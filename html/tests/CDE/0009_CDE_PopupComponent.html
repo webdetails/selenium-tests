@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>0037_CDE_PopupComponent</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0037_CDE_PopupComponent</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/pentaho/api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Apopup.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Community Dashboard Editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=Title</td>
+	<td>Popup Component Reference</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=Example1Title</td>
+	<td>Example 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=Example2Title</td>
+	<td>Example 2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='example1Obj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[7]/div/div[2]</td>
+	<td>This will appear in the popup</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='rect']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[7]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='example2Obj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[8]/div</td>
+	<td>A simple text that can be used as a tooltip</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[8]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

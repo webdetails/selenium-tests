@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>0033_CDE_BullertCharttestcase</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0033_CDE_BullertCharttestcase</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/pentaho/api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Community Dashboard Editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#title &gt; span</td>
+	<td>Bullet chart test case</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#subtitle1 &gt; span</td>
+	<td>No data sent</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='obj1']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='rect']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj1']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj1']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='text']</td>
+	<td>No data</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subtitle2</td>
+	<td>Returning one value only (65)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj2']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Value only</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj2']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='text']</td>
+	<td>value is 65</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subtitle3</td>
+	<td>Returning name and value</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Atelier graphique</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='text']</td>
+	<td>Customer</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Signal Gift Stores</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='text']</td>
+	<td>Customer</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Australian Collectors, Co.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='text']</td>
+	<td>Customer</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subtitle4</td>
+	<td>Title, value and marker</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj4']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Atelier graphique</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj4']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='text']</td>
+	<td>Subtitle</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=subtitle5</td>
+	<td>Complete dataset</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj5']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Atelier graphique</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@id='obj5']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='text']</td>
+	<td>Carine Schmitt</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

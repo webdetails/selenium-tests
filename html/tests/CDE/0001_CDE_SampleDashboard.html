@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>00027_Marketplace_CDFVersionCheck</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">00027_Marketplace_CDFVersionCheck</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/pentaho/api/repos/:public:plugin-samples:pentaho-cdf-dd:cde_sample1.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Community Dashboard Editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='body']/div[2]/div</td>
+	<td>How to start</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='body']/div[2]/div[2]/p[2]</td>
+	<td>Totally extensible, virtually everything is possible, and CDE doesn't stop any of the advanced tricks supported&nbsp;&nbsp;by CDF. </td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='body']/div[2]/div[2]/p[10]</td>
+	<td>Enjoy</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='body']/div[2]/div[3]</td>
+	<td>Pedro Alves, webdetails</td>
+</tr>
+<!--Check the table-->
+<!--Check the paging-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[2]/td</td>
+	<td>Vida Sport, Ltd</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[7]/td[2]</td>
+	<td>78,155.28</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tableTable_paginate']/a[2][contains(text(),'Next')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[5]/td</td>
+	<td>Marseille Mini Autos</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td[2]</td>
+	<td>61,072.54</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tableTable_paginate']/a[2][contains(text(),'Next')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[3]/td</td>
+	<td>Volvo Model Replicas, Co</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[10]/td[2]</td>
+	<td>20,786.45</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tableTable_paginate']/a[2][contains(text(),'Next')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[10]/td</td>
+	<td>Rovelli Gifts</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[6]/td[2]</td>
+	<td>14,380.70</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tableTable_paginate']/a[2][contains(text(),'Next')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[4]/td</td>
+	<td>Petit Auto</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[4]/td[2]</td>
+	<td>3,508.80</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tableTable_paginate']/a[contains(text(),'Previous')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tableTable_paginate']/a[contains(text(),'Previous')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[4]/td</td>
+	<td>Corrida Auto Replicas, Ltd</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td[2]</td>
+	<td>36,212.68</td>
+</tr>
+<!--Ordering 'Total'-->
+<tr>
+	<td>click</td>
+	<td>//table[@id='tableTable']/thead/tr/th[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td[2]</td>
+	<td>3,508.80</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td</td>
+	<td>Petit Auto</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tableTable_paginate']/a[contains(text(),'Previous')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td[2]</td>
+	<td>16,560.30</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td</td>
+	<td>Atelier graphique</td>
+</tr>
+<!--Ordering 'Customer'-->
+<tr>
+	<td>click</td>
+	<td>//table[@id='tableTable']/thead/tr/th</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td[2]</td>
+	<td>20,743.56</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td</td>
+	<td>Alpha Cognac</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='tableTable_paginate']/a[contains(text(),'Previous')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td[2]</td>
+	<td>25,239.36</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td</td>
+	<td>Corrida Auto Replicas, Ltd</td>
+</tr>
+<!--Check the Chart-->
+<!--Disable all territories-->
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']</td>
+	<td>Sales by territory and market</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td</td>
+	<td>Cruz &amp; Sons Co.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[2]/td</td>
+	<td>Dragon Souveniers, Ltd.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[3]/td</td>
+	<td>King Kong Collectables, Co.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[4]/td</td>
+	<td>Osaka Souveniers Co.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[5]/td</td>
+	<td>Tokyo Collectables, Ltd</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr/td[2]</td>
+	<td>18,061.68</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[2]/td[2]</td>
+	<td>4,175.60</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[3]/td[2]</td>
+	<td>3,845.80</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[4]/td[2]</td>
+	<td>16,646.15</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='tableTable']/tbody/tr[5]/td[2]</td>
+	<td>9,890.26</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[@id='tableTable_next' and @class='paginate_disabled_next']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//a[@id='tableTable_previous' and @class='paginate_disabled_previous']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

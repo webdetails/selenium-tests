@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/pentaho/api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:43-DateRangeInputComponent:date_range_component.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Community Dashboard Framework</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='dashboardContent']/div/div/div/h2/span[2]</td>
+	<td>DateRangeInputComponent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#code &gt; button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>var d=new Date(); <br />d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)<br />+'-'+('0'+(d.getDate())).slice(-2);</td>
+	<td>dateToday</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>var d=new Date(); <br />d.getFullYear()+'-01'<br />+'-01';</td>
+	<td>dateBeginYear</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${dateToday}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${dateBeginYear}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=myInput</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=myInput</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//a[contains(text(),'Year to date')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You chose from ${dateBeginYear} to ${dateToday}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
