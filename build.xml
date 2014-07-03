@@ -1,0 +1,5 @@
+<project name="selenium-tests" default="dist">
+
+    <import file="build-res/subfloor.xml"/>
+
+</project>

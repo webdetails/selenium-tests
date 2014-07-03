@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+    <info organisation="pentaho" module="pentaho-platform-assembly" revision="${project.revision}" />
+    <configurations>
+        <conf name="default" />
+        <conf name="plugin" />
+        <conf name="kettle-plugin" />
+        <conf name="pdf-docs" />
+        <conf name="oss-licenses" />
+        <conf name="datasource-libs" />
+        <conf name="sampledata-libs" />
+        <conf name="solution" />
+        <conf name="test" visibility="private" />
+        <conf name="bundle" visibility="private"/>
+        <conf name="core-bundle" visibility="private"/>
+        <conf name="fragment-bundle" visibility="private"/>
+    </configurations>
+    <dependencies defaultconf="default->default">
+
+        <!-- Pentaho -->
+        <dependency org="pentaho" name="pentaho-platform-extensions" rev="${project.revision}" changing="true">
+            <exclude org="pentaho-reporting-engine" module="pentaho-reporting-engine-classic-core-test" />
+        </dependency>
+        <!-- Pentaho Commons  -->
+        <dependency org="pentaho" name="pentaho-database-model"     rev="${dependency.pentaho-database-model.revision}"               changing="true" transitive="false"/>
+
+        <!--  Reporting -->
+        <!-- NOTE: this reporting plugin jar will be removed once the reporting plugin is 3.5 plugin compliant -->
+        <dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-core-platform-plugin" rev="${dependency.pentaho-reporting-plugin.revision}" changing="true">
+            <exclude org="pentaho-reporting-engine" module="pentaho-reporting-engine-classic-core-test" />
+        </dependency>
+        <dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-core" rev="${dependency.pentaho-reporting.revision}" changing="true">
+            <exclude org="pentaho-reporting-engine" module="pentaho-reporting-engine-classic-core-test" />
+        </dependency>
+
+        <dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-extensions" rev="${dependency.pentaho-reporting.revision}" changing="true">
+            <exclude org="pentaho-reporting-engine" module="pentaho-reporting-engine-classic-core-test" />
+        </dependency>
+
+        <dependency org="pentaho-library" name="libserializer" rev="${dependency.libserializer.revision}" changing="true" transitive="false" conf="default->default" />
+        <!-- Misc -->
+        <dependency org="org.owasp.esapi" name="esapi" rev="2.0.1" transitive="false" />
+        <dependency org="org.apache.axis" name="axis" rev="1.4" />
+        <dependency org="org.apache.xmlgraphics" name="batik-bridge" rev="1.7" transitive="false"/>
+        <dependency org="bsf" name="bsf" rev="2.4.0" transitive="false" />   <!-- we don't want bsf's commons_logging -->
+        <dependency org="org.netbeans" name="mdrjdbc" rev="1.4.2" />
+        <dependency org="org.beanshell" name="bsh" rev="1.3.0" />
+        <dependency org="ognl" name="ognl" rev="2.6.9" />
+        <dependency org="com.ibm.icu" name="icu4j" rev="4_4_1_1"/>
+        <dependency org="com.ibm.icu" name="icu4j-charsets" rev="4_4_1_1"/>
+
+        <!-- WARNING: calling out commons-logging here so we can force version 1.1.1 over 1.1. This is a temporary hack until we get 1.1.1 propogated across all projects -->
+        <dependency org="commons-logging" name="commons-logging" rev="1.1.1" />
+
+
+        <!-- PDF Documentation for bundling -->
+        <dependency org="pentaho-doc" name="admin_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="admin_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="aggregation_designer_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="aggregation_designer_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="analysis_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="analysis_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="bigdata_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="bigdata_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="components" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="components" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="config_ba_server" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="config_ba_server" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="config_pdi_server" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="config_pdi_server" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="customizing_pentaho_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="customizing_pentaho_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="dashboard_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="dashboard_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="getting_started_with_data_models" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="getting_started_with_data_models" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="getting_started_with_instaview" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="getting_started_with_instaview" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="getting_started_with_pdi" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="getting_started_with_pdi" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="getting_started_with_pentaho" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="getting_started_with_pentaho" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="getting_started_with_prd" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="getting_started_with_prd" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="getting_support" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="getting_support" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="install_client" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="install_client" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="install_client_pdi" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="install_client_pdi" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="install_graphical" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="install_graphical" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="install_graphical_pdi" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="install_graphical_pdi" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="install_manual" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="install_manual" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="install_overview" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="install_overview" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="install_overview_pdi" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="install_overview_pdi" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="install_pdi" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="install_pdi" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="install_ziptar" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="install_ziptar" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="integrating_biserver" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="integrating_biserver" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="pdi_admin_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="pdi_admin_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="pdi_embed_extend_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="pdi_embed_extend_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="pdi_user_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="pdi_user_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="pdi_whats_new" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="pdi_whats_new" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="performance_tuning_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="performance_tuning_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="pme_user_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="pme_user_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="puc_user_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="puc_user_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="report_designer_user_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="report_designer_user_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="reporting_embedders_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="reporting_embedders_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="security_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="security_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="supported_components" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="supported_components" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="troubleshooting_guide" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="troubleshooting_guide" type="pdf" />
+        </dependency>
+        <dependency org="pentaho-doc" name="workflows" rev="${dependency.documentation.revision}" conf="pdf-docs->default">
+            <artifact name="workflows" type="pdf" />
+        </dependency>
+
+
+        <!--  OSS Licenses file -->
+        <dependency org="pentaho" name="oss-licenses" rev="${dependency.oss-licenses.revision}" conf="oss-licenses->default">
+            <artifact name="oss-licenses" type="zip" />
+        </dependency>
+
+
+        <!-- Datasource Libraries -->
+        <!-- Define another commons-logging dependency with datasource-libs conf so it's copied into tomcat/lib as well -->
+        <dependency org="commons-logging" name="commons-logging" rev="1.1.1" conf="datasource-libs->default" />
+        <dependency org="hsqldb" name="hsqldb" rev="1.8.0" conf="datasource-libs->default" transitive="false"/>
+        <dependency org="mysql" name="mysql-connector-java" rev="5.1.17" conf="datasource-libs->default" />
+        <dependency org="com.h2database" name="h2" rev="1.2.131" conf="datasource-libs->default" />
+
+        <!-- SampleData libs -->
+        <dependency org="hsqldb" name="hsqldb" rev="1.8.0" conf="sampledata-libs->default" transitive="false"/>
+
+        <!-- metro -->
+        <dependency org="org.glassfish.metro" name="webservices-api" rev="2.1" transitive="false"/>
+        <dependency org="org.glassfish.metro" name="webservices-rt" rev="2.1" transitive="false"/>
+
+        <!-- COMMONS -->
+        <dependency org="commons-beanutils" name="commons-beanutils" rev="1.8.0" transitive="false" />
+        <dependency org="commons-cli" name="commons-cli" rev="1.0" transitive="false" />
+        <dependency org="commons-digester" name="commons-digester" rev="1.8" transitive="false" />
+        <dependency org="commons-discovery" name="commons-discovery" rev="0.4" transitive="false" />
+        <dependency org="commons-jxpath" name="commons-jxpath" rev="1.2" transitive="false" />
+        <dependency org="concurrent" name="concurrent" rev="1.3.4" />
+        <dependency org="jakarta-regexp" name="jakarta-regexp" rev="1.2" />
+        <dependency org="javax.xml" name="jaxrpc-api" rev="1.1" />
+        <dependency org="jcommon-logging-log4jlog" name="jcommon-logging-log4jlog" rev="1.0.2" />
+        <dependency org="joda-time" name="joda-time" rev="1.6" transitive="false" />
+        <dependency org="commons-math" name="commons-math" rev="1.1" transitive="false" />
+        <dependency org="org.slf4j" name="slf4j-log4j12" rev="1.6.1" />
+
+        <!-- SAXON -->
+        <dependency org="net.sourceforge.saxon" name="saxon" rev="9.1.0.8" />
+        <dependency org="net.sf.saxon" name="saxon-dom" rev="9.1.0.8" />
+        <dependency org="net.sf.saxon" name="saxon-jdom" rev="9.1.0.8" />
+        <dependency org="net.sf.saxon" name="saxon-sql" rev="9.1.0.8" />
+        <dependency org="net.sf.saxon" name="saxon-xom" rev="9.1.0.8" />
+
+        <dependency org="rhino" name="js" rev="1.7R1" />
+        <dependency org="soap" name="soap" rev="2.3" />
+        <dependency org="wsdl4j" name="wsdl4j" rev="1.5.0" />
+        <dependency org="org.quartz-scheduler" name="quartz-oracle" rev="1.7.2" />
+
+        <!-- Platform plugins -->
+        <dependency org="pentaho-reporting-engine" name="pentaho-reporting-engine-classic-core-platform-plugin-package" rev="${dependency.pentaho-reporting-plugin.revision}" transitive="false" changing="true"  conf="plugin->default" />
+        <!-- In progrress D-A-v2
+        <dependency org="pentaho" name="pentaho-bi-platform-data-access-api-v2" rev="${dependency.data-access-api-v2.revision}" changing="true" transitive="false" conf="default->default" />
+        <dependency org="pentaho" name="pentaho-bi-platform-data-access-core-v2" rev="${dependency.data-access-core-v2.revision}" changing="true" transitive="false" conf="default->default" />
+        <dependency org="pentaho" name="data-access-v2-plugin" rev="${dependency.data-access-v2-plugin.revision}" changing="true" transitive="false" conf="plugin->default" />
+        -->
+        <dependency org="pentaho" name="data-access-plugin" rev="${dependency.data-access-plugin.revision}" changing="true" transitive="false" conf="plugin->default" />
+        <dependency org="pentaho" name="common-ui" rev="${dependency.common-ui.revision}" changing="true" transitive="false" conf="plugin->default" >
+            <artifact name="common-ui" type="zip" />
+        </dependency>
+
+        <dependency org="pentaho" name="pentaho-pdi-platform-plugin-package" rev="${dependency.pentaho-pdi-plugin.revision}" changing="true" transitive="false" conf="plugin->default"/>
+
+        <dependency org="pentaho" name="pentaho-cdf" rev="${dependency.pentaho-cdf-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
+            <artifact name="pentaho-cdf" type="zip" /> <!-- download the zip file, not the jar -->
+        </dependency>
+
+        <dependency org="pentaho" name="cgg" rev="${dependency.pentaho-cgg-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
+            <artifact name="cgg" type="zip" /> <!-- download the zip file, not the jar -->
+        </dependency>
+
+        <dependency org="pentaho" name="pentaho-jpivot-plugin" rev="${dependency.pentaho-jpivot-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
+            <artifact name="pentaho-jpivot-plugin" type="zip" /> <!-- download the zip file, not the jar -->
+        </dependency>
+
+        <dependency org="pentaho" name="marketplace" rev="${dependency.pentaho-marketplace-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
+            <artifact name="marketplace" type="zip" /> <!-- download the zip file, not the jar -->
+        </dependency>
+
+
+
+        <!-- Solutions bundles -->
+        <dependency org="pentaho" name="pentaho-cdf-samples" rev="${dependency.pentaho-cdf-plugin.revision}" changing="true" transitive="false" conf="solution->default">
+            <artifact name="pentaho-cdf-samples" type="zip" /> <!-- download the zip file, not the jar -->
+        </dependency>
+
+        <!--  Other archive resources -->
+        <dependency org="pentaho" name="pentaho-user-console-package" rev="${project.revision}" transitive="false" changing="true" />
+
+        <!--  BigData dependencies -->
+
+        <!-- Kettle Plugins -->
+        <dependency org="pentaho" name="pentaho-big-data-plugin" rev="${dependency.pentaho-big-data-plugin.revision}" conf="kettle-plugin->default" changing="true" transitive="false">
+            <artifact name="pentaho-big-data-plugin" type="zip" />
+        </dependency>
+        <dependency org="pentaho" name="pentaho-big-data-plugin-samples" rev="${dependency.pentaho-big-data-plugin-samples.revision}" conf="kettle-plugin->default" changing="true" transitive="false">
+            <artifact name="pentaho-big-data-plugin-samples" type="zip"/>
+        </dependency>
+        <dependency org="pentaho" name="pentaho-mongodb-plugin" rev="${dependency.pentaho-mongodb-plugin.revision}" conf="kettle-plugin->default" changing="true" transitive="false">
+            <artifact name="pentaho-mongodb-plugin" type="zip"/>
+        </dependency>
+        <dependency org="pentaho" name="pentaho-cassandra-plugin" rev="${dependency.pentaho-cassandra-plugin.revision}" conf="kettle-plugin->default" changing="true" transitive="false">
+            <artifact name="pentaho-cassandra-plugin" type="zip"/>
+        </dependency>
+        <dependency org="pentaho" name="pdi-teradata-tpt-plugin-package" rev="${dependency.pdi-teradata-tpt-plugin.revision}" conf="kettle-plugin->default" changing="true" transitive="false">
+            <artifact name="pdi-teradata-tpt-plugin-package" type="zip"/>
+        </dependency>
+
+        <!-- OSGI Bundles -->
+        <dependency org="org.apache.aries" name="org.apache.aries.util" rev="1.1.0" conf="core-bundle->default" />
+        <dependency org="org.apache.servicemix.bundles" name="org.apache.servicemix.bundles.aopalliance" rev="1.0_6" conf="core-bundle->default"/>
+
+        <dependency org="org.springframework" name="org.springframework.beans" rev="3.2.4.RELEASE"  conf="core-bundle->default"/>
+        <dependency org="org.springframework" name="org.springframework.core" rev="3.2.4.RELEASE"  conf="core-bundle->default"/>
+        <dependency org="org.springframework" name="org.springframework.aop" rev="3.2.4.RELEASE"  conf="core-bundle->default"/>
+        <dependency org="org.springframework" name="org.springframework.context" rev="3.2.4.RELEASE"  conf="core-bundle->default"/>
+        <dependency org="org.springframework" name="org.springframework.expression" rev="3.2.4.RELEASE"  conf="core-bundle->default"/>
+
+        <dependency org="org.eclipse.gemini.blueprint" name="gemini-blueprint-core" rev="1.0.2.RELEASE" conf="core-bundle->default"/>
+        <dependency org="org.eclipse.gemini.blueprint" name="gemini-blueprint-extender" rev="1.0.2.RELEASE" conf="core-bundle->default"/>
+        <dependency org="org.eclipse.gemini.blueprint" name="gemini-blueprint-io" rev="1.0.2.RELEASE" conf="core-bundle->default"/>
+        <dependency org="org.ow2.asm" name="asm-all" rev="4.0" conf="core-bundle->default"/>
+        <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.logging" rev="1.1.1"  conf="core-bundle->default"/>
+        <dependency org="commons-collections" name="commons-collections" rev="3.2.1" conf="core-bundle->default" />
+        <dependency org="org.slf4j" name="osgi-over-slf4j" rev="1.7.5" conf="core-bundle->default"/>
+        <dependency org="log4j" name="log4j" rev="1.2.17" conf="core-bundle->default"/>
+        <dependency org="org.slf4j" name="slf4j-api" rev="1.7.5" conf="core-bundle->default"/>
+        <dependency org="org.apache.felix" name="org.apache.felix.configadmin" rev="1.8.0" conf="core-bundle->default"/>
+        <dependency org="org.apache.felix" name="org.apache.felix.fileinstall" rev="3.2.6" conf="core-bundle->default"/>
+        <dependency org="org.apache.felix" name="org.apache.felix.utils" rev="1.4.0" conf="core-bundle->default"/>
+
+        <exclude org="org.osgi"  module="org.osgi.core" conf="core-bundle" />
+
+
+        <!--
+          Explicitly exluding illegal jars is purely a workaround. We need to fix the root problem, that certain project(s)
+          are exporting these jars in their default dependencies.
+        -->
+
+        <exclude org="org.slf4j" module="slf4j-jcl"      />
+        <exclude org="javax.servlet"   module="jsp-api" />
+        <exclude org="javax.servlet"   module="servlet-api" />
+        <exclude org="com.google.gwt"  module="gwt-user" />
+        <exclude org="com.google.gwt"  module="gwt-dev" />
+        <exclude org="commons-logging" module="commons-logging-api" />
+        <exclude org="javax.validation" module="validation-api" />
+        <!-- since we depend on reporting 3.8, we can't fix this until 4.5 platform is out the door -->
+        <exclude org="org.hibernate" module="hibernate" />
+        <!-- remove ehcache artifact and keep ehcache-core artifact -->
+        <exclude org="net.sf.ehcache"  module="ehcache" />
+        <!-- CM-241 -->
+        <exclude org="cglib"  module="cglib" />
+
+        <!--  Make sure we get the correct version of kettle and pentaho-metadata -->
+        <conflict org="pentaho-kettle" rev="${dependency.kettle.revision}" />
+        <conflict org="pentaho" module="pentaho-metadata" rev="${dependency.pentaho-metadata.revision}" />
+        <conflict org="pentaho-reporting" rev="3.8-SNAPSHOT" />
+
+    </dependencies>
+
+</ivy-module>
