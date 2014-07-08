@@ -2,57 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37050f01-fbf2-4b57-9eac-3c43f9c30b80" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build-res/subfloor-pkg.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build-res/subfloor.xml" />
-      <change type="DELETED" beforePath="C:\Repository\Working\Selenium-Tests\core\build-res\subfloor-pkg.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Repository\Working\Selenium-Tests\core\build-res\subfloor.xml" afterPath="" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\ivy.xml" afterPath="$PROJECT_DIR$/ivy.xml" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\ivysettings.xml" afterPath="$PROJECT_DIR$/ivysettings.xml" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\test_suite_cde.html" afterPath="$PROJECT_DIR$/src-html/test_suite_cde.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\test_suite_cdf.html" afterPath="$PROJECT_DIR$/src-html/test_suite_cdf.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\test_suite_global.html" afterPath="$PROJECT_DIR$/src-html/test_suite_global.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\0001_Login_Pentaho.html" afterPath="$PROJECT_DIR$/src-html/tests/0001_Login_Pentaho.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\9999_Logout_Pentaho.html" afterPath="$PROJECT_DIR$/src-html/tests/9999_Logout_Pentaho.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0001_CDE_SampleDashboard.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0001_CDE_SampleDashboard.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0002_CDE_DashboardEdition.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0002_CDE_DashboardEdition.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0003_CDE_AddinReference.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0003_CDE_AddinReference.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0004_CDE_AjaxRequestReference.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0004_CDE_AjaxRequestReference.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0005_CDE_BullertCharttestcase.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0005_CDE_BullertCharttestcase.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0006_CDE_CCCV2ShowCase.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0006_CDE_CCCV2ShowCase.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0007_CDE_MapComponentFullTest.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0007_CDE_MapComponentFullTest.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0008_CDE_MapComponentReference.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0008_CDE_MapComponentReference.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0009_CDE_PopupComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0009_CDE_PopupComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDE\0010_CDE_WidgetReference.html" afterPath="$PROJECT_DIR$/src-html/tests/CDE/0010_CDE_WidgetReference.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0001_CDF_AutoCompleteBoxComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0001_CDF_AutoCompleteBoxComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0002_CDF_ButtonComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0002_CDF_ButtonComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0003_CDF_CheckComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0003_CDF_CheckComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0004_CDF_CommentComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0004_CDF_CommentComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0005_CDF_DateInputComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0005_CDF_DateInputComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0006_CDF_DateRangeInputComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0006_CDF_DateRangeInputComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0007_CDF_DialComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0007_CDF_DialComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0008_CDF_ExecutePrptComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0008_CDF_ExecutePrptComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0009_CDF_ExecuteXactionComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0009_CDF_ExecuteXactionComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0010_CDF_jFreeChartComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0010_CDF_jFreeChartComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0011_CDF_MonthPickerComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0011_CDF_MonthPickerComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0012_CDF_MultiButtonComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0012_CDF_MultiButtonComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0013_CDF_OpenFlashChartComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0013_CDF_OpenFlashChartComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0014_CDF_PrptComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0014_CDF_PrptComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0015_CDF_QueryComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0015_CDF_QueryComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0016_CDF_RadioComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0016_CDF_RadioComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0017_CDF_SchedulePrptComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0017_CDF_SchedulePrptComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0018_CDF_SelectComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0018_CDF_SelectComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0019_CDF_SelectMultiComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0019_CDF_SelectMultiComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0020_CDF_TableComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0020_CDF_TableComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0021_CDF_TextComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0021_CDF_TextComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0022_CDF_TextInputComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0022_CDF_TextInputComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0023_CDF_timePlotComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0023_CDF_timePlotComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0024_CDF_TrafficComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0024_CDF_TrafficComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0025_CDF_XactionComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0025_CDF_XactionComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0027_CDF_MapBubbleComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0027_CDF_MapBubbleComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\CDF\0028_CDF_MapComponent.html" afterPath="$PROJECT_DIR$/src-html/tests/CDF/0028_CDF_MapComponent.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\Marketplace\0001_Marketplace_CDFVersionCheck.html" afterPath="$PROJECT_DIR$/src-html/tests/Marketplace/0001_Marketplace_CDFVersionCheck.html" />
-      <change type="MOVED" beforePath="C:\Repository\Working\Selenium-Tests\core\src-html\tests\Marketplace\0002_Marketplace_CDEVersionCheck.html" afterPath="$PROJECT_DIR$/src-html/tests/Marketplace/0002_Marketplace_CDEVersionCheck.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Selenium-Tests.iws" />
@@ -89,18 +38,28 @@
       <file leaf-file-name="build.properties" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="187">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
               <caret line="0" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="subfloor.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="subfloor.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build-res/subfloor.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43524095" vertical-offset="3570" max-vertical-offset="23188">
-              <caret line="227" column="22" selection-start-line="227" selection-start-column="22" selection-end-line="227" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="21852" max-vertical-offset="23188">
+              <caret line="1321" column="20" selection-start-line="1321" selection-start-column="20" selection-end-line="1321" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_suite_global.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src-html/test_suite_global.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.20029455" vertical-offset="0" max-vertical-offset="1020">
+              <caret line="8" column="21" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -109,7 +68,7 @@
       <file leaf-file-name="subfloor-pkg.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build-res/subfloor-pkg.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4357" max-vertical-offset="5100">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4896" max-vertical-offset="5100">
               <caret line="288" column="22" selection-start-line="288" selection-start-column="21" selection-end-line="288" selection-end-column="22" />
               <folding />
             </state>
@@ -119,7 +78,7 @@
       <file leaf-file-name="ivy.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ivy.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+            <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="544">
               <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
@@ -129,7 +88,7 @@
       <file leaf-file-name="ivysettings.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ivysettings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+            <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="595">
               <caret line="10" column="77" selection-start-line="10" selection-start-column="77" selection-end-line="10" selection-end-column="77" />
               <folding />
             </state>
@@ -158,6 +117,7 @@
         <option value="$PROJECT_DIR$/build.properties" />
         <option value="$PROJECT_DIR$/build-res/subfloor.xml" />
         <option value="$PROJECT_DIR$/build-res/subfloor-pkg.xml" />
+        <option value="$PROJECT_DIR$/src-html/test_suite_global.html" />
       </list>
     </option>
   </component>
@@ -222,6 +182,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src-html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Selenium-Tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Selenium-Tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src-html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Selenium-Tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Selenium-Tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="build-res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -237,7 +229,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../WebDetails/CDF" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
@@ -246,6 +238,14 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -256,12 +256,14 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
       <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -269,16 +271,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
-      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -308,7 +300,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -319,9 +310,10 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -344,6 +336,158 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+          <caret line="0" column="41" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
+          <caret line="0" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-res/subfloor.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="21852" max-vertical-offset="23188">
+          <caret line="1321" column="20" selection-start-line="1321" selection-start-column="20" selection-end-line="1321" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-html/test_suite_global.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1020">
+          <caret line="40" column="41" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-res/subfloor-pkg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4896" max-vertical-offset="5100">
+          <caret line="288" column="22" selection-start-line="288" selection-start-column="21" selection-end-line="288" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ivy.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="544">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ivysettings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="595">
+          <caret line="10" column="77" selection-start-line="10" selection-start-column="77" selection-end-line="10" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+          <caret line="0" column="41" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
+          <caret line="0" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-res/subfloor.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="21852" max-vertical-offset="23188">
+          <caret line="1321" column="20" selection-start-line="1321" selection-start-column="20" selection-end-line="1321" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-res/subfloor-pkg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4357" max-vertical-offset="5100">
+          <caret line="288" column="22" selection-start-line="288" selection-start-column="21" selection-end-line="288" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ivy.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="544">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ivysettings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="595">
+          <caret line="10" column="77" selection-start-line="10" selection-start-column="77" selection-end-line="10" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+          <caret line="0" column="41" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
+          <caret line="0" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-res/subfloor.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="21852" max-vertical-offset="23188">
+          <caret line="1316" column="0" selection-start-line="1316" selection-start-column="0" selection-end-line="1316" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-res/subfloor-pkg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4357" max-vertical-offset="5100">
+          <caret line="288" column="22" selection-start-line="288" selection-start-column="21" selection-end-line="288" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ivy.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="544">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ivysettings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="595">
+          <caret line="10" column="77" selection-start-line="10" selection-start-column="77" selection-end-line="10" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
@@ -434,8 +578,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build-res/subfloor.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43524095" vertical-offset="3570" max-vertical-offset="23188">
-          <caret line="227" column="22" selection-start-line="227" selection-start-column="22" selection-end-line="227" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="21852" max-vertical-offset="23188">
+          <caret line="1321" column="20" selection-start-line="1321" selection-start-column="20" selection-end-line="1321" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-html/test_suite_global.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20029455" vertical-offset="0" max-vertical-offset="1020">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="21" />
           <folding />
         </state>
       </provider>
