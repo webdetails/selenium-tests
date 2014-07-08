@@ -307,6 +307,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
       <!-- Starting Pentaho BI Server -->
       <antcall target="start-pentaho-bi-server"/>
+      <sleep minutes="3" />
     </target>
 
 
