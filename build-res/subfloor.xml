@@ -307,7 +307,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
       <!-- Starting Pentaho BI Server -->
       <antcall target="start-pentaho-bi-server"/>
-      <sleep minutes="3" />
+      <antcall target="wait.for.tomcat.start"/>
+    </target>
+
+    <!--=======================================================================
+        Wait for tomcat start-up
+        ====================================================================-->
+    <target name="wait.for.tomcat.start"> 
+          <waitfor maxwait="5" maxwaitunit="minute" checkevery="500">
+              <http url="http://localhost:8080/pentaho"/>
+          </waitfor>
     </target>
 
 
@@ -327,6 +336,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <echo message="Stop the Pentaho BI Server." />
       <service action="stop" service="tomcat6"/>
     </target>
+
 
     <!--=======================================================================
         install-antcontrib
@@ -667,6 +677,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </sequential>
     </macrodef>
 
+
     <!--=======================================================================
         Macro usage to start or stop a service.
 
@@ -683,4 +694,5 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          </exec>
       </sequential>
     </macrodef>
+
 </project>
