@@ -1,5 +1,6 @@
-<project name="selenium-tests" basedir="." default="dist">
+<project name="selenium-tests" basedir="." default="default">
 
-    <import file="core/build-res/subfloor.xml"/>
+    <import file="build-res/subfloor.xml"/>
+    <import file="build-res/subfloor-pkg.xml"/>
 
 </project>

@@ -128,20 +128,33 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- Project meta properties -->
     <property name="impl.vendor" value="Pentaho Corporation" description="Jar file metadata describing the jar's vendor" />
-    <property name="impl.productID"
-              value=""
-              description="Jar file metadata indicating the product ID (this is not the revision)" />
+    <property name="impl.productID" value="" description="Jar file metadata indicating the product ID (this is not the revision)" />
 
     <!-- Compile properties -->
-    <!-- none -->
-
+    <property name="bin.dir" value="${basedir}/bin" description="Base directory for all non-dist build output" />
+    <property name="lib.dir"
+            value="${basedir}/lib"
+            description="Directory that hosts Jar files required to compile project source.  (IVY will populate this directory with required jars)" />
+    <property name="tmp.dir" value="${basedir}/tmp" description="Temp directory only used for temp procedures" />
+    
     <!-- Third party Ant tasks and tools properties -->
+    <property name="subfloor.resources.dir"
+              value="${user.home}/.subfloor"
+              description="Base dir for runtime jars that are required exclusively by the build process" />
+    <property name="subfloor.tmp.dir"
+              value="${subfloor.resources.dir}/tmp"
+              description="Temporary space where files are prepared for installation" />
+    <property name="antcontrib.build.cache.dir"
+              value="${subfloor.resources.dir}/ant-contrib"
+              description="Directory where the Ant-Contrib jar (and dependencies) is placed after it is auto-downloaded by the build" />
     <property name="ivy.url"
               value="http://repo.pentaho.org/artifactory/repo/org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar"
               description="The URL to the current release of Apache IVY" />
+    <property name="pentaho.bi.server.dir"
+              value="C:\Pentaho\5.1\biserver-ce-5.1.0.0-752\biserver-ce"
+              description="The location of Pentaho BI Server" />
 
-
-
+    
     <!-- Ivy properties -->
     <property name="ivy.settingsurl"
               value="file:${basedir}/ivysettings.xml"
@@ -199,12 +212,24 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </condition>
 
     <!-- Set the os property -->
+    <condition property="isLinux">
+      <os family="unix" />
+    </condition>
     <condition property="isWindows">
-        <os family="windows" />
+      <os family="windows" />
+    </condition>
+    <condition property="isMac">
+      <os family="mac" />
     </condition>
 
     <condition property="os.classifier" value="win">
-        <os family="windows" />
+      <os family="windows" />
+    </condition>
+    <condition property="os.classifier" value="mac">
+      <os family="mac" />
+    </condition>
+    <condition property="os.classifier" value="linux">
+      <os family="unix" />
     </condition>
     <property name="os.classifier" value="unsupported" />
 
@@ -213,7 +238,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         The target that is run if no target is given
         ====================================================================-->
-    <target name="default" depends="build" />
+    <target name="default" depends="ctools" />
 
 
     <!--=======================================================================
@@ -221,16 +246,84 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         Runs a typical build process to create the project locally
         ====================================================================-->
-    <target name="build" depends="clean-all,resolve,copy-ctools" />
+    <target name="build" depends="clean,resolve" />
 
 
     <!--=======================================================================
-        build-testless
+        ctools
 
-        Runs a typical build process to create the project locally (no testing)
+        This process shall clean the project, download the CTools, and copy to
+        Pentaho Server.
         ====================================================================-->
-    <target name="build-testless" depends="clean-all,resolve" />
+    <target name="ctools" depends="clean, resolve, stop-pentaho-bi-server">
+      <echo message="Starting copy CTools." />
 
+      <!-- Delete ctools on server -->
+      <property name="pentaho.default.content.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/default-content"/>
+      <property name="pentaho.plugin.cgg.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/cgg"/>
+      <property name="pentaho.plugin.cda.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/cda"/>
+      <property name="pentaho.plugin.cdf.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf"/>
+      <property name="pentaho.plugin.cde.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf-dd"/>
+      <!-- Delete CGG, CDA, CDF, CDE-->
+      <delete dir="${pentaho.plugin.cgg.dir}" />
+      <delete dir="${pentaho.plugin.cda.dir}" />
+      <delete dir="${pentaho.plugin.cdf.dir}" />
+      <delete dir="${pentaho.plugin.cde.dir}" />
+
+      <!-- Unzip the ctools -->
+      <unzip src="${lib.dir}/plugin/cgg.zip" dest="${tmp.dir}" />
+      <unzip src="${lib.dir}/plugin/cda.zip" dest="${tmp.dir}" />
+      <unzip src="${lib.dir}/plugin/pentaho-cdf.zip" dest="${tmp.dir}" />
+      <unzip src="${lib.dir}/plugin/pentaho-cdf-dd.zip" dest="${tmp.dir}" />
+      <!-- unzip the samples -->
+      <!-- 
+          1º Create a directory with name 'public'
+          2º Create a directory with name 'plugin-samples' under 'public'
+          3º Unzip the samples CDF, CDE and CDA
+          4º Move the samples dir (CDF, CDE, CDA) under 'plugin-samples'
+      -->
+      <mkdir dir="${tmp.dir}/public/plugin-samples" />
+      <unzip src="${lib.dir}/plugin/pentaho-cdf-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
+      <unzip src="${lib.dir}/plugin/cda-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
+      <zip destfile="${tmp.dir}/plugin-samples.zip">
+        <zipfileset dir="${tmp.dir}/public" prefix="public"/>
+      </zip>
+
+
+      <!-- Copy the ctools -->
+      <copy todir="${pentaho.plugin.cgg.dir}">
+        <fileset dir="${tmp.dir}/cgg" />
+      </copy>
+      <copy todir="${pentaho.plugin.cda.dir}">
+        <fileset dir="${tmp.dir}/cda" />
+      </copy>
+      <copy todir="${pentaho.plugin.cdf.dir}">
+        <fileset dir="${tmp.dir}/pentaho-cdf" />
+      </copy>
+      <copy todir="${pentaho.plugin.cde.dir}">
+        <fileset dir="${tmp.dir}/pentaho-cdf-dd" />
+      </copy>
+      <copy file="${tmp.dir}/plugin-samples.zip" todir="${pentaho.default.content.dir}" />
+
+      <echo message="Start the Pentaho BI Server." />
+      <antcall target="start-pentaho-bi-server"/>
+      <sleep minutes="3" /><!-- Wait for the pentaho start-up -->
+    </target>
+
+
+    <!--=======================================================================
+        Shall start the pentaho-server
+        ====================================================================-->
+    <target name="start-pentaho-bi-server">
+      <service action="start" service="tomcat6"/>
+    </target>
+
+    <!--=======================================================================
+        Shall stop the pentaho-server
+        ====================================================================-->
+    <target name="stop-pentaho-bi-server">
+        <service action="stop" service="tomcat6"/>
+    </target>
 
     <!--=======================================================================
         install-antcontrib
@@ -294,116 +387,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
     <!--=======================================================================
-        init
-
-        Ensures that all the required directories exist before processing
-        a build.
-        ====================================================================-->
-    <target name="init">
-        <mkdir dir="${classes.dir}" />
-        <mkdir dir="${dist.dir}" />
-        <mkdir dir="${lib.dir}" />
-        <mkdir dir="${devlib.dir}" />
-        <mkdir dir="${testlib.dir}" />
-    </target>
-
-
-    <!--=======================================================================
-      install-svnant
-
-      (Fetches and) installs the SVN ANT for use by this ant script
-      ====================================================================-->
-    <target name="install-svnant" depends="install-ivy">
-        <if>
-            <istrue value="${svnant.isinstalled}" />
-            <then>
-                <echo message="Skipping SVN ANT install.  SVN ANT has already been configured by the build" />
-            </then>
-            <else>
-                <taskdef-with-ivy organisation="tigris"
-                                  module="svnant"
-                                  revision="1.3.0"
-                                  resource="org/tigris/subversion/svnant/svnantlib.xml"
-                                  classname="org.tigris.subversion.svnant.SvnTask" />
-                <property name="svnant.isinstalled" value="true" />
-            </else>
-        </if>
-    </target>
-
-
-    <!--=======================================================================
-          test-svnant
-
-          Tests SVN by printing out the repository
-          ====================================================================-->
-    <target name="test-svnant" depends="install-svnant">
-        <svn javahl="${svnant.use-javahl}" svnkit="${svnant.use-svnkit}">
-            <wcVersion path="." />
-        </svn>
-        <echo message="Subversion repository url: ${repository.url}" />
-    </target>
-
-
-    <!--=======================================================================
-          svn-revision
-
-          Prints and sets the SVN revision for the repository at the current dir (if svn.revision is not set)
-          ====================================================================-->
-    <target name="svn-revision" depends="install-svnant">
-
-        <svn javahl="${svnant.use-javahl}" svnkit="${svnant.use-svnkit}">
-            <status path="." revisionProperty="svn.revision" />
-        </svn>
-        <echo message="Subversion repository revision: ${svn.revision}" />
-    </target>
-
-
-    <!--=======================================================================
-          set-build.id
-
-          Sets a property build.id to the either "development" or the svn revision
-          if in release mode
-          ====================================================================-->
-    <target name="set-build.id" unless="build.id" depends="install-antcontrib">
-        <if>
-            <istrue value="${release}" />
-            <then>
-                <antcallback target="svn-revision" return="svn.revision" />
-                <property name="build.id" value="${svn.revision}" />
-            </then>
-            <else>
-                <property name="build.id" value="development" />
-            </else>
-        </if>
-    </target>
-
-    <!--=================================================================================
-         version-properties: common Ant driven version file generation.  Projects that produce
-         a package or packages should run this target.  Projects that produce
-         jars only should NOT.
-     ===================================================================================-->
-    <target name="version-properties" depends="set-build.id">
-        <tstamp>
-            <format property="build.time" pattern="yyyy/MM/dd hh:mm aa" />
-        </tstamp>
-        <propertyfile file="version.properties" comment="Release Build version info">
-            <entry key="release.major.number" value="${release.major.number}" />
-            <entry key="release.minor.number" value="${release.minor.number}" />
-            <entry key="release.milestone.number" value="${release.milestone.number}" />
-            <entry key="release.candidate.token" value="${release.candidate.token}" />
-            <entry key="impl.vendor" value="${impl.vendor}" />
-            <entry key="impl.version"
-                   value="${release.major.number}.${release.minor.number}.${release.milestone.number}.${build.id}" />
-            <entry key="impl.title" value="${impl.title}" />
-            <entry key="buildDate" value="${build.time}" />
-            <entry key="svn.revision" value="${build.id}" />
-            <entry key="release.build.number" default="0" type="int" operation="+" value="1" pattern="0000" />
-        </propertyfile>
-        <property file="${basedir}/version.properties" />
-    </target>
-
-
-    <!--=======================================================================
         install-ivy
 
         Fetches and installs IVY ant tasks if not already installed
@@ -430,28 +413,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </target>
 
 
-    <!--=======================================================================
-        ivy.check-releasable
-
-        Verifies that there are no SNAPSHOT dependencies defined in the ivy xml.
-        If there are SNAPSHOTS, fail the release build.
-        ====================================================================-->
-    <target name="ivy.check-releasable" depends="install-ivy, install-antcontrib">
-        <if>
-            <istrue value="${release}" />
-            <then>
-                <sequential>
-                    <ivy:artifactproperty conf="${ivy.configs}" name="dep.[module]/[artifact]-[revision]" value="[revision]" />
-
-                    <propertyselector property="violators" match="dep\..*SNAPSHOT.*" select="\0" casesensitive="false" />
-
-                    <fail if="violators"
-                          message="Release not possible, you have dependencies on non-released artifacts: ${violators}" />
-                </sequential>
-            </then>
-        </if>
-    </target>
-
 
     <!--=======================================================================
         resolve
@@ -460,59 +421,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         file), this task will retrieve the needed files and place them into
         the defined directories.
         ====================================================================-->
-    <target name="resolve"
-            depends="resolve-default, resolve-test, ivy.check-releasable"
-            description="Retrieves all the dependent libraries" />
-
-    <target name="resolve-init" unless="resolve-init.skip" depends="install-ivy">
-        <!-- If this is the 1st time through resolve-init, then we need to clean up the jars-->
-        <antcall target="clean-jars" />
-        <property name="resolve-init.skip" value="" />
+    <target name="resolve" depends="install-ivy"
+            description="Retrieves all the dependent libraries">
+            <ivy:resolve file="${ivyfile}"  conf="plugin"/>
+            <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}"/>
     </target>
 
-    <target name="resolve-default" depends="resolve-default.default,resolve-default.composite"/>
-
-    <!--
-    This target resolves the default IVY configuration as a composite of child configurations.
-    You should set ivy.default.sub-configs in your build.properties only if you want your default
-    configuration to be treated as a composite of two or more child configurations.
-    To turn this on, set ivy.default.sub-configs property in your build.properties, e.g.
-    ivy.default.sub-configs=external,internal
-    Note: the parent config "default" proper will not be resolved
-    -->
-    <target name="resolve-default.composite" depends="install-antcontrib,resolve-init" if="ivy.default.sub-configs">
-        <for list="${ivy.default.sub-configs}" param="conf">
-            <sequential>
-                <ivy:resolve file="${ivyfile}" conf="default_@{conf}" />
-                <ivy:retrieve conf="default_@{conf}" pattern="${lib.dir}/@{conf}/[module]-[revision](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" />
-            </sequential>
-        </for>
-    </target>
-
-    <target name="resolve-default.default" depends="resolve-init" unless="ivy.default.sub-configs">
-        <ivy:resolve file="${ivyfile}" conf="default" />
-        <ivy:retrieve conf="default" pattern="${lib.dir}/[module]-[revision](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" />
-    </target>
-
-    <target name="resolve-test" depends="resolve-init">
-        <ivy:resolve file="${ivyfile}" conf="test" />
-        <ivy:retrieve conf="test" pattern="${testlib.dir}/[module]-[revision](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" />
-    </target>
-
-    <target name="resolve-enunciate" depends="resolve-init">
-        <ivy:resolve file="${ivyfile}" conf="enunciate" />
-        <ivy:retrieve conf="enunciate" pattern="${basedir}/enunciate/lib/[module]-[revision](-[classifier]).[ext]" />
-    </target>
-
-    <target name="resolve-codegen" depends="resolve-init">
-        <ivy:resolve file="${ivyfile}" conf="codegen" />
-        <ivy:retrieve conf="codegen" pattern="${lib.dir}/[module]-[revision](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" />
-    </target>
-
-    <target name="resolve-runtime" depends="resolve-init">
-        <ivy:resolve file="${ivyfile}" conf="runtime" />
-        <ivy:retrieve conf="runtime" pattern="${lib.dir}/[module]-[revision](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" />
-    </target>
+    <!--=======================================================================
+        ivy-clean-all
+        
+        Clean the cache and local.
+        ====================================================================-->
+    <target name="ivy-clean-all" depends="ivy-clean-cache,ivy-clean-local"/>
 
 
     <!--=======================================================================
@@ -570,7 +490,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </for>
     </target>
 
-
     <!--=======================================================================
         ivy-report
 
@@ -580,111 +499,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <ivy:resolve file="${ivyfile}" conf="${ivy.configs}" />
         <ivy:report xml="true" todir="${ivy.reports.dir}" />
     </target>
-
-
-    <!--=======================================================================
-        publish-local-nojar
-
-        Publishes the jar file for this project to the user's local repository
-        for download by other projects currently being executed on the user's
-        system.
-        ====================================================================-->
-    <target name="publish-local-nojar" depends="install-ivy,publish-local-nojar.internal">
-        <if>
-            <equals arg1="${tests.publish}" arg2="true" />
-            <then>
-                <antcall target="publish-local-nojar.internal">
-                    <param name="ivy.artifact.id" value="${ivy.artifact.id}-test"/>
-                </antcall>
-            </then>
-        </if>
-        <antcall target="publish-local-nojar.post"/>
-    </target>
-
-    <!--=======================================================================
-        publish-local-nojar.post this target is invoked after the normal set of publish-local-nojar
-        is completed, override this to perform additional publishing in extensions of subfloor, etc
-        ====================================================================-->
-    <target name="publish-local-nojar.post">
-    </target>
-
-    <target name="publish-local-nojar.internal" depends="install-ivy">
-        <ivy:resolve file="${ivy.artifact.ivyfilename}" />
-        <ivy:publish resolver="local" pubrevision="${project.revision}" overwrite="true" forcedeliver="true" warnonmissing="yes" haltonmissing="no">
-            <artifacts pattern="${dist.dir}/[artifact]-[revision](-[classifier]).[ext]" />
-        </ivy:publish>
-    </target>
-
-    <!--=======================================================================
-        publish-local
-
-        Builds and publishes the jar file for this project to the user's
-        local repository for download by other projects currently being
-        executed on the user's system.
-        ====================================================================-->
-    <target name="publish-local"
-            depends="dist, dist-source, publish-local-nojar"
-            description="Builds and publishes the jar file to the local repository" />
-
-
-    <!--=======================================================================
-          publish
-
-          Creates and publishes the jar file for this project to a Maven2
-          repository.
-          ====================================================================-->
-    <target name="publish" depends="dist, dist-source, publish-nojar">
-    </target>
-
-
-    <!--=======================================================================
-        publish-nojar
-
-        Publishes the jar file for this project to a Maven2 repository.
-        ====================================================================-->
-    <target name="publish-nojar" depends="install-antcontrib,create-pom,ivy.deliver,publish-nojar.internal">
-        <if>
-            <equals arg1="${tests.publish}" arg2="true" />
-            <then>
-                <antcall target="publish-nojar.internal">
-                    <param name="ivy.artifact.id" value="${ivy.artifact.id}-test"/>
-                </antcall>
-            </then>
-        </if>
-    </target>
-
-    <target name="publish-nojar.internal" depends="install-antcontrib,create-pom,ivy.deliver">
-        <antcall target="maven-publish-dependencies">
-            <param name="publish.groupId" value="${ivy.artifact.group}" />
-            <param name="publish.artifactId" value="${ivy.artifact.id}" />
-            <param name="publish.version" value="${project.revision}" />
-            <param name="publish.file" value="${ivy.artifact.ivypathname}" />
-        </antcall>
-
-        <if>
-            <equals arg1="${source.publish}" arg2="true" />
-            <then>
-                <antcall target="maven-publish-sources">
-                    <param name="publish.groupId" value="${ivy.artifact.group}" />
-                    <param name="publish.artifactId" value="${ivy.artifact.id}" />
-                    <param name="publish.version" value="${project.revision}" />
-                    <param name="publish.file" value="${dist.dir}/${ivy.artifact.id}-${project.revision}-sources.jar" />
-                </antcall>
-            </then>
-        </if>
-
-        <antcall target="maven-publish-artifact">
-            <param name="publish.pomFile" value="${ivy.artifact.pomfile}" />
-            <param name="publish.file" value="${dist.dir}/${ivy.artifact.id}-${project.revision}.jar" />
-        </antcall>
-
-        <antcall target="maven-publish.post"/>
-
-    </target>
-
-    <!-- Override this if anything is needed to be done after the standard parts of publish are completed -->
-    <!-- Such as:  publishing non-standard/extended artifacts, etc -->
-    <target name="maven-publish.post"/>
 
     <!--=======================================================================
           ivy.deliver
@@ -697,530 +511,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
     <!--=======================================================================
-        maven-publish-dependencies
-
-        A function that deploys an ivy.xml file to a maven repository
-        ====================================================================-->
-    <target name="maven-publish-dependencies" depends="install-antcontrib">
-        <sequential>
-            <fail message="No file found at: ${publish.file}">
-                <condition>
-                    <not>
-                        <available file="${publish.file}" />
-                    </not>
-                </condition>
-            </fail>
-            <echo message="Publishing ${publish.file} to ${ivy.repository.publish}..." />
-            <if>
-                <isset property="isWindows" />
-                <then>
-                    <exec executable="cmd" failonerror="true">
-                        <arg value="/c" />
-                        <arg value="mvn.bat" />
-                        <arg value="deploy:deploy-file" />
-                        <arg value="-DrepositoryId=${ivy.repository.id}" />
-                        <arg value="-Durl=${ivy.repository.publish}" />
-                        <arg value="-DgroupId=${publish.groupId}" />
-                        <arg value="-DartifactId=${publish.artifactId}" />
-                        <arg value="-Dversion=${publish.version}" />
-                        <arg value="-Dpackaging=ivy.xml" />
-                        <arg value="-Dfile=${publish.file}" />
-                    </exec>
-                </then>
-                <else>
-                    <exec executable="mvn" failonerror="true">
-                        <arg value="deploy:deploy-file" />
-                        <arg value="-DrepositoryId=${ivy.repository.id}" />
-                        <arg value="-Durl=${ivy.repository.publish}" />
-                        <arg value="-DgroupId=${publish.groupId}" />
-                        <arg value="-DartifactId=${publish.artifactId}" />
-                        <arg value="-Dversion=${publish.version}" />
-                        <arg value="-Dpackaging=ivy.xml" />
-                        <arg value="-Dfile=${publish.file}" />
-                        <arg value="-e" />
-                    </exec>
-                </else>
-            </if>
-        </sequential>
-    </target>
-
-
-    <!--=======================================================================
-        maven-publish-artifact
-
-        A function that deploys an artifact to a maven repository
-        ====================================================================-->
-    <target name="maven-publish-artifact" depends="install-antcontrib">
-        <sequential>
-            <fail message="No file found at: ${publish.file}">
-                <condition>
-                    <not>
-                        <available file="${publish.file}" />
-                    </not>
-                </condition>
-            </fail>
-            <echo message="Publishing ${publish.file} to ${ivy.repository.publish}..." />
-            <if>
-                <isset property="isWindows" />
-                <then>
-                    <exec executable="cmd" failonerror="true">
-                        <arg value="/c" />
-                        <arg value="mvn.bat" />
-                        <arg value="deploy:deploy-file" />
-                        <arg value="-DrepositoryId=${ivy.repository.id}" />
-                        <arg value="-Durl=${ivy.repository.publish}" />
-                        <arg value="-DpomFile=${publish.pomFile}" />
-                        <arg value="-Dfile=${publish.file}" />
-                    </exec>
-                </then>
-                <else>
-                    <exec executable="mvn" failonerror="true">
-                        <arg value="deploy:deploy-file" />
-                        <arg value="-DrepositoryId=${ivy.repository.id}" />
-                        <arg value="-Durl=${ivy.repository.publish}" />
-                        <arg value="-DpomFile=${publish.pomFile}" />
-                        <arg value="-Dfile=${publish.file}" />
-                    </exec>
-                </else>
-            </if>
-        </sequential>
-    </target>
-
-
-    <!--=======================================================================
-        maven-publish-sources
-
-        A function that deploys a java-sources artifact to a maven repository
-        ====================================================================-->
-    <target name="maven-publish-sources" depends="install-antcontrib">
-        <sequential>
-            <fail message="No file found at: ${publish.file}">
-                <condition>
-                    <not>
-                        <available file="${publish.file}" />
-                    </not>
-                </condition>
-            </fail>
-            <echo message="Publishing ${publish.file} to ${ivy.repository.publish}..." />
-            <if>
-                <isset property="isWindows" />
-                <then>
-                    <exec executable="cmd" failonerror="true">
-                        <arg value="/c" />
-                        <arg value="mvn.bat" />
-                        <arg value="deploy:deploy-file" />
-                        <arg value="-DrepositoryId=${ivy.repository.id}" />
-                        <arg value="-Durl=${ivy.repository.publish}" />
-                        <arg value="-DgroupId=${publish.groupId}" />
-                        <arg value="-DartifactId=${publish.artifactId}" />
-                        <arg value="-Dversion=${publish.version}" />
-                        <arg value="-DgeneratePom=true" />
-                        <arg value="-Dpackaging=java-source" />
-                        <arg value="-Dfile=${publish.file}" />
-                    </exec>
-                </then>
-                <else>
-                    <exec executable="mvn" failonerror="true">
-                        <arg value="deploy:deploy-file" />
-                        <arg value="-DrepositoryId=${ivy.repository.id}" />
-                        <arg value="-Durl=${ivy.repository.publish}" />
-                        <arg value="-DgroupId=${publish.groupId}" />
-                        <arg value="-DartifactId=${publish.artifactId}" />
-                        <arg value="-Dversion=${publish.version}" />
-                        <arg value="-DgeneratePom=true" />
-                        <arg value="-Dpackaging=java-source" />
-                        <arg value="-Dfile=${publish.file}" />
-                    </exec>
-                </else>
-            </if>
-        </sequential>
-    </target>
-
-
-    <!--=======================================================================
-        create-pom
-
-        Creates the POM file for publishing the jar file to a Maven2 repository.
-        ====================================================================-->
-    <target name="create-pom" depends="install-ivy">
-        <ivy:makepom ivyfile="${ivyfile}" pomfile="${dist.dir}/pom.xml">
-            <mapping conf="default" scope="compile" />
-            <mapping conf="runtime" scope="runtime" />
-        </ivy:makepom>
-    </target>
-
-
-    <!--=======================================================================
-        clean-jars
-
-        Removes all the libraries that have been downloaded for this project
-        using the ivy dependencies.
-        ====================================================================-->
-    <target name="clean-jars">
-        <delete dir="${lib.dir}" />
-        <delete dir="${testlib.dir}" />
-    </target>
-
-
-    <!--=======================================================================
         clean
 
         Removes all the files generated from the build process.
         ====================================================================-->
-    <target name="clean"
-            description="Cleans all the files generated from a build with the exception of IVY-downloaded jars (see clean-all)"
-            depends="clean-tests, clean-cobertura, clean-sonar, clean-javadoc, clean-dist">
-        <delete dir="${classes.dir}" />
-        <delete dir="${bin.dir}" />
+    <target name="clean" description="Cleans all the files generated from ctools">
+      <delete dir="${lib.dir}" />
+      <delete dir="${tmp.dir}" />
     </target>
 
     <!--=======================================================================
-        compile
+        clean-all
 
-        Compiles the source code (using the specified options) into the
-        binary directory.
-
-        NOTE: This contains multiple sub-tasks which will occur in the
-              following order (this is provided for easier overriding by
-              the build.xml which will include this file)...
-          - compile.pre      : anything needed to prep for compile
-          - compile.compile  : the actual compilation step
-          - compile.src_copy : copying the source into the bin directory
-          - compile.res_copy : copying the resources into the bin directory
-          - compile.lic_copy : copying the license information into the bin directory
-          - compile.post     : anything needed after the compile is done
+        Removes all the files generated from the ctools process and ivy-downloaded jars
         ====================================================================-->
-    <target name="compile"
-            depends="init, compile.pre, compile.compile, compile.src_copy, compile.res_copy, compile.lic_copy, compile.post"
-            description="Performs all the steps to prepare the bin directory with a complete compilation" />
-
-
-    <!--=======================================================================
-        compile.pre
-
-        Prepares to perform the compile.
-        ====================================================================-->
-    <target name="compile.pre" />
-
-
-    <!--=======================================================================
-        compile.compile
-
-        Performs the actual compile
-        ====================================================================-->
-    <target name="compile.compile" depends="init">
-        <javac destdir="${classes.dir}"
-               debug="${javac.debug}"
-               deprecation="${javac.deprecation}"
-               fork="true"
-               memorymaximumsize="${javac.maxmemory}"
-               source="${javac.source}"
-               target="${javac.target}"
-               encoding="UTF-8">
-            <classpath>
-                <path refid="classpath" />
-            </classpath>
-            <src path="${src.dir}" />
-            <compilerarg value="${javac.xlint}" />
-        </javac>
-    </target>
-
-
-    <!--=======================================================================
-        compile.res_copy
-
-        Copies any needed resources into the classes directory.  Will not
-        duplicate copying of resources from src tree (handled by compile.src_copy
-        if jar.include.source is set.
-        ====================================================================-->
-    <target name="compile.res_copy" depends="install-antcontrib">
-        <if>
-            <available file="${res.dir}" />
-            <then>
-                <copy todir="${classes.dir}">
-                    <fileset dir="${res.dir}" />
-                </copy>
-            </then>
-        </if>
-
-        <if>
-            <not>
-                <isset property="jar.include.source" />
-            </not>
-            <then>
-                <copy todir="${classes.dir}" flatten="false">
-                    <fileset dir="${src.dir}" excludes="**/*.java" />
-                </copy>
-            </then>
-        </if>
-    </target>
-
-
-    <!--=======================================================================
-        compile.src_copy
-
-        Copies the source files to the bin directory
-        NOTE: if the dont.copy.source variable exists, this step will be
-              skipped!
-        ====================================================================-->
-    <target name="compile.src_copy" depends="init" if="jar.include.source">
-        <copy todir="${classes.dir}" flatten="false">
-            <fileset dir="${src.dir}" />
-        </copy>
-    </target>
-
-
-    <!--=======================================================================
-        compile.lic_copy
-
-        Copies the license file(s) into the bin directory
-        ====================================================================-->
-    <target name="compile.lic_copy" depends="init">
-        <condition property="lgpl-license-avail">
-            <available file="${license.dir}/lgpl-2.1.txt" />
-        </condition>
-        <antcall target="copy-license-lgpl" />
-        <condition property="gpl-license-avail">
-            <available file="${license.dir}/gpl-2.0.txt" />
-        </condition>
-        <antcall target="copy-license-gpl" />
-    </target>
-
-
-    <!--=======================================================================
-        compile.post
-
-        Performs any needed post-compile tasks
-        ====================================================================-->
-    <target name="compile.post" />
-
-
-    <!--=======================================================================
-        jar
-
-        Creates a jar file from the bin directory
-        ====================================================================-->
-    <target name="jar"
-            depends="jar.main,jar.test"
-            description="Jars up the bin directory after a compile">
-    </target>
-
-    <!-- jar the tests ONLY IF tests.publish it true -->
-    <!-- if the compile-tests target is in the dependency list for this target, -->
-    <!-- it will get executed no matter what the value of tests.publish is      -->
-    <target name="jar.test"
-            if="tests.publish">
-        <antcall target="compile-tests" />
-        <jar destfile="${dist.dir}/${ivy.artifact.id}-test-${project.revision}.jar" manifest="${dist.manifest.file}">
-            <fileset dir="${testclasses.dir}"/>
-        </jar>
-    </target>
-
-    <target name="jar.main"
-            depends="compile,set-build.id,generate.manifest">
-        <jar destfile="${dist.dir}/${ivy.artifact.id}-${project.revision}.jar" manifest="${dist.manifest.file}">
-            <fileset dir="${classes.dir}" />
-        </jar>
-    </target>
-
-    <!--=======================================================================
-        generate.manifest
-
-        Creates a new manifest file if one is not specified, or updates
-        an existing manifest file if one is specified.
-        ====================================================================-->
-    <target name="generate.manifest" depends="init,set-build.id">
-        <delete file="${dist.manifest.file}" />
-        <touch file="${dist.manifest.file}" />
-        <copy file="${manifest.file}" tofile="${dist.manifest.file}" overwrite="true" failonerror="false" />
-
-        <manifest file="${dist.manifest.file}" mode="update">
-            <attribute name="Implementation-Title" value="${impl.title}" />
-            <attribute name="Implementation-Version" value="${project.revision}.${build.id}" />
-            <attribute name="Implementation-Vendor" value="${impl.vendor}" />
-            <attribute name="Implementation-ProductID" value="${impl.productID}" />
-        </manifest>
-    </target>
-
-
-    <!--=======================================================================
-        dist-source
-
-        Generates zip and targz distributions of the javadoc
-        ====================================================================-->
-    <target name="dist-source" depends="source.jar, source.zip, source.targz" />
-
-
-    <!--=======================================================================
-        source.jar
-
-        Creates a jar of the project source for distribution
-        ====================================================================-->
-    <target name="source.jar" depends="init,install-antcontrib">
-        <jar jarfile="${dist.dir}/${ivy.artifact.id}-${project.revision}-sources.jar" basedir="${src.dir}" />
-        <if>
-            <equals arg1="${tests.publish}" arg2="true" />
-            <then>
-                <jar jarfile="${dist.dir}/${ivy.artifact.id}-test-${project.revision}-sources.jar" basedir="${src.dir}" />
-            </then>
-        </if>
-    </target>
-
-    <!--=======================================================================
-        source.zip
-
-        Creates a zip of the project source for distribution
-        ====================================================================-->
-    <target name="source.zip" depends="init">
-        <jar jarfile="${dist.dir}/${source.zip.filename}" basedir="${src.dir}" />
-    </target>
-
-    <!--=======================================================================
-        source.targz
-
-        Creates a gzipped tar of the project source for distribution
-        ====================================================================-->
-    <target name="source.targz" depends="init">
-        <tar compression="gzip" destfile="${dist.dir}/${source.tar.filename}" basedir="${src.dir}" />
-    </target>
-
-
-    <!--=======================================================================
-        clean-tests
-
-        Removes all files related to tests
-        ====================================================================-->
-    <target name="clean-tests">
-        <delete dir="${testbin.dir}" />
-    </target>
-
-
-    <!--=======================================================================
-        init-tests
-
-        Compiles project test source
-        ====================================================================-->
-    <target name="init-tests" depends="clean-tests">
-        <mkdir dir="${testclasses.dir}" />
-        <mkdir dir="${testsrc.dir}" />
-    </target>
-
-
-    <!--=======================================================================
-        compile-tests
-
-        Compiles project test source
-        ====================================================================-->
-    <target name="compile-tests" depends="init-tests">
-        <javac destdir="${testclasses.dir}"
-               debug="true"
-               optimize="false"
-               source="${javac.source}"
-               target="${javac.target}"
-               fork="true"
-               encoding="UTF-8">
-            <src path="${testsrc.dir}" />
-            <classpath refid="test.classpath" />
-        </javac>
-
-        <!-- Copy the non-java files from the source directory to the test classes directory
-    -->
-        <copy todir="${testclasses.dir}">
-            <fileset dir="${testsrc.dir}">
-                <exclude name="**/*.java" />
-            </fileset>
-        </copy>
-    </target>
-
-
-    <!--=======================================================================
-        test
-
-        Compiles and runs all the tests for the project
-        ====================================================================-->
-    <target name="test" depends="compile,compile-tests, init-test-reports" description="Compiles and runs unit tests">
-        <junit maxmemory="${junit.maxmemory}"
-               dir="${junit.base.dir}"
-               fork="yes"
-               forkmode="${junit.forkmode}"
-               failureProperty="test.failed"
-               haltonfailure="${junit.haltonfailure}"
-               haltonerror="${junit.haltonerror}"
-               printsummary="yes">
-            <sysproperty key="java.awt.headless" value="${headless.unittest}" />
-
-            <syspropertyset>
-                <propertyref prefix="junit.sysprop." />
-                <mapper type="glob" from="junit.sysprop.*" to="*"/>
-            </syspropertyset>
-
-            <classpath refid="test.classpath" />
-            <formatter type="xml" />
-            <test name="${testcase}" todir="${testreports.xml.dir}" if="testcase" />
-            <batchtest fork="yes" todir="${testreports.xml.dir}" unless="testcase">
-                <fileset dir="${testsrc.dir}" casesensitive="yes">
-                    <include name="**/*Test.java" />
-                </fileset>
-            </batchtest>
-        </junit>
-
-        <junitreport todir="${testreports.html.dir}">
-            <fileset dir="${testreports.xml.dir}">
-                <include name="TEST-*.xml" />
-            </fileset>
-            <report format="frames" todir="${testreports.html.dir}" />
-        </junitreport>
-    </target>
-
-
-    <!--=======================================================================
-      clean-test-reports
-
-      Remove all xml and html JUnit test reports
-      ====================================================================-->
-    <target name="clean-test-reports">
-        <delete dir="${testreports.xml.dir}" />
-        <delete dir="${testreports.html.dir}" />
-    </target>
-
-
-    <!--=======================================================================
-      init-test-reports
-
-      Prepare directories for JUnit test reports
-      ====================================================================-->
-    <target name="init-test-reports" depends="clean-test-reports">
-        <mkdir dir="${testreports.xml.dir}" />
-        <mkdir dir="${testreports.html.dir}" />
-    </target>
-
-    <!--=======================================================================
-        dist
-
-        Creates a distribution of this project
-        ====================================================================-->
-    <target name="dist" depends="jar" description="Creates a distribution" />
-
-
-    <!--=======================================================================
-        dist-full
-
-        Creates a distribution of this project including all sources needed
-        to build as well as the resultant jar
-        ====================================================================-->
-    <target name="dist-full" depends="jar"
-            description="Creates all the distributable items for this project">
-        <!-- Create the required zip distribution which contains the entire project -->
-        <zip destfile="${dist.dir}/${ivy.artifact.id}-${project.revision}.zip">
-            <fileset dir="${basedir}">
-                <exclude name="bin/"/>
-                <exclude name="dist/"/>
-                <exclude name="eclipse-bin/"/>
-            </fileset>
-            <zipfileset dir="${dist.dir}" includes="**/*.jar"/>
-        </zip>
-    </target>
-
+    <target name="clean-all" depends="clean,ivy-clean-all" 
+      description="Cleans all the files generated from a build as well IVY-downloaded jars" />
 
     <!--=======================================================================
           MACRO: taskdef-with-ivy
@@ -1355,5 +661,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </then>
             </if>
         </sequential>
+    </macrodef>
+
+    <!--=======================================================================
+        Macro usage to start or stop a service.
+
+        parameters:
+        action    - The name of the library (the filename w/o extension)
+        service   - The URL from which the library will be downloaded
+        ====================================================================-->
+    <macrodef name="service">
+      <attribute name="service"/>
+      <attribute name="action"/>
+      <sequential>
+        <exec executable="cmd.exe">
+          <arg line="/c net @{action} '@{service}'"/>
+         </exec>
+      </sequential>
     </macrodef>
 </project>
