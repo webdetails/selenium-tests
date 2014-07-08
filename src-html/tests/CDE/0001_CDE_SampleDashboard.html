@@ -290,17 +290,6 @@
 	<td>500</td>
 	<td></td>
 </tr>
-<!--Disable NA-->
-<tr>
-	<td>click</td>
-	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect']</td>
-	<td></td>
-</tr>
 <!--Enable Japan-->
 <tr>
 	<td>click</td>
@@ -312,6 +301,18 @@
 	<td>500</td>
 	<td></td>
 </tr>
+<!--Disable NA-->
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<!--Test Japan Data-->
 <tr>
 	<td>waitForElementNotPresent</td>
 	<td>xpath=//div[@class='blockUI blockOverlay']</td>
