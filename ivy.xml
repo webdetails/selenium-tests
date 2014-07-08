@@ -42,6 +42,11 @@
             changing="true" transitive="false" conf="plugin->default">
           <artifact name="pentaho-cdf-samples" type="zip" /> <!-- download the zip file, not the jar -->
         </dependency>
+        <!-- CDE samples -->
+        <dependency org="pentaho" name="pentaho-cdf-dd-solution" rev="${dependency.pentaho-cde-plugin.revision}" 
+            changing="true" transitive="false" conf="plugin->default">
+          <artifact name="pentaho-cdf-dd-solution" type="zip" /> <!-- download the zip file, not the jar -->
+        </dependency>
         <!-- CDA samples -->
         <dependency org="pentaho" name="cda-samples" rev="${dependency.pentaho-cda-plugin.revision}" 
             changing="true" transitive="false" conf="plugin->default">

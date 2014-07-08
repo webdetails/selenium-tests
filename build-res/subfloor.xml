@@ -255,7 +255,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         This process shall clean the project, download the CTools, and copy to
         Pentaho Server.
         ====================================================================-->
-    <target name="ctools" depends="clean, resolve, stop-pentaho-bi-server">
+    <target name="ctools" depends="clean-all, resolve, stop-pentaho-bi-server">
       <echo message="Starting copy CTools." />
 
       <!-- Delete ctools on server -->
@@ -284,11 +284,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       -->
       <mkdir dir="${tmp.dir}/public/plugin-samples" />
       <unzip src="${lib.dir}/plugin/pentaho-cdf-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
+      <unzip src="${lib.dir}/plugin/pentaho-cdf-dd-solution.zip" dest="${tmp.dir}/public/plugin-samples" />
       <unzip src="${lib.dir}/plugin/cda-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
       <zip destfile="${tmp.dir}/plugin-samples.zip">
         <zipfileset dir="${tmp.dir}/public" prefix="public"/>
       </zip>
-
 
       <!-- Copy the ctools -->
       <copy todir="${pentaho.plugin.cgg.dir}">
@@ -305,9 +305,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </copy>
       <copy file="${tmp.dir}/plugin-samples.zip" todir="${pentaho.default.content.dir}" />
 
-      <echo message="Start the Pentaho BI Server." />
+      <!-- Starting Pentaho BI Server -->
       <antcall target="start-pentaho-bi-server"/>
-      <sleep minutes="3" /><!-- Wait for the pentaho start-up -->
     </target>
 
 
@@ -315,14 +314,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         Shall start the pentaho-server
         ====================================================================-->
     <target name="start-pentaho-bi-server">
+      <echo message="Start the Pentaho BI Server." />
       <service action="start" service="tomcat6"/>
     </target>
+
 
     <!--=======================================================================
         Shall stop the pentaho-server
         ====================================================================-->
     <target name="stop-pentaho-bi-server">
-        <service action="stop" service="tomcat6"/>
+      <echo message="Stop the Pentaho BI Server." />
+      <service action="stop" service="tomcat6"/>
     </target>
 
     <!--=======================================================================
@@ -413,7 +415,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </target>
 
 
-
     <!--=======================================================================
         resolve
 
@@ -423,9 +424,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
     <target name="resolve" depends="install-ivy"
             description="Retrieves all the dependent libraries">
+            <echo message="Resolve dependencies." />
             <ivy:resolve file="${ivyfile}"  conf="plugin"/>
             <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}"/>
     </target>
+
 
     <!--=======================================================================
         ivy-clean-all
