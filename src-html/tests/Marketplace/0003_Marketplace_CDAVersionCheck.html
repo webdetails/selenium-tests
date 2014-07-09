@@ -4,36 +4,46 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/pentaho/" />
-<title>9999_Logout_Pentaho</title>
+<title>0002_Marketplace_CDEVersionCheck</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">9999_Logout_Pentaho</td></tr>
+<tr><td rowspan="1" colspan="3">0002_Marketplace_CDEVersionCheck</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/pentaho/Home</td>
+	<td>/pentaho/Login</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//iframe[@id=&quot;home.perspective&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Pentaho User Console</td>
+	<td>xpath=//iframe[@id='home.perspective']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='pucUserDropDown']/table/tbody/tr/td/div</td>
+	<td>//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=gwt-uid-3</td>
+	<td>click</td>
+	<td>//div[@id='customDropdownPopupMajor']/div/div/table/tbody/tr[4]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=//div[@class='marketplacePanel']/div[3]/div/div/div/div[2]/span[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=//div[@class='marketplacePanel']/div[3]/div/div/div/div[2]/span[3]</td>
+	<td>TRUNK-SNAPSHOT (TRUNK)</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
 	<td></td>
 </tr>
 </tbody></table>
