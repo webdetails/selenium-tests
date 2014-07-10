@@ -136,6 +136,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             value="${basedir}/lib"
             description="Directory that hosts Jar files required to compile project source.  (IVY will populate this directory with required jars)" />
     <property name="tmp.dir" value="${basedir}/tmp" description="Temp directory only used for temp procedures" />
+    <property name="resources.dir" value="${basedir}/resources" description="All itens need during the test execution." />
     
     <!-- Third party Ant tasks and tools properties -->
     <property name="subfloor.resources.dir"
@@ -286,6 +287,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <unzip src="${lib.dir}/plugin/pentaho-cdf-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
       <unzip src="${lib.dir}/plugin/pentaho-cdf-dd-solution.zip" dest="${tmp.dir}/public/plugin-samples" />
       <unzip src="${lib.dir}/plugin/cda-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
+      <!-- copy the files for CGG tests -->
+      <copy todir="${tmp.dir}/public">
+        <fileset dir="${resources.dir}/cgg" />
+      </copy>
       <zip destfile="${tmp.dir}/plugin-samples.zip">
         <zipfileset dir="${tmp.dir}/public" prefix="public"/>
       </zip>
