@@ -17,28 +17,60 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>6000</td>
+	<td>waitForElementNotPresent</td>
+	<td>xpath=//div[@class='blockUI blockOverlay']</td>
+	<td></td>
+</tr>
+<!--Check for global icon near zoom in/out-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@class='olControlZoomToMaxExtentItemInactive olButton']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>assertElementPresent</td>
+	<td>//div[@class='olControlZoomToMaxExtentItemInactive olButton']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>xpath=//div[@id='testWithGeoLocalization']</td>
 	<td></td>
 </tr>
+<!--France-->
 <tr>
 	<td>assertElementPresent</td>
-	<td>//div[@id='testWithGeoLocalization']/div/div/div[5]//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']</td>
+	<td>xpath=//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']</td>
 	<td></td>
 </tr>
+<!--Australia-->
 <tr>
 	<td>assertElementPresent</td>
-	<td>//div[@id='testWithGeoLocalization']/div/div/div[5]//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]</td>
+	<td>xpath=//div[@id='testWithGeoLocalization']/div/div/div[5]//../*[local-name()='image'][2]</td>
 	<td></td>
 </tr>
+<!--Las Vegas-->
 <tr>
-	<td>pause</td>
-	<td>500</td>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='testWithGeoLocalization']/div/div/div[5]//../*[local-name()='image'][3]</td>
+	<td></td>
+</tr>
+<!--Norway-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='testWithGeoLocalization']/div/div/div[5]//../*[local-name()='image'][4]</td>
+	<td></td>
+</tr>
+<!--Sao Francisco-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='testWithGeoLocalization']/div/div/div[5]//../*[local-name()='image'][5]</td>
+	<td></td>
+</tr>
+<!--Germany-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//div[@id='testWithGeoLocalization']/div/div/div[5]//../*[local-name()='image'][6]</td>
 	<td></td>
 </tr>
 </tbody></table>
