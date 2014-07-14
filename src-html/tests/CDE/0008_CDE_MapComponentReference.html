@@ -17,13 +17,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>waitForElementNotPresent</td>
+	<td>xpath=//div[@class='blockUI blockOverlay']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>xpath=//div[@class='container']/div[4]/div/div</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='selectMapEngineObj']</td>
 	<td></td>
 </tr>
 <tr>
@@ -32,18 +32,23 @@
 	<td>label=google</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>//div[@id='selectTileObj']/select</td>
 	<td>label=mapquest-normal</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
+	<td>waitForElementPresent</td>
+	<td>xpath=//div[@class='container']/div[8]/div/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=//div[@class='container']/div[10]/div/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=//div[@class='container']/div[12]/div/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
 	<td></td>
 </tr>
 <tr>
@@ -59,11 +64,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>xpath=//div[@class='container']/div[12]/div/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>500</td>
 	<td></td>
 </tr>
 </tbody></table>
