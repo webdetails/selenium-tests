@@ -1,12 +1,5 @@
 echo ON
 
-echo param1:%1
-echo param2:%2
-echo param3:%3
-echo param4:%4
-
-
-
 set param.lib.selenium.standalone=lib\selenium-server-standalone.jar
 set param.browser=*firefox
 set param.host=http://localhost:8080/pentaho/
