@@ -154,6 +154,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <property name="pentaho.bi.server.dir"
               value="C:\Pentaho\5.1\biserver-ce-5.1.0.0-752\biserver-ce"
               description="The location of Pentaho BI Server" />
+    <property name="pentaho.bi.server.service.name" value="tomcat6" description="The service name of BI Server" />
 
     
     <!-- Ivy properties -->
@@ -330,7 +331,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
     <target name="start-pentaho-bi-server">
       <echo message="Start the Pentaho BI Server." />
-      <service action="start" service="tomcat6"/>
+      <service action="start" service="${pentaho.bi.server.service.name}"/>
     </target>
 
 
@@ -339,7 +340,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
     <target name="stop-pentaho-bi-server">
       <echo message="Stop the Pentaho BI Server." />
-      <service action="stop" service="tomcat6"/>
+      <service action="stop" service="${pentaho.bi.server.service.name}"/>
     </target>
 
 
