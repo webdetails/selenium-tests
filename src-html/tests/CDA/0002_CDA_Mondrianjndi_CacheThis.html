@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/pentaho/plugin/cda/api/previewQuery?path=%2Fpublic%2Fplugin-samples%2Fcda%2Fcdafiles%2Fmondrian-jndi.cda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//span[@id='fileid']</td>
+	<td>/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='previewerTable']/span</td>
+	<td>Please select a Data Access ID</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@id='dataAccessSelector']</td>
+	<td>label=Mdx Query on SampleData - Jndi</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='dataAccessSelector']/option[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='contents_length']/select</td>
+	<td></td>
+</tr>
+<!--Check only three rows exists-->
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//table[@id='contents']/tbody/tr[4]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr/td</td>
+	<td>All Years</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[2]/td</td>
+	<td>All Years</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[3]/td</td>
+	<td>All Years</td>
+</tr>
+<!--Click on 'Cache this'-->
+<tr>
+	<td>click</td>
+	<td>id=cachethis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=p.dialogTitle</td>
+	<td>exact:What schedule should this query run on? (advanced)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.dialogTitle</td>
+	<td>exact:What schedule should this query run on? (advanced)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=periodType</td>
+	<td>label=every day</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=startAt</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=CDA Cache Manager</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=versionInfo</td>
+	<td>Version TRUNK-SNAPSHOT</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='scheduledQueries']/div</td>
+	<td>Scheduled Queries</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div[2]/div/div[5]</td>
+	<td>exact:0 0 12 * * ? *</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>var d=new Date(); <br />d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)<br />+'-'+('0'+(d.getDate()+1)).slice(-2);</td>
+	<td>dateTomorrow</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${dateTomorrow}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div[2]/div/div[4]</td>
+	<td>${dateTomorrow}<br />12:00:00</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img.deleteIcon.button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Want to delete this scheduler entry?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cacheButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=clearCacheButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=clearCacheButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>This will remove ALL items from cache. Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>6 items have been removed from cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
