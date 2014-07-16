@@ -120,7 +120,7 @@
 </tr>
 <tr>
 	<td>storeEval</td>
-	<td>var d=new Date(); <br />d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)<br />+'-'+('0'+(d.getDate())).slice(-2);</td>
+	<td>var daySome=0;var d=new Date();if(d.getHours()&gt;11){daySum=1;}<br />d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)<br />+'-'+('0'+(d.getDate()+daySum)).slice(-2);</td>
 	<td>dateToday</td>
 </tr>
 <tr>
@@ -180,7 +180,7 @@
 </tr>
 <tr>
 	<td>assertAlert</td>
-	<td>6 items have been removed from cache</td>
+	<td>* items have been removed from cache</td>
 	<td></td>
 </tr>
 <tr>
