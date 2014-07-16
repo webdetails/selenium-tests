@@ -120,22 +120,27 @@
 </tr>
 <tr>
 	<td>storeEval</td>
-	<td>var d=new Date(); <br />d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)<br />+'-'+('0'+(d.getDate()+1)).slice(-2);</td>
-	<td>dateTomorrow</td>
+	<td>var d=new Date(); <br />d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)<br />+'-'+('0'+(d.getDate())).slice(-2);</td>
+	<td>dateToday</td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>${dateTomorrow}</td>
+	<td>${dateToday}</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[2]/div[2]/div/div[4]</td>
-	<td>${dateTomorrow}<br />12:00:00</td>
+	<td>${dateToday}<br />12:00:00</td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>css=img.deleteIcon.button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForConfirmationPresent</td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -159,13 +164,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForConfirmationPresent</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertConfirmation</td>
 	<td>This will remove ALL items from cache. Are you sure?</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForAlertPresent</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertAlert</td>
-	<td>6 items have been removed from cache</td>
+	<td>39 items have been removed from cache</td>
 	<td></td>
 </tr>
 <tr>
