@@ -169,7 +169,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               value="ivy.xml"
               description="The name of the IVY xml file defining your project's dependencies" />
     <property name="ivy.artifact.group"
-              value="Pentaho"
+              value="pentaho"
               description="IVY metadata describing the originating company or organization" />
     <property name="ivy.artifact.ivyfilename"
               value="ivy.xml"
@@ -497,7 +497,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
     <target name="resolve-plugin" depends="install-ivy" description="Retrieves all the dependent libraries">
             <echo message="Resolve dependencies." />
-            <ivy:resolve file="${ivy.file}" conf="plugin" checkIfChanged="true"/>
+            <ivy:resolve file="${ivy.file}" conf="plugin"/>
             <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}"/>
     </target>
 
@@ -510,7 +510,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
     <target name="resolve-test-java" depends="install-ivy" description="Retrieves all the dependent libraries">
         <echo message="Resolve dependencies." />
-        <ivy:resolve file="${ivy.file}" conf="test-java" checkIfChanged="true"/>
+        <ivy:resolve file="${ivy.file}" conf="test-java"/>
         <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}"/>
     </target>
 
