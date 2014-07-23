@@ -268,7 +268,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         This process shall clean the project, compile the tests and run them.
         ====================================================================-->
-    <target name="test-java" depends="clean-java, compile, stop-pentaho-bi-server">
+    <target name="test-java" depends="clean-java, resolve-plugin, compile, stop-pentaho-bi-server">
       
 
       <!-- Starting Pentaho BI Server -->
