@@ -520,8 +520,52 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         
         Clean the cache and local.
         ====================================================================-->
-    <target name="ivy-clean-all" depends="ivy-clean-cache"/>
+    <target name="ivy-clean-all" depends="ivy-clean-cache,ivy-clean-local"/>
 
+
+
+    <!--=======================================================================
+        ivy-clean-local
+
+        Completely cleans your local repository of any files published locally
+        by way of publish-local.
+        WARNING: this is a global action and will affect other IVY projects
+        currently referencing a locally published dependency
+        ====================================================================-->
+    <target name="ivy-clean-local" depends="install-ivy">
+        <delete dir="${ivy.local.default.root}/" />
+    </target>
+
+
+    <!--=======================================================================
+        ivy-clean-by-name
+
+        Cleans your IVY cache and local repository of specific files.
+        WARNING: this is a global action and will affect other IVY projects
+        currently referencing a locally published dependency
+        ====================================================================-->
+    <target name="ivy-clean-pentaho" depends="install-ivy">
+        <mkdir dir="${ivy.local.default.root}" />
+        <!-- just in case it doesn't exist -->
+        <for param="dir">
+            <path>
+                <dirset dir="${ivy.local.default.root}" includes="*${ivy.clean.pattern}*" />
+                <dirset dir="${ivy.default.ivy.user.dir}/cache" includes="*${ivy.clean.pattern}*" />
+            </path>
+            <sequential>
+                <delete dir="@{dir}" includeemptydirs="true" />
+            </sequential>
+        </for>
+        <for param="file">
+            <path>
+                <fileset dir="${ivy.local.default.root}" includes="*${ivy.clean.pattern}*" />
+                <fileset dir="${ivy.default.ivy.user.dir}/cache" includes="*${ivy.clean.pattern}*" />
+            </path>
+            <sequential>
+                <delete file="@{file}" />
+            </sequential>
+        </for>
+    </target>
 
     <!--=======================================================================
         ivy-clean-cache
