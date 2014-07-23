@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0">
-    <info organisation="pentaho" module="selenium-tests" revision="${project.revision}"/>
-    <configurations defaultconf="plugin->default">
+    <info organisation="${ivy.artifact.group}" module="selenium-tests" revision="${project.revision}"/>
+    <configurations>
         <conf name="plugin"/>
+        <conf name="test-java" />
     </configurations>
     <dependencies >
         <!-- CTools: CDF, CGG, CDE, CDA -->
@@ -25,8 +26,7 @@
         -->
         <dependency org="pentaho" name="pentaho-cdf-dd" rev="${dependency.pentaho-cde-plugin.revision}" changing="true"
                     transitive="false" conf="plugin->default">
-            <artifact name="pentaho-cdf-dd" type="zip"/>
-            <!-- download the zip file, not the jar -->
+            <artifact name="pentaho-cdf-dd" type="zip"/><!-- download the zip file, not the jar -->
         </dependency>
         <!--
             CDA
@@ -53,6 +53,11 @@
           <artifact name="cda-samples" type="zip" />
           <!-- download the zip file, not the jar -->
         </dependency>
-        
+
+        <!-- Junit -->
+        <dependency org="junit" name="junit" rev="4.11" conf="test-java->default"/>
+        <!-- Selenium Java -->
+        <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="2.42.2" conf="test-java->default"/>
+
     </dependencies>
 </ivy-module>

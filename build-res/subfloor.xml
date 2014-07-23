@@ -119,7 +119,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </description>
 
     <!-- Load the properties files in the proper order -->
-    <property file="build.properties" description="Properties customized for your particular project belong in this file." />
+    <property file="${basedir}/build.properties" description="Properties customized for your particular project belong in this file." />
 
     <!-- =================================================================================
          Property Defaults
@@ -132,9 +132,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- Compile properties -->
     <property name="bin.dir" value="${basedir}/bin" description="Base directory for all non-dist build output" />
-    <property name="lib.dir"
-            value="${basedir}/lib"
-            description="Directory that hosts Jar files required to compile project source.  (IVY will populate this directory with required jars)" />
+    <property name="src.java.dir" value="src-java" description="Source code of Selenium Java tests." />
+    <property name="build.dir" value="build" description="Build directory." />
+    <property name="classes.dir" value="${build.dir}/classes" description="Classes directory created during compilation."/>
+    <property name="jar.dir" value="${build.dir}/jar" description="Jar directory created during compilation."/>
+    <property name="lib.dir" value="${basedir}/lib"
+            description="Directory that hosts Jar files required to compile project source." />
+    <property name="lib.ext.dir" value="${basedir}/lib/ext"
+              description="Directory that hosts Jar files required to compile project source. (IVY will populate this directory with required jars)" />
     <property name="tmp.dir" value="${basedir}/tmp" description="Temp directory only used for temp procedures" />
     <property name="resources.dir" value="${basedir}/resources" description="All itens need during the test execution." />
     
@@ -156,12 +161,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               description="The location of Pentaho BI Server" />
     <property name="pentaho.bi.server.service.name" value="tomcat6" description="The service name of BI Server" />
 
-    
     <!-- Ivy properties -->
     <property name="ivy.settingsurl"
               value="file:${basedir}/ivysettings.xml"
               description="URL to the (common) ivysettings.xml.  This file is required by the build to configure IVY.  Note you must escape the ':' if this property exists in a .properties file" />
-    <property name="ivyfile"
+    <property name="ivy.file"
               value="ivy.xml"
               description="The name of the IVY xml file defining your project's dependencies" />
     <property name="ivy.artifact.group"
@@ -170,21 +174,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <property name="ivy.artifact.ivyfilename"
               value="ivy.xml"
               description="The name of the IVY xml file to deploy with the artifact" />
-    <property name="ivy.artifact.ivypathname"
-              value="${dist.dir}/ivy.xml"
-              description="The full path to the IVY xml file to deploy with the artifact" />
     <property name="ivy.reports.dir"
               value="${bin.dir}/reports/ivy"
               description="Base directory that holds all IVY dependency report files" />
     <property name="ivy.configs" value="*" description="Set of configs used for IVY reporting and checking operations" />
     <property name="ivy.use.symlinks" value="true" description="Flag indicating if Ivy should create symlinks when retrieving artifacts."/>
 
+    <!-- TEST propertis -->
+    <property name="test.java.reports.dir" value="${basedir}/report-java" description="Directory to drag reports"/>
+    <property name="test.java.reports.html.dir" value="${basedir}/report-java/html" description="Directory to drag "/>
+
+    <!-- CLASSPATH FOR TEST-JAVA -->
+    <path id="test.java.classpath">
+        <fileset dir="${lib.ext.dir}" includes="**/*" />
+        <pathelement location="${classes.dir}" />
+    </path>
+
 
     <!-- Set the project revision number to the value in the manifest file (if it has not
          been specified in the properties file -->
-    <property name="project.revision"
-              value="${Implementation-Version}"
-              description="Sets the version number of the project based on the Implementation-Version found in the manifest file (if one is supplied and nothing is specified in the build.properties)" />
     <fail message="A project revision number has not been determined!">
         <condition>
             <matches string="${project.revision}" pattern="\$\{.*\}" />
@@ -193,9 +201,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- Set the project title to the value in the manifest file (if it has not
          been specified in the properties file -->
-    <property name="impl.title"
-              value="${Implementation-Title}"
-              description="Sets the title of the project based on the Implementation-Title found in the manifest file (if one is supplied and nothing is specified in the build.properties)" />
     <fail message="A project title has not been determined!">
         <condition>
             <matches string="${impl.title}" pattern="\$\{.*\}" />
@@ -240,15 +245,49 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         The target that is run if no target is given
         ====================================================================-->
-    <target name="default" depends="ctools" />
+    <target name="default" depends="test-html" />
 
 
     <!--=======================================================================
-        build
+        compile
 
-        Runs a typical build process to create the project locally
+        Compile the script tests in Java
         ====================================================================-->
-    <target name="build" depends="clean,resolve" />
+    <target name="compile" depends="resolve-test-java">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.java.dir}" destdir="${classes.dir}"
+               fork="yes"
+               debug="true"
+               includeAntRuntime="false"
+               classpathref="test.java.classpath"
+               nowarn="true"/>
+    </target>
+
+    <!--=======================================================================
+        test-java
+
+        This process shall clean the project, compile the tests and run them.
+        ====================================================================-->
+    <target name="test-java" depends="clean-java, compile">
+        <mkdir dir="${test.java.reports.dir}"/>
+        <junit fork="yes" printsummary="true" showoutput="true" haltonfailure="false" haltonerror="false">
+            <classpath refid="test.java.classpath" />
+
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+
+            <batchtest todir="${test.java.reports.dir}">
+                <fileset dir="${classes.dir}" includes="**/CToolsTestSuite.class"/>
+            </batchtest>
+        </junit>
+
+        <junitreport todir="${test.java.reports.dir}">
+            <fileset dir="${test.java.reports.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${test.java.reports.html.dir}"/>
+        </junitreport>
+    </target>
 
 
     <!--=======================================================================
@@ -257,7 +296,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         This process shall clean the project, download the CTools, and copy to
         Pentaho Server.
         ====================================================================-->
-    <target name="ctools" depends="clean-all, resolve, stop-pentaho-bi-server">
+    <target name="test-html" depends="clean-html, resolve-plugin, stop-pentaho-bi-server">
       <echo message="Starting copy CTools." />
 
       <!-- Delete ctools on server -->
@@ -273,10 +312,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <delete dir="${pentaho.plugin.cde.dir}" />
 
       <!-- Unzip the ctools -->
-      <unzip src="${lib.dir}/plugin/cgg.zip" dest="${tmp.dir}" />
-      <unzip src="${lib.dir}/plugin/cda.zip" dest="${tmp.dir}" />
-      <unzip src="${lib.dir}/plugin/pentaho-cdf.zip" dest="${tmp.dir}" />
-      <unzip src="${lib.dir}/plugin/pentaho-cdf-dd.zip" dest="${tmp.dir}" />
+      <unzip src="${lib.ext.dir}/plugin/cgg.zip" dest="${tmp.dir}" />
+      <unzip src="${lib.ext.dir}/plugin/cda.zip" dest="${tmp.dir}" />
+      <unzip src="${lib.ext.dir}/plugin/pentaho-cdf.zip" dest="${tmp.dir}" />
+      <unzip src="${lib.ext.dir}/plugin/pentaho-cdf-dd.zip" dest="${tmp.dir}" />
       <!-- unzip the samples -->
       <!-- 
           1º Create a directory with name 'public'
@@ -285,9 +324,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           4º Move the samples dir (CDF, CDE, CDA) under 'plugin-samples'
       -->
       <mkdir dir="${tmp.dir}/public/plugin-samples" />
-      <unzip src="${lib.dir}/plugin/pentaho-cdf-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
-      <unzip src="${lib.dir}/plugin/pentaho-cdf-dd-solution.zip" dest="${tmp.dir}/public/plugin-samples" />
-      <unzip src="${lib.dir}/plugin/cda-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
+      <unzip src="${lib.ext.dir}/plugin/pentaho-cdf-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
+      <unzip src="${lib.ext.dir}/plugin/pentaho-cdf-dd-solution.zip" dest="${tmp.dir}/public/plugin-samples" />
+      <unzip src="${lib.ext.dir}/plugin/cda-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
       <!-- copy the files for CGG tests -->
       <copy todir="${tmp.dir}/public">
         <fileset dir="${resources.dir}/cgg" />
@@ -414,17 +453,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <if>
             <istrue value="${ivy.isinstalled}" />
             <then>
-                <echo message="Skipping IVY install.  IVY has already been configured by the build" />
+                <echo message="Skipping IVY install. IVY has already been configured by the build" />
             </then>
             <else>
                 <download-antlib name="ivy" url="${ivy.url}" classname="org.apache.ivy.ant.IvyTask" extension="jar" />
+                <!--
+                IN ORDER TO AVOID WARNNING MESSAGE:
+                Trying to override old definition of task antlib:org.apache.ivy.ant:buildobr
+                WE HAVE COMMENT THIS 'TASHDEF'
+
                 <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant">
                     <classpath>
                         <fileset dir="${subfloor.resources.dir}/ivy">
                             <include name="*.jar" />
                         </fileset>
                     </classpath>
-                </taskdef>
+                </taskdef>-->
                 <ivy:settings url="${ivy.settingsurl}" />
                 <property name="ivy.isinstalled" value="true" />
             </else>
@@ -433,17 +477,29 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
     <!--=======================================================================
-        resolve
+        resolve-plugin
 
         Using ivy and the dependencies for the project (defined in the ivy.xml
         file), this task will retrieve the needed files and place them into
         the defined directories.
         ====================================================================-->
-    <target name="resolve" depends="install-ivy"
-            description="Retrieves all the dependent libraries">
+    <target name="resolve-plugin" depends="install-ivy" description="Retrieves all the dependent libraries">
             <echo message="Resolve dependencies." />
-            <ivy:resolve file="${ivyfile}"  conf="plugin"/>
-            <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}"/>
+            <ivy:resolve file="${ivy.file}" conf="plugin" checkIfChanged="true"/>
+            <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}"/>
+    </target>
+
+    <!--=======================================================================
+        resolve-test-java
+
+        Using ivy and the dependencies for the project (defined in the ivy.xml
+        file), this task will retrieve the needed files and place them into
+        the defined directories.
+        ====================================================================-->
+    <target name="resolve-test-java" depends="install-ivy" description="Retrieves all the dependent libraries">
+        <echo message="Resolve dependencies." />
+        <ivy:resolve file="${ivy.file}" conf="test-java" checkIfChanged="true"/>
+        <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}"/>
     </target>
 
 
@@ -452,7 +508,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         
         Clean the cache and local.
         ====================================================================-->
-    <target name="ivy-clean-all" depends="ivy-clean-cache,ivy-clean-local"/>
+    <target name="ivy-clean-all" depends="ivy-clean-cache"/>
 
 
     <!--=======================================================================
@@ -466,57 +522,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <ivy:cleancache />
     </target>
 
-
-    <!--=======================================================================
-        ivy-clean-local
-
-        Completely cleans your local repository of any files published locally
-        by way of publish-local.
-        WARNING: this is a global action and will affect other IVY projects
-        currently referencing a locally published dependency
-        ====================================================================-->
-    <target name="ivy-clean-local" depends="install-ivy">
-        <delete dir="${ivy.local.default.root}/" />
-    </target>
-
-
-    <!--=======================================================================
-        ivy-clean-by-name
-
-        Cleans your IVY cache and local repository of specific files.
-        WARNING: this is a global action and will affect other IVY projects
-        currently referencing a locally published dependency
-        ====================================================================-->
-    <target name="ivy-clean-pentaho" depends="install-ivy">
-        <mkdir dir="${ivy.local.default.root}" />
-        <!-- just in case it doesn't exist -->
-        <for param="dir">
-            <path>
-                <dirset dir="${ivy.local.default.root}" includes="*${ivy.clean.pattern}*" />
-                <dirset dir="${ivy.default.ivy.user.dir}/cache" includes="*${ivy.clean.pattern}*" />
-            </path>
-            <sequential>
-                <delete dir="@{dir}" includeemptydirs="true" />
-            </sequential>
-        </for>
-        <for param="file">
-            <path>
-                <fileset dir="${ivy.local.default.root}" includes="*${ivy.clean.pattern}*" />
-                <fileset dir="${ivy.default.ivy.user.dir}/cache" includes="*${ivy.clean.pattern}*" />
-            </path>
-            <sequential>
-                <delete file="@{file}" />
-            </sequential>
-        </for>
-    </target>
-
     <!--=======================================================================
         ivy-report
 
         Generates an IVY dependency report for this project.
         ====================================================================-->
     <target name="ivy-report" depends="install-ivy">
-        <ivy:resolve file="${ivyfile}" conf="${ivy.configs}" />
+        <ivy:resolve file="${ivy.file}" conf="${ivy.configs}" />
         <ivy:report xml="true" todir="${ivy.reports.dir}" />
     </target>
 
@@ -525,104 +537,39 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
           Creates a publishable version of the ivy dependencies file, ivy.xml
           ====================================================================-->
-    <target name="ivy.deliver" depends="resolve">
+    <!--<target name="ivy.deliver" depends="resolve">
         <ivy:deliver conf="*(public)" deliverpattern="${dist.dir}/ivy.xml" />
-    </target>
+    </target>-->
 
 
     <!--=======================================================================
-        clean
+        clean-html
 
-        Removes all the files generated from the build process.
+        Removes regarding the target 'test-html'
         ====================================================================-->
-    <target name="clean" description="Cleans all the files generated from ctools">
-      <delete dir="${lib.dir}" />
+    <target name="clean-html" description="Cleans all the files generated from ctools">
+      <delete dir="${lib.ext.dir}" />
       <delete dir="${tmp.dir}" />
+    </target>
+
+    <!--=======================================================================
+        clean-java
+
+        Removes regarding the target 'test-java'
+        ====================================================================-->
+    <target name="clean-java" description="Cleans the directories created when build selenium java tests">
+        <delete dir="${build.dir}" />
+        <delete dir="${test.java.reports.dir}" />
+        <delete dir="${lib.ext.dir}" />
     </target>
 
     <!--=======================================================================
         clean-all
 
-        Removes all the files generated from the ctools process and ivy-downloaded jars
+        Removes all the files generated from build processes and ivy-downloaded jars
         ====================================================================-->
-    <target name="clean-all" depends="clean,ivy-clean-all" 
-      description="Cleans all the files generated from a build as well IVY-downloaded jars" />
-
-    <!--=======================================================================
-          MACRO: taskdef-with-ivy
-          Downloads (using IVY) and defines new Ant tasks
-
-        NOTE: any task using this macro must depend on "install-antcontrib"
-
-        parameters:
-        task-name    - Name to give the new Ant task (only used if resource is not set)
-        organisation - Artifact organization (for artifact resolution with IVY)
-        module       - Artifact module (for artifact resolution with IVY)
-        revision     - Artifact revision (for artifact resolution with IVY)
-        classname    - Classname for the Ant task.  Used during taskdef and to check
-                       if we already have the libraries
-        resource     - (optional) Resource defining the Ant task.  Used during taskdef
-        ====================================================================-->
-    <macrodef name="taskdef-with-ivy">
-        <attribute name="task-name"
-                   description="Name to give the new Ant task (only used if resource is not set)"
-                   default="unset" />
-        <attribute name="organisation" description="Artifact organization" />
-        <attribute name="module" description="Artifact module" />
-        <attribute name="revision" description="Artifact revision" />
-        <attribute name="classname"
-                   description="Classname for the Ant task.  Used during taskdef and to check if we already have the libraries." />
-        <attribute name="resource"
-                   description="(optional) Resource defining the Ant task.  Used during taskdef"
-                   default="unset" />
-        <sequential>
-            <mkdir dir="${subfloor.resources.dir}/@{module}-@{revision}/" />
-            <!-- if the library does not exist, we must download it -->
-            <if>
-                <not>
-                    <and>
-                        <available file="${subfloor.resources.dir}/@{module}-@{revision}" />
-                        <available classname="@{classname}">
-                            <classpath>
-                                <fileset dir="${subfloor.resources.dir}/@{module}-@{revision}">
-                                    <include name="*.jar" />
-                                </fileset>
-                            </classpath>
-                        </available>
-                    </and>
-                </not>
-                <then>
-                    <ivy:retrieve inline="true"
-                                  conf="default"
-                                  organisation="@{organisation}"
-                                  module="@{module}"
-                                  revision="@{revision}"
-                                  pattern="${subfloor.resources.dir}/@{module}-@{revision}/[module]-__-[revision](-[classifier]).[ext]" />
-                    <!-- in case the artifact pulls in an ant jar, remove it. they cause runtime conflicts -->
-                    <delete>
-                        <fileset dir="${subfloor.resources.dir}/@{module}-@{revision}">
-                            <include name="ant-__-*.jar" />
-                            <include name="ant-launcher-__-*.jar" />
-                        </fileset>
-                    </delete>
-                </then>
-            </if>
-            <path id="taskdef.classpath">
-                <fileset dir="${subfloor.resources.dir}/@{module}-@{revision}">
-                    <include name="*.jar" />
-                </fileset>
-            </path>
-            <if>
-                <equals arg1="@{resource}" arg2="unset" />
-                <then>
-                    <taskdef classpathref="taskdef.classpath" name="@{task-name}" classname="@{classname}" />
-                </then>
-                <else>
-                    <taskdef classpathref="taskdef.classpath" resource="@{resource}" />
-                </else>
-            </if>
-        </sequential>
-    </macrodef>
+    <target name="clean-all" depends="clean-html,clean-java,ivy-clean-all"
+            description="Cleans all the files generated from a build as well IVY-downloaded jars" />
 
 
     <!--=======================================================================
