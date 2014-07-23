@@ -268,7 +268,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         This process shall clean the project, compile the tests and run them.
         ====================================================================-->
-    <target name="test-java" depends="clean-java, compile">
+    <target name="test-java" depends="clean-java, compile, stop-pentaho-bi-server">
+      
+
+      <!-- Starting Pentaho BI Server -->
+      <antcall target="start-pentaho-bi-server"/>
+      <antcall target="wait.for.tomcat.start"/>
+
         <mkdir dir="${test.java.reports.dir}"/>
         <junit fork="yes" printsummary="true" showoutput="true" haltonfailure="false" haltonerror="false">
             <classpath refid="test.java.classpath" />
@@ -291,12 +297,27 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
     <!--=======================================================================
-        ctools
+        test-html
 
         This process shall clean the project, download the CTools, and copy to
         Pentaho Server.
         ====================================================================-->
     <target name="test-html" depends="clean-html, resolve-plugin, stop-pentaho-bi-server">
+      <!-- copy data to the server -->
+      <antcall target="copy-plugin-samples"/>
+
+      <!-- Starting Pentaho BI Server -->
+      <antcall target="start-pentaho-bi-server"/>
+      <antcall target="wait.for.tomcat.start"/>
+    </target>
+
+
+    <!--=======================================================================
+        copy-plugin-samples
+
+        Copy the CTools and samples to Pentaho server.
+        ====================================================================-->
+    <target name="copy-plugin-samples">
       <echo message="Starting copy CTools." />
 
       <!-- Delete ctools on server -->
@@ -349,10 +370,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <fileset dir="${tmp.dir}/pentaho-cdf-dd" />
       </copy>
       <copy file="${tmp.dir}/plugin-samples.zip" todir="${pentaho.default.content.dir}" />
-
-      <!-- Starting Pentaho BI Server -->
-      <antcall target="start-pentaho-bi-server"/>
-      <antcall target="wait.for.tomcat.start"/>
     </target>
 
     <!--=======================================================================
