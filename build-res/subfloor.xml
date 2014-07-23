@@ -474,18 +474,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </then>
             <else>
                 <download-antlib name="ivy" url="${ivy.url}" classname="org.apache.ivy.ant.IvyTask" extension="jar" />
-                <!--
-                IN ORDER TO AVOID WARNNING MESSAGE:
-                Trying to override old definition of task antlib:org.apache.ivy.ant:buildobr
-                WE HAVE COMMENT THIS 'TASHDEF'
-
                 <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant">
                     <classpath>
                         <fileset dir="${subfloor.resources.dir}/ivy">
                             <include name="*.jar" />
                         </fileset>
                     </classpath>
-                </taskdef>-->
+                </taskdef>
                 <ivy:settings url="${ivy.settingsurl}" />
                 <property name="ivy.isinstalled" value="true" />
             </else>
