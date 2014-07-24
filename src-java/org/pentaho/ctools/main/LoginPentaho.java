@@ -65,8 +65,8 @@ public class LoginPentaho {
     WebElement homeperspective = driver.findElement(By.id("home.perspective"));
     driver.switchTo().frame("home.perspective");
 
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("buttonWrapper")));
-    driver.findElement(By.xpath("//div[@id='buttonWrapper']/div/div/button")).click();
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("well sidebar")));
+    driver.findElement(By.xpath("//div[@class='well sidebar']/button")).click();
 
 
     driver.switchTo().defaultContent();
