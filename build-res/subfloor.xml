@@ -160,6 +160,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               value="C:\Pentaho\5.1\biserver-ce-5.1.0.0-752\biserver-ce"
               description="The location of Pentaho BI Server" />
     <property name="pentaho.bi.server.service.name" value="tomcat6" description="The service name of BI Server" />
+    <property name="pentaho.bi.server.url" value="http://localhost:8080/pentaho" description="The URL to access the Pentaho Server." />
 
     <!-- Ivy properties -->
     <property name="ivy.settingsurl"
@@ -274,8 +275,35 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
       <!-- Starting Pentaho BI Server -->
       <antcall target="start-pentaho-bi-server"/>
-      <antcall target="wait.for.tomcat.start"/>
+      <antcall target="waitfor-pentaho-bi-server-started"/>
 
+    </target>
+
+
+    <!--=======================================================================
+        test-html
+
+        This process shall clean the project, download the CTools, and copy to
+        Pentaho Server.
+        ====================================================================-->
+    <target name="test-html" depends="clean-html, resolve-plugin, stop-pentaho-bi-server">
+        <!-- copy data to the server -->
+        <antcall target="copy-plugin-samples"/>
+
+        <!-- Starting Pentaho BI Server -->
+        <antcall target="start-pentaho-bi-server"/>
+        <antcall target="waitfor-pentaho-bi-server-started"/>
+
+        <antcall target="run-test-java"/>
+    </target>
+
+
+    <!--=======================================================================
+        run-test-java
+
+        This process shall execute Selenium Java tests.
+        ====================================================================-->
+    <target name="run-test-java">
         <mkdir dir="${test.java.reports.dir}"/>
         <junit fork="yes" printsummary="true" showoutput="true" haltonfailure="false" haltonerror="false">
             <classpath refid="test.java.classpath" />
@@ -287,7 +315,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <fileset dir="${classes.dir}" includes="**/CToolsTestSuite.class"/>
             </batchtest>
         </junit>
+    </target>
 
+    <!--=======================================================================
+        generate-junit-report
+
+        This process shall generate the html report of the executed tests.
+        ====================================================================-->
+    <target name="generate-junit-report">
         <junitreport todir="${test.java.reports.dir}">
             <fileset dir="${test.java.reports.dir}">
                 <include name="TEST-*.xml"/>
@@ -295,23 +330,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <report format="frames" todir="${test.java.reports.html.dir}"/>
         </junitreport>
     </target>
-
-
-    <!--=======================================================================
-        test-html
-
-        This process shall clean the project, download the CTools, and copy to
-        Pentaho Server.
-        ====================================================================-->
-    <target name="test-html" depends="clean-html, resolve-plugin, stop-pentaho-bi-server">
-      <!-- copy data to the server -->
-      <antcall target="copy-plugin-samples"/>
-
-      <!-- Starting Pentaho BI Server -->
-      <antcall target="start-pentaho-bi-server"/>
-      <antcall target="wait.for.tomcat.start"/>
-    </target>
-
 
     <!--=======================================================================
         copy-plugin-samples
@@ -376,9 +394,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!--=======================================================================
         Wait for tomcat start-up
         ====================================================================-->
-    <target name="wait.for.tomcat.start"> 
+    <target name="waitfor-pentaho-bi-server-started"> 
           <waitfor maxwait="5" maxwaitunit="minute" checkevery="500">
-              <http url="http://localhost:8080/pentaho"/>
+              <http url="${pentaho.bi.server.url}"/>
           </waitfor>
     </target>
 
