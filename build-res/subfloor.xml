@@ -181,8 +181,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <property name="ivy.use.symlinks" value="true" description="Flag indicating if Ivy should create symlinks when retrieving artifacts."/>
 
     <!-- TEST propertis -->
-    <property name="test.java.reports.dir" value="${basedir}/report-java" description="Directory to drag reports"/>
-    <property name="test.java.reports.html.dir" value="${basedir}/report-java/html" description="Directory to drag "/>
+    <property name="test.html.reports.dir" value="${basedir}/reports-html" description="Directory to drag reports for the selenium html scripts"/>
+    <property name="test.java.reports.dir" value="${basedir}/reports-java" description="Directory to drag reports"/>
+    <property name="test.java.reports.html.dir" value="${basedir}/reports-java/html" description="Directory to drag "/>
 
     <!-- CLASSPATH FOR TEST-JAVA -->
     <path id="test.java.classpath">
@@ -589,16 +590,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </target>
 
     <!--=======================================================================
-          ivy.deliver
-
-          Creates a publishable version of the ivy dependencies file, ivy.xml
-          ====================================================================-->
-    <!--<target name="ivy.deliver" depends="resolve">
-        <ivy:deliver conf="*(public)" deliverpattern="${dist.dir}/ivy.xml" />
-    </target>-->
-
-
-    <!--=======================================================================
         clean-html
 
         Removes regarding the target 'test-html'
@@ -606,6 +597,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <target name="clean-html" description="Cleans all the files generated from ctools">
       <delete dir="${lib.ext.dir}" />
       <delete dir="${tmp.dir}" />
+      <delete dir="${test.html.reports.dir}" />
     </target>
 
     <!--=======================================================================
@@ -618,6 +610,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <delete dir="${test.java.reports.dir}" />
         <delete dir="${lib.ext.dir}" />
     </target>
+
+     <!--=======================================================================
+        clean
+
+        Removes all the files generated during the execution test for html and 
+        java's selenium tests.
+        ====================================================================-->
+    <target name="clean" depends="clean-html,clean-java"
+            description="Cleans all the files generated on selenium html and java tests" />
 
     <!--=======================================================================
         clean-all
