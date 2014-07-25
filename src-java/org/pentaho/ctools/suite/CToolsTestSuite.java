@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.cdf.CDFAutoCompleteBoxComponent;
+import org.pentaho.ctools.cdf.CDFMetaLayerHomeDashboard;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,6 +35,7 @@ import java.util.concurrent.TimeUnit;
     LoginPentaho.class,
     //CDF
     CDFAutoCompleteBoxComponent.class,
+    CDFMetaLayerHomeDashboard.class,
     LogoutPentaho.class
 })
 
