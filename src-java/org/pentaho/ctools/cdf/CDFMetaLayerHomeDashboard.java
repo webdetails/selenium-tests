@@ -15,6 +15,7 @@
 
 package org.pentaho.ctools.cdf;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +30,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * NOTE - The test was created regarding issue CDF-318
+ */
 public class CDFMetaLayerHomeDashboard {
   // Instance of the driver (browser emulator)
   private WebDriver driver;
@@ -60,9 +64,18 @@ public class CDFMetaLayerHomeDashboard {
 
     //Wait for the frame
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='fancybox-frame']")));
-    driver.switchTo().frame("fancybox-frame");
+
+
+    WebElement frame = driver.findElement(By.xpath("//iframe[@id='fancybox-frame']"));
+    String valueFrameAttrSrc = frame.getAttribute("src");
+
+    ///pentaho/plugin/jpivot/Pivot?solution=system&path=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf%2Factions&action=jpivot.xaction&width=500&height=600
+    //Check if we have the sizes 500 and 600
+    assertTrue(StringUtils.containsIgnoreCase(valueFrameAttrSrc, "action=jpivot.xaction&width=500&height=600"));
+
 
     //Wait for the element be visible.
+    driver.switchTo().frame("fancybox-frame");
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='internal_content']")));
     assertNotNull(driver.findElement(By.xpath("//div[@id='internal_content']")));
 
