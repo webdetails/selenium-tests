@@ -62,7 +62,7 @@ public class LoginPentaho {
     assertEquals("Pentaho User Console", driver.getTitle());
 
 
-    WebElement homeperspective = driver.findElement(By.id("home.perspective"));
+    //Go to the Home Perspective [IFRAME]
     driver.switchTo().frame("home.perspective");
 
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='well sidebar']")));
@@ -71,10 +71,13 @@ public class LoginPentaho {
 
     driver.switchTo().defaultContent();
 
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("applicationShell")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='browser.perspective']")));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("applicationShell")));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//iframe[@id='browser.perspective']")));
     driver.switchTo().frame("browser.perspective");
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowser']")));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowser']")));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowserFolders']")));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='buttonsHeader']")));
+
     assertNotNull(driver.findElement(By.xpath("//div[@id='fileBrowser']")));
   }
 

@@ -270,9 +270,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         This process shall clean the project, compile the tests and run them.
         ====================================================================-->
-    <target name="test-java" depends="clean-java, resolve-plugin, compile, stop-pentaho-bi-server">
+    <target name="test-java" depends="clean-java, compile, stop-pentaho-bi-server">
       
-
       <!-- Starting Pentaho BI Server -->
       <antcall target="start-pentaho-bi-server"/>
       <antcall target="waitfor-pentaho-bi-server-started"/>
@@ -293,8 +292,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <!-- Starting Pentaho BI Server -->
         <antcall target="start-pentaho-bi-server"/>
         <antcall target="waitfor-pentaho-bi-server-started"/>
-
-        <antcall target="run-test-java"/>
     </target>
 
 
