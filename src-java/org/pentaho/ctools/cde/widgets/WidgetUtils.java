@@ -1,25 +1,19 @@
-
 package org.pentaho.ctools.cde.widgets;
 
-import java.security.Key;
-import java.util.ArrayList;
-import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.Select;
 
-import java.lang.System;
+import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-class WidgetUtils {
+public class WidgetUtils {
 
   /**
    * This method is responsible to remove the widget from 'Browse Files'.

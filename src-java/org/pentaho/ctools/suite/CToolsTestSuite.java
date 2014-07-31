@@ -28,6 +28,7 @@ import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.cdf.CDFAutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.CDFMetaLayerHomeDashboard;
 import org.pentaho.ctools.cde.widgets.CreateWidget;
+import org.pentaho.ctools.security.AccessSystemResources;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +40,8 @@ import java.util.concurrent.TimeUnit;
     CDFMetaLayerHomeDashboard.class,
     //CDE - Widgets
     CreateWidget.class,
+    //Security
+    AccessSystemResources.class,
     LogoutPentaho.class
 })
 

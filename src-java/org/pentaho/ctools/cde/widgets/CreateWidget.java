@@ -1,39 +1,18 @@
-/*!
-  * This program is free software;you can redistribute it and/or modify it under the
-  * terms of the GNU Lesser General Public License,version2.1as published by the Free Software Foundation.
-  *
-  * You should have received a copy of the GNU Lesser General Public License along with this
-  * program;if not,you can obtain a copy at http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
-  * or from the Free Software Foundation,Inc., 51 Franklin Street,Fifth Floor,Boston,MA 02110-1301 USA.
-  *
-  * This program is distributed in the hope that it will be useful,but WITHOUT ANY WARRANTY;
-  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  * See the GNU Lesser General Public License for more details.
-  *
-  * Copyright(c)2002-2014 Pentaho Corporation..All rights reserved.
-  */
-
 package org.pentaho.ctools.cde.widgets;
 
-import java.util.List;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
-import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.cde.widgets.WidgetUtils;
+import org.pentaho.ctools.suite.CToolsTestSuite;
 
-
-import java.lang.Thread;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -62,7 +41,7 @@ public class CreateWidget {
   @Test
   public void testCreateWidget() throws Exception {
     //Step 0 - Delete the widget
-    //WidgetUtils.RemoveWidgetByName(driver, wait, baseUrl, widgetName);
+    WidgetUtils.RemoveWidgetByName(driver, wait, baseUrl, widgetName);
 
 
     //Step 1 - Go to homepage
