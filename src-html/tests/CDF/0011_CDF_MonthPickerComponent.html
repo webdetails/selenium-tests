@@ -57,13 +57,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>storeEval</td>
+	<td>var d=new Date();<br />'2006-'+(('0'+(d.getMonth())).slice(-2));</td>
+	<td>previousMonth</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${previousMonth}</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>id=myInput</td>
-	<td>2006-02</td>
+	<td>${previousMonth}</td>
 </tr>
 <tr>
 	<td>assertAlert</td>
-	<td>You chose: 2006-02</td>
+	<td>You chose: ${previousMonth}</td>
 	<td></td>
 </tr>
 <tr>
