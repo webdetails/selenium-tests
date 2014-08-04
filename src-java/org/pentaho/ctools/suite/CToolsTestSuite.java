@@ -25,8 +25,9 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
-import org.pentaho.ctools.cdf.CDFAutoCompleteBoxComponent;
-import org.pentaho.ctools.cdf.CDFMetaLayerHomeDashboard;
+import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
+import org.pentaho.ctools.cdf.DataInputComponent;
+import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
 import org.pentaho.ctools.cde.widgets.CreateWidget;
 import org.pentaho.ctools.cde.widgets.TableComponent;
 import org.pentaho.ctools.security.AccessSystemResources;
@@ -37,8 +38,9 @@ import java.util.concurrent.TimeUnit;
 @Suite.SuiteClasses({
     LoginPentaho.class,
     //CDF
-    CDFAutoCompleteBoxComponent.class,
-    CDFMetaLayerHomeDashboard.class,
+    AutoCompleteBoxComponent.class,
+    DataInputComponent.class,
+    MetaLayerHomeDashboard.class,
     //CDE - Widgets
     CreateWidget.class,
     TableComponent.class,
