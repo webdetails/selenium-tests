@@ -204,6 +204,8 @@ public class WidgetUtils {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']")));
     driver.findElement(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']")).click();
 
+    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("popupbox")));
+
     return driver;
   }
 
