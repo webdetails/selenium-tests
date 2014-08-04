@@ -8,10 +8,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 
+import java.lang.Exception;
+import java.lang.Thread;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class WidgetUtils {
 
@@ -22,7 +23,11 @@ public class WidgetUtils {
    * @param wait
    * @param widgetName
    */
-  public static void RemoveWidgetByName(WebDriver driver, Wait<WebDriver> wait, String baseUrl, String widgetName){
+  public static void RemoveWidgetByName(WebDriver driver,
+                                        Wait<WebDriver> wait,
+                                        String baseUrl,
+                                        String widgetName){
+    driver.switchTo().defaultContent();
     driver.get(baseUrl + "Home");
 
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
@@ -41,7 +46,6 @@ public class WidgetUtils {
     driver.switchTo().frame("browser.perspective");
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowser']")));
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowserFolders']")));
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='buttonsHeader']")));
 
     //Public
     driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div/div")).click();
@@ -82,5 +86,178 @@ public class WidgetUtils {
         driver.findElement(By.id("okButton")).click();
       }
     }
+  }
+
+  /**
+   * This method shall create an widget with specific parameter.
+   *
+   * @param driver
+   * @param wait
+   * @param baseUrl
+   * @param widgetName
+   * @param paramName
+   * @return
+   */
+  public static WebDriver CreateWidgetWithParameter(WebDriver driver,
+                                                    Wait<WebDriver> wait,
+                                                    String baseUrl,
+                                                    String widgetName,
+                                                    String paramName) throws Exception{
+    //Step 1 - Go to homepage
+    driver.switchTo().defaultContent();
+    driver.get(baseUrl + "Home");
+
+    //Wait for the visibility of Menu and frame contents
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='mainMenubar']")));
+    driver.switchTo().frame("home.perspective");
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='buttonWrapper']")));
+
+
+    //Step 2 - Click in Create New (CDE Dashboard)
+    //Click to create a widget
+    WebElement buttonCreateNew = driver.findElement(By.xpath("//button[@id='btnCreateNew']"));
+    assertEquals(buttonCreateNew.getText(), "Create New");
+    buttonCreateNew.click();
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popover-content']/button")));
+    WebElement buttonCDEBashBoard = driver.findElement(By.xpath("//div[@class='popover-content']/button"));
+    assertEquals(buttonCDEBashBoard.getText(), "CDE Dashboard");
+    buttonCDEBashBoard.click();
+    driver.switchTo().defaultContent();//back to the root
+
+
+    //Step 3 - Click in Component Panel
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe")));
+    WebElement frameCDEDashboard = driver.findElement(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe"));
+    driver.switchTo().frame(frameCDEDashboard);
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='componentsPanelButton']")));
+    driver.findElement(By.xpath("//div[@class='componentsPanelButton']")).click();
+
+
+    //Step 4 - Add a Simple Parameter
+    //Click in Generic
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='cdfdd-components-palletePallete']/div[3]/h3/span")));
+    driver.findElement(By.xpath("//div[@id='cdfdd-components-palletePallete']/div[3]/h3/span")).click();
+    //Click in SimpleParameter
+    driver.findElement(By.xpath("//div[@id='cdfdd-components-palletePallete']/div[3]/div/ul/li[3]/a")).click();
+    //Add a name to parameter 'paramCreateWidget'
+    //Click in Name
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]")));
+    assertEquals(driver.findElement(By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr/td")).getText(), "Name");
+    //The below code is comment because the input text is already active.
+    //driver.findElement(By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]")).click();
+    WebElement inputPName = driver.findElement(By.xpath("//input[@name='value']"));
+    inputPName.clear();
+    inputPName.sendKeys(paramName);
+    inputPName.sendKeys(Keys.RETURN);
+
+    //Click in PropertyValue
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]")));
+    driver.findElement(By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]")).click();
+    WebElement inputValue = driver.findElement(By.xpath("//input[@name='value']"));
+    inputValue.clear();
+    inputValue.sendKeys("1");
+    inputValue.sendKeys(Keys.RETURN);
+
+
+    //Step 5 - Press SAVE
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='headerLinks']/div[2]/a")));
+    driver.findElement(By.xpath("//div[@id='headerLinks']/div[2]/a")).click();
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='popup']")));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='container_id']/ul/li")));
+    driver.findElement(By.xpath("//input[@id='widgetRadio']")).click();
+    while(true) {
+
+      if(driver.findElement(By.xpath("//div[@id='container_id']")).isDisplayed() == false){
+        break;
+      } else {
+        Thread.sleep(100);
+      }
+    }
+    //Insert file name
+    driver.findElement(By.xpath("//input[@id='fileInput']")).sendKeys(widgetName);
+    //Insert widget name
+    driver.findElement(By.xpath("//input[@id='componentInput']")).sendKeys(widgetName);
+    //Press OK (SAVING)
+    driver.findElement(By.xpath("//button[@id='popup_state0_buttonOk']")).click();
+
+
+    //Step 6 - Check if the parameter exist in 'Settings'
+    //Popup message informing saving
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='layoutPanelButton']")));
+    assertTrue(driver.findElement(By.xpath("//div[@class='layoutPanelButton']")).isEnabled());
+    //Press 'Settings'
+    driver.findElement(By.xpath("//div[@id='headerLinks']/div[5]/a")).click();
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='popup']")));
+    assertNotNull(driver.findElement(By.xpath("//span[@id='widgetParameters']/div/input")));
+    //The parameter MUST be equal to the one set
+    assertEquals(driver.findElement(By.xpath("//span[@id='widgetParameters']/div/span")).getText(), paramName);
+    //Press on the check box
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='widgetParameters']/div/input")));
+    driver.findElement(By.xpath("//span[@id='widgetParameters']/div/input")).click();
+    //Press button save
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']")));
+    driver.findElement(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']")).click();
+
+    return driver;
+  }
+
+  /**
+   * This method
+   *
+   * @param driver
+   * @param wait
+   * @param baseUrl
+   * @param widgetName
+   * @return
+   */
+  public static WebDriver OpenWidgetEditMode(WebDriver driver, Wait<WebDriver> wait, String baseUrl, String widgetName) {
+    //Resuming Steps
+    // 1. open the widget
+    // 2. check if the parameter exist in settings
+    // 3. check if the widget exist in 'widgets' at Component Layout
+    driver.switchTo().defaultContent();
+    driver.get(baseUrl + "Home");
+
+
+    //Step 1 - Go to Homepage and click 'Browse Files'
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
+    assertNotNull(driver.findElement(By.xpath("//iframe[@id='home.perspective']")));
+    //Go to the Home Perspective [IFRAME]
+    driver.switchTo().frame("home.perspective");
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='well sidebar']")));
+    driver.findElement(By.xpath("//div[@class='well sidebar']/button")).click();//Click in 'Browse Files'
+
+
+    //Step 2  - Go to 'widgets' and click in the created widget and press 'Edit'
+    //Now we have to navegate to 'Public/cde/widgets
+    driver.switchTo().defaultContent();
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("applicationShell")));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//iframe[@id='browser.perspective']")));
+    driver.switchTo().frame("browser.perspective");
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowser']")));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowserFolders']")));
+    //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='buttonsHeader']")));
+    //Collapse folder 'Public'
+    driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div/div")).click();
+    //Collapse folder 'CDE'
+    driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div[2]/div[2]/div/div")).click();
+    //Collapse folder 'widgets'
+    driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div[2]/div[2]/div[2]/div[4]/div/div[3]")).click();
+    //Click in the created widget
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowserFiles']/div[2]")));
+    WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
+    List<WebElement> theWidgetFiles = listFiles.findElements(By.xpath("//div[@class='title' and contains(text(),'" + widgetName + "')]"));
+    assertNotNull(theWidgetFiles);
+    //Check if the widget named exist
+    if(theWidgetFiles != null){
+      if(theWidgetFiles.size() > 0) {
+        ((WebElement)theWidgetFiles.get(0)).click();
+      }
+    }
+    //Click in the EDIT button
+    driver.findElement(By.id("editButton")).click();
+    driver.switchTo().defaultContent();//back to the root
+
+    return driver;
   }
 }

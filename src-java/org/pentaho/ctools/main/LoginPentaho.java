@@ -76,7 +76,6 @@ public class LoginPentaho {
     driver.switchTo().frame("browser.perspective");
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowser']")));
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowserFolders']")));
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='buttonsHeader']")));
 
     assertNotNull(driver.findElement(By.xpath("//div[@id='fileBrowser']")));
   }
