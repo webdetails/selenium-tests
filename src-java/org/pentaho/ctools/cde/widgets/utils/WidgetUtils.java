@@ -1,4 +1,4 @@
-package org.pentaho.ctools.cde.widgets;
+package org.pentaho.ctools.cde.widgets.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -48,11 +48,17 @@ public class WidgetUtils {
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowserFolders']")));
 
     //Public
-    driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div/div")).click();
+    WebElement folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
+    WebElement publicFolder = folders.findElement(By.xpath("//div[@path='/public']"));
+    publicFolder.findElement(By.className("expandCollapse")).click();
     //CDE
-    driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div[2]/div[2]/div/div")).click();
-    //widgets
-    driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div[2]/div[2]/div[2]/div[4]/div/div[3]")).click();
+    folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
+    WebElement cdeFolder = folders.findElement(By.xpath("//div[@path='/public/cde']"));
+    cdeFolder.findElement(By.className("expandCollapse")).click();
+    //Widgets
+    folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
+    WebElement widgetsFolder = folders.findElement(By.xpath("//div[@path='/public/cde/widgets']"));
+    widgetsFolder.findElement(By.className("title")).click();
 
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowserFiles']/div[2]")));
     WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
@@ -236,13 +242,18 @@ public class WidgetUtils {
     driver.switchTo().frame("browser.perspective");
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowser']")));
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowserFolders']")));
-    //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='buttonsHeader']")));
-    //Collapse folder 'Public'
-    driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div/div")).click();
-    //Collapse folder 'CDE'
-    driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div[2]/div[2]/div/div")).click();
-    //Collapse folder 'widgets'
-    driver.findElement(By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[2]/div[2]/div[2]/div[2]/div[4]/div/div[3]")).click();
+    //Public
+    WebElement folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
+    WebElement publicFolder = folders.findElement(By.xpath("//div[@path='/public']"));
+    publicFolder.findElement(By.className("expandCollapse")).click();
+    //CDE
+    folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
+    WebElement cdeFolder = folders.findElement(By.xpath("//div[@path='/public/cde']"));
+    cdeFolder.findElement(By.className("expandCollapse")).click();
+    //Widgets
+    folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
+    WebElement widgetsFolder = folders.findElement(By.xpath("//div[@path='/public/cde/widgets']"));
+    widgetsFolder.findElement(By.className("title")).click();
     //Click in the created widget
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='fileBrowserFiles']/div[2]")));
     WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));

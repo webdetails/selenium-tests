@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
-import org.pentaho.ctools.cde.widgets.WidgetUtils;
+import org.pentaho.ctools.cde.widgets.utils.WidgetUtils;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 
 import java.util.List;
