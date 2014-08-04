@@ -47,7 +47,7 @@ public class TableComponent {
   public void testCheckParametersAddingWidgetParameter() throws Exception {
     //Step 0 - Delete the widget
     WidgetUtils.RemoveWidgetByName(driver, wait, baseUrl, widgetName);
-/*
+
     //Step 1 - Create widget with specific parameter
     driver = WidgetUtils.CreateWidgetWithParameter(driver, wait, baseUrl, widgetName, paramName);
 
@@ -127,16 +127,15 @@ public class TableComponent {
     ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/input[@class='StringListAddButton']"));
     ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div"));
     ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div[2]"));
-*/
+
     /*#######################################
       EXPECT RESULT:
       Check if the arg & value add in the widget are there.
      #######################################*/
-    /*
     String tempArgName = driver.findElement(By.xpath("//input[@id='arg_0']")).getAttribute("value");
     String tempValueName = driver.findElement(By.xpath("//input[@id='val_0']")).getAttribute("value");
     assertEquals(tempArgName, paramArgName);
-    assertEquals(tempValueName, "${p:"+paramName+"}");*/
+    assertEquals(tempValueName, "${p:"+paramName+"}");
   }
 
 
