@@ -124,8 +124,8 @@ public class WidgetUtils {
     WebElement buttonCreateNew = driver.findElement(By.xpath("//button[@id='btnCreateNew']"));
     assertEquals(buttonCreateNew.getText(), "Create New");
     buttonCreateNew.click();
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popover-content']/button")));
-    WebElement buttonCDEBashBoard = driver.findElement(By.xpath("//div[@class='popover-content']/button"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.popover-content > #createNewlaunch_new_cdeButton")));
+    WebElement buttonCDEBashBoard = driver.findElement(By.cssSelector("div.popover-content > #createNewlaunch_new_cdeButton"));
     assertEquals(buttonCDEBashBoard.getText(), "CDE Dashboard");
     buttonCDEBashBoard.click();
     driver.switchTo().defaultContent();//back to the root
