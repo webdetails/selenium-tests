@@ -27,9 +27,10 @@ import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.DataInputComponent;
+import org.pentaho.ctools.cdf.TableComponent;
 import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
 import org.pentaho.ctools.cde.widgets.CreateWidget;
-import org.pentaho.ctools.cde.widgets.TableComponent;
+import org.pentaho.ctools.cde.widgets.AddParamTableComponent;
 import org.pentaho.ctools.security.AccessSystemResources;
 
 import java.util.concurrent.TimeUnit;
@@ -40,6 +41,7 @@ import java.util.concurrent.TimeUnit;
     //CDF
     AutoCompleteBoxComponent.class,
     DataInputComponent.class,
+    TableComponent.class,
     MetaLayerHomeDashboard.class,
     //CDE - Widgets
     CreateWidget.class,

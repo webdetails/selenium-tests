@@ -1,10 +1,11 @@
 package org.pentaho.ctools.utils;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 public class ElementHelper {
 
@@ -12,7 +13,8 @@ public class ElementHelper {
    * This method shall check if the element to search is displayed and
    * is enabled.
    *
-   * @param path - DOM element to search.
+   * @param driver  The access to browser.
+   * @param path    DOM element to search.
    */
   public static void IsElementDisplayed(WebDriver driver, By path) {
     for (int i = 0; i < 100; i++) {
@@ -34,5 +36,27 @@ public class ElementHelper {
         System.out.println("Exception timeout");
       }
     }
+  }
+
+  /**
+   * This method shall verify if the element exist in DOM, if not exist wait the
+   * amount of time specified.
+   *
+   * @param driver        The access to browser.
+   * @param timeToWaitSec The amount of time to wait for the element.
+   * @param path          The element path in DOM (css, id, xpath)
+   * @return  true        Element exist in DOM.
+   *          false       Elemenet does not exist.
+   */
+  public static boolean IsElementPresent(WebDriver driver, long timeToWaitSec, By path) {
+    boolean elementPresent = true;
+    try {
+      driver.manage().timeouts().implicitlyWait(timeToWaitSec, TimeUnit.SECONDS);
+      driver.findElement(path);
+    } catch (NoSuchElementException ex) {
+      elementPresent = false;
+    }
+
+    return elementPresent;
   }
 }

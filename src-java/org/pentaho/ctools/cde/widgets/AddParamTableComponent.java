@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * NOTE - The test was created regarding issue CDF-308
  */
-public class TableComponent {
+public class AddParamTableComponent {
   // Instance of the driver (browser emulator)
   private WebDriver driver;
   // Instance to be used on wait commands
