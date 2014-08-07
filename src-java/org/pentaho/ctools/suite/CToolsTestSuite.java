@@ -45,7 +45,7 @@ import java.util.concurrent.TimeUnit;
     MetaLayerHomeDashboard.class,
     //CDE - Widgets
     CreateWidget.class,
-    TableComponent.class,
+    AddParamTableComponent.class,
     //Security
     AccessSystemResources.class,
     LogoutPentaho.class
