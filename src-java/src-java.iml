@@ -5,6 +5,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="selenium-server-standalone" level="project" />
+    <orderEntry type="library" name="classes" level="project" />
   </component>
 </module>
 

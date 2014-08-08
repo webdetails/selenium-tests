@@ -43,7 +43,7 @@ import static org.junit.Assert.*;
  * search in table contents.
  *
  * Naming convention for test:
- *  'StateUnderTest_ExpectedBehavior'
+ *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  * Issues History:
  * - CDF-346: validate paging, because previous we only had 10 entries of data.

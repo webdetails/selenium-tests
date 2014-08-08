@@ -15,24 +15,29 @@
 
 package org.pentaho.ctools.suite;
 
+import net.jsourcerer.webdriver.jserrorcollector.JavaScriptError;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.pentaho.ctools.main.LoginPentaho;
-import org.pentaho.ctools.main.LogoutPentaho;
+import org.pentaho.ctools.cde.MapComponentReference;
+import org.pentaho.ctools.cde.widgets.AddParamTableComponent;
+import org.pentaho.ctools.cde.widgets.CreateWidget;
 import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.DataInputComponent;
-import org.pentaho.ctools.cdf.TableComponent;
 import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
-import org.pentaho.ctools.cde.widgets.CreateWidget;
-import org.pentaho.ctools.cde.widgets.AddParamTableComponent;
+import org.pentaho.ctools.cdf.TableComponent;
+import org.pentaho.ctools.main.LoginPentaho;
+import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.security.AccessSystemResources;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(Suite.class)
@@ -43,6 +48,8 @@ import java.util.concurrent.TimeUnit;
     DataInputComponent.class,
     TableComponent.class,
     MetaLayerHomeDashboard.class,
+    //CDE
+    MapComponentReference.class,
     //CDE - Widgets
     CreateWidget.class,
     AddParamTableComponent.class,
@@ -61,10 +68,12 @@ public class CToolsTestSuite {
 
 
   @BeforeClass
-  public static void setUpClass() {
+  public static void setUpClass() throws IOException {
     System.out.println("Master setup");
     //Inicialize DRIVER
-    driver = new FirefoxDriver();
+    FirefoxProfile ffProfile = new FirefoxProfile();
+    JavaScriptError.addExtension(ffProfile);
+    driver = new FirefoxDriver(ffProfile);
     driver.manage().window().maximize();
     driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -82,6 +91,17 @@ public class CToolsTestSuite {
   @AfterClass
   public static void tearDownClass() {
     System.out.println("Master tearDown");
+
+    List<JavaScriptError> jsErrors = JavaScriptError.readErrors(driver);
+    System.out.println("###start displaying errors");
+    for(int i = 0; i < jsErrors.size(); i++) {
+      System.out.println("Error Message: " + jsErrors.get(i).getErrorMessage());
+      System.out.println("Line Number: " + jsErrors.get(i).getLineNumber());
+      System.out.println("Source Name: " + jsErrors.get(i).getSourceName());
+    }
+    System.out.println("###start displaying errors");
+
+    driver.close();
     driver.quit();
   }
 

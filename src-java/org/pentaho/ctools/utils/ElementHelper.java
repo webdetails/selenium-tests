@@ -59,4 +59,23 @@ public class ElementHelper {
 
     return elementPresent;
   }
+
+  /**
+   *
+   * @param driver
+   * @param maxTimeToWaitSec
+   * @param path
+   */
+  public static void WaitForElementNotPresent(WebDriver driver, long maxTimeToWaitSec, By path){
+    if ( maxTimeToWaitSec > 0 ) {
+      int timeToWaitSec = 2;
+
+      for (int i = 0; i < maxTimeToWaitSec; i = i + timeToWaitSec) {
+        Boolean isPresent = IsElementPresent(driver, timeToWaitSec, path);
+        if (isPresent == false) {
+          break;
+        }
+      }
+    }
+  }
 }
