@@ -207,13 +207,14 @@ public class MapComponentReference {
     //Image with Google (left down corner)
     assertNotNull(driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[2]/a/div/img")));
     //Text 'Termos de Utilização (righ down corner)
-    String strTerms = new String(((String)"Termos de Utilização").getBytes(), Charset.forName("utf-8"));
-    String strSat = new String(((String)"Satélite").getBytes(), Charset.forName("utf-8"));
+    String strMap = "Map";
+    String strTerms = "Terms of Use";
+    String strSat = "Satellite";
 
     assertEquals(strTerms, driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[6]/div[2]/a")).getText());
     //check if we have mapquest-sat/Mapa/Satelite
     assertEquals("mapquest-sat", driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[9]/div/div")).getText());
-    assertEquals("Mapa", driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[9]/div[2]/div")).getText());
+    assertEquals(strMap, driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[9]/div[2]/div")).getText());
     assertEquals(strSat, driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[9]/div[3]/div")).getText());
 
     //## Step3
@@ -226,7 +227,7 @@ public class MapComponentReference {
     assertEquals(strTerms, driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[6]/div[2]/a")).getText());
     //check if we have mapbox-world-dark/Mapa/Satelite
     assertEquals("mapbox-world-dark", driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[9]/div/div")).getText());
-    assertEquals("Mapa", driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[9]/div[2]/div")).getText());
+    assertEquals(strMap, driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[9]/div[2]/div")).getText());
     assertEquals(strSat, driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[9]/div[3]/div")).getText());
   }
 

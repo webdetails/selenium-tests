@@ -59,19 +59,21 @@ import java.util.concurrent.TimeUnit;
 })
 
 public class CToolsTestSuite {
-  // TODO
+  /// Instance of the driver (browser emulator)
   private static WebDriver driver;
-  // TODO
+  // Instance to be used on wait commands
   private static Wait<WebDriver> wait;
-  // TODO
+  // The base url to be append the relative url in test
   private static String baseUrl;
 
 
   @BeforeClass
   public static void setUpClass() throws IOException {
     System.out.println("Master setup");
+
     //Inicialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
+    ffProfile.setPreference("intl.accept_languages", "en-us");
     JavaScriptError.addExtension(ffProfile);
     driver = new FirefoxDriver(ffProfile);
     driver.manage().window().maximize();
@@ -92,6 +94,7 @@ public class CToolsTestSuite {
   public static void tearDownClass() {
     System.out.println("Master tearDown");
 
+    /*
     List<JavaScriptError> jsErrors = JavaScriptError.readErrors(driver);
     System.out.println("###start displaying errors");
     for(int i = 0; i < jsErrors.size(); i++) {
@@ -99,7 +102,7 @@ public class CToolsTestSuite {
       System.out.println("Line Number: " + jsErrors.get(i).getLineNumber());
       System.out.println("Source Name: " + jsErrors.get(i).getSourceName());
     }
-    System.out.println("###start displaying errors");
+    System.out.println("###start displaying errors");*/
 
     driver.close();
     driver.quit();
