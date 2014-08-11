@@ -11,18 +11,21 @@ public class ElementHelper {
 
   /**
    * This method shall check if the element to search is displayed and
-   * is enabled.
+   * is enabled, if not, wait until reach 20000 (20sec).
    *
    * @param driver  The access to browser.
    * @param path    DOM element to search.
    */
-  public static void IsElementDisplayed(WebDriver driver, By path) {
+  public static boolean IsElementDisplayed(WebDriver driver, By path) {
+    boolean elementDisplayed = false;
+
     for (int i = 0; i < 100; i++) {
       try {
         WebElement element = driver.findElement(path);
         if (element != null) {
           if (element.isDisplayed() && element.isEnabled()) {
-            return;
+            elementDisplayed = true;
+            break;
           }
         }
       } catch ( NoSuchElementException ex ){
@@ -31,11 +34,12 @@ public class ElementHelper {
 
       try {
         Thread.sleep(200);
-
       } catch (InterruptedException ex) {
         System.out.println("Exception timeout");
       }
     }
+
+    return elementDisplayed;
   }
 
   /**

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
+import org.pentaho.ctools.utils.ElementHelper;
 
 import java.lang.Exception;
 import java.lang.Thread;
@@ -84,11 +85,11 @@ public class WidgetUtils {
         action.build().perform();
 
         //Here we still in the iframe
+        assertTrue(ElementHelper.IsElementDisplayed(driver, By.id("deleteButton")));
         driver.findElement(By.id("deleteButton")).click();
         //Go back to root html
         driver.switchTo().defaultContent();
-        assertEquals(driver.findElement(By.cssSelector("div.gwt-HTML")).getText(),
-            "Are you sure you want to move all selected items to the trash?");
+        assertEquals(driver.findElement(By.cssSelector("div.gwt-HTML")).getText(), "Are you sure you want to move all selected items to the trash?");
         driver.findElement(By.id("okButton")).click();
       }
     }
