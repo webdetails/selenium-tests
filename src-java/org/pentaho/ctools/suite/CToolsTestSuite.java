@@ -26,6 +26,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.cde.MapComponentReference;
+import org.pentaho.ctools.cde.widgets.SelectCdaFileAsDatasource;
 import org.pentaho.ctools.cde.widgets.AddParamTableComponent;
 import org.pentaho.ctools.cde.widgets.CreateWidget;
 import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
@@ -53,6 +54,7 @@ import java.util.concurrent.TimeUnit;
     //CDE - Widgets
     CreateWidget.class,
     AddParamTableComponent.class,
+    SelectCdaFileAsDatasource.class,
     //Security
     AccessSystemResources.class,
     LogoutPentaho.class

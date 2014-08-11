@@ -211,6 +211,75 @@ public class WidgetUtils {
   }
 
   /**
+   * This method shall create an widget with specific parameter.
+   *
+   * @param driver
+   * @param wait
+   * @param baseUrl
+   * @param widgetName
+   * @param paramName
+   * @return
+   */
+  public static WebDriver CreateWidget(WebDriver driver,
+                                       Wait<WebDriver> wait,
+                                       String baseUrl,
+                                       String widgetName) throws Exception{
+    //Step 1 - Go to homepage
+    driver.switchTo().defaultContent();
+    driver.get(baseUrl + "Home");
+
+    //Wait for the visibility of Menu and frame contents
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='mainMenubar']")));
+    driver.switchTo().frame("home.perspective");
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='buttonWrapper']")));
+
+
+    //Step 2 - Click in Create New (CDE Dashboard)
+    //Click to create a widget
+    WebElement buttonCreateNew = driver.findElement(By.xpath("//button[@id='btnCreateNew']"));
+    assertEquals(buttonCreateNew.getText(), "Create New");
+    buttonCreateNew.click();
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.popover-content > #createNewlaunch_new_cdeButton")));
+    WebElement buttonCDEBashBoard = driver.findElement(By.cssSelector("div.popover-content > #createNewlaunch_new_cdeButton"));
+    assertEquals(buttonCDEBashBoard.getText(), "CDE Dashboard");
+    buttonCDEBashBoard.click();
+    driver.switchTo().defaultContent();//back to the root
+
+
+    //Step 3 - Click in Component Panel
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe")));
+    WebElement frameCDEDashboard = driver.findElement(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe"));
+    driver.switchTo().frame(frameCDEDashboard);
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='componentsPanelButton']")));
+    driver.findElement(By.xpath("//div[@class='componentsPanelButton']")).click();
+
+
+    //Step 4 - Save the widget
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='headerLinks']/div[2]/a")));
+    driver.findElement(By.xpath("//div[@id='headerLinks']/div[2]/a")).click();
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='popup']")));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='container_id']/ul/li")));
+    driver.findElement(By.xpath("//input[@id='widgetRadio']")).click();
+    while(true) {
+      if(driver.findElement(By.xpath("//div[@id='container_id']")).isDisplayed() == false){
+        break;
+      } else {
+        Thread.sleep(100);
+      }
+    }
+    //Insert file name
+    driver.findElement(By.xpath("//input[@id='fileInput']")).sendKeys(widgetName);
+    //Insert widget name
+    driver.findElement(By.xpath("//input[@id='componentInput']")).sendKeys(widgetName);
+    //Press OK (SAVING)
+    driver.findElement(By.xpath("//button[@id='popup_state0_buttonOk']")).click();
+    //Wait for the pop-up exit
+    ElementHelper.WaitForElementNotPresent(driver, 10, By.id("popupbox"));
+
+    return driver;
+  }
+
+  /**
    * This method
    *
    * @param driver
