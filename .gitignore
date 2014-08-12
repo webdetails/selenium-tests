@@ -1,2 +1,9 @@
 #IntelliJ files
 .idea/
+*.iml
+misc.xml
+workspace.xml
+junit*
+build/
+reports-java/
+lib/ext/
