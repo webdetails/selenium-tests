@@ -46,24 +46,25 @@ public class WidgetUtils {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='browser.perspective']")));
     driver.switchTo().frame("browser.perspective");
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowser']")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFolders']")));
-
+    
     //Public
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFolders']")));
     WebElement folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@path='/public']")));
     WebElement publicFolder = folders.findElement(By.xpath("//div[@path='/public']"));
     publicFolder.findElement(By.className("expandCollapse")).click();
     //CDE
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFolders']"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFolders']")));
     folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
     WebElement cdeFolder = folders.findElement(By.xpath("//div[@path='/public/cde']"));
     cdeFolder.findElement(By.className("expandCollapse")).click();
     //Widgets
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFolders']"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFolders']")));
     folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
     WebElement widgetsFolder = folders.findElement(By.xpath("//div[@path='/public/cde/widgets']"));
     widgetsFolder.findElement(By.className("title")).click();
-
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div"));
+    //Check if at least one file is displayed
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFiles']/div[2]/div")));
     WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
     List<WebElement> theWidgetFiles = listFiles.findElements(By.xpath("//div[@class='title' and contains(text(),'" + widgetName + "')]"));
 

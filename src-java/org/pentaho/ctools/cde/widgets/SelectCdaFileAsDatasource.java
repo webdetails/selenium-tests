@@ -94,25 +94,31 @@ public class SelectCdaFileAsDatasource {
     assertTrue(ElementHelper.IsElementDisplayed(driver, By.id("popupbox")));
     assertTrue(ElementHelper.IsElementDisplayed(driver, By.id("popup_state_browse")));
     //Click in 'Public'
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("container_id")));
     WebElement listFolders = driver.findElement(By.xpath("//div[@id='container_id']"));
     listFolders.findElement(By.xpath("//a[@rel='public/']")).click();
     //Click in 'plugin-samples'
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("container_id")));
     listFolders = driver.findElement(By.xpath("//div[@id='container_id']"));
     listFolders.findElement(By.xpath("//a[@rel='public/plugin-samples/']")).click();
     //Click in 'cda'
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("container_id")));
     listFolders = driver.findElement(By.xpath("//div[@id='container_id']"));
     listFolders.findElement(By.xpath("//a[@rel='public/plugin-samples/cda/']")).click();
     //Click in 'cdafiles'
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("container_id")));
     listFolders = driver.findElement(By.xpath("//div[@id='container_id']"));
     listFolders.findElement(By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/']")).click();
     //Select a file
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("container_id")));
     listFolders = driver.findElement(By.xpath("//div[@id='container_id']"));
     listFolders.findElement(By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']")).click();
     //Click OK
+    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("popup_browse_buttonOk")));
     driver.findElement(By.id("popup_browse_buttonOk")).click();
     ElementHelper.WaitForElementNotPresent(driver, 2, By.id("popup_browse_buttonOk"));
     //SAVE the widget
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='headerLinks']/div[2]/a")));
+    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='headerLinks']/div[2]/a"));
     driver.findElement(By.xpath("//div[@id='headerLinks']/div[2]/a")).click();
     ElementHelper.WaitForElementNotPresent(driver, 5, By.id("notifyBar"));
 
