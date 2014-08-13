@@ -57,7 +57,7 @@ public class LoginPentaho {
     driver.findElement(By.id("j_password")).sendKeys("password");
     driver.findElement(By.cssSelector("button.btn")).click();
 
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
     assertNotNull(driver.findElement(By.xpath("//iframe[@id='home.perspective']")));
     assertEquals("Pentaho User Console", driver.getTitle());
 
