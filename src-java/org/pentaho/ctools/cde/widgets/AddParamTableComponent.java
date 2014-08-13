@@ -68,7 +68,7 @@ public class AddParamTableComponent {
     WebElement elementListedOthers = driver.findElement(By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/div"));
     elementListedOthers.findElement(By.xpath("//a[@title='table Component']")).click();
     //Click in parameters
-    ElementHelper.IsElementDisplayed(driver, By.id("table-cdfdd-components-properties"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-cdfdd-components-properties")));
     driver.findElement(By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]")).click();
 
     //Step 4 - Add the pair arg & value (use the parameter of the widget as value)
