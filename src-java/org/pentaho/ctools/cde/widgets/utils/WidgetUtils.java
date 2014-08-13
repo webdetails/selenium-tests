@@ -64,7 +64,7 @@ public class WidgetUtils {
     WebElement widgetsFolder = folders.findElement(By.xpath("//div[@path='/public/cde/widgets']"));
     widgetsFolder.findElement(By.className("title")).click();
     //Check if at least one file is displayed
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFiles']/div[2]/div")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='fileBrowserFiles']/div[2]/div")));
     WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
     List<WebElement> theWidgetFiles = listFiles.findElements(By.xpath("//div[@class='title' and contains(text(),'" + widgetName + "')]"));
 

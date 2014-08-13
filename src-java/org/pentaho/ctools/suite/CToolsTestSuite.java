@@ -23,12 +23,17 @@ import org.junit.runners.Suite;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.cde.MapComponentReference;
 import org.pentaho.ctools.cde.widgets.SelectCdaFileAsDatasource;
 import org.pentaho.ctools.cde.widgets.AddParamTableComponent;
 import org.pentaho.ctools.cde.widgets.CreateWidget;
+import org.pentaho.ctools.cde.widgets.SimpleExtensionPoints;
 import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.DataInputComponent;
 import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
@@ -37,9 +42,11 @@ import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.security.AccessSystemResources;
 
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -55,6 +62,7 @@ import java.util.concurrent.TimeUnit;
     CreateWidget.class,
     AddParamTableComponent.class,
     SelectCdaFileAsDatasource.class,
+    SimpleExtensionPoints.class,
     //Security
     AccessSystemResources.class,
     LogoutPentaho.class
@@ -73,11 +81,30 @@ public class CToolsTestSuite {
   public static void setUpClass() throws IOException {
     System.out.println("Master setup");
 
+    System.setProperty("webdriver.log.file", "/dev/stdout");
+    System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
+
+    //Setting log preferences
+    LoggingPreferences logs = new LoggingPreferences();
+    logs.enable(LogType.BROWSER, Level.ALL);
+    logs.enable(LogType.SERVER, Level.ALL);
+    logs.enable(LogType.DRIVER, Level.ALL);
+    logs.enable(LogType.PROFILER, Level.ALL);
+    logs.enable(LogType.CLIENT, Level.ALL);
+    logs.enable(LogType.PERFORMANCE, Level.ALL);
+
+    DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+    capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
+
     //Inicialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
     ffProfile.setPreference("intl.accept_languages", "en-us");
+
+
+    capabilities.setCapability(FirefoxDriver.PROFILE, ffProfile);
+
     JavaScriptError.addExtension(ffProfile);
-    driver = new FirefoxDriver(ffProfile);
+    driver = new FirefoxDriver(capabilities);
     driver.manage().window().maximize();
     driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
