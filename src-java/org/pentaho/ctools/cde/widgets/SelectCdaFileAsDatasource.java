@@ -90,6 +90,7 @@ public class SelectCdaFileAsDatasource {
     //##Step 4 - Add the cda file
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-cdfdd-datasources-properties")));
     //Click in the property to add the file
+    ElementHelper.IsElementDisplayed(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/button"));
     driver.findElement(By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/button")).click();
     assertTrue(ElementHelper.IsElementDisplayed(driver, By.id("popupbox")));
     assertTrue(ElementHelper.IsElementDisplayed(driver, By.id("popup_state_browse")));
@@ -152,7 +153,5 @@ public class SelectCdaFileAsDatasource {
 
 
   @After
-  public void tearDown() {
-    driver.manage().timeouts().implicitlyWait(200, TimeUnit.MILLISECONDS);
-  }
+  public void tearDown() {}
 }

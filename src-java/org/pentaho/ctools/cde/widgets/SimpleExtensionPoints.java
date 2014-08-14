@@ -298,7 +298,5 @@ public class SimpleExtensionPoints {
 
 
   @After
-  public void tearDown() {
-    driver.manage().timeouts().implicitlyWait(200, TimeUnit.MILLISECONDS);
-  }
+  public void tearDown() {}
 }

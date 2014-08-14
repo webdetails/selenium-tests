@@ -3,15 +3,21 @@ package org.pentaho.ctools.cde.widgets.utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.utils.ElementHelper;
 
+
+import org.openqa.selenium.NoSuchElementException;
+
 import java.lang.Exception;
 import java.lang.Thread;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -134,7 +140,8 @@ public class WidgetUtils {
     WebElement buttonCreateNew = driver.findElement(By.xpath("//button[@id='btnCreateNew']"));
     assertEquals(buttonCreateNew.getText(), "Create New");
     buttonCreateNew.click();
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.popover-content > #createNewlaunch_new_cdeButton")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='popover-content']")));
+    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"), "CDE Dashboard"));
     WebElement buttonCDEBashBoard = driver.findElement(By.cssSelector("div.popover-content > #createNewlaunch_new_cdeButton"));
     assertEquals(buttonCDEBashBoard.getText(), "CDE Dashboard");
     buttonCDEBashBoard.click();
@@ -199,22 +206,27 @@ public class WidgetUtils {
 
     //Step 6 - Check if the parameter exist in 'Settings'
     //Popup message informing saving
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='layoutPanelButton']")));
+    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@class='layoutPanelButton']"));
+    //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='layoutPanelButton']")));
     assertTrue(driver.findElement(By.xpath("//div[@class='layoutPanelButton']")).isEnabled());
     //Press 'Settings'
+    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
     driver.findElement(By.xpath("//div[@id='headerLinks']/div[5]/a")).click();
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='popup']")));
+    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='popup']"));
     assertNotNull(driver.findElement(By.xpath("//span[@id='widgetParameters']/div/input")));
     //The parameter MUST be equal to the one set
     assertEquals(driver.findElement(By.xpath("//span[@id='widgetParameters']/div/span")).getText(), paramName);
     //Press on the check box
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='widgetParameters']/div/input")));
+    ElementHelper.IsElementDisplayed(driver, By.xpath("//span[@id='widgetParameters']/div/input"));
+    //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='widgetParameters']/div/input")));
     driver.findElement(By.xpath("//span[@id='widgetParameters']/div/input")).click();
     //Press button save
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']")));
+    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']"));
+    //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']")));
     driver.findElement(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']")).click();
 
-    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("popupbox")));
+    ElementHelper.WaitForElementNotPresent(driver, 10, By.id("popupbox"));
+    //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("popupbox")));
 
     return driver;
   }
@@ -297,7 +309,10 @@ public class WidgetUtils {
    * @param widgetName
    * @return
    */
-  public static WebDriver OpenWidgetEditMode(WebDriver driver, Wait<WebDriver> wait, String baseUrl, String widgetName) {
+  public static WebDriver OpenWidgetEditMode(WebDriver driver, 
+                                            Wait<WebDriver> wait, 
+                                            String baseUrl, 
+                                            String widgetName) {
     //Resuming Steps
     // 1. open the widget
     // 2. check if the parameter exist in settings
@@ -345,21 +360,22 @@ public class WidgetUtils {
     //wait for the page load in 'fileBrowserFiles'
     ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("//div[@class='spinner large-spinner']"));
     //Check if at least one file is displayed
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='fileBrowserFiles']/div[2]/div")));
+    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div"));
     WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
     List<WebElement> theWidgetFiles = listFiles.findElements(By.xpath("//div[@class='title' and contains(text(),'" + widgetName + "')]"));
 
-    
+
     //Check if the widget named exist
     if(theWidgetFiles != null){
       if(theWidgetFiles.size() > 0) {
         ((WebElement)theWidgetFiles.get(0)).click();
       }
     }
+    
     //Click in the EDIT button
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fileBrowserButtons")));
-    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("newFolderButton")));
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("editButton")));
+    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("buttonsHeader"), "File Actions"));
+    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("editButton"), "Edit"));
+    ElementHelper.IsElementDisplayed(driver, By.id("editButton"));
     driver.findElement(By.id("editButton")).click();
     driver.switchTo().defaultContent();//back to the root
 
