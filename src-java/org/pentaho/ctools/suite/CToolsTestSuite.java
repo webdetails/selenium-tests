@@ -55,10 +55,10 @@ import java.util.logging.Level;
     //CDE
     MapComponentReference.class,
     //CDE - Widgets
-    CreateWidget.class,
-    AddParamTableComponent.class,
-    SelectCdaFileAsDatasource.class,
-    SimpleExtensionPoints.class,
+    //CreateWidget.class,
+    //AddParamTableComponent.class,
+    //SelectCdaFileAsDatasource.class,
+    //SimpleExtensionPoints.class,
     //Security
     AccessSystemResources.class,
     LogoutPentaho.class
@@ -77,8 +77,8 @@ public class CToolsTestSuite {
   public static void setUpClass() throws IOException {
     System.out.println("Master setup");
 
-    System.setProperty("webdriver.log.file", "/dev/stdout");
-    System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
+    //System.setProperty("webdriver.log.file", "/dev/stdout");
+    //System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
 
     //Setting log preferences
     LoggingPreferences logs = new LoggingPreferences();

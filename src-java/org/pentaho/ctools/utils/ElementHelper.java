@@ -21,6 +21,7 @@ public class ElementHelper {
 
     for (int i = 0; i < 100; i++) {
       try {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         WebElement element = driver.findElement(path);
         if (element != null) {
           if (element.isDisplayed() && element.isEnabled()) {

@@ -100,20 +100,17 @@ public class SelectCdaFileAsDatasource {
     listFolders.findElement(By.xpath("//a[@rel='public/']")).click();
     //Click in 'plugin-samples'
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("container_id")));
-    listFolders = driver.findElement(By.xpath("//div[@id='container_id']"));
-    listFolders.findElement(By.xpath("//a[@rel='public/plugin-samples/']")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//a[@rel='public/plugin-samples/']")));
+    driver.findElement(By.xpath("//a[@rel='public/plugin-samples/']")).click();;
     //Click in 'cda'
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("container_id")));
-    listFolders = driver.findElement(By.xpath("//div[@id='container_id']"));
-    listFolders.findElement(By.xpath("//a[@rel='public/plugin-samples/cda/']")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//a[@rel='public/plugin-samples/cda/']")));
+    driver.findElement(By.xpath("//a[@rel='public/plugin-samples/cda/']")).click();
     //Click in 'cdafiles'
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("container_id")));
-    listFolders = driver.findElement(By.xpath("//div[@id='container_id']"));
-    listFolders.findElement(By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/']")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/']")));
+    driver.findElement(By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/']")).click();
     //Select a file
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("container_id")));
-    listFolders = driver.findElement(By.xpath("//div[@id='container_id']"));
-    listFolders.findElement(By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']")));
+    driver.findElement(By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']")).click();
     //Click OK
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("popup_browse_buttonOk")));
     driver.findElement(By.id("popup_browse_buttonOk")).click();

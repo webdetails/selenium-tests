@@ -116,8 +116,10 @@ public class AddParamTableComponent {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='componentsPanelButton']")));
     driver.findElement(By.xpath("//div[@class='componentsPanelButton']")).click();
     //Expand the 'Table Components' (column 'Components')
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[@id='OTHERCOMPONENTS']/td/span"));
-    driver.findElement(By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[@id='OTHERCOMPONENTS']/td/span")).click();
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='table-cdfdd-components-components']")));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='table-cdfdd-components-properties']")));
+    ElementHelper.IsElementDisplayed(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[3]/td/span"));
+    driver.findElement(By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[3]/td/span")).click();
     driver.findElement(By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[4]/td")).click();
     //Click in Parameters (column 'Properties')
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-cdfdd-components-properties")));
