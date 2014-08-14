@@ -53,28 +53,22 @@ public class WidgetUtils {
     driver.switchTo().frame("browser.perspective");
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fileBrowser")));
     ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("//div[@class='spinner large-spinner']"));
-    
-    
+    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
+
     //Public
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("fileBrowserFolders")));
-    WebElement folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@path='/public']")));
-    WebElement publicFolder = folders.findElement(By.xpath("//div[@path='/public']"));
-    publicFolder.findElement(By.className("expandCollapse")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFolders']")));
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public']")));
+    driver.findElement(By.xpath("//div[@path='/public']")).findElement(By.className("expandCollapse")).click();
     //CDE
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFolders']")));
-    folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@path='/public/cde']")));
-    WebElement cdeFolder = folders.findElement(By.xpath("//div[@path='/public/cde']"));
-    cdeFolder.findElement(By.className("expandCollapse")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public/cde']")));
+    driver.findElement(By.xpath("//div[@path='/public/cde']")).findElement(By.className("expandCollapse")).click();
     //Widgets
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFolders']")));
-    folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@path='/public/cde/widgets']")));
-    WebElement widgetsFolder = folders.findElement(By.xpath("//div[@path='/public/cde/widgets']"));
-    widgetsFolder.findElement(By.className("title")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public/cde/widgets']")));
+    driver.findElement(By.xpath("//div[@path='/public/cde/widgets']")).findElement(By.className("title")).click();
+
     //wait for the page load in 'fileBrowserFiles'
     ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("//div[@class='spinner large-spinner']"));
+    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
     //Check if at least one file is displayed
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='fileBrowserFiles']/div[2]/div")));
     WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
@@ -338,27 +332,22 @@ public class WidgetUtils {
     driver.switchTo().frame("browser.perspective");
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fileBrowser")));
     ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("//div[@class='spinner large-spinner']"));
+    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
      
     //Public
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("fileBrowserFolders")));
-    WebElement folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@path='/public']")));
-    WebElement publicFolder = folders.findElement(By.xpath("//div[@path='/public']"));
-    publicFolder.findElement(By.className("expandCollapse")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFolders']")));
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public']")));
+    driver.findElement(By.xpath("//div[@path='/public']")).findElement(By.className("expandCollapse")).click();
     //CDE
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFolders']")));
-    folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@path='/public/cde']")));
-    WebElement cdeFolder = folders.findElement(By.xpath("//div[@path='/public/cde']"));
-    cdeFolder.findElement(By.className("expandCollapse")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public/cde']")));
+    driver.findElement(By.xpath("//div[@path='/public/cde']")).findElement(By.className("expandCollapse")).click();
     //Widgets
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='fileBrowserFolders']")));
-    folders = driver.findElement(By.xpath("//div[@id='fileBrowserFolders']"));
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@path='/public/cde/widgets']")));
-    WebElement widgetsFolder = folders.findElement(By.xpath("//div[@path='/public/cde/widgets']"));
-    widgetsFolder.findElement(By.className("title")).click();
+    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public/cde/widgets']")));
+    driver.findElement(By.xpath("//div[@path='/public/cde/widgets']")).findElement(By.className("title")).click();
+
     //wait for the page load in 'fileBrowserFiles'
     ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("//div[@class='spinner large-spinner']"));
+    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
     //Check if at least one file is displayed
     ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div"));
     WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
@@ -368,16 +357,18 @@ public class WidgetUtils {
     //Check if the widget named exist
     if(theWidgetFiles != null){
       if(theWidgetFiles.size() > 0) {
-        ((WebElement)theWidgetFiles.get(0)).click();
+
+        Actions action = new Actions(driver);
+        action.click((WebElement)theWidgetFiles.get(0));
+        action.build().perform();
+
+        //Here we still in the iframe
+        assertTrue(ElementHelper.IsElementDisplayed(driver, By.id("editButton")));
+        driver.findElement(By.id("editButton")).click();
+
+        driver.switchTo().defaultContent();//back to the root
       }
     }
-    
-    //Click in the EDIT button
-    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("buttonsHeader"), "File Actions"));
-    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("editButton"), "Edit"));
-    ElementHelper.IsElementDisplayed(driver, By.id("editButton"));
-    driver.findElement(By.id("editButton")).click();
-    driver.switchTo().defaultContent();//back to the root
 
     return driver;
   }
