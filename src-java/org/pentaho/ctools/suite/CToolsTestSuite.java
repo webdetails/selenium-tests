@@ -29,6 +29,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.pentaho.ctools.cde.MapComponentReference;
 import org.pentaho.ctools.cde.widgets.SelectCdaFileAsDatasource;
 import org.pentaho.ctools.cde.widgets.AddParamTableComponent;
@@ -38,6 +39,7 @@ import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.DataInputComponent;
 import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
 import org.pentaho.ctools.cdf.TableComponent;
+import org.pentaho.ctools.cdf.VisualizationAPIComponent;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.security.AccessSystemResources;
@@ -52,11 +54,13 @@ import java.util.logging.Level;
 @Suite.SuiteClasses({
     LoginPentaho.class,
     //CDF
-    AutoCompleteBoxComponent.class,
+    /*AutoCompleteBoxComponent.class,
     DataInputComponent.class,
     TableComponent.class,
-    MetaLayerHomeDashboard.class,
+    MetaLayerHomeDashboard.class,*/
+    VisualizationAPIComponent.class,
     //CDE
+    /*
     MapComponentReference.class,
     //CDE - Widgets
     CreateWidget.class,
@@ -64,13 +68,14 @@ import java.util.logging.Level;
     SelectCdaFileAsDatasource.class,
     SimpleExtensionPoints.class,
     //Security
-    AccessSystemResources.class,
+    AccessSystemResources.class,*/
     LogoutPentaho.class
 })
 
 public class CToolsTestSuite {
   /// Instance of the driver (browser emulator)
   private static WebDriver driver;
+  WebDriverWait
   // Instance to be used on wait commands
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
@@ -81,8 +86,8 @@ public class CToolsTestSuite {
   public static void setUpClass() throws IOException {
     System.out.println("Master setup");
 
-    //System.setProperty("webdriver.log.file", "/dev/stdout");
-    //System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
+    System.setProperty("webdriver.log.file", "/dev/stdout");
+    System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
 
     //Setting log preferences
     LoggingPreferences logs = new LoggingPreferences();
