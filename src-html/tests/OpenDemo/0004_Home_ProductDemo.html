@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>0004_Home_ProductDemo</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0004_Home_ProductDemo</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>api/repos/:public:ctools-samples:PublicDemo:ProductDemo:ProductDemo.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Sales POC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#5cea42da-8e6e-2759-a33f-7a973f7ea97b &gt; span.datesLabel.datesLabel </td>
+	<td>Comparison</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//div[@id='baseDate'])[2]</td>
+	<td>April 24, 2010</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=th.w</td>
+	<td>Overall Impact</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='summaryTable']/table/thead/tr/th[3]</td>
+	<td>Orders�� %Change</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='summaryTable']/table/thead/tr/th[2]</td>
+	<td>AOV�� %Change</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td</td>
+	<td>�All contributors - -</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/thead/tr/th[2]</td>
+	<td>AOV�� %Change</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/thead/tr/th[3]</td>
+	<td>Orders�� %Change</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=th.w2</td>
+	<td>% Total</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/thead/tr/th[5]</td>
+	<td>Overall Impact</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#detailsTable &gt; table.ecoTable &gt; tbody &gt; tr &gt; td</td>
+	<td>�children - Beautiful Outfits</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td</td>
+	<td>�children - Even nicer Clothes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td</td>
+	<td>�children - Great Clothes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[4]/td</td>
+	<td>�children - Nice Clothes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[5]/td</td>
+	<td>�men - Beautiful Outfits</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[6]/td</td>
+	<td>�men - Even nicer Clothes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[8]/td</td>
+	<td>�men - Nice Clothes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[7]/td</td>
+	<td>�men - Great Clothes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[9]/td</td>
+	<td>�women - Beautiful Outfits</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[10]/td</td>
+	<td>�women - Even nicer Clothes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[11]/td</td>
+	<td>�women - Great Clothes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[11]/td</td>
+	<td>�women - Great Clothes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[12]/td</td>
+	<td>�women - Nice Clothes</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='categorySelectObj']/select</td>
+	<td>value=children</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='categorySelectObj']/select</td>
+	<td>children</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='categorySelectObj']/select</td>
+	<td>value=men</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='categorySelectObj']/select</td>
+	<td>men</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='categorySelectObj']/select</td>
+	<td>value=woman</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='categorySelectObj']/select</td>
+	<td>woman</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='brandSelectObj']/select</td>
+	<td>value=Nice Clothes</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='brandSelectObj']/select</td>
+	<td>Nice Clothes</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='brandSelectObj']/select</td>
+	<td>value=Great Clothes</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='brandSelectObj']/select</td>
+	<td>Great Clothes</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='brandSelectObj']/select</td>
+	<td>value=Beautiful Outfits</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='brandSelectObj']/select</td>
+	<td>Beautiful Outfits</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='brandSelectObj']/select</td>
+	<td>value=Even nicer Clothes</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='brandSelectObj']/select</td>
+	<td>Even nicer Clothes</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='marketingSelectObj']/select</td>
+	<td>value=Affiliate</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='marketingSelectObj']/select</td>
+	<td>Affiliate</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='marketingSelectObj']/select</td>
+	<td>value=Email</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='marketingSelectObj']/select</td>
+	<td>Email</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='marketingSelectObj']/select</td>
+	<td>value=Paid Search</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='marketingSelectObj']/select</td>
+	<td>Paid Search</td>
+</tr>
+<!--verifição Geography-->
+<tr>
+	<td>select</td>
+	<td>//div[@id='geographySelectObj']/select</td>
+	<td>value=all</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='geographySelectObj']/select</td>
+	<td>all</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.floatLeft</td>
+	<td>13914</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='summaryTable']/table/tbody/tr/td[3]/div</td>
+	<td>13914</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[3]/div</td>
+	<td>15189</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[2]/div</td>
+	<td>15189</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[2]/div</td>
+	<td>14204</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[3]/div</td>
+	<td>14204</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[12]/td[5]</td>
+	<td>+143402</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[11]/td[5]</td>
+	<td>+150570</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[10]/td[5]</td>
+	<td>+153539</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[4]</td>
+	<td>27%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[4]</td>
+	<td>27%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[4]/span</td>
+	<td>28%</td>
+</tr>
+<!--verifição USA-->
+<tr>
+	<td>select</td>
+	<td>//div[@id='geographySelectObj']/select</td>
+	<td>value=USA</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='geographySelectObj']/select</td>
+	<td>USA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.floatLeft</td>
+	<td>13914</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='summaryTable']/table/tbody/tr/td[3]/div</td>
+	<td>13914</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[2]/div</td>
+	<td>5099</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[3]/div</td>
+	<td>5099</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[2]/div</td>
+	<td>4886</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[3]/div</td>
+	<td>4886</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[2]/div[2]</td>
+	<td>-44.9%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[3]/div</td>
+	<td>3978</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[2]/div</td>
+	<td>3978</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[3]/div[2]</td>
+	<td>-44.9%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[3]/div[2]</td>
+	<td>+20.2%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[2]/div[2]</td>
+	<td>+20.2%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[2]/div[2]</td>
+	<td>+12.8%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[3]/div[2]</td>
+	<td>+12.8%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[5]</td>
+	<td>+54212</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[5]</td>
+	<td>+47237</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[5]</td>
+	<td>+48141</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[4]</td>
+	<td>33%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[4]</td>
+	<td>65%</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[4]</td>
+	<td>68%</td>
+</tr>
+<!--verifição EURO-->
+<tr>
+	<td>select</td>
+	<td>//div[@id='geographySelectObj']/select</td>
+	<td>value=EURO</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='geographySelectObj']/select</td>
+	<td>EURO</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.floatLeft</td>
+	<td>13914</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='summaryTable']/table/tbody/tr/td[3]/div</td>
+	<td>13914</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[2]/div</td>
+	<td>5798</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr/td[3]/div</td>
+	<td>5798</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[2]/div</td>
+	<td>4569</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[2]/div</td>
+	<td>3844</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[3]/div</td>
+	<td>3844</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td[3]/div</td>
+	<td>4569</td>
+</tr>
+<!--verifição UK-->
+<tr>
+	<td>select</td>
+	<td>//div[@id='geographySelectObj']/select</td>
+	<td>value=UK</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='geographySelectObj']/select</td>
+	<td>UK</td>
+</tr>
+</tbody></table>
+</body>
+</html>
