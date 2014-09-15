@@ -188,7 +188,7 @@ public class VisualizationAPIComponent {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("visualPanelElement-0")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span")));
     assertEquals("0", driver.findElement(By.xpath("//div[@id='visualPanelElement-0']/span")).getText());
   }
 
@@ -236,7 +236,7 @@ public class VisualizationAPIComponent {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("visualPanelElement-0")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span")));
     assertEquals("4787.772727272727", driver.findElement(By.xpath("//div[@id='visualPanelElement-0']/span")).getText());
   }
 
