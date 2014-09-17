@@ -57,9 +57,14 @@
         <!-- Junit -->
         <dependency org="junit" name="junit" rev="4.11" conf="test-java->default"/>
         <!-- Selenium Java -->
-        <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="2.43.1" conf="test-java->default"/>
+        <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="2.43.1" conf="test-java->default">
+            <exclude  org="xml-apis" />
+        </dependency>
         <!-- JSErrorCollector -->
-        <dependency org="net.jsourcerer.webdriver" name="JSErrorCollector" rev="0.5-atlassian-2" conf="test-java->default"/>
+        <dependency org="net.jsourcerer.webdriver" name="JSErrorCollector" rev="0.5-atlassian-2" conf="test-java->default">
+            <exclude  org="junit" />
+            <exclude  org="org.seleniumhq.selenium" />
+        </dependency>
 
     </dependencies>
 </ivy-module>
