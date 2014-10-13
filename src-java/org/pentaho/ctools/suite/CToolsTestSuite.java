@@ -15,7 +15,6 @@
 
 package org.pentaho.ctools.suite;
 
-import net.jsourcerer.webdriver.jserrorcollector.JavaScriptError;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -47,13 +46,13 @@ import java.util.logging.Level;
 @Suite.SuiteClasses({
     LoginPentaho.class,
     //CDF
-    AutoCompleteBoxComponent.class,
-    DataInputComponent.class,
-    TableComponent.class,
-    MetaLayerHomeDashboard.class,
-    VisualizationAPIComponent.class,
+    //AutoCompleteBoxComponent.class,
+    //DataInputComponent.class,
+    //TableComponent.class,
+    //MetaLayerHomeDashboard.class,
+    //VisualizationAPIComponent.class,
     //CDE
-    MapComponentReference.class,
+    //MapComponentReference.class,
     //CDE - Widgets
     //CreateWidget.class,
     //AddParamTableComponent.class,
@@ -99,7 +98,8 @@ public class CToolsTestSuite {
 
     capabilities.setCapability(FirefoxDriver.PROFILE, ffProfile);
 
-    JavaScriptError.addExtension(ffProfile);
+
+    //JavaScriptError.addExtension(ffProfile);
     driver = new FirefoxDriver(capabilities);
     driver.manage().window().maximize();
     driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
