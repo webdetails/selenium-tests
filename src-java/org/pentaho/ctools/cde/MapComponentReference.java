@@ -36,8 +36,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 
-import java.nio.charset.Charset;
-
 import static org.junit.Assert.*;
 
 /**
