@@ -7,3 +7,5 @@ build/
 reports-java/
 lib/ext/
 /.settings/
+/.project
+/.classpath
