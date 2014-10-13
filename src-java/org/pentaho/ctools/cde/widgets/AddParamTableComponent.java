@@ -13,9 +13,6 @@ import org.pentaho.ctools.cde.widgets.utils.WidgetUtils;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 
-import java.lang.annotation.ElementType;
-import java.util.concurrent.TimeUnit;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

@@ -38,7 +38,7 @@ import org.pentaho.ctools.utils.ElementHelper;
 import static org.junit.Assert.*;
 
 /**
- * Testing the functionalies related with component Visualization API.
+ * Testing the functionalities related with component Visualization API.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'

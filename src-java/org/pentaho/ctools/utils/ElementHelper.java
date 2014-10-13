@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -82,5 +84,12 @@ public class ElementHelper {
         }
       }
     }
+  }
+  
+  public static boolean IsElementInvisible(WebDriver driver, Wait<WebDriver> wait, By locator){
+	  driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+	  boolean b = wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='busy-indicator-container waitPopup']")));
+	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	  return b;
   }
 }

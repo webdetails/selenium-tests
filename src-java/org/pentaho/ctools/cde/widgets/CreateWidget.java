@@ -4,15 +4,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.cde.widgets.utils.WidgetUtils;
 import org.pentaho.ctools.suite.CToolsTestSuite;
-
-import java.util.List;
 
 import static org.junit.Assert.*;
 

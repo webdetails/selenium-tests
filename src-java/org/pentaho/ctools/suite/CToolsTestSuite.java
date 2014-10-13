@@ -15,11 +15,11 @@
 
 package org.pentaho.ctools.suite;
 
-import net.jsourcerer.webdriver.jserrorcollector.JavaScriptError;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -43,25 +43,29 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    LoginPentaho.class,
+	LoginPentaho.class,
     //CDF
-    AutoCompleteBoxComponent.class,
-    DataInputComponent.class,
-    TableComponent.class,
-    MetaLayerHomeDashboard.class,
-    VisualizationAPIComponent.class,
+    //AutoCompleteBoxComponent.class,
+    //DataInputComponent.class,
+    //TableComponent.class,
+    //MetaLayerHomeDashboard.class,
+    //VisualizationAPIComponent.class,
     //CDE
-    MapComponentReference.class,
+    //MapComponentReference.class,
     //CDE - Widgets
     //CreateWidget.class,
     //AddParamTableComponent.class,
     //SelectCdaFileAsDatasource.class,
     //SimpleExtensionPoints.class,
     //Security
-    AccessSystemResources.class,
-    LogoutPentaho.class
+    //AccessSystemResources.class,
+	LogoutPentaho.class
 })
 
 public class CToolsTestSuite {
@@ -81,35 +85,35 @@ public class CToolsTestSuite {
     //System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
 
     //Setting log preferences
-    LoggingPreferences logs = new LoggingPreferences();
-    logs.enable(LogType.BROWSER, Level.ALL);
-    logs.enable(LogType.SERVER, Level.ALL);
-    logs.enable(LogType.DRIVER, Level.ALL);
-    logs.enable(LogType.PROFILER, Level.ALL);
-    logs.enable(LogType.CLIENT, Level.ALL);
-    logs.enable(LogType.PERFORMANCE, Level.ALL);
-
-    DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-    capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
-
-    //Inicialize DRIVER
+    //LoggingPreferences logs = new LoggingPreferences();
+    //logs.enable(LogType.BROWSER, Level.ALL);
+    //logs.enable(LogType.SERVER, Level.ALL);
+    //logs.enable(LogType.DRIVER, Level.ALL);
+    //logs.enable(LogType.PROFILER, Level.ALL);
+    //logs.enable(LogType.CLIENT, Level.ALL);
+    //logs.enable(LogType.PERFORMANCE, Level.ALL);
+    
+    //Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
     ffProfile.setPreference("intl.accept_languages", "en-us");
 
 
+    //Setting properties for webdriver
+    DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+    //capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
     capabilities.setCapability(FirefoxDriver.PROFILE, ffProfile);
 
-    JavaScriptError.addExtension(ffProfile);
+
+    //JavaScriptError.addExtension(ffProfile);
     driver = new FirefoxDriver(capabilities);
     driver.manage().window().maximize();
     driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-    //Inicialize WAIT
+    //Initialize WAIT
     wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(1, TimeUnit.SECONDS)
-        .ignoring(org.openqa.selenium.NoSuchElementException.class);
+        .pollingEvery(3, TimeUnit.SECONDS);
 
     //Inicialize BASEURL
     baseUrl = "http://localhost:8080/pentaho/";

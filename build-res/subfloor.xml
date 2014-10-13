@@ -132,8 +132,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <!-- Compile properties -->
     <property name="bin.dir" value="${basedir}/bin" description="Base directory for all non-dist build output" />
-    <property name="src.java.dir" value="src-java" description="Source code of Selenium Java tests." />
-    <property name="build.dir" value="build" description="Build directory." />
+    <property name="src.java.dir" value="${basedir}/src-java" description="Source code of Selenium Java tests." />
+    <property name="build.dir" value="${basedir}/build" description="Build directory." />
     <property name="classes.dir" value="${build.dir}/classes" description="Classes directory created during compilation."/>
     <property name="jar.dir" value="${build.dir}/jar" description="Jar directory created during compilation."/>
     <property name="lib.dir" value="${basedir}/lib"
@@ -312,6 +312,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <fileset dir="${classes.dir}" includes="**/CToolsTestSuite.class"/>
             </batchtest>
         </junit>
+        <junitreport todir="${test.java.reports.dir}">
+            <fileset dir="${test.java.reports.dir}">
+                <include name="${test.java.reports.dir}/TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${test.java.reports.dir}/html"/>
+        </junitreport>
     </target>
 
     <!--=======================================================================
@@ -621,7 +627,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         Removes regarding the target 'test-java'
         ====================================================================-->
     <target name="clean-java" description="Cleans the directories created when build selenium java tests">
-        <delete dir="${build.dir}" />
+    	  <delete dir="${bin.dir}" />
+    	  <delete dir="${build.dir}" />
         <delete dir="${test.java.reports.dir}" />
         <delete dir="${lib.ext.dir}" />
     </target>
