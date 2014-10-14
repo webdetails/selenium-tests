@@ -28,6 +28,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -39,7 +40,7 @@ import org.pentaho.ctools.utils.ElementHelper;
 import static org.junit.Assert.*;
 
 /**
- * Testing the functionalies related with Tables, paging, sort, display rows,
+ * Testing the functionals related with Tables, paging, sort, display rows,
  * search in table contents.
  *
  * Naming convention for test:
@@ -78,9 +79,9 @@ public class TableComponent {
     //The URL for the TableComponent under CDF samples
     //This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/Table Component
     driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:64-TableComponent:table_component.xcdf/generatedContent");
-
-    //Wait for visibility of 'TableComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    
+    //Not we have to wait for loading disappear
+    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -95,9 +96,13 @@ public class TableComponent {
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
+  	//Wait for title become visible and with value 'Community Dashboard Framework'
+  	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+  	//Wait for visibility of 'TableComponent'
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+  	
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]"));
     assertEquals("TableComponent", driver.findElement(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")).getText());
   }
 
@@ -113,16 +118,15 @@ public class TableComponent {
    */
   @Test
   public void tc2_ReloadSample_SampleReadyToUse(){
-    //## Step 1
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    assertTrue(driver.findElement(By.id("sample")).isDisplayed());
-    //Click in 'Code'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
-    driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    assertFalse(driver.findElement(By.id("sample")).isDisplayed());
-    //Click in 'Try me'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#code > button")));
-    driver.findElement(By.cssSelector("#code > button")).click();
+    //Render again the sample
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
+    driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).sendKeys(Keys.ENTER);
+    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='code']/button"), "Try me"));
+    driver.findElement(By.xpath("//div[@id='code']/button")).sendKeys(Keys.ENTER);
+    //Not we have to wait for loading disappear
+    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+
+    //The table is now displayed
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
     assertTrue(driver.findElement(By.id("sample")).isDisplayed());
   }
@@ -133,7 +137,7 @@ public class TableComponent {
    * Test Case Name:
    *    Check Paging
    * Description:
-   *    User has the possibility to navegate between pages, and new date shall
+   *    User has the possibility to navigate between pages, and new date shall
    *    be displayed.
    * Steps:
    *    1. Check the data in first page is correct.
@@ -162,7 +166,7 @@ public class TableComponent {
     //Where we press NEXT
     WebElement page2 = driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']"));
     assertNotNull(page2);
-    page2.click();
+    page2.sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']")));
     assertEquals("Showing 11 to 20 of 50 entries", driver.findElement(By.xpath("//div[@id='sampleObjectTable_info']")).getText());
     assertEquals("Danish Wholesale Imports", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
@@ -176,7 +180,7 @@ public class TableComponent {
     //Where we press 5
     WebElement page5 = driver.findElement(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[5]"));
     assertNotNull(page5);
-    page5.click();
+    page5.sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']")));
     assertEquals("Showing 41 to 50 of 50 entries", driver.findElement(By.xpath("//div[@id='sampleObjectTable_info']")).getText());
     assertEquals("Suominen Souveniers", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
@@ -187,13 +191,13 @@ public class TableComponent {
     assertEquals("88,041", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
 
     //## Step 4
-    driver.findElement(By.xpath("//a[@id='sampleObjectTable_previous']")).click();
+    driver.findElement(By.xpath("//a[@id='sampleObjectTable_previous']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[4][@class='paginate_button current']")));
-    driver.findElement(By.xpath("//a[@id='sampleObjectTable_previous']")).click();
+    driver.findElement(By.xpath("//a[@id='sampleObjectTable_previous']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']")));
-    driver.findElement(By.xpath("//a[@id='sampleObjectTable_previous']")).click();
+    driver.findElement(By.xpath("//a[@id='sampleObjectTable_previous']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']")));
-    driver.findElement(By.xpath("//a[@id='sampleObjectTable_previous']")).click();
+    driver.findElement(By.xpath("//a[@id='sampleObjectTable_previous']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[@class='paginate_button current']")));
 
     assertEquals("Showing 1 to 10 of 50 entries", driver.findElement(By.xpath("//div[@id='sampleObjectTable_info']")).getText());
@@ -254,7 +258,7 @@ public class TableComponent {
     //## Step 3
     WebElement page3 = driver.findElement(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[3]"));
     assertNotNull(page3);
-    page3.click();
+    page3.sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']")));
     //Check Data
     assertNotNull(driver.findElement(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']")));
@@ -282,7 +286,7 @@ public class TableComponent {
     //## Step 5
     WebElement page2 = driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']"));
     assertNotNull(page2);
-    page2.click();
+    page2.sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']")));
     assertNotNull(driver.findElement(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']")));
     assertEquals("Showing 11 to 20 of 50 entries", driver.findElement(By.xpath("//div[@id='sampleObjectTable_info']")).getText());
@@ -294,11 +298,11 @@ public class TableComponent {
     assertEquals("135,043", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
 
     //## Step 6
-    driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']")).click();
+    driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']")));
-    driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']")).click();
+    driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[4][@class='paginate_button current']")));
-    driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']")).click();
+    driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']")));
     assertNotNull(driver.findElement(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']")));
     assertEquals("Showing 41 to 50 of 50 entries", driver.findElement(By.xpath("//div[@id='sampleObjectTable_info']")).getText());
@@ -312,7 +316,7 @@ public class TableComponent {
     //## Step 7
     WebElement page1 = driver.findElement(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]"));
     assertNotNull(page1);
-    page1.click();
+    page1.sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']")));
     //Check Data
     assertNotNull(driver.findElement(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']")));
@@ -325,7 +329,7 @@ public class TableComponent {
     assertEquals("158,345", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
 
 
-    //reset to inicial state
+    //reset to initial state
     driver.findElement(By.xpath("//table[@id='sampleObjectTable']/thead/tr/th")).click();//Set Customers to ASC
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_asc']")));
     assertEquals("Showing 1 to 10 of 50 entries", driver.findElement(By.xpath("//div[@id='sampleObjectTable_info']")).getText());
@@ -449,7 +453,7 @@ public class TableComponent {
     assertEquals("Saveley & Henriot, Co.", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
     assertEquals("142,874", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
     //Click Next
-    driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']")).click();
+    driver.findElement(By.xpath("//a[@id='sampleObjectTable_next']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']")));
     assertEquals("Souveniers And Things Co.", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr[1]/td")).getText());
     assertEquals("Toys of Finland, Co.", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td")).getText());
@@ -464,7 +468,7 @@ public class TableComponent {
     assertTrue(driver.findElement(By.id("sampleObjectTable_next")).isEnabled());
     assertTrue(driver.findElement(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")).isEnabled());
     assertTrue(driver.findElement(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")).isDisplayed());
-    assertFalse(ElementHelper.IsElementPresent(driver, 2, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2]")));
+    assertFalse(ElementHelper.IsElementPresent(driver, 3, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2]")));
     assertEquals("Showing 1 to 1 of 1 entries (filtered from 50 total entries)", driver.findElement(By.xpath("//div[@id='sampleObjectTable_info']")).getText());
     assertEquals("Euro+ Shopping Channel", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
     assertEquals("912,294", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
@@ -476,7 +480,7 @@ public class TableComponent {
     assertTrue(driver.findElement(By.id("sampleObjectTable_previous")).isEnabled());
     assertTrue(driver.findElement(By.id("sampleObjectTable_next")).isDisplayed());
     assertTrue(driver.findElement(By.id("sampleObjectTable_next")).isEnabled());
-    assertFalse(ElementHelper.IsElementPresent(driver, 2, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")));
+    assertFalse(ElementHelper.IsElementPresent(driver, 3, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")));
     assertEquals("Showing 0 to 0 of 0 entries (filtered from 50 total entries)", driver.findElement(By.xpath("//div[@id='sampleObjectTable_info']")).getText());
     assertEquals("No matching records found", driver.findElement(By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
   }

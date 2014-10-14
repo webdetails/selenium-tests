@@ -80,6 +80,8 @@ public class AutoCompleteBoxComponent {
     //Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
 
+    //Wait for title become visible and with value 'Community Dashboard Framework'
+  	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     //Wait for visibility of 'AutocompleteBoxComponent'
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
     // Validate the sample that we are testing is the one

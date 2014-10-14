@@ -53,10 +53,11 @@ public class ElementHelper {
    * @param timeToWaitSec The amount of time to wait for the element.
    * @param path          The element path in DOM (css, id, xpath)
    * @return  true        Element exist in DOM.
-   *          false       Elemenet does not exist.
+   *          false       Element does not exist.
    */
   public static boolean IsElementPresent(WebDriver driver, long timeToWaitSec, By path) {
     boolean elementPresent = true;
+    
     try {
       driver.manage().timeouts().implicitlyWait(timeToWaitSec, TimeUnit.SECONDS);
       driver.findElement(path);
@@ -64,10 +65,14 @@ public class ElementHelper {
       elementPresent = false;
     }
 
+    //Restore to initial value
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    
     return elementPresent;
   }
 
   /**
+   * TODO
    *
    * @param driver
    * @param maxTimeToWaitSec
@@ -86,6 +91,14 @@ public class ElementHelper {
     }
   }
   
+  /**
+   * TODO
+   * 
+   * @param driver
+   * @param wait
+   * @param locator
+   * @return
+   */
   public static boolean IsElementInvisible(WebDriver driver, Wait<WebDriver> wait, By locator){
 	  driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 	  boolean b = wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='busy-indicator-container waitPopup']")));
