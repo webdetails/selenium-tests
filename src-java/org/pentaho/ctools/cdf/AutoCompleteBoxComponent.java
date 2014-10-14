@@ -62,17 +62,18 @@ public class AutoCompleteBoxComponent {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Authentication
+   *    AutocompleteBox
    * Description:
-   *    With an administrator user, we check if user can authenticate in the 
-   *    system.
+   *    We pretend to test the component AutocompleteBox, so when we enter any 
+   *    key, the text box should show a list of related data (that contains the
+   *    same string).
    * Steps:
    *    1. Open the AutocompleteBoxComponent.
    *    2. Execute the "Try me".
    *    3. Press a on text box and check the autocomplete.
    */
   @Test
-  public void tc1_AutocompleteBox_DataAreListed() throws Exception {
+  public void tc1_AutocompleteBox_DataAreListed() {
   	//## Step 1
     driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:58-AutocompleteBoxComponent:autocomplete_component.xcdf/generatedContent");
     
