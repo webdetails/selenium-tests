@@ -74,15 +74,15 @@ public class LoginPentaho {
    */
   @Test
   public void tc1_Login_SuccessAuthentication() throws Exception {
-	//## Step 1
-	driver.get(baseUrl + "Login");
+  	//## Step 1
+  	driver.get(baseUrl + "Login");
 
     //Wait for form display
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='login-form-container']/div/h1")));
     assertEquals("User Console", driver.findElement(By.xpath("//div[@id='login-form-container']/div/h1")).getText());
     
     
-	//## Step 2
+    //## Step 2
     //Wait for all all elements in the form to be visible
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_username")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_password")));
@@ -94,9 +94,9 @@ public class LoginPentaho {
     driver.findElement(By.cssSelector("button.btn")).click();
     
     
-	//## Step 3
+    //## Step 3
     //wait for visibility of waiting pop-up
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='busy-indicator-container waitPopup']")));
+    //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='busy-indicator-container waitPopup']")));
     //wait for invisibility of waiting pop-up
     ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
         
