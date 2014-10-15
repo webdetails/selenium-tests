@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -54,7 +55,7 @@ public class VisualizationAPIComponent {
   private static String baseUrl;
 
   /**
-   * Shall inicialized the test before run each test case.
+   * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp(){
@@ -74,8 +75,8 @@ public class VisualizationAPIComponent {
     //This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/VisualizationAPIComponent
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualizationapi_component.xcdf/generatedContent");
 
-    //Wait for visibility of 'VisualizationAPIComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    //Not we have to wait for loading disappear
+    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -90,9 +91,13 @@ public class VisualizationAPIComponent {
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
+    //Wait for title become visible and with value 'Community Dashboard Framework'
+  	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    //Wait for visibility of 'VisualizationAPIComponent'
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+      
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]"));
     assertEquals("VisualizationAPIComponent", driver.findElement(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")).getText());
   }
 
@@ -108,18 +113,18 @@ public class VisualizationAPIComponent {
    */
   @Test
   public void tc2_ReloadSample_SampleReadyToUse(){
-    //## Step 1
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    assertTrue(driver.findElement(By.id("sample")).isDisplayed());
-    //Click in 'Code'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
-    driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    assertFalse(driver.findElement(By.id("sample")).isDisplayed());
-    //Click in 'Try me'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#code > button")));
-    driver.findElement(By.cssSelector("#code > button")).click();
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    assertTrue(driver.findElement(By.id("sample")).isDisplayed());
+  	//## Step 1
+    //Render again the sample
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
+    driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).sendKeys(Keys.ENTER);
+    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='code']/button"), "Try me"));
+    driver.findElement(By.xpath("//div[@id='code']/button")).sendKeys(Keys.ENTER);
+    
+    //Not we have to wait for loading disappear
+    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+    
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sample']")));
+    assertNotNull(driver.findElement(By.id("sample")));
   }
 
   /**
@@ -135,12 +140,9 @@ public class VisualizationAPIComponent {
    */
   @Test
   public void tc3_MaxNumber_PresentCorrectValue() {
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("visualPanelElement-0")));
-
     //## Step 1
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sample']")));
+  	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span")));
     assertEquals("35659", driver.findElement(By.xpath("//div[@id='visualPanelElement-0']/span")).getText());
   }
 
@@ -158,38 +160,31 @@ public class VisualizationAPIComponent {
    */
   @Test
   public void tc4_MinNumber_PresentCorrectValue() {
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("visualPanelElement-0")));
-    //## Step 1 - Change the option parameter to MIN and reload sample
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    assertTrue(driver.findElement(By.id("sample")).isDisplayed());
-    //Click in 'Code'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
-    driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    assertFalse(driver.findElement(By.id("sample")).isDisplayed());
-    //Click in 'Try me'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("code")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']/button")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("samplecode")));
-
+  	//## Step 1 - Change the option parameter to MIN and reload sample
+  	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
+    driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).sendKeys(Keys.ENTER);
+    
+    //Wait for board load
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']")));
+    //Change contains to MIN
     ((JavascriptExecutor) driver).executeScript("$('#samplecode').text($('#samplecode').text().replace('MAX', 'MIN'));");
-
-    driver.findElement(By.xpath("//button")).click();
-
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    assertTrue(driver.findElement(By.id("sample")).isDisplayed());
-
-
-    //## Step 2 - Check the presented value for MIN.
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("visualPanelElement-0")));
+    
+    String strText = "";
+    while(strText.indexOf("MIN") == -1) {
+    	strText = driver.findElement(By.id("samplecode")).getText();	
+    }
+    
+    //Click in Try me
+    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='code']/button"), "Try me"));
+    driver.findElement(By.xpath("//div[@id='code']/button")).sendKeys(Keys.ENTER);
+    
+    //Not we have to wait for loading disappear
+    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+    
+  	//## Step 2 - Check the presented value for MIN.
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sample']")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span")));
-    assertEquals("0", driver.findElement(By.xpath("//div[@id='visualPanelElement-0']/span")).getText());
+    assertEquals("0", driver.findElement(By.xpath("//div[@id='visualPanelElement-0']/span")).getText());    
   }
 
   /**
@@ -206,36 +201,29 @@ public class VisualizationAPIComponent {
    */
   @Test
   public void tc5_AvgNumber_PresentCorrectValue() {
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("visualPanelElement-0")));
-    //## Step 1 - Change the option parameter to AVG and reload sample
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    assertTrue(driver.findElement(By.id("sample")).isDisplayed());
-    //Click in 'Code'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
-    driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    assertFalse(driver.findElement(By.id("sample")).isDisplayed());
-    //Click in 'Try me'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("code")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']/button")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("samplecode")));
-
+  	//## Step 1 - Change the option parameter to AVG and reload sample
+  	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
+    driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).sendKeys(Keys.ENTER);
+    
+    //Wait for board load
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']")));
+    //Change contains to AVG
     ((JavascriptExecutor) driver).executeScript("$('#samplecode').text($('#samplecode').text().replace('MIN', 'AVG'));");
-
-    driver.findElement(By.xpath("//button")).click();
-
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    assertTrue(driver.findElement(By.id("sample")).isDisplayed());
-
-
-    //## Step 2 - Check the presented value for AVG.
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sample")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("visualPanelElement-0")));
+    
+    String strText = "";
+    while(strText.indexOf("AVG") == -1) {
+    	strText = driver.findElement(By.id("samplecode")).getText();	
+    }
+    
+    //Click in Try me
+    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='code']/button"), "Try me"));
+    driver.findElement(By.xpath("//div[@id='code']/button")).sendKeys(Keys.ENTER);
+    
+    //Not we have to wait for loading disappear
+    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+    
+  	//## Step 2 - Check the presented value for MIN.
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sample']")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span")));
     assertEquals("4787.772727272727", driver.findElement(By.xpath("//div[@id='visualPanelElement-0']/span")).getText());
   }
