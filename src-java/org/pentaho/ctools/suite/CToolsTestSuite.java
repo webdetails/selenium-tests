@@ -1,70 +1,67 @@
-/*!
-  * This program is free software;you can redistribute it and/or modify it under the
-  * terms of the GNU Lesser General Public License,version2.1as published by the Free Software Foundation.
-  *
-  * You should have received a copy of the GNU Lesser General Public License along with this
-  * program;if not,you can obtain a copy at http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
-  * or from the Free Software Foundation,Inc., 51 Franklin Street,Fifth Floor,Boston,MA 02110-1301 USA.
-  *
-  * This program is distributed in the hope that it will be useful,but WITHOUT ANY WARRANTY;
-  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  * See the GNU Lesser General Public License for more details.
-  *
-  * Copyright(c)2002-2014 Pentaho Corporation..All rights reserved.
-  */
-
+/*!*****************************************************************************
+*
+* Selenium Tests For CTools
+*
+* Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
+*
+*******************************************************************************
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with
+* the License. You may obtain a copy of the License at
+*
+*    http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+******************************************************************************/
 package org.pentaho.ctools.suite;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.pentaho.ctools.cde.MapComponentReference;
-import org.pentaho.ctools.cde.widgets.AddParamTableComponent;
-import org.pentaho.ctools.cde.widgets.CreateWidget;
-import org.pentaho.ctools.cde.widgets.SelectCdaFileAsDatasource;
-import org.pentaho.ctools.cde.widgets.SimpleExtensionPoints;
-import org.pentaho.ctools.cdf.*;
+import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
+import org.pentaho.ctools.cdf.DataInputComponent;
+import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
+import org.pentaho.ctools.cdf.TableComponent;
+import org.pentaho.ctools.cdf.VisualizationAPIComponent;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.security.AccessSystemResources;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+	//##### Execution Order #####
 	LoginPentaho.class,
-    //CDF
-    //AutoCompleteBoxComponent.class,
-    //DataInputComponent.class,
-    //TableComponent.class,
-    //MetaLayerHomeDashboard.class,
-    //VisualizationAPIComponent.class,
-    //CDE
-    //MapComponentReference.class,
-    //CDE - Widgets
-    //CreateWidget.class,
-    //AddParamTableComponent.class,
-    //SelectCdaFileAsDatasource.class,
-    //SimpleExtensionPoints.class,
-    //Security
-    //AccessSystemResources.class,
+  //CDF
+  AutoCompleteBoxComponent.class,
+  DataInputComponent.class,
+  TableComponent.class,
+  MetaLayerHomeDashboard.class,
+  VisualizationAPIComponent.class,
+  //CDE
+  //MapComponentReference.class,
+  //CDE - Widgets
+  //CreateWidget.class,
+  //AddParamTableComponent.class,
+  //SelectCdaFileAsDatasource.class,
+  //SimpleExtensionPoints.class,
+  //Security
+  AccessSystemResources.class,
 	LogoutPentaho.class
 })
 
