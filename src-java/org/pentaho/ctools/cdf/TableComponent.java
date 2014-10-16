@@ -121,7 +121,7 @@ public class TableComponent {
     //Render again the sample
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
     driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).sendKeys(Keys.ENTER);
-    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='code']/button"), "Try me"));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='code']/button")));
     driver.findElement(By.xpath("//div[@id='code']/button")).sendKeys(Keys.ENTER);
     //Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));

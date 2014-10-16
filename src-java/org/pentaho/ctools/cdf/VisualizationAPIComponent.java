@@ -117,7 +117,7 @@ public class VisualizationAPIComponent {
     //Render again the sample
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
     driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).sendKeys(Keys.ENTER);
-    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@id='code']/button"), "Try me"));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='code']/button")));
     driver.findElement(By.xpath("//div[@id='code']/button")).sendKeys(Keys.ENTER);
     
     //Not we have to wait for loading disappear
@@ -142,6 +142,7 @@ public class VisualizationAPIComponent {
   public void tc3_MaxNumber_PresentCorrectValue() {
     //## Step 1
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
     assertEquals("35659", driver.findElement(By.xpath("//div[@id='sample']/div[2]/div/span")).getText());
   }
 
