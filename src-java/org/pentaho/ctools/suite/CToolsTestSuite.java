@@ -106,13 +106,14 @@ public class CToolsTestSuite {
     driver.manage().window().maximize();
     driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 
     //Initialize WAIT
     wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(3, TimeUnit.SECONDS);
+        .pollingEvery(5, TimeUnit.SECONDS);
 
-    //Inicialize BASEURL
+    //Initialize BASEURL
     baseUrl = "http://localhost:8080/pentaho/";
   }
 

@@ -86,7 +86,7 @@ public class MetaLayerHomeDashboard {
     
     //Wait for title become visible and with value 'Community Dashboard Framework'
   	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
-    //Wait for visibility of 'AutocompleteBoxComponent'
+    //Wait for visibility of 'Top Ten Customers'
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='titleObject']")));
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
@@ -99,7 +99,7 @@ public class MetaLayerHomeDashboard {
     WebElement linkDetails = driver.findElement(By.xpath("//div[@id='topTenCustomersDetailsObject']/a"));
     assertEquals("Details...", linkDetails.getText());
     //click on the 'Details...'
-    linkDetails.sendKeys(Keys.ENTER);
+    linkDetails.click();
 
     
     //## Step 3

@@ -141,9 +141,8 @@ public class VisualizationAPIComponent {
   @Test
   public void tc3_MaxNumber_PresentCorrectValue() {
     //## Step 1
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sample']")));
-  	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span")));
-    assertEquals("35659", driver.findElement(By.xpath("//div[@id='visualPanelElement-0']/span")).getText());
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
+    assertEquals("35659", driver.findElement(By.xpath("//div[@id='sample']/div[2]/div/span")).getText());
   }
 
   /**
@@ -157,9 +156,10 @@ public class VisualizationAPIComponent {
    * Steps:
    *    1. Change the option parameter to MIN and reload sample
    *    2. Check the presented value for MIN.
+   * @throws InterruptedException 
    */
   @Test
-  public void tc4_MinNumber_PresentCorrectValue() {
+  public void tc4_MinNumber_PresentCorrectValue() throws InterruptedException {
   	//## Step 1 - Change the option parameter to MIN and reload sample
   	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
     driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).sendKeys(Keys.ENTER);
@@ -181,10 +181,19 @@ public class VisualizationAPIComponent {
     //Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
     
+    
   	//## Step 2 - Check the presented value for MIN.
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sample']")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span")));
-    assertEquals("0", driver.findElement(By.xpath("//div[@id='visualPanelElement-0']/span")).getText());    
+    //Thread.sleep(400);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
+    
+    String value = "";
+    for (int i = 0; i < 10 || !value.equals("0"); i++){
+    	Thread.sleep(150);
+    	value = driver.findElement(By.xpath("//div[@id='sample']/div[2]/div/span")).getText();
+    }
+    //WebElement value = ;
+    assertEquals("0", value);
   }
 
   /**
@@ -198,9 +207,10 @@ public class VisualizationAPIComponent {
    * Steps:
    *    1. Change the option parameter to AVG and reload sample
    *    2. Check the presented value for AVG.
+   * @throws InterruptedException 
    */
   @Test
-  public void tc5_AvgNumber_PresentCorrectValue() {
+  public void tc5_AvgNumber_PresentCorrectValue() throws InterruptedException {
   	//## Step 1 - Change the option parameter to AVG and reload sample
   	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
     driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).sendKeys(Keys.ENTER);
@@ -221,11 +231,21 @@ public class VisualizationAPIComponent {
     
     //Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+   
     
   	//## Step 2 - Check the presented value for MIN.
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sample']")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='visualPanelElement-0']/span")));
-    assertEquals("4787.772727272727", driver.findElement(By.xpath("//div[@id='visualPanelElement-0']/span")).getText());
+    //Thread.sleep(400);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
+    String value = "";
+    for (int i = 0; i < 10 || !value.equals("4787.772727272727"); i++){
+    	Thread.sleep(150);
+    	value = driver.findElement(By.xpath("//div[@id='sample']/div[2]/div/span")).getText();
+    	
+    }
+    //WebElement value = ;
+    //assertEquals("0", value);
+    assertEquals("4787.772727272727", value);
   }
 
   @AfterClass
