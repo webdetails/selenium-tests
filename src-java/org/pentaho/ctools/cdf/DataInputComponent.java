@@ -84,7 +84,7 @@ public class DataInputComponent {
     ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]"));
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("DateInputComponent", ElementHelper.FindElement(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")).getText());
+    assertEquals("DateInputComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
 
     
     //## Step 2

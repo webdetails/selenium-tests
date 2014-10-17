@@ -139,8 +139,21 @@ public class ElementHelper {
 	 * @return
 	 */
 	public static WebElement FindElement(WebDriver driver, By locator) {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+        .withTimeout(30, TimeUnit.SECONDS)
+        .pollingEvery(1, TimeUnit.SECONDS);
+		
 		try {
-			return driver.findElement(locator);
+			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+			
+			WebElement element = driver.findElements(locator).get(0);
+			if ( element.isDisplayed() && element.isEnabled() ){
+				return element;
+			}
+			else {
+				System.out.println("Trying again!");
+				return FindElement(driver, locator);
+			}
 		} catch (StaleElementReferenceException s) {
 			System.out.println("Stale - got one");
 			return FindElement(driver, locator);
@@ -148,5 +161,22 @@ public class ElementHelper {
 			System.out.println("NotVisible - got one");
 			return IsElementVisible(driver, locator);
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param elemetn
+	 * @return
+	 */
+	public static String GetText(WebDriver driver, By locator) {
+		String text = ""; 
+		try {
+			text = FindElement(driver, locator).getText();
+		} catch (StaleElementReferenceException e) {
+			System.out.println("Got stale");
+			text = FindElement(driver, locator).getText();
+		}
+		return text;
 	}
 }

@@ -103,7 +103,7 @@ public class TableComponent {
   	
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("TableComponent", ElementHelper.FindElement(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")).getText());
+    assertEquals("TableComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -152,13 +152,13 @@ public class TableComponent {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObjectTable_paginate")));
 
     //## Step 1
-    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Amica Models & Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("94,117", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("200,995", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Baane Mini Imports", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Cruz & Sons Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("94,016", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("94,117", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("200,995", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Baane Mini Imports", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Cruz & Sons Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("94,016", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 2
     //Where we press NEXT
@@ -166,13 +166,13 @@ public class TableComponent {
     assertNotNull(page2);
     page2.sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']")));
-    assertEquals("Showing 11 to 20 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Danish Wholesale Imports", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("145,042", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("174,140", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Extreme Desk Decorations, Ltd", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Handji Gifts& Co", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("115,499", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 11 to 20 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Danish Wholesale Imports", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("145,042", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("174,140", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Extreme Desk Decorations, Ltd", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Handji Gifts& Co", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("115,499", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 3
     //Where we press 5
@@ -180,13 +180,13 @@ public class TableComponent {
     assertNotNull(page5);
     page5.sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']")));
-    assertEquals("Showing 41 to 50 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Suominen Souveniers", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("113,961", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("160,010", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Toys of Finland, Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Vitachrome Inc.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("88,041", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 41 to 50 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Suominen Souveniers", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("113,961", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("160,010", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Toys of Finland, Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Vitachrome Inc.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("88,041", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 4
     ElementHelper.FindElement(driver, By.xpath("//a[@id='sampleObjectTable_previous']")).sendKeys(Keys.ENTER);
@@ -198,13 +198,13 @@ public class TableComponent {
     ElementHelper.FindElement(driver, By.xpath("//a[@id='sampleObjectTable_previous']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[@class='paginate_button current']")));
 
-    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Amica Models & Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("94,117", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("200,995", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Baane Mini Imports", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Cruz & Sons Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("94,016", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("94,117", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("200,995", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Baane Mini Imports", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Cruz & Sons Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("94,016", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
   }
 
   /**
@@ -232,26 +232,26 @@ public class TableComponent {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_desc']")));
     //Check Data
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']")));
-    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Vitachrome Inc.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("88,041", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("118,008", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText().contains("Toms"));
-    assertEquals("Suominen Souveniers", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("113,961", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Vitachrome Inc.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("88,041", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("118,008", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertTrue(ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).contains("Toms"));
+    assertEquals("Suominen Souveniers", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("113,961", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 2
     ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[2]")).click();//Sort Sales to ASC
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[2][@class='column1 numeric sorting_asc']")));
     //Check Data
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']")));
-    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Collectable Mini Designs Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("87,489", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("88,805", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Amica Models & Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText().contains("Toms"));
-    assertEquals("100,307", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Collectable Mini Designs Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("87,489", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("88,805", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertTrue(ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).contains("Toms"));
+    assertEquals("100,307", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 3
     WebElement page3 = ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[3]"));
@@ -260,26 +260,26 @@ public class TableComponent {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']")));
     //Check Data
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']")));
-    assertEquals("Showing 21 to 30 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Handji Gifts& Co", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("115,499", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("117,714", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Corrida Auto Replicas, Ltd", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Scandinavian Gift Ideas", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("134,259", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 21 to 30 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Handji Gifts& Co", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("115,499", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("117,714", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Corrida Auto Replicas, Ltd", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Scandinavian Gift Ideas", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("134,259", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 4
     ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[2]")).click();//Sort Sales to DESC
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[2][@class='column1 numeric sorting_desc']")));
     //Check Data
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']")));
-    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Euro+ Shopping Channel", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("912,294", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("200,995", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Down Under Souveniers, Inc", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Kelly's Gift Shop", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("158,345", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Euro+ Shopping Channel", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("912,294", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("200,995", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Down Under Souveniers, Inc", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Kelly's Gift Shop", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("158,345", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 5
     WebElement page2 = ElementHelper.FindElement(driver, By.xpath("//a[@id='sampleObjectTable_next']"));
@@ -287,13 +287,13 @@ public class TableComponent {
     page2.sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']")));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']")));
-    assertEquals("Showing 11 to 20 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("AV Stores, Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("157,808", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("151,571", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Danish Wholesale Imports", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Reims Collectables", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("135,043", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 11 to 20 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("AV Stores, Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("157,808", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("151,571", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Danish Wholesale Imports", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Reims Collectables", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("135,043", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 6
     ElementHelper.FindElement(driver, By.xpath("//a[@id='sampleObjectTable_next']")).sendKeys(Keys.ENTER);
@@ -303,13 +303,13 @@ public class TableComponent {
     ElementHelper.FindElement(driver, By.xpath("//a[@id='sampleObjectTable_next']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']")));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']")));
-    assertEquals("Showing 41 to 50 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText().contains("Toms"));
-    assertEquals("100,307", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("98,496", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Cruz & Sons Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Collectable Mini Designs Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("87,489", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 41 to 50 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertTrue(ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).contains("Toms"));
+    assertEquals("100,307", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("98,496", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Cruz & Sons Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Collectable Mini Designs Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("87,489", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 7
     WebElement page1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]"));
@@ -318,25 +318,25 @@ public class TableComponent {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']")));
     //Check Data
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']")));
-    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Euro+ Shopping Channel", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("912,294", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("200,995", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Down Under Souveniers, Inc", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Kelly's Gift Shop", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("158,345", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Euro+ Shopping Channel", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("912,294", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("200,995", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Down Under Souveniers, Inc", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Kelly's Gift Shop", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("158,345", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
 
     //reset to initial state
     ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/thead/tr/th")).click();//Set Customers to ASC
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_asc']")));
-    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Amica Models & Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("94,117", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("200,995", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Baane Mini Imports", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Cruz & Sons Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("94,016", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("94,117", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("200,995", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Baane Mini Imports", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Cruz & Sons Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("94,016", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
   }
 
   /**
@@ -353,68 +353,68 @@ public class TableComponent {
    */
   @Test
   public void tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected() {
-    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Amica Models & Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("94,117", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("200,995", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Baane Mini Imports", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Cruz & Sons Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("94,016", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("94,117", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("200,995", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Baane Mini Imports", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Cruz & Sons Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("94,016", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
     //## Step 1
     Select displayEntries = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_length']/label/select")));
     displayEntries.selectByValue("25");
-    assertEquals("Showing 1 to 25 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Amica Models & Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("94,117", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("200,995", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Baane Mini Imports", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Cruz & Sons Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("94,016", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 25 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("94,117", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("200,995", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Baane Mini Imports", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Cruz & Sons Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("94,016", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
     //11 to 25
-    assertEquals("Dragon Souveniers, Ltd.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[14]/td")).getText());
-    assertEquals("172,990", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[14]/td[2]")).getText());
-    assertEquals("98,924", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[17]/td[2]")).getText());
-    assertEquals("Handji Gifts& Co", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[20]/td")).getText());
-    assertEquals("La Corne D'abondance, Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[25]/td")).getText());
-    assertEquals("97,204", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[25]/td[2]")).getText());
+    assertEquals("Dragon Souveniers, Ltd.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[14]/td")));
+    assertEquals("172,990", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[14]/td[2]")));
+    assertEquals("98,924", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[17]/td[2]")));
+    assertEquals("Handji Gifts& Co", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[20]/td")));
+    assertEquals("La Corne D'abondance, Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[25]/td")));
+    assertEquals("97,204", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[25]/td[2]")));
 
     //## Step 2
     displayEntries = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_length']/label/select")));
     displayEntries.selectByValue("50");
-    assertEquals("Showing 1 to 50 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Amica Models & Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("94,117", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("200,995", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Baane Mini Imports", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Cruz & Sons Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("94,016", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 50 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("94,117", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("200,995", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Baane Mini Imports", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Cruz & Sons Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("94,016", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
     //11 to 25
-    assertEquals("Dragon Souveniers, Ltd.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[14]/td")).getText());
-    assertEquals("172,990", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[14]/td[2]")).getText());
-    assertEquals("98,924", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[17]/td[2]")).getText());
-    assertEquals("Handji Gifts& Co", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[20]/td")).getText());
-    assertEquals("La Corne D'abondance, Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[25]/td")).getText());
-    assertEquals("97,204", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[25]/td[2]")).getText());
+    assertEquals("Dragon Souveniers, Ltd.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[14]/td")));
+    assertEquals("172,990", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[14]/td[2]")));
+    assertEquals("98,924", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[17]/td[2]")));
+    assertEquals("Handji Gifts& Co", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[20]/td")));
+    assertEquals("La Corne D'abondance, Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[25]/td")));
+    assertEquals("97,204", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[25]/td[2]")));
     //26 to 50
-    assertEquals("Muscle Machine Inc", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[31]/td")).getText());
-    assertEquals("197,737", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[31]/td[2]")).getText());
-    assertEquals("151,571", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[39]/td[2]")).getText());
-    assertEquals("Toys of Finland, Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[46]/td")).getText());
-    assertEquals("Vitachrome Inc.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[50]/td")).getText());
-    assertEquals("88,041", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[50]/td[2]")).getText());
+    assertEquals("Muscle Machine Inc", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[31]/td")));
+    assertEquals("197,737", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[31]/td[2]")));
+    assertEquals("151,571", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[39]/td[2]")));
+    assertEquals("Toys of Finland, Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[46]/td")));
+    assertEquals("Vitachrome Inc.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[50]/td")));
+    assertEquals("88,041", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[50]/td[2]")));
 
     //Reset display to 10
     displayEntries = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_length']/label/select")));
     displayEntries.selectByValue("10");
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[5]")));
-    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Amica Models & Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("94,117", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("200,995", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Baane Mini Imports", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Cruz & Sons Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("94,016", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("94,117", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("200,995", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Baane Mini Imports", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Cruz & Sons Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("94,016", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
   }
 
   /**
@@ -434,7 +434,7 @@ public class TableComponent {
   public void tc6_SearchEngine_TableDisplayedContentSearch() {
     //## Step 1
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_filter']/label/input")).sendKeys("Co.");
-    assertEquals("Showing 1 to 10 of 13 entries (filtered from 50 total entries)", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
+    assertEquals("Showing 1 to 10 of 13 entries (filtered from 50 total entries)", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_previous")).isDisplayed());
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_previous")).isEnabled());
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_next")).isDisplayed());
@@ -444,18 +444,18 @@ public class TableComponent {
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")).isDisplayed());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2]")).isEnabled());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2]")).isDisplayed());
-    assertEquals("Amica Models & Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("94,117", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
-    assertEquals("157,808", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
-    assertEquals("Cruz & Sons Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")).getText());
-    assertEquals("Saveley & Henriot, Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")).getText());
-    assertEquals("142,874", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")).getText());
+    assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("94,117", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
+    assertEquals("157,808", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
+    assertEquals("Cruz & Sons Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[6]/td")));
+    assertEquals("Saveley & Henriot, Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
+    assertEquals("142,874", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
     //Click Next
     ElementHelper.FindElement(driver, By.xpath("//a[@id='sampleObjectTable_next']")).sendKeys(Keys.ENTER);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']")));
-    assertEquals("Souveniers And Things Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[1]/td")).getText());
-    assertEquals("Toys of Finland, Co.", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td")).getText());
-    assertEquals("111,250", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")).getText());
+    assertEquals("Souveniers And Things Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[1]/td")));
+    assertEquals("Toys of Finland, Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td")));
+    assertEquals("111,250", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]")));
 
     //## Step 2
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_filter']/label/input")).clear();
@@ -467,9 +467,9 @@ public class TableComponent {
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")).isEnabled());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")).isDisplayed());
     assertFalse(ElementHelper.IsElementPresent(driver, 3, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2]")));
-    assertEquals("Showing 1 to 1 of 1 entries (filtered from 50 total entries)", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("Euro+ Shopping Channel", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
-    assertEquals("912,294", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")).getText());
+    assertEquals("Showing 1 to 1 of 1 entries (filtered from 50 total entries)", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("Euro+ Shopping Channel", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
+    assertEquals("912,294", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
 
     //## Step 3
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_filter']/label/input")).clear();
@@ -479,8 +479,8 @@ public class TableComponent {
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_next")).isDisplayed());
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_next")).isEnabled());
     assertFalse(ElementHelper.IsElementPresent(driver, 3, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")));
-    assertEquals("Showing 0 to 0 of 0 entries (filtered from 50 total entries)", ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_info']")).getText());
-    assertEquals("No matching records found", ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")).getText());
+    assertEquals("Showing 0 to 0 of 0 entries (filtered from 50 total entries)", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
+    assertEquals("No matching records found", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
   }
 
   @AfterClass

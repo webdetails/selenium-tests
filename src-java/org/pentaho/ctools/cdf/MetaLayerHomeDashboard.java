@@ -90,7 +90,7 @@ public class MetaLayerHomeDashboard {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='titleObject']")));
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("Top Ten Customers", ElementHelper.FindElement(driver, By.xpath("//div[@id='titleObject']")).getText());
+    assertEquals("Top Ten Customers", ElementHelper.GetText(driver, By.xpath("//div[@id='titleObject']")));
     
     
     //## Step 2
@@ -117,7 +117,7 @@ public class MetaLayerHomeDashboard {
     driver.switchTo().frame("fancybox-frame");
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='internal_content']")));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='internal_content']")));
-    assertEquals("Measures", ElementHelper.FindElement(driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")).getText());
+    assertEquals("Measures", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
     
     //Close pop-up
     driver.switchTo().defaultContent();

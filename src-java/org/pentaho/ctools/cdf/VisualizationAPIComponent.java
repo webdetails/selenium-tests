@@ -40,207 +40,217 @@ import static org.junit.Assert.*;
 /**
  * Testing the functionalities related with component Visualization API.
  *
- * Naming convention for test:
- *  'tcN_StateUnderTest_ExpectedBehavior'
+ * Naming convention for test: 'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class VisualizationAPIComponent {
-  // Instance of the driver (browser emulator)
-  private static WebDriver driver;
-  // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
-  // The base url to be append the relative url in test
-  private static String baseUrl;
+	// Instance of the driver (browser emulator)
+	private static WebDriver       driver;
+	// Instance to be used on wait commands
+	private static Wait<WebDriver> wait;
+	// The base url to be append the relative url in test
+	private static String          baseUrl;
 
-  /**
-   * Shall initialized the test before run each test case.
-   */
-  @BeforeClass
-  public static void setUp(){
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+	/**
+	 * Shall initialized the test before run each test case.
+	 */
+	@BeforeClass
+	public static void setUp() {
+		driver = CToolsTestSuite.getDriver();
+		wait = CToolsTestSuite.getWait();
+		baseUrl = CToolsTestSuite.getBaseUrl();
 
-    //Go to sample
-    init();
-  }
+		// Go to sample
+		init();
+	}
 
-  /**
-   * Go to the TableComponent web page.
-   */
-  public static void init(){
-    //The URL for the VisualizationAPIComponent under CDF samples
-    //This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/VisualizationAPIComponent
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualizationapi_component.xcdf/generatedContent");
+	/**
+	 * Go to the TableComponent web page.
+	 */
+	public static void init() {
+		// The URL for the VisualizationAPIComponent under CDF samples
+		// This samples is in: Public/plugin-samples/CDF/Documentation/Component
+		// Reference/Core Components/VisualizationAPIComponent
+		driver
+		    .get(baseUrl
+		        + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualizationapi_component.xcdf/generatedContent");
 
-    //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
-  }
+		// Not we have to wait for loading disappear
+		ElementHelper.IsElementInvisible(driver, wait,
+		    By.xpath("//div[@class='blockUI blockOverlay']"));
+	}
 
-  /**
-   * ############################### Test Case 1 ###############################
-   *
-   * Test Case Name:
-   *    Validate Page Contents
-   * Description:
-   *    Here we want to validate the page contents.
-   * Steps:
-   *    1. Check the widget's title.
-   */
-  @Test
-  public void tc1_PageContent_DisplayTitle() {
-    //Wait for title become visible and with value 'Community Dashboard Framework'
-  	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
-    //Wait for visibility of 'VisualizationAPIComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
-      
-    // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("VisualizationAPIComponent", ElementHelper.FindElement(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")).getText());
-  }
+	/**
+	 * ############################### Test Case 1 ###############################
+	 *
+	 * Test Case Name: Validate Page Contents Description: Here we want to
+	 * validate the page contents. Steps: 1. Check the widget's title.
+	 */
+	@Test
+	public void tc1_PageContent_DisplayTitle() {
+		// Wait for title become visible and with value 'Community Dashboard
+		// Framework'
+		wait.until(ExpectedConditions
+		    .titleContains("Community Dashboard Framework"));
+		// Wait for visibility of 'VisualizationAPIComponent'
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+		    .xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
 
-  /**
-   * ############################### Test Case 2 ###############################
-   *
-   * Test Case Name:
-   *    Reload Sample
-   * Description:
-   *    Reload the sample (not refresh page).
-   * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
-   */
-  @Test
-  public void tc2_ReloadSample_SampleReadyToUse(){
-  	//## Step 1
-    //Render again the sample
-  	ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
-    
-    //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
-    
-    //Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
-  }
+		// Validate the sample that we are testing is the one
+		assertEquals("Community Dashboard Framework", driver.getTitle());
+		assertEquals("VisualizationAPIComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+	}
 
-  /**
-   * ############################### Test Case 3 ###############################
-   *
-   * Test Case Name:
-   *    Validate MAX number
-   * Description:
-   *    When the user access the component, it is presented the max number of
-   *    array set.
-   * Steps:
-   *    1. Check the presented value for MAX.
-   */
-  @Test
-  public void tc3_MaxNumber_PresentCorrectValue() {
-    //## Step 1
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
-    assertEquals("35659", ElementHelper.FindElement(driver, By.xpath("//div[@id='sample']/div[2]/div/span")).getText());
-  }
+	/**
+	 * ############################### Test Case 2 ###############################
+	 *
+	 * Test Case Name: Reload Sample Description: Reload the sample (not refresh
+	 * page). Steps: 1. Click in Code and then click in button 'Try me'.
+	 */
+	@Test
+	public void tc2_ReloadSample_SampleReadyToUse() {
+		// ## Step 1
+		// Render again the sample
+		ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
+		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
-  /**
-   * ############################### Test Case 4 ###############################
-   *
-   * Test Case Name:
-   *    Validate MIN number
-   * Description:
-   *    When the user access the component, it is presented the min number of
-   *    array set.
-   * Steps:
-   *    1. Change the option parameter to MIN and reload sample
-   *    2. Check the presented value for MIN.
-   * @throws InterruptedException 
-   */
-  @Test
-  public void tc4_MinNumber_PresentCorrectValue() throws InterruptedException {
-  	//## Step 1 - Change the option parameter to MIN and reload sample
-    //Render again the sample
-  	ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-  	
-    //Wait for board load
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']")));
-    //Change contains to MIN
-    ((JavascriptExecutor) driver).executeScript("$('#samplecode').text($('#samplecode').text().replace('MAX', 'MIN'));");
-    
-    String strText = "";
-    while(strText.indexOf("MIN") == -1) {
-    	strText = ElementHelper.FindElement(driver, By.id("samplecode")).getText();	
-    }
-    
-    //Click in Try me
-  	ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
-    //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
-    //Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
-    
-    
-  	//## Step 2 - Check the presented value for MIN.
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
-    
-    String value = "";
-    for (int i = 0; i < 10 || !value.equals("0"); i++){
-    	Thread.sleep(150);
-    	value = ElementHelper.FindElement(driver, By.xpath("//div[@id='sample']/div[2]/div/span")).getText();
-    }
-    assertEquals("0", value);
-  }
+		// Not we have to wait for loading disappear
+		ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
 
-  /**
-   * ############################### Test Case 5 ###############################
-   *
-   * Test Case Name:
-   *    Validate AVG number
-   * Description:
-   *    When the user access the component, it is presented the avg number of
-   *    array set.
-   * Steps:
-   *    1. Change the option parameter to AVG and reload sample
-   *    2. Check the presented value for AVG.
-   * @throws InterruptedException 
-   */
-  @Test
-  public void tc5_AvgNumber_PresentCorrectValue() throws InterruptedException {
-  	//## Step 1 - Change the option parameter to AVG and reload sample
-    //Render again the sample
-  	ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-  	
-    //Wait for board load
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']")));
-    //Change contains to AVG
-    ((JavascriptExecutor) driver).executeScript("$('#samplecode').text($('#samplecode').text().replace('MIN', 'AVG'));");
-    
-    String strText = "";
-    while(strText.indexOf("AVG") == -1) {
-    	strText = ElementHelper.FindElement(driver, By.id("samplecode")).getText();	
-    }
-    
-    //Click in Try me
-  	ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
-    //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
-    //Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+		// Now sample element must be displayed
+		assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+	}
 
-   
-    //## Step 2 - Check the presented value for MIN.
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
-    
-    String value = "";
-    for (int i = 0; i < 10 || !value.equals("4787.772727272727"); i++){
-    	Thread.sleep(150);
-    	value = ElementHelper.FindElement(driver, By.xpath("//div[@id='sample']/div[2]/div/span")).getText();
-    }
-    assertEquals("4787.772727272727", value);
-  }
+	/**
+	 * ############################### Test Case 3 ###############################
+	 *
+	 * Test Case Name: Validate MAX number Description: When the user access the
+	 * component, it is presented the max number of array set. Steps: 1. Check the
+	 * presented value for MAX.
+	 */
+	@Test
+	public void tc3_MaxNumber_PresentCorrectValue() {
+		// ## Step 1
+		assertEquals(
+		    "35659",
+		    ElementHelper.GetText(driver,
+		        By.xpath("//div[@id='sample']/div[2]/div/span")));
+	}
 
-  @AfterClass
-  public static void tearDown() { }
+	/**
+	 * ############################### Test Case 4 ###############################
+	 *
+	 * Test Case Name: Validate MIN number Description: When the user access the
+	 * component, it is presented the min number of array set. Steps: 1. Change
+	 * the option parameter to MIN and reload sample 2. Check the presented value
+	 * for MIN.
+	 * 
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void tc4_MinNumber_PresentCorrectValue() throws InterruptedException {
+		// ## Step 1 - Change the option parameter to MIN and reload sample
+		// Render again the sample
+		ElementHelper.FindElement(driver,
+		    By.xpath("//div[@id='example']/ul/li[2]/a")).click();
+
+		// Wait for board load
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+		    .xpath("//div[@id='code']")));
+		// Change contains to MIN
+		((JavascriptExecutor) driver)
+		    .executeScript("$('#samplecode').text($('#samplecode').text().replace('MAX', 'MIN'));");
+
+		String strText = "";
+		while (strText.indexOf("MIN") == -1) {
+			strText = ElementHelper.GetText(driver, By.id("samplecode"));
+		}
+
+		// Click in Try me
+		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button"))
+		    .click();
+		// Not we have to wait for loading disappear
+		ElementHelper.IsElementInvisible(driver, wait,
+		    By.xpath("//div[@class='blockUI blockOverlay']"));
+		// Now sample element must be displayed
+		assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+
+		// ## Step 2 - Check the presented value for MIN.
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+		    .xpath("//div[@id='sample']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+		    .xpath("//div[@id='sample']/div[2]/div/span")));
+		/*
+		 * String value = ""; for (int i = 0; i < 10 || !value.equals("0"); i++){
+		 * Thread.sleep(150); value = ElementHelper.FindElement(driver,
+		 * By.xpath("//div[@id='sample']/div[2]/div/span")).getText(); }
+		 * assertEquals("0", value);
+		 */
+		assertEquals(
+		    "0",
+		    ElementHelper.GetText(driver,
+		        By.xpath("//div[@id='sample']/div[2]/div/span")));
+	}
+
+	/**
+	 * ############################### Test Case 5 ###############################
+	 *
+	 * Test Case Name: Validate AVG number Description: When the user access the
+	 * component, it is presented the avg number of array set. Steps: 1. Change
+	 * the option parameter to AVG and reload sample 2. Check the presented value
+	 * for AVG.
+	 * 
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void tc5_AvgNumber_PresentCorrectValue() throws InterruptedException {
+		// ## Step 1 - Change the option parameter to AVG and reload sample
+		// Render again the sample
+		ElementHelper.FindElement(driver,
+		    By.xpath("//div[@id='example']/ul/li[2]/a")).click();
+
+		// Wait for board load
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+		    .xpath("//div[@id='code']")));
+		// Change contains to AVG
+		((JavascriptExecutor) driver)
+		    .executeScript("$('#samplecode').text($('#samplecode').text().replace('MIN', 'AVG'));");
+
+		String strText = "";
+		while (strText.indexOf("AVG") == -1) {
+			strText = ElementHelper.GetText(driver, By.id("samplecode"));
+		}
+
+		// Click in Try me
+		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button"))
+		    .click();
+		// Not we have to wait for loading disappear
+		ElementHelper.IsElementInvisible(driver, wait,
+		    By.xpath("//div[@class='blockUI blockOverlay']"));
+		// Now sample element must be displayed
+		assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+
+		// ## Step 2 - Check the presented value for MIN.
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+		    .xpath("//div[@id='sample']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+		    .xpath("//div[@id='sample']/div[2]/div/span")));
+
+		/*
+		 * String value = ""; for (int i = 0; i < 10 ||
+		 * !value.equals("4787.772727272727"); i++){ Thread.sleep(150); value =
+		 * ElementHelper.FindElement(driver,
+		 * By.xpath("//div[@id='sample']/div[2]/div/span")).getText(); }
+		 * assertEquals("4787.772727272727", value);
+		 */
+		assertEquals(
+		    "4787.772727272727",
+		    ElementHelper.GetText(driver,
+		        By.xpath("//div[@id='sample']/div[2]/div/span")));
+	}
+
+	@AfterClass
+	public static void tearDown() {
+	}
 }
