@@ -35,6 +35,7 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Testing the functionalities related with DataInputComponent.
@@ -83,33 +84,33 @@ public class DataInputComponent {
     ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]"));
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("DateInputComponent", driver.findElement(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")).getText());
+    assertEquals("DateInputComponent", ElementHelper.FindElement(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")).getText());
 
     
     //## Step 2
     //Render again the sample
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='example']/ul/li[2]/a")));
-    driver.findElement(By.xpath("//div[@id='example']/ul/li[2]/a")).sendKeys(Keys.ENTER);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='code']/button")));
-    driver.findElement(By.xpath("//div[@id='code']/button")).sendKeys(Keys.ENTER);
+  	ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
     //Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+    //Now sample element must be displayed
+    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
 
     
     //## Step 3
     //Pick a date
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("myInput")));
-    driver.findElement(By.id("myInput")).sendKeys("''");
+    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys("''");
     
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ui-datepicker-div")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ui-datepicker-month")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ui-datepicker-year")));
-    Select month = new Select(driver.findElement(By.className("ui-datepicker-month")));
+    Select month = new Select(ElementHelper.FindElement(driver, By.className("ui-datepicker-month")));
     month.selectByValue("9");
-    Select year = new Select(driver.findElement(By.className("ui-datepicker-year")));
+    Select year = new Select(ElementHelper.FindElement(driver, By.className("ui-datepicker-year")));
     year.selectByValue("2011");
     //Day 23
-    driver.findElement(By.xpath("//table[@class='ui-datepicker-calendar']//tbody//tr[5]/td/a")).sendKeys(Keys.ENTER);
+    ElementHelper.FindElement(driver, By.xpath("//table[@class='ui-datepicker-calendar']//tbody//tr[5]/td/a")).sendKeys(Keys.ENTER);
 
 
     wait.until(ExpectedConditions.alertIsPresent());

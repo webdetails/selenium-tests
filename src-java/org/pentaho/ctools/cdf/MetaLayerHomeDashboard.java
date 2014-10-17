@@ -90,13 +90,13 @@ public class MetaLayerHomeDashboard {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='titleObject']")));
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("Top Ten Customers", driver.findElement(By.xpath("//div[@id='titleObject']")).getText());
+    assertEquals("Top Ten Customers", ElementHelper.FindElement(driver, By.xpath("//div[@id='titleObject']")).getText());
     
     
     //## Step 2
     //Wait for visibility of 'topTenCustomersDetailsObject' the text 'Details'
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='topTenCustomersDetailsObject']")));
-    WebElement linkDetails = driver.findElement(By.xpath("//div[@id='topTenCustomersDetailsObject']/a"));
+    WebElement linkDetails = ElementHelper.FindElement(driver, By.xpath("//div[@id='topTenCustomersDetailsObject']/a"));
     assertEquals("Details...", linkDetails.getText());
     //click on the 'Details...'
     linkDetails.click();
@@ -106,7 +106,7 @@ public class MetaLayerHomeDashboard {
     //Wait for the frame
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fancybox-wrap")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='fancybox-frame']")));
-    WebElement frame = driver.findElement(By.xpath("//iframe[@id='fancybox-frame']"));
+    WebElement frame = ElementHelper.FindElement(driver, By.xpath("//iframe[@id='fancybox-frame']"));
     String valueFrameAttrSrc = frame.getAttribute("src");
 
     ///pentaho/plugin/jpivot/Pivot?solution=system&path=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf%2Factions&action=jpivot.xaction&width=500&height=600
@@ -116,12 +116,12 @@ public class MetaLayerHomeDashboard {
     //Wait for the element be visible.
     driver.switchTo().frame("fancybox-frame");
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='internal_content']")));
-    assertNotNull(driver.findElement(By.xpath("//div[@id='internal_content']")));
-    assertEquals("Measures", driver.findElement(By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")).getText());
+    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='internal_content']")));
+    assertEquals("Measures", ElementHelper.FindElement(driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")).getText());
     
     //Close pop-up
     driver.switchTo().defaultContent();
-    driver.findElement(By.xpath("//a[@id='fancybox-close']")).sendKeys(Keys.ENTER);
+    ElementHelper.FindElement(driver, By.xpath("//a[@id='fancybox-close']")).sendKeys(Keys.ENTER);
     ElementHelper.IsElementInvisible(driver, wait, By.id("fancybox-wrap"));
   }
 
