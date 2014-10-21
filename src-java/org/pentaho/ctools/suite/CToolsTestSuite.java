@@ -34,6 +34,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.DataInputComponent;
 import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
+import org.pentaho.ctools.cdf.SchedulePrptComponent;
 import org.pentaho.ctools.cdf.TableComponent;
 import org.pentaho.ctools.cdf.VisualizationAPIComponent;
 import org.pentaho.ctools.main.LoginPentaho;
@@ -53,6 +54,7 @@ import java.util.concurrent.TimeUnit;
   TableComponent.class,
   MetaLayerHomeDashboard.class,
   VisualizationAPIComponent.class,
+  SchedulePrptComponent.class,
   //CDE
   //MapComponentReference.class,
   //CDE - Widgets
@@ -108,6 +110,7 @@ public class CToolsTestSuite {
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 
+    
     //Initialize WAIT
     wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
