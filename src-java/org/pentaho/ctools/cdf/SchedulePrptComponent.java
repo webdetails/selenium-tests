@@ -329,7 +329,7 @@ public class SchedulePrptComponent {
   				
   				ElementHelper.FindElement(driver, By.cssSelector("img.gwt-Image.pentaho-deletebutton")).click();
   				
-  				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='pentaho-dialog']")));
+  				ElementHelper.FindElement(driver, By.xpath("//div[@class='pentaho-dialog']"));
   				ElementHelper.FindElement(driver, By.id("okButton")).click();
   				
   				someThingToDelete = true;//Continue checking if there is something to delete  				
