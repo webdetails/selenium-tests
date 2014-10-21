@@ -322,8 +322,14 @@ public class SchedulePrptComponent {
 		  List<WebElement> listScheduleTrs = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody")).findElements(By.tagName("tr"));
   		
   		for (int j = 0; j < listScheduleTrs.size(); j++) {
-  			WebElement elementTr = listScheduleTrs.get(j);
-  			WebElement elementFirstDiv = elementTr.findElement(By.xpath("td/div"));
+  		  //WebElement elementTr = listScheduleTrs.get(j);
+  			//WebElement elementFirstDiv = elementTr.findElement(By.xpath("td/div"));
+  		  WebElement elementFirstDiv = null;
+  		  if ( j == 0)
+  		    elementFirstDiv = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr/td/div"));
+  		  else
+  		    elementFirstDiv = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td/div"));
+  		      
   			if(elementFirstDiv.getText().equals(schNameTc3)){
   				elementFirstDiv.click();
   				
