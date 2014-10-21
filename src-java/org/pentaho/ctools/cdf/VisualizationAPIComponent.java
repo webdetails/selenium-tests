@@ -30,6 +30,7 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.service.DriverCommandExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -132,10 +133,17 @@ public class VisualizationAPIComponent {
 	@Test
 	public void tc3_MaxNumber_PresentCorrectValue() {
 		// ## Step 1
-		assertEquals(
-		    "35659",
-		    ElementHelper.GetText(driver,
-		        By.xpath("//div[@id='sample']/div[2]/div/span")));
+	  String value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+	  for (int i = 0; i<100;i++){
+	    if ( value.equals("35659") ){
+	      break;
+	    }
+	    else {
+	      value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+	    }
+	  }
+	  
+		assertEquals("35659", value);
 	}
 
 	/**
@@ -152,15 +160,12 @@ public class VisualizationAPIComponent {
 	public void tc4_MinNumber_PresentCorrectValue() throws InterruptedException {
 		// ## Step 1 - Change the option parameter to MIN and reload sample
 		// Render again the sample
-		ElementHelper.FindElement(driver,
-		    By.xpath("//div[@id='example']/ul/li[2]/a")).click();
+		ElementHelper.FindElement(driver,By.xpath("//div[@id='example']/ul/li[2]/a")).click();
 
 		// Wait for board load
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-		    .xpath("//div[@id='code']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']")));
 		// Change contains to MIN
-		((JavascriptExecutor) driver)
-		    .executeScript("$('#samplecode').text($('#samplecode').text().replace('MAX', 'MIN'));");
+		((JavascriptExecutor) driver).executeScript("$('#samplecode').text($('#samplecode').text().replace('MAX', 'MIN'));");
 
 		String strText = "";
 		while (strText.indexOf("MIN") == -1) {
@@ -168,29 +173,28 @@ public class VisualizationAPIComponent {
 		}
 
 		// Click in Try me
-		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button"))
-		    .click();
+		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 		// Not we have to wait for loading disappear
-		ElementHelper.IsElementInvisible(driver, wait,
-		    By.xpath("//div[@class='blockUI blockOverlay']"));
+		ElementHelper.IsElementInvisible(driver, wait,By.xpath("//div[@class='blockUI blockOverlay']"));
 		// Now sample element must be displayed
 		assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
 
 		// ## Step 2 - Check the presented value for MIN.
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-		    .xpath("//div[@id='sample']")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-		    .xpath("//div[@id='sample']/div[2]/div/span")));
-		/*
-		 * String value = ""; for (int i = 0; i < 10 || !value.equals("0"); i++){
-		 * Thread.sleep(150); value = ElementHelper.FindElement(driver,
-		 * By.xpath("//div[@id='sample']/div[2]/div/span")).getText(); }
-		 * assertEquals("0", value);
-		 */
-		assertEquals(
-		    "0",
-		    ElementHelper.GetText(driver,
-		        By.xpath("//div[@id='sample']/div[2]/div/span")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
+		
+		
+		String value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+    for (int i = 0; i<100;i++){
+      if ( value.equals("0") ){
+        break;
+      }
+      else {
+        value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+      }
+    }
+		
+		assertEquals("0", value);
 	}
 
 	/**
@@ -207,15 +211,12 @@ public class VisualizationAPIComponent {
 	public void tc5_AvgNumber_PresentCorrectValue() throws InterruptedException {
 		// ## Step 1 - Change the option parameter to AVG and reload sample
 		// Render again the sample
-		ElementHelper.FindElement(driver,
-		    By.xpath("//div[@id='example']/ul/li[2]/a")).click();
+		ElementHelper.FindElement(driver,By.xpath("//div[@id='example']/ul/li[2]/a")).click();
 
 		// Wait for board load
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-		    .xpath("//div[@id='code']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']")));
 		// Change contains to AVG
-		((JavascriptExecutor) driver)
-		    .executeScript("$('#samplecode').text($('#samplecode').text().replace('MIN', 'AVG'));");
+		((JavascriptExecutor) driver).executeScript("$('#samplecode').text($('#samplecode').text().replace('MIN', 'AVG'));");
 
 		String strText = "";
 		while (strText.indexOf("AVG") == -1) {
@@ -223,31 +224,26 @@ public class VisualizationAPIComponent {
 		}
 
 		// Click in Try me
-		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button"))
-		    .click();
+		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 		// Not we have to wait for loading disappear
-		ElementHelper.IsElementInvisible(driver, wait,
-		    By.xpath("//div[@class='blockUI blockOverlay']"));
+		ElementHelper.IsElementInvisible(driver, wait,By.xpath("//div[@class='blockUI blockOverlay']"));
 		// Now sample element must be displayed
 		assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
 
 		// ## Step 2 - Check the presented value for MIN.
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-		    .xpath("//div[@id='sample']")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-		    .xpath("//div[@id='sample']/div[2]/div/span")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
 
-		/*
-		 * String value = ""; for (int i = 0; i < 10 ||
-		 * !value.equals("4787.772727272727"); i++){ Thread.sleep(150); value =
-		 * ElementHelper.FindElement(driver,
-		 * By.xpath("//div[@id='sample']/div[2]/div/span")).getText(); }
-		 * assertEquals("4787.772727272727", value);
-		 */
-		assertEquals(
-		    "4787.772727272727",
-		    ElementHelper.GetText(driver,
-		        By.xpath("//div[@id='sample']/div[2]/div/span")));
+		String value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+    for (int i = 0; i<100;i++){
+      if ( value.equals("4787.772727272727") ){
+        break;
+      }
+      else {
+        value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+      }
+    }
+    assertEquals("4787.772727272727", value);
 	}
 
 	@AfterClass

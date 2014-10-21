@@ -141,7 +141,7 @@ public class ElementHelper {
 	public static WebElement FindElement(WebDriver driver, By locator) {
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(1, TimeUnit.SECONDS);
+        .pollingEvery(3, TimeUnit.SECONDS);
 		
 		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
