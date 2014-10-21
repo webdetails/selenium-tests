@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -272,7 +273,7 @@ public class SchedulePrptComponent {
  		if ( !scheduleNextRun.isEmpty() ) {
    		try {
         Date dateNextRun = new SimpleDateFormat("yyyy MMM dd hh:mm:ss").parse(scheduleNextRun);
-        dayOfWeek = (new SimpleDateFormat("EE")).format(dateNextRun);
+        dayOfWeek = (new SimpleDateFormat("EE", Locale.US)).format(dateNextRun);
       } catch (ParseException e) {
         e.printStackTrace();
       }
