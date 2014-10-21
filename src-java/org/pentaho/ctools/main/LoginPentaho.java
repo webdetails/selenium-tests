@@ -86,7 +86,7 @@ public class LoginPentaho {
     //Wait for all all elements in the form to be visible
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_username")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_password")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("loginbtn")));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.btn")));
     driver.findElement(By.id("j_username")).clear();
     driver.findElement(By.id("j_username")).sendKeys("admin");
     driver.findElement(By.id("j_password")).clear();

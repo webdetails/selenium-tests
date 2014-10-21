@@ -107,8 +107,8 @@ public class LogoutPentaho {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='login-form-container']/div/h1")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_username")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_password")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("loginbtn")));
-    assertNotNull(driver.findElement(By.xpath("//div[@id='login-form-container']/div/h1")));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.btn")));
+    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='login-form-container']/div/h1")));
   }
 
   @After
