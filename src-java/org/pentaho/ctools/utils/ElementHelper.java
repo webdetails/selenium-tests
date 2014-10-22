@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ElementHelper {
@@ -141,22 +142,26 @@ public class ElementHelper {
 	public static WebElement FindElement(WebDriver driver, By locator) {
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(3, TimeUnit.SECONDS);
+        .pollingEvery(3, TimeUnit.SECONDS)
+        .ignoring(NoSuchElementException.class);
 		
 		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 			
-			WebElement element = driver.findElements(locator).get(0);
-			if ( element.isDisplayed() && element.isEnabled() ){
-				return element;
+			List<WebElement> listElements = driver.findElements(locator);
+			if (listElements.size() > 0) {
+  			WebElement element = driver.findElements(locator).get(0);
+  			if ( element.isDisplayed() && element.isEnabled() ){
+  				return element;
+  			}
+  			else {
+  				System.out.println("Trying again! Locator: " + locator.toString());
+  				return FindElement(driver, locator);
+  			}
+			} else {
+			  System.out.println("Trying obtain! Locator: " + locator.toString());
+			  return null;
 			}
-			else {
-				System.out.println("Trying again! Locator: " + locator.toString());
-				return FindElement(driver, locator);
-			}
-		} catch (NoSuchElementException nse) {
-		  System.out.println("NoSuchElemen - got one. Locator: " + locator.toString());
-      return FindElement(driver, locator);
 		} catch (StaleElementReferenceException s) {
 			System.out.println("Stale - got one. Locator: " + locator.toString());
 			return FindElement(driver, locator);
