@@ -151,14 +151,17 @@ public class ElementHelper {
 				return element;
 			}
 			else {
-				System.out.println("Trying again!");
+				System.out.println("Trying again! Locator: " + locator.toString());
 				return FindElement(driver, locator);
 			}
+		} catch (NoSuchElementException nse) {
+		  System.out.println("NoSuchElemen - got one. Locator: " + locator.toString());
+      return FindElement(driver, locator);
 		} catch (StaleElementReferenceException s) {
-			System.out.println("Stale - got one");
+			System.out.println("Stale - got one. Locator: " + locator.toString());
 			return FindElement(driver, locator);
 		} catch ( ElementNotVisibleException v) {
-			System.out.println("NotVisible - got one");
+			System.out.println("NotVisible - got one. Locator: " + locator.toString());
 			return IsElementVisible(driver, locator);
 		}
 	}

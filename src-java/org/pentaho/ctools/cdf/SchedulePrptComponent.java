@@ -321,21 +321,24 @@ public class SchedulePrptComponent {
 		  someThingToDelete = false;
 		  List<WebElement> listScheduleTrs = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody")).findElements(By.tagName("tr"));
   		
-  		for (int j = 0; j < listScheduleTrs.size(); j++) {
-  		  //WebElement elementTr = listScheduleTrs.get(j);
-  			//WebElement elementFirstDiv = elementTr.findElement(By.xpath("td/div"));
-  		  WebElement elementFirstDiv = null;
-  		  if ( j == 0)
-  		    elementFirstDiv = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr/td/div"));
-  		  else
-  		    elementFirstDiv = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td/div"));
-  		      
-  			if(elementFirstDiv.getText().equals(schNameTc3)){
-  				elementFirstDiv.click();
+  		for (int j = 1; j <= listScheduleTrs.size(); j++) {
+  		  WebElement elementFirstDiv = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td/div"));
+  		  
+  		  if(elementFirstDiv.getText().equals(schNameTc3)){
+  				elementFirstDiv.click();//Select the row
+
+  				//Wait for row to be selected
+  				for(int t = 0; t<100; t++) {
+  				  WebElement elementRow = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]"));
+  				  
+  				  if( elementRow.getAttribute("class").contains("cellTableSelectedRow"))
+  				    break;
+  				}
   				
+  				//Click to remove the schedule item (the selected row)
   				ElementHelper.FindElement(driver, By.cssSelector("img.gwt-Image.pentaho-deletebutton")).click();
   				
-  				ElementHelper.FindElement(driver, By.xpath("//div[@class='pentaho-dialog']"));
+  				wait.until(ExpectedConditions.visibilityOfElementLocated( By.xpath("//div[@class='pentaho-dialog']")));
   				ElementHelper.FindElement(driver, By.id("okButton")).click();
   				
   				someThingToDelete = true;//Continue checking if there is something to delete  				
