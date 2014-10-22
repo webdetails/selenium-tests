@@ -121,7 +121,7 @@ public class MetaLayerHomeDashboard {
     
     //Close pop-up
     driver.switchTo().defaultContent();
-    ElementHelper.FindElement(driver, By.xpath("//a[@id='fancybox-close']")).sendKeys(Keys.ENTER);
+    ElementHelper.FindElement(driver, By.xpath("//a[@id='fancybox-close']")).click();
     ElementHelper.IsElementInvisible(driver, wait, By.id("fancybox-wrap"));
   }
 

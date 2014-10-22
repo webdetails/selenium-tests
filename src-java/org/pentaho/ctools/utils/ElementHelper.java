@@ -112,7 +112,7 @@ public class ElementHelper {
 	 */
 	public static boolean IsElementInvisible(WebDriver driver, Wait<WebDriver> wait, By locator) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-		boolean b = wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='busy-indicator-container waitPopup']")));
+		boolean b = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return b;
 	}

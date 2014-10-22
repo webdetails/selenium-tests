@@ -317,6 +317,7 @@ public class SchedulePrptComponent {
 		
 	  // Now we are in Schedule page
 		Boolean someThingToDelete = true;
+
 		while(someThingToDelete) {
 		  someThingToDelete = false;
 		  List<WebElement> listScheduleTrs = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody")).findElements(By.tagName("tr"));
@@ -341,6 +342,8 @@ public class SchedulePrptComponent {
   				wait.until(ExpectedConditions.visibilityOfElementLocated( By.xpath("//div[@class='pentaho-dialog']")));
   				ElementHelper.FindElement(driver, By.id("okButton")).click();
   				
+          ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='pentaho-dialog']"));
+          
   				someThingToDelete = true;//Continue checking if there is something to delete  				
   				break;
   			}
