@@ -36,6 +36,8 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -145,10 +147,12 @@ public class DateRangeInputComponent {
 	@Test
 	public void tc3_Today_DateIsSetSuccessful(){
   	//## Step 1
-	  ElementHelper.FindElement(driver, By.id("myInput")).click();
+	  WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
+	  Actions acts = new Actions(driver);
+	  acts.click(elemInput).build().perform();
 	  ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Today')])[2]")).sendKeys(Keys.ENTER);
 	  //The next operation is a TRICK, in order to raise an alert
-	  ElementHelper.FindElement(driver, By.id("myInput")).click();
+	  acts.click(elemInput).build().perform();
 	  
 	  
 	  //## Step 2
@@ -181,10 +185,12 @@ public class DateRangeInputComponent {
 	public void tc4_LastSevenDays_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
+    WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
+    Actions acts = new Actions(driver);
+    acts.click(elemInput).build().perform();
     ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Last 7 days')])[3]")).sendKeys(Keys.ENTER);
     //The next operation is a TRICK, in order to raise an alert
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
+    acts.click(elemInput).build().perform();
     
     
     //## Step 2
@@ -219,10 +225,12 @@ public class DateRangeInputComponent {
   public void tc5_MonthToDate_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
+    WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
+    Actions acts = new Actions(driver);
+    acts.click(elemInput).build().perform();
     ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Month to date')])[4]")).sendKeys(Keys.ENTER);
     //The next operation is a TRICK, in order to raise an alert
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
+    acts.click(elemInput).build().perform();
     
     
     //## Step 2
@@ -257,10 +265,12 @@ public class DateRangeInputComponent {
 	public void tc6_YearToDate_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
+    WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
+    Actions acts = new Actions(driver);
+    acts.click(elemInput).build().perform();
     ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Year to date')])[5]")).sendKeys(Keys.ENTER);
     //The next operation is a TRICK, in order to raise an alert
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
+    acts.click(elemInput).build().perform();
     
     
     //## Step 2
@@ -296,10 +306,12 @@ public class DateRangeInputComponent {
 	public void tc7_ThePreviousMonth_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
+    WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
+    Actions acts = new Actions(driver);
+    acts.click(elemInput).build().perform();
     ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'The previous Month')])[6]")).sendKeys(Keys.ENTER);
     //The next operation is a TRICK, in order to raise an alert
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
+    acts.click(elemInput).build().perform();
     
     
     //## Step 2
@@ -335,8 +347,6 @@ public class DateRangeInputComponent {
    *    2. Click in Today option and then Done
    *    3. Check for Alert
    */
-  @Test
-  @Ignore
 	public void tc8_CancelAllDatesAfterDone_DateIsCancelAndThenSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
@@ -384,8 +394,6 @@ public class DateRangeInputComponent {
    *    1. Click in Today option
    *    2. Check for Alert
    */
-  @Test
-  @Ignore
 	public void tc9_CancelDateRangeDone_DateIsCancelAndThenSetSuccessful(){
   }
 	
