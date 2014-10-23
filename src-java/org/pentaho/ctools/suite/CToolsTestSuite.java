@@ -52,7 +52,7 @@ import java.util.concurrent.TimeUnit;
   //CDF
   AutoCompleteBoxComponent.class,
   DateInputComponent.class,
-  DateRangeInputComponent.class,
+  //DateRangeInputComponent.class,
   TableComponent.class,
   MetaLayerHomeDashboard.class,
   VisualizationAPIComponent.class,

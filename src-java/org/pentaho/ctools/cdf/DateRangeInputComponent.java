@@ -29,16 +29,13 @@ import java.util.Date;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -148,16 +145,11 @@ public class DateRangeInputComponent {
 	@Test
 	public void tc3_Today_DateIsSetSuccessful(){
   	//## Step 1
-	  boolean ignoreAlert = false;
 	  WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
 	  elemInput.click();
 	  ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Today')])[2]")).sendKeys(Keys.ENTER);
 	  //The next operation is a TRICK, in order to raise an alert
-	  try {
-	    elemInput.click();
-	  } catch(WebDriverException wde) {
-	    ignoreAlert = true;
-	  }
+	  elemInput.click();
 	  
 	  
 	  //## Step 2
@@ -165,18 +157,13 @@ public class DateRangeInputComponent {
     Date dNow = new Date();
 	  String strToday = sdf.format(dNow);
 	  
-	  if ( ignoreAlert ) {
-  	  wait.until(ExpectedConditions.alertIsPresent());
-  	  Alert alert = driver.switchTo().alert();
-      String confirmationMsg = alert.getText();
-      String expectedCnfText = "You chose from " + strToday + " to " + strToday;
-      alert.accept();
-      
-      assertEquals(confirmationMsg, expectedCnfText);
-	  } else {
-	    assertEquals(strToday, ElementHelper.GetText(driver, By.id("myInput")));
-	    assertEquals(strToday, ElementHelper.GetText(driver, By.id("myInput2")));
-	  }
+	  wait.until(ExpectedConditions.alertIsPresent());
+  	Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + strToday + " to " + strToday;
+    alert.accept();
+     
+    assertEquals(confirmationMsg, expectedCnfText);
 	}
 	
 	/**
@@ -195,16 +182,11 @@ public class DateRangeInputComponent {
 	public void tc4_LastSevenDays_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    boolean ignoreAlert = false;
     WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
     elemInput.click();
     ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Last 7 days')])[3]")).sendKeys(Keys.ENTER);
     //The next operation is a TRICK, in order to raise an alert
-    try {
-      elemInput.click();
-    } catch(WebDriverException wde) {
-      ignoreAlert = true;
-    }
+    elemInput.click();
     
     
     //## Step 2
@@ -214,18 +196,13 @@ public class DateRangeInputComponent {
     Date dNow = new Date();
     String strToday = sdf.format(dNow);
     
-    if ( ignoreAlert ) {
-      wait.until(ExpectedConditions.alertIsPresent());
-      Alert alert = driver.switchTo().alert();
-      String confirmationMsg = alert.getText();
-      String expectedCnfText = "You chose from " + sdf.format(c.getTime()) + " to " + strToday;
-      alert.accept();
+    wait.until(ExpectedConditions.alertIsPresent());
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + sdf.format(c.getTime()) + " to " + strToday;
+    alert.accept();
       
-      assertEquals(confirmationMsg, expectedCnfText);
-    } else {
-      assertEquals(sdf.format(c.getTime()), ElementHelper.GetText(driver, By.id("myInput")));
-      assertEquals(strToday, ElementHelper.GetText(driver, By.id("myInput2")));
-    }
+    assertEquals(confirmationMsg, expectedCnfText);
   }
 	
   /**
@@ -244,16 +221,11 @@ public class DateRangeInputComponent {
   public void tc5_MonthToDate_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    boolean ignoreAlert = false;
     WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
     elemInput.click();
     ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Month to date')])[4]")).sendKeys(Keys.ENTER);
     //The next operation is a TRICK, in order to raise an alert
-    try {
-      elemInput.click();
-    } catch(WebDriverException wde) {
-      ignoreAlert = true;
-    }
+    elemInput.click();
     
     
     //## Step 2
@@ -263,18 +235,13 @@ public class DateRangeInputComponent {
     String strToday = sdf.format(dNow);
     String strCurrentMonth = sdfMonth.format(dNow) + "-01";
     
-    if ( ignoreAlert ) {
-      wait.until(ExpectedConditions.alertIsPresent());
-      Alert alert = driver.switchTo().alert();
-      String confirmationMsg = alert.getText();
-      String expectedCnfText = "You chose from " + strCurrentMonth + " to " + strToday;
-      alert.accept();
+    wait.until(ExpectedConditions.alertIsPresent());
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + strCurrentMonth + " to " + strToday;
+    alert.accept();
       
-      assertEquals(confirmationMsg, expectedCnfText);
-    } else {
-      assertEquals(strCurrentMonth, ElementHelper.GetText(driver, By.id("myInput")));
-      assertEquals(strToday, ElementHelper.GetText(driver, By.id("myInput2")));
-    }
+    assertEquals(confirmationMsg, expectedCnfText);
   }
   
   /**
@@ -293,16 +260,11 @@ public class DateRangeInputComponent {
 	public void tc6_YearToDate_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    boolean ignoreAlert = false;
     WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
     elemInput.click();
     ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Year to date')])[5]")).sendKeys(Keys.ENTER);
     //The next operation is a TRICK, in order to raise an alert
-    try {
-      elemInput.click();
-    } catch(WebDriverException wde) {
-      ignoreAlert = true;
-    }
+    elemInput.click();
     
     
     //## Step 2
@@ -312,18 +274,13 @@ public class DateRangeInputComponent {
     String strToday = sdf.format(dNow);
     String strBeginYear = sdfYear.format(dNow)+"-01-01";
     
-    if ( ignoreAlert ) {
-      wait.until(ExpectedConditions.alertIsPresent());
-      Alert alert = driver.switchTo().alert();
-      String confirmationMsg = alert.getText();
-      String expectedCnfText = "You chose from " + strBeginYear + " to " + strToday;
-      alert.accept();
+    wait.until(ExpectedConditions.alertIsPresent());
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + strBeginYear + " to " + strToday;
+    alert.accept();
       
-      assertEquals(confirmationMsg, expectedCnfText);
-    } else {
-      assertEquals(strBeginYear, ElementHelper.GetText(driver, By.id("myInput")));
-      assertEquals(strToday, ElementHelper.GetText(driver, By.id("myInput2")));
-    }
+    assertEquals(confirmationMsg, expectedCnfText);
   }
 	
   /**
@@ -343,16 +300,11 @@ public class DateRangeInputComponent {
 	public void tc7_ThePreviousMonth_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    boolean ignoreAlert = false;
     WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
     elemInput.click();
     ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'The previous Month')])[6]")).sendKeys(Keys.ENTER);
     //The next operation is a TRICK, in order to raise an alert
-    try {
-      elemInput.click();
-    } catch(WebDriverException wde) {
-      ignoreAlert = true;
-    }
+    elemInput.click();
     
     
     //## Step 2
@@ -366,22 +318,17 @@ public class DateRangeInputComponent {
     c.add(Calendar.DAY_OF_MONTH, (c.get(Calendar.DAY_OF_MONTH) * -1) );
     strLastMonthEndDay += "-" + c.get(Calendar.DAY_OF_MONTH) ;
     
-    if ( ignoreAlert ) {
-      wait.until(ExpectedConditions.alertIsPresent());
-      Alert alert = driver.switchTo().alert();
-      String confirmationMsg = alert.getText();
-      String expectedCnfText = "You chose from " + strLastMonthStartDay + " to " + strLastMonthEndDay;
-      alert.accept();
-      
-      assertEquals(confirmationMsg, expectedCnfText);
-    } else {
-      assertEquals(strLastMonthStartDay, ElementHelper.GetText(driver, By.id("myInput")));
-      assertEquals(strLastMonthEndDay, ElementHelper.GetText(driver, By.id("myInput2")));
-    }
+    wait.until(ExpectedConditions.alertIsPresent());
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + strLastMonthStartDay + " to " + strLastMonthEndDay;
+    alert.accept();
+    
+    assertEquals(confirmationMsg, expectedCnfText);
   }
 	
   /**
-   * ############################### Test Case 7 ###############################
+   * ############################### Test Case 8 ###############################
    *
    * Test Case Name: 
    *    Set Date Range Today 
@@ -429,7 +376,7 @@ public class DateRangeInputComponent {
   }
 	
   /**
-   * ############################### Test Case 8 ###############################
+   * ############################### Test Case 9 ###############################
    *
    * Test Case Name: 
    *    Set Date Range Today 
