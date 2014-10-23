@@ -30,7 +30,6 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.service.DriverCommandExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
