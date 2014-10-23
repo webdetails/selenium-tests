@@ -38,13 +38,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Testing the functionalities related with DataInputComponent.
+ * Testing the functionalities related with DateInputComponent.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-public class DataInputComponent {
+public class DateInputComponent {
   // Instance of the driver (browser emulator)
   private WebDriver driver;
   // Instance to be used on wait commands
@@ -63,7 +63,7 @@ public class DataInputComponent {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    DataInputComponent
+   *    DateInputComponent
    * Description:
    *    We pretend to check the component when user pick a data an alert message
    *    is displayed indicating the date picked.
