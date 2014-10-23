@@ -87,7 +87,7 @@ public class SchedulePrptComponent {
 		driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:86-SchedulePrptComponent:schedule_prpt_component.xcdf/generatedContent");
 
 		// Not we have to wait for loading disappear
-		ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+		ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class SchedulePrptComponent {
 		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
 		// Not we have to wait for loading disappear
-		ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+		ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
 		// Now sample element must be displayed
 		assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
@@ -228,7 +228,7 @@ public class SchedulePrptComponent {
     //Go to home page
     driver.get(baseUrl + "Home");
   	// Not we have to wait for loading disappear
-  	ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+  	ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   		
   	//Click in Schedule
   	ElementHelper.FindElement(driver, By.xpath("//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]")).click();
@@ -297,7 +297,8 @@ public class SchedulePrptComponent {
 		//Go to home page
 		driver.get(baseUrl + "Home");
 		// Not we have to wait for loading disappear
-		ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+		ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
 		
 		//Click in Schedule
 		ElementHelper.FindElement(driver, By.xpath("//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]")).click();
@@ -315,31 +316,47 @@ public class SchedulePrptComponent {
 		
 		
 	  // Now we are in Schedule page
-		List<WebElement> listScheduleTrs = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody")).findElements(By.tagName("tr"));
-		for (int j = 1; j <= listScheduleTrs.size(); j++) {
-		  WebElement elementFirstDiv = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td/div"));
+		Boolean someThingToDelete = true;
+		int listElements = 0;
+		int listElementsPrevious = -1;
+		while(someThingToDelete) {
+		  someThingToDelete = false;
+		  List<WebElement> listScheduleTrs = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody")).findElements(By.tagName("tr"));
+		  listElements = listScheduleTrs.size();
+  		
+		  //The new list must be different from previous list
+		  while( listElements == listElementsPrevious) {
+  		  listScheduleTrs = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody")).findElements(By.tagName("tr"));
+        listElements = listScheduleTrs.size();
+  		}		  
+		  
+  		for (int j = 1; j <= listElements; j++) {
+  		  WebElement elementFirstDiv = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td/div"));
+  		  
+  		  if(elementFirstDiv.getText().equals(schNameTc3)){
+  				elementFirstDiv.click();//Select the row
 
-		  if(elementFirstDiv.getText().equals(schNameTc3)){
-		    elementFirstDiv.click();//Select the row
-
-		    //Wait for row to be selected
-		    for(int t = 0; t<100; t++) {
-		      WebElement elementRow = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]"));
-
-		      if( elementRow.getAttribute("class").contains("cellTableSelectedRow"))
-		        break;
-		    }
-
-		    //Click to remove the schedule item (the selected row)
-		    ElementHelper.FindElement(driver, By.cssSelector("img.gwt-Image.pentaho-deletebutton")).click();
-
-		    wait.until(ExpectedConditions.visibilityOfElementLocated( By.xpath("//div[@class='pentaho-dialog']")));
-		    ElementHelper.FindElement(driver, By.id("okButton")).click();
-
-		    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='pentaho-dialog']"));
-
-		    break;
-		  }
+  				//Wait for row to be selected
+  				for(int t = 0; t<100; t++) {
+  				  WebElement elementRow = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]"));
+  				  
+  				  if( elementRow.getAttribute("class").contains("cellTableSelectedRow"))
+  				    break;
+  				}
+  				
+  				//Click to remove the schedule item (the selected row)
+  				ElementHelper.FindElement(driver, By.cssSelector("img.gwt-Image.pentaho-deletebutton")).click();
+  				
+  				wait.until(ExpectedConditions.visibilityOfElementLocated( By.xpath("//div[@class='pentaho-dialog']")));
+  				ElementHelper.FindElement(driver, By.id("okButton")).click();
+  				
+          ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='pentaho-dialog']"));
+          
+  				someThingToDelete = true;//Continue checking if there is something to delete  				
+  				break;
+  			}
+  		}
+  		listElementsPrevious = listElements;
 		}
 	}
 
