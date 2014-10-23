@@ -110,13 +110,24 @@ public class ElementHelper {
 	 * @param locator
 	 * @return
 	 */
-	public static boolean IsElementInvisible(WebDriver driver, Wait<WebDriver> wait, By locator) {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+	public static boolean IsElementInvisible(WebDriver driver, By locator) {
+	  Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+        .withTimeout(30, TimeUnit.SECONDS)
+        .pollingEvery(200, TimeUnit.MILLISECONDS);
+	  
+	  driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		boolean b = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return b;
 	}
 	
+	/**
+	 * TODO
+	 * 
+	 * @param driver
+	 * @param locator
+	 * @return
+	 */
 	public static WebElement IsElementVisible(WebDriver driver, By locator) {
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
@@ -126,6 +137,29 @@ public class ElementHelper {
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 		
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
+	
+	/**
+	 * TODO
+	 * 
+	 * @param driver
+	 * @param locator
+	 * @return
+	 */
+	public static boolean IsElementPresent(WebDriver driver, By locator) {
+	  boolean isElementPresent = false;
+	  Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+        .withTimeout(30, TimeUnit.SECONDS)
+        .pollingEvery(200, TimeUnit.MILLISECONDS);
+	  
+	  driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+	  WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+	  if (element != null) {
+	    isElementPresent = true;
+	  }
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    
+    return isElementPresent;
 	}
 	
 
@@ -140,22 +174,18 @@ public class ElementHelper {
 	 * @return
 	 */
 	public static WebElement FindElement(WebDriver driver, By locator) {
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-        .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(3, TimeUnit.SECONDS)
-        .ignoring(NoSuchElementException.class);
-		
 		try {
-			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+		  
+		  IsElementPresent(driver, locator);
 			
 			List<WebElement> listElements = driver.findElements(locator);
 			if (listElements.size() > 0) {
-  			WebElement element = driver.findElements(locator).get(0);
+  			WebElement element = listElements.get(0);
   			if ( element.isDisplayed() && element.isEnabled() ){
   				return element;
   			}
   			else {
-  				System.out.println("Trying again! Locator: " + locator.toString());
+  				System.out.println("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
   				return FindElement(driver, locator);
   			}
 			} else {

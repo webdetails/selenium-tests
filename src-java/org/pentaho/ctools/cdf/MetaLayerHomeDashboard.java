@@ -82,7 +82,7 @@ public class MetaLayerHomeDashboard {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalyer.xcdf/generatedContent");
 
     //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     
     //Wait for title become visible and with value 'Community Dashboard Framework'
   	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -122,7 +122,7 @@ public class MetaLayerHomeDashboard {
     //Close pop-up
     driver.switchTo().defaultContent();
     ElementHelper.FindElement(driver, By.xpath("//a[@id='fancybox-close']")).click();
-    ElementHelper.IsElementInvisible(driver, wait, By.id("fancybox-wrap"));
+    ElementHelper.IsElementInvisible(driver, By.id("fancybox-wrap"));
   }
 
   @After

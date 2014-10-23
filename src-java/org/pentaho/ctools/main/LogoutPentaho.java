@@ -79,7 +79,7 @@ public class LogoutPentaho {
     //waiting pop-up to be visible
     //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='busy-indicator-container waitPopup']")));
     //waiting pop-up to be invisible
-    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     
     
     //## Step 2

@@ -81,7 +81,7 @@ public class TableComponent {
     driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:64-TableComponent:table_component.xcdf/generatedContent");
     
     //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -123,7 +123,7 @@ public class TableComponent {
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
     
     //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //The table is now displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());

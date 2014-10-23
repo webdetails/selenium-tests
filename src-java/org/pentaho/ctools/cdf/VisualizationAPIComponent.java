@@ -78,8 +78,7 @@ public class VisualizationAPIComponent {
 		        + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualizationapi_component.xcdf/generatedContent");
 
 		// Not we have to wait for loading disappear
-		ElementHelper.IsElementInvisible(driver, wait,
-		    By.xpath("//div[@class='blockUI blockOverlay']"));
+		ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 	}
 
 	/**
@@ -117,7 +116,7 @@ public class VisualizationAPIComponent {
 		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
 		// Not we have to wait for loading disappear
-		ElementHelper.IsElementInvisible(driver, wait, By.xpath("//div[@class='blockUI blockOverlay']"));
+		ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
 		// Now sample element must be displayed
 		assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
@@ -175,7 +174,7 @@ public class VisualizationAPIComponent {
 		// Click in Try me
 		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 		// Not we have to wait for loading disappear
-		ElementHelper.IsElementInvisible(driver, wait,By.xpath("//div[@class='blockUI blockOverlay']"));
+		ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 		// Now sample element must be displayed
 		assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
 
@@ -226,7 +225,7 @@ public class VisualizationAPIComponent {
 		// Click in Try me
 		ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 		// Not we have to wait for loading disappear
-		ElementHelper.IsElementInvisible(driver, wait,By.xpath("//div[@class='blockUI blockOverlay']"));
+		ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 		// Now sample element must be displayed
 		assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
 
