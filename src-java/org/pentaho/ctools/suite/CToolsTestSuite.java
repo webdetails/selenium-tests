@@ -26,6 +26,7 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -108,6 +109,7 @@ public class CToolsTestSuite {
     //JavaScriptError.addExtension(ffProfile);
     driver = new FirefoxDriver(capabilities);
     driver.manage().window().maximize();
+    driver.manage().window().setSize(new Dimension(1980,1080));
     driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);

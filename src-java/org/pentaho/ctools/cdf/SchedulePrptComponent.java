@@ -200,24 +200,28 @@ public class SchedulePrptComponent {
 		//Start - tomorrow
 		ElementHelper.FindElement(driver, By.id("rangeStartIn")).clear();
 		ElementHelper.FindElement(driver, By.id("rangeStartIn")).sendKeys(sdf.format(dTomorrow));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='ui-datepicker-calendar']")));
 		WebElement dateCalendar = ElementHelper.FindElement(driver, By.xpath("//table[@class='ui-datepicker-calendar']"));
 		List<WebElement> columns = dateCalendar.findElements(By.tagName("td"));
 		String tomorrowDay = sdfDay.format(dTomorrow);
 		for(WebElement cell: columns) {
-		  if (cell.getText().equals(tomorrowDay)){
-		    cell.findElement(By.linkText(tomorrowDay)).click();
+        String strCell = cell.getText();
+		  if (strCell.equals(tomorrowDay)){        
+        cell.findElement(By.linkText(tomorrowDay)).click();
 		    break;
 		  }
 		}
 		//End
 		ElementHelper.FindElement(driver, By.id("endByRadio")).click();
 		ElementHelper.FindElement(driver, By.id("endByIn")).sendKeys(sdf.format(d30days));
-		dateCalendar = ElementHelper.FindElement(driver, By.xpath("//table[@class='ui-datepicker-calendar']"));
-    columns = dateCalendar.findElements(By.tagName("td"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='ui-datepicker-calendar']")));
+		WebElement dateCalendar2 = ElementHelper.FindElement(driver, By.xpath("//table[@class='ui-datepicker-calendar']"));
+    List<WebElement> columns2 = dateCalendar2.findElements(By.tagName("td"));
     String day = sdfDay.format(d30days);
-    for(WebElement cell: columns) {
-      if (cell.getText().equals(day)){
-        cell.findElement(By.linkText(day)).click();
+    for(WebElement cell2: columns2) {
+      String strCell2 = cell2.getText();
+      if (strCell2.equals(day)){
+        cell2.findElement(By.linkText(day)).click();
         break;
       }
     }
