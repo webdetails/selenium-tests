@@ -36,6 +36,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -146,10 +147,9 @@ public class DateRangeInputComponent {
 	public void tc3_Today_DateIsSetSuccessful(){
   	//## Step 1
 	  WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
-	  elemInput.click();
-	  ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Today')])[2]")).sendKeys(Keys.ENTER);
-	  //The next operation is a TRICK, in order to raise an alert
-	  elemInput.click();
+	  new Actions(driver).click(elemInput).build().perform();
+	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[contains(text(),'Today')])[2]")));
+	  ElementHelper.FindElement(driver, By.linkText("Today")).click();
 	  
 	  
 	  //## Step 2
@@ -178,15 +178,16 @@ public class DateRangeInputComponent {
    *    1. Click in Last 7 Days option
    *    2. Check for Alert
    */
-  @Test
 	public void tc4_LastSevenDays_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
     WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
-    elemInput.click();
-    ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Last 7 days')])[3]")).sendKeys(Keys.ENTER);
+    new Actions(driver).click(elemInput).build().perform();
+    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[contains(text(),'Last 7 days')])[3]")));
+    //ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Today')])[2]")).click();
+    ElementHelper.FindElement(driver, By.linkText("Last 7 days")).click();
     //The next operation is a TRICK, in order to raise an alert
-    elemInput.click();
+    //elemInput.click();
     
     
     //## Step 2
@@ -217,7 +218,6 @@ public class DateRangeInputComponent {
    *    1. Click in Month to date option
    *    2. Check for Alert
    */
-  @Test
   public void tc5_MonthToDate_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
@@ -256,7 +256,6 @@ public class DateRangeInputComponent {
    *    1. Click in Year to date option
    *    2. Check for Alert
    */
-  @Test
 	public void tc6_YearToDate_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
@@ -296,7 +295,6 @@ public class DateRangeInputComponent {
    *    1. Click in The Previous Month option
    *    2. Check for Alert
    */
-  @Test
 	public void tc7_ThePreviousMonth_DateIsSetSuccessful(){
     tc2_ReloadSample_SampleReadyToUse();
     //## Step 1

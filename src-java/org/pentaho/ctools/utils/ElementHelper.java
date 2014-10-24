@@ -113,7 +113,8 @@ public class ElementHelper {
 	public static boolean IsElementInvisible(WebDriver driver, By locator) {
 	  Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(200, TimeUnit.MILLISECONDS);
+        .pollingEvery(200, TimeUnit.MILLISECONDS)
+        .ignoring(NoSuchElementException.class);
 	  
 	  driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		boolean b = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
@@ -129,14 +130,21 @@ public class ElementHelper {
 	 * @return
 	 */
 	public static WebElement IsElementVisible(WebDriver driver, By locator) {
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+	  WebElement element = null;
+	  driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+	  
+	  Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(1, TimeUnit.SECONDS);
+        .pollingEvery(200, TimeUnit.MILLISECONDS)
+        .ignoring(NoSuchElementException.class);
 		
 		//Wait for element presence
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+		element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 		
-		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		return element;
 	}
 	
 	/**
@@ -150,9 +158,11 @@ public class ElementHelper {
 	  boolean isElementPresent = false;
 	  Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(200, TimeUnit.MILLISECONDS);
+        .pollingEvery(200, TimeUnit.MILLISECONDS)
+        .ignoring(NoSuchElementException.class);
 	  
 	  driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+	  
 	  WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 	  if (element != null) {
 	    isElementPresent = true;
@@ -174,9 +184,8 @@ public class ElementHelper {
 	 * @return
 	 */
 	public static WebElement FindElement(WebDriver driver, By locator) {
-		try {
-		  
-		  IsElementPresent(driver, locator);
+	  try {
+	    IsElementVisible(driver, locator);
 			
 			List<WebElement> listElements = driver.findElements(locator);
 			if (listElements.size() > 0) {

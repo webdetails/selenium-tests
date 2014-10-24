@@ -38,7 +38,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
@@ -151,11 +150,12 @@ public class SchedulePrptComponent {
 	 *    4. On Schedule Manager, it is set the schedule.
 	 */
 	@Test
-	public void tc3_SchedulePrpt_ScheduleCreatedSuccessful(){
+	public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() throws InterruptedException{
 		String schLocation = "/public";
 		
 		//Initialize some data
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
 		Date dNow = new Date();
 		Calendar c = Calendar.getInstance();
 		c.setTime(dNow);
@@ -170,24 +170,26 @@ public class SchedulePrptComponent {
 		
 		// ## Step 2
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("jqi_state_basicState")));
-		//Set values for Schedule name and location
-		Actions acts = new Actions(driver);
-		acts.sendKeys(ElementHelper.FindElement(driver, By.id("nameIn")), schNameTc3);
-		acts.sendKeys(ElementHelper.FindElement(driver, By.id("locationIn")), schLocation);
-		//Select Month
-		Select slRecurrence = new Select(ElementHelper.FindElement(driver, By.id("recurrId")));
-		slRecurrence.selectByValue("monthly");		
-		//Select Hour
-		Select slHours = new Select(ElementHelper.FindElement(driver, By.id("hours")));
-		slHours.selectByValue("9");
-		//Select Minutes
-		Select slMinutes = new Select(ElementHelper.FindElement(driver, By.id("minutes")));
-		slMinutes.selectByValue("17");
-   	//Select AM/FM
-		Select slAMFM = new Select(ElementHelper.FindElement(driver, By.id("amPm")));
-		slAMFM.selectByValue("pm");
-		//Select Option 'The x y of every month
-		acts.click(ElementHelper.FindElement(driver, By.xpath("//div[@id='patternMonth']/input[2]")));
+		//Set schedule name
+		ElementHelper.FindElement(driver, By.id("nameIn")).clear();
+		ElementHelper.FindElement(driver, By.id("nameIn")).sendKeys(schNameTc3);
+    //Set schedule location		
+		ElementHelper.FindElement(driver, By.id("locationIn")).clear();
+		ElementHelper.FindElement(driver, By.id("locationIn")).sendKeys(schLocation);
+    //Select Month
+    Select slRecurrence = new Select(ElementHelper.FindElement(driver, By.id("recurrId")));
+    slRecurrence.selectByValue("monthly");    
+    //Select Hour
+    Select slHours = new Select(ElementHelper.FindElement(driver, By.id("hours")));
+    slHours.selectByValue("9");
+    //Select Minutes
+    Select slMinutes = new Select(ElementHelper.FindElement(driver, By.id("minutes")));
+    slMinutes.selectByValue("17");
+    //Select AM/FM
+    Select slAMFM = new Select(ElementHelper.FindElement(driver, By.id("amPm")));
+    slAMFM.selectByValue("pm");
+    //Select Option 'The x y of every month
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='patternMonth']/input[2]")).click();
 		//Select Month
 		Select slOccDay = new Select(ElementHelper.FindElement(driver, By.id("monthOpt1Select")));
 		slOccDay.selectByValue("1");
@@ -196,33 +198,44 @@ public class SchedulePrptComponent {
 		slWeekday.selectByValue("3");		
 		//Select Range Of Recurrence
 		//Start - tomorrow
-		acts.sendKeys(ElementHelper.FindElement(driver, By.id("rangeStartIn")), sdf.format(dTomorrow));
-		//End
-		acts.click(ElementHelper.FindElement(driver, By.id("endByRadio")));
-		acts.sendKeys(ElementHelper.FindElement(driver, By.id("endByIn")), sdf.format(d30days));
-
-		//Fill the fields assign to this Actions
-		ElementHelper.FindElement(driver, By.id("nameIn")).clear();
-		ElementHelper.FindElement(driver, By.id("locationIn")).clear();
 		ElementHelper.FindElement(driver, By.id("rangeStartIn")).clear();
-		acts.build().perform();
-		
-		//Submit Form		
+		ElementHelper.FindElement(driver, By.id("rangeStartIn")).sendKeys(sdf.format(dTomorrow));
+		WebElement dateCalendar = ElementHelper.FindElement(driver, By.xpath("//table[@class='ui-datepicker-calendar']"));
+		List<WebElement> columns = dateCalendar.findElements(By.tagName("td"));
+		String tomorrowDay = sdfDay.format(dTomorrow);
+		for(WebElement cell: columns) {
+		  if (cell.getText().equals(tomorrowDay)){
+		    cell.findElement(By.linkText(tomorrowDay)).click();
+		    break;
+		  }
+		}
+		//End
+		ElementHelper.FindElement(driver, By.id("endByRadio")).click();
+		ElementHelper.FindElement(driver, By.id("endByIn")).sendKeys(sdf.format(d30days));
+		dateCalendar = ElementHelper.FindElement(driver, By.xpath("//table[@class='ui-datepicker-calendar']"));
+    columns = dateCalendar.findElements(By.tagName("td"));
+    String day = sdfDay.format(d30days);
+    for(WebElement cell: columns) {
+      if (cell.getText().equals(day)){
+        cell.findElement(By.linkText(day)).click();
+        break;
+      }
+    }
+		//Submit Form
 		ElementHelper.FindElement(driver, By.id("jqi_basicState_buttonOk")).click();
-		
 		//Wait for the new window.
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("jqi_state_mailState")));
 		ElementHelper.FindElement(driver, By.id("jqi_mailState_buttonOk")).click();
 		
 		
 		// ## Step 3
-		wait.until(ExpectedConditions.alertIsPresent());
-		
+		wait.until(ExpectedConditions.alertIsPresent());		
 		Alert alert = driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals(confirmationMsg, "Successfully scheduled.");
 
+    
 		// ## Step 4
     //-->Need to check if the schedule was created
     //Go to home page
@@ -231,6 +244,10 @@ public class SchedulePrptComponent {
   	ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   		
   	//Click in Schedule
+  	wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
+  	wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]")));
   	ElementHelper.FindElement(driver, By.xpath("//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]")).click();
   	WebElement listMenyTr = ElementHelper.FindElement(driver, By.xpath("//div[@id='customDropdownPopupMajor']/div/div/table/tbody"));
   	List<WebElement> listMenuElementsTrs = listMenyTr.findElements(By.xpath("//td[@class='gwt-MenuItem']"));
@@ -301,6 +318,10 @@ public class SchedulePrptComponent {
 
 		
 		//Click in Schedule
+		wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]")));
 		ElementHelper.FindElement(driver, By.xpath("//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]")).click();
 		WebElement listMenyTr = ElementHelper.FindElement(driver, By.xpath("//div[@id='customDropdownPopupMajor']/div/div/table/tbody"));
 		List<WebElement> listMenuElementsTrs = listMenyTr.findElements(By.xpath("//td[@class='gwt-MenuItem']"));

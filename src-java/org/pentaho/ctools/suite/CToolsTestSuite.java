@@ -50,12 +50,12 @@ import java.util.concurrent.TimeUnit;
   //##### Execution Order #####
 	LoginPentaho.class,
   //CDF
-  AutoCompleteBoxComponent.class,
+	AutoCompleteBoxComponent.class,
   DateInputComponent.class,
-  //DateRangeInputComponent.class,
-  TableComponent.class,
-  MetaLayerHomeDashboard.class,
-  VisualizationAPIComponent.class,
+  DateRangeInputComponent.class,
+	TableComponent.class,
+	MetaLayerHomeDashboard.class,
+	VisualizationAPIComponent.class,
   SchedulePrptComponent.class,
   //CDE
   //MapComponentReference.class,
