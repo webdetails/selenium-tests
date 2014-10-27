@@ -29,6 +29,7 @@ import java.util.Date;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
@@ -41,6 +42,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 import static org.junit.Assert.*;
 
@@ -58,6 +60,9 @@ public class DateRangeInputComponent {
 	private static Wait<WebDriver> wait;
 	// The base url to be append the relative url in test
 	private static String          baseUrl;
+	
+	@Rule
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
 
 	/**
 	 * Shall initialized the test before run each test case.

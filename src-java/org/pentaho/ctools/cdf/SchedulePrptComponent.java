@@ -32,6 +32,7 @@ import java.util.Locale;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
@@ -43,6 +44,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 import static org.junit.Assert.*;
 
@@ -62,6 +64,9 @@ public class SchedulePrptComponent {
 	private static String          baseUrl;
 	// The schedule name for TC3
 	private static String schNameTc3 = "SchedulePSTc3";
+	
+	@Rule
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
 
 	/**
 	 * Shall initialized the test before run each test case.

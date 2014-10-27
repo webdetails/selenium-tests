@@ -24,6 +24,7 @@ package org.pentaho.ctools.cdf;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
@@ -32,6 +33,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -52,6 +54,9 @@ public class AutoCompleteBoxComponent {
   private Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private String baseUrl;
+  
+  @Rule
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
 
   @Before
   public void setUp() throws Exception {
