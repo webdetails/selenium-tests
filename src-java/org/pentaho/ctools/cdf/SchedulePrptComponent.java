@@ -274,9 +274,9 @@ public class SchedulePrptComponent {
  		String scheduleCreatedBy = "";
  		String scheduleStatus = "";
  		for (int j = 0; j < listScheduleTrs.size(); j++) {
- 			WebElement elementTr = listScheduleTrs.get(j);
- 			WebElement elementFirstDiv = elementTr.findElement(By.xpath("td/div"));
+ 			WebElement elementFirstDiv = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td/div"));
  			if(elementFirstDiv.getText().equals(schNameTc3)){
+ 			  WebElement elementTr = listScheduleTrs.get(j);
  			  scheduleName = elementTr.findElement(By.xpath("td/div")).getText();
  			  scheduleRepeats = elementTr.findElement(By.xpath("td[2]/div")).getText();
  			  scheduleSourceFile= elementTr.findElement(By.xpath("td[3]/div")).getText();
