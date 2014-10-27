@@ -24,7 +24,9 @@ package org.pentaho.ctools.cdf;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,6 +49,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * NOTE - The test was created regarding issue CDF-318
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MetaLayerHomeDashboard {
   // Instance of the driver (browser emulator)
   private WebDriver driver;

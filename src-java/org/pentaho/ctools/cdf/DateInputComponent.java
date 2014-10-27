@@ -23,7 +23,9 @@ package org.pentaho.ctools.cdf;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -44,6 +46,7 @@ import static org.junit.Assert.assertTrue;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DateInputComponent {
   // Instance of the driver (browser emulator)
   private WebDriver driver;

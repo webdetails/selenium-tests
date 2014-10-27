@@ -33,8 +33,11 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
+import org.pentaho.ctools.cdf.ButtonComponent;
+import org.pentaho.ctools.cdf.CheckComponent;
 import org.pentaho.ctools.cdf.DateInputComponent;
 import org.pentaho.ctools.cdf.DateRangeInputComponent;
+import org.pentaho.ctools.cdf.DialComponent;
 import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
 import org.pentaho.ctools.cdf.SchedulePrptComponent;
 import org.pentaho.ctools.cdf.TableComponent;
@@ -52,8 +55,11 @@ import java.util.concurrent.TimeUnit;
 	LoginPentaho.class,
   //CDF
 	AutoCompleteBoxComponent.class,
+	ButtonComponent.class,
+	CheckComponent.class,
   DateInputComponent.class,
   DateRangeInputComponent.class,
+  DialComponent.class,
 	TableComponent.class,
 	MetaLayerHomeDashboard.class,
 	VisualizationAPIComponent.class,
