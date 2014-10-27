@@ -273,18 +273,18 @@ public class SchedulePrptComponent {
  		String scheduleNextRun = "";
  		String scheduleCreatedBy = "";
  		String scheduleStatus = "";
- 		for (int j = 0; j < listScheduleTrs.size(); j++) {
+ 		for (int j = 1; j <= listScheduleTrs.size(); j++) {
  			WebElement elementFirstDiv = ElementHelper.FindElement(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td/div"));
- 			if(elementFirstDiv.getText().equals(schNameTc3)){
- 			  WebElement elementTr = listScheduleTrs.get(j);
- 			  scheduleName = elementTr.findElement(By.xpath("td/div")).getText();
- 			  scheduleRepeats = elementTr.findElement(By.xpath("td[2]/div")).getText();
- 			  scheduleSourceFile= elementTr.findElement(By.xpath("td[3]/div")).getText();
- 			  scheduleOuputLocation= elementTr.findElement(By.xpath("td[4]/div")).getText();
- 			  scheduleLastRun= elementTr.findElement(By.xpath("td[5]/div")).getText();
- 			  scheduleNextRun= elementTr.findElement(By.xpath("td[6]/div")).getText();
- 			  scheduleCreatedBy= elementTr.findElement(By.xpath("td[7]/div")).getText();
- 			  scheduleStatus= elementTr.findElement(By.xpath("td[8]/div")).getText();
+ 			scheduleName = elementFirstDiv.getText();
+      if(scheduleName.equals(schNameTc3)){
+ 			  
+        scheduleRepeats = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td[2]/div"));
+ 			  scheduleSourceFile= ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td[3]/div"));
+ 			  scheduleOuputLocation= ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td[4]/div"));
+ 			  scheduleLastRun= ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td[5]/div"));
+ 			  scheduleNextRun= ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td[6]/div"));
+ 			  scheduleCreatedBy= ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td[7]/div"));
+ 			  scheduleStatus= ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr["+j+"]/td[8]/div"));
  			  break;
  			}
  		}
