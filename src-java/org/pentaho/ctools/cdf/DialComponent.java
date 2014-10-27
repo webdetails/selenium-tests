@@ -147,7 +147,7 @@ public class DialComponent {
    */
   @Test
   public void tc3_CheckEachOption_AfterCheckAnAlertIsDisplayed() {
-    WebElement dialElement = ElementHelper.FindElement(driver, By.cssSelector("img2"));
+    WebElement dialElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
     assertNotNull(dialElement);
     
     String attrSrc = dialElement.getAttribute("src");
