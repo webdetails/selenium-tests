@@ -115,15 +115,27 @@ public class ElementHelper {
 	 * @return
 	 */
 	public static boolean IsElementInvisible(WebDriver driver, By locator) {
-	  Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-        .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(1, TimeUnit.SECONDS);
+		boolean bElementInvisible = false;
+		try {
+			driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
+			driver.findElement(locator);
+		} catch (NoSuchElementException s) {
+		  log.error("NuSuchElement - got it. Locator: " + locator.toString());
+		  bElementInvisible = true;
+		}
 
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-		boolean b = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+		if (!bElementInvisible) {
+		  Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+	        .withTimeout(30, TimeUnit.SECONDS)
+	        .pollingEvery(1, TimeUnit.SECONDS);
+
+	    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+			bElementInvisible = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+		}
+
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
-		return b;
+
+		return bElementInvisible;
 	}
 	
 	/**
