@@ -21,6 +21,8 @@
 ******************************************************************************/
 package org.pentaho.ctools.main;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -53,12 +55,15 @@ public class LogoutPentaho {
   private Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private String baseUrl;
+  //Log instance
+  private static Logger log = LogManager.getLogger(LogoutPentaho.class);
   
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
   
   @Before
   public void setUp() {
+    log.debug("setUp");
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -77,7 +82,8 @@ public class LogoutPentaho {
    *    3. The user is logged out and is redirect to home page (login page).
    */
   @Test
-  public void tc1_Logout_SuccessLogOutReturnHomePage() throws Exception {
+  public void tc1_Logout_SuccessLogOutReturnHomePage() {
+    log.debug("tc1_Logout_SuccessLogOutReturnHomePage");
   	//## Step 1
     driver.get(baseUrl + "Home");
 
@@ -117,5 +123,7 @@ public class LogoutPentaho {
   }
 
   @After
-  public void tearDown() { }
+  public void tearDown() { 
+    log.debug("tearDown");
+  }
 }

@@ -21,6 +21,8 @@
 ******************************************************************************/
 package org.pentaho.ctools.main;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -53,12 +55,15 @@ public class LoginPentaho {
   private Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private String baseUrl;
+  //Log instance
+  private static Logger log = LogManager.getLogger(LoginPentaho.class);
   
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
 
   @Before
   public void setUp() {
+    log.debug("setUp");
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -78,7 +83,8 @@ public class LoginPentaho {
    *    3. User authenticated, and user name of logged user is displayed.
    */
   @Test
-  public void tc1_Login_SuccessAuthentication() throws Exception {
+  public void tc1_Login_SuccessAuthentication() {
+    log.debug("tc1_Login_SuccessAuthentication");
   	//## Step 1
   	driver.get(baseUrl + "Login");
 
@@ -121,5 +127,7 @@ public class LoginPentaho {
   }
 
   @After
-  public void tearDown(){}
+  public void tearDown(){
+    log.debug("tearDown");
+  }
 }
