@@ -63,6 +63,9 @@
             <exclude  org="junit" />
             <exclude  org="org.seleniumhq.selenium" />
         </dependency>
-
+        <!-- LOG4J - logging framework -->
+        <dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.1" conf="test-java->default"/>
+        <dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.1" conf="test-java->default"/>
+        
     </dependencies>
 </ivy-module>
