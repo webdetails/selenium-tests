@@ -23,6 +23,7 @@ package org.pentaho.ctools.cdf;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -152,7 +153,7 @@ public class TextComponent {
   public void tc3_DisplayedText_ContainsExpectedText() {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
     
-    SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd yyyy HH:mm");
+    SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd yyyy HH:mm", Locale.US);
     Date dNow = new Date();
     String strToday = sdf.format(dNow);
     

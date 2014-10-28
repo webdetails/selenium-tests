@@ -29,7 +29,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -37,7 +36,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
@@ -80,7 +78,7 @@ public class TimePlotComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/TimePlotComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A28-TrafficComponent%3Atraffic_component.xcdf/generatedContent");
+    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A31-TimePlotComponent%3Atimeplot_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -99,13 +97,13 @@ public class TimePlotComponent {
   @Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    //wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
 
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("TrafficComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    //assertEquals("Community Dashboard Framework", driver.getTitle());
+    assertEquals("timePlotComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -137,7 +135,7 @@ public class TimePlotComponent {
     assertEquals(1, nSampleObject);
   }
 
-  /**
+    /**
    * ############################### Test Case 3 ###############################
    *
    * Test Case Name: 
@@ -146,30 +144,25 @@ public class TimePlotComponent {
    *    For this component we need to validate when user move mouse over plot
    *    we have new values for Total Price. 
    * Steps: 
-   *    1. Check if the plot is presented
+   *    1. Check if the graphic is presented
    *    2. Move mouse over graphic and check the expected value for Total Price
    */
   @Test
   public void tc3_MouseOverPlot_TotalPriceChanged() {
     // ## Step 1
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.img.trafficYellow")));
-    WebElement elemTraffic = ElementHelper.FindElement(driver, By.cssSelector("div.img.trafficYellow"));
-    assertNotNull(elemTraffic);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sampleObject']/div/span")));
+    assertEquals("total order income     ", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/span")));
+    assertEquals("Total Price   ", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/span[2]")));    
     
     
     // ## Step 2
     Actions acts = new Actions(driver);
-    acts.moveToElement(elemTraffic, 5, 5);
+    acts.moveToElement(ElementHelper.FindElement(driver, By.cssSelector("canvas.timeplot-canvas")), 10, 10);
     acts.build().perform();
     
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='tooltip']/h3")));
+    String expectedText = "Total Price = 6,864  ";
+    String text = ElementHelper.WaitForText(driver, By.xpath("//div[@id='sampleObject']/div/span[2]"), expectedText);
     
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//h3/div[@class='img trafficRed']")));
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//h3/div[@class='img trafficYellow']")));
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//h3/div[@class='img trafficGreen']")));
-    
-    String text = ElementHelper.GetText(driver, By.xpath("//div[@id='tooltip']/h3"));
-    String expectedText = "Value: 1.43199389E8\n≤ 70000000 < < 150000000 ≤";
     assertEquals(expectedText, text);    
   }
   

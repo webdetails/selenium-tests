@@ -117,12 +117,12 @@ public class ElementHelper {
 	public static boolean IsElementInvisible(WebDriver driver, By locator) {
 	  Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(200, TimeUnit.MILLISECONDS)
-        .ignoring(NoSuchElementException.class);
-	  
-	  driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        .pollingEvery(1, TimeUnit.SECONDS);
+
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		boolean b = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
 		return b;
 	}
 	
