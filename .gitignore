@@ -1,7 +1,6 @@
 #IntelliJ files
 .idea/
 *.iml
-*.xml
 junit*
 build/
 reports-java/
