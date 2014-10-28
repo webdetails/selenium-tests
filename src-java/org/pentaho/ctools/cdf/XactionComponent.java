@@ -46,14 +46,14 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Testing the functionalities related with Dial Component.
+ * Testing the functionalities related with Xaction Component.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class DialComponent {
+public class XactionComponent {
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -69,8 +69,8 @@ public class DialComponent {
    */
   @BeforeClass
   public static void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
+    driver  = CToolsTestSuite.getDriver();
+    wait    = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -78,13 +78,13 @@ public class DialComponent {
   }
 
   /**
-   * Go to the DialComponent web page.
+   * Go to the XactionComponent web page.
    */
   public static void init() {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/DialComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A25-DialComponent%3Adial_component.xcdf/generatedContent");
+    // Reference/Core Components/XactionComponent
+    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A10-XactionComponent%3Axaction_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -109,7 +109,7 @@ public class DialComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("DialComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("XactionComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -134,33 +134,38 @@ public class DialComponent {
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    
+    //Check the number of divs with id 'SampleObject'
+    //Hence, we guarantee when click Try Me the previous div is replaced
+    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
+    assertEquals(1, nSampleObject);
   }
 
   /**
    * ############################### Test Case 3 ###############################
    *
    * Test Case Name: 
-   *    Dial Component
+   *    Xacion
    * Description: 
-   *    We pretend validate the generated graphic (in a image) and if url for 
-   *    the image is valid. 
+   *    We pretend validate the generated graphic (in an image) and if the image
+   *    has a valid url. 
    * Steps: 
    *    1. Check if a graphic was generated
-   *    2. Check the http request for the generated image
+   *    2. Check the http request for the image generated
    */
   @Test
-  public void tc3_GenerateGraphic_GraphicGeneratedAndHttp200() {
+  public void tc3_MouseOverPlot_TotalPriceChanged() {
     // ## Step 1
-    WebElement dialElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
-    assertNotNull(dialElement);
+    WebElement xactionElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
+    assertNotNull(xactionElement);
     
-    String attrSrc    = dialElement.getAttribute("src");
-    String attrWidth  = dialElement.getAttribute("width");
-    String attrHeight = dialElement.getAttribute("height");
-    assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=tmp_chart_admin-"));
-    assertEquals(attrWidth, "400");
-    assertEquals(attrHeight, "200");
+    String attrSrc    = xactionElement.getAttribute("src");
+    String attrWidth  = xactionElement.getAttribute("width");
+    String attrHeight = xactionElement.getAttribute("height");
     
+    assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=tmp_chart_admin-"));    
+    assertEquals(attrWidth, "500");
+    assertEquals(attrHeight, "600");
     
     // ## Step 2
     try {

@@ -21,39 +21,34 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-
-import org.apache.http.HttpStatus;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Testing the functionalities related with Dial Component.
+ * Testing the functionalities related with Text Input Component.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class DialComponent {
+public class TextInputComponent {
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -78,13 +73,13 @@ public class DialComponent {
   }
 
   /**
-   * Go to the DialComponent web page.
+   * Go to the TextInputComponent web page.
    */
   public static void init() {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/DialComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A25-DialComponent%3Adial_component.xcdf/generatedContent");
+    // Reference/Core Components/TextInputComponent
+    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A37-TextInputComponent%3Atext_input_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -109,7 +104,7 @@ public class DialComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("DialComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("TextInputComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -134,45 +129,120 @@ public class DialComponent {
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    
+    //Check the number of divs with id 'SampleObject'
+    //Hence, we guarantee when click Try Me the previous div is replaced
+    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
+    assertEquals(1, nSampleObject);
   }
 
   /**
    * ############################### Test Case 3 ###############################
    *
    * Test Case Name: 
-   *    Dial Component
+   *    Insert a small text
    * Description: 
-   *    We pretend validate the generated graphic (in a image) and if url for 
-   *    the image is valid. 
+   *    We pretend validate when we insert a small text an alert is raised. 
    * Steps: 
-   *    1. Check if a graphic was generated
-   *    2. Check the http request for the generated image
+   *    1. Insert text
+   *    2. Check for alert
+   *    3. Check the input text inserted
    */
   @Test
-  public void tc3_GenerateGraphic_GraphicGeneratedAndHttp200() {
+  public void tc3_InputSmallPhrase_AlertDispayed() {
     // ## Step 1
-    WebElement dialElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
-    assertNotNull(dialElement);
-    
-    String attrSrc    = dialElement.getAttribute("src");
-    String attrWidth  = dialElement.getAttribute("width");
-    String attrHeight = dialElement.getAttribute("height");
-    assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=tmp_chart_admin-"));
-    assertEquals(attrWidth, "400");
-    assertEquals(attrHeight, "200");
+    String strInputString = "Hello World!";
+    ElementHelper.FindElement(driver, By.id("myInput")).clear();
+    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(strInputString);
+    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(Keys.ENTER);
     
     
     // ## Step 2
-    try {
-      URL url = new URL(attrSrc);
-      URLConnection connection = url.openConnection();
-      connection.connect();
-      
-      assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-         
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
+    wait.until(ExpectedConditions.alertIsPresent());
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "you typed: " + strInputString;
+    alert.accept();
+     
+    assertEquals(expectedCnfText, confirmationMsg);
+  }
+  
+  /**
+   * ############################### Test Case 4 ###############################
+   *
+   * Test Case Name: 
+   *    Insert a long text
+   * Description: 
+   *    We pretend validate when we insert a long text an alert is raised. 
+   * Steps: 
+   *    1. Insert text
+   *    2. Check for alert
+   *    3. Check the input text inserted
+   */
+  @Test
+  public void tc4_InputLongPhrase_AlertDispayed() {
+    // ## Step 1
+    String strInputString = "Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!";
+    strInputString += strInputString;
+    strInputString += strInputString;
+    strInputString += strInputString;
+    strInputString += strInputString;
+    ElementHelper.FindElement(driver, By.id("myInput")).clear();
+    //After clean text, we need to trait the pop-up    
+    wait.until(ExpectedConditions.alertIsPresent());
+    Alert alert = driver.switchTo().alert();
+    alert.accept();
+    
+    
+    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(strInputString);
+    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(Keys.ENTER);
+    
+    
+    // ## Step 2
+    wait.until(ExpectedConditions.alertIsPresent());
+    alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "you typed: " + strInputString;
+    alert.accept();
+     
+    assertEquals(expectedCnfText, confirmationMsg);
+  }
+  
+  /**
+   * ############################### Test Case 5 ###############################
+   *
+   * Test Case Name: 
+   *    Insert special characters
+   * Description: 
+   *    We pretend validate when we insert a special characters an alert is 
+   *    raised. 
+   * Steps: 
+   *    1. Insert text
+   *    2. Check for alert
+   *    3. Check the input text inserted
+   */
+  @Test
+  public void tc5_InputSpecialPhrase_AlertDispayed() {
+    // ## Step 1
+    String strInputString = "|!\"1#$%&/()=?*»`ª:_Ç<>/*-+";
+    ElementHelper.FindElement(driver, By.id("myInput")).clear();
+    //After clean text, we need to trait the pop-up
+    wait.until(ExpectedConditions.alertIsPresent());
+    Alert alert = driver.switchTo().alert();
+    alert.accept();
+    
+    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(strInputString);
+    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(Keys.ENTER);
+    
+    
+    // ## Step 2
+    wait.until(ExpectedConditions.alertIsPresent());
+    alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "you typed: " + strInputString;
+    alert.accept();
+     
+    assertEquals(expectedCnfText, confirmationMsg);
   }
   
   @AfterClass
