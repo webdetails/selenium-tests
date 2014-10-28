@@ -21,11 +21,6 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-
-import org.apache.http.HttpStatus;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -34,26 +29,25 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Testing the functionalities related with Dial Component.
+ * Testing the functionalities related with Traffic Component.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class DialComponent {
+public class TrafficComponent {
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -69,8 +63,8 @@ public class DialComponent {
    */
   @BeforeClass
   public static void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
+    driver  = CToolsTestSuite.getDriver();
+    wait    = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -78,13 +72,13 @@ public class DialComponent {
   }
 
   /**
-   * Go to the DialComponent web page.
+   * Go to the TimePlotComponent web page.
    */
   public static void init() {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/DialComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A25-DialComponent%3Adial_component.xcdf/generatedContent");
+    // Reference/Core Components/TimePlotComponent
+    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A31-TimePlotComponent%3Atimeplot_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -109,7 +103,7 @@ public class DialComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("DialComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("timePlotComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -134,45 +128,43 @@ public class DialComponent {
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    
+    //Check the number of divs with id 'SampleObject'
+    //Hence, we guarantee when click Try Me the previous div is replaced
+    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
+    assertEquals(1, nSampleObject);
   }
 
   /**
    * ############################### Test Case 3 ###############################
    *
    * Test Case Name: 
-   *    Dial Component
+   *    Time Plot
    * Description: 
-   *    We pretend validate the generated graphic (in a image) and if url for 
-   *    the image is valid. 
+   *    For this component we need to validate when user move mouse over plot
+   *    we have new values for Total Price. 
    * Steps: 
-   *    1. Check if a graphic was generated
-   *    2. Check the http request for the generated image
+   *    1. Check if the graphic is presented
+   *    2. Move mouse over graphic and check the expected value for Total Price
    */
   @Test
-  public void tc3_GenerateGraphic_GraphicGeneratedAndHttp200() {
+  public void tc3_MouseOverPlot_TotalPriceChanged() {
     // ## Step 1
-    WebElement dialElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
-    assertNotNull(dialElement);
-    
-    String attrSrc    = dialElement.getAttribute("src");
-    String attrWidth  = dialElement.getAttribute("width");
-    String attrHeight = dialElement.getAttribute("height");
-    assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=tmp_chart_admin-"));
-    assertEquals(attrWidth, "400");
-    assertEquals(attrHeight, "200");
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sampleObject']/div/span")));
+    assertEquals("total order income     ", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/span")));
+    assertEquals("Total Price   ", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/span[2]")));    
     
     
     // ## Step 2
-    try {
-      URL url = new URL(attrSrc);
-      URLConnection connection = url.openConnection();
-      connection.connect();
-      
-      assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-         
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
+    Actions acts = new Actions(driver);
+    acts.moveToElement(ElementHelper.FindElement(driver, By.cssSelector("canvas.timeplot-canvas")), 10, 10);
+    acts.build().perform();
+    
+    String expectedText = "Total Price = 6,864  ";
+    String text = ElementHelper.WaitForText(driver, By.xpath("//div[@id='sampleObject']/div/span[2]"), expectedText);
+    
+    assertEquals(expectedText, text);
+    
   }
   
   @AfterClass

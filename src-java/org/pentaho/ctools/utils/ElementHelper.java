@@ -1,5 +1,7 @@
 package org.pentaho.ctools.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,6 +16,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ElementHelper {
+  //Log instance
+  private static Logger log = LogManager.getLogger(ElementHelper.class);
 
 	/**
 	 * This method shall check if the element to search is displayed and is
@@ -184,28 +188,30 @@ public class ElementHelper {
 	 * @return
 	 */
 	public static WebElement FindElement(WebDriver driver, By locator) {
+	  log.debug("Enter:FindElement");
 	  try {
 	    IsElementVisible(driver, locator);
-			
+	    log.debug("Element is visble");
 			List<WebElement> listElements = driver.findElements(locator);
 			if (listElements.size() > 0) {
   			WebElement element = listElements.get(0);
   			if ( element.isDisplayed() && element.isEnabled() ){
+  			  log.debug("return element found it");
   				return element;
   			}
   			else {
-  				System.out.println("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
+  			  log.warn("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
   				return FindElement(driver, locator);
   			}
 			} else {
-			  System.out.println("Trying obtain! Locator: " + locator.toString());
+			  log.warn("Trying obtain! Locator: " + locator.toString());
 			  return null;
 			}
 		} catch (StaleElementReferenceException s) {
-			System.out.println("Stale - got one. Locator: " + locator.toString());
+		  log.error("Stale - got one. Locator: " + locator.toString());
 			return FindElement(driver, locator);
 		} catch ( ElementNotVisibleException v) {
-			System.out.println("NotVisible - got one. Locator: " + locator.toString());
+		  log.error("NotVisible - got one. Locator: " + locator.toString());
 			return IsElementVisible(driver, locator);
 		}
 	}
@@ -213,7 +219,8 @@ public class ElementHelper {
 	
 	/**
 	 * 
-	 * @param elemetn
+	 * @param driver
+	 * @param locator
 	 * @return
 	 */
 	public static String GetText(WebDriver driver, By locator) {
@@ -226,4 +233,33 @@ public class ElementHelper {
 		}
 		return text;
 	}
+	
+	
+	/**
+	 * 
+	 * @param driver
+	 * @param locator
+	 * @param text
+	 * @return
+	 */
+  public static String WaitForText(WebDriver driver, By locator, String text) {
+    String strText = "";
+    
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+        .withTimeout(30, TimeUnit.SECONDS)
+        .pollingEvery(200, TimeUnit.MILLISECONDS)
+        .ignoring(NoSuchElementException.class);
+    
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    
+    boolean found = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, strText));
+    if (found) 
+      strText = GetText(driver, locator);
+    
+    
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    
+    return strText;
+  }
+	
 }
