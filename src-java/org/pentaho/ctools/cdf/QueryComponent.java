@@ -21,15 +21,15 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -41,20 +41,22 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Testing the functionalities related with Text Input Component.
+ * Testing the functionalities related with Query Component.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TextInputComponent {
+public class QueryComponent {
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
+  //Log instance
+  private static Logger log = LogManager.getLogger(QueryComponent.class);
   
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
@@ -64,8 +66,9 @@ public class TextInputComponent {
    */
   @BeforeClass
   public static void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
+    log.debug("setup");
+    driver  = CToolsTestSuite.getDriver();
+    wait    = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -73,13 +76,13 @@ public class TextInputComponent {
   }
 
   /**
-   * Go to the TextInputComponent web page.
+   * Go to the QueryComponent web page.
    */
   public static void init() {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/TextInputComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A37-TextInputComponent%3Atext_input_component.xcdf/generatedContent");
+    // Reference/Core Components/QueryComponent
+    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A70-QueryComponent%3Aquery_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -88,11 +91,11 @@ public class TextInputComponent {
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
+   * Description:
    *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
@@ -104,7 +107,7 @@ public class TextInputComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("TextInputComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("QueryComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -140,112 +143,23 @@ public class TextInputComponent {
    * ############################### Test Case 3 ###############################
    *
    * Test Case Name: 
-   *    Insert a small text
+   *    Query Compoment
    * Description: 
-   *    We pretend validate when we insert a small text an alert is raised. 
-   * Steps: 
-   *    1. Insert text
-   *    2. Check for alert
-   *    3. Check the input text inserted
+   *    We pretend validate the result of a query.
+   * Steps:
+   *    1. Execute the component and check the return value of query data.
    */
   @Test
-  public void tc3_InputSmallPhrase_AlertDispayed() {
+  public void tc3_ExecuteQuery_ReturnedTextAsExpected() {
+    log.debug("tc3_ExecuteQuery_ReturnedTextAsExpected");
+
     // ## Step 1
-    String strInputString = "Hello World!";
-    ElementHelper.FindElement(driver, By.id("myInput")).clear();
-    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(strInputString);
-    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(Keys.ENTER);
-    
-    
-    // ## Step 2
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "you typed: " + strInputString;
-    alert.accept();
-     
-    assertEquals(expectedCnfText, confirmationMsg);
+    String queryTextExpected = ElementHelper.GetText(driver, By.id("sampleObjectResult"));
+    assertEquals(queryTextExpected, "Muscle Machine Inc,197736.93999999997");
   }
-  
-  /**
-   * ############################### Test Case 4 ###############################
-   *
-   * Test Case Name: 
-   *    Insert a long text
-   * Description: 
-   *    We pretend validate when we insert a long text an alert is raised. 
-   * Steps: 
-   *    1. Insert text
-   *    2. Check for alert
-   *    3. Check the input text inserted
-   */
-  @Test
-  public void tc4_InputLongPhrase_AlertDispayed() {
-    // ## Step 1
-    String strInputString = "Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!";
-    strInputString += strInputString;
-    strInputString += strInputString;
-    strInputString += strInputString;
-    strInputString += strInputString;
-    ElementHelper.FindElement(driver, By.id("myInput")).clear();
-    //After clean text, we need to trait the pop-up    
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    alert.accept();
-    
-    
-    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(strInputString);
-    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(Keys.ENTER);
-    
-    
-    // ## Step 2
-    wait.until(ExpectedConditions.alertIsPresent());
-    alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "you typed: " + strInputString;
-    alert.accept();
-     
-    assertEquals(expectedCnfText, confirmationMsg);
-  }
-  
-  /**
-   * ############################### Test Case 5 ###############################
-   *
-   * Test Case Name: 
-   *    Insert special characters
-   * Description: 
-   *    We pretend validate when we insert a special characters an alert is 
-   *    raised. 
-   * Steps: 
-   *    1. Insert text
-   *    2. Check for alert
-   *    3. Check the input text inserted
-   */
-  @Test
-  public void tc5_InputSpecialPhrase_AlertDispayed() {
-    // ## Step 1
-    String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
-    ElementHelper.FindElement(driver, By.id("myInput")).clear();
-    //After clean text, we need to trait the pop-up
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    alert.accept();
-    
-    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(strInputString);
-    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(Keys.ENTER);
-    
-    
-    // ## Step 2
-    wait.until(ExpectedConditions.alertIsPresent());
-    alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "you typed: " + strInputString;
-    alert.accept();
-     
-    assertEquals(expectedCnfText, confirmationMsg);
-  }
-  
+
   @AfterClass
   public static void tearDown() {
+    log.debug("tearDown");
   }
 }

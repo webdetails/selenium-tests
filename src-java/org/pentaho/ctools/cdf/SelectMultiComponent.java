@@ -73,7 +73,7 @@ public class SelectMultiComponent {
   }
 
   /**
-   * Go to the XactionComponent web page.
+   * Go to the SelectMultiComponent web page.
    */
   public static void init() {
     // The URL for the CheckComponent under CDF samples

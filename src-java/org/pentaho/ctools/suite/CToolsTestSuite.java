@@ -21,6 +21,7 @@
 ******************************************************************************/
 package org.pentaho.ctools.suite;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +45,11 @@ import org.pentaho.ctools.cdf.DateInputComponent;
 import org.pentaho.ctools.cdf.DateRangeInputComponent;
 import org.pentaho.ctools.cdf.DialComponent;
 import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
+import org.pentaho.ctools.cdf.PrptComponent;
+import org.pentaho.ctools.cdf.QueryComponent;
+import org.pentaho.ctools.cdf.RadioComponent;
 import org.pentaho.ctools.cdf.SchedulePrptComponent;
+import org.pentaho.ctools.cdf.SelectComponent;
 import org.pentaho.ctools.cdf.SelectMultiComponent;
 import org.pentaho.ctools.cdf.TableComponent;
 import org.pentaho.ctools.cdf.TextComponent;
@@ -60,7 +65,7 @@ import org.pentaho.ctools.security.AccessSystemResources;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //##### Execution Order #####
-	LoginPentaho.class,
+  LoginPentaho.class,
   //CDF
 	AutoCompleteBoxComponent.class,
 	ButtonComponent.class,
@@ -69,7 +74,11 @@ import org.pentaho.ctools.security.AccessSystemResources;
   DateRangeInputComponent.class,
   DialComponent.class,
 	MetaLayerHomeDashboard.class,
+	PrptComponent.class,
+	QueryComponent.class,
+	RadioComponent.class,
   SchedulePrptComponent.class,
+  SelectComponent.class,
 	SelectMultiComponent.class,
 	TableComponent.class,
 	TextComponent.class,
@@ -97,6 +106,8 @@ public class CToolsTestSuite {
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String baseUrl;
+  //Directory are all download files persist
+  private static String downloadDir;
 
   //Log instance
   //private static Logger log = LogManager.getLogger(CToolsTestSuite.class);
@@ -107,6 +118,11 @@ public class CToolsTestSuite {
     System.setProperty("log4j.configurationFile", "log4j2.xml");
     log = LogManager.getLogger(CToolsTestSuite.class);
     log.info("Master setup");
+    
+  //Initialize BASEURL
+    baseUrl = "http://localhost:8080/pentaho/";
+    downloadDir = System.getProperty("user.home") + "\\SeleniumDonwloadDir";
+    new File(downloadDir).mkdir();
     
     //System.setProperty("webdriver.log.file", "/dev/stdout");
     //System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
@@ -123,6 +139,23 @@ public class CToolsTestSuite {
     //Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
     ffProfile.setPreference("intl.accept_languages", "en-us");
+    ffProfile.setPreference("browser.download.folderList",2);//0 - Desktop, 1- Donwload dir, 2 - specify dir
+    ffProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
+    ffProfile.setPreference("browser.download.manager.showWhenStarting",false);
+    ffProfile.setPreference("browser.download.dir", downloadDir);
+    ffProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", 
+          "table/excel;"
+        + "application/vnd.ms-excel;"
+        + "application/msexcel;"
+        + "application/x-msexcel;"
+        + "application/x-ms-excel;"
+        + "application/x-excel;"
+        + "application/x-dos_ms_excel;"
+        + "application/xls;"
+        + "application/x-xls;"
+        + "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;"
+        + "text/csv;"
+        + "application/rtf");
 
 
     //Setting properties for webdriver
@@ -143,9 +176,6 @@ public class CToolsTestSuite {
     wait = new FluentWait<WebDriver>(driver)
         .withTimeout(30, TimeUnit.SECONDS)
         .pollingEvery(5, TimeUnit.SECONDS);
-
-    //Initialize BASEURL
-    baseUrl = "http://localhost:8080/pentaho/";
   }
 
   @AfterClass
@@ -188,5 +218,13 @@ public class CToolsTestSuite {
    */
   public static Wait<WebDriver> getWait() {
     return wait;
+  }
+
+  /**
+   * 
+   * @return
+   */
+  public static String getDownloadDir() {
+    return downloadDir;
   }
 }
