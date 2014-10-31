@@ -90,7 +90,7 @@ public class MetaLayerHomeDashboard {
 
     //Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    
+
     //Wait for title become visible and with value 'Community Dashboard Framework'
   	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     //Wait for visibility of 'Top Ten Customers'
@@ -98,8 +98,8 @@ public class MetaLayerHomeDashboard {
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
     assertEquals("Top Ten Customers", ElementHelper.GetText(driver, By.xpath("//div[@id='titleObject']")));
-    
-    
+
+
     //## Step 2
     //Wait for visibility of 'topTenCustomersDetailsObject' the text 'Details'
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='topTenCustomersDetailsObject']")));
@@ -108,12 +108,13 @@ public class MetaLayerHomeDashboard {
     //click on the 'Details...'
     linkDetails.click();
 
-    
+
     //## Step 3
     //Wait for the frame
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fancybox-wrap")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='fancybox-frame']")));
-    WebElement frame = ElementHelper.FindElement(driver, By.xpath("//iframe[@id='fancybox-frame']"));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.fancybox-inner")));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe")));
+    WebElement frame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
+    String valueFrameAttrId  = frame.getAttribute("id");
     String valueFrameAttrSrc = frame.getAttribute("src");
 
     ///pentaho/plugin/jpivot/Pivot?solution=system&path=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf%2Factions&action=jpivot.xaction&width=500&height=600
@@ -121,15 +122,17 @@ public class MetaLayerHomeDashboard {
     assertTrue(StringUtils.containsIgnoreCase(valueFrameAttrSrc, "action=jpivot.xaction&width=500&height=600"));
 
     //Wait for the element be visible.
-    driver.switchTo().frame("fancybox-frame");
+    driver.switchTo().frame(valueFrameAttrId);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='internal_content']")));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='internal_content']")));
     assertEquals("Measures", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
+    assertEquals("Australian Collectors, Co.", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
+    assertEquals("180,125", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
     
     //Close pop-up
     driver.switchTo().defaultContent();
-    ElementHelper.FindElement(driver, By.xpath("//a[@id='fancybox-close']")).click();
-    ElementHelper.IsElementInvisible(driver, By.id("fancybox-wrap"));
+    ElementHelper.FindElement(driver, By.xpath("/html/body/div[3]/div/div/a")).click();
+    ElementHelper.IsElementInvisible(driver, By.cssSelector("div.fancybox-inner"));
   }
 
   @After
