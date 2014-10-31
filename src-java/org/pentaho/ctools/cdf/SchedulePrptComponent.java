@@ -77,6 +77,7 @@ public class SchedulePrptComponent {
 	 */
 	@BeforeClass
 	public static void setUp() {
+	  log.debug("setup");
 		driver  = CToolsTestSuite.getDriver();
 		wait    = CToolsTestSuite.getWait();
 		baseUrl = CToolsTestSuite.getBaseUrl();
@@ -400,6 +401,7 @@ public class SchedulePrptComponent {
 
 	@AfterClass
 	public static void tearDown() {
+	  log.debug("tearDown");
 		removeAllCreatedSchedules();
 	}
 }

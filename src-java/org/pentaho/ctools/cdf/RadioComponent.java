@@ -83,7 +83,7 @@ public class RadioComponent {
   public static void init() {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/QueryComponent
+    // Reference/Core Components/RadioComponent
     driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A52-RadioComponent%3Aradio_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear

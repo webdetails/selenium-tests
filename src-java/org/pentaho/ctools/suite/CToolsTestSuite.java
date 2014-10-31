@@ -45,6 +45,9 @@ import org.pentaho.ctools.cdf.DateInputComponent;
 import org.pentaho.ctools.cdf.DateRangeInputComponent;
 import org.pentaho.ctools.cdf.DialComponent;
 import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
+import org.pentaho.ctools.cdf.MonthPickerComponent;
+import org.pentaho.ctools.cdf.MultiButtonComponent;
+import org.pentaho.ctools.cdf.OpenFlashChartComponent;
 import org.pentaho.ctools.cdf.PrptComponent;
 import org.pentaho.ctools.cdf.QueryComponent;
 import org.pentaho.ctools.cdf.RadioComponent;
@@ -67,26 +70,29 @@ import org.pentaho.ctools.security.AccessSystemResources;
   //##### Execution Order #####
   LoginPentaho.class,
   //CDF
-	AutoCompleteBoxComponent.class,
-	ButtonComponent.class,
-	CheckComponent.class,
+  AutoCompleteBoxComponent.class,
+  ButtonComponent.class,
+  CheckComponent.class,
   DateInputComponent.class,
   DateRangeInputComponent.class,
   DialComponent.class,
-	MetaLayerHomeDashboard.class,
-	PrptComponent.class,
-	QueryComponent.class,
-	RadioComponent.class,
+  MetaLayerHomeDashboard.class,
+  MonthPickerComponent.class,
+  MultiButtonComponent.class,
+  OpenFlashChartComponent.class,
+  PrptComponent.class,
+  QueryComponent.class,
+  RadioComponent.class,
   SchedulePrptComponent.class,
   SelectComponent.class,
-	SelectMultiComponent.class,
-	TableComponent.class,
-	TextComponent.class,
-	TextInputComponent.class,
-	TimePlotComponent.class,
-	TrafficComponent.class,	
-	VisualizationAPIComponent.class,
-	XactionComponent.class,
+  SelectMultiComponent.class,
+  TableComponent.class,
+  TextComponent.class,
+  TextInputComponent.class,
+  TimePlotComponent.class,
+  TrafficComponent.class,	
+  VisualizationAPIComponent.class,
+  XactionComponent.class,
   //CDE
   //MapComponentReference.class,
   //CDE - Widgets
