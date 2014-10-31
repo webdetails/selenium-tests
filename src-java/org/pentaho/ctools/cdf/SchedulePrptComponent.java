@@ -29,6 +29,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -64,6 +66,8 @@ public class SchedulePrptComponent {
 	private static String          baseUrl;
 	// The schedule name for TC3
 	private static String schNameTc3 = "SchedulePSTc3";
+  //Log instance
+  private static Logger log = LogManager.getLogger(SchedulePrptComponent.class);
 	
 	@Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
@@ -73,8 +77,8 @@ public class SchedulePrptComponent {
 	 */
 	@BeforeClass
 	public static void setUp() {
-		driver = CToolsTestSuite.getDriver();
-		wait = CToolsTestSuite.getWait();
+		driver  = CToolsTestSuite.getDriver();
+		wait    = CToolsTestSuite.getWait();
 		baseUrl = CToolsTestSuite.getBaseUrl();
 
 		// Go to sample
@@ -160,7 +164,7 @@ public class SchedulePrptComponent {
 		
 		//Initialize some data
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
+		SimpleDateFormat sdfDay = new SimpleDateFormat("d");
 		Date dNow = new Date();
 		Calendar c = Calendar.getInstance();
 		c.setTime(dNow);
@@ -174,16 +178,16 @@ public class SchedulePrptComponent {
 
 		
 		// ## Step 2
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("jqi_state_basicState")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("jqistate_basicState")));
 		//Set schedule name
 		ElementHelper.FindElement(driver, By.id("nameIn")).clear();
 		ElementHelper.FindElement(driver, By.id("nameIn")).sendKeys(schNameTc3);
     //Set schedule location		
 		ElementHelper.FindElement(driver, By.id("locationIn")).clear();
 		ElementHelper.FindElement(driver, By.id("locationIn")).sendKeys(schLocation);
-    //Select Month
+    //Select Monthly
     Select slRecurrence = new Select(ElementHelper.FindElement(driver, By.id("recurrId")));
-    slRecurrence.selectByValue("monthly");    
+    slRecurrence.selectByValue("monthly");
     //Select Hour
     Select slHours = new Select(ElementHelper.FindElement(driver, By.id("hours")));
     slHours.selectByValue("9");
@@ -211,12 +215,14 @@ public class SchedulePrptComponent {
 		String tomorrowDay = sdfDay.format(dTomorrow);
 		for(WebElement cell: columns) {
         String strCell = cell.getText();
-		  if (strCell.equals(tomorrowDay)){        
+		  if (strCell.equals(tomorrowDay)){
         cell.findElement(By.linkText(tomorrowDay)).click();
 		    break;
 		  }
 		}
 		//End
+		//Select End Date
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("endByRadio")));
 		ElementHelper.FindElement(driver, By.id("endByRadio")).click();
 		ElementHelper.FindElement(driver, By.id("endByIn")).sendKeys(sdf.format(d30days));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='ui-datepicker-calendar']")));
@@ -231,12 +237,14 @@ public class SchedulePrptComponent {
       }
     }
 		//Submit Form
+    wait.until(ExpectedConditions.elementToBeClickable(By.id("jqi_basicState_buttonOk")));
 		ElementHelper.FindElement(driver, By.id("jqi_basicState_buttonOk")).click();
 		//Wait for the new window.
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("jqi_state_mailState")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("jqistate_mailState")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("jqi_mailState_buttonOk")));
 		ElementHelper.FindElement(driver, By.id("jqi_mailState_buttonOk")).click();
-		
-		
+
+
 		// ## Step 3
 		wait.until(ExpectedConditions.alertIsPresent());		
 		Alert alert = driver.switchTo().alert();
@@ -244,7 +252,7 @@ public class SchedulePrptComponent {
     alert.accept();
     assertEquals(confirmationMsg, "Successfully scheduled.");
 
-    
+
 		// ## Step 4
     //-->Need to check if the schedule was created
     //Go to home page

@@ -155,20 +155,14 @@ public class TrafficComponent {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.img.trafficYellow")));
     WebElement elemTraffic = ElementHelper.FindElement(driver, By.cssSelector("div.img.trafficYellow"));
     assertNotNull(elemTraffic);
-    
-    
+
+
     // ## Step 2
     Actions acts = new Actions(driver);
     acts.moveToElement(elemTraffic, 5, 5);
     acts.build().perform();
-    
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='tooltip']/h3")));
-    
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//h3/div[@class='img trafficRed']")));
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//h3/div[@class='img trafficYellow']")));
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//h3/div[@class='img trafficGreen']")));
-    
-    String text = ElementHelper.GetText(driver, By.xpath("//div[@id='tooltip']/h3"));
+
+    String text = ElementHelper.GetText(driver, By.xpath("//div[@class='ui-tooltip-content']"));
     String expectedTextV1 = "Value: 1.43199389E8";
     String expectedTextV2 = "70000000";
     String expectedTextV3 = "150000000";
