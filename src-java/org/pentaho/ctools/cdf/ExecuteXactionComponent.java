@@ -24,6 +24,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.apache.http.HttpStatus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -47,13 +49,15 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class XactionComponent {
+public class ExecuteXactionComponent {
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
+  //Log instance
+  private static Logger          log                = LogManager.getLogger(ExecuteXactionComponent.class);
 
   @Rule
   public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
@@ -72,13 +76,13 @@ public class XactionComponent {
   }
 
   /**
-   * Go to the XactionComponent web page.
+   * Go to the ExecuteXactionComponent web page.
    */
   public static void init() {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/XactionComponent
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A10-XactionComponent%3Axaction_component.xcdf/generatedContent");
+    // Reference/Core Components/ExecuteXactionComponent
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A76-ExecuteXactionComponent%3Aexecute_xaction_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -103,7 +107,7 @@ public class XactionComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("XactionComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("ExecuteXactionComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -139,17 +143,32 @@ public class XactionComponent {
    * ############################### Test Case 3 ###############################
    *
    * Test Case Name:
-   *    Xacion
+   *    Execute Xacion
    * Description:
-   *    We pretend validate the generated graphic (in an image) and if the image
+   *    We pretend validate the generated chart (in an image) and if the image
    *    has a valid url.
    * Steps:
-   *    1. Check if a graphic was generated
-   *    2. Check the http request for the image generated
+   *    1. Click to generate chart
+   *    2. Check if a chart was generated
+   *    3. Check the http request for the image generated
    */
   @Test
-  public void tc3_GenerateChart_ChartIsDisplayed() {
+  public void tc3_PressToGenerateChart_ChartIsDisplayed() {
     // ## Step 1
+    String buttonName = ElementHelper.GetText(driver, By.xpath("//button/span"));
+    assertEquals("Execute XAction", buttonName);
+    //Click in button
+    ElementHelper.FindElement(driver, By.xpath("//button")).click();
+
+    // ## Step 1
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.fancybox-skin")));
+    WebElement elemIframe = ElementHelper.FindElement(driver, By.cssSelector("div.fancybox-inner iframe"));
+    String attrId = elemIframe.getAttribute("id");
+    driver.switchTo().frame(attrId);
+    //Check the title
+    String chartTitle = ElementHelper.GetText(driver, By.xpath("//table/tbody/tr/td"));
+    assertEquals("Action Successful", chartTitle);
+    //Check for the displayed image
     WebElement xactionElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
     assertNotNull(xactionElement);
 
@@ -161,17 +180,22 @@ public class XactionComponent {
     assertEquals(attrWidth, "500");
     assertEquals(attrHeight, "600");
 
-    // ## Step 2
+    // ## Step 3
     try {
       URL url = new URL(attrSrc);
       URLConnection connection = url.openConnection();
       connection.connect();
 
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-
     } catch (Exception ex) {
-      ex.printStackTrace();
+      log.error(ex.getMessage());
     }
+
+    //Close pop-up window
+    driver.switchTo().defaultContent();
+    ElementHelper.FindElement(driver, By.xpath("/html/body/div[3]/div/div/a")).click();
+    ElementHelper.IsElementInvisible(driver, By.cssSelector("div.fancybox-inner"));
+    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//button")));
   }
 
   @AfterClass

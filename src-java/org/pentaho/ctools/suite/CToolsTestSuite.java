@@ -1,24 +1,18 @@
-/*!*****************************************************************************
-*
-* Selenium Tests For CTools
-*
-* Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
-*
-*******************************************************************************
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with
-* the License. You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-******************************************************************************/
+/*
+ * !*****************************************************************************
+ * Selenium Tests For CTools Copyright (C) 2002-2014 by Pentaho :
+ * http://www.pentaho.com
+ * ********************************************************
+ * ********************** Licensed under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law
+ * or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ * ****************************************************************************
+ */
 package org.pentaho.ctools.suite;
 
 import java.io.File;
@@ -44,6 +38,8 @@ import org.pentaho.ctools.cdf.CheckComponent;
 import org.pentaho.ctools.cdf.DateInputComponent;
 import org.pentaho.ctools.cdf.DateRangeInputComponent;
 import org.pentaho.ctools.cdf.DialComponent;
+import org.pentaho.ctools.cdf.ExecuteXactionComponent;
+import org.pentaho.ctools.cdf.JFreeChartComponent;
 import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
 import org.pentaho.ctools.cdf.MonthPickerComponent;
 import org.pentaho.ctools.cdf.MultiButtonComponent;
@@ -67,69 +63,44 @@ import org.pentaho.ctools.security.AccessSystemResources;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-  //##### Execution Order #####
-  LoginPentaho.class,
-  //CDF
-  AutoCompleteBoxComponent.class,
-  ButtonComponent.class,
-  CheckComponent.class,
-  DateInputComponent.class,
-  DateRangeInputComponent.class,
-  DialComponent.class,
-  MetaLayerHomeDashboard.class,
-  MonthPickerComponent.class,
-  MultiButtonComponent.class,
-  OpenFlashChartComponent.class,
-  PrptComponent.class,
-  QueryComponent.class,
-  RadioComponent.class,
-  SchedulePrptComponent.class,
-  SelectComponent.class,
-  SelectMultiComponent.class,
-  TableComponent.class,
-  TextComponent.class,
-  TextInputComponent.class,
-  TimePlotComponent.class,
-  TrafficComponent.class,	
-  VisualizationAPIComponent.class,
-  XactionComponent.class,
-  //CDE
-  //MapComponentReference.class,
-  //CDE - Widgets
-  //CreateWidget.class,
-  //AddParamTableComponent.class,
-  //SelectCdaFileAsDatasource.class,
-  //SimpleExtensionPoints.class,
-  //Security
-  AccessSystemResources.class,
-	LogoutPentaho.class
-})
-
+//##### Execution Order #####
+LoginPentaho.class,
+//CDF
+AutoCompleteBoxComponent.class, ButtonComponent.class, CheckComponent.class, DateInputComponent.class, DateRangeInputComponent.class, DialComponent.class, ExecuteXactionComponent.class, JFreeChartComponent.class, MetaLayerHomeDashboard.class, MonthPickerComponent.class, MultiButtonComponent.class, OpenFlashChartComponent.class, PrptComponent.class, QueryComponent.class, RadioComponent.class, SchedulePrptComponent.class, SelectComponent.class, SelectMultiComponent.class, TableComponent.class, TextComponent.class, TextInputComponent.class, TimePlotComponent.class, TrafficComponent.class, VisualizationAPIComponent.class, XactionComponent.class,
+//CDE
+//MapComponentReference.class,
+//CDE - Widgets
+//CreateWidget.class,
+//AddParamTableComponent.class,
+//SelectCdaFileAsDatasource.class,
+//SimpleExtensionPoints.class,
+//Security
+AccessSystemResources.class, LogoutPentaho.class })
 public class CToolsTestSuite {
   /// Instance of the driver (browser emulator)
-  private static WebDriver driver;
+  private static WebDriver       driver;
   // Instance to be used on wait commands
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
-  private static String baseUrl;
+  private static String          baseUrl;
   //Directory are all download files persist
-  private static String downloadDir;
+  private static String          downloadDir;
 
   //Log instance
   //private static Logger log = LogManager.getLogger(CToolsTestSuite.class);
-  private static Logger log;
+  private static Logger          log;
 
   @BeforeClass
   public static void setUpClass() throws IOException {
     System.setProperty("log4j.configurationFile", "log4j2.xml");
     log = LogManager.getLogger(CToolsTestSuite.class);
     log.info("Master setup");
-    
-  //Initialize BASEURL
+
+    //Initialize BASEURL
     baseUrl = "http://localhost:8080/pentaho/";
     downloadDir = System.getProperty("user.home") + "\\SeleniumDonwloadDir";
     new File(downloadDir).mkdir();
-    
+
     //System.setProperty("webdriver.log.file", "/dev/stdout");
     //System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
 
@@ -141,47 +112,30 @@ public class CToolsTestSuite {
     //logs.enable(LogType.PROFILER, Level.ALL);
     //logs.enable(LogType.CLIENT, Level.ALL);
     //logs.enable(LogType.PERFORMANCE, Level.ALL);
-    
+
     //Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
     ffProfile.setPreference("intl.accept_languages", "en-us");
-    ffProfile.setPreference("browser.download.folderList",2);//0 - Desktop, 1- Donwload dir, 2 - specify dir
+    ffProfile.setPreference("browser.download.folderList", 2);//0 - Desktop, 1- Donwload dir, 2 - specify dir
     ffProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
-    ffProfile.setPreference("browser.download.manager.showWhenStarting",false);
+    ffProfile.setPreference("browser.download.manager.showWhenStarting", false);
     ffProfile.setPreference("browser.download.dir", downloadDir);
-    ffProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", 
-          "table/excel;"
-        + "application/vnd.ms-excel;"
-        + "application/msexcel;"
-        + "application/x-msexcel;"
-        + "application/x-ms-excel;"
-        + "application/x-excel;"
-        + "application/x-dos_ms_excel;"
-        + "application/xls;"
-        + "application/x-xls;"
-        + "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;"
-        + "text/csv;"
-        + "application/rtf");
-
+    ffProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "table/excel;" + "application/vnd.ms-excel;" + "application/msexcel;" + "application/x-msexcel;" + "application/x-ms-excel;" + "application/x-excel;" + "application/x-dos_ms_excel;" + "application/xls;" + "application/x-xls;" + "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;" + "text/csv;" + "application/rtf");
 
     //Setting properties for webdriver
     DesiredCapabilities capabilities = DesiredCapabilities.firefox();
     //capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
     capabilities.setCapability(FirefoxDriver.PROFILE, ffProfile);
 
-
     //JavaScriptError.addExtension(ffProfile);
     driver = new FirefoxDriver(capabilities);
-    driver.manage().window().setSize(new Dimension(1980,1080));
+    driver.manage().window().setSize(new Dimension(1980, 1080));
     driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 
-    
     //Initialize WAIT
-    wait = new FluentWait<WebDriver>(driver)
-        .withTimeout(30, TimeUnit.SECONDS)
-        .pollingEvery(5, TimeUnit.SECONDS);
+    wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(5, TimeUnit.SECONDS);
   }
 
   @AfterClass
@@ -214,7 +168,7 @@ public class CToolsTestSuite {
    * TODO
    * @return
    */
-  public static String getBaseUrl(){
+  public static String getBaseUrl() {
     return baseUrl;
   }
 
@@ -227,7 +181,7 @@ public class CToolsTestSuite {
   }
 
   /**
-   * 
+   *
    * @return
    */
   public static String getDownloadDir() {
