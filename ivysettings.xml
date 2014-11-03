@@ -25,5 +25,5 @@
             <ibiblio name="public-maven" root="${public.resolve.repo}" m2compatible="true" />
         </chain>
     </resolvers>
-    <caches lockStrategy="artifact-lock" defaultCacheDir="${ivy.cache.dir}" resolutionCacheDir="${ivy.default.ivy.user.dir}/resol-cache${env.EXECUTOR_NUMBER}" />
+    <caches lockStrategy="artifact-lock" defaultCacheDir="${ivy.default.ivy.user.dir}/cache" resolutionCacheDir="${ivy.default.ivy.user.dir}/resol-cache${env.EXECUTOR_NUMBER}" />
 </ivysettings>
