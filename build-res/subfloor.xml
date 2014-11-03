@@ -180,6 +180,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               description="Base directory that holds all IVY dependency report files" />
     <property name="ivy.configs" value="*" description="Set of configs used for IVY reporting and checking operations" />
     <property name="ivy.use.symlinks" value="true" description="Flag indicating if Ivy should create symlinks when retrieving artifacts."/>
+    <property name="ivy.cache.dir"
+              value="${user.home}/.ivy2/cache"
+              description="Dir of ivy cache" />
+    
 
     <!-- TEST propertis -->
     <property name="test.html.reports.dir" value="${basedir}/reports-html" description="Directory to drag reports for the selenium html scripts"/>
@@ -520,7 +524,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <target name="resolve-plugin" depends="install-ivy" description="Retrieves all the dependent libraries">
             <echo message="Resolve dependencies." />
             <ivy:resolve file="${ivy.file}" conf="plugin"/>
-            <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}"/>
+            <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}" sync="true"/>
     </target>
 
     <!--=======================================================================
@@ -533,7 +537,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <target name="resolve-test-java" depends="install-ivy" description="Retrieves all the dependent libraries">
         <echo message="Resolve dependencies." />
         <ivy:resolve file="${ivy.file}" conf="test-java"/>
-        <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}"/>
+        <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" sync="true"/>
     </target>
 
 
