@@ -21,11 +21,18 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hamcrest.CoreMatchers;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -38,9 +45,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Testing the functionalities related with Text Component.
@@ -57,9 +61,12 @@ public class TextComponent {
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
-  
+  //Time of day
+  private Date                   dNow;
+  //Log instance
+  private static Logger          log                = LogManager.getLogger(CommentComponent.class);
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -81,7 +88,7 @@ public class TextComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/TextComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A34-TextComponent%3Atext_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A34-TextComponent%3Atext_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -90,11 +97,11 @@ public class TextComponent {
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
@@ -106,17 +113,17 @@ public class TextComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("TextComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("TextComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
@@ -125,13 +132,14 @@ public class TextComponent {
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    this.dNow = new Date();
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
-    
+
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = driver.findElements(By.id("sampleObject")).size();
@@ -141,30 +149,34 @@ public class TextComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Text Component
-   * Description: 
-   *    The component just displayed a text in sample area, so we want to 
-   *    validate the displayed text is according specification. 
-   * Steps: 
+   * Description:
+   *    The component just displayed a text in sample area, so we want to
+   *    validate the displayed text is according specification.
+   * Steps:
    *    1. Validate the displayed text
    */
   @Test
   public void tc3_DisplayedText_ContainsExpectedText() {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
-    
+
     SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd yyyy HH:mm", Locale.US);
-    Date dNow = new Date();
-    String strToday = sdf.format(dNow);
-    
+    String strToday = sdf.format(this.dNow);
+
     String text = ElementHelper.GetText(driver, By.id("sampleObject"));
-    String expectedText = "My text generated in " + strToday ;
-    
-    assertTrue(text.startsWith(expectedText));
-    assertTrue(text.contains("GMT+0000"));
+    String expectedText = "My text generated in " + strToday;
+
+    boolean displayTime = text.startsWith(expectedText);
+    if (!displayTime) {
+      log.error("Displayed time: " + text);
+      log.error("Expected time: " + expectedText);
+    }
+
+    Assert.assertThat("Displayed time: " + text + "Expected time: " + expectedText, text, CoreMatchers.containsString(expectedText));
+    Assert.assertThat("Displayed time: " + text, text, CoreMatchers.containsString("GMT+0000"));
   }
-  
+
   @AfterClass
-  public static void tearDown() {
-  }
+  public static void tearDown() {}
 }
