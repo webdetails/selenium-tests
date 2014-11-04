@@ -65,6 +65,9 @@ import org.pentaho.ctools.cdf.TimePlotComponent;
 import org.pentaho.ctools.cdf.TrafficComponent;
 import org.pentaho.ctools.cdf.VisualizationAPIComponent;
 import org.pentaho.ctools.cdf.XactionComponent;
+import org.pentaho.ctools.cgg.BarChart;
+import org.pentaho.ctools.cgg.DialChart;
+import org.pentaho.ctools.cgg.ScatterChart;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.security.AccessSystemResources;
@@ -72,6 +75,7 @@ import org.pentaho.ctools.security.AccessSystemResources;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 //##### Execution Order #####
+//Start Tests
 LoginPentaho.class,
 //CDF
 AutoCompleteBoxComponent.class, ButtonComponent.class, CheckComponent.class, CommentComponent.class, DateInputComponent.class, DateRangeInputComponent.class, DialComponent.class, ExecutePrptComponent.class, ExecuteXactionComponent.class, JFreeChartComponent.class, MetaLayerHomeDashboard.class, MonthPickerComponent.class, MultiButtonComponent.class, OpenFlashChartComponent.class, PrptComponent.class, QueryComponent.class, RadioComponent.class, SchedulePrptComponent.class, SelectComponent.class, SelectMultiComponent.class, TableComponent.class, TextComponent.class, TextInputComponent.class, TimePlotComponent.class, TrafficComponent.class, VisualizationAPIComponent.class, XactionComponent.class,
@@ -82,6 +86,8 @@ AutoCompleteBoxComponent.class, ButtonComponent.class, CheckComponent.class, Com
 //AddParamTableComponent.class,
 //SelectCdaFileAsDatasource.class,
 //SimpleExtensionPoints.class,
+//CGG
+BarChart.class, ScatterChart.class, DialChart.class,
 //Security
 AccessSystemResources.class,
 //End Tests

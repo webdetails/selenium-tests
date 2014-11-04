@@ -201,7 +201,7 @@ public class CommentComponent {
     String smallText = "Remove this comment please";
     String longText = "The policy states that a pre departure beverage should be served to First Class/Envoy Class customers on every flight. Beverages given by flight attendants (including bottles of water) must be collected before or during the walk through before takeoff/landing. Because we have not integrated ALL P/P's between East/West, you may find that the West f/a's collect before closing the a/c door as it was/may still be policy. Reasons short of laziness to not serve? Catering hasn't provided adequate supplies yet. Steady stream of passengers because the flight is way late and the agents have a steady flow of customers line up. Even then, they should try. Short of that, there is NO excuse.";
     String specCharText = "+´~~º-113334233&#$%66/8&%$53";
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
 
     /*
      * ## Step 1
@@ -379,6 +379,7 @@ public class CommentComponent {
           int nTry = 1000;
           while (nTry > 0) {
             int nowSize = driver.findElements(By.cssSelector("div.archive")).size();
+            log.debug("size: " + nowSize + "Expected: " + (nIteractions - i));
             if (nowSize == nIteractions - i) {
               break;//The code was updated
             }
