@@ -368,6 +368,7 @@ public class CommentComponent {
 
     List<WebElement> listEraseComments = driver.findElements(By.cssSelector("div.archive"));
     int nIteractions = listEraseComments.size();
+    log.info("Number elements to remove: " + nIteractions);
     if (nIteractions > 0) {
       log.debug("We have comments to remove");
       for (int i = 1; i <= nIteractions; i++) {
@@ -377,6 +378,7 @@ public class CommentComponent {
         acts.moveToElement(ElementHelper.FindElement(driver, By.cssSelector("div.archive")));
         acts.click();
         acts.perform();
+        log.info("One comment removed.");
         //TODO
         /*
         if (i != nIteractions) {
