@@ -395,9 +395,9 @@ public class CommentComponent {
             int nowSize = driver.findElements(By.cssSelector("div.archive")).size();
             log.debug("size: " + nowSize + "Expected: " + (nIteractions - i));
             log.info("ToDEL: size: " + nowSize + "Expected: " + (nIteractions - i));
-            int nExpectedSize = nIteractions - i;
+            //int nExpectedSize = nIteractions - i;
             log.info("ToDEL: expected size: " + nExpectedSize);
-            if (nowSize == nExpectedSize) {
+            if (nowSize == nIteractions - i) {
               log.info("ToDEL: look next");
               break;//The code was updated
             }
