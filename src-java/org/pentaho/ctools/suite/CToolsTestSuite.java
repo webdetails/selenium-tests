@@ -74,10 +74,9 @@ import org.pentaho.ctools.security.AccessSystemResources;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-LoginPentaho.class,
+/*LoginPentaho.class,
 CommentComponent.class,
-LogoutPentaho.class
-/*
+LogoutPentaho.class*/
 //##### Execution Order #####
 //Start Tests
 LoginPentaho.class,
@@ -95,7 +94,7 @@ BarChart.class, ScatterChart.class, DialChart.class,
 //Security
 AccessSystemResources.class,
 //End Tests
-LogoutPentaho.class*/ })
+LogoutPentaho.class })
 public class CToolsTestSuite {
   /// Instance of the driver (browser emulator)
   private static WebDriver       driver;
