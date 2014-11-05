@@ -94,7 +94,7 @@ BarChart.class, ScatterChart.class, DialChart.class,
 //Security
 AccessSystemResources.class,
 //End Tests
-LogoutPentaho.class })
+LogoutPentaho.class})
 public class CToolsTestSuite {
   /// Instance of the driver (browser emulator)
   private static WebDriver       driver;

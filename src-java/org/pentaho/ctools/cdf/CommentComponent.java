@@ -162,7 +162,6 @@ public class CommentComponent {
   @Test
   public void tc3_DisplayComponent_CheckDisplayedPage() {
     log.debug("tc3_SelectEachItem_AlertDisplayed");
-    log.info("ToDEL: enter: tc3_DisplayComponent_CheckDisplayedPage");
     /*
      * Guarantee no comments displayed
      */
@@ -177,7 +176,6 @@ public class CommentComponent {
 
     String refreshComments = ElementHelper.GetText(driver, By.cssSelector("div.navigateRefresh"));
     assertEquals("Refresh", refreshComments);
-    log.info("ToDEL: exit: tc3_DisplayComponent_CheckDisplayedPage");
   }
 
   /**
@@ -195,7 +193,6 @@ public class CommentComponent {
   @Test
   public void tc4_AddComponent_CommentIsDisplayed() {
     log.debug("tc3_SelectEachItem_AlertDisplayed");
-    log.info("ToDEL: enter: tc4_AddComponent_CommentIsDisplayed");
     /*
      * Guarantee no comments displayed
      */
@@ -302,8 +299,6 @@ public class CommentComponent {
     assertThat("Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString(strCommentTimeAdded));
     commentAdded1 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[3]/div[2]/div"));
     assertEquals(commentAdded1, smallText);
-
-    log.info("ToDEL: exit: tc4_AddComponent_CommentIsDisplayed");
   }
 
   /**
@@ -320,7 +315,6 @@ public class CommentComponent {
   @Test
   public void tc5_RemoveComponent_CommentRemoved() {
     log.debug("tc5_RemoveComponent_CommentRemoved");
-    log.info("ToDEL: enter: tc5_RemoveComponent_CommentRemoved");
     /*
      * Guarantee no comments displayed
      */
@@ -351,9 +345,10 @@ public class CommentComponent {
     Actions acts = new Actions(driver);
     acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div")));
     acts.build().perform();
-    ElementHelper.FindElement(driver, By.cssSelector("div.archive")).click();
-    //wait for no element present
-    ElementHelper.IsElementInvisible(driver, By.cssSelector("div.archive"));
+    acts.perform();
+    acts.moveToElement(ElementHelper.FindElement(driver, By.cssSelector("div.archive")));
+    acts.click();
+    acts.perform();
     //Check we don't have more comments
     noComments = ElementHelper.GetText(driver, By.cssSelector("div.comment"));
     assertEquals("No Comments to show!", noComments);
@@ -361,8 +356,6 @@ public class CommentComponent {
     assertEquals("Add Comment", addComments);
     String refreshComments = ElementHelper.GetText(driver, By.cssSelector("div.navigateRefresh"));
     assertEquals("Refresh", refreshComments);
-
-    log.info("ToDEL: exit: tc5_RemoveComponent_CommentRemoved");
   }
 
   /**
@@ -377,36 +370,20 @@ public class CommentComponent {
     int nIteractions = listEraseComments.size();
     if (nIteractions > 0) {
       log.debug("We have comments to remove");
-      log.info("ToDEL: We have comments to remove " + nIteractions);
       for (int i = 1; i <= nIteractions; i++) {
-        log.info("ToDEL: Iteration " + i);
         Actions acts = new Actions(driver);
         acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div")));
-        acts.build().perform();
-        log.info("ToDEL: mouse over");
-        ElementHelper.FindElement(driver, By.cssSelector("div.archive")).click();
-        log.info("ToDEL: click");
-
+        acts.perform();
+        acts.moveToElement(ElementHelper.FindElement(driver, By.cssSelector("div.archive")));
+        acts.click();
+        acts.perform();
+        //TODO
+        /*
         if (i != nIteractions) {
-          log.info("ToDEL: check if was updated");
-          int nTry = 1000;
-          while (nTry > 0) {
-            log.info("ToDEL: check for updated");
-            int nowSize = driver.findElements(By.cssSelector("div.archive")).size();
-            log.debug("size: " + nowSize + "Expected: " + (nIteractions - i));
-            log.info("ToDEL: size: " + nowSize + "Expected: " + (nIteractions - i));
-            //int nExpectedSize = nIteractions - i;
-            log.info("ToDEL: expected size: " + (nIteractions - i));
-            if (nowSize == nIteractions - i) {
-              log.info("ToDEL: look next");
-              break;//The code was updated
-            }
-            nTry--;
-          }
-        }
+          //ElementHelper.WaitForInvisible(driver, By.xpath("//div[@id='sampleObject']/div/div/div[" + (nIteractions-i+1) + "]/div"));
+        }*/
       }
     }
-    log.info("ToDEL: leave remove comments");
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 

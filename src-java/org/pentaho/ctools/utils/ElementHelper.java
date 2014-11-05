@@ -277,4 +277,21 @@ public class ElementHelper {
     return strText;
   }
 
+  public static void WaitForInvisible(WebDriver driver, By locator) {
+    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+
+    for (int i = 0; i < 1000; i++) {
+      try {
+        driver.findElement(locator);
+      } catch (NoSuchElementException s) {
+        log.error("NuSuchElement - got it. Locator: " + locator.toString());
+        break;
+      } catch (StaleElementReferenceException s) {
+        log.error("Stale - got it. Locator: " + locator.toString());        
+      }
+    }
+
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);    
+  }
+
 }
