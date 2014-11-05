@@ -62,7 +62,7 @@ public class TextComponent {
   // The base url to be append the relative url in test
   private static String          baseUrl;
   //Time of day
-  private Date                   dNow;
+  private static Date            dNow;
   //Log instance
   private static Logger          log                = LogManager.getLogger(CommentComponent.class);
   @Rule
