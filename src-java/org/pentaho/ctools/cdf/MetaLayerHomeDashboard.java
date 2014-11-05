@@ -123,7 +123,6 @@ public class MetaLayerHomeDashboard {
 
     //Wait for the element be visible.
     driver.switchTo().frame(valueFrameAttrId);
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='internal_content']")));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='internal_content']")));
     assertEquals("Measures", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
     assertEquals("Australian Collectors, Co.", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
