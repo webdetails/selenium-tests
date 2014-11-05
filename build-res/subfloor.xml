@@ -524,7 +524,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <target name="resolve-plugin" depends="install-ivy" description="Retrieves all the dependent libraries">
             <echo message="Resolve dependencies." />
             <ivy:resolve file="${ivy.file}" conf="plugin"/>
-            <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact].[ext]" symlink="${ivy.use.symlinks.internal}" sync="true"/>
+            <ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" sync="true"/>
     </target>
 
     <!--=======================================================================
