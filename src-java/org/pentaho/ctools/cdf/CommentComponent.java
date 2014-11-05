@@ -396,7 +396,7 @@ public class CommentComponent {
             log.debug("size: " + nowSize + "Expected: " + (nIteractions - i));
             log.info("ToDEL: size: " + nowSize + "Expected: " + (nIteractions - i));
             //int nExpectedSize = nIteractions - i;
-            log.info("ToDEL: expected size: " + nExpectedSize);
+            log.info("ToDEL: expected size: " + (nIteractions - i));
             if (nowSize == nIteractions - i) {
               log.info("ToDEL: look next");
               break;//The code was updated
