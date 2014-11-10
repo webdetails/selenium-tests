@@ -132,7 +132,7 @@ public class TextComponent {
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
-    this.dNow = new Date();
+    dNow = new Date();
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -162,7 +162,7 @@ public class TextComponent {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
 
     SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd yyyy HH:mm", Locale.US);
-    String strToday = sdf.format(this.dNow);
+    String strToday = sdf.format(dNow);
 
     String text = ElementHelper.GetText(driver, By.id("sampleObject"));
     String expectedText = "My text generated in " + strToday;

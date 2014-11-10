@@ -38,6 +38,9 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.pentaho.ctools.cda.CDACacheManager;
+import org.pentaho.ctools.cda.CDADatasourceTest;
+import org.pentaho.ctools.cda.MondrianJNDI;
 import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.ButtonComponent;
 import org.pentaho.ctools.cdf.CheckComponent;
@@ -73,9 +76,7 @@ import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.security.AccessSystemResources;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({
-/*LoginPentaho.class,
-CommentComponent.class,
+@Suite.SuiteClasses({ /*LoginPentaho.class,
 LogoutPentaho.class*/
 //##### Execution Order #####
 //Start Tests
@@ -89,12 +90,14 @@ AutoCompleteBoxComponent.class, ButtonComponent.class, CheckComponent.class, Com
 //AddParamTableComponent.class,
 //SelectCdaFileAsDatasource.class,
 //SimpleExtensionPoints.class,
+//CDA
+CDADatasourceTest.class, MondrianJNDI.class, CDACacheManager.class,
 //CGG
 BarChart.class, ScatterChart.class, DialChart.class,
 //Security
 AccessSystemResources.class,
 //End Tests
-LogoutPentaho.class})
+LogoutPentaho.class })
 public class CToolsTestSuite {
   /// Instance of the driver (browser emulator)
   private static WebDriver       driver;
@@ -139,7 +142,7 @@ public class CToolsTestSuite {
     ffProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
     ffProfile.setPreference("browser.download.manager.showWhenStarting", false);
     ffProfile.setPreference("browser.download.dir", downloadDir);
-    ffProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "table/excel;" + "application/vnd.ms-excel;" + "application/msexcel;" + "application/x-msexcel;" + "application/x-ms-excel;" + "application/x-excel;" + "application/x-dos_ms_excel;" + "application/xls;" + "application/x-xls;" + "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;" + "text/csv;" + "application/rtf");
+    ffProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf;text/html");
 
     //Setting properties for webdriver
     DesiredCapabilities capabilities = DesiredCapabilities.firefox();
