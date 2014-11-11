@@ -90,19 +90,8 @@ public class MondrianJNDI {
 
   @Before
   public void setUpTestCase() {
-    // Go to sample
-    init();
-  }
-
-  /**
-   * Go to the Mondrian-jndi web page.
-   */
-  public static void init() {
     // This samples is in: Public/plugin-samples/CDA/cdafiles/mondrian-jndi
     driver.get(baseUrl + "plugin/cda/api/previewQuery?path=%2Fpublic%2Fplugin-samples%2Fcda%2Fcdafiles%2Fmondrian-jndi.cda");
-
-    // Not we have to wait for loading disappear
-    //ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -467,7 +456,7 @@ public class MondrianJNDI {
 
     WebElement inputQueryUrl = ElementHelper.FindElement(driver, By.xpath("//input[@id='doQueryUrl']"));
     String queryUrl = inputQueryUrl.getAttribute("value");
-    log.info("Testing: " + queryUrl);
+    log.debug("Query URL: " + queryUrl);
 
     ElementHelper.FindElement(driver, By.linkText("Close")).click();
 
