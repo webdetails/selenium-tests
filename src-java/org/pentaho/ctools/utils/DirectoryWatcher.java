@@ -31,11 +31,10 @@ import java.nio.file.WatchService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.pentaho.ctools.cda.MondrianJNDI;
 
 public class DirectoryWatcher {
   //Log instance
-  private static Logger log = LogManager.getLogger(MondrianJNDI.class);
+  private static Logger log = LogManager.getLogger(DirectoryWatcher.class);
 
   /**
    * The method will watch a directory for file creation. If a file was created
