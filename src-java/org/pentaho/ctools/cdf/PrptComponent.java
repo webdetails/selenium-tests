@@ -399,9 +399,9 @@ public class PrptComponent {
     new File(downloadDir + "\\Product Sales.xls").delete();
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("table/excel;page-mode=flow");
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
+    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));    
     assertTrue(new File(downloadDir + "\\Product Sales.xls").exists());
     new File(downloadDir + "\\Product Sales.xls").delete();
 
@@ -409,9 +409,9 @@ public class PrptComponent {
     new File(downloadDir + "\\Product Sales.xlsx").delete();
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow");
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
+    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
     assertTrue(new File(downloadDir + "\\Product Sales.xlsx").exists());
     new File(downloadDir + "\\Product Sales.xlsx").delete();
 
@@ -419,9 +419,9 @@ public class PrptComponent {
     new File(downloadDir + "\\Product Sales.csv").delete();
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("table/csv;page-mode=stream");
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
+    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));    
     assertTrue(new File(downloadDir + "\\Product Sales.csv").exists());
     new File(downloadDir + "\\Product Sales.csv").delete();
 
@@ -429,9 +429,9 @@ public class PrptComponent {
     new File(downloadDir + "\\Product Sales.rtf").delete();
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("table/rtf;page-mode=flow");
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
+    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
     assertTrue(new File(downloadDir + "\\Product Sales.rtf").exists());
     new File(downloadDir + "\\Product Sales.rtf").delete();
 
