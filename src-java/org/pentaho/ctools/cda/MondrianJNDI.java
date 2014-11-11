@@ -53,6 +53,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
+import org.pentaho.ctools.utils.DirectoryWatcher;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
@@ -414,15 +415,8 @@ public class MondrianJNDI {
       //Click to export
       buttonExport.click();
 
-      for (int i = 0; i < 50; i++) {
-        //Wait sometime for the download
-        Thread.sleep(100);
-
-        File fExist = new File(downloadDir + "\\cda-export.xls");
-        if (fExist.exists()) {
-          break;
-        }
-      }
+      //Wait for file to be created in the destination dir
+      DirectoryWatcher.WatchForCreate(downloadDir);
 
       //Check if file was download
       assertTrue(new File(downloadDir + "\\cda-export.xls").exists());

@@ -21,6 +21,11 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -42,13 +47,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
+import org.pentaho.ctools.utils.DirectoryWatcher;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 /**
  * Testing the functionalities related with Prpt Component.
@@ -66,10 +67,10 @@ public class PrptComponent {
   // The base url to be append the relative url in test
   private static String          baseUrl;
   //Log instance
-  private static Logger log = LogManager.getLogger(PrptComponent.class);
-  
+  private static Logger          log                = LogManager.getLogger(PrptComponent.class);
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -77,8 +78,8 @@ public class PrptComponent {
   @BeforeClass
   public static void setUp() {
     log.debug("setup");
-    driver  = CToolsTestSuite.getDriver();
-    wait    = CToolsTestSuite.getWait();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -92,7 +93,7 @@ public class PrptComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/PrptComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A63-PentahoReportingComponent%3Aprpt_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A63-PentahoReportingComponent%3Aprpt_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -104,7 +105,7 @@ public class PrptComponent {
    * Test Case Name:
    *    Reload Sample
    * Description:
-   *    Reload the sample (not refresh page). 
+   *    Reload the sample (not refresh page).
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -117,17 +118,17 @@ public class PrptComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("PrptComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("PrptComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
@@ -152,7 +153,7 @@ public class PrptComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select HTML and PDF (content type)
    * Description:
    *    The test case pretends validate the result when change for option HTML
@@ -170,7 +171,7 @@ public class PrptComponent {
     select.selectByValue("application/pdf");
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    
+
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sampleObject")));
     driver.switchTo().frame("sampleObject_prptFrame");
     //Check presence of tool bar elements
@@ -185,7 +186,7 @@ public class PrptComponent {
     assertEquals("Output Type", outputTypeName);
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     //Check for View Report button
-    String buttonName = ElementHelper.GetText(driver, By.xpath("//button/span")); 
+    String buttonName = ElementHelper.GetText(driver, By.xpath("//button/span"));
     assertEquals("View Report", buttonName);
     //Check the generated image
     driver.switchTo().frame("reportContent");
@@ -203,15 +204,14 @@ public class PrptComponent {
       log.error(ex.getMessage());
     }
 
-
     // ## Step 2
     driver.switchTo().defaultContent();
     select = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     select.selectByValue("text/html");
-    
- // Not we have to wait for loading disappear
+
+    // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    
+
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sampleObject")));
     driver.switchTo().frame("sampleObject_prptFrame");
     //Check presence of tool bar elements
@@ -226,7 +226,7 @@ public class PrptComponent {
     assertEquals("Output Type", outputTypeName);
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     //Check for View Report button
-    buttonName = ElementHelper.GetText(driver, By.xpath("//button/span")); 
+    buttonName = ElementHelper.GetText(driver, By.xpath("//button/span"));
     assertEquals("View Report", buttonName);
     //Check the generated image
     driver.switchTo().frame("reportContent");
@@ -248,7 +248,7 @@ public class PrptComponent {
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Toggle Prompt Panel
    * Description:
    *    The test case pretends disable and enable the prompt panel.
@@ -261,13 +261,11 @@ public class PrptComponent {
     log.debug("tc4_TogglePromptPanel_PromptPanelEnableDisable");
     driver.switchTo().defaultContent();
 
-
     // ## Step 1
     driver.switchTo().frame("sampleObject_prptFrame");
     assertNotNull(ElementHelper.FindElement(driver, By.id("reportControlPanel")));
     ElementHelper.FindElement(driver, By.xpath("//span[@id='toolbar-parameterToggle']/span")).click();
     assertTrue(ElementHelper.IsElementInvisible(driver, By.id("reportControlPanel")));
-
 
     // ## Step 2
     ElementHelper.FindElement(driver, By.xpath("//span[@id='toolbar-parameterToggle']/span")).click();
@@ -277,7 +275,7 @@ public class PrptComponent {
   /**
    * ############################### Test Case 5 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select Several Products
    * Description:
    *    The test case pretends to validate that when we select a product a new
@@ -311,7 +309,6 @@ public class PrptComponent {
     assertNotEquals(previewsAttrSrc, attrSrc);
     previewsAttrSrc = attrSrc;
 
-
     // ## Step 2
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
@@ -325,7 +322,6 @@ public class PrptComponent {
     assertNotEquals(previewsAttrSrc, attrSrc);
     previewsAttrSrc = attrSrc;
 
-
     // ## Step 3
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
@@ -335,11 +331,11 @@ public class PrptComponent {
     driver.switchTo().frame("reportContent");
     assertNotNull(ElementHelper.FindElement(driver, By.cssSelector("img.style-3")));
   }
-  
+
   /**
    * ############################### Test Case 6 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Output Type
    * Description:
    *    We pretend to test all Output Type options.
@@ -352,7 +348,7 @@ public class PrptComponent {
    *    6. Select: Comma Separated Value
    *    7. Select: Rich-Text-Format
    *    8. Select: Text
-   * @throws InterruptedException 
+   * @throws InterruptedException
    */
   @Test
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() throws InterruptedException {
@@ -360,7 +356,6 @@ public class PrptComponent {
     driver.switchTo().defaultContent();
 
     String downloadDir = CToolsTestSuite.getDownloadDir();
-
 
     // ## Step 1
     driver.switchTo().frame("sampleObject_prptFrame");
@@ -373,7 +368,6 @@ public class PrptComponent {
     assertNotNull(image);
     String attrSrc = image.getAttribute("src");
     assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=picture"));
-
 
     // ## Step 2
     driver.switchTo().defaultContent();
@@ -388,7 +382,6 @@ public class PrptComponent {
     attrSrc = image.getAttribute("src");
     assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=picture"));
 
-
     // ## Step 3
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
@@ -400,7 +393,6 @@ public class PrptComponent {
     ElementHelper.IsElementInvisible(driver, By.cssSelector("img.style-3"));
     assertNotNull(ElementHelper.FindElement(driver, By.id("pageContainer1")));
 
-
     // ## Step 4
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
@@ -408,40 +400,40 @@ public class PrptComponent {
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("table/excel;page-mode=flow");
     ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
-    Thread.sleep(2000);
+    //Wait for file to be created in the destination dir
+    DirectoryWatcher.WatchForCreate(downloadDir);
     assertTrue(new File(downloadDir + "\\Product Sales.xls").exists());
     new File(downloadDir + "\\Product Sales.xls").delete();
-
 
     // ## Step 5
     new File(downloadDir + "\\Product Sales.xlsx").delete();
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow");
     ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
-    Thread.sleep(2000);
+    //Wait for file to be created in the destination dir
+    DirectoryWatcher.WatchForCreate(downloadDir);
     assertTrue(new File(downloadDir + "\\Product Sales.xlsx").exists());
     new File(downloadDir + "\\Product Sales.xlsx").delete();
-
 
     // ## Step 6
     new File(downloadDir + "\\Product Sales.csv").delete();
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("table/csv;page-mode=stream");
     ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
-    Thread.sleep(2000);
+    //Wait for file to be created in the destination dir
+    DirectoryWatcher.WatchForCreate(downloadDir);
     assertTrue(new File(downloadDir + "\\Product Sales.csv").exists());
     new File(downloadDir + "\\Product Sales.csv").delete();
-
 
     // ## Step 7
     new File(downloadDir + "\\Product Sales.rtf").delete();
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("table/rtf;page-mode=flow");
     ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
-    Thread.sleep(2000);
+    //Wait for file to be created in the destination dir
+    DirectoryWatcher.WatchForCreate(downloadDir);
     assertTrue(new File(downloadDir + "\\Product Sales.rtf").exists());
     new File(downloadDir + "\\Product Sales.rtf").delete();
-
 
     // ## Step 8
     //TODO - pageable/text
