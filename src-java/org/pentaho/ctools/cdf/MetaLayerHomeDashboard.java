@@ -1,25 +1,29 @@
 /*!*****************************************************************************
-*
-* Selenium Tests For CTools
-*
-* Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
-*
-*******************************************************************************
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with
-* the License. You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-******************************************************************************/
+ *
+ * Selenium Tests For CTools
+ *
+ * Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
+ *
+ *******************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
 package org.pentaho.ctools.cdf;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
@@ -37,10 +41,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 /**
  * Testing the functionalities related with MetaLayerHome.
  *
@@ -54,20 +54,20 @@ import static org.junit.Assert.assertNotNull;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MetaLayerHomeDashboard {
   // Instance of the driver (browser emulator)
-  private WebDriver driver;
+  private WebDriver         driver;
   // Instance to be used on wait commands
-  private Wait<WebDriver> wait;
+  private Wait<WebDriver>   wait;
   // The base url to be append the relative url in test
-  private String baseUrl;
-  
+  private String            baseUrl;
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(this.driver);
 
   @Before
   public void setUp() throws Exception {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    this.driver = CToolsTestSuite.getDriver();
+    this.wait = CToolsTestSuite.getWait();
+    this.baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -76,7 +76,7 @@ public class MetaLayerHomeDashboard {
    * Test Case Name:
    *    MetaLayer Home Dashboard - clicking details
    * Description:
-   *    We pretend to validate when user click on 'Details...' a pop-up message 
+   *    We pretend to validate when user click on 'Details...' a pop-up message
    *    is displayed.
    * Steps:
    *    1. Open the MetaLayer Home Dashboard.
@@ -86,35 +86,33 @@ public class MetaLayerHomeDashboard {
   @Test
   public void tc1_LinkDetails_PopupJPivot() throws Exception {
     //## Step 1
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalyer.xcdf/generatedContent");
+    this.driver.get(this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalyer.xcdf/generatedContent");
 
     //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.IsElementInvisible(this.driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
-  	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    this.wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     //Wait for visibility of 'Top Ten Customers'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='titleObject']")));
+    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='titleObject']")));
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("Top Ten Customers", ElementHelper.GetText(driver, By.xpath("//div[@id='titleObject']")));
-
+    assertEquals("Community Dashboard Framework", this.driver.getTitle());
+    assertEquals("Top Ten Customers", ElementHelper.GetText(this.driver, By.xpath("//div[@id='titleObject']")));
 
     //## Step 2
     //Wait for visibility of 'topTenCustomersDetailsObject' the text 'Details'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='topTenCustomersDetailsObject']")));
-    WebElement linkDetails = ElementHelper.FindElement(driver, By.xpath("//div[@id='topTenCustomersDetailsObject']/a"));
+    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='topTenCustomersDetailsObject']")));
+    WebElement linkDetails = ElementHelper.FindElement(this.driver, By.linkText("scheduleStatus"));
     assertEquals("Details...", linkDetails.getText());
     //click on the 'Details...'
     linkDetails.click();
 
-
     //## Step 3
     //Wait for the frame
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.fancybox-inner")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe")));
-    WebElement frame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    String valueFrameAttrId  = frame.getAttribute("id");
+    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.fancybox-inner")));
+    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe")));
+    WebElement frame = ElementHelper.FindElement(this.driver, By.xpath("//iframe"));
+    String valueFrameAttrId = frame.getAttribute("id");
     String valueFrameAttrSrc = frame.getAttribute("src");
 
     ///pentaho/plugin/jpivot/Pivot?solution=system&path=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf%2Factions&action=jpivot.xaction&width=500&height=600
@@ -122,18 +120,19 @@ public class MetaLayerHomeDashboard {
     assertTrue(StringUtils.containsIgnoreCase(valueFrameAttrSrc, "action=jpivot.xaction&width=500&height=600"));
 
     //Wait for the element be visible.
-    driver.switchTo().frame(valueFrameAttrId);
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='internal_content']")));
-    assertEquals("Measures", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
-    assertEquals("Australian Collectors, Co.", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
-    assertEquals("180,125", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
-    
+    this.driver.switchTo().frame(valueFrameAttrId);
+    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body")));
+    assertNotNull(ElementHelper.FindElement(this.driver, By.xpath("//div[@id='internal_content']")));
+    assertEquals("Measures", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
+    assertEquals("Australian Collectors, Co.", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
+    assertEquals("180,125", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
+
     //Close pop-up
-    driver.switchTo().defaultContent();
-    ElementHelper.FindElement(driver, By.xpath("/html/body/div[3]/div/div/a")).click();
-    ElementHelper.IsElementInvisible(driver, By.cssSelector("div.fancybox-inner"));
+    this.driver.switchTo().defaultContent();
+    ElementHelper.FindElement(this.driver, By.xpath("/html/body/div[3]/div/div/a")).click();
+    ElementHelper.IsElementInvisible(this.driver, By.cssSelector("div.fancybox-inner"));
   }
 
   @After
-  public void tearDown() { }
+  public void tearDown() {}
 }
