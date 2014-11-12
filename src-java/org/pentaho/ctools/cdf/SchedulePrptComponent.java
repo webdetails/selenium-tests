@@ -297,15 +297,6 @@ public class SchedulePrptComponent {
         scheduleNextRun = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[6]/div"));
         scheduleCreatedBy = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[7]/div"));
         scheduleStatus = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[8]/div"));
-
-        log.info("Repeats: " + scheduleRepeats);
-        log.info("Source File: " + scheduleSourceFile);
-        log.info("Ouput Location: " + scheduleOuputLocation);
-        log.info("Last Run: " + scheduleLastRun);
-        log.info("Next Run: " + scheduleNextRun);
-        log.info("Created By: " + scheduleCreatedBy);
-        log.info("Status: " + scheduleStatus);
-
         break;
       }
     }
@@ -314,7 +305,7 @@ public class SchedulePrptComponent {
     String dayOfWeek = "";
     if (!scheduleNextRun.isEmpty()) {
       try {
-        Date dateNextRun = new SimpleDateFormat("yyyy MMM dd hh:mm:ss").parse(scheduleNextRun);
+        Date dateNextRun = new SimpleDateFormat("yyyy MMM dd HH:mm:ss", Locale.US).parse(scheduleNextRun);
         dayOfWeek = new SimpleDateFormat("EE", Locale.US).format(dateNextRun);
       } catch (ParseException pe) {
         log.error(pe.getMessage());

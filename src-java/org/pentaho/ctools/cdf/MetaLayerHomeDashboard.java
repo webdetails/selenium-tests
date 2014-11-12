@@ -26,6 +26,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -59,6 +61,8 @@ public class MetaLayerHomeDashboard {
   private Wait<WebDriver>   wait;
   // The base url to be append the relative url in test
   private String            baseUrl;
+  //Log instance
+  private static Logger     log                = LogManager.getLogger(MetaLayerHomeDashboard.class);
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(this.driver);
@@ -85,7 +89,9 @@ public class MetaLayerHomeDashboard {
    */
   @Test
   public void tc1_LinkDetails_PopupJPivot() throws Exception {
-    //## Step 1
+    /*
+     * ## Step 1
+     */
     this.driver.get(this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalyer.xcdf/generatedContent");
 
     //Not we have to wait for loading disappear
@@ -99,18 +105,23 @@ public class MetaLayerHomeDashboard {
     assertEquals("Community Dashboard Framework", this.driver.getTitle());
     assertEquals("Top Ten Customers", ElementHelper.GetText(this.driver, By.xpath("//div[@id='titleObject']")));
 
-    //## Step 2
+    /*
+     * ## Step 2
+     */
+    
     //Wait for visibility of 'topTenCustomersDetailsObject' the text 'Details'
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='topTenCustomersDetailsObject']")));
-    WebElement linkDetails = ElementHelper.FindElement(this.driver, By.linkText("scheduleStatus"));
+    ElementHelper.IsElementVisible(this.driver, By.id("topTenCustomersDetailsObject"));
+    WebElement linkDetails = ElementHelper.FindElement(this.driver, By.linkText("Details..."));
     assertEquals("Details...", linkDetails.getText());
     //click on the 'Details...'
     linkDetails.click();
 
-    //## Step 3
+    /*
+     * ## Step 3
+     */
     //Wait for the frame
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.fancybox-inner")));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe")));
+    ElementHelper.IsElementVisible(this.driver, By.cssSelector("div.fancybox-inner"));
+    ElementHelper.IsElementVisible(this.driver, By.xpath("//iframe"));
     WebElement frame = ElementHelper.FindElement(this.driver, By.xpath("//iframe"));
     String valueFrameAttrId = frame.getAttribute("id");
     String valueFrameAttrSrc = frame.getAttribute("src");
@@ -121,7 +132,9 @@ public class MetaLayerHomeDashboard {
 
     //Wait for the element be visible.
     this.driver.switchTo().frame(valueFrameAttrId);
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body")));
+    ElementHelper.IsElementVisible(this.driver, By.cssSelector("body"));
+    ElementHelper.IsElementVisible(this.driver, By.xpath("//div[@id='internal_content']"));
+    ElementHelper.IsElementVisible(this.driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]"));
     assertNotNull(ElementHelper.FindElement(this.driver, By.xpath("//div[@id='internal_content']")));
     assertEquals("Measures", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
     assertEquals("Australian Collectors, Co.", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
