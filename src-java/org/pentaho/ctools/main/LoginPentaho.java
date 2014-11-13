@@ -82,7 +82,7 @@ public class LoginPentaho {
    *    2. Enter user and password.
    *    3. User authenticated, and user name of logged user is displayed.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_Login_SuccessAuthentication() {
     log.debug("tc1_Login_SuccessAuthentication");
   	//## Step 1

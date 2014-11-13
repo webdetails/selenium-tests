@@ -104,7 +104,7 @@ public class TextComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -126,7 +126,7 @@ public class TextComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -157,7 +157,7 @@ public class TextComponent {
    * Steps:
    *    1. Validate the displayed text
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_DisplayedText_ContainsExpectedText() {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObject")));
 

@@ -99,7 +99,7 @@ public class TableComponent {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
   	//Wait for title become visible and with value 'Community Dashboard Framework'
   	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -121,7 +121,7 @@ public class TableComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse(){
   	//Render again the sample
   	ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
@@ -148,7 +148,7 @@ public class TableComponent {
    *    3. Go to the end page and check the data.
    *    4. Go to the first page and check the data.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_Paging_NavigateBetweenPages() {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObjectTable_length")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObjectTable_filter")));
@@ -229,7 +229,7 @@ public class TableComponent {
    *    6. Go to the end page and check the data.
    *    7. Go to the first page and check the data.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_Sort_ElementsAreSort() {
     //## Step 1
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_asc']")));
@@ -356,7 +356,7 @@ public class TableComponent {
    *    1. Select 25 and paging
    *    2. Select 50 (no paging)
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected() {
     assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
     assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
@@ -435,7 +435,7 @@ public class TableComponent {
    *    2. Search for 'Euro' (Check paging, display entries, sort)
    *    3. Search for 'TODO' (no result)
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc6_SearchEngine_TableDisplayedContentSearch() {
     //## Step 1
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_filter']/label/input")).sendKeys("Co.");

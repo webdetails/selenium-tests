@@ -104,7 +104,7 @@ public class MonthPickerComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -126,7 +126,7 @@ public class MonthPickerComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -156,7 +156,7 @@ public class MonthPickerComponent {
    * Steps:
    *    1. Pick a month and check for alert
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_SelectMonth_AlertDisplayed() {
     log.debug("tc3_SelectMonth_AlertDisplayed");
 

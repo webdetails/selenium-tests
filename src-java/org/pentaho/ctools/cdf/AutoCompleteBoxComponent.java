@@ -79,7 +79,7 @@ public class AutoCompleteBoxComponent {
    *    2. Execute the "Try me".
    *    3. Press a on text box and check the autocomplete.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_AutocompleteBox_DataAreListed() {
   	//## Step 1
     driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:58-AutocompleteBoxComponent:autocomplete_component.xcdf/generatedContent");

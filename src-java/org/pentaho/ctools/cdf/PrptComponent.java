@@ -109,7 +109,7 @@ public class PrptComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -131,7 +131,7 @@ public class PrptComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -162,7 +162,7 @@ public class PrptComponent {
    *    1. Select PDF
    *    2. Select HTML
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_SelectHTMLAndPDF_PageDisplayedAccording() {
     log.debug("tc3_SelectHTMLAndPDF_PageDisplayedAccording");
 
@@ -256,7 +256,7 @@ public class PrptComponent {
    *    1. Enable prompt panel
    *    2. Disable prompt panel
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
     log.debug("tc4_TogglePromptPanel_PromptPanelEnableDisable");
     driver.switchTo().defaultContent();
@@ -285,7 +285,7 @@ public class PrptComponent {
    *    2. Select product 'Diamond T620 Semi-Skirted Tanker'
    *    3. Click in View Report
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
     log.debug("tc5_SelectSeveralProducts_ReportIsRefreshed");
     driver.switchTo().defaultContent();
@@ -350,7 +350,7 @@ public class PrptComponent {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() throws InterruptedException {
     log.debug("tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised");
     driver.switchTo().defaultContent();

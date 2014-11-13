@@ -100,7 +100,7 @@ public class RadioComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -122,7 +122,7 @@ public class RadioComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -154,7 +154,7 @@ public class RadioComponent {
    *    3. Select Western
    *    4. Select Southern
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_SelectEachItem_AlertDisplayed() {
     log.debug("tc3_SelectEachItem_AlertDisplayed");
 
@@ -231,7 +231,7 @@ public class RadioComponent {
    *    3. Select Central
    *    4. Select Western
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_SelectArbitrary_AlertDisplayed() {
     log.debug("tc4_SelectArbitrary_AlertDisplayed");
 

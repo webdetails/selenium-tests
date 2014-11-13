@@ -94,7 +94,7 @@ public class ButtonComponent {
    * Steps: 
    *    1. Check the widget's title.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -116,7 +116,7 @@ public class ButtonComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -142,7 +142,7 @@ public class ButtonComponent {
    *    1. Click in button
    *    2. Check for alert
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_ClickableButton_AlertMessageDisplayed() {
     // ## Step 1
     String buttonText = ElementHelper.GetText(driver, By.xpath("//button"));

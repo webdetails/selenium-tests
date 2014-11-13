@@ -109,7 +109,7 @@ public class CommentComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -159,7 +159,7 @@ public class CommentComponent {
    * Steps:
    *    1. Check the contents of display page
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_DisplayComponent_CheckDisplayedPage() {
     log.debug("tc3_SelectEachItem_AlertDisplayed");
     /*
@@ -190,7 +190,7 @@ public class CommentComponent {
    *    2. Add another comment
    *    3. Add another comment
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_AddComponent_CommentIsDisplayed() {
     log.debug("tc3_SelectEachItem_AlertDisplayed");
     /*
@@ -312,7 +312,7 @@ public class CommentComponent {
    *    1. Add a comment
    *    2. Remove added comment
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc5_RemoveComponent_CommentRemoved() {
     log.debug("tc5_RemoveComponent_CommentRemoved");
     /*

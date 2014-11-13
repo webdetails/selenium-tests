@@ -40,7 +40,7 @@ public class AddParamTableComponent {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Test
+  @Test(timeout = 60000)
   public void testCheckParametersAddingWidgetParameter() throws Exception {
     //Step 0 - Delete the widget
     WidgetUtils.RemoveWidgetByName(driver, wait, baseUrl, widgetName);

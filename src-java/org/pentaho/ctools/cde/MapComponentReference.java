@@ -92,7 +92,7 @@ public class MapComponentReference {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Editor", driver.getTitle());
@@ -116,7 +116,7 @@ public class MapComponentReference {
    *    2. Perform a zoom
    *    3. Click in Globe
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_MapWithNoMarkersAndShapes_MapMustBeVisible() throws Exception{
     //wait for inicialize
     wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//div[@id='simpleTest']/div/div[8]/div"), "10000 km"));
@@ -170,7 +170,7 @@ public class MapComponentReference {
    *    2. Chance map to Google
    *    3. Change map service to 'mapbox-world-dark'
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_MapEngineAndTileServices_MapDisplayedAfterChanges() {
     //wait for inicialize
     wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//div[@id='testTileServices']/div/div[8]/div"), "10000 km"));
@@ -241,7 +241,7 @@ public class MapComponentReference {
    *    1. Check the data exist
    *    2. Chick in each marker
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_MapWithMarkersBasedLongLat_MarkersShouldDisplayCorrectContents() throws Exception{
     ((JavascriptExecutor) driver).executeScript("window.onerror = function(){alert('an error');} ");
 
@@ -301,7 +301,7 @@ public class MapComponentReference {
    *    1. Check the data exist
    *    2. Chick in each marker
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc5_MapWithMarkersBasedCity_MarkersShouldDisplayCorrectContents() {
     //## Step1
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='subtitle3']/span")));
@@ -330,7 +330,7 @@ public class MapComponentReference {
    *    2. Chick in a shape country
    *    3. Chick country with no shape
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc6_MapWithShapes_ShapesAreClickable() {
     //## Step1
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='subtitle4']/span")));

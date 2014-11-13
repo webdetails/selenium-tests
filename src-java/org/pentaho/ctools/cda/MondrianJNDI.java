@@ -106,7 +106,7 @@ public class MondrianJNDI {
    *    1. Check if we are reading the correct file
    *    2. Check if About is working
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayeFilenameAndAbout() {
     log.info("tc1_PageContent_DisplayeFilenameAndAbout");
 
@@ -170,7 +170,7 @@ public class MondrianJNDI {
    *    5. Search existence content
    *    6. Search inexistance content
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_SelectDataAccess_DisplayDataForSelectedDataAccess() {
     log.info("tc2_SelectDataAccess_DisplayDataForSelectedDataAccess");
 
@@ -376,7 +376,7 @@ public class MondrianJNDI {
    * Steps:
    *    1. Press in Export.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_ExportXls_FileDownload() {
     log.info("tc3_ExportXls_FileDownload");
 
@@ -427,7 +427,7 @@ public class MondrianJNDI {
    *    1. Check query url dialog
    *    2. Open a new browser with query url
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage() {
     log.info("tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage");
 
@@ -483,7 +483,7 @@ public class MondrianJNDI {
    *    4. In the new window, check the schedule
    *    5. Remove the schedule
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
     log.info("tc5_CacheThisSimple_ScheduleIsSetSuccessful");
     String selectedHours = "21";

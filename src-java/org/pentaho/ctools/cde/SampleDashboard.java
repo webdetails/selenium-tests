@@ -91,7 +91,7 @@ public class SampleDashboard {
    * Steps:
    *    1. Check for display text
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_ContentDisplayedAsExpected() {
     log.info("tc1_PageContent_CachedQueries");
 
@@ -141,7 +141,7 @@ public class SampleDashboard {
    *    4. Press preview
    *    5. Press next
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_Paging_UserCanPagingBettweenPages() {
     log.info("tc2_Paging_UserCanPagingBettweenPages");
 
@@ -224,7 +224,7 @@ public class SampleDashboard {
    *    1. Sort Asc by Customer
    *    2. Sort Desc by Total
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_Sorting_UserCanSortByCustomerAndTotal() {
     log.info("tc3_Sorting_UserCanSortByCustomerAndTotal");
     String customer = "";
@@ -281,7 +281,7 @@ public class SampleDashboard {
    *    1. Enable/Disable series
    *    2. Select a data and navigate between pages
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_UpdateTableByClickingChart_TableUpdatedForSpecificData() {
     log.info("tc4_UpdateTableByClickingChart_TableUpdatedForSpecificData");
 

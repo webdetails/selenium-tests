@@ -91,7 +91,7 @@ public class CDACacheManager {
    *    1. Check for text 'Queries in cache'
    *    2. Check for button 'Clear Cache'
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_CachedQueries() {
     log.info("tc1_PageContent_CachedQueries");
 
@@ -126,7 +126,7 @@ public class CDACacheManager {
    *    1. Press to clear cache
    *    2. Check no query is listed
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ClearCache_AllQueriesWhereRemove() {
     log.info("tc2_ClearCache_AllQueriesWhereRemove");
 

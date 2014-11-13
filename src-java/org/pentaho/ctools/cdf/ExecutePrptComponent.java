@@ -103,7 +103,7 @@ public class ExecutePrptComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -125,7 +125,7 @@ public class ExecutePrptComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -155,7 +155,7 @@ public class ExecutePrptComponent {
    * Steps:
    *    1. Check the contents presented
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_CheckDisplayPage_DataIsDisplayedAsExpected() {
     log.debug("tc3_CheckDisplayPage_DataIsDisplayedAsExpected");
 
@@ -210,7 +210,7 @@ public class ExecutePrptComponent {
    *    1. Enable prompt panel
    *    2. Disable prompt panel
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
     log.debug("tc4_TogglePromptPanel_PromptPanelEnableDisable");
     driver.switchTo().defaultContent();
@@ -242,7 +242,7 @@ public class ExecutePrptComponent {
    *    2. Select product 'Diamond T620 Semi-Skirted Tanker'
    *    3. Click in View Report
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
     log.debug("tc5_SelectSeveralProducts_ReportIsRefreshed");
     driver.switchTo().defaultContent();
@@ -315,7 +315,7 @@ public class ExecutePrptComponent {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() throws InterruptedException {
     log.debug("tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised");
     driver.switchTo().defaultContent();
@@ -422,7 +422,7 @@ public class ExecutePrptComponent {
    * Steps:
    *    1. Click in close window
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc7_ClosePrpt_PopUpIsClosed() {
     log.debug("tc7_ClosePrpt_PopUpIsClosed");
 

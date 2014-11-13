@@ -94,7 +94,7 @@ public class XactionComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -116,7 +116,7 @@ public class XactionComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -147,7 +147,7 @@ public class XactionComponent {
    *    1. Check if a graphic was generated
    *    2. Check the http request for the image generated
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_GenerateChart_ChartIsDisplayed() {
     // ## Step 1
     WebElement xactionElement = ElementHelper.FindElement(driver, By.cssSelector("img"));

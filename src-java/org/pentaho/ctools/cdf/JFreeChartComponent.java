@@ -111,7 +111,7 @@ public class JFreeChartComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -133,7 +133,7 @@ public class JFreeChartComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -166,7 +166,7 @@ public class JFreeChartComponent {
    *    3. Open Bar Chart
    *    4. Click on chart
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_ClickOnChart_AlertDisplayed() {
     log.debug("tc3_ClickOnChart_AlertDisplayed");
     
@@ -251,7 +251,7 @@ public class JFreeChartComponent {
    *    1. Zoom on Bar Chart
    *    2. Zoom on Pie Chart
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_PreviewChart_NewWindowDisplayed() {
     log.debug("tc4_PreviewChart_NewWindowDisplayed");
 

@@ -94,7 +94,7 @@ public class CheckComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -116,7 +116,7 @@ public class CheckComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -144,7 +144,7 @@ public class CheckComponent {
    *    3. Check in Central and validate alert
    *    4. Check in Western and validate alert
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_CheckEachOption_AfterCheckAnAlertIsDisplayed() {
     String confirmationMsg = "";
     // ## Step 1
@@ -205,7 +205,7 @@ public class CheckComponent {
    *    3. Unchecked Central and validate alert
    *    4. Unchecked Western and validate alert
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed() {
     String confirmationMsg = "";
     // ## Step 1
@@ -263,7 +263,7 @@ public class CheckComponent {
    * Steps: 
    *    1. Check and unchecked arbitrary, and validate alert message
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc5_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed() {
     String confirmationMsg = "";
     //Click in Central

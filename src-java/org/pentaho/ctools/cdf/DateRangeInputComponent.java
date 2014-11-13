@@ -100,7 +100,7 @@ public class DateRangeInputComponent {
 	 * Steps: 
 	 * 		1. Check the widget's title.
 	 */
-	@Test
+	@Test(timeout = 60000)
 	public void tc1_PageContent_DisplayTitle() {
 		// Wait for title become visible and with value 'Community Dashboard Framework'
 		wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -122,7 +122,7 @@ public class DateRangeInputComponent {
 	 * Steps: 
 	 * 		1. Click in Code and then click in button 'Try me'.
 	 */
-	@Test
+	@Test(timeout = 60000)
 	public void tc2_ReloadSample_SampleReadyToUse() {
 		// ## Step 1
 		// Render again the sample
@@ -148,7 +148,7 @@ public class DateRangeInputComponent {
 	 * 		1. Click in Today option
 	 *    2. Check for Alert
 	 */
-	@Test
+	@Test(timeout = 60000)
 	public void tc3_Today_DateIsSetSuccessful(){
   	//## Step 1
 	  WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));

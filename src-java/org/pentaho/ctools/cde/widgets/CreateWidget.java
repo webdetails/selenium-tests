@@ -35,7 +35,7 @@ public class CreateWidget {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Test
+  @Test(timeout = 60000)
   public void testCreateWidget() throws Exception {
     //Step 0 - Delete the widget
     WidgetUtils.RemoveWidgetByName(driver, wait, baseUrl, widgetName);
@@ -44,7 +44,7 @@ public class CreateWidget {
     driver = WidgetUtils.CreateWidgetWithParameter(driver, wait, baseUrl, widgetName, paramName);
   }
 
-  @Test
+  @Test(timeout = 60000)
   public void checkExistentWidgetAndParameter() throws Exception {
     //Resuming Steps
     // 1. open the widget

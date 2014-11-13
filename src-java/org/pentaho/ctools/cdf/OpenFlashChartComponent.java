@@ -100,7 +100,7 @@ public class OpenFlashChartComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -122,7 +122,7 @@ public class OpenFlashChartComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -151,7 +151,7 @@ public class OpenFlashChartComponent {
    * Steps:
    *    1. Check that component generate a flash object
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_OpenFlashChart_ChartDisplayed() {
     log.debug("tc3_OpenFlashChart_ChartDisplayed");
     

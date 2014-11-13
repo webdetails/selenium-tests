@@ -95,7 +95,7 @@ public class SelectMultiComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -117,7 +117,7 @@ public class SelectMultiComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -149,7 +149,7 @@ public class SelectMultiComponent {
    *    3. Select Central
    *    4. Select Western
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_SelectEachItem_AlertDisplayed() {
     // ## Step 1
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("select")));
@@ -222,7 +222,7 @@ public class SelectMultiComponent {
    *    1. Select all options
    *    2. Deselect all options
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_SelectAll_AlertDisplayed() {
     // ## Step 1
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("select")));
@@ -297,7 +297,7 @@ public class SelectMultiComponent {
    * Steps: 
    *    1. Select Arbitrary
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc5_SelectArbitrary_AlertDisplayed() {
     // ## Step 1
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("select")));

@@ -99,7 +99,7 @@ public class MultiButtonComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -121,7 +121,7 @@ public class MultiButtonComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -153,7 +153,7 @@ public class MultiButtonComponent {
    *    3. Click in Western
    *    4. Click in Southern
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_ClickInEachOption_AlertDisplayed() {
     log.debug("tc3_ClickInEachOption_AlertDisplayed");
 
@@ -207,7 +207,7 @@ public class MultiButtonComponent {
    *    3. Click in Eastern
    *    4. Click in Southern
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc4_ClickArbitrary_AlertDisplayed() {
     log.debug("tc4_ClickArbitrary_AlertDisplayed");
 

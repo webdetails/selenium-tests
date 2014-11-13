@@ -90,7 +90,7 @@ public class CDADatasourceTest {
    * Steps:
    *    1. Check the result displayed
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_DatasourceTest_ResultOK() {
     log.info("tc1_DatasourceTest_ResultOK");
 

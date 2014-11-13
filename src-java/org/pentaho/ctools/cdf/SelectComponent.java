@@ -100,7 +100,7 @@ public class SelectComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -122,7 +122,7 @@ public class SelectComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -152,7 +152,7 @@ public class SelectComponent {
    *    1. Select Dusseldorf
    *    2. Select Lisbon
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_SelectEachItem_AlertDisplayed() {
     log.debug("tc3_SelectEachItem_AlertDisplayed");
     

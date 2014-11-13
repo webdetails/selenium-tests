@@ -80,7 +80,7 @@ public class DateInputComponent {
    *    2. Render the component again.
    *    3. Choose the date '2011-10-23'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_DataInput_DisplayPopupWithPickedDate() {
   	//## Step 1
   	driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:40-DateInputComponent:date_input_component.xcdf/generatedContent");

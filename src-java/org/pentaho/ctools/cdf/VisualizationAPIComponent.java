@@ -91,7 +91,7 @@ public class VisualizationAPIComponent {
 	 * Test Case Name: Validate Page Contents Description: Here we want to
 	 * validate the page contents. Steps: 1. Check the widget's title.
 	 */
-	@Test
+	@Test(timeout = 60000)
 	public void tc1_PageContent_DisplayTitle() {
 		// Wait for title become visible and with value 'Community Dashboard
 		// Framework'
@@ -112,7 +112,7 @@ public class VisualizationAPIComponent {
 	 * Test Case Name: Reload Sample Description: Reload the sample (not refresh
 	 * page). Steps: 1. Click in Code and then click in button 'Try me'.
 	 */
-	@Test
+	@Test(timeout = 60000)
 	public void tc2_ReloadSample_SampleReadyToUse() {
 		// ## Step 1
 		// Render again the sample
@@ -133,7 +133,7 @@ public class VisualizationAPIComponent {
 	 * component, it is presented the max number of array set. Steps: 1. Check the
 	 * presented value for MAX.
 	 */
-	@Test
+	@Test(timeout = 60000)
 	public void tc3_MaxNumber_PresentCorrectValue() {
 		// ## Step 1
 	  String value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
@@ -159,7 +159,7 @@ public class VisualizationAPIComponent {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@Test
+	@Test(timeout = 60000)
 	public void tc4_MinNumber_PresentCorrectValue() throws InterruptedException {
 		// ## Step 1 - Change the option parameter to MIN and reload sample
 		// Render again the sample
@@ -210,7 +210,7 @@ public class VisualizationAPIComponent {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@Test
+	@Test(timeout = 60000)
 	public void tc5_AvgNumber_PresentCorrectValue() throws InterruptedException {
 		// ## Step 1 - Change the option parameter to AVG and reload sample
 		// Render again the sample

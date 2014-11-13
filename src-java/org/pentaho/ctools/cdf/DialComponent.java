@@ -100,7 +100,7 @@ public class DialComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -122,7 +122,7 @@ public class DialComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -148,7 +148,7 @@ public class DialComponent {
    *    1. Check if a graphic was generated
    *    2. Check the http request for the generated image
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_GenerateGraphic_GraphicGeneratedAndHttp200() {
     // ## Step 1
     WebElement dialElement = ElementHelper.FindElement(driver, By.cssSelector("img"));

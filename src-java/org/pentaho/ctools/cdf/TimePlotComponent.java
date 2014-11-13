@@ -94,7 +94,7 @@ public class TimePlotComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     //wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -116,7 +116,7 @@ public class TimePlotComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -147,7 +147,7 @@ public class TimePlotComponent {
   *    1. Check if the graphic is presented
   *    2. Move mouse over graphic and check the expected value for Total Price
   */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_MouseOverPlot_TotalPriceChanged() {
     // ## Step 1
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sampleObject']/div/span")));

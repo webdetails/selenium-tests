@@ -75,7 +75,7 @@ public class BarChart {
    * Steps:
    *    1. Open the bar chart.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_BarChart_ImageRendered() {
     log.debug("tc1_BarChart_ImageRendered");
     //## Step 1

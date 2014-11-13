@@ -88,7 +88,7 @@ public class MetaLayerHomeDashboard {
    *    2. Click in 'Details...'.
    *    3. Check if we have width = 500 and height = 600
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_LinkDetails_PopupJPivot() throws Exception {
     /*
      * ## Step 1

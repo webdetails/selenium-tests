@@ -98,7 +98,7 @@ public class QueryComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
@@ -120,7 +120,7 @@ public class QueryComponent {
    * Steps: 
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -149,7 +149,7 @@ public class QueryComponent {
    * Steps:
    *    1. Execute the component and check the return value of query data.
    */
-  @Test
+  @Test(timeout = 60000)
   public void tc3_ExecuteQuery_ReturnedTextAsExpected() {
     log.debug("tc3_ExecuteQuery_ReturnedTextAsExpected");
 
