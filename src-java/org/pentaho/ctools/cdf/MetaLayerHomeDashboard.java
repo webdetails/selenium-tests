@@ -68,7 +68,7 @@ public class MetaLayerHomeDashboard {
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(this.driver);
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     log.info("setUp##" + MetaLayerHomeDashboard.class.getSimpleName());
     this.driver = CToolsTestSuite.getDriver();
     this.wait = CToolsTestSuite.getWait();
@@ -89,7 +89,8 @@ public class MetaLayerHomeDashboard {
    *    3. Check if we have width = 500 and height = 600
    */
   @Test(timeout = 60000)
-  public void tc1_LinkDetails_PopupJPivot() throws Exception {
+  public void tc1_LinkDetails_PopupJPivot() {
+    log.info("tc1_LinkDetails_PopupJPivot");
     /*
      * ## Step 1
      */
@@ -134,9 +135,9 @@ public class MetaLayerHomeDashboard {
     //Wait for the element be visible.
     this.driver.switchTo().frame(valueFrameAttrId);
     ElementHelper.IsElementVisible(this.driver, By.cssSelector("body"));
-    ElementHelper.IsElementVisible(this.driver, By.xpath("//div[@id='internal_content']"));
+    ElementHelper.IsElementVisible(this.driver, By.id("internal_content"));
     ElementHelper.IsElementVisible(this.driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]"));
-    assertNotNull(ElementHelper.FindElement(this.driver, By.xpath("//div[@id='internal_content']")));
+    assertNotNull(ElementHelper.FindElement(this.driver, By.id("internal_content")));
     assertEquals("Measures", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
     assertEquals("Australian Collectors, Co.", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
     assertEquals("180,125", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
