@@ -69,6 +69,7 @@ public class MetaLayerHomeDashboard {
 
   @Before
   public void setUp() throws Exception {
+    log.info("setUp##" + MetaLayerHomeDashboard.class.getSimpleName());
     this.driver = CToolsTestSuite.getDriver();
     this.wait = CToolsTestSuite.getWait();
     this.baseUrl = CToolsTestSuite.getBaseUrl();
@@ -108,7 +109,7 @@ public class MetaLayerHomeDashboard {
     /*
      * ## Step 2
      */
-    
+
     //Wait for visibility of 'topTenCustomersDetailsObject' the text 'Details'
     ElementHelper.IsElementVisible(this.driver, By.id("topTenCustomersDetailsObject"));
     WebElement linkDetails = ElementHelper.FindElement(this.driver, By.linkText("Details..."));
@@ -147,5 +148,7 @@ public class MetaLayerHomeDashboard {
   }
 
   @After
-  public void tearDown() {}
+  public void tearDown() {
+    log.info("tearDown##" + MetaLayerHomeDashboard.class.getSimpleName());
+  }
 }

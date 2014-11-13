@@ -41,6 +41,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.cda.CDACacheManager;
 import org.pentaho.ctools.cda.CDADatasourceTest;
 import org.pentaho.ctools.cda.MondrianJNDI;
+import org.pentaho.ctools.cde.SampleDashboard;
 import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.ButtonComponent;
 import org.pentaho.ctools.cdf.CheckComponent;
@@ -76,14 +77,15 @@ import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.security.AccessSystemResources;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ /*LoginPentaho.class,
-LogoutPentaho.class*/
+@Suite.SuiteClasses({
+  /*LoginPentaho.class, SampleDashboard.class, LogoutPentaho.class*/
 //##### Execution Order #####
 //Start Tests
 LoginPentaho.class,
 //CDF
 AutoCompleteBoxComponent.class, ButtonComponent.class, CheckComponent.class, CommentComponent.class, DateInputComponent.class, DateRangeInputComponent.class, DialComponent.class, ExecutePrptComponent.class, ExecuteXactionComponent.class, JFreeChartComponent.class, MetaLayerHomeDashboard.class, MonthPickerComponent.class, MultiButtonComponent.class, OpenFlashChartComponent.class, PrptComponent.class, QueryComponent.class, RadioComponent.class, SchedulePrptComponent.class, SelectComponent.class, SelectMultiComponent.class, TableComponent.class, TextComponent.class, TextInputComponent.class, TimePlotComponent.class, TrafficComponent.class, VisualizationAPIComponent.class, XactionComponent.class,
 //CDE
+SampleDashboard.class,
 //MapComponentReference.class,
 //CDE - Widgets
 //CreateWidget.class,

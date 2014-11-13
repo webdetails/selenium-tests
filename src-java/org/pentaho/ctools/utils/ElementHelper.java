@@ -28,9 +28,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -126,7 +128,7 @@ public class ElementHelper {
 
   /**
    * TODO
-   * 
+   *
    * @param driver
    * @param wait
    * @param locator
@@ -156,7 +158,7 @@ public class ElementHelper {
 
   /**
    * TODO
-   * 
+   *
    * @param driver
    * @param locator
    * @return
@@ -178,7 +180,7 @@ public class ElementHelper {
 
   /**
    * TODO
-   * 
+   *
    * @param driver
    * @param locator
    * @return
@@ -203,7 +205,7 @@ public class ElementHelper {
    * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
    * the element is not ready in DOM. Hence, to prevent exception, we develop
    * a function that is the same of findElement but avoid this exception.
-   *  
+   *
    * @param driver
    * @param locator
    * @return
@@ -237,7 +239,7 @@ public class ElementHelper {
   }
 
   /**
-   * 
+   *
    * @param driver
    * @param locator
    * @return
@@ -254,29 +256,49 @@ public class ElementHelper {
   }
 
   /**
-   * 
+   * This method wait for text to be present.
+   *
    * @param driver
    * @param locator
    * @param text
    * @return
    */
-  public static String WaitForText(WebDriver driver, By locator, String text) {
-    String strText = "";
-
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
+  public static void WaitForTextPresent(WebDriver driver, By locator, String textToWait) {
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(10, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+  }
 
-    boolean found = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, strText));
+  /**
+   * This method wait for text to be present and if present return the text.
+   *
+   * @param driver
+   * @param locator
+   * @param textToWait
+   * @return
+   */
+  public static String WaitForText(WebDriver driver, By locator, String textToWait) {
+    String strText = "";
+
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(10, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
+
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    boolean found = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
     if (found) {
       strText = GetText(driver, locator);
     }
-
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
     return strText;
   }
 
+  /**
+   *
+   * @param driver
+   * @param locator
+   */
   public static void WaitForInvisible(WebDriver driver, By locator) {
     driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
@@ -287,11 +309,33 @@ public class ElementHelper {
         log.error("NuSuchElement - got it. Locator: " + locator.toString());
         break;
       } catch (StaleElementReferenceException s) {
-        log.error("Stale - got it. Locator: " + locator.toString());        
+        log.error("Stale - got it. Locator: " + locator.toString());
       }
     }
 
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);    
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
+  /**
+   * The function will search for the element and then click on it.
+   *
+   * @param driver
+   * @param locator
+   */
+  public static void Click(WebDriver driver, By locator) {
+    WebElement element = FindElement(driver, locator);
+    if (element != null) {
+      try {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+      } catch (WebDriverException wde) {
+        if (wde.getMessage().contains("arguments[0].click is not a function")) {
+          element.click();
+        }
+      }
+
+    } else {
+      log.entry("Element is null " + locator.toString());
+    }
+  }
 }
