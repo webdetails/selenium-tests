@@ -79,7 +79,7 @@ public class JFreeChartComponent {
    */
   @BeforeClass
   public static void setUp() {
-    log.debug("setup");
+    log.info("setUp##" + JFreeChartComponent.class.getSimpleName());
     driver  = CToolsTestSuite.getDriver();
     wait    = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -113,6 +113,7 @@ public class JFreeChartComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -135,6 +136,7 @@ public class JFreeChartComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
@@ -168,7 +170,7 @@ public class JFreeChartComponent {
    */
   @Test(timeout = 60000)
   public void tc3_ClickOnChart_AlertDisplayed() {
-    log.debug("tc3_ClickOnChart_AlertDisplayed");
+    log.info("tc3_ClickOnChart_AlertDisplayed");
     
     WebElement img = ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']"));
     String firstChart = img.getAttribute("src");
@@ -253,7 +255,7 @@ public class JFreeChartComponent {
    */
   @Test(timeout = 60000)
   public void tc4_PreviewChart_NewWindowDisplayed() {
-    log.debug("tc4_PreviewChart_NewWindowDisplayed");
+    log.info("tc4_PreviewChart_NewWindowDisplayed");
 
     // ## Step 1
     Actions acts = new Actions(driver);
