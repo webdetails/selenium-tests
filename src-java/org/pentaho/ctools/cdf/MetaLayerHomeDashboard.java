@@ -28,8 +28,8 @@ import static org.junit.Assert.assertTrue;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -39,6 +39,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
+import org.pentaho.ctools.cde.reference.AddinReference;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -55,24 +56,24 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MetaLayerHomeDashboard {
-  // Instance of the driver (browser emulator)
-  private WebDriver         driver;
+  //Instance of the driver (browser emulator)
+  private static WebDriver       driver;
   // Instance to be used on wait commands
-  private Wait<WebDriver>   wait;
+  private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
-  private String            baseUrl;
+  private static String          baseUrl;
   //Log instance
-  private static Logger     log                = LogManager.getLogger(MetaLayerHomeDashboard.class);
+  private static Logger          log                = LogManager.getLogger(MetaLayerHomeDashboard.class);
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(this.driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
-  @Before
-  public void setUp() throws Exception {
+  @BeforeClass
+  public static void setUpClass() {
     log.info("setUp##" + MetaLayerHomeDashboard.class.getSimpleName());
-    this.driver = CToolsTestSuite.getDriver();
-    this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
+    baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -93,26 +94,24 @@ public class MetaLayerHomeDashboard {
     /*
      * ## Step 1
      */
-    this.driver.get(this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalyer.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalyer.xcdf/generatedContent");
 
     //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(this.driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
-    this.wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     //Wait for visibility of 'Top Ten Customers'
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='titleObject']")));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='titleObject']")));
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", this.driver.getTitle());
-    assertEquals("Top Ten Customers", ElementHelper.GetText(this.driver, By.xpath("//div[@id='titleObject']")));
+    assertEquals("Community Dashboard Framework", driver.getTitle());
+    assertEquals("Top Ten Customers", ElementHelper.GetText(driver, By.xpath("//div[@id='titleObject']")));
 
     /*
      * ## Step 2
      */
-
     //Wait for visibility of 'topTenCustomersDetailsObject' the text 'Details'
-    ElementHelper.IsElementVisible(this.driver, By.id("topTenCustomersDetailsObject"));
-    WebElement linkDetails = ElementHelper.FindElement(this.driver, By.linkText("Details..."));
+    WebElement linkDetails = ElementHelper.FindElement(driver, By.linkText("Details..."));
     assertEquals("Details...", linkDetails.getText());
     //click on the 'Details...'
     linkDetails.click();
@@ -121,10 +120,9 @@ public class MetaLayerHomeDashboard {
      * ## Step 3
      */
     //Wait for the frame
-    ElementHelper.IsElementVisible(this.driver, By.cssSelector("div.fancybox-inner"));
-    ElementHelper.IsElementVisible(this.driver, By.xpath("//iframe"));
-    WebElement frame = ElementHelper.FindElement(this.driver, By.xpath("//iframe"));
-    String valueFrameAttrId = frame.getAttribute("id");
+    ElementHelper.IsElementVisible(driver, By.cssSelector("div.fancybox-inner"));
+    ElementHelper.IsElementVisible(driver, By.xpath("//iframe"));
+    WebElement frame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     String valueFrameAttrSrc = frame.getAttribute("src");
 
     ///pentaho/plugin/jpivot/Pivot?solution=system&path=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf%2Factions&action=jpivot.xaction&width=500&height=600
@@ -132,23 +130,20 @@ public class MetaLayerHomeDashboard {
     assertTrue(StringUtils.containsIgnoreCase(valueFrameAttrSrc, "action=jpivot.xaction&width=500&height=600"));
 
     //Wait for the element be visible.
-    this.driver.switchTo().frame(valueFrameAttrId);
-    ElementHelper.IsElementVisible(this.driver, By.cssSelector("body"));
-    ElementHelper.IsElementVisible(this.driver, By.xpath("//div[@id='internal_content']"));
-    ElementHelper.IsElementVisible(this.driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]"));
-    assertNotNull(ElementHelper.FindElement(this.driver, By.xpath("//div[@id='internal_content']")));
-    assertEquals("Measures", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
-    assertEquals("Australian Collectors, Co.", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
-    assertEquals("180,125", ElementHelper.GetText(this.driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
+    driver.switchTo().frame(0);
+    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='internal_content']")));
+    assertEquals("Measures", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
+    assertEquals("Australian Collectors, Co.", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
+    assertEquals("180,125", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
 
     //Close pop-up
-    this.driver.switchTo().defaultContent();
-    ElementHelper.FindElement(this.driver, By.xpath("/html/body/div[3]/div/div/a")).click();
-    ElementHelper.IsElementInvisible(this.driver, By.cssSelector("div.fancybox-inner"));
+    driver.switchTo().defaultContent();
+    ElementHelper.FindElement(driver, By.xpath("/html/body/div[3]/div/div/a")).click();
+    ElementHelper.IsElementInvisible(driver, By.cssSelector("div.fancybox-inner"));
   }
 
-  @After
-  public void tearDown() {
-    log.info("tearDown##" + MetaLayerHomeDashboard.class.getSimpleName());
+  @AfterClass
+  public static void tearDownClass() {
+    log.info("tearDown##" + AddinReference.class.getSimpleName());
   }
 }
