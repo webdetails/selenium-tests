@@ -39,7 +39,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
-import org.pentaho.ctools.cde.reference.AddinReference;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -145,6 +144,6 @@ public class MetaLayerHomeDashboard {
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + AddinReference.class.getSimpleName());
+    log.info("tearDown##" + MetaLayerHomeDashboard.class.getSimpleName());
   }
 }
