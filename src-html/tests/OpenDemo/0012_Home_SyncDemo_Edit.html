@@ -4,20 +4,16 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/pentaho/" />
-<title>New Test</title>
+<title>0012_Home_SyncDemo_Edit</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">New Test</td></tr>
+<tr><td rowspan="1" colspan="3">0012_Home_SyncDemo_Edit</td></tr>
 </thead><tbody>
-
-</tbody></table>
-</body>
-</html>
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:PublicDemo:SyncDemo1:SyncDemo1.wcdf/generatedContent</td>
+	<td>api/repos/:public:ctools-samples:PublicDemo:SyncDemo1:SyncDemo1.wcdf/edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -27,13 +23,63 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=select</td>
+	<td>css=caption.ui-state-default</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>SteelWheels</td>
+	<td>assertText</td>
+	<td>css=td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#d183eeba-a85e-91ff-63bc-c98a6906504f &gt; td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#7dd8946b-eae7-5fe2-74ab-c299572fdff7 &gt; td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='e68e8836-fdab-812a-2244-347d6d88c73a']/td[2]</td>
+	<td>css</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='d183eeba-a85e-91ff-63bc-c98a6906504f']/td[2]</td>
+	<td>header</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='7dd8946b-eae7-5fe2-74ab-c299572fdff7']/td[2]</td>
+	<td>content</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=previewButton</td>
 	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>windowFocus</td>
+	<td>id=fancybox-content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='tableObjTable']/thead/tr/th</td>
+	<td>Country</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -641,11 +687,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>css=#salesChartprotovis</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=#topChartprotovis</td>
 	<td></td>
 </tr>
 <tr>
@@ -1332,4 +1373,11 @@
 	<td>css=#monthlyChartprotovis</td>
 	<td></td>
 </tr>
-<!--Verificar Edit-->
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

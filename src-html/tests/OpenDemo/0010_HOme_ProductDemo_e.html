@@ -4,16 +4,16 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/pentaho/" />
-<title>0004_Home_ProductDemo</title>
+<title>0010_Home_ProductDemo_Edit</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">0004_Home_ProductDemo</td></tr>
+<tr><td rowspan="1" colspan="3">0010_Home_ProductDemo_Edit</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:PublicDemo:ProductDemo:ProductDemo.wcdf/generatedContent</td>
+	<td>api/repos/:public:ctools-samples:PublicDemo:ProductDemo:ProductDemo.wcdf/edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -23,13 +23,63 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=body</td>
+	<td>css=caption.ui-state-default</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Sales POC</td>
+	<td>assertText</td>
+	<td>css=td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#08b02b12-8232-ae32-1701-f84a4d475ee1 &gt; td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#46683282-093d-ffc1-3353-fda6ac4730ff &gt; td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='9a987b5e-bbbf-7772-6783-a9ab0194ac4c']/td[2]</td>
+	<td>Css</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='08b02b12-8232-ae32-1701-f84a4d475ee1']/td[2]</td>
+	<td>header</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='46683282-093d-ffc1-3353-fda6ac4730ff']/td[2]</td>
+	<td>body</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=previewButton</td>
 	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>windowFocus</td>
+	<td>id=fancybox-content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=th.w</td>
+	<td>Overall Impact</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -49,27 +99,27 @@
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='summaryTable']/table/thead/tr/th[3]</td>
-	<td>Orders�� %Change</td>
+	<td>Orders&nbsp;&nbsp;&nbsp;%Change</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='summaryTable']/table/thead/tr/th[2]</td>
-	<td>AOV�� %Change</td>
+	<td>AOV&nbsp;&nbsp;&nbsp;%Change</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=td</td>
-	<td>�All contributors - -</td>
+	<td>//div[@id='summaryTable']/table/tbody/tr/td</td>
+	<td>All contributors - -</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/thead/tr/th[2]</td>
-	<td>AOV�� %Change</td>
+	<td>AOV&nbsp;&nbsp;&nbsp;%Change</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/thead/tr/th[3]</td>
-	<td>Orders�� %Change</td>
+	<td>Orders&nbsp;&nbsp;&nbsp;%Change</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -84,67 +134,67 @@
 <tr>
 	<td>assertText</td>
 	<td>css=#detailsTable &gt; table.ecoTable &gt; tbody &gt; tr &gt; td</td>
-	<td>�children - Beautiful Outfits</td>
+	<td>children - Beautiful Outfits</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[2]/td</td>
-	<td>�children - Even nicer Clothes</td>
+	<td>children - Even nicer Clothes</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td</td>
-	<td>�children - Great Clothes</td>
+	<td>children - Great Clothes</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[4]/td</td>
-	<td>�children - Nice Clothes</td>
+	<td>children - Nice Clothes</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[5]/td</td>
-	<td>�men - Beautiful Outfits</td>
+	<td>men - Beautiful Outfits</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[6]/td</td>
-	<td>�men - Even nicer Clothes</td>
+	<td>men - Even nicer Clothes</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[8]/td</td>
-	<td>�men - Nice Clothes</td>
+	<td>men - Nice Clothes</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[7]/td</td>
-	<td>�men - Great Clothes</td>
+	<td>men - Great Clothes</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[9]/td</td>
-	<td>�women - Beautiful Outfits</td>
+	<td>women - Beautiful Outfits</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[10]/td</td>
-	<td>�women - Even nicer Clothes</td>
+	<td>women - Even nicer Clothes</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[11]/td</td>
-	<td>�women - Great Clothes</td>
+	<td>women - Great Clothes</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[11]/td</td>
-	<td>�women - Great Clothes</td>
+	<td>women - Great Clothes</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@id='detailsTable']/table/tbody/tr[12]/td</td>
-	<td>�women - Nice Clothes</td>
+	<td>women - Nice Clothes</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -640,6 +690,12 @@
 	<td>//div[@id='detailsTable']/table/tbody/tr[3]/td[5]</td>
 	<td>+46548</td>
 </tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+
 </tbody></table>
 </body>
 </html>

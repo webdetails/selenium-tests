@@ -12,24 +12,49 @@
 <tr><td rowspan="1" colspan="3">0002_Open_CDE_Open_Demos</td></tr>
 </thead><tbody>
 <tr>
-	<td>click</td>
-	<td>//div [@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div/div</td>
+	<td>open</td>
+	<td>Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.busy-indicator-container.waitPopup</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div [@id= &quot;fileBrowserFolders&quot;]/div/div[2]/div[2]/div[4]/div/div</td>
+	<td>css=td.custom-dropdown-arrow.custom-dropdown-arrow-major</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div[2]/div/div/div[3]</td>
+	<td>id=gwt-uid-7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div/div/div[3]</td>
+	<td>Home</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[5]/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div[2]/div/div/div[3]</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[5]/div[2]/div/div/div[3]</td>
 	<td>CDE Open Demos</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[5]/div[2]/div/div/div[3]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
@@ -40,11 +65,6 @@
 	<td>assertText</td>
 	<td>//div[@id=&quot;fileBrowserFiles&quot;]/div[2]/div/div[2]</td>
 	<td>CDE Open Demos</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>api/repos/%3Apublic%3Actools-samples%3APublicDemo%3APublicDemo.wcdf/generatedContent</td>
-	<td></td>
 </tr>
 </tbody></table>
 </body>

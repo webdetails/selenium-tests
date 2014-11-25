@@ -4,31 +4,71 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/pentaho/" />
-<title>0003_Home_Senna</title>
+<title>0009_Home_Senna_Edit</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">0003_Home_Senna</td></tr>
+<tr><td rowspan="1" colspan="3">0009_Home_Senna_Edit</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:PublicDemo:Senna:Senna.wcdf/generatedContent</td>
+	<td>api/repos/:public:ctools-samples:PublicDemo:Senna:Senna.wcdf/edit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
-	<td>css=div.fancybox-loading</td>
+	<td>waitForElementPresent</td>
+	<td>id=previewButton</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTitle</td>
-	<td>Senna</td>
+	<td>assertText</td>
+	<td>css=td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#c26d2e99-0c95-2d3d-c790-5559b642333d &gt; td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#b7896aab-3103-b92e-8f32-9504656fea43 &gt; td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#9a6a94cd-0d9d-8a46-4c1c-1e4da9123ca2 &gt; td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='c26d2e99-0c95-2d3d-c790-5559b642333d']/td[2]</td>
+	<td>css</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='5898de5e-b6f6-f447-e6cd-c0df0745fc28']/td[2]</td>
+	<td>content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[@id='b7896aab-3103-b92e-8f32-9504656fea43']/td[2]</td>
+	<td>positionChart</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=previewButton</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Senna</td>
+	<td>click</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-bg-n</td>
 	<td></td>
 </tr>
 <tr>
@@ -37,8 +77,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>windowFocus</td>
+	<td>id=fancybox-content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='summaryRowTable']/tbody/tr/td[2]</td>
+	<td>41</td>
+</tr>
+<tr>
 	<td>assertText</td>
-	<td>//table[@id='summaryRowTable']/tbody/tr/td</td>
+	<td>//table[@id='summaryRowTable']/tbody/tr/td[1]</td>
 	<td>162</td>
 </tr>
 <tr>
@@ -60,6 +110,11 @@
 	<td>assertText</td>
 	<td>//table[@id='summaryRowTable']/tbody/tr/td[5]</td>
 	<td>19</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='polesTableTable']/tbody/tr[3]/td[2]</td>
+	<td>Toleman</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -294,12 +349,12 @@
 <tr>
 	<td>assertText</td>
 	<td>//table[@id='summaryRowTable']/thead/tr/th[2]</td>
-	<td>Vit�rias</td>
+	<td>Vitórias</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//table[@id='summaryRowTable']/thead/tr/th[3]</td>
-	<td>P�dios</td>
+	<td>Pódios</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -309,110 +364,12 @@
 <tr>
 	<td>assertText</td>
 	<td>//table[@id='summaryRowTable']/thead/tr/th[5]</td>
-	<td>Voltas mais r�pidas</td>
-</tr>
-<!--Verificar primeira barra "Pontos em GP" e resultados em "Corrida"-->
-<tr>
-	<td>pause</td>
-	<td>2000</td>
-	<td></td>
+	<td>Voltas mais rápidas</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect']</td>
+	<td>id=fancybox-close</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//div[10]/div[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][@fill='rgb(0,71,103)']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='selectorRow']/select</td>
-	<td>1984</td>
-</tr>
-<!--Verificar segunda barra "Pontos em GP" e resultados em "Corrida"-->
-<tr>
-	<td>pause</td>
-	<td>2000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//div[10]/div[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2][@fill='rgb(0,71,103)']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='selectorRow']/select</td>
-	<td>1985</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='selectorRow']/select</td>
-	<td>1985</td>
-</tr>
-<!--Verificar terceira barra "Pontos em GP" e resultados em "Corrida"-->
-<tr>
-	<td>pause</td>
-	<td>2000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//div[10]/div[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3][@fill='rgb(0,71,103)']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='selectorRow']/select</td>
-	<td>1986</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='selectorRow']/select</td>
-	<td>1986</td>
 </tr>
 </tbody></table>
 </body>
