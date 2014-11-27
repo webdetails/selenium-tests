@@ -31,6 +31,7 @@ import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -235,6 +236,11 @@ public class ElementHelper {
     } catch (ElementNotVisibleException v) {
       log.error("NotVisible - got one. Locator: " + locator.toString());
       return IsElementVisible(driver, locator);
+    } catch (TimeoutException te) {
+      log.error("TimeoutException - got one. Locator: " + locator.toString());
+      log.error(te.getMessage());
+      log.debug("Trying again.");
+      return driver.findElement(locator);
     }
   }
 

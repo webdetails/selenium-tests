@@ -123,6 +123,7 @@ public class MetaLayerHomeDashboard {
     ElementHelper.IsElementVisible(driver, By.cssSelector("div.fancybox-inner"));
     ElementHelper.IsElementVisible(driver, By.xpath("//iframe"));
     WebElement frame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
+    String valueFrameAttrId = frame.getAttribute("id");
     String valueFrameAttrSrc = frame.getAttribute("src");
 
     ///pentaho/plugin/jpivot/Pivot?solution=system&path=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf%2Factions&action=jpivot.xaction&width=500&height=600
@@ -130,11 +131,11 @@ public class MetaLayerHomeDashboard {
     assertTrue(StringUtils.containsIgnoreCase(valueFrameAttrSrc, "action=jpivot.xaction&width=500&height=600"));
 
     //Wait for the element be visible.
-    driver.switchTo().frame(0);
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='internal_content']")));
-    assertEquals("Measures", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
-    assertEquals("Australian Collectors, Co.", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
-    assertEquals("180,125", ElementHelper.GetText(driver, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
+    WebDriver driverFrame = driver.switchTo().frame(valueFrameAttrId);
+    assertNotNull(ElementHelper.FindElement(driverFrame, By.xpath("//div[@id='internal_content']")));
+    assertEquals("Measures", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
+    assertEquals("Australian Collectors, Co.", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
+    assertEquals("180,125", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
 
     //Close pop-up
     driver.switchTo().defaultContent();
