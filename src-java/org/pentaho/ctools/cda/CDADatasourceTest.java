@@ -74,7 +74,7 @@ public class CDADatasourceTest {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Acda%3Acda_test.xcdf/generatedContent");
 
     //wait for element to be visible
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td"));
+    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td"));
 
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -111,51 +111,55 @@ public class CDADatasourceTest {
     //sql.jndi
     String accessMethod2 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[3]/td"));
     String sample2 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[3]/td[3]/a"));
-    WebElement element2 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element2 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[3]/td[4]/img[@src='resources/ok.png']"));
     //sql.stringarray.jndi
     String accessMethod3 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[4]/td"));
     String sample3 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[4]/td[3]/a"));
-    WebElement element3 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element3 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[4]/td[4]/img[@src='resources/ok.png']"));
     //mondrian.jdbc
     String accessMethod4 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[5]/td"));
     String sample4 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[5]/td[3]/a"));
-    WebElement element4 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element4 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[5]/td[4]/img[@src='resources/ok.png']"));
     //mondrian.jndi
     String accessMethod5 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[6]/td"));
     String sample5 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[6]/td[3]/a"));
-    WebElement element5 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element5 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[6]/td[4]/img[@src='resources/ok.png']"));
     // mondrian.jdbc (denormalized)
     String accessMethod6 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[7]/td"));
     String sample6 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[7]/td[3]/a"));
-    WebElement element6 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element6 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[7]/td[4]/img[@src='resources/ok.png']"));
     //mondrian.jndi (denormalized)
     String accessMethod7 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[8]/td"));
     String sample7 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[8]/td[3]/a"));
-    WebElement element7 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element7 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[8]/td[4]/img[@src='resources/ok.png']"));
     //olap4j
     String accessMethod8 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[9]/td"));
     String sample8 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[9]/td[3]/a"));
-    WebElement element8 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element8 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[9]/td[4]/img[@src='resources/ok.png']"));
     //kettle
     String accessMethod9 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[10]/td"));
     String sample9 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[10]/td[3]/a"));
-    WebElement element9 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element9 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[10]/td[4]/img[@src='resources/ok.png']"));
     //metadata
     String accessMethod10 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[11]/td"));
     String sample10 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[11]/td[3]/a"));
-    WebElement element10 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element10 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[11]/td[4]/img[@src='resources/ok.png']"));
     //scripting
     String accessMethod11 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td"));
     String sample11 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td[3]/a"));
-    WebElement element11 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
-    //Compound join
+    WebElement element11 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td[4]/img[@src='resources/ok.png']"));
+    //Xpath
     String accessMethod12 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td"));
     String sample12 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td[3]/a"));
-    WebElement element12 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
-    //Compound Union
+    WebElement element12 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td[4]/img[@src='resources/ok.png']"));
+    //Compound join
     String accessMethod13 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td"));
     String sample13 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td[3]/a"));
-    WebElement element13 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element13 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td[4]/img[@src='resources/ok.png']"));
+    //Compound Union
+    String accessMethod14 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td"));
+    String sample14 = ElementHelper.GetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td[3]/a"));
+    WebElement element14 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td[4]/img[@src='resources/ok.png']"));
 
     assertEquals("sql.jdbc", accessMethod1);
     assertEquals("cdafiles/sql-jdbc.cda", sample1);
@@ -190,12 +194,15 @@ public class CDADatasourceTest {
     assertEquals("scripting", accessMethod11);
     assertEquals("cdafiles/scripting.cda", sample11);
     assertNotNull(element11);
-    assertEquals("Compound join", accessMethod12);
-    assertEquals("cdafiles/compoundJoin.cda", sample12);
+    assertEquals("xpath", accessMethod12);
+    assertEquals("cdafiles/xpath.cda", sample12);
     assertNotNull(element12);
-    assertEquals("Compound Union", accessMethod13);
-    assertEquals("cdafiles/compoundUnion.cda", sample13);
+    assertEquals("Compound join", accessMethod13);
+    assertEquals("cdafiles/compoundJoin.cda", sample13);
     assertNotNull(element13);
+    assertEquals("Compound Union", accessMethod14);
+    assertEquals("cdafiles/compoundUnion.cda", sample14);
+    assertNotNull(element14);
   }
 
   @AfterClass
