@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>0002_openCDETutorial</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0002_openCDETutorial</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=toolsmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=toolsmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=refreshmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=refreshmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=cdaClearCache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cdaClearCache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.pentaho-tabWidgetLabel</td>
+	<td>CDA Cache</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.pentaho-tabWidgetLabel</td>
+	<td>CDA Cache</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=td.custom-dropdown-arrow.custom-dropdown-arrow-major</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=td.custom-dropdown-arrow.custom-dropdown-arrow-major</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=gwt-uid-7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=gwt-uid-7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div[2]/div/div/div[3]</td>
+	<td>CDE Tutorial</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div[2]/div/div/div[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserFiles&quot;]/div/div/div[2]</td>
+	<td>#Welcome</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFiles&quot;]/div/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserButtons&quot;]/div/button</td>
+	<td>Open</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserButtons&quot;]/div/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;content&quot;]/div/div/div/h2</td>
+	<td>Welcome to the CDE Tutorial.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id= &quot;content&quot;]/div/div/div/h2</td>
+	<td>Welcome to the CDE Tutorial.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

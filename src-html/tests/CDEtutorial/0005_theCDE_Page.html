@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>0005_theCDE_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0005_theCDE_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>api/repos/:public:ctools-samples:Dashboards:the_cde_interface.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<!--Verificar Textos-->
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>The CDE Interface</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>The Layout Section</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[2]</td>
+	<td>The Components Section</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[3]</td>
+	<td>The Data Sources Section</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[5]/div/h3</td>
+	<td>Putting it all together: Layout, Components and Data Sources</td>
+</tr>
+<!--Verificar Imagens-->
+<tr>
+	<td>assertElementHeight</td>
+	<td>css=img</td>
+	<td>37</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>css=#cf78298e-3d26-d901-7835-9afc1b4f5b4e &gt; img</td>
+	<td>414</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>css=#4735840c-bade-e141-fe9a-fab88309a3f2 &gt; img</td>
+	<td>693</td>
+</tr>
+<!--Verificar Links-->
+<tr>
+	<td>click</td>
+	<td>link=Community Data Access</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cda/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cda/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<!--Verificar Navegação Entre Páginas-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h2</td>
+	<td>Welcome to the CDE Tutorial.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Welcome to the CDE Tutorial.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h2</td>
+	<td>Hello, World!</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Hello, World!</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
