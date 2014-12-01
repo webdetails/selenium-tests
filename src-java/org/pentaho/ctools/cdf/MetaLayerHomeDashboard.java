@@ -131,14 +131,18 @@ public class MetaLayerHomeDashboard {
     //Check if we have the sizes 500 and 600
     assertTrue(StringUtils.containsIgnoreCase(valueFrameAttrSrc, "action=jpivot.xaction&width=500&height=600"));
 
+    //Not we have to wait for loading disappear
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
     //Wait for the element be visible.
-    WebDriver driverFrame = driver.switchTo().frame(valueFrameAttrId);
+    WebDriver driverFrame = driver.switchTo().frame(frame);
 
     //BEGING: Testing debug
     //Printing the html of the element to check what problem is being occurred when tyring to find 'internal_content'
     log.info("MetaLayerHomeDashboard html");
     log.info("TODO:" + ((JavascriptExecutor) driver).executeScript("return document.body.innerHTML;").toString());
     //ENDING: Testing debug
+
 
     assertNotNull(ElementHelper.FindElement(driverFrame, By.xpath("//div[@id='internal_content']")));
     assertEquals("Measures", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));

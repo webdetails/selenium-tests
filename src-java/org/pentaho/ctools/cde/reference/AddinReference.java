@@ -272,7 +272,7 @@ public class AddinReference {
     //Check attribute 'd'
     chartRow2Col1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr[2]/td[2]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='path']"));
     String row1Col1ChartDataActual = chartRow2Col1.getAttribute("d");
-    String row1Col1ChartDataExpected1 = "M0,7.428571428571429L31.";
+    String row1Col1ChartDataExpected1 = "M0,7.428571428571429";
     String row1Col1ChartDataExpected2 = ",0.8571428571428577";
     assertThat("Display tooltip: " + row1Col1ChartDataActual, row1Col1ChartDataActual, CoreMatchers.containsString(row1Col1ChartDataExpected1));
     assertThat("Display tooltip: " + row1Col1ChartDataActual, row1Col1ChartDataActual, CoreMatchers.containsString(row1Col1ChartDataExpected2));
