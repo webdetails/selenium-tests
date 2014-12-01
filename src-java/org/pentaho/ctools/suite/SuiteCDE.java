@@ -32,6 +32,11 @@ import org.pentaho.ctools.cde.reference.AddinReference;
   SampleDashboard.class,
   //CDE Reference
   AddinReference.class
-//Widgets
+//MapComponentReference.class,
+//CDE - Widgets
+//CreateWidget.class,
+//AddParamTableComponent.class,
+//SelectCdaFileAsDatasource.class,
+//SimpleExtensionPoints.class,
 })
-public class cde {}
+public class SuiteCDE {}

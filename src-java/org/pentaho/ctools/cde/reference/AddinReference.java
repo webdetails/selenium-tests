@@ -190,6 +190,7 @@ public class AddinReference {
     acts.moveToElement(chartRow1Col1, 50, 5);
     acts.build().perform();
     //Check tooltip text
+    ElementHelper.WaitForText(driver, By.xpath("//div[@id='jqstooltip']/div"), "43");
     String sparlkineCol1TooltipValue = ElementHelper.GetText(driver, By.xpath("//div[@id='jqstooltip']/div"));
     assertThat("Display tooltip: " + sparlkineCol1TooltipValue, sparlkineCol1TooltipValue, CoreMatchers.containsString("43"));
 
@@ -211,6 +212,7 @@ public class AddinReference {
     acts.moveToElement(chartRow1Col1, 50, 5);
     acts.build().perform();
     //Check tooltip text
+    ElementHelper.WaitForText(driver, By.xpath("//div[@id='jqstooltip']/div"), "50");
     sparlkineCol1TooltipValue = ElementHelper.GetText(driver, By.xpath("//div[@id='jqstooltip']/div"));
     assertThat("Display tooltip: " + sparlkineCol1TooltipValue, sparlkineCol1TooltipValue, CoreMatchers.containsString("50"));
   }

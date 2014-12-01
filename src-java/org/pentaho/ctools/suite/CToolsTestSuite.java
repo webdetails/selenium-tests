@@ -38,39 +38,6 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.pentaho.ctools.cda.CDACacheManager;
-import org.pentaho.ctools.cda.CDADatasourceTest;
-import org.pentaho.ctools.cda.MondrianJNDI;
-import org.pentaho.ctools.cdf.AutoCompleteBoxComponent;
-import org.pentaho.ctools.cdf.ButtonComponent;
-import org.pentaho.ctools.cdf.CheckComponent;
-import org.pentaho.ctools.cdf.CommentComponent;
-import org.pentaho.ctools.cdf.DateInputComponent;
-import org.pentaho.ctools.cdf.DateRangeInputComponent;
-import org.pentaho.ctools.cdf.DialComponent;
-import org.pentaho.ctools.cdf.ExecutePrptComponent;
-import org.pentaho.ctools.cdf.ExecuteXactionComponent;
-import org.pentaho.ctools.cdf.JFreeChartComponent;
-import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
-import org.pentaho.ctools.cdf.MonthPickerComponent;
-import org.pentaho.ctools.cdf.MultiButtonComponent;
-import org.pentaho.ctools.cdf.OpenFlashChartComponent;
-import org.pentaho.ctools.cdf.PrptComponent;
-import org.pentaho.ctools.cdf.QueryComponent;
-import org.pentaho.ctools.cdf.RadioComponent;
-import org.pentaho.ctools.cdf.SchedulePrptComponent;
-import org.pentaho.ctools.cdf.SelectComponent;
-import org.pentaho.ctools.cdf.SelectMultiComponent;
-import org.pentaho.ctools.cdf.TableComponent;
-import org.pentaho.ctools.cdf.TextComponent;
-import org.pentaho.ctools.cdf.TextInputComponent;
-import org.pentaho.ctools.cdf.TimePlotComponent;
-import org.pentaho.ctools.cdf.TrafficComponent;
-import org.pentaho.ctools.cdf.VisualizationAPIComponent;
-import org.pentaho.ctools.cdf.XactionComponent;
-import org.pentaho.ctools.cgg.BarChart;
-import org.pentaho.ctools.cgg.DialChart;
-import org.pentaho.ctools.cgg.ScatterChart;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.security.AccessSystemResources;
@@ -78,27 +45,20 @@ import org.pentaho.ctools.security.AccessSystemResources;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   /*LoginPentaho.class,
+  MetaLayerHomeDashboard.class,
   //AddinReference.class,
   LogoutPentaho.class*/
   //##### Execution Order #####
   //Start Tests
   LoginPentaho.class,
   //CDF
-  AutoCompleteBoxComponent.class, ButtonComponent.class, CheckComponent.class, CommentComponent.class, DateInputComponent.class, DateRangeInputComponent.class, DialComponent.class, ExecutePrptComponent.class, ExecuteXactionComponent.class, JFreeChartComponent.class, MetaLayerHomeDashboard.class, MonthPickerComponent.class, MultiButtonComponent.class, OpenFlashChartComponent.class, PrptComponent.class, QueryComponent.class, RadioComponent.class, SchedulePrptComponent.class, SelectComponent.class, SelectMultiComponent.class, TableComponent.class, TextComponent.class, TextInputComponent.class, TimePlotComponent.class, TrafficComponent.class, VisualizationAPIComponent.class, XactionComponent.class,
+  SuiteCDF.class,
   //CDE
-  cde.class,
-  //SampleDashboard.class,
-  //CDE Reference
-  //MapComponentReference.class,
-  //CDE - Widgets
-  //CreateWidget.class,
-  //AddParamTableComponent.class,
-  //SelectCdaFileAsDatasource.class,
-  //SimpleExtensionPoints.class,
+  SuiteCDE.class,
   //CDA
-  CDADatasourceTest.class, MondrianJNDI.class, CDACacheManager.class,
+  SuiteCDA.class,
   //CGG
-  BarChart.class, ScatterChart.class, DialChart.class,
+  SuiteCGG.class,
   //Security
   AccessSystemResources.class,
   //End Tests
