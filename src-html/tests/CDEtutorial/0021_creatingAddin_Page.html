@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/pentaho/" />
-<title>0005_theCDE_Page</title>
+<title>0021_creatingAddin_Page</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">0005_theCDE_Page</td></tr>
+<tr><td rowspan="1" colspan="3">0021_creatingAddin_Page</td></tr>
 </thead><tbody>
 <tr>
 	<td>setTimeout</td>
@@ -18,85 +18,94 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:Dashboards:the_cde_interface.wcdf/generatedContent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
+	<td>api/repos/:public:ctools-samples:Dashboards:creating_addin.wcdf/generatedContent</td>
 	<td></td>
 </tr>
 <!--Verificar Textos-->
 <tr>
-	<td>assertText</td>
-	<td>css=h2</td>
-	<td>The CDE Interface</td>
+	<td>waitForText</td>
+	<td>//div[43]/code[3]</td>
+	<td>&quot;sparkline&quot;</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=h3</td>
-	<td>The Layout Section</td>
+	<td>The implementation: Sparkline Add-In</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//h3[2]</td>
-	<td>The Components Section</td>
+	<td>css=code.js.comments</td>
+	<td>// Add-In name</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//h3[3]</td>
-	<td>The Data Sources Section</td>
+	<td>//div[7]/code[2]</td>
+	<td>defaults: {</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[5]/div/h3</td>
-	<td>Putting it all together: Layout, Components and Data Sources</td>
-</tr>
-<!--Verificar Imagens-->
-<tr>
-	<td>waitForElementHeight</td>
-	<td>css=img</td>
-	<td>37</td>
+	<td>//div[12]/code[2]</td>
+	<td>init:</td>
 </tr>
 <tr>
-	<td>assertElementHeight</td>
-	<td>css=img</td>
-	<td>37</td>
+	<td>assertText</td>
+	<td>//div[16]/code[2]</td>
+	<td>$.fn.dataTableExt.oSort[</td>
 </tr>
 <tr>
-	<td>waitForElementHeight</td>
-	<td>css=#cf78298e-3d26-d901-7835-9afc1b4f5b4e &gt; img</td>
-	<td>414</td>
+	<td>assertText</td>
+	<td>//div[20]/code[3]</td>
+	<td>myself.sort(b,a)</td>
 </tr>
 <tr>
-	<td>assertElementHeight</td>
-	<td>css=#cf78298e-3d26-d901-7835-9afc1b4f5b4e &gt; img</td>
-	<td>414</td>
+	<td>assertText</td>
+	<td>//div[26]/code[4]</td>
+	<td>.sumStrArray(a) -</td>
 </tr>
 <tr>
-	<td>waitForElementHeight</td>
-	<td>css=#4735840c-bade-e141-fe9a-fab88309a3f2 &gt; img</td>
-	<td>693</td>
+	<td>assertText</td>
+	<td>//div[31]/code[7]</td>
+	<td>(prev, curr, index, array){</td>
 </tr>
 <tr>
-	<td>assertElementHeight</td>
-	<td>css=#4735840c-bade-e141-fe9a-fab88309a3f2 &gt; img</td>
-	<td>693</td>
+	<td>assertText</td>
+	<td>//div[36]/code[2]</td>
+	<td>//Implementation will be passed to the target DOM Element</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[40]/code[4]</td>
+	<td>(tgt, st, opt) {</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[42]/code[2]</td>
+	<td>t.sparkline(st.value.split(/,/),opt);</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[47]/code</td>
+	<td>Dashboards.registerAddIn(</td>
 </tr>
 <!--Verificar Links-->
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=sparkline using the jquery plugin</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>link=Community Data Access</td>
+	<td>link=sparkline using the jquery plugin</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cda/</td>
+	<td>http://omnipotent.net/jquery.sparkline/#s-about</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cda/</td>
+	<td>http://omnipotent.net/jquery.sparkline/#s-about</td>
 	<td></td>
 </tr>
 <tr>
@@ -118,12 +127,12 @@
 <tr>
 	<td>waitForText</td>
 	<td>css=h2</td>
-	<td>Welcome to the CDE Tutorial.</td>
+	<td>Creating components</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=h2</td>
-	<td>Welcome to the CDE Tutorial.</td>
+	<td>Creating components</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -158,12 +167,17 @@
 <tr>
 	<td>waitForText</td>
 	<td>css=h2</td>
-	<td>Hello, World!</td>
+	<td>Getting the most out of CDA</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=h2</td>
-	<td>Hello, World!</td>
+	<td>Getting the most out of CDA</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>

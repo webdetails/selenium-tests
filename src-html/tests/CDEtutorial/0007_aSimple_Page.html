@@ -12,6 +12,11 @@
 <tr><td rowspan="1" colspan="3">0007_aSimple_Page</td></tr>
 </thead><tbody>
 <tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>api/repos/:public:ctools-samples:Dashboards:a_simple_one-chart_dashboard.wcdf/generatedContent</td>
 	<td></td>
@@ -120,6 +125,16 @@
 	<td>EMEA</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>242.01936904027642</td>
+</tr>
+<tr>
 	<td>assertAttribute</td>
 	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
 	<td>242.01936904027642</td>
@@ -176,9 +191,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
 	<td>EMEA</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>242.01936904027642</td>
 </tr>
 <tr>
 	<td>assertAttribute</td>
@@ -210,6 +235,11 @@
 	<td>assertText</td>
 	<td>css=h2</td>
 	<td>Hello, World!</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>

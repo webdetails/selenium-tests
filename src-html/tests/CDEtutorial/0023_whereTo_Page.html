@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/pentaho/" />
-<title>0004_welcome_Page</title>
+<title>0023_whereTo_Page</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">0004_welcome_Page</td></tr>
+<tr><td rowspan="1" colspan="3">0023_whereTo_Page</td></tr>
 </thead><tbody>
 <tr>
 	<td>setTimeout</td>
@@ -18,29 +18,55 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:Dashboards:welcome.wcdf/generatedContent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
+	<td>api/repos/:public:ctools-samples:Dashboards:where_to_go.wcdf/generatedContent</td>
 	<td></td>
 </tr>
 <!--Verificar Textos-->
 <tr>
-	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Welcome to the CDE Tutorial.</td>
+	<td>waitForText</td>
+	<td>//div[2]/div/h3</td>
+	<td>CDE Open Demos</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h3</td>
+	<td>css=h2</td>
+	<td>Where to go from here!</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3</td>
 	<td>The C-Tools Family</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//h3[2]</td>
-	<td>What is a CDE Dashboard?</td>
+	<td>HyperText Markup Language, Cascading Style Sheets and JavaScript</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[3]</td>
+	<td>Some JS, CSS plugins and libraries that are useful to know</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[4]</td>
+	<td>Some other links</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div/h3</td>
+	<td>CDE Open Demos</td>
+</tr>
+<!--Verificar Imagens-->
+<tr>
+	<td>waitForElementHeight</td>
+	<td>//div[2]/div/a/div</td>
+	<td>112</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>css=div.cdedemo</td>
+	<td>112</td>
 </tr>
 <!--Verificar Links-->
 <tr>
@@ -64,11 +90,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForLocation</td>
-	<td>http://localhost:8080/pentaho/api/repos/:public:ctools-samples:Dashboards:welcome.wcdf/generatedContent</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>css=a.ctools.cde &gt; div</td>
 	<td></td>
@@ -295,156 +316,6 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=CDE</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=CDE</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cde/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cde/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=CDA</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=CDA</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cda/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cda/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=CCC</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=CCC</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/ccc/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/ccc/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=CDF</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=CDF</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdf/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdf/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=C-Tools forum</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=C-Tools forum</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://forums.pentaho.com/forumdisplay.php?80-Community-Tools-CTools</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://forums.pentaho.com/forumdisplay.php?80-Community-Tools-CTools</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=ctools.webdetails.org</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=ctools.webdetails.org</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://ctools.webdetails.org/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://ctools.webdetails.org/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
 	<td>link=HyperText Markup Language (HTML)</td>
 	<td></td>
 </tr>
@@ -495,6 +366,31 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>link=JavaScript (JS)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=JavaScript (JS)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.w3schools.com/jsref/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.w3schools.com/jsref/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>link=jQuery JavaScript general purpose library</td>
 	<td></td>
 </tr>
@@ -511,6 +407,256 @@
 <tr>
 	<td>assertLocation</td>
 	<td>http://jquery.com/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Blueprint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Blueprint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.blueprintcss.org/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.blueprintcss.org/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://mbostock.github.io/protovis/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://mbostock.github.io/protovis/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Datatables</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Datatables</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://datatables.net/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://datatables.net/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sparklines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sparklines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://omnipotent.net/jquery.sparkline/#s-about</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://omnipotent.net/jquery.sparkline/#s-about</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>api/repos/:public:ctools-samples:Dashboards:where_to_go.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Chosen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Chosen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://harvesthq.github.io/chosen/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://harvesthq.github.io/chosen/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Facebook page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Facebook page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>https://www.facebook.com/webdetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>https://www.facebook.com/webdetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Pedro Alves Blog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Pedro Alves Blog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://pedroalves-bi.blogspot.pt/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://pedroalves-bi.blogspot.pt/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Community Tools - CTools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Community Tools - CTools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://forums.pentaho.com/forumdisplay.php?80-Community-Tools-CTools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://forums.pentaho.com/forumdisplay.php?80-Community-Tools-CTools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=##pentaho IRC channel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=##pentaho IRC channel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>irc://irc.freenode.net/##pentaho</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>irc://irc.freenode.net/##pentaho</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/index.html#knowledge</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/index.html#knowledge</td>
 	<td></td>
 </tr>
 <tr>
@@ -520,24 +666,75 @@
 </tr>
 <!--Verificar Navegação Entre Páginas-->
 <tr>
+	<td>open</td>
+	<td>api/repos/:public:ctools-samples:Dashboards:where_to_go.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Next lesson &gt;</td>
+	<td>link=&lt; Previous lesson</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Next lesson &gt;</td>
+	<td>link=&lt; Previous lesson</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
 	<td>css=h2</td>
-	<td>The CDE Interface</td>
+	<td>Getting the most out of CDA</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>css=h2</td>
-	<td>The CDE Interface</td>
+	<td>Getting the most out of CDA</td>
+</tr>
+<!--Esvaziar a Cache-->
+<tr>
+	<td>open</td>
+	<td>Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=toolsmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=toolsmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=refreshmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=refreshmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=cdaClearCache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cdaClearCache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.pentaho-tabWidgetLabel</td>
+	<td>CDA Cache</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.pentaho-tabWidgetLabel</td>
+	<td>CDA Cache</td>
 </tr>
 </tbody></table>
 </body>

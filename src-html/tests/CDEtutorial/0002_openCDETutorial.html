@@ -12,49 +12,9 @@
 <tr><td rowspan="1" colspan="3">0002_openCDETutorial</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>Home</td>
+	<td>setTimeout</td>
+	<td>60000</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=toolsmenu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=toolsmenu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=refreshmenu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>mouseOver</td>
-	<td>id=refreshmenu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=cdaClearCache</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=cdaClearCache</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>css=div.pentaho-tabWidgetLabel</td>
-	<td>CDA Cache</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=div.pentaho-tabWidgetLabel</td>
-	<td>CDA Cache</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -62,63 +22,58 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=td.custom-dropdown-arrow.custom-dropdown-arrow-major</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>css=div.custom-dropdown-label</td>
+	<td>Home</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;buttonWrapper&quot;]/div/div/button</td>
+	<td>Browse Files</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=td.custom-dropdown-arrow.custom-dropdown-arrow-major</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=gwt-uid-7</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=gwt-uid-7</td>
+	<td>//div[@id= &quot;buttonWrapper&quot;]/div/div/button</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div/div</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div/div</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div/div</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div/div</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div[2]/div/div/div[3]</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Tutorial')]</td>
 	<td>CDE Tutorial</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[4]/div[2]/div/div/div[3]</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Tutorial')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@id= &quot;fileBrowserFiles&quot;]/div/div/div[2]</td>
+	<td>//div[@id= &quot;fileBrowserFiles&quot;]//div[contains(text(),'#Welcome')]</td>
 	<td>#Welcome</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id= &quot;fileBrowserFiles&quot;]/div/div/div[2]</td>
+	<td>//div[@id= &quot;fileBrowserFiles&quot;]//div[contains(text(),'#Welcome')]</td>
 	<td></td>
 </tr>
 <tr>

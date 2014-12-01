@@ -28,47 +28,67 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=td.custom-dropdown-arrow.custom-dropdown-arrow-major</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=gwt-uid-7</td>
+	<td>//div[@id= &quot;buttonWrapper&quot;]/div/div/button[contains(text(),'Browse Files')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div/div/div[3]</td>
-	<td>Home</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]</td>
+	<td>Public</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div/div</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[5]/div/div</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[5]/div[2]/div/div/div[3]</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Open Demos')]</td>
 	<td>CDE Open Demos</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id= &quot;fileBrowserFolders&quot;]/div[2]/div[2]/div[2]/div[5]/div[2]/div/div/div[3]</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Open Demos')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@id=&quot;fileBrowserFiles&quot;]/div[2]/div/div[2]</td>
+	<td>//div[@id=&quot;fileBrowserFiles&quot;]//div[contains(text(),'CDE Open Demos')]</td>
 	<td>CDE Open Demos</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id=&quot;fileBrowserFiles&quot;]/div[2]/div/div[2]</td>
+	<td>//div[@id=&quot;fileBrowserFiles&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td>CDE Open Demos</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id=&quot;fileBrowserFiles&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;fileBrowserButtons&quot;]//button[contains(text(),'Open')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id=&quot;fileBrowserButtons&quot;]//button[contains(text(),'Open')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id=&quot;solutionNavigatorAndContentPanel&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td>CDE Open Demos</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id=&quot;solutionNavigatorAndContentPanel&quot;]//div[contains(text(),'CDE Open Demos')]</td>
 	<td>CDE Open Demos</td>
 </tr>
 </tbody></table>
