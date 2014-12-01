@@ -245,6 +245,49 @@ public class ElementHelper {
   }
 
   /**
+   * This method works as a wrapper for findElement method of WebDriver.
+   * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
+   * the element is not ready in DOM. Hence, to prevent exception, we develop
+   * a function that is the same of findElement but avoid this exception.
+   *
+   * @param driver
+   * @param locator
+   * @return
+   */
+  public static WebElement FindElementInvisble(WebDriver driver, By locator) {
+    log.debug("Enter:FindElement");
+    try {
+      IsElementPresent(driver, locator);
+      log.debug("Element is visble");
+      List<WebElement> listElements = driver.findElements(locator);
+      if (listElements.size() > 0) {
+        WebElement element = listElements.get(0);
+        if (element.isEnabled()) {
+          log.debug("return element found it");
+          return element;
+        } else {
+          log.warn("Trying again! Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
+          return FindElement(driver, locator);
+        }
+      } else {
+        log.warn("Trying obtain! Locator: " + locator.toString());
+        return null;
+      }
+    } catch (StaleElementReferenceException s) {
+      log.error("Stale - got one. Locator: " + locator.toString());
+      return FindElement(driver, locator);
+    } catch (ElementNotVisibleException v) {
+      log.error("NotVisible - got one. Locator: " + locator.toString());
+      return IsElementVisible(driver, locator);
+    } catch (TimeoutException te) {
+      log.error("TimeoutException - got one. Locator: " + locator.toString());
+      log.error(te.getMessage());
+      log.debug("Trying again.");
+      return driver.findElement(locator);
+    }
+  }
+
+  /**
    *
    * @param driver
    * @param locator
@@ -255,9 +298,30 @@ public class ElementHelper {
     try {
       text = FindElement(driver, locator).getText();
     } catch (StaleElementReferenceException e) {
-      System.out.println("Got stale");
+      log.debug("Got stale");
       text = FindElement(driver, locator).getText();
     }
+    return text;
+  }
+
+  /**
+   *
+   * @param driver
+   * @param locator
+   * @return
+   */
+  public static String GetTextElementInvisible(WebDriver driver, By locator) {
+    String text = "";
+    try {
+      WebElement element = FindElementInvisble(driver, locator);
+      text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
+    } catch (StaleElementReferenceException e) {
+      log.debug("Got stale");
+      text = FindElementInvisble(driver, locator).getText();
+    } catch (Exception e) {
+      log.debug("Exception: " + e.getMessage());
+    }
+
     return text;
   }
 
