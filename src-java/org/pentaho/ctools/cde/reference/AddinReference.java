@@ -39,7 +39,6 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -144,8 +143,7 @@ public class AddinReference {
    *    The test case pretends to validate the sparkline sample.
    * Steps:
    *    1. Check if the sample for 'sparkline' has its contents present
-   *    2. Check tooltip for first chart
-   *    3. Order the table and then check tooltip for first chart
+   *    2. Order the table
    */
   @Test(timeout = 60000)
   public void tc02_Sparkline_SampleWorks() {
@@ -154,7 +152,6 @@ public class AddinReference {
     /*
      * ## Step 1
      */
-
     String sampleTitle = ElementHelper.GetText(driver, By.id("SparklineTitle"));
     assertEquals("sparkline", sampleTitle);
     //Check the hyperlink
@@ -183,18 +180,6 @@ public class AddinReference {
     assertNotNull(chartRow2Col2);
 
     /*
-     * ## Step 2
-     */
-    //Check tooltip
-    Actions acts = new Actions(driver);
-    acts.moveToElement(chartRow1Col1, 50, 5);
-    acts.build().perform();
-    //Check tooltip text
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    String sparlkineCol1TooltipValue = ElementHelper.GetText(driver, By.xpath("//div[@id='jqstooltip']/div"));
-    assertThat("Display tooltip: " + sparlkineCol1TooltipValue, sparlkineCol1TooltipValue, CoreMatchers.containsString("43"));
-
-    /*
      * ## Step 3
      */
     //Check ordering
@@ -205,17 +190,6 @@ public class AddinReference {
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr[2]/td"));
     assertEquals("Row 2", row1);
     assertEquals("Row 1", row2);
-
-    //Check tooltip
-    chartRow1Col1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr[1]/td[2]/canvas"));
-    acts = new Actions(driver);
-    acts.moveToElement(chartRow1Col1, 50, 5);
-    acts.build().perform();
-    //Check tooltip text
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    ElementHelper.WaitForText(driver, By.xpath("//div[@id='jqstooltip']/div"), "50");
-    sparlkineCol1TooltipValue = ElementHelper.GetText(driver, By.xpath("//div[@id='jqstooltip']/div"));
-    assertThat("Display tooltip: " + sparlkineCol1TooltipValue, sparlkineCol1TooltipValue, CoreMatchers.containsString("50"));
   }
 
   /**
