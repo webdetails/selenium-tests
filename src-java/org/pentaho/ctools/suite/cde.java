@@ -23,14 +23,15 @@ package org.pentaho.ctools.suite;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.pentaho.ctools.cde.SampleDashboard;
 import org.pentaho.ctools.cde.reference.AddinReference;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //CDE
-  //SampleDashboard.class,
+  SampleDashboard.class,
   //CDE Reference
   AddinReference.class
-  //Widgets
+//Widgets
 })
 public class cde {}
