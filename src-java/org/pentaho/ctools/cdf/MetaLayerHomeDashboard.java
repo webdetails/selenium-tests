@@ -124,7 +124,6 @@ public class MetaLayerHomeDashboard {
     ElementHelper.IsElementVisible(driver, By.cssSelector("div.fancybox-inner"));
     ElementHelper.IsElementVisible(driver, By.xpath("//iframe"));
     WebElement frame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    String valueFrameAttrId = frame.getAttribute("id");
     String valueFrameAttrSrc = frame.getAttribute("src");
 
     ///pentaho/plugin/jpivot/Pivot?solution=system&path=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf%2Factions&action=jpivot.xaction&width=500&height=600
@@ -142,7 +141,6 @@ public class MetaLayerHomeDashboard {
     log.info("MetaLayerHomeDashboard html");
     log.info("TODO:" + ((JavascriptExecutor) driver).executeScript("return document.body.innerHTML;").toString());
     //ENDING: Testing debug
-
 
     assertNotNull(ElementHelper.FindElement(driverFrame, By.xpath("//div[@id='internal_content']")));
     assertEquals("Measures", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
