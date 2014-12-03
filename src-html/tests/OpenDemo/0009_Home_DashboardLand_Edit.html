@@ -12,8 +12,13 @@
 <tr><td rowspan="1" colspan="3">0011_Home_DasboardLand_Edit</td></tr>
 </thead><tbody>
 <tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:PublicDemo:Dashboardland:Dashboardland.wcdf/edit</td>
+	<td>pentaho/api/repos/:public:ctools-samples:PublicDemo:Dashboardland:Dashboardland.wcdf/edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -33,32 +38,32 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#0d108ed7-b2aa-e45b-e33c-fd540d48135c &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td</td>
 	<td>Resource</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#1a304f4c-4e80-d1a3-9d52-1395dee5d8bd &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td</td>
 	<td>Row</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#1cd5ff94-145d-5631-5838-93d3f3adf593 &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[26]/td</td>
 	<td>Row</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='0d108ed7-b2aa-e45b-e33c-fd540d48135c']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td[2]</td>
 	<td>css</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='1cd5ff94-145d-5631-5838-93d3f3adf593']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td[2]</td>
 	<td>filterRow</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='9bde4848-27f9-4069-28d8-fef4a7c8b6b8']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[26]/td[2]</td>
 	<td>footer</td>
 </tr>
 <tr>
@@ -73,17 +78,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=fancybox-content</td>
+	<td>//div[@class='fancybox-inner']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>windowFocus</td>
-	<td>id=fancybox-content</td>
+	<td>//div[@class='fancybox-inner']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=fancybox-close</td>
+	<td>css=div.fancybox-overlay.fancybox-overlay-fixed</td>
 	<td></td>
 </tr>
 </tbody></table>

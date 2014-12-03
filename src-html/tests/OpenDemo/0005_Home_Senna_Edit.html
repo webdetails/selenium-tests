@@ -12,8 +12,13 @@
 <tr><td rowspan="1" colspan="3">0009_Home_Senna_Edit</td></tr>
 </thead><tbody>
 <tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:PublicDemo:Senna:Senna.wcdf/edit</td>
+	<td>pentaho/api/repos/:public:ctools-samples:PublicDemo:Senna:Senna.wcdf/edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -28,32 +33,32 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#c26d2e99-0c95-2d3d-c790-5559b642333d &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td</td>
 	<td>Resource</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#b7896aab-3103-b92e-8f32-9504656fea43 &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td</td>
 	<td>Row</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#9a6a94cd-0d9d-8a46-4c1c-1e4da9123ca2 &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[18]/td</td>
 	<td>Row</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='c26d2e99-0c95-2d3d-c790-5559b642333d']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td[2]</td>
 	<td>css</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='5898de5e-b6f6-f447-e6cd-c0df0745fc28']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]</td>
 	<td>content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='b7896aab-3103-b92e-8f32-9504656fea43']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[18]/td[2]</td>
 	<td>positionChart</td>
 </tr>
 <tr>
@@ -68,17 +73,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=fancybox-bg-n</td>
+	<td>//div[@class='fancybox-inner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>windowFocus</td>
+	<td>//div[@class='fancybox-inner']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
-	<td></td>
-</tr>
-<tr>
-	<td>windowFocus</td>
-	<td>id=fancybox-content</td>
 	<td></td>
 </tr>
 <tr>
@@ -368,7 +373,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=fancybox-close</td>
+	<td>css=div.fancybox-overlay.fancybox-overlay-fixed</td>
 	<td></td>
 </tr>
 </tbody></table>

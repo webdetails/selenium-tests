@@ -12,8 +12,13 @@
 <tr><td rowspan="1" colspan="3">0013_Home_TieFighterShootout_Edit</td></tr>
 </thead><tbody>
 <tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:PublicDemo:TieDemo:TieDemo.wcdf/edit</td>
+	<td>pentaho/api/repos/:public:ctools-samples:PublicDemo:TieDemo:TieDemo.wcdf/edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -28,27 +33,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#875958f1-7a44-dc3a-35d7-b173b6083947 &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td</td>
 	<td>Row</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#faa1b2c8-e94d-e936-5ff9-bc7ac9e08e1b &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[19]/td</td>
 	<td>Row</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='054d1ec4-c787-e4f2-a4e8-87a3ae5e1455']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr/td[2]</td>
 	<td>css</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='875958f1-7a44-dc3a-35d7-b173b6083947']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td[2]</td>
 	<td>content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='faa1b2c8-e94d-e936-5ff9-bc7ac9e08e1b']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[19]/td[2]</td>
 	<td>footer</td>
 </tr>
 <tr>
@@ -63,12 +68,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=fancybox-content</td>
+	<td>//div[@class='fancybox-inner']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>windowFocus</td>
-	<td>id=fancybox-content</td>
+	<td>//div[@class='fancybox-inner']</td>
 	<td></td>
 </tr>
 <tr>
@@ -82,9 +87,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForAttribute</td>
-	<td>//div[contains(@id,'chartBroughtdownprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][13]@cy</td>
-	<td>50.871312604562036</td>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'chartBroughtdownprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][13]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'chartBroughtdownprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][12]/*[local-name()='circle'][19][@cy='32.86927877958297']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -152,6 +162,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'chartLifetimeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][15]/*[local-name()='circle'][18]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//div[contains(@id,'chartLifetimeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
 	<td>Jed the Jedi</td>
@@ -207,6 +222,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'chart_clumsyprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][5]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//div[contains(@id,'chart_clumsyprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
 	<td>No one riding them</td>
@@ -244,6 +264,11 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>css=#chart_pieprotovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'chart_pieprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
 	<td></td>
 </tr>
 <tr>
@@ -302,6 +327,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'chart_barprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//div[contains(@id,'chart_barprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
 	<td>Emperor</td>
@@ -343,10 +373,9 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=fancybox-close</td>
+	<td>css=div.fancybox-overlay.fancybox-overlay-fixed</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

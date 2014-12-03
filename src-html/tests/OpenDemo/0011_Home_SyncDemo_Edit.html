@@ -12,8 +12,13 @@
 <tr><td rowspan="1" colspan="3">0012_Home_SyncDemo_Edit</td></tr>
 </thead><tbody>
 <tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:PublicDemo:SyncDemo1:SyncDemo1.wcdf/edit</td>
+	<td>pentaho/api/repos/:public:ctools-samples:PublicDemo:SyncDemo1:SyncDemo1.wcdf/edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -33,27 +38,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#d183eeba-a85e-91ff-63bc-c98a6906504f &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td</td>
 	<td>Row</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#7dd8946b-eae7-5fe2-74ab-c299572fdff7 &gt; td</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[10]/td</td>
 	<td>Row</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='e68e8836-fdab-812a-2244-347d6d88c73a']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr/td[2]</td>
 	<td>css</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='d183eeba-a85e-91ff-63bc-c98a6906504f']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td[2]</td>
 	<td>header</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@id='7dd8946b-eae7-5fe2-74ab-c299572fdff7']/td[2]</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[10]/td[2]</td>
 	<td>content</td>
 </tr>
 <tr>
@@ -68,12 +73,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=fancybox-content</td>
+	<td>//div[@class='fancybox-inner']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>windowFocus</td>
-	<td>id=fancybox-content</td>
+	<td>//div[@class='fancybox-inner']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1375,7 +1380,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=fancybox-close</td>
+	<td>css=div.fancybox-overlay.fancybox-overlay-fixed</td>
 	<td></td>
 </tr>
 </tbody></table>
