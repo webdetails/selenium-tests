@@ -25,18 +25,20 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.pentaho.ctools.cde.SampleDashboard;
 import org.pentaho.ctools.cde.reference.AddinReference;
+import org.pentaho.ctools.cde.reference.AddinReferenceEdit;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //CDE
   SampleDashboard.class,
   //CDE Reference
-  AddinReference.class
-//MapComponentReference.class,
-//CDE - Widgets
-//CreateWidget.class,
-//AddParamTableComponent.class,
-//SelectCdaFileAsDatasource.class,
-//SimpleExtensionPoints.class,
+  AddinReference.class,
+  AddinReferenceEdit.class
+  //MapComponentReference.class,
+  //CDE - Widgets
+  //CreateWidget.class,
+  //AddParamTableComponent.class,
+  //SelectCdaFileAsDatasource.class,
+  //SimpleExtensionPoints.class,
 })
 public class SuiteCDE {}

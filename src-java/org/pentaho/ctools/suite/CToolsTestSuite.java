@@ -45,8 +45,7 @@ import org.pentaho.ctools.security.AccessSystemResources;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   /*LoginPentaho.class,
-  MetaLayerHomeDashboard.class,
-  //AddinReference.class,
+  AddinReferenceEdit.class,
   LogoutPentaho.class*/
   //##### Execution Order #####
   //Start Tests

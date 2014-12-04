@@ -236,11 +236,6 @@ public class ElementHelper {
     } catch (ElementNotVisibleException v) {
       log.error("NotVisible - got one. Locator: " + locator.toString());
       return IsElementVisible(driver, locator);
-    } catch (TimeoutException te) {
-      log.error("TimeoutException - got one. Locator: " + locator.toString());
-      log.error(te.getMessage());
-      log.debug("Trying again.");
-      return driver.findElement(locator);
     }
   }
 
@@ -403,7 +398,6 @@ public class ElementHelper {
           element.click();
         }
       }
-
     } else {
       log.entry("Element is null " + locator.toString());
     }
