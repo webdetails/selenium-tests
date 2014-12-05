@@ -219,6 +219,10 @@ public class CCCV2ShowCase {
     //Wait for the charts load
     ElementHelper.IsElementVisible(driver, By.xpath("//*[@width='266']"));
 
+    Actions acts = new Actions(driver);
+    acts.moveToElement(ElementHelper.FindElement(driver, By.cssSelector("div.webdetailsFooterWebdetails")));
+    acts.perform();
+
     /*
      * ## Step 3 - Pie Chart
      */
@@ -244,7 +248,7 @@ public class CCCV2ShowCase {
     String serie2005Value = ElementHelper.GetText(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
     assertEquals("1.98M", serie2005Value);
     //Check mouse hover
-    /* Does not work on jenkins!!
+    /* Does not work on jenkins!!*/
     WebElement pieChartSerie2005 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
     Actions acts3 = new Actions(driver);
     acts3.moveToElement(pieChartSerie2005);
@@ -265,7 +269,7 @@ public class CCCV2ShowCase {
     assertEquals("Series", pieSeriesLabel);
     assertEquals("Sales", pieSeriesValue);
     assertEquals("Value", pieValueLabel);
-    assertEquals("1,980,825.34", pieValueValue);*/
+    assertEquals("1,980,825.34", pieValueValue);
   }
 
   @AfterClass
