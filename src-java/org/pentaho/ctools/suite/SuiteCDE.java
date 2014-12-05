@@ -33,18 +33,18 @@ import org.pentaho.ctools.cde.reference.CCCV2ShowCase;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //CDE
-  //SampleDashboard.class,
+  SampleDashboard.class,
   //CDE Reference
-  //AddinReference.class,
-  //AddinReferenceEdit.class,
-  //AjaxRequestReference.class,
+  AddinReference.class,
+  AddinReferenceEdit.class,
+  AjaxRequestReference.class,
   BullertChartTestCase.class,
   CCCV2ShowCase.class
-  //MapComponentReference.class,
-  //CDE - Widgets
-  //CreateWidget.class,
-  //AddParamTableComponent.class,
-  //SelectCdaFileAsDatasource.class,
-  //SimpleExtensionPoints.class,
+//MapComponentReference.class,
+//CDE - Widgets
+//CreateWidget.class,
+//AddParamTableComponent.class,
+//SelectCdaFileAsDatasource.class,
+//SimpleExtensionPoints.class,
 })
 public class SuiteCDE {}

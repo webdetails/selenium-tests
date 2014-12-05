@@ -85,13 +85,11 @@ public class CCCV2ShowCase {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    ChartContent
+   *    BarChart
    * Description:
-   *    The test case pretends validate the contents presented in the sample.
+   *    The test case pretends validate the bar chart information.
    * Steps:
-   *    1. Check chart Bar Chart
-   *    2. Check chart Line Chart
-   *    3. Check chart Pie Chart
+   *    1. Check Bar Chart
    */
   @Test(timeout = 60000)
   public void tc01_ChartContent_DisplayedCorrect() {
@@ -154,6 +152,16 @@ public class CCCV2ShowCase {
     assertEquals("4,987,739.84", valueValue);
   }
 
+  /**
+   * ############################### Test Case 2 ###############################
+   *
+   * Test Case Name:
+   *    LineChart
+   * Description:
+   *    The test case pretends validate the line chart information.
+   * Steps:
+   *    1. Check Line Chart
+   */
   @Test(timeout = 90000)
   public void tc02_ChartContent_DisplayedCorrect() {
     log.info("tc02_ChartContent_DisplayedCorrect");
@@ -203,6 +211,16 @@ public class CCCV2ShowCase {
     assertEquals("7,959", valueLineValue);
   }
 
+  /**
+   * ############################### Test Case 3 ###############################
+   *
+   * Test Case Name:
+   *    LineChart
+   * Description:
+   *    The test case pretends validate the pie chart information.
+   * Steps:
+   *    1. Check Pie Chart
+   */
   @Test(timeout = 90000)
   public void tc03_ChartContent_DisplayedCorrect() {
     log.info("tc03_ChartContent_DisplayedCorrect");
@@ -218,7 +236,6 @@ public class CCCV2ShowCase {
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
     ElementHelper.IsElementVisible(driver, By.xpath("//*[@width='266']"));
-
 
     /*
      * ## Step 3 - Pie Chart
