@@ -201,6 +201,50 @@ public class CCCV2ShowCase {
     assertEquals("Category", categoryLabel);
     assertEquals("Feb", categoryValue);
     assertEquals("7,959", valueLineValue);
+
+        String pieChartTitle = ElementHelper.GetText(driver, By.id("PieChartTitleRow"));
+    assertEquals("Pie Chart", pieChartTitle);
+    //Check pies
+    WebElement pieChartCircle1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][1]"));
+    WebElement pieChartCircle2 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]"));
+    WebElement pieChartCircle3 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]"));
+    assertNotNull(pieChartCircle1);
+    assertNotNull(pieChartCircle2);
+    assertNotNull(pieChartCircle3);
+    //Interact with pie chart disabling two series
+    //Series 2003
+    WebElement serie2003 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='text']"));
+    serie2003.click();
+    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]"));
+    //Series 2004
+    WebElement serie2004 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
+    serie2004.click();
+    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]"));
+    //Check value of the serie2005
+    String serie2005Value = ElementHelper.GetText(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
+    assertEquals("1.98M", serie2005Value);
+    //Check mouse hover
+    WebElement pieChartSerie2005 = driver.findElement(By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
+    Actions acts3 = new Actions(driver);
+    acts3.moveToElement(pieChartSerie2005);
+    acts3.perform();
+    String pieTimeLabel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[1]/td[1]/span"));
+    acts3.perform();
+    String pieTimeValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[1]/td[3]/span"));
+    acts3.perform();
+    String pieSeriesLabel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[2]/td[1]/span"));
+    acts3.perform();
+    String pieSeriesValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[2]/td[3]/span"));
+    acts3.perform();
+    String pieValueLabel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[3]/td[1]/span"));
+    acts3.perform();
+    String pieValueValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[3]/td[3]/span"));
+    assertEquals("Time", pieTimeLabel);
+    assertEquals("2005", pieTimeValue);
+    assertEquals("Series", pieSeriesLabel);
+    assertEquals("Sales", pieSeriesValue);
+    assertEquals("Value", pieValueLabel);
+    assertEquals("1,980,825.34", pieValueValue);
   }
 
   @Test(timeout = 90000)

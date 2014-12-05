@@ -109,6 +109,8 @@ public class BullertChartTestCase {
     String title = ElementHelper.GetText(driver, By.cssSelector("#title > span"));
     assertEquals("Bullet chart test case", title);
 
+    ElementHelper.IsElementVisible(driver, By.xpath("//*[@transform='translate(289.63880028623845,15) ']"));
+
     /*
      * ## Step 1
      */
