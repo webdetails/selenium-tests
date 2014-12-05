@@ -99,8 +99,6 @@ public class BullertChartTestCase {
   public void tc01_ChartContent_DisplayedCorrect() throws InterruptedException {
     log.info("tc01_ChartContent_DisplayedCorrect");
 
-    Thread.sleep(10000);
-
     /*
      * ## Step 0
      */
