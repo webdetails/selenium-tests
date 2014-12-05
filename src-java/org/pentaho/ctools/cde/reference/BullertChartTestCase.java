@@ -93,10 +93,13 @@ public class BullertChartTestCase {
    *    3. Check chart 3 - Returning name and value
    *    4. Check chart 4 - Title, value and marker
    *    5. Check chart 5 - Complete dataset
+   * @throws InterruptedException
    */
   @Test(timeout = 60000)
-  public void tc01_ChartContent_DisplayedCorrect() {
+  public void tc01_ChartContent_DisplayedCorrect() throws InterruptedException {
     log.info("tc01_ChartContent_DisplayedCorrect");
+
+    Thread.sleep(8000);
 
     /*
      * ## Step 0
