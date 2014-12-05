@@ -99,7 +99,7 @@ public class BullertChartTestCase {
   public void tc01_ChartContent_DisplayedCorrect() throws InterruptedException {
     log.info("tc01_ChartContent_DisplayedCorrect");
 
-    Thread.sleep(8000);
+    Thread.sleep(10000);
 
     /*
      * ## Step 0
@@ -219,7 +219,7 @@ public class BullertChartTestCase {
     assertEquals("296.79999999999995", cht4SizeBar.getAttribute("width"));
     WebElement cht4RectWhite1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='obj4']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='path'][1]"));
     assertNotNull(cht4RectWhite1);
-    assertEquals("translate(282.11320966020315,15) ", cht4RectWhite1.getAttribute("transform"));
+    assertEquals("translate(289.63880028623845,15) ", cht4RectWhite1.getAttribute("transform"));
 
     /*
      * ## Step 5

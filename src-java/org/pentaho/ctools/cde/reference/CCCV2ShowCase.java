@@ -93,7 +93,7 @@ public class CCCV2ShowCase {
    *    2. Check chart Line Chart
    *    3. Check chart Pie Chart
    */
-  @Test(timeout = 90000)
+  @Test(timeout = 60000)
   public void tc01_ChartContent_DisplayedCorrect() {
     log.info("tc01_ChartContent_DisplayedCorrect");
 
@@ -152,6 +152,23 @@ public class CCCV2ShowCase {
     assertEquals("2004", timeValue);
     assertEquals("Value", valueLabel);
     assertEquals("4,987,739.84", valueValue);
+  }
+
+  @Test(timeout = 90000)
+  public void tc02_ChartContent_DisplayedCorrect() {
+    log.info("tc02_ChartContent_DisplayedCorrect");
+
+    /*
+     * ## Step 0
+     */
+    //Check page title
+    wait.until(ExpectedConditions.titleIs("Community Dashboard Editor"));
+    assertEquals("Community Dashboard Editor", driver.getTitle());
+    //Check title
+    String title = ElementHelper.GetText(driver, By.xpath("//div[@id='Headers']/div"));
+    assertEquals("CCC v2 - Show Case", title);
+    //Wait for the charts load
+    ElementHelper.IsElementVisible(driver, By.xpath("//*[@width='266']"));
 
     /*
      * ## Step 2 - Line Chart
@@ -171,19 +188,36 @@ public class CCCV2ShowCase {
     acts2.moveToElement(lineChartCircle4);
     acts2.perform();
     String measuresLabel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[1]/span"));
-    acts.perform();
+    acts2.perform();
     String measuresValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[3]/span"));
-    acts.perform();
+    acts2.perform();
     String categoryLabel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[1]/span"));
-    acts.perform();
+    acts2.perform();
     String categoryValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[3]/span"));
-    acts.perform();
+    acts2.perform();
     String valueLineValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[4]/td[3]/span"));
     assertEquals("Measures", measuresLabel);
     assertEquals("Quantity", measuresValue);
     assertEquals("Category", categoryLabel);
     assertEquals("Feb", categoryValue);
     assertEquals("7,959", valueLineValue);
+  }
+
+  @Test(timeout = 90000)
+  public void tc03_ChartContent_DisplayedCorrect() {
+    log.info("tc03_ChartContent_DisplayedCorrect");
+
+    /*
+     * ## Step 0
+     */
+    //Check page title
+    wait.until(ExpectedConditions.titleIs("Community Dashboard Editor"));
+    assertEquals("Community Dashboard Editor", driver.getTitle());
+    //Check title
+    String title = ElementHelper.GetText(driver, By.xpath("//div[@id='Headers']/div"));
+    assertEquals("CCC v2 - Show Case", title);
+    //Wait for the charts load
+    ElementHelper.IsElementVisible(driver, By.xpath("//*[@width='266']"));
 
     /*
      * ## Step 3 - Pie Chart
