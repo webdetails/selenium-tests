@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<link rel="selenium.base" href="http://localhost:8080/" />
 <title>0010_makingThe_Page</title>
 </head>
 <body>
@@ -39,7 +39,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=#67716df5-23d7-e136-d35d-802f7a82a7a1 &gt; span.content.content&nbsp;&nbsp;&gt; h3</td>
+	<td>//div[4]/div/span/h3</td>
 	<td>Modify the Product Chart</td>
 </tr>
 <tr>
@@ -160,6 +160,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_1protovis</td>
 	<td></td>
 </tr>
@@ -240,6 +250,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_1protovis</td>
 	<td></td>
 </tr>
@@ -320,6 +340,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_1protovis</td>
 	<td></td>
 </tr>
@@ -384,9 +414,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>239.9636377370812</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -421,11 +451,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -464,11 +489,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
 	<td></td>
@@ -501,11 +521,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -556,7 +571,7 @@
 <!--Verificar Primeiro Preview-->
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:Sandbox:cdf_charts_reloaded_III_a.wcdf/generatedContent</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Sandbox:cdf_charts_reloaded_III_a.wcdf/generatedContent</td>
 	<td></td>
 </tr>
 <tr>
@@ -578,6 +593,16 @@
 	<td>assertValue</td>
 	<td>css=select</td>
 	<td>2005</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -647,6 +672,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_1protovis</td>
 	<td></td>
 </tr>
@@ -713,6 +748,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_1protovis</td>
 	<td></td>
 </tr>
@@ -763,9 +808,9 @@
 </tr>
 <!--Dependencies-->
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>239.9636377370812</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -800,11 +845,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -843,11 +883,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
 	<td></td>
@@ -880,11 +915,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -925,7 +955,7 @@
 <!--Verificar Primeiro Edit-->
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:Sandbox:cdf_charts_reloaded_III_a.wcdf/edit</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Sandbox:cdf_charts_reloaded_III_a.wcdf/edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -985,6 +1015,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_1protovis</td>
 	<td></td>
 </tr>
@@ -1051,6 +1091,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_1protovis</td>
 	<td></td>
 </tr>
@@ -1117,6 +1167,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_1protovis</td>
 	<td></td>
 </tr>
@@ -1167,9 +1227,9 @@
 </tr>
 <!--Dependencies-->
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>239.9636377370812</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1204,11 +1264,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1247,11 +1302,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
 	<td></td>
@@ -1279,11 +1329,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1319,7 +1364,7 @@
 <!--Verificar Segundo Set de Gráficos-->
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:Dashboards:cdf_charts_reloaded_III.wcdf/generatedContent</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:cdf_charts_reloaded_III.wcdf/generatedContent</td>
 	<td></td>
 </tr>
 <tr>
@@ -1341,6 +1386,16 @@
 	<td>assertValue</td>
 	<td>css=#yearSelector_2 &gt; select</td>
 	<td>2005</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -1424,6 +1479,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_2protovis</td>
 	<td></td>
 </tr>
@@ -1504,6 +1569,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_2protovis</td>
 	<td></td>
 </tr>
@@ -1568,9 +1643,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>239.9636377370812</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1623,9 +1698,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>178.48258651587108</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1650,11 +1725,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1708,9 +1778,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>88.84016250275768</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1735,11 +1805,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1793,9 +1858,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>111.40413484832222</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1820,11 +1885,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1878,9 +1938,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.016946472107144</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.016946472107144</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1920,7 +1985,7 @@
 <!--Verificar Segundo Preview-->
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:Sandbox:cdf_charts_reloaded_III_b.wcdf/generatedContent</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Sandbox:cdf_charts_reloaded_III_b.wcdf/generatedContent</td>
 	<td></td>
 </tr>
 <tr>
@@ -1942,6 +2007,16 @@
 	<td>assertValue</td>
 	<td>css=#yearSelector_2 &gt; select</td>
 	<td>2005</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -2025,6 +2100,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_2protovis</td>
 	<td></td>
 </tr>
@@ -2105,6 +2190,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_2protovis</td>
 	<td></td>
 </tr>
@@ -2169,9 +2264,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>239.9636377370812</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2224,9 +2319,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>178.48258651587108</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2251,11 +2346,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -2309,9 +2399,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>88.84016250275768</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2336,11 +2426,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -2394,9 +2479,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>111.40413484832222</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2421,11 +2506,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -2479,9 +2559,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.016946472107144</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.016946472107144</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2511,7 +2596,7 @@
 <!--Verificar Segundo Edit-->
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:Sandbox:cdf_charts_reloaded_III_b.wcdf/edit</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Sandbox:cdf_charts_reloaded_III_b.wcdf/edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -2571,6 +2656,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_2protovis</td>
 	<td></td>
 </tr>
@@ -2651,6 +2746,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_2protovis</td>
 	<td></td>
 </tr>
@@ -2731,6 +2836,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>css=#marketChart_2protovis</td>
 	<td></td>
 </tr>
@@ -2795,9 +2910,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>239.9636377370812</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2850,9 +2965,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>178.48258651587108</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2877,11 +2992,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -2935,9 +3045,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>88.84016250275768</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2962,11 +3072,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -3020,9 +3125,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>111.40413484832222</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -3047,11 +3152,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -3105,9 +3205,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.016946472107144</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.016946472107144</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -3137,7 +3242,7 @@
 <!--Verificar Navegação Entre Páginas-->
 <tr>
 	<td>open</td>
-	<td>api/repos/:public:ctools-samples:Dashboards:cdf_charts_reloaded_III.wcdf/generatedContent</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:cdf_charts_reloaded_III.wcdf/generatedContent</td>
 	<td></td>
 </tr>
 <tr>
