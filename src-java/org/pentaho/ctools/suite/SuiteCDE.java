@@ -26,6 +26,9 @@ import org.junit.runners.Suite;
 import org.pentaho.ctools.cde.SampleDashboard;
 import org.pentaho.ctools.cde.reference.AddinReference;
 import org.pentaho.ctools.cde.reference.AddinReferenceEdit;
+import org.pentaho.ctools.cde.reference.AjaxRequestReference;
+import org.pentaho.ctools.cde.reference.BullertChartTestCase;
+import org.pentaho.ctools.cde.reference.CCCV2ShowCase;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -33,7 +36,10 @@ import org.pentaho.ctools.cde.reference.AddinReferenceEdit;
   SampleDashboard.class,
   //CDE Reference
   AddinReference.class,
-  AddinReferenceEdit.class
+  AddinReferenceEdit.class,
+  AjaxRequestReference.class,
+  BullertChartTestCase.class,
+  CCCV2ShowCase.class
   //MapComponentReference.class,
   //CDE - Widgets
   //CreateWidget.class,

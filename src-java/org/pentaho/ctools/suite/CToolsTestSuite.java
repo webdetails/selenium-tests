@@ -45,8 +45,7 @@ import org.pentaho.ctools.security.AccessSystemResources;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   /*LoginPentaho.class,
-  AddinReferenceEdit.class,
-  LogoutPentaho.class*/
+  CCCV2ShowCase.class*/
   //##### Execution Order #####
   //Start Tests
   LoginPentaho.class,

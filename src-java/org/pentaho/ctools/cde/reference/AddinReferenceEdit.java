@@ -41,7 +41,7 @@ import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
- * Testing the functionalities related with CDA Cache Manager.
+ * Testing the functionalities related with Addin Reference edit mode.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'

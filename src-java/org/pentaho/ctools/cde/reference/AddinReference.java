@@ -47,7 +47,7 @@ import org.pentaho.ctools.utils.HttpUtils;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
- * Testing the functionalities related with CDA Cache Manager.
+ * Testing the functionalities related with AddinReference.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'
