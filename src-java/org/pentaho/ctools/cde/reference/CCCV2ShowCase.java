@@ -158,6 +158,12 @@ public class CCCV2ShowCase {
      */
     String lineChartTitle = ElementHelper.GetText(driver, By.id("LineChartTitleRow"));
     assertEquals("Line Chart", lineChartTitle);
+    WebElement lineElement = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1]"));
+    log.info("cy : " + lineElement.getAttribute("cy"));
+    lineElement = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7]"));
+    log.info("cy : " + lineElement.getAttribute("cy"));
+    lineElement = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11]"));
+    log.info("cy : " + lineElement.getAttribute("cy"));
     //Check lines
     WebElement lineChartCircle1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1][@cy='120.91996305199999']"));
     WebElement lineChartCircle2 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7][@cy='137.10615583599997']"));

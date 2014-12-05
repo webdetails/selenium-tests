@@ -213,7 +213,7 @@ public class BullertChartTestCase {
     //Check chart
     WebElement cht4SizeBar = ElementHelper.FindElement(driver, By.xpath("//div[@id='obj4']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']"));
     assertNotNull(cht4SizeBar);
-    assertEquals("254.46460660992733", cht4SizeBar.getAttribute("width"));
+    assertEquals("296.79999999999995", cht4SizeBar.getAttribute("width"));
     WebElement cht4RectWhite1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='obj4']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='path'][1]"));
     assertNotNull(cht4RectWhite1);
     assertEquals("translate(424,15) ", cht4RectWhite1.getAttribute("transform"));
