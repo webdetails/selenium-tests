@@ -158,19 +158,13 @@ public class CCCV2ShowCase {
      */
     String lineChartTitle = ElementHelper.GetText(driver, By.id("LineChartTitleRow"));
     assertEquals("Line Chart", lineChartTitle);
-    WebElement lineElement = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1]"));
-    log.info("cy : " + lineElement.getAttribute("cy"));
-    lineElement = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7]"));
-    log.info("cy : " + lineElement.getAttribute("cy"));
-    lineElement = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11]"));
-    log.info("cy : " + lineElement.getAttribute("cy"));
     //Check lines
-    WebElement lineChartCircle1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1][@cy='120.91996305199999']"));
-    WebElement lineChartCircle2 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7][@cy='137.10615583599997']"));
-    WebElement lineChartCircle3 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11][@cy='24.606426639999995']"));
-    assertNotNull(lineChartCircle1);
-    assertNotNull(lineChartCircle2);
-    assertNotNull(lineChartCircle3);
+    WebElement lineChartCircle1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1]"));
+    WebElement lineChartCircle2 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7]"));
+    WebElement lineChartCircle3 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11]"));
+    assertEquals("120.414021784", lineChartCircle1.getAttribute("cy"));
+    assertEquals("136.53248991200002", lineChartCircle2.getAttribute("cy"));
+    assertEquals("24.50347088000001", lineChartCircle3.getAttribute("cy"));
     //Mouse hover elements
     WebElement lineChartCircle4 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][2]"));
     Actions acts2 = new Actions(driver);
