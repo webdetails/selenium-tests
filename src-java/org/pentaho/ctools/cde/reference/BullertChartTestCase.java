@@ -218,13 +218,9 @@ public class BullertChartTestCase {
     //Check chart
     WebElement cht4SizeBar = ElementHelper.FindElement(driver, By.xpath("//div[@id='obj4']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']"));
     assertNotNull(cht4SizeBar);
-    log.info(cht4SizeBar.getAttribute("width"));
-    //assertEquals("296.79999999999995", cht4SizeBar.getAttribute("width"));
     WebElement cht4RectWhite1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='obj4']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='path'][1]"));
     assertNotNull(cht4RectWhite1);
-    log.info(cht4RectWhite1.getAttribute("transform"));
-    //assertEquals("translate(299.2382966220193,15) ", cht4RectWhite1.getAttribute("transform"));
-
+    
     /*
      * ## Step 5
      */
@@ -240,12 +236,8 @@ public class BullertChartTestCase {
     //Check chart
     WebElement cht5SizeBar = ElementHelper.FindElement(driver, By.xpath("//div[@id='obj5']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']"));
     assertNotNull(cht5SizeBar);
-    log.info(cht5SizeBar.getAttribute("width"));
-    //assertEquals("261.9778136626517", cht5SizeBar.getAttribute("width"));
     WebElement cht5RectWhite1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='obj5']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='path'][1]"));
     assertNotNull(cht5RectWhite1);
-    log.info(cht5RectWhite1.getAttribute("transform"));
-    //assertEquals("translate(424,15) ", cht5RectWhite1.getAttribute("transform"));
   }
 
   @AfterClass
