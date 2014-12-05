@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<link rel="selenium.base" href="http://localhost:8080/" />
 <title>0003_home_Page</title>
 </head>
 <body>
@@ -16,9 +16,55 @@
 	<td>120000</td>
 	<td></td>
 </tr>
+<!--Clear Cache-->
 <tr>
 	<td>open</td>
-	<td>api/repos/%3Apublic%3Actools-samples%3ADashboards%3Awelcome.wcdf/generatedContent</td>
+	<td>pentaho/Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=toolsmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=toolsmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=refreshmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=refreshmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=cdaClearCache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cdaClearCache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.pentaho-tabWidgetLabel</td>
+	<td>CDA Cache</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.pentaho-tabWidgetLabel</td>
+	<td>CDA Cache</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3ADashboards%3Awelcome.wcdf/generatedContent</td>
 	<td></td>
 </tr>
 <tr>

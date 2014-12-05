@@ -13,6 +13,21 @@
 </thead><tbody>
 <!--Dependente do issue#3317 do Redmine-->
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='productTableTable_filter']/label/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div</td>
+	<td>Product</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[2]/div</td>
+	<td>Sales</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td</td>
 	<td>Classic Metal Creations</td>
@@ -168,8 +183,23 @@
 	<td>5,319.93</td>
 </tr>
 <tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>34.48557192315977</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -212,13 +242,33 @@
 	<td>Classic Metal Creations</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td>9,224.74</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td>9,224.74</td>
 </tr>
 <tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>170.8054681907456</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -261,9 +311,19 @@
 	<td>Autoart Studio Design</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td>3,685.61</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td>3,685.61</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>128.89911906475766</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -271,9 +331,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForElementNotPresent</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td</td>
-	<td>Autoart Studio Design</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -310,9 +375,19 @@
 	<td>Carousel DieCast Legends</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td>2,710.32</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td>2,710.32</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>128.08678884824798</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -320,9 +395,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForElementNotPresent</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td</td>
-	<td>Carousel DieCast Legends</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -512,8 +592,23 @@
 	<td>5,319.93</td>
 </tr>
 <tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>34.48557192315977</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -556,13 +651,33 @@
 	<td>Classic Metal Creations</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td>9,224.74</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td>9,224.74</td>
 </tr>
 <tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>170.8054681907456</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -605,9 +720,19 @@
 	<td>Autoart Studio Design</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td>3,685.61</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td>3,685.61</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>128.89911906475766</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -615,9 +740,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForElementNotPresent</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td</td>
-	<td>Autoart Studio Design</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -654,9 +784,19 @@
 	<td>Carousel DieCast Legends</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td>2,710.32</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
 	<td>2,710.32</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>128.08678884824798</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -664,9 +804,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForElementNotPresent</td>
 	<td>//table[@id='productTableTable']/tbody/tr/td</td>
-	<td>Carousel DieCast Legends</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
