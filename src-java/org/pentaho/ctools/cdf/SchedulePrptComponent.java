@@ -172,8 +172,8 @@ public class SchedulePrptComponent {
     c.setTime(dNow);
     c.add(Calendar.DATE, 1);
     Date dTomorrow = c.getTime();
-    c.add(Calendar.DATE, 30); //30th days from today
-    Date d30days = c.getTime();
+    c.add(Calendar.DATE, 40); //30th days from today
+    Date d40days = c.getTime();
 
     // ## Step 1
     ElementHelper.FindElement(driver, By.xpath("//span[@id='sampleObject']/button")).click();
@@ -225,11 +225,11 @@ public class SchedulePrptComponent {
     //Select End Date
     wait.until(ExpectedConditions.elementToBeClickable(By.id("endByRadio")));
     ElementHelper.FindElement(driver, By.id("endByRadio")).click();
-    ElementHelper.FindElement(driver, By.id("endByIn")).sendKeys(sdf.format(d30days));
+    ElementHelper.FindElement(driver, By.id("endByIn")).sendKeys(sdf.format(d40days));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='ui-datepicker-calendar']")));
     WebElement dateCalendar2 = ElementHelper.FindElement(driver, By.xpath("//table[@class='ui-datepicker-calendar']"));
     List<WebElement> columns2 = dateCalendar2.findElements(By.tagName("td"));
-    String day = sdfDay.format(d30days);
+    String day = sdfDay.format(d40days);
     for (WebElement cell2 : columns2) {
       String strCell2 = cell2.getText();
       if (strCell2.equals(day)) {
@@ -237,6 +237,7 @@ public class SchedulePrptComponent {
         break;
       }
     }
+
     //Submit Form
     wait.until(ExpectedConditions.elementToBeClickable(By.id("jqi_basicState_buttonOk")));
     ElementHelper.FindElement(driver, By.id("jqi_basicState_buttonOk")).click();
@@ -257,7 +258,7 @@ public class SchedulePrptComponent {
     //Go to home page
     driver.get(baseUrl + "Home");
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Click in Schedule
     wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
@@ -330,7 +331,7 @@ public class SchedulePrptComponent {
     //Go to home page
     driver.get(baseUrl + "Home");
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Click in Schedule
     wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
@@ -386,7 +387,7 @@ public class SchedulePrptComponent {
           wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='pentaho-dialog']")));
           ElementHelper.FindElement(driver, By.id("okButton")).click();
 
-          ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='pentaho-dialog']"));
+          ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='pentaho-dialog']"));
 
           someThingToDelete = true;//Continue checking if there is something to delete
           break;
