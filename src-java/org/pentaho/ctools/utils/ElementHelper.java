@@ -474,7 +474,9 @@ public class ElementHelper {
 
     WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     if (element != null) {
-      text = element.getText();
+      //text = element.getText();
+      //text = element.getAttribute("textContent");
+      text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
     }
 
     return text;
