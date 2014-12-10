@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<link rel="selenium.base" href="http://localhost:8080/" />
 <title>0003_howTo_Page</title>
 </head>
 <body>
@@ -12,8 +12,13 @@
 <tr><td rowspan="1" colspan="3">0003_howTo_Page</td></tr>
 </thead><tbody>
 <tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
-	<td>api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A0-howToStart%3AhowToStart.xcdf/generatedContent?ts=1417448133861</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A0-howToStart%3AhowToStart.xcdf/generatedContent?ts=1417448133861</td>
 	<td></td>
 </tr>
 <!--Check Intro-->
@@ -105,12 +110,12 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[2]/div[2]/div[2]/h3</td>
+	<td>//div[2]/div[2]/h3</td>
 	<td>Step 1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div[2]/div[2]/h3</td>
+	<td>//div[2]/div[2]/h3</td>
 	<td>Step 1</td>
 </tr>
 <tr>
@@ -237,7 +242,6 @@
 	<td>//div[@id='dashboard']/div[9]/img</td>
 	<td>450</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
