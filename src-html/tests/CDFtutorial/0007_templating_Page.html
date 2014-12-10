@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0007_templating_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0007_templating_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<!--Verificar Intro-->
+<tr>
+	<td>waitForText</td>
+	<td>css=h1</td>
+	<td>Templating</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h1</td>
+	<td>Templating</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step4</td>
+	<td>Step4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step4</td>
+	<td>Step4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=th</td>
+	<td>What we will learn</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<!--Verificar Step 1-->
+<tr>
+	<td>click</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div</td>
+	<td>Click on the different links to see this sample with different templates</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div</td>
+	<td>Click on the different links to see this sample with different templates</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step1']/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step1']/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard-mantle.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard-mantle.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=mantle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=mantle</td>
+	<td></td>
+</tr>
+<!--Preciso ver se é para reportar o fato de esta página estar em branco-->
+<!--Verificar Step 2-->
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div</td>
+	<td>Click on the different links to see this sample with different templates</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div</td>
+	<td>Click on the different links to see this sample with different templates</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step2']/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step2']/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard-mantle.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard-mantle.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=mantle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=mantle</td>
+	<td></td>
+</tr>
+<!--Preciso ver se é para reportar o fato de esta página estar em branco-->
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard-tutorial.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard-tutorial.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorial</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorial</td>
+	<td></td>
+</tr>
+<!--THis is not hte template used in this sample. This sample uses the tutorial Blue template-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard-tutorialBlue.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard-tutorialBlue.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorialBlue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorialBlue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard-tutorialBLeft.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard-tutorialBLeft.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorialBLeft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorialBLeft</td>
+	<td></td>
+</tr>
+<!--Não era suposto o Summary e Step2 estarem à esquerda dos links??-->
+<!--Verificar Step 3-->
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div</td>
+	<td>Click on the different links to see this sample with different templates</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div</td>
+	<td>Click on the different links to see this sample with different templates</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step3']/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step3']/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard-mantle.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard-mantle.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=mantle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=mantle</td>
+	<td></td>
+</tr>
+<!--Preciso ver se é para reportar o fato de esta página estar em branco-->
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard-tutorial.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard-tutorial.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorial</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorial</td>
+	<td></td>
+</tr>
+<!--THis is not hte template used in this sample. This sample uses the tutorial Blue template-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard-tutorialBlue.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard-tutorialBlue.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorialBlue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorialBlue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=template-dashboard-tutorialBLeft.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=template-dashboard-tutorialBLeft.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorialBLeft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent?template=tutorialBLeft</td>
+	<td></td>
+</tr>
+<!--Não era suposto o Summary e Step2 estarem à esquerda dos links??-->
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=xcdf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=xcdf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@class='fancybox-inner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@class='fancybox-inner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'&lt;title&gt;Templating&lt;/title&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'&lt;title&gt;Templating&lt;/title&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.fancybox-item.fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.fancybox-item.fancybox-close</td>
+	<td></td>
+</tr>
+<!--Verificar Step 4-->
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div[7]</td>
+	<td>template-dashboard-tutorial.html</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div[7]</td>
+	<td>template-dashboard-tutorial.html</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step4']/h3</td>
+	<td>Step 4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step4']/h3</td>
+	<td>Step 4</td>
+</tr>
+<tr>
+	<td>waitForElementHeight</td>
+	<td>//img[@alt='template-dashboard-tutorial.html']</td>
+	<td>522</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//img[@alt='template-dashboard-tutorial.html']</td>
+	<td>522</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

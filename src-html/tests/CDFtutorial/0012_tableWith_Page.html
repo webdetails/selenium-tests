@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0012_tableWith_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0012_tableWith_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A9-tableSparklines%3AtableSparklines.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<!--Check Intro-->
+<tr>
+	<td>waitForText</td>
+	<td>css=h1</td>
+	<td>Table with Sparklines</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h1</td>
+	<td>Table with Sparklines</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=th</td>
+	<td>What we will learn</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[4]/th</td>
+	<td>Components that will be used</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<!--Check Step1-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step1']/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step1']/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th</td>
+	<td>Products</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th</td>
+	<td>Products</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th[2]</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Classic Cars</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[2]</td>
+	<td>4,091,420</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[2]</td>
+	<td>748,671</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[7]/td</td>
+	<td>Vintage Cars</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[7]/td[2]</td>
+	<td>2,066,226</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='table_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='table_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var table')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var table')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Check Step2-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step2']/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step2']/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th</td>
+	<td>Products</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th</td>
+	<td>Products</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th[2]</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th[3]</td>
+	<td>Sales/months</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Classic Cars</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[2]</td>
+	<td>4,091,420</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[2]</td>
+	<td>748,671</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[7]/td</td>
+	<td>Vintage Cars</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[7]/td[2]</td>
+	<td>2,066,226</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='table_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='table_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var table')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var table')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Check Step3-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step3']/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step3']/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//label[contains(text(),'Show')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//label[contains(text(),'Show')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//label[contains(text(),'Search')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//label[contains(text(),'Search')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='table_objectTable_info']</td>
+	<td>Showing 1 to 5 of 7 entries</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='table_objectTable_info']</td>
+	<td>Showing 1 to 5 of 7 entries</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='table_objectTable_paginate']/a</td>
+	<td>Previous</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='table_objectTable_paginate']/a</td>
+	<td>Previous</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='table_objectTable_paginate']/a[2]</td>
+	<td>Next</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='table_objectTable_paginate']/span/a</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='table_objectTable_paginate']/span/a[2]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th</td>
+	<td>Products</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th</td>
+	<td>Products</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th[2]</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th[3]</td>
+	<td>Sales/months</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Classic Cars</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[2]</td>
+	<td>4,091,420</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[2]</td>
+	<td>748,671</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Trucks and Buses</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Trucks and Buses</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[2]</td>
+	<td>1,154,281</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='table_objectTable_info']</td>
+	<td>Showing 6 to 7 of 7 entries</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='table_objectTable_info']</td>
+	<td>Showing 6 to 7 of 7 entries</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='table_objectTable_length']/label/select</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='table_objectTable_length']/label/select</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='table_objectTable_length']/label/select</td>
+	<td>25</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='table_objectTable_info']</td>
+	<td>Showing 1 to 7 of 7 entries</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='table_objectTable_info']</td>
+	<td>Showing 1 to 7 of 7 entries</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Trains</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Trains</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[2]</td>
+	<td>234,469</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td</td>
+	<td>Trucks and Buses</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[2]</td>
+	<td>1,154,281</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='table_objectTable']/thead/tr/th[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Trains</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Trains</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[2]</td>
+	<td>234,469</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td</td>
+	<td>Trucks and Buses</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[2]</td>
+	<td>1,154,281</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>//table[@id='table_objectTable']/tbody/tr[4]/td[3]/canvas</td>
+	<td>19</td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>css=input[type=&quot;search&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>css=input[type=&quot;search&quot;]</td>
+	<td>Ca</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Vintage Cars</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td</td>
+	<td>Vintage Cars</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[2]</td>
+	<td>2,066,226</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='table_objectTable']/tbody/tr/td[2]</td>
+	<td>2,066,226</td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>css=input[type=&quot;search&quot;]</td>
+	<td>${KEY_BACKSPACE}${KEY_BACKSPACE}</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='table_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='table_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var table')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var table')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=See Final Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=See Final Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@class='fancybox-inner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@class='fancybox-inner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.fancybox-item.fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.fancybox-item.fancybox-close</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

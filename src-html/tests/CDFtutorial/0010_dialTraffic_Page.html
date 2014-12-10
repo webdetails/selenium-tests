@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0010_dialTraffic_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0010_dialTraffic_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A7-dialTraffic%3AdialTraffic.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<!--Verificar Intro-->
+<tr>
+	<td>waitForText</td>
+	<td>css=h1</td>
+	<td>Dial + Traffic</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h1</td>
+	<td>Dial + Traffic</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=th</td>
+	<td>What we will learn</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[4]/th</td>
+	<td>Components that will be used</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<!--Verificar Step 1-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step1']/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step1']/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='dial1_object']/img@height</td>
+	<td>160</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='dial1_object']/img@height</td>
+	<td>160</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='dial2_object']/img@height</td>
+	<td>180</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='dial2_object']/img@height</td>
+	<td>180</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='dial3_object']/img@height</td>
+	<td>220</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='dial3_object']/img@height</td>
+	<td>220</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='dial1_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dial1_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial1')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial1')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='dial2_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dial2_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial2')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial2')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='dial3_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dial3_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial3')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial3')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Verificar Step 2-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step2']/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step2']/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='dial1_object']/img@height</td>
+	<td>160</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='dial1_object']/img@height</td>
+	<td>160</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='dial2_object']/img@height</td>
+	<td>180</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='dial2_object']/img@height</td>
+	<td>180</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='dial3_object']/img@height</td>
+	<td>220</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='dial3_object']/img@height</td>
+	<td>220</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='traffic1_object']/div[@class='img trafficRed']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='traffic1_object']/div[@class='img trafficRed']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='traffic2_object']/div[@class='img trafficYellow']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='traffic2_object']/div[@class='img trafficYellow']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='traffic3_object']/div[@class='img trafficGreen']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='traffic3_object']/div[@class='img trafficGreen']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='dial1_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dial1_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial1')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial1')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='dial2_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dial2_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial2')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial2')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='dial3_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dial3_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial3')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dial3')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='traffic1_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='traffic1_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var traffic1')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var traffic1')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='traffic2_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='traffic2_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var traffic2')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var traffic2')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='traffic3_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='traffic3_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var traffic3')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var traffic3')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=See Final Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=See Final Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@class='fancybox-inner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@class='fancybox-inner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.fancybox-item.fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.fancybox-item.fancybox-close</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
