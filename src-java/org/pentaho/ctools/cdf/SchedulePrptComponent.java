@@ -97,7 +97,7 @@ public class SchedulePrptComponent {
     driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:86-SchedulePrptComponent:schedule_prpt_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -140,7 +140,7 @@ public class SchedulePrptComponent {
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
@@ -160,7 +160,7 @@ public class SchedulePrptComponent {
    *    3. Check for alert.
    *    4. On Schedule Manager, it is set the schedule.
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 90000)
   public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() throws InterruptedException {
     String schLocation = "/public";
 

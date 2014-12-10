@@ -426,7 +426,7 @@ public class ElementHelper {
       log.warn("Element doesn't exist - BY: " + locator.toString());
     }
 
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   /**
@@ -453,7 +453,7 @@ public class ElementHelper {
       log.warn("Element doesn't exist - BY: " + locator.toString());
     }
 
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     return element;
   }
 
