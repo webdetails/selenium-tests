@@ -258,7 +258,7 @@ public class SchedulePrptComponent {
     //Go to home page
     driver.get(baseUrl + "Home");
     // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Click in Schedule
     wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
@@ -331,7 +331,7 @@ public class SchedulePrptComponent {
     //Go to home page
     driver.get(baseUrl + "Home");
     // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Click in Schedule
     wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
