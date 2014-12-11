@@ -29,6 +29,8 @@ import org.pentaho.ctools.cde.reference.AddinReferenceEdit;
 import org.pentaho.ctools.cde.reference.AjaxRequestReference;
 import org.pentaho.ctools.cde.reference.BullertChartTestCase;
 import org.pentaho.ctools.cde.reference.CCCV2ShowCase;
+import org.pentaho.ctools.cde.reference.MapComponentFullTest;
+import org.pentaho.ctools.cde.reference.MapComponentReference;
 import org.pentaho.ctools.cde.reference.PopupComponent;
 import org.pentaho.ctools.cde.reference.WidgetReference;
 
@@ -42,9 +44,10 @@ import org.pentaho.ctools.cde.reference.WidgetReference;
   AjaxRequestReference.class,
   BullertChartTestCase.class,
   CCCV2ShowCase.class,
+  MapComponentFullTest.class,
+  MapComponentReference.class,
   PopupComponent.class,
   WidgetReference.class
-  //MapComponentReference.class,
   //CDE - Widgets
   //CreateWidget.class,
   //AddParamTableComponent.class,
