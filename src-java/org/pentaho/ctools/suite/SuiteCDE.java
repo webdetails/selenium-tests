@@ -37,17 +37,17 @@ import org.pentaho.ctools.cde.reference.WidgetReference;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //CDE
-  SampleDashboard.class,
+  /*SampleDashboard.class,
   //CDE Reference
   AddinReference.class,
   AddinReferenceEdit.class,
   AjaxRequestReference.class,
   BullertChartTestCase.class,
-  CCCV2ShowCase.class,
+  CCCV2ShowCase.class,*/
   MapComponentFullTest.class,
   MapComponentReference.class,
-  PopupComponent.class,
-  WidgetReference.class
+  //PopupComponent.class,
+  //WidgetReference.class
   //CDE - Widgets
   //CreateWidget.class,
   //AddParamTableComponent.class,

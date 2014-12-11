@@ -516,7 +516,7 @@ public class MapComponentReference {
     //Click in shape4 (England) and check it comes with red.
     String shape4Id = shape4.getAttribute("id");
     shape4.click();
-    ElementHelper.IsElementVisible(driver, By.xpath("//*[local-name()='path' and @fill='red']"));
+    ElementHelper.IsElementPresent(driver, By.xpath("//*[local-name()='path' and @fill='red']"));
     WebElement shape4Red = ElementHelper.FindElement(driver, By.id(shape4Id));
     assertEquals("red", shape4Red.getAttribute("fill"));
   }

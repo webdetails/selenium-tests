@@ -154,7 +154,7 @@ public class MapComponentFullTest {
     marker1.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//div[@id='HiddenContentCol']"));
+    ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='HiddenContentCol']"));
     //Check we have the expect series displayed
     String marker1Serie1 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker1Serie2 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
@@ -178,7 +178,7 @@ public class MapComponentFullTest {
     marker2.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//div[@id='HiddenContentCol']"));
+    ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='HiddenContentCol']"));
     //Check we have the expect series displayed
     String marker2Serie1 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker2Serie2 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
@@ -200,7 +200,7 @@ public class MapComponentFullTest {
     marker3.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//div[@id='HiddenContentCol']"));
+    ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='HiddenContentCol']"));
     //Check we have the expect series displayed
     String marker3Serie1 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker3Serie2 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
@@ -220,7 +220,7 @@ public class MapComponentFullTest {
     marker4.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//div[@id='HiddenContentCol']"));
+    ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='HiddenContentCol']"));
     //Check we have the expect series displayed
     String marker4Serie1 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker4Serie2 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
@@ -238,7 +238,7 @@ public class MapComponentFullTest {
     marker5.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//div[@id='HiddenContentCol']"));
+    ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='HiddenContentCol']"));
     //Check we have the expect series displayed
     String marker5Serie1 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker5Serie2 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
@@ -264,7 +264,7 @@ public class MapComponentFullTest {
     marker6.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//div[@id='HiddenContentCol']"));
+    ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='HiddenContentCol']"));
     //Check we have the expect series displayed
     String marker6Serie1 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker6Serie2 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
@@ -290,7 +290,7 @@ public class MapComponentFullTest {
     marker7.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//div[@id='HiddenContentCol']"));
+    ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='HiddenContentCol']"));
     //Check we have the expect series displayed
     String marker7Serie1 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker7Serie2 = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
@@ -310,7 +310,7 @@ public class MapComponentFullTest {
     marker6.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//div[@id='HiddenContentCol']"));
+    ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='HiddenContentCol']"));
     //Move mouse to element
     WebElement marker6SeriesClassicCars = ElementHelper.FindElement(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][1]"));
     Actions acts = new Actions(driver);
