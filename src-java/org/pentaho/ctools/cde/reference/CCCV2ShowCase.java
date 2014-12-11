@@ -21,8 +21,10 @@
  ******************************************************************************/
 package org.pentaho.ctools.cde.reference;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -119,9 +121,12 @@ public class CCCV2ShowCase {
     assertNotNull(barChartRect1);
     assertNotNull(barChartRect2);
     assertNotNull(barChartRect3);
-    assertEquals("196.11771571469967", barChartRect1.getAttribute("width"));
-    assertEquals("266", barChartRect2.getAttribute("width"));
-    assertEquals("105.63893814477713", barChartRect3.getAttribute("width"));
+    Double barChartRect1Width = Double.parseDouble(barChartRect1.getAttribute("width"));
+    Double barChartRect2Width = Double.parseDouble(barChartRect2.getAttribute("width"));
+    Double barChartRect3Width = Double.parseDouble(barChartRect3.getAttribute("width"));
+    assertThat("Current width: " + barChartRect1Width, barChartRect1Width, greaterThan(Double.valueOf(192)));
+    assertThat("Current width: " + barChartRect2Width, barChartRect2Width, greaterThan(Double.valueOf(250)));
+    assertThat("Current width: " + barChartRect3Width, barChartRect3Width, greaterThan(Double.valueOf(100)));
     //Check bars value
     String barChartRectValue1 = ElementHelper.GetText(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][1]"));
     String barChartRectValue2 = ElementHelper.GetText(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][2]"));
