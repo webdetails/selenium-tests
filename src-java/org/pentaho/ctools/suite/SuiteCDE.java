@@ -44,8 +44,8 @@ import org.pentaho.ctools.cde.reference.WidgetReference;
   AjaxRequestReference.class,
   BullertChartTestCase.class,
   CCCV2ShowCase.class,
-  //MapComponentFullTest.class,
-  //MapComponentReference.class,
+  MapComponentFullTest.class,
+  MapComponentReference.class,
   PopupComponent.class,
   WidgetReference.class
   //CDE - Widgets
