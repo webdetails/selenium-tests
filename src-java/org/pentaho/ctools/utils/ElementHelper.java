@@ -249,7 +249,7 @@ public class ElementHelper {
    * @param locator
    * @return
    */
-  public static WebElement FindElementInvisble(WebDriver driver, By locator) {
+  public static WebElement FindElementInvisible(WebDriver driver, By locator) {
     log.debug("Enter:FindElement");
     try {
       IsElementPresent(driver, locator);
@@ -308,11 +308,11 @@ public class ElementHelper {
   public static String GetTextElementInvisible(WebDriver driver, By locator) {
     String text = "";
     try {
-      WebElement element = FindElementInvisble(driver, locator);
+      WebElement element = FindElementInvisible(driver, locator);
       text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
     } catch (StaleElementReferenceException e) {
       log.debug("Got stale");
-      text = FindElementInvisble(driver, locator).getText();
+      text = FindElementInvisible(driver, locator).getText();
     } catch (Exception e) {
       log.debug("Exception: " + e.getMessage());
     }
@@ -389,6 +389,29 @@ public class ElementHelper {
    */
   public static void Click(WebDriver driver, By locator) {
     WebElement element = FindElement(driver, locator);
+    if (element != null) {
+      try {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+      } catch (WebDriverException wde) {
+        if (wde.getMessage().contains("arguments[0].click is not a function")) {
+          element.click();
+        }
+      }
+    } else {
+      log.error("Element is null " + locator.toString());
+    }
+  }
+
+  /**
+   * The function will search for the element present (doesn't matter
+   * if element is visible or not) and then click on it.
+   *
+   * @param driver
+   * @param locator
+   */
+  public static void ClickElementInvisible(WebDriver driver, By locator) {
+    WebElement element = FindElementInvisible(driver, locator);
     if (element != null) {
       try {
         JavascriptExecutor executor = (JavascriptExecutor) driver;

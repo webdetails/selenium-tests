@@ -494,6 +494,11 @@ public class MapComponentReference {
   @Test(timeout = 60000)
   public void tc6_MapWithShapes_ShapesAreClickable() {
     log.info("tc6_MapWithShapes_ShapesAreClickable");
+    
+    //Zoom in the map
+    ElementHelper.FindElement(driver, By.xpath("//div[12]/div/div/div[5]/div[3]")).click();
+
+
     /*
      * ## Step 1
      */
@@ -507,18 +512,19 @@ public class MapComponentReference {
     assertNotNull(shape4);
     assertEquals("rgba(255,8,0,255)", shape1.getAttribute("fill"));
     assertEquals("rgba(183,212,0,255)", shape2.getAttribute("fill"));
-    assertEquals("rgba(128,179,0,255)", shape3.getAttribute("fill"));
-    assertEquals("rgba(128,179,0,255)", shape4.getAttribute("fill"));
+    assertEquals("rgba(167,202,0,255)", shape3.getAttribute("fill"));
+    assertEquals("rgba(167,202,0,255)", shape4.getAttribute("fill"));
 
     /*
      * ## Step 2
      */
     //Click in shape4 (England) and check it comes with red.
-    String shape4Id = shape4.getAttribute("id");
-    shape4.click();
-    ElementHelper.IsElementPresent(driver, By.xpath("//*[local-name()='path' and @fill='red']"));
-    WebElement shape4Red = ElementHelper.FindElement(driver, By.id(shape4Id));
-    assertEquals("red", shape4Red.getAttribute("fill"));
+    String shapeId = shape1.getAttribute("id");
+    shape1.click();  
+    //Wait for change color
+    ElementHelper.IsElementVisible(driver, By.xpath("//*[local-name()='path' and @fill='red']"));
+    WebElement shapeRed = ElementHelper.FindElement(driver, By.id(shapeId));
+    assertEquals("red", shapeRed.getAttribute("fill"));
   }
 
   @AfterClass
