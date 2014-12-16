@@ -161,7 +161,7 @@ public class SchedulePrptComponent {
    *    4. On Schedule Manager, it is set the schedule.
    */
   @Test(timeout = 90000)
-  public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() throws InterruptedException {
+  public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() {
     String schLocation = "/public";
 
     //Initialize some data
@@ -257,8 +257,8 @@ public class SchedulePrptComponent {
     //-->Need to check if the schedule was created
     //Go to home page
     driver.get(baseUrl + "Home");
-    // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    // NOTE - we have to wait for loading disappear
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Click in Schedule
     wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
@@ -330,8 +330,8 @@ public class SchedulePrptComponent {
   private static void removeAllCreatedSchedules() {
     //Go to home page
     driver.get(baseUrl + "Home");
-    // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    // NOTE - we have to wait for loading disappear
+    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Click in Schedule
     wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
