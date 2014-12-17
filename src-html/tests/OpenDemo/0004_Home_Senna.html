@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<link rel="selenium.base" href="http://localhost:8080/" />
 <title>0003_Home_Senna</title>
 </head>
 <body>
@@ -318,18 +318,13 @@
 </tr>
 <!--Verificar primeira barra "Pontos em GP" e resultados em "Corrida"-->
 <tr>
-	<td>pause</td>
-	<td>2000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>//div[10]/div[2]</td>
+	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
 </tr>
 <tr>
@@ -349,9 +344,9 @@
 </tr>
 <!--Verificar segunda barra "Pontos em GP" e resultados em "Corrida"-->
 <tr>
-	<td>pause</td>
-	<td>2000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>40.90721649484536</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -360,7 +355,7 @@
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>//div[10]/div[2]</td>
+	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
 </tr>
 <tr>
@@ -385,9 +380,9 @@
 </tr>
 <!--Verificar terceira barra "Pontos em GP" e resultados em "Corrida"-->
 <tr>
-	<td>pause</td>
-	<td>2000</td>
-	<td></td>
+	<td>waitForAttribute</td>
+	<td>//div[@id='chartPointsprotovis']//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']//*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>63.91752577319587</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -396,7 +391,7 @@
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>//div[10]/div[2]</td>
+	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
 </tr>
 <tr>

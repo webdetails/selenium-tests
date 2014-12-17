@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<link rel="selenium.base" href="http://localhost:8080/" />
 <title>0002_Open_CDE_Open_Demos</title>
 </head>
 <body>
@@ -27,8 +27,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;buttonWrapper&quot;]//button[contains(text(),'Browse Files')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//div[@id= &quot;buttonWrapper&quot;]/div/div/button[contains(text(),'Browse Files')]</td>
+	<td>//div[@id= &quot;buttonWrapper&quot;]//button[contains(text(),'Browse Files')]</td>
 	<td></td>
 </tr>
 <tr>

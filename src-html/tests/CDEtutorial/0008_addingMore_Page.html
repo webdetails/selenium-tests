@@ -99,6 +99,11 @@
 </tr>
 <!--Verificar Primeiro Set de Gráficos-->
 <tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_1protovis</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
 	<td>css=#marketChart_1protovis</td>
 	<td></td>
@@ -121,6 +126,11 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//div[contains(@id,'marketChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#countryChart_1protovis</td>
 	<td></td>
 </tr>
 <tr>
@@ -717,6 +727,16 @@
 <tr>
 	<td>click</td>
 	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
 </tr>
 <tr>

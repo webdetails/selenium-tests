@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<link rel="selenium.base" href="http://localhost:8080/" />
 <title>0012_Home_SyncDemo_Edit</title>
 </head>
 <body>
@@ -27,9 +27,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=caption.ui-state-default</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>css=td</td>
+	<td>Resource</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -37,8 +37,18 @@
 	<td>Resource</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td</td>
+	<td>Row</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='table-cdfdd-layout-tree']/tbody/tr[10]/td</td>
 	<td>Row</td>
 </tr>
 <tr>
