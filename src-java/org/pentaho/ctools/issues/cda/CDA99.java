@@ -132,12 +132,9 @@ public class CDA99 {
     /*
      * ## Step 2
      */
-    driver.switchTo().frame("externalEditor");
-    String code = ElementHelper.GetText(driver, By.xpath("//pre[@id='editArea']/div[2]/div"));
+    String code = ((JavascriptExecutor) driver).executeScript("return getEditorWindow().editor.getContents();").toString();
     code = code.replace("<DataAccess id=\"1\" connection=\"1\" type=\"olap4j\" access=\"public\">", "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j.defaultolap4j\" access=\"public\">");
-    driver.switchTo().defaultContent();
     ((JavascriptExecutor) driver).executeScript("getEditorWindow().editor.setContents(arguments[0]);", code);
-    driver.switchTo().defaultContent();
 
     //Save file
     ElementHelper.Click(driver, By.id("save"));
@@ -192,12 +189,9 @@ public class CDA99 {
     /*
      * ## Step 4
      */
-    driver.switchTo().frame("externalEditor");
-    String code2 = ElementHelper.GetText(driver, By.xpath("//pre[@id='editArea']/div[2]/div"));
+    String code2 = ((JavascriptExecutor) driver).executeScript("return getEditorWindow().editor.getContents();").toString();
     code2 = code2.replace("<DataAccess id=\"1\" connection=\"1\" type=\"olap4j.defaultolap4j\" access=\"public\">", "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j\" access=\"public\">");
-    driver.switchTo().defaultContent();
     ((JavascriptExecutor) driver).executeScript("getEditorWindow().editor.setContents(arguments[0]);", code2);
-    driver.switchTo().defaultContent();
 
     //Save file
     ElementHelper.Click(driver, By.id("save"));
