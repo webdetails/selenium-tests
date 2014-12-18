@@ -45,7 +45,7 @@ import org.pentaho.ctools.security.AccessSystemResources;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   /*LoginPentaho.class,
-  CCCV2ShowCase.class*/
+  CDA99.class*/
   //##### Execution Order #####
   //Start Tests
   LoginPentaho.class,
@@ -59,6 +59,8 @@ import org.pentaho.ctools.security.AccessSystemResources;
   SuiteCGG.class,
   //Security
   AccessSystemResources.class,
+  //Issues
+  SuiteIssues.class,
   //End Tests
   LogoutPentaho.class })
 public class CToolsTestSuite {
