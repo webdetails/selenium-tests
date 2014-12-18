@@ -163,7 +163,7 @@ public class ExecutePrptComponent {
     String buttonText = ElementHelper.GetText(driver, By.xpath("//button/span"));
     assertEquals("Execute Prpt", buttonText);
     ElementHelper.FindElement(driver, By.xpath("//button/span")).click();
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.fancybox-skin")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fancybox-content")));
     //Move to iframe
     WebElement elemIFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     String attrId = elemIFrame.getAttribute("id");
@@ -428,8 +428,8 @@ public class ExecutePrptComponent {
 
     // ## Step 1
     driver.switchTo().defaultContent();
-    ElementHelper.FindElement(driver, By.xpath("/html/body/div[3]/div/div/a")).click();
-    ElementHelper.IsElementInvisible(driver, By.cssSelector("div.fancybox-inner"));
+    ElementHelper.FindElement(driver, By.id("fancybox-close")).click();
+    ElementHelper.IsElementInvisible(driver, By.id("fancybox-content"));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//button/span")));
   }
 

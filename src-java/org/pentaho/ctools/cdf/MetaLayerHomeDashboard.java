@@ -121,7 +121,7 @@ public class MetaLayerHomeDashboard {
      * ## Step 3
      */
     //Wait for the frame
-    ElementHelper.IsElementVisible(driver, By.cssSelector("div.fancybox-inner"));
+    ElementHelper.IsElementVisible(driver, By.id("fancybox-content"));
     ElementHelper.IsElementVisible(driver, By.xpath("//iframe"));
     WebElement frame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     String valueFrameAttrSrc = frame.getAttribute("src");
@@ -149,9 +149,9 @@ public class MetaLayerHomeDashboard {
 
     //Close pop-up
     driver.switchTo().defaultContent();
-    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@title='Close']")));
-    ElementHelper.FindElement(driver, By.xpath("//a[@title='Close']")).click();
-    ElementHelper.IsElementInvisible(driver, By.cssSelector("div.fancybox-inner"));
+    wait.until(ExpectedConditions.elementToBeClickable(By.id("fancybox-close")));
+    ElementHelper.FindElement(driver, By.id("fancybox-close")).click();
+    ElementHelper.IsElementInvisible(driver, By.id("fancybox-content"));
   }
 
   @AfterClass

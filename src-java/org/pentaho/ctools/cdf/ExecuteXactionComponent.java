@@ -161,10 +161,8 @@ public class ExecuteXactionComponent {
     ElementHelper.FindElement(driver, By.xpath("//button")).click();
 
     // ## Step 1
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.fancybox-skin")));
-    WebElement elemIframe = ElementHelper.FindElement(driver, By.cssSelector("div.fancybox-inner iframe"));
-    String attrId = elemIframe.getAttribute("id");
-    driver.switchTo().frame(attrId);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fancybox-content")));
+    driver.switchTo().frame("fancybox-frame");
     //Check the title
     String chartTitle = ElementHelper.GetText(driver, By.xpath("//table/tbody/tr/td"));
     assertEquals("Action Successful", chartTitle);
@@ -193,8 +191,8 @@ public class ExecuteXactionComponent {
 
     //Close pop-up window
     driver.switchTo().defaultContent();
-    ElementHelper.FindElement(driver, By.xpath("/html/body/div[3]/div/div/a")).click();
-    ElementHelper.IsElementInvisible(driver, By.cssSelector("div.fancybox-inner"));
+    ElementHelper.FindElement(driver, By.id("fancybox-close")).click();
+    ElementHelper.IsElementInvisible(driver, By.id("fancybox-content"));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//button")));
   }
 
