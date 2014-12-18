@@ -22,7 +22,6 @@
 package org.pentaho.ctools.issues.cda;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -244,11 +243,12 @@ public class CDA99 {
     } catch (NoSuchElementException see) {
       selectNotExist = true;
     }
-    assertFalse(selectNotExist);
 
     //Need guarantee we close everything
     previewWindow.close();
     driver.switchTo().window(currentWindowHandle);
+
+    assertEquals(false, selectNotExist);
   }
 
   @AfterClass
