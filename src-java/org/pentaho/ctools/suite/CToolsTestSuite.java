@@ -121,10 +121,10 @@ public class CToolsTestSuite {
     
     log.info(driver.manage().window().getPosition().x);
     log.info(driver.manage().window().getPosition().y);
-    log.info(driver.manage().window().setSize().width);
-    log.info(driver.manage().window().setSize().height);
-    driver.manage().window().setPosition(new Point(0, 0));
-    driver.manage().window().setSize(new Dimension(1360, 764));
+    log.info(driver.manage().window().getSize().width);
+    log.info(driver.manage().window().getSize().height);
+    //driver.manage().window().setPosition(new Point(0, 0));
+    //driver.manage().window().setSize(new Dimension(1360, 764));
     driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
