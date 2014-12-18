@@ -301,32 +301,42 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='object_breakdownByMarkets_tooltip']/img</td>
+	<td>link=here</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='object_breakdownByMarkets_tooltip']/img</td>
+	<td>link=here</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var breakdownByMarkets')]</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'marketsQuery = {')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var breakdownByMarkets')]</td>
+	<td>//pre[contains(text(),'marketsQuery = {')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=brownJqi_state0_buttonClose</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=brownJqi_state0_buttonClose</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
@@ -361,43 +371,73 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=here</td>
+	<td>//div[@id='object_breakdownByMarkets_tooltip']/img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=here</td>
+	<td>//div[@id='object_breakdownByMarkets_tooltip']/img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//pre[contains(text(),'marketsQuery = {')]</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var breakdownByMarkets')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//pre[contains(text(),'marketsQuery = {')]</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var breakdownByMarkets')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=brownJqi_state0_buttonClose</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=brownJqi_state0_buttonClose</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='object_breakdownByMarkets']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='object_breakdownByMarkets']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='object_breakdownByMarkets']/map/area@title</td>
+	<td>Japan: (42.920,94, 2%)</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='object_breakdownByMarkets']/map/area@title</td>
+	<td>Japan: (42.920,94, 2%)</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='object_breakdownByProducts']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='object_breakdownByProducts']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='object_breakdownByProducts']/map/area@title</td>
+	<td>(2005, Trains) = 36.917,33</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='object_breakdownByProducts']/map/area@title</td>
+	<td>(2005, Trains) = 36.917,33</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -411,12 +451,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -431,12 +471,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <!--Check Step3-->
@@ -877,12 +917,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -897,12 +937,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <!--Check Step4-->
@@ -1443,12 +1483,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1463,12 +1503,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 </tbody></table>

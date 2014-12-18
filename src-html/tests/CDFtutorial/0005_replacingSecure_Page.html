@@ -1251,9 +1251,14 @@
 	<td>Administrative Assistant</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>waitForElementPresent</td>
 	<td>//div[@id='runButton_object']/button</td>
 	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -1276,14 +1281,29 @@
 	<td>Western</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>waitForText</td>
 	<td>//div[@id='pageContainer1']/div[2]/div[14]</td>
 	<td>Finance</td>
 </tr>
 <tr>
 	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[14]</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>waitForText</td>
 	<td>//div[@id='pageContainer1']/div[2]/div[15]</td>
 	<td>Administrative</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[15]</td>
+	<td>Administrative</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[17]</td>
+	<td>$918.400</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1302,23 +1322,143 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//div[@id='pageContainer1']</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@id='outputSelect_object']/select</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CFO</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CFO</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CFO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>IS</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>IS</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>IS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Controller</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Controller</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Controller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1347,12 +1487,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1392,12 +1532,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
@@ -1407,51 +1547,6 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>CFO</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>CFO</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>CFO</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Payroll</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Payroll</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Payroll</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>IS</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>IS</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>IS</td>
-</tr>
-<tr>
-	<td>select</td>
 	<td>//div[@id='departmentSelect_object']/select</td>
 	<td>Marketing &amp; Communication</td>
 </tr>
@@ -1464,16 +1559,6 @@
 	<td>assertValue</td>
 	<td>//div[@id='departmentSelect_object']/select</td>
 	<td>Marketing &amp; Communication</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
-	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -1516,18 +1601,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAt</td>
 	<td>//div[@id='runButton_object']/button</td>
-	<td></td>
+	<td>0.0</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1567,28 +1652,128 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='outputSelect_object']/select</td>
-	<td></td>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='outputSelect_object']/select</td>
-	<td>Web Page</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Graphics</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Graphics</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Graphics</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Press Relations</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Press Relations</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Press Relations</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Writer</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Writer</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Writer</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1611,18 +1796,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAt</td>
 	<td>//div[@id='runButton_object']/button</td>
-	<td></td>
+	<td>0.0</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1662,63 +1847,18 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@id='positionSelect_object']//option[contains(text(),'Graphics')]</td>
 	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Graphics</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Graphics</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Graphics</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Press Relations</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Press Relations</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Press Relations</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Writer</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Writer</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Writer</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1776,18 +1916,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAt</td>
 	<td>//div[@id='runButton_object']/button</td>
-	<td></td>
+	<td>0.0</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1827,23 +1967,128 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@id='outputSelect_object']/select</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Services Mgr</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Services Mgr</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Services Mgr</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Staff Consultant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Staff Consultant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Staff Consultant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1866,18 +2111,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAt</td>
 	<td>//div[@id='runButton_object']/button</td>
-	<td></td>
+	<td>0.0</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1917,58 +2162,18 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Services Mgr</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Services Mgr</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Services Mgr</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Staff Consultant</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Staff Consultant</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Staff Consultant</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Trainer</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Trainer</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Trainer</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/select/option[contains(text(),'Staff Consultant')]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2021,18 +2226,23 @@
 	<td>pdf</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>waitForElementPresent</td>
 	<td>//div[@id='runButton_object']/button</td>
 	<td></td>
 </tr>
 <tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2072,23 +2282,128 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@id='outputSelect_object']/select</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Pre-Sales</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Pre-Sales</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Pre-Sales</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Sales Rep</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Sales Rep</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Sales Rep</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Sales Rep</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Sales Rep</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Sales Rep</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2106,18 +2421,23 @@
 	<td>html</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>waitForElementPresent</td>
 	<td>//div[@id='runButton_object']/button</td>
 	<td></td>
 </tr>
 <tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2157,58 +2477,13 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Pre-Sales</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Pre-Sales</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Pre-Sales</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Sales Rep</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Sales Rep</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Sales Rep</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Senior Sales Rep</td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Senior Sales Rep</td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>//div[@id='positionSelect_object']/select</td>
-	<td>Senior Sales Rep</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2367,12 +2642,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2387,12 +2662,62 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
 </tr>
 <tr>
@@ -2407,12 +2732,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2427,12 +2752,62 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
 </tr>
 <tr>
@@ -2447,12 +2822,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>focus</td>
-	<td>//div[@class='fancybox-inner']</td>
+	<td>//div[@id='fancybox-content']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2467,12 +2842,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=a.fancybox-item.fancybox-close</td>
+	<td>id=fancybox-close</td>
 	<td></td>
 </tr>
 </tbody></table>
