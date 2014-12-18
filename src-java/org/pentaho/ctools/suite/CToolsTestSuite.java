@@ -118,7 +118,7 @@ public class CToolsTestSuite {
     //JavaScriptError.addExtension(ffProfile);
     driver = new FirefoxDriver(capabilities);
     driver.manage().window().setPosition(new Point(0, 0));
-    driver.manage().window().setSize(new Dimension(1366, 768));
+    driver.manage().window().setSize(new Dimension(1360, 764));
     driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
