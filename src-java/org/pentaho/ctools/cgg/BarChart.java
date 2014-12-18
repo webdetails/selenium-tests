@@ -81,11 +81,18 @@ public class BarChart {
     //## Step 1
     this.driver.get(this.baseUrl + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png");
 
+try{
+    Thread.sleep(5000);
+}catch(Exception e) {}
+
     WebElement elementImage = ElementHelper.FindElement(this.driver, By.cssSelector("img"));
     assertNotNull(elementImage);
     String attrWidth = elementImage.getAttribute("width");
     String attrHeight = elementImage.getAttribute("height");
     String attrSrc = elementImage.getAttribute("src");
+
+    log.info("width" + attrWidth);
+    log.info("width" + attrHeight);
 
     assertEquals("981", attrWidth);
     assertEquals("733", attrHeight);

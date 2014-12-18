@@ -51,17 +51,17 @@ import org.pentaho.ctools.security.AccessSystemResources;
   //Start Tests
   LoginPentaho.class,
   //CDF
-  SuiteCDF.class,
+  //SuiteCDF.class,
   //CDE
-  SuiteCDE.class,
+  //SuiteCDE.class,
   //CDA
-  SuiteCDA.class,
+  //SuiteCDA.class,
   //CGG
   SuiteCGG.class,
   //Security
-  AccessSystemResources.class,
+  //AccessSystemResources.class,
   //Issues
-  SuiteIssues.class,
+  //SuiteIssues.class,
   //End Tests
   LogoutPentaho.class })
 public class CToolsTestSuite {
