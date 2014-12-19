@@ -145,7 +145,7 @@ public class AddinReference {
    *    1. Check if the sample for 'sparkline' has its contents present
    *    2. Order the table
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 120000)
   public void tc02_Sparkline_SampleWorks() {
     log.info("tc02_Sparkline_SampleWorks");
 
