@@ -207,8 +207,8 @@ public class PopupComponent {
     //Close popup
     ElementHelper.Click(driver, By.xpath("//div[8]/a"));
     //wait for popup disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[4]/a"));
-    WebElement element = driver.findElement(By.xpath("//div[4]/a"));
+    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[8]/a"));
+    WebElement element = driver.findElement(By.xpath("//div[8]/a"));
     assertFalse(element.isDisplayed());
   }
 
