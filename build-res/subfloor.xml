@@ -180,9 +180,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               description="Base directory that holds all IVY dependency report files" />
     <property name="ivy.configs" value="*" description="Set of configs used for IVY reporting and checking operations" />
     <property name="ivy.use.symlinks" value="true" description="Flag indicating if Ivy should create symlinks when retrieving artifacts."/>
-    <property name="ivy.default.ivy.user.dir"
-              value="C:\.ivy2"
-              description="Dir of ivy cache" />
+    <property name="ivy.local.default.root" value="C:\.ivy2" description="Dir of ivy cache" />
+    <property name="ivy.clean.pattern" value="pentaho" description="Clean CTools" />
+
     
 
     <!-- TEST propertis -->
@@ -572,11 +572,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
     <target name="ivy-clean-pentaho" depends="install-ivy">
         <mkdir dir="${ivy.local.default.root}" />
+
         <!-- just in case it doesn't exist -->
         <for param="dir">
             <path>
-                <dirset dir="${ivy.local.default.root}" includes="*${ivy.clean.pattern}*" />
-                <dirset dir="${ivy.default.ivy.user.dir}/cache" includes="*${ivy.clean.pattern}*" />
+                <dirset dir="${ivy.local.default.root}/cache" includes="*${ivy.clean.pattern}*" />
             </path>
             <sequential>
                 <delete dir="@{dir}" includeemptydirs="true" />
@@ -584,8 +584,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </for>
         <for param="file">
             <path>
-                <fileset dir="${ivy.local.default.root}" includes="*${ivy.clean.pattern}*" />
-                <fileset dir="${ivy.default.ivy.user.dir}/cache" includes="*${ivy.clean.pattern}*" />
+                <fileset dir="${ivy.local.default.root}/cache" includes="*${ivy.clean.pattern}*" />
             </path>
             <sequential>
                 <delete file="@{file}" />
