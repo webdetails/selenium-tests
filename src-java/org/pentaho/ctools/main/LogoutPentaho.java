@@ -81,7 +81,7 @@ public class LogoutPentaho {
    *    2. Press Log Out.
    *    3. The user is logged out and is redirect to home page (login page).
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 120000)
   public void tc1_Logout_SuccessLogOutReturnHomePage() {
     log.debug("tc1_Logout_SuccessLogOutReturnHomePage");
   	//## Step 1
@@ -90,7 +90,10 @@ public class LogoutPentaho {
     //waiting pop-up to be visible
     //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='busy-indicator-container waitPopup']")));
     //waiting pop-up to be invisible
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    
+    //ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     
     
     //## Step 2

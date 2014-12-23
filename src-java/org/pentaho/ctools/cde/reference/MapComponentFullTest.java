@@ -125,13 +125,16 @@ public class MapComponentFullTest {
    *    3. Check tooltip
    *    4. Check disabling series in pie chart
    */
-  @Test(timeout = 120000)
+  @Test(timeout = 150000)
   public void tc02_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed() {
     log.info("tc02_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed");
 
     /*
      * ## Step 1
      */
+    //Check if the chart is already rendered
+    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][1]"), 90);
+
     WebElement marker1 = ElementHelper.FindElement(driver, By.xpath("//*[local-name()='image'][1]"));
     WebElement marker2 = ElementHelper.FindElement(driver, By.xpath("//*[local-name()='image'][2]"));
     WebElement marker3 = ElementHelper.FindElement(driver, By.xpath("//*[local-name()='image'][3]"));

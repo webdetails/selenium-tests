@@ -440,7 +440,6 @@ public class ElementHelper {
     WebElement element = null;
     try {
       element = driver.findElement(locator);
-
       if (element != null) {
         //wait for element disappear
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
@@ -450,6 +449,60 @@ public class ElementHelper {
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+  }
+
+  /**
+   * This method pretends to check if the element is present, if it doesn't
+   * then don't wait, if element is present, wait for its invisibility.
+   *
+   * @param driver
+   * @param locator
+   */
+  public static WebElement WaitForElementPresence(WebDriver driver, By locator) {
+    WebElement element = null;
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+    try {
+      element = driver.findElement(locator);
+      if (element != null) {
+        //wait for element presence
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+      }
+    } catch (NoSuchElementException nse) {
+      log.warn("Element doesn't exist - BY: " + locator.toString());
+    }
+
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return element;
+  }
+
+  /**
+   * This method pretends to check if the element is present, if it doesn't
+   * then don't wait, if element is present, wait for its invisibility.
+   *
+   * @param driver
+   * @param locator
+   */
+  public static WebElement WaitForElementPresence(WebDriver driver, By locator, int timeout) {
+    WebElement element = null;
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+    try {
+      element = driver.findElement(locator);
+      if (element != null) {
+        //wait for element presence
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+      }
+    } catch (NoSuchElementException nse) {
+      log.warn("Element doesn't exist - BY: " + locator.toString());
+    }
+
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return element;
   }
 
   /**

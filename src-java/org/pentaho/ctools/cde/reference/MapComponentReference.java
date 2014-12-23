@@ -425,12 +425,14 @@ public class MapComponentReference {
    *    1. Check the data exist
    *    2. Chick in each marker
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 150000)
   public void tc5_MapWithMarkersBasedCity_MarkersShouldDisplayCorrectContents() {
     log.info("tc5_MapWithMarkersBasedCity_MarkersShouldDisplayCorrectContents");
     /*
      * ## Step 1
      */
+    //Check if the chart is already rendered
+    ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']"), 90);
     WebElement marker1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']"));
     WebElement marker2 = ElementHelper.FindElement(driver, By.xpath("//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]"));
     WebElement marker3 = ElementHelper.FindElement(driver, By.xpath("//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]"));
