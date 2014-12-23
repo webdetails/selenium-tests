@@ -1,0 +1,1661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0006_editAddDeleteElements</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0006_editAddDeleteElements</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//button[@name='render_tabMultiButton'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@name='render_tabMultiButton'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td>Add New Element</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td>Add New Element</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>___</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>asd___</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>abc123</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=a.chzn-single.chzn-single-with-drop &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=a.chzn-single.chzn-single-with-drop &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseUp</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//span[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li[contains(text(),'Clean Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//li[contains(text(),'Clean Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[contains(text(),'Clean Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseUp</td>
+	<td>//li[contains(text(),'Clean Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[contains(text(),'Clean Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//span[contains(text(),'Clean Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='newElementAddButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>___</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>asd___</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>abc123</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest1</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=a.chzn-single.chzn-single-with-drop &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=a.chzn-single.chzn-single-with-drop &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseUp</td>
+	<td>//li[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//span[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li[contains(text(),'Sparkl Default')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//li[contains(text(),'Sparkl Default')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[contains(text(),'Sparkl Default')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseUp</td>
+	<td>//li[contains(text(),'Sparkl Default')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[contains(text(),'Sparkl Default')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//span[contains(text(),'Sparkl Default')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='newElementAdminButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='newElementAdminButtonObj']@class</td>
+	<td>formCheckbox positive toggleValidation checked</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='newElementAdminButtonObj']@class</td>
+	<td>formCheckbox positive toggleValidation checked</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='newElementAddButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>___</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>asd___</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>abc123</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest1</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest2</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=a.chzn-single.chzn-single-with-drop &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=a.chzn-single.chzn-single-with-drop &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseUp</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//span[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li[contains(text(),'Clean Job')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//li[contains(text(),'Clean Job')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[contains(text(),'Clean Job')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseUp</td>
+	<td>//li[contains(text(),'Clean Job')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[contains(text(),'Clean Job')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//span[contains(text(),'Clean Job')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='newElementAdminButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='newElementAdminButtonObj']@class</td>
+	<td>formCheckbox positive toggleValidation checked</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='newElementAdminButtonObj']@class</td>
+	<td>formCheckbox positive toggleValidation checked</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='newElementAddButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>123</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>___</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>asd___</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>abc123</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=invalidLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest1</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest2</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='render_newElementNameForm']</td>
+	<td>atest3</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=inUseLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>css=a.chzn-single.chzn-single &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>css=a.chzn-single.chzn-single-with-drop &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=a.chzn-single.chzn-single-with-drop &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseUp</td>
+	<td>//li[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//span[contains(text(),'Kettle Endpoint')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDown</td>
+	<td>//span[contains(text(),'3. Choose Template')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li[contains(text(),'Clean Transformation')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//li[contains(text(),'Clean Transformation')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[contains(text(),'Clean Transformation')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseUp</td>
+	<td>//li[contains(text(),'Clean Transformation')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span[contains(text(),'Clean Transformation')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//span[contains(text(),'Clean Transformation')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='newElementAdminButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='newElementAdminButtonObj']@class</td>
+	<td>formCheckbox positive toggleValidation checked</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='newElementAdminButtonObj']@class</td>
+	<td>formCheckbox positive toggleValidation checked</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='newElementAddButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/thead/tr/th</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>atest</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>atest</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td[2]</td>
+	<td>Dashboard</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td[2]</td>
+	<td>Dashboard</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td[3]</td>
+	<td>All Users</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[2]/td</td>
+	<td>atest1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[2]/td[2]</td>
+	<td>Dashboard</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[2]/td[3]</td>
+	<td>Admin Only</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[3]/td</td>
+	<td>atest2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[3]/td[2]</td>
+	<td>Kettle</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[3]/td[3]</td>
+	<td>Admin Only</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[4]/td</td>
+	<td>atest3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[4]/td[2]</td>
+	<td>Kettle</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[4]/td[3]</td>
+	<td>Admin Only</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.viewDashboardButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>atest</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/atest</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/atest</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.editDashboardButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&amp;inferScheme=false&amp;file=atest.wcdf&amp;path=%2Fsparkl%2Fdashboards%2F&amp;solution=system&amp;mode=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&amp;inferScheme=false&amp;file=atest.wcdf&amp;path=%2Fsparkl%2Fdashboards%2F&amp;solution=system&amp;mode=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[2]/td[4]/div/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=cpkText</td>
+	<td>.Sparkl</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cpkText</td>
+	<td>.Sparkl</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>id=cpkVersion</td>
+	<td>v TRUNK_SNAPSHOT</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=cpkVersion</td>
+	<td>v TRUNK_SNAPSHOT</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=atest</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=atest</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/atest</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/atest</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[2]/td[4]/div/button[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&amp;inferScheme=false&amp;file=atest1.wcdf&amp;path=%2Fsparkl%2Fdashboards%2Fadmin%2F&amp;solution=system&amp;mode=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&amp;inferScheme=false&amp;file=atest1.wcdf&amp;path=%2Fsparkl%2Fdashboards%2Fadmin%2F&amp;solution=system&amp;mode=edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.runEndpointButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAllWindowTitles</td>
+	<td>Pentaho Sparkl,</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAllWindowTitles</td>
+	<td>Pentaho Sparkl,</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/atest2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/atest2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=pre</td>
+	<td>{&quot;result&quot;:true,&quot;exitStatus&quot;:0,&quot;nrRows&quot;:0,&quot;nrErrors&quot;:0}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=pre</td>
+	<td>{&quot;result&quot;:true,&quot;exitStatus&quot;:0,&quot;nrRows&quot;:0,&quot;nrErrors&quot;:0}</td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[4]/td[4]/div/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAllWindowTitles</td>
+	<td>Pentaho Sparkl,</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAllWindowTitles</td>
+	<td>Pentaho Sparkl,</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/atest3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/atest3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'metadata')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'metadata')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=button.deleteDashboardButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.deleteDashboardButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=dialogGrabComponentObj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=dialogGrabComponentObj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#dialogGrabComponentObj &gt; span</td>
+	<td>You are about to delete atest. Please, press OK to continue...</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#dialogGrabComponentObj &gt; span</td>
+	<td>You are about to delete atest. Please, press OK to continue...</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>atest1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>atest1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=button.deleteDashboardButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.deleteDashboardButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=dialogGrabComponentObj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=dialogGrabComponentObj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#dialogGrabComponentObj &gt; span</td>
+	<td>You are about to delete atest1. Please, press OK to continue...</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#dialogGrabComponentObj &gt; span</td>
+	<td>You are about to delete atest1. Please, press OK to continue...</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>atest2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>atest2</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=button.deleteEndpointButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.deleteEndpointButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=dialogGrabComponentObj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=dialogGrabComponentObj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#dialogGrabComponentObj &gt; span</td>
+	<td>You are about to delete atest2. Please, press OK to continue...</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#dialogGrabComponentObj &gt; span</td>
+	<td>You are about to delete atest2. Please, press OK to continue...</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>atest3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>atest3</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=button.deleteEndpointButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.deleteEndpointButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=dialogGrabComponentObj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>id=dialogGrabComponentObj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#dialogGrabComponentObj &gt; span</td>
+	<td>You are about to delete atest3. Please, press OK to continue...</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#dialogGrabComponentObj &gt; span</td>
+	<td>You are about to delete atest3. Please, press OK to continue...</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.closeButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.closeButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/main</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/main</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0004_EditSparkl</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0004_editAbout</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.pluginName</td>
+	<td>Sparkl</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.pluginName</td>
+	<td>Sparkl</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.pluginId</td>
+	<td>sparkl</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//button[@name='render_tabMultiButton']</td>
+	<td>About</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//button[@name='render_tabMultiButton'])[2]</td>
+	<td>Elements</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//button[@type='button'])[4]</td>
+	<td>Submit Changes</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Pack</td>
+	<td>Pack</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=aboutPluginHeader</td>
+	<td>Plugin Info</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(text(),'Name')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(text(),'Plugin Version')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(text(),'Description')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(text(),'Creation Date')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(text(),'Updated Libraries?')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//input[@placeholder='Insert plugin name']</td>
+	<td>Sparkl</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@placeholder='Insert date']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//input[@placeholder='Insert plugin description']</td>
+	<td>Create and explore pentaho plugins.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@placeholder='Insert plugin version']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert date']</td>
+	<td>01/01/1983</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert plugin version']</td>
+	<td>3.1.1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=aboutAuthorHeader</td>
+	<td>Author info</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='aboutAuthorSubcell']//div[contains(text(),'Name')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='aboutAuthorSubcell']//div[contains(text(),'Company')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='aboutAuthorSubcell']//div[contains(text(),'Email')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='aboutAuthorSubcell']//div[contains(text(),'URL')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@placeholder='Insert author name']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@placeholder='Insert author email']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@placeholder='Insert company name']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@placeholder='Insert author/company URL']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert author name']</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert author email']</td>
+	<td>test@test.pt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert company name']</td>
+	<td>Test inc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert author/company URL']</td>
+	<td>www.test.pt</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#submitChangesButtonObj &gt; button[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert date']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert plugin version']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert author name']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert author email']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert company name']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='Insert author/company URL']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#submitChangesButtonObj &gt; button[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<!--This check will be done due to issue SPARKL-88 After issue is fixed asertion should be done that the values of the fields that were deleted are now = ""-->
+<tr>
+	<td>assertValue</td>
+	<td>//input[@placeholder='Insert date']</td>
+	<td>01/01/1983</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//input[@placeholder='Insert plugin version']</td>
+	<td>3.1.1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//input[@placeholder='Insert author name']</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//input[@placeholder='Insert author email']</td>
+	<td>test@test.pt</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//input[@placeholder='Insert company name']</td>
+	<td>Test inc</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//input[@placeholder='Insert author/company URL']</td>
+	<td>www.test.pt</td>
+</tr>
+<!--End of check that needs to be changed After issue is fixed asertion should be done that the values of the fields that were deleted are now =""-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Pack</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=Pack@href</td>
+	<td>/pentaho/plugin/sparkl/api/packplugin?parampluginId=sparkl</td>
+</tr>
+</tbody></table>
+</body>
+</html>

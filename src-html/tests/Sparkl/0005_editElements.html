@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0005_editElements</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0005_editElements</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//button[@name='render_tabMultiButton'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@name='render_tabMultiButton'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td>Add New Element</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='openNewElementButtonObj']/button</td>
+	<td>Add New Element</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//button[@name='render_viewSelector']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//button[@name='render_viewSelector']</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//button[@name='render_viewSelector']</td>
+	<td>All</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//button[@name='render_viewSelector'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>xpath=(//button[@name='render_viewSelector'])[2]</td>
+	<td>Endpoints</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//button[@name='render_viewSelector'])[2]</td>
+	<td>Endpoints</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//button[@name='render_viewSelector'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>xpath=(//button[@name='render_viewSelector'])[3]</td>
+	<td>Dashboards</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xpath=(//button[@name='render_viewSelector'])[3]</td>
+	<td>Dashboards</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/thead/tr/th</td>
+	<td>Name</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/thead/tr/th</td>
+	<td>Name</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/thead/tr/th[2]</td>
+	<td>Type</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/thead/tr/th[2]</td>
+	<td>Type</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/thead/tr/th[3]</td>
+	<td>Permission</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/thead/tr/th[3]</td>
+	<td>Permission</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/thead/tr/th</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>createelement</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
+	<td>createelement</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/thead/tr/th[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td[2]</td>
+	<td>Dashboard</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr/td[2]</td>
+	<td>Dashboard</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@name='render_viewSelector'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//table[@id='elementsTableObjTable']//td[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//table[@id='elementsTableObjTable']//td[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr//button[@title='Run Endpoint']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr//button[@title='Run Endpoint']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//body/pre</td>
+	<td>{&quot;result&quot;:false,&quot;exitStatus&quot;:0,&quot;nrRows&quot;:0,&quot;nrErrors&quot;:1}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//body/pre</td>
+	<td>{&quot;result&quot;:false,&quot;exitStatus&quot;:0,&quot;nrRows&quot;:0,&quot;nrErrors&quot;:1}</td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[5]//button[@title='Run Endpoint']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[5]//button[@title='Run Endpoint']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'metadata')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'metadata')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[10]//button[@title='Run Endpoint']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[10]//button[@title='Run Endpoint']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'metadata')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'metadata')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@name='render_viewSelector'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//table[@id='elementsTableObjTable']//td[contains(text(),'Kettle')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//table[@id='elementsTableObjTable']//td[contains(text(),'Kettle')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr//button[@title='View Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr//button[@title='View Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttributeFromAllWindows</td>
+	<td>location</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/main</td>
+</tr>
+<tr>
+	<td>assertAttributeFromAllWindows</td>
+	<td>location</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/main</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[3]//button[@title='View Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[3]//button[@title='View Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttributeFromAllWindows</td>
+	<td>location</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo</td>
+</tr>
+<tr>
+	<td>assertAttributeFromAllWindows</td>
+	<td>location</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[5]//button[@title='View Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[5]//button[@title='View Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttributeFromAllWindows</td>
+	<td>location</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/variableinfo</td>
+</tr>
+<tr>
+	<td>assertAttributeFromAllWindows</td>
+	<td>location</td>
+	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/variableinfo</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr//button[@title='Edit Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr//button[@title='Edit Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAllWindowTitles</td>
+	<td>Pentaho Sparkl,Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[2]/td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]</td>
+	<td>projectJS</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>projectCSS</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>pluginsListFiltersCell</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.descriptionContainer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.name</td>
+	<td>Sparkl</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.id</td>
+	<td>sparkl</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.body</td>
+	<td>Create and explore pentaho plugins.</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[3]//button[@title='Edit Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[3]//button[@title='Edit Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAllWindowTitles</td>
+	<td>Pentaho Sparkl,Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[2]/td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]</td>
+	<td>pluginDialogHelperJS</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>hideSparklLogo</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>projectCSS</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='newPluginIdFormObj']/span</td>
+	<td>First define your Plugin ID</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='newPluginIdFormObj']/span</td>
+	<td>First define your Plugin ID</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@placeholder='myPluginId']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@placeholder='myPluginId']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//button</td>
+	<td>Create Plugin</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//button</td>
+	<td>Create Plugin</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[5]//button[@title='Edit Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='elementsTableObjTable']/tbody/tr[5]//button[@title='Edit Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAllWindowTitles</td>
+	<td>Pentaho Sparkl,Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[2]/td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td</td>
+	<td>Resource</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]</td>
+	<td>projectJS</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>projectCSS</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>rowTitle</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='rowTitle']</td>
+	<td>CPK Variable Information</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='rowTitle']</td>
+	<td>CPK Variable Information</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='Description']/p</td>
+	<td>The following table lists the Sparkl specific system variables passed to the PDI Endpoints at execution time</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='Description']/p</td>
+	<td>The following table lists the Sparkl specific system variables passed to the PDI Endpoints at execution time</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='tableObjTable']/thead/tr/th</td>
+	<td>Variable</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tableObjTable']/thead/tr/th</td>
+	<td>Variable</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='tableObjTable']/thead/tr/th[2]</td>
+	<td>Value</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tableObjTable']/thead/tr/th[2]</td>
+	<td>Value</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr/td</td>
+	<td>${cpk.plugin.id}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr/td</td>
+	<td>${cpk.plugin.id}</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr/td[2]</td>
+	<td>sparkl</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr/td[2]</td>
+	<td>sparkl</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr[2]/td</td>
+	<td>${cpk.plugin.dir}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr[2]/td</td>
+	<td>${cpk.plugin.dir}</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr[2]/td[2]</td>
+	<td>/C:/BASERVER5.2/PENTAHO/server/biserver-ee/pentaho-solutions/system/sparkl/</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr[2]/td[2]</td>
+	<td>/C:/BASERVER5.2/PENTAHO/server/biserver-ee/pentaho-solutions/system/sparkl/</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr[3]/td</td>
+	<td>${cpk.solution.system.dir}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr[3]/td</td>
+	<td>${cpk.solution.system.dir}</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr[3]/td[2]</td>
+	<td>/C:/BASERVER5.2/PENTAHO/server/biserver-ee/pentaho-solutions/system/</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tableObjTable']/tbody/tr[3]/td[2]</td>
+	<td>/C:/BASERVER5.2/PENTAHO/server/biserver-ee/pentaho-solutions/system/</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=Pentaho Sparkl</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
