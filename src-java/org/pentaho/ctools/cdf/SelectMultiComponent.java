@@ -21,6 +21,9 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -37,9 +40,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 /**
  * Testing the functionalities related with Select Multi Component.
  *
@@ -55,17 +55,17 @@ public class SelectMultiComponent {
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
-  
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    driver  = CToolsTestSuite.getDriver();
-    wait    = CToolsTestSuite.getWait();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -79,20 +79,20 @@ public class SelectMultiComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/SelectMultiComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A19-SelectMultiComponent%3Aselect_multi_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A19-SelectMultiComponent%3Aselect_multi_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -104,17 +104,17 @@ public class SelectMultiComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("SelectMultiComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("SelectMultiComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -129,7 +129,7 @@ public class SelectMultiComponent {
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
-    
+
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = driver.findElements(By.id("sampleObject")).size();
@@ -139,11 +139,11 @@ public class SelectMultiComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select options one by one
-   * Description: 
+   * Description:
    *    We pretend validate the selection of each option one by one.
-   * Steps: 
+   * Steps:
    *    1. Select Southern
    *    2. Select Eastern
    *    3. Select Central
@@ -160,65 +160,61 @@ public class SelectMultiComponent {
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern", confirmationMsg);
-    
-    
+
     // ## Step 2
     list.deselectByValue("Southern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     alert.accept();
-    
+
     list.selectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Eastern", confirmationMsg);
-    
-    
+
     // ## Step 3
     list.deselectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     alert.accept();
-    
+
     list.selectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Central", confirmationMsg);
-    
-    
+
     // ## Step 4
     list.deselectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     alert.accept();
-    
+
     list.selectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Western", confirmationMsg);
-    
-    
+
     //RESET
     list.deselectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     alert.accept();
   }
-  
+
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select and deselect all
-   * Description: 
+   * Description:
    *    We pretend validate the selection and deselection of all options.
-   * Steps: 
+   * Steps:
    *    1. Select all options
    *    2. Deselect all options
    */
@@ -228,35 +224,34 @@ public class SelectMultiComponent {
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("select")));
     Select list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Southern");
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern", confirmationMsg);
-    
+
     list.selectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Eastern", confirmationMsg);
-    
+
     list.selectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central", confirmationMsg);
-    
+
     list.selectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central,Western", confirmationMsg);
-    
-    
+
     // ## Step 2
     list.deselectByValue("Southern");
     wait.until(ExpectedConditions.alertIsPresent());
@@ -264,21 +259,21 @@ public class SelectMultiComponent {
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Eastern,Central,Western", confirmationMsg);
-    
+
     list.deselectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Central,Western", confirmationMsg);
-    
+
     list.deselectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Western", confirmationMsg);
-    
+
     list.deselectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -286,15 +281,15 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: ", confirmationMsg);
   }
-  
+
   /**
    * ############################### Test Case 5 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select arbitrary
-   * Description: 
+   * Description:
    *    We pretend validate the selection options arbitrary.
-   * Steps: 
+   * Steps:
    *    1. Select Arbitrary
    */
   @Test(timeout = 60000)
@@ -308,51 +303,50 @@ public class SelectMultiComponent {
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Eastern", confirmationMsg);
-    
+
     list.selectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Eastern,Central", confirmationMsg);
-    
+
     list.selectByValue("Southern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central", confirmationMsg);
-    
+
     list.deselectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Central", confirmationMsg);
-    
+
     list.selectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central", confirmationMsg);
-    
+
     list.selectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central,Western", confirmationMsg);
-    
+
     list.deselectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
-    assertEquals("you chose: Southern,Eastern,Western", confirmationMsg);    
+    assertEquals("you chose: Southern,Eastern,Western", confirmationMsg);
   }
-  
+
   @AfterClass
-  public static void tearDown() {
-  }
+  public static void tearDown() {}
 }

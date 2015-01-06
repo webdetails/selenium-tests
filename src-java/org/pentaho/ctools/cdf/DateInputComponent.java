@@ -89,7 +89,7 @@ public class DateInputComponent {
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Wait for visibility of 'DateInputComponent'
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]"));
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]"));
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
     assertEquals("DateInputComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));

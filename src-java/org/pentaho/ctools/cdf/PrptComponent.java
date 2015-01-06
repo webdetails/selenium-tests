@@ -96,7 +96,7 @@ public class PrptComponent {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A63-PentahoReportingComponent%3Aprpt_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -401,7 +401,7 @@ public class PrptComponent {
     select.selectByValue("table/excel;page-mode=flow");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));    
+    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
     assertTrue(new File(downloadDir + "\\Product Sales.xls").exists());
     new File(downloadDir + "\\Product Sales.xls").delete();
 
@@ -421,7 +421,7 @@ public class PrptComponent {
     select.selectByValue("table/csv;page-mode=stream");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));    
+    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
     assertTrue(new File(downloadDir + "\\Product Sales.csv").exists());
     new File(downloadDir + "\\Product Sales.csv").delete();
 

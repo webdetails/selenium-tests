@@ -97,7 +97,7 @@ public class SchedulePrptComponent {
     driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:86-SchedulePrptComponent:schedule_prpt_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -140,7 +140,7 @@ public class SchedulePrptComponent {
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
     // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
@@ -387,7 +387,7 @@ public class SchedulePrptComponent {
           wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='pentaho-dialog']")));
           ElementHelper.FindElement(driver, By.id("okButton")).click();
 
-          ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='pentaho-dialog']"));
+          ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='pentaho-dialog']"));
 
           someThingToDelete = true;//Continue checking if there is something to delete
           break;

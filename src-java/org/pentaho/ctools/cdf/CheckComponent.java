@@ -21,6 +21,9 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -35,9 +38,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Testing the functionalities related with Check Component.
@@ -54,9 +54,9 @@ public class CheckComponent {
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
-  
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -78,20 +78,20 @@ public class CheckComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/CheckComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A55-CheckComponent%3Acheck_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A55-CheckComponent%3Acheck_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -103,17 +103,17 @@ public class CheckComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("CheckComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("CheckComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -133,12 +133,12 @@ public class CheckComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Check options
-   * Description: 
+   * Description:
    *    Here we pretend to check each option one by one and validate if an alert
-   *    is raised with correct message. 
-   * Steps: 
+   *    is raised with correct message.
+   * Steps:
    *    1. Check in Southern and validate alert
    *    2. Check in Eastern and validate alert
    *    3. Check in Central and validate alert
@@ -150,56 +150,53 @@ public class CheckComponent {
     // ## Step 1
     //Click in Southern
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Southern']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern", confirmationMsg);
-    
-    
+
     // ## Step 2
     //Click in Eastern
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Eastern']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Eastern", confirmationMsg);
 
-    
     // ## Step 3
     //Click in Central
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Central']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central", confirmationMsg);
-    
-    
+
     // ## Step 4
     //Click in Western
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Western']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central,Western", confirmationMsg);
   }
-  
+
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Unchecked options
-   * Description: 
+   * Description:
    *    Here we pretend to unchecked each option one by one and validate if an
-   *    alert is raised with correct message. 
-   * Steps: 
+   *    alert is raised with correct message.
+   * Steps:
    *    1. Unchecked Southern and validate alert
    *    2. Unchecked Eastern and validate alert
    *    3. Unchecked Central and validate alert
@@ -211,56 +208,53 @@ public class CheckComponent {
     // ## Step 1
     //Click in Southern
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Southern']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Eastern,Central,Western", confirmationMsg);
-    
-    
+
     // ## Step 2
     //Click in Eastern
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Eastern']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Central,Western", confirmationMsg);
 
-    
     // ## Step 3
     //Click in Central
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Central']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Western", confirmationMsg);
-    
-    
+
     // ## Step 4
     //Click in Western
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Western']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: ", confirmationMsg);
   }
-  
+
   /**
    * ############################### Test Case 5 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Check and Unchecked Arbitrary
-   * Description: 
+   * Description:
    *    Here we pretend to check and unchecked arbitrary and validate the alert
-   *    message according each action (check and unchecked). 
-   * Steps: 
+   *    message according each action (check and unchecked).
+   * Steps:
    *    1. Check and unchecked arbitrary, and validate alert message
    */
   @Test(timeout = 60000)
@@ -268,57 +262,52 @@ public class CheckComponent {
     String confirmationMsg = "";
     //Click in Central
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Central']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Central", confirmationMsg);
-    
-    
+
     //Click in Southern
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Southern']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern,Central", confirmationMsg);
 
-    
     //UnChecked Southern
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Southern']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Central", confirmationMsg);
-    
-    
+
     //Click in Western
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Western']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Central,Western", confirmationMsg);
-    
-   
+
     //Click in Western
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Eastern']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Eastern,Central,Western", confirmationMsg);
-    
-    
+
     //Unchecked Central
     ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Central']")).click();
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
@@ -327,6 +316,5 @@ public class CheckComponent {
   }
 
   @AfterClass
-  public static void tearDown() {
-  }
+  public static void tearDown() {}
 }

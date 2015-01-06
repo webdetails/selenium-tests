@@ -21,6 +21,10 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -37,10 +41,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 /**
  * Testing the functionalities related with Traffic Component.
  *
@@ -56,17 +56,17 @@ public class TrafficComponent {
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
-  
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    driver  = CToolsTestSuite.getDriver();
-    wait    = CToolsTestSuite.getWait();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -80,20 +80,20 @@ public class TrafficComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/TrafficComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A28-TrafficComponent%3Atraffic_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A28-TrafficComponent%3Atraffic_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -105,17 +105,17 @@ public class TrafficComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("TrafficComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("TrafficComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -130,32 +130,31 @@ public class TrafficComponent {
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
-    
+
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = driver.findElements(By.id("sampleObject")).size();
     assertEquals(1, nSampleObject);
   }
 
-/**
-   * ############################### Test Case 3 ###############################
-   *
-   * Test Case Name: 
-   *    Time Plot
-   * Description: 
-   *    For this component we need to validate when user move mouse over plot
-   *    we have new values for Total Price. 
-   * Steps: 
-   *    1. Check if the plot is presented
-   *    2. Move mouse over graphic and check the expected value for Total Price
-   */
+  /**
+     * ############################### Test Case 3 ###############################
+     *
+     * Test Case Name: 
+     *    Time Plot
+     * Description: 
+     *    For this component we need to validate when user move mouse over plot
+     *    we have new values for Total Price. 
+     * Steps: 
+     *    1. Check if the plot is presented
+     *    2. Move mouse over graphic and check the expected value for Total Price
+     */
   @Test(timeout = 60000)
   public void tc3_MouseOverTrafficLight_TooltipDisplayed() {
     // ## Step 1
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.img.trafficYellow")));
     WebElement elemTraffic = ElementHelper.FindElement(driver, By.cssSelector("div.img.trafficYellow"));
     assertNotNull(elemTraffic);
-
 
     // ## Step 2
     Actions acts = new Actions(driver);
@@ -170,8 +169,7 @@ public class TrafficComponent {
     assertTrue(text.contains(expectedTextV2));
     assertTrue(text.contains(expectedTextV3));
   }
-  
+
   @AfterClass
-  public static void tearDown() {
-  }
+  public static void tearDown() {}
 }

@@ -52,6 +52,7 @@ public class ElementHelper {
    * @param path
    *          DOM element to search.
    */
+  /*
   public static boolean IsElementDisplayed(WebDriver driver, By path) {
     boolean elementDisplayed = false;
 
@@ -77,7 +78,7 @@ public class ElementHelper {
     }
 
     return elementDisplayed;
-  }
+  }*/
 
   /**
    * This method shall verify if the element exist in DOM, if not exist wait the
@@ -91,6 +92,7 @@ public class ElementHelper {
    *          The element path in DOM (css, id, xpath)
    * @return true Element exist in DOM. false Element does not exist.
    */
+  /*
   public static boolean IsElementPresent(WebDriver driver, long timeToWaitSec, By path) {
     boolean elementPresent = true;
 
@@ -105,7 +107,7 @@ public class ElementHelper {
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
     return elementPresent;
-  }
+  }*/
 
   /**
    * TODO
@@ -114,6 +116,7 @@ public class ElementHelper {
    * @param maxTimeToWaitSec
    * @param path
    */
+  /*
   public static void WaitForElementNotPresent(WebDriver driver, long maxTimeToWaitSec, By path) {
     if (maxTimeToWaitSec > 0) {
       int timeToWaitSec = 2;
@@ -125,7 +128,7 @@ public class ElementHelper {
         }
       }
     }
-  }
+  }*/
 
   /**
    * TODO
@@ -433,19 +436,22 @@ public class ElementHelper {
    * @param driver
    * @param locator
    */
-  public static void WaitForElementPresenceAndInvisibility(WebDriver driver, By locator) {
+  public static void WaitForElementInvisibility(WebDriver driver, By locator) {
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
 
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    WebElement element = null;
+    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+    List<WebElement> elements = null;
     try {
-      element = driver.findElement(locator);
-      if (element != null) {
+      elements = driver.findElements(locator);
+      if (elements.size() > 0) {
         //wait for element disappear
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+      } else {
+        log.warn("No elements found!");
       }
-    } catch (NoSuchElementException nse) {
-      log.warn("Element doesn't exist - BY: " + locator.toString());
+    } catch (Exception e) {
+      log.warn("Something went wrong searching for: " + locator.toString());
+      log.error(e.getMessage());
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -453,25 +459,30 @@ public class ElementHelper {
 
   /**
    * This method pretends to check if the element is present, if it doesn't
-   * then don't wait, if element is present, wait for its invisibility.
+   * we wait for presence for a specific timeout (30 seconds).
    *
    * @param driver
    * @param locator
    */
   public static WebElement WaitForElementPresence(WebDriver driver, By locator) {
     WebElement element = null;
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+    List<WebElement> elements = null;
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     try {
-      element = driver.findElement(locator);
-      if (element != null) {
+      elements = driver.findElements(locator);
+      int size = elements.size();
+      if (size == 0) {
         //wait for element presence
         element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+      } else {
+        log.warn("We have some elements! " + size);
       }
-    } catch (NoSuchElementException nse) {
-      log.warn("Element doesn't exist - BY: " + locator.toString());
+    } catch (Exception e) {
+      log.warn("Something went wrong searching for: " + locator.toString());
+      log.error(e.getMessage());
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -480,25 +491,30 @@ public class ElementHelper {
 
   /**
    * This method pretends to check if the element is present, if it doesn't
-   * then don't wait, if element is present, wait for its invisibility.
+   * we wait for presence for a specific timeout (input).
    *
    * @param driver
    * @param locator
    */
   public static WebElement WaitForElementPresence(WebDriver driver, By locator, int timeout) {
     WebElement element = null;
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+    List<WebElement> elements = null;
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     try {
-      element = driver.findElement(locator);
-      if (element != null) {
+      elements = driver.findElements(locator);
+      int size = elements.size();
+      if (size == 0) {
         //wait for element presence
         element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+      } else {
+        log.warn("We have some elements! " + size);
       }
-    } catch (NoSuchElementException nse) {
-      log.warn("Element doesn't exist - BY: " + locator.toString());
+    } catch (Exception e) {
+      log.warn("Something went wrong searching for: " + locator.toString());
+      log.error(e.getMessage());
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -512,21 +528,24 @@ public class ElementHelper {
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementPresenceAndVisibility(WebDriver driver, By locator) {
+  public static WebElement WaitForElementVisibility(WebDriver driver, By locator) {
     WebElement element = null;
+    List<WebElement> elements = null;
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     try {
-      element = driver.findElement(locator);
-
-      if (element != null) {
+      elements = driver.findElements(locator);
+      if (elements.size() > 0) {
         //wait for element disappear
         element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+      } else {
+        log.warn("No elements found!");
       }
-    } catch (NoSuchElementException nse) {
-      log.warn("Element doesn't exist - BY: " + locator.toString());
+    } catch (Exception e) {
+      log.warn("Something went wrong searching for: " + locator.toString());
+      log.error(e.getMessage());
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -535,7 +554,7 @@ public class ElementHelper {
 
   /**
    * This method check if the element is present, if don't waits for it.
-   * And then returns the innerHTML text.
+   * And then returns the textContent.
    *
    * NOTE - the method was created to help on the tool tips, when mouse over an
    * element and we want to read the elements.

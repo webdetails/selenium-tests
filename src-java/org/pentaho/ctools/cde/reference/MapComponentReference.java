@@ -86,7 +86,7 @@ public class MapComponentReference {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Amaps.wcdf/generatedContent");
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -326,7 +326,7 @@ public class MapComponentReference {
 
     //## Step2
     mapEngine.selectByValue("google");
-    ElementHelper.WaitForElementNotPresent(driver, 60, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='testTileServices']/div[@class='gm-style']")));
     //Image with Google (left down corner)
     assertNotNull(driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[2]/a/div/img")));
@@ -343,7 +343,7 @@ public class MapComponentReference {
 
     //## Step3
     mapService.selectByValue("mapbox-world-dark");
-    ElementHelper.WaitForElementNotPresent(driver, 60, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//div[@id='testTileServices']/div/div[9]/div/div"), "mapquest-sat"));
     //Image with Google (left down corner)
     assertNotNull(driver.findElement(By.xpath("//div[@id='testTileServices']/div/div[2]/a/div/img")));
@@ -393,21 +393,21 @@ public class MapComponentReference {
     //Open Marker 1
     marker1.click();
     //Wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     String marker1Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']"));
     ElementHelper.FindElement(driver, By.xpath("//div[@class='olPopupCloseBox']")).click();
     assertEquals("Atelier Graphique", marker1Text);
     //Open Marker 2
     marker2.click();
     //Wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     String marker2Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']"));
     ElementHelper.FindElement(driver, By.xpath("//div[@class='olPopupCloseBox']")).click();
     assertEquals("Australian Collectors, Co.", marker2Text);
     //Open Marker 3
     marker3.click();
     //Wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     String marker3Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']"));
     ElementHelper.FindElement(driver, By.xpath("//div[@class='olPopupCloseBox']")).click();
     assertEquals("Signal Gift Stores", marker3Text);
@@ -454,28 +454,28 @@ public class MapComponentReference {
     //Open Marker 1
     marker1.click();
     //Wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     String marker1Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']"));
     ElementHelper.FindElement(driver, By.xpath("//div[@class='olPopupCloseBox']")).click();
     assertEquals("Atelier Graphique", marker1Text);
     //Open Marker 2
     marker2.click();
     //Wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     String marker2Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']"));
     ElementHelper.FindElement(driver, By.xpath("//div[@class='olPopupCloseBox']")).click();
     assertEquals("Signal Gift Stores", marker2Text);
     //Open Marker 3
     marker3.click();
     //Wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     String marker3Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']"));
     ElementHelper.FindElement(driver, By.xpath("//div[@class='olPopupCloseBox']")).click();
     assertEquals("La Rochelle Gifts", marker3Text);
     //Open Marker 4
     marker4.click();
     //Wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     String marker4Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']"));
     ElementHelper.FindElement(driver, By.xpath("//div[@class='olPopupCloseBox']")).click();
     assertEquals("Baane Mini Imports", marker4Text);
@@ -496,10 +496,9 @@ public class MapComponentReference {
   @Test(timeout = 60000)
   public void tc6_MapWithShapes_ShapesAreClickable() {
     log.info("tc6_MapWithShapes_ShapesAreClickable");
-    
+
     //Zoom in the map
     ElementHelper.FindElement(driver, By.xpath("//div[12]/div/div/div[5]/div[3]")).click();
-
 
     /*
      * ## Step 1
@@ -522,7 +521,7 @@ public class MapComponentReference {
      */
     //Click in shape4 (England) and check it comes with red.
     String shapeId = shape1.getAttribute("id");
-    shape1.click();  
+    shape1.click();
     //Wait for change color
     ElementHelper.IsElementVisible(driver, By.xpath("//*[local-name()='path' and @fill='red']"));
     WebElement shapeRed = ElementHelper.FindElement(driver, By.id(shapeId));

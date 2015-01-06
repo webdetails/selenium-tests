@@ -21,9 +21,9 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -69,10 +69,10 @@ public class JFreeChartComponent {
   // The base url to be append the relative url in test
   private static String          baseUrl;
   //Log instance
-  private static Logger log = LogManager.getLogger(JFreeChartComponent.class);
+  private static Logger          log                = LogManager.getLogger(JFreeChartComponent.class);
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -80,8 +80,8 @@ public class JFreeChartComponent {
   @BeforeClass
   public static void setUp() {
     log.info("setUp##" + JFreeChartComponent.class.getSimpleName());
-    driver  = CToolsTestSuite.getDriver();
-    wait    = CToolsTestSuite.getWait();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -95,10 +95,10 @@ public class JFreeChartComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/jFreeChartComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A22-JFreeChartComponent%3Ajfreechart_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A22-JFreeChartComponent%3Ajfreechart_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -107,7 +107,7 @@ public class JFreeChartComponent {
    * Test Case Name:
    *    Reload Sample
    * Description:
-   *    Reload the sample (not refresh page). 
+   *    Reload the sample (not refresh page).
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -121,17 +121,17 @@ public class JFreeChartComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("jFreeChartComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("jFreeChartComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -157,9 +157,9 @@ public class JFreeChartComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select Month
-   * Description: 
+   * Description:
    *    The test case pretends to validate an alert is displayed after select
    *    a month and the alert displayed the selected month.
    * Steps:
@@ -171,7 +171,7 @@ public class JFreeChartComponent {
   @Test(timeout = 60000)
   public void tc3_ClickOnChart_AlertDisplayed() {
     log.info("tc3_ClickOnChart_AlertDisplayed");
-    
+
     WebElement img = ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']"));
     String firstChart = img.getAttribute("src");
 
@@ -189,7 +189,6 @@ public class JFreeChartComponent {
     String secondChart = img.getAttribute("src");
     assertNotEquals(firstChart, secondChart);
 
-
     // ## Step 2
     //Click in 'Dragon Souveniers, Ltd.'
     ElementHelper.FindElement(driver, By.xpath("//map[@id='sampleObjectimageMap']/area[4]")).click();
@@ -206,7 +205,6 @@ public class JFreeChartComponent {
     alert.accept();
     assertEquals("You clicked Mini Gifts Distributors Ltd.", confirmationMsg);
 
-
     // ## Step 3
     Actions acts2 = new Actions(driver);
     acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
@@ -220,9 +218,8 @@ public class JFreeChartComponent {
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']")));
     img = ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']"));
     String thirdChart = img.getAttribute("src");
-    assertNotEquals(firstChart,  thirdChart);
+    assertNotEquals(firstChart, thirdChart);
     assertNotEquals(secondChart, thirdChart);
-
 
     // ## Step 3
     //Click in 'Australian Collectors, Co.'
@@ -244,9 +241,9 @@ public class JFreeChartComponent {
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Preview Chart
-   * Description: 
+   * Description:
    *    The test case pretends to validate when user press on Zoom a new window
    *    is displayed.
    * Steps:
@@ -282,7 +279,7 @@ public class JFreeChartComponent {
     }
     //Get popup id
     Iterator<String> windowIterator = setWindows.iterator();
-    while(windowIterator.hasNext()) {
+    while (windowIterator.hasNext()) {
       String windowHandle = windowIterator.next();
       popup = driver.switchTo().window(windowHandle);
       if (popup.getTitle().isEmpty()) {
@@ -297,7 +294,7 @@ public class JFreeChartComponent {
       URL url = new URL(attrSrcPopup);
       URLConnection connection = url.openConnection();
       connection.connect();
-      
+
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
     } catch (Exception ex) {
       log.error(ex.getMessage());
@@ -305,8 +302,7 @@ public class JFreeChartComponent {
 
     popup.close();
     driver.switchTo().window(parentWindowHandle);
-    assertTrue(driver.getWindowHandles().size()==1);
-
+    assertTrue(driver.getWindowHandles().size() == 1);
 
     // ## Step 2
     Actions acts2 = new Actions(driver);
@@ -322,11 +318,11 @@ public class JFreeChartComponent {
     acts3.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts3.build().perform();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']")).click();
-    
+
     elementBar = ElementHelper.FindElement(driver, By.xpath("//div[@class='caption-bottom']"));
     attriStyle = elementBar.getAttribute("style");
     assertFalse(attriStyle.contains("margin: 0px"));
-    
+
     parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
     //wait for popup render
     for (int i = 0; i < 50 || setWindows.size() != 2; i++) {
@@ -339,7 +335,7 @@ public class JFreeChartComponent {
     }
     //Get popup id
     windowIterator = setWindows.iterator();
-    while(windowIterator.hasNext()) {
+    while (windowIterator.hasNext()) {
       String windowHandle = windowIterator.next();
       popup = driver.switchTo().window(windowHandle);
       if (popup.getTitle().isEmpty()) {
@@ -354,7 +350,7 @@ public class JFreeChartComponent {
       URL url = new URL(attrSrcPopup);
       URLConnection connection = url.openConnection();
       connection.connect();
-      
+
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
     } catch (Exception ex) {
       log.error(ex.getMessage());
@@ -362,12 +358,12 @@ public class JFreeChartComponent {
 
     popup.close();
     driver.switchTo().window(parentWindowHandle);
-    assertTrue(driver.getWindowHandles().size()==1);
+    assertTrue(driver.getWindowHandles().size() == 1);
   }
 
   @AfterClass
   public static void tearDown() {
     log.debug("tearDown");
-    
+
   }
 }

@@ -86,14 +86,14 @@ public class CDA99 {
     driver.get(baseUrl + "plugin/cda/api/editFile?path=/public/plugin-samples/cda/cdafiles/olap4j.cda");
 
     //Wait for buttons: preview, reload, save AND file
-    ElementHelper.WaitForElementPresenceAndVisibility(driver, By.id("preview"));
-    ElementHelper.WaitForElementPresenceAndVisibility(driver, By.id("reload"));
-    ElementHelper.WaitForElementPresenceAndVisibility(driver, By.id("save"));
-    ElementHelper.WaitForElementPresenceAndVisibility(driver, By.id("staticfile"));
+    ElementHelper.WaitForElementVisibility(driver, By.id("preview"));
+    ElementHelper.WaitForElementVisibility(driver, By.id("reload"));
+    ElementHelper.WaitForElementVisibility(driver, By.id("save"));
+    ElementHelper.WaitForElementVisibility(driver, By.id("staticfile"));
 
     //Check iframe
     driver.switchTo().frame("externalEditor");
-    ElementHelper.WaitForElementPresenceAndVisibility(driver, By.xpath("//pre/div[2]/div/div[3]/div[1]"));
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//pre/div[2]/div/div[3]/div[1]"));
     driver.switchTo().defaultContent();
   }
 

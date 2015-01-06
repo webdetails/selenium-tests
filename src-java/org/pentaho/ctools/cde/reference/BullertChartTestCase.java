@@ -78,7 +78,7 @@ public class BullertChartTestCase {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/generatedContent");
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -220,7 +220,7 @@ public class BullertChartTestCase {
     assertNotNull(cht4SizeBar);
     WebElement cht4RectWhite1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='obj4']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='path'][1]"));
     assertNotNull(cht4RectWhite1);
-    
+
     /*
      * ## Step 5
      */

@@ -1,5 +1,11 @@
 package org.pentaho.ctools.cde.widgets.utils;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -8,12 +14,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.utils.ElementHelper;
-
-import java.lang.Exception;
-import java.lang.Thread;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class WidgetUtils {
 
@@ -25,9 +25,9 @@ public class WidgetUtils {
    * @param widgetName
    */
   public static void RemoveWidgetByName(WebDriver driver,
-                                        Wait<WebDriver> wait,
-                                        String baseUrl,
-                                        String widgetName){
+    Wait<WebDriver> wait,
+    String baseUrl,
+    String widgetName) {
     driver.switchTo().defaultContent();
     driver.get(baseUrl + "Home");
 
@@ -39,38 +39,37 @@ public class WidgetUtils {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='well sidebar']")));
     driver.findElement(By.xpath("//div[@class='well sidebar']/button")).click();//Click in 'Browse Files'
 
-
     //Now we have to navegate to 'Public/cde/widgets
     driver.switchTo().defaultContent();
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("applicationShell")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='browser.perspective']")));
     driver.switchTo().frame("browser.perspective");
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fileBrowser")));
-    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
 
     //Public
-    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFolders']")));
-    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public']")));
+    assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='fileBrowserFolders']")));
+    assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@path='/public']")));
     driver.findElement(By.xpath("//div[@path='/public']")).findElement(By.className("expandCollapse")).click();
     //CDE
-    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public/cde']")));
+    assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@path='/public/cde']")));
     driver.findElement(By.xpath("//div[@path='/public/cde']")).findElement(By.className("expandCollapse")).click();
     //Widgets
-    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public/cde/widgets']")));
+    assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@path='/public/cde/widgets']")));
     driver.findElement(By.xpath("//div[@path='/public/cde/widgets']")).findElement(By.className("title")).click();
 
     //wait for the page load in 'fileBrowserFiles'
-    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
     //Check if at least one file is displayed
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='fileBrowserFiles']/div[2]/div")));
     WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
     List<WebElement> theWidgetFiles = listFiles.findElements(By.xpath("//div[@class='title' and contains(text(),'" + widgetName + "')]"));
 
     //Check if the widget named exist
-    if(theWidgetFiles != null){
-      if(theWidgetFiles.size() > 0) {
+    if (theWidgetFiles != null) {
+      if (theWidgetFiles.size() > 0) {
         WebElement[] arrayTheWidgetFiles = new WebElement[theWidgetFiles.size()];
         theWidgetFiles.toArray(arrayTheWidgetFiles);
 
@@ -81,14 +80,14 @@ public class WidgetUtils {
         //To do that we select each file (using the CONTROL key) and delete them.
         Actions action = new Actions(driver);
         action.keyDown(Keys.CONTROL);
-        for (int i = 0; i < arrayTheWidgetFiles.length; i++) {
-          action.click(arrayTheWidgetFiles[i]);
+        for (WebElement arrayTheWidgetFile : arrayTheWidgetFiles) {
+          action.click(arrayTheWidgetFile);
         }
         action.keyUp(Keys.CONTROL);
         action.build().perform();
 
         //Here we still in the iframe
-        assertTrue(ElementHelper.IsElementDisplayed(driver, By.id("deleteButton")));
+        assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.id("deleteButton")));
         driver.findElement(By.id("deleteButton")).click();
         //Go back to root html
         driver.switchTo().defaultContent();
@@ -109,10 +108,10 @@ public class WidgetUtils {
    * @return
    */
   public static WebDriver CreateWidgetWithParameter(WebDriver driver,
-                                                    Wait<WebDriver> wait,
-                                                    String baseUrl,
-                                                    String widgetName,
-                                                    String paramName) throws Exception{
+    Wait<WebDriver> wait,
+    String baseUrl,
+    String widgetName,
+    String paramName) throws Exception {
     //Step 1 - Go to homepage
     driver.switchTo().defaultContent();
     driver.get(baseUrl + "Home");
@@ -121,7 +120,6 @@ public class WidgetUtils {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='mainMenubar']")));
     driver.switchTo().frame("home.perspective");
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='buttonWrapper']")));
-
 
     //Step 2 - Click in Create New (CDE Dashboard)
     //Click to create a widget
@@ -135,14 +133,12 @@ public class WidgetUtils {
     buttonCDEBashBoard.click();
     driver.switchTo().defaultContent();//back to the root
 
-
     //Step 3 - Click in Component Panel
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe")));
     WebElement frameCDEDashboard = driver.findElement(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe"));
     driver.switchTo().frame(frameCDEDashboard);
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='componentsPanelButton']")));
     driver.findElement(By.xpath("//div[@class='componentsPanelButton']")).click();
-
 
     //Step 4 - Add a Simple Parameter
     //Click in Generic
@@ -169,16 +165,15 @@ public class WidgetUtils {
     inputValue.sendKeys("1");
     inputValue.sendKeys(Keys.RETURN);
 
-
     //Step 5 - Press SAVE
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='headerLinks']/div[2]/a")));
     driver.findElement(By.xpath("//div[@id='headerLinks']/div[2]/a")).click();
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='popup']")));
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='container_id']/ul/li")));
     driver.findElement(By.xpath("//input[@id='widgetRadio']")).click();
-    while(true) {
+    while (true) {
 
-      if(driver.findElement(By.xpath("//div[@id='container_id']")).isDisplayed() == false){
+      if (driver.findElement(By.xpath("//div[@id='container_id']")).isDisplayed() == false) {
         break;
       } else {
         Thread.sleep(100);
@@ -191,29 +186,28 @@ public class WidgetUtils {
     //Press OK (SAVING)
     driver.findElement(By.xpath("//button[@id='popup_state0_buttonOk']")).click();
 
-
     //Step 6 - Check if the parameter exist in 'Settings'
     //Popup message informing saving
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@class='layoutPanelButton']"));
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='layoutPanelButton']"));
     //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='layoutPanelButton']")));
     assertTrue(driver.findElement(By.xpath("//div[@class='layoutPanelButton']")).isEnabled());
     //Press 'Settings'
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
     driver.findElement(By.xpath("//div[@id='headerLinks']/div[5]/a")).click();
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='popup']"));
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='popup']"));
     assertNotNull(driver.findElement(By.xpath("//span[@id='widgetParameters']/div/input")));
     //The parameter MUST be equal to the one set
     assertEquals(driver.findElement(By.xpath("//span[@id='widgetParameters']/div/span")).getText(), paramName);
     //Press on the check box
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//span[@id='widgetParameters']/div/input"));
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//span[@id='widgetParameters']/div/input"));
     //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='widgetParameters']/div/input")));
     driver.findElement(By.xpath("//span[@id='widgetParameters']/div/input")).click();
     //Press button save
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']"));
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']"));
     //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']")));
     driver.findElement(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonSave']")).click();
 
-    ElementHelper.WaitForElementNotPresent(driver, 10, By.id("popupbox"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("popupbox"));
     //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("popupbox")));
 
     return driver;
@@ -230,9 +224,9 @@ public class WidgetUtils {
    * @return
    */
   public static WebDriver CreateWidget(WebDriver driver,
-                                       Wait<WebDriver> wait,
-                                       String baseUrl,
-                                       String widgetName) throws Exception{
+    Wait<WebDriver> wait,
+    String baseUrl,
+    String widgetName) throws Exception {
     //Step 1 - Go to homepage
     driver.switchTo().defaultContent();
     driver.get(baseUrl + "Home");
@@ -241,7 +235,6 @@ public class WidgetUtils {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='mainMenubar']")));
     driver.switchTo().frame("home.perspective");
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='buttonWrapper']")));
-
 
     //Step 2 - Click in Create New (CDE Dashboard)
     //Click to create a widget
@@ -254,7 +247,6 @@ public class WidgetUtils {
     buttonCDEBashBoard.click();
     driver.switchTo().defaultContent();//back to the root
 
-
     //Step 3 - Click in Component Panel
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe")));
     WebElement frameCDEDashboard = driver.findElement(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe"));
@@ -262,15 +254,14 @@ public class WidgetUtils {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='componentsPanelButton']")));
     driver.findElement(By.xpath("//div[@class='componentsPanelButton']")).click();
 
-
     //Step 4 - Save the widget
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='headerLinks']/div[2]/a")));
     driver.findElement(By.xpath("//div[@id='headerLinks']/div[2]/a")).click();
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='popup']")));
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='container_id']/ul/li")));
     driver.findElement(By.xpath("//input[@id='widgetRadio']")).click();
-    while(true) {
-      if(driver.findElement(By.xpath("//div[@id='container_id']")).isDisplayed() == false){
+    while (true) {
+      if (driver.findElement(By.xpath("//div[@id='container_id']")).isDisplayed() == false) {
         break;
       } else {
         Thread.sleep(100);
@@ -283,7 +274,7 @@ public class WidgetUtils {
     //Press OK (SAVING)
     driver.findElement(By.xpath("//button[@id='popup_state0_buttonOk']")).click();
     //Wait for the pop-up exit
-    ElementHelper.WaitForElementNotPresent(driver, 10, By.id("popupbox"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("popupbox"));
 
     return driver;
   }
@@ -297,17 +288,16 @@ public class WidgetUtils {
    * @param widgetName
    * @return
    */
-  public static WebDriver OpenWidgetEditMode(WebDriver driver, 
-                                            Wait<WebDriver> wait, 
-                                            String baseUrl, 
-                                            String widgetName) {
+  public static WebDriver OpenWidgetEditMode(WebDriver driver,
+    Wait<WebDriver> wait,
+    String baseUrl,
+    String widgetName) {
     //Resuming Steps
     // 1. open the widget
     // 2. check if the parameter exist in settings
     // 3. check if the widget exist in 'widgets' at Component Layout
     driver.switchTo().defaultContent();
     driver.get(baseUrl + "Home");
-
 
     //Step 1 - Go to Homepage and click 'Browse Files'
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
@@ -317,7 +307,6 @@ public class WidgetUtils {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='well sidebar']")));
     driver.findElement(By.xpath("//div[@class='well sidebar']/button")).click();//Click in 'Browse Files'
 
-
     //Step 2  - Go to 'widgets' and click in the created widget and press 'Edit'
     //Now we have to navegate to 'Public/cde/widgets
     driver.switchTo().defaultContent();
@@ -325,39 +314,38 @@ public class WidgetUtils {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='browser.perspective']")));
     driver.switchTo().frame("browser.perspective");
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fileBrowser")));
-    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-     
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
+
     //Public
-    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFolders']")));
-    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public']")));
+    assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='fileBrowserFolders']")));
+    assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@path='/public']")));
     driver.findElement(By.xpath("//div[@path='/public']")).findElement(By.className("expandCollapse")).click();
     //CDE
-    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public/cde']")));
+    assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@path='/public/cde']")));
     driver.findElement(By.xpath("//div[@path='/public/cde']")).findElement(By.className("expandCollapse")).click();
     //Widgets
-    assertTrue(ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@path='/public/cde/widgets']")));
+    assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@path='/public/cde/widgets']")));
     driver.findElement(By.xpath("//div[@path='/public/cde/widgets']")).findElement(By.className("title")).click();
 
     //wait for the page load in 'fileBrowserFiles'
-    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementNotPresent(driver, 30, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
     //Check if at least one file is displayed
-    ElementHelper.IsElementDisplayed(driver, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div"));
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div"));
     WebElement listFiles = driver.findElement(By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
     List<WebElement> theWidgetFiles = listFiles.findElements(By.xpath("//div[@class='title' and contains(text(),'" + widgetName + "')]"));
 
-
     //Check if the widget named exist
-    if(theWidgetFiles != null){
-      if(theWidgetFiles.size() > 0) {
+    if (theWidgetFiles != null) {
+      if (theWidgetFiles.size() > 0) {
 
         Actions action = new Actions(driver);
-        action.click((WebElement)theWidgetFiles.get(0));
+        action.click(theWidgetFiles.get(0));
         action.build().perform();
 
         //Here we still in the iframe
-        assertTrue(ElementHelper.IsElementDisplayed(driver, By.id("editButton")));
+        assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.id("editButton")));
         driver.findElement(By.id("editButton")).click();
 
         driver.switchTo().defaultContent();//back to the root

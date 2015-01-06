@@ -74,7 +74,7 @@ public class WidgetReference {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Awidgets.wcdf/generatedContent");
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -140,21 +140,21 @@ public class WidgetReference {
     //>Select 2003
     select.selectByValue("2003");
     //wait for loading bar disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     WebElement rect = ElementHelper.FindElement(driver, By.xpath("//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]"));
     log.info(rect.getAttribute("height"));
     assertEquals("185.54946181445413", rect.getAttribute("height"));//185.54946181445413
     //>Select 2004
     select.selectByValue("2004");
     //wait for loading bar disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     rect = ElementHelper.FindElement(driver, By.xpath("//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]"));
     log.info(rect.getAttribute("height"));
     assertEquals("122.4067513368984", rect.getAttribute("height"));//122.4067513368984
     //>Select 2005
     select.selectByValue("2005");
     //wait for loading bar disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     rect = ElementHelper.FindElement(driver, By.xpath("//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]"));
     log.info(rect.getAttribute("height"));
     assertEquals("133.12012705746463", rect.getAttribute("height"));//133.12012705746463
@@ -175,7 +175,7 @@ public class WidgetReference {
     //Click in Vintage Cars
     ElementHelper.Click(driver, By.xpath("//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']"));
     //Wait for the previous series disable
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]"));
     //Check chart
     WebElement rect1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][1]"));
     WebElement rect2 = ElementHelper.FindElement(driver, By.xpath("//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]"));

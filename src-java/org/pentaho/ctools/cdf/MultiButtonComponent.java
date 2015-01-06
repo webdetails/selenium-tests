@@ -21,6 +21,9 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
@@ -38,9 +41,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 /**
  * Testing the functionalities related with MultiButton Component.
  *
@@ -57,10 +57,10 @@ public class MultiButtonComponent {
   // The base url to be append the relative url in test
   private static String          baseUrl;
   //Log instance
-  private static Logger log = LogManager.getLogger(MultiButtonComponent.class);
-  
+  private static Logger          log                = LogManager.getLogger(MultiButtonComponent.class);
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -68,8 +68,8 @@ public class MultiButtonComponent {
   @BeforeClass
   public static void setUp() {
     log.debug("setup");
-    driver  = CToolsTestSuite.getDriver();
-    wait    = CToolsTestSuite.getWait();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -83,10 +83,10 @@ public class MultiButtonComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/MultiButtonComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A56-MultiButtonComponent%3Amultibutton_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A56-MultiButtonComponent%3Amultibutton_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -95,7 +95,7 @@ public class MultiButtonComponent {
    * Test Case Name:
    *    Reload Sample
    * Description:
-   *    Reload the sample (not refresh page). 
+   *    Reload the sample (not refresh page).
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -108,17 +108,17 @@ public class MultiButtonComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("MultiButtonComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("MultiButtonComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -143,9 +143,9 @@ public class MultiButtonComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Click In Each Button
-   * Description: 
+   * Description:
    *    The test case pretends to validate the buttons works ok.
    * Steps:
    *    1. Click in Eastern
@@ -165,7 +165,6 @@ public class MultiButtonComponent {
     alert.accept();
     assertEquals("you chose: Eastern", confirmationMsg);
 
-
     // ## Step 2
     ElementHelper.FindElement(driver, By.xpath("//button[contains(text(),'Central')]")).click();
     wait.until(ExpectedConditions.alertIsPresent());
@@ -173,7 +172,6 @@ public class MultiButtonComponent {
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Central", confirmationMsg);
-
 
     // ## Step 3
     ElementHelper.FindElement(driver, By.xpath("//button[contains(text(),'Western')]")).click();
@@ -183,7 +181,6 @@ public class MultiButtonComponent {
     alert.accept();
     assertEquals("you chose: Western", confirmationMsg);
 
-
     // ## Step 4
     ElementHelper.FindElement(driver, By.xpath("//button[contains(text(),'Southern')]")).click();
     wait.until(ExpectedConditions.alertIsPresent());
@@ -192,14 +189,14 @@ public class MultiButtonComponent {
     alert.accept();
     assertEquals("you chose: Southern", confirmationMsg);
   }
-  
+
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Click Arbitrary in available Button
-   * Description: 
-   *    The test case pretends to validate no error occurs when we click 
+   * Description:
+   *    The test case pretends to validate no error occurs when we click
    *    arbitrary in the buttons.
    * Steps:
    *    1. Click in Central
@@ -219,7 +216,6 @@ public class MultiButtonComponent {
     alert.accept();
     assertEquals("you chose: Central", confirmationMsg);
 
-
     // ## Step 2
     ElementHelper.FindElement(driver, By.xpath("//button[contains(text(),'Southern')]")).click();
     wait.until(ExpectedConditions.alertIsPresent());
@@ -228,7 +224,6 @@ public class MultiButtonComponent {
     alert.accept();
     assertEquals("you chose: Southern", confirmationMsg);
 
-
     // ## Step 3
     ElementHelper.FindElement(driver, By.xpath("//button[contains(text(),'Eastern')]")).click();
     wait.until(ExpectedConditions.alertIsPresent());
@@ -236,7 +231,6 @@ public class MultiButtonComponent {
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Eastern", confirmationMsg);
-
 
     // ## Step 4
     ElementHelper.FindElement(driver, By.xpath("//button[contains(text(),'Southern')]")).click();

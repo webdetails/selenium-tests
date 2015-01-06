@@ -21,6 +21,9 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
@@ -39,9 +42,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 /**
  * Testing the functionalities related with Select Component.
  *
@@ -58,10 +58,10 @@ public class SelectComponent {
   // The base url to be append the relative url in test
   private static String          baseUrl;
   //Log instance
-  private static Logger log = LogManager.getLogger(SelectComponent.class);
-  
+  private static Logger          log                = LogManager.getLogger(SelectComponent.class);
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -69,8 +69,8 @@ public class SelectComponent {
   @BeforeClass
   public static void setUp() {
     log.debug("setup");
-    driver  = CToolsTestSuite.getDriver();
-    wait    = CToolsTestSuite.getWait();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -84,20 +84,20 @@ public class SelectComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/SelectComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A16-SelectComponent%3Aselect_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A16-SelectComponent%3Aselect_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -109,17 +109,17 @@ public class SelectComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("SelectComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("SelectComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -134,7 +134,7 @@ public class SelectComponent {
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
-    
+
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = driver.findElements(By.id("sampleObject")).size();
@@ -144,18 +144,18 @@ public class SelectComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select options one by one
-   * Description: 
+   * Description:
    *    We pretend validate the selection of each option one by one.
-   * Steps: 
+   * Steps:
    *    1. Select Dusseldorf
    *    2. Select Lisbon
    */
   @Test(timeout = 60000)
   public void tc3_SelectEachItem_AlertDisplayed() {
     log.debug("tc3_SelectEachItem_AlertDisplayed");
-    
+
     // ## Step 1
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("select")));
     Select list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
@@ -165,17 +165,16 @@ public class SelectComponent {
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("You chose: 2", confirmationMsg);
-    
-    
+
     // ## Step 2
     list.selectByValue("1");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
-    assertEquals("You chose: 1", confirmationMsg);    
+    assertEquals("You chose: 1", confirmationMsg);
   }
-  
+
   @AfterClass
   public static void tearDown() {
     log.debug("tearDown");

@@ -81,7 +81,7 @@ public class TimePlotComponent {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A31-TimePlotComponent%3Atimeplot_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -136,17 +136,17 @@ public class TimePlotComponent {
   }
 
   /**
-  * ############################### Test Case 3 ###############################
-  *
-  * Test Case Name: 
-  *    Time Plot
-  * Description: 
-  *    For this component we need to validate when user move mouse over plot
-  *    we have new values for Total Price. 
-  * Steps: 
-  *    1. Check if the graphic is presented
-  *    2. Move mouse over graphic and check the expected value for Total Price
-  */
+   * ############################### Test Case 3 ###############################
+   *
+   * Test Case Name:
+   *    Time Plot
+   * Description:
+   *    For this component we need to validate when user move mouse over plot
+   *    we have new values for Total Price.
+   * Steps:
+   *    1. Check if the graphic is presented
+   *    2. Move mouse over graphic and check the expected value for Total Price
+   */
   @Test(timeout = 60000)
   public void tc3_MouseOverPlot_TotalPriceChanged() {
     // ## Step 1

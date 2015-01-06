@@ -62,10 +62,10 @@ public class MonthPickerComponent {
   // The base url to be append the relative url in test
   private static String          baseUrl;
   //Log instance
-  private static Logger log = LogManager.getLogger(MonthPickerComponent.class);
+  private static Logger          log                = LogManager.getLogger(MonthPickerComponent.class);
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -73,8 +73,8 @@ public class MonthPickerComponent {
   @BeforeClass
   public static void setUp() {
     log.debug("setup");
-    driver  = CToolsTestSuite.getDriver();
-    wait    = CToolsTestSuite.getWait();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -88,10 +88,10 @@ public class MonthPickerComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/MonthPickerComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A46-MonthPickerComponent%3Amonth_picker_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A46-MonthPickerComponent%3Amonth_picker_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -100,7 +100,7 @@ public class MonthPickerComponent {
    * Test Case Name:
    *    Reload Sample
    * Description:
-   *    Reload the sample (not refresh page). 
+   *    Reload the sample (not refresh page).
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -113,17 +113,17 @@ public class MonthPickerComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("MonthPickerComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("MonthPickerComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -148,9 +148,9 @@ public class MonthPickerComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select Month
-   * Description: 
+   * Description:
    *    The test case pretends to validate an alert is displayed after select
    *    a month and the alert displayed the selected month.
    * Steps:
@@ -160,19 +160,18 @@ public class MonthPickerComponent {
   public void tc3_SelectMonth_AlertDisplayed() {
     log.debug("tc3_SelectMonth_AlertDisplayed");
 
-
     //## Step 1
     Calendar c = Calendar.getInstance();
-    c.add(Calendar.YEAR, (2006-c.get(Calendar.YEAR)) );
+    c.add(Calendar.YEAR, 2006 - c.get(Calendar.YEAR));
     c.add(Calendar.MONTH, 2);
     Date timeToPick = c.getTime();
-    
+
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
     String strTimeToPick = sdf.format(timeToPick);
-    
+
     Select select = new Select(ElementHelper.FindElement(driver, By.id("myInput")));
     select.selectByValue(strTimeToPick);
-    
+
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
     String confirmationMsg = alert.getText();

@@ -80,7 +80,7 @@ public class CCCV2ShowCase {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AtestCCCv2-II.wcdf/generatedContent");
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -258,11 +258,11 @@ public class CCCV2ShowCase {
     //Series 2003
     WebElement serie2003 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='text']"));
     serie2003.click();
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]"));
     //Series 2004
     WebElement serie2004 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
     serie2004.click();
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]"));
     //Check value of the serie2005
     String serie2005Value = ElementHelper.GetText(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
     assertEquals("1.98M", serie2005Value);

@@ -21,6 +21,9 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -35,9 +38,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Testing the functionalities related with Button Component.
@@ -54,9 +54,9 @@ public class ButtonComponent {
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
-  
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -78,20 +78,20 @@ public class ButtonComponent {
     // The URL for the ButtonComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/ButtonComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A82-ButtonComponent%3Abutton_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A82-ButtonComponent%3Abutton_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
    * ############################### Test Case 1 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Validate Page Contents
-   * Description: 
+   * Description:
    *    Here we want to validate the page contents.
-   * Steps: 
+   * Steps:
    *    1. Check the widget's title.
    */
   @Test(timeout = 60000)
@@ -103,17 +103,17 @@ public class ButtonComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("ButtonComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("ButtonComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -133,12 +133,12 @@ public class ButtonComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Button Clickable
-   * Description: 
+   * Description:
    *    The test case validate if the button is clickable and when click an
-   *    alert is displayed. 
-   * Steps: 
+   *    alert is displayed.
+   * Steps:
    *    1. Click in button
    *    2. Check for alert
    */
@@ -148,21 +148,19 @@ public class ButtonComponent {
     String buttonText = ElementHelper.GetText(driver, By.xpath("//button"));
     assertEquals("A button", buttonText);
     ElementHelper.FindElement(driver, By.xpath("//button")).click();
-    
-    
+
     // ## Step 2
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
-    
+
     buttonText = ElementHelper.GetText(driver, By.xpath("//button"));
-    
+
     assertEquals("Button was clicked", confirmationMsg);
     assertEquals("Yes, a clickable button", buttonText);
   }
 
   @AfterClass
-  public static void tearDown() {
-  }
+  public static void tearDown() {}
 }

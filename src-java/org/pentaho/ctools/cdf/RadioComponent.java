@@ -21,6 +21,10 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
@@ -38,10 +42,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 /**
  * Testing the functionalities related with Radio Component.
  *
@@ -58,10 +58,10 @@ public class RadioComponent {
   // The base url to be append the relative url in test
   private static String          baseUrl;
   //Log instance
-  private static Logger log = LogManager.getLogger(RadioComponent.class);
-  
+  private static Logger          log                = LogManager.getLogger(RadioComponent.class);
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -69,8 +69,8 @@ public class RadioComponent {
   @BeforeClass
   public static void setUp() {
     log.debug("setup");
-    driver  = CToolsTestSuite.getDriver();
-    wait    = CToolsTestSuite.getWait();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -84,10 +84,10 @@ public class RadioComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/RadioComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A52-RadioComponent%3Aradio_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A52-RadioComponent%3Aradio_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -96,7 +96,7 @@ public class RadioComponent {
    * Test Case Name:
    *    Reload Sample
    * Description:
-   *    Reload the sample (not refresh page). 
+   *    Reload the sample (not refresh page).
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -109,17 +109,17 @@ public class RadioComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("RadioComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("RadioComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -134,7 +134,7 @@ public class RadioComponent {
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
-    
+
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = driver.findElements(By.id("sampleObject")).size();
@@ -144,9 +144,9 @@ public class RadioComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select options one by one
-   * Description: 
+   * Description:
    *    We pretend validate the selection of each option one by one.
    * Steps:
    *    1. Select Eastern
@@ -175,7 +175,6 @@ public class RadioComponent {
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
-
     // ## Step 2
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Central']")));
     ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).click();
@@ -188,7 +187,6 @@ public class RadioComponent {
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
-
 
     // ## Step 3
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Western']")));
@@ -203,7 +201,6 @@ public class RadioComponent {
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
-
     // ## Step 4
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Southern']")));
     ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).click();
@@ -217,13 +214,13 @@ public class RadioComponent {
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
   }
-  
+
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Select arbitrary options
-   * Description: 
+   * Description:
    *    We pretend validate the selection every available options but arbitrary.
    * Steps:
    *    1. Select Western
@@ -252,7 +249,6 @@ public class RadioComponent {
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
-
     // ## Step 2
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Southern']")));
     ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).click();
@@ -266,7 +262,6 @@ public class RadioComponent {
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
-
     // ## Step 3
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Central']")));
     ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).click();
@@ -279,7 +274,6 @@ public class RadioComponent {
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
     assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
-
 
     // ## Step 4
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Western']")));

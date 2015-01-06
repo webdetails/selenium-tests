@@ -21,6 +21,10 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -41,10 +45,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 /**
  * Testing the functionalities related with Dial Component.
  *
@@ -60,9 +60,9 @@ public class DialComponent {
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
-  
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -84,20 +84,20 @@ public class DialComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/DialComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A25-DialComponent%3Adial_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A25-DialComponent%3Adial_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -109,17 +109,17 @@ public class DialComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("DialComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("DialComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -139,12 +139,12 @@ public class DialComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Dial Component
-   * Description: 
-   *    We pretend validate the generated graphic (in a image) and if url for 
-   *    the image is valid. 
-   * Steps: 
+   * Description:
+   *    We pretend validate the generated graphic (in a image) and if url for
+   *    the image is valid.
+   * Steps:
    *    1. Check if a graphic was generated
    *    2. Check the http request for the generated image
    */
@@ -153,29 +153,27 @@ public class DialComponent {
     // ## Step 1
     WebElement dialElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
     assertNotNull(dialElement);
-    
-    String attrSrc    = dialElement.getAttribute("src");
-    String attrWidth  = dialElement.getAttribute("width");
+
+    String attrSrc = dialElement.getAttribute("src");
+    String attrWidth = dialElement.getAttribute("width");
     String attrHeight = dialElement.getAttribute("height");
     assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=tmp_chart_admin-"));
     assertEquals(attrWidth, "400");
     assertEquals(attrHeight, "200");
-    
-    
+
     // ## Step 2
     try {
       URL url = new URL(attrSrc);
       URLConnection connection = url.openConnection();
       connection.connect();
-      
+
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-         
+
     } catch (Exception ex) {
       ex.printStackTrace();
     }
   }
-  
+
   @AfterClass
-  public static void tearDown() {
-  }
+  public static void tearDown() {}
 }

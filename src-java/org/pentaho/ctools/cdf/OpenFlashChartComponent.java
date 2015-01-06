@@ -21,6 +21,10 @@
  ******************************************************************************/
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
@@ -38,10 +42,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 /**
  * Testing the functionalities related with Open Flash Chart Component.
  *
@@ -58,10 +58,10 @@ public class OpenFlashChartComponent {
   // The base url to be append the relative url in test
   private static String          baseUrl;
   //Log instance
-  private static Logger log = LogManager.getLogger(OpenFlashChartComponent.class);
-  
+  private static Logger          log                = LogManager.getLogger(OpenFlashChartComponent.class);
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
@@ -69,8 +69,8 @@ public class OpenFlashChartComponent {
   @BeforeClass
   public static void setUp() {
     log.debug("setup");
-    driver  = CToolsTestSuite.getDriver();
-    wait    = CToolsTestSuite.getWait();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
@@ -84,10 +84,10 @@ public class OpenFlashChartComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/OpenFlashChartComponent
-    driver.get(baseUrl+ "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A26-OpenFlashChartComponent%3Aopenflashchart_component.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A26-OpenFlashChartComponent%3Aopenflashchart_component.xcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -96,7 +96,7 @@ public class OpenFlashChartComponent {
    * Test Case Name:
    *    Reload Sample
    * Description:
-   *    Reload the sample (not refresh page). 
+   *    Reload the sample (not refresh page).
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -109,17 +109,17 @@ public class OpenFlashChartComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("OpenFlashChartComponent",ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("OpenFlashChartComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Reload Sample
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
@@ -144,9 +144,9 @@ public class OpenFlashChartComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *    Open Flash Chart
-   * Description: 
+   * Description:
    *    The test case pretends to validate a flash object is generated.
    * Steps:
    *    1. Check that component generate a flash object
@@ -154,14 +154,14 @@ public class OpenFlashChartComponent {
   @Test(timeout = 60000)
   public void tc3_OpenFlashChart_ChartDisplayed() {
     log.debug("tc3_OpenFlashChart_ChartDisplayed");
-    
+
     assertNotNull(ElementHelper.FindElement(driver, By.cssSelector("object")));
     WebElement elemEmbed = ElementHelper.FindElement(driver, By.cssSelector("embed"));
     String attrWidth = elemEmbed.getAttribute("width");
     String attrHeight = elemEmbed.getAttribute("height");
     String attrType = elemEmbed.getAttribute("type");
     String attrSrc = elemEmbed.getAttribute("src");
-    
+
     assertEquals("500", attrWidth);
     assertEquals("500", attrHeight);
     assertEquals("application/x-shockwave-flash", attrType);

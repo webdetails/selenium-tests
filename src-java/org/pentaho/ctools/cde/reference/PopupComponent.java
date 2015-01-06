@@ -74,7 +74,7 @@ public class PopupComponent {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Apopup.wcdf/generatedContent");
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -165,7 +165,7 @@ public class PopupComponent {
     //Close popup
     ElementHelper.Click(driver, By.cssSelector("a.close"));
     //wait for popup disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.cssSelector("a.close"));
+    ElementHelper.WaitForElementInvisibility(driver, By.cssSelector("a.close"));
     WebElement element = driver.findElement(By.cssSelector("a.close"));
     assertFalse(element.isDisplayed());
   }
@@ -207,7 +207,7 @@ public class PopupComponent {
     //Close popup
     ElementHelper.Click(driver, By.xpath("//div[8]/a"));
     //wait for popup disappear
-    ElementHelper.WaitForElementPresenceAndInvisibility(driver, By.xpath("//div[8]/a"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[8]/a"));
     WebElement element = driver.findElement(By.xpath("//div[8]/a"));
     assertFalse(element.isDisplayed());
   }

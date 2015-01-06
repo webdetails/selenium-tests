@@ -22,6 +22,10 @@
 
 package org.pentaho.ctools.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -39,8 +43,6 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
-import static org.junit.Assert.*;
-
 /**
  * Testing the functionals related with Tables, paging, sort, display rows,
  * search in table contents.
@@ -55,20 +57,20 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TableComponent {
   // Instance of the driver (browser emulator)
-  private static WebDriver driver;
+  private static WebDriver       driver;
   // Instance to be used on wait commands
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
-  private static String baseUrl;
-  
+  private static String          baseUrl;
+
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
-  public static void setUp(){
+  public static void setUp() {
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -80,13 +82,13 @@ public class TableComponent {
   /**
    * Go to the TableComponent web page.
    */
-  public static void init(){
+  public static void init() {
     //The URL for the TableComponent under CDF samples
     //This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/Table Component
     driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:64-TableComponent:table_component.xcdf/generatedContent");
-    
+
     //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -101,11 +103,11 @@ public class TableComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
-  	//Wait for title become visible and with value 'Community Dashboard Framework'
-  	wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
-  	//Wait for visibility of 'TableComponent'
+    //Wait for title become visible and with value 'Community Dashboard Framework'
+    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    //Wait for visibility of 'TableComponent'
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
-  	
+
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
     assertEquals("TableComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
@@ -122,11 +124,11 @@ public class TableComponent {
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test(timeout = 60000)
-  public void tc2_ReloadSample_SampleReadyToUse(){
-  	//Render again the sample
-  	ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
+  public void tc2_ReloadSample_SampleReadyToUse() {
+    //Render again the sample
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
-    
+
     //Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
@@ -331,7 +333,6 @@ public class TableComponent {
     assertEquals("Kelly's Gift Shop", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td")));
     assertEquals("158,345", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]")));
 
-
     //reset to initial state
     ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/thead/tr/th")).click();//Set Customers to ASC
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_asc']")));
@@ -471,7 +472,7 @@ public class TableComponent {
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_next")).isEnabled());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")).isEnabled());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")).isDisplayed());
-    assertFalse(ElementHelper.IsElementPresent(driver, 3, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2]")));
+    assertNotNull(ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2]")));
     assertEquals("Showing 1 to 1 of 1 entries (filtered from 50 total entries)", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
     assertEquals("Euro+ Shopping Channel", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
     assertEquals("912,294", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
@@ -483,11 +484,11 @@ public class TableComponent {
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_previous")).isEnabled());
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_next")).isDisplayed());
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_next")).isEnabled());
-    assertFalse(ElementHelper.IsElementPresent(driver, 3, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")));
+    assertNotNull(ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")));
     assertEquals("Showing 0 to 0 of 0 entries (filtered from 50 total entries)", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
     assertEquals("No matching records found", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
   }
 
   @AfterClass
-  public static void tearDown() { }
+  public static void tearDown() {}
 }
