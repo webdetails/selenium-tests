@@ -37,7 +37,47 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowser']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='fileBrowser']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFolders']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFiles']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserButtons']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='spinner large-spinner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='spinner large-spinner'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]</td>
 	<td>Public</td>
 </tr>
@@ -47,8 +87,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]</td>
+	<td>Webdetails Doc</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Open Demos')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -62,9 +117,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForElementPresent</td>
 	<td>//div[@id=&quot;fileBrowserFiles&quot;]//div[contains(text(),'CDE Open Demos')]</td>
-	<td>CDE Open Demos</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -82,8 +137,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//div[@id=&quot;fileBrowserButtons&quot;]//button[contains(text(),'Open')]</td>
+	<td>Open</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id=&quot;fileBrowserButtons&quot;]//button[contains(text(),'Open')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.busy-indicator-container.waitPopup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.busy-indicator-container.waitPopup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;solutionNavigatorAndContentPanel&quot;]</td>
 	<td></td>
 </tr>
 <tr>
