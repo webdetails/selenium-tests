@@ -141,7 +141,6 @@ public class CDE347 {
     assertNotNull(obj4);
     assertNotNull(obj5);
     assertNotNull(obj6);
-
   }
 
   @AfterClass

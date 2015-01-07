@@ -28,7 +28,6 @@ import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -68,18 +67,6 @@ public class CDADatasourceTest {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-    //Go to the CDA Cache Manager web page.
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Acda%3Acda_test.xcdf/generatedContent");
-
-    //wait for element to be visible
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td"));
-
-    // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -93,6 +80,16 @@ public class CDADatasourceTest {
   @Test(timeout = 60000)
   public void tc1_DatasourceTest_ResultOK() {
     log.info("tc1_DatasourceTest_ResultOK");
+
+    /*
+     * Step 0 - Go to web page.
+     */
+    //Go to the CDA Cache Manager web page.
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Acda%3Acda_test.xcdf/generatedContent");
+    //wait for element to be visible
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td"));
+    // Not we have to wait for loading disappear
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Test Link CDA Documentation
     String urlCdaDoc = ElementHelper.FindElement(driver, By.linkText("CDA Documentation")).getAttribute("href");
