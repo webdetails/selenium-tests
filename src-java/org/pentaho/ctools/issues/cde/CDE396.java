@@ -86,7 +86,7 @@ public class CDE396 {
    *    Asserting refreshing CDE returns confirmation
    *
    * Description:
-   *    The test pretends validate the CDE-396 issue, so when user refreshes CDEa confirmation
+   *    The test pretends validate the CDE-396 issue, so when user refreshes CDE a confirmation
    *    that the request was concluded is received.
    *
    * Steps:

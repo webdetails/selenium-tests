@@ -576,4 +576,40 @@ public class ElementHelper {
 
     return text;
   }
+
+  /**
+   * This method intends to get the value of an input field.
+   *
+   * @param driver
+   * @param locator
+   * @return
+   */
+  public static String GetInputValue(WebDriver driver, By locator) {
+    log.debug("Enter:GetInputValue");
+    try {
+      IsElementVisible(driver, locator);
+      log.debug("Element is visible");
+      List<WebElement> listElements = driver.findElements(locator);
+      if (listElements.size() > 0) {
+        WebElement element = listElements.get(0);
+        String value = element.getAttribute("value");
+        if (element.isDisplayed() && element.isEnabled()) {
+          log.debug("return element found it");
+          return value;
+        } else {
+          log.warn("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
+          return GetInputValue(driver, locator);
+        }
+      } else {
+        log.warn("Trying obtain! Locator: " + locator.toString());
+        return null;
+      }
+    } catch (StaleElementReferenceException s) {
+      log.error("Stale - got one. Locator: " + locator.toString());
+      return GetInputValue(driver, locator);
+    } catch (ElementNotVisibleException v) {
+      log.error("NotVisible - got one. Locator: " + locator.toString());
+      return GetInputValue(driver, locator);
+    }
+  }
 }
