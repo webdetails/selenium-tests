@@ -140,7 +140,7 @@ public class CDA103 {
      * ## Step 4
      */
     //wait for invisibility of waiting pop-up
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
     //Check tab title and text on iframe
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@title='CDA Cache']"));
@@ -152,7 +152,6 @@ public class CDA103 {
     ElementHelper.WaitForElementVisibility(frame, By.xpath("//pre"));
     String cdaBodyText = ElementHelper.GetText(frame, By.xpath("//pre"));
     assertEquals("Cache Cleared Successfully", cdaBodyText);
-
   }
 
   @AfterClass

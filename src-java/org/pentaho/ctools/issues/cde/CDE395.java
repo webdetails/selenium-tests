@@ -74,19 +74,17 @@ public class CDE395 {
 
   @Before
   public void setUpTestCase() {
-
     //Go to User Console
     driver.get(baseUrl + "Home");
 
     //wait for invisibility of waiting pop-up
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
     //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
     ElementHelper.WaitForElementVisibility(driver, By.id("filemenu"));
     ElementHelper.WaitForElementVisibility(driver, By.id("viewmenu"));
     ElementHelper.WaitForElementVisibility(driver, By.id("toolsmenu"));
     ElementHelper.WaitForElementVisibility(driver, By.id("helpmenu"));
-
   }
 
   /**
@@ -146,7 +144,7 @@ public class CDE395 {
      * ## Step 3
      */
     //wait for invisibility of waiting pop-up
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     driver.switchTo().defaultContent();
 
     //assert title
@@ -173,8 +171,6 @@ public class CDE395 {
     /*
      * ## Step 4
      */
-    //String rendererText = ElementHelper.GetText(frame1, By.xpath("//select[@id='rendererInput']/option[@selected='']"));
-    //assertEquals("bootstrap", rendererText);
     WebElement obj1 = ElementHelper.FindElement(frame1, By.xpath("//select[@id='rendererInput']/option[@value='bootstrap']"));
     assertEquals(obj1.isSelected(), true);
   }

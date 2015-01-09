@@ -459,15 +459,15 @@ public class ElementHelper {
 
   /**
    * This method pretends to check if the element is present, if it doesn't
-   * we wait for presence for a specific timeout (30 seconds).
+   * we wait for presence for a specific timeout (input).
    *
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementPresence(WebDriver driver, By locator) {
+  public static WebElement WaitForElementPresence(WebDriver driver, By locator, Integer timeout) {
     WebElement element = null;
     List<WebElement> elements = null;
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
@@ -491,34 +491,13 @@ public class ElementHelper {
 
   /**
    * This method pretends to check if the element is present, if it doesn't
-   * we wait for presence for a specific timeout (input).
+   * we wait for presence for a specific timeout (30 seconds).
    *
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementPresence(WebDriver driver, By locator, int timeout) {
-    WebElement element = null;
-    List<WebElement> elements = null;
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
-
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-
-    try {
-      elements = driver.findElements(locator);
-      int size = elements.size();
-      if (size == 0) {
-        //wait for element presence
-        element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-      } else {
-        log.warn("We have some elements! " + size);
-      }
-    } catch (Exception e) {
-      log.warn("Something went wrong searching for: " + locator.toString());
-      log.error(e.getMessage());
-    }
-
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    return element;
+  public static WebElement WaitForElementPresence(WebDriver driver, By locator) {
+    return WaitForElementPresence(driver, locator, 30);
   }
 
   /**
@@ -548,7 +527,11 @@ public class ElementHelper {
       log.error(e.getMessage());
     }
 
+    //------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
+    //when set a new implicitlyWait timeout, we have to set the default
+    //in order to not destroy other invocations of findElement ('WebDriver').
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
     return element;
   }
 
@@ -578,38 +561,48 @@ public class ElementHelper {
   }
 
   /**
-   * This method intends to get the value of an input field.
+   * This method pretends to check if the element is present, if it doesn't
+   * we wait for presence for a specific timeout (30 seconds).
    *
    * @param driver
    * @param locator
-   * @return
    */
-  public static String GetInputValue(WebDriver driver, By locator) {
-    log.debug("Enter:GetInputValue");
+  public static boolean IsElementNotPresent(WebDriver driver, By locator, Integer timeout) {
+    boolean isElementPresent = false;
+
+    driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+
     try {
-      IsElementVisible(driver, locator);
-      log.debug("Element is visible");
-      List<WebElement> listElements = driver.findElements(locator);
-      if (listElements.size() > 0) {
-        WebElement element = listElements.get(0);
-        String value = element.getAttribute("value");
-        if (element.isDisplayed() && element.isEnabled()) {
-          log.debug("return element found it");
-          return value;
-        } else {
-          log.warn("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
-          return GetInputValue(driver, locator);
-        }
-      } else {
-        log.warn("Trying obtain! Locator: " + locator.toString());
-        return null;
+      //When searching for the element the 'findElement' will wait a
+      //maximum of 'timeout' seconds to return the element or throw exception
+      WebElement element = driver.findElement(locator);
+      if (element != null) {
+        isElementPresent = true;
       }
-    } catch (StaleElementReferenceException s) {
-      log.error("Stale - got one. Locator: " + locator.toString());
-      return GetInputValue(driver, locator);
-    } catch (ElementNotVisibleException v) {
-      log.error("NotVisible - got one. Locator: " + locator.toString());
-      return GetInputValue(driver, locator);
+    } catch (NoSuchElementException nsee) {
+      log.warn("Element not present! " + locator.toString());
+    } catch (Exception e) {
+      log.warn("Something went wrong searching for: " + locator.toString());
+      log.error(e.getMessage());
     }
+
+    //------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
+    //when set a new implicitlyWait timeout, we have to set the default
+    //in order to not destroy other invocations of findElement ('WebDriver').
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+    return isElementPresent;
   }
+
+  /**
+   * This method pretends to check if the element is present, if it doesn't
+   * we wait for presence for a specific timeout (30 seconds).
+   *
+   * @param driver
+   * @param locator
+   */
+  public static boolean IsElementNotPresent(WebDriver driver, By locator) {
+    return IsElementNotPresent(driver, locator, 30);
+  }
+
 }

@@ -26,7 +26,6 @@ import static org.junit.Assert.assertEquals;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -71,14 +70,6 @@ public class CDE396 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-
-    //Go to User Console
-    driver.get(baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh");
-
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -96,6 +87,9 @@ public class CDE396 {
   @Test(timeout = 120000)
   public void tc01_RefreshCde_ReturnsInfo() {
     log.info("tc01_RefreshCde_ReturnsInfo");
+
+    //Go to User Console
+    driver.get(baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh");
 
     /*
      * ## Step 1

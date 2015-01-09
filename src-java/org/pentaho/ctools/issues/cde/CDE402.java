@@ -71,12 +71,10 @@ public class CDE402 {
     log.info("setUp##" + CDE402.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     baseUrl = CToolsTestSuite.getBaseUrl();
-
   }
 
   @Before
   public void setUpTestCase() {
-
     //Go to User Console
     driver.get(baseUrl + "Home");
 
@@ -88,7 +86,6 @@ public class CDE402 {
     ElementHelper.WaitForElementVisibility(driver, By.id("viewmenu"));
     ElementHelper.WaitForElementVisibility(driver, By.id("toolsmenu"));
     ElementHelper.WaitForElementVisibility(driver, By.id("helpmenu"));
-
   }
 
   /**
@@ -220,7 +217,6 @@ public class CDE402 {
     assertEquals("Panel_1", tr6td2Text);
     assertEquals("Column", tr7tdText);
     assertEquals("Panel_2", tr7td2Text);
-
   }
 
   @AfterClass
