@@ -51,7 +51,7 @@ import org.pentaho.ctools.security.AccessSystemResources;
   //Start Tests
   LoginPentaho.class,
   //CDF
-  SuiteCDF.class,
+  //SuiteCDF.class,
   //CDE
   SuiteCDE.class,
   //CDA
