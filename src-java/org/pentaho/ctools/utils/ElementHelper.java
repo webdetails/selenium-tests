@@ -394,8 +394,11 @@ public class ElementHelper {
     WebElement element = FindElement(driver, locator);
     if (element != null) {
       try {
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
+        //JavascriptExecutor executor = (JavascriptExecutor) driver;
+        //executor.executeScript("arguments[0].click();", element);
+        //JavascriptExecutor executor = (JavascriptExecutor) driver;
+        //executor.executeScript("var element =  document.getElementById('save'); element.click();");
+        element.click();
       } catch (WebDriverException wde) {
         if (wde.getMessage().contains("arguments[0].click is not a function")) {
           element.click();
@@ -478,6 +481,7 @@ public class ElementHelper {
         //wait for element presence
         element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
       } else {
+        element = elements.get(1);
         log.warn("We have some elements! " + size);
       }
     } catch (Exception e) {

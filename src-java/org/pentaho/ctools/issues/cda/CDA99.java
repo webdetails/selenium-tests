@@ -150,15 +150,11 @@ public class CDA99 {
 
     WebDriver previewWindow = null;
     String currentWindowHandle = driver.getWindowHandle();
-    Set<String> listWindows = null;
+    Set<String> listWindows = driver.getWindowHandles();;
+
     //wait for popup render
-    for (int i = 0; i < 50 || listWindows.size() != 2; i++) {
+    while (listWindows.size() != 2) {
       listWindows = driver.getWindowHandles();
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        log.error(e.getMessage());
-      }
     }
     //Get the windowHandler of the new open window
     Iterator<String> iterWindows = listWindows.iterator();
@@ -207,14 +203,10 @@ public class CDA99 {
 
     previewWindow = null;
     listWindows = null;
+    listWindows = driver.getWindowHandles();
     //wait for popup render
-    for (int i = 0; i < 50 || listWindows.size() != 2; i++) {
+    while (listWindows.size() != 2) {
       listWindows = driver.getWindowHandles();
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        log.error(e.getMessage());
-      }
     }
     //Get the windowHandler of the new open window
     iterWindows = null;

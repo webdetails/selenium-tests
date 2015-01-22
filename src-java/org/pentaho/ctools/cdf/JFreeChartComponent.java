@@ -267,15 +267,10 @@ public class JFreeChartComponent {
 
     WebDriver popup = null;
     String parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
-    Set<String> setWindows = null;
+    Set<String> setWindows = driver.getWindowHandles();
     //wait for popup render
-    for (int i = 0; i < 50 || setWindows.size() != 2; i++) {
+    while (setWindows.size() != 2) {
       setWindows = driver.getWindowHandles();
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        log.error(e.getMessage());
-      }
     }
     //Get popup id
     Iterator<String> windowIterator = setWindows.iterator();
@@ -324,14 +319,10 @@ public class JFreeChartComponent {
     assertFalse(attriStyle.contains("margin: 0px"));
 
     parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
+    setWindows = driver.getWindowHandles();
     //wait for popup render
-    for (int i = 0; i < 50 || setWindows.size() != 2; i++) {
+    while (setWindows.size() != 2) {
       setWindows = driver.getWindowHandles();
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        log.error(e.getMessage());
-      }
     }
     //Get popup id
     windowIterator = setWindows.iterator();

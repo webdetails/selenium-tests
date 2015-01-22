@@ -523,15 +523,10 @@ public class MondrianJNDI {
     ElementHelper.FindElement(driver, By.xpath("//input[@id='startAt']")).sendKeys(selectedHours);
     ElementHelper.FindElement(driver, By.linkText("Ok")).click();
 
-    Set<String> listWindows = null;
+    Set<String> listWindows = driver.getWindowHandles();
     //wait for popup render
-    for (int i = 0; i < 50 || listWindows.size() != 2; i++) {
+    while (listWindows.size() != 2) {
       listWindows = driver.getWindowHandles();
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        log.error(e.getMessage());
-      }
     }
     //Get popup id
     WebDriver cdaCacheManager = null;
