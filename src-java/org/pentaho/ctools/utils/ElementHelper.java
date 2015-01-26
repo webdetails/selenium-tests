@@ -394,11 +394,8 @@ public class ElementHelper {
     WebElement element = FindElement(driver, locator);
     if (element != null) {
       try {
-        //JavascriptExecutor executor = (JavascriptExecutor) driver;
-        //executor.executeScript("arguments[0].click();", element);
-        //JavascriptExecutor executor = (JavascriptExecutor) driver;
-        //executor.executeScript("var element =  document.getElementById('save'); element.click();");
-        element.click();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
       } catch (WebDriverException wde) {
         if (wde.getMessage().contains("arguments[0].click is not a function")) {
           element.click();
