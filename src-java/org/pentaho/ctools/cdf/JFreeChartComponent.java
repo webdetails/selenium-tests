@@ -271,7 +271,6 @@ public class JFreeChartComponent {
     //wait for popup render
     ElementHelper.WaitForNewWindow(driver);
     setWindows = driver.getWindowHandles();
-      
     //Get popup id
     Iterator<String> windowIterator = setWindows.iterator();
     while (windowIterator.hasNext()) {

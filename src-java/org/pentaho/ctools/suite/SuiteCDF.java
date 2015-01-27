@@ -54,6 +54,33 @@ import org.pentaho.ctools.cdf.XactionComponent;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //CDE
-  AutoCompleteBoxComponent.class, ButtonComponent.class, CheckComponent.class, CommentComponent.class, DateInputComponent.class, DateRangeInputComponent.class, DialComponent.class, ExecutePrptComponent.class, ExecuteXactionComponent.class, JFreeChartComponent.class, MetaLayerHomeDashboard.class, MonthPickerComponent.class, MultiButtonComponent.class, OpenFlashChartComponent.class, PrptComponent.class, QueryComponent.class, RadioComponent.class, SchedulePrptComponent.class, SelectComponent.class, SelectMultiComponent.class, TableComponent.class, TextAreaInputComponent.class, org.pentaho.ctools.cdf.TextComponent.class, TextInputComponent.class, TimePlotComponent.class, TrafficComponent.class, VisualizationAPIComponent.class, XactionComponent.class
+  AutoCompleteBoxComponent.class,
+  ButtonComponent.class,
+  CheckComponent.class,
+  CommentComponent.class,
+  DateInputComponent.class,
+  DateRangeInputComponent.class,
+  DialComponent.class,
+  ExecutePrptComponent.class,
+  ExecuteXactionComponent.class,
+  JFreeChartComponent.class,
+  MetaLayerHomeDashboard.class,
+  MonthPickerComponent.class,
+  MultiButtonComponent.class,
+  OpenFlashChartComponent.class,
+  PrptComponent.class,
+  QueryComponent.class,
+  RadioComponent.class,
+  SchedulePrptComponent.class,
+  SelectComponent.class,
+  SelectMultiComponent.class,
+  TableComponent.class,
+  TextAreaInputComponent.class,
+  org.pentaho.ctools.cdf.TextComponent.class,
+  TextInputComponent.class,
+  TimePlotComponent.class,
+  TrafficComponent.class,
+  VisualizationAPIComponent.class,
+  XactionComponent.class
 })
 public class SuiteCDF {}

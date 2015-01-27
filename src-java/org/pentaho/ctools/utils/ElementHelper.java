@@ -337,14 +337,14 @@ public class ElementHelper {
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(10, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    
+
     boolean isTextPresent = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
-    if ( isTextPresent == true ) {
-        textPresent = textToWait;
+    if (isTextPresent == true) {
+      textPresent = textToWait;
     }
-    
+
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-      
+
     return textPresent;
   }
 
@@ -650,16 +650,20 @@ public class ElementHelper {
       return GetInputValue(driver, locator);
     }
   }
-    
-    
-    public static void WaitForNewWindow(WebDriver driver){
-         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(500, TimeUnit.MILLISECONDS);
 
-        wait.until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return (d.getWindowHandles().size() != 1);
-            }
-        });
-    }
+  /**
+   * This method shall wait for a new window present.
+   *
+   * @param driver
+   */
+  public static void WaitForNewWindow(WebDriver driver) {
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS);
+
+    wait.until(new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver d) {
+        return d.getWindowHandles().size() != 1;
+      }
+    });
+  }
 }

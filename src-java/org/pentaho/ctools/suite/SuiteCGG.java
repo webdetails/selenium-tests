@@ -30,6 +30,8 @@ import org.pentaho.ctools.cgg.ScatterChart;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //CGG
-  BarChart.class, ScatterChart.class, DialChart.class
+  BarChart.class,
+  ScatterChart.class,
+  DialChart.class
 })
 public class SuiteCGG {}
