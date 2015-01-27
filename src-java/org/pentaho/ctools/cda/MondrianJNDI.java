@@ -114,8 +114,9 @@ public class MondrianJNDI {
      * ## Step 1
      */
     //Check if the field 'filename' exist and expected value
-    String filename = ElementHelper.GetText(driver, By.id("fileid"));
-    String pleaseSelect = ElementHelper.GetText(driver, By.id("pleaseselect"));
+      
+    String filename = ElementHelper.WaitForTextPresent(driver, By.id("fileid"), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda");
+    String pleaseSelect = ElementHelper.WaitForTextPresent(driver, By.id("pleaseselect"), "Please select a Data Access ID");
 
     assertEquals("/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda", filename);
     assertEquals("Please select a Data Access ID", pleaseSelect);
@@ -525,9 +526,8 @@ public class MondrianJNDI {
 
     Set<String> listWindows = driver.getWindowHandles();
     //wait for popup render
-    while (listWindows.size() != 2) {
-      listWindows = driver.getWindowHandles();
-    }
+    ElementHelper.WaitForNewWindow(driver);
+    listWindows = driver.getWindowHandles();
     //Get popup id
     WebDriver cdaCacheManager = null;
     Iterator<String> iterWindows = listWindows.iterator();

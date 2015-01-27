@@ -35,6 +35,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -331,12 +332,20 @@ public class ElementHelper {
    * @param text
    * @return
    */
-  public static void WaitForTextPresent(WebDriver driver, By locator, String textToWait) {
+  public static String WaitForTextPresent(WebDriver driver, By locator, String textToWait) {
+    String textPresent = "";
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(10, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
+    
+    boolean isTextPresent = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
+    if ( isTextPresent == true ) {
+        textPresent = textToWait;
+    }
+    
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+      
+    return textPresent;
   }
 
   /**
@@ -641,4 +650,16 @@ public class ElementHelper {
       return GetInputValue(driver, locator);
     }
   }
+    
+    
+    public static void WaitForNewWindow(WebDriver driver){
+         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(500, TimeUnit.MILLISECONDS);
+
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return (d.getWindowHandles().size() != 1);
+            }
+        });
+    }
 }

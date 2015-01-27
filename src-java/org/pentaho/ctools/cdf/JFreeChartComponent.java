@@ -269,9 +269,9 @@ public class JFreeChartComponent {
     String parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
     Set<String> setWindows = driver.getWindowHandles();
     //wait for popup render
-    while (setWindows.size() != 2) {
-      setWindows = driver.getWindowHandles();
-    }
+    ElementHelper.WaitForNewWindow(driver);
+    setWindows = driver.getWindowHandles();
+      
     //Get popup id
     Iterator<String> windowIterator = setWindows.iterator();
     while (windowIterator.hasNext()) {
@@ -321,9 +321,8 @@ public class JFreeChartComponent {
     parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
     setWindows = driver.getWindowHandles();
     //wait for popup render
-    while (setWindows.size() != 2) {
-      setWindows = driver.getWindowHandles();
-    }
+    ElementHelper.WaitForNewWindow(driver);
+    setWindows = driver.getWindowHandles();
     //Get popup id
     windowIterator = setWindows.iterator();
     while (windowIterator.hasNext()) {

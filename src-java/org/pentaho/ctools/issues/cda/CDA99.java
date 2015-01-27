@@ -153,9 +153,8 @@ public class CDA99 {
     Set<String> listWindows = driver.getWindowHandles();;
 
     //wait for popup render
-    while (listWindows.size() != 2) {
-      listWindows = driver.getWindowHandles();
-    }
+    ElementHelper.WaitForNewWindow(driver);
+    listWindows = driver.getWindowHandles();
     //Get the windowHandler of the new open window
     Iterator<String> iterWindows = listWindows.iterator();
     while (iterWindows.hasNext()) {
@@ -203,11 +202,9 @@ public class CDA99 {
 
     previewWindow = null;
     listWindows = null;
-    listWindows = driver.getWindowHandles();
     //wait for popup render
-    while (listWindows.size() != 2) {
-      listWindows = driver.getWindowHandles();
-    }
+    ElementHelper.WaitForNewWindow(driver);
+    listWindows = driver.getWindowHandles();
     //Get the windowHandler of the new open window
     iterWindows = null;
     iterWindows = listWindows.iterator();
