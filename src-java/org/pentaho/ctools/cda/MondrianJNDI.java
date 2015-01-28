@@ -600,17 +600,25 @@ public class MondrianJNDI {
    * This method is usage to remove any schedule entry.
    */
   public void removeFirstSchedule() {
-    //Press to delete schedule
-    ElementHelper.FindElement(driver, By.cssSelector("img.deleteIcon.button")).click();
+    boolean elementPresent = false;
+    
+    elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 5);
+      
+    while (elementPresent) { 
+      //Press to delete schedule
+      ElementHelper.FindElement(driver, By.cssSelector("img.deleteIcon.button")).click();
 
-    //Wait for pop-up
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "Want to delete this scheduler entry?";
-    alert.accept();
+      //Wait for pop-up
+      wait.until(ExpectedConditions.alertIsPresent());
+      Alert alert = driver.switchTo().alert();
+      String confirmationMsg = alert.getText();
+      String expectedCnfText = "Want to delete this scheduler entry?";
+      alert.accept();
 
-    assertEquals(confirmationMsg, expectedCnfText);
+      assertEquals(confirmationMsg, expectedCnfText);
+    
+      elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 5);
+    }
   }
 
   @After
