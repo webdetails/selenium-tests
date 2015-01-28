@@ -324,7 +324,7 @@ public class ElementHelper {
     return text;
   }
 
-  /**
+   /**
    * This method wait for text to be present.
    *
    * @param driver
@@ -333,18 +333,32 @@ public class ElementHelper {
    * @return
    */
   public static String WaitForTextPresent(WebDriver driver, By locator, String textToWait) {
+    return WaitForTextPresent(driver, locator, textToWait, 10);
+  }
+    
+
+  /**
+   * This method wait for text to be present.
+   *
+   * @param driver
+   * @param locator
+   * @param text
+   * @param timeout - in seconds
+   * @return
+   */
+  public static String WaitForTextPresent(WebDriver driver, By locator, String textToWait, Integer timeout) {
     String textPresent = "";
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(10, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-
+    
     boolean isTextPresent = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
-    if (isTextPresent == true) {
-      textPresent = textToWait;
+    if ( isTextPresent == true ) {
+        textPresent = textToWait;
     }
-
+    
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
+      
     return textPresent;
   }
 
@@ -650,20 +664,16 @@ public class ElementHelper {
       return GetInputValue(driver, locator);
     }
   }
+    
+    
+    public static void WaitForNewWindow(WebDriver driver){
+         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(500, TimeUnit.MILLISECONDS);
 
-  /**
-   * This method shall wait for a new window present.
-   *
-   * @param driver
-   */
-  public static void WaitForNewWindow(WebDriver driver) {
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS);
-
-    wait.until(new ExpectedCondition<Boolean>() {
-      @Override
-      public Boolean apply(WebDriver d) {
-        return d.getWindowHandles().size() != 1;
-      }
-    });
-  }
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return (d.getWindowHandles().size() != 1);
+            }
+        });
+    }
 }

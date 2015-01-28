@@ -604,7 +604,7 @@ public class MondrianJNDI {
     
     elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 5);
       
-    while (elementPresent) { 
+    while (!elementPresent) { 
       //Press to delete schedule
       ElementHelper.FindElement(driver, By.cssSelector("img.deleteIcon.button")).click();
 
