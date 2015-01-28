@@ -86,7 +86,7 @@ public class MapComponentReference {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Amaps.wcdf/generatedContent");
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"), 180);
     
     //Wait for page render on each map test
     ElementHelper.WaitForTextPresent(driver, By.xpath("//div[@id='simpleTest']/div/div[8]/div"), "200 km", 90);

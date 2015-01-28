@@ -460,7 +460,18 @@ public class ElementHelper {
    * @param locator
    */
   public static void WaitForElementInvisibility(WebDriver driver, By locator) {
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+      WaitForElementInvisibility(driver, locator, 30);
+  }
+    
+  /**
+   * This method pretends to check if the element is present, if it doesn't
+   * then don't wait, if element is present, wait for its invisibility.
+   *
+   * @param driver
+   * @param locator
+   */
+  public static void WaitForElementInvisibility(WebDriver driver, By locator, Integer timeout) {
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
 
     driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     List<WebElement> elements = null;
