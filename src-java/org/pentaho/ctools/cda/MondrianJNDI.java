@@ -484,7 +484,7 @@ public class MondrianJNDI {
    *    4. In the new window, check the schedule
    *    5. Remove the schedule
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 240000)
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
     log.info("tc5_CacheThisSimple_ScheduleIsSetSuccessful");
     String selectedHours = "21";
@@ -603,8 +603,8 @@ public class MondrianJNDI {
     boolean elementPresent = false;
     
     elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 5);
-      
-    while (!elementPresent) { 
+    
+    while (elementPresent) { 
       //Press to delete schedule
       ElementHelper.FindElement(driver, By.cssSelector("img.deleteIcon.button")).click();
 
@@ -616,6 +616,8 @@ public class MondrianJNDI {
       alert.accept();
 
       assertEquals(confirmationMsg, expectedCnfText);
+      ElementHelper.WaitForAlertNotPresent(driver);
+      driver.switchTo().defaultContent();
     
       elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 5);
     }

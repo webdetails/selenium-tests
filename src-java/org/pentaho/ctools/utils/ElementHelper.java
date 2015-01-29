@@ -29,6 +29,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
@@ -684,6 +685,24 @@ public class ElementHelper {
             @Override
             public Boolean apply(WebDriver d) {
                 return (d.getWindowHandles().size() != 1);
+            }
+        });
+    }
+    
+    public static void WaitForAlertNotPresent(WebDriver driver){
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS);
+        
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                 Boolean alertExist = false;
+                 try{
+                    d.switchTo().alert();
+                    alertExist = true;
+                 } catch(NoAlertPresentException e){
+                    //Ignore the exception
+                 }
+                return (alertExist != true);
             }
         });
     }
