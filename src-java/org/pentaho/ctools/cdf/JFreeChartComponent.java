@@ -258,12 +258,17 @@ public class JFreeChartComponent {
     Actions acts = new Actions(driver);
     acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts.build().perform();
+    //Check bar title
     assertTrue(ElementHelper.GetText(driver, By.id("sampleObjectcaptiontitle")).equals("Top 10 Customers"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']")).click();
-
+    //Check the bar is visible
     WebElement elementBar = ElementHelper.FindElement(driver, By.xpath("//div[@class='caption-bottom']"));
     String attriStyle = elementBar.getAttribute("style");
     assertFalse(attriStyle.contains("margin: 0px"));
+    //Click in Zoom
+    acts.build().perform();
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']")).click();
+    // Not we have to wait for loading disappear
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     WebDriver popup = null;
     String parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
@@ -304,6 +309,8 @@ public class JFreeChartComponent {
     acts2.build().perform();
     //Open the Pie Chart
     assertTrue(ElementHelper.GetText(driver, By.id("sampleObjectcaptiontitle")).equals("Top 10 Customers"));
+    //Change to pie chart
+    acts2.build().perform();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']")).click();
     // Not we have to wait for loading disappear
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -311,11 +318,16 @@ public class JFreeChartComponent {
     Actions acts3 = new Actions(driver);
     acts3.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts3.build().perform();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']")).click();
-
+    //Check bar is visible
     elementBar = ElementHelper.FindElement(driver, By.xpath("//div[@class='caption-bottom']"));
     attriStyle = elementBar.getAttribute("style");
     assertFalse(attriStyle.contains("margin: 0px"));
+    //Zoom
+    acts3.build().perform();
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']")).click();
+    // Not we have to wait for loading disappear
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    
 
     parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
     setWindows = driver.getWindowHandles();
