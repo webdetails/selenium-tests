@@ -160,7 +160,7 @@ public class SchedulePrptComponent {
    *    3. Check for alert.
    *    4. On Schedule Manager, it is set the schedule.
    */
-  @Test(timeout = 90000)
+  @Test(timeout = 150000)
   public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() {
     String schLocation = "/public";
 
@@ -258,7 +258,7 @@ public class SchedulePrptComponent {
     //Go to home page
     driver.get(baseUrl + "Home");
     // NOTE - we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
     //Click in Schedule
     wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
@@ -331,7 +331,7 @@ public class SchedulePrptComponent {
     //Go to home page
     driver.get(baseUrl + "Home");
     // NOTE - we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
     //Click in Schedule
     wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
