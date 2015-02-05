@@ -159,10 +159,10 @@ public class TimePlotComponent {
     acts.moveToElement(ElementHelper.FindElement(driver, By.cssSelector("canvas.timeplot-canvas")), 10, 10);
     acts.build().perform();
 
-    String expectedText = "Total Price = 6,864  ";
+    String expectedText = "Total Price = 6,864";
     String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/span[2]"));
 
-    assertEquals(expectedText, text);
+    assertTrue(text.startsWith(expectedText));
   }
 
   @AfterClass
