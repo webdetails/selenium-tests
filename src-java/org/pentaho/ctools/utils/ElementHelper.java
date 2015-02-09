@@ -325,7 +325,7 @@ public class ElementHelper {
     return text;
   }
 
-   /**
+  /**
    * This method wait for text to be present.
    *
    * @param driver
@@ -336,7 +336,6 @@ public class ElementHelper {
   public static String WaitForTextPresent(WebDriver driver, By locator, String textToWait) {
     return WaitForTextPresent(driver, locator, textToWait, 10);
   }
-    
 
   /**
    * This method wait for text to be present.
@@ -352,14 +351,14 @@ public class ElementHelper {
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    
+
     boolean isTextPresent = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
-    if ( isTextPresent == true ) {
-        textPresent = textToWait;
+    if (isTextPresent == true) {
+      textPresent = textToWait;
     }
-    
+
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-      
+
     return textPresent;
   }
 
@@ -461,9 +460,9 @@ public class ElementHelper {
    * @param locator
    */
   public static void WaitForElementInvisibility(WebDriver driver, By locator) {
-      WaitForElementInvisibility(driver, locator, 30);
+    WaitForElementInvisibility(driver, locator, 30);
   }
-    
+
   /**
    * This method pretends to check if the element is present, if it doesn't
    * then don't wait, if element is present, wait for its invisibility.
@@ -650,60 +649,54 @@ public class ElementHelper {
    */
   public static String GetInputValue(WebDriver driver, By locator) {
     log.debug("Enter:GetInputValue");
-    try {
-      IsElementVisible(driver, locator);
-      log.debug("Element is visible");
-      List<WebElement> listElements = driver.findElements(locator);
-      if (listElements.size() > 0) {
-        WebElement element = listElements.get(0);
-        String value = element.getAttribute("value");
-        if (element.isDisplayed() && element.isEnabled()) {
-          log.debug("return element found it");
-          return value;
-        } else {
-          log.warn("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
-          return GetInputValue(driver, locator);
-        }
-      } else {
-        log.warn("Trying obtain! Locator: " + locator.toString());
-        return null;
-      }
-    } catch (StaleElementReferenceException s) {
-      log.error("Stale - got one. Locator: " + locator.toString());
-      return GetInputValue(driver, locator);
-    } catch (ElementNotVisibleException v) {
-      log.error("NotVisible - got one. Locator: " + locator.toString());
-      return GetInputValue(driver, locator);
+    String attrValue = "";
+    WebElement element = FindElement(driver, locator);
+    if (element != null) {
+      attrValue = element.getAttribute("value");
     }
-  }
-    
-    
-    public static void WaitForNewWindow(WebDriver driver){
-         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(500, TimeUnit.MILLISECONDS);
 
-        wait.until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return (d.getWindowHandles().size() != 1);
-            }
-        });
-    }
-    
-    public static void WaitForAlertNotPresent(WebDriver driver){
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(15, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS);
-        
-        wait.until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                 Boolean alertExist = false;
-                 try{
-                    d.switchTo().alert();
-                    alertExist = true;
-                 } catch(NoAlertPresentException e){
-                    //Ignore the exception
-                 }
-                return (alertExist != true);
-            }
-        });
-    }
+    return attrValue;
+  }
+
+  /**
+   * This function shall wait for the new window display.
+   * The code check if there is more than one window in the list. In the
+   * beginning we only have the main window.
+   *
+   * @param driver
+   */
+  public static void WaitForNewWindow(WebDriver driver) {
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(500, TimeUnit.MILLISECONDS);
+
+    wait.until(new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver d) {
+        return d.getWindowHandles().size() != 1;
+      }
+    });
+  }
+
+  /**
+   * This function shall wait for the alert window to be closed or doesn't
+   * exist.
+   *
+   * @param driver
+   */
+  public static void WaitForAlertNotPresent(WebDriver driver) {
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS);
+
+    wait.until(new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver d) {
+        Boolean alertExist = false;
+        try {
+          d.switchTo().alert();
+          alertExist = true;
+        } catch (NoAlertPresentException e) {
+          //Ignore the exception
+        }
+        return alertExist != true;
+      }
+    });
+  }
 }

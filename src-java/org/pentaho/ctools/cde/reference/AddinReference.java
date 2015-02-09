@@ -25,7 +25,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hamcrest.CoreMatchers;
@@ -43,7 +42,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
-import org.pentaho.ctools.utils.HttpUtils;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -157,7 +155,7 @@ public class AddinReference {
     //Check the hyperlink
     WebElement elemUrl = ElementHelper.FindElement(driver, By.linkText("JQuery Sparkline plugin"));
     String attrHref = elemUrl.getAttribute("href");
-    assertEquals(HttpStatus.SC_OK, HttpUtils.GetHttpStatus(attrHref));
+    assertEquals("http://www.omnipotent.net/jquery.sparkline/", attrHref);
 
     //Check Defaults
     String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='SparklineDescHtml']/blockquote/pre"));
@@ -508,9 +506,9 @@ public class AddinReference {
     String urlRow1Col1AttrHref = ElementHelper.FindElement(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[1]/td[2]/a")).getAttribute("href");
     String urlRow2Col1AttrHref = ElementHelper.FindElement(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td[2]/a")).getAttribute("href");
     String urlRow3Col1AttrHref = ElementHelper.FindElement(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td[2]/a")).getAttribute("href");
-    assertEquals(HttpStatus.SC_OK, HttpUtils.GetHttpStatus(urlRow1Col1AttrHref));
-    assertEquals(HttpStatus.SC_OK, HttpUtils.GetHttpStatus(urlRow2Col1AttrHref));
-    assertEquals(HttpStatus.SC_OK, HttpUtils.GetHttpStatus(urlRow3Col1AttrHref));
+    assertEquals("http://www.webdetails.org/", urlRow1Col1AttrHref);
+    assertEquals("http://ctools.webdetails.org/", urlRow2Col1AttrHref);
+    assertEquals("http://cdf.webdetails.org/", urlRow3Col1AttrHref);
 
     /*
      * ## Step 2
