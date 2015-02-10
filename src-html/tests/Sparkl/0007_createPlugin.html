@@ -1074,38 +1074,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[@id='pluginsListObj']/div[3]/div/div/div/span</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='pluginsListObj']//span[contains(text(),'Atest1')]</td>
 	<td>Atest1</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@id='pluginsListObj']/div[3]/div/div/div/span</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='pluginsListObj']//span[contains(text(),'Atest1')]</td>
 	<td>Atest1</td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[@id='pluginsListObj']/div[3]/div/div/div[2]</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'atest1')]</td>
 	<td>atest1</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@id='pluginsListObj']/div[3]/div/div/div[2]</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'atest1')]</td>
 	<td>atest1</td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[@id='pluginsListObj']/div[3]/div[2]/div</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'Restart server')]</td>
 	<td>Restart server</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@id='pluginsListObj']/div[3]/div[2]/div</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'Restart server')]</td>
 	<td>Restart server</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>xpath=(//div[@id='deleteAction'])[2]</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'atest1')]/../../..//div[@id='deleteAction']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1179,8 +1179,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='pluginsListObj']//span[contains(text(),'Atest')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='pluginsListObj']//span[contains(text(),'Atest')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'atest')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'atest')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'Restart server')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'Restart server')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>id=deleteAction</td>
+	<td>//div[@id='pluginsListObj']//div[contains(text(),'atest')]/../../..//div[@id='deleteAction']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1253,7 +1283,6 @@
 	<td>//span[contains(text(),'Atest')]</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

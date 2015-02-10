@@ -487,19 +487,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=span.name</td>
+	<td>assertElementPresent</td>
+	<td>css=span.name[contains(text(),'Sparkl')]</td>
 	<td>Sparkl</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=div.id</td>
+	<td>assertElementPresent</td>
+	<td>css=div.id[contains(text(),'sparkl')]</td>
 	<td>sparkl</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=div.body</td>
-	<td>Create and explore pentaho plugins.</td>
+	<td>assertElementPresent</td>
+	<td>css=div.body[contains(text(),'Create and explore pentaho plugins.')]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -820,11 +820,6 @@
 	<td>assertText</td>
 	<td>//table[@id='tableObjTable']/tbody/tr[2]/td</td>
 	<td>${cpk.plugin.dir}</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//table[@id='tableObjTable']/tbody/tr[2]/td[2]</td>
-	<td>/C:/BASERVER5.2/PENTAHO/server/biserver-ee/pentaho-solutions/system/sparkl/</td>
 </tr>
 <tr>
 	<td>waitForText</td>
