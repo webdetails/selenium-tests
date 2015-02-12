@@ -291,7 +291,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
     <target name="test-html" depends="clean-html, resolve-plugin, stop-pentaho-bi-server">
         <!-- copy data to the server -->
-        <antcall target="copy-plugin-samples"/>
+        <antcall target="copy-ctools-and-other-resources"/>
 
         <!-- Starting Pentaho BI Server -->
         <antcall target="start-pentaho-bi-server"/>
@@ -339,14 +339,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </target>
 
     <!--=======================================================================
-        copy-plugin-samples
+        copy-ctools-and-other-resources
 
         Copy the CTools and samples to Pentaho server.
         ====================================================================-->
-    <target name="copy-plugin-samples">
-      <echo message="Starting copy CTools." />
+    <target name="copy-ctools-and-other-resources">
+      <echo message="Starting copy CTools and other resources." />
 
-      <!-- Delete ctools on server -->
+      <!-- Delete CTools on server -->
       <property name="pentaho.default.content.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/default-content"/>
       <property name="pentaho.plugin.cgg.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/cgg"/>
       <property name="pentaho.plugin.cda.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/cda"/>
@@ -365,10 +365,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <unzip src="${lib.ext.dir}/plugin/pentaho-cdf-dd.zip" dest="${tmp.dir}" />
       <!-- unzip the samples -->
       <!-- 
-          1º Create a directory with name 'public'
-          2º Create a directory with name 'plugin-samples' under 'public'
-          3º Unzip the samples CDF, CDE and CDA
-          4º Move the samples dir (CDF, CDE, CDA) under 'plugin-samples'
+          1- Create a directory with name 'public'
+          2- Create a directory with name 'plugin-samples' under 'public'
+          3- Unzip the samples CDF, CDE and CDA
+          4- Move the samples dir (CDF, CDE, CDA) under 'plugin-samples'
       -->
       <mkdir dir="${tmp.dir}/public/plugin-samples" />
       <unzip src="${lib.ext.dir}/plugin/pentaho-cdf-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
@@ -382,7 +382,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <zipfileset dir="${tmp.dir}/public" prefix="public"/>
       </zip>
 
-      <!-- Copy the ctools -->
+      <!-- Copy the CTools -->
       <copy todir="${pentaho.plugin.cgg.dir}">
         <fileset dir="${tmp.dir}/cgg" />
       </copy>
@@ -396,6 +396,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <fileset dir="${tmp.dir}/pentaho-cdf-dd" />
       </copy>
       <copy file="${tmp.dir}/plugin-samples.zip" todir="${pentaho.default.content.dir}" />
+	  <!-- Copy resources for CDF Tutorial -->
+	  <copy todir="${pentaho.plugin.cdf.dir}">
+        <fileset dir="${resources.dir}/cdf-tutorial" />
+      </copy>	  
     </target>
 
     <!--=======================================================================

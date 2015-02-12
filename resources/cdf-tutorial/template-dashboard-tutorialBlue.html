@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Tutorial Blue</title>
+
+
+	<!-- CSS style -->
+	<link rel="stylesheet" href="resources/style/tutorialBlue.css" type="text/css">
+	
+	<script language="javascript" type="text/javascript">
+		$(function(){
+		    $('.corner').corner();
+		    $('#sidebar h3').corner();
+		});
+
+		$(function(){
+			$('#steps > div').bind("click", 
+			      function(){
+				      switchToStep($(this).attr("id"));
+			      }
+			);
+		});
+
+		
+		var switchToStep = function(stepNumber){
+
+		      // Mark tab as selected
+		      $('#steps > div').parent().children().removeClass("selected");
+		      $("#"+stepNumber).addClass("selected");
+
+			 // display components for this step in div
+			 $('#main tr').hide();
+			 $('#dashboard .hide').hide();
+			 $(".step"+stepNumber).show();
+
+		      // display text for this step in sidebar div
+		      $('#sidebar > div').hide();
+		      $("#step"+stepNumber).show();
+
+		};
+		
+		var highLightTicks = 0;
+		
+		var buildToolTip = function(component,htmlObject){	
+			
+			var getObjectValue = function(name,object){
+				//return "var " + name + " = " + JSON.toJSONString(object,true).replace(/\t/g," ");
+				//return "var " + name + " = " + JSON.stringify(object,true,2);
+				return 'var ' + name + ' = ' +
+				JSON.stringify(object, function(key, val) {
+					if (object.hasOwnProperty(key) && typeof val == 'function') {
+						return '' + val; 
+					}
+					return val;
+				}, 2);
+			}
+			
+			var _class =  component.type != "text" ? "samplesTooltip" : "samplesTextTooltip";
+			var _tooltip = $('<image title="View Code" class="' + _class + '" src="resources/style/images/help.png"/>');		
+			
+			var value = getObjectValue(component.name,component);
+			var defName = component.name + "Definition";
+			var componentDefinition = window[defName]; // eval('typeof ' + defName);
+			if(typeof componentDefinition != "undefined"){
+				value = value.replace('"' + defName+ '"', defName);
+				value += "\n\n" + getObjectValue(defName,window[defName]);
+				while(value.indexOf('\\"')!= -1){
+					value = value.replace('\\"', '\"');
+				}
+				while(value.indexOf('\\n')!= -1){
+					value = value.replace('\\n', '\n');
+				}
+			}
+			
+			var _prompt = _tooltip.bind("click",function(){
+			var _inner = '<br /><textarea wrap="off" cols="180" class="samples" name="textarea">' + value + '</textarea>';
+			$.prompt(_inner,{
+					buttons: { Close:true },
+					opacity: 0.2,
+					prefix:'brownJqi'
+					});
+			});
+		
+			if(htmlObject == undefined)
+				$("#" + component.htmlObject).append(_tooltip);
+			else{
+				$("#" + htmlObject).empty();
+				$("#" + htmlObject).append(_tooltip);
+			}
+				
+			_tooltip.tooltip({delay:0, track:false, fade:250, showURL:false});
+			
+		};
+
+
+		var showFile = function(link){
+			$.fancybox({type:"iframe", href:link, width:$(window).width() - 100, height:$(window).height() - 50});
+		};
+	</script>
+
+</head>
+
+<body>
+
+	<div class="container corner">
+		
+		<div id="header" class="span-24 last">
+			<!-- title -->
+			<div class="span-14 prepend-top append-bottom prepend-1">
+				<i>A step by step introduction to CDF's capabilities</i>
+				<div id="title"><h1></h1></div>
+			</div>
+			
+			<div class="span-4 prepend-top prepend-3">
+				<img width="200" border="0" alt="WebDetails" src="resources/style/images/cdf-logo.png">
+			</div>
+		</div>
+
+
+		
+		<div id="steps" class="span-23 prepend-1 last">
+			
+			<div id="0" class="span-2 selected">
+			      <a href="#">Intro</a>
+			</div>
+
+			<div id="1" class="span-2">
+			      <a href="#">Step1</a>
+			</div>
+
+			<div id="2" class="span-2">
+			      <a href="#">Step2</a>
+			</div>
+			  
+			<div id="3" class="span-2">
+			      <a href="#">Step3</a>
+			</div>
+
+			<div id="4" class="span-2">
+			      <a href="#">Step4</a>
+			</div>
+
+			<div id="5" class="span-2">
+			      <a href="#">Step5</a>
+			</div>
+
+			<div id="6" class="span-2 last">
+			    <a href="#">Step6</a>
+			</div>
+		</div>
+
+
+		<div id="content" class="span-23 last corner">
+
+			{content}
+
+			<!-- main content -->
+
+			<!-- sidebar (steps description) -->
+
+		</div>
+
+
+		<!-- footer -->
+		<div id="footer" class="span-24 last">
+
+			<div class="span-11 prepend-1 prepend-top append-bottom">
+				<a href="http://www.webdetails.pt">
+					<img width="120" border="0" alt="WebDetails" src="resources/style/images/webdetails.png">
+				</a>
+			</div>
+
+			<div class="span-11 prepend-top last">
+				<p style="text-align:right">
+					 For further information, <i><a href="mailto:cdf@webdetails.pt">contact us</a></i>.<br />
+					 License granted to @CLIENT-NAME@.
+				</p>
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+</html>
