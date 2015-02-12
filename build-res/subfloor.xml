@@ -341,7 +341,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!--=======================================================================
         copy-ctools-and-other-resources
 
-        Copy the CTools and samples to Pentaho server.
+        Copy the CTools, samples and other resources to Pentaho server.
         ====================================================================-->
     <target name="copy-ctools-and-other-resources">
       <echo message="Starting copy CTools and other resources." />
