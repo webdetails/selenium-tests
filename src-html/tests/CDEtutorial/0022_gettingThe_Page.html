@@ -329,7 +329,7 @@
 <tr>
 	<td>waitForAttribute</td>
 	<td>//div[contains(@id,'e2_containerprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
-	<td>M101.*,-14.*,102.375 0 0,1 -68.*,75.*L0,0Z</td>
+	<td>M10?.*,-14.*,10?.* 0 0,1 -68.*,75.*L0,0Z</td>
 </tr>
 <tr>
 	<td>waitForAttribute</td>
@@ -342,24 +342,29 @@
 	<td>M-93.*,40.*,102.375 0 0,1 -1.*,-102.375L0,0Z</td>
 </tr>
 <tr>
-	<td>assertAttribute</td>
+	<td>verifyAttribute</td>
 	<td>//div[contains(@id,'e2_containerprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
 	<td>M6.2*e-15,-10?.*,10?.* 0 0,1 10?.*,-14.*L0,0Z'</td>
 </tr>
 <tr>
-	<td>assertAttribute</td>
+	<td>verifyAttribute</td>
 	<td>//div[contains(@id,'e2_containerprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]@d</td>
 	<td>M6.2*e-15,-10?.*,10?.* 0 0,1 10?.*,-14.*L0,0Z'</td>
 </tr>
 <tr>
-	<td>assertAttribute</td>
+	<td>verifyAttribute</td>
 	<td>//div[contains(@id,'e2_containerprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]@d</td>
 	<td>M6.2*e-15,-10?.*,10?.* 0 0,1 10?.*,-14.*L0,0Z'</td>
 </tr>
 <tr>
-	<td>assertAttribute</td>
+	<td>verifyAttribute</td>
 	<td>//div[contains(@id,'e2_containerprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']@d</td>
 	<td>M6.2*e-15,-10?.*,10?.* 0 0,1 10?.*,-14.*L0,0Z'</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'e2_containerprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>APAC22133</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -790,11 +795,6 @@
 	<td>2005</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementNotPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
@@ -915,11 +915,6 @@
 	<td>2004</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementNotPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
 	<td></td>
@@ -1038,11 +1033,6 @@
 	<td>assertValue</td>
 	<td>css=select</td>
 	<td>2003</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
-	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
