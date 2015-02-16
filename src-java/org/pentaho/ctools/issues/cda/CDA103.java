@@ -117,7 +117,7 @@ public class CDA103 {
     assertEquals("File", fileMenuText);
     assertEquals("View", viewMenuText);
     assertEquals("Tools", toolsMenuText);
-    assertEquals("Help...", helpMenuText);
+    assertEquals("Help", helpMenuText);
     ElementHelper.Click(driver, By.id("toolsmenu"));
 
     /*

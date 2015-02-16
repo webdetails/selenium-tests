@@ -128,14 +128,8 @@ public class CDE395 {
     /*
      * ## Step 2
      */
-    String analysisText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewanalyzerButton']"));
-    String interactiveText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewinteractiveReportButton']"));
-    String dashboardText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdashboardButton']"));
     String cdeText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
     String dataText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdatasourceButton']"));
-    assertEquals("Analysis Report", analysisText);
-    assertEquals("Interactive Report", interactiveText);
-    assertEquals("Dashboard", dashboardText);
     assertEquals("CDE Dashboard", cdeText);
     assertEquals("Data Source", dataText);
     ElementHelper.Click(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
@@ -152,26 +146,26 @@ public class CDE395 {
     assertEquals("CDE Dashboard", titleText);
 
     //focus iframe
-    WebElement elementFrame1 = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    WebDriver frame1 = driver.switchTo().frame(elementFrame1);
+    elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
+    frame = driver.switchTo().frame(elementFrame);
 
     //assert buttons and click Settings
-    String newText = ElementHelper.GetText(frame1, By.xpath("//div[@id='headerLinks']/div/a"));
-    String saveText = ElementHelper.GetText(frame1, By.xpath("//div[@id='headerLinks']/div[2]/a"));
-    String saveasText = ElementHelper.GetText(frame1, By.xpath("//div[@id='headerLinks']/div[3]/a"));
-    String reloadText = ElementHelper.GetText(frame1, By.xpath("//div[@id='headerLinks']/div[4]/a"));
-    String settingsText = ElementHelper.GetText(frame1, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    String newText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div/a"));
+    String saveText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div[2]/a"));
+    String saveasText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div[3]/a"));
+    String reloadText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div[4]/a"));
+    String settingsText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div[5]/a"));
     assertEquals("New", newText);
     assertEquals("Save", saveText);
     assertEquals("Save as...", saveasText);
     assertEquals("Reload", reloadText);
     assertEquals("Settings", settingsText);
-    ElementHelper.Click(frame1, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    ElementHelper.Click(frame, By.xpath("//div[@id='headerLinks']/div[5]/a"));
 
     /*
      * ## Step 4
      */
-    WebElement obj1 = ElementHelper.FindElement(frame1, By.xpath("//select[@id='rendererInput']/option[@value='bootstrap']"));
+    WebElement obj1 = ElementHelper.FindElement(frame, By.xpath("//select[@id='rendererInput']/option[@value='bootstrap']"));
     assertEquals(obj1.isSelected(), true);
   }
 

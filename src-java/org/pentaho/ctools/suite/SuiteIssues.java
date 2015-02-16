@@ -23,11 +23,46 @@ package org.pentaho.ctools.suite;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.pentaho.ctools.issues.cda.CDA103;
+import org.pentaho.ctools.issues.cda.CDA108;
+import org.pentaho.ctools.issues.cda.CDA46;
 import org.pentaho.ctools.issues.cda.CDA99;
+import org.pentaho.ctools.issues.cde.CDE347;
+import org.pentaho.ctools.issues.cde.CDE367;
+import org.pentaho.ctools.issues.cde.CDE384;
+import org.pentaho.ctools.issues.cde.CDE392;
+import org.pentaho.ctools.issues.cde.CDE395;
+import org.pentaho.ctools.issues.cde.CDE396;
+import org.pentaho.ctools.issues.cde.CDE399;
+import org.pentaho.ctools.issues.cde.CDE402;
+import org.pentaho.ctools.issues.cde.CDE407;
+import org.pentaho.ctools.issues.cde.CDE408;
+import org.pentaho.ctools.issues.cde.CDE413;
+import org.pentaho.ctools.issues.cdf.CDF435;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //Issues CDA
-  CDA99.class
+  CDA46.class,
+  CDA99.class,
+  CDA103.class,
+  CDA108.class,
+
+  //Issues CDE
+  CDE347.class,
+  CDE367.class,
+  CDE384.class,
+  CDE392.class,
+  CDE395.class,
+  CDE396.class,
+  CDE399.class,
+  CDE402.class,
+  CDE407.class,
+  CDE408.class,
+  CDE413.class,
+
+  //Issues CDF
+  CDF435.class
+
 })
 public class SuiteIssues {}
