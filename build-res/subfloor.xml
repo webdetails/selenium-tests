@@ -157,7 +157,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               value="http://repo.pentaho.org/artifactory/repo/org/apache/ivy/ivy/2.4.0-rc1/ivy-2.4.0-rc1.jar"
               description="The URL to the current release of Apache IVY" />
     <property name="pentaho.bi.server.dir"
-              value="C:\Pentaho\5.1\biserver-ce-5.1.0.0-752\biserver-ce"
+              value="C:\Pentaho\biserver-ce"
               description="The location of Pentaho BI Server" />
     <property name="pentaho.bi.server.service.name" value="tomcat6" description="The service name of BI Server" />
     <property name="pentaho.bi.server.url" value="http://localhost:8080/pentaho" description="The URL to access the Pentaho Server." />
@@ -353,6 +353,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <property name="pentaho.plugin.cdf.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf"/>
       <property name="pentaho.plugin.cde.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf-dd"/>
       <!-- Delete CGG, CDA, CDF, CDE-->
+	  <delete>
+		<fileset dir="${pentaho.default.content.dir}" includes="**/*"/>		 
+	  </delete>
+	  <!-- Delete CGG, CDA, CDF, CDE-->
       <delete dir="${pentaho.plugin.cgg.dir}" />
       <delete dir="${pentaho.plugin.cda.dir}" />
       <delete dir="${pentaho.plugin.cdf.dir}" />
@@ -396,6 +400,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <fileset dir="${tmp.dir}/pentaho-cdf-dd" />
       </copy>
       <copy file="${tmp.dir}/plugin-samples.zip" todir="${pentaho.default.content.dir}" />
+	  <!-- copy all issues to default content -->
+	  <copy file="${resources.dir}/Issues/public.zip" todir="${pentaho.default.content.dir}" />
 	  <!-- Copy resources for CDF Tutorial -->
 	  <copy todir="${pentaho.plugin.cdf.dir}">
         <fileset dir="${resources.dir}/cdf-tutorial" />
