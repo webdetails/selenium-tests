@@ -94,7 +94,7 @@ public class AddinReferenceEdit {
     //Go to AddinReference
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent");
     //NOTE - we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     WebElement titleWithFontSize18 = ElementHelper.FindElement(driver, By.xpath("//div[@id='Title']/span"));
     assertEquals("font-size: 18px;", titleWithFontSize18.getAttribute("style"));
 
@@ -109,7 +109,7 @@ public class AddinReferenceEdit {
     //Go to AddinReference
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent");
     //NOTE - we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     titleWithFontSize18 = ElementHelper.FindElement(driver, By.xpath("//div[@id='Title']/span"));
     assertEquals("font-size: 34px;", titleWithFontSize18.getAttribute("style"));
   }

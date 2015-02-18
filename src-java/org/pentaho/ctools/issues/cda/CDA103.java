@@ -78,7 +78,7 @@ public class CDA103 {
     driver.get(baseUrl);
 
     //wait for invisibility of waiting pop-up
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
     //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
     ElementHelper.WaitForElementVisibility(driver, By.id("filemenu"));
