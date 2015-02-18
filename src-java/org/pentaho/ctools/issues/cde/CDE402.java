@@ -107,7 +107,7 @@ public class CDE402 {
    *    5. Wait for confirmation of command and confirm
    *    6. Assert that selected template was applied
    */
-  @Test(timeout = 15000)
+  @Test(timeout = 60000)
   public void tc01_NewCdeDashboard_ApplyTemplate() {
     log.info("tc01_NewCdeDashboard_ApplyTemplate");
 
@@ -145,18 +145,11 @@ public class CDE402 {
     driver.switchTo().defaultContent();
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
-    /*try {
-      Thread.sleep(10000);
-    } catch (Exception e) {
-      log.info("olda!!!");
-    }*/
-
     //assert title
     String titleText = ElementHelper.GetText(driver, By.xpath("//div[@title='New CDE Dashboard']"));
     assertEquals("CDE Dashboard", titleText);
 
     //focus iframe
-    //driver = driver.switchTo().defaultContent();
     elementFrame = ElementHelper.FindElement(driver, By.xpath("//td/..//iframe"));
     driver.switchTo().frame(elementFrame);
 
@@ -171,7 +164,6 @@ public class CDE402 {
     /*
      * ## Step 4
      */
-
     ElementHelper.WaitForElementPresence(driver, By.id("popupTemplatebox"));
     ElementHelper.WaitForElementPresence(driver, By.id("thumbs"));
     ElementHelper.WaitForElementVisibility(driver, By.id("popupTemplatebox"));
