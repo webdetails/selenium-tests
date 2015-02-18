@@ -512,11 +512,11 @@ public class ElementHelper {
         //wait for element presence
         element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
       } else {
-        element = elements.get(1);
+        element = elements.get(0);
         log.warn("We have some elements! " + size);
       }
     } catch (Exception e) {
-      log.warn("Something went wrong searching for: " + locator.toString());
+      log.warn("Something went wrong searching for pr: " + locator.toString());
       log.error(e.getMessage());
     }
 
@@ -552,13 +552,13 @@ public class ElementHelper {
     try {
       elements = driver.findElements(locator);
       if (elements.size() > 0) {
-        //wait for element disappear
+        //wait for element to appear
         element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
       } else {
         log.warn("No elements found!");
       }
     } catch (Exception e) {
-      log.warn("Something went wrong searching for: " + locator.toString());
+      log.warn("Something went wrong searching for vi: " + locator.toString());
       log.error(e.getMessage());
     }
 
