@@ -137,7 +137,7 @@ public class PopupComponent {
     /*
      * ## Step 2
      */
-    ElementHelper.Click(driver, By.xpath("//div[@id='example1Obj']/button"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='example1Obj']/button"));
     ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='popupContent1']"));
     //Wait for the charts load
     ElementHelper.IsElementVisible(driver, By.xpath("//*[3][@width>13]"));
@@ -163,7 +163,7 @@ public class PopupComponent {
     String tooltipValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[3]/span"));
     assertEquals("49,578", tooltipValue);
     //Close popup
-    ElementHelper.Click(driver, By.cssSelector("a.close"));
+    ElementHelper.ClickJS(driver, By.cssSelector("a.close"));
     //wait for popup disappear
     ElementHelper.WaitForElementInvisibility(driver, By.cssSelector("a.close"));
     WebElement element = driver.findElement(By.cssSelector("a.close"));
@@ -199,13 +199,13 @@ public class PopupComponent {
     /*
      * ## Step 2
      */
-    ElementHelper.Click(driver, By.xpath("//div[@id='example2Obj']/button"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='example2Obj']/button"));
     ElementHelper.IsElementPresent(driver, By.xpath("//div[@id='popupContent2']"));
     //Check text
     String textInPopup = ElementHelper.GetText(driver, By.xpath("//div[@id='popupContent2']"));
     assertEquals("A simple text that can be used as a tooltip", textInPopup);
     //Close popup
-    ElementHelper.Click(driver, By.xpath("//div[8]/a"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[8]/a"));
     //wait for popup disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[8]/a"));
     WebElement element = driver.findElement(By.xpath("//div[8]/a"));

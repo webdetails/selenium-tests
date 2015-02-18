@@ -121,7 +121,7 @@ public class CDE347 {
      * ## Step 2
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@title='Preview your Dashboard']"));
-    ElementHelper.Click(driver, By.id("previewButton"));
+    ElementHelper.ClickJS(driver, By.id("previewButton"));
     ElementHelper.WaitForElementVisibility(driver, By.id("fancybox-content"));
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     driver.switchTo().frame(elementFrame);

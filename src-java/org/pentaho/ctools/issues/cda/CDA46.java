@@ -108,7 +108,7 @@ public class CDA46 {
     ElementHelper.WaitForElementPresence(driver, By.id("outputIndexId"));
     ElementHelper.FindElement(driver, By.id("outputIndexId")).click();
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='helpButton helpButtonShort']"));
-    ElementHelper.Click(driver, By.xpath("//div[@class='helpButton helpButtonShort']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='helpButton helpButtonShort']"));
 
     /*
      * ## Step 2

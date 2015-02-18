@@ -122,7 +122,7 @@ public class CDE384 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add FreeForm']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Row']"));
-    ElementHelper.Click(driver, By.xpath("//a[@title='Add Resource']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@title='Add Resource']"));
 
     /*
      * ## Step 2
@@ -133,36 +133,36 @@ public class CDE384 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//select[@id='resourceSource']"));
     Select select1 = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceSource']")));
     select1.selectByValue("file");
-    ElementHelper.Click(driver, By.xpath("//button[@id='popup_state0_buttonOk']"));
+    ElementHelper.ClickJS(driver, By.xpath("//button[@id='popup_state0_buttonOk']"));
 
     /*
      * ## Step 3
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
-    ElementHelper.Click(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
+    ElementHelper.ClickJS(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
     ElementHelper.WaitForElementVisibility(driver, By.id("container_id"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']"));
-    ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']"));
+    ElementHelper.ClickJS(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
 
     /*
      * ## Step 4
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@class='cdfddInput']"));
-    ElementHelper.Click(driver, By.xpath("//button[@class='cdfddInput']"));
+    ElementHelper.ClickJS(driver, By.xpath("//button[@class='cdfddInput']"));
     driver = driver.switchTo().frame("externalEditor");
 
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//span[@id='infoArea']"));
     String pathText = ElementHelper.GetText(driver, By.xpath("//span[@id='infoArea']"));
     assertEquals("/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText);
     driver.switchTo().defaultContent();
-    ElementHelper.Click(driver, By.xpath("//div[@class='popupclose']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='popupclose']"));
 
     /*
      * ## Step 5
@@ -170,44 +170,44 @@ public class CDE384 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='layoutPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='componentsPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    ElementHelper.Click(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
     String cdaText = ElementHelper.GetText(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
     assertEquals("Community Data Access", cdaText);
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='CDA Data Source']"));
-    ElementHelper.Click(driver, By.xpath("//a[@title='CDA Data Source']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@title='CDA Data Source']"));
 
     /*
      * ## Step 6
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']"));
-    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']"));
+    ElementHelper.ClickJS(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']"));
     ElementHelper.WaitForElementVisibility(driver, By.id("container_id"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/plugin-samples/cda/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/cda/']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/plugin-samples/cda/']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']"));
-    ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']"));
+    ElementHelper.ClickJS(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
 
     /*
      * ## Step 7
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfddInput']"));
-    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfddInput']"));
+    ElementHelper.ClickJS(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfddInput']"));
 
     driver = driver.switchTo().frame("externalEditor");
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//span[@id='infoArea']"));
     String pathText1 = ElementHelper.GetText(driver, By.xpath("//span[@id='infoArea']"));
     assertEquals("/public/plugin-samples/cda/cdafiles/compoundJoin.cda", pathText1);
     driver.switchTo().defaultContent();
-    ElementHelper.Click(driver, By.xpath("//div[@class='popupclose']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='popupclose']"));
 
     /*
      * ## Step 8
@@ -215,16 +215,16 @@ public class CDE384 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='layoutPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='componentsPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    ElementHelper.Click(driver, By.xpath("//div[@class='layoutPanelButton']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='layoutPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@class='cdfddInput']"));
-    ElementHelper.Click(driver, By.xpath("//button[@class='cdfddInput']"));
+    ElementHelper.ClickJS(driver, By.xpath("//button[@class='cdfddInput']"));
 
     driver = driver.switchTo().frame("externalEditor");
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//span[@id='infoArea']"));
     String pathText3 = ElementHelper.GetText(driver, By.xpath("//span[@id='infoArea']"));
     assertEquals("/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText3);
     driver.switchTo().defaultContent();
-    ElementHelper.Click(driver, By.xpath("//div[@class='popupclose']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='popupclose']"));
 
   }
 

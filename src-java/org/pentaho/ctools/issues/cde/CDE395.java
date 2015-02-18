@@ -123,7 +123,7 @@ public class CDE395 {
     assertEquals("Create New", createText);
     assertEquals("Manage Data Sources", manageText);
     assertEquals("Documentation", documentationText);
-    ElementHelper.Click(frame, By.id("btnCreateNew"));
+    ElementHelper.ClickJS(frame, By.id("btnCreateNew"));
 
     /*
      * ## Step 2
@@ -132,7 +132,7 @@ public class CDE395 {
     String dataText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdatasourceButton']"));
     assertEquals("CDE Dashboard", cdeText);
     assertEquals("Data Source", dataText);
-    ElementHelper.Click(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
+    ElementHelper.ClickJS(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
 
     /*
      * ## Step 3
@@ -160,7 +160,7 @@ public class CDE395 {
     assertEquals("Save as...", saveasText);
     assertEquals("Reload", reloadText);
     assertEquals("Settings", settingsText);
-    ElementHelper.Click(frame, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    ElementHelper.ClickJS(frame, By.xpath("//div[@id='headerLinks']/div[5]/a"));
 
     /*
      * ## Step 4

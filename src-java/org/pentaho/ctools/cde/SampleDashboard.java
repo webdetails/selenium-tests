@@ -155,7 +155,7 @@ public class SampleDashboard {
     assertEquals("78,155.28", total);
     assertEquals("Showing 1 to 10 of 44 entries", paggingInfo);
     //Click next
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
 
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 11 to 20 of 44 entries");
     //Check next page
@@ -168,11 +168,11 @@ public class SampleDashboard {
      * ## Step 2
      */
     //Go to the end
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 21 to 30 of 44 entries");
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 31 to 40 of 44 entries");
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 41 to 44 of 44 entries");
     customer = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[2]/td"));
     total = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[3]/td[2]"));
@@ -183,7 +183,7 @@ public class SampleDashboard {
      * ## Step 3
      */
     //Click in preview page
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[1]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[1]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 31 to 40 of 44 entries");
     customer = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[5]/td"));
     total = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"));
@@ -194,7 +194,7 @@ public class SampleDashboard {
      * ## Step 4
      */
     //Click in preview page
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[1]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[1]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 21 to 30 of 44 entries");
     customer = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[5]/td"));
     total = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"));
@@ -205,7 +205,7 @@ public class SampleDashboard {
      * ## Step 5
      */
     //Go to next
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 31 to 40 of 44 entries");
     customer = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[5]/td"));
     total = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"));
@@ -233,7 +233,7 @@ public class SampleDashboard {
     /*
      * ## Step 1
      */
-    ElementHelper.Click(driver, By.xpath("//table[@id='tableTable']/thead/tr/th"));
+    ElementHelper.ClickJS(driver, By.xpath("//table[@id='tableTable']/thead/tr/th"));
     ElementHelper.WaitForTextPresent(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"), "20,743.56");
     //Check the contents
     customer = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[5]/td"));
@@ -241,7 +241,7 @@ public class SampleDashboard {
     assertEquals("Auto Canal+ Petit", customer);
     assertEquals("20,743.56", total);
     //Go to next page and check the contents
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 11 to 20 of 44 entries");
     customer = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[5]/td"));
     total = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"));
@@ -251,9 +251,9 @@ public class SampleDashboard {
     /*
      * ## Step 2
      */
-    ElementHelper.Click(driver, By.xpath("//table[@id='tableTable']/thead/tr/th[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//table[@id='tableTable']/thead/tr/th[2]"));
     ElementHelper.WaitForTextPresent(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"), "3,508.80");
-    ElementHelper.Click(driver, By.xpath("//table[@id='tableTable']/thead/tr/th[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//table[@id='tableTable']/thead/tr/th[2]"));
     ElementHelper.WaitForTextPresent(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"), "409,484.24");
     //Check the contents
     customer = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[5]/td"));
@@ -261,7 +261,7 @@ public class SampleDashboard {
     assertEquals("Salzburg Collectables", customer);
     assertEquals("409,484.24", total);
     //Go to next page and check the contents
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 11 to 20 of 44 entries");
     customer = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[5]/td"));
     total = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"));
@@ -291,19 +291,19 @@ public class SampleDashboard {
     String sampleChartTitel = ElementHelper.GetText(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"));
     assertEquals("Sales by territory and market", sampleChartTitel);
     //disable APAC
-    ElementHelper.Click(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']"));
     //disable/enable EMEA
-    ElementHelper.Click(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
-    ElementHelper.Click(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
     //disable Japan
-    ElementHelper.Click(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']"));
     //disable NA
-    ElementHelper.Click(driver, By.xpath(" //div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']"));
+    ElementHelper.ClickJS(driver, By.xpath(" //div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']"));
 
     /*
      * ## Step 2
      */
-    ElementHelper.Click(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]//..//*[local-name()='rect'][2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]//..//*[local-name()='rect'][2]"));
     //Wait for page render
     ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //check contents
@@ -319,7 +319,7 @@ public class SampleDashboard {
     assertEquals("30,524.29", total2);
     assertEquals("Showing 1 to 10 of 21 entries", paggingInfo);
     //Next page
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 11 to 20 of 21 entries");
     paggingInfo = ElementHelper.GetText(driver, By.id("tableTable_info"));
     customer1 = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[2]/td"));
@@ -332,7 +332,7 @@ public class SampleDashboard {
     assertEquals("5,442.80", total2);
     assertEquals("Showing 11 to 20 of 21 entries", paggingInfo);
     //Next page
-    ElementHelper.Click(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 21 to 21 of 21 entries");
     paggingInfo = ElementHelper.GetText(driver, By.id("tableTable_info"));
     customer1 = ElementHelper.GetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td"));

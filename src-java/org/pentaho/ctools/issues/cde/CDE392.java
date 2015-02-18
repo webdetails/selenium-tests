@@ -130,14 +130,14 @@ public class CDE392 {
     assertEquals("Save as...", saveasText);
     assertEquals("Reload", reloadText);
     assertEquals("Settings", settingsText);
-    ElementHelper.Click(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
 
     /*
      * ## Step 2
      */
     WebElement obj1 = ElementHelper.FindElement(driver, By.xpath("//select[@id='rendererInput']/option[@value='bootstrap']"));
     assertEquals(obj1.isSelected(), true);
-    ElementHelper.Click(driver, By.xpath("//div[@class='popupclose']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='popupclose']"));
 
     /*
      * ## Step 3
@@ -145,19 +145,19 @@ public class CDE392 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='layoutPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='componentsPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    ElementHelper.Click(driver, By.xpath("//div[@class='componentsPanelButton']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='componentsPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     String otherText = ElementHelper.GetText(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     assertEquals("Others", otherText);
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='table Component']"));
-    ElementHelper.Click(driver, By.xpath("//a[@title='table Component']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@title='table Component']"));
 
     /*
      * ## Step 4
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[@title='Table style']"));
     String styleText = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[@title='Table style']"));
     String style1Text = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[@title='Table style']/../td[2]"));
@@ -177,12 +177,12 @@ public class CDE392 {
     assertEquals("Save as...", saveasText1);
     assertEquals("Reload", reloadText1);
     assertEquals("Settings", settingsText1);
-    ElementHelper.Click(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
 
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//select[@id='rendererInput']"));
     Select select = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='rendererInput']")));
     select.selectByValue("blueprint");
-    ElementHelper.Click(driver, By.xpath("//button[@id='popup_state0_buttonSave']"));
+    ElementHelper.ClickJS(driver, By.xpath("//button[@id='popup_state0_buttonSave']"));
 
     /*
      * ## Step 6

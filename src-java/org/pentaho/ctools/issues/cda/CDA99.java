@@ -139,7 +139,7 @@ public class CDA99 {
       ((JavascriptExecutor) driver).executeScript("getEditorWindow().editor.setContents(arguments[0]);", code);
 
       //Save file
-      ElementHelper.Click(driver, By.id("save"));
+      ElementHelper.ClickJS(driver, By.id("save"));
       //Check for the message name
       String fileSaved = ElementHelper.GetText(driver, By.id("notifications"));
       assertEquals("/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved);
@@ -148,7 +148,7 @@ public class CDA99 {
        * ## Step 3
        */
       //Perform the preview of this CDA query
-      ElementHelper.Click(driver, By.id("preview"));
+      ElementHelper.ClickJS(driver, By.id("preview"));
 
       WebDriver previewWindow = null;
       String currentWindowHandle = driver.getWindowHandle();
@@ -192,7 +192,7 @@ public class CDA99 {
       ((JavascriptExecutor) driver).executeScript("getEditorWindow().editor.setContents(arguments[0]);", code2);
 
       //Save file
-      ElementHelper.Click(driver, By.id("save"));
+      ElementHelper.ClickJS(driver, By.id("save"));
       //Check for the message name
       String fileSaved2 = ElementHelper.GetText(driver, By.id("notifications"));
       assertEquals("/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved2);
@@ -201,7 +201,7 @@ public class CDA99 {
        * ## Step 5
        */
       //Perform the preview of this CDA query
-      ElementHelper.Click(driver, By.id("preview"));
+      ElementHelper.ClickJS(driver, By.id("preview"));
 
       previewWindow = null;
       listWindows = null;

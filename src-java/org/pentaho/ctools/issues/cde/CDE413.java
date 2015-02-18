@@ -112,7 +112,7 @@ public class CDE413 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='layoutPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='componentsPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    ElementHelper.Click(driver, By.xpath("//div[@class='componentsPanelButton']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='componentsPanelButton']"));
 
     /*
      * ## Step 2
@@ -120,21 +120,21 @@ public class CDE413 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     String otherText = ElementHelper.GetText(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     assertEquals("Others", otherText);
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='table Component']"));
-    ElementHelper.Click(driver, By.xpath("//a[@title='table Component']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@title='table Component']"));
 
     /*
      * ## Step 3
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-properties']//tr[5]/td[2]"));
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-components-properties']//tr[5]/td[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-properties']//tr[5]/td[2]"));
 
     /*
      * ## Step 4
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='popupstates']//input[@class='StringArrayAddButton']"));
-    ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']//input[@class='StringArrayAddButton']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='popupstates']//input[@class='StringArrayAddButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//span[@class='StringArrayTextLabel']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//input[@id='arg_0']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//input[@value='']"));

@@ -408,12 +408,13 @@ public class ElementHelper {
   }
 
   /**
-   * The function will search for the element and then click on it.
+   * The function will search for the element and then click on it using
+   * the Click method of java script.
    *
    * @param driver
    * @param locator
    */
-  public static void Click(WebDriver driver, By locator) {
+  public static void ClickJS(WebDriver driver, By locator) {
     WebElement element = FindElement(driver, locator);
     if (element != null) {
       try {
@@ -424,6 +425,22 @@ public class ElementHelper {
           element.click();
         }
       }
+    } else {
+      log.error("Element is null " + locator.toString());
+    }
+  }
+
+  /**
+   * The function will search for the element and then click on it using
+   * the Click method of webdriver.
+   *
+   * @param driver
+   * @param locator
+   */
+  public static void Click(WebDriver driver, By locator) {
+    WebElement element = FindElement(driver, locator);
+    if (element != null) {
+      element.click();
     } else {
       log.error("Element is null " + locator.toString());
     }

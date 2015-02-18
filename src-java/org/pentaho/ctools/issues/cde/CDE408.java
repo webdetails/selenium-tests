@@ -117,7 +117,7 @@ public class CDE408 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='layoutPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='componentsPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    ElementHelper.Click(driver, By.xpath("//div[@class='componentsPanelButton']"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@class='componentsPanelButton']"));
 
     /*
      * ## Step 2
@@ -125,15 +125,15 @@ public class CDE408 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     String otherText = ElementHelper.GetText(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     assertEquals("Others", otherText);
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='table Component']"));
-    ElementHelper.Click(driver, By.xpath("//a[@title='table Component']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@title='table Component']"));
 
     /*
      * ## Step 3
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
 
     /*
      * ## Step 4

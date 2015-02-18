@@ -123,13 +123,13 @@ public class AddinReferenceEdit {
     //NOTE - we have to wait for loading disappear
     //ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Expand first row - Title
-    ElementHelper.Click(driver, By.cssSelector("span.expander"));
+    ElementHelper.ClickJS(driver, By.cssSelector("span.expander"));
     //Click in HTML to open the Properties
     Actions acts = new Actions(driver);
     acts.click(ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]")));
     acts.build().perform();
     //Click in field 'Font Size' to be editable
-    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]"));
+    ElementHelper.ClickJS(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]"));
     //Write 34
     ElementHelper.FindElement(driver, By.name("value")).clear();
     ElementHelper.FindElement(driver, By.xpath("//form[@class='cdfddInput']/input")).sendKeys(value);

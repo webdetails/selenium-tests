@@ -114,19 +114,19 @@ public class CDE367 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add FreeForm']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Row']"));
-    ElementHelper.Click(driver, By.xpath("//a[@title='Add Row']"));
+    ElementHelper.ClickJS(driver, By.xpath("//a[@title='Add Row']"));
 
     /*
      * ## Step 2
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//form[@class='cdfddInput']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorcheck']"));
-    ElementHelper.Click(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorcheck']"));
+    ElementHelper.ClickJS(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorcheck']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//form[@class='cdfddInput']/input[@checked='checked']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
-    ElementHelper.Click(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
+    ElementHelper.ClickJS(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
     ElementHelper.FindElement(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']")).sendKeys("#3d558c");
-    ElementHelper.Click(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
+    ElementHelper.ClickJS(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
 
     /*
      * ## Step 3
