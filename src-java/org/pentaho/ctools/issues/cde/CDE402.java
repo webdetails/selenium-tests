@@ -164,8 +164,9 @@ public class CDE402 {
     /*
      * ## Step 4
      */
-    ElementHelper.WaitForElementVisibility(driver, By.id("popupTemplatebox"));
-    ElementHelper.WaitForElementVisibility(driver, By.id("thumbs"));
+    driver.getPageSource();
+    ElementHelper.WaitForElementPresence(driver, By.id("popupTemplatebox"));
+    ElementHelper.WaitForElementPresence(driver, By.id("thumbs"));
     String templateText = ElementHelper.FindElement(driver, By.xpath("//div[@id='thumbs']/div[2]/p")).getText();
     assertEquals("Two Columns Template", templateText);
     ElementHelper.ClickJS(driver, By.xpath("//div[@id='thumbs']/div[2]/p"));
