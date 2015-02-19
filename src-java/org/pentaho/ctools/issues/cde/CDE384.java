@@ -140,6 +140,7 @@ public class CDE384 {
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
     ElementHelper.ClickJS(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
+    driver.switchTo().defaultContent();
     ElementHelper.WaitForElementVisibility(driver, By.id("container_id"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/']"));
     ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/']"));
@@ -183,6 +184,7 @@ public class CDE384 {
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']"));
+    driver.switchTo().defaultContent();
     ElementHelper.WaitForElementVisibility(driver, By.id("container_id"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@rel='public/']"));
     ElementHelper.ClickJS(driver, By.xpath("//a[@rel='public/']"));

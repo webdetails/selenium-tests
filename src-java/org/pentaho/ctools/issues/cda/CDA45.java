@@ -121,8 +121,8 @@ public class CDA45 {
     driver.switchTo().defaultContent();
     ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@class='helpButton helpButtonShort']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='helpButton helpButtonShort']"));
-    String styleText = ElementHelper.FindElement(driver, By.xpath("//div[@class='helpButton helpButtonShort']")).getAttribute("style");
-    assertEquals("", styleText);
+    String styleText = ElementHelper.FindElement(driver, By.id("outputIndexId")).getAttribute("class");
+    assertEquals("cdaButton cdaButtonShort cdaButtonSelected", styleText);
 
     /*
      * ## Step 3
@@ -130,8 +130,8 @@ public class CDA45 {
     ElementHelper.WaitForElementPresence(driver, By.id("status"));
     ElementHelper.FindElement(driver, By.id("status")).click();
     ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@class='helpButton']"));
-    String styleText1 = ElementHelper.FindElement(driver, By.xpath("//div[@class='helpButton']")).getAttribute("style");
-    assertEquals("display: block;", styleText1);
+    String styleText1 = ElementHelper.FindElement(driver, By.id("status")).getAttribute("class");
+    assertEquals("cdaButton cdaButtonSelected", styleText1);
 
     /*
      * ## Step 4
@@ -139,8 +139,8 @@ public class CDA45 {
     ElementHelper.WaitForElementPresence(driver, By.id("orderDate"));
     ElementHelper.FindElement(driver, By.id("orderDate")).click();
     ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='parameterHolder']/div[2]/div[2]/div"));
-    String styleText2 = ElementHelper.FindElement(driver, By.xpath("//div[@id='parameterHolder']/div[2]/div[2]/div")).getAttribute("style");
-    assertEquals("display: block;", styleText2);
+    String styleText2 = ElementHelper.FindElement(driver, By.id("orderDate")).getAttribute("class");
+    assertEquals("cdaButton cdaButtonSelected", styleText2);
   }
 
   @AfterClass

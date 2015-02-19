@@ -38,6 +38,7 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
@@ -87,7 +88,7 @@ public class MapComponentReference {
 
     //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"), 180);
-    
+
     //Wait for page render on each map test
     ElementHelper.WaitForTextPresent(driver, By.xpath("//div[@id='simpleTest']/div/div[8]/div"), "200 km", 90);
     ElementHelper.WaitForTextPresent(driver, By.xpath("//div[@id='testTileServices']/div/div[8]/div"), "200 km", 90);
@@ -532,6 +533,14 @@ public class MapComponentReference {
     //Wait for change color
     ElementHelper.IsElementVisible(driver, By.xpath("//*[local-name()='path' and @fill='red']"));
     WebElement shapeRed = ElementHelper.FindElement(driver, By.id(shapeId));
+    assertEquals("red", shapeRed.getAttribute("fill"));
+
+    //Related to issue CDE-317
+    Actions action = new Actions(driver);
+    action.moveToElement(shape2).build().perform();
+    action.moveToElement(shape1).build().perform();
+    shapeId = shape1.getAttribute("id");
+    shapeRed = ElementHelper.FindElement(driver, By.id(shapeId));
     assertEquals("red", shapeRed.getAttribute("fill"));
   }
 
