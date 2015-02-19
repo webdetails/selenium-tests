@@ -26,9 +26,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
@@ -69,6 +71,8 @@ public class CDA100 {
   private static String     baseUrl;
   //Download directory
   private static String     downloadDir;
+  // The path for the export file
+  private static String     exportFilePath;
   // Log instance
   private static Logger     log                = LogManager.getLogger(CDA100.class);
   // Getting screenshot when test fails
@@ -81,6 +85,7 @@ public class CDA100 {
     driver = CToolsTestSuite.getDriver();
     baseUrl = CToolsTestSuite.getBaseUrl();
     downloadDir = CToolsTestSuite.getDownloadDir();
+    exportFilePath = downloadDir + "\\cda-export.xls";
   }
 
   @Before
@@ -127,7 +132,7 @@ public class CDA100 {
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
@@ -143,10 +148,10 @@ public class CDA100 {
      * ## Step 3
      */
     WebElement buttonExport = ElementHelper.FindElement(driver, By.id("export"));
+    assertNotNull(buttonExport);
     try {
       //Delete the existence if exist
-      new File(downloadDir + "\\cda-export.xls").delete();
-      assertNotNull(buttonExport);
+      new File(exportFilePath).delete();
 
       //Click to export
       buttonExport.click();
@@ -154,29 +159,47 @@ public class CDA100 {
       //Wait for file to be created in the destination dir
       DirectoryWatcher.WatchForCreate(downloadDir);
 
-      //Assert File exists
-      File exportFile = new File(downloadDir + "\\cda-export.xls");
+      //Check if the file really exist
+      File exportFile = new File(exportFilePath);
       assertTrue(exportFile.exists());
 
-      FileInputStream export = new FileInputStream(exportFile);
-      //Assert md5 is as expected
-      String md5 = DigestUtils.md5Hex(export);
-      export.close();
-      assertEquals(md5, "d41d8cd98f00b204e9800998ecf8427e");
+      //Wait for the file to be downloaded totally
+      for (int i = 0; i < 50; i++) { //we only try 50 times == 5000 ms
+        long nSize = FileUtils.sizeOf(exportFile);
+        //Since the file always contents the same data, we wait for the expected bytes
+        if (nSize >= 249856) {
+          break;
+        }
+        Thread.sleep(100);
+      }
+
+      //Check if the file downloaded is the expected
+      String md5 = DigestUtils.md5Hex(Files.readAllBytes(exportFile.toPath()));
+      assertEquals(md5, "29f8434bd43d75ab5d7dbac3431f5426");
+
+      //The delete file
+      DeleteFile();
 
     } catch (Exception e) {
       log.error(e.getMessage());
     }
+  }
 
-    while (new File(downloadDir + "\\cda-export.xls").exists()) {
-      //Delete created file
-      new File(downloadDir + "\\cda-export.xls").delete();
+  /**
+   * The function will delete the export file.
+   */
+  public static void DeleteFile() {
+    try {
+      Files.deleteIfExists(Paths.get(exportFilePath));
+    } catch (Exception e) {
+      log.error(e.getMessage());
     }
-    log.info(new File(downloadDir + "\\cda-export.xls").exists());
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDA108.class.getSimpleName());
+    log.info("tearDown##" + CDA100.class.getSimpleName());
+    //In case something went wrong we delete the file
+    DeleteFile();
   }
 }
