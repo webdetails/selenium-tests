@@ -124,17 +124,17 @@ public class CDE347 {
     ElementHelper.ClickJS(driver, By.id("previewButton"));
     ElementHelper.WaitForElementVisibility(driver, By.id("fancybox-content"));
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    driver.switchTo().frame(elementFrame);
+    WebDriver frame = driver.switchTo().frame(elementFrame);
 
     /*
      * ## Step 3
      */
-    WebElement obj1 = ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='obj1protovis']//*[local-name()='path']"));
-    WebElement obj2 = ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='obj1protovis']//*[local-name()='path'][2]"));
-    WebElement obj3 = ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='obj2protovis']//*[local-name()='g'][2]/*[local-name()='rect']"));
-    WebElement obj4 = ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='obj3protovis']//*[local-name()='path']"));
-    WebElement obj5 = ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='obj4protovis']//*[local-name()='path']"));
-    WebElement obj6 = ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='obj5protovis']//*[local-name()='path']"));
+    WebElement obj1 = ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@id='obj1protovis']//*[local-name()='path']"));
+    WebElement obj2 = ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@id='obj1protovis']//*[local-name()='path'][2]"));
+    WebElement obj3 = ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@id='obj2protovis']//*[local-name()='g'][2]/*[local-name()='rect']"));
+    WebElement obj4 = ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@id='obj3protovis']//*[local-name()='path']"));
+    WebElement obj5 = ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@id='obj4protovis']//*[local-name()='path']"));
+    WebElement obj6 = ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@id='obj5protovis']//*[local-name()='path']"));
     assertNotNull(obj1);
     assertNotNull(obj2);
     assertNotNull(obj3);

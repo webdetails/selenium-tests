@@ -36,6 +36,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -673,6 +674,23 @@ public class ElementHelper {
     }
 
     return attrValue;
+  }
+
+  /**
+   * This method intends to drag and drop an element.
+   *
+   * @param driver
+   * @param from
+   * @param to
+   * @return
+   */
+  public static void DragAndDrop(WebDriver driver, By from, By to) {
+    log.debug("Enter:DragAndDrop");
+    WebElement drag = FindElement(driver, from);
+    WebElement drop = FindElement(driver, to);
+    if (drag != null && drop != null) {
+      new Actions(driver).dragAndDrop(drag, drop).build().perform();
+    }
   }
 
   /**
