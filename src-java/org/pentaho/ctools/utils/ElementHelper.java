@@ -511,12 +511,30 @@ public class ElementHelper {
 
   /**
    * This method pretends to check if the element is present, if it doesn't
-   * we wait for presence for a specific timeout (input).
+   * we wait for presence for a specific timeout (input), after this, we will
+   * wait for element visible. And, if the element is present then we have to 
+   * check if is visible if not wait for visibility.
+   * 
+   * The default timeout to wait for elements is 30 seconds.
    *
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementPresence(WebDriver driver, By locator, Integer timeout) {
+  public static WebElement WaitForElementPresenceAndVisible(WebDriver driver, By locator) {
+    return WaitForElementPresenceAndVisible(driver, locator, 30);
+  }
+
+  /**
+   * This method pretends to check if the element is present, if it doesn't
+   * we wait for presence for a specific timeout (input), after this, we will
+   * wait for element visible. And, if the element is present then we have to 
+   * check if is visible if not wait for visibility. 
+   *
+   * @param driver
+   * @param locator
+   * @param timeout
+   */
+  public static WebElement WaitForElementPresenceAndVisible(WebDriver driver, By locator, Integer timeout) {
     WebElement element = null;
     List<WebElement> elements = null;
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
@@ -528,10 +546,27 @@ public class ElementHelper {
       int size = elements.size();
       if (size == 0) {
         //wait for element presence
-        element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+        if (elements.size() != 0) {
+          //wait for element visible
+          elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+          if (elements.size() != 0) {
+            element = elements.get(0);
+          }
+        }
       } else {
         element = elements.get(0);
-        log.warn("We have some elements! " + size);
+        if (element.isDisplayed() == true && element.isEnabled() == true) {
+          log.warn("We have some elements! " + size);
+        }
+        else {
+          //wait for element visible
+          log.warn("Wait for visibility!");
+          elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+          if (elements.size() != 0) {
+            element = elements.get(0);
+          }
+        }
       }
     } catch (Exception e) {
       log.warn("Something went wrong searching for pr: " + locator.toString());
@@ -551,6 +586,42 @@ public class ElementHelper {
    */
   public static WebElement WaitForElementPresence(WebDriver driver, By locator) {
     return WaitForElementPresence(driver, locator, 30);
+  }
+
+  /**
+   * This method pretends to check if the element is present, if it doesn't
+   * we wait for presence for a specific timeout (input).
+   *
+   * @param driver
+   * @param locator
+   */
+  public static WebElement WaitForElementPresence(WebDriver driver, By locator, Integer timeout) {
+    WebElement element = null;
+    List<WebElement> elements = null;
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
+
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+    try {
+      elements = driver.findElements(locator);
+      int size = elements.size();
+      if (size == 0) {
+        //wait for element presence
+        elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+        if (elements.size() != 0) {
+          element = elements.get(0);
+        }
+      } else {
+        element = elements.get(0);
+        log.warn("We have some elements! " + size);
+      }
+    } catch (Exception e) {
+      log.warn("Something went wrong searching for pr: " + locator.toString());
+      log.error(e.getMessage());
+    }
+
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return element;
   }
 
   /**
@@ -731,6 +802,31 @@ public class ElementHelper {
           //Ignore the exception
         }
         return alertExist != true;
+      }
+    });
+  }
+
+  /**
+   * The method will wait for the frame to be available to usage. To ensure that
+   * we check if an element exist inside (example a new element that refresh the
+   * frame).
+   * 
+   * @param driver 
+   * @param locator
+   */
+  public static void WaitForFrameReady(WebDriver driver, final By locator) {
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS);
+
+    wait.until(new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver d) {
+        Boolean elementExist = false;
+        List<WebElement> listElements = d.findElements(locator);
+
+        if (listElements.size() > 0) {
+          elementExist = true;
+        }
+        return elementExist;
       }
     });
   }
