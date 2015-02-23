@@ -122,10 +122,14 @@ public class CDE403 {
     try {
       robot = new Robot();
       robot.keyPress(84);
+	  robot.keyRelease(84);
       robot.keyPress(69);
+	  robot.keyRelease(69);
       robot.keyPress(83);
+	  robot.keyRelease(83);
       robot.keyPress(84);
-	  Thread.sleep(4000);
+	  robot.keyRelease(84);
+	  
     } catch (AWTException e) {
       e.printStackTrace();
     }catch (Exception e) {
@@ -135,7 +139,7 @@ public class CDE403 {
     /*
      * ## Step 4
      */
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div"));
+    ElementHelper.WaitForText(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div"), "testselect {} ON COLUMNS,");
     String text = ElementHelper.FindElement(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div")).getText();
     assertEquals("testselect {} ON COLUMNS,", text);
   }
