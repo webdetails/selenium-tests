@@ -76,18 +76,7 @@ public class CDE404 {
     driver = CToolsTestSuite.getDriver();
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
-
-  @Before
-  public void setUpTestCase() {
-
-    //Go to New CDE Dashboard
-    driver.get(baseUrl + "plugin/sparkl/api/plugininfo?pluginId=CDE404");
-
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-
-  }
-
+  
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -109,6 +98,11 @@ public class CDE404 {
   @Test(timeout = 120000)
   public void tc01_ExternalResources_PluginDashboard() {
     log.info("tc01_ExternalResources_PluginDashboard");
+	
+	//Go to New CDE Dashboard
+    driver.get(baseUrl + "plugin/sparkl/api/plugininfo?pluginId=CDE404");
+	//wait for invisibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     /*
      * ## Step 1

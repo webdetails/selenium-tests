@@ -51,13 +51,13 @@ import org.pentaho.ctools.security.AccessSystemResources;
   //Start Tests
   LoginPentaho.class,
   //CDF
-  SuiteCDF.class,
+  //SuiteCDF.class,
   //CDE
-  SuiteCDE.class,
+  //SuiteCDE.class,
   //CDA
-  SuiteCDA.class,
+  //SuiteCDA.class,
   //CGG
-  SuiteCGG.class,
+  //SuiteCGG.class,
   //Security
   AccessSystemResources.class,
   //Issues
