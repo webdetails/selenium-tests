@@ -132,8 +132,6 @@ public class CDE403 {
 	  
     } catch (AWTException e) {
       e.printStackTrace();
-    }catch (Exception e) {
-      e.printStackTrace();
     }
 
     /*

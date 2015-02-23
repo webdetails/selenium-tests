@@ -56,7 +56,7 @@ import org.pentaho.ctools.issues.cdf.CDF435;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //Issues CDA
-  /*CDA45.class,
+  CDA45.class,
   CDA46.class,
   CDA55.class,
   CDA99.class,
@@ -64,9 +64,9 @@ import org.pentaho.ctools.issues.cdf.CDF435;
   CDA103.class,
   CDA108.class,
   CDA109.class,
-*/
+
   //Issues CDE
-/*  CDE149.class,
+  CDE149.class,
   CDE270.class,
   CDE342.class,
   CDE347.class,
@@ -78,17 +78,17 @@ import org.pentaho.ctools.issues.cdf.CDF435;
   CDE395.class,
   CDE396.class,
   CDE399.class,
-  CDE402.class,*/
+  CDE402.class,
   CDE403.class,
- /* CDE404.class,
+  CDE404.class,
   CDE407.class,
   CDE408.class,
   CDE413.class,
-*/
+
   //Issues CDF
- /* CDF379.class,
+  CDF379.class,
   CDF424.class,
-  CDF435.class*/
+  CDF435.class
 
 })
 public class SuiteIssues {}
