@@ -74,14 +74,6 @@ public class CDE403 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-
-    //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -89,7 +81,8 @@ public class CDE403 {
    *    Focus goes to opened input field
    *
    * Description:
-   *    The test pretends validate the CDE-403 issue, so when user opens an input field the focus goes automatically to it.
+   *    The test pretends validate the CDE-403 issue, so when user opens an 
+   *    input field the focus goes automatically to it.
    *
    * Steps:
    *    testtest
@@ -97,6 +90,9 @@ public class CDE403 {
   @Test(timeout = 120000)
   public void tc01_CdeDashboard_InputFieldFocus() {
     log.info("tc01_CdeDashboard_InputFieldFocus");
+	
+	//Go to New CDE Dashboard
+    driver.get(baseUrl + "api/repos/wcdf/new");
 
     /*
      * ## Step 1
@@ -129,8 +125,10 @@ public class CDE403 {
       robot.keyPress(69);
       robot.keyPress(83);
       robot.keyPress(84);
-
+	  Thread.sleep(4000);
     } catch (AWTException e) {
+      e.printStackTrace();
+    }catch (Exception e) {
       e.printStackTrace();
     }
 
