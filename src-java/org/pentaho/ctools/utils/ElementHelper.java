@@ -27,10 +27,12 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -512,9 +514,9 @@ public class ElementHelper {
   /**
    * This method pretends to check if the element is present, if it doesn't
    * we wait for presence for a specific timeout (input), after this, we will
-   * wait for element visible. And, if the element is present then we have to 
+   * wait for element visible. And, if the element is present then we have to
    * check if is visible if not wait for visibility.
-   * 
+   *
    * The default timeout to wait for elements is 30 seconds.
    *
    * @param driver
@@ -527,8 +529,8 @@ public class ElementHelper {
   /**
    * This method pretends to check if the element is present, if it doesn't
    * we wait for presence for a specific timeout (input), after this, we will
-   * wait for element visible. And, if the element is present then we have to 
-   * check if is visible if not wait for visibility. 
+   * wait for element visible. And, if the element is present then we have to
+   * check if is visible if not wait for visibility.
    *
    * @param driver
    * @param locator
@@ -765,6 +767,50 @@ public class ElementHelper {
   }
 
   /**
+   * This method intends to check if two elements overlap or are contained inside each other, returns true if
+   * elements don't overlap.
+   *
+   * @param driver
+   * @param element1
+   * @param element2
+   * @return
+   */
+  public static boolean ElementsNotOverlap(WebDriver driver, By element1, By element2) {
+    log.debug("Enter:ElementsNotOverlap");
+    WebElement elem1 = ElementHelper.FindElement(driver, element1);
+    WebElement elem2 = ElementHelper.FindElement(driver, element2);
+
+    // get borders of first element
+    Point firstLocation = elem1.getLocation();
+    Dimension firstDimension = elem1.getSize();
+    int firstLeft = firstLocation.getX();
+    int firstTop = firstLocation.getY();
+    int firstRight = firstLeft + firstDimension.getWidth();
+    int firstBottom = firstTop + firstDimension.getHeight();
+    // get borders of second element
+    Point secondLocation = elem2.getLocation();
+    Dimension secondDimension = elem2.getSize();
+    int secondLeft = secondLocation.getX();
+    int secondTop = secondLocation.getY();
+    int secondRight = secondLeft + secondDimension.getWidth();
+    int secondBottom = secondTop + secondDimension.getHeight();
+    log.info(firstTop);
+    log.info(firstBottom);
+    log.info(firstLeft);
+    log.info(firstRight);
+    log.info(secondTop);
+    log.info(secondBottom);
+    log.info(secondLeft);
+    log.info(secondRight);
+    //if firstElement is either to the left, the right, above or below the second return true
+    boolean notIntersected = firstBottom < secondTop
+      || firstTop > secondBottom
+      || firstLeft > secondRight
+      || firstRight < secondLeft;
+    return notIntersected;
+  }
+
+  /**
    * This function shall wait for the new window display.
    * The code check if there is more than one window in the list. In the
    * beginning we only have the main window.
@@ -810,8 +856,8 @@ public class ElementHelper {
    * The method will wait for the frame to be available to usage. To ensure that
    * we check if an element exist inside (example a new element that refresh the
    * frame).
-   * 
-   * @param driver 
+   *
+   * @param driver
    * @param locator
    */
   public static void WaitForFrameReady(WebDriver driver, final By locator) {
