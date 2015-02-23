@@ -405,16 +405,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	  <!-- Copy resources for CDF Tutorial -->
 	  <copy todir="${pentaho.plugin.cdf.dir}">
         <fileset dir="${resources.dir}/cdf-tutorial" />
-      </copy>	  
+      </copy>
+	  
+	  <!-- Add Sparkl plugin -->
+	  <mkdir dir="${tmp.dir}/sparkl" />
+	  <unzip src="${resources.dir}/Sparkl/Plugins.zip" dest="${tmp.dir}/sparkl" />
+	  <copy todir="${pentaho.bi.server.dir}/pentaho-solutions/system" overwrite="true" >
+        <fileset dir="${tmp.dir}/sparkl" >
+		  <include name="**/*" />
+		</fileset>
+      </copy>
     </target>
 
     <!--=======================================================================
         Wait for tomcat start-up
         ====================================================================-->
     <target name="waitfor-pentaho-bi-server-started"> 
-          <waitfor maxwait="5" maxwaitunit="minute" checkevery="500">
-              <http url="${pentaho.bi.server.url}"/>
-          </waitfor>
+      <waitfor maxwait="5" maxwaitunit="minute" checkevery="500">
+        <http url="${pentaho.bi.server.url}"/>
+      </waitfor>
     </target>
 
 
@@ -633,12 +642,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <ivy:report xml="true" todir="${ivy.reports.dir}" />
     </target>
 
+	<!--=======================================================================
+        clean-common
+
+        Removes resources share by Selenium HTML and JAVA scripts
+        ====================================================================-->
+    <target name="clean-common" description="Detect common resources.">
+		<delete dir="${tmp.dir}" />
+    </target>
+	
     <!--=======================================================================
         clean-html
 
         Removes regarding the target 'test-html'
         ====================================================================-->
-    <target name="clean-html" description="Cleans all the files generated from ctools">
+    <target name="clean-html" depends="clean-common" description="Cleans all the files generated from ctools">
       <delete dir="${lib.ext.dir}" />
       <delete dir="${tmp.dir}" />
       <delete dir="${test.html.reports.dir}" />
@@ -649,9 +667,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         Removes regarding the target 'test-java'
         ====================================================================-->
-    <target name="clean-java" description="Cleans the directories created when build selenium java tests">
-    	  <delete dir="${bin.dir}" />
-    	  <delete dir="${build.dir}" />
+    <target name="clean-java" depends="clean-common" description="Cleans the directories created when build selenium java tests">
+    	<delete dir="${bin.dir}" />
+    	<delete dir="${build.dir}" />
         <delete dir="${test.java.reports.dir}" />
         <delete dir="${lib.ext.dir}" />
     </target>
@@ -662,7 +680,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         Removes all the files generated during the execution test for html and 
         java's selenium tests.
         ====================================================================-->
-    <target name="clean" depends="clean-html,clean-java"
+    <target name="clean" depends="clean-common,clean-html,clean-java"
             description="Cleans all the files generated on selenium html and java tests" />
 
     <!--=======================================================================
