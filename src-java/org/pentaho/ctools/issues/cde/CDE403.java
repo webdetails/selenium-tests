@@ -25,11 +25,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -81,7 +81,7 @@ public class CDE403 {
    *    Focus goes to opened input field
    *
    * Description:
-   *    The test pretends validate the CDE-403 issue, so when user opens an 
+   *    The test pretends validate the CDE-403 issue, so when user opens an
    *    input field the focus goes automatically to it.
    *
    * Steps:
@@ -90,8 +90,8 @@ public class CDE403 {
   @Test(timeout = 120000)
   public void tc01_CdeDashboard_InputFieldFocus() {
     log.info("tc01_CdeDashboard_InputFieldFocus");
-	
-	//Go to New CDE Dashboard
+
+    //Go to New CDE Dashboard
     driver.get(baseUrl + "api/repos/wcdf/new");
 
     /*
@@ -121,15 +121,14 @@ public class CDE403 {
     Robot robot;
     try {
       robot = new Robot();
-      robot.keyPress(84);
-	  robot.keyRelease(84);
-      robot.keyPress(69);
-	  robot.keyRelease(69);
-      robot.keyPress(83);
-	  robot.keyRelease(83);
-      robot.keyPress(84);
-	  robot.keyRelease(84);
-	  
+      robot.keyPress(KeyEvent.VK_T);
+      robot.keyRelease(KeyEvent.VK_T);
+      robot.keyPress(KeyEvent.VK_E);
+      robot.keyRelease(KeyEvent.VK_E);
+      robot.keyPress(KeyEvent.VK_S);
+      robot.keyRelease(KeyEvent.VK_S);
+      robot.keyPress(KeyEvent.VK_T);
+      robot.keyRelease(KeyEvent.VK_T);
     } catch (AWTException e) {
       e.printStackTrace();
     }

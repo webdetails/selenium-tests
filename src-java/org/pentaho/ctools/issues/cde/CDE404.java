@@ -29,7 +29,6 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -76,7 +75,7 @@ public class CDE404 {
     driver = CToolsTestSuite.getDriver();
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
-  
+
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -98,10 +97,10 @@ public class CDE404 {
   @Test(timeout = 120000)
   public void tc01_ExternalResources_PluginDashboard() {
     log.info("tc01_ExternalResources_PluginDashboard");
-	
-	//Go to New CDE Dashboard
+
+    //Go to New CDE Dashboard
     driver.get(baseUrl + "plugin/sparkl/api/plugininfo?pluginId=CDE404");
-	//wait for invisibility of waiting pop-up
+    //wait for invisibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     /*

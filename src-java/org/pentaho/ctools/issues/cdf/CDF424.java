@@ -98,7 +98,7 @@ public class CDF424 {
    *    The test pretends validate the CDF-424 issue, so when user sets ortho2AxisLabel_textStyle property in a chart it overrides axisLabel_textStyle for the ortho2 axis.
    *
    * Steps:
-   *    1. Assert colour of axis elements is correct
+   *    1. Assert color of axis elements is correct
    */
   @Test(timeout = 120000)
   public void tc01_CCCProperties_PrioritizedCorrectly() {
