@@ -35,7 +35,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -135,13 +134,6 @@ public class MetaLayerHomeDashboard {
 
     //Wait for the element be visible.
     WebDriver driverFrame = driver.switchTo().frame(frame);
-
-    //BEGING: Testing debug
-    //Printing the html of the element to check what problem is being occurred when tyring to find 'internal_content'
-    log.info("MetaLayerHomeDashboard html");
-    log.info("TODO:" + ((JavascriptExecutor) driver).executeScript("return document.body.innerHTML;").toString());
-    //ENDING: Testing debug
-
     assertNotNull(ElementHelper.FindElement(driverFrame, By.xpath("//div[@id='internal_content']")));
     assertEquals("Measures", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
     assertEquals("Australian Collectors, Co.", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
