@@ -68,7 +68,7 @@ public class OpenFlashChartComponent {
    */
   @BeforeClass
   public static void setUp() {
-    log.debug("setup");
+    log.info("setUp##" + OpenFlashChartComponent.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -102,6 +102,8 @@ public class OpenFlashChartComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
+
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -124,6 +126,7 @@ public class OpenFlashChartComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
@@ -153,7 +156,7 @@ public class OpenFlashChartComponent {
    */
   @Test(timeout = 60000)
   public void tc3_OpenFlashChart_ChartDisplayed() {
-    log.debug("tc3_OpenFlashChart_ChartDisplayed");
+    log.info("tc3_OpenFlashChart_ChartDisplayed");
 
     assertNotNull(ElementHelper.FindElement(driver, By.cssSelector("object")));
     WebElement elemEmbed = ElementHelper.FindElement(driver, By.cssSelector("embed"));
@@ -170,6 +173,6 @@ public class OpenFlashChartComponent {
 
   @AfterClass
   public static void tearDown() {
-    log.debug("tearDown");
+    log.info("tearDown##" + OpenFlashChartComponent.class.getSimpleName());
   }
 }

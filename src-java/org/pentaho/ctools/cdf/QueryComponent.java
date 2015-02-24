@@ -66,7 +66,7 @@ public class QueryComponent {
    */
   @BeforeClass
   public static void setUp() {
-    log.debug("setup");
+    log.info("setUp##" + QueryComponent.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -100,6 +100,8 @@ public class QueryComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
+
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -122,13 +124,15 @@ public class QueryComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
+
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
@@ -151,7 +155,7 @@ public class QueryComponent {
    */
   @Test(timeout = 60000)
   public void tc3_ExecuteQuery_ReturnedTextAsExpected() {
-    log.debug("tc3_ExecuteQuery_ReturnedTextAsExpected");
+    log.info("tc3_ExecuteQuery_ReturnedTextAsExpected");
 
     // ## Step 1
     String queryTextExpected = ElementHelper.GetText(driver, By.id("sampleObjectResult"));
@@ -160,6 +164,6 @@ public class QueryComponent {
 
   @AfterClass
   public static void tearDown() {
-    log.debug("tearDown");
+    log.info("tearDown##" + QueryComponent.class.getSimpleName());
   }
 }

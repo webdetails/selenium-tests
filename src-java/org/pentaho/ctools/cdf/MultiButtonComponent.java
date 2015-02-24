@@ -67,7 +67,7 @@ public class MultiButtonComponent {
    */
   @BeforeClass
   public static void setUp() {
-    log.debug("setup");
+    log.info("setUp##" + MultiButtonComponent.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -101,6 +101,7 @@ public class MultiButtonComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -123,6 +124,7 @@ public class MultiButtonComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
@@ -155,7 +157,7 @@ public class MultiButtonComponent {
    */
   @Test(timeout = 60000)
   public void tc3_ClickInEachOption_AlertDisplayed() {
-    log.debug("tc3_ClickInEachOption_AlertDisplayed");
+    log.info("tc3_ClickInEachOption_AlertDisplayed");
 
     // ## Step 1
     ElementHelper.FindElement(driver, By.xpath("//button[contains(text(),'Eastern')]")).click();
@@ -243,6 +245,6 @@ public class MultiButtonComponent {
 
   @AfterClass
   public static void tearDown() {
-    log.debug("tearDown");
+    log.info("tearDown##" + MultiButtonComponent.class.getSimpleName());
   }
 }

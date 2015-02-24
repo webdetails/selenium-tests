@@ -94,14 +94,14 @@ public class CDE404 {
    *    5. Select file
    *    6. Edit resource and assert elements on external editor
    */
-  @Test(timeout = 120000)
+  @Test(timeout = 180000)
   public void tc01_ExternalResources_PluginDashboard() {
     log.info("tc01_ExternalResources_PluginDashboard");
 
     //Go to New CDE Dashboard
     driver.get(baseUrl + "plugin/sparkl/api/plugininfo?pluginId=CDE404");
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"), 120000);
 
     /*
      * ## Step 1

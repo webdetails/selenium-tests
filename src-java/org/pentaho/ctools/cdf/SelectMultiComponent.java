@@ -24,6 +24,8 @@ package org.pentaho.ctools.cdf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -55,6 +57,8 @@ public class SelectMultiComponent {
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
+  //Log instance
+  private static Logger          log                = LogManager.getLogger(SelectMultiComponent.class);
 
   @Rule
   public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
@@ -64,6 +68,7 @@ public class SelectMultiComponent {
    */
   @BeforeClass
   public static void setUp() {
+    log.info("setUp##" + SelectMultiComponent.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -97,6 +102,8 @@ public class SelectMultiComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
+
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -119,6 +126,8 @@ public class SelectMultiComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
+
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
@@ -151,6 +160,8 @@ public class SelectMultiComponent {
    */
   @Test(timeout = 60000)
   public void tc3_SelectEachItem_AlertDisplayed() {
+    log.info("tc3_SelectEachItem_AlertDisplayed");
+
     // ## Step 1
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("select")));
     Select list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
@@ -220,6 +231,8 @@ public class SelectMultiComponent {
    */
   @Test(timeout = 60000)
   public void tc4_SelectAll_AlertDisplayed() {
+    log.info("tc4_SelectAll_AlertDisplayed");
+
     // ## Step 1
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("select")));
     Select list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
@@ -294,6 +307,8 @@ public class SelectMultiComponent {
    */
   @Test(timeout = 60000)
   public void tc5_SelectArbitrary_AlertDisplayed() {
+    log.info("tc5_SelectArbitrary_AlertDisplayed");
+
     // ## Step 1
     wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("select")));
     Select list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
@@ -348,5 +363,7 @@ public class SelectMultiComponent {
   }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    log.info("tearDown##" + SelectMultiComponent.class.getSimpleName());
+  }
 }

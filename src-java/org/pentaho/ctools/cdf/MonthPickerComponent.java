@@ -72,7 +72,7 @@ public class MonthPickerComponent {
    */
   @BeforeClass
   public static void setUp() {
-    log.debug("setup");
+    log.info("setUp##" + MonthPickerComponent.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -106,6 +106,7 @@ public class MonthPickerComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -128,6 +129,7 @@ public class MonthPickerComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
@@ -158,7 +160,7 @@ public class MonthPickerComponent {
    */
   @Test(timeout = 60000)
   public void tc3_SelectMonth_AlertDisplayed() {
-    log.debug("tc3_SelectMonth_AlertDisplayed");
+    log.info("tc3_SelectMonth_AlertDisplayed");
 
     //## Step 1
     Calendar c = Calendar.getInstance();
@@ -182,6 +184,6 @@ public class MonthPickerComponent {
 
   @AfterClass
   public static void tearDown() {
-    log.debug("tearDown");
+    log.info("tearDown##" + MonthPickerComponent.class.getSimpleName());
   }
 }

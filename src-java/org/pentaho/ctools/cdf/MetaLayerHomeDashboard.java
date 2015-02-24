@@ -130,7 +130,7 @@ public class MetaLayerHomeDashboard {
     assertTrue(StringUtils.containsIgnoreCase(valueFrameAttrSrc, "action=jpivot.xaction&width=500&height=600"));
 
     //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Wait for the element be visible.
     WebDriver driverFrame = driver.switchTo().frame(frame);

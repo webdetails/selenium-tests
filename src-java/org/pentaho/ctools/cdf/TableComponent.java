@@ -27,6 +27,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -63,6 +65,8 @@ public class TableComponent {
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
+  //Log instance
+  private static Logger          log                = LogManager.getLogger(TableComponent.class);
 
   @Rule
   public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
@@ -72,6 +76,8 @@ public class TableComponent {
    */
   @BeforeClass
   public static void setUp() {
+    log.info("setUp##" + TableComponent.class.getSimpleName());
+
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -104,6 +110,8 @@ public class TableComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
+
     //Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     //Wait for visibility of 'TableComponent'
@@ -126,12 +134,14 @@ public class TableComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
+
     //Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
     //Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //The table is now displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
@@ -153,6 +163,8 @@ public class TableComponent {
    */
   @Test(timeout = 60000)
   public void tc3_Paging_NavigateBetweenPages() {
+    log.info("tc3_Paging_NavigateBetweenPages");
+
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObjectTable_length")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObjectTable_filter")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObjectTable")));
@@ -234,6 +246,8 @@ public class TableComponent {
    */
   @Test(timeout = 60000)
   public void tc4_Sort_ElementsAreSort() {
+    log.info("tc4_Sort_ElementsAreSort");
+
     //## Step 1
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_asc']")));
     ElementHelper.FindElement(driver, By.xpath("//table[@id='sampleObjectTable']/thead/tr/th")).click();//Set to DESC
@@ -360,6 +374,8 @@ public class TableComponent {
    */
   @Test(timeout = 60000)
   public void tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected() {
+    log.info("tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected");
+
     assertEquals("Showing 1 to 10 of 50 entries", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
     assertEquals("Amica Models & Co.", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
     assertEquals("94,117", ElementHelper.GetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
@@ -439,6 +455,8 @@ public class TableComponent {
    */
   @Test(timeout = 60000)
   public void tc6_SearchEngine_TableDisplayedContentSearch() {
+    log.info("tc6_SearchEngine_TableDisplayedContentSearch");
+
     //## Step 1
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_filter']/label/input")).sendKeys("Co.");
     assertEquals("Showing 1 to 10 of 13 entries (filtered from 50 total entries)", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
@@ -491,5 +509,7 @@ public class TableComponent {
   }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    log.info("tearDown##" + TableComponent.class.getSimpleName());
+  }
 }

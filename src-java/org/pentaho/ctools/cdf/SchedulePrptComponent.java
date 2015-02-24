@@ -78,7 +78,7 @@ public class SchedulePrptComponent {
    */
   @BeforeClass
   public static void setUp() {
-    log.debug("setup");
+    log.info("setUp##" + SchedulePrptComponent.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -112,6 +112,8 @@ public class SchedulePrptComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
+
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -134,6 +136,8 @@ public class SchedulePrptComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
+
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
@@ -162,6 +166,8 @@ public class SchedulePrptComponent {
    */
   @Test(timeout = 150000)
   public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() {
+    log.info("tc3_SchedulePrpt_ScheduleCreatedSuccessful");
+
     String schLocation = "/public";
 
     //Initialize some data
@@ -399,7 +405,7 @@ public class SchedulePrptComponent {
 
   @AfterClass
   public static void tearDown() {
-    log.debug("tearDown");
+    log.info("tearDown##" + SchedulePrptComponent.class.getSimpleName());
     removeAllCreatedSchedules();
   }
 }

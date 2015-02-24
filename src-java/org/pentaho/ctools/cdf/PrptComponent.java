@@ -77,7 +77,7 @@ public class PrptComponent {
    */
   @BeforeClass
   public static void setUp() {
-    log.debug("setup");
+    log.info("setUp##" + PrptComponent.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -111,6 +111,7 @@ public class PrptComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -133,13 +134,15 @@ public class PrptComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
+
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
@@ -164,7 +167,7 @@ public class PrptComponent {
    */
   @Test(timeout = 60000)
   public void tc3_SelectHTMLAndPDF_PageDisplayedAccording() {
-    log.debug("tc3_SelectHTMLAndPDF_PageDisplayedAccording");
+    log.info("tc3_SelectHTMLAndPDF_PageDisplayedAccording");
 
     // ## Step 1
     Select select = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
@@ -258,7 +261,7 @@ public class PrptComponent {
    */
   @Test(timeout = 60000)
   public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
-    log.debug("tc4_TogglePromptPanel_PromptPanelEnableDisable");
+    log.info("tc4_TogglePromptPanel_PromptPanelEnableDisable");
     driver.switchTo().defaultContent();
 
     // ## Step 1
@@ -287,7 +290,7 @@ public class PrptComponent {
    */
   @Test(timeout = 60000)
   public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
-    log.debug("tc5_SelectSeveralProducts_ReportIsRefreshed");
+    log.info("tc5_SelectSeveralProducts_ReportIsRefreshed");
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
     String previewsAttrSrc = "";
@@ -351,8 +354,8 @@ public class PrptComponent {
    * @throws InterruptedException
    */
   @Test(timeout = 60000)
-  public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() throws InterruptedException {
-    log.debug("tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised");
+  public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
+    log.info("tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised");
     driver.switchTo().defaultContent();
 
     String downloadDir = CToolsTestSuite.getDownloadDir();
@@ -441,6 +444,6 @@ public class PrptComponent {
 
   @AfterClass
   public static void tearDown() {
-    log.debug("tearDown");
+    log.info("tearDown##" + PrptComponent.class.getSimpleName());
   }
 }
