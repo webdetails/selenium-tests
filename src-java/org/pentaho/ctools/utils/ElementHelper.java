@@ -491,13 +491,17 @@ public class ElementHelper {
    * @param locator
    */
   public static void WaitForElementInvisibility(WebDriver driver, By locator, Integer timeout) {
+    log.debug("WaitForElementInvisibility::Enter");
+
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
 
-    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     List<WebElement> elements = null;
     try {
+      log.debug("Find Elements");
       elements = driver.findElements(locator);
       if (elements.size() > 0) {
+        log.debug("Wait For invisibility");
         //wait for element disappear
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
       } else {
@@ -509,6 +513,7 @@ public class ElementHelper {
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    log.debug("WaitForElementInvisibility::Exit");
   }
 
   /**
