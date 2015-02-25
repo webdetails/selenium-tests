@@ -63,7 +63,7 @@ import org.pentaho.ctools.security.AccessSystemResources;
   //Security
   AccessSystemResources.class,
   //Issues
-  //SuiteIssues.class,
+  SuiteIssues.class,
   //End Tests
   LogoutPentaho.class })
 public class CToolsTestSuite {
