@@ -118,7 +118,7 @@ public class CDA103 {
     assertEquals("View", viewMenuText);
     assertEquals("Tools", toolsMenuText);
     assertEquals("Help", helpMenuText);
-    ElementHelper.ClickJS(driver, By.id("toolsmenu"));
+    ElementHelper.Click(driver, By.id("toolsmenu"));
 
     /*
      * ## Step 2
@@ -134,7 +134,15 @@ public class CDA103 {
     ElementHelper.WaitForElementVisibility(driver, By.id("cdaClearCache"));
     String cdaClearCacheText = ElementHelper.GetText(driver, By.id("cdaClearCache"));
     assertEquals("CDA Cache", cdaClearCacheText);
-    ElementHelper.ClickJS(driver, By.id("cdaClearCache"));
+    ElementHelper.Click(driver, By.id("cdaClearCache"));
+
+    /*
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }*/
 
     /*
      * ## Step 4
