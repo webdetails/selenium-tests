@@ -382,7 +382,7 @@ public class ElementHelper {
    * @param driver
    * @param locator
    */
-  public static void WaitForElementInvisibility(WebDriver driver, By locator) {
+  public static void WaitForElementInvisibility(WebDriver driver, final By locator) {
     log.debug("WaitForElementInvisibility(Main)::Enter");
     WaitForElementInvisibility(driver, locator, 30);
     log.debug("WaitForElementInvisibility(Main)::Exit");
@@ -395,27 +395,26 @@ public class ElementHelper {
    * @param driver
    * @param locator
    */
-  public static void WaitForElementInvisibility(WebDriver driver, By locator, Integer timeout) {
+  public static void WaitForElementInvisibility(WebDriver driver, final By locator, Integer timeout) {
     log.debug("WaitForElementInvisibility::Enter");
 
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    List<WebElement> elements = null;
-    try {
-      log.debug("Find Elements");
-      elements = driver.findElements(locator);
-      if (elements.size() > 0) {
-        log.debug("Wait For invisibility");
-        //wait for element disappear
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
-      } else {
-        log.warn("No elements found!");
+
+    wait.until(new ExpectedCondition<Boolean>() {
+      @Override
+      public Boolean apply(WebDriver d) {
+        try {
+          WebElement element = d.findElement(locator);
+          return element.isDisplayed() == false && element.isEnabled() == false;
+        } catch (NoSuchElementException nsee) {
+          return true;
+        } catch (StaleElementReferenceException sere) {
+          return true;
+        }
       }
-    } catch (Exception e) {
-      log.warn("Something went wrong searching for: " + locator.toString());
-      log.error(e.getMessage());
-    }
+    });
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
@@ -742,8 +741,8 @@ public class ElementHelper {
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-    log.debug("ElementsNotOverlap::Exit");
-    return notIntersected;
+      log.debug("ElementsNotOverlap::Exit");
+      return notIntersected;
   }
 
   /**
