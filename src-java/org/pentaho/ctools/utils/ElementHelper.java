@@ -395,7 +395,7 @@ public class ElementHelper {
    * @param driver
    * @param locator
    */
-  public static void WaitForElementInvisibility(WebDriver driver, final By locator, Integer timeout) {
+  public static void WaitForElementInvisibility(final WebDriver driver, final By locator, Integer timeout) {
     log.debug("WaitForElementInvisibility::Enter");
 
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
@@ -406,8 +406,7 @@ public class ElementHelper {
       @Override
       public Boolean apply(WebDriver d) {
         try {
-          WebElement element = d.findElement(locator);
-          return element.isDisplayed() == false && element.isEnabled() == false;
+          return d.findElement(locator).isDisplayed() == false;
         } catch (NoSuchElementException nsee) {
           return true;
         } catch (StaleElementReferenceException sere) {
@@ -741,8 +740,8 @@ public class ElementHelper {
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-      log.debug("ElementsNotOverlap::Exit");
-      return notIntersected;
+    log.debug("ElementsNotOverlap::Exit");
+    return notIntersected;
   }
 
   /**

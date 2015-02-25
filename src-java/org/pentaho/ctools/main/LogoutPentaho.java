@@ -34,6 +34,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -59,14 +60,14 @@ public class LogoutPentaho {
   private static Logger     log                = LogManager.getLogger(LogoutPentaho.class);
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(this.driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
 
   @Before
   public void setUp() {
     log.debug("setUp");
-    this.driver = CToolsTestSuite.getDriver();
-    this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
+    driver = CToolsTestSuite.getDriver();
+    wait = CToolsTestSuite.getWait();
+    baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -85,37 +86,37 @@ public class LogoutPentaho {
   public void tc1_Logout_SuccessLogOutReturnHomePage() {
     log.debug("tc1_Logout_SuccessLogOutReturnHomePage");
     //## Step 1
-    this.driver.get(this.baseUrl + "Home");
+    driver.get(baseUrl + "Home");
 
     //waiting pop-up to be visible
-    ElementHelper.WaitForElementInvisibility(this.driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
     //## Step 2
     //wait for frame to load
-    this.wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
-    assertEquals("Pentaho User Console", this.driver.getTitle());
-    assertNotNull(this.driver.findElement(By.xpath("//iframe[@id='home.perspective']")));
+    wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
+    assertEquals("Pentaho User Console", driver.getTitle());
+    assertNotNull(driver.findElement(By.xpath("//iframe[@id='home.perspective']")));
 
     //User drop down available
-    this.wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")));
-    assertEquals("admin", this.driver.findElement(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")).getText());
-    this.driver.findElement(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")).click();
+    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")));
+    assertEquals("admin", driver.findElement(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")).getText());
+    driver.findElement(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")).click();
 
     //Logout option available
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")));
-    this.wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")));
-    assertEquals("Log Out", this.driver.findElement(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")).getText());
-    this.driver.findElement(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")).click();
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")));
+    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")));
+    assertEquals("Log Out", driver.findElement(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")).getText());
+    driver.findElement(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")).click();
 
     //## Step 3
     //Wait for form display (login form)
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='login-form-container']/div/h1")));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_username")));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_password")));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.btn")));
-    assertNotNull(ElementHelper.FindElement(this.driver, By.xpath("//div[@id='login-form-container']/div/h1")));
+    WebElement elForm = ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='login-form-container']/div/h1"));
+    ElementHelper.WaitForElementPresence(driver, By.id("j_username"));
+    ElementHelper.WaitForElementPresence(driver, By.id("j_password"));
+    ElementHelper.WaitForElementPresence(driver, By.cssSelector("button.btn"));
+    assertNotNull(elForm);
   }
 
   @After

@@ -143,7 +143,7 @@ public class JFreeChartComponent {
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
@@ -171,6 +171,7 @@ public class JFreeChartComponent {
   @Test(timeout = 60000)
   public void tc3_ClickOnChart_AlertDisplayed() {
     log.info("tc3_ClickOnChart_AlertDisplayed");
+    String title = "";
 
     WebElement img = ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']"));
     String firstChart = img.getAttribute("src");
@@ -179,10 +180,11 @@ public class JFreeChartComponent {
     Actions acts = new Actions(driver);
     acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts.build().perform();
-    assertTrue(ElementHelper.GetText(driver, By.id("sampleObjectcaptiontitle")).equals("Top 10 Customers"));
+    title = ElementHelper.WaitForTextPresent(driver, By.id("sampleObjectcaptiontitle"), "Top 10 Customers");
+    assertTrue(title.equals("Top 10 Customers"));
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']")).click();
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check if the generated image is different from previews, is not something static
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']")));
     img = ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']"));
@@ -210,10 +212,11 @@ public class JFreeChartComponent {
     acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts2.build().perform();
     //Open the Pie Chart
-    assertTrue(ElementHelper.GetText(driver, By.id("sampleObjectcaptiontitle")).equals("Top 10 Customers"));
+    title = ElementHelper.WaitForTextPresent(driver, By.id("sampleObjectcaptiontitle"), "Top 10 Customers");
+    assertTrue(title.equals("Top 10 Customers"));
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']")).click();
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check if the generated image is different from previews, is not something static
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']")));
     img = ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']"));
@@ -253,13 +256,15 @@ public class JFreeChartComponent {
   @Test(timeout = 60000)
   public void tc4_PreviewChart_NewWindowDisplayed() {
     log.info("tc4_PreviewChart_NewWindowDisplayed");
+    String title = "";
 
     // ## Step 1
     Actions acts = new Actions(driver);
     acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts.build().perform();
     //Check bar title
-    assertTrue(ElementHelper.GetText(driver, By.id("sampleObjectcaptiontitle")).equals("Top 10 Customers"));
+    title = ElementHelper.WaitForTextPresent(driver, By.id("sampleObjectcaptiontitle"), "Top 10 Customers");
+    assertTrue(title.equals("Top 10 Customers"));
     //Check the bar is visible
     WebElement elementBar = ElementHelper.FindElement(driver, By.xpath("//div[@class='caption-bottom']"));
     String attriStyle = elementBar.getAttribute("style");
@@ -308,12 +313,13 @@ public class JFreeChartComponent {
     acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts2.build().perform();
     //Open the Pie Chart
-    assertTrue(ElementHelper.GetText(driver, By.id("sampleObjectcaptiontitle")).equals("Top 10 Customers"));
+    title = ElementHelper.WaitForTextPresent(driver, By.id("sampleObjectcaptiontitle"), "Top 10 Customers");
+    assertTrue(title.equals("Top 10 Customers"));
     //Change to pie chart
     acts2.build().perform();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']")).click();
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Zoom the Pie Chart
     Actions acts3 = new Actions(driver);
     acts3.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
@@ -327,7 +333,6 @@ public class JFreeChartComponent {
     ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']")).click();
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    
 
     parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
     setWindows = driver.getWindowHandles();

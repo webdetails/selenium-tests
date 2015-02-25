@@ -93,8 +93,7 @@ public class AddinReferenceEdit {
      */
     //Go to AddinReference
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent");
-    //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='Title']/span"));
     WebElement titleWithFontSize18 = ElementHelper.FindElement(driver, By.xpath("//div[@id='Title']/span"));
     assertEquals("font-size: 18px;", titleWithFontSize18.getAttribute("style"));
 
@@ -120,9 +119,9 @@ public class AddinReferenceEdit {
    */
   private static void ChangeFontSize(String value) {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/wcdf.edit");
-    //NOTE - we have to wait for loading disappear
-    //ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
     //Expand first row - Title
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("span.expander"));
     ElementHelper.ClickJS(driver, By.cssSelector("span.expander"));
     //Click in HTML to open the Properties
     Actions acts = new Actions(driver);
@@ -135,10 +134,10 @@ public class AddinReferenceEdit {
     ElementHelper.FindElement(driver, By.xpath("//form[@class='cdfddInput']/input")).sendKeys(value);
     ElementHelper.FindElement(driver, By.xpath("//form[@class='cdfddInput']/input")).submit();
     //Save the changes
-    ElementHelper.FindElement(driver, By.linkText("Save")).click();
+    ElementHelper.Click(driver, By.linkText("Save"));
     //Wait for element present and invisible
-    ElementHelper.IsElementVisible(driver, By.xpath("//div[@id='notifyBar']"));
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@id='notifyBar']"));
+    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='notifyBar']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='notifyBar']"));
   }
 
   @AfterClass
