@@ -133,15 +133,15 @@ public class CDE395 {
     assertEquals("CDE Dashboard", cdeText);
     assertEquals("Data Source", dataText);
     ElementHelper.ClickJS(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
+    driver.switchTo().defaultContent();
 
     /*
      * ## Step 3
      */
     //wait for invisibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    driver.switchTo().defaultContent();
-
     //assert title
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("solutionNavigatorAndContentPanel"));
     String titleText = ElementHelper.GetText(driver, By.xpath("//div[@title='New CDE Dashboard']"));
     assertEquals("CDE Dashboard", titleText);
 
@@ -165,6 +165,7 @@ public class CDE395 {
     /*
      * ## Step 4
      */
+    ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("popup"));
     WebElement obj1 = ElementHelper.FindElement(frame, By.xpath("//select[@id='rendererInput']/option[@value='bootstrap']"));
     assertEquals(obj1.isSelected(), true);
   }

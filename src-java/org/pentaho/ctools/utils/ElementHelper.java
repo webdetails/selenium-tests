@@ -407,6 +407,7 @@ public class ElementHelper {
       public Boolean apply(WebDriver d) {
         try {
           log.debug("inv0");
+          d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
           WebElement elem = d.findElement(locator);
           log.debug("inv1");
           return elem.isDisplayed() == false;
@@ -763,8 +764,8 @@ public class ElementHelper {
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-      log.debug("ElementsNotOverlap::Exit");
-      return notIntersected;
+    log.debug("ElementsNotOverlap::Exit");
+    return notIntersected;
   }
 
   /**

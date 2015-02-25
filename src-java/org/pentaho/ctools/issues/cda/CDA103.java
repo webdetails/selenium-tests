@@ -123,7 +123,7 @@ public class CDA103 {
     /*
      * ## Step 2
      */
-    ElementHelper.WaitForElementVisibility(driver, By.id("refreshmenu"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("refreshmenu"));
     String refreshMenuText = ElementHelper.GetText(driver, By.id("refreshmenu"));
     assertEquals("Refresh", refreshMenuText);
     ElementHelper.ClickJS(driver, By.id("refreshmenu"));
@@ -131,7 +131,7 @@ public class CDA103 {
     /*
      * ## Step 3
      */
-    ElementHelper.WaitForElementVisibility(driver, By.id("cdaClearCache"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("cdaClearCache"));
     String cdaClearCacheText = ElementHelper.GetText(driver, By.id("cdaClearCache"));
     assertEquals("CDA Cache", cdaClearCacheText);
     ElementHelper.Click(driver, By.id("cdaClearCache"));

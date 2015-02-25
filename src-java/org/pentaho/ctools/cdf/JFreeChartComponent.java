@@ -305,10 +305,12 @@ public class JFreeChartComponent {
     }
 
     popup.close();
-    driver.switchTo().window(parentWindowHandle);
+
+    driver = driver.switchTo().window(parentWindowHandle);
     assertTrue(driver.getWindowHandles().size() == 1);
 
     // ## Step 2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(text(),'Details')]"));
     Actions acts2 = new Actions(driver);
     acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts2.build().perform();

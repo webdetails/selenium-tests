@@ -111,7 +111,7 @@ public class CDE394 {
     WebElement element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']"));
     String widthText = element.getAttribute("width");
     double width = Double.parseDouble(widthText);
-    log.info(width);
+    log.debug(width);
 
     /*
      * ## Step 2
@@ -119,15 +119,15 @@ public class CDE394 {
     element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][14]"));
     String cx1Text = element.getAttribute("cx");
     double cx1 = Double.parseDouble(cx1Text);
-    log.info(cx1);
+    log.debug(cx1);
     element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='circle'][14]"));
     String cx2Text = element.getAttribute("cx");
     double cx2 = Double.parseDouble(cx2Text);
-    log.info(cx2);
+    log.debug(cx2);
     element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][9]/*[local-name()='circle'][14]"));
     String cx3Text = element.getAttribute("cx");
     double cx3 = Double.parseDouble(cx3Text);
-    log.info(cx3);
+    log.debug(cx3);
 
     /*
      * ## Step 3
