@@ -77,7 +77,7 @@ public class SampleDashboard {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/generatedContent");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
   /**
@@ -305,7 +305,7 @@ public class SampleDashboard {
      */
     ElementHelper.ClickJS(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]//..//*[local-name()='rect'][2]"));
     //Wait for page render
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //check contents
     ElementHelper.WaitForTextPresent(driver, By.id("tableTable_info"), "Showing 1 to 10 of 21 entries");
     String paggingInfo = ElementHelper.GetText(driver, By.id("tableTable_info"));
