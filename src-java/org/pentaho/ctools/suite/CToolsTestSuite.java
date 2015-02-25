@@ -87,7 +87,7 @@ public class CToolsTestSuite {
     log.info("Master setup");
 
     //Initialize BASEURL
-    baseUrl = "http://10.120.40.243:8080/pentaho/";
+    baseUrl = "http://localhost:8080/pentaho/";
     downloadDir = System.getProperty("user.home") + "\\SeleniumDonwloadDir";
     new File(downloadDir).mkdir();
 
