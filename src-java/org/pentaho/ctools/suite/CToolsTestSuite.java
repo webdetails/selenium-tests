@@ -45,8 +45,10 @@ import org.pentaho.ctools.security.AccessSystemResources;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-  /*LoginPentaho.class,
-  CDA99.class*/
+  /*  LoginPentaho.class,
+    CDA103.class,
+    LogoutPentaho.class*/
+  //LogoutPentaho.class
   //##### Execution Order #####
   //Start Tests
   LoginPentaho.class,
@@ -61,7 +63,7 @@ import org.pentaho.ctools.security.AccessSystemResources;
   //Security
   AccessSystemResources.class,
   //Issues
-  SuiteIssues.class,
+  //SuiteIssues.class,
   //End Tests
   LogoutPentaho.class })
 public class CToolsTestSuite {
@@ -85,7 +87,7 @@ public class CToolsTestSuite {
     log.info("Master setup");
 
     //Initialize BASEURL
-    baseUrl = "http://localhost:8080/pentaho/";
+    baseUrl = "http://10.120.40.243:8080/pentaho/";
     downloadDir = System.getProperty("user.home") + "\\SeleniumDonwloadDir";
     new File(downloadDir).mkdir();
 
@@ -101,6 +103,10 @@ public class CToolsTestSuite {
     //logs.enable(LogType.CLIENT, Level.ALL);
     //logs.enable(LogType.PERFORMANCE, Level.ALL);
 
+    /*
+     * INTERNET EXPLORER DRIVER
+     *
+     */
     //Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
     ffProfile.setPreference("intl.accept_languages", "en-us");
@@ -115,8 +121,36 @@ public class CToolsTestSuite {
     //capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
     capabilities.setCapability(FirefoxDriver.PROFILE, ffProfile);
 
-    //JavaScriptError.addExtension(ffProfile);
     driver = new FirefoxDriver(capabilities);
+
+    /*
+     * INTERNET EXPLORER DRIVER
+     *
+     */
+    /*
+    System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
+    System.setProperty("webdriver.ie.driver.host", "10.120.42.25");
+    System.setProperty("webdriver.ie.driver.loglevel", "FATAL");
+    System.setProperty("webdriver.ie.driver.loglevel", downloadDir + "\\seleniumlogs.txt");
+
+    // We could use any driver for our tests...
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    capabilities.setBrowserName("internet explorer");
+    capabilities.setVersion("8");
+    capabilities.setPlatform(Platform.WINDOWS);
+    capabilities.setCapability("platform", "WINDOWS");
+    capabilities.setJavascriptEnabled(true);
+    //capabilities.setCapability(InternetExplorerDriver.HOST, "10.120.40.243");
+
+    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+    capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+
+    // Get a handle to the driver. This will throw an exception
+    // if a matching driver cannot be located
+    driver = new RemoteWebDriver(new URL("http://10.120.42.25:4444/wd/hub"), capabilities);
+    //driver = new InternetExplorerDriver();
+     */
+
     driver.manage().window().setPosition(new Point(0, 0));
     driver.manage().window().setSize(new Dimension(1360, 764));
     driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);

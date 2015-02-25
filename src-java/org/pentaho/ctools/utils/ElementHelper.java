@@ -406,10 +406,15 @@ public class ElementHelper {
       @Override
       public Boolean apply(WebDriver d) {
         try {
-          return d.findElement(locator).isDisplayed() == false;
+          log.debug("inv0");
+          WebElement elem = d.findElement(locator);
+          log.debug("inv1");
+          return elem.isDisplayed() == false;
         } catch (NoSuchElementException nsee) {
+          log.debug("inv2");
           return true;
         } catch (StaleElementReferenceException sere) {
+          log.debug("inv3");
           return true;
         }
       }
@@ -758,8 +763,8 @@ public class ElementHelper {
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-    log.debug("ElementsNotOverlap::Exit");
-    return notIntersected;
+      log.debug("ElementsNotOverlap::Exit");
+      return notIntersected;
   }
 
   /**
