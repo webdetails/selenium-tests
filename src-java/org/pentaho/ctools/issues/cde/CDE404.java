@@ -88,7 +88,7 @@ public class CDE404 {
    *
    * Steps:
    *    1. Assert elements on page and click "Elements"
-   *    2. Look for existing dashboard and clik to edit it.
+   *    2. Look for existing dashboard and click to edit it.
    *    3. Wait for dashboard to load and click add resources.
    *    4. Select external file as resource
    *    5. Select file
@@ -101,7 +101,7 @@ public class CDE404 {
     //Go to New CDE Dashboard
     driver.get(baseUrl + "plugin/sparkl/api/plugininfo?pluginId=CDE404");
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"), 120000);
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"), 60);
 
     /*
      * ## Step 1

@@ -45,9 +45,9 @@ import org.pentaho.ctools.security.AccessSystemResources;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-  /*  LoginPentaho.class,
-    CDA103.class,
-    LogoutPentaho.class*/
+  /*LoginPentaho.class,
+  JFreeChartComponent.class,
+  LogoutPentaho.class*/
   //LogoutPentaho.class
   //##### Execution Order #####
   //Start Tests
@@ -164,18 +164,6 @@ public class CToolsTestSuite {
   @AfterClass
   public static void tearDownClass() {
     log.info("Master tearDown");
-
-    /*
-    List<JavaScriptError> jsErrors = JavaScriptError.readErrors(driver);
-    System.out.println("###start displaying errors");
-    for(int i = 0; i < jsErrors.size(); i++) {
-      System.out.println("Error Message: " + jsErrors.get(i).getErrorMessage());
-      System.out.println("Line Number: " + jsErrors.get(i).getLineNumber());
-      System.out.println("Source Name: " + jsErrors.get(i).getSourceName());
-    }
-    System.out.println("###start displaying errors");*/
-
-    driver.close();
     driver.quit();
   }
 

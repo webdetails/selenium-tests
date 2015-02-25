@@ -135,7 +135,8 @@ public class ElementHelper {
   public static WebElement FindElement(WebDriver driver, By locator) {
     log.debug("FindElement::Enter");
     try {
-      IsElementVisible(driver, locator);
+      //IsElementVisible(driver, locator);
+      WaitForElementPresenceAndVisible(driver, locator);
       log.debug("Element is visble");
       List<WebElement> listElements = driver.findElements(locator);
       if (listElements.size() > 0) {
@@ -394,11 +395,12 @@ public class ElementHelper {
    *
    * @param driver
    * @param locator
+   * @param timeout
    */
   public static void WaitForElementInvisibility(WebDriver driver, final By locator, Integer timeout) {
     log.debug("WaitForElementInvisibility::Enter");
 
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(250, TimeUnit.MILLISECONDS);
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
@@ -406,16 +408,12 @@ public class ElementHelper {
       @Override
       public Boolean apply(WebDriver d) {
         try {
-          log.debug("inv0");
           d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
           WebElement elem = d.findElement(locator);
-          log.debug("inv1");
           return elem.isDisplayed() == false;
         } catch (NoSuchElementException nsee) {
-          log.debug("inv2");
           return true;
         } catch (StaleElementReferenceException sere) {
-          log.debug("inv3");
           return true;
         }
       }
