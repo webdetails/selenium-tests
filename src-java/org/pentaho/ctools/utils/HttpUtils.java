@@ -21,14 +21,24 @@
  ******************************************************************************/
 package org.pentaho.ctools.utils;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
 import org.pentaho.ctools.cda.CDACacheManager;
+
+import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 public class HttpUtils {
 
@@ -54,5 +64,77 @@ public class HttpUtils {
     }
 
     return nHttpStatus;
+  }
+
+  /**
+   * This method shall look for HttpErrors return the status of HTTP request. Will return false if no error with that number was found.
+   *
+   * @param driver
+   * @param ErrorNumber
+   * @return
+   * @throws Exception
+   */
+  public static boolean GetHttpError(WebDriver driver, String ErrorNumber) {
+    Boolean errorFound = false;
+    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+
+    for (int i = 0; i < 1000; i++) {
+      try {
+        driver.findElement(By.id("web_" + ErrorNumber));
+        errorFound = true;
+      } catch (NoSuchElementException s) {
+        log.error("NoSuchElement - got it.");
+        break;
+      } catch (StaleElementReferenceException s) {
+        log.error("Stale - got it.");
+      }
+    }
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    return errorFound;
+  }
+
+  /**
+   * This method shall return the status of HTTP request. When authentication is not needed.
+   *
+   * @param url
+   * @return
+   * @throws Exception
+   */
+
+  public static int getResponseCode(String url) {
+    try {
+      WebClient client = new WebClient();
+      return client.getPage(url).getWebResponse().getStatusCode();
+    } catch (IOException ioe) {
+      throw new RuntimeException(ioe);
+    } catch (FailingHttpStatusCodeException fhscr) {
+      return fhscr.getStatusCode();
+    }
+  }
+
+  /**
+   * This method shall return the status of HTTP request. When authentication is needed.
+   *
+   * @param url
+   * @param username
+   * @param password
+   * @return
+   * @throws Exception
+   */
+
+  public static int getResponseCode(String url, String username, String password) {
+    try {
+      //set proxy username and password
+      WebClient client = new WebClient();
+      final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) client.getCredentialsProvider();
+      credentialsProvider.addCredentials(username, password);
+      return client.getPage(url).getWebResponse().getStatusCode();
+    } catch (IOException ioe) {
+      throw new RuntimeException(ioe);
+    } catch (FailingHttpStatusCodeException fhscr) {
+      return fhscr.getStatusCode();
+
+    }
+
   }
 }

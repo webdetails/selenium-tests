@@ -41,6 +41,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.HttpUtils;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -88,7 +89,7 @@ public class MetaLayerHomeDashboard {
    *    2. Click in 'Details...'.
    *    3. Check if we have width = 500 and height = 600
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 180000)
   public void tc1_LinkDetails_PopupJPivot() {
     log.info("tc1_LinkDetails_PopupJPivot");
     /*
@@ -142,8 +143,13 @@ public class MetaLayerHomeDashboard {
     //Close pop-up
     driver.switchTo().defaultContent();
     wait.until(ExpectedConditions.elementToBeClickable(By.id("fancybox-close")));
+    String background = ElementHelper.FindElement(driver, By.cssSelector("#fancybox-close")).getCssValue("background-image");
+    String background1 = background.substring(background.indexOf(34) + 1, background.lastIndexOf(34));
+    assertEquals("http://localhost:8080/pentaho/api/repos/pentaho-cdf/js/fancybox/fancybox.png", background1);
     ElementHelper.FindElement(driver, By.id("fancybox-close")).click();
     ElementHelper.IsElementInvisible(driver, By.id("fancybox-content"));
+    assertEquals("200", Integer.toString(HttpUtils.getResponseCode(background1, "admin", "password")));
+
   }
 
   @AfterClass
