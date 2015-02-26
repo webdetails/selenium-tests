@@ -44,6 +44,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
+import com.google.common.base.Function;
+
 public class ElementHelper {
   //Log instance
   private static Logger log = LogManager.getLogger(ElementHelper.class);
@@ -400,42 +402,30 @@ public class ElementHelper {
   public static void WaitForElementInvisibility(WebDriver driver, final By locator, Integer timeout) {
     log.debug("WaitForElementInvisibility::Enter");
 
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(250, TimeUnit.MILLISECONDS);
-
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-
-    wait.until(new ExpectedCondition<Boolean>() {
-      @Override
-      public Boolean apply(WebDriver d) {
-        try {
-          d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-          WebElement elem = d.findElement(locator);
-          return elem.isDisplayed() == false;
-        } catch (NoSuchElementException nsee) {
-          return true;
-        } catch (StaleElementReferenceException sere) {
-          return true;
-        }
-      }
-    });
-
-    /*
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    List<WebElement> elements = null;
     try {
-      log.debug("Find Elements");
-      elements = driver.findElements(locator);
-      if (elements.size() > 0) {
-        log.debug("Wait For invisibility");
-        //wait for element disappear
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
-      } else {
-        log.warn("No elements found!");
-      }
-    } catch (Exception e) {
-      log.warn("Something went wrong searching for: " + locator.toString());
-      log.error(e.getMessage());
-    }*/
+      Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+        .withTimeout(timeout, TimeUnit.SECONDS)
+        .pollingEvery(250, TimeUnit.MILLISECONDS);
+
+      driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+      wait.until(new Function<WebDriver, Boolean>() {
+        @Override
+        public Boolean apply(WebDriver d) {
+          try {
+            WebElement elem = d.findElement(locator);
+            return elem.isDisplayed() == false;
+          } catch (NoSuchElementException nsee) {
+            return true;
+          } catch (StaleElementReferenceException sere) {
+            return true;
+          }
+        }
+      });
+    } catch (TimeoutException te) {
+      log.warn("Timeout exceeded!");
+      log.debug("Exception Message: " + te.getMessage());
+    }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
@@ -762,8 +752,8 @@ public class ElementHelper {
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-    log.debug("ElementsNotOverlap::Exit");
-    return notIntersected;
+      log.debug("ElementsNotOverlap::Exit");
+      return notIntersected;
   }
 
   /**

@@ -42,6 +42,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -96,6 +97,7 @@ public class SchedulePrptComponent {
     // Reference/Core Components/SchedulePrptComponent
     driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:86-SchedulePrptComponent:schedule_prpt_component.xcdf/generatedContent");
 
+    log.info(((JavascriptExecutor) driver).executeScript("return document.readyState;").toString());
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
@@ -163,6 +165,7 @@ public class SchedulePrptComponent {
    *    2. Fill the form and submit
    *    3. Check for alert.
    *    4. On Schedule Manager, it is set the schedule.
+   * @throws InterruptedException
    */
   @Test(timeout = 150000)
   public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() {
@@ -263,6 +266,7 @@ public class SchedulePrptComponent {
     //-->Need to check if the schedule was created
     //Go to home page
     driver.get(baseUrl + "Home");
+
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
