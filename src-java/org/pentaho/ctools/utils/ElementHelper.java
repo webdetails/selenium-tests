@@ -22,6 +22,9 @@
 package org.pentaho.ctools.utils;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
@@ -46,7 +49,8 @@ import org.openqa.selenium.support.ui.Wait;
 
 import com.google.common.base.Function;
 
-public class ElementHelper {
+public class ElementHelper{
+
   //Log instance
   private static Logger log = LogManager.getLogger(ElementHelper.class);
 
@@ -63,12 +67,13 @@ public class ElementHelper {
     try {
       driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
       driver.findElement(locator);
-    } catch (NoSuchElementException s) {
+    }
+    catch(NoSuchElementException s) {
       log.error("NuSuchElement - got it. Locator: " + locator.toString());
       bElementInvisible = true;
     }
 
-    if (!bElementInvisible) {
+    if( ! bElementInvisible) {
       Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS);
 
       driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -116,7 +121,7 @@ public class ElementHelper {
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-    if (element != null) {
+    if(element != null) {
       isElementPresent = true;
     }
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -141,9 +146,9 @@ public class ElementHelper {
       WaitForElementPresenceAndVisible(driver, locator);
       log.debug("Element is visble");
       List<WebElement> listElements = driver.findElements(locator);
-      if (listElements.size() > 0) {
+      if(listElements.size() > 0) {
         WebElement element = listElements.get(0);
-        if (element.isDisplayed() && element.isEnabled()) {
+        if(element.isDisplayed() && element.isEnabled()) {
           log.debug("Return element found");
           return element;
         } else {
@@ -154,10 +159,12 @@ public class ElementHelper {
         log.warn("Trying obtain! Locator: " + locator.toString());
         return null;
       }
-    } catch (StaleElementReferenceException s) {
+    }
+    catch(StaleElementReferenceException s) {
       log.error("Stale - got one. Locator: " + locator.toString());
       return FindElement(driver, locator);
-    } catch (ElementNotVisibleException v) {
+    }
+    catch(ElementNotVisibleException v) {
       log.error("NotVisible - got one. Locator: " + locator.toString());
       return IsElementVisible(driver, locator);
     }
@@ -179,9 +186,9 @@ public class ElementHelper {
       IsElementPresent(driver, locator);
       log.debug("Element is visble");
       List<WebElement> listElements = driver.findElements(locator);
-      if (listElements.size() > 0) {
+      if(listElements.size() > 0) {
         WebElement element = listElements.get(0);
-        if (element.isEnabled()) {
+        if(element.isEnabled()) {
           log.debug("Return element found it");
           return element;
         } else {
@@ -192,13 +199,16 @@ public class ElementHelper {
         log.warn("Trying obtain! Locator: " + locator.toString());
         return null;
       }
-    } catch (StaleElementReferenceException s) {
+    }
+    catch(StaleElementReferenceException s) {
       log.error("Stale - got one. Locator: " + locator.toString());
       return FindElement(driver, locator);
-    } catch (ElementNotVisibleException v) {
+    }
+    catch(ElementNotVisibleException v) {
       log.error("NotVisible - got one. Locator: " + locator.toString());
       return IsElementVisible(driver, locator);
-    } catch (TimeoutException te) {
+    }
+    catch(TimeoutException te) {
       log.error("TimeoutException - got one. Locator: " + locator.toString());
       log.error(te.getMessage());
       log.debug("Trying again.");
@@ -216,7 +226,8 @@ public class ElementHelper {
     String text = "";
     try {
       text = FindElement(driver, locator).getText();
-    } catch (StaleElementReferenceException e) {
+    }
+    catch(StaleElementReferenceException e) {
       log.debug("Got stale");
       text = FindElement(driver, locator).getText();
     }
@@ -234,10 +245,12 @@ public class ElementHelper {
     try {
       WebElement element = FindElementInvisible(driver, locator);
       text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
-    } catch (StaleElementReferenceException e) {
+    }
+    catch(StaleElementReferenceException e) {
       log.debug("Got stale");
       text = FindElementInvisible(driver, locator).getText();
-    } catch (Exception e) {
+    }
+    catch(Exception e) {
       log.debug("Exception: " + e.getMessage());
     }
 
@@ -272,7 +285,7 @@ public class ElementHelper {
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     boolean isTextPresent = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
-    if (isTextPresent == true) {
+    if(isTextPresent == true) {
       textPresent = textToWait;
     }
 
@@ -296,7 +309,7 @@ public class ElementHelper {
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     boolean found = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
-    if (found) {
+    if(found) {
       strText = GetText(driver, locator);
     }
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -315,12 +328,13 @@ public class ElementHelper {
     log.debug("ClickJS::Enter");
 
     WebElement element = FindElement(driver, locator);
-    if (element != null) {
+    if(element != null) {
       try {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-      } catch (WebDriverException wde) {
-        if (wde.getMessage().contains("arguments[0].click is not a function")) {
+      }
+      catch(WebDriverException wde) {
+        if(wde.getMessage().contains("arguments[0].click is not a function")) {
           element.click();
         }
       }
@@ -342,7 +356,7 @@ public class ElementHelper {
     log.debug("Click::Enter");
 
     WebElement element = FindElement(driver, locator);
-    if (element != null) {
+    if(element != null) {
       element.click();
     } else {
       log.error("Element is null " + locator.toString());
@@ -362,12 +376,13 @@ public class ElementHelper {
     log.debug("ClickElementInvisible::Enter");
 
     WebElement element = FindElementInvisible(driver, locator);
-    if (element != null) {
+    if(element != null) {
       try {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-      } catch (WebDriverException wde) {
-        if (wde.getMessage().contains("arguments[0].click is not a function")) {
+      }
+      catch(WebDriverException wde) {
+        if(wde.getMessage().contains("arguments[0].click is not a function")) {
           element.click();
         }
       }
@@ -399,32 +414,55 @@ public class ElementHelper {
    * @param locator
    * @param timeout
    */
-  public static void WaitForElementInvisibility(WebDriver driver, final By locator, Integer timeout) {
+  public static void WaitForElementInvisibility(final WebDriver driver, final By locator, final Integer timeout) {
     log.debug("WaitForElementInvisibility::Enter");
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     try {
-      Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-        .withTimeout(timeout, TimeUnit.SECONDS)
-        .pollingEvery(250, TimeUnit.MILLISECONDS);
 
-      driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      Runnable r = new Runnable(){
 
-      wait.until(new Function<WebDriver, Boolean>() {
         @Override
-        public Boolean apply(WebDriver d) {
-          try {
-            WebElement elem = d.findElement(locator);
-            return elem.isDisplayed() == false;
-          } catch (NoSuchElementException nsee) {
-            return true;
-          } catch (StaleElementReferenceException sere) {
-            return true;
-          }
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+
+          //Wait for element invisible
+          wait.until(new Function<WebDriver, Boolean>(){
+
+            @Override
+            public Boolean apply(WebDriver d) {
+              try {
+                WebElement elem = d.findElement(locator);
+                return elem.isDisplayed() == false;
+              }
+              catch(NoSuchElementException | StaleElementReferenceException sere) {
+                return true;
+              }
+            }
+          });
         }
-      });
-    } catch (TimeoutException te) {
+      };
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.shutdown();
+
+    }
+    catch(TimeoutException te) {
       log.warn("Timeout exceeded!");
       log.debug("Exception Message: " + te.getMessage());
+    }
+    catch(InterruptedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    catch(ExecutionException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    catch(java.util.concurrent.TimeoutException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -472,31 +510,32 @@ public class ElementHelper {
     try {
       elements = driver.findElements(locator);
       int size = elements.size();
-      if (size == 0) {
+      if(size == 0) {
         //wait for element presence
         elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
-        if (elements.size() != 0) {
+        if(elements.size() != 0) {
           //wait for element visible
           elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-          if (elements.size() != 0) {
+          if(elements.size() != 0) {
             element = elements.get(0);
           }
         }
       } else {
         element = elements.get(0);
-        if (element.isDisplayed() == true && element.isEnabled() == true) {
+        if(element.isDisplayed() == true && element.isEnabled() == true) {
           log.warn("We have some elements! Nr: Nr:" + size);
         }
         else {
           //wait for element visible
           log.warn("Wait for visibility!");
           elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-          if (elements.size() != 0) {
+          if(elements.size() != 0) {
             element = elements.get(0);
           }
         }
       }
-    } catch (Exception e) {
+    }
+    catch(Exception e) {
       log.warn("Something went wrong searching for pr: " + locator.toString());
       log.error(e.getMessage());
     }
@@ -538,17 +577,18 @@ public class ElementHelper {
     try {
       elements = driver.findElements(locator);
       int size = elements.size();
-      if (size == 0) {
+      if(size == 0) {
         //wait for element presence
         elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
-        if (elements.size() != 0) {
+        if(elements.size() != 0) {
           element = elements.get(0);
         }
       } else {
         element = elements.get(0);
         log.warn("We have some elements! Nr: " + size);
       }
-    } catch (Exception e) {
+    }
+    catch(Exception e) {
       log.warn("Something went wrong searching for pr: " + locator.toString());
       log.error(e.getMessage());
     }
@@ -575,13 +615,14 @@ public class ElementHelper {
 
     try {
       elements = driver.findElements(locator);
-      if (elements.size() > 0) {
+      if(elements.size() > 0) {
         //wait for element to appear
         element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
       } else {
         log.warn("No elements found!");
       }
-    } catch (Exception e) {
+    }
+    catch(Exception e) {
       log.warn("Something went wrong searching for vi: " + locator.toString());
       log.error(e.getMessage());
     }
@@ -611,7 +652,7 @@ public class ElementHelper {
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(2, TimeUnit.SECONDS).pollingEvery(15, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
 
     WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-    if (element != null) {
+    if(element != null) {
       //text = element.getText();
       //text = element.getAttribute("textContent");
       text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
@@ -638,12 +679,14 @@ public class ElementHelper {
       //When searching for the element the 'findElement' will wait a
       //maximum of 'timeout' seconds to return the element or throw exception
       WebElement element = driver.findElement(locator);
-      if (element != null) {
+      if(element != null) {
         isElementPresent = true;
       }
-    } catch (NoSuchElementException nsee) {
+    }
+    catch(NoSuchElementException nsee) {
       log.warn("Element not present! " + locator.toString());
-    } catch (Exception e) {
+    }
+    catch(Exception e) {
       log.warn("Something went wrong searching for: " + locator.toString());
       log.error(e.getMessage());
     }
@@ -682,7 +725,7 @@ public class ElementHelper {
 
     String attrValue = "";
     WebElement element = FindElement(driver, locator);
-    if (element != null) {
+    if(element != null) {
       attrValue = element.getAttribute("value");
     }
 
@@ -703,7 +746,7 @@ public class ElementHelper {
 
     WebElement drag = FindElement(driver, from);
     WebElement drop = FindElement(driver, to);
-    if (drag != null && drop != null) {
+    if(drag != null && drop != null) {
       new Actions(driver).dragAndDrop(drag, drop).build().perform();
     }
 
@@ -768,7 +811,8 @@ public class ElementHelper {
 
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(500, TimeUnit.MILLISECONDS);
 
-    wait.until(new ExpectedCondition<Boolean>() {
+    wait.until(new ExpectedCondition<Boolean>(){
+
       @Override
       public Boolean apply(WebDriver d) {
         return d.getWindowHandles().size() != 1;
@@ -789,14 +833,16 @@ public class ElementHelper {
 
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS);
 
-    wait.until(new ExpectedCondition<Boolean>() {
+    wait.until(new ExpectedCondition<Boolean>(){
+
       @Override
       public Boolean apply(WebDriver d) {
         Boolean alertExist = false;
         try {
           d.switchTo().alert();
           alertExist = true;
-        } catch (NoAlertPresentException e) {
+        }
+        catch(NoAlertPresentException e) {
           //Ignore the exception
         }
         return alertExist != true;
@@ -818,13 +864,14 @@ public class ElementHelper {
     log.debug("WaitForFrameReady::Enter");
     Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS);
 
-    wait.until(new ExpectedCondition<Boolean>() {
+    wait.until(new ExpectedCondition<Boolean>(){
+
       @Override
       public Boolean apply(WebDriver d) {
         Boolean elementExist = false;
         List<WebElement> listElements = d.findElements(locator);
 
-        if (listElements.size() > 0) {
+        if(listElements.size() > 0) {
           elementExist = true;
         }
         return elementExist;
