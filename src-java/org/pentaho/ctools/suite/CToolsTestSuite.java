@@ -45,9 +45,9 @@ import org.pentaho.ctools.security.AccessSystemResources;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-  /*LoginPentaho.class,
-  JFreeChartComponent.class,
-  LogoutPentaho.class*/
+  /* LoginPentaho.class,
+   MondrianJNDI.class,
+    LogoutPentaho.class*/
   //LogoutPentaho.class
   //##### Execution Order #####
   //Start Tests
@@ -114,7 +114,7 @@ public class CToolsTestSuite {
     ffProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
     ffProfile.setPreference("browser.download.manager.showWhenStarting", false);
     ffProfile.setPreference("browser.download.dir", downloadDir);
-    ffProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf;text/html");
+    ffProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf");
 
     //Setting properties for webdriver
     DesiredCapabilities capabilities = DesiredCapabilities.firefox();
