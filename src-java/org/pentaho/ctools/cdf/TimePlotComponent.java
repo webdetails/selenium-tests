@@ -22,8 +22,11 @@
 package org.pentaho.ctools.cdf;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -32,6 +35,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -47,13 +51,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TimePlotComponent {
+public class TimePlotComponent{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
+  //Log instance
+  private static Logger          log                = LogManager.getLogger(TimePlotComponent.class);
 
   @Rule
   public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
@@ -63,6 +70,7 @@ public class TimePlotComponent {
    */
   @BeforeClass
   public static void setUp() {
+    log.info("setUp##" + TimePlotComponent.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -96,6 +104,7 @@ public class TimePlotComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
     // Wait for title become visible and with value 'Community Dashboard Framework'
     //wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -118,6 +127,7 @@ public class TimePlotComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
@@ -149,10 +159,14 @@ public class TimePlotComponent {
    */
   @Test(timeout = 60000)
   public void tc3_MouseOverPlot_TotalPriceChanged() {
+    log.info("tc3_MouseOverPlot_TotalPriceChanged");
     // ## Step 1
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sampleObject']/div/span")));
     assertEquals("total order income     ", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/span")));
     assertEquals("Total Price   ", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/span[2]")));
+
+    WebElement element2004 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(text(), '2004')]"));
+    assertNotNull(element2004);
 
     // ## Step 2
     Actions acts = new Actions(driver);
@@ -166,5 +180,7 @@ public class TimePlotComponent {
   }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    log.info("tearDown##" + TimePlotComponent.class.getSimpleName());
+  }
 }

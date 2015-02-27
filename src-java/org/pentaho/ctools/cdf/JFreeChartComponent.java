@@ -61,7 +61,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class JFreeChartComponent {
+public class JFreeChartComponent{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -182,7 +183,7 @@ public class JFreeChartComponent {
     acts.perform();
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']")).click();
+    ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check if the generated image is different from previews, is not something static
@@ -214,7 +215,7 @@ public class JFreeChartComponent {
     //Open the Pie Chart
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']")).click();
+    ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check if the generated image is different from previews, is not something static
@@ -284,10 +285,10 @@ public class JFreeChartComponent {
     setWindows = driver.getWindowHandles();
     //Get popup id
     Iterator<String> windowIterator = setWindows.iterator();
-    while (windowIterator.hasNext()) {
+    while(windowIterator.hasNext()) {
       String windowHandle = windowIterator.next();
       popup = driver.switchTo().window(windowHandle);
-      if (popup.getTitle().isEmpty()) {
+      if(popup.getTitle().isEmpty()) {
         break;
       }
     }
@@ -301,7 +302,8 @@ public class JFreeChartComponent {
       connection.connect();
 
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    } catch (Exception ex) {
+    }
+    catch(Exception ex) {
       log.error(ex.getMessage());
     }
 
@@ -319,7 +321,6 @@ public class JFreeChartComponent {
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
     //Change to pie chart
-    acts2.perform();
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -344,10 +345,10 @@ public class JFreeChartComponent {
     setWindows = driver.getWindowHandles();
     //Get popup id
     windowIterator = setWindows.iterator();
-    while (windowIterator.hasNext()) {
+    while(windowIterator.hasNext()) {
       String windowHandle = windowIterator.next();
       popup = driver.switchTo().window(windowHandle);
-      if (popup.getTitle().isEmpty()) {
+      if(popup.getTitle().isEmpty()) {
         break;
       }
     }
@@ -361,7 +362,8 @@ public class JFreeChartComponent {
       connection.connect();
 
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    } catch (Exception ex) {
+    }
+    catch(Exception ex) {
       log.error(ex.getMessage());
     }
 
