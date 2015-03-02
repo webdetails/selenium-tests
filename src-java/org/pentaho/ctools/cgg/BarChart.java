@@ -88,7 +88,7 @@ public class BarChart{
     String attrHeight = elementImage.getAttribute("height");
     String attrSrc = elementImage.getAttribute("src");
 
-    assertEquals("891", attrWidth);
+    assertEquals("852", attrWidth);
     assertEquals("637", attrHeight);
     assertEquals(this.baseUrl + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png", attrSrc);
   }
