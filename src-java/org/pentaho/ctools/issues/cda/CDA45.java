@@ -111,7 +111,7 @@ public class CDA45 {
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Sql Query on SampleData - Jdbc");
     //wait to render page
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     /*
      * ## Step 2

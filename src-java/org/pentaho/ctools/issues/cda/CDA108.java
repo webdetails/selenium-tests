@@ -113,7 +113,7 @@ public class CDA108 {
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("In Process", elemStatus.getAttribute("value"));

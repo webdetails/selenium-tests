@@ -58,7 +58,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDE404 {
+public class CDE404{
+
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
   // The base url to be append the relative url in test
@@ -133,18 +134,16 @@ public class CDE404 {
 
     String parentHandle = driver.getWindowHandle();
     Set<String> setWindows = driver.getWindowHandles();
-    log.info("before WaitForNewWindow");
     ElementHelper.WaitForNewWindow(driver);
-    log.info("after WaitForNewWindow");
     setWindows = driver.getWindowHandles();
     //Get popup id
     WebDriver popup = null;
     Iterator<String> windowIterator = setWindows.iterator();
-    log.info("before while");
-    while (windowIterator.hasNext()) {
+
+    while(windowIterator.hasNext()) {
       String windowHandle = windowIterator.next();
       popup = driver.switchTo().window(windowHandle);
-      if (popup.getTitle().equals("Webdetails CDE")) {
+      if(popup.getTitle().equals("Webdetails CDE")) {
         break;
       }
     }

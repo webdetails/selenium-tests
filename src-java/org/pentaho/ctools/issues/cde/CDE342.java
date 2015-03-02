@@ -121,7 +121,7 @@ public class CDE342 {
     ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).clear();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).sendKeys("ert");
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
-    ElementHelper.IsElementInvisible(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
 
     /*
      * ## Step 3
@@ -131,7 +131,7 @@ public class CDE342 {
     option2 = ElementHelper.GetText(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
     assertEquals("Anna's Decorations, Ltd", option2);
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));
-    ElementHelper.IsElementInvisible(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));
 
   }
 

@@ -136,7 +136,7 @@ public class CDE403 {
     /*
      * ## Step 4
      */
-    ElementHelper.WaitForText(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div"), "testselect {} ON COLUMNS,");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div"), "testselect {} ON COLUMNS,");
     String text = ElementHelper.FindElement(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div")).getText();
     assertEquals("testselect {} ON COLUMNS,", text);
   }

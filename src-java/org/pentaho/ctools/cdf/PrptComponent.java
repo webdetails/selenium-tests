@@ -59,7 +59,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PrptComponent {
+public class PrptComponent{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -173,7 +174,7 @@ public class PrptComponent {
     Select select = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     select.selectByValue("application/pdf");
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sampleObject")));
     driver.switchTo().frame("sampleObject_prptFrame");
@@ -203,7 +204,8 @@ public class PrptComponent {
       connection.connect();
 
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    } catch (Exception ex) {
+    }
+    catch(Exception ex) {
       log.error(ex.getMessage());
     }
 
@@ -213,7 +215,7 @@ public class PrptComponent {
     select.selectByValue("text/html");
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sampleObject")));
     driver.switchTo().frame("sampleObject_prptFrame");
@@ -243,7 +245,8 @@ public class PrptComponent {
       connection.connect();
 
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    } catch (Exception ex) {
+    }
+    catch(Exception ex) {
       log.error(ex.getMessage());
     }
   }
@@ -268,7 +271,8 @@ public class PrptComponent {
     driver.switchTo().frame("sampleObject_prptFrame");
     assertNotNull(ElementHelper.FindElement(driver, By.id("reportControlPanel")));
     ElementHelper.FindElement(driver, By.xpath("//span[@id='toolbar-parameterToggle']/span")).click();
-    assertTrue(ElementHelper.IsElementInvisible(driver, By.id("reportControlPanel")));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("reportControlPanel"));
+    assertTrue(ElementHelper.IsElementNotPresent(driver, By.id("reportControlPanel"), 2));
 
     // ## Step 2
     ElementHelper.FindElement(driver, By.xpath("//span[@id='toolbar-parameterToggle']/span")).click();
@@ -304,7 +308,7 @@ public class PrptComponent {
     driver.switchTo().frame("sampleObject_prptFrame");
     Select selProductName = new Select(ElementHelper.FindElement(driver, By.xpath("//td/div/div[2]/select")));
     selProductName.selectByValue("S18_3856");
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//td/div/div[2]/select/option[@value='S18_3856']")).isSelected());
     driver.switchTo().frame("reportContent");
     image = ElementHelper.FindElement(driver, By.cssSelector("img.style-3"));
@@ -317,7 +321,7 @@ public class PrptComponent {
     driver.switchTo().frame("sampleObject_prptFrame");
     selProductName = new Select(ElementHelper.FindElement(driver, By.xpath("//td/div/div[2]/select")));
     selProductName.selectByValue("S50_1392");
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//td/div/div[2]/select/option[@value='S50_1392']")).isSelected());
     driver.switchTo().frame("reportContent");
     image = ElementHelper.FindElement(driver, By.cssSelector("img.style-3"));
@@ -329,7 +333,7 @@ public class PrptComponent {
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
     ElementHelper.FindElement(driver, By.xpath("//button/span")).click();
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//td/div/div[2]/select/option[@value='S50_1392']")).isSelected());
     driver.switchTo().frame("reportContent");
     assertNotNull(ElementHelper.FindElement(driver, By.cssSelector("img.style-3")));
@@ -364,7 +368,7 @@ public class PrptComponent {
     driver.switchTo().frame("sampleObject_prptFrame");
     Select select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("table/html;page-mode=page");
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     //Check the generated image
     driver.switchTo().frame("reportContent");
     WebElement image = ElementHelper.FindElement(driver, By.cssSelector("img.style-3"));
@@ -377,7 +381,7 @@ public class PrptComponent {
     driver.switchTo().frame("sampleObject_prptFrame");
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("table/html;page-mode=stream");
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     //Check the generated image
     driver.switchTo().frame("reportContent");
     image = ElementHelper.FindElement(driver, By.cssSelector("img.style-3"));
@@ -390,10 +394,10 @@ public class PrptComponent {
     driver.switchTo().frame("sampleObject_prptFrame");
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     select.selectByValue("pageable/pdf");
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     //Check the generated image
     driver.switchTo().frame("reportContent");
-    ElementHelper.IsElementInvisible(driver, By.cssSelector("img.style-3"));
+    ElementHelper.WaitForElementInvisibility(driver, By.cssSelector("img.style-3"));
     assertNotNull(ElementHelper.FindElement(driver, By.id("pageContainer1")));
 
     // ## Step 4
@@ -404,7 +408,7 @@ public class PrptComponent {
     select.selectByValue("table/excel;page-mode=flow");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     assertTrue(new File(downloadDir + "\\Product Sales.xls").exists());
     new File(downloadDir + "\\Product Sales.xls").delete();
 
@@ -414,7 +418,7 @@ public class PrptComponent {
     select.selectByValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     assertTrue(new File(downloadDir + "\\Product Sales.xlsx").exists());
     new File(downloadDir + "\\Product Sales.xlsx").delete();
 
@@ -424,7 +428,7 @@ public class PrptComponent {
     select.selectByValue("table/csv;page-mode=stream");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     assertTrue(new File(downloadDir + "\\Product Sales.csv").exists());
     new File(downloadDir + "\\Product Sales.csv").delete();
 
@@ -434,7 +438,7 @@ public class PrptComponent {
     select.selectByValue("table/rtf;page-mode=flow");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
-    ElementHelper.IsElementInvisible(driver, By.id("glasspane"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     assertTrue(new File(downloadDir + "\\Product Sales.rtf").exists());
     new File(downloadDir + "\\Product Sales.rtf").delete();
 

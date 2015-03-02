@@ -128,7 +128,7 @@ public class ExecuteXactionComponent {
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
     // Not we have to wait for loading disappear
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     // Now sample element must be displayed
     assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
@@ -192,7 +192,7 @@ public class ExecuteXactionComponent {
     //Close pop-up window
     driver.switchTo().defaultContent();
     ElementHelper.FindElement(driver, By.id("fancybox-close")).click();
-    ElementHelper.IsElementInvisible(driver, By.id("fancybox-content"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("fancybox-content"));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//button")));
   }
 

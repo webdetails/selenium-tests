@@ -90,8 +90,8 @@ public class MapComponentReference {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"), 180);
 
     //Wait for page render on each map test
-    ElementHelper.WaitForTextPresent(driver, By.xpath("//div[@id='simpleTest']/div/div[8]/div"), "200 km", 90);
-    ElementHelper.WaitForTextPresent(driver, By.xpath("//div[@id='testTileServices']/div/div[8]/div"), "200 km", 90);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='simpleTest']/div/div[8]/div"), "200 km", 90);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='testTileServices']/div/div[8]/div"), "200 km", 90);
     ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']"), 90);
     ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]"), 90);
     ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']"), 90);
@@ -531,7 +531,7 @@ public class MapComponentReference {
     String shapeId = shape1.getAttribute("id");
     shape1.click();
     //Wait for change color
-    ElementHelper.IsElementVisible(driver, By.xpath("//*[local-name()='path' and @fill='red']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[local-name()='path' and @fill='red']"));
     WebElement shapeRed = ElementHelper.FindElement(driver, By.id(shapeId));
     assertEquals("red", shapeRed.getAttribute("fill"));
 

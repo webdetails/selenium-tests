@@ -97,7 +97,7 @@ public class CDF406 {
     //assert Elements loaded
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("col1protovis"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"));
-    ElementHelper.WaitForText(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"), "cool");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"), "cool");
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path']"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][32]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']"));

@@ -119,8 +119,8 @@ public class CDE388 {
     /*
      * ## Step 2
      */
-    ElementHelper.WaitForText(driver, By.xpath("//div[@id='cdfdd-datasources-datasources']/div/div/div"), "Datasources");
-    ElementHelper.WaitForText(driver, By.xpath("//div[@id='cdfdd-datasources-properties']/div/div/div"), "Properties");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='cdfdd-datasources-datasources']/div/div/div"), "Datasources");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='cdfdd-datasources-properties']/div/div/div"), "Properties");
     String classText = ElementHelper.FindElement(driver, By.xpath("//div[@title='Datasources Panel']")).getAttribute("class");
     assertEquals("panelButton panelButton-active", classText);
     ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-datasources-palletePallete']/div/h3/span"));
@@ -129,7 +129,7 @@ public class CDE388 {
     /*
      * ## Step 3
      */
-    ElementHelper.WaitForText(driver, By.xpath("//div[@id='wizardDialog']/div/div/h1"), "OLAP Wizard");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='wizardDialog']/div/div/h1"), "OLAP Wizard");
     ElementHelper.WaitForElementPresence(driver, By.id("cdfdd-wizard-button-ok"));
     ElementHelper.WaitForElementPresence(driver, By.id("cdfdd-wizard-button-cancel"));
     Select select = new Select(ElementHelper.FindElement(driver, By.id("cdfddOlapCatalogSelect")));

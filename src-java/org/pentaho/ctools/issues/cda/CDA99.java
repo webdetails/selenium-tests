@@ -222,7 +222,7 @@ public class CDA99 {
       //Now in the PREVIEW WINDOW we want to check the available options
       selectNotExist = false;
       //wait for file id contains text
-      ElementHelper.WaitForTextPresent(previewWindow, By.id("fileid"), "/public/plugin-samples/cda/cdafiles/olap4j.cda");
+      ElementHelper.WaitForTextPresence(previewWindow, By.id("fileid"), "/public/plugin-samples/cda/cdafiles/olap4j.cda");
       //Selector must be present
       selector = ElementHelper.FindElement(previewWindow, By.id("dataAccessSelector"));
       assertNotNull(selector);

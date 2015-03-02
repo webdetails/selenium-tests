@@ -124,7 +124,7 @@ public class CDA106 {
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
@@ -142,13 +142,13 @@ public class CDA106 {
      * ## Step 3
      */
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dialog"));
-    ElementHelper.WaitForText(driver, By.xpath("//div[@id='dialog']/p"), "What schedule should this query run on?");
-    ElementHelper.WaitForText(driver, By.xpath("//div[@id='dialog']/div/span/span"), "on the");
-    ElementHelper.WaitForText(driver, By.xpath("//div[@id='dialog']/div/span/span[2]"), "th day of the week (1-7)");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='dialog']/p"), "What schedule should this query run on?");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='dialog']/div/span/span"), "on the");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='dialog']/div/span/span[2]"), "th day of the week (1-7)");
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='dialog']/div[2]/a"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='dialog']/div[2]/a[2]"));
     ElementHelper.FindElement(driver, By.id("startAt")).sendKeys("1");
-    ElementHelper.WaitForText(driver, By.xpath("//div[@id='dialog']/div[2]/a"), "Ok");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='dialog']/div[2]/a"), "Ok");
     ElementHelper.Click(driver, By.xpath("//div[@id='dialog']/div[2]/a"));
 
     String parentWindowHandle = driver.getWindowHandle();

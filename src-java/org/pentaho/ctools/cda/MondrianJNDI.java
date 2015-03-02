@@ -65,7 +65,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MondrianJNDI {
+public class MondrianJNDI{
+
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -114,9 +115,9 @@ public class MondrianJNDI {
      * ## Step 1
      */
     //Check if the field 'filename' exist and expected value
-      
-    String filename = ElementHelper.WaitForTextPresent(driver, By.id("fileid"), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda");
-    String pleaseSelect = ElementHelper.WaitForTextPresent(driver, By.id("pleaseselect"), "Please select a Data Access ID");
+
+    String filename = ElementHelper.WaitForTextPresence(driver, By.id("fileid"), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda");
+    String pleaseSelect = ElementHelper.WaitForTextPresence(driver, By.id("pleaseselect"), "Please select a Data Access ID");
 
     assertEquals("/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda", filename);
     assertEquals("Please select a Data Access ID", pleaseSelect);
@@ -181,7 +182,7 @@ public class MondrianJNDI {
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Mdx Query on SampleData - Jndi");
     //wait to render page
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
@@ -387,7 +388,7 @@ public class MondrianJNDI {
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Mdx Query on SampleData - Jndi");
     //wait to render page
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
@@ -412,7 +413,8 @@ public class MondrianJNDI {
       assertTrue(new File(downloadDir + "\\cda-export.xls").exists());
 
       new File(downloadDir + "\\cda-export.xls").delete();
-    } catch (Exception e) {
+    }
+    catch(Exception e) {
       log.error(e.getMessage());
     }
   }
@@ -438,7 +440,7 @@ public class MondrianJNDI {
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Mdx Query on SampleData - Jndi");
     //wait to render page
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
@@ -495,7 +497,7 @@ public class MondrianJNDI {
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Mdx Query on SampleData - Jndi");
     //wait to render page
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
@@ -531,10 +533,10 @@ public class MondrianJNDI {
     //Get popup id
     WebDriver cdaCacheManager = null;
     Iterator<String> iterWindows = listWindows.iterator();
-    while (iterWindows.hasNext()) {
+    while(iterWindows.hasNext()) {
       String windowHandle = iterWindows.next();
       cdaCacheManager = driver.switchTo().window(windowHandle);
-      if (cdaCacheManager.getTitle().equals("CDA Cache Manager")) {
+      if(cdaCacheManager.getTitle().equals("CDA Cache Manager")) {
         break;
       }
     }
@@ -572,7 +574,8 @@ public class MondrianJNDI {
       assertEquals("0 0 21 * * ? *", queryCron);
       assertEquals("-1", queryTime);
       assertEquals("Success", queryStatus);
-    } catch (AssertionError ae) {
+    }
+    catch(AssertionError ae) {
       log.error(ae.getMessage());
 
       //Remove schedule
@@ -601,10 +604,10 @@ public class MondrianJNDI {
    */
   public void removeFirstSchedule() {
     boolean elementPresent = false;
-    
+
     elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 5);
-    
-    while (elementPresent) { 
+
+    while(elementPresent) {
       //Press to delete schedule
       ElementHelper.FindElement(driver, By.cssSelector("img.deleteIcon.button")).click();
 
@@ -618,7 +621,7 @@ public class MondrianJNDI {
       assertEquals(confirmationMsg, expectedCnfText);
       ElementHelper.WaitForAlertNotPresent(driver);
       driver.switchTo().defaultContent();
-    
+
       elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 5);
     }
   }

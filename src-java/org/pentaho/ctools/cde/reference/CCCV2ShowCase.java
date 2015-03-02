@@ -107,7 +107,7 @@ public class CCCV2ShowCase {
     String title = ElementHelper.GetText(driver, By.xpath("//div[@id='Headers']/div"));
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
-    ElementHelper.IsElementVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
 
     /*
      * ## Step 1 - Bar Chart
@@ -181,7 +181,7 @@ public class CCCV2ShowCase {
     String title = ElementHelper.GetText(driver, By.xpath("//div[@id='Headers']/div"));
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
-    ElementHelper.IsElementVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
 
     /*
      * ## Step 2 - Line Chart
@@ -240,7 +240,7 @@ public class CCCV2ShowCase {
     String title = ElementHelper.GetText(driver, By.xpath("//div[@id='Headers']/div"));
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
-    ElementHelper.IsElementVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
 
     /*
      * ## Step 3 - Pie Chart

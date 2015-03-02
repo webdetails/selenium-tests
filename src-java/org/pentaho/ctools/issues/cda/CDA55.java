@@ -114,7 +114,7 @@ public class CDA55 {
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.IsElementInvisible(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
     WebElement elemCountries = ElementHelper.FindElement(driver, By.id("countries"));
     assertEquals("France;USA", elemCountries.getAttribute("value"));

@@ -125,7 +125,7 @@ public class CDE432 {
       e.printStackTrace();
     }
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr/td"));
-    ElementHelper.WaitForText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr/td"), "Row");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr/td"), "Row");
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]"));
     ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]"));
 

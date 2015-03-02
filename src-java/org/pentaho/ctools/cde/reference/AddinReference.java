@@ -52,7 +52,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class AddinReference {
+public class AddinReference{
+
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -183,7 +184,7 @@ public class AddinReference {
     //Check ordering
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='SparklineObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='SparklineObjTable']/thead/tr/th[1]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='SparklineObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='SparklineObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr[2]/td"));
     assertEquals("Row 2", row1);
@@ -238,7 +239,7 @@ public class AddinReference {
     //Check ordering
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='PvSparklineObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='PvSparklineObjTable']/thead/tr/th[1]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='PvSparklineObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='PvSparklineObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr[2]/td"));
     assertEquals("Row 2", row1);
@@ -319,7 +320,7 @@ public class AddinReference {
     //Check ordering
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[1]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td"));
     row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td"));
@@ -339,7 +340,7 @@ public class AddinReference {
 
     //Check ordering - Custom barData
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[3]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[3][@class='column2 dataBar sorting_asc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[3][@class='column2 dataBar sorting_asc']"));
     //check values in column 1
     chartRow1Col1Value = ElementHelper.GetTextElementInvisible(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[1]/td[2]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='rect']/*[name()='title']"));
     chartRow2Col1Value = ElementHelper.GetTextElementInvisible(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td[2]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='rect']/*[name()='title']"));
@@ -414,7 +415,7 @@ public class AddinReference {
     //Check ordering
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[1]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td"));
     row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td"));
@@ -432,7 +433,7 @@ public class AddinReference {
 
     //Check ordering - Custom trendArrow
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[3]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[3][@class='column2 trendArrow sorting_asc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[3][@class='column2 trendArrow sorting_asc']"));
     //Check column value for 'Custom trendArrow'
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td"));
@@ -516,7 +517,7 @@ public class AddinReference {
     //Check ordering
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[1]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td"));
     row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td"));
@@ -533,7 +534,7 @@ public class AddinReference {
 
     //Check ordering - Custom hyperlink
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[3]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[3][@class='column2 hyperlink sorting_asc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[3][@class='column2 hyperlink sorting_asc']"));
     //Check column value for 'Custom hyperlink'
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td"));
@@ -628,7 +629,7 @@ public class AddinReference {
     //Check ordering
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[1]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[2]/td"));
     row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[3]/td"));
@@ -653,7 +654,7 @@ public class AddinReference {
 
     //Check ordering - Custom circle
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[3]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[3][@class='column2 circle sorting_asc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[3][@class='column2 circle sorting_asc']"));
     //Check column values
     circleRow1Col1Value = ElementHelper.GetTextElementInvisible(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[1]/td[2]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='circle']/*[name()='title']"));
     circleRow3Col1Value = ElementHelper.GetTextElementInvisible(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[3]/td[2]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='circle']/*[name()='title']"));
@@ -721,7 +722,7 @@ public class AddinReference {
     //Check ordering
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[1]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
     //Check Rows
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td"));
@@ -745,7 +746,7 @@ public class AddinReference {
 
     //Check ordering - Custom hyperlink
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[3]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[3][@class='column2 formattedText sorting_asc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[3][@class='column2 formattedText sorting_asc']"));
     //Check Rows
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td"));
@@ -822,7 +823,7 @@ public class AddinReference {
     //Check ordering
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='bulletChartObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='bulletChartObjTable']/thead/tr/th[1]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='bulletChartObjTable']/thead/tr/th[1][@class='column0 String sorting_desc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='bulletChartObjTable']/thead/tr/th[1][@class='column0 String sorting_desc']"));
     //Check Rows
     row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr/td"));
     row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr[2]/td"));
@@ -897,7 +898,7 @@ public class AddinReference {
     //Check ordering
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='groupHeadersObjTable']/thead/tr/th[3]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='groupHeadersObjTable']/thead/tr/th[3]"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//table[@id='groupHeadersObjTable']/thead/tr/th[3][@class='column2 sorting_desc']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='groupHeadersObjTable']/thead/tr/th[3][@class='column2 sorting_desc']"));
     //Check Rows
     value1 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[2]/td"));
     value2 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[5]/td"));

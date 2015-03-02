@@ -121,8 +121,8 @@ public class MetaLayerHomeDashboard {
      * ## Step 3
      */
     //Wait for the frame
-    ElementHelper.IsElementVisible(driver, By.id("fancybox-content"));
-    ElementHelper.IsElementVisible(driver, By.xpath("//iframe"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("fancybox-content"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe"));
     WebElement frame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     String valueFrameAttrSrc = frame.getAttribute("src");
 
@@ -147,7 +147,7 @@ public class MetaLayerHomeDashboard {
     String background1 = background.substring(background.indexOf(34) + 1, background.lastIndexOf(34));
     assertEquals("http://localhost:8080/pentaho/api/repos/pentaho-cdf/js/fancybox/fancybox.png", background1);
     ElementHelper.FindElement(driver, By.id("fancybox-close")).click();
-    ElementHelper.IsElementInvisible(driver, By.id("fancybox-content"));
+    ElementHelper.WaitForElementInvisibility(driver, By.id("fancybox-content"));
     assertEquals("200", Integer.toString(HttpUtils.getResponseCode(background1, "admin", "password")));
 
   }
