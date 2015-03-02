@@ -47,7 +47,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class BarChart {
+public class BarChart{
+
   // Instance of the driver (browser emulator)
   private WebDriver         driver;
   // The base url to be append the relative url in test
@@ -87,7 +88,7 @@ public class BarChart {
     String attrHeight = elementImage.getAttribute("height");
     String attrSrc = elementImage.getAttribute("src");
 
-    assertEquals("852", attrWidth);
+    assertEquals("891", attrWidth);
     assertEquals("637", attrHeight);
     assertEquals(this.baseUrl + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png", attrSrc);
   }
