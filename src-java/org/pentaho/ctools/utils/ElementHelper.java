@@ -649,7 +649,7 @@ public class ElementHelper{
   public static String WaitForElementPresentGetText(WebDriver driver, By locator) {
     log.debug("WaitForElementPresentGetText::Enter");
     String text = "";
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(2, TimeUnit.SECONDS).pollingEvery(15, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(5, TimeUnit.SECONDS).pollingEvery(15, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
 
     WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     if(element != null) {
@@ -795,8 +795,8 @@ public class ElementHelper{
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-      log.debug("ElementsNotOverlap::Exit");
-      return notIntersected;
+    log.debug("ElementsNotOverlap::Exit");
+    return notIntersected;
   }
 
   /**
