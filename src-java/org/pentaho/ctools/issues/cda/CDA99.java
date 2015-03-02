@@ -122,10 +122,10 @@ public class CDA99 {
       /*
        * ## Step 1
        */
-      String buttonPreviewText = ElementHelper.GetText(driver, By.id("preview"));
-      String buttonReloadText = ElementHelper.GetText(driver, By.id("reload"));
-      String buttonSaveText = ElementHelper.GetText(driver, By.id("save"));
-      String buttonStaticFileText = ElementHelper.GetText(driver, By.id("staticfile"));
+      String buttonPreviewText = ElementHelper.WaitForElementPresentGetText(driver, By.id("preview"));
+      String buttonReloadText = ElementHelper.WaitForElementPresentGetText(driver, By.id("reload"));
+      String buttonSaveText = ElementHelper.WaitForElementPresentGetText(driver, By.id("save"));
+      String buttonStaticFileText = ElementHelper.WaitForElementPresentGetText(driver, By.id("staticfile"));
       assertEquals("Preview", buttonPreviewText);
       assertEquals("Reload", buttonReloadText);
       assertEquals("Save", buttonSaveText);
@@ -141,7 +141,7 @@ public class CDA99 {
       //Save file
       ElementHelper.ClickJS(driver, By.id("save"));
       //Check for the message name
-      String fileSaved = ElementHelper.GetText(driver, By.id("notifications"));
+      String fileSaved = ElementHelper.WaitForElementPresentGetText(driver, By.id("notifications"));
       assertEquals("/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved);
 
       /*
@@ -194,7 +194,7 @@ public class CDA99 {
       //Save file
       ElementHelper.ClickJS(driver, By.id("save"));
       //Check for the message name
-      String fileSaved2 = ElementHelper.GetText(driver, By.id("notifications"));
+      String fileSaved2 = ElementHelper.WaitForElementPresentGetText(driver, By.id("notifications"));
       assertEquals("/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved2);
 
       /*

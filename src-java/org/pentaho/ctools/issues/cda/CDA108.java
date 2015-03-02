@@ -118,11 +118,11 @@ public class CDA108 {
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("In Process", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.GetText(driver, By.id("contents_info"));
+    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 1 of 1 elements", textPaging);
     //Check text on table
-    String columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    String columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
     assertEquals("103", columnOneRowOne);
     assertEquals("Atelier graphique", columnTwoRowOne);
 

@@ -153,8 +153,8 @@ public class CDA112 {
     elemStatus = ElementHelper.FindElement(driver, By.id("p12"));
     assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
     //Check text on table
-    String columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    String columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
     assertEquals("242", columnOneRowOne);
     assertEquals("Alpha Cognac", columnTwoRowOne);
 

@@ -104,7 +104,7 @@ public class CCCV2ShowCase {
     wait.until(ExpectedConditions.titleIs("Community Dashboard Editor"));
     assertEquals("Community Dashboard Editor", driver.getTitle());
     //Check title
-    String title = ElementHelper.GetText(driver, By.xpath("//div[@id='Headers']/div"));
+    String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Headers']/div"));
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
@@ -112,7 +112,7 @@ public class CCCV2ShowCase {
     /*
      * ## Step 1 - Bar Chart
      */
-    String barChartTitle = ElementHelper.GetText(driver, By.id("BarChartTitleRow"));
+    String barChartTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("BarChartTitleRow"));
     assertEquals("Bar Chart", barChartTitle);
     //Check bars
     WebElement barChartRect1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1]"));
@@ -128,9 +128,9 @@ public class CCCV2ShowCase {
     assertThat("Current width: " + barChartRect2Width, barChartRect2Width, greaterThan(Double.valueOf(250)));
     assertThat("Current width: " + barChartRect3Width, barChartRect3Width, greaterThan(Double.valueOf(100)));
     //Check bars value
-    String barChartRectValue1 = ElementHelper.GetText(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][1]"));
-    String barChartRectValue2 = ElementHelper.GetText(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][2]"));
-    String barChartRectValue3 = ElementHelper.GetText(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][3]"));
+    String barChartRectValue1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][1]"));
+    String barChartRectValue2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][2]"));
+    String barChartRectValue3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][3]"));
     assertEquals("3.68M", barChartRectValue1);
     assertEquals("4.99M", barChartRectValue2);
     assertEquals("1.98M", barChartRectValue3);
@@ -178,7 +178,7 @@ public class CCCV2ShowCase {
     wait.until(ExpectedConditions.titleIs("Community Dashboard Editor"));
     assertEquals("Community Dashboard Editor", driver.getTitle());
     //Check title
-    String title = ElementHelper.GetText(driver, By.xpath("//div[@id='Headers']/div"));
+    String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Headers']/div"));
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
@@ -186,7 +186,7 @@ public class CCCV2ShowCase {
     /*
      * ## Step 2 - Line Chart
      */
-    String lineChartTitle = ElementHelper.GetText(driver, By.id("LineChartTitleRow"));
+    String lineChartTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("LineChartTitleRow"));
     assertEquals("Line Chart", lineChartTitle);
     //Check lines
     WebElement lineChartCircle1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1]"));
@@ -237,7 +237,7 @@ public class CCCV2ShowCase {
     wait.until(ExpectedConditions.titleIs("Community Dashboard Editor"));
     assertEquals("Community Dashboard Editor", driver.getTitle());
     //Check title
-    String title = ElementHelper.GetText(driver, By.xpath("//div[@id='Headers']/div"));
+    String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Headers']/div"));
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
@@ -245,7 +245,7 @@ public class CCCV2ShowCase {
     /*
      * ## Step 3 - Pie Chart
      */
-    String pieChartTitle = ElementHelper.GetText(driver, By.id("PieChartTitleRow"));
+    String pieChartTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("PieChartTitleRow"));
     assertEquals("Pie Chart", pieChartTitle);
     //Check pies
     WebElement pieChartCircle1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][1]"));
@@ -264,7 +264,7 @@ public class CCCV2ShowCase {
     serie2004.click();
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]"));
     //Check value of the serie2005
-    String serie2005Value = ElementHelper.GetText(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
+    String serie2005Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
     assertEquals("1.98M", serie2005Value);
     //Check mouse hover
     /* Does not work on jenkins!!

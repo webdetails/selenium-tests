@@ -109,7 +109,7 @@ public class QueryComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("QueryComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("QueryComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -158,7 +158,7 @@ public class QueryComponent {
     log.info("tc3_ExecuteQuery_ReturnedTextAsExpected");
 
     // ## Step 1
-    String queryTextExpected = ElementHelper.GetText(driver, By.id("sampleObjectResult"));
+    String queryTextExpected = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectResult"));
     assertEquals(queryTextExpected, "Muscle Machine Inc,197736.93999999997");
   }
 

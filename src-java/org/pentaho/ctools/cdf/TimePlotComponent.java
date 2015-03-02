@@ -112,7 +112,7 @@ public class TimePlotComponent{
 
     // Validate the sample that we are testing is the one
     //assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("timePlotComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("timePlotComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -162,8 +162,8 @@ public class TimePlotComponent{
     log.info("tc3_MouseOverPlot_TotalPriceChanged");
     // ## Step 1
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sampleObject']/div/span")));
-    assertEquals("total order income     ", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/span")));
-    assertEquals("Total Price   ", ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/span[2]")));
+    assertEquals("total order income     ", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/span")));
+    assertEquals("Total Price   ", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/span[2]")));
 
     WebElement element2004 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(text(), '2004')]"));
     assertNotNull(element2004);

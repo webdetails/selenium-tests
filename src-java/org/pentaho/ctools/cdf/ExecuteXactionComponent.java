@@ -107,7 +107,7 @@ public class ExecuteXactionComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("ExecuteXactionComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("ExecuteXactionComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -155,7 +155,7 @@ public class ExecuteXactionComponent {
   @Test(timeout = 60000)
   public void tc3_PressToGenerateChart_ChartIsDisplayed() {
     // ## Step 1
-    String buttonName = ElementHelper.GetText(driver, By.xpath("//button/span"));
+    String buttonName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button/span"));
     assertEquals("Execute XAction", buttonName);
     //Click in button
     ElementHelper.FindElement(driver, By.xpath("//button")).click();
@@ -164,7 +164,7 @@ public class ExecuteXactionComponent {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fancybox-content")));
     driver.switchTo().frame("fancybox-frame");
     //Check the title
-    String chartTitle = ElementHelper.GetText(driver, By.xpath("//table/tbody/tr/td"));
+    String chartTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table/tbody/tr/td"));
     assertEquals("Action Successful", chartTitle);
     //Check for the displayed image
     WebElement xactionElement = ElementHelper.FindElement(driver, By.cssSelector("img"));

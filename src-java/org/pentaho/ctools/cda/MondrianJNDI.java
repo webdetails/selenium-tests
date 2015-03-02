@@ -129,16 +129,16 @@ public class MondrianJNDI{
     ElementHelper.FindElement(driver, By.linkText("About")).click();
     //element 'fileid'
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fileid")));
-    String textElementFileid = ElementHelper.GetText(driver, By.id("fileid"));
+    String textElementFileid = ElementHelper.WaitForElementPresentGetText(driver, By.id("fileid"));
     //element image
     WebElement elemImg = ElementHelper.FindElement(driver, By.cssSelector("img"));
     String imgAttrSrc = elemImg.getAttribute("src");
     //element //div[@id='aboutSubContainerLeft']/div[2]/p
     String textFirstParagExpected = "CDA is a Pentaho plugin designed for accessing data with great flexibility. Born to overcoming some cons of the older implementation, CDA allows you to access any of the various Pentaho data sources and:";
-    String textFirstParag = ElementHelper.GetText(driver, By.xpath("//div[@id='aboutSubContainerLeft']/div[2]/p"));
+    String textFirstParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='aboutSubContainerLeft']/div[2]/p"));
     //element //div[@id='aboutSubContainerLeft']/div[2]/p[2]
     String textSecondParagExpected = "CDA can be used as a standalone plugin on the Pentaho BI server or in combination with CDE / CDF.";
-    String textSecondParag = ElementHelper.GetText(driver, By.xpath("//div[@id='aboutSubContainerLeft']/div[2]/p[2]"));
+    String textSecondParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='aboutSubContainerLeft']/div[2]/p[2]"));
 
     assertEquals("Hello!", textElementFileid);
     assertEquals(baseUrl + "api/repos/cda/static/cda.png", imgAttrSrc);
@@ -148,8 +148,8 @@ public class MondrianJNDI{
     //Back to Mondrian JNDI
     ElementHelper.FindElement(driver, By.linkText("Back to CDA")).click();
     //Check if we are in the correct page
-    filename = ElementHelper.GetText(driver, By.id("fileid"));
-    pleaseSelect = ElementHelper.GetText(driver, By.id("pleaseselect"));
+    filename = ElementHelper.WaitForElementPresentGetText(driver, By.id("fileid"));
+    pleaseSelect = ElementHelper.WaitForElementPresentGetText(driver, By.id("pleaseselect"));
 
     assertEquals("/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda", filename);
     assertEquals("Please select a Data Access ID", pleaseSelect);
@@ -187,33 +187,33 @@ public class MondrianJNDI{
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.GetText(driver, By.id("contents_info"));
+    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 3 of 3 elements", textPaging);
     //Column Time
-    String columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    String columnOneRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
-    String columnOneRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td"));
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    String columnOneRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
+    String columnOneRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td"));
     assertEquals("All Years", columnOneRowOne);
     assertEquals("All Years", columnOneRowTwo);
     assertEquals("All Years", columnOneRowThree);
     //Column Year
-    String columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
-    String columnTwoRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
-    String columnTwoRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[2]"));
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    String columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
+    String columnTwoRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[2]"));
     assertEquals("2003", columnTwoRowOne);
     assertEquals("2004", columnTwoRowTwo);
     assertEquals("2005", columnTwoRowThree);
     //Column Price
-    String columnThreeRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
-    String columnThreeRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[3]"));
-    String columnThreeRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[3]"));
+    String columnThreeRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
+    String columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[3]"));
+    String columnThreeRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[3]"));
     assertEquals("3573701.2500000023", columnThreeRowOne);
     assertEquals("4750205.889999998", columnThreeRowTwo);
     assertEquals("1513074.4600000002", columnThreeRowThree);
     //Column PriceInk
-    String columnFourRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
-    String columnFourRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[4]"));
-    String columnFourRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[4]"));
+    String columnFourRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
+    String columnFourRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[4]"));
+    String columnFourRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[4]"));
     assertEquals("3.5737012500000023", columnFourRowOne);
     assertEquals("4.750205889999998", columnFourRowTwo);
     assertEquals("1.5130744600000001", columnFourRowThree);
@@ -226,30 +226,30 @@ public class MondrianJNDI{
     //Click Desc
     ElementHelper.FindElement(driver, By.xpath("//table[@id='contents']/thead/tr/th[2]")).click();
     //Column Time
-    columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    columnOneRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
-    columnOneRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td"));
+    columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    columnOneRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
+    columnOneRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td"));
     assertEquals("All Years", columnOneRowOne);
     assertEquals("All Years", columnOneRowTwo);
     assertEquals("All Years", columnOneRowThree);
     //Column Year
-    columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
-    columnTwoRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
-    columnTwoRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[2]"));
+    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
+    columnTwoRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[2]"));
     assertEquals("2005", columnTwoRowOne);
     assertEquals("2004", columnTwoRowTwo);
     assertEquals("2003", columnTwoRowThree);
     //Column Price
-    columnThreeRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
-    columnThreeRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[3]"));
-    columnThreeRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[3]"));
+    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
+    columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[3]"));
+    columnThreeRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[3]"));
     assertEquals("1513074.4600000002", columnThreeRowOne);
     assertEquals("4750205.889999998", columnThreeRowTwo);
     assertEquals("3573701.2500000023", columnThreeRowThree);
     //Column PriceInk
-    columnFourRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
-    columnFourRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[4]"));
-    columnFourRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[4]"));
+    columnFourRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
+    columnFourRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[4]"));
+    columnFourRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[4]"));
     assertEquals("1.5130744600000001", columnFourRowOne);
     assertEquals("4.750205889999998", columnFourRowTwo);
     assertEquals("3.5737012500000023", columnFourRowThree);
@@ -262,30 +262,30 @@ public class MondrianJNDI{
     //Click Desc
     ElementHelper.FindElement(driver, By.xpath("//table[@id='contents']/thead/tr/th[3]")).click();
     //Column Time
-    columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    columnOneRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
-    columnOneRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td"));
+    columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    columnOneRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
+    columnOneRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td"));
     assertEquals("All Years", columnOneRowOne);
     assertEquals("All Years", columnOneRowTwo);
     assertEquals("All Years", columnOneRowThree);
     //Column Year
-    columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
-    columnTwoRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
-    columnTwoRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[2]"));
+    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
+    columnTwoRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[2]"));
     assertEquals("2004", columnTwoRowOne);
     assertEquals("2003", columnTwoRowTwo);
     assertEquals("2005", columnTwoRowThree);
     //Column Price
-    columnThreeRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
-    columnThreeRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[3]"));
-    columnThreeRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[3]"));
+    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
+    columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[3]"));
+    columnThreeRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[3]"));
     assertEquals("4750205.889999998", columnThreeRowOne);
     assertEquals("3573701.2500000023", columnThreeRowTwo);
     assertEquals("1513074.4600000002", columnThreeRowThree);
     //Column PriceInk
-    columnFourRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
-    columnFourRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[4]"));
-    columnFourRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[4]"));
+    columnFourRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
+    columnFourRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[4]"));
+    columnFourRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[4]"));
     assertEquals("4.750205889999998", columnFourRowOne);
     assertEquals("3.5737012500000023", columnFourRowTwo);
     assertEquals("1.5130744600000001", columnFourRowThree);
@@ -298,30 +298,30 @@ public class MondrianJNDI{
     //Click Desc
     ElementHelper.FindElement(driver, By.xpath("//table[@id='contents']/thead/tr/th[4]")).click();
     //Column Time
-    columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    columnOneRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
-    columnOneRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td"));
+    columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    columnOneRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
+    columnOneRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td"));
     assertEquals("All Years", columnOneRowOne);
     assertEquals("All Years", columnOneRowTwo);
     assertEquals("All Years", columnOneRowThree);
     //Column Year
-    columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
-    columnTwoRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
-    columnTwoRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[2]"));
+    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
+    columnTwoRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[2]"));
     assertEquals("2004", columnTwoRowOne);
     assertEquals("2003", columnTwoRowTwo);
     assertEquals("2005", columnTwoRowThree);
     //Column Price
-    columnThreeRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
-    columnThreeRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[3]"));
-    columnThreeRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[3]"));
+    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
+    columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[3]"));
+    columnThreeRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[3]"));
     assertEquals("4750205.889999998", columnThreeRowOne);
     assertEquals("3573701.2500000023", columnThreeRowTwo);
     assertEquals("1513074.4600000002", columnThreeRowThree);
     //Column PriceInk
-    columnFourRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
-    columnFourRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[4]"));
-    columnFourRowThree = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[4]"));
+    columnFourRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
+    columnFourRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[4]"));
+    columnFourRowThree = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[4]"));
     assertEquals("4.750205889999998", columnFourRowOne);
     assertEquals("3.5737012500000023", columnFourRowTwo);
     assertEquals("1.5130744600000001", columnFourRowThree);
@@ -332,19 +332,19 @@ public class MondrianJNDI{
     ElementHelper.FindElement(driver, By.xpath("//div[@id='contents_filter']/input")).clear();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='contents_filter']/input")).sendKeys("2004");
     //Check we have only one element
-    textPaging = ElementHelper.GetText(driver, By.id("contents_info"));
+    textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 1 of 1 elements (filter 3 elements)", textPaging);
     //Column Time
-    columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
     assertEquals("All Years", columnOneRowOne);
     //Column Year
-    columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
     assertEquals("2004", columnTwoRowOne);
     //Column Price
-    columnThreeRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
+    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
     assertEquals("4750205.889999998", columnThreeRowOne);
     //Column PriceInk
-    columnFourRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
+    columnFourRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[4]"));
     assertEquals("4.750205889999998", columnFourRowOne);
 
     /*
@@ -353,10 +353,10 @@ public class MondrianJNDI{
     ElementHelper.FindElement(driver, By.xpath("//div[@id='contents_filter']/input")).clear();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='contents_filter']/input")).sendKeys("Merry");
     //Check we have only one element
-    textPaging = ElementHelper.GetText(driver, By.id("contents_info"));
+    textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("empty (filter 3 elements)", textPaging);
     //Check if table is empty
-    String textNoResult = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    String textNoResult = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
     assertEquals("No results.", textNoResult);
 
     //Clean data
@@ -393,7 +393,7 @@ public class MondrianJNDI{
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.GetText(driver, By.id("contents_info"));
+    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 3 of 3 elements", textPaging);
 
     //Click in export as xls
@@ -445,7 +445,7 @@ public class MondrianJNDI{
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.GetText(driver, By.id("contents_info"));
+    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 3 of 3 elements", textPaging);
 
     // Check query url
@@ -454,7 +454,7 @@ public class MondrianJNDI{
     buttonQueryUrl.click();
 
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("queryUrlDialog")));
-    String dialogTitle = ElementHelper.GetText(driver, By.xpath("//div[@id='queryUrlDialog']/p"));
+    String dialogTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='queryUrlDialog']/p"));
     assertEquals("Query Execution URL:", dialogTitle);
 
     WebElement inputQueryUrl = ElementHelper.FindElement(driver, By.xpath("//input[@id='doQueryUrl']"));
@@ -468,7 +468,7 @@ public class MondrianJNDI{
      */
     driver.get(queryUrl);
     String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"String\",\"colName\":\"PriceInK\"}]}";
-    String jsonQueryActual = ElementHelper.GetText(driver, By.cssSelector("body"));
+    String jsonQueryActual = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("body"));
     assertEquals(jsonQueryExpected, jsonQueryActual);
   }
 
@@ -502,7 +502,7 @@ public class MondrianJNDI{
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.GetText(driver, By.id("contents_info"));
+    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 3 of 3 elements", textPaging);
 
     /*
@@ -511,7 +511,7 @@ public class MondrianJNDI{
     //Click in 'Cache this'
     ElementHelper.FindElement(driver, By.id("cachethis")).click();
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='dialog']")));
-    String questionActual = ElementHelper.GetText(driver, By.xpath("//div[@id='dialog']/p"));
+    String questionActual = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dialog']/p"));
     String questionExpect = "What schedule should this query run on?\n(advanced)";
     assertEquals(questionExpect, questionActual);
 
@@ -545,7 +545,7 @@ public class MondrianJNDI{
     String titleCdaCacheManager = cdaCacheManager.getTitle();
     assertEquals("CDA Cache Manager", titleCdaCacheManager);
     //Scheduled queries
-    String subTitleText = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='scheduledQueries']/div"));
+    String subTitleText = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='scheduledQueries']/div"));
     assertEquals("Scheduled Queries", subTitleText);
 
     /*
@@ -554,14 +554,14 @@ public class MondrianJNDI{
     //Validate Query
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String strToday = sdf.format(new Date());
-    String queryName = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[1]"));
-    String queryParam1 = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dt"));
-    String queryParam2 = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dd"));
-    String queryLExec = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[3]"));
-    String queryNExec = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[4]"));
-    String queryCron = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[5]"));
-    String queryTime = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[6]"));
-    String queryStatus = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[7]"));
+    String queryName = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[1]"));
+    String queryParam1 = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dt"));
+    String queryParam2 = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dd"));
+    String queryLExec = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[3]"));
+    String queryNExec = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[4]"));
+    String queryCron = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[5]"));
+    String queryTime = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[6]"));
+    String queryStatus = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[7]"));
 
     try {
       assertEquals("/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda (1)", queryName);

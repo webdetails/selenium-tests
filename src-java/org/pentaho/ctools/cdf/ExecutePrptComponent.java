@@ -113,7 +113,7 @@ public class ExecutePrptComponent{
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("ExecutePrptComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("ExecutePrptComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -161,7 +161,7 @@ public class ExecutePrptComponent{
     log.debug("tc3_CheckDisplayPage_DataIsDisplayedAsExpected");
 
     // ## Step 1
-    String buttonText = ElementHelper.GetText(driver, By.xpath("//button/span"));
+    String buttonText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button/span"));
     assertEquals("Execute Prpt", buttonText);
     ElementHelper.FindElement(driver, By.xpath("//button/span")).click();
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fancybox-content")));
@@ -174,14 +174,14 @@ public class ExecutePrptComponent{
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='toolbar']/div[2]")));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='toolbar']/span")));
     //Check the Product Name and Output Type
-    String prodName = ElementHelper.GetText(driver, By.xpath("//td/div/div"));
+    String prodName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//td/div/div"));
     assertEquals("Product Name", prodName);
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//td/div/div[2]/select")));
-    String outputTypeName = ElementHelper.GetText(driver, By.xpath("//tr[2]/td/div/div"));
+    String outputTypeName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[2]/td/div/div"));
     assertEquals("Output Type", outputTypeName);
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
     //Check for View Report button
-    String buttonName = ElementHelper.GetText(driver, By.xpath("//button/span"));
+    String buttonName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button/span"));
     assertEquals("View Report", buttonName);
     //Check the generated image
     driver.switchTo().frame("reportContent");

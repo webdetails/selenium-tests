@@ -139,8 +139,8 @@ public class CDA100 {
     elemStatus = ElementHelper.FindElement(driver, By.id("orderDate"));
     assertEquals("2003-03-01", elemStatus.getAttribute("value"));
     //Check text on table
-    String columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    String columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
     assertEquals("S10_1678", columnOneRowOne);
     assertEquals("10107", columnTwoRowOne);
 

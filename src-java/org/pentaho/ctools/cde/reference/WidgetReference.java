@@ -94,11 +94,11 @@ public class WidgetReference {
     /*
      * ## Step 1
      */
-    String sampleTitle = ElementHelper.GetText(driver, By.xpath("//div[@id='Title']/span"));
-    String firstParag = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/p"));
-    String sampleSubTitle1 = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/div"));
-    String sampleSubTitle2 = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/div[2]"));
-    String lastParag = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/p[7]"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Title']/span"));
+    String firstParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/p"));
+    String sampleSubTitle1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div"));
+    String sampleSubTitle2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div[2]"));
+    String lastParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/p[7]"));
 
     assertEquals("Widget reference", sampleTitle);
     assertEquals("Widgets are a way to turn complex component and layout setups into reusable components. Widgets are developed as if they were dashboards and used as if they were components in client dashboards.", firstParag);
@@ -128,8 +128,8 @@ public class WidgetReference {
     /*
      * ## Step 1
      */
-    String widgetTitle = ElementHelper.GetText(driver, By.xpath("//div[@id='SampleTitle']"));
-    String widgetDesc = ElementHelper.GetText(driver, By.xpath("//div[@id='SampleDescHtml']/p"));
+    String widgetTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='SampleTitle']"));
+    String widgetDesc = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='SampleDescHtml']/p"));
     assertEquals("Sample Widget", widgetTitle);
     assertEquals("This is a simple sample Widget. The widget contains only a single bar chart and a year parameter, and the parameter is linked to the documentation dashboard's year parameter, which is exposed in the pulldown.", widgetDesc);
 

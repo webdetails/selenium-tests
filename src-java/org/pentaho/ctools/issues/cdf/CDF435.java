@@ -122,7 +122,7 @@ public class CDF435 {
     WebDriver frame = driver.switchTo().frame(elementFrame);
 
     ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@id='promptPanel']//button/span"));
-    String buttonText = ElementHelper.GetText(frame, By.xpath("//div[@id='promptPanel']//button/span"));
+    String buttonText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='promptPanel']//button/span"));
     assertEquals("View Report", buttonText);
     ElementHelper.WaitForElementVisibility(frame, By.xpath("//input[@value='[Time].[2003]']"));
     String yearText = ElementHelper.GetInputValue(frame, By.xpath("//input[@value='[Time].[2003]']"));
@@ -133,18 +133,18 @@ public class CDF435 {
     frame = driver.switchTo().frame(elementFrame);
 
     //Check content of table
-    String r1c1Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[2]/td"));
-    String r1c2Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[2]/td[2]"));
-    String r1c3Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[2]/td[3]"));
-    String r1c4Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[2]/td[4]"));
-    String r2c1Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[3]/td"));
-    String r2c2Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[3]/td[2]"));
-    String r2c3Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[3]/td[3]"));
-    String r2c4Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[3]/td[4]"));
-    String r3c1Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[4]/td"));
-    String r3c2Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[4]/td[2]"));
-    String r3c3Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[4]/td[3]"));
-    String r3c4Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[4]/td[4]"));
+    String r1c1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[2]/td"));
+    String r1c2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[2]/td[2]"));
+    String r1c3Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[2]/td[3]"));
+    String r1c4Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[2]/td[4]"));
+    String r2c1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[3]/td"));
+    String r2c2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[3]/td[2]"));
+    String r2c3Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[3]/td[3]"));
+    String r2c4Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[3]/td[4]"));
+    String r3c1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[4]/td"));
+    String r3c2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[4]/td[2]"));
+    String r3c3Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[4]/td[3]"));
+    String r3c4Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[4]/td[4]"));
     assertEquals("Euro+ Shopping Channel", r1c1Text);
     assertEquals("$ 210,228", r1c2Text);
     assertEquals("2,153", r1c3Text);
@@ -177,7 +177,7 @@ public class CDF435 {
     frame = driver.switchTo().frame(elementFrame);
 
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='promptPanel']//button/span"));
-    buttonText = ElementHelper.GetText(driver, By.xpath("//div[@id='promptPanel']//button/span"));
+    buttonText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='promptPanel']//button/span"));
     assertEquals("View Report", buttonText);
     ElementHelper.WaitForElementVisibility(frame, By.xpath("//input[@value='[Time].[2004]']"));
     yearText = ElementHelper.GetInputValue(frame, By.xpath("//input[@value='[Time].[2004]']"));
@@ -188,18 +188,18 @@ public class CDF435 {
     frame = driver.switchTo().frame(elementFrame);
 
     //Check content of table
-    r1c1Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[2]/td"));
-    r1c2Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[2]/td[2]"));
-    r1c3Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[2]/td[3]"));
-    r1c4Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[2]/td[4]"));
-    r2c1Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[3]/td"));
-    r2c2Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[3]/td[2]"));
-    r2c3Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[3]/td[3]"));
-    r2c4Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[3]/td[4]"));
-    r3c1Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[4]/td"));
-    r3c2Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[4]/td[2]"));
-    r3c3Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[4]/td[3]"));
-    r3c4Text = ElementHelper.GetText(frame, By.xpath("//tbody/tr[4]/td[4]"));
+    r1c1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[2]/td"));
+    r1c2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[2]/td[2]"));
+    r1c3Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[2]/td[3]"));
+    r1c4Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[2]/td[4]"));
+    r2c1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[3]/td"));
+    r2c2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[3]/td[2]"));
+    r2c3Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[3]/td[3]"));
+    r2c4Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[3]/td[4]"));
+    r3c1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[4]/td"));
+    r3c2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[4]/td[2]"));
+    r3c3Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[4]/td[3]"));
+    r3c4Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//tbody/tr[4]/td[4]"));
     assertEquals("Euro+ Shopping Channel", r1c1Text);
     assertEquals("$ 375,268", r1c2Text);
     assertEquals("3,912", r1c3Text);

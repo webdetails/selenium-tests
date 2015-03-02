@@ -108,7 +108,7 @@ public class CDA109 {
     /*
      * ## Step 1
      */
-    String filePath = ElementHelper.GetText(driver, By.xpath("//span[@id='staticfile']"));
+    String filePath = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//span[@id='staticfile']"));
     assertEquals("/public/Issues/CDA - 109/.cda", filePath);
 
     /*
@@ -118,13 +118,13 @@ public class CDA109 {
     WebDriver frame = driver.switchTo().frame(elementFrame);
 
     ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@class='ace_layer ace_text-layer']"));
-    String ln1Text = ElementHelper.GetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[2]/span[2]"));
+    String ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[2]/span[2]"));
     assertEquals("CDADescriptor", ln1Text);
-    ln1Text = ElementHelper.GetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[3]/span[2]"));
+    ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[3]/span[2]"));
     assertEquals("DataSources", ln1Text);
-    ln1Text = ElementHelper.GetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[4]/span[3]"));
+    ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[4]/span[3]"));
     assertEquals("Connection", ln1Text);
-    ln1Text = ElementHelper.GetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[5]/span[4]"));
+    ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[5]/span[4]"));
     assertEquals("Catalog", ln1Text);
   }
 

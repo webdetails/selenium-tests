@@ -137,10 +137,10 @@ public class CDE407 {
     /*
      * ## Step 4
      */
-    String tr1tdText = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr/td"));
-    String tr2tdText = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td"));
-    String tr3tdText = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[3]/td"));
-    String tr4tdText = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td"));
+    String tr1tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr/td"));
+    String tr2tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td"));
+    String tr3tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[3]/td"));
+    String tr4tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td"));
     assertEquals("Row", tr1tdText);
     assertEquals("Space", tr2tdText);
     assertEquals("Space", tr3tdText);

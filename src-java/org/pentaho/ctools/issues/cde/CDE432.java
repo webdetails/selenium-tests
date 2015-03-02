@@ -150,7 +150,7 @@ public class CDE432 {
      * ## Step 4
      */
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]"));
-    String align = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]"));
+    String align = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]"));
     assertEquals("Left", align);
 
   }

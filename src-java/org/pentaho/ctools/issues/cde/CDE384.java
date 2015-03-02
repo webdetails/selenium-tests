@@ -153,7 +153,7 @@ public class CDE384 {
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementFrame);
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//span[@id='infoArea']"));
-    String pathText = ElementHelper.GetText(frame, By.xpath("//span[@id='infoArea']"));
+    String pathText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
     assertEquals("/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText);
     driver.switchTo().defaultContent();
     ElementHelper.Click(driver, By.id("popup_edit_buttonClose"));
@@ -166,7 +166,7 @@ public class CDE384 {
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
     ElementHelper.Click(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
-    String cdaText = ElementHelper.GetText(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
+    String cdaText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
     assertEquals("Community Data Access", cdaText);
     ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='CDA Data Source']"));
@@ -198,7 +198,7 @@ public class CDE384 {
     elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     frame = driver.switchTo().frame(elementFrame);
     ElementHelper.WaitForElementVisibility(frame, By.xpath("//span[@id='infoArea']"));
-    String pathText1 = ElementHelper.GetText(frame, By.xpath("//span[@id='infoArea']"));
+    String pathText1 = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
     assertEquals("/public/plugin-samples/cda/cdafiles/compoundJoin.cda", pathText1);
     driver.switchTo().defaultContent();
     ElementHelper.Click(driver, By.id("popup_edit_buttonClose"));
@@ -216,7 +216,7 @@ public class CDE384 {
     elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     frame = driver.switchTo().frame(elementFrame);
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//span[@id='infoArea']"));
-    String pathText3 = ElementHelper.GetText(frame, By.xpath("//span[@id='infoArea']"));
+    String pathText3 = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
     assertEquals("/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText3);
     driver.switchTo().defaultContent();
     ElementHelper.Click(driver, By.id("popup_edit_buttonClose"));

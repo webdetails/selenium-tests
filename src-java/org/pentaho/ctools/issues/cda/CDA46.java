@@ -116,8 +116,8 @@ public class CDA46 {
     ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='outputIndexHelp']"));
     ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='outputIndexHelp']/p"));
     ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='outputIndexHelp']/p[2]"));
-    String p1Text = ElementHelper.GetText(driver, By.xpath("//div[@id='outputIndexHelp']/p"));
-    String p2Text = ElementHelper.GetText(driver, By.xpath("//div[@id='outputIndexHelp']/p[2]"));
+    String p1Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='outputIndexHelp']/p"));
+    String p2Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='outputIndexHelp']/p[2]"));
     assertEquals("Output Index Id", p1Text);
     assertEquals("This Id is used to select the desired set of Output Options for the current Data Access.", p2Text);
 

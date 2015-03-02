@@ -45,10 +45,9 @@ import org.pentaho.ctools.security.AccessSystemResources;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-  /* LoginPentaho.class,
-   MondrianJNDI.class,
-    LogoutPentaho.class*/
-  //LogoutPentaho.class
+  /*LoginPentaho.class,
+  TableComponent.class
+  LogoutPentaho.class*/
   //##### Execution Order #####
   //Start Tests
   LoginPentaho.class,
@@ -63,10 +62,11 @@ import org.pentaho.ctools.security.AccessSystemResources;
   //Security
   AccessSystemResources.class,
   //Issues
-  SuiteIssues.class,
+  //SuiteIssues.class,
   //End Tests
   LogoutPentaho.class })
-public class CToolsTestSuite {
+public class CToolsTestSuite{
+
   /// Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands

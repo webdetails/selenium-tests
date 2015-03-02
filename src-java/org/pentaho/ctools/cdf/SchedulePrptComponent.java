@@ -123,7 +123,7 @@ public class SchedulePrptComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("SchedulePrptComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("SchedulePrptComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -301,13 +301,13 @@ public class SchedulePrptComponent {
       scheduleName = elementFirstDiv.getText();
       if (scheduleName.equals(schNameTc3)) {
 
-        scheduleRepeats = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[2]/div"));
-        scheduleSourceFile = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[3]/div"));
-        scheduleOuputLocation = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[4]/div"));
-        scheduleLastRun = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[5]/div"));
-        scheduleNextRun = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[6]/div"));
-        scheduleCreatedBy = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[7]/div"));
-        scheduleStatus = ElementHelper.GetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[8]/div"));
+        scheduleRepeats = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[2]/div"));
+        scheduleSourceFile = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[3]/div"));
+        scheduleOuputLocation = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[4]/div"));
+        scheduleLastRun = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[5]/div"));
+        scheduleNextRun = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[6]/div"));
+        scheduleCreatedBy = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[7]/div"));
+        scheduleStatus = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='schedule-table']/tbody/tr[" + j + "]/td[8]/div"));
         break;
       }
     }

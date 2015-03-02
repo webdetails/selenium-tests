@@ -106,15 +106,15 @@ public class TextAreaInputComponent {
     // Page title
     assertEquals("Community Dashboard Framework", driver.getTitle());
     //Sample Title
-    String sampleTitle = ElementHelper.GetText(driver, By.xpath("//span[2]"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//span[2]"));
     assertEquals("TextAreaInputComponent", sampleTitle);
 
     /*
      * ## Step 2
      */
     //Sample Description
-    String sampleDescTitle = ElementHelper.GetText(driver, By.xpath("//h3"));
-    String sampleDescription = ElementHelper.GetText(driver, By.xpath("//p"));
+    String sampleDescTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//h3"));
+    String sampleDescription = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//p"));
     assertEquals("Description", sampleDescTitle);
     assertEquals("Renders a multi-line text input box to collect user input. Change event is fired after user edits the content and removes the focus from the box. Pre/postChange functions can be used to make data validation.", sampleDescription);
 
@@ -122,9 +122,9 @@ public class TextAreaInputComponent {
      * ## Step 3
      */
     //Options
-    String optionsTitle = ElementHelper.GetText(driver, By.xpath("//h3[2]"));
-    String options1 = ElementHelper.GetText(driver, By.xpath("//dt[7]"));
-    String options2 = ElementHelper.GetText(driver, By.xpath("//dt[8]"));
+    String optionsTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//h3[2]"));
+    String options1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//dt[7]"));
+    String options2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//dt[8]"));
     assertEquals("Options", optionsTitle);
     assertEquals("charWidth", options1);
     assertEquals("maxChars", options2);
@@ -133,7 +133,7 @@ public class TextAreaInputComponent {
      * ## Step 4
      */
     //Samples
-    String samplesTitle = ElementHelper.GetText(driver, By.xpath("//h3[3]"));
+    String samplesTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//h3[3]"));
     assertEquals("Sample", samplesTitle);
   }
 

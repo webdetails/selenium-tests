@@ -129,11 +129,11 @@ public class CDA106 {
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.GetText(driver, By.id("contents_info"));
+    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 3 of 3 elements", textPaging);
     //Check text on table
-    String columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    String columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
     assertEquals("All Years", columnOneRowOne);
     assertEquals("2003", columnTwoRowOne);
     ElementHelper.Click(driver, By.xpath("//button[@id='cachethis']"));
@@ -171,16 +171,16 @@ public class CDA106 {
     String titleCdaCacheManager = cdaCacheManager.getTitle();
     assertEquals("CDA Cache Manager", titleCdaCacheManager);
     //Scheduled queries
-    String subTitleText = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='scheduledQueries']/div"));
+    String subTitleText = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='scheduledQueries']/div"));
     assertEquals("Scheduled Queries", subTitleText);
     //Validate Query
-    String queryName = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[1]"));
-    String queryParam1 = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dt"));
-    String queryParam2 = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dd"));
-    String queryLExec = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[3]"));
-    String queryCron = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[5]"));
-    String queryTime = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[6]"));
-    String queryStatus = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[7]"));
+    String queryName = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[1]"));
+    String queryParam1 = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dt"));
+    String queryParam2 = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dd"));
+    String queryLExec = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[3]"));
+    String queryCron = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[5]"));
+    String queryTime = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[6]"));
+    String queryStatus = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[7]"));
     assertEquals("/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda (1)", queryName);
     assertEquals("status", queryParam1);
     assertEquals("Shipped", queryParam2);
@@ -203,7 +203,7 @@ public class CDA106 {
     /*
      * ## Step 6
      */
-    String queryLExecNew = ElementHelper.GetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[3]"));
+    String queryLExecNew = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[3]"));
     assertTrue(queryLExec != queryLExecNew);
     ElementHelper.Click(cdaCacheManager, By.xpath("//img[@title='Remove Query']"));
 

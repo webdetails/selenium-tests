@@ -247,11 +247,11 @@ public class CDE410{
     }
 
     //assert values are changed
-    String value = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr/td[2]"));
+    String value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr/td[2]"));
     assertEquals(value, "a");
-    value = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]/td[2]"));
+    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]/td[2]"));
     assertEquals(value, "1");
-    value = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[7]/td[2]"));
+    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[7]/td[2]"));
     assertEquals(value, "False");
 
     //Click tab and assert focus has gone back to first table
@@ -393,11 +393,11 @@ public class CDE410{
     }
 
     //assert values are changed
-    value = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]"));
+    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]"));
     assertEquals(value, "a");
-    value = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]"));
+    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]"));
     assertEquals(value, "1");
-    value = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[9]/td[2]"));
+    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[9]/td[2]"));
     assertEquals(value, "False");
 
     //Click tab and assert focus has gone back to first table
@@ -544,11 +544,11 @@ public class CDE410{
     }
 
     //assert values are changed
-    value = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr/td[2]"));
+    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr/td[2]"));
     assertEquals(value, "a");
-    value = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[2]/td[2]"));
+    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[2]/td[2]"));
     assertEquals(value, "1");
-    value = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[13]/td[2]"));
+    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[13]/td[2]"));
     assertEquals(value, "False");
 
     //Click tab and assert focus has gone back to first table

@@ -108,10 +108,10 @@ public class CDE347 {
     /*
      * ## Step 1
      */
-    String c1r1Text = ElementHelper.GetText(driver, By.xpath("//tr/td"));
-    String c2r1Text = ElementHelper.GetText(driver, By.xpath("//tr/td[2]"));
-    String c1r4Text = ElementHelper.GetText(driver, By.xpath("//tr[6]/td"));
-    String c2r4Text = ElementHelper.GetText(driver, By.xpath("//tr[6]/td[2]"));
+    String c1r1Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr/td"));
+    String c2r1Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr/td[2]"));
+    String c1r4Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[6]/td"));
+    String c2r4Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[6]/td[2]"));
     assertEquals("Resource", c1r1Text);
     assertEquals("template", c2r1Text);
     assertEquals("Row", c1r4Text);

@@ -96,7 +96,7 @@ public class CDE439 {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ADuplicateComponent%3AduplicateComponent.wcdf/generatedContent");
 
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='content']/div/div[2]/div"));
-    String title = ElementHelper.GetText(driver, By.xpath("//div[@id='content']/div/div[2]/div"));
+    String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='content']/div/div[2]/div"));
     assertEquals("Duplicate Component sample", title);
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column1"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column2"));

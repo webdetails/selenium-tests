@@ -94,7 +94,7 @@ public class CDE396 {
     /*
      * ## Step 1
      */
-    String confirmationText = ElementHelper.GetText(driver, By.xpath("//body/pre"));
+    String confirmationText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//body/pre"));
     assertEquals("Refreshed CDE Successfully", confirmationText);
   }
 

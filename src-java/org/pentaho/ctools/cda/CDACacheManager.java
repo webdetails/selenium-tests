@@ -105,13 +105,13 @@ public class CDACacheManager {
     /*
      * ## Step 1
      */
-    String subTitle = ElementHelper.GetText(driver, By.xpath("//div[@id='cachedQueries']/div[3]"));
+    String subTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='cachedQueries']/div[3]"));
     assertEquals("Queries in cache", subTitle);
 
     /*
      * ## Step 2
      */
-    String buttonTextClearCache = ElementHelper.GetText(driver, By.id("clearCacheButton"));
+    String buttonTextClearCache = ElementHelper.WaitForElementPresentGetText(driver, By.id("clearCacheButton"));
     assertEquals("Clear Cache", buttonTextClearCache);
   }
 
@@ -160,7 +160,7 @@ public class CDACacheManager {
     /*
      * ## Step 2
      */
-    String textEmptyCache = ElementHelper.GetText(driver, By.xpath("//div[@id='cachedQueriesOverviewLines']/div"));
+    String textEmptyCache = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='cachedQueriesOverviewLines']/div"));
     assertEquals("Cache is empty.", textEmptyCache);
   }
 

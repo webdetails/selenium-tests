@@ -105,31 +105,31 @@ public class AddinReference{
     assertEquals("Community Dashboard Editor", driver.getTitle());
 
     //Check subtitle
-    String textSubTitle1 = ElementHelper.GetText(driver, By.xpath("//div[@id='Title']/span"));
+    String textSubTitle1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Title']/span"));
     assertEquals("AddIns reference", textSubTitle1);
 
     //Check subtitle
-    String textSubTitle2 = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/div"));
+    String textSubTitle2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div"));
     assertEquals("AddIn Implementation", textSubTitle2);
 
     //Check subtitle
-    String textSubTitle3 = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/div[2]"));
+    String textSubTitle3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div[2]"));
     assertEquals("Setting options", textSubTitle3);
 
     //Check subtitle
-    String textSubTitle4 = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/div[3]"));
+    String textSubTitle4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div[3]"));
     assertEquals("Setting defaults", textSubTitle4);
 
     //Check subtitle
-    String textSubTitle5 = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/div[4]"));
+    String textSubTitle5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div[4]"));
     assertEquals("Implementation arguments", textSubTitle5);
 
     //Check subtitle
-    String textSubTitle6 = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/div[5]"));
+    String textSubTitle6 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div[5]"));
     assertEquals("Calling AddIns from components", textSubTitle6);
 
     //Check subtitle
-    String textSubTitle7 = ElementHelper.GetText(driver, By.xpath("//div[@id='SupportedAddinsTitle']"));
+    String textSubTitle7 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='SupportedAddinsTitle']"));
     assertEquals("Supported AddIns - Table \"colType\"", textSubTitle7);
   }
 
@@ -151,7 +151,7 @@ public class AddinReference{
     /*
      * ## Step 1
      */
-    String sampleTitle = ElementHelper.GetText(driver, By.id("SparklineTitle"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("SparklineTitle"));
     assertEquals("sparkline", sampleTitle);
     //Check the hyperlink
     WebElement elemUrl = ElementHelper.FindElement(driver, By.linkText("JQuery Sparkline plugin"));
@@ -159,12 +159,12 @@ public class AddinReference{
     assertEquals("http://www.omnipotent.net/jquery.sparkline/", attrHref);
 
     //Check Defaults
-    String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='SparklineDescHtml']/blockquote/pre"));
+    String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='SparklineDescHtml']/blockquote/pre"));
     assertEquals("     defaults: {\n      type: 'line'\n    }     \n ", defaultText);
 
     //Check Rows
-    String row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr/td"));
-    String row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr[2]/td"));
+    String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr/td"));
+    String row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr[2]/td"));
     assertEquals("Row 1", row1);
     assertEquals("Row 2", row2);
 
@@ -185,8 +185,8 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='SparklineObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='SparklineObjTable']/thead/tr/th[1]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='SparklineObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr[2]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr[2]/td"));
     assertEquals("Row 2", row1);
     assertEquals("Row 1", row2);
   }
@@ -210,16 +210,16 @@ public class AddinReference{
      * ## Step 1
      */
     //Check sample title
-    String sampleTitle = ElementHelper.GetText(driver, By.id("PvSparklineTitle"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("PvSparklineTitle"));
     assertEquals("pvSparkline", sampleTitle);
 
     //Check Defaults
-    String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='PvSparklineDesc']/blockquote/pre"));
+    String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='PvSparklineDesc']/blockquote/pre"));
     assertEquals("    defaults: {\n      height: 10,\n      strokeStyle: \"#000\",\n      lineWidth: 1,\n      width: undefined,\n      canvasMargin: 2\n    }     \n ", defaultText);
 
     //Check Rows
-    String row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr/td"));
-    String row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr[2]/td"));
+    String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr/td"));
+    String row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr[2]/td"));
     assertEquals("Row 1", row1);
     assertEquals("Row 2", row2);
 
@@ -240,8 +240,8 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='PvSparklineObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='PvSparklineObjTable']/thead/tr/th[1]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='PvSparklineObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr[2]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr[2]/td"));
     assertEquals("Row 2", row1);
     assertEquals("Row 1", row2);
 
@@ -273,17 +273,17 @@ public class AddinReference{
      * ## Step 1
      */
     //Check sample title
-    String sampleTitle = ElementHelper.GetText(driver, By.id("DataBarTitle"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("DataBarTitle"));
     assertEquals("dataBar", sampleTitle);
 
     //Check Defaults
-    String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='DataBarDesc']/blockquote/pre"));
+    String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DataBarDesc']/blockquote/pre"));
     assertEquals("    defaults: {\n      widthRatio:1,\n      height: 10,\n      startColor: \"#55A4D6\",\n      endColor: \"#448FC8\",\n      stroke: null,\n      max: undefined,\n      min: undefined,\n      absValue: true,\n      includeValue: false,\n      valueFormat: function(v, format, st) {\n        return \"\" + sprintf(format,v) + \"\";\n      }\n    }\n ", defaultText);
 
     //Check Rows
-    String row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr/td"));
-    String row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td"));
-    String row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td"));
+    String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr/td"));
+    String row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td"));
+    String row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 1", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 3", row3);
@@ -309,8 +309,8 @@ public class AddinReference{
     assertEquals("Value: 30", chartRow2Col1Value);
 
     //check values in column 2
-    String chartRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td[3]/div/span"));
-    String chartRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td[3]/div/span"));
+    String chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td[3]/div/span"));
+    String chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td[3]/div/span"));
     assertEquals("77.0", chartRow2Col2Value);
     assertEquals("-65.0", chartRow3Col2Value);
 
@@ -321,9 +321,9 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[1]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='DataBarObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td"));
-    row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td"));
+    row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 3", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 1", row3);
@@ -333,8 +333,8 @@ public class AddinReference{
     assertEquals("Value: 14.5", chartRow1Col1Value);
     assertEquals("Value: 30", chartRow2Col1Value);
     //check values in column 2
-    chartRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td[3]/div/span"));
-    chartRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td[3]/div/span"));
+    chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td[3]/div/span"));
+    chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td[3]/div/span"));
     assertEquals("77.0", chartRow2Col2Value);
     assertEquals("50.0", chartRow3Col2Value);
 
@@ -347,8 +347,8 @@ public class AddinReference{
     assertEquals("Value: 14.5", chartRow1Col1Value);
     assertEquals("Value: 26", chartRow2Col1Value);
     //check values in column 2
-    chartRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td[3]/div/span"));
-    chartRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td[3]/div/span"));
+    chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[2]/td[3]/div/span"));
+    chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr[3]/td[3]/div/span"));
     assertEquals("50.0", chartRow2Col2Value);
     assertEquals("77.0", chartRow3Col2Value);
   }
@@ -372,17 +372,17 @@ public class AddinReference{
      * ## Step 1
      */
     //Check sample title
-    String sampleTitle = ElementHelper.GetText(driver, By.id("TrendArrowTitle"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("TrendArrowTitle"));
     assertEquals("trendArrow", sampleTitle);
 
     //Check Defaults
-    String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='TrendArrowDesc']/blockquote/pre"));
+    String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='TrendArrowDesc']/blockquote/pre"));
     assertEquals("    defaults: {\n      includeValue: false,\n      good: true,\n      valueFormat: function(v,format,st) {\n        return sprintf(format,v);\n      }\n    }\n ", defaultText);
 
     //Check Rows
-    String row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
-    String row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td"));
-    String row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td"));
+    String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
+    String row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td"));
+    String row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 1", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 3", row3);
@@ -402,9 +402,9 @@ public class AddinReference{
     assertNotNull(chartRow3Col2);
 
     //Check column value for 'Custom trendArrow'
-    String chartRow1Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div"));
-    String chartRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div"));
-    String chartRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div"));
+    String chartRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div"));
+    String chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div"));
+    String chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div"));
     assertEquals("50.00€", chartRow1Col2Value);
     assertEquals("77.00€", chartRow2Col2Value);
     assertEquals("-65.00€", chartRow3Col2Value);
@@ -416,17 +416,17 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[1]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td"));
-    row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td"));
+    row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 3", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 1", row3);
 
     //Check column value for 'Custom trendArrow'
-    chartRow1Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div"));
-    chartRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div"));
-    chartRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div"));
+    chartRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div"));
+    chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div"));
+    chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div"));
     assertEquals("-65.00€", chartRow1Col2Value);
     assertEquals("77.00€", chartRow2Col2Value);
     assertEquals("50.00€", chartRow3Col2Value);
@@ -435,15 +435,15 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[3]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[3][@class='column2 trendArrow sorting_asc']"));
     //Check column value for 'Custom trendArrow'
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td"));
-    row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td"));
+    row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 3", row1);
     assertEquals("Row 1", row2);
     assertEquals("Row 2", row3);
-    chartRow1Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div"));
-    chartRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div"));
-    chartRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div"));
+    chartRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div"));
+    chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div"));
+    chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div"));
     assertEquals("-65.00€", chartRow1Col2Value);
     assertEquals("50.00€", chartRow2Col2Value);
     assertEquals("77.00€", chartRow3Col2Value);
@@ -468,17 +468,17 @@ public class AddinReference{
      * ## Step 1
      */
     //Check sample title
-    String sampleTitle = ElementHelper.GetText(driver, By.id("HyperlinkTitle"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("HyperlinkTitle"));
     assertEquals("hyperlink", sampleTitle);
 
     //Check Defaults
-    String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='HyperlinkDesc']/blockquote/pre"));
+    String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HyperlinkDesc']/blockquote/pre"));
     assertEquals("    defaults: {\n      openInNewTab: true,\n      prependHttpIfNeeded: true,\n      regexp: null\n    }\n ", defaultText);
 
     //Check Rows
-    String row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr/td"));
-    String row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td"));
-    String row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td"));
+    String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr/td"));
+    String row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td"));
+    String row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 1", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 3", row3);
@@ -498,9 +498,9 @@ public class AddinReference{
     assertNotNull(chartRow3Col2);
 
     //Check column value for 'Custom hyperlink'
-    String urlRow1Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[1]/td[3]"));
-    String urlRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td[3]/a"));
-    String urlRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td[3]/a"));
+    String urlRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[1]/td[3]"));
+    String urlRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td[3]/a"));
+    String urlRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td[3]/a"));
     assertEquals("www.webdetails.pt", urlRow1Col2Value);
     assertEquals("http://ctools.webdetails.org", urlRow2Col2Value);
     assertEquals("cde.webdetails.org", urlRow3Col2Value);
@@ -518,16 +518,16 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[1]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td"));
-    row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td"));
+    row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 3", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 1", row3);
     //Check column value for 'Custom hyperlink'
-    urlRow1Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[1]/td[3]/a"));
-    urlRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td[3]/a"));
-    urlRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td[3]"));
+    urlRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[1]/td[3]/a"));
+    urlRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td[3]/a"));
+    urlRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td[3]"));
     assertEquals("cde.webdetails.org", urlRow1Col2Value);
     assertEquals("http://ctools.webdetails.org", urlRow2Col2Value);
     assertEquals("www.webdetails.pt", urlRow3Col2Value);
@@ -536,16 +536,16 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[3]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='HyperlinkObjTable']/thead/tr/th[3][@class='column2 hyperlink sorting_asc']"));
     //Check column value for 'Custom hyperlink'
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td"));
-    row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td"));
+    row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 3", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 1", row3);
     //Check column value for 'Custom hyperlink'
-    urlRow1Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[1]/td[3]/a"));
-    urlRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td[3]/a"));
-    urlRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td[3]"));
+    urlRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[1]/td[3]/a"));
+    urlRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[2]/td[3]/a"));
+    urlRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr[3]/td[3]"));
     assertEquals("cde.webdetails.org", urlRow1Col2Value);
     assertEquals("http://ctools.webdetails.org", urlRow2Col2Value);
     assertEquals("www.webdetails.pt", urlRow3Col2Value);
@@ -570,19 +570,19 @@ public class AddinReference{
      * ## Step 1
      */
     //Check sample title
-    String sampleTitle = ElementHelper.GetText(driver, By.id("CircleTitle"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("CircleTitle"));
     assertEquals("Circle", sampleTitle);
 
     //Check Defaults
-    String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='CircleDesc']/blockquote/pre"));
+    String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='CircleDesc']/blockquote/pre"));
     assertEquals("    defaults: {\n      canvasSize: 10,\n      radius: 4,\n      color: 'black',\n      title: function(st) {return \"Value: \" + st.value;}\n    }\n    \n ", defaultText);
 
     //Check Rows
-    String row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr/td"));
-    String row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[2]/td"));
-    String row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[3]/td"));
-    String row4 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[4]/td"));
-    String row5 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[5]/td"));
+    String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr/td"));
+    String row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[2]/td"));
+    String row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[3]/td"));
+    String row4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[4]/td"));
+    String row5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[5]/td"));
     assertEquals("Row 1", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 3", row3);
@@ -630,11 +630,11 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[1]"));
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[1]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='CircleObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[2]/td"));
-    row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[3]/td"));
-    row4 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[4]/td"));
-    row5 = ElementHelper.GetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[5]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[2]/td"));
+    row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[3]/td"));
+    row4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[4]/td"));
+    row5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr[5]/td"));
     assertEquals("Row 5", row1);
     assertEquals("Row 4", row2);
     assertEquals("Row 3", row3);
@@ -687,28 +687,28 @@ public class AddinReference{
      * ## Step 1
      */
     //Check sample title
-    String sampleTitle = ElementHelper.GetText(driver, By.id("textFormatTitle"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("textFormatTitle"));
     assertEquals("formattedText", sampleTitle);
 
     //Check Defaults
-    String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='textFormatDesc']/blockquote/pre"));
+    String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='textFormatDesc']/blockquote/pre"));
     assertEquals("    defaults: {\n      textFormat: function(v, st) {return st.colFormat ? sprintf(st.colFormat,v) : v;}\n    }\n ", defaultText);
 
     //Check Rows
-    String row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));
-    String row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td"));
-    String row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td"));
+    String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));
+    String row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td"));
+    String row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 1", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 3", row3);
 
     //Check column value
-    String textRow1Col1Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[2]"));
-    String textRow1Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[3]/span"));
-    String textRow2Col1Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[2]"));
-    String textRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[3]/span"));
-    String textRow3Col1Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[2]"));
-    String textRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[3]/span"));
+    String textRow1Col1Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[2]"));
+    String textRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[3]/span"));
+    String textRow2Col1Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[2]"));
+    String textRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[3]/span"));
+    String textRow3Col1Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[2]"));
+    String textRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[3]/span"));
     assertEquals("1.26%", textRow1Col1Value);
     assertEquals("0.21", textRow1Col2Value);
     assertEquals("33.00%", textRow2Col1Value);
@@ -724,19 +724,19 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[1]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[1][@class='column0 string sorting_desc']"));
     //Check Rows
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td"));
-    row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td"));
+    row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 3", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 1", row3);
     //Check column value
-    textRow1Col1Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[2]"));
-    textRow1Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[3]/span"));
-    textRow2Col1Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[2]"));
-    textRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[3]/span"));
-    textRow3Col1Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[2]"));
-    textRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[3]/span"));
+    textRow1Col1Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[2]"));
+    textRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[3]/span"));
+    textRow2Col1Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[2]"));
+    textRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[3]/span"));
+    textRow3Col1Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[2]"));
+    textRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[3]/span"));
     assertEquals("14.50%", textRow1Col1Value);
     assertEquals("50.49", textRow1Col2Value);
     assertEquals("33.00%", textRow2Col1Value);
@@ -748,19 +748,19 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[3]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='textFormatObjTable']/thead/tr/th[3][@class='column2 formattedText sorting_asc']"));
     //Check Rows
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td"));
-    row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td"));
+    row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 1", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 3", row3);
     //Check column value
-    textRow1Col1Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[2]"));
-    textRow1Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[3]/span"));
-    textRow2Col1Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[2]"));
-    textRow2Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[3]/span"));
-    textRow3Col1Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[2]"));
-    textRow3Col2Value = ElementHelper.GetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[3]/span"));
+    textRow1Col1Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[2]"));
+    textRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[1]/td[3]/span"));
+    textRow2Col1Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[2]"));
+    textRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[2]/td[3]/span"));
+    textRow3Col1Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[2]"));
+    textRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr[3]/td[3]/span"));
     assertEquals("1.26%", textRow1Col1Value);
     assertEquals("0.21", textRow1Col2Value);
     assertEquals("33.00%", textRow2Col1Value);
@@ -788,17 +788,17 @@ public class AddinReference{
      * ## Step 1
      */
     //Check sample title
-    String sampleTitle = ElementHelper.GetText(driver, By.id("bulletChartTitle"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("bulletChartTitle"));
     assertEquals("cccBulletChart", sampleTitle);
 
     //Check Defaults
-    String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='bulletChartDesc']/blockquote/pre"));
+    String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='bulletChartDesc']/blockquote/pre"));
     assertEquals("    defaults: {\n      height: 40,\n      animate: false,\n      orientation: \"horizontal\",\n      bulletSize: 16,\n      bulletSpacing: 150,\n      bulletMargin: 5,\n      bulletRanges: [30,80,100],\n      extensionPoints: {\n        \"bulletMarker_shape\":\"triangle\",\n        \"bulletTitle_textStyle\":\"green\",\n        \"bulletMeasure_fillStyle\":\"black\",\n        \"bulletRuleLabel_font\":\"8px sans-serif\",\n        \"bulletRule_height\": 5\n      }\n    }\n ", defaultText);
 
     //Check Rows
-    String row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr/td"));
-    String row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr[2]/td"));
-    String row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr[3]/td"));
+    String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr/td"));
+    String row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr[2]/td"));
+    String row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 1", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 3", row3);
@@ -825,9 +825,9 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='bulletChartObjTable']/thead/tr/th[1]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='bulletChartObjTable']/thead/tr/th[1][@class='column0 String sorting_desc']"));
     //Check Rows
-    row1 = ElementHelper.GetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr/td"));
-    row2 = ElementHelper.GetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr[2]/td"));
-    row3 = ElementHelper.GetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr[3]/td"));
+    row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr/td"));
+    row2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr[2]/td"));
+    row3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr[3]/td"));
     assertEquals("Row 3", row1);
     assertEquals("Row 2", row2);
     assertEquals("Row 1", row3);
@@ -865,23 +865,23 @@ public class AddinReference{
      * ## Step 1
      */
     //Check sample title
-    String sampleTitle = ElementHelper.GetText(driver, By.id("groupHeadersTitle"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("groupHeadersTitle"));
     assertEquals("groupHeaders", sampleTitle);
 
     //Check Defaults
-    String defaultText = ElementHelper.GetText(driver, By.xpath("//div[@id='groupHeadersDesc']/blockquote/pre"));
+    String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='groupHeadersDesc']/blockquote/pre"));
     assertEquals("    defaults: {\n      hide: true\n    }\n ", defaultText);
 
     //Check Rows
-    String value1 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[2]/td"));
-    String value2 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[5]/td"));
-    String value3 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[7]/td[3]"));
-    String value4 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[7]/td[4]"));
-    String value5 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[9]/td[3]"));
-    String value6 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[9]/td[4]"));
-    String value7 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[17]/td[3]"));
-    String value8 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[17]/td[4]"));
-    String value9 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[31]/td"));
+    String value1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[2]/td"));
+    String value2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[5]/td"));
+    String value3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[7]/td[3]"));
+    String value4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[7]/td[4]"));
+    String value5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[9]/td[3]"));
+    String value6 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[9]/td[4]"));
+    String value7 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[17]/td[3]"));
+    String value8 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[17]/td[4]"));
+    String value9 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[31]/td"));
     assertEquals("AAA", value1);
     assertEquals("aaa", value2);
     assertEquals("-26", value3);
@@ -900,15 +900,15 @@ public class AddinReference{
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='groupHeadersObjTable']/thead/tr/th[3]"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='groupHeadersObjTable']/thead/tr/th[3][@class='column2 sorting_desc']"));
     //Check Rows
-    value1 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[2]/td"));
-    value2 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[5]/td"));
-    value3 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[7]/td[3]"));
-    value4 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[7]/td[4]"));
-    value5 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[9]/td[3]"));
-    value6 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[9]/td[4]"));
-    value7 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[17]/td[3]"));
-    value8 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[17]/td[4]"));
-    value9 = ElementHelper.GetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[31]/td"));
+    value1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[2]/td"));
+    value2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[5]/td"));
+    value3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[7]/td[3]"));
+    value4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[7]/td[4]"));
+    value5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[9]/td[3]"));
+    value6 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[9]/td[4]"));
+    value7 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[17]/td[3]"));
+    value8 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[17]/td[4]"));
+    value9 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[31]/td"));
     assertEquals("AAA", value1);
     assertEquals("aaa", value2);
     assertEquals("90", value3);

@@ -105,7 +105,7 @@ public class TrafficComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("TrafficComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("TrafficComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -161,7 +161,7 @@ public class TrafficComponent {
     acts.moveToElement(elemTraffic, 5, 5);
     acts.build().perform();
 
-    String text = ElementHelper.GetText(driver, By.xpath("//div[@class='ui-tooltip-content']"));
+    String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='ui-tooltip-content']"));
     String expectedTextV1 = "Value: 1.43199389E8";
     String expectedTextV2 = "70000000";
     String expectedTextV3 = "150000000";

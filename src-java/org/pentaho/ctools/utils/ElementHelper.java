@@ -138,32 +138,10 @@ public class ElementHelper{
     }
     catch(TimeoutException te) {
       log.error("TimeoutException - got one. Locator: " + locator.toString());
-      log.error(te.getMessage());
+      log.fatal(te);
       log.debug("Trying again.");
       return driver.findElement(locator);
     }
-  }
-
-  /**
-   *
-   * @param driver
-   * @param locator
-   * @return
-   */
-  public static String GetText(WebDriver driver, By locator) {
-    log.debug("GetText::Enter");
-    log.debug("Locator: " + locator.toString());
-
-    String text = "";
-    try {
-      text = FindElement(driver, locator).getText();
-    }
-    catch(StaleElementReferenceException e) {
-      log.debug("Got stale");
-      text = FindElement(driver, locator).getText();
-    }
-    log.debug("GetText::Exit");
-    return text;
   }
 
   /**
@@ -203,7 +181,6 @@ public class ElementHelper{
    */
   public static String WaitForTextPresence(WebDriver driver, By locator, String textToWait) {
     log.debug("WaitForTextPresence(Main)::Enter");
-    log.debug("Locator: " + locator.toString());
     String str = WaitForTextPresence(driver, locator, textToWait, 10);
     log.debug("WaitForTextPresence(Main)::Exit");
     return str;
@@ -325,7 +302,6 @@ public class ElementHelper{
    */
   public static void WaitForElementInvisibility(WebDriver driver, final By locator) {
     log.debug("WaitForElementInvisibility(Main)::Enter");
-    log.debug("Locator: " + locator.toString());
     WaitForElementInvisibility(driver, locator, 30);
     log.debug("WaitForElementInvisibility(Main)::Exit");
   }
@@ -407,8 +383,6 @@ public class ElementHelper{
    */
   public static WebElement WaitForElementPresenceAndVisible(WebDriver driver, By locator) {
     log.debug("WaitForElementPresenceAndVisible(Main)::Enter");
-    log.debug("Locator: " + locator.toString());
-
     WebElement element = WaitForElementPresenceAndVisible(driver, locator, 30);
     log.debug("WaitForElementPresenceAndVisible(Main)::Exit");
     return element;
@@ -481,7 +455,6 @@ public class ElementHelper{
    */
   public static WebElement WaitForElementPresence(WebDriver driver, By locator) {
     log.debug("WaitForElementPresence(Main)::Enter");
-    log.debug("Locator: " + locator.toString());
     WebElement element = WaitForElementPresence(driver, locator, 30);
     log.debug("WaitForElementPresence(Main)::Exit");
     return element;
@@ -521,7 +494,7 @@ public class ElementHelper{
     }
     catch(Exception e) {
       log.warn("Something went wrong searching for pr: " + locator.toString());
-      log.error(e.getMessage());
+      log.fatal(e);
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -558,7 +531,7 @@ public class ElementHelper{
     }
     catch(Exception e) {
       log.warn("Something went wrong searching for vi: " + locator.toString());
-      log.error(e.getMessage());
+      log.fatal(e);
     }
 
     //------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
@@ -589,9 +562,12 @@ public class ElementHelper{
 
     WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     if(element != null) {
-      //text = element.getText();
-      //text = element.getAttribute("textContent");
+      String text1 = element.getText();
+      String text2 = element.getAttribute("textContent");
       text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
+      log.debug("Text 1 " + text1);
+      log.debug("Text 2 " + text2);
+      log.debug("Text 3 " + text);
     }
 
     log.debug("WaitForElementPresentGetText::Exit");
@@ -626,7 +602,7 @@ public class ElementHelper{
     }
     catch(Exception e) {
       log.warn("Something went wrong searching for: " + locator.toString());
-      log.error(e.getMessage());
+      log.fatal(e);
     }
 
     //------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
@@ -646,7 +622,6 @@ public class ElementHelper{
    */
   public static boolean IsElementNotPresent(WebDriver driver, By locator) {
     log.debug("IsElementNotPresent(Main)::Enter");
-    log.debug("Locator: " + locator.toString());
     boolean result = IsElementNotPresent(driver, locator, 30);
     log.debug("IsElementNotPresent(Main)::Exit");
     return result;

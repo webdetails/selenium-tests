@@ -115,10 +115,10 @@ public class CDE395 {
     WebDriver frame = driver.switchTo().frame(elementFrame);
 
     //assert button text and click Create New
-    String browseText = ElementHelper.GetText(frame, By.xpath("//div[@id='buttonWrapper']//button"));
-    String createText = ElementHelper.GetText(frame, By.xpath("//div[@id='buttonWrapper']//button[2]"));
-    String manageText = ElementHelper.GetText(frame, By.xpath("//div[@id='buttonWrapper']//button[3]"));
-    String documentationText = ElementHelper.GetText(frame, By.xpath("//div[@id='buttonWrapper']//button[4]"));
+    String browseText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button"));
+    String createText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[2]"));
+    String manageText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[3]"));
+    String documentationText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[4]"));
     assertEquals("Browse Files", browseText);
     assertEquals("Create New", createText);
     assertEquals("Manage Data Sources", manageText);
@@ -128,8 +128,8 @@ public class CDE395 {
     /*
      * ## Step 2
      */
-    String cdeText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
-    String dataText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdatasourceButton']"));
+    String cdeText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
+    String dataText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdatasourceButton']"));
     assertEquals("CDE Dashboard", cdeText);
     assertEquals("Data Source", dataText);
     ElementHelper.ClickJS(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
@@ -142,7 +142,7 @@ public class CDE395 {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     //assert title
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("solutionNavigatorAndContentPanel"));
-    String titleText = ElementHelper.GetText(driver, By.xpath("//div[@title='New CDE Dashboard']"));
+    String titleText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@title='New CDE Dashboard']"));
     assertEquals("CDE Dashboard", titleText);
 
     //focus iframe
@@ -150,11 +150,11 @@ public class CDE395 {
     frame = driver.switchTo().frame(elementFrame);
 
     //assert buttons and click Settings
-    String newText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div/a"));
-    String saveText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div[2]/a"));
-    String saveasText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div[3]/a"));
-    String reloadText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div[4]/a"));
-    String settingsText = ElementHelper.GetText(frame, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    String newText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div/a"));
+    String saveText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div[2]/a"));
+    String saveasText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div[3]/a"));
+    String reloadText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div[4]/a"));
+    String settingsText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div[5]/a"));
     assertEquals("New", newText);
     assertEquals("Save", saveText);
     assertEquals("Save as...", saveasText);

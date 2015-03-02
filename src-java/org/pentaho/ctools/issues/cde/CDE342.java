@@ -104,11 +104,11 @@ public class CDE342 {
      * ## Step 1
      */
     ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).sendKeys("A");
-    String option1 = ElementHelper.GetText(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
-    String option2 = ElementHelper.GetText(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));
-    String option3 = ElementHelper.GetText(driver, By.xpath("//ul[@id='ui-id-1']/li[3]/a"));
-    String option4 = ElementHelper.GetText(driver, By.xpath("//ul[@id='ui-id-1']/li[4]/a"));
-    String option5 = ElementHelper.GetText(driver, By.xpath("//ul[@id='ui-id-1']/li[5]/a"));
+    String option1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
+    String option2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));
+    String option3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li[3]/a"));
+    String option4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li[4]/a"));
+    String option5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li[5]/a"));
     assertEquals("Anna's Decorations, Ltd", option1);
     assertEquals("Australian Collectors, Co.", option2);
     assertEquals("Souveniers And Things Co.", option3);
@@ -128,7 +128,7 @@ public class CDE342 {
      */
     ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).clear();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).sendKeys("Anna");
-    option2 = ElementHelper.GetText(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
+    option2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
     assertEquals("Anna's Decorations, Ltd", option2);
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));

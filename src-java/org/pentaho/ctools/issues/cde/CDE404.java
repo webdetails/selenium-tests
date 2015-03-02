@@ -108,10 +108,10 @@ public class CDE404{
      * ## Step 1
      */
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
-    String button1 = ElementHelper.GetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
+    String button1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
     assertEquals("About", button1);
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
-    button1 = ElementHelper.GetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
+    button1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
     assertEquals("Elements", button1);
     ElementHelper.Click(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
 
@@ -119,13 +119,13 @@ public class CDE404{
      * ## Step 2
      */
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
-    String text = ElementHelper.GetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
+    String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
     assertEquals("test", text);
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
-    text = ElementHelper.GetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
     assertEquals("Dashboard", text);
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
-    text = ElementHelper.GetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
     assertEquals("All Users", text);
     WebElement button = ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[4]/div/button[2]"));
     Actions action = new Actions(driver);
@@ -190,20 +190,20 @@ public class CDE404{
     WebElement elementframe = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementframe);
     ElementHelper.WaitForElementVisibility(frame, By.xpath("//span[@id='infoArea']"));
-    String pathText = ElementHelper.GetText(frame, By.xpath("//span[@id='infoArea']"));
+    String pathText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
     assertEquals("/system/CDE404/static/system/css/cpk.css", pathText);
-    String lineText = ElementHelper.GetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div/span"));
+    String lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div/span"));
     assertEquals("/* This Source Code Form is subject to the terms of the Mozilla Public", lineText);
-    lineText = ElementHelper.GetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div[2]/span"));
+    lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div[2]/span"));
     assertEquals(" * License, v. 2.0. If a copy of the MPL was not distributed with this file,", lineText);
-    lineText = ElementHelper.GetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div[3]/span"));
+    lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div[3]/span"));
     assertEquals(" * You can obtain one at http://mozilla.org/MPL/2.0/. */", lineText);
     driver.switchTo().defaultContent();
     ElementHelper.Click(driver, By.xpath("//div[@class='popupclose']"));
     driver.close();
     driver.switchTo().window(parentHandle);
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
-    text = ElementHelper.GetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
     assertEquals("test", text);
 
   }

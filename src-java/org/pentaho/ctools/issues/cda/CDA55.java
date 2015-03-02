@@ -121,15 +121,15 @@ public class CDA55 {
     WebElement elemCostumers = ElementHelper.FindElement(driver, By.id("Costumers"));
     assertEquals("103;112", elemCostumers.getAttribute("value"));
     //Check we have two elements and no more than that
-    String textPaging = ElementHelper.GetText(driver, By.id("contents_info"));
+    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 2 of 2 elements", textPaging);
     //Check text on table
-    String columnOneRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    String columnTwoRowOne = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
     assertEquals("103", columnOneRowOne);
     assertEquals("Atelier graphique", columnTwoRowOne);
-    String columnOneRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
-    String columnTwoRowTwo = ElementHelper.GetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
+    String columnOneRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td"));
+    String columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[2]"));
     assertEquals("112", columnOneRowTwo);
     assertEquals("Signal Gift Stores", columnTwoRowTwo);
 

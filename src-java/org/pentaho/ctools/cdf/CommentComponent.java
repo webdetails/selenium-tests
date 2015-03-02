@@ -118,7 +118,7 @@ public class CommentComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("CommentsComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("CommentsComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -168,13 +168,13 @@ public class CommentComponent {
     cleanAllComments();
 
     // ## Step 1
-    String noComments = ElementHelper.GetText(driver, By.cssSelector("div.comment"));
+    String noComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.comment"));
     assertEquals("No Comments to show!", noComments);
 
-    String addComments = ElementHelper.GetText(driver, By.cssSelector("div.addComment"));
+    String addComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.addComment"));
     assertEquals("Add Comment", addComments);
 
-    String refreshComments = ElementHelper.GetText(driver, By.cssSelector("div.navigateRefresh"));
+    String refreshComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.navigateRefresh"));
     assertEquals("Refresh", refreshComments);
   }
 
@@ -208,13 +208,13 @@ public class CommentComponent {
      */
     ElementHelper.FindElement(driver, By.cssSelector("div.addComment")).click();
     //After click in add, check if the button add, save and cancel are displayed
-    String noComments = ElementHelper.GetText(driver, By.cssSelector("div.comment"));
+    String noComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.comment"));
     assertEquals("No Comments to show!", noComments);
-    String addComments = ElementHelper.GetText(driver, By.cssSelector("div.addComment"));
+    String addComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.addComment"));
     assertEquals("Add Comment", addComments);
-    String cancelComments = ElementHelper.GetText(driver, By.cssSelector("div.cancelComment"));
+    String cancelComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.cancelComment"));
     assertEquals("Cancel", cancelComments);
-    String saveComments = ElementHelper.GetText(driver, By.cssSelector("div.saveComment"));
+    String saveComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.saveComment"));
     assertEquals("Save", saveComments);
     //Insert the text
     ElementHelper.FindElement(driver, By.cssSelector("textarea.addCommentText")).sendKeys(smallText);
@@ -224,9 +224,9 @@ public class CommentComponent {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.navigateRefresh")));
     //Check if the comment was added
     String strCommentTimeAdded = "admin, " + sdf.format(timeAddedComment1);
-    String commentDetails1 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div"));
+    String commentDetails1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div"));
     assertThat("Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString(strCommentTimeAdded));
-    String commentAdded1 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div"));
+    String commentAdded1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div"));
     assertEquals(commentAdded1, smallText);
 
     /*
@@ -234,11 +234,11 @@ public class CommentComponent {
      */
     ElementHelper.FindElement(driver, By.cssSelector("div.addComment")).click();
     //After click in add, check if the button add, save and cancel are displayed
-    addComments = ElementHelper.GetText(driver, By.cssSelector("div.addComment"));
+    addComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.addComment"));
     assertEquals("Add Comment", addComments);
-    cancelComments = ElementHelper.GetText(driver, By.cssSelector("div.cancelComment"));
+    cancelComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.cancelComment"));
     assertEquals("Cancel", cancelComments);
-    saveComments = ElementHelper.GetText(driver, By.cssSelector("div.saveComment"));
+    saveComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.saveComment"));
     assertEquals("Save", saveComments);
     //Insert the text
     ElementHelper.FindElement(driver, By.cssSelector("textarea.addCommentText")).sendKeys(longText);
@@ -251,14 +251,14 @@ public class CommentComponent {
     //Check if the comment was added
     //Comment added 2
     String strCommentTimeAdded2 = "admin, " + sdf.format(timeAddedComment2);
-    String commentDetails2 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div"));
+    String commentDetails2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div"));
     assertThat("Comment added: " + commentDetails2, commentDetails2, CoreMatchers.containsString(strCommentTimeAdded2));
-    String commentAdded2 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div"));
+    String commentAdded2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div"));
     assertEquals(commentAdded2, longText);
     //Comment added 1
-    commentDetails1 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[2]/div"));
+    commentDetails1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[2]/div"));
     assertThat("Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString(strCommentTimeAdded));
-    commentAdded1 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[2]/div[2]/div"));
+    commentAdded1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[2]/div[2]/div"));
     assertEquals(commentAdded1, smallText);
 
     /*
@@ -266,11 +266,11 @@ public class CommentComponent {
      */
     ElementHelper.FindElement(driver, By.cssSelector("div.addComment")).click();
     //After click in add, check if the button add, save and cancel are displayed
-    addComments = ElementHelper.GetText(driver, By.cssSelector("div.addComment"));
+    addComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.addComment"));
     assertEquals("Add Comment", addComments);
-    cancelComments = ElementHelper.GetText(driver, By.cssSelector("div.cancelComment"));
+    cancelComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.cancelComment"));
     assertEquals("Cancel", cancelComments);
-    saveComments = ElementHelper.GetText(driver, By.cssSelector("div.saveComment"));
+    saveComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.saveComment"));
     assertEquals("Save", saveComments);
     //Insert the text
     ElementHelper.FindElement(driver, By.cssSelector("textarea.addCommentText")).sendKeys(specCharText);
@@ -284,20 +284,20 @@ public class CommentComponent {
     //Check if the comment was added
     //Comment added 3
     String strCommentTimeAdded3 = "admin, " + sdf.format(timeAddedComment3);
-    String commentDetails3 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div"));
+    String commentDetails3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div"));
     assertThat("Comment added: " + commentDetails3, commentDetails3, CoreMatchers.containsString(strCommentTimeAdded3));
-    String commentAdded3 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div"));
+    String commentAdded3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div"));
     assertEquals(commentAdded3, specCharText);
     //Comment added 2
     strCommentTimeAdded2 = "" + sdf.format(timeAddedComment2);
-    commentDetails2 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[2]/div"));
+    commentDetails2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[2]/div"));
     assertThat("Comment added: " + commentDetails2, commentDetails2, CoreMatchers.containsString(strCommentTimeAdded2));
-    commentAdded2 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[2]/div[2]/div"));
+    commentAdded2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[2]/div[2]/div"));
     assertEquals(commentAdded2, longText);
     //Comment added 1
-    commentDetails1 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[3]/div"));
+    commentDetails1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[3]/div"));
     assertThat("Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString(strCommentTimeAdded));
-    commentAdded1 = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[3]/div[2]/div"));
+    commentAdded1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[3]/div[2]/div"));
     assertEquals(commentAdded1, smallText);
   }
 
@@ -321,9 +321,9 @@ public class CommentComponent {
     cleanAllComments();
 
     String commentText = "Some comment!";
-    String noComments = ElementHelper.GetText(driver, By.cssSelector("div.comment"));
+    String noComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.comment"));
     assertEquals("No Comments to show!", noComments);
-    String addComments = ElementHelper.GetText(driver, By.cssSelector("div.addComment"));
+    String addComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.addComment"));
     assertEquals("Add Comment", addComments);
 
     /*
@@ -336,7 +336,7 @@ public class CommentComponent {
     //wait for the page rendered
     wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.navigateRefresh")));
     //Check if the comment was added
-    String commentAdded = ElementHelper.GetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div"));
+    String commentAdded = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div"));
     assertEquals(commentAdded, commentText);
 
     /*
@@ -350,11 +350,11 @@ public class CommentComponent {
     acts.click();
     acts.perform();
     //Check we don't have more comments
-    noComments = ElementHelper.GetText(driver, By.cssSelector("div.comment"));
+    noComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.comment"));
     assertEquals("No Comments to show!", noComments);
-    addComments = ElementHelper.GetText(driver, By.cssSelector("div.addComment"));
+    addComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.addComment"));
     assertEquals("Add Comment", addComments);
-    String refreshComments = ElementHelper.GetText(driver, By.cssSelector("div.navigateRefresh"));
+    String refreshComments = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("div.navigateRefresh"));
     assertEquals("Refresh", refreshComments);
   }
 

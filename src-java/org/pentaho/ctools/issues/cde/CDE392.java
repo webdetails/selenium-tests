@@ -120,11 +120,11 @@ public class CDE392 {
     /*
      * ## Step 1
      */
-    String newText = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div/a"));
-    String saveText = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div[2]/a"));
-    String saveasText = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div[3]/a"));
-    String reloadText = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div[4]/a"));
-    String settingsText = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    String newText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div/a"));
+    String saveText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[2]/a"));
+    String saveasText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[3]/a"));
+    String reloadText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[4]/a"));
+    String settingsText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
     assertEquals("New", newText);
     assertEquals("Save", saveText);
     assertEquals("Save as...", saveasText);
@@ -147,7 +147,7 @@ public class CDE392 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
     ElementHelper.ClickJS(driver, By.xpath("//div[@class='componentsPanelButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
-    String otherText = ElementHelper.GetText(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
+    String otherText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     assertEquals("Others", otherText);
     ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='table Component']"));
@@ -159,19 +159,19 @@ public class CDE392 {
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
     ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[@title='Table style']"));
-    String styleText = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[@title='Table style']"));
-    String style1Text = ElementHelper.GetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[@title='Table style']/../td[2]"));
+    String styleText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[@title='Table style']"));
+    String style1Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[@title='Table style']/../td[2]"));
     assertEquals("Style", styleText);
     assertEquals("Bootstrap", style1Text);
 
     /*
      * ## Step 5
      */
-    String newText1 = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div/a"));
-    String saveText1 = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div[2]/a"));
-    String saveasText1 = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div[3]/a"));
-    String reloadText1 = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div[4]/a"));
-    String settingsText1 = ElementHelper.GetText(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    String newText1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div/a"));
+    String saveText1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[2]/a"));
+    String saveasText1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[3]/a"));
+    String reloadText1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[4]/a"));
+    String settingsText1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
     assertEquals("New", newText1);
     assertEquals("Save", saveText1);
     assertEquals("Save as...", saveasText1);

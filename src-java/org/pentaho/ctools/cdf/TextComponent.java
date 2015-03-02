@@ -113,7 +113,7 @@ public class TextComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("TextComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("TextComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -164,7 +164,7 @@ public class TextComponent {
     SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd yyyy HH:mm", Locale.US);
     String strToday = sdf.format(dNow);
 
-    String text = ElementHelper.GetText(driver, By.id("sampleObject"));
+    String text = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObject"));
     String expectedText = "My text generated in " + strToday;
 
     boolean displayTime = text.startsWith(expectedText);

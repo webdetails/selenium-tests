@@ -99,23 +99,23 @@ public class AjaxRequestReference {
     wait.until(ExpectedConditions.titleIs("Community Dashboard Editor"));
     assertEquals("Community Dashboard Editor", driver.getTitle());
     //Check title
-    String title = ElementHelper.GetText(driver, By.xpath("//div[@id='Title']/span"));
+    String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Title']/span"));
     assertEquals("Ajax Request Reference", title);
     //Check first paragh
     String expParag = "Ajax Request Component provides a way to build an Ajax request. Given an url, a response type and list of parameters it's possible to build an jQuery ajax call, which its result will be stored in the resultvar.";
-    String actParag = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/p"));
+    String actParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/p"));
     assertEquals(expParag, actParag);
     //Check subtitle
-    String subtitle = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/div"));
+    String subtitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div"));
     assertEquals("Component Parameters", subtitle);
     //Check parag 1
-    String parag1 = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/p[2]"));
+    String parag1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/p[2]"));
     assertEquals("The Component definition supports the following arguments:", parag1);
     //Check subtitle2
-    String subtitle2 = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/div[2]"));
+    String subtitle2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div[2]"));
     assertEquals("Default values", subtitle2);
     //Check quote
-    String quote = ElementHelper.GetText(driver, By.xpath("//div[@id='DescriptionBody']/blockquote/pre"));
+    String quote = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/blockquote/pre"));
     assertEquals("    defaults: {\n      ajaxRequestType: json,\n      asyncCall: true\n    }\n ", quote);
   }
 

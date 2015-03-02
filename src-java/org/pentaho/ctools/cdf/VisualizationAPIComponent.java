@@ -104,7 +104,7 @@ public class VisualizationAPIComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("VisualizationAPIComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("VisualizationAPIComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -137,13 +137,13 @@ public class VisualizationAPIComponent {
   @Test(timeout = 60000)
   public void tc3_MaxNumber_PresentCorrectValue() {
     // ## Step 1
-    String value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+    String value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
     for (int i = 0; i < 100; i++) {
       if (value.equals("35659")) {
         break;
       }
       else {
-        value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+        value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
       }
     }
 
@@ -173,7 +173,7 @@ public class VisualizationAPIComponent {
 
     String strText = "";
     while (strText.indexOf("MIN") == -1) {
-      strText = ElementHelper.GetText(driver, By.id("samplecode"));
+      strText = ElementHelper.WaitForElementPresentGetText(driver, By.id("samplecode"));
     }
 
     // Click in Try me
@@ -187,13 +187,13 @@ public class VisualizationAPIComponent {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
 
-    String value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+    String value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
     for (int i = 0; i < 100; i++) {
       if (value.equals("0")) {
         break;
       }
       else {
-        value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+        value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
       }
     }
 
@@ -223,7 +223,7 @@ public class VisualizationAPIComponent {
 
     String strText = "";
     while (strText.indexOf("AVG") == -1) {
-      strText = ElementHelper.GetText(driver, By.id("samplecode"));
+      strText = ElementHelper.WaitForElementPresentGetText(driver, By.id("samplecode"));
     }
 
     // Click in Try me
@@ -237,13 +237,13 @@ public class VisualizationAPIComponent {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']")));
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
 
-    String value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+    String value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
     for (int i = 0; i < 100; i++) {
       if (value.equals("4787.772727272727")) {
         break;
       }
       else {
-        value = ElementHelper.GetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
+        value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
       }
     }
     assertEquals("4787.772727272727", value);

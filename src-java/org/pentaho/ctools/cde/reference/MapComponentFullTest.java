@@ -105,9 +105,9 @@ public class MapComponentFullTest {
     //Check page title
     assertEquals("Community Dashboard Editor", driver.getTitle());
     //Check sample title
-    String sampleTitle = ElementHelper.GetText(driver, By.xpath("//div[2]/div[2]/div/div/span"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[2]/div[2]/div/div/span"));
     assertEquals("Map Component Full Test", sampleTitle);
-    String sampleMapTitle = ElementHelper.GetText(driver, By.xpath("//div[2]/span"));
+    String sampleMapTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[2]/span"));
     assertEquals("Full Map with CGG Markers and PopupWindows", sampleMapTitle);
   }
 
@@ -377,8 +377,8 @@ public class MapComponentFullTest {
     ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]//*[local-name()='text']")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][2]"));
     //Check the values for the pie char for serie Vintage Cars
-    String marker5SerieVintageCarsValue = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text'][1]"));
-    String marker5SerieVintageCarsValuePer = ElementHelper.GetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text'][2]"));
+    String marker5SerieVintageCarsValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text'][1]"));
+    String marker5SerieVintageCarsValuePer = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text'][2]"));
     assertEquals("2,753", marker5SerieVintageCarsValue);
     assertEquals("(100%)", marker5SerieVintageCarsValuePer);
   }

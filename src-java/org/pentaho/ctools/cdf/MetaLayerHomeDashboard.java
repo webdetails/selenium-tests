@@ -106,7 +106,7 @@ public class MetaLayerHomeDashboard {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='titleObject']")));
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("Top Ten Customers", ElementHelper.GetText(driver, By.xpath("//div[@id='titleObject']")));
+    assertEquals("Top Ten Customers", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='titleObject']")));
 
     /*
      * ## Step 2
@@ -136,9 +136,9 @@ public class MetaLayerHomeDashboard {
     //Wait for the element be visible.
     WebDriver driverFrame = driver.switchTo().frame(frame);
     assertNotNull(ElementHelper.FindElement(driverFrame, By.xpath("//div[@id='internal_content']")));
-    assertEquals("Measures", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
-    assertEquals("Australian Collectors, Co.", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
-    assertEquals("180,125", ElementHelper.GetText(driverFrame, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
+    assertEquals("Measures", ElementHelper.WaitForElementPresentGetText(driverFrame, By.xpath("//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]")));
+    assertEquals("Australian Collectors, Co.", ElementHelper.WaitForElementPresentGetText(driverFrame, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div")));
+    assertEquals("180,125", ElementHelper.WaitForElementPresentGetText(driverFrame, By.xpath("//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td")));
 
     //Close pop-up
     driver.switchTo().defaultContent();

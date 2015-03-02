@@ -119,10 +119,10 @@ public class CDE402 {
     WebDriver frame = driver.switchTo().frame(elementFrame);
 
     //assert button text and click Create New
-    String browseText = ElementHelper.GetText(frame, By.xpath("//div[@id='buttonWrapper']//button"));
-    String createText = ElementHelper.GetText(frame, By.xpath("//div[@id='buttonWrapper']//button[2]"));
-    String manageText = ElementHelper.GetText(frame, By.xpath("//div[@id='buttonWrapper']//button[3]"));
-    String documentationText = ElementHelper.GetText(frame, By.xpath("//div[@id='buttonWrapper']//button[4]"));
+    String browseText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button"));
+    String createText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[2]"));
+    String manageText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[3]"));
+    String documentationText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[4]"));
     assertEquals("Browse Files", browseText);
     assertEquals("Create New", createText);
     assertEquals("Manage Data Sources", manageText);
@@ -132,8 +132,8 @@ public class CDE402 {
     /*
      * ## Step 2
      */
-    String cdeText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
-    String dataText = ElementHelper.GetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdatasourceButton']"));
+    String cdeText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
+    String dataText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdatasourceButton']"));
     assertEquals("CDE Dashboard", cdeText);
     assertEquals("Data Source", dataText);
     ElementHelper.ClickJS(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
@@ -146,7 +146,7 @@ public class CDE402 {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
     //assert title
-    String titleText = ElementHelper.GetText(driver, By.xpath("//div[@title='New CDE Dashboard']"));
+    String titleText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@title='New CDE Dashboard']"));
     assertEquals("CDE Dashboard", titleText);
 
     //focus iframe
@@ -181,7 +181,7 @@ public class CDE402 {
      * ## Step 5
      */
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatemessage']"));
-    String warningText = ElementHelper.GetText(frame, By.xpath("//div[@class='popupTemplatemessage']"));
+    String warningText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popupTemplatemessage']"));
     assertEquals("Are you sure you want to load the template?\n\nWARNING: Dashboard Layout will be overwritten!", warningText);
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
     ElementHelper.Click(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
@@ -193,10 +193,10 @@ public class CDE402 {
     ElementHelper.Click(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span"));
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]"));
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]"));
-    String tr6tdText = ElementHelper.GetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td"));
-    String tr6td2Text = ElementHelper.GetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]"));
-    String tr7tdText = ElementHelper.GetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td"));
-    String tr7td2Text = ElementHelper.GetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]"));
+    String tr6tdText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td"));
+    String tr6td2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]"));
+    String tr7tdText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td"));
+    String tr7td2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]"));
     assertEquals("Column", tr6tdText);
     assertEquals("Panel_1", tr6td2Text);
     assertEquals("Column", tr7tdText);

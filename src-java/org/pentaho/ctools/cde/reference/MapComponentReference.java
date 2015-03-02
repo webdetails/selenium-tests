@@ -120,30 +120,30 @@ public class MapComponentReference {
      */
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Editor", driver.getTitle());
-    String sampleTitle = ElementHelper.GetText(driver, By.xpath("//div[@id='title']/span"));
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='title']/span"));
     assertEquals("Map Component Reference", sampleTitle);
-    String sampleDesc = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/p"));
+    String sampleDesc = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/p"));
     assertEquals("This component allows the user to either navigate through the map and see information about marked locations, or to represent quantities as the fill color of a set of shapes/regions.", sampleDesc);
 
     /*
      * ## Step 2
      */
-    String subTitleGlobalOptions = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/h3"));
+    String subTitleGlobalOptions = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/h3"));
     assertEquals("Global Options", subTitleGlobalOptions);
-    String goItem1 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd/b"));
-    String goItem2 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[2]/b"));
-    String goItem3 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[3]/b"));
-    String goItem4 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[4]/b"));
-    String goItem5 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[5]/b"));
-    String goItem6 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[6]/b"));
-    String goItem7 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[7]/b"));
-    String goItem8 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[8]/b"));
-    String goItem9 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[9]/b"));
-    String goItem10 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[10]/b"));
-    String goItem11 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[11]/b"));
-    String goItem12 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[12]/b"));
-    String goItem13 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[13]/b"));
-    String goItem14 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl/dd[14]/b"));
+    String goItem1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd/b"));
+    String goItem2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[2]/b"));
+    String goItem3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[3]/b"));
+    String goItem4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[4]/b"));
+    String goItem5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[5]/b"));
+    String goItem6 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[6]/b"));
+    String goItem7 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[7]/b"));
+    String goItem8 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[8]/b"));
+    String goItem9 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[9]/b"));
+    String goItem10 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[10]/b"));
+    String goItem11 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[11]/b"));
+    String goItem12 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[12]/b"));
+    String goItem13 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[13]/b"));
+    String goItem14 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl/dd[14]/b"));
     assertEquals("listeners:", goItem1);
     assertEquals("parameters:", goItem2);
     assertEquals("htmlObject:", goItem3);
@@ -162,18 +162,18 @@ public class MapComponentReference {
     /*
      * ## Step 3
      */
-    String subTitleOptionsMarker = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/h3[2]"));
+    String subTitleOptionsMarker = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/h3[2]"));
     assertEquals("Options valid in Marker mode", subTitleOptionsMarker);
-    String omItem1 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd/b"));
-    String omItem2 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[2]/b"));
-    String omItem3 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[3]/b"));
-    String omItem4 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[4]/b"));
-    String omItem5 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[5]/b"));
-    String omItem6 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[6]/b"));
-    String omItem7 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[7]/b"));
-    String omItem8 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[8]/b"));
-    String omItem9 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[9]/b"));
-    String omItem10 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[10]/b"));
+    String omItem1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd/b"));
+    String omItem2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[2]/b"));
+    String omItem3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[3]/b"));
+    String omItem4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[4]/b"));
+    String omItem5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[5]/b"));
+    String omItem6 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[6]/b"));
+    String omItem7 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[7]/b"));
+    String omItem8 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[8]/b"));
+    String omItem9 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[9]/b"));
+    String omItem10 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[2]/dd[10]/b"));
     assertEquals("Marker image:", omItem1);
     assertEquals("Marker Width:", omItem2);
     assertEquals("Marker Height:", omItem3);
@@ -188,23 +188,23 @@ public class MapComponentReference {
     /*
      * ## Step 4
      */
-    String subTitleLocationMarker = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/h3[3]"));
+    String subTitleLocationMarker = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/h3[3]"));
     assertEquals("Location Result Set in Marker mode", subTitleLocationMarker);
-    String lmItem1 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd/b"));
-    String lmItem2 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[2]/b"));
-    String lmItem3 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[3]/b"));
-    String lmItem4 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[4]/b"));
-    String lmItem5 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[5]/b"));
-    String lmItem6 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[6]/b"));
-    String lmItem7 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[7]/b"));
-    String lmItem8 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[8]/b"));
-    String lmItem9 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[9]/b"));
-    String lmItem10 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[10]/b"));
-    String lmItem11 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[11]/b"));
-    String lmItem12 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[12]/b"));
-    String lmItem13 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[13]/b"));
-    String lmItem14 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[14]/b"));
-    String lmItem15 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[15]/b"));
+    String lmItem1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd/b"));
+    String lmItem2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[2]/b"));
+    String lmItem3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[3]/b"));
+    String lmItem4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[4]/b"));
+    String lmItem5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[5]/b"));
+    String lmItem6 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[6]/b"));
+    String lmItem7 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[7]/b"));
+    String lmItem8 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[8]/b"));
+    String lmItem9 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[9]/b"));
+    String lmItem10 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[10]/b"));
+    String lmItem11 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[11]/b"));
+    String lmItem12 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[12]/b"));
+    String lmItem13 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[13]/b"));
+    String lmItem14 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[14]/b"));
+    String lmItem15 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[3]/dd[15]/b"));
     assertEquals("Longitude:", lmItem1);
     assertEquals("Latitude:", lmItem2);
     assertEquals("Address:", lmItem3);
@@ -224,12 +224,12 @@ public class MapComponentReference {
     /*
      * ## Step 5
      */
-    String subTitleOptionsSahpes = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/h3[4]"));
+    String subTitleOptionsSahpes = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/h3[4]"));
     assertEquals("Options valid in Shapes mode", subTitleOptionsSahpes);
-    String osItem1 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[4]/dd/b"));
-    String osItem2 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[4]/dd[2]/b"));
-    String osItem3 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[4]/dd[3]/b"));
-    String osItem4 = ElementHelper.GetText(driver, By.xpath("//div[@id='documentation']/dl[4]/dd[4]/b"));
+    String osItem1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[4]/dd/b"));
+    String osItem2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[4]/dd[2]/b"));
+    String osItem3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[4]/dd[3]/b"));
+    String osItem4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='documentation']/dl[4]/dd[4]/b"));
     assertEquals("Shape Definitions:", osItem1);
     assertEquals("Shape Mouse Over Function:", osItem2);
     assertEquals("Shape Mouse Out Function:", osItem3);

@@ -103,7 +103,7 @@ public class ButtonComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("ButtonComponent", ElementHelper.GetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals("ButtonComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
   }
 
   /**
@@ -145,7 +145,7 @@ public class ButtonComponent {
   @Test(timeout = 60000)
   public void tc3_ClickableButton_AlertMessageDisplayed() {
     // ## Step 1
-    String buttonText = ElementHelper.GetText(driver, By.xpath("//button"));
+    String buttonText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button"));
     assertEquals("A button", buttonText);
     ElementHelper.FindElement(driver, By.xpath("//button")).click();
 
@@ -155,7 +155,7 @@ public class ButtonComponent {
     String confirmationMsg = alert.getText();
     alert.accept();
 
-    buttonText = ElementHelper.GetText(driver, By.xpath("//button"));
+    buttonText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button"));
 
     assertEquals("Button was clicked", confirmationMsg);
     assertEquals("Yes, a clickable button", buttonText);
