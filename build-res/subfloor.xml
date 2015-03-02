@@ -601,11 +601,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
     <target name="ivy-clean-pentaho" depends="install-ivy">
         <mkdir dir="${ivy.local.default.root}" />
-
+    	  <mkdir dir="${ivy.local.default.root}/cache" />
+    	
         <!-- just in case it doesn't exist -->
         <for param="dir">
             <path>
-            	  <mkdir dir="${ivy.local.default.root}/cache" />
+            	  
                 <dirset dir="${ivy.local.default.root}/cache" includes="*${ivy.clean.pattern}*" />
             </path>
             <sequential>
@@ -614,8 +615,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </for>
         <for param="file">
             <path>
-            	  <mkdir dir="${ivy.local.default.root}/cache" />
-                <fileset dir="${ivy.local.default.root}/cache" includes="*${ivy.clean.pattern}*" />
+            	  <fileset dir="${ivy.local.default.root}/cache" includes="*${ivy.clean.pattern}*" />
             </path>
             <sequential>
                 <delete file="@{file}" />
