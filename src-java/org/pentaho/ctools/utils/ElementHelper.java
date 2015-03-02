@@ -523,7 +523,7 @@ public class ElementHelper{
       } else {
         element = elements.get(0);
         if(element.isDisplayed() == true && element.isEnabled() == true) {
-          log.warn("We have some elements! Nr: Nr:" + size);
+          log.warn("We have some elements! Nr: " + size);
         }
         else {
           //wait for element visible
@@ -582,6 +582,7 @@ public class ElementHelper{
         elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
         if(elements.size() != 0) {
           element = elements.get(0);
+          log.debug("Get element present.");
         }
       } else {
         element = elements.get(0);
@@ -618,6 +619,7 @@ public class ElementHelper{
       if(elements.size() > 0) {
         //wait for element to appear
         element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        log.debug("Get element visible.");
       } else {
         log.warn("No elements found!");
       }
@@ -795,8 +797,8 @@ public class ElementHelper{
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-    log.debug("ElementsNotOverlap::Exit");
-    return notIntersected;
+      log.debug("ElementsNotOverlap::Exit");
+      return notIntersected;
   }
 
   /**
