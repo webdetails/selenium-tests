@@ -64,36 +64,101 @@ public class ElementHelper{
    * @param locator
    * @return
    */
-  public static WebElement FindElement(WebDriver driver, By locator) {
+  public static WebElement FindElement(final WebDriver driver, final By locator) {
     log.debug("FindElement::Enter");
     log.debug("Locator: " + locator.toString());
+    WebElement element = null;
+    final long timeout = 29;
+
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     try {
-      WaitForElementPresenceAndVisible(driver, locator);
-      log.debug("Element is visble");
-      List<WebElement> listElements = driver.findElements(locator);
-      if(listElements.size() > 0) {
-        WebElement element = listElements.get(0);
-        if(element.isDisplayed() && element.isEnabled()) {
-          log.debug("Return element found");
-          return element;
-        } else {
-          log.warn("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
-          return FindElement(driver, locator);
+
+      class RunnableObject implements Runnable{
+
+        private WebElement theElement;
+
+        public RunnableObject(WebElement theElement){
+          this.theElement = theElement;
         }
-      } else {
-        log.warn("Trying obtain! Locator: " + locator.toString());
-        return null;
+
+        public WebElement getValue() {
+          return this.theElement;
+        }
+
+        @Override
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class).ignoring(StaleElementReferenceException.class);
+
+          //Wait for element invisible
+          this.theElement = wait.until(new Function<WebDriver, WebElement>(){
+
+            @Override
+            public WebElement apply(WebDriver d) {
+              WebElement elem = d.findElement(locator);
+              if(elem.isDisplayed() && elem.isEnabled()) {
+                return elem;
+              }
+              return null;
+            }
+          });
+        }
       }
+
+      RunnableObject r = new RunnableObject(element);
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor.submit(r).get(timeout + 1, TimeUnit.SECONDS);
+      executor.shutdown();
+      element = r.getValue();
     }
-    catch(StaleElementReferenceException s) {
-      log.error("Stale - got one. Locator: " + locator.toString());
-      return FindElement(driver, locator);
+    catch(TimeoutException te) {
+      log.warn("Timeout exceeded! Looking for: " + locator.toString());
+      log.fatal(te);
     }
-    catch(ElementNotVisibleException v) {
-      log.error("NotVisible - got one. Locator: " + locator.toString());
-      return WaitForElementPresenceAndVisible(driver, locator);
+    catch(InterruptedException e) {
+      log.fatal(e);
     }
+    catch(ExecutionException e) {
+      log.fatal(e);
+    }
+    catch(java.util.concurrent.TimeoutException cte) {
+      log.warn("Timeout exceeded! Looking for: " + locator.toString());
+      log.fatal(cte);
+    }
+
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+    /*
+      try {
+        WaitForElementPresenceAndVisible(driver, locator);
+        log.debug("Element is visble");
+        List<WebElement> listElements = driver.findElements(locator);
+        if(listElements.size() > 0) {
+          WebElement element = listElements.get(0);
+          if(element.isDisplayed() && element.isEnabled()) {
+            log.debug("Return element found");
+            return element;
+          } else {
+            log.warn("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
+            return FindElement(driver, locator);
+          }
+        } else {
+          log.warn("Trying obtain! Locator: " + locator.toString());
+          return null;
+        }
+      }
+      catch(StaleElementReferenceException s) {
+        log.error("Stale - got one. Locator: " + locator.toString());
+        return FindElement(driver, locator);
+      }
+      catch(ElementNotVisibleException v) {
+        log.error("NotVisible - got one. Locator: " + locator.toString());
+        return WaitForElementPresenceAndVisible(driver, locator);
+      }*/
+
+    log.debug("FindElement::Exit");
+    return element;
   }
 
   /**
@@ -562,12 +627,13 @@ public class ElementHelper{
 
     WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     if(element != null) {
-      String text1 = element.getText();
-      String text2 = element.getAttribute("textContent");
+      text = element.getText();
+      /*String text2 = element.getAttribute("textContent");
       text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
       log.debug("Text 1 " + text1);
-      log.debug("Text 2 " + text2);
-      log.debug("Text 3 " + text);
+      log.debug("Text 2 " + text2.trim());
+      log.debug("Text 3 " + text.trim());
+      text = text1;*/
     }
 
     log.debug("WaitForElementPresentGetText::Exit");
