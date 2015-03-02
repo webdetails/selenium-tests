@@ -50,7 +50,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class WidgetReference {
+public class WidgetReference{
+
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
   // The base url to be append the relative url in test
@@ -198,7 +199,7 @@ public class WidgetReference {
     acts.moveToElement(rect1);
     acts.perform();
     String tooltipValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='tipsy tipsy-s']/div[2]"));
-    assertEquals("Trucks and Buses, APAC:  488", tooltipValue);
+    assertEquals("Trucks and Buses, APAC: 488", tooltipValue);
 
   }
 
