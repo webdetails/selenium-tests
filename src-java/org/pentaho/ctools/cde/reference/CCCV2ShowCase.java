@@ -189,6 +189,9 @@ public class CCCV2ShowCase{
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1][@width>192]"));//search for //width of barchartrect1
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2][@width>249]"));//search for //width of barchartrect2
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3][@width>100]"));//search for //width of barchartrect3
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1][@cy>120]"));//search for //cy of line1
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7][@cy>136]"));//search for //cy of line7
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11][@cy>24]"));//search for //cy of line11
 
     /*
      * ## Step 2 - Line Chart
@@ -205,11 +208,7 @@ public class CCCV2ShowCase{
     assertThat("Current cy: " + lineChartCircle1Cy, lineChartCircle1Cy, greaterThan(Double.valueOf(120)));
     assertThat("Current cy: " + lineChartCircle2Cy, lineChartCircle2Cy, greaterThan(Double.valueOf(136)));
     assertThat("Current cy: " + lineChartCircle3Cy, lineChartCircle3Cy, greaterThan(Double.valueOf(24)));
-    /*
-    assertEquals("120.414021784", );
-    assertEquals("136.53248991200002", lineChartCircle2.getAttribute("cy"));
-    assertEquals("24.50347088000001", lineChartCircle3.getAttribute("cy"));
-    */
+
     //Mouse hover elements
     WebElement lineChartCircle4 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][2]"));
     Actions acts2 = new Actions(driver);
@@ -258,6 +257,9 @@ public class CCCV2ShowCase{
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1][@width>192]"));//search for //width of barchartrect1
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2][@width>249]"));//search for //width of barchartrect2
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3][@width>100]"));//search for //width of barchartrect3
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1][@cy>120]"));//search for //cy of line1
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7][@cy>136]"));//search for //cy of line7
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11][@cy>24]"));//search for //cy of line11
 
     /*
      * ## Step 3 - Pie Chart
@@ -283,29 +285,6 @@ public class CCCV2ShowCase{
     //Check value of the serie2005
     String serie2005Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
     assertEquals("1.98M", serie2005Value);
-    //Check mouse hover
-    /* Does not work on jenkins!!
-    WebElement pieChartSerie2005 = ElementHelper.FindElement(driver, By.xpath("//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
-    Actions acts3 = new Actions(driver);
-    acts3.moveToElement(pieChartSerie2005);
-    acts3.perform();
-    String pieTimeLabel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[1]/td[1]/span"));
-    acts3.perform();
-    String pieTimeValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[1]/td[3]/span"));
-    acts3.perform();
-    String pieSeriesLabel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[2]/td[1]/span"));
-    acts3.perform();
-    String pieSeriesValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[2]/td[3]/span"));
-    acts3.perform();
-    String pieValueLabel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[3]/td[1]/span"));
-    acts3.perform();
-    String pieValueValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[3]/td[3]/span"));
-    assertEquals("Time", pieTimeLabel);
-    assertEquals("2005", pieTimeValue);
-    assertEquals("Series", pieSeriesLabel);
-    assertEquals("Sales", pieSeriesValue);
-    assertEquals("Value", pieValueLabel);
-    assertEquals("1,980,825.34", pieValueValue);*/
   }
 
   @AfterClass

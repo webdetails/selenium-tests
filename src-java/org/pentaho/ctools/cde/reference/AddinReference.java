@@ -160,7 +160,7 @@ public class AddinReference{
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='SparklineDescHtml']/blockquote/pre"));
-    assertEquals("     defaults: {\n      type: 'line'\n    }     \n ", defaultText);
+    assertEquals("defaults: { type: 'line' }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='SparklineObjTable']/tbody/tr/td"));
@@ -215,7 +215,7 @@ public class AddinReference{
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='PvSparklineDesc']/blockquote/pre"));
-    assertEquals("    defaults: {\n      height: 10,\n      strokeStyle: \"#000\",\n      lineWidth: 1,\n      width: undefined,\n      canvasMargin: 2\n    }     \n ", defaultText);
+    assertEquals("defaults: { height: 10, strokeStyle: \"#000\", lineWidth: 1, width: undefined, canvasMargin: 2 }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='PvSparklineObjTable']/tbody/tr/td"));
@@ -278,7 +278,7 @@ public class AddinReference{
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DataBarDesc']/blockquote/pre"));
-    assertEquals("    defaults: {\n      widthRatio:1,\n      height: 10,\n      startColor: \"#55A4D6\",\n      endColor: \"#448FC8\",\n      stroke: null,\n      max: undefined,\n      min: undefined,\n      absValue: true,\n      includeValue: false,\n      valueFormat: function(v, format, st) {\n        return \"\" + sprintf(format,v) + \"\";\n      }\n    }\n ", defaultText);
+    assertEquals("defaults: { widthRatio:1, height: 10, startColor: \"#55A4D6\", endColor: \"#448FC8\", stroke: null, max: undefined, min: undefined, absValue: true, includeValue: false, valueFormat: function(v, format, st) { return \"\" + sprintf(format,v) + \"\"; } }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr/td"));
@@ -377,7 +377,7 @@ public class AddinReference{
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='TrendArrowDesc']/blockquote/pre"));
-    assertEquals("    defaults: {\n      includeValue: false,\n      good: true,\n      valueFormat: function(v,format,st) {\n        return sprintf(format,v);\n      }\n    }\n ", defaultText);
+    assertEquals("defaults: { includeValue: false, good: true, valueFormat: function(v,format,st) { return sprintf(format,v); } }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
@@ -473,7 +473,7 @@ public class AddinReference{
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HyperlinkDesc']/blockquote/pre"));
-    assertEquals("    defaults: {\n      openInNewTab: true,\n      prependHttpIfNeeded: true,\n      regexp: null\n    }\n ", defaultText);
+    assertEquals("defaults: { openInNewTab: true, prependHttpIfNeeded: true, regexp: null }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='HyperlinkObjTable']/tbody/tr/td"));
@@ -575,7 +575,7 @@ public class AddinReference{
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='CircleDesc']/blockquote/pre"));
-    assertEquals("    defaults: {\n      canvasSize: 10,\n      radius: 4,\n      color: 'black',\n      title: function(st) {return \"Value: \" + st.value;}\n    }\n    \n ", defaultText);
+    assertEquals("defaults: { canvasSize: 10, radius: 4, color: 'black', title: function(st) {return \"Value: \" + st.value;} }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='CircleObjTable']/tbody/tr/td"));
@@ -692,7 +692,7 @@ public class AddinReference{
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='textFormatDesc']/blockquote/pre"));
-    assertEquals("    defaults: {\n      textFormat: function(v, st) {return st.colFormat ? sprintf(st.colFormat,v) : v;}\n    }\n ", defaultText);
+    assertEquals("defaults: { textFormat: function(v, st) {return st.colFormat ? sprintf(st.colFormat,v) : v;} }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));
@@ -793,7 +793,7 @@ public class AddinReference{
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='bulletChartDesc']/blockquote/pre"));
-    assertEquals("    defaults: {\n      height: 40,\n      animate: false,\n      orientation: \"horizontal\",\n      bulletSize: 16,\n      bulletSpacing: 150,\n      bulletMargin: 5,\n      bulletRanges: [30,80,100],\n      extensionPoints: {\n        \"bulletMarker_shape\":\"triangle\",\n        \"bulletTitle_textStyle\":\"green\",\n        \"bulletMeasure_fillStyle\":\"black\",\n        \"bulletRuleLabel_font\":\"8px sans-serif\",\n        \"bulletRule_height\": 5\n      }\n    }\n ", defaultText);
+    assertEquals("defaults: { height: 40, animate: false, orientation: \"horizontal\", bulletSize: 16, bulletSpacing: 150, bulletMargin: 5, bulletRanges: [30,80,100], extensionPoints: { \"bulletMarker_shape\":\"triangle\", \"bulletTitle_textStyle\":\"green\", \"bulletMeasure_fillStyle\":\"black\", \"bulletRuleLabel_font\":\"8px sans-serif\", \"bulletRule_height\": 5 } }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='bulletChartObjTable']/tbody/tr/td"));
@@ -870,7 +870,7 @@ public class AddinReference{
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='groupHeadersDesc']/blockquote/pre"));
-    assertEquals("    defaults: {\n      hide: true\n    }\n ", defaultText);
+    assertEquals("defaults: { hide: true }", defaultText);
 
     //Check Rows
     String value1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='groupHeadersObjTable']/tbody/tr[2]/td"));

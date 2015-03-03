@@ -54,7 +54,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDE402 {
+public class CDE402{
+
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
 
@@ -182,7 +183,7 @@ public class CDE402 {
      */
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatemessage']"));
     String warningText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popupTemplatemessage']"));
-    assertEquals("Are you sure you want to load the template?\n\nWARNING: Dashboard Layout will be overwritten!", warningText);
+    assertEquals("Are you sure you want to load the template?WARNING: Dashboard Layout will be overwritten!", warningText);
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
     ElementHelper.Click(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
 

@@ -630,6 +630,8 @@ public class ElementHelper{
     if(element != null) {
       //Cross-browser, see: http://www.quirksmode.org/dom/html/
       text = ((JavascriptExecutor) driver).executeScript("return (arguments[0].innerText == null)?arguments[0].textContent:arguments[0].innerText", element).toString();
+      //text = text.replaceAll("[^\\x00-\\x7F]", "");//only ascii charachters between 0 to 127
+      text = text.replaceAll("\\xA0", " ");
       text = text.replaceAll("\\s+", " ");
       text = text.replaceAll("\\r\\n|\\r|\\n|\\t", "");
       text = text.trim();//remove spaces, newlines,...
@@ -774,8 +776,8 @@ public class ElementHelper{
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-      log.debug("ElementsNotOverlap::Exit");
-      return notIntersected;
+    log.debug("ElementsNotOverlap::Exit");
+    return notIntersected;
   }
 
   /**

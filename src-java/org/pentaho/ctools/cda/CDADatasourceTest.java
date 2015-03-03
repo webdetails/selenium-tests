@@ -49,7 +49,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDADatasourceTest {
+public class CDADatasourceTest{
+
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
   // The base url to be append the relative url in test
@@ -104,59 +105,59 @@ public class CDADatasourceTest {
     //sqk,jdbc
     String accessMethod1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td"));
     String sample1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[3]/a"));
-    WebElement element1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element1 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[2]/td[4]/img[@src='resources/ok.png']"));
     //sql.jndi
     String accessMethod2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[3]/td"));
     String sample2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[3]/td[3]/a"));
-    WebElement element2 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[3]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element2 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[3]/td[4]/img[@src='resources/ok.png']"));
     //sql.stringarray.jndi
     String accessMethod3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[4]/td"));
     String sample3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[4]/td[3]/a"));
-    WebElement element3 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[4]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element3 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[4]/td[4]/img[@src='resources/ok.png']"));
     //mondrian.jdbc
     String accessMethod4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[5]/td"));
     String sample4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[5]/td[3]/a"));
-    WebElement element4 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[5]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element4 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[5]/td[4]/img[@src='resources/ok.png']"));
     //mondrian.jndi
     String accessMethod5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[6]/td"));
     String sample5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[6]/td[3]/a"));
-    WebElement element5 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[6]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element5 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[6]/td[4]/img[@src='resources/ok.png']"));
     // mondrian.jdbc (denormalized)
     String accessMethod6 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[7]/td"));
     String sample6 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[7]/td[3]/a"));
-    WebElement element6 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[7]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element6 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[7]/td[4]/img[@src='resources/ok.png']"));
     //mondrian.jndi (denormalized)
     String accessMethod7 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[8]/td"));
     String sample7 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[8]/td[3]/a"));
-    WebElement element7 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[8]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element7 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[8]/td[4]/img[@src='resources/ok.png']"));
     //olap4j
     String accessMethod8 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[9]/td"));
     String sample8 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[9]/td[3]/a"));
-    WebElement element8 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[9]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element8 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[9]/td[4]/img[@src='resources/ok.png']"));
     //kettle
     String accessMethod9 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[10]/td"));
     String sample9 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[10]/td[3]/a"));
-    WebElement element9 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[10]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element9 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[10]/td[4]/img[@src='resources/ok.png']"));
     //metadata
     String accessMethod10 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[11]/td"));
     String sample10 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[11]/td[3]/a"));
-    WebElement element10 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[11]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element10 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[11]/td[4]/img[@src='resources/ok.png']"));
     //scripting
     String accessMethod11 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td"));
     String sample11 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td[3]/a"));
-    WebElement element11 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element11 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td[4]/img[@src='resources/ok.png']"));
     //Xpath
     String accessMethod12 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td"));
     String sample12 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td[3]/a"));
-    WebElement element12 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element12 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td[4]/img[@src='resources/ok.png']"));
     //Compound join
     String accessMethod13 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td"));
     String sample13 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td[3]/a"));
-    WebElement element13 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element13 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td[4]/img[@src='resources/ok.png']"));
     //Compound Union
     String accessMethod14 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td"));
     String sample14 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td[3]/a"));
-    WebElement element14 = ElementHelper.FindElement(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td[4]/img[@src='resources/ok.png']"));
+    WebElement element14 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td[4]/img[@src='resources/ok.png']"));
 
     assertEquals("sql.jdbc", accessMethod1);
     assertEquals("cdafiles/sql-jdbc.cda", sample1);

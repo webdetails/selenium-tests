@@ -48,7 +48,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class AjaxRequestReference {
+public class AjaxRequestReference{
+
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
   //Instance to be used on wait commands
@@ -116,7 +117,7 @@ public class AjaxRequestReference {
     assertEquals("Default values", subtitle2);
     //Check quote
     String quote = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/blockquote/pre"));
-    assertEquals("    defaults: {\n      ajaxRequestType: json,\n      asyncCall: true\n    }\n ", quote);
+    assertEquals("defaults: { ajaxRequestType: json, asyncCall: true }", quote);
   }
 
   @AfterClass

@@ -512,7 +512,7 @@ public class MondrianJNDI{
     ElementHelper.FindElement(driver, By.id("cachethis")).click();
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='dialog']")));
     String questionActual = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dialog']/p"));
-    String questionExpect = "What schedule should this query run on?\n(advanced)";
+    String questionExpect = "What schedule should this query run on? (advanced)";
     assertEquals(questionExpect, questionActual);
 
     /*

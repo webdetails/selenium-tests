@@ -195,9 +195,10 @@ public class CDE404{
     String lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div/span"));
     assertEquals("/* This Source Code Form is subject to the terms of the Mozilla Public", lineText);
     lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div[2]/span"));
-    assertEquals(" * License, v. 2.0. If a copy of the MPL was not distributed with this file,", lineText);
+    assertEquals("* License, v. 2.0. If a copy of the MPL was not distributed with this file,", lineText);
     lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div[3]/span"));
-    assertEquals(" * You can obtain one at http://mozilla.org/MPL/2.0/. */", lineText);
+    assertEquals("* You can obtain one at http://mozilla.org/MPL/2.0/. */", lineText);
+
     driver.switchTo().defaultContent();
     ElementHelper.Click(driver, By.xpath("//div[@class='popupclose']"));
     driver.close();
