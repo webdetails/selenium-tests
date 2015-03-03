@@ -630,6 +630,8 @@ public class ElementHelper{
     if(element != null) {
       //Cross-browser, see: http://www.quirksmode.org/dom/html/
       text = ((JavascriptExecutor) driver).executeScript("return (arguments[0].innerText == null)?arguments[0].textContent:arguments[0].innerText", element).toString();
+      text = text.replaceAll("\\s+", " ");
+      text = text.replaceAll("\\r\\n|\\r|\\n|\\t", "");
       text = text.trim();//remove spaces, newlines,...
     }
 

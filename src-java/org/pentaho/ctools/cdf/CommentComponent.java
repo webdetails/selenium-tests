@@ -59,7 +59,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CommentComponent {
+public class CommentComponent{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -369,21 +370,16 @@ public class CommentComponent {
     List<WebElement> listEraseComments = driver.findElements(By.cssSelector("div.archive"));
     int nIteractions = listEraseComments.size();
     log.info("Number elements to remove: " + nIteractions);
-    if (nIteractions > 0) {
+    if(nIteractions > 0) {
       log.debug("We have comments to remove");
-      for (int i = 1; i <= nIteractions; i++) {
+      for(int i = 1; i <= nIteractions; i ++ ) {
         Actions acts = new Actions(driver);
         acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div")));
         acts.perform();
         acts.moveToElement(ElementHelper.FindElement(driver, By.cssSelector("div.archive")));
         acts.click();
         acts.perform();
-        log.info("One comment removed.");
-        //TODO
-        /*
-        if (i != nIteractions) {
-          //ElementHelper.WaitForInvisible(driver, By.xpath("//div[@id='sampleObject']/div/div/div[" + (nIteractions-i+1) + "]/div"));
-        }*/
+        log.debug("One comment removed.");
       }
     }
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

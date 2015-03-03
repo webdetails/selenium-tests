@@ -50,7 +50,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TextAreaInputComponent {
+public class TextAreaInputComponent{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
