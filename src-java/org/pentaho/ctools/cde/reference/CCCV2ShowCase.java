@@ -53,7 +53,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CCCV2ShowCase {
+public class CCCV2ShowCase{
+
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
   //Instance to be used on wait commands
@@ -107,7 +108,9 @@ public class CCCV2ShowCase {
     String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Headers']/div"));
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1][@width>192]"));//search for //width of barchartrect1
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2][@width>249]"));//search for //width of barchartrect2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3][@width>100]"));//search for //width of barchartrect3
 
     /*
      * ## Step 1 - Bar Chart
@@ -115,6 +118,7 @@ public class CCCV2ShowCase {
     String barChartTitle = ElementHelper.WaitForElementPresentGetText(driver, By.id("BarChartTitleRow"));
     assertEquals("Bar Chart", barChartTitle);
     //Check bars
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2]"));
     WebElement barChartRect1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1]"));
     WebElement barChartRect2 = ElementHelper.FindElement(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2]"));
     WebElement barChartRect3 = ElementHelper.FindElement(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3]"));
@@ -134,6 +138,7 @@ public class CCCV2ShowCase {
     assertEquals("3.68M", barChartRectValue1);
     assertEquals("4.99M", barChartRectValue2);
     assertEquals("1.98M", barChartRectValue3);
+
     //Mouse hover elements
     Actions acts = new Actions(driver);
     acts.moveToElement(barChartRect2);
@@ -181,7 +186,9 @@ public class CCCV2ShowCase {
     String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Headers']/div"));
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1][@width>192]"));//search for //width of barchartrect1
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2][@width>249]"));//search for //width of barchartrect2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3][@width>100]"));//search for //width of barchartrect3
 
     /*
      * ## Step 2 - Line Chart
@@ -192,9 +199,17 @@ public class CCCV2ShowCase {
     WebElement lineChartCircle1 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1]"));
     WebElement lineChartCircle2 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7]"));
     WebElement lineChartCircle3 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11]"));
-    assertEquals("120.414021784", lineChartCircle1.getAttribute("cy"));
+    Double lineChartCircle1Cy = Double.parseDouble(lineChartCircle1.getAttribute("cy"));
+    Double lineChartCircle2Cy = Double.parseDouble(lineChartCircle2.getAttribute("cy"));
+    Double lineChartCircle3Cy = Double.parseDouble(lineChartCircle3.getAttribute("cy"));
+    assertThat("Current cy: " + lineChartCircle1Cy, lineChartCircle1Cy, greaterThan(Double.valueOf(120)));
+    assertThat("Current cy: " + lineChartCircle2Cy, lineChartCircle2Cy, greaterThan(Double.valueOf(136)));
+    assertThat("Current cy: " + lineChartCircle3Cy, lineChartCircle3Cy, greaterThan(Double.valueOf(24)));
+    /*
+    assertEquals("120.414021784", );
     assertEquals("136.53248991200002", lineChartCircle2.getAttribute("cy"));
     assertEquals("24.50347088000001", lineChartCircle3.getAttribute("cy"));
+    */
     //Mouse hover elements
     WebElement lineChartCircle4 = ElementHelper.FindElement(driver, By.xpath("//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][2]"));
     Actions acts2 = new Actions(driver);
@@ -240,7 +255,9 @@ public class CCCV2ShowCase {
     String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Headers']/div"));
     assertEquals("CCC v2 - Show Case", title);
     //Wait for the charts load
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//*[starts-with(@width,'26')]"));//search for //width of barchartrect2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1][@width>192]"));//search for //width of barchartrect1
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2][@width>249]"));//search for //width of barchartrect2
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3][@width>100]"));//search for //width of barchartrect3
 
     /*
      * ## Step 3 - Pie Chart
