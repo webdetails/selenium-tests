@@ -67,8 +67,8 @@ public class ElementHelper{
   public static WebElement FindElement(final WebDriver driver, final By locator) {
     log.debug("FindElement::Enter");
     log.debug("Locator: " + locator.toString());
-    WebElement element = null;
-    element = WaitForElementPresenceAndVisible(driver, locator);
+    //WebElement element = null;
+    //element = WaitForElementPresenceAndVisible(driver, locator);
     /*
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
@@ -132,37 +132,34 @@ public class ElementHelper{
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    */
-    /*
-      try {
-        WaitForElementPresenceAndVisible(driver, locator);
-        log.debug("Element is visble");
-        List<WebElement> listElements = driver.findElements(locator);
-        if(listElements.size() > 0) {
-          WebElement element = listElements.get(0);
-          if(element.isDisplayed() && element.isEnabled()) {
-            log.debug("Return element found");
-            return element;
-          } else {
-            log.warn("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
-            return FindElement(driver, locator);
-          }
+     */
+    try {
+      WaitForElementPresenceAndVisible(driver, locator);
+      log.debug("Element is visble");
+      List<WebElement> listElements = driver.findElements(locator);
+      if(listElements.size() > 0) {
+        WebElement element = listElements.get(0);
+        if(element.isDisplayed() && element.isEnabled()) {
+          log.debug("Return element found");
+          log.debug("FindElement::Exit");
+          return element;
         } else {
-          log.warn("Trying obtain! Locator: " + locator.toString());
-          return null;
+          log.warn("Trying again! Displayed:" + element.isDisplayed() + " Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
+          return FindElement(driver, locator);
         }
+      } else {
+        log.warn("Trying obtain! Locator: " + locator.toString());
+        return null;
       }
-      catch(StaleElementReferenceException s) {
-        log.error("Stale - got one. Locator: " + locator.toString());
-        return FindElement(driver, locator);
-      }
-      catch(ElementNotVisibleException v) {
-        log.error("NotVisible - got one. Locator: " + locator.toString());
-        return WaitForElementPresenceAndVisible(driver, locator);
-      }*/
-
-    log.debug("FindElement::Exit");
-    return element;
+    }
+    catch(StaleElementReferenceException s) {
+      log.error("Stale - got one. Locator: " + locator.toString());
+      return FindElement(driver, locator);
+    }
+    catch(ElementNotVisibleException v) {
+      log.error("NotVisible - got one. Locator: " + locator.toString());
+      return WaitForElementPresenceAndVisible(driver, locator);
+    }
   }
 
   /**
