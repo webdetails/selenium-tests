@@ -68,8 +68,8 @@ public class ElementHelper{
     log.debug("FindElement::Enter");
     log.debug("Locator: " + locator.toString());
     WebElement element = null;
-    final long timeout = 29;
-
+    element = WaitForElementPresenceAndVisible(driver, locator);
+    /*
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     try {
@@ -88,7 +88,11 @@ public class ElementHelper{
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class).ignoring(StaleElementReferenceException.class);
+          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+            .withTimeout(timeout, TimeUnit.SECONDS)
+            .pollingEvery(50, TimeUnit.MILLISECONDS)
+            .ignoring(NoSuchElementException.class)
+            .ignoring(StaleElementReferenceException.class);
 
           //Wait for element invisible
           this.theElement = wait.until(new Function<WebDriver, WebElement>(){
@@ -128,7 +132,7 @@ public class ElementHelper{
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
+    */
     /*
       try {
         WaitForElementPresenceAndVisible(driver, locator);
@@ -775,8 +779,8 @@ public class ElementHelper{
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-      log.debug("ElementsNotOverlap::Exit");
-      return notIntersected;
+    log.debug("ElementsNotOverlap::Exit");
+    return notIntersected;
   }
 
   /**
