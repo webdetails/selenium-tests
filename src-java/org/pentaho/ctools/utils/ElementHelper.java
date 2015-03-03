@@ -628,13 +628,9 @@ public class ElementHelper{
 
     WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     if(element != null) {
-      text = element.getText();
-      /*String text2 = element.getAttribute("textContent");
-      text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
-      log.debug("Text 1 " + text1);
-      log.debug("Text 2 " + text2.trim());
-      log.debug("Text 3 " + text.trim());
-      text = text1;*/
+      //Cross-browser, see: http://www.quirksmode.org/dom/html/
+      text = ((JavascriptExecutor) driver).executeScript("return (arguments[0].innerText == null)?arguments[0].textContent:arguments[0].innerText", element).toString();
+      text = text.trim();//remove spaces, newlines,...
     }
 
     log.debug("WaitForElementPresentGetText::Exit");
@@ -776,8 +772,8 @@ public class ElementHelper{
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-    log.debug("ElementsNotOverlap::Exit");
-    return notIntersected;
+      log.debug("ElementsNotOverlap::Exit");
+      return notIntersected;
   }
 
   /**
