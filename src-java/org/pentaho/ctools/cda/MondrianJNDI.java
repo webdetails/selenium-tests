@@ -146,10 +146,10 @@ public class MondrianJNDI{
     assertEquals(textSecondParagExpected, textSecondParag);
 
     //Back to Mondrian JNDI
-    ElementHelper.FindElement(driver, By.linkText("Back to CDA")).click();
+    ElementHelper.Click(driver, By.linkText("Back to CDA"));
     //Check if we are in the correct page
-    filename = ElementHelper.WaitForElementPresentGetText(driver, By.id("fileid"));
-    pleaseSelect = ElementHelper.WaitForElementPresentGetText(driver, By.id("pleaseselect"));
+    filename = ElementHelper.WaitForTextPresence(driver, By.id("fileid"), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda");
+    pleaseSelect = ElementHelper.WaitForTextPresence(driver, By.id("pleaseselect"), "Please select a Data Access ID");
 
     assertEquals("/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda", filename);
     assertEquals("Please select a Data Access ID", pleaseSelect);
@@ -605,7 +605,7 @@ public class MondrianJNDI{
   public void removeFirstSchedule() {
     boolean elementPresent = false;
 
-    elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 5);
+    elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 2);
 
     while(elementPresent) {
       //Press to delete schedule
@@ -622,7 +622,7 @@ public class MondrianJNDI{
       ElementHelper.WaitForAlertNotPresent(driver);
       driver.switchTo().defaultContent();
 
-      elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 5);
+      elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 2);
     }
   }
 

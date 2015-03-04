@@ -255,7 +255,7 @@ public class JFreeChartComponent{
    *    1. Zoom on Bar Chart
    *    2. Zoom on Pie Chart
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 120000)
   public void tc4_PreviewChart_NewWindowDisplayed() {
     log.info("tc4_PreviewChart_NewWindowDisplayed");
     String title = "";
