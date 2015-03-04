@@ -258,6 +258,7 @@ public class JFreeChartComponent{
   public void tc4_PreviewChart_NewWindowDisplayed() {
     log.info("tc4_PreviewChart_NewWindowDisplayed");
     String title = "";
+    String attriStyle = "";
 
     // ## Step 1
     Actions acts = new Actions(driver);
@@ -268,8 +269,7 @@ public class JFreeChartComponent{
     assertTrue(title.equals("Top 10 Customers"));
     //Check the bar is visible
     acts.perform();
-    WebElement elementBar = ElementHelper.FindElement(driver, By.xpath("//div[@class='caption-bottom']"));
-    String attriStyle = elementBar.getAttribute("style");
+    attriStyle = ElementHelper.GetAttribute(driver, By.xpath("//div[@class='caption-bottom']"), "style");
     assertFalse(attriStyle.contains("margin: 0px"));
     //Click in Zoom
     acts.perform();
@@ -321,20 +321,22 @@ public class JFreeChartComponent{
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
     //Change to pie chart
+    acts2.perform();
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
     //Zoom the Pie Chart
     Actions acts3 = new Actions(driver);
     acts3.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts3.perform();
     //Check bar is visible
-    elementBar = ElementHelper.FindElement(driver, By.xpath("//div[@class='caption-bottom']"));
-    attriStyle = elementBar.getAttribute("style");
+    attriStyle = ElementHelper.GetAttribute(driver, By.xpath("//div[@class='caption-bottom']"), "style");
     assertFalse(attriStyle.contains("margin: 0px"));
+
     //Zoom
     acts3.perform();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']")).click();
+    ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']"));
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 

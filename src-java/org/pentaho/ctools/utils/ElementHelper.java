@@ -31,7 +31,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -181,37 +180,35 @@ public class ElementHelper{
     log.debug("FindElementInvisible::Enter");
     log.debug("Locator: " + locator.toString());
 
+    WebElement element = null;
+
     try {
       WaitForElementPresence(driver, locator);
-      log.debug("Element is visble");
+      log.debug("Element is presence!");
       List<WebElement> listElements = driver.findElements(locator);
       if(listElements.size() > 0) {
-        WebElement element = listElements.get(0);
-        if(element.isEnabled()) {
+        WebElement elementTmp = listElements.get(0);
+        if(elementTmp.isEnabled()) {
           log.debug("Return element found it");
-          return element;
+          element = elementTmp;
         } else {
-          log.warn("Trying again! Enabled:" + element.isEnabled() + " Locator: " + locator.toString());
-          return FindElement(driver, locator);
+          log.warn("Trying again! Enabled:" + elementTmp.isEnabled());
+          element = FindElementInvisible(driver, locator);
         }
       } else {
-        log.warn("Trying obtain! Locator: " + locator.toString());
-        return null;
+        log.warn("No element found!");
       }
     }
     catch(StaleElementReferenceException s) {
       log.warn("Stale - got one. Locator: " + locator.toString());
-      return FindElement(driver, locator);
-    }
-    catch(ElementNotVisibleException v) {
-      log.warn("NotVisible - got one. Locator: " + locator.toString());
-      return WaitForElementPresenceAndVisible(driver, locator);
+      element = FindElementInvisible(driver, locator);
     }
     catch(TimeoutException te) {
       log.warn("TimeoutException - got one. Locator: " + locator.toString());
-      log.debug("Trying again.");
-      return driver.findElement(locator);
     }
+
+    log.debug("FindElementInvisible::Exit");
+    return element;
   }
 
   /**
@@ -892,8 +889,8 @@ public class ElementHelper{
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-    log.debug("ElementsNotOverlap::Exit");
-    return notIntersected;
+      log.debug("ElementsNotOverlap::Exit");
+      return notIntersected;
   }
 
   /**
@@ -990,7 +987,7 @@ public class ElementHelper{
    */
   public static String GetAttribute(WebDriver driver, By locator, String attributeName) {
     log.debug("GetAttribute::Enter");
-    log.debug("Locator: " + locator.toString());
+
     String attributeValue = "";
     try {
       WebElement element = FindElement(driver, locator);

@@ -28,13 +28,21 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class DirectoryWatcher {
+public class DirectoryWatcher{
+
   //Log instance
   private static Logger log = LogManager.getLogger(DirectoryWatcher.class);
+
+  public static boolean WatchForCreate(final String path) {
+    return WatchForCreate(path, 15);
+  }
 
   /**
    * The method will watch a directory for file creation. If a file was created
@@ -45,47 +53,78 @@ public class DirectoryWatcher {
    * @return true  - file was created in dir
    *         false - otherwise
    */
-  public static boolean WatchForCreate(String path) {
+  public static boolean WatchForCreate(final String path, long timeout) {
     boolean bFileCreated = false;
 
     try {
-      WatchService watcher = FileSystems.getDefault().newWatchService();
-      Path dir = Paths.get(path);
-      dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
+      class RunnableObject implements Runnable{
 
-      while (!bFileCreated) {
-        WatchKey key;
-        try {
-          key = watcher.take();
-        } catch (InterruptedException ex) {
-          log.error(ex.getMessage());
-          break;
+        private boolean isFileCreated;
+
+        public RunnableObject(boolean isFileCreated){
+          this.isFileCreated = isFileCreated;
         }
 
-        for (WatchEvent<?> event : key.pollEvents()) {
-          WatchEvent.Kind<?> kind = event.kind();
+        public boolean getValue() {
+          return this.isFileCreated;
+        }
 
-          if (kind == StandardWatchEventKinds.OVERFLOW) {
-            continue;
+        @Override
+        public void run() {
+          try {
+            WatchService watcher = FileSystems.getDefault().newWatchService();
+            Path dir = Paths.get(path);
+            dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
+
+            while( ! this.isFileCreated) {
+              WatchKey key;
+              try {
+                key = watcher.take();
+              }
+              catch(InterruptedException ex) {
+                log.error(ex.getMessage());
+                break;
+              }
+
+              for(WatchEvent<?> event: key.pollEvents()) {
+                WatchEvent.Kind<?> kind = event.kind();
+
+                if(kind == StandardWatchEventKinds.OVERFLOW) {
+                  continue;
+                }
+
+                @SuppressWarnings("unchecked")
+                WatchEvent<Path> ev = (WatchEvent<Path>) event;
+                Path fileName = ev.context();
+
+                log.info(kind.name() + ": " + fileName);
+                if(kind == StandardWatchEventKinds.ENTRY_CREATE) {
+                  this.isFileCreated = true;
+                  log.info("The file was created: " + fileName);
+                }
+              }
+
+              boolean valid = key.reset();
+              if( ! valid) {
+                break;
+              }
+            }
           }
-
-          @SuppressWarnings("unchecked")
-          WatchEvent<Path> ev = (WatchEvent<Path>) event;
-          Path fileName = ev.context();
-
-          log.info(kind.name() + ": " + fileName);
-          if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-            bFileCreated = true;
-            log.info("The file was created: " + fileName);
+          catch(Exception e) {
+            log.error(e.getMessage());
           }
-        }
-
-        boolean valid = key.reset();
-        if (!valid) {
-          break;
-        }
+        };
       }
-    } catch (Exception e) {
+
+      RunnableObject r = new RunnableObject(bFileCreated);
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.shutdown();
+      bFileCreated = r.getValue();
+
+    }
+    catch(Exception e) {
       log.error(e.getMessage());
     }
 

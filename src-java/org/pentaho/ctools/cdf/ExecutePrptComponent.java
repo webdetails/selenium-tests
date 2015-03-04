@@ -318,7 +318,7 @@ public class ExecutePrptComponent{
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test(timeout = 12000)
+  @Test(timeout = 60000)
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() throws InterruptedException {
     log.debug("tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised");
     driver.switchTo().defaultContent();
