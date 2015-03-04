@@ -46,23 +46,23 @@ import org.pentaho.ctools.security.AccessSystemResources;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   /*LoginPentaho.class,
-  OpenFlashChartComponent.class,
-  LogoutPentaho.class*/
+  CCCV2ShowCase.class, CDE439.class*/
+  //LogoutPentaho.class
   //##### Execution Order #####
   //Start Tests
   LoginPentaho.class,
   //CDF
   SuiteCDF.class,
   //CDE
-  SuiteCDE.class,
+  //SuiteCDE.class,
   //CDA
-  SuiteCDA.class,
+  //SuiteCDA.class,
   //CGG
   SuiteCGG.class,
   //Security
   AccessSystemResources.class,
   //Issues
-  SuiteIssues.class,
+  //SuiteIssues.class,
   //End Tests
   LogoutPentaho.class })
 public class CToolsTestSuite{
@@ -164,7 +164,6 @@ public class CToolsTestSuite{
   @AfterClass
   public static void tearDownClass() {
     log.info("Master tearDown");
-    driver.close();
     driver.quit();
   }
 
