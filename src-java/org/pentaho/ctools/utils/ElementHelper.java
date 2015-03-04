@@ -269,16 +269,26 @@ public class ElementHelper{
     log.debug("WaitForTextPresence::Enter");
     log.debug("Locator: " + locator.toString());
     String textPresent = "";
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
 
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    try {
+      Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
 
-    boolean isTextPresent = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
-    if(isTextPresent == true) {
-      textPresent = textToWait;
+      driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+      boolean isTextPresent = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
+      if(isTextPresent == true) {
+        textPresent = textToWait;
+      }
+
+      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
-
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    catch(StaleElementReferenceException sere) {
+      log.warn("Stale Element Reference Exception");
+      textPresent = WaitForTextPresence(driver, locator, textToWait, timeout);
+    }
+    catch(Exception e) {
+      log.error("Exception");
+    }
 
     log.debug("WaitForTextPresence::Exit");
     return textPresent;
@@ -981,15 +991,17 @@ public class ElementHelper{
   public static String GetAttribute(WebDriver driver, By locator, String attributeName) {
     log.debug("GetAttribute::Enter");
     log.debug("Locator: " + locator.toString());
-
+    String attributeValue = "";
     try {
       WebElement element = FindElement(driver, locator);
-      log.debug("GetAttribute::Exit");
-      return element.getAttribute(attributeName);
+      attributeValue = element.getAttribute(attributeName);
     }
     catch(StaleElementReferenceException e) {
       log.warn("Stale Element Reference Exception");
-      return GetAttribute(driver, locator, attributeName);
+      attributeValue = GetAttribute(driver, locator, attributeName);
     }
+
+    log.debug("GetAttribute::Exit");
+    return attributeValue;
   }
 }
