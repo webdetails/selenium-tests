@@ -200,16 +200,15 @@ public class ElementHelper{
       }
     }
     catch(StaleElementReferenceException s) {
-      log.error("Stale - got one. Locator: " + locator.toString());
+      log.warn("Stale - got one. Locator: " + locator.toString());
       return FindElement(driver, locator);
     }
     catch(ElementNotVisibleException v) {
-      log.error("NotVisible - got one. Locator: " + locator.toString());
+      log.warn("NotVisible - got one. Locator: " + locator.toString());
       return WaitForElementPresenceAndVisible(driver, locator);
     }
     catch(TimeoutException te) {
-      log.error("TimeoutException - got one. Locator: " + locator.toString());
-      log.fatal("Exception", te);
+      log.warn("TimeoutException - got one. Locator: " + locator.toString());
       log.debug("Trying again.");
       return driver.findElement(locator);
     }
@@ -231,11 +230,11 @@ public class ElementHelper{
       text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
     }
     catch(StaleElementReferenceException e) {
-      log.debug("Got stale");
+      log.warn("Stale Element Reference Exception");
       text = FindElementInvisible(driver, locator).getText();
     }
     catch(Exception e) {
-      log.fatal("Exception", e);
+      log.catching(e);
     }
 
     log.debug("GetTextElementInvisible::Exit");
@@ -335,7 +334,7 @@ public class ElementHelper{
       }
     }
     catch(StaleElementReferenceException e) {
-      log.fatal("Exception", e);
+      log.warn("Stale Element Reference Exception");
       Click(driver, locator);
     }
   }
@@ -430,16 +429,20 @@ public class ElementHelper{
 
     }
     catch(TimeoutException te) {
-      log.warn("Timeout exceeded! Looking for: " + locator.toString(), te);
+      log.warn("Webdriver timeout exceeded! Looking for: " + locator.toString());
     }
-    catch(InterruptedException e) {
-      log.fatal("Exception", e);
+    catch(InterruptedException ie) {
+      log.warn("Interrupted Exception");
     }
-    catch(ExecutionException e) {
-      log.fatal("Exception", e);
+    catch(ExecutionException ee) {
+      log.warn("Interrupted Exception");
     }
     catch(java.util.concurrent.TimeoutException cte) {
-      log.warn("Timeout exceeded! Looking for: " + locator.toString(), cte);
+      log.warn("Thread timeout exceeded! Looking for: " + locator.toString());
+    }
+    catch(Exception e) {
+      log.error("Exception");
+      log.catching(e);
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -535,16 +538,20 @@ public class ElementHelper{
       element = r.getValue();
     }
     catch(TimeoutException te) {
-      log.warn("Timeout exceeded! Looking for: " + locator.toString(), te);
+      log.warn("WebDriver timeout exceeded! Looking for: " + locator.toString());
     }
-    catch(InterruptedException e) {
-      log.fatal("Exception", e);
+    catch(InterruptedException ie) {
+      log.warn("Interrupted Exception");
     }
-    catch(ExecutionException e) {
-      log.fatal("Exception", e);
+    catch(ExecutionException ee) {
+      log.warn("Execution Exception");
     }
     catch(java.util.concurrent.TimeoutException cte) {
-      log.warn("Timeout exceeded! Looking for: " + locator.toString(), cte);
+      log.warn("Thread timeout exceeded! Looking for: " + locator.toString());
+    }
+    catch(Exception e) {
+      log.error("Exception");
+      log.catching(e);
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -653,7 +660,7 @@ public class ElementHelper{
     }
     catch(Exception e) {
       log.warn("Something went wrong searching for pr: " + locator.toString());
-      log.fatal("Exception", e);
+      log.catching(e);
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -690,7 +697,7 @@ public class ElementHelper{
     }
     catch(Exception e) {
       log.warn("Something went wrong searching for vi: " + locator.toString());
-      log.fatal("Exception", e);
+      log.catching(e);
     }
 
     //------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
@@ -731,7 +738,7 @@ public class ElementHelper{
         text = text.trim();//remove spaces, newlines,...
       }
       catch(WebDriverException wde) {
-        log.fatal("Exception", wde);
+        log.warn("WebDriver Exception", wde);
         text = element.getText();
       }
     }
@@ -768,7 +775,7 @@ public class ElementHelper{
     }
     catch(Exception e) {
       log.warn("Something went wrong searching for: " + locator.toString());
-      log.fatal("Exception", e);
+      log.catching(e);
     }
 
     //------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
@@ -981,7 +988,7 @@ public class ElementHelper{
       return element.getAttribute(attributeName);
     }
     catch(StaleElementReferenceException e) {
-      log.fatal("Exception", e);
+      log.warn("Stale Element Reference Exception");
       return GetAttribute(driver, locator, attributeName);
     }
   }
