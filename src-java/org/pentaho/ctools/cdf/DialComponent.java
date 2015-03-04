@@ -30,6 +30,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.apache.http.HttpStatus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -53,13 +55,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class DialComponent {
+public class DialComponent{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private static String          baseUrl;
+  //Log instance
+  private static Logger          log                = LogManager.getLogger(DialComponent.class);
 
   @Rule
   public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
@@ -69,6 +74,7 @@ public class DialComponent {
    */
   @BeforeClass
   public static void setUp() {
+    log.info("setUp##" + DialComponent.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     wait = CToolsTestSuite.getWait();
     baseUrl = CToolsTestSuite.getBaseUrl();
@@ -102,6 +108,7 @@ public class DialComponent {
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
+    log.info("tc1_PageContent_DisplayTitle");
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -124,6 +131,7 @@ public class DialComponent {
    */
   @Test(timeout = 60000)
   public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
     // ## Step 1
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
@@ -150,6 +158,7 @@ public class DialComponent {
    */
   @Test(timeout = 60000)
   public void tc3_GenerateGraphic_GraphicGeneratedAndHttp200() {
+    log.info("tc3_GenerateGraphic_GraphicGeneratedAndHttp200");
     // ## Step 1
     WebElement dialElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
     assertNotNull(dialElement);
@@ -169,11 +178,14 @@ public class DialComponent {
 
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
 
-    } catch (Exception ex) {
+    }
+    catch(Exception ex) {
       ex.printStackTrace();
     }
   }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    log.info("tearDown##" + DialComponent.class.getSimpleName());
+  }
 }

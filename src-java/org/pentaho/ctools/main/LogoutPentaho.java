@@ -108,14 +108,14 @@ public class LogoutPentaho {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")));
     wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")));
     assertEquals("Log Out", driver.findElement(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")).getText());
-    driver.findElement(By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td")).click();
-
+    ElementHelper.Click(driver, By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td"));
+    
     //## Step 3
     //Wait for form display (login form)
-    WebElement elForm = ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='login-form-container']/div/h1"));
-    ElementHelper.WaitForElementPresence(driver, By.id("j_username"));
-    ElementHelper.WaitForElementPresence(driver, By.id("j_password"));
-    ElementHelper.WaitForElementPresence(driver, By.cssSelector("button.btn"));
+    WebElement elForm = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='login-form-container']/div/h1"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("j_username"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("j_password"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("button.btn"));
     assertNotNull(elForm);
   }
 

@@ -65,7 +65,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDA106 {
+public class CDA106{
+
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
   // The base url to be append the relative url in test
@@ -159,10 +160,10 @@ public class CDA106 {
     //Get popup id
     WebDriver cdaCacheManager = null;
     Iterator<String> iterWindows = listWindows.iterator();
-    while (iterWindows.hasNext()) {
+    while(iterWindows.hasNext()) {
       String windowHandle = iterWindows.next();
       cdaCacheManager = driver.switchTo().window(windowHandle);
-      if (cdaCacheManager.getTitle().equals("CDA Cache Manager")) {
+      if(cdaCacheManager.getTitle().equals("CDA Cache Manager")) {
         break;
       }
     }
@@ -205,7 +206,7 @@ public class CDA106 {
      */
     String queryLExecNew = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[3]"));
     assertTrue(queryLExec != queryLExecNew);
-    ElementHelper.Click(cdaCacheManager, By.xpath("//img[@title='Remove Query']"));
+    ElementHelper.Click(cdaCacheManager, By.xpath("//a/img[@title='Remove Query']"));
 
     //Wait for pop-up
     FluentWait<WebDriver> wait = new FluentWait<WebDriver>(cdaCacheManager).withTimeout(30, TimeUnit.SECONDS).pollingEvery(1, TimeUnit.SECONDS);

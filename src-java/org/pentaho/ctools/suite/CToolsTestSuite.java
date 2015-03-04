@@ -46,7 +46,7 @@ import org.pentaho.ctools.security.AccessSystemResources;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   /*LoginPentaho.class,
-  JFreeChartComponent.class,
+  OpenFlashChartComponent.class,
   LogoutPentaho.class*/
   //##### Execution Order #####
   //Start Tests
@@ -164,6 +164,7 @@ public class CToolsTestSuite{
   @AfterClass
   public static void tearDownClass() {
     log.info("Master tearDown");
+    driver.close();
     driver.quit();
   }
 

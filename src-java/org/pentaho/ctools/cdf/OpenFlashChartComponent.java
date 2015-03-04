@@ -35,7 +35,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -50,7 +49,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class OpenFlashChartComponent {
+public class OpenFlashChartComponent{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -159,11 +159,11 @@ public class OpenFlashChartComponent {
     log.info("tc3_OpenFlashChart_ChartDisplayed");
 
     assertNotNull(ElementHelper.FindElement(driver, By.cssSelector("object")));
-    WebElement elemEmbed = ElementHelper.FindElement(driver, By.cssSelector("embed"));
-    String attrWidth = elemEmbed.getAttribute("width");
-    String attrHeight = elemEmbed.getAttribute("height");
-    String attrType = elemEmbed.getAttribute("type");
-    String attrSrc = elemEmbed.getAttribute("src");
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("embed"));
+    String attrWidth = ElementHelper.GetAttribute(driver, By.cssSelector("embed"), "width");
+    String attrHeight = ElementHelper.GetAttribute(driver, By.cssSelector("embed"), "height");
+    String attrType = ElementHelper.GetAttribute(driver, By.cssSelector("embed"), "type");
+    String attrSrc = ElementHelper.GetAttribute(driver, By.cssSelector("embed"), "src");
 
     assertEquals("500", attrWidth);
     assertEquals("500", attrHeight);
