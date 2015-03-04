@@ -54,9 +54,9 @@ import org.pentaho.ctools.security.AccessSystemResources;
   //CDF
   SuiteCDF.class,
   //CDE
-  //SuiteCDE.class,
+  SuiteCDE.class,
   //CDA
-  //SuiteCDA.class,
+  SuiteCDA.class,
   //CGG
   SuiteCGG.class,
   //Security
