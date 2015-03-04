@@ -66,8 +66,10 @@ public class ElementHelper{
    */
   public static WebElement FindElement(final WebDriver driver, final By locator) {
     log.debug("FindElement::Enter");
-    log.debug("Locator: " + locator.toString());
-    WebElement element = null;
+    WebElement element = WaitForElementPresenceAndVisible(driver, locator, 30);
+    log.debug("FindElement::Exit");
+    return element;
+    /*WebElement element = null;
     //element = WaitForElementPresenceAndVisible(driver, locator);
     final long timeout = 29;
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -134,6 +136,7 @@ public class ElementHelper{
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     log.debug("FindElement::Exit");
     return element;
+     */
     /*
     try {
       WaitForElementPresenceAndVisible(driver, locator);
@@ -506,7 +509,7 @@ public class ElementHelper{
                 return elem.isDisplayed() == true && elem.isEnabled() == true;
               }
               catch(NoSuchElementException nsee) {
-                return true;
+                return false;
               }
               catch(StaleElementReferenceException sere) {
                 return false;
@@ -521,7 +524,7 @@ public class ElementHelper{
       ExecutorService executor = Executors.newSingleThreadExecutor();
       executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
       executor.shutdown();
-
+      element = r.getValue();
     }
     catch(TimeoutException te) {
       log.warn("Timeout exceeded! Looking for: " + locator.toString(), te);
@@ -864,8 +867,8 @@ public class ElementHelper{
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-    log.debug("ElementsNotOverlap::Exit");
-    return notIntersected;
+      log.debug("ElementsNotOverlap::Exit");
+      return notIntersected;
   }
 
   /**
