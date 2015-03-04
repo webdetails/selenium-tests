@@ -476,7 +476,7 @@ public class ElementHelper{
    * @param timeout
    */
   public static WebElement WaitForElementPresenceAndVisible(final WebDriver driver, final By locator, final Integer timeout) {
-    log.debug("WaitForElementInvisibility::Enter");
+    log.debug("WaitForElementPresenceAndVisible::Enter");
     log.debug("Locator: " + locator.toString());
     WebElement element = null;
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -499,20 +499,28 @@ public class ElementHelper{
         public void run() {
           Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
 
-          //Wait for element invisible
-          wait.until(new Function<WebDriver, Boolean>(){
+          //Wait for element visible
+          this.theElement = wait.until(new Function<WebDriver, WebElement>(){
 
             @Override
-            public Boolean apply(WebDriver d) {
+            public WebElement apply(WebDriver d) {
               try {
                 WebElement elem = d.findElement(locator);
-                return elem.isDisplayed() == true && elem.isEnabled() == true;
+                log.info(elem.isDisplayed());
+                log.info(elem.isEnabled());
+                if(elem.isDisplayed() && elem.isEnabled()) {
+                  return elem;
+                }
+                log.info("not ready");
+                return null;
               }
               catch(NoSuchElementException nsee) {
-                return false;
+                log.info("nosuch");
+                return null;
               }
               catch(StaleElementReferenceException sere) {
-                return false;
+                log.info("stale");
+                return null;
               }
             }
           });
@@ -541,7 +549,7 @@ public class ElementHelper{
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-    log.debug("WaitForElementInvisibility::Exit");
+    log.debug("WaitForElementPresenceAndVisible::Exit");
     return element;
     /*log.debug("WaitForElementPresenceAndVisible::Enter");
     log.debug("Locator: " + locator.toString());
@@ -867,8 +875,8 @@ public class ElementHelper{
       || firstLeft > secondRight
       || firstRight < secondLeft;
 
-      log.debug("ElementsNotOverlap::Exit");
-      return notIntersected;
+    log.debug("ElementsNotOverlap::Exit");
+    return notIntersected;
   }
 
   /**

@@ -52,7 +52,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDE439 {
+public class CDE439{
+
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
   // The base url to be append the relative url in test
@@ -94,6 +95,9 @@ public class CDE439 {
      */
     //Open CGG Component sample
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ADuplicateComponent%3AduplicateComponent.wcdf/generatedContent");
+
+    // NOTE - we have to wait for loading disappear
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='content']/div/div[2]/div"));
     String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='content']/div/div[2]/div"));
