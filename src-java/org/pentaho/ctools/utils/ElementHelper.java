@@ -118,17 +118,17 @@ public class ElementHelper{
     }
     catch(TimeoutException te) {
       log.warn("Timeout exceeded! Looking for: " + locator.toString());
-      log.fatal(te);
+      log.fatal("Exception", te);
     }
     catch(InterruptedException e) {
-      log.fatal(e);
+      log.fatal("Exception", e);
     }
     catch(ExecutionException e) {
-      log.fatal(e);
+      log.fatal("Exception", e);
     }
     catch(java.util.concurrent.TimeoutException cte) {
       log.warn("Timeout exceeded! Looking for: " + locator.toString());
-      log.fatal(cte);
+      log.fatal("Exception", cte);
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -206,7 +206,7 @@ public class ElementHelper{
     }
     catch(TimeoutException te) {
       log.error("TimeoutException - got one. Locator: " + locator.toString());
-      log.fatal(te);
+      log.fatal("Exception", te);
       log.debug("Trying again.");
       return driver.findElement(locator);
     }
@@ -232,7 +232,7 @@ public class ElementHelper{
       text = FindElementInvisible(driver, locator).getText();
     }
     catch(Exception e) {
-      log.fatal(e);
+      log.fatal("Exception", e);
     }
 
     log.debug("GetTextElementInvisible::Exit");
@@ -332,7 +332,7 @@ public class ElementHelper{
       }
     }
     catch(StaleElementReferenceException e) {
-      log.fatal(e);
+      log.fatal("Exception", e);
       Click(driver, locator);
     }
   }
@@ -410,8 +410,11 @@ public class ElementHelper{
                 WebElement elem = d.findElement(locator);
                 return elem.isDisplayed() == false;
               }
-              catch(NoSuchElementException | StaleElementReferenceException sere) {
+              catch(NoSuchElementException nsee) {
                 return true;
+              }
+              catch(StaleElementReferenceException sere) {
+                return false;
               }
             }
           });
@@ -424,18 +427,16 @@ public class ElementHelper{
 
     }
     catch(TimeoutException te) {
-      log.warn("Timeout exceeded! Looking for: " + locator.toString());
-      log.fatal(te);
+      log.warn("Timeout exceeded! Looking for: " + locator.toString(), te);
     }
     catch(InterruptedException e) {
-      log.fatal(e);
+      log.fatal("Exception", e);
     }
     catch(ExecutionException e) {
-      log.fatal(e);
+      log.fatal("Exception", e);
     }
     catch(java.util.concurrent.TimeoutException cte) {
-      log.warn("Timeout exceeded! Looking for: " + locator.toString());
-      log.fatal(cte);
+      log.warn("Timeout exceeded! Looking for: " + locator.toString(), cte);
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -471,8 +472,75 @@ public class ElementHelper{
    * @param locator
    * @param timeout
    */
-  public static WebElement WaitForElementPresenceAndVisible(WebDriver driver, By locator, Integer timeout) {
-    log.debug("WaitForElementPresenceAndVisible::Enter");
+  public static WebElement WaitForElementPresenceAndVisible(final WebDriver driver, final By locator, final Integer timeout) {
+    log.debug("WaitForElementInvisibility::Enter");
+    log.debug("Locator: " + locator.toString());
+    WebElement element = null;
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+    try {
+
+      class RunnableObject implements Runnable{
+
+        private WebElement theElement;
+
+        public RunnableObject(WebElement theElement){
+          this.theElement = theElement;
+        }
+
+        public WebElement getValue() {
+          return this.theElement;
+        }
+
+        @Override
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+
+          //Wait for element invisible
+          wait.until(new Function<WebDriver, Boolean>(){
+
+            @Override
+            public Boolean apply(WebDriver d) {
+              try {
+                WebElement elem = d.findElement(locator);
+                return elem.isDisplayed() == true && elem.isEnabled() == true;
+              }
+              catch(NoSuchElementException nsee) {
+                return true;
+              }
+              catch(StaleElementReferenceException sere) {
+                return false;
+              }
+            }
+          });
+        }
+      };
+
+      RunnableObject r = new RunnableObject(element);
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.shutdown();
+
+    }
+    catch(TimeoutException te) {
+      log.warn("Timeout exceeded! Looking for: " + locator.toString(), te);
+    }
+    catch(InterruptedException e) {
+      log.fatal("Exception", e);
+    }
+    catch(ExecutionException e) {
+      log.fatal("Exception", e);
+    }
+    catch(java.util.concurrent.TimeoutException cte) {
+      log.warn("Timeout exceeded! Looking for: " + locator.toString(), cte);
+    }
+
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+    log.debug("WaitForElementInvisibility::Exit");
+    return element;
+    /*log.debug("WaitForElementPresenceAndVisible::Enter");
     log.debug("Locator: " + locator.toString());
 
     WebElement element = null;
@@ -509,14 +577,21 @@ public class ElementHelper{
         }
       }
     }
+    catch(StaleElementReferenceException sere) {
+      log.warn("Stale Exception", sere);
+      return WaitForElementPresenceAndVisible(driver, locator, timeout);
+    }
+    catch(TimeoutException te) {
+      log.warn("Timeout Exception", te);
+      return element;
+    }
     catch(Exception e) {
-      log.warn("Something went wrong searching for pr: " + locator.toString());
-      e.printStackTrace();
+      log.warn("Something went wrong searching for pr: " + locator.toString(), e);
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     log.debug("WaitForElementPresenceAndVisible::Exit");
-    return element;
+    return element;*/
   }
 
   /**
@@ -567,7 +642,7 @@ public class ElementHelper{
     }
     catch(Exception e) {
       log.warn("Something went wrong searching for pr: " + locator.toString());
-      log.fatal(e);
+      log.fatal("Exception", e);
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -604,7 +679,7 @@ public class ElementHelper{
     }
     catch(Exception e) {
       log.warn("Something went wrong searching for vi: " + locator.toString());
-      log.fatal(e);
+      log.fatal("Exception", e);
     }
 
     //------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
@@ -635,13 +710,19 @@ public class ElementHelper{
 
     WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     if(element != null) {
-      //Cross-browser, see: http://www.quirksmode.org/dom/html/
-      text = ((JavascriptExecutor) driver).executeScript("return (arguments[0].innerText == null)?arguments[0].textContent:arguments[0].innerText", element).toString();
-      //text = text.replaceAll("[^\\x00-\\x7F]", "");//only ascii charachters between 0 to 127
-      text = text.replaceAll("\\xA0", " ");
-      text = text.replaceAll("\\s+", " ");
-      text = text.replaceAll("\\r\\n|\\r|\\n|\\t", "");
-      text = text.trim();//remove spaces, newlines,...
+      try {
+        //Cross-browser, see: http://www.quirksmode.org/dom/html/
+        text = ((JavascriptExecutor) driver).executeScript("return (arguments[0].innerText == null)?arguments[0].textContent:arguments[0].innerText", element).toString();
+        //text = text.replaceAll("[^\\x00-\\x7F]", "");//only ascii charachters between 0 to 127
+        text = text.replaceAll("\\xA0", " ");
+        text = text.replaceAll("\\s+", " ");
+        text = text.replaceAll("\\r\\n|\\r|\\n|\\t", "");
+        text = text.trim();//remove spaces, newlines,...
+      }
+      catch(WebDriverException wde) {
+        log.fatal("Exception", wde);
+        text = element.getText();
+      }
     }
 
     log.debug("WaitForElementPresentGetText::Exit");
@@ -676,7 +757,7 @@ public class ElementHelper{
     }
     catch(Exception e) {
       log.warn("Something went wrong searching for: " + locator.toString());
-      log.fatal(e);
+      log.fatal("Exception", e);
     }
 
     //------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
@@ -889,7 +970,7 @@ public class ElementHelper{
       return element.getAttribute(attributeName);
     }
     catch(StaleElementReferenceException e) {
-      log.fatal(e);
+      log.fatal("Exception", e);
       return GetAttribute(driver, locator, attributeName);
     }
   }

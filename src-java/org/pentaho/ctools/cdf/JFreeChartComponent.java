@@ -194,7 +194,7 @@ public class JFreeChartComponent{
 
     // ## Step 2
     //Click in 'Dragon Souveniers, Ltd.'
-    ElementHelper.FindElement(driver, By.xpath("//map[@id='sampleObjectimageMap']/area[4]")).click();
+    ElementHelper.Click(driver, By.xpath("//map[@id='sampleObjectimageMap']/area[4]"));
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
     String confirmationMsg = alert.getText();
