@@ -175,8 +175,7 @@ public class JFreeChartComponent{
     log.info("tc3_ClickOnChart_AlertDisplayed");
     String title = "";
 
-    WebElement img = ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']"));
-    String firstChart = img.getAttribute("src");
+    String firstChart = ElementHelper.GetAttribute(driver, By.xpath("//img[@id='sampleObjectimage']"), "src");
 
     // ## Step 1
     Actions acts = new Actions(driver);
@@ -189,8 +188,7 @@ public class JFreeChartComponent{
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check if the generated image is different from previews, is not something static
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']")));
-    img = ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']"));
-    String secondChart = img.getAttribute("src");
+    String secondChart = ElementHelper.GetAttribute(driver, By.xpath("//img[@id='sampleObjectimage']"), "src");
     assertNotEquals(firstChart, secondChart);
 
     // ## Step 2
@@ -221,8 +219,7 @@ public class JFreeChartComponent{
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check if the generated image is different from previews, is not something static
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']")));
-    img = ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']"));
-    String thirdChart = img.getAttribute("src");
+    String thirdChart = ElementHelper.GetAttribute(driver, By.xpath("//img[@id='sampleObjectimage']"), "src");
     assertNotEquals(firstChart, thirdChart);
     assertNotEquals(secondChart, thirdChart);
 
@@ -299,8 +296,7 @@ public class JFreeChartComponent{
       }
     }
 
-    WebElement popupImage = ElementHelper.FindElement(popup, By.cssSelector("img"));
-    String attrSrcPopup = popupImage.getAttribute("src");
+    String attrSrcPopup = ElementHelper.GetAttribute(popup, By.cssSelector("img"), "src");
 
     try {
       URL url = new URL(attrSrcPopup);
@@ -361,8 +357,7 @@ public class JFreeChartComponent{
       }
     }
 
-    popupImage = ElementHelper.FindElement(popup, By.cssSelector("img"));
-    attrSrcPopup = popupImage.getAttribute("src");
+    attrSrcPopup = ElementHelper.GetAttribute(popup, By.cssSelector("img"), "src");
 
     try {
       URL url = new URL(attrSrcPopup);
