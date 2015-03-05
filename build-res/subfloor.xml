@@ -417,9 +417,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </copy>
 	  
 	  <!-- Delete sparkl plugins that could may leave after testing -->
-	  <delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest" />
+      <antcall target="delete-sparkl-plugins"/>
+    </target>
+	
+	<!--=======================================================================
+        Will delete plugins sparkls that could be left in ba server by an error.
+        ====================================================================-->
+    <target name="delete-sparkl-plugins"> 
+      <delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest" />
 	  <delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest1" />
     </target>
+
 
     <!--=======================================================================
         Wait for tomcat start-up
