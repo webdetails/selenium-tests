@@ -415,6 +415,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		  <include name="**/*" />
 		</fileset>
       </copy>
+	  
+	  <!-- Delete sparkl plugins that could may leave after testing -->
+	  <delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest" />
+	  <delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest1" />
     </target>
 
     <!--=======================================================================

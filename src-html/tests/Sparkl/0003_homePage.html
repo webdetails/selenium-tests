@@ -22,6 +22,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.pentaho-busy-indicator-message.waitPopup_msg</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
 	<td>Pentaho User Console</td>
 	<td></td>
@@ -48,7 +53,7 @@
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>xpath=//div[@class='busy-indicator-container waitPopup']</td>
+	<td>css=div.pentaho-busy-indicator-message.waitPopup_msg</td>
 	<td></td>
 </tr>
 <tr>
@@ -62,9 +67,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>css=span.name[contains(text(),'Sparkl')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
 	<td>css=span.name[contains(text(),'Sparkl')]</td>
 	<td>Sparkl</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.id[contains(text(),'sparkl')]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -72,8 +87,13 @@
 	<td>sparkl</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(text(),'Create and explore pentaho plugins.')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementPresent</td>
-	<td>css=div.body[contains(text(),'Create and explore pentaho plugins.')]</td>
+	<td>//div[contains(text(),'Create and explore pentaho plugins.')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -97,6 +117,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
 	<td>close</td>
 	<td>title=Pentaho Sparkl</td>
 	<td></td>
@@ -112,11 +137,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.blockUIDefaultImg</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementNotPresent</td>
 	<td>css=div.blockUIDefaultImg</td>
 	<td></td>
@@ -126,6 +146,7 @@
 	<td>//div[@id='refreshObj']/button</td>
 	<td></td>
 </tr>
+<!--Click Refresh-->
 <tr>
 	<td>click</td>
 	<td>//div[@id='refreshObj']/button</td>
@@ -137,10 +158,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementNotPresent</td>
 	<td>css=div.blockUIDefaultImg</td>
 	<td></td>
 </tr>
+<!--Click to Create new plugin and go back-->
 <tr>
 	<td>click</td>
 	<td>css=span.label</td>
@@ -148,13 +175,43 @@
 </tr>
 <tr>
 	<td>waitForLocation</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo</td>
+	<td>http://*pentaho/plugin/sparkl/api/plugininfo</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertLocation</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo</td>
+	<td>http://*pentaho/plugin/sparkl/api/plugininfo</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=span</td>
+	<td>First define your Plugin ID</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span</td>
+	<td>First define your Plugin ID</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=render_newPluginIdForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=render_newPluginIdForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=button[type=&quot;button&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=button[type=&quot;button&quot;]</td>
+	<td>Create Plugin</td>
 </tr>
 <tr>
 	<td>goBack</td>
@@ -162,6 +219,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementNotPresent</td>
 	<td>css=div.blockUIDefaultImg</td>
 	<td></td>
@@ -176,6 +238,7 @@
 	<td>//span[contains(text(),'Create')]</td>
 	<td></td>
 </tr>
+<!--Open plugin sparkl-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@title='sparkl']/../../../div[2]/div/div[2]</td>
@@ -184,16 +247,6 @@
 <tr>
 	<td>click</td>
 	<td>//div[@title='sparkl']/../../../div[2]/div/div[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,6 +259,7 @@
 	<td>css=div.blockUIDefaultImg</td>
 	<td></td>
 </tr>
+<!--Close plugin and go back to sparkl homepage-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.closeButton</td>
@@ -236,6 +290,7 @@
 	<td>css=div.descriptionContainer</td>
 	<td></td>
 </tr>
+<!--Check the delete plugin and confirmation message-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@title='sparkl']/../../../div[2]/div/div[3]</td>
