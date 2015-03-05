@@ -428,7 +428,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	  <delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest1" />
     </target>
 
-
+    <!--=======================================================================
+        Wait for tomcat shut-down
+        ====================================================================-->
+	<target name="waitfor-pentaho-bi-server-stopped">
+	  <waitfor maxwait="5" maxwaitunit="minute" checkevery="500">
+	      <not>
+            <http url="${pentaho.bi.server.url}"/>
+		  </not>
+      </waitfor>
+    </target>
+	
     <!--=======================================================================
         Wait for tomcat start-up
         ====================================================================-->
