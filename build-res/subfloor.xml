@@ -161,6 +161,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               description="The location of Pentaho BI Server" />
     <property name="pentaho.bi.server.service.name" value="tomcat6" description="The service name of BI Server" />
     <property name="pentaho.bi.server.url" value="http://localhost:8080/pentaho" description="The URL to access the Pentaho Server." />
+	<property name="pentaho.bi.server.hostname" value="localhost" description="The hostname where BA server is running." />
+	<property name="pentaho.bi.server.port" value="8080" description="The port where BA server is running." />
 
     <!-- Ivy properties -->
     <property name="ivy.settingsurl"
@@ -432,9 +434,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         Wait for tomcat shut-down
         ====================================================================-->
 	<target name="waitfor-pentaho-bi-server-stopped">
-	  <waitfor maxwait="6" maxwaitunit="minute" checkevery="40" checkunit="second">
+	  <waitfor maxwait="6" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
 	      <not>
-            <http url="${pentaho.bi.server.url}"/>
+            <socket server="${pentaho.bi.server.hostname}" port="${pentaho.bi.server.port}"/>
 		  </not>
       </waitfor>
     </target>
@@ -443,7 +445,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         Wait for tomcat start-up
         ====================================================================-->
     <target name="waitfor-pentaho-bi-server-started"> 
-      <waitfor maxwait="6" maxwaitunit="minute" checkevery="30" checkunit="second">
+      <waitfor maxwait="6" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
         <http url="${pentaho.bi.server.url}"/>
       </waitfor>
     </target>
