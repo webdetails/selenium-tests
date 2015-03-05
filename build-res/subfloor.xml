@@ -432,7 +432,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         Wait for tomcat shut-down
         ====================================================================-->
 	<target name="waitfor-pentaho-bi-server-stopped">
-	  <waitfor maxwait="5" maxwaitunit="minute" checkevery="500">
+	  <waitfor maxwait="6" maxwaitunit="minute" checkevery="40" checkunit="second">
 	      <not>
             <http url="${pentaho.bi.server.url}"/>
 		  </not>
@@ -443,7 +443,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         Wait for tomcat start-up
         ====================================================================-->
     <target name="waitfor-pentaho-bi-server-started"> 
-      <waitfor maxwait="5" maxwaitunit="minute" checkevery="500">
+      <waitfor maxwait="6" maxwaitunit="minute" checkevery="30" checkunit="second">
         <http url="${pentaho.bi.server.url}"/>
       </waitfor>
     </target>
