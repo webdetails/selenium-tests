@@ -31,6 +31,7 @@
 	<td>css=div.blockUIDefaultImg</td>
 	<td></td>
 </tr>
+<!--Open Elements tab-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>xpath=(//button[@name='render_tabMultiButton'])[2]</td>
@@ -131,6 +132,7 @@
 	<td>//table[@id='elementsTableObjTable']/thead/tr/th[3]</td>
 	<td>Permission</td>
 </tr>
+<!--Ordering list by Name-->
 <tr>
 	<td>click</td>
 	<td>//table[@id='elementsTableObjTable']/thead/tr/th</td>
@@ -146,6 +148,7 @@
 	<td>//table[@id='elementsTableObjTable']/tbody/tr/td</td>
 	<td>createelement</td>
 </tr>
+<!--Ordering list by Type-->
 <tr>
 	<td>click</td>
 	<td>//table[@id='elementsTableObjTable']/thead/tr/th[2]</td>
@@ -161,6 +164,7 @@
 	<td>//table[@id='elementsTableObjTable']/tbody/tr/td[2]</td>
 	<td>Dashboard</td>
 </tr>
+<!--Click on Endpoints-->
 <tr>
 	<td>click</td>
 	<td>xpath=(//button[@name='render_viewSelector'])[2]</td>
@@ -181,6 +185,7 @@
 	<td>//table[@id='elementsTableObjTable']/tbody/tr//button[@title='Run Endpoint']</td>
 	<td></td>
 </tr>
+<!--Click in Run Endpoint on the first element in the list-->
 <tr>
 	<td>click</td>
 	<td>//table[@id='elementsTableObjTable']/tbody/tr//button[@title='Run Endpoint']</td>
@@ -211,6 +216,7 @@
 	<td>title=Pentaho Sparkl</td>
 	<td></td>
 </tr>
+<!--Click in Run Endpoint on the fifth element in the list-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//table[@id='elementsTableObjTable']/tbody/tr[5]//button[@title='Run Endpoint']</td>
@@ -246,6 +252,7 @@
 	<td>title=Pentaho Sparkl</td>
 	<td></td>
 </tr>
+<!--Click in Run Endpoint on the tenth element in the list-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//table[@id='elementsTableObjTable']/tbody/tr[10]//button[@title='Run Endpoint']</td>
@@ -279,6 +286,12 @@
 <tr>
 	<td>selectWindow</td>
 	<td>title=Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<!--Click in Dashboards-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//button[@name='render_viewSelector'])[3]</td>
 	<td></td>
 </tr>
 <tr>
@@ -296,6 +309,7 @@
 	<td>//table[@id='elementsTableObjTable']//td[contains(text(),'Kettle')]</td>
 	<td></td>
 </tr>
+<!--View the main dashboard-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//table[@id='elementsTableObjTable']/tbody//td[contains(text(),'main')]/..//button[@title='View Dashboard']</td>
@@ -309,16 +323,21 @@
 <tr>
 	<td>waitForAttributeFromAllWindows</td>
 	<td>location</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/main</td>
+	<td>http://*/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/main</td>
 </tr>
 <tr>
 	<td>assertAttributeFromAllWindows</td>
 	<td>location</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/main</td>
+	<td>http://*/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/main</td>
 </tr>
 <tr>
 	<td>selectWindow</td>
 	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
 	<td></td>
 </tr>
 <tr>
@@ -344,12 +363,12 @@
 <tr>
 	<td>waitForAttributeFromAllWindows</td>
 	<td>location</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo</td>
+	<td>http://*/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo</td>
 </tr>
 <tr>
 	<td>assertAttributeFromAllWindows</td>
 	<td>location</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo</td>
+	<td>http://*/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo</td>
 </tr>
 <tr>
 	<td>selectWindow</td>
@@ -366,6 +385,7 @@
 	<td>Pentaho Sparkl</td>
 	<td></td>
 </tr>
+<!--View the plugininfo dashboard-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//table[@id='elementsTableObjTable']/tbody//td[contains(text(),'variableinfo')]/..//button[@title='View Dashboard']</td>
@@ -379,16 +399,21 @@
 <tr>
 	<td>waitForAttributeFromAllWindows</td>
 	<td>location</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/variableinfo</td>
+	<td>http://*/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/variableinfo</td>
 </tr>
 <tr>
 	<td>assertAttributeFromAllWindows</td>
 	<td>location</td>
-	<td>http://localhost:8080/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/variableinfo</td>
+	<td>http://*/pentaho/plugin/sparkl/api/plugininfo?pluginId=sparkl,http://localhost:8080/pentaho/plugin/sparkl/api/variableinfo</td>
 </tr>
 <tr>
 	<td>selectWindow</td>
 	<td>Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
 	<td></td>
 </tr>
 <tr>
@@ -401,6 +426,7 @@
 	<td>Pentaho Sparkl</td>
 	<td></td>
 </tr>
+<!--Edit the main dashboard-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//table[@id='elementsTableObjTable']/tbody//td[contains(text(),'main')]/..//button[@title='Edit Dashboard']</td>
@@ -461,6 +487,7 @@
 	<td>//tr[3]/td[2]</td>
 	<td>pluginsListFiltersCell</td>
 </tr>
+<!--Preview the dashboard-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>id=previewButton</td>
@@ -479,6 +506,16 @@
 <tr>
 	<td>focus</td>
 	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUIDefaultImg</td>
 	<td></td>
 </tr>
 <tr>
@@ -521,6 +558,7 @@
 	<td>Pentaho Sparkl</td>
 	<td></td>
 </tr>
+<!--Edit the pluginfo dashboard-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//table[@id='elementsTableObjTable']/tbody//td[contains(text(),'plugininfo')]/..//button[@title='Edit Dashboard']</td>
@@ -581,6 +619,7 @@
 	<td>//tr[3]/td[2]</td>
 	<td>projectCSS</td>
 </tr>
+<!--Preview the dashboard-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>id=previewButton</td>
@@ -661,6 +700,7 @@
 	<td>Pentaho Sparkl</td>
 	<td></td>
 </tr>
+<!--Edit the variableInfo dashboard-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//table[@id='elementsTableObjTable']/tbody//td[contains(text(),'variableinfo')]/..//button[@title='Edit Dashboard']</td>
@@ -721,6 +761,7 @@
 	<td>//tr[3]/td[2]</td>
 	<td>rowTitle</td>
 </tr>
+<!--Preview the dashboard-->
 <tr>
 	<td>waitForElementPresent</td>
 	<td>id=previewButton</td>
@@ -844,6 +885,16 @@
 <tr>
 	<td>selectWindow</td>
 	<td>title=Pentaho Sparkl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody//td[contains(text(),'main')]/..//button[@title='View Dashboard']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//table[@id='elementsTableObjTable']/tbody//td[contains(text(),'main')]/..//button[@title='View Dashboard']</td>
 	<td></td>
 </tr>
 </tbody></table>
