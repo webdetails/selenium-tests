@@ -92,13 +92,23 @@
 	<td>123</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -107,13 +117,23 @@
 	<td>___</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -122,13 +142,23 @@
 	<td>abc___</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -137,13 +167,23 @@
 	<td>abc123</td>
 </tr>
 <tr>
-	<td>waitForNotVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last active']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last active']/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -152,28 +192,23 @@
 	<td>atest</td>
 </tr>
 <tr>
-	<td>waitForNotVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertNotVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='createNewPluginButtonObj']/button</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//div[@id='createNewPluginButtonObj']/button</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>css=div#newPluginIdFormObj.newPluginContainer.notEmpty.inUse</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last active']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last active']/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -182,13 +217,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.blockUIDefaultImg</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>css=div.blockUIDefaultImg</td>
+	<td>pause</td>
+	<td>60000</td>
 	<td></td>
 </tr>
 <tr>
@@ -931,31 +961,26 @@
 <tr>
 	<td>type</td>
 	<td>//input[@placeholder='myPluginId']</td>
-	<td>123</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>//input[@placeholder='myPluginId']</td>
 	<td>___</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -964,28 +989,23 @@
 	<td>abc___</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer invalid notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>//input[@placeholder='myPluginId']</td>
-	<td>atest</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>css=div.validityFeedback.inUseLabel</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertVisible</td>
-	<td>css=div.validityFeedback.inUseLabel</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -994,13 +1014,48 @@
 	<td>abc123</td>
 </tr>
 <tr>
-	<td>waitForNotVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
+	<td>assertElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last active']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last active']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@placeholder='myPluginId']</td>
+	<td>atest</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty inUse']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty inUse']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last']/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -1009,39 +1064,24 @@
 	<td>atest1</td>
 </tr>
 <tr>
-	<td>waitForNotVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertNotVisible</td>
-	<td>css=div.validityFeedback.invalidLabel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForNotVisible</td>
-	<td>css=div.validityFeedback.inUseLabel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertNotVisible</td>
-	<td>css=div.validityFeedback.inUseLabel</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='createNewPluginButtonObj']/button</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//div[@id='createNewPluginButtonObj']/button</td>
+	<td>//div[@id='newPluginIdFormObj' and @class='newPluginContainer notEmpty']</td>
 	<td></td>
 </tr>
 <tr>
-  <td>assertElementNotPresent</td>
-  <td>css=div#newPluginIdFormObj.newPluginContainer.notEmpty.inUse</td>
-  <td></td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last active']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='createNewPluginButtonObj' and @class='createNewPluginButton last active']/button</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -1049,13 +1089,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.blockUIDefaultImg</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>css=div.blockUIDefaultImg</td>
+	<td>pause</td>
+	<td>60000</td>
 	<td></td>
 </tr>
 <tr>
