@@ -516,20 +516,15 @@ public class ElementHelper{
             public WebElement apply(WebDriver d) {
               try {
                 WebElement elem = d.findElement(locator);
-                log.info(elem.isDisplayed());
-                log.info(elem.isEnabled());
                 if(elem.isDisplayed() && elem.isEnabled()) {
                   return elem;
                 }
-                log.info("not ready");
                 return null;
               }
               catch(NoSuchElementException nsee) {
-                log.info("nosuch");
                 return null;
               }
               catch(StaleElementReferenceException sere) {
-                log.info("stale");
                 return null;
               }
             }
@@ -746,7 +741,13 @@ public class ElementHelper{
       }
       catch(WebDriverException wde) {
         log.warn("WebDriver Exception", wde);
-        text = element.getText();
+        try {
+          text = element.getText();
+        }
+        catch(StaleElementReferenceException sere) {
+          text = WaitForElementPresentGetText(driver, locator);
+        }
+
       }
     }
 
