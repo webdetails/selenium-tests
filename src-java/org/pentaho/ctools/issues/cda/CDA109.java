@@ -117,14 +117,14 @@ public class CDA109 {
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementFrame);
 
-    ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@class='ace_layer ace_text-layer']"));
-    String ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[2]/span[2]"));
+    ElementHelper.WaitForElementVisibility(frame, By.xpath("//pre[@id='editArea']/div[2]/div[1]/div[3]"));
+    String ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div[1]/div[3]/div[2]/span[2]"));
     assertEquals("CDADescriptor", ln1Text);
-    ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[3]/span[2]"));
+    ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div[1]/div[3]/div[3]/span[2]"));
     assertEquals("DataSources", ln1Text);
-    ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[4]/span[3]"));
+    ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div[1]/div[3]/div[4]/span[3]"));
     assertEquals("Connection", ln1Text);
-    ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='ace_layer ace_text-layer']/div[5]/span[4]"));
+    ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div[1]/div[3]/div[5]/span[4]"));
     assertEquals("Catalog", ln1Text);
   }
 

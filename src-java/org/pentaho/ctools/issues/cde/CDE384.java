@@ -26,7 +26,6 @@ import static org.junit.Assert.assertEquals;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -73,14 +72,6 @@ public class CDE384 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-
-    //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -110,6 +101,8 @@ public class CDE384 {
     /*
      * ## Step 1
      */
+    //Go to New CDE Dashboard
+    driver.get(baseUrl + "api/repos/wcdf/new");
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Save as Template']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Apply Template']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Resource']"));
@@ -134,15 +127,20 @@ public class CDE384 {
      */
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
     ElementHelper.Click(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
+    //ElementHelper.FindElement(driver, By.xpath("//div[@id='popupstates']/div/div"));
+    //ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='popupstates']/div/div"), "Choose existing file, or select a folder to create one:");
+    //String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='popupstates']/div/div"));
+    //text = text.substring(0, text.indexOf(58));
+    //assertEquals(text, "Choose existing file, or select a folder to create one");
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("container_id"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='public/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']"));
     ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
 
     /*
@@ -177,17 +175,22 @@ public class CDE384 {
      */
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']"));
     ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']"));
+    //ElementHelper.FindElement(driver, By.xpath("//div[@id='popupstates']/div/div"));
+    //ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='popupstates']/div/div"), "Choose existing file, or select a folder to create one:");
+    //String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='popupstates']/div/div"));
+    //text = text.substring(0, text.indexOf(58));
+    //assertEquals(text, "Choose existing file, or select a folder to create one");
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("container_id"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='public/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='public/plugin-samples/cda/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/cda/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']"));
-    ElementHelper.Click(driver, By.xpath("//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']"));
     ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
 
     /*

@@ -29,12 +29,15 @@ import org.pentaho.ctools.issues.cda.CDA106;
 import org.pentaho.ctools.issues.cda.CDA108;
 import org.pentaho.ctools.issues.cda.CDA109;
 import org.pentaho.ctools.issues.cda.CDA112;
+import org.pentaho.ctools.issues.cda.CDA121;
 import org.pentaho.ctools.issues.cda.CDA45;
 import org.pentaho.ctools.issues.cda.CDA46;
 import org.pentaho.ctools.issues.cda.CDA55;
 import org.pentaho.ctools.issues.cda.CDA99;
 import org.pentaho.ctools.issues.cde.CDE149;
+import org.pentaho.ctools.issues.cde.CDE269;
 import org.pentaho.ctools.issues.cde.CDE270;
+import org.pentaho.ctools.issues.cde.CDE286;
 import org.pentaho.ctools.issues.cde.CDE342;
 import org.pentaho.ctools.issues.cde.CDE347;
 import org.pentaho.ctools.issues.cde.CDE367;
@@ -78,10 +81,13 @@ import org.pentaho.ctools.issues.cdf.CDF442;
   CDA108.class,
   CDA109.class,
   CDA112.class,
+  CDA121.class,
 
   //Issues CDE
   CDE149.class,
+  CDE269.class,
   CDE270.class,
+  CDE286.class,
   CDE342.class,
   CDE347.class,
   CDE367.class,

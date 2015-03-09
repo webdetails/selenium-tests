@@ -58,7 +58,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDE404{
+public class CDE404 {
 
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
@@ -81,7 +81,7 @@ public class CDE404{
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Able to edit external resource from a dashbord belonging to a plugin with upper-case leter on the name
+   *    Able to edit external resource from a dashbord belonging to a plugin with upper-case letter on the name
    *
    * Description:
    *    The test pretends validate the CDE-404 issue, so user is able to edit a external resource when
@@ -107,10 +107,10 @@ public class CDE404{
     /*
      * ## Step 1
      */
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
     String button1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
     assertEquals("About", button1);
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
     button1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
     assertEquals("Elements", button1);
     ElementHelper.Click(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
@@ -118,13 +118,13 @@ public class CDE404{
     /*
      * ## Step 2
      */
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
     String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
     assertEquals("test", text);
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
     assertEquals("Dashboard", text);
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
     assertEquals("All Users", text);
     WebElement button = ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[4]/div/button[2]"));
@@ -140,28 +140,28 @@ public class CDE404{
     WebDriver popup = null;
     Iterator<String> windowIterator = setWindows.iterator();
 
-    while(windowIterator.hasNext()) {
+    while (windowIterator.hasNext()) {
       String windowHandle = windowIterator.next();
       popup = driver.switchTo().window(windowHandle);
-      if(popup.getTitle().equals("Webdetails CDE")) {
+      if (popup.getTitle().equals("Webdetails CDE")) {
         break;
       }
     }
     log.info("after while");
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
+    ElementHelper.FindElement(driver, By.xpath("//a[@title='Save as Template']"));
+    ElementHelper.FindElement(driver, By.xpath("//a[@title='Apply Template']"));
+    ElementHelper.FindElement(driver, By.xpath("//a[@title='Add Resource']"));
+    ElementHelper.FindElement(driver, By.xpath("//a[@title='Add FreeForm']"));
+    ElementHelper.FindElement(driver, By.xpath("//a[@title='Add Row']"));
     ElementHelper.Click(driver, By.xpath("//a[@title='Add Resource']"));
 
     /*
      * ## Step 4
      */
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//select[@id='resourceType']"));
+    ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceType']"));
     Select select = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceType']")));
     select.selectByValue("Css");
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//select[@id='resourceSource']"));
+    ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceSource']"));
     Select select1 = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceSource']")));
     select1.selectByValue("file");
     ElementHelper.Click(driver, By.xpath("//button[@id='popup_state0_buttonOk']"));
@@ -169,27 +169,32 @@ public class CDE404{
     /*
      * ## Step 5
      */
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
+    ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
     ElementHelper.Click(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("container_id"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='static/']"));
+    //ElementHelper.FindElement(driver, By.xpath("//div[@id='popupstates']/div/div"));
+    //ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='popupstates']/div/div"), "Choose existing file, or select a folder to create one:");
+    //text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='popupstates']/div/div"));
+    //text = text.substring(0, text.indexOf(58));
+    //assertEquals(text, "Choose existing file, or select a folder to create one");
+    ElementHelper.FindElement(driver, By.id("container_id"));
+    ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/']"));
     ElementHelper.Click(driver, By.xpath("//a[@rel='static/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='static/system/']"));
+    ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/']"));
     ElementHelper.Click(driver, By.xpath("//a[@rel='static/system/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='static/system/css/']"));
+    ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/css/']"));
     ElementHelper.Click(driver, By.xpath("//a[@rel='static/system/css/']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@rel='static/system/css/cpk.css']"));
+    ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/css/cpk.css']"));
     ElementHelper.Click(driver, By.xpath("//a[@rel='static/system/css/cpk.css']"));
     ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
 
     /*
      * ## Step 6
      */
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@class='cdfddInput']"));
+    ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfddInput']"));
     ElementHelper.Click(driver, By.xpath("//button[@class='cdfddInput']"));
     WebElement elementframe = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementframe);
-    ElementHelper.WaitForElementVisibility(frame, By.xpath("//span[@id='infoArea']"));
+    ElementHelper.FindElement(frame, By.xpath("//span[@id='infoArea']"));
     String pathText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
     assertEquals("/system/CDE404/static/system/css/cpk.css", pathText);
     String lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div/span"));
@@ -203,7 +208,7 @@ public class CDE404{
     ElementHelper.Click(driver, By.xpath("//div[@class='popupclose']"));
     driver.close();
     driver.switchTo().window(parentHandle);
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
     assertEquals("test", text);
 

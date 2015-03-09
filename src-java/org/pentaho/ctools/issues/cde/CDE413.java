@@ -134,7 +134,8 @@ public class CDE413 {
      * ## Step 4
      */
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='popupstates']//input[@class='StringArrayAddButton']"));
-    ElementHelper.ClickJS(driver, By.xpath("//div[@id='popupstates']//input[@class='StringArrayAddButton']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']//input[@class='StringArrayAddButton']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']//input[@class='StringArrayAddButton']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//span[@class='StringArrayTextLabel']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//input[@id='arg_0']"));
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//input[@value='']"));

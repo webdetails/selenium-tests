@@ -34,7 +34,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -51,10 +50,10 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
  * The script is testing the issue:
- * - http://jira.pentaho.com/browse/CDA-100
+ * - http://jira.pentaho.com/browse/CDA-121
  *
  * and the automation test is described:
- * - http://jira.pentaho.com/browse/QUALITY-965
+ * - http://jira.pentaho.com/browse/QUALITY-1013
  *
  * NOTE
  * To test this script it is required to have CDA plugin installed.
@@ -64,7 +63,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDA100 {
+public class CDA121 {
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
   // The base url to be append the relative url in test
@@ -74,57 +73,56 @@ public class CDA100 {
   // The path for the export file
   private static String     exportFilePath;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDA100.class);
+  private static Logger     log                = LogManager.getLogger(CDA121.class);
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDA100.class.getSimpleName());
+    log.info("setUp##" + CDA121.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     baseUrl = CToolsTestSuite.getBaseUrl();
     downloadDir = CToolsTestSuite.getDownloadDir();
     exportFilePath = downloadDir + "\\cda-export.xls";
   }
 
-  @Before
-  public void setUpTestCase() {
-    //Go to User Console
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA-100/CDA-100.cda");
-
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-    //Wait for buttons: button, Cache This AND Query URL
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='button']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='cachethis']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='queryUrl']"));
-
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Asserting that export to excel follows output options
+   *    Asserting that export to excel of sql query works
    * Description:
-   *    The test pretends validate the CDA-100 issue, asserting that export to excel follows output options.
+   *    The test pretends validate the CDA-121 issue, asserting that export to excel of excel query works.
    *
    * Steps:
-   *    1. Select "Sample query on SampleData - Jdbc" on "dataAccessSelector"
+   *    1. Open sql-jdbc CDA sample and assert elements on page and select "Sql Query on SampleData - Jdbc" on "dataAccessSelector"
    *    2. Wait for and assert elements and text on page
    *    3. Export file and assure it has same md5 as expected
    *
    */
   @Test(timeout = 120000)
-  public void tc01_CdaFileViewer_ExcelOutputIndex() {
-    log.info("tc01_CdaFileViewer_ExcelOutputIndex");
+  public void tc01_CdaFileViewer_ExcelSqlQuery() {
+    log.info("tc01_CdaFileViewer_ExcelSqlQuery");
 
     /*
      * ## Step 1
      */
-    ElementHelper.WaitForElementPresence(driver, By.id("dataAccessSelector"));
+    //Go to sql-jdbc CDA sample
+    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda");
+
+    //wait for invisibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+
+    //Wait for buttons: button, Cache This AND Query URL
+    WebElement element = ElementHelper.FindElement(driver, By.xpath("//button[@id='button']"));
+    assertNotNull(element);
+    element = ElementHelper.FindElement(driver, By.xpath("//button[@id='cachethis']"));
+    assertNotNull(element);
+    element = ElementHelper.FindElement(driver, By.xpath("//button[@id='queryUrl']"));
+    assertNotNull(element);
+    element = ElementHelper.FindElement(driver, By.id("dataAccessSelector"));
+    assertNotNull(element);
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Sql Query on SampleData - Jdbc");
 
@@ -141,8 +139,8 @@ public class CDA100 {
     //Check text on table
     String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
     String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
-    assertEquals("S10_1678", columnOneRowOne);
-    assertEquals("10107", columnTwoRowOne);
+    assertEquals("Shipped", columnOneRowOne);
+    assertEquals("2003", columnTwoRowOne);
 
     /*
      * ## Step 3
@@ -175,7 +173,7 @@ public class CDA100 {
 
       //Check if the file downloaded is the expected
       String md5 = DigestUtils.md5Hex(Files.readAllBytes(exportFile.toPath()));
-      assertEquals(md5, "c185607111840543e3cf33b86b4174bc");
+      assertEquals(md5, "fcdeddd5adfd9ae3e0cf34acc1633177");
 
       //The delete file
       DeleteFile();
@@ -198,7 +196,7 @@ public class CDA100 {
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDA100.class.getSimpleName());
+    log.info("tearDown##" + CDA121.class.getSimpleName());
     //In case something went wrong we delete the file
     DeleteFile();
   }

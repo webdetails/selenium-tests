@@ -246,11 +246,11 @@ public class CDA99 {
       assertEquals(false, selectNotExist);
     } catch (AssertionError e) {
       log.info(e.getMessage());
-      try {
+      /*try {
         Thread.sleep(100000);
       } catch (Exception e2) {
         e2.getMessage();
-      }
+      }*/
     }
   }
 

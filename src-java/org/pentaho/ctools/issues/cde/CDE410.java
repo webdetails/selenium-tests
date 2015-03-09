@@ -57,7 +57,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDE410{
+public class CDE410 {
 
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
@@ -122,8 +122,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(40);
       robot.keyRelease(40);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]")).getAttribute("class");
@@ -138,8 +137,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_UP);
       robot.keyPress(KeyEvent.VK_UP);
       robot.keyRelease(KeyEvent.VK_UP);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr")).getAttribute("class");
@@ -161,8 +159,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_DOWN);
       robot.keyPress(KeyEvent.VK_RIGHT);
       robot.keyRelease(KeyEvent.VK_RIGHT);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]"));
@@ -177,8 +174,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_DOWN);
       robot.keyPress(KeyEvent.VK_UP);
       robot.keyRelease(KeyEvent.VK_UP);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]")).getAttribute("class");
@@ -192,8 +188,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_TAB);
       robot.keyRelease(KeyEvent.VK_TAB);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr")).getAttribute("class");
@@ -212,6 +207,9 @@ public class CDE410{
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Span Size"
+      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]")).getAttribute("class");
+      assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
       robot.keyPress(KeyEvent.VK_1);
@@ -229,6 +227,9 @@ public class CDE410{
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Right Border"
+      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[7]")).getAttribute("class");
+      assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
       robot.keyPress(KeyEvent.VK_DOWN);
@@ -241,8 +242,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_ENTER);
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
 
@@ -259,8 +259,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_TAB);
       robot.keyRelease(KeyEvent.VK_TAB);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[7]")).getAttribute("class");
@@ -273,8 +272,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_UP);
       robot.keyPress(KeyEvent.VK_LEFT);
       robot.keyRelease(KeyEvent.VK_LEFT);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]"));
@@ -295,8 +293,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(40);
       robot.keyRelease(40);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[3]")).getAttribute("class");
@@ -311,8 +308,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_UP);
       robot.keyPress(KeyEvent.VK_RIGHT);
       robot.keyRelease(KeyEvent.VK_RIGHT);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]"));
@@ -322,8 +318,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]")).getAttribute("class");
@@ -334,8 +329,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_TAB);
       robot.keyRelease(KeyEvent.VK_TAB);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr")).getAttribute("class");
@@ -354,6 +348,9 @@ public class CDE410{
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Title"
+      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]")).getAttribute("class");
+      assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
       robot.keyPress(KeyEvent.VK_1);
@@ -375,6 +372,9 @@ public class CDE410{
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "V1 - Bar line"
+      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[9]")).getAttribute("class");
+      assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
       robot.keyPress(KeyEvent.VK_DOWN);
@@ -387,8 +387,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_ENTER);
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
 
@@ -405,8 +404,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_TAB);
       robot.keyRelease(KeyEvent.VK_TAB);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[9]")).getAttribute("class");
@@ -419,8 +417,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_UP);
       robot.keyPress(KeyEvent.VK_LEFT);
       robot.keyRelease(KeyEvent.VK_LEFT);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]"));
@@ -438,8 +435,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(40);
       robot.keyRelease(40);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[3]")).getAttribute("class");
@@ -454,8 +450,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_UP);
       robot.keyPress(KeyEvent.VK_RIGHT);
       robot.keyRelease(KeyEvent.VK_RIGHT);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]"));
@@ -465,8 +460,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]")).getAttribute("class");
@@ -477,8 +471,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_TAB);
       robot.keyRelease(KeyEvent.VK_TAB);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr")).getAttribute("class");
@@ -497,6 +490,9 @@ public class CDE410{
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Access Level"
+      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[2]")).getAttribute("class");
+      assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
       robot.keyPress(KeyEvent.VK_1);
@@ -526,6 +522,9 @@ public class CDE410{
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Cache"
+      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[13]")).getAttribute("class");
+      assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
       robot.keyPress(KeyEvent.VK_DOWN);
@@ -538,8 +537,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_ENTER);
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
 
@@ -556,8 +554,7 @@ public class CDE410{
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_TAB);
       robot.keyRelease(KeyEvent.VK_TAB);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[13]")).getAttribute("class");
@@ -570,8 +567,7 @@ public class CDE410{
       robot.keyRelease(KeyEvent.VK_UP);
       robot.keyPress(KeyEvent.VK_LEFT);
       robot.keyRelease(KeyEvent.VK_LEFT);
-    }
-    catch(AWTException e) {
+    } catch (AWTException e) {
       e.printStackTrace();
     }
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]"));
