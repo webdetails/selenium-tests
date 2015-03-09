@@ -51,6 +51,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
+import org.pentaho.ctools.utils.ActionsHelper;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
@@ -177,10 +178,8 @@ public class JFreeChartComponent{
 
     String firstChart = ElementHelper.GetAttribute(driver, By.xpath("//img[@id='sampleObjectimage']"), "src");
 
-    // ## Step 1
-    Actions acts = new Actions(driver);
-    acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
-    acts.perform();
+    ActionsHelper actsHelper = new ActionsHelper(driver);
+    actsHelper.MouseOver(By.xpath("//div[contains(text(),'Details')]"));
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
