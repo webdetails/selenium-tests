@@ -26,13 +26,13 @@ import static org.junit.Assert.assertEquals;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -54,7 +54,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDE402{
+public class CDE402 {
 
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
@@ -72,22 +72,6 @@ public class CDE402{
     log.info("setUp##" + CDE402.class.getSimpleName());
     driver = CToolsTestSuite.getDriver();
     baseUrl = CToolsTestSuite.getBaseUrl();
-  }
-
-  @Before
-  public void setUpTestCase() {
-    //Go to User Console
-    driver.get(baseUrl + "Home");
-
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//iframe[@id='home.perspective']"));
-
-    //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    ElementHelper.WaitForElementVisibility(driver, By.id("filemenu"));
-    ElementHelper.WaitForElementVisibility(driver, By.id("viewmenu"));
-    ElementHelper.WaitForElementVisibility(driver, By.id("toolsmenu"));
-    ElementHelper.WaitForElementVisibility(driver, By.id("helpmenu"));
   }
 
   /**
@@ -115,6 +99,19 @@ public class CDE402{
     /*
      * ## Step 1
      */
+    //Go to User Console
+    driver.get(baseUrl + "Home");
+
+    //wait for invisibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
+
+    //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("filemenu"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("toolsmenu"));
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("helpmenu"));
+
     //focus iframe
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementFrame);
@@ -182,6 +179,12 @@ public class CDE402{
      * ## Step 5
      */
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatemessage']"));
+    WebElement elem = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("popupTemplate"));
+    Dimension size = elem.getSize();
+    int height = size.getHeight();
+    assertEquals(height, 183);
+    int width = size.getWidth();
+    assertEquals(width, 743);
     String warningText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popupTemplatemessage']"));
     assertEquals("Are you sure you want to load the template?WARNING: Dashboard Layout will be overwritten!", warningText);
     ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
