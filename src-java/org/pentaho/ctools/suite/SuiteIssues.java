@@ -58,11 +58,12 @@ import org.pentaho.ctools.issues.cde.CDE410;
 import org.pentaho.ctools.issues.cde.CDE412;
 import org.pentaho.ctools.issues.cde.CDE413;
 import org.pentaho.ctools.issues.cde.CDE417;
-import org.pentaho.ctools.issues.cde.CDE424;
 import org.pentaho.ctools.issues.cde.CDE425;
 import org.pentaho.ctools.issues.cde.CDE432;
 import org.pentaho.ctools.issues.cde.CDE438;
 import org.pentaho.ctools.issues.cde.CDE439;
+import org.pentaho.ctools.issues.cde.CDE446;
+import org.pentaho.ctools.issues.cde.CDE452;
 import org.pentaho.ctools.issues.cdf.CDF379;
 import org.pentaho.ctools.issues.cdf.CDF406;
 import org.pentaho.ctools.issues.cdf.CDF424;
@@ -110,11 +111,12 @@ import org.pentaho.ctools.issues.cdf.CDF442;
   CDE412.class,
   CDE413.class,
   CDE417.class,
-  CDE424.class,
   CDE425.class,
   CDE432.class,
   CDE438.class,
   CDE439.class,
+  CDE446.class,
+  CDE452.class,
 
   //Issues CDF
   CDF379.class,
