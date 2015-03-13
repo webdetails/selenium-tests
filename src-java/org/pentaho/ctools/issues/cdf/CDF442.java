@@ -21,8 +21,6 @@
  ******************************************************************************/
 package org.pentaho.ctools.issues.cdf;
 
-import static org.junit.Assert.assertTrue;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
@@ -98,7 +96,6 @@ public class CDF442 {
 
     //assert Elements loaded
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("col1protovis"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.id("cdfErrorDiv")));
 
   }
 

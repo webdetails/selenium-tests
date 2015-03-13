@@ -41,7 +41,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  * - http://jira.pentaho.com/browse/CDF-379
  *
  * and the automation test is described:
- * - http://jira.pentaho.com/browse/QUALITY-9389
+ * - http://jira.pentaho.com/browse/QUALITY-989
  *
  * NOTE
  * To test this script it is required to have CDF plugin installed.

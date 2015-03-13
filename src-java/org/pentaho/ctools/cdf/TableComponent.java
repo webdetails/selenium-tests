@@ -23,7 +23,6 @@
 package org.pentaho.ctools.cdf;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -58,7 +57,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TableComponent{
+public class TableComponent {
 
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
@@ -492,7 +491,7 @@ public class TableComponent{
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_next")).isEnabled());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")).isEnabled());
     assertTrue(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]")).isDisplayed());
-    assertFalse(ElementHelper.IsElementNotPresent(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2]"), 2));
+    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[2]"), 2));
     assertEquals("Showing 1 to 1 of 1 entries (filtered from 50 total entries)", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
     assertEquals("Euro+ Shopping Channel", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
     assertEquals("912,294", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td[2]")));
@@ -504,7 +503,7 @@ public class TableComponent{
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_previous")).isEnabled());
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_next")).isDisplayed());
     assertTrue(ElementHelper.FindElement(driver, By.id("sampleObjectTable_next")).isEnabled());
-    assertFalse(ElementHelper.IsElementNotPresent(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]"), 2));
+    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@id='sampleObjectTable_paginate']/span/a[1]"), 2));
     assertEquals("Showing 0 to 0 of 0 entries (filtered from 50 total entries)", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObjectTable_info']")));
     assertEquals("No matching records found", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='sampleObjectTable']/tbody/tr/td")));
   }

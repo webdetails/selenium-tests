@@ -53,7 +53,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ExecutePrptComponent{
+public class ExecutePrptComponent {
 
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
@@ -195,8 +195,7 @@ public class ExecutePrptComponent{
       connection.connect();
 
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    }
-    catch(Exception ex) {
+    } catch (Exception ex) {
       log.error(ex.getMessage());
     }
   }
@@ -225,7 +224,7 @@ public class ExecutePrptComponent{
     assertNotNull(ElementHelper.FindElement(driver, By.id("reportControlPanel")));
     ElementHelper.FindElement(driver, By.xpath("//span[@id='toolbar-parameterToggle']/span")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.id("reportControlPanel"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.id("reportControlPanel"), 2));
+    assertTrue(!ElementHelper.WaitForElementNotPresent(driver, By.id("reportControlPanel"), 2));
 
     // ## Step 2
     ElementHelper.FindElement(driver, By.xpath("//span[@id='toolbar-parameterToggle']/span")).click();

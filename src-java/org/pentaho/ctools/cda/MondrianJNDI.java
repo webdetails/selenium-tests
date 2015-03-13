@@ -65,7 +65,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MondrianJNDI{
+public class MondrianJNDI {
 
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
@@ -413,8 +413,7 @@ public class MondrianJNDI{
       assertTrue(new File(downloadDir + "\\cda-export.xls").exists());
 
       new File(downloadDir + "\\cda-export.xls").delete();
-    }
-    catch(Exception e) {
+    } catch (Exception e) {
       log.error(e.getMessage());
     }
   }
@@ -533,10 +532,10 @@ public class MondrianJNDI{
     //Get popup id
     WebDriver cdaCacheManager = null;
     Iterator<String> iterWindows = listWindows.iterator();
-    while(iterWindows.hasNext()) {
+    while (iterWindows.hasNext()) {
       String windowHandle = iterWindows.next();
       cdaCacheManager = driver.switchTo().window(windowHandle);
-      if(cdaCacheManager.getTitle().equals("CDA Cache Manager")) {
+      if (cdaCacheManager.getTitle().equals("CDA Cache Manager")) {
         break;
       }
     }
@@ -574,12 +573,11 @@ public class MondrianJNDI{
       assertEquals("0 0 21 * * ? *", queryCron);
       assertEquals("-1", queryTime);
       assertEquals("Success", queryStatus);
-    }
-    catch(AssertionError ae) {
+    } catch (AssertionError ae) {
       log.error(ae.getMessage());
 
       //Remove schedule
-      this.removeFirstSchedule();
+      removeFirstSchedule();
 
       //Need guarantee we close everything
       cdaCacheManager.close();
@@ -592,7 +590,7 @@ public class MondrianJNDI{
     /*
      * ## Step 5
      */
-    this.removeFirstSchedule();
+    removeFirstSchedule();
 
     cdaCacheManager.close();
     driver.switchTo().window(parentWindowHandle);
@@ -605,9 +603,9 @@ public class MondrianJNDI{
   public void removeFirstSchedule() {
     boolean elementPresent = false;
 
-    elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 2);
+    elementPresent = ElementHelper.WaitForElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 2);
 
-    while(elementPresent) {
+    while (!elementPresent) {
       //Press to delete schedule
       ElementHelper.FindElement(driver, By.cssSelector("img.deleteIcon.button")).click();
 
@@ -622,7 +620,7 @@ public class MondrianJNDI{
       ElementHelper.WaitForAlertNotPresent(driver);
       driver.switchTo().defaultContent();
 
-      elementPresent = ElementHelper.IsElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 2);
+      elementPresent = ElementHelper.WaitForElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 2);
     }
   }
 

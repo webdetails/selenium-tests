@@ -985,4 +985,88 @@ public class ElementHelper {
     log.debug("GetAttribute::Exit");
     return attributeValue;
   }
+
+  /**
+   * This method pretends to assert the element is not present and return a boolean = true if it isn't.
+   *
+   * @param driver
+   * @param locator
+   * @param timeout
+   */
+  public static Boolean WaitForElementNotPresent(final WebDriver driver, final By locator, final Integer timeout) {
+    log.debug("WaitForElementNotPresent::Enter");
+    Boolean NotPresent = false;
+    log.debug("Locator: " + locator.toString());
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+    try {
+
+      class RunnableObject implements Runnable {
+
+        private Boolean NotPresent;
+
+        public RunnableObject(Boolean NotPresent) {
+          this.NotPresent = NotPresent;
+        }
+
+        public Boolean getValue() {
+          return NotPresent;
+        }
+
+        @Override
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+
+          //Wait for element visible
+          NotPresent = wait.until(new Function<WebDriver, Boolean>() {
+
+            @Override
+            public Boolean apply(WebDriver d) {
+              try {
+                List<WebElement> listElem = d.findElements(locator);
+                if (listElem.size() == 0) {
+                  return true;
+                }
+                return false;
+              }
+
+              catch (StaleElementReferenceException sere) {
+                return true;
+              }
+            }
+          });
+        }
+      };
+
+      RunnableObject r = new RunnableObject(NotPresent);
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.shutdown();
+      NotPresent = r.getValue();
+    } catch (TimeoutException te) {
+      log.warn("WebDriver timeout exceeded! Looking for: " + locator.toString());
+    } catch (InterruptedException ie) {
+      log.warn("Interrupted Exception");
+    } catch (ExecutionException ee) {
+      log.warn("Execution Exception");
+    } catch (java.util.concurrent.TimeoutException cte) {
+      log.warn("Thread timeout exceeded! Looking for: " + locator.toString());
+    } catch (Exception e) {
+      log.error("Exception");
+      log.catching(e);
+    }
+
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+    log.debug("WaitForElementNotPresent::Exit");
+    return NotPresent;
+  }
+
+  public static Boolean WaitForElementNotPresent(final WebDriver driver, final By locator) {
+    log.debug("WaitForElementNotPresent::Enter");
+    boolean result = WaitForElementNotPresent(driver, locator, 30);
+    log.debug("WaitForElementNotPresent::Exit");
+    return result;
+  }
 }

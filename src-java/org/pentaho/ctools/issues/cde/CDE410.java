@@ -22,7 +22,6 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -149,8 +148,7 @@ public class CDE410 {
     //Assert columns aren't visible, go to row and expand it and then assert columns are visible
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]"));
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[14]"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]"), 1));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[14]"), 1));
+
     try {
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_DOWN);
@@ -277,8 +275,6 @@ public class CDE410 {
     }
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]"));
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[14]"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]")));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[14]")));
 
     /*
      * ## Step 5
@@ -301,7 +297,7 @@ public class CDE410 {
 
     //Assert Charts aren't visible, go to row and expand it and then assert columns are visible
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]"), 1));
+
     try {
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_UP);
@@ -421,7 +417,6 @@ public class CDE410 {
       e.printStackTrace();
     }
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]"), 1));
 
     /*
      * ## Step 6
@@ -443,7 +438,7 @@ public class CDE410 {
 
     //Assert Datasource aren't visible, go to Datasource group and expand it and then assert Datasource is visible
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]"), 1));
+
     try {
       robot = new Robot();
       robot.keyPress(KeyEvent.VK_UP);
@@ -571,7 +566,6 @@ public class CDE410 {
       e.printStackTrace();
     }
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]"), 1));
 
   }
 

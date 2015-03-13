@@ -22,8 +22,8 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -222,8 +222,8 @@ public class CDE417 {
     assertEquals("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", text);
     assertEquals(200, HttpUtils.getResponseCode("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", "admin", "password"));
     ElementHelper.Click(driver, By.id("fancybox-close"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//div[@class='exportElement']")));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[1]")));
+    assertFalse(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@class='exportElement']")));
+    assertFalse(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[1]")));
 
     /*
      * ## Step 6
@@ -249,8 +249,8 @@ public class CDE417 {
     assertEquals("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=svg&paramwidth=350&paramheight=200", text);
     assertEquals(200, HttpUtils.getResponseCode("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", "admin", "password"));
     ElementHelper.Click(driver, By.id("fancybox-close"));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//div[@class='exportElement']")));
-    assertTrue(ElementHelper.IsElementNotPresent(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[1]")));
+    assertFalse(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@class='exportElement']")));
+    assertFalse(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[1]")));
 
   }
 
