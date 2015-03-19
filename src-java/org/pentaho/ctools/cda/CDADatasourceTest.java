@@ -49,7 +49,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDADatasourceTest{
+public class CDADatasourceTest {
 
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
@@ -146,18 +146,22 @@ public class CDADatasourceTest{
     String accessMethod11 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td"));
     String sample11 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td[3]/a"));
     WebElement element11 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[12]/td[4]/img[@src='resources/ok.png']"));
-    //Xpath
+    //scripting (json object)
     String accessMethod12 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td"));
     String sample12 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td[3]/a"));
     WebElement element12 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[13]/td[4]/img[@src='resources/ok.png']"));
-    //Compound join
+    //Xpath
     String accessMethod13 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td"));
     String sample13 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td[3]/a"));
     WebElement element13 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[14]/td[4]/img[@src='resources/ok.png']"));
-    //Compound Union
+    //Compound join
     String accessMethod14 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td"));
     String sample14 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td[3]/a"));
     WebElement element14 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[15]/td[4]/img[@src='resources/ok.png']"));
+    //Compound Union
+    String accessMethod15 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[16]/td"));
+    String sample15 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='testTable']/tbody/tr[16]/td[3]/a"));
+    WebElement element15 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='testTable']/tbody/tr[16]/td[4]/img[@src='resources/ok.png']"));
 
     assertEquals("sql.jdbc", accessMethod1);
     assertEquals("cdafiles/sql-jdbc.cda", sample1);
@@ -192,15 +196,18 @@ public class CDADatasourceTest{
     assertEquals("scripting", accessMethod11);
     assertEquals("cdafiles/scripting.cda", sample11);
     assertNotNull(element11);
-    assertEquals("xpath", accessMethod12);
-    assertEquals("cdafiles/xpath.cda", sample12);
+    assertEquals("scripting (json object)", accessMethod12);
+    assertEquals("cdafiles/json-scripting.cda", sample12);
     assertNotNull(element12);
-    assertEquals("Compound join", accessMethod13);
-    assertEquals("cdafiles/compoundJoin.cda", sample13);
+    assertEquals("xpath", accessMethod13);
+    assertEquals("cdafiles/xpath.cda", sample13);
     assertNotNull(element13);
-    assertEquals("Compound Union", accessMethod14);
-    assertEquals("cdafiles/compoundUnion.cda", sample14);
+    assertEquals("Compound join", accessMethod14);
+    assertEquals("cdafiles/compoundJoin.cda", sample14);
     assertNotNull(element14);
+    assertEquals("Compound Union", accessMethod15);
+    assertEquals("cdafiles/compoundUnion.cda", sample15);
+    assertNotNull(element15);
   }
 
   @AfterClass
