@@ -57,7 +57,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MapComponentReference {
+public class MapComponentReference{
+
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -501,7 +502,7 @@ public class MapComponentReference {
    *    1. Check the data exist
    *    2. Chick in a shape country
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 90000)
   public void tc6_MapWithShapes_ShapesAreClickable() {
     log.info("tc6_MapWithShapes_ShapesAreClickable");
 
@@ -519,10 +520,18 @@ public class MapComponentReference {
     assertNotNull(shape2);
     assertNotNull(shape3);
     assertNotNull(shape4);
-    assertEquals("rgba(255,8,0,255)", shape1.getAttribute("fill"));
-    assertEquals("rgba(183,212,0,255)", shape2.getAttribute("fill"));
-    assertEquals("rgba(167,202,0,255)", shape3.getAttribute("fill"));
-    assertEquals("rgba(167,202,0,255)", shape4.getAttribute("fill"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]"), "fill", "rgba(255,8,0,255)", 10);
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]"), "fill", "rgba(183,212,0,255)", 15);
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]"), "fill", "rgba(167,202,0,255)", 15);
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]"), "fill", "rgba(167,202,0,255)", 15);
+    String attrFillShape1 = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]"), "fill");
+    String attrFillShape2 = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]"), "fill");
+    String attrFillShape3 = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]"), "fill");
+    String attrFillShape4 = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]"), "fill");
+    assertEquals("rgba(255,8,0,255)", attrFillShape1);
+    assertEquals("rgba(183,212,0,255)", attrFillShape2);
+    assertEquals("rgba(167,202,0,255)", attrFillShape3);
+    assertEquals("rgba(167,202,0,255)", attrFillShape4);
 
     /*
      * ## Step 2
