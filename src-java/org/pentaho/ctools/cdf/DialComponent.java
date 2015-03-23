@@ -160,12 +160,12 @@ public class DialComponent{
   public void tc3_GenerateGraphic_GraphicGeneratedAndHttp200() {
     log.info("tc3_GenerateGraphic_GraphicGeneratedAndHttp200");
     // ## Step 1
-    WebElement dialElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
+    WebElement dialElement = ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("img"));
     assertNotNull(dialElement);
 
-    String attrSrc = dialElement.getAttribute("src");
-    String attrWidth = dialElement.getAttribute("width");
-    String attrHeight = dialElement.getAttribute("height");
+    String attrSrc = ElementHelper.GetAttribute(driver, By.cssSelector("img"), "src");
+    String attrWidth = ElementHelper.GetAttribute(driver, By.cssSelector("img"), "width");
+    String attrHeight = ElementHelper.GetAttribute(driver, By.cssSelector("img"), "height");
     assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=tmp_chart_admin-"));
     assertEquals(attrWidth, "400");
     assertEquals(attrHeight, "200");
