@@ -115,16 +115,16 @@ public class CDA121 {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = ElementHelper.FindElement(driver, By.xpath("//button[@id='button']"));
+    WebElement element = ElementHelper.FindElement(driver, By.id("dataAccessSelector"));
+    assertNotNull(element);
+    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
+    select.selectByVisibleText("Sql Query on SampleData - Jdbc");
+    element = ElementHelper.FindElement(driver, By.xpath("//button[@id='button']"));
     assertNotNull(element);
     element = ElementHelper.FindElement(driver, By.xpath("//button[@id='cachethis']"));
     assertNotNull(element);
     element = ElementHelper.FindElement(driver, By.xpath("//button[@id='queryUrl']"));
     assertNotNull(element);
-    element = ElementHelper.FindElement(driver, By.id("dataAccessSelector"));
-    assertNotNull(element);
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
-    select.selectByVisibleText("Sql Query on SampleData - Jdbc");
 
     /*
      * ## Step 2

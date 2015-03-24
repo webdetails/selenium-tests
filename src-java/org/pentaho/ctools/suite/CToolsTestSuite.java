@@ -62,10 +62,10 @@ import org.pentaho.ctools.security.AccessSystemResources;
   //Security
   AccessSystemResources.class,
   //Issues
-  //SuiteIssues.class,
+  SuiteIssues.class,
   //End Tests
   LogoutPentaho.class })
-public class CToolsTestSuite{
+public class CToolsTestSuite {
 
   /// Instance of the driver (browser emulator)
   private static WebDriver       driver;

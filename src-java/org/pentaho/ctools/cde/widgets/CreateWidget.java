@@ -1,5 +1,9 @@
 package org.pentaho.ctools.cde.widgets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,22 +15,20 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.cde.widgets.utils.WidgetUtils;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 
-import static org.junit.Assert.*;
-
 /**
  * NOTE - The test was created regarding issue CDF-318
  */
 public class CreateWidget {
   // Instance of the driver (browser emulator)
-  private WebDriver driver;
+  private WebDriver       driver;
   // Instance to be used on wait commands
   private Wait<WebDriver> wait;
   // The base url to be append the relative url in test
-  private String baseUrl;
+  private String          baseUrl;
   // The name for the widget to be created
-  private String widgetName = "dummyCreateWidget";
+  private String          widgetName = "dummyCreateWidget";
   // The name for the parameter to be added
-  private String paramName = "paramCreateWidget";
+  private String          paramName  = "paramCreateWidget";
 
   @Before
   public void setUp() throws Exception {
@@ -38,10 +40,10 @@ public class CreateWidget {
   @Test(timeout = 60000)
   public void testCreateWidget() throws Exception {
     //Step 0 - Delete the widget
-    WidgetUtils.RemoveWidgetByName(driver, wait, baseUrl, widgetName);
+    WidgetUtils.RemoveWidgetByName(driver, widgetName);
 
     //Create widget with specific parameter
-    driver = WidgetUtils.CreateWidgetWithParameter(driver, wait, baseUrl, widgetName, paramName);
+    driver = WidgetUtils.CreateWidgetWithParameter(driver, widgetName, paramName);
   }
 
   @Test(timeout = 60000)
@@ -74,7 +76,6 @@ public class CreateWidget {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonCancel']")));
     driver.findElement(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonCancel']")).click();
 
-
     //Step 4 - Click on Component Panel and check if the widget is listed
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='componentsPanelButton']")));
     driver.findElement(By.xpath("//div[@class='componentsPanelButton']")).click();
@@ -87,19 +88,18 @@ public class CreateWidget {
     assertNotNull(theWidgetCreated);
     assertEquals(theWidgetCreated.getText(), widgetName);
 
-
     //Step 5 - Click in the widget created and check if the widget is add at Components column and Properties
     theWidgetCreated.click();
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[4]/td")));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td")));
     assertEquals(driver.findElement(
-        By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[4]/td")).getText(),
-        widgetName + " Widget");
+                                    By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[4]/td")).getText(),
+                                    widgetName + " Widget");
     assertEquals(driver.findElement(
-            By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td")).getText(),
-        "Parameter " + paramName);
+                                    By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td")).getText(),
+                                    "Parameter " + paramName);
   }
 
   @After
-  public void tearDown() { }
+  public void tearDown() {}
 }
