@@ -22,14 +22,10 @@
 package org.pentaho.ctools.cdf;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -45,14 +41,13 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ActionsHelper;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.HttpUtils;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -258,24 +253,23 @@ public class JFreeChartComponent{
     String attriStyle = "";
 
     // ## Step 1
-    WebElement elemDetails = ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]"));
-    Actions acts = new Actions(driver);
-    acts.moveToElement(elemDetails);
-    Action act = acts.build();
-    act.perform();
     //Check bar title
+    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='caption-bottom' and contains(@style,'margin: 0px')]"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 10);
     //Check the bar is visible
-    act.perform();
-    attriStyle = ElementHelper.GetAttribute(driver, By.xpath("//div[@class='caption-bottom'][1]"), "style");
-    assertFalse(attriStyle.contains("margin: 0px"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='caption-bottom' and contains(@style,'margin: 0px')]"));
+    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
+    attriStyle = ElementHelper.GetAttribute(driver, By.xpath("//div[@class='caption-bottom']"), "style");
+    assertTrue(attriStyle.contains("margin: -42px"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 10);
     //Click in Zoom
-    act.perform();
+    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='caption-bottom' and contains(@style,'margin: 0px')]"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 10);
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
@@ -296,48 +290,38 @@ public class JFreeChartComponent{
     }
 
     String attrSrcPopup = ElementHelper.GetAttribute(popup, By.cssSelector("img"), "src");
-
-    try {
-      URL url = new URL(attrSrcPopup);
-      URLConnection connection = url.openConnection();
-      connection.connect();
-
-      assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    }
-    catch(Exception ex) {
-      log.error(ex.getMessage());
-    }
-
+    assertEquals(HttpStatus.SC_OK, HttpUtils.GetResponseCode(attrSrcPopup));
     popup.close();
 
     driver = driver.switchTo().window(parentWindowHandle);
     assertTrue(driver.getWindowHandles().size() == 1);
+    driver.switchTo().defaultContent();
 
     // ## Step 2
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(text(),'Details')]"));
     //Change to pie chart
-    act.perform();
+    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='caption-bottom' and contains(@style,'margin: 0px')]"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 3);
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check bar title
-    elemDetails = ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]"));
-    acts.moveToElement(elemDetails);
-    act = acts.build();
-    act.perform();
+    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='caption-bottom' and contains(@style,'margin: 0px')]"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 3);
     //Check bar is visible
-    act.perform();
-    attriStyle = ElementHelper.GetAttribute(driver, By.xpath("//div[@class='caption-bottom'][1]"), "style");
-    assertFalse(attriStyle.contains("margin: 0px"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='caption-bottom' and contains(@style,'margin: 0px')]"));
+    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
+    attriStyle = ElementHelper.GetAttribute(driver, By.xpath("//div[@class='caption-bottom']"), "style");
+    assertTrue(attriStyle.contains("margin: -42px"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 3);
     //Zoom
-    act.perform();
+    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='caption-bottom' and contains(@style,'margin: 0px')]"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 3);
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
@@ -357,17 +341,7 @@ public class JFreeChartComponent{
     }
 
     attrSrcPopup = ElementHelper.GetAttribute(popup, By.cssSelector("img"), "src");
-
-    try {
-      URL url = new URL(attrSrcPopup);
-      URLConnection connection = url.openConnection();
-      connection.connect();
-
-      assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    }
-    catch(Exception ex) {
-      log.error(ex.getMessage());
-    }
+    assertEquals(HttpStatus.SC_OK, HttpUtils.GetResponseCode(attrSrcPopup));
 
     popup.close();
     driver.switchTo().window(parentWindowHandle);

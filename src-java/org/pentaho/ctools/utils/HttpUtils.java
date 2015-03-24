@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 
-public class HttpUtils {
+public class HttpUtils{
 
   private static Logger log = LogManager.getLogger(CDACacheManager.class);
 
@@ -59,7 +59,8 @@ public class HttpUtils {
       URLConnection uc = oUrl.openConnection();
       uc.connect();
       nHttpStatus = ((HttpURLConnection) uc).getResponseCode();
-    } catch (Exception ex) {
+    }
+    catch(Exception ex) {
       log.error(ex.getMessage());
     }
 
@@ -78,14 +79,16 @@ public class HttpUtils {
     Boolean errorFound = false;
     driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
-    for (int i = 0; i < 1000; i++) {
+    for(int i = 0; i < 1000; i ++ ) {
       try {
         driver.findElement(By.id("web_" + ErrorNumber));
         errorFound = true;
-      } catch (NoSuchElementException s) {
+      }
+      catch(NoSuchElementException s) {
         log.error("NoSuchElement - got it.");
         break;
-      } catch (StaleElementReferenceException s) {
+      }
+      catch(StaleElementReferenceException s) {
         log.error("Stale - got it.");
       }
     }
@@ -98,18 +101,23 @@ public class HttpUtils {
    *
    * @param url
    * @return
-   * @throws Exception
    */
+  public static int GetResponseCode(String url) {
+    int nResponseCode = HttpStatus.SC_BAD_REQUEST;
 
-  public static int getResponseCode(String url) {
     try {
       WebClient client = new WebClient();
-      return client.getPage(url).getWebResponse().getStatusCode();
-    } catch (IOException ioe) {
-      throw new RuntimeException(ioe);
-    } catch (FailingHttpStatusCodeException fhscr) {
-      return fhscr.getStatusCode();
+      nResponseCode = client.getPage(url).getWebResponse().getStatusCode();
     }
+    catch(IOException ioe) {
+      log.error("IOException");
+    }
+    catch(FailingHttpStatusCodeException fhscr) {
+      log.warn("FailingHttpStatusCodeException");
+      nResponseCode = fhscr.getStatusCode();
+    }
+
+    return nResponseCode;
   }
 
   /**
@@ -121,20 +129,23 @@ public class HttpUtils {
    * @return
    * @throws Exception
    */
+  public static int GetResponseCode(String url, String username, String password) {
+    int nResponseCode = HttpStatus.SC_BAD_REQUEST;
 
-  public static int getResponseCode(String url, String username, String password) {
     try {
       //set proxy username and password
       WebClient client = new WebClient();
       final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) client.getCredentialsProvider();
       credentialsProvider.addCredentials(username, password);
-      return client.getPage(url).getWebResponse().getStatusCode();
-    } catch (IOException ioe) {
-      throw new RuntimeException(ioe);
-    } catch (FailingHttpStatusCodeException fhscr) {
-      return fhscr.getStatusCode();
-
+      nResponseCode = client.getPage(url).getWebResponse().getStatusCode();
     }
-
+    catch(IOException ioe) {
+      log.error("IOException");
+    }
+    catch(FailingHttpStatusCodeException fhscr) {
+      log.warn("FailingHttpStatusCodeException");
+      nResponseCode = fhscr.getStatusCode();
+    }
+    return nResponseCode;
   }
 }

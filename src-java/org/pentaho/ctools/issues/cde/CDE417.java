@@ -56,7 +56,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDE417 {
+public class CDE417{
+
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
   // The base url to be append the relative url in test
@@ -220,7 +221,7 @@ public class CDE417 {
     assertEquals("Export", text);
     text = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div[2]/img"), "src");
     assertEquals("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", text);
-    assertEquals(200, HttpUtils.getResponseCode("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", "admin", "password"));
+    assertEquals(200, HttpUtils.GetResponseCode("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", "admin", "password"));
     ElementHelper.Click(driver, By.id("fancybox-close"));
     assertFalse(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@class='exportElement']")));
     assertFalse(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[1]")));
@@ -247,7 +248,7 @@ public class CDE417 {
     assertEquals("Export", text);
     text = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div[2]/img"), "src");
     assertEquals("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=svg&paramwidth=350&paramheight=200", text);
-    assertEquals(200, HttpUtils.getResponseCode("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", "admin", "password"));
+    assertEquals(200, HttpUtils.GetResponseCode("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", "admin", "password"));
     ElementHelper.Click(driver, By.id("fancybox-close"));
     assertFalse(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@class='exportElement']")));
     assertFalse(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[1]")));

@@ -55,7 +55,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  * NOTE - The test was created regarding issue CDF-318
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MetaLayerHomeDashboard {
+public class MetaLayerHomeDashboard{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -148,7 +149,7 @@ public class MetaLayerHomeDashboard {
     assertEquals("http://localhost:8080/pentaho/api/repos/pentaho-cdf/js/fancybox/fancybox.png", background1);
     ElementHelper.FindElement(driver, By.id("fancybox-close")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.id("fancybox-content"));
-    assertEquals("200", Integer.toString(HttpUtils.getResponseCode(background1, "admin", "password")));
+    assertEquals("200", Integer.toString(HttpUtils.GetResponseCode(background1, "admin", "password")));
 
   }
 

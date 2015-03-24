@@ -490,37 +490,80 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementPresence(WebDriver driver, By locator, Integer timeout) {
+  public static WebElement WaitForElementPresence(final WebDriver driver, final By locator, final Integer timeout) {
     log.debug("WaitForElementPresence::Enter");
     log.debug("Locator: " + locator.toString());
-
     WebElement element = null;
-    List<WebElement> elements = null;
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class).ignoring(StaleElementReferenceException.class);
-
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     try {
-      elements = driver.findElements(locator);
-      int size = elements.size();
-      if(size == 0) {
-        //wait for element presence
-        elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
-        if(elements.size() != 0) {
-          element = elements.get(0);
-          log.debug("Get element present.");
+
+      class RunnableObject implements Runnable{
+
+        private WebElement theElement;
+
+        public RunnableObject(WebElement theElement){
+          this.theElement = theElement;
         }
-      } else {
-        element = elements.get(0);
-        log.warn("We have some elements! Nr: " + size);
-      }
+
+        public WebElement getValue() {
+          return this.theElement;
+        }
+
+        @Override
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+
+          //Wait for element visible
+          this.theElement = wait.until(new Function<WebDriver, WebElement>(){
+
+            @Override
+            public WebElement apply(WebDriver d) {
+              try {
+                List<WebElement> listElem = d.findElements(locator);
+                if(listElem.size() > 0) {
+                  WebElement elem = listElem.get(0);
+                  if(elem.isEnabled()) {
+                    return elem;
+                  }
+                  return null;
+                }
+                return null;
+              }
+              catch(StaleElementReferenceException sere) {
+                return null;
+              }
+            }
+          });
+        }
+      };
+
+      RunnableObject r = new RunnableObject(element);
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.shutdown();
+      element = r.getValue();
+    }
+    catch(TimeoutException te) {
+      log.warn("WebDriver timeout exceeded! Looking for: " + locator.toString());
+    }
+    catch(InterruptedException ie) {
+      log.warn("Interrupted Exception");
+    }
+    catch(ExecutionException ee) {
+      log.warn("Execution Exception");
+    }
+    catch(java.util.concurrent.TimeoutException cte) {
+      log.warn("Thread timeout exceeded! Looking for: " + locator.toString());
     }
     catch(Exception e) {
-      log.warn("Something went wrong searching for pr: " + locator.toString());
+      log.error("Exception");
       log.catching(e);
     }
 
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
     log.debug("WaitForElementPresence::Exit");
     return element;
   }
@@ -787,7 +830,12 @@ public class ElementHelper{
     String attributeValue = "";
     try {
       WebElement element = FindElement(driver, locator);
-      attributeValue = element.getAttribute(attributeName);
+      if(element != null) {
+        attributeValue = element.getAttribute(attributeName);
+      }
+      else {
+        log.warn("Element is null - could not get attribute value!");
+      }
     }
     catch(StaleElementReferenceException e) {
       log.warn("Stale Element Reference Exception");
@@ -922,6 +970,8 @@ public class ElementHelper{
   public static void WaitForAttributeValue(final WebDriver driver, final By locator, final String attributeName, final String attributeValue, final Integer timeout) {
     log.debug("WaitForAttributeValue::Enter");
     log.debug("Locator: " + locator.toString());
+    log.debug("Attribute: " + attributeName);
+    log.debug("AttributeValue: " + attributeValue);
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
     try {
@@ -943,7 +993,6 @@ public class ElementHelper{
                   WebElement element = listElements.get(0);
                   String attrValue = element.getAttribute(attributeName).toLowerCase();
                   String attrValueFor = attributeValue.toLowerCase();
-
                   return attrValue.contains(attrValueFor);
                 }
                 return false;
