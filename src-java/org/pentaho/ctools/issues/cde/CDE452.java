@@ -284,6 +284,38 @@ public class CDE452 {
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//body"));
     assertEquals("Access Denied to file /public/Issues/CDF-430/CDE/i18nTest.wcdf", text);
 
+    //Log out
+    driver.get(baseUrl + "Home");
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td[2]"));
+    assertNotNull(element);
+    element.click();
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td"));
+    assertNotNull(element);
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td"));
+    assertEquals("Log Out", text);
+    element.click();
+
+    //Wait for form display
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='login-form-container']/div/h1"));
+    assertEquals("User Console", text);
+
+    //Wait for all all elements in the form to be visible
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("j_username"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("j_password"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("button.btn"));
+    assertNotNull(element);
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("j_username")).clear();
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("j_username")).sendKeys("admin");
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("j_password")).clear();
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("j_password")).sendKeys("password");
+    ElementHelper.Click(driver, By.cssSelector("button.btn"));
+
+    //wait for visibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+
   }
 
   @AfterClass

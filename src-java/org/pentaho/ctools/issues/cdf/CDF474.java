@@ -103,9 +103,6 @@ public class CDF474 {
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("select2-drop"));
     assertNotNull(element);
     String text = element.getAttribute("style");
-    //assertEquals("left: 88px; width: 64px; top: 26px; bottom: auto; display: block;", text);
-    assertTrue(text.contains("width: 64px;"));
-    //ElementHelper.Click(driver, By.xpath("//div[@id='select2-drop']/ul/li[2]/div/span"));
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='col2']/div/a/span[2]/b"));
     assertNotNull(element);
     element.click();
