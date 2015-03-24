@@ -145,7 +145,12 @@ public class CDE453 {
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("applicationShell"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='browser.perspective']"));
     driver.switchTo().frame("browser.perspective");
+
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("fileBrowser"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
+
+    ElementHelper.Click(driver, By.id("refreshBrowserIcon"));
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
 

@@ -56,7 +56,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDE417{
+public class CDE417 {
 
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
@@ -144,6 +144,8 @@ public class CDE417{
     element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup']/div/div[3]"));
     assertNotNull(element);
     ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup']/div/div[3]"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
     element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']/div[2]"));
     assertNotNull(element);
     ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']/div[2]"));

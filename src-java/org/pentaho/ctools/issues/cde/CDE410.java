@@ -516,6 +516,8 @@ public class CDE410 {
       robot.keyRelease(KeyEvent.VK_DOWN);
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
+      robot.keyPress(KeyEvent.VK_DOWN);
+      robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Cache"
       ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[@class='initialized ui-state-active']"));
       class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[13]")).getAttribute("class");
