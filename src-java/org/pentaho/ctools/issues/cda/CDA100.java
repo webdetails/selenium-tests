@@ -175,7 +175,7 @@ public class CDA100 {
 
       //Check if the file downloaded is the expected
       String md5 = DigestUtils.md5Hex(Files.readAllBytes(exportFile.toPath()));
-      assertEquals(md5, "c185607111840543e3cf33b86b4174bc");
+      assertEquals(md5, "f87ea229efc4da71d47a90ef2029564d");
 
       //The delete file
       DeleteFile();
