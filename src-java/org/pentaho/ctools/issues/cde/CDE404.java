@@ -22,6 +22,7 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -107,10 +108,12 @@ public class CDE404 {
     /*
      * ## Step 1
      */
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
+    WebElement element = ElementHelper.FindElement(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
+    assertNotNull(element);
     String button1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
     assertEquals("About", button1);
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
+    assertNotNull(element);
     button1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
     assertEquals("Elements", button1);
     ElementHelper.Click(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
@@ -118,13 +121,16 @@ public class CDE404 {
     /*
      * ## Step 2
      */
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
+    assertNotNull(element);
     String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
     assertEquals("test", text);
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
+    assertNotNull(element);
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
     assertEquals("Dashboard", text);
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
+    assertNotNull(element);
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
     assertEquals("All Users", text);
     WebElement button = ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[4]/div/button[2]"));
@@ -148,20 +154,27 @@ public class CDE404 {
       }
     }
     log.info("after while");
-    ElementHelper.FindElement(driver, By.xpath("//a[@title='Save as Template']"));
-    ElementHelper.FindElement(driver, By.xpath("//a[@title='Apply Template']"));
-    ElementHelper.FindElement(driver, By.xpath("//a[@title='Add Resource']"));
-    ElementHelper.FindElement(driver, By.xpath("//a[@title='Add FreeForm']"));
-    ElementHelper.FindElement(driver, By.xpath("//a[@title='Add Row']"));
+    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Save as Template']"));
+    assertNotNull(element);
+    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Apply Template']"));
+    assertNotNull(element);
+    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Add Resource']"));
+    assertNotNull(element);
+    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Add FreeForm']"));
+    assertNotNull(element);
+    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Add Row']"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//a[@title='Add Resource']"));
 
     /*
      * ## Step 4
      */
-    ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceType']"));
+    element = ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceType']"));
+    assertNotNull(element);
     Select select = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceType']")));
     select.selectByValue("Css");
-    ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceSource']"));
+    element = ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceSource']"));
+    assertNotNull(element);
     Select select1 = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceSource']")));
     select1.selectByValue("file");
     ElementHelper.Click(driver, By.xpath("//button[@id='popup_state0_buttonOk']"));
@@ -169,32 +182,35 @@ public class CDE404 {
     /*
      * ## Step 5
      */
-    ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
+    element = ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
-    //ElementHelper.FindElement(driver, By.xpath("//div[@id='popupstates']/div/div"));
-    //ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='popupstates']/div/div"), "Choose existing file, or select a folder to create one:");
-    //text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='popupstates']/div/div"));
-    //text = text.substring(0, text.indexOf(58));
-    //assertEquals(text, "Choose existing file, or select a folder to create one");
-    ElementHelper.FindElement(driver, By.id("container_id"));
-    ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/']"));
+    element = ElementHelper.FindElement(driver, By.id("container_id"));
+    assertNotNull(element);
+    element = ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/']"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//a[@rel='static/']"));
-    ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/']"));
+    element = ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/']"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//a[@rel='static/system/']"));
-    ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/css/']"));
+    element = ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/css/']"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//a[@rel='static/system/css/']"));
-    ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/css/cpk.css']"));
+    element = ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/css/cpk.css']"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//a[@rel='static/system/css/cpk.css']"));
     ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
 
     /*
      * ## Step 6
      */
-    ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfddInput']"));
+    element = ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfddInput']"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//button[@class='cdfddInput']"));
     WebElement elementframe = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementframe);
-    ElementHelper.FindElement(frame, By.xpath("//span[@id='infoArea']"));
+    element = ElementHelper.FindElement(frame, By.xpath("//span[@id='infoArea']"));
+    assertNotNull(element);
     String pathText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
     assertEquals("/system/CDE404/static/system/css/cpk.css", pathText);
     String lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div/span"));
@@ -208,7 +224,8 @@ public class CDE404 {
     ElementHelper.Click(driver, By.xpath("//div[@class='popupclose']"));
     driver.close();
     driver.switchTo().window(parentHandle);
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
+    assertNotNull(element);
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
     assertEquals("test", text);
 

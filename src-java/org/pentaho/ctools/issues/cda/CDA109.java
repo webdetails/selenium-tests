@@ -22,11 +22,11 @@
 package org.pentaho.ctools.issues.cda;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -72,21 +72,6 @@ public class CDA109 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-    //Go to User Console
-    driver.get(baseUrl + "plugin/cda/api/editFile?path=/public/Issues/CDA%20-%20109/.cda");
-
-    //Wait for Elements outside of iFrame
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='webdetailsLogo']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='buttoncontact']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//span[@id='staticfile']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='save']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='reload']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='preview']"));
-
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -108,6 +93,20 @@ public class CDA109 {
     /*
      * ## Step 1
      */
+    //Go to User Console
+    driver.get(baseUrl + "plugin/cda/api/editFile?path=/public/Issues/CDA%20-%20109/.cda");
+
+    //Wait for Elements outside of iFrame
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='webdetailsLogo']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//span[@id='staticfile']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='save']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='reload']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='preview']"));
+    assertNotNull(element);
     String filePath = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//span[@id='staticfile']"));
     assertEquals("/public/Issues/CDA - 109/.cda", filePath);
 
@@ -117,7 +116,8 @@ public class CDA109 {
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementFrame);
 
-    ElementHelper.WaitForElementVisibility(frame, By.xpath("//pre[@id='editArea']/div[2]/div[1]/div[3]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//pre[@id='editArea']/div[2]/div[1]/div[3]"));
+    assertNotNull(element);
     String ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div[1]/div[3]/div[2]/span[2]"));
     assertEquals("CDADescriptor", ln1Text);
     ln1Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div[1]/div[3]/div[3]/span[2]"));

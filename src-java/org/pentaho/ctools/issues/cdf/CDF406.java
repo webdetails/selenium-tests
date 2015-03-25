@@ -21,6 +21,9 @@
  ******************************************************************************/
 package org.pentaho.ctools.issues.cdf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
@@ -31,6 +34,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -95,13 +99,20 @@ public class CDF406 {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //assert Elements loaded
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("col1protovis"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"));
-    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"), "cool");
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][32]"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][19]"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("col1protovis"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"));
+    assertNotNull(element);
+    String text = ElementHelper.WaitForTextPresence(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"), "cool");
+    assertEquals("cool", text);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][32]"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'col1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][19]"));
+    assertNotNull(element);
 
   }
 

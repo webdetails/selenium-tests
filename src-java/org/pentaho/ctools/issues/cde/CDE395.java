@@ -22,11 +22,11 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -72,21 +72,6 @@ public class CDE395 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-    //Go to User Console
-    driver.get(baseUrl + "Home");
-
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-    //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    ElementHelper.WaitForElementVisibility(driver, By.id("filemenu"));
-    ElementHelper.WaitForElementVisibility(driver, By.id("viewmenu"));
-    ElementHelper.WaitForElementVisibility(driver, By.id("toolsmenu"));
-    ElementHelper.WaitForElementVisibility(driver, By.id("helpmenu"));
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -110,6 +95,22 @@ public class CDE395 {
     /*
      * ## Step 1
      */
+    //Go to User Console
+    driver.get(baseUrl + "Home");
+
+    //wait for invisibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+
+    //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("filemenu"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("toolsmenu"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("helpmenu"));
+    assertNotNull(element);
+
     //focus iframe
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementFrame);
@@ -123,7 +124,7 @@ public class CDE395 {
     assertEquals("Create New", createText);
     assertEquals("Manage Data Sources", manageText);
     assertEquals("Documentation", documentationText);
-    ElementHelper.ClickJS(frame, By.id("btnCreateNew"));
+    ElementHelper.Click(frame, By.id("btnCreateNew"));
 
     /*
      * ## Step 2
@@ -132,7 +133,7 @@ public class CDE395 {
     String dataText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdatasourceButton']"));
     assertEquals("CDE Dashboard", cdeText);
     assertEquals("Data Source", dataText);
-    ElementHelper.ClickJS(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
+    ElementHelper.Click(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
     driver.switchTo().defaultContent();
 
     /*
@@ -140,8 +141,10 @@ public class CDE395 {
      */
     //wait for invisibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+
     //assert title
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("solutionNavigatorAndContentPanel"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("solutionNavigatorAndContentPanel"));
+    assertNotNull(element);
     String titleText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@title='New CDE Dashboard']"));
     assertEquals("CDE Dashboard", titleText);
 
@@ -165,7 +168,8 @@ public class CDE395 {
     /*
      * ## Step 4
      */
-    ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("popup"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("popup"));
+    assertNotNull(element);
     WebElement obj1 = ElementHelper.FindElement(frame, By.xpath("//select[@id='rendererInput']/option[@value='bootstrap']"));
     assertEquals(obj1.isSelected(), true);
   }

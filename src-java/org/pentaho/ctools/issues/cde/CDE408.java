@@ -24,12 +24,12 @@ package org.pentaho.ctools.issues.cde;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -76,21 +76,6 @@ public class CDE408 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-
-    //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-
-    //assert buttons
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Save as Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Apply Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Resource']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add FreeForm']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Row']"));
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -114,49 +99,59 @@ public class CDE408 {
     /*
      * ## Step 1
      */
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='layoutPanelButton']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='componentsPanelButton']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    ElementHelper.ClickJS(driver, By.xpath("//div[@class='componentsPanelButton']"));
+
+    //Go to New CDE Dashboard
+    driver.get(baseUrl + "api/repos/wcdf/new");
+
+    //assert buttons
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='layoutPanelButton']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//div[@class='componentsPanelButton']"));
 
     /*
      * ## Step 2
      */
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
+    assertNotNull(element);
     String otherText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
     assertEquals("Others", otherText);
-    ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='table Component']"));
-    ElementHelper.ClickJS(driver, By.xpath("//a[@title='table Component']"));
+    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='table Component']"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//a[@title='table Component']"));
 
     /*
      * ## Step 3
      */
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
-    ElementHelper.ClickJS(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
 
     /*
      * ## Step 4
      */
-    WebElement elemClickAction = driver.findElement(By.xpath("//div[@id='cdfdd-components-properties']//tr[39]/td/div[2]"));
-    log.info(elemClickAction.isEnabled());
-
-    //driver.switchTo().defaultContent();
-
-    //colocar javascrict
-    //var element = (document.frame_0.document.getElementsByClassName('scrollContainer')[3]);
-    //var pos = element.scrollTop;
-    //var height = element.scrollHeight;
-    //element.scrollTop=height;
-    //return pos
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-components-properties']//tr[39]/td/div[2]"));
+    assertNotNull(element);
     String posText = "var pos = document.getElementsByClassName('scrollContainer')[3].scrollTop;var height = document.getElementsByClassName('scrollContainer')[3].scrollHeight;document.getElementsByClassName('scrollContainer')[3].scrollTop=height;return pos";
     String pos = ((JavascriptExecutor) driver).executeScript(posText).toString();
-    log.info(pos);
-    //var pos1 = element.scrollTop;
-    //((JavascriptExecutor) driver).executeScript("return document.body.innerHTML;")
     String posText1 = "return document.getElementsByClassName('scrollContainer')[3].scrollTop;";
     String pos1 = ((JavascriptExecutor) driver).executeScript(posText1).toString();
-    log.info(pos1);
     assertThat(pos, not(equalTo(pos1)));
 
   }

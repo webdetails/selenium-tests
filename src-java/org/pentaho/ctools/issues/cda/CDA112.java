@@ -108,25 +108,30 @@ public class CDA112 {
     /*
      * ## Step 1
      */
-    //Go to User Console
+    //Open Issue Sample
     driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA-112/cda112.cda");
 
     //wait for invisibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
 
     //Wait for buttons: button, Cache This AND Query URL
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='button']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='cachethis']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='queryUrl']"));
-    ElementHelper.WaitForElementPresence(driver, By.id("dataAccessSelector"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
+    assertNotNull(element);
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByValue("sqlDummyTWELVE");
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
+    assertNotNull(element);
 
     /*
      * ## Step 2
      */
     //wait to render page
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("p1"));
     assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
@@ -152,6 +157,7 @@ public class CDA112 {
     assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
     elemStatus = ElementHelper.FindElement(driver, By.id("p12"));
     assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
+
     //Check text on table
     String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
     String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));

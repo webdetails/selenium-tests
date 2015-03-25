@@ -22,11 +22,11 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -34,6 +34,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -71,16 +72,6 @@ public class CDE342 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-    //Go to User Console
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent");
-
-    //Wait for Input field
-    ElementHelper.WaitForElementVisibility(driver, By.id("col1"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//input[@class='ui-autocomplete-input']"));
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -103,6 +94,14 @@ public class CDE342 {
     /*
      * ## Step 1
      */
+    //Go to Issue sample
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent");
+
+    //Wait for Input field
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("col1"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//input[@class='ui-autocomplete-input']"));
+    assertNotNull(element);
     ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).sendKeys("A");
     String option1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
     String option2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));

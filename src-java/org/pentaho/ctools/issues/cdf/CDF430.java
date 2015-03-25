@@ -22,6 +22,7 @@
 package org.pentaho.ctools.issues.cdf;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -99,9 +101,12 @@ public class CDF430 {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //assert Elements loaded
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_1"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_2"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_3"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_1"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_2"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_3"));
+    assertNotNull(element);
     String text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_1"));
     assertEquals(text, "my message 1, coming from messages.properties");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_2"));
@@ -119,9 +124,12 @@ public class CDF430 {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //assert Elements loaded
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_1"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_2"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_3"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_1"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_2"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_3"));
+    assertNotNull(element);
     text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_1"));
     assertEquals(text, "my message 1, coming from messages.properties");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_2"));
@@ -139,9 +147,12 @@ public class CDF430 {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //assert Elements loaded
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='sampleButton01']/button/span"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='sampleButton02']/button/span"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='sampleButton03']/button/span"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='sampleButton01']/button/span"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='sampleButton02']/button/span"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='sampleButton03']/button/span"));
+    assertNotNull(element);
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleButton01']/button/span"));
     assertEquals(text, "My button 01 label");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleButton02']/button/span"));

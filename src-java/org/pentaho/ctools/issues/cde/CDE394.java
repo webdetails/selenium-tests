@@ -22,12 +22,12 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -73,19 +73,6 @@ public class CDE394 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-    //Go to User Console
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent");
-
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-    //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    ElementHelper.WaitForElementVisibility(driver, By.id("column1protovis"));
-
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -108,26 +95,34 @@ public class CDE394 {
     /*
      * ## Step 1
      */
+    //Go to Issue Sample
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent");
+
+    //wait for invisibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+
+    //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
+    ElementHelper.WaitForElementVisibility(driver, By.id("column1protovis"));
     WebElement element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']"));
+    assertNotNull(element);
     String widthText = element.getAttribute("width");
     double width = Double.parseDouble(widthText);
-    log.debug(width);
 
     /*
      * ## Step 2
      */
     element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][14]"));
+    assertNotNull(element);
     String cx1Text = element.getAttribute("cx");
     double cx1 = Double.parseDouble(cx1Text);
-    log.debug(cx1);
     element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='circle'][14]"));
+    assertNotNull(element);
     String cx2Text = element.getAttribute("cx");
     double cx2 = Double.parseDouble(cx2Text);
-    log.debug(cx2);
     element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][9]/*[local-name()='circle'][14]"));
+    assertNotNull(element);
     String cx3Text = element.getAttribute("cx");
     double cx3 = Double.parseDouble(cx3Text);
-    log.debug(cx3);
 
     /*
      * ## Step 3

@@ -22,6 +22,7 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -37,6 +38,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -98,10 +100,14 @@ public class CDE403 {
      * ## Step 1
      */
     //Assert elements on page and go to Datasources Panel
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    ElementHelper.WaitForElementPresence(driver, By.id("previewButton"));
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@class='layoutPanelButton']"));
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@class='componentsPanelButton']"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("previewButton"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='layoutPanelButton']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
 
     /*
@@ -109,15 +115,19 @@ public class CDE403 {
      */
     //Add MDX query element and click Parameters
     ElementHelper.ClickElementInvisible(driver, By.xpath("//a[@title='denormalizedMdx over mondrianJdbc']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@title='Query to be executed in the selected datasource']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@title='Query to be executed in the selected datasource']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button"));
 
     /*
      * ## Step 3
      */
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("wizardDialogBody"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("wizardEditor"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("wizardDialogBody"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("wizardEditor"));
+    assertNotNull(element);
     Robot robot;
     try {
       robot = new Robot();
@@ -136,8 +146,7 @@ public class CDE403 {
     /*
      * ## Step 4
      */
-    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div"), "testselect {} ON COLUMNS,");
-    String text = ElementHelper.FindElement(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div")).getText();
+    String text = ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div"), "testselect {} ON COLUMNS,");
     assertEquals("testselect {} ON COLUMNS,", text);
   }
 

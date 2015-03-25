@@ -99,7 +99,8 @@ public class CDE446 {
     //Open created dashboard's cda file
     driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDE-446/CDE-446.cda");
 
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
+    assertNotNull(element);
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("DataAccess ID: kettleTransform");
 
@@ -107,7 +108,7 @@ public class CDE446 {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
     assertNotNull(element);
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
     assertNotNull(element);

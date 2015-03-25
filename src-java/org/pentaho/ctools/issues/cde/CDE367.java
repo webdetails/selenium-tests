@@ -22,11 +22,11 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -34,6 +34,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -71,21 +72,6 @@ public class CDE367 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-
-    //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-
-    //assert buttons
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Save as Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Apply Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Resource']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add FreeForm']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Row']"));
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -108,33 +94,46 @@ public class CDE367 {
     /*
      * ## Step 1
      */
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Save as Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Apply Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Resource']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add FreeForm']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Row']"));
-    ElementHelper.ClickJS(driver, By.xpath("//a[@title='Add Row']"));
+    //Go to New CDE Dashboard
+    driver.get(baseUrl + "api/repos/wcdf/new");
+
+    //assert buttons
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//a[@title='Add Row']"));
 
     /*
      * ## Step 2
      */
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//form[@class='cdfddInput']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorcheck']"));
-    ElementHelper.ClickJS(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorcheck']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//form[@class='cdfddInput']/input[@checked='checked']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
-    ElementHelper.ClickJS(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//form[@class='cdfddInput']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorcheck']"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorcheck']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
     ElementHelper.FindElement(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']")).sendKeys("#3d558c");
-    ElementHelper.ClickJS(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
+    ElementHelper.Click(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
 
     /*
      * ## Step 3
      */
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='colorpicker']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='colorpicker']/div[@class='colorpicker_hex']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='colorpicker']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='colorpicker']/div[@class='colorpicker_hex']"));
+    assertNotNull(element);
     String hexText = ElementHelper.GetInputValue(driver, By.xpath("//div[@class='colorpicker']/div[@class='colorpicker_hex']/input"));
-    log.info(hexText);
     assertEquals("3d558c", hexText);
 
   }

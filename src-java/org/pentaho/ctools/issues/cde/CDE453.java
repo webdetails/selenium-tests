@@ -140,7 +140,7 @@ public class CDE453 {
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='well sidebar']"));
     ElementHelper.Click(driver, By.xpath("//div[@class='well sidebar']/button"));//Click in 'Browse Files'
 
-    //Now we have to navegate to 'Public/cde/widgets
+    //Now we have to navigate to 'Public/cde/widgets
     driver.switchTo().defaultContent();
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("applicationShell"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='browser.perspective']"));

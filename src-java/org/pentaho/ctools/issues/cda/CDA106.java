@@ -109,29 +109,36 @@ public class CDA106 {
     /*
      * ## Step 1
      */
-    //Go to User Console
+    //Open MondrianJndi Sample
     driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda");
 
     //Wait for buttons: button, Cache This AND Query URL
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='button']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='cachethis']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='queryUrl']"));
-
-    ElementHelper.WaitForElementPresence(driver, By.id("dataAccessSelector"));
+    WebElement element = ElementHelper.WaitForElementPresence(driver, By.id("dataAccessSelector"));
+    assertNotNull(element);
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Mdx Query on SampleData - Jndi");
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
+    assertNotNull(element);
 
     /*
      * ## Step 2
      */
     //wait to render page
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
+    assertNotNull(elemStatus);
     assertEquals("Shipped", elemStatus.getAttribute("value"));
+
     //Check we have three elements and no more than that
     String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 3 of 3 elements", textPaging);
+
     //Check text on table
     String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
     String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
@@ -142,21 +149,26 @@ public class CDA106 {
     /*
      * ## Step 3
      */
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dialog"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dialog"));
+    assertNotNull(element);
     ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='dialog']/p"), "What schedule should this query run on?");
     ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='dialog']/div/span/span"), "on the");
     ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='dialog']/div/span/span[2]"), "th day of the week (1-7)");
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='dialog']/div[2]/a"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='dialog']/div[2]/a[2]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='dialog']/div[2]/a"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='dialog']/div[2]/a[2]"));
+    assertNotNull(element);
     ElementHelper.FindElement(driver, By.id("startAt")).sendKeys("1");
     ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='dialog']/div[2]/a"), "Ok");
     ElementHelper.Click(driver, By.xpath("//div[@id='dialog']/div[2]/a"));
 
     String parentWindowHandle = driver.getWindowHandle();
     Set<String> listWindows = driver.getWindowHandles();
+
     //wait for popup render
     ElementHelper.WaitForNewWindow(driver);
     listWindows = driver.getWindowHandles();
+
     //Get popup id
     WebDriver cdaCacheManager = null;
     Iterator<String> iterWindows = listWindows.iterator();
@@ -171,9 +183,11 @@ public class CDA106 {
     //Title
     String titleCdaCacheManager = cdaCacheManager.getTitle();
     assertEquals("CDA Cache Manager", titleCdaCacheManager);
+
     //Scheduled queries
     String subTitleText = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='scheduledQueries']/div"));
     assertEquals("Scheduled Queries", subTitleText);
+
     //Validate Query
     String queryName = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[1]"));
     String queryParam1 = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dt"));
@@ -223,10 +237,18 @@ public class CDA106 {
     cdaCacheManager.close();
     driver.switchTo().window(parentWindowHandle);
     assertTrue(driver.getWindowHandles().size() == 1);
+
     //Wait for buttons: button, Cache This AND Query URL
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='button']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='cachethis']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='queryUrl']"));
+    element = ElementHelper.WaitForElementPresence(driver, By.id("dataAccessSelector"));
+    assertNotNull(element);
+    select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
+    select.selectByVisibleText("Mdx Query on SampleData - Jndi");
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
+    assertNotNull(element);
 
   }
 

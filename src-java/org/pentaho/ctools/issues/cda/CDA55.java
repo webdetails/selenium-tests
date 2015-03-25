@@ -22,11 +22,11 @@
 package org.pentaho.ctools.issues.cda;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -73,18 +73,6 @@ public class CDA55 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-    //Go to User Console
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA-55/sample-kettle-ParamArray.cda");
-
-    //Wait for buttons: button, Cache This AND Query URL
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='button']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='cachethis']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='queryUrl']"));
-
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -106,9 +94,19 @@ public class CDA55 {
     /*
      * ## Step 1
      */
-    ElementHelper.WaitForElementPresence(driver, By.id("dataAccessSelector"));
+    //Go to User Console
+    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA-55/sample-kettle-ParamArray.cda");
+
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
+    assertNotNull(element);
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Sample query on SteelWheelsSales");
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
+    assertNotNull(element);
 
     /*
      * ## Step 2

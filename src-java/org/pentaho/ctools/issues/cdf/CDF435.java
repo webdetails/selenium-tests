@@ -22,11 +22,11 @@
 package org.pentaho.ctools.issues.cdf;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -73,28 +73,6 @@ public class CDF435 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-
-    //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-435%3AIssue_435.wcdf/generatedContent");
-
-    // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-
-    //assert Elements loaded
-    ElementHelper.WaitForElementVisibility(driver, By.id("Panel_1"));
-
-    //focus iframe
-    WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe[@name='report_prptFrame']"));
-    WebDriver frame = driver.switchTo().frame(elementFrame);
-
-    ElementHelper.WaitForElementVisibility(frame, By.id("pageControl"));
-    ElementHelper.WaitForElementVisibility(frame, By.id("reportControlPanel"));
-    ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@id='promptPanel']//button"));
-    driver.switchTo().defaultContent();
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -117,14 +95,32 @@ public class CDF435 {
     /*
      * ## Step 1
      */
+    //Go to New CDE Dashboard
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-435%3AIssue_435.wcdf/generatedContent");
+
+    // Wait for loading disappear
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
+    //assert Elements loaded
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_1"));
+    assertNotNull(element);
+
     //focus iframe
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe[@name='report_prptFrame']"));
     WebDriver frame = driver.switchTo().frame(elementFrame);
 
-    ElementHelper.WaitForElementVisibility(frame, By.xpath("//div[@id='promptPanel']//button/span"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("pageControl"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("reportControlPanel"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='promptPanel']//button"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='promptPanel']//button/span"));
+    assertNotNull(element);
     String buttonText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='promptPanel']//button/span"));
     assertEquals("View Report", buttonText);
-    ElementHelper.WaitForElementVisibility(frame, By.xpath("//input[@value='[Time].[2003]']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//input[@value='[Time].[2003]']"));
+    assertNotNull(element);
     String yearText = ElementHelper.GetInputValue(frame, By.xpath("//input[@value='[Time].[2003]']"));
     assertEquals("[Time].[2003]", yearText);
 
@@ -176,10 +172,12 @@ public class CDF435 {
     elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe[@name='report_prptFrame']"));
     frame = driver.switchTo().frame(elementFrame);
 
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='promptPanel']//button/span"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='promptPanel']//button/span"));
+    assertNotNull(element);
     buttonText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='promptPanel']//button/span"));
     assertEquals("View Report", buttonText);
-    ElementHelper.WaitForElementVisibility(frame, By.xpath("//input[@value='[Time].[2004]']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//input[@value='[Time].[2004]']"));
+    assertNotNull(element);
     yearText = ElementHelper.GetInputValue(frame, By.xpath("//input[@value='[Time].[2004]']"));
     assertEquals("[Time].[2004]", yearText);
 

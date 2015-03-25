@@ -22,6 +22,7 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -37,6 +38,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -103,11 +105,16 @@ public class CDE410 {
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/edit");
 
     //assert elements on page
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//a[@title='Save as Template']"));
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//a[@title='Apply Template']"));
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//a[@title='Add Resource']"));
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//a[@title='Add FreeForm']"));
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//a[@title='Add Row']"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
+    assertNotNull(element);
 
     /*
      * ## Step 2
@@ -124,7 +131,8 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
-    class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]")).getAttribute("class");
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]"), "class", "ui-draggable ui-draggable-disabled ui-droppable initialized ui-state-active");
+    class1 = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]")).getAttribute("class");
     assertEquals(class1, "ui-draggable ui-draggable-disabled ui-droppable initialized ui-state-active");
 
     //Go to row and back to first resource and assert it's selected
@@ -139,6 +147,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr"), "class", "ui-draggable ui-droppable initialized ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr")).getAttribute("class");
     assertEquals(class1, "ui-draggable ui-droppable initialized ui-state-active");
 
@@ -160,8 +169,10 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[14]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[14]"));
+    assertNotNull(element);
 
     //Go to second column and back to first and assert first column is selected
     try {
@@ -175,6 +186,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]"), "class", "child-of-5a376f7c-edb3-0aa2-291d-4d512631ed6e ui-draggable ui-droppable initialized parent collapsed ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]")).getAttribute("class");
     assertEquals(class1, "child-of-5a376f7c-edb3-0aa2-291d-4d512631ed6e ui-draggable ui-droppable initialized parent collapsed ui-state-active");
 
@@ -189,6 +201,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr"), "class", "initialized ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr")).getAttribute("class");
     assertEquals(class1, "initialized ui-state-active");
 
@@ -205,7 +218,7 @@ public class CDE410 {
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Span Size"
-      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]"), "class", "initialized ui-state-active");
       class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]")).getAttribute("class");
       assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
@@ -225,7 +238,7 @@ public class CDE410 {
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Right Border"
-      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[7]"), "class", "initialized ui-state-active");
       class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[7]")).getAttribute("class");
       assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
@@ -260,6 +273,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[7]"), "class", "initialized");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[7]")).getAttribute("class");
     assertEquals(class1, "initialized");
 
@@ -280,9 +294,9 @@ public class CDE410 {
      * ## Step 5
      */
     ElementHelper.Click(driver, By.xpath("//div[@title='Components Panel']/a"));
-    log.info("Panel clicked");
     //Press down and assert second Chart group
     ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr/td"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr"), "class", "initialized parent collapsed ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr")).getAttribute("class");
     assertEquals(class1, "initialized parent collapsed ui-state-active");
     try {
@@ -292,6 +306,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[3]"), "class", "initialized parent collapsed ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[3]")).getAttribute("class");
     assertEquals(class1, "initialized parent collapsed ui-state-active");
 
@@ -307,7 +322,8 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]"));
+    assertNotNull(element);
 
     //Go to to chart and assert it's selected
     try {
@@ -317,6 +333,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]"), "class", "child-of-CHARTS initialized collapsed ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[2]")).getAttribute("class");
     assertEquals(class1, "child-of-CHARTS initialized collapsed ui-state-active");
 
@@ -328,6 +345,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr"), "class", "initialized ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr")).getAttribute("class");
     assertEquals(class1, "initialized ui-state-active");
 
@@ -344,7 +362,7 @@ public class CDE410 {
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Title"
-      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]"), "class", "initialized ui-state-active");
       class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]")).getAttribute("class");
       assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
@@ -368,7 +386,7 @@ public class CDE410 {
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "V1 - Bar line"
-      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[9]"), "class", "initialized ui-state-active");
       class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[9]")).getAttribute("class");
       assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
@@ -403,6 +421,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[9]"), "class", "initialized");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[9]")).getAttribute("class");
     assertEquals(class1, "initialized");
 
@@ -424,6 +443,7 @@ public class CDE410 {
     ElementHelper.Click(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
     //Press down and assert second Chart group
     ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr/td"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr"), "class", "initialized parent collapsed ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr")).getAttribute("class");
     assertEquals(class1, "initialized parent collapsed ui-state-active");
     try {
@@ -433,6 +453,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[3]"), "class", "initialized parent collapsed ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[3]")).getAttribute("class");
     assertEquals(class1, "initialized parent collapsed ui-state-active");
 
@@ -448,7 +469,8 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]"));
+    assertNotNull(element);
 
     //Go to Datasource and assert it's selected
     try {
@@ -458,6 +480,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]"), "class", "child-of-MDX initialized collapsed ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]")).getAttribute("class");
     assertEquals(class1, "child-of-MDX initialized collapsed ui-state-active");
 
@@ -469,6 +492,7 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr"), "class", "initialized ui-state-active");
     class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr")).getAttribute("class");
     assertEquals(class1, "initialized ui-state-active");
 
@@ -485,7 +509,7 @@ public class CDE410 {
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Access Level"
-      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[@class='initialized ui-state-active']"));
+      ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[2]"), "class", "initialized ui-state-active");
       class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[2]")).getAttribute("class");
       assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
@@ -519,8 +543,8 @@ public class CDE410 {
       robot.keyPress(KeyEvent.VK_DOWN);
       robot.keyRelease(KeyEvent.VK_DOWN);
       //Change "Cache"
-      ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[@class='initialized ui-state-active']"));
-      class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[13]")).getAttribute("class");
+      ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[14]"), "class", "initialized ui-state-active");
+      class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[14]")).getAttribute("class");
       assertEquals(class1, "initialized ui-state-active");
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
@@ -543,7 +567,7 @@ public class CDE410 {
     assertEquals(value, "a");
     value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[2]/td[2]"));
     assertEquals(value, "1");
-    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[13]/td[2]"));
+    value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[14]/td[2]"));
     assertEquals(value, "False");
 
     //Click tab and assert focus has gone back to first table
@@ -554,7 +578,8 @@ public class CDE410 {
     } catch (AWTException e) {
       e.printStackTrace();
     }
-    class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[13]")).getAttribute("class");
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[14]"), "class", "initialized");
+    class1 = ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[14]")).getAttribute("class");
     assertEquals(class1, "initialized");
 
     //Collapse Datasource group and assert Datasource isn't showing

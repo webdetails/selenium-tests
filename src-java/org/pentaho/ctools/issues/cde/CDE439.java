@@ -22,6 +22,7 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -52,7 +54,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CDE439{
+public class CDE439 {
 
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
@@ -99,33 +101,47 @@ public class CDE439{
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='content']/div/div[2]/div"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='content']/div/div[2]/div"));
+    assertNotNull(element);
     String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='content']/div/div[2]/div"));
     assertEquals("Duplicate Component sample", title);
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column1"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column2"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column4"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path'][2]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column1"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column2"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column4"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path'][2]"));
+    assertNotNull(element);
 
     /*
      * ## Step 2
      */
 
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column2']/a"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column2']/a"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='column2']/a"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column1_1"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1_1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1_1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path'][2]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column1_1"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1_1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1_1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path'][2]"));
+    assertNotNull(element);
 
     /*
      * ## Step 3
      */
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column4']/a"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column4']/a"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='column4']/a"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column1_2"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1_2']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1_2']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path'][2]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("column1_2"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1_2']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='column1_2']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path'][2]"));
+    assertNotNull(element);
 
   }
 

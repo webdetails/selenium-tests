@@ -22,11 +22,11 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -34,6 +34,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -71,21 +72,6 @@ public class CDE407 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-
-    //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-
-    //assert buttons
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Save as Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Apply Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Resource']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add FreeForm']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Row']"));
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -109,30 +95,38 @@ public class CDE407 {
     /*
      * ## Step 1
      */
-    /*
-     * ## Step 1
-     */
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Save as Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Apply Template']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Resource']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add FreeForm']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Row']"));
-    ElementHelper.ClickJS(driver, By.xpath("//a[@title='Add Row']"));
+    //Go to New CDE Dashboard
+    driver.get(baseUrl + "api/repos/wcdf/new");
+
+    //assert buttons
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//a[@title='Add Row']"));
 
     /*
      * ## Step 2
      */
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Add Space']"));
-    ElementHelper.ClickJS(driver, By.xpath("//a[@title='Add Space']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Space']"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//a[@title='Add Space']"));
 
     /*
      * ## Step 3
      */
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//tr[2]/td[@class='ui-draggable ui-droppable ui-state-active']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//a[@title='Duplicate Layout Element']"));
-    ElementHelper.ClickJS(driver, By.xpath("//a[@title='Duplicate Layout Element']"));
-    ElementHelper.ClickJS(driver, By.xpath("//a[@title='Duplicate Layout Element']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Duplicate Layout Element']"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//a[@title='Duplicate Layout Element']"));
+    ElementHelper.Click(driver, By.xpath("//a[@title='Duplicate Layout Element']"));
 
     /*
      * ## Step 4

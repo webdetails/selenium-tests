@@ -22,11 +22,11 @@
 package org.pentaho.ctools.issues.cda;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -34,6 +34,8 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -71,18 +73,6 @@ public class CDA46 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-    //Go to User Console
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/compoundJoin.cda");
-
-    //Wait for buttons: button, Cache This AND Query URL
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='button']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='cachethis']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='queryUrl']"));
-
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -105,6 +95,21 @@ public class CDA46 {
     /*
      * ## Step 1
      */
+    //Open Sql-Jdbc Sample
+    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda");
+
+    //Wait for buttons: button, Cache This AND Query URL
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
+    assertNotNull(element);
+    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
+    select.selectByValue("1");
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
+    assertNotNull(element);
+
     ElementHelper.WaitForElementPresence(driver, By.id("outputIndexId"));
     ElementHelper.FindElement(driver, By.id("outputIndexId")).click();
     ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='helpButton helpButtonShort']"));

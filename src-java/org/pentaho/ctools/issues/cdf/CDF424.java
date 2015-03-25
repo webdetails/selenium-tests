@@ -22,11 +22,11 @@
 package org.pentaho.ctools.issues.cdf;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -34,6 +34,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -71,23 +72,6 @@ public class CDF424 {
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Before
-  public void setUpTestCase() {
-
-    //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-424%3ACDF-424.wcdf/generatedContent");
-
-    // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-
-    //assert Elements loaded
-    ElementHelper.WaitForElementVisibility(driver, By.id("placeprotovis"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='text']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']"));
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -107,6 +91,25 @@ public class CDF424 {
     /*
      * ## Step 1
      */
+
+    //Go to Issue Sample
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-424%3ACDF-424.wcdf/generatedContent");
+
+    // Wait for loading disappear
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
+    //assert Elements loaded
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("placeprotovis"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='text']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']"));
+    assertNotNull(element);
+
     String axis1Text = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']")).getAttribute("fill");
     String axis2Text = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']")).getAttribute("fill");
     String axis3Text = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='text']")).getAttribute("fill");

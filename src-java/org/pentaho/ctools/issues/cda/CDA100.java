@@ -34,7 +34,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -88,21 +87,6 @@ public class CDA100 {
     exportFilePath = downloadDir + "\\cda-export.xls";
   }
 
-  @Before
-  public void setUpTestCase() {
-    //Go to User Console
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA-100/CDA-100.cda");
-
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-    //Wait for buttons: button, Cache This AND Query URL
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='button']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='cachethis']"));
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//button[@id='queryUrl']"));
-
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -124,20 +108,36 @@ public class CDA100 {
     /*
      * ## Step 1
      */
-    ElementHelper.WaitForElementPresence(driver, By.id("dataAccessSelector"));
+    //Open sample CDA file
+    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA-100/CDA-100.cda");
+
+    //wait for invisibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+
+    //Wait for buttons: button, Cache This AND Query URL
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
+    assertNotNull(element);
     Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Sql Query on SampleData - Jdbc");
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
+    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
+    assertNotNull(element);
 
     /*
      * ## Step 2
      */
     //wait to render page
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
     //Check the presented contains
     WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     elemStatus = ElementHelper.FindElement(driver, By.id("orderDate"));
     assertEquals("2003-03-01", elemStatus.getAttribute("value"));
+
     //Check text on table
     String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
     String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));

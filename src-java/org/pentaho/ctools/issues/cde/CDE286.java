@@ -138,13 +138,17 @@ public class CDE286 {
 
     //Add Colour Range
     ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div/div/input"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div/div/input"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div[2]/div/input"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div[2]/div/input"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div[3]/div/input"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div[3]/div/input"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']/div/div/div/div/div/div/input"));
     ElementHelper.FindElement(driver, By.xpath("//div[@id='popupstates']/div/div/div/div/div/div/input")).sendKeys("blue");
     ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']/div/div/div/div/div[2]/div/input"));
@@ -158,13 +162,17 @@ public class CDE286 {
 
     //Add Intervals Array
     ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div/div/input"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div/div/input"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div[2]/div/input"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div[2]/div/input"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div[3]/div/input"));
+    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div[3]/div/input"));
+    assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//div[@id='popupstates']/div/div/div/input"));
     ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div[4]/div/input"));
     ElementHelper.FindElement(driver, By.xpath("//div[@id='StringArray']/div/div/div/input")).sendKeys("0");
