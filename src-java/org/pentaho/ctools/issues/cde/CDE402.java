@@ -184,8 +184,9 @@ public class CDE402 {
     String templateText = ElementHelper.FindElement(frame, By.xpath("//div[@id='thumbs']/div[2]/p")).getText();
     assertEquals("Two Columns Template", templateText);
     ElementHelper.Click(frame, By.xpath("//div[@id='thumbs']/div[2]/p"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='thumbs']/div[@class='active']"));
-    assertNotNull(element);
+    ElementHelper.WaitForAttributeValue(frame, By.xpath("//div[@id='thumbs']/div[2]"), "class", "hover active");
+    String text = ElementHelper.GetAttribute(frame, By.xpath("//div[@id='thumbs']/div[2]"), "class");
+    assertEquals("hover active", text);
     element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
     assertNotNull(element);
     ElementHelper.Click(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
