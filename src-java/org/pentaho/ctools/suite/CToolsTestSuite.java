@@ -41,6 +41,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
+import org.pentaho.ctools.security.AccessSystemResources;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -51,7 +52,7 @@ import org.pentaho.ctools.main.LogoutPentaho;
   //Start Tests
   LoginPentaho.class,
   //CDF
-  /*SuiteCDF.class,
+  SuiteCDF.class,
   //CDE
   SuiteCDE.class,
   //CDA
@@ -59,9 +60,9 @@ import org.pentaho.ctools.main.LogoutPentaho;
   //CGG
   SuiteCGG.class,
   //Security
-  AccessSystemResources.class,*/
+  AccessSystemResources.class,
   //Issues
-  SuiteIssues.class,
+  //SuiteIssues.class,
   //End Tests
   LogoutPentaho.class })
 public class CToolsTestSuite {
