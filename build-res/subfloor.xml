@@ -345,30 +345,33 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         Copy the CTools, samples and other resources to Pentaho server.
         ====================================================================-->
-    <target name="copy-ctools-and-other-resources">
+    <target name="copy-ctools-and-other-resources" depends="delete-sparkl-plugins">
       <echo message="Starting copy CTools and other resources." />
 
       <!-- Delete CTools on server -->
       <property name="pentaho.default.content.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/default-content"/>
-      <property name="pentaho.plugin.cgg.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/cgg"/>
-      <property name="pentaho.plugin.cda.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/cda"/>
-      <property name="pentaho.plugin.cdf.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf"/>
-      <property name="pentaho.plugin.cde.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf-dd"/>
-      <!-- Delete CGG, CDA, CDF, CDE-->
+      <property name="pentaho.plugin.cgg.dir"      value="${pentaho.bi.server.dir}/pentaho-solutions/system/cgg"/>
+      <property name="pentaho.plugin.cda.dir"      value="${pentaho.bi.server.dir}/pentaho-solutions/system/cda"/>
+      <property name="pentaho.plugin.cdf.dir"      value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf"/>
+      <property name="pentaho.plugin.cde.dir"      value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf-dd"/>
+	  <property name="pentaho.plugin.sparkl.dir"   value="${pentaho.bi.server.dir}/pentaho-solutions/system/sparkl"/>
+      <!-- Delete CGG, CDA, CDF, CDE, SPARKL at default-content in BA Server -->
 	  <delete>
 		<fileset dir="${pentaho.default.content.dir}" includes="**/*"/>		 
 	  </delete>
-	  <!-- Delete CGG, CDA, CDF, CDE-->
+	  <!-- Delete CGG, CDA, CDF, CDE, SPARKL at system in BA Server -->
       <delete dir="${pentaho.plugin.cgg.dir}" />
       <delete dir="${pentaho.plugin.cda.dir}" />
       <delete dir="${pentaho.plugin.cdf.dir}" />
       <delete dir="${pentaho.plugin.cde.dir}" />
+	  <delete dir="${pentaho.plugin.sparkl.dir}" />
 
       <!-- Unzip the ctools -->
       <unzip src="${lib.ext.dir}/plugin/cgg.zip" dest="${tmp.dir}" />
       <unzip src="${lib.ext.dir}/plugin/cda.zip" dest="${tmp.dir}" />
       <unzip src="${lib.ext.dir}/plugin/pentaho-cdf.zip" dest="${tmp.dir}" />
       <unzip src="${lib.ext.dir}/plugin/pentaho-cdf-dd.zip" dest="${tmp.dir}" />
+	  <unzip src="${lib.ext.dir}/plugin/sparkl.zip" dest="${tmp.dir}" />
       <!-- unzip the samples -->
       <!-- 
           1- Create a directory with name 'public'
@@ -388,7 +391,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <zipfileset dir="${tmp.dir}/public" prefix="public"/>
       </zip>
 
-      <!-- Copy the CTools -->
+      <!-- Copy the CTools and sparkl -->
       <copy todir="${pentaho.plugin.cgg.dir}">
         <fileset dir="${tmp.dir}/cgg" />
       </copy>
@@ -401,6 +404,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <copy todir="${pentaho.plugin.cde.dir}">
         <fileset dir="${tmp.dir}/pentaho-cdf-dd" />
       </copy>
+	  <copy todir="${pentaho.plugin.sparkl.dir}">
+        <fileset dir="${tmp.dir}/sparkl" />
+      </copy>
       <copy file="${tmp.dir}/plugin-samples.zip" todir="${pentaho.default.content.dir}" />
 	  <!-- copy all issues to default content -->
 	  <copy file="${resources.dir}/Issues/public.zip" todir="${pentaho.default.content.dir}" />
@@ -409,17 +415,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <fileset dir="${resources.dir}/cdf-tutorial" />
       </copy>
 	  
-	  <!-- Add Sparkl plugin -->
-	  <mkdir dir="${tmp.dir}/sparkl" />
-	  <unzip src="${resources.dir}/Sparkl/Plugins.zip" dest="${tmp.dir}/sparkl" />
+	  <!-- Add Sparkl plugins for tests -->
+	  <mkdir dir="${tmp.dir}/sparkl-plugins" />
+	  <unzip src="${resources.dir}/Sparkl/Plugins.zip" dest="${tmp.dir}/sparkl-plugins" />
 	  <copy todir="${pentaho.bi.server.dir}/pentaho-solutions/system" overwrite="true" >
-        <fileset dir="${tmp.dir}/sparkl" >
+        <fileset dir="${tmp.dir}/sparkl-plugins" >
 		  <include name="**/*" />
 		</fileset>
-      </copy>
+      </copy>  
 	  
-	  <!-- Delete sparkl plugins that could may leave after testing -->
-      <antcall target="delete-sparkl-plugins"/>
     </target>
 	
 	<!--=======================================================================
@@ -428,6 +432,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <target name="delete-sparkl-plugins"> 
       <delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest" />
 	  <delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest1" />
+	  <delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/CDE404" />	  
     </target>
 
     <!--=======================================================================
