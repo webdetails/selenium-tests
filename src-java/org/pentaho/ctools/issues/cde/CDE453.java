@@ -22,7 +22,6 @@
 package org.pentaho.ctools.issues.cde;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -135,7 +134,7 @@ public class CDE453 {
     /*
      * ## Step 4
      */
-    driver.get(baseUrl + "Home");
+    /*driver.get(baseUrl + "Home");
     driver.switchTo().frame("home.perspective");
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='well sidebar']"));
     ElementHelper.Click(driver, By.xpath("//div[@class='well sidebar']/button"));//Click in 'Browse Files'
@@ -159,7 +158,7 @@ public class CDE453 {
     assertNotNull(ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@path='/public']")));
     driver.findElement(By.xpath("//div[@path='/public']")).findElement(By.className("expandCollapse")).click();
     //CDE
-    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@path='/public/cde']")));
+    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@path='/public/cde']")));*/
 
   }
 
