@@ -141,7 +141,7 @@ public class MondrianJNDI {
     String textSecondParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='aboutSubContainerLeft']/div[2]/p[2]"));
 
     assertEquals("Hello!", textElementFileid);
-    assertEquals(baseUrl + "api/repos/cda/static/cda.png", imgAttrSrc);
+    assertEquals("cda.png", imgAttrSrc);
     assertEquals(textFirstParagExpected, textFirstParag);
     assertEquals(textSecondParagExpected, textSecondParag);
 

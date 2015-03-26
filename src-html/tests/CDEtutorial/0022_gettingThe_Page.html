@@ -2061,6 +2061,11 @@
 	<td>These charts show the sales by Region, Country and Product in the last three years. Just select one year and the charts will be updated. If you click on a Region, the charts to the right will be updated. If you click on a Country, the product chart will be updated.</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
 	<td>France</td>
