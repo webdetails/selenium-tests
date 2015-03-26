@@ -66,7 +66,7 @@
         <!-- Junit -->
         <dependency org="junit" name="junit" rev="4.11" conf="test-java->default"/>
         <!-- Assertations -->
-        <dependency org="org.hamcrest" name="hamcrest-all" rev="1.3"/>
+        <dependency org="org.hamcrest" name="hamcrest-all" rev="1.3" conf="test-java->default"/>
          <!-- Selenium Java -->
         <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="2.44.0" conf="test-java->default"/>
         <!-- LOG4J - logging framework -->
