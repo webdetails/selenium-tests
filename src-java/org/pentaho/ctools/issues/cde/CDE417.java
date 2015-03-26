@@ -293,6 +293,7 @@ public class CDE417 {
 
     //Uncheck Show Hidden Files
     driver.get(baseUrl + "Home");
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
     assertNotNull(element);
     element.click();
