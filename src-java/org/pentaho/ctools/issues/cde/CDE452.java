@@ -88,7 +88,7 @@ public class CDE452 {
    *    3. Log out and log in with Pat, repeat step 1 and assert it gives "Access Denied"
    *    4. Log out and log in with Tiffany, repeat step 1 and assert it gives "Access Denied"
    */
-  @Test(timeout = 120000)
+  @Test(timeout = 180000)
   public void tc01_CdeDashboard_AccessDeniedEdit() {
     log.info("tc01_CdeDashboard_AccessDeniedEdit");
 

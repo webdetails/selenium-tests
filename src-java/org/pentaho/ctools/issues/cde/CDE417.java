@@ -135,6 +135,7 @@ public class CDE417 {
       assertNotNull(element);
       element.click();
     } else {
+      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
       element.click();
     }
 
