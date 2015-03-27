@@ -61,6 +61,7 @@ public class WidgetUtils {
       assertNotNull(element);
       element.click();
     } else {
+      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
       element.click();
     }
 
@@ -156,6 +157,8 @@ public class WidgetUtils {
     assertNotNull(element);
     text = element.getAttribute("class");
     assertEquals("gwt-MenuItem-checkbox-unchecked", text);
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
+    element.click();
   }
 
   /**

@@ -163,7 +163,7 @@ public class CDE384 {
     WebDriver frame = driver.switchTo().frame(elementFrame);
     element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//span[@id='infoArea']"));
     assertNotNull(element);
-    String pathText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
+    String pathText = ElementHelper.WaitForTextPresence(frame, By.xpath("//span[@id='infoArea']"), "/public/plugin-samples/pentaho-cdf-dd/cdeReference.css");
     assertEquals("/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText);
     driver.switchTo().defaultContent();
     ElementHelper.Click(driver, By.id("popup_edit_buttonClose"));
@@ -222,7 +222,7 @@ public class CDE384 {
     frame = driver.switchTo().frame(elementFrame);
     element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//span[@id='infoArea']"));
     assertNotNull(element);
-    String pathText1 = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
+    String pathText1 = ElementHelper.WaitForTextPresence(frame, By.xpath("//span[@id='infoArea']"), "/public/plugin-samples/cda/cdafiles/compoundJoin.cda");
     assertEquals("/public/plugin-samples/cda/cdafiles/compoundJoin.cda", pathText1);
     driver.switchTo().defaultContent();
     ElementHelper.Click(driver, By.id("popup_edit_buttonClose"));
@@ -245,7 +245,7 @@ public class CDE384 {
     frame = driver.switchTo().frame(elementFrame);
     element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//span[@id='infoArea']"));
     assertNotNull(element);
-    String pathText3 = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
+    String pathText3 = ElementHelper.WaitForTextPresence(frame, By.xpath("//span[@id='infoArea']"), "/public/plugin-samples/pentaho-cdf-dd/cdeReference.css");
     assertEquals("/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText3);
     driver.switchTo().defaultContent();
     ElementHelper.Click(driver, By.id("popup_edit_buttonClose"));

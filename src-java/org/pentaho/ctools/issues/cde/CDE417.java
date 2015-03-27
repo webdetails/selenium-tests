@@ -97,7 +97,7 @@ public class CDE417 {
    *    6. Click to export chart as SVG, click export, assert chart is shown
    *
    */
-  @Test(timeout = 120000)
+  @Test(timeout = 240000)
   public void tc01_PopupExportComponent_PreviewerRendersChart() {
     log.info("tc01_PopupExportComponent_PreviewerRendersChart");
 
