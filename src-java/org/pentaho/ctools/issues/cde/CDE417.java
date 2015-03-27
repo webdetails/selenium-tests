@@ -186,18 +186,18 @@ public class CDE417 {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
     element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']/div[2]"));
-    assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']/div[2]"));
-    text = ElementHelper.GetAttribute(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']"), "class");
-    assertEquals(text, "file selected");
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
-    assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
-    driver.switchTo().defaultContent();
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("okButton"));
-    assertNotNull(element);
-    ElementHelper.Click(frame, By.id("okButton"));
-
+    if (element != null) {
+      ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']/div[2]"));
+      text = ElementHelper.GetAttribute(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']"), "class");
+      assertEquals(text, "file selected");
+      element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
+      assertNotNull(element);
+      ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
+      driver.switchTo().defaultContent();
+      element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("okButton"));
+      assertNotNull(element);
+      ElementHelper.Click(frame, By.id("okButton"));
+    }
     //wait for invisibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     // Wait for loading disappear
@@ -205,6 +205,7 @@ public class CDE417 {
 
     elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe[@id='browser.perspective']"));
     frame = driver.switchTo().frame(elementFrame);
+    ElementHelper.WaitForAttributeValue(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div[1]"), "title", "ExportPopupComponent.cda");
     text = ElementHelper.GetAttribute(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div[1]"), "title");
     assertEquals(text, "ExportPopupComponent.cda");
 
