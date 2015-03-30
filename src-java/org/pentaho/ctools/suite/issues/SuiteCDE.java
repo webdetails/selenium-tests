@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -19,21 +19,10 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package org.pentaho.ctools.suite;
+package org.pentaho.ctools.suite.issues;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.pentaho.ctools.issues.cda.CDA100;
-import org.pentaho.ctools.issues.cda.CDA103;
-import org.pentaho.ctools.issues.cda.CDA106;
-import org.pentaho.ctools.issues.cda.CDA108;
-import org.pentaho.ctools.issues.cda.CDA109;
-import org.pentaho.ctools.issues.cda.CDA112;
-import org.pentaho.ctools.issues.cda.CDA121;
-import org.pentaho.ctools.issues.cda.CDA45;
-import org.pentaho.ctools.issues.cda.CDA46;
-import org.pentaho.ctools.issues.cda.CDA55;
-import org.pentaho.ctools.issues.cda.CDA99;
 import org.pentaho.ctools.issues.cde.CDE149;
 import org.pentaho.ctools.issues.cde.CDE269;
 import org.pentaho.ctools.issues.cde.CDE270;
@@ -57,40 +46,15 @@ import org.pentaho.ctools.issues.cde.CDE408;
 import org.pentaho.ctools.issues.cde.CDE410;
 import org.pentaho.ctools.issues.cde.CDE412;
 import org.pentaho.ctools.issues.cde.CDE413;
-import org.pentaho.ctools.issues.cde.CDE417;
 import org.pentaho.ctools.issues.cde.CDE425;
 import org.pentaho.ctools.issues.cde.CDE432;
 import org.pentaho.ctools.issues.cde.CDE438;
 import org.pentaho.ctools.issues.cde.CDE439;
-import org.pentaho.ctools.issues.cde.CDE446;
 import org.pentaho.ctools.issues.cde.CDE452;
 import org.pentaho.ctools.issues.cde.CDE453;
-import org.pentaho.ctools.issues.cdf.CDF149;
-import org.pentaho.ctools.issues.cdf.CDF379;
-import org.pentaho.ctools.issues.cdf.CDF406;
-import org.pentaho.ctools.issues.cdf.CDF424;
-import org.pentaho.ctools.issues.cdf.CDF430;
-import org.pentaho.ctools.issues.cdf.CDF435;
-import org.pentaho.ctools.issues.cdf.CDF442;
-import org.pentaho.ctools.issues.cdf.CDF469;
-import org.pentaho.ctools.issues.cdf.CDF474;
-import org.pentaho.ctools.issues.cdf.CDF486;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-  //Issues CDA
-  CDA45.class,
-  CDA46.class,
-  CDA55.class,
-  CDA99.class,
-  CDA100.class,
-  CDA103.class,
-  CDA106.class,
-  CDA108.class,
-  CDA109.class,
-  CDA112.class,
-  CDA121.class,
-
   //Issues CDE
   CDE149.class,
   CDE269.class,
@@ -115,26 +79,13 @@ import org.pentaho.ctools.issues.cdf.CDF486;
   CDE410.class,
   CDE412.class,
   CDE413.class,
-  CDE417.class,
+  //CDE417.class,
   CDE425.class,
   CDE432.class,
   CDE438.class,
   CDE439.class,
-  CDE446.class,
+  //CDE446.class,
   CDE452.class,
-  CDE453.class,
-
-  //Issues CDF
-  CDF149.class,
-  CDF379.class,
-  CDF406.class,
-  CDF424.class,
-  CDF430.class,
-  CDF435.class,
-  CDF442.class,
-  CDF469.class,
-  CDF474.class,
-  CDF486.class
-
+  CDE453.class
 })
-public class SuiteIssues {}
+public class SuiteCDE{}

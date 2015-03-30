@@ -41,30 +41,29 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
+import org.pentaho.ctools.security.AccessSystemResources;
+import org.pentaho.ctools.suite.issues.SuiteIssues;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-  /*LoginPentaho.class,
-  CCCV2ShowCase.class, CDE439.class*/
-  //LogoutPentaho.class
   //##### Execution Order #####
   //Start Tests
   LoginPentaho.class,
   //CDF
-  /*SuiteCDF.class,
-   //CDE
-   SuiteCDE.class,
-   //CDA
-   SuiteCDA.class,
-   //CGG
-   SuiteCGG.class,
-   //Security
-   AccessSystemResources.class,*/
+  SuiteCDF.class,
+  //CDE
+  SuiteCDE.class,
+  //CDA
+  SuiteCDA.class,
+  //CGG
+  SuiteCGG.class,
+  //Security
+  AccessSystemResources.class,
   //Issues
   SuiteIssues.class,
   //End Tests
   LogoutPentaho.class })
-public class CToolsTestSuite {
+public class CToolsTestSuite{
 
   /// Instance of the driver (browser emulator)
   private static WebDriver       driver;

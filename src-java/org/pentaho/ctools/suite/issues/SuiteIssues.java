@@ -19,31 +19,21 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package org.pentaho.ctools.suite;
+package org.pentaho.ctools.suite.issues;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.pentaho.ctools.cde.SampleDashboard;
-import org.pentaho.ctools.cde.reference.AddinReference;
-import org.pentaho.ctools.cde.reference.AddinReferenceEdit;
-import org.pentaho.ctools.cde.reference.AjaxRequestReference;
-import org.pentaho.ctools.cde.reference.BullertChartTestCase;
-import org.pentaho.ctools.cde.reference.CCCV2ShowCase;
-import org.pentaho.ctools.cde.reference.MapComponentFullTest;
-import org.pentaho.ctools.cde.reference.MapComponentReference;
-import org.pentaho.ctools.cde.reference.PopupComponent;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-  SampleDashboard.class,
-  AddinReference.class,
-  AddinReferenceEdit.class,
-  AjaxRequestReference.class,
-  BullertChartTestCase.class,
-  CCCV2ShowCase.class,
-  MapComponentFullTest.class,
-  MapComponentReference.class,
-  PopupComponent.class
+  //Issues CDA
+  SuiteCDA.class,
+
+  //Issues CDE
+  SuiteCDE.class,
+
+  //Issues CDF
+  SuiteCDF.class,
 
 })
-public class SuiteCDERequire {}
+public class SuiteIssues{}

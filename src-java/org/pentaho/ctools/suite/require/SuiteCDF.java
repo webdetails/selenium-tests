@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package org.pentaho.ctools.suite;
+package org.pentaho.ctools.suite.require;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -81,4 +81,4 @@ import org.pentaho.ctools.cdf.XactionComponent;
   VisualizationAPIComponent.class,
   XactionComponent.class
 })
-public class SuiteCDFRequire {}
+public class SuiteCDF {}
