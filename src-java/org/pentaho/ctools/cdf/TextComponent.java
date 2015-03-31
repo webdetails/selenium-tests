@@ -25,8 +25,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,7 +56,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TextComponent {
+public class TextComponent{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -168,13 +171,18 @@ public class TextComponent {
     String expectedText = "My text generated in " + strToday;
 
     boolean displayTime = text.startsWith(expectedText);
-    if (!displayTime) {
+    if( ! displayTime) {
       log.error("Displayed time: " + text);
       log.error("Expected time: " + expectedText);
     }
 
+    TimeZone tz = Calendar.getInstance().getTimeZone();
+    int offset = tz.getOffset(System.currentTimeMillis());
+    String offsetText = String.format("%s%02d%02d", offset >= 0?"+": "-", offset / 3600000, offset / 60000 % 60);
+
     Assert.assertThat("Displayed time: " + text + "Expected time: " + expectedText, text, CoreMatchers.containsString(expectedText));
-    Assert.assertThat("Displayed time: " + text, text, CoreMatchers.containsString("GMT+0000"));
+    Assert.assertThat("Displayed time: " + text, text, CoreMatchers.containsString("GMT" + offsetText));
+
   }
 
   @AfterClass
