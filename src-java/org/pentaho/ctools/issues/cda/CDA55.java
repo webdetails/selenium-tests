@@ -95,7 +95,7 @@ public class CDA55 {
      * ## Step 1
      */
     //Go to User Console
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA-55/sample-kettle-ParamArray.cda");
+    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-55/sample-kettle-ParamArray.cda");
 
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
     assertNotNull(element);

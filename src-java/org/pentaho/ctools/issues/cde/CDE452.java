@@ -108,7 +108,7 @@ public class CDE452 {
     assertNotNull(element);
 
     //Open repository dashboard in edit mode and assert elements on page
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit");
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
     assertNotNull(element);
@@ -171,10 +171,10 @@ public class CDE452 {
     assertEquals("Access Denied to file /system/CDE404/dashboards/i18nTest.wcdf", text);
 
     //Open repository dashboard in edit mode and assert elements on page
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit");
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//body"));
-    assertEquals("Access Denied to file /public/Issues/CDF-430/CDE/i18nTest.wcdf", text);
+    assertEquals("Access Denied to file /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf", text);
 
     /*
      * ## Step 3
@@ -228,10 +228,10 @@ public class CDE452 {
     assertEquals("Access Denied to file /system/CDE404/dashboards/i18nTest.wcdf", text);
 
     //Open repository dashboard in edit mode and assert elements on page
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit");
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//body"));
-    assertEquals("Access Denied to file /public/Issues/CDF-430/CDE/i18nTest.wcdf", text);
+    assertEquals("Access Denied to file /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf", text);
 
     /*
      * ## Step 4
@@ -285,10 +285,10 @@ public class CDE452 {
     assertEquals("Access Denied to file /system/CDE404/dashboards/i18nTest.wcdf", text);
 
     //Open repository dashboard in edit mode and assert elements on page
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit");
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//body"));
-    assertEquals("Access Denied to file /public/Issues/CDF-430/CDE/i18nTest.wcdf", text);
+    assertEquals("Access Denied to file /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf", text);
 
     //Log out
     driver.get(baseUrl + "Home");

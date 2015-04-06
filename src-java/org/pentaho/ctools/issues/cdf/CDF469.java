@@ -94,7 +94,7 @@ public class CDF469 {
      * ## Step 1
      */
     //Open created dashboard
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-469%3Acdf-469.wcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-469%3Acdf-469.wcdf/generatedContent");
 
     // Wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));

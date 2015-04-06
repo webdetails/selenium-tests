@@ -118,7 +118,7 @@ public class CDF430 {
      * ## Step 2
      */
     //Go to CDE sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-430%3ACDE%3Ai18nTest.wcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/generatedContent");
 
     // Wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -141,7 +141,7 @@ public class CDF430 {
      * ## Step 3
      */
     //Go to CDE sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-430%3ACDF%3Acdf_i18nTest.xcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDF%3Acdf_i18nTest.xcdf/generatedContent");
 
     // Wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));

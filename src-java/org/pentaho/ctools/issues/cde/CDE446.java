@@ -97,7 +97,7 @@ public class CDE446 {
      * ## Step 1
      */
     //Open created dashboard's cda file
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDE-446/CDE-446.cda");
+    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDE/CDE-446/CDE-446.cda");
 
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
     assertNotNull(element);

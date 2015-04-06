@@ -94,7 +94,7 @@ public class CDA109 {
      * ## Step 1
      */
     //Go to User Console
-    driver.get(baseUrl + "plugin/cda/api/editFile?path=/public/Issues/CDA%20-%20109/.cda");
+    driver.get(baseUrl + "plugin/cda/api/editFile?path=/public/Issues/CDA/CDA%20-%20109/.cda");
 
     //Wait for Elements outside of iFrame
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='webdetailsLogo']"));

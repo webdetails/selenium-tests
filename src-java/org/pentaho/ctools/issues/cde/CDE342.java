@@ -95,7 +95,7 @@ public class CDE342 {
      * ## Step 1
      */
     //Go to Issue sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent");
 
     //Wait for Input field
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("col1"));

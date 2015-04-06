@@ -92,7 +92,7 @@ public class CDF474 {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/:public:Issues:CDF-474:CDF-474.wcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/:public:Issues:CDF:CDF-474:CDF-474.wcdf/generatedContent");
 
     // Wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));

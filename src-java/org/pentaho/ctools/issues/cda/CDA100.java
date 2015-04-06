@@ -109,7 +109,7 @@ public class CDA100 {
      * ## Step 1
      */
     //Open sample CDA file
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA-100/CDA-100.cda");
+    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-100/CDA-100.cda");
 
     //wait for invisibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
@@ -168,15 +168,17 @@ public class CDA100 {
       for (int i = 0; i < 50; i++) { //we only try 50 times == 5000 ms
         long nSize = FileUtils.sizeOf(exportFile);
         //Since the file always contents the same data, we wait for the expected bytes
-        if (nSize >= 249856) {
+        if (nSize >= 300000) {
           break;
         }
         Thread.sleep(100);
       }
 
+      log.info("File size :" + FileUtils.sizeOf(exportFile));
+
       //Check if the file downloaded is the expected
       String md5 = DigestUtils.md5Hex(Files.readAllBytes(exportFile.toPath()));
-      assertEquals(md5, "f87ea229efc4da71d47a90ef2029564d");
+      assertEquals(md5, "55d930ece357f87af6f4d85cc8ead619");
 
       //The delete file
       DeleteFile();

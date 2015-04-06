@@ -97,23 +97,33 @@ public class CDE417 {
    *    6. Click to export chart as SVG, click export, assert chart is shown
    *
    */
-  @Test(timeout = 240000)
+  @Test(timeout = 360000)
   public void tc01_PopupExportComponent_PreviewerRendersChart() {
     log.info("tc01_PopupExportComponent_PreviewerRendersChart");
 
     /*
      * ## Step 1
      */
+    //Save Export Popup Component sample
+    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AExportPopup%3AExportPopupComponent.wcdf/edit");
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@onclick='cdfdd.save()']"));
+    assertNotNull(element);
+    ElementHelper.Click(driver, By.xpath("//a[@onclick='cdfdd.save()']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='notifyBar']/div[2]"));
+    assertNotNull(element);
+    String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='notifyBar']/div[2]"));
+    assertEquals(text, "Dashboard saved successfully");
+
     // Show Hidden Files
     driver.get(baseUrl + "Home");
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
     assertNotNull(element);
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
     assertNotNull(element);
     element.click();
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
     assertNotNull(element);
-    String text = element.getAttribute("class");
+    text = element.getAttribute("class");
     if (text.equals("gwt-MenuItem-checkbox-unchecked")) {
       element.click();
       //wait for visibility of waiting pop-up
@@ -156,9 +166,9 @@ public class CDE417 {
     assertNotNull(element);
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementFrame);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='buttonWrapper']/div/div/button[1]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='buttonWrapper']/div/button[1]"));
     assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='buttonWrapper']/div/div/button[1]"));
+    ElementHelper.Click(frame, By.xpath("//div[@id='buttonWrapper']/div/button[1]"));
 
     /*
      * ## Step 2

@@ -109,7 +109,7 @@ public class CDA112 {
      * ## Step 1
      */
     //Open Issue Sample
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA-112/cda112.cda");
+    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-112/cda112.cda");
 
     //wait for invisibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));

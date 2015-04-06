@@ -96,7 +96,7 @@ public class CDE394 {
      * ## Step 1
      */
     //Go to Issue Sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent");
 
     //wait for invisibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));

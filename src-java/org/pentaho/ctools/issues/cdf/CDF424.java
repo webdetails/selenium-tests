@@ -93,7 +93,7 @@ public class CDF424 {
      */
 
     //Go to Issue Sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-424%3ACDF-424.wcdf/generatedContent");
+    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-424%3ACDF-424.wcdf/generatedContent");
 
     // Wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
