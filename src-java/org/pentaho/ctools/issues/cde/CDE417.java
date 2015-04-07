@@ -166,9 +166,9 @@ public class CDE417 {
     assertNotNull(element);
     WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     WebDriver frame = driver.switchTo().frame(elementFrame);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='buttonWrapper']/div/button[1]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='buttonWrapper']//button[1]"));
     assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='buttonWrapper']/div/button[1]"));
+    ElementHelper.Click(frame, By.xpath("//div[@id='buttonWrapper']//button[1]"));
 
     /*
      * ## Step 2
