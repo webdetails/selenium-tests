@@ -30,7 +30,8 @@ public class WidgetUtils {
 
     String baseUrl = CToolsTestSuite.getBaseUrl();
     driver.get(baseUrl + "Home");
-
+    //wait for visibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
     assertNotNull(element);
 
@@ -134,6 +135,9 @@ public class WidgetUtils {
       }
     }
     driver.get(baseUrl + "Home");
+
+    //wait for visibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     //Uncheck Show Hidden Files
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
     assertNotNull(element);
@@ -176,7 +180,8 @@ public class WidgetUtils {
     driver.switchTo().defaultContent();
     String baseUrl = CToolsTestSuite.getBaseUrl();
     driver.get(baseUrl + "Home");
-
+    //wait for visibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     //Wait for the visibility of Menu and frame contents
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='mainMenubar']"));
     driver.switchTo().frame("home.perspective");
@@ -289,7 +294,8 @@ public class WidgetUtils {
     driver.switchTo().defaultContent();
     String baseUrl = CToolsTestSuite.getBaseUrl();
     driver.get(baseUrl + "Home");
-
+    //wait for visibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     //Wait for the visibility of Menu and frame contents
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='mainMenubar']"));
     driver.switchTo().frame("home.perspective");
@@ -351,7 +357,8 @@ public class WidgetUtils {
     // 3. check if the widget exist in 'widgets' at Component Layout
     driver.switchTo().defaultContent();
     driver.get(baseUrl + "Home");
-
+    //wait for visibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     //Step 1 - Go to Homepage and click 'Browse Files'
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
     assertNotNull(driver.findElement(By.xpath("//iframe[@id='home.perspective']")));
