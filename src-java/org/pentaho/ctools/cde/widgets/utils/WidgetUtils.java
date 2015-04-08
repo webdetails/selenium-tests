@@ -30,7 +30,7 @@ public class WidgetUtils {
   public static void RemoveWidgetByName(WebDriver driver, String widgetName) {
     driver.switchTo().defaultContent();
 
-    String baseUrl = CToolsTestSuite.getBaseUrl();
+    CToolsTestSuite.getBaseUrl();
 
     BrowseFiles browser = new BrowseFiles(driver);
     if (PUCSettings.SHOWHIDDENFILES = false) {
@@ -100,7 +100,7 @@ public class WidgetUtils {
 
       }
     }
-    driver.get(baseUrl + "Home");
+
   }
 
   /**
