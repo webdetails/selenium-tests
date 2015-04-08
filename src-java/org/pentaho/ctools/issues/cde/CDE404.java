@@ -24,9 +24,6 @@ package org.pentaho.ctools.issues.cde;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
@@ -38,7 +35,6 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
@@ -89,72 +85,25 @@ public class CDE404 {
    *    accessing it from a dashboard that belongs to a plugin with upper case letter on the name.
    *
    * Steps:
-   *    1. Assert elements on page and click "Elements"
-   *    2. Look for existing dashboard and click to edit it.
-   *    3. Wait for dashboard to load and click add resources.
-   *    4. Select external file as resource
-   *    5. Select file
-   *    6. Edit resource and assert elements on external editor
+   *    1. Open CDE404's dashboard in edit mode.
+   *    2. Select external file as resource
+   *    3. Select file
+   *    4. Edit resource and assert elements on external editor
    */
   @Test(timeout = 180000)
   public void tc01_ExternalResources_PluginDashboard() {
     log.info("tc01_ExternalResources_PluginDashboard");
 
-    //Go to New CDE Dashboard
-    driver.get(baseUrl + "plugin/sparkl/api/plugininfo?pluginId=CDE404");
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"), 60);
-
     /*
      * ## Step 1
      */
-    WebElement element = ElementHelper.FindElement(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
-    assertNotNull(element);
-    String button1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div/button"));
-    assertEquals("About", button1);
-    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
-    assertNotNull(element);
-    button1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
-    assertEquals("Elements", button1);
-    ElementHelper.Click(driver, By.xpath("//div[@id='tabMultiButtonObj']/div/div[2]/button"));
 
-    /*
-     * ## Step 2
-     */
-    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
-    assertNotNull(element);
-    String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
-    assertEquals("test", text);
-    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
-    assertNotNull(element);
-    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[2]"));
-    assertEquals("Dashboard", text);
-    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
-    assertNotNull(element);
-    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[3]"));
-    assertEquals("All Users", text);
-    WebElement button = ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[4]/div/button[2]"));
-    Actions action = new Actions(driver);
-    action.moveToElement(button).build().perform();
-    ElementHelper.Click(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td[4]/div/button[2]"));
+    //Open plugin dashboard
+    driver.get(baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=Test.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit");
+    //wait for invisibility of waiting pop-up
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"), 60);
 
-    String parentHandle = driver.getWindowHandle();
-    Set<String> setWindows = driver.getWindowHandles();
-    ElementHelper.WaitForNewWindow(driver);
-    setWindows = driver.getWindowHandles();
-    //Get popup id
-    WebDriver popup = null;
-    Iterator<String> windowIterator = setWindows.iterator();
-
-    while (windowIterator.hasNext()) {
-      String windowHandle = windowIterator.next();
-      popup = driver.switchTo().window(windowHandle);
-      if (popup.getTitle().equals("Webdetails CDE")) {
-        break;
-      }
-    }
-    log.info("after while");
-    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Save as Template']"));
+    WebElement element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Save as Template']"));
     assertNotNull(element);
     element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Apply Template']"));
     assertNotNull(element);
@@ -167,7 +116,7 @@ public class CDE404 {
     ElementHelper.Click(driver, By.xpath("//a[@title='Add Resource']"));
 
     /*
-     * ## Step 4
+     * ## Step 2
      */
     element = ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceType']"));
     assertNotNull(element);
@@ -180,7 +129,7 @@ public class CDE404 {
     ElementHelper.Click(driver, By.xpath("//button[@id='popup_state0_buttonOk']"));
 
     /*
-     * ## Step 5
+     * ## Step 3
      */
     element = ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
     assertNotNull(element);
@@ -202,7 +151,7 @@ public class CDE404 {
     ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
 
     /*
-     * ## Step 6
+     * ## Step 4
      */
     element = ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfddInput']"));
     assertNotNull(element);
@@ -219,15 +168,6 @@ public class CDE404 {
     assertEquals("* License, v. 2.0. If a copy of the MPL was not distributed with this file,", lineText);
     lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div[3]/span"));
     assertEquals("* You can obtain one at http://mozilla.org/MPL/2.0/. */", lineText);
-
-    driver.switchTo().defaultContent();
-    ElementHelper.Click(driver, By.xpath("//div[@class='popupclose']"));
-    driver.close();
-    driver.switchTo().window(parentHandle);
-    element = ElementHelper.FindElement(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
-    assertNotNull(element);
-    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='elementsTableObjTable_wrapper']/table/tbody/tr/td"));
-    assertEquals("test", text);
 
   }
 

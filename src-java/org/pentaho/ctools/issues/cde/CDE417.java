@@ -39,7 +39,9 @@ import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.HttpUtils;
+import org.pentaho.ctools.utils.PUCSettings;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
+import org.pentaho.gui.web.puc.BrowseFiles;
 
 /**
  * The script is testing the issue:
@@ -104,119 +106,21 @@ public class CDE417 {
     /*
      * ## Step 1
      */
-    //Save Export Popup Component sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AExportPopup%3AExportPopupComponent.wcdf/edit");
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@onclick='cdfdd.save()']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@onclick='cdfdd.save()']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='notifyBar']/div[2]"));
-    assertNotNull(element);
-    String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='notifyBar']/div[2]"));
-    assertEquals(text, "Dashboard saved successfully");
-
     // Show Hidden Files
-    driver.get(baseUrl + "Home");
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
-    assertNotNull(element);
-    text = element.getAttribute("class");
-    if (text.equals("gwt-MenuItem-checkbox-unchecked")) {
-      element.click();
-      //wait for visibility of waiting pop-up
-      ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-      ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-      ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-
-      ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("filemenu"));
-      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-      assertNotNull(element);
-      element.click();
-
-      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
-      assertNotNull(element);
-      text = element.getAttribute("class");
-      assertEquals("gwt-MenuItem-checkbox-checked", text);
-      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-      assertNotNull(element);
-      element.click();
-    } else {
-      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-      element.click();
+    BrowseFiles browser = new BrowseFiles(driver);
+    if (PUCSettings.SHOWHIDDENFILES = false) {
+      browser.CheckShowHiddenFiles();
     }
-
-    //Go to Home page
-    driver.get(baseUrl + "Home");
-
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-    //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("filemenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("toolsmenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("helpmenu"));
-    assertNotNull(element);
-    WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    WebDriver frame = driver.switchTo().frame(elementFrame);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='buttonWrapper']//button[1]"));
-    assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='buttonWrapper']//button[1]"));
 
     /*
      * ## Step 2
      */
-    driver.switchTo().defaultContent();
-    elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe[@id='browser.perspective']"));
-    frame = driver.switchTo().frame(elementFrame);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("fileBrowserFolders"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[@path='/public']/div/div"));
-    assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]/div[@path='/public']/div/div"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples']/div/div"));
-    assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples']/div/div"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd']/div/div"));
-    assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd']/div/div"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests']/div/div"));
-    assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests']/div/div"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup']/div/div[3]"));
-    assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFolders']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup']/div/div[3]"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']/div[2]"));
-    if (element != null) {
-      ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']/div[2]"));
-      text = ElementHelper.GetAttribute(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]//div[@path='/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js']"), "class");
-      assertEquals(text, "file selected");
-      element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
-      assertNotNull(element);
-      ElementHelper.Click(frame, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
-      driver.switchTo().defaultContent();
-      element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("okButton"));
-      assertNotNull(element);
-      ElementHelper.Click(frame, By.id("okButton"));
-    }
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    browser.DeleteFile("/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js");
 
-    elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe[@id='browser.perspective']"));
-    frame = driver.switchTo().frame(elementFrame);
+    WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe[@id='browser.perspective']"));
+    WebDriver frame = driver.switchTo().frame(elementFrame);
     ElementHelper.WaitForAttributeValue(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div[1]"), "title", "ExportPopupComponent.cda");
-    text = ElementHelper.GetAttribute(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div[1]"), "title");
+    String text = ElementHelper.GetAttribute(frame, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div[1]"), "title");
     assertEquals(text, "ExportPopupComponent.cda");
 
     /*
@@ -224,7 +128,8 @@ public class CDE417 {
      */
     //Go to Export Popup Component sample
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AExportPopup%3AExportPopupComponent.wcdf/edit");
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@onclick='cdfdd.save()']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@onclick='cdfdd.save()']"));
     assertNotNull(element);
     ElementHelper.Click(driver, By.xpath("//a[@onclick='cdfdd.save()']"));
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='notifyBar']/div[2]"));
@@ -236,6 +141,7 @@ public class CDE417 {
      * ## Step 4
      */
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AExportPopup%3AExportPopupComponent.wcdf/generatedContent");
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Assert chart and export buttons
     WebElement elem = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='ChartExportPNGExporting']/div"));
     assertNotNull(elem);
@@ -302,29 +208,6 @@ public class CDE417 {
     assertEquals(200, HttpUtils.GetResponseCode("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", "admin", "password"));
     ElementHelper.Click(driver, By.id("fancybox-close"));
     assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[1]")));
-
-    //Uncheck Show Hidden Files
-    driver.get(baseUrl + "Home");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
-    assertNotNull(element);
-    text = element.getAttribute("class");
-    assertEquals("gwt-MenuItem-checkbox-checked", text);
-    element.click();
-    //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
-    assertNotNull(element);
-    text = element.getAttribute("class");
-    assertEquals("gwt-MenuItem-checkbox-unchecked", text);
 
   }
 

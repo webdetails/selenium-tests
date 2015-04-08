@@ -98,7 +98,7 @@ public class CDE149 {
 
     //Go to New CDE Dashboard
     driver.get(baseUrl + "api/repos/wcdf/new");
-
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Assert elements on page and go to Datasources Panel
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
     assertNotNull(element);

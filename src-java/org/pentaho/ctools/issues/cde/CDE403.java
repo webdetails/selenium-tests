@@ -95,7 +95,7 @@ public class CDE403 {
 
     //Go to New CDE Dashboard
     driver.get(baseUrl + "api/repos/wcdf/new");
-
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     /*
      * ## Step 1
      */

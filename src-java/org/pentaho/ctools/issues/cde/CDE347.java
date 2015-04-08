@@ -96,7 +96,7 @@ public class CDE347 {
      */
     //Go to Bullet Chart sample
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit");
-
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Wait for buttons: Layout. Components, Datasources AND Preview
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@title='Datasources Panel']"));
     assertNotNull(element);

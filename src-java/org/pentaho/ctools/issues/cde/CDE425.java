@@ -103,7 +103,7 @@ public class CDE425 {
      */
     //Go to New CDE Dashboard
     driver.get(baseUrl + "api/repos/wcdf/new");
-
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //assert buttons
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
     assertNotNull(element);

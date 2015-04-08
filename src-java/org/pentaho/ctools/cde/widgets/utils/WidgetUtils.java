@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PUCSettings;
+import org.pentaho.gui.web.puc.BrowseFiles;
 
 public class WidgetUtils {
 
@@ -29,47 +31,11 @@ public class WidgetUtils {
     driver.switchTo().defaultContent();
 
     String baseUrl = CToolsTestSuite.getBaseUrl();
-    driver.get(baseUrl + "Home");
-    //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
-    assertNotNull(element);
 
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
-    assertNotNull(element);
-    String text = element.getAttribute("class");
-    if (text.equals("gwt-MenuItem-checkbox-unchecked")) {
-      element.click();
-      //wait for visibility of waiting pop-up
-      ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-      ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-      ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-
-      ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("filemenu"));
-      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-      assertNotNull(element);
-      element.click();
-
-      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
-      assertNotNull(element);
-      text = element.getAttribute("class");
-      assertEquals("gwt-MenuItem-checkbox-checked", text);
-      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-      assertNotNull(element);
-      element.click();
-    } else {
-      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-      element.click();
+    BrowseFiles browser = new BrowseFiles(driver);
+    if (PUCSettings.SHOWHIDDENFILES = false) {
+      browser.CheckShowHiddenFiles();
     }
-
-    //Go to the Home Perspective [IFRAME]
-    driver.switchTo().frame("home.perspective");
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='well sidebar']"));
-    ElementHelper.Click(driver, By.xpath("//div[@class='well sidebar']/button"));//Click in 'Browse Files'
 
     //Now we have to navegate to 'Public/cde/widgets
     driver.switchTo().defaultContent();
@@ -135,34 +101,6 @@ public class WidgetUtils {
       }
     }
     driver.get(baseUrl + "Home");
-
-    //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    //Uncheck Show Hidden Files
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
-    assertNotNull(element);
-    text = element.getAttribute("class");
-    assertEquals("gwt-MenuItem-checkbox-checked", text);
-    element.click();
-
-    //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
-    assertNotNull(element);
-    text = element.getAttribute("class");
-    assertEquals("gwt-MenuItem-checkbox-unchecked", text);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    element.click();
   }
 
   /**
@@ -290,36 +228,14 @@ public class WidgetUtils {
    * @return
    */
   public static WebDriver CreateWidget(WebDriver driver, String widgetName) {
-    //Step 1 - Go to homepage
+    //Open New CDE Dashboard
     driver.switchTo().defaultContent();
     String baseUrl = CToolsTestSuite.getBaseUrl();
-    driver.get(baseUrl + "Home");
+    driver.get(baseUrl + "api/repos/wcdf/new");
     //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    //Wait for the visibility of Menu and frame contents
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='mainMenubar']"));
-    driver.switchTo().frame("home.perspective");
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='buttonWrapper']"));
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
-    //Step 2 - Click in Create New (CDE Dashboard)
-    //Click to create a widget
-    WebElement buttonCreateNew = driver.findElement(By.xpath("//button[@id='btnCreateNew']"));
-    assertEquals(buttonCreateNew.getText(), "Create New");
-    buttonCreateNew.click();
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("div.popover-content > #createNewlaunch_new_cdeButton"));
-    WebElement buttonCDEBashBoard = ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("div.popover-content > #createNewlaunch_new_cdeButton"));
-    assertEquals(buttonCDEBashBoard.getText(), "CDE Dashboard");
-    buttonCDEBashBoard.click();
-    driver.switchTo().defaultContent();//back to the root
-
-    //Step 3 - Click in Component Panel
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe"));
-    WebElement frameCDEDashboard = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe"));
-    driver.switchTo().frame(frameCDEDashboard);
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']")).click();
-
-    //Step 4 - Save the widget
+    //Save the widget
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='headerLinks']/div[2]/a"));
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='headerLinks']/div[2]/a")).click();
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='popup']"));

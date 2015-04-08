@@ -100,129 +100,73 @@ public class CDE402 {
     /*
      * ## Step 1
      */
-    //Go to User Console
-    driver.get(baseUrl + "Home");
-
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
-    assertNotNull(element);
-
-    //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("filemenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("toolsmenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("helpmenu"));
-    assertNotNull(element);
-
-    //focus iframe
-    WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    WebDriver frame = driver.switchTo().frame(elementFrame);
-
-    //assert button text and click Create New
-    String browseText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button"));
-    String createText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[2]"));
-    String manageText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[3]"));
-    String documentationText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[4]"));
-    assertEquals("Browse Files", browseText);
-    assertEquals("Create New", createText);
-    assertEquals("Manage Data Sources", manageText);
-    assertEquals("Documentation", documentationText);
-    ElementHelper.Click(frame, By.id("btnCreateNew"));
-
-    /*
-     * ## Step 2
-     */
-    String cdeText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
-    String dataText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdatasourceButton']"));
-    assertEquals("CDE Dashboard", cdeText);
-    assertEquals("Data Source", dataText);
-    ElementHelper.Click(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
-
-    /*
-     * ## Step 3
-     */
-    //wait for invisibility of waiting pop-up
-    driver.switchTo().defaultContent();
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-    //assert title
-    String titleText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@title='New CDE Dashboard']"));
-    assertEquals("CDE Dashboard", titleText);
-
-    //focus iframe
-    elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    frame = driver.switchTo().frame(elementFrame);
+    driver.get(baseUrl + "api/repos/wcdf/new");
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //assert buttons and click Apply template
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//a[@title='Save as Template']"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
     assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//a[@title='Apply Template']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
     assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//a[@title='Add Resource']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
     assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//a[@title='Add Bootstrap Panel']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
     assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//a[@title='Add FreeForm']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
     assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//a[@title='Apply Template']"));
+    ElementHelper.Click(driver, By.xpath("//a[@title='Apply Template']"));
 
     /*
      * ## Step 4
      */
     driver.switchTo().defaultContent();
-    elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    frame = driver.switchTo().frame(elementFrame);
     ElementHelper.WaitForFrameReady(driver, By.id("popupTemplatebox"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("popupTemplatebox"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("popupTemplatebox"));
     assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("thumbs"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("thumbs"));
     assertNotNull(element);
-    String templateText = ElementHelper.FindElement(frame, By.xpath("//div[@id='thumbs']/div[2]/p")).getText();
+    String templateText = ElementHelper.FindElement(driver, By.xpath("//div[@id='thumbs']/div[2]/p")).getText();
     assertEquals("Two Columns Template", templateText);
-    ElementHelper.Click(frame, By.xpath("//div[@id='thumbs']/div[2]/p"));
-    ElementHelper.WaitForAttributeValue(frame, By.xpath("//div[@id='thumbs']/div[2]"), "class", "hover active");
-    String text = ElementHelper.GetAttribute(frame, By.xpath("//div[@id='thumbs']/div[2]"), "class");
+    ElementHelper.Click(driver, By.xpath("//div[@id='thumbs']/div[2]/p"));
+    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@id='thumbs']/div[2]"), "class", "hover active");
+    String text = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='thumbs']/div[2]"), "class");
     assertEquals("hover active", text);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
     assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
+    ElementHelper.Click(driver, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
 
     /*
      * ## Step 5
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatemessage']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='popupTemplatemessage']"));
     assertNotNull(element);
-    WebElement elem = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("popupTemplate"));
+    WebElement elem = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("popupTemplate"));
     assertNotNull(elem);
     Dimension size = elem.getSize();
     int height = size.getHeight();
     assertEquals(height, 183);
     int width = size.getWidth();
     assertEquals(width, 743);
-    String warningText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popupTemplatemessage']"));
+    String warningText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='popupTemplatemessage']"));
     assertEquals("Are you sure you want to load the template?WARNING: Dashboard Layout will be overwritten!", warningText);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
     assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
+    ElementHelper.Click(driver, By.xpath("//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']"));
 
     /*
      * ## Step 6
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span"));
     assertNotNull(element);
-    ElementHelper.Click(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]"));
+    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]"));
     assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]"));
     assertNotNull(element);
-    String tr6tdText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td"));
-    String tr6td2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]"));
-    String tr7tdText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td"));
-    String tr7td2Text = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]"));
+    String tr6tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td"));
+    String tr6td2Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]"));
+    String tr7tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td"));
+    String tr7td2Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]"));
     assertEquals("Column", tr6tdText);
     assertEquals("Panel_1", tr6td2Text);
     assertEquals("Column", tr7tdText);

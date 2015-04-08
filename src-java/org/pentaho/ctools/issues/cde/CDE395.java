@@ -83,9 +83,7 @@ public class CDE395 {
    *    dashboard it has the renderer option as Bootstrap by default.
    *
    * Steps:
-   *    1. Assert elements on page and click "Create New" button
-   *    2. Wait for options to load and then click "CDE Dashboard" button
-   *    3. Wait for new Dashboard to be created, assert elements on page and click "Settings"
+   *    1. Create New Dashboard, assert elements on page and click "Settings"
    *    4. Focus on popup, assert elements and assert Bootstrap option is selected by default
    */
   @Test(timeout = 120000)
@@ -95,82 +93,28 @@ public class CDE395 {
     /*
      * ## Step 1
      */
-    //Go to User Console
-    driver.get(baseUrl + "Home");
-
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-    //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("filemenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("toolsmenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("helpmenu"));
-    assertNotNull(element);
-
-    //focus iframe
-    WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    WebDriver frame = driver.switchTo().frame(elementFrame);
-
-    //assert button text and click Create New
-    String browseText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button"));
-    String createText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[2]"));
-    String manageText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[3]"));
-    String documentationText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='buttonWrapper']//button[4]"));
-    assertEquals("Browse Files", browseText);
-    assertEquals("Create New", createText);
-    assertEquals("Manage Data Sources", manageText);
-    assertEquals("Documentation", documentationText);
-    ElementHelper.Click(frame, By.id("btnCreateNew"));
-
-    /*
-     * ## Step 2
-     */
-    String cdeText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
-    String dataText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewdatasourceButton']"));
-    assertEquals("CDE Dashboard", cdeText);
-    assertEquals("Data Source", dataText);
-    ElementHelper.Click(frame, By.xpath("//div[@class='popover-content']/button[@id='createNewlaunch_new_cdeButton']"));
-    driver.switchTo().defaultContent();
-
-    /*
-     * ## Step 3
-     */
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-    //assert title
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("solutionNavigatorAndContentPanel"));
-    assertNotNull(element);
-    String titleText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@title='New CDE Dashboard']"));
-    assertEquals("CDE Dashboard", titleText);
-
-    //focus iframe
-    elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    frame = driver.switchTo().frame(elementFrame);
-
+    //Create new CDE dashboard
+    driver.get(baseUrl + "api/repos/wcdf/new");
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //assert buttons and click Settings
-    String newText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div/a"));
-    String saveText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div[2]/a"));
-    String saveasText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div[3]/a"));
-    String reloadText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div[4]/a"));
-    String settingsText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    String newText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div/a"));
+    String saveText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[2]/a"));
+    String saveasText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[3]/a"));
+    String reloadText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[4]/a"));
+    String settingsText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
     assertEquals("New", newText);
     assertEquals("Save", saveText);
     assertEquals("Save as...", saveasText);
     assertEquals("Reload", reloadText);
     assertEquals("Settings", settingsText);
-    ElementHelper.ClickJS(frame, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    ElementHelper.ClickJS(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("popup"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("popup"));
     assertNotNull(element);
-    WebElement obj1 = ElementHelper.FindElement(frame, By.xpath("//select[@id='rendererInput']/option[@value='bootstrap']"));
+    WebElement obj1 = ElementHelper.FindElement(driver, By.xpath("//select[@id='rendererInput']/option[@value='bootstrap']"));
     assertEquals(obj1.isSelected(), true);
   }
 
