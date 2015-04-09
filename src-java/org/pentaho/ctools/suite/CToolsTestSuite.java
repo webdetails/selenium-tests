@@ -110,7 +110,8 @@ public class CToolsTestSuite{
      */
     //Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
-    ffProfile.setPreference("intl.accept_languages", "en-us");
+    ffProfile.setPreference("general.useragent.locale", "en-US");
+    ffProfile.setPreference("intl.accept_languages", "en-US, en");
     ffProfile.setPreference("browser.download.folderList", 2);//0 - Desktop, 1- Donwload dir, 2 - specify dir
     ffProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
     ffProfile.setPreference("browser.download.manager.showWhenStarting", false);
