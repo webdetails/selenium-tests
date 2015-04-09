@@ -107,10 +107,13 @@ public class CDF430 {
     assertNotNull(element);
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_3"));
     assertNotNull(element);
+    ElementHelper.WaitForTextPresence(driver, By.id("Panel_1"), "my message 1, coming from messages.properties");
     String text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_1"));
     assertEquals(text, "my message 1, coming from messages.properties");
+    ElementHelper.WaitForTextPresence(driver, By.id("Panel_2"), "my message 2, overriden by messages_en.properties");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_2"));
     assertEquals(text, "my message 2, overriden by messages_en.properties");
+    ElementHelper.WaitForTextPresence(driver, By.id("Panel_3"), "my message 3, overriden by messages_en-US.properties");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_3"));
     assertEquals(text, "my message 3, overriden by messages_en-US.properties");
 
@@ -130,10 +133,13 @@ public class CDF430 {
     assertNotNull(element);
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("Panel_3"));
     assertNotNull(element);
+    ElementHelper.WaitForTextPresence(driver, By.id("Panel_1"), "my message 1, coming from messages.properties");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_1"));
     assertEquals(text, "my message 1, coming from messages.properties");
+    ElementHelper.WaitForTextPresence(driver, By.id("Panel_2"), "my message 2, overriden by messages_en.properties");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_2"));
     assertEquals(text, "my message 2, overriden by messages_en.properties");
+    ElementHelper.WaitForTextPresence(driver, By.id("Panel_3"), "my message 3, overriden by messages_en-US.properties");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.id("Panel_3"));
     assertEquals(text, "my message 3, overriden by messages_en-US.properties");
 
@@ -153,10 +159,13 @@ public class CDF430 {
     assertNotNull(element);
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='sampleButton03']/button/span"));
     assertNotNull(element);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='sampleButton01']/button/span"), "My button 01 label");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleButton01']/button/span"));
     assertEquals(text, "My button 01 label");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='sampleButton02']/button/span"), "messages_en button 02 label");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleButton02']/button/span"));
     assertEquals(text, "messages_en button 02 label");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='sampleButton03']/button/span"), "messages_en-US button 03 label");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleButton03']/button/span"));
     assertEquals(text, "messages_en-US button 03 label");
 
