@@ -55,7 +55,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  * NOTE - The test was created regarding issue CDF-318
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MetaLayerHomeDashboard{
+public class MetaLayerHomeDashboard {
 
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
@@ -146,7 +146,7 @@ public class MetaLayerHomeDashboard{
     wait.until(ExpectedConditions.elementToBeClickable(By.id("fancybox-close")));
     String background = ElementHelper.FindElement(driver, By.cssSelector("#fancybox-close")).getCssValue("background-image");
     String background1 = background.substring(background.indexOf(34) + 1, background.lastIndexOf(34));
-    assertEquals("http://localhost:8080/pentaho/api/repos/pentaho-cdf/js/fancybox/fancybox.png", background1);
+    assertEquals("http://localhost:8080/pentaho/api/repos/pentaho-cdf/js-legacy/lib/fancybox/fancybox.png", background1);
     ElementHelper.FindElement(driver, By.id("fancybox-close")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.id("fancybox-content"));
     assertEquals("200", Integer.toString(HttpUtils.GetResponseCode(background1, "admin", "password")));

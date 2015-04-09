@@ -23,6 +23,7 @@ public class BrowseFiles {
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
     //this.baseURL = baseURL;
     SetSHOWHIDDENFILES();
+    CheckShowHiddenFiles();
     GoToBrowseFiles();
   }
 
@@ -94,8 +95,9 @@ public class BrowseFiles {
     log.info("Exit: EmptyTrash");
   }
 
-  public void SelectFile(String path) {
+  public boolean SelectFile(String path) {
     log.info("Enter: SelectFile");
+    Boolean selected = true;
     String[] folders = path.split("/");
     log.info("Enter: Expanding Path");
     for (int i = 1; i < folders.length; i++) {
@@ -112,6 +114,7 @@ public class BrowseFiles {
         }
         else {
           log.info("File " + folders[i] + " was not found");
+          selected = false;
         }
       }
       else if (i == folders.length - 2) {
@@ -127,6 +130,7 @@ public class BrowseFiles {
         }
         else {
           log.info("Folder " + folders[i] + " was not found");
+          selected = false;
         }
       }
       else {
@@ -141,10 +145,12 @@ public class BrowseFiles {
         }
         else {
           log.info("Folder " + folders[i] + " was not found");
+          selected = false;
         }
       }
     }
     log.info("Exit: SelectFile");
+    return selected;
   }
 
   public void SelectFolder(String path) {
@@ -175,15 +181,14 @@ public class BrowseFiles {
   }
 
   public void CheckShowHiddenFiles() {
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
     assertNotNull(element);
     element.click();
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
     assertNotNull(element);
     String text = element.getAttribute("class");
     if (text.equals("gwt-MenuItem-checkbox-unchecked")) {
+      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
       element.click();
       //wait for visibility of waiting pop-up
       ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
@@ -220,6 +225,7 @@ public class BrowseFiles {
     assertNotNull(element);
     String text = element.getAttribute("class");
     if (text.equals("gwt-MenuItem-checkbox-checked")) {
+      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
       element.click();
       //wait for visibility of waiting pop-up
       ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
@@ -246,10 +252,8 @@ public class BrowseFiles {
     PUCSettings.SHOWHIDDENFILES = false;
   }
 
-  public void SetSHOWHIDDENFILES() {
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='home.perspective']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
+  public boolean SetSHOWHIDDENFILES() {
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
     assertNotNull(element);
     element.click();
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@id='showHiddenFilesMenuItem']"));
@@ -258,26 +262,30 @@ public class BrowseFiles {
     if (text.equals("gwt-MenuItem-checkbox-checked")) {
       PUCSettings.SHOWHIDDENFILES = true;
     }
-    else {
+    else if (text.equals("gwt-MenuItem-checkbox-unchecked")) {
       PUCSettings.SHOWHIDDENFILES = false;
     }
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
     element.click();
+    return PUCSettings.SHOWHIDDENFILES;
   }
 
   public void DeleteFile(String path) {
-    SelectFile(path);
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
-    driver.switchTo().defaultContent();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("okButton"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.id("okButton"));
-    //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-    // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-
+    if (SelectFile(path)) {
+      WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
+      assertNotNull(element);
+      ElementHelper.Click(driver, By.xpath("//div[@id='fileBrowserButtons']/div[2]/button[@id='deleteButton']"));
+      driver.switchTo().defaultContent();
+      element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("okButton"));
+      assertNotNull(element);
+      ElementHelper.Click(driver, By.id("okButton"));
+      //wait for invisibility of waiting pop-up
+      ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+      // Wait for loading disappear
+      ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    }
+    else {
+      log.info("file not deleted for it was not found");
+    }
   }
 }
