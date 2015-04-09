@@ -33,4 +33,4 @@ import org.junit.runners.Suite;
   SuiteCDE.class
 
 })
-public class SuiteRequire{}
+public class SuiteRequireJS{}

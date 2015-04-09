@@ -43,6 +43,7 @@ import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.security.AccessSystemResources;
 import org.pentaho.ctools.suite.issues.SuiteIssues;
+import org.pentaho.ctools.suite.require.SuiteRequireJS;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -57,6 +58,8 @@ import org.pentaho.ctools.suite.issues.SuiteIssues;
   SuiteCDA.class,
   //CGG
   SuiteCGG.class,
+  //RequireJS
+  SuiteRequireJS.class,
   //Security
   AccessSystemResources.class,
   //Issues
