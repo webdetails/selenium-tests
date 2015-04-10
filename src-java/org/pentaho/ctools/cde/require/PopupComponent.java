@@ -208,8 +208,7 @@ public class PopupComponent {
     ElementHelper.ClickJS(driver, By.xpath("//div[8]/a"));
     //wait for popup disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[8]/a"));
-    WebElement element = driver.findElement(By.xpath("//div[8]/a"));
-    assertFalse(element.isDisplayed());
+
   }
 
   @AfterClass

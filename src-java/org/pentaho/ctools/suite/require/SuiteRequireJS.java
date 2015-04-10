@@ -27,10 +27,10 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   //Require CDF
-  SuiteCDF.class,
+  //SuiteCDF.class,
 
   //Require CDE
   SuiteCDE.class
 
 })
-public class SuiteRequireJS{}
+public class SuiteRequireJS {}

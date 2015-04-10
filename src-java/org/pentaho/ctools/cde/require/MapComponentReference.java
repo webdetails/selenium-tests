@@ -388,9 +388,9 @@ public class MapComponentReference {
     assertNotNull(marker1);
     assertNotNull(marker2);
     assertNotNull(marker3);
-    assertEquals("/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_grey.png", marker1.getAttribute("xlink:href"));
-    assertEquals("/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_blue.png", marker2.getAttribute("xlink:href"));
-    assertEquals("/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_grey02.png", marker3.getAttribute("xlink:href"));
+    assertEquals("/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_grey.png", marker1.getAttribute("xlink:href"));
+    assertEquals("/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_blue.png", marker2.getAttribute("xlink:href"));
+    assertEquals("/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_grey02.png", marker3.getAttribute("xlink:href"));
 
     /*
      * ## Step 2
@@ -450,10 +450,10 @@ public class MapComponentReference {
     assertNotNull(marker2);
     assertNotNull(marker3);
     assertNotNull(marker4);
-    assertEquals("/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_grey.png", marker1.getAttribute("xlink:href"));
-    assertEquals("/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_grey02.png", marker2.getAttribute("xlink:href"));
-    assertEquals("/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_orange.png", marker3.getAttribute("xlink:href"));
-    assertEquals("/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_purple.png", marker4.getAttribute("xlink:href"));
+    assertEquals("/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_grey.png", marker1.getAttribute("xlink:href"));
+    assertEquals("/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_grey02.png", marker2.getAttribute("xlink:href"));
+    assertEquals("/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_orange.png", marker3.getAttribute("xlink:href"));
+    assertEquals("/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_purple.png", marker4.getAttribute("xlink:href"));
 
     /*
      * ## Step 2

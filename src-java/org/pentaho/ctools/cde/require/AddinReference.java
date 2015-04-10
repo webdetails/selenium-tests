@@ -278,7 +278,7 @@ public class AddinReference {
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DataBarDesc']/blockquote/pre"));
-    assertEquals("defaults: { widthRatio:1, height: 10, startColor: \"#55A4D6\", endColor: \"#448FC8\", stroke: null, max: undefined, min: undefined, absValue: true, includeValue: false, valueFormat: function(v, format, st) { return \"\" + sprintf(format,v) + \"\"; } }", defaultText);
+    assertEquals("defaults: { widthRatio:1, height: 10, startColor: \"#55A4D6\", endColor: \"#448FC8\", stroke: null, max: undefined, min: undefined, absValue: true, includeValue: false, valueFormat: function(v, format, st) { return \"\" + dashboard.sprintf(format,v) + \"\"; } }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='DataBarObjTable']/tbody/tr/td"));
@@ -377,7 +377,7 @@ public class AddinReference {
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='TrendArrowDesc']/blockquote/pre"));
-    assertEquals("defaults: { includeValue: false, good: true, valueFormat: function(v,format,st) { return sprintf(format,v); } }", defaultText);
+    assertEquals("defaults: { includeValue: false, good: true, valueFormat: function(v,format,st) { return dashboard.sprintf(format,v); } }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr/td"));
@@ -405,9 +405,9 @@ public class AddinReference {
     String chartRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div"));
     String chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div"));
     String chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div"));
-    assertEquals("50.00€", chartRow1Col2Value);
-    assertEquals("77.00€", chartRow2Col2Value);
-    assertEquals("-65.00€", chartRow3Col2Value);
+    assertEquals("50€", chartRow1Col2Value);
+    assertEquals("77€", chartRow2Col2Value);
+    assertEquals("-65€", chartRow3Col2Value);
 
     /*
      * ## Step 2
@@ -427,9 +427,9 @@ public class AddinReference {
     chartRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div"));
     chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div"));
     chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div"));
-    assertEquals("-65.00€", chartRow1Col2Value);
-    assertEquals("77.00€", chartRow2Col2Value);
-    assertEquals("50.00€", chartRow3Col2Value);
+    assertEquals("-65€", chartRow1Col2Value);
+    assertEquals("77€", chartRow2Col2Value);
+    assertEquals("50€", chartRow3Col2Value);
 
     //Check ordering - Custom trendArrow
     ElementHelper.ClickJS(driver, By.xpath("//table[@id='TrendArrowObjTable']/thead/tr/th[3]"));
@@ -444,9 +444,9 @@ public class AddinReference {
     chartRow1Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div"));
     chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div"));
     chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div"));
-    assertEquals("-65.00€", chartRow1Col2Value);
-    assertEquals("50.00€", chartRow2Col2Value);
-    assertEquals("77.00€", chartRow3Col2Value);
+    assertEquals("-65€", chartRow1Col2Value);
+    assertEquals("50€", chartRow2Col2Value);
+    assertEquals("77€", chartRow3Col2Value);
   }
 
   /**
@@ -692,7 +692,7 @@ public class AddinReference {
 
     //Check Defaults
     String defaultText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='textFormatDesc']/blockquote/pre"));
-    assertEquals("defaults: { textFormat: function(v, st) {return st.colFormat ? sprintf(st.colFormat,v) : v;} }", defaultText);
+    assertEquals("defaults: { textFormat: function(v, st) {return st.colFormat ? dashboard.sprintf(st.colFormat,v) : v;} }", defaultText);
 
     //Check Rows
     String row1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='textFormatObjTable']/tbody/tr/td"));

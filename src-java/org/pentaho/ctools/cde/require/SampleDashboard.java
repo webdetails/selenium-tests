@@ -281,14 +281,14 @@ public class SampleDashboard {
    *    1. Enable/Disable series
    *    2. Select a data and navigate between pages
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 120000)
   public void tc4_UpdateTableByClickingChart_TableUpdatedForSpecificData() {
     log.info("tc4_UpdateTableByClickingChart_TableUpdatedForSpecificData");
 
     /*
      * ## Step 1
      */
-    String sampleChartTitel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"));
+    String sampleChartTitel = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']"));
     assertEquals("Sales by territory and market", sampleChartTitel);
     //disable APAC
     ElementHelper.ClickJS(driver, By.xpath("//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']"));
@@ -313,11 +313,11 @@ public class SampleDashboard {
     String total1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"));
     String customer2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[5]/td"));
     String total2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[7]/td[2]"));
-    assertEquals("Daedalus Designs Imports", customer1);
-    assertEquals("63,753.07", total1);
-    assertEquals("UK Collectables, Ltd.", customer2);
-    assertEquals("30,524.29", total2);
-    assertEquals("Showing 1 to 10 of 21 entries", paggingInfo);
+    assertEquals("Vida Sport, Ltd", customer1);
+    assertEquals("409,484.24", total1);
+    assertEquals("Salzburg Collectables", customer2);
+    assertEquals("78,155.28", total2);
+    assertEquals("Showing 1 to 10 of 44 entries", paggingInfo);
     //Next page
     ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresence(driver, By.id("tableTable_info"), "Showing 11 to 20 of 21 entries");
@@ -326,20 +326,20 @@ public class SampleDashboard {
     total1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"));
     customer2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[5]/td"));
     total2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[7]/td[2]"));
-    assertEquals("Suominen Souveniers", customer1);
-    assertEquals("21,244.34", total1);
-    assertEquals("L'ordine Souveniers", customer2);
-    assertEquals("5,442.80", total2);
-    assertEquals("Showing 11 to 20 of 21 entries", paggingInfo);
+    assertEquals("Herkku Gifts", customer1);
+    assertEquals("61,072.54", total1);
+    assertEquals("Marseille Mini Autos", customer2);
+    assertEquals("43,148.90", total2);
+    assertEquals("Showing 11 to 20 of 44 entries", paggingInfo);
     //Next page
     ElementHelper.ClickJS(driver, By.xpath("//div[@id='tableTable_paginate']/a[2]"));
     ElementHelper.WaitForTextPresence(driver, By.id("tableTable_info"), "Showing 21 to 21 of 21 entries");
     paggingInfo = ElementHelper.WaitForElementPresentGetText(driver, By.id("tableTable_info"));
     customer1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td"));
     total1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='tableTable']/tbody/tr[1]/td[2]"));
-    assertEquals("La Corne D'abondance, Co.", customer1);
-    assertEquals("2,173.60", total1);
-    assertEquals("Showing 21 to 21 of 21 entries", paggingInfo);
+    assertEquals("Scandinavian Gift Ideas", customer1);
+    assertEquals("36,212.68", total1);
+    assertEquals("Showing 21 to 30 of 44 entries", paggingInfo);
   }
 
   //Chart enable disable serie, click in one and check the results.

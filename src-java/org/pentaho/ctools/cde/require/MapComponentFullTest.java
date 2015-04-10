@@ -134,12 +134,12 @@ public class MapComponentFullTest {
      */
     //Check if the chart is already rendered
     ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][1]"), 90);
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][2]"), 30);
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][3]"), 30);
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][4]"), 30);
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][5]"), 30);
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][6]"), 30);
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][7]"), 30);
+    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][2]"));
+    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][3]"));
+    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][4]"));
+    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][5]"));
+    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][6]"));
+    ElementHelper.WaitForElementPresence(driver, By.xpath("//*[local-name()='image'][7]"));
 
     WebElement marker1 = ElementHelper.FindElement(driver, By.xpath("//*[local-name()='image'][1]"));
     WebElement marker2 = ElementHelper.FindElement(driver, By.xpath("//*[local-name()='image'][2]"));
