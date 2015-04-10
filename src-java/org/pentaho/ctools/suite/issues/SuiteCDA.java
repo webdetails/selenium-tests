@@ -23,7 +23,6 @@ package org.pentaho.ctools.suite.issues;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.pentaho.ctools.issues.cda.CDA100;
 import org.pentaho.ctools.issues.cda.CDA103;
 import org.pentaho.ctools.issues.cda.CDA106;
 import org.pentaho.ctools.issues.cda.CDA108;
@@ -42,7 +41,7 @@ import org.pentaho.ctools.issues.cda.CDA99;
   CDA46.class,
   CDA55.class,
   CDA99.class,
-  CDA100.class,
+  // CDA100.class,
   CDA103.class,
   CDA106.class,
   CDA108.class,
