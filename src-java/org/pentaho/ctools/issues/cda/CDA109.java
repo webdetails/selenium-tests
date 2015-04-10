@@ -108,7 +108,7 @@ public class CDA109 {
     element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='preview']"));
     assertNotNull(element);
     String filePath = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//span[@id='staticfile']"));
-    assertEquals("/public/Issues/CDA - 109/.cda", filePath);
+    assertEquals("/public/Issues/CDA/CDA - 109/.cda", filePath);
 
     /*
      * ## Step 2

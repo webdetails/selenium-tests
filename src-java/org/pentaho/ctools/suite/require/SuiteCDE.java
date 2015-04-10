@@ -23,15 +23,15 @@ package org.pentaho.ctools.suite.require;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.pentaho.ctools.cde.SampleDashboard;
-import org.pentaho.ctools.cde.reference.AddinReference;
-import org.pentaho.ctools.cde.reference.AddinReferenceEdit;
-import org.pentaho.ctools.cde.reference.AjaxRequestReference;
-import org.pentaho.ctools.cde.reference.BullertChartTestCase;
-import org.pentaho.ctools.cde.reference.CCCV2ShowCase;
-import org.pentaho.ctools.cde.reference.MapComponentFullTest;
-import org.pentaho.ctools.cde.reference.MapComponentReference;
-import org.pentaho.ctools.cde.reference.PopupComponent;
+import org.pentaho.ctools.cde.require.AddinReference;
+import org.pentaho.ctools.cde.require.AddinReferenceEdit;
+import org.pentaho.ctools.cde.require.AjaxRequestReference;
+import org.pentaho.ctools.cde.require.BullertChartTestCase;
+import org.pentaho.ctools.cde.require.CCCV2ShowCase;
+import org.pentaho.ctools.cde.require.MapComponentFullTest;
+import org.pentaho.ctools.cde.require.MapComponentReference;
+import org.pentaho.ctools.cde.require.PopupComponent;
+import org.pentaho.ctools.cde.require.SampleDashboard;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

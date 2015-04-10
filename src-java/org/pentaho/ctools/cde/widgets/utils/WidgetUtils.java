@@ -31,75 +31,11 @@ public class WidgetUtils {
     driver.switchTo().defaultContent();
 
     CToolsTestSuite.getBaseUrl();
-
     BrowseFiles browser = new BrowseFiles(driver);
-    if (PUCSettings.SHOWHIDDENFILES = false) {
+    if (PUCSettings.SHOWHIDDENFILES == false) {
       browser.CheckShowHiddenFiles();
     }
-
-    //Now we have to navegate to 'Public/cde/widgets
-    driver.switchTo().defaultContent();
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("applicationShell"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='browser.perspective']"));
-    driver.switchTo().frame("browser.perspective");
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("fileBrowser"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-
-    //Public
-    assertNotNull(ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='fileBrowserFolders']")));
-    assertNotNull(ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@path='/public']")));
-    driver.findElement(By.xpath("//div[@path='/public']")).findElement(By.className("expandCollapse")).click();
-    //CDE
-    assertNotNull(ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@path='/public/cde']")));
-    driver.findElement(By.xpath("//div[@path='/public/cde']")).findElement(By.className("expandCollapse")).click();
-    //Widgets
-    assertNotNull(ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@path='/public/cde/widgets']")));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@path='/public/cde/widgets']")).findElement(By.className("title")).click();
-
-    //wait for the page load in 'fileBrowserFiles'
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-    //Check if at least one file is displayed
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='fileBrowserFiles']/div[2]/div"));
-    WebElement listFiles = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='fileBrowserFiles']/div[2]"));
-    List<WebElement> theWidgetFiles = listFiles.findElements(By.xpath("//div[@class='title' and contains(text(),'" + widgetName + "')]"));
-
-    //Check if the widget named exist
-    if (theWidgetFiles != null) {
-      if (theWidgetFiles.size() > 0) {
-        WebElement[] arrayTheWidgetFiles = new WebElement[theWidgetFiles.size()];
-        theWidgetFiles.toArray(arrayTheWidgetFiles);
-
-        //Where we want to select three files
-        // <the widget>
-        // <the widget>.cdfde
-        // <the widget>.component.xml
-        //To do that we select each file (using the CONTROL key) and delete them.
-        Actions action = new Actions(driver);
-        action.keyDown(Keys.CONTROL);
-        for (WebElement arrayTheWidgetFile : arrayTheWidgetFiles) {
-          action.click(arrayTheWidgetFile);
-        }
-        action.keyUp(Keys.CONTROL);
-        action.build().perform();
-
-        //Here we still in the iframe
-        assertNotNull(ElementHelper.WaitForElementVisibility(driver, By.id("deleteButton")));
-        ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("deleteButton")).click();
-        //Go back to root html
-        driver.switchTo().defaultContent();
-        assertEquals(ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("div.gwt-HTML")).getText(), "Are you sure you want to move all selected items to the trash?");
-        ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("okButton")).click();
-
-        //wait for visibility of waiting pop-up
-        ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
-
-        ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-        ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-
-      }
-    }
+    browser.DeleteMultipleFilesByName("/public/cde/widgets", widgetName);
 
   }
 
