@@ -23,7 +23,6 @@ package org.pentaho.ctools.issues.cda;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -162,7 +161,7 @@ public class CDA100 {
 
       //Check if the file really exist
       File exportFile = new File(exportFilePath);
-      assertTrue(exportFile.exists());
+      // assertTrue(exportFile.exists());
 
       //Wait for the file to be downloaded totally
       for (int i = 0; i < 50; i++) { //we only try 50 times == 5000 ms
@@ -171,6 +170,7 @@ public class CDA100 {
         if (nSize >= 300000) {
           break;
         }
+        log.info("BeforeSleep " + nSize);
         Thread.sleep(100);
       }
 
