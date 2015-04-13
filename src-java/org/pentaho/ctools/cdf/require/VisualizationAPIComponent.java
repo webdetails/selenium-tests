@@ -32,7 +32,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -157,20 +156,26 @@ public class VisualizationAPIComponent {
    * @throws InterruptedException
    */
   @Test(timeout = 60000)
-  public void tc4_MinNumber_PresentCorrectValue() throws InterruptedException {
+  public void tc4_MinNumber_PresentCorrectValue() {
     // ## Step 1 - Change the option parameter to MIN and reload sample
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
 
     // Wait for board load
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']")));
-    // Change contains to MIN
-    ((JavascriptExecutor) driver).executeScript("$('#samplecode').text($('#samplecode').text().replace('MAX', 'MIN'));");
 
-    String strText = "";
+    String text = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='code']/textarea")).getText().replace("MAX", "MIN");
+    text = text.replace("//Using postFetch to convert data types, because the query is passing //a Numeric field as String and that breaks the sample visualization", "");
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='code']/textarea")).clear();
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='code']/textarea")).sendKeys(text);
+
+    // Change contains to MIN
+    //((JavascriptExecutor) driver).executeScript("$('#samplecode').text($('#samplecode').text().replace('MAX', 'MIN'));");
+
+    /*String strText = "";
     while (strText.indexOf("MIN") == -1) {
       strText = ElementHelper.WaitForElementPresentGetText(driver, By.id("samplecode"));
-    }
+    }*/
 
     // Click in Try me
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
@@ -212,15 +217,10 @@ public class VisualizationAPIComponent {
     // Render again the sample
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
 
-    // Wait for board load
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='code']")));
-    // Change contains to AVG
-    ((JavascriptExecutor) driver).executeScript("$('#samplecode').text($('#samplecode').text().replace('MIN', 'AVG'));");
-
-    String strText = "";
-    while (strText.indexOf("AVG") == -1) {
-      strText = ElementHelper.WaitForElementPresentGetText(driver, By.id("samplecode"));
-    }
+    String text = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='code']/textarea")).getText().replace("MAX", "AVG");
+    text = text.replace("//Using postFetch to convert data types, because the query is passing //a Numeric field as String and that breaks the sample visualization", "");
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='code']/textarea")).clear();
+    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='code']/textarea")).sendKeys(text);
 
     // Click in Try me
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();

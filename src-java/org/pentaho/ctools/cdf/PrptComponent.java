@@ -182,9 +182,9 @@ public class PrptComponent {
     String prodName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//td/div/div"));
     assertEquals("Line", prodName);
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//td/div/div[2]/select")));
-    String outputTypeName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("////div[@class='parameter']/div"));
+    String outputTypeName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='parameter']/div[2]/select/../../div"));
     assertEquals("Output Type", outputTypeName);
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
+    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
     //Check for View Report button
     String buttonName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button/span"));
     assertEquals("View Report", buttonName);
@@ -198,11 +198,11 @@ public class PrptComponent {
     ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[3]/td"), "Autoart Studio Design");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[3]/td"));
     assertEquals("Autoart Studio Design", text);
-    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "1952 Alpine Renault 1300");
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "1958 Chevy Corvette Limited Edition");
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[5]/td[3]/a"));
-    assertEquals("1952 Alpine Renault 1300", text);
+    assertEquals("1958 Chevy Corvette Limited Edition", text);
     text = ElementHelper.GetAttribute(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "href");
-    assertEquals("http://images.google.com/images?q=1952%20Alpine%20Renault%201300", text);
+    assertEquals("http://images.google.com/images?q=1958%20Chevy%20Corvette%20Limited%20Edition", text);
 
     // ## Step 2
     /*driver.switchTo().defaultContent();
@@ -372,79 +372,118 @@ public class PrptComponent {
     ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     //Check the generated image
     driver.switchTo().frame("reportContent");
-    WebElement image = ElementHelper.FindElement(driver, By.cssSelector("img.style-3"));
-    assertNotNull(image);
-    String attrSrc = image.getAttribute("src");
-    assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=picture"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//tbody/tr"));
+    assertNotNull(element);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr"), "LINE: Motorcycles");
+    String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr"));
+    assertEquals("LINE: Motorcycles", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[3]/td"), "Autoart Studio Design");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[3]/td"));
+    assertEquals("Autoart Studio Design", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "1997 BMW F650 ST");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[5]/td[3]/a"));
+    assertEquals("1997 BMW F650 ST", text);
+    text = ElementHelper.GetAttribute(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "href");
+    assertEquals("http://images.google.com/images?q=1997%20BMW%20F650%20ST", text);
 
     // ## Step 2
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
-    select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
+    select = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
     select.selectByValue("table/html;page-mode=stream");
     ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     //Check the generated image
     driver.switchTo().frame("reportContent");
-    image = ElementHelper.FindElement(driver, By.cssSelector("img.style-3"));
-    assertNotNull(image);
-    attrSrc = image.getAttribute("src");
-    assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=picture"));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//tbody/tr"));
+    assertNotNull(element);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr"), "LINE: Motorcycles");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr"));
+    assertEquals("LINE: Motorcycles", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[3]/td"), "Autoart Studio Design");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[3]/td"));
+    assertEquals("Autoart Studio Design", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "1997 BMW F650 ST");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[5]/td[3]/a"));
+    assertEquals("1997 BMW F650 ST", text);
+    text = ElementHelper.GetAttribute(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "href");
+    assertEquals("http://images.google.com/images?q=1997%20BMW%20F650%20ST", text);
 
     // ## Step 3
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
-    select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
+    select = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
     select.selectByValue("pageable/pdf");
     ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
     //Check the generated image
     driver.switchTo().frame("reportContent");
-    ElementHelper.WaitForElementInvisibility(driver, By.cssSelector("img.style-3"));
-    assertNotNull(ElementHelper.FindElement(driver, By.id("pageContainer1")));
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']"));
+    assertNotNull(element);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div"), "L I N E :");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div"));
+    assertEquals("L I N E :", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div[2]"), "M o t o r c y c l e s");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div[2]"));
+    assertEquals("M o t o r c y c l e s", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div[3]"), "MSRP");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div[3]"));
+    assertEquals("MSRP", text);
 
     // ## Step 4
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
-    new File(downloadDir + "\\Product Sales.xls").delete();
-    select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
+    new File(downloadDir + "\\InventorybyLine.xls").delete();
+    select = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
     select.selectByValue("table/excel;page-mode=flow");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
     ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
-    assertTrue(new File(downloadDir + "\\Product Sales.xls").exists());
-    new File(downloadDir + "\\Product Sales.xls").delete();
+    assertTrue(new File(downloadDir + "\\InventorybyLine.xls").exists());
+    new File(downloadDir + "\\InventorybyLine.xls").delete();
 
     // ## Step 5
-    new File(downloadDir + "\\Product Sales.xlsx").delete();
-    select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
+    new File(downloadDir + "\\InventorybyLine.xlsx").delete();
+    select = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
     select.selectByValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
     ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
-    assertTrue(new File(downloadDir + "\\Product Sales.xlsx").exists());
-    new File(downloadDir + "\\Product Sales.xlsx").delete();
+    assertTrue(new File(downloadDir + "\\InventorybyLine.xlsx").exists());
+    new File(downloadDir + "\\InventorybyLine.xlsx").delete();
 
     // ## Step 6
-    new File(downloadDir + "\\Product Sales.csv").delete();
-    select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
+    new File(downloadDir + "\\InventorybyLine.csv").delete();
+    select = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
     select.selectByValue("table/csv;page-mode=stream");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
     ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
-    assertTrue(new File(downloadDir + "\\Product Sales.csv").exists());
-    new File(downloadDir + "\\Product Sales.csv").delete();
+    assertTrue(new File(downloadDir + "\\InventorybyLine.csv").exists());
+    new File(downloadDir + "\\InventorybyLine.csv").delete();
 
     // ## Step 7
-    new File(downloadDir + "\\Product Sales.rtf").delete();
-    select = new Select(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
+    new File(downloadDir + "\\InventorybyLine.rtf").delete();
+    select = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
     select.selectByValue("table/rtf;page-mode=flow");
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate(downloadDir);
     ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
-    assertTrue(new File(downloadDir + "\\Product Sales.rtf").exists());
-    new File(downloadDir + "\\Product Sales.rtf").delete();
+    assertTrue(new File(downloadDir + "\\InventorybyLine.rtf").exists());
+    new File(downloadDir + "\\InventorybyLine.rtf").delete();
 
     // ## Step 8
     //TODO - pageable/text
+    driver.switchTo().defaultContent();
+    driver.switchTo().frame("sampleObject_prptFrame");
+    select = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
+    select.selectByValue("pageable/text");
+    ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
+    //Check the generated image
+    driver.switchTo().frame("reportContent");
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//pre"));
+    assertNotNull(element);
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//pre"));
+    assertTrue(text.contains("LINE: Motorcycles"));
+
   }
 
   @AfterClass

@@ -32,7 +32,6 @@ import org.pentaho.ctools.cdf.require.DateRangeInputComponent;
 import org.pentaho.ctools.cdf.require.DialComponent;
 import org.pentaho.ctools.cdf.require.ExecutePrptComponent;
 import org.pentaho.ctools.cdf.require.ExecuteXactionComponent;
-import org.pentaho.ctools.cdf.require.JFreeChartComponent;
 import org.pentaho.ctools.cdf.require.MetaLayerHomeDashboard;
 import org.pentaho.ctools.cdf.require.MonthPickerComponent;
 import org.pentaho.ctools.cdf.require.MultiButtonComponent;
@@ -61,7 +60,7 @@ import org.pentaho.ctools.cdf.require.XactionComponent;
   DialComponent.class,
   ExecutePrptComponent.class,
   ExecuteXactionComponent.class,
-  JFreeChartComponent.class,
+  //JFreeChartComponent.class,
   MetaLayerHomeDashboard.class,
   MonthPickerComponent.class,
   MultiButtonComponent.class,

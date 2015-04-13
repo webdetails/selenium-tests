@@ -149,7 +149,7 @@ public class CheckComponent {
     String confirmationMsg = "";
     // ## Step 1
     //Click in Southern
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Southern']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Southern']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
@@ -159,7 +159,7 @@ public class CheckComponent {
 
     // ## Step 2
     //Click in Eastern
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Eastern']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Eastern']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -169,7 +169,7 @@ public class CheckComponent {
 
     // ## Step 3
     //Click in Central
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Central']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Central']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -179,7 +179,7 @@ public class CheckComponent {
 
     // ## Step 4
     //Click in Western
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Western']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Western']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -207,7 +207,7 @@ public class CheckComponent {
     String confirmationMsg = "";
     // ## Step 1
     //Click in Southern
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Southern']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Southern']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
@@ -217,7 +217,7 @@ public class CheckComponent {
 
     // ## Step 2
     //Click in Eastern
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Eastern']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Eastern']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -227,7 +227,7 @@ public class CheckComponent {
 
     // ## Step 3
     //Click in Central
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Central']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Central']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -237,7 +237,7 @@ public class CheckComponent {
 
     // ## Step 4
     //Click in Western
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Western']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Western']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -261,7 +261,7 @@ public class CheckComponent {
   public void tc5_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed() {
     String confirmationMsg = "";
     //Click in Central
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Central']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Central']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     Alert alert = driver.switchTo().alert();
@@ -270,7 +270,7 @@ public class CheckComponent {
     assertEquals("you chose: Central", confirmationMsg);
 
     //Click in Southern
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Southern']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Southern']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -279,7 +279,7 @@ public class CheckComponent {
     assertEquals("you chose: Southern,Central", confirmationMsg);
 
     //UnChecked Southern
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Southern']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Southern']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -288,7 +288,7 @@ public class CheckComponent {
     assertEquals("you chose: Central", confirmationMsg);
 
     //Click in Western
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Western']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Western']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -297,7 +297,7 @@ public class CheckComponent {
     assertEquals("you chose: Central,Western", confirmationMsg);
 
     //Click in Western
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Eastern']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Eastern']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -306,7 +306,7 @@ public class CheckComponent {
     assertEquals("you chose: Eastern,Central,Western", confirmationMsg);
 
     //Unchecked Central
-    ElementHelper.FindElement(driver, By.xpath("//input[@name='regionSelector' and @value='Central']")).click();
+    ElementHelper.FindElement(driver, By.xpath("//input[@name='checkComponent' and @value='Central']")).click();
 
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();

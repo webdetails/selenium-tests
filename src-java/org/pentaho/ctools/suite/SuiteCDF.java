@@ -37,6 +37,7 @@ import org.pentaho.ctools.cdf.MetaLayerHomeDashboard;
 import org.pentaho.ctools.cdf.MonthPickerComponent;
 import org.pentaho.ctools.cdf.MultiButtonComponent;
 import org.pentaho.ctools.cdf.OpenFlashChartComponent;
+import org.pentaho.ctools.cdf.PrptComponent;
 import org.pentaho.ctools.cdf.QueryComponent;
 import org.pentaho.ctools.cdf.RadioComponent;
 import org.pentaho.ctools.cdf.SchedulePrptComponent;
@@ -67,7 +68,7 @@ import org.pentaho.ctools.cdf.XactionComponent;
   MonthPickerComponent.class,
   MultiButtonComponent.class,
   OpenFlashChartComponent.class,
-  //PrptComponent.class,
+  PrptComponent.class,
   QueryComponent.class,
   RadioComponent.class,
   SchedulePrptComponent.class,

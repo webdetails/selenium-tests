@@ -185,7 +185,7 @@ public class SchedulePrptComponent {
     Date d40days = c.getTime();
 
     // ## Step 1
-    ElementHelper.FindElement(driver, By.xpath("//span[@id='sampleObject']/button")).click();
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObject']/button")).click();
 
     // ## Step 2
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("jqistate_basicState")));

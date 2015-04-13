@@ -108,7 +108,7 @@ public class TextAreaInputComponent {
     assertEquals("Community Dashboard Framework", driver.getTitle());
     //Sample Title
     String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//span[2]"));
-    assertEquals("TextAreaInputComponent", sampleTitle);
+    assertEquals("TextareaInputComponent", sampleTitle);
 
     /*
      * ## Step 2

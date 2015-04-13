@@ -22,7 +22,6 @@
 package org.pentaho.ctools.cdf.require;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
@@ -163,10 +162,6 @@ public class RadioComponent {
     log.info("tc3_SelectEachItem_AlertDisplayed");
 
     // ## Step 1
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Eastern']")));
     ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).click();
     wait.until(ExpectedConditions.alertIsPresent());
@@ -174,10 +169,6 @@ public class RadioComponent {
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Eastern", confirmationMsg);
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
     // ## Step 2
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Central']")));
@@ -187,10 +178,6 @@ public class RadioComponent {
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Central", confirmationMsg);
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
     // ## Step 3
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Western']")));
@@ -200,10 +187,6 @@ public class RadioComponent {
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Western", confirmationMsg);
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
     // ## Step 4
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Southern']")));
@@ -213,10 +196,6 @@ public class RadioComponent {
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern", confirmationMsg);
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
   }
 
   /**
@@ -237,10 +216,6 @@ public class RadioComponent {
     log.info("tc4_SelectArbitrary_AlertDisplayed");
 
     // ## Step 1
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Western']")));
     ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).click();
     wait.until(ExpectedConditions.alertIsPresent());
@@ -248,10 +223,6 @@ public class RadioComponent {
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Western", confirmationMsg);
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
     // ## Step 2
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Southern']")));
@@ -261,10 +232,6 @@ public class RadioComponent {
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Southern", confirmationMsg);
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
     // ## Step 3
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Central']")));
@@ -274,10 +241,6 @@ public class RadioComponent {
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Central", confirmationMsg);
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
 
     // ## Step 4
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@value='Western']")));
@@ -287,10 +250,6 @@ public class RadioComponent {
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals("you chose: Western", confirmationMsg);
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Southern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Eastern']")).isSelected());
-    assertFalse(ElementHelper.FindElement(driver, By.xpath("//input[@value='Central']")).isSelected());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//input[@value='Western']")).isSelected());
   }
 
   @AfterClass

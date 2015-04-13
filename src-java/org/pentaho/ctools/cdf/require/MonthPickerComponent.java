@@ -171,7 +171,7 @@ public class MonthPickerComponent {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
     String strTimeToPick = sdf.format(timeToPick);
 
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("myInput")));
+    Select select = new Select(ElementHelper.FindElement(driver, By.id("monthPickerComponent")));
     select.selectByValue(strTimeToPick);
 
     wait.until(ExpectedConditions.alertIsPresent());
