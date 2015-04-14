@@ -250,26 +250,17 @@ public class JFreeChartComponent {
   public void tc4_PreviewChart_NewWindowDisplayed() {
     log.info("tc4_PreviewChart_NewWindowDisplayed");
     String title = "";
-    String attriStyle = "";
-
     // ## Step 1
     //Check bar title
-    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
+    Actions acts2 = new Actions(driver);
+    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    acts2.perform();
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 10);
-    //Check the bar is visible
-    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
-    attriStyle = ElementHelper.GetAttribute(driver, By.xpath("//div[@class='caption-bottom']"), "style");
-    assertTrue(attriStyle.contains("margin: -42px"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 10);
     //Click in Zoom
-    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
+    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    acts2.perform();
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 10);
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
@@ -299,29 +290,20 @@ public class JFreeChartComponent {
 
     // ## Step 2
     //Change to pie chart
-    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
+    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    acts2.perform();
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 3);
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check bar title
-    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
+    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    acts2.perform();
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 3);
-    //Check bar is visible
-    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
-    attriStyle = ElementHelper.GetAttribute(driver, By.xpath("//div[@class='caption-bottom']"), "style");
-    assertTrue(attriStyle.contains("margin: -42px"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 3);
     //Zoom
-    ElementHelper.Click(driver, By.xpath("//div[@class='caption-details']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: -42px", 3);
+    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    acts2.perform();
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']"));
-    ElementHelper.WaitForAttributeValue(driver, By.xpath("//div[@class='caption-bottom']"), "style", "margin: 0px", 3);
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 

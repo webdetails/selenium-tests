@@ -158,7 +158,7 @@ public class TrafficComponent {
 
     // ## Step 2
     Actions acts = new Actions(driver);
-    acts.moveToElement(elemTraffic, 5, 5);
+    acts.moveToElement(elemTraffic);
     acts.build().perform();
 
     String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='ui-tooltip-content']"));

@@ -113,6 +113,8 @@ public class BullertChartTestCase {
     /*
      * ## Step 1
      */
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='obj1']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']"));
+    assertNotNull(element);
     //Chart 1
     //Check title
     String subtitle1 = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("#subtitle1 > span"));
