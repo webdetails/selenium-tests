@@ -27,6 +27,7 @@ import org.pentaho.ctools.issues.cdf.CDF149;
 import org.pentaho.ctools.issues.cdf.CDF379;
 import org.pentaho.ctools.issues.cdf.CDF406;
 import org.pentaho.ctools.issues.cdf.CDF424;
+import org.pentaho.ctools.issues.cdf.CDF430;
 import org.pentaho.ctools.issues.cdf.CDF435;
 import org.pentaho.ctools.issues.cdf.CDF442;
 import org.pentaho.ctools.issues.cdf.CDF469;
@@ -40,7 +41,7 @@ import org.pentaho.ctools.issues.cdf.CDF486;
   CDF379.class,
   CDF406.class,
   CDF424.class,
-  //CDF430.class,
+  CDF430.class,
   CDF435.class,
   CDF442.class,
   CDF469.class,
