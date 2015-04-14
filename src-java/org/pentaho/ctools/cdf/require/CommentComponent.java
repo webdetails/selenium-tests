@@ -374,9 +374,9 @@ public class CommentComponent {
       log.debug("We have comments to remove");
       for (int i = 1; i <= nIteractions; i++) {
         Actions acts = new Actions(driver);
-        acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObject']/div/div/div[1]/div[2]/div")));
+        acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObject']/div/div/div/div[2]/div[2]")));
         acts.perform();
-        acts.moveToElement(ElementHelper.FindElement(driver, By.cssSelector("div.archive")));
+        acts.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[@id='sampleObject']/div/div/div/div[2]/div[2]/div")));
         acts.click();
         acts.perform();
         log.debug("One comment removed.");

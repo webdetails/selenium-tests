@@ -93,14 +93,14 @@ public class TimePlotComponent {
   }
 
   /**
-   * ############################### Test Case 2 ###############################
+   * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Reload Sample
+   *    Open Sample
    * Description:
-   *    Reload the sample (not refresh page).
+   *    Open Sample
    * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
+   *    1. Open Sample
    */
   @Test(timeout = 60000)
   public void tc1_PageContent_DisplayTitle() {
@@ -119,6 +119,36 @@ public class TimePlotComponent {
    * ############################### Test Case 2 ###############################
    *
    * Test Case Name:
+   *    Reload Sample
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
+   *    1. Click in Code and then click in button 'Try me'.
+   */
+  @Test(timeout = 60000)
+  public void tc2_ReloadSample_SampleReadyToUse() {
+    log.info("tc2_ReloadSample_SampleReadyToUse");
+    // ## Step 1
+    // Render again the sample
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
+    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+
+    // Not we have to wait for loading disappear
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+
+    // Now sample element must be displayed
+    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+
+    //Check the number of divs with id 'SampleObject'
+    //Hence, we guarantee when click Try Me the previous div is replaced
+    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
+    assertEquals(1, nSampleObject);
+  }
+
+  /**
+   * ############################### Test Case 3 ###############################
+   *
+   * Test Case Name:
    *    Time Plot
    * Description:
    *    For this component we need to validate when user move mouse over plot
@@ -128,8 +158,8 @@ public class TimePlotComponent {
    *    2. Move mouse over graphic and check the expected value for Total Price
    */
   @Test(timeout = 60000)
-  public void tc2_MouseOverPlot_TotalPriceChanged() {
-    log.info("tc2_MouseOverPlot_TotalPriceChanged");
+  public void tc3_MouseOverPlot_TotalPriceChanged() {
+    log.info("tc3_MouseOverPlot_TotalPriceChanged");
     // ## Step 1
     ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='sampleObject']/div/span"));
     assertEquals("Total order income", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sampleObject']/div/span")));
@@ -147,36 +177,6 @@ public class TimePlotComponent {
     String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='timeplot-div timeplot-valueflag']"));
     assertEquals(text, expectedText);
     // assertTrue(text.startsWith(expectedText));
-  }
-
-  /**
-   * ############################### Test Case 3 ###############################
-   *
-   * Test Case Name:
-   *    Reload Sample
-   * Description:
-   *    Reload the sample (not refresh page).
-   * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
-   */
-  @Test(timeout = 60000)
-  public void tc3_ReloadSample_SampleReadyToUse() {
-    log.info("tc3_ReloadSample_SampleReadyToUse");
-    // ## Step 1
-    // Render again the sample
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
-
-    // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-
-    // Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
-
-    //Check the number of divs with id 'SampleObject'
-    //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
-    assertEquals(1, nSampleObject);
   }
 
   @AfterClass
