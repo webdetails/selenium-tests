@@ -44,6 +44,7 @@ import org.pentaho.ctools.cdf.require.SelectComponent;
 import org.pentaho.ctools.cdf.require.SelectMultiComponent;
 import org.pentaho.ctools.cdf.require.TableComponent;
 import org.pentaho.ctools.cdf.require.TextAreaInputComponent;
+import org.pentaho.ctools.cdf.require.TextComponent;
 import org.pentaho.ctools.cdf.require.TextInputComponent;
 import org.pentaho.ctools.cdf.require.TimePlotComponent;
 import org.pentaho.ctools.cdf.require.TrafficComponent;
@@ -74,7 +75,7 @@ import org.pentaho.ctools.cdf.require.XactionComponent;
   SelectMultiComponent.class,
   TableComponent.class,
   TextAreaInputComponent.class,
-  org.pentaho.ctools.cdf.TextComponent.class,
+  TextComponent.class,
   TextInputComponent.class,
   TimePlotComponent.class,
   TrafficComponent.class,
