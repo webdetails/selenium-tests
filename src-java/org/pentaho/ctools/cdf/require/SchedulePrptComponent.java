@@ -325,7 +325,7 @@ public class SchedulePrptComponent {
 
     assertEquals(schNameTc3, scheduleName);
     assertEquals("The second Wednesday of every month at 21:17:00", scheduleRepeats);
-    assertEquals("/public/Steel Wheels/Widget Library/Report Snippets/Product Sales", scheduleSourceFile);
+    assertEquals("/public/Steel Wheels/Widget Library/Report Snippets/InventorybyLine", scheduleSourceFile);
     assertEquals(schLocation, scheduleOuputLocation);
     assertEquals("-", scheduleLastRun);
     assertEquals("Wed", dayOfWeek);

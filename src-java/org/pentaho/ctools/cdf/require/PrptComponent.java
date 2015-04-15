@@ -145,7 +145,7 @@ public class PrptComponent {
 
     // ## Step 1
     Select select = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
-    select.selectByValue("application/pdf");
+    select.selectByValue("pageable/pdf");
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
@@ -167,24 +167,22 @@ public class PrptComponent {
     assertEquals("View Report", buttonName);
     //Check the generated image
     driver.switchTo().frame("reportContent");
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//tbody/tr"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']"));
     assertNotNull(element);
-    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr"), "LINE: Classic Cars");
-    String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr"));
-    assertEquals("LINE: Classic Cars", text);
-    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[3]/td"), "Autoart Studio Design");
-    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[3]/td"));
-    assertEquals("Autoart Studio Design", text);
-    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "1958 Chevy Corvette Limited Edition");
-    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[5]/td[3]/a"));
-    assertEquals("1958 Chevy Corvette Limited Edition", text);
-    text = ElementHelper.GetAttribute(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "href");
-    assertEquals("http://images.google.com/images?q=1958%20Chevy%20Corvette%20Limited%20Edition", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div"), "L I N E :");
+    String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div"));
+    assertEquals("L I N E :", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div[2]"), "C l a s s i c");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div[2]"));
+    assertEquals("C l a s s i c", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div[3]"), "C a r s");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='pageContainer1']/div[@class='textLayer']/div[3]"));
+    assertEquals("C a r s", text);
 
     // ## Step 2
-    /*driver.switchTo().defaultContent();
+    driver.switchTo().defaultContent();
     select = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
-    select.selectByValue("text/html");
+    select.selectByValue("table/html;page-mode=stream");
 
     // Not we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
@@ -197,29 +195,29 @@ public class PrptComponent {
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='toolbar']/span")));
     //Check the Product Name and Output Type
     prodName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//td/div/div"));
-    assertEquals("Product Name", prodName);
+    assertEquals("Line", prodName);
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//td/div/div[2]/select")));
-    outputTypeName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[2]/td/div/div"));
+    outputTypeName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@class='parameter']/div[2]/select/../../div"));
     assertEquals("Output Type", outputTypeName);
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//tr[2]/td/div/div[2]/select")));
+    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
     //Check for View Report button
     buttonName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button/span"));
     assertEquals("View Report", buttonName);
     //Check the generated image
     driver.switchTo().frame("reportContent");
-    image = ElementHelper.FindElement(driver, By.cssSelector("img.style-3"));
-    assertNotNull(image);
-    attrSrc = image.getAttribute("src");
-    assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=picture"));
-    try {
-      URL url = new URL(attrSrc);
-      URLConnection connection = url.openConnection();
-      connection.connect();
-
-      assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    } catch (Exception ex) {
-      log.error(ex.getMessage());
-    }*/
+    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//tbody/tr"));
+    assertNotNull(element);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr"), "LINE: Classic Cars");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr"));
+    assertEquals("LINE: Classic Cars", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[3]/td"), "Autoart Studio Design");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[3]/td"));
+    assertEquals("Autoart Studio Design", text);
+    ElementHelper.WaitForTextPresence(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "1958 Chevy Corvette Limited Edition");
+    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tbody/tr[5]/td[3]/a"));
+    assertEquals("1958 Chevy Corvette Limited Edition", text);
+    text = ElementHelper.GetAttribute(driver, By.xpath("//tbody/tr[5]/td[3]/a"), "href");
+    assertEquals("http://images.google.com/images?q=1958%20Chevy%20Corvette%20Limited%20Edition", text);
   }
 
   /**

@@ -94,6 +94,10 @@ public class CDF430 {
     /*
      * ## Step 1
      */
+    //Set locale
+    driver.get(baseUrl + "Home?locale=en-US");
+    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+
     //Go to Sparkl sample
     driver.get(baseUrl + "plugin/CDE404/api/i18ntest");
 
