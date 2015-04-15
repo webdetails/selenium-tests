@@ -26,7 +26,6 @@ import org.junit.runners.Suite;
 import org.pentaho.ctools.cdf.require.AutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.require.ButtonComponent;
 import org.pentaho.ctools.cdf.require.CheckComponent;
-import org.pentaho.ctools.cdf.require.CommentComponent;
 import org.pentaho.ctools.cdf.require.DateInputComponent;
 import org.pentaho.ctools.cdf.require.DateRangeInputComponent;
 import org.pentaho.ctools.cdf.require.DialComponent;
@@ -56,7 +55,7 @@ import org.pentaho.ctools.cdf.require.XactionComponent;
   AutoCompleteBoxComponent.class,
   ButtonComponent.class,
   CheckComponent.class,
-  CommentComponent.class,
+  //CommentComponent.class,
   DateInputComponent.class,
   DateRangeInputComponent.class,
   DialComponent.class,
