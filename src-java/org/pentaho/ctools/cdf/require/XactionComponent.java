@@ -153,9 +153,9 @@ public class XactionComponent {
     WebElement xactionElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
     assertNotNull(xactionElement);
 
-    String attrSrc = xactionElement.getAttribute("src");
-    String attrWidth = xactionElement.getAttribute("width");
-    String attrHeight = xactionElement.getAttribute("height");
+    String attrSrc = ElementHelper.FindElement(driver, By.cssSelector("img")).getAttribute("src");
+    String attrWidth = ElementHelper.FindElement(driver, By.cssSelector("img")).getAttribute("width");
+    String attrHeight = ElementHelper.FindElement(driver, By.cssSelector("img")).getAttribute("height");
 
     assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=tmp_chart_admin-"));
     assertEquals(attrWidth, "500");

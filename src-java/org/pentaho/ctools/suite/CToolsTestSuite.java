@@ -40,7 +40,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
-import org.pentaho.ctools.marketplace.DevStageFilter;
+import org.pentaho.ctools.main.LogoutPentaho;
+import org.pentaho.ctools.suite.issues.SuiteIssues;
+import org.pentaho.ctools.suite.require.SuiteRequireJS;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -48,7 +50,7 @@ import org.pentaho.ctools.marketplace.DevStageFilter;
   //Start Tests
   LoginPentaho.class,
   //CDF
-  /*SuiteCDF.class,
+  SuiteCDF.class,
   //CDE
   SuiteCDE.class,
   //CDA
@@ -62,8 +64,8 @@ import org.pentaho.ctools.marketplace.DevStageFilter;
   //Issues
   SuiteIssues.class,
   //End Tests
-  LogoutPentaho.class*/
-  DevStageFilter.class
+  LogoutPentaho.class
+
 })
 public class CToolsTestSuite {
 
