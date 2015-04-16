@@ -164,9 +164,6 @@ public class ExecutePrptComponent {
     WebElement elemIFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
     String attrId = elemIFrame.getAttribute("id");
     driver.switchTo().frame(attrId);
-
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sampleObject")));
-    driver.switchTo().frame("sampleObject_prptFrame");
     //Check presence of tool bar elements
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='toolbar']/div")));
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//div[@id='toolbar']/div[2]")));
@@ -371,6 +368,10 @@ public class ExecutePrptComponent {
     assertEquals("http://images.google.com/images?q=1997%20BMW%20F650%20ST", text);
 
     // ## Step 3
+    driver.switchTo().defaultContent();
+    elemIFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
+    attrIframeId = elemIFrame.getAttribute("id");
+    driver.switchTo().frame(attrIframeId);
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));
     select.selectByValue("pageable/pdf");
     ElementHelper.WaitForElementInvisibility(driver, By.id("glasspane"));
