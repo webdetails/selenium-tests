@@ -173,11 +173,13 @@ public class SelectMultiComponent {
     assertEquals("you chose: Southern", confirmationMsg);
 
     // ## Step 2
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Southern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     alert.accept();
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -186,11 +188,13 @@ public class SelectMultiComponent {
     assertEquals("you chose: Eastern", confirmationMsg);
 
     // ## Step 3
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     alert.accept();
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -199,11 +203,13 @@ public class SelectMultiComponent {
     assertEquals("you chose: Central", confirmationMsg);
 
     // ## Step 4
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
     alert.accept();
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -212,6 +218,7 @@ public class SelectMultiComponent {
     assertEquals("you chose: Western", confirmationMsg);
 
     //RESET
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -244,6 +251,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Southern", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -251,6 +259,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Southern,Eastern", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -258,6 +267,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -266,6 +276,7 @@ public class SelectMultiComponent {
     assertEquals("you chose: Southern,Eastern,Central,Western", confirmationMsg);
 
     // ## Step 2
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Southern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -273,6 +284,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Eastern,Central,Western", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -280,6 +292,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Central,Western", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -287,6 +300,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Western", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -319,6 +333,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Eastern", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -326,6 +341,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Eastern,Central", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Southern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -333,6 +349,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -340,6 +357,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Southern,Central", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Eastern");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -347,6 +365,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.selectByValue("Western");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
@@ -354,6 +373,7 @@ public class SelectMultiComponent {
     alert.accept();
     assertEquals("you chose: Southern,Eastern,Central,Western", confirmationMsg);
 
+    list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     list.deselectByValue("Central");
     wait.until(ExpectedConditions.alertIsPresent());
     alert = driver.switchTo().alert();
