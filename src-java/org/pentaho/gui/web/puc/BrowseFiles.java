@@ -70,6 +70,10 @@ public class BrowseFiles {
   /**
    * This method will empty the Trash
    *
+   * It will first check if the Trash is empty and if not, proceed to emptying it.
+   *
+   * This method must be called from the Browse Files page with the driver set to the browser perspective
+   *
    */
   public void EmptyTrash() {
     log.info("Enter: EmptyTrash");
@@ -108,6 +112,11 @@ public class BrowseFiles {
   /**
    * This method will select a file in the repository given the full path to it, including the file name.
    * It will return true if the file was successfully selected
+   *
+   * Ex. "/public/plugin-samples/pentaho-cdf-dd/cde_sample1.wcdf" in this case the expand arrow will be pressed until the pentaho-cdf-dd folder,
+   * that folder will be clicked to show the files contained and cde_sample1.wcdf will be selected on the files table.
+   *
+   * If in any step no div is found with the corresponding path the method will return false
    *
    * @param path
    * @returns selected
@@ -173,7 +182,12 @@ public class BrowseFiles {
 
   /**
    * This method will select a folder in the repository given the full path to it, including the folder name
-   * It will return true if the file was successfully selected
+   * It will return true if the folder was successfully selected
+   *
+   * Ex. "/public/plugin-samples/pentaho-cdf-dd" in this case the expand arrow will be pressed until the pentaho-cdf-dd folder,
+   * that folder will be clicked.
+   *
+   * If in any step no div is found with the corresponding path the method will return false
    *
    * @param path
    * @returns selected
@@ -223,6 +237,8 @@ public class BrowseFiles {
   /**
    * This method will check the Show Hidden Files option on the View menu
    *
+   * It has to be called from the Browse Files page and will end with the driver set to the browser.perspective
+   *
    */
   public void CheckShowHiddenFiles() {
     if (PUCSettings.SHOWHIDDENFILES == false) {
@@ -271,6 +287,8 @@ public class BrowseFiles {
   /**
    * This method will uncheck the Show Hidden Files option on the View menu
    *
+   * It has to be called from the Browse Files page and will end with the driver set to the browser.perspective
+   *
    */
   public void UncheckShowHiddenFiles() {
     //This is being done because this method is called from within browse files and view menu is on PUC
@@ -317,6 +335,10 @@ public class BrowseFiles {
   /**
    * This method will delete a file in the repository given the full path to it, including the file name
    *
+   * Ex. "/public/plugin-samples/pentaho-cdf-dd/cde_sample1.wcdf" the SelectFile method will be called with the path
+   * provided, it it returns false an info will be shown on the logs saying the file wasn't deleted for it wasn't found.
+   * If it returns true, Delete button will be clicked on File Actions, it will wait for popup and confirm the delete action.
+   *
    * @param path
    */
   public void DeleteFile(String path) {
@@ -340,6 +362,11 @@ public class BrowseFiles {
 
   /**
    * This method will empty a folder in the repository given the full path to it, including the folder name
+   *
+   * Ex. "/public/plugin-samples/pentaho-cdf-dd" the SelectFolder method will be called with the path
+   * provided, it it returns false an info will be shown on the logs saying the file wasn't deleted for it wasn't found.
+   * If it returns true, all files shown on the files table will be selected, Delete button will be clicked on File Actions,
+   * it will wait for popup and confirm the delete action.
    *
    * @param path
    */
@@ -392,6 +419,12 @@ public class BrowseFiles {
   /**
    * Given the path to a folder this method will delete all files located in that
    * folder that contain a specific string in the name
+   *
+   * Ex. "/public/plugin-samples/pentaho-cdf-dd" the SelectFolder method will be called with the path
+   * provided, it it returns false an info will be shown on the logs saying the file wasn't deleted for it wasn't found.
+   *
+   * If it returns true, all files containing string "name" provided in the name will be selected, Delete button will be clicked on File Actions,
+   * it will wait for popup and confirm the delete action.
    *
    * @param path
    * @param name
