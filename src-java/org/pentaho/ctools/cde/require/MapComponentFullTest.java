@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -53,7 +53,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MapComponentFullTest {
+public class MapComponentFullTest{
+
   // Instance of the driver (browser emulator)
   private static WebDriver  driver;
   // The base url to be append the relative url in test
@@ -203,8 +204,8 @@ public class MapComponentFullTest {
     //Check we have the expect series displayed
     String marker2Serie1 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker2Serie2 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
-    String marker2Serie3 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]//*[local-name()='text']"));
-    String marker2Serie4 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']"));
+    String marker2Serie3 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']"));
+    String marker2Serie4 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]//*[local-name()='text']"));
     assertEquals("Classic Cars", marker2Serie1);
     assertEquals("Vintage Cars", marker2Serie2);
     assertEquals("Trucks and Buses", marker2Serie3);
@@ -263,10 +264,10 @@ public class MapComponentFullTest {
     //Check we have the expect series displayed
     String marker5Serie1 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker5Serie2 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
-    String marker5Serie3 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]//*[local-name()='text']"));
-    String marker5Serie4 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']"));
-    String marker5Serie5 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]//*[local-name()='text']"));
-    String marker5Serie6 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]//*[local-name()='text']"));
+    String marker5Serie3 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']"));
+    String marker5Serie4 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]//*[local-name()='text']"));
+    String marker5Serie5 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]//*[local-name()='text']"));
+    String marker5Serie6 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][1]//*[local-name()='text']"));
     assertEquals("Classic Cars", marker5Serie1);
     assertEquals("Vintage Cars", marker5Serie2);
     assertEquals("Trucks and Buses", marker5Serie3);
@@ -289,10 +290,10 @@ public class MapComponentFullTest {
     //Check we have the expect series displayed
     String marker6Serie1 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']"));
     String marker6Serie2 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']"));
-    String marker6Serie3 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]//*[local-name()='text']"));
-    String marker6Serie4 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']"));
-    String marker6Serie5 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]//*[local-name()='text']"));
-    String marker6Serie6 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]//*[local-name()='text']"));
+    String marker6Serie3 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']"));
+    String marker6Serie4 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]//*[local-name()='text']"));
+    String marker6Serie5 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]//*[local-name()='text']"));
+    String marker6Serie6 = ElementHelper.GetTextElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][1]//*[local-name()='text']"));
     assertEquals("Classic Cars", marker6Serie1);
     assertEquals("Vintage Cars", marker6Serie2);
     assertEquals("Trucks and Buses", marker6Serie3);
@@ -365,16 +366,16 @@ public class MapComponentFullTest {
     ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][6]"));
     //Disable 'Trucks and Buses'
-    ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]//*[local-name()='text']")).click();
+    ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][5]"));
     //Disable 'Ships'
-    ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']")).click();
+    ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]//*[local-name()='text']")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][4]"));
     //Disable 'Motorcycles'
-    ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]//*[local-name()='text']")).click();
+    ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]//*[local-name()='text']")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][3]"));
     //Disable 'Trains'
-    ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]//*[local-name()='text']")).click();
+    ElementHelper.FindElementInvisible(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][1]//*[local-name()='text']")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][2]"));
     //Check the values for the pie char for serie Vintage Cars
     String marker5SerieVintageCarsValue = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text'][1]"));

@@ -1,0 +1,3015 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0005_replacingSecure_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0005_replacingSecure_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A2-replacingSecurePrompt%3AreplacingSecurePrompt.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<!--Check Intro-->
+<tr>
+	<td>waitForText</td>
+	<td>css=h1</td>
+	<td>Replacing Secure / Prompt</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h1</td>
+	<td>Replacing Secure / Prompt</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=th</td>
+	<td>What we will learn</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[4]/th</td>
+	<td>Components that will be used</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<!--Check Step1-->
+<tr>
+	<td>click</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[2]/div[2]/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div[2]/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Region:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div[2]/div</td>
+	<td>Department:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div[3]/div</td>
+	<td>Position:</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Central</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Central</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Central</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Eastern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Eastern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Eastern</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/select/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Controller</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Controller</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Controller</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Engineer</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Engineer</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Engineer</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='regionSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var regionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var regionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='departmentSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='departmentSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var departmentSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var departmentSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='positionSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var positionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var positionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Check Step2-->
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[3]/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[3]/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Region:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div[2]/div</td>
+	<td>Department:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div[3]/div</td>
+	<td>Position:</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Central</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Central</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Central</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Eastern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Eastern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Eastern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']//option[contains(text(),'Administrative Assistant')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CFO</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CFO</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CFO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>IS</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>IS</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>IS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/select/option[contains(text(),'CMO')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Graphics</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Graphics</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Graphics</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Press Relations</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Press Relations</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Press Relations</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Writer</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Writer</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Writer</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/select/option[contains(text(),'Senior Consultant')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Services Mgr</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Services Mgr</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Services Mgr</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Staff Consultant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Staff Consultant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Staff Consultant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/select/option[contains(text(),'District Manager')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Pre-Sales</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Pre-Sales</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Pre-Sales</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Sales Rep</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Sales Rep</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Sales Rep</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Sales Rep</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Sales Rep</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Sales Rep</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='regionSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var regionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var regionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='departmentSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='departmentSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var departmentSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var departmentSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='positionSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var positionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var positionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Check Step3-->
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[4]/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[4]/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Region:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div[2]/div</td>
+	<td>Department:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div[3]/div</td>
+	<td>Position:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div[4]/div</td>
+	<td>Output:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>Run...</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Central</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Central</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Central</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Eastern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Eastern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Eastern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']//option[contains(text(),'Administrative Assistant')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='pageContainer1']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='pageContainer1']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[8]</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[8]</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[14]</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[14]</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[15]</td>
+	<td>Administrative</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[15]</td>
+	<td>Administrative</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[17]</td>
+	<td>$918,400</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[17]</td>
+	<td>$918,400</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[18]</td>
+	<td>$897,368</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[19]</td>
+	<td>-$21,032</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CFO</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CFO</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CFO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Payroll</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>IS</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>IS</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>IS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Controller</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Controller</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Controller</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>Web Page</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>html</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>html</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tbody/tr[6]/td</td>
+	<td>Region: Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[6]/td</td>
+	<td>Region: Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[9]/td</td>
+	<td>Finance</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[2]</td>
+	<td>Administrative Assistant</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[3]</td>
+	<td>$918,400</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[4]</td>
+	<td>$897,368</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[5]</td>
+	<td>-$21,032</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']//option[contains(text(),'CFO')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/select/option[contains(text(),'CMO')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>PDF</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>pdf</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>pdf</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[8]</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[8]</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[14]</td>
+	<td>Marketing</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[17]</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[18]</td>
+	<td>$918,400</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[19]</td>
+	<td>$897,368</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[20]</td>
+	<td>-$21,032</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Graphics</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Graphics</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Graphics</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Press Relations</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Press Relations</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Press Relations</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Writer</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Writer</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Writer</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>Web Page</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>html</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>html</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tbody/tr[6]/td</td>
+	<td>Region: Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[6]/td</td>
+	<td>Region: Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[9]/td</td>
+	<td>Marketing &amp; Communication</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[2]</td>
+	<td>CMO</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[3]</td>
+	<td>$918,400</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[4]</td>
+	<td>$897,368</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[5]</td>
+	<td>-$21,032</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']//option[contains(text(),'Graphics')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/select/option[contains(text(),'Senior Consultant')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>PDF</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>pdf</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>pdf</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[8]</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[8]</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[14]</td>
+	<td>Professional</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[16]</td>
+	<td>Senior</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[18]</td>
+	<td>$3,721,780</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[19]</td>
+	<td>$3,718,000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[20]</td>
+	<td>-$3,780</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Services Mgr</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Services Mgr</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Services Mgr</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Staff Consultant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Staff Consultant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Staff Consultant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Trainer</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>Web Page</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>html</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>html</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tbody/tr[6]/td</td>
+	<td>Region: Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[6]/td</td>
+	<td>Region: Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[9]/td</td>
+	<td>Professional Services</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[2]</td>
+	<td>Senior Consultant</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[3]</td>
+	<td>$3,721,780</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[4]</td>
+	<td>$3,718,000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[5]</td>
+	<td>-$3,780</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/select/option[contains(text(),'Staff Consultant')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='departmentSelect_object']/select</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/select/option[contains(text(),'District Manager')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>PDF</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>pdf</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>pdf</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[8]</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[8]</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[14]</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[15]</td>
+	<td>District</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[17]</td>
+	<td>$700,000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[18]</td>
+	<td>$688,250</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='pageContainer1']/div[2]/div[19]</td>
+	<td>-$11,750</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Pre-Sales</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Pre-Sales</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Pre-Sales</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Sales Rep</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Sales Rep</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Sales Rep</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Sales Rep</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Sales Rep</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>Senior Sales Rep</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='positionSelect_object']/select</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>Web Page</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>html</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='outputSelect_object']/select</td>
+	<td>html</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='runButton_object']/button</td>
+	<td>0.0</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tbody/tr[6]/td</td>
+	<td>Region: Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[6]/td</td>
+	<td>Region: Western</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[9]/td</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[2]</td>
+	<td>District Manager</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[3]</td>
+	<td>$700,000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[4]</td>
+	<td>$688,250</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody/tr[10]/td[5]</td>
+	<td>-$11,750</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='regionSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var regionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var regionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='departmentSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='departmentSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var departmentSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var departmentSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='positionSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='positionSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var positionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var positionSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='outputSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='outputSelect_object']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var outputSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var outputSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='runButton_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='runButton_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var runButton')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var runButton')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=xaction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=xaction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=definition</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=definition</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Southern</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>Western</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=See Final Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=See Final Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,3722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0019_usingTables_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0019_usingTables_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:using_table_addin.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<!--Verificar Textos-->
+<tr>
+	<td>waitForText</td>
+	<td>//div[6]/code[2]</td>
+	<td>valueFormat: function(v, format, st) {return sprintf(format, (v*0.7)) +</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Using Table Add-ins</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/code</td>
+	<td>[Time].[Diff] as ([Time].[${year}].lastchild - [Time].[${year}].lastchild.prevmember)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//code[3]</td>
+	<td>{[Time].[All Years].[${year}], [Time].[Diff]}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[5]/code[3]</td>
+	<td>{[Product].[${product}].</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/code[2]</td>
+	<td>includeValue: false,</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//span/div/div/table/tbody/tr/td[2]/div/div[4]/code[2]</td>
+	<td>valueFormat: function(v, format, st) {return sprintf(format,v);}</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div/table/tbody/tr/td[2]/div/div[2]/code[2]</td>
+	<td>this.setAddInOptions(</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[6]/code[2]</td>
+	<td>valueFormat: function(v, format, st) {return sprintf(format, (v*0.7)) +</td>
+</tr>
+<!--Verificar Primeiro Gráfico-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[6]/td[3]/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/thead/tr/th/div</td>
+	<td>Product</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/thead/tr/th[2]/div</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/thead/tr/th[3]/div</td>
+	<td>Difference</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td[2]</td>
+	<td>4,745.75</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td[3]/div@class</td>
+	<td>trend down good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='exampleTableTable']/thead/tr/th[2]/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td</td>
+	<td>Exoto Designs</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td</td>
+	<td>Exoto Designs</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td[2]</td>
+	<td>5,740.74</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td[2]</td>
+	<td>5,740.74</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='exampleTableTable']/thead/tr/th[3]/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td</td>
+	<td>Gearbox Collectibles</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td</td>
+	<td>Gearbox Collectibles</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td[2]</td>
+	<td>2,573.47</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td[2]</td>
+	<td>2,573.47</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.ui-icon.ui-icon-circle-arrow-e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td</td>
+	<td>Min Lin Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td</td>
+	<td>Min Lin Diecast</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td[2]</td>
+	<td>12,229.89</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='exampleTableTable']/tbody/tr[3]/td[2]</td>
+	<td>12,229.89</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='exampleTableTable']/thead/tr/th/div/span</td>
+	<td></td>
+</tr>
+<!--Verificar Set de Gráficos-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='charts_header']/div</td>
+	<td>Sales by Region, Country and Product</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='charts_header']/div</td>
+	<td>Sales by Region, Country and Product</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='charts_leyend']/div</td>
+	<td>These charts show the sales by Region, Country and Product in the last three years. Just select one year and the charts will be updated. If you click on a Region, the charts to the right will be updated. If you click on a Country, the product chart will be updated. If you click on a Product, the table below will show the details.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='charts_leyend']/div</td>
+	<td>These charts show the sales by Region, Country and Product in the last three years. Just select one year and the charts will be updated. If you click on a Region, the charts to the right will be updated. If you click on a Country, the product chart will be updated. If you click on a Product, the table below will show the details.</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>100,000</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>100,000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M56.14888985505164,-84.5550244991111A101.5,101.5 0 0,1 -31.77857331253055,96.3969516023205L0,0Z</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M56.14888985505164,-84.5550244991111A101.5,101.5 0 0,1 -31.77857331253055,96.3969516023205L0,0Z</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>APAC</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>Japan</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>NA</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr[5]/td[3]/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div</td>
+	<td>Product</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div</td>
+	<td>Product</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[2]/div</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[3]/div</td>
+	<td>Difference</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>31,035.93</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>14,581.41�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[2]/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Motor City Art Classics</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Motor City Art Classics</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>31,731.11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>12,266.52�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[3]/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Red Start Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Red Start Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>29,154.05</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>12,305.83�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='productTableTable_next']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Second Gear Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Second Gear Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>128,276.96</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>33,753.38�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#productChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#productChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>21,349.25</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>21,349.25</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>42.15�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#productChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>37,501.58</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>37,501.58</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>4,918.28�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M56.14888985505164,-84.5550244991111A101.5,101.5 0 0,1 -31.77857331253055,96.3969516023205L0,0Z</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M56.14888985505164,-84.5550244991111A101.5,101.5 0 0,1 -31.77857331253055,96.3969516023205L0,0Z</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>14,009.84</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>14,009.84</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>10,777.90�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>197.05178732095428</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>197.05178732095428</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>1,430.02</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>1,430.02</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>0.00�</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>0.00�</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend invalid good</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend invalid good</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>34.3533493311626</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>34.3533493311626</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Motor City Art Classics</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Motor City Art Classics</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>2,962.57</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>2,962.57</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>2,962.57�</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>2,962.57�</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>New Zealand</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>New Zealand</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Train</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Train</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>5,671.23</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>5,671.23</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>215.40�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>92.0802184312896</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>92.0802184312896</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Gearbox Collectibles</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Gearbox Collectibles</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>1,747.24</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>1,747.24</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>-1,747.24�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend down good</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>170.16527000363592</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>170.16527000363592</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Min Lin Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Min Lin Diecast</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>1,735.26</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>1,735.26</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>1,735.26�</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>1,735.26�</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Philippines</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Philippines</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>2,440.07</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>2,440.07</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>0.00�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend invalid good</td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Canada</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Canada</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>8,914.79</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>8,914.79</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>3,588.10�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.30024454224743</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.30024454224743</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Vinta</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Vinta</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Min Lin Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Min Lin Diecast</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>3,276.14</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>3,276.14</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>3,276.14�</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>127.59568586582256</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]@height</td>
+	<td>127.59568586582256</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Red Start Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Red Start Diecast</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>2,506.98</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>2,506.98</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>2,506.98�</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>2,506.98�</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=a.sandboxLink.preview@href</td>
+	<td>../:public:ctools-samples:Sandbox:using_table_addin.wcdf/generatedContent</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=a.sandboxLink.edit@href</td>
+	<td>../:public:ctools-samples:Sandbox:using_table_addin.wcdf/edit</td>
+</tr>
+<!--Verificar Preview-->
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Sandbox:using_table_addin.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='charts_header']/div</td>
+	<td>Sales by Region, Country and Product</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='charts_header']/div</td>
+	<td>Sales by Region, Country and Product</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='charts_leyend']/div</td>
+	<td>These charts show the sales by Region, Country and Product in the last three years. Just select one year and the charts will be updated. If you click on a Region, the charts to the right will be updated. If you click on a Country, the product chart will be updated. If you click on a Product, the table below will show the details.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='charts_leyend']/div</td>
+	<td>These charts show the sales by Region, Country and Product in the last three years. Just select one year and the charts will be updated. If you click on a Region, the charts to the right will be updated. If you click on a Country, the product chart will be updated. If you click on a Product, the table below will show the details.</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>100,000</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>100,000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M31.49731444455175,-47.43203652628708A56.9375,56.9375 0 0,1 -17.82652727076067,54.07489095425737L0,0Z</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M31.49731444455175,-47.43203652628708A56.9375,56.9375 0 0,1 -17.82652727076067,54.07489095425737L0,0Z</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>APAC</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>Japan</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>NA</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr[5]/td[3]/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div</td>
+	<td>Product</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[2]/div</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[3]/div</td>
+	<td>Difference</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>31,035.93</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>14,581.41€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[2]/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Motor City Art Classics</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Motor City Art Classics</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>31,731.11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>12,266.52€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[3]/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Red Start Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Red Start Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>29,154.05</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>12,305.83€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='productTableTable_next']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Second Gear Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Second Gear Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>128,276.96</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>33,753.38€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#productChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>21,349.25</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>21,349.25</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>42.15€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#productChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>37,501.58</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>37,501.58</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>4,918.28€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M31.49731444455175,-47.43203652628708A56.9375,56.9375 0 0,1 -17.82652727076067,54.07489095425737L0,0Z</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M31.49731444455175,-47.43203652628708A56.9375,56.9375 0 0,1 -17.82652727076067,54.07489095425737L0,0Z</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>197.05178732095428</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>197.05178732095428</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>New Zealand</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>New Zealand</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Train</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Train</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>92.0802184312896</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>92.0802184312896</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Philippines</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Philippines</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Canada</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Canada</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.30024454224743</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.30024454224743</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Vinta</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Vinta</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<!--Verificar Edit-->
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Sandbox:using_table_addin.wcdf/edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>example_3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td</td>
+	<td>Row</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>example_3</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=previewButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='charts_header']/div</td>
+	<td>Sales by Region, Country and Product</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='charts_header']/div</td>
+	<td>Sales by Region, Country and Product</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='charts_leyend']/div</td>
+	<td>These charts show the sales by Region, Country and Product in the last three years. Just select one year and the charts will be updated. If you click on a Region, the charts to the right will be updated. If you click on a Country, the product chart will be updated. If you click on a Product, the table below will show the details.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='charts_leyend']/div</td>
+	<td>These charts show the sales by Region, Country and Product in the last three years. Just select one year and the charts will be updated. If you click on a Region, the charts to the right will be updated. If you click on a Country, the product chart will be updated. If you click on a Product, the table below will show the details.</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>100,000</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>100,000</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M31.49731444455175,-47.43203652628708A56.9375,56.9375 0 0,1 -17.82652727076067,54.07489095425737L0,0Z</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M31.49731444455175,-47.43203652628708A56.9375,56.9375 0 0,1 -17.82652727076067,54.07489095425737L0,0Z</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>APAC</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>Japan</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>NA</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='productTableTable']/tbody/tr[5]/td[3]/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div</td>
+	<td>Product</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[2]/div</td>
+	<td>Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[3]/div</td>
+	<td>Difference</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>31,035.93</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>14,581.41€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[2]/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Motor City Art Classics</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Motor City Art Classics</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>31,731.11</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>12,266.52€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th[3]/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Red Start Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Red Start Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>29,154.05</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>12,305.83€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='productTableTable_next']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Second Gear Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td</td>
+	<td>Second Gear Diecast</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>128,276.96</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>33,753.38€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='productTableTable']/thead/tr/th/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#productChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>21,349.25</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>21,349.25</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>42.15€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#marketChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>EMEA</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#productChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[1]</td>
+	<td>Studio M Art Models</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>37,501.58</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[2]</td>
+	<td>37,501.58</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div</td>
+	<td>4,918.28€</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//table[@id='productTableTable']/tbody/tr[3]/td[3]/div[2]@class</td>
+	<td>trend up good</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M31.49731444455175,-47.43203652628708A56.9375,56.9375 0 0,1 -17.82652727076067,54.07489095425737L0,0Z</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]@d</td>
+	<td>M31.49731444455175,-47.43203652628708A56.9375,56.9375 0 0,1 -17.82652727076067,54.07489095425737L0,0Z</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>197.05178732095428</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>197.05178732095428</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>New Zealand</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>New Zealand</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Train</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Train</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>92.0802184312896</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>92.0802184312896</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Philippines</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Philippines</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'marketChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#countryChart_2protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Canada</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']</td>
+	<td>Canada</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='text']</td>
+	<td>Ships</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.30024454224743</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]@height</td>
+	<td>10.30024454224743</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[contains(@id,'countryChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Vinta</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Vinta</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_2protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<!--Dependencies-->
+<!--Verificar Navegação Entre Páginas-->
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:using_table_addin.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h2</td>
+	<td>Using Tables for Displaying Data</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Using Tables for Displaying Data</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h2</td>
+	<td>Using Table Add-ins</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Using Table Add-ins</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h2</td>
+	<td>Creating components</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Creating components</td>
+</tr>
+</tbody></table>
+</body>
+</html>

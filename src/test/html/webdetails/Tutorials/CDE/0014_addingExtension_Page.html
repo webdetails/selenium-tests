@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0014_addingExtension_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0014_addingExtension_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:charting_the_CCC_grand_tour_II.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#productChart_1protovis</td>
+	<td></td>
+</tr>
+<!--Verificar Textos-->
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>The CCC Grand Tour: Adding extension points</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Extension Points</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[2]</td>
+	<td>Enhancing the Second Chart</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[3]/div/span/h3</td>
+	<td>Enhancing the Third Chart</td>
+</tr>
+<!--Verificar Links-->
+<tr>
+	<td>click</td>
+	<td>link=Protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://mbostock.github.io/protovis/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://mbostock.github.io/protovis/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=ccc.webdetails.org</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=ccc.webdetails.org</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/ccc/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/ccc/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=radians</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=radians</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://en.wikipedia.org/wiki/Radian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://en.wikipedia.org/wiki/Radian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://mbostock.github.io/protovis/docs/label.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://mbostock.github.io/protovis/docs/label.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=(//a[contains(text(),'Label')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>xpath=(//a[contains(text(),'Label')])[2]@href</td>
+	<td>http://mbostock.github.com/protovis/docs/label.html</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>xpath=(//a[contains(text(),'Label')])[3]@href</td>
+	<td>http://mbostock.github.com/protovis/docs/label.html</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>xpath=(//a[contains(text(),'Label')])[4]@href</td>
+	<td>http://mbostock.github.com/protovis/docs/label.html</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>xpath=(//a[contains(text(),'Label')])[5]@href</td>
+	<td>http://mbostock.github.com/protovis/docs/label.html</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>xpath=(//a[contains(text(),'Label')])[6]@href</td>
+	<td>http://mbostock.github.com/protovis/docs/label.html</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>xpath=(//a[contains(text(),'Label')])[7]@href</td>
+	<td>http://mbostock.github.com/protovis/docs/label.html</td>
+</tr>
+<!--Verificar Primeiro Gráfico-->
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>France</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>200,000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'countryChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>200,000</td>
+</tr>
+<!--Verificar Segundo Gráfico-->
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.71em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>Plane</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(@id,'productChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(@id,'productChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[contains(@id,'productChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[contains(@id,'productChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']@dy</td>
+	<td>.35em</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[contains(@id,'productChart_1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']</td>
+	<td>200,000</td>
+</tr>
+<!--Verificar Navegação Entre Páginas-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h2</td>
+	<td>Charting: the CCC Grand Tour</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Charting: the CCC Grand Tour</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Next lesson &gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h2</td>
+	<td>The CCC Grand Tour: Configuring the datasets</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>The CCC Grand Tour: Configuring the datasets</td>
+</tr>
+</tbody></table>
+</body>
+</html>

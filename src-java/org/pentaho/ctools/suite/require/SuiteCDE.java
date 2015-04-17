@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -28,6 +28,8 @@ import org.pentaho.ctools.cde.require.AddinReferenceEdit;
 import org.pentaho.ctools.cde.require.AjaxRequestReference;
 import org.pentaho.ctools.cde.require.BullertChartTestCase;
 import org.pentaho.ctools.cde.require.CCCV2ShowCase;
+import org.pentaho.ctools.cde.require.MapComponentFullTest;
+import org.pentaho.ctools.cde.require.MapComponentReference;
 import org.pentaho.ctools.cde.require.PopupComponent;
 import org.pentaho.ctools.cde.require.SampleDashboard;
 
@@ -39,9 +41,9 @@ import org.pentaho.ctools.cde.require.SampleDashboard;
   AjaxRequestReference.class,
   BullertChartTestCase.class,
   CCCV2ShowCase.class,
-  //MapComponentFullTest.class,
-  //MapComponentReference.class,
+  MapComponentFullTest.class,
+  MapComponentReference.class,
   PopupComponent.class
 
 })
-public class SuiteCDE {}
+public class SuiteCDE{}

@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0023_whereTo_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0023_whereTo_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:where_to_go.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<!--Verificar Textos-->
+<tr>
+	<td>waitForText</td>
+	<td>//div[2]/div/h3</td>
+	<td>CDE Open Demos</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Where to go from here!</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3</td>
+	<td>The C-Tools Family</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[2]</td>
+	<td>HyperText Markup Language, Cascading Style Sheets and JavaScript</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[3]</td>
+	<td>Some JS, CSS plugins and libraries that are useful to know</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[4]</td>
+	<td>Some other links</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div/h3</td>
+	<td>CDE Open Demos</td>
+</tr>
+<!--Verificar Imagens-->
+<tr>
+	<td>waitForElementHeight</td>
+	<td>//div[2]/div/a/div</td>
+	<td>112</td>
+</tr>
+<tr>
+	<td>assertElementHeight</td>
+	<td>css=div.cdedemo</td>
+	<td>112</td>
+</tr>
+<!--Verificar Links-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.cdf &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cdf/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cdf/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.ctools.cde &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.cde &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cde/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cde/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.ctools.cda &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.cda &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cda/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cda/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.ctools.ccc &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.ccc &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/ccc/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/ccc/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.ctools.cgg &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.cgg &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cgg/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cgg/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.ctools.cdv &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.cdv &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cdv/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cdv/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.ctools.cdb &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.cdb &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cdb/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cdb/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.ctools.cdc &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.cdc &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cdc/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cdc/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.ctools.cst &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.cst &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cst/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cst/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a.ctools.cbf &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.ctools.cbf &gt; div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/ctools/cbf/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/ctools/cbf/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=HyperText Markup Language (HTML)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=HyperText Markup Language (HTML)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.w3schools.com/html/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.w3schools.com/html/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Cascading Style Sheets (CSS)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cascading Style Sheets (CSS)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.w3schools.com/css/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.w3schools.com/css/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=JavaScript (JS)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=JavaScript (JS)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.w3schools.com/jsref/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.w3schools.com/jsref/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=jQuery JavaScript general purpose library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=jQuery JavaScript general purpose library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://jquery.com/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://jquery.com/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Blueprint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Blueprint</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.blueprintcss.org/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.blueprintcss.org/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Protovis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://mbostock.github.io/protovis//</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://mbostock.github.io/protovis//</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Datatables</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Datatables</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://datatables.net/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://datatables.net/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sparklines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sparklines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://omnipotent.net/jquery.sparkline/#s-about</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://omnipotent.net/jquery.sparkline/#s-about</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:where_to_go.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Chosen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Chosen</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://harvesthq.github.io/chosen/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://harvesthq.github.io/chosen/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Facebook page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Facebook page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>https://www.facebook.com/webdetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>https://www.facebook.com/webdetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Pedro Alves Blog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Pedro Alves Blog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://pedroalves-bi.blogspot.pt/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://pedroalves-bi.blogspot.pt/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Community Tools - CTools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Community Tools - CTools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://forums.pentaho.com/forumdisplay.php?80-Community-Tools-CTools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://forums.pentaho.com/forumdisplay.php?80-Community-Tools-CTools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=##pentaho IRC channel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//ul[3]/li[4]/a@href</td>
+	<td>irc://irc.freenode.net/##pentaho</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//ul[3]/li[4]/a@href</td>
+	<td>irc://irc.freenode.net/##pentaho</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=here</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.webdetails.pt/index.html#knowledge</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.webdetails.pt/index.html#knowledge</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<!--Verificar Navegação Entre Páginas-->
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:where_to_go.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=&lt; Previous lesson</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h2</td>
+	<td>Getting the most out of CDA</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Getting the most out of CDA</td>
+</tr>
+<!--Esvaziar a Cache-->
+<tr>
+	<td>open</td>
+	<td>pentaho/Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>xpath=//div[@class='busy-indicator-container waitPopup']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=toolsmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=toolsmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=refreshmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>id=refreshmenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=cdaClearCache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=cdaClearCache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.pentaho-tabWidgetLabel</td>
+	<td>CDA Cache</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.pentaho-tabWidgetLabel</td>
+	<td>CDA Cache</td>
+</tr>
+</tbody></table>
+</body>
+</html>

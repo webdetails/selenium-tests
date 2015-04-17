@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>0019_CDF_SelectMultiComponent</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0019_CDF_SelectMultiComponent</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/pentaho/api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:19-SelectMultiComponent:select_multi_component.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Community Dashboard Framework</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='dashboardContent']/div/div/div/h2/span[2]</td>
+	<td>SelectMultiComponent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#code &gt; button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>label=Southern</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>you chose: Southern</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>label=Eastern</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>you chose: Eastern</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>label=Central</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>you chose: Central</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>label=Western</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>you chose: Western</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>css=select</td>
+	<td>label=Eastern</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>you chose: Eastern,Western</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

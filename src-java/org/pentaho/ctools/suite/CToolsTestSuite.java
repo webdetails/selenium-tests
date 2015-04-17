@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -41,6 +41,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
+import org.pentaho.ctools.security.AccessSystemResources;
 import org.pentaho.ctools.suite.issues.SuiteIssues;
 import org.pentaho.ctools.suite.require.SuiteRequireJS;
 
@@ -60,14 +61,14 @@ import org.pentaho.ctools.suite.require.SuiteRequireJS;
   //RequireJS
   SuiteRequireJS.class,
   //Security
-  //AccessSystemResources.class,
+  AccessSystemResources.class,
   //Issues
   SuiteIssues.class,
   //End Tests
   LogoutPentaho.class
 
 })
-public class CToolsTestSuite {
+public class CToolsTestSuite{
 
   /// Instance of the driver (browser emulator)
   private static WebDriver       driver;
@@ -131,27 +132,27 @@ public class CToolsTestSuite {
      *
      */
     /*
-    System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
-    System.setProperty("webdriver.ie.driver.host", "10.120.42.25");
-    System.setProperty("webdriver.ie.driver.loglevel", "FATAL");
-    System.setProperty("webdriver.ie.driver.loglevel", downloadDir + "\\seleniumlogs.txt");
+      System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer_Win32_2.44.0\\IEDriverServer.exe");
+      System.setProperty("webdriver.ie.driver.host", "10.120.42.25");
+      System.setProperty("webdriver.ie.driver.loglevel", "FATAL");
+      System.setProperty("webdriver.ie.driver.loglevel", downloadDir + "\\seleniumlogs.txt");
 
-    // We could use any driver for our tests...
-    DesiredCapabilities capabilities = new DesiredCapabilities();
-    capabilities.setBrowserName("internet explorer");
-    capabilities.setVersion("8");
-    capabilities.setPlatform(Platform.WINDOWS);
-    capabilities.setCapability("platform", "WINDOWS");
-    capabilities.setJavascriptEnabled(true);
-    //capabilities.setCapability(InternetExplorerDriver.HOST, "10.120.40.243");
+      // We could use any driver for our tests...
+      DesiredCapabilities capabilities = new DesiredCapabilities();
+      capabilities.setBrowserName("internet explorer");
+      capabilities.setVersion("8");
+      capabilities.setPlatform(Platform.WINDOWS);
+      capabilities.setCapability("platform", "WINDOWS");
+      capabilities.setJavascriptEnabled(true);
+      //capabilities.setCapability(InternetExplorerDriver.HOST, "10.120.40.243");
 
-    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-    capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+      capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+      capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
 
-    // Get a handle to the driver. This will throw an exception
-    // if a matching driver cannot be located
-    driver = new RemoteWebDriver(new URL("http://10.120.42.25:4444/wd/hub"), capabilities);
-    //driver = new InternetExplorerDriver();
+      // Get a handle to the driver. This will throw an exception
+      // if a matching driver cannot be located
+      driver = new RemoteWebDriver(new URL("http://10.120.42.25:4444/wd/hub"), capabilities);
+      //driver = new InternetExplorerDriver();
      */
 
     driver.manage().window().setPosition(new Point(0, 0));

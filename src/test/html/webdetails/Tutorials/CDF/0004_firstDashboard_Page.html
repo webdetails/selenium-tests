@@ -1,0 +1,1896 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0004_firstDashboard_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0004_firstDashboard_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A1-firstDashboard%3AfirstDashboard.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<!--Check Intro-->
+<tr>
+	<td>waitForText</td>
+	<td>css=h1</td>
+	<td>First Dashboard</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h1</td>
+	<td>First Dashboard</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step4</td>
+	<td>Step4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step4</td>
+	<td>Step4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=th</td>
+	<td>What we will learn</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[4]/th</td>
+	<td>Components that will be used</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<!--Check Step1-->
+<tr>
+	<td>click</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[2]/div[2]/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div[2]/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Show other components:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Show other components:</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div/div[2]/div/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div/div[2]/div/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var radio')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var radio')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div/div[2]/div[2]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var singleSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var singleSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Check Step2-->
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[3]/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[3]/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Show other components:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Show other components:</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div/div[2]/div/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div/div[2]/div/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var radio')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var radio')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div/div[2]/div[2]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var singleSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var singleSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Red</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>red</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>red</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Green</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>green</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>green</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the green color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Blue</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>blue</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>blue</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the blue color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Yellow</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>yellow</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>yellow</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the yellow color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[3]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var multiSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var multiSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='check_object']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[4]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var check')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var check')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]</td>
+	<td></td>
+</tr>
+<!--Check Step3-->
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[4]/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[4]/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Show other components:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Show other components:</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div/div[2]/div/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div/div[2]/div/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var radio')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var radio')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div/div[2]/div[2]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var singleSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var singleSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Red</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>red</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>red</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): red</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): red</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the red color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Green</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>green</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>green</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the green color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): green</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): green</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Blue</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>blue</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>blue</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the blue color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): blue</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): blue</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Yellow</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>yellow</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>yellow</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the yellow color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): yellow</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): yellow</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[3]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var multiSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var multiSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='check_object']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s):</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s):</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil,rubber</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil,rubber</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil,rubber,square</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil,rubber,square</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[4]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var check')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var check')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[3]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var checkOptions')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var checkOptions')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Check Step4-->
+<tr>
+	<td>click</td>
+	<td>link=Step4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[5]/h3</td>
+	<td>Step 4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[5]/h3</td>
+	<td>Step 4</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Show other components:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Show other components:</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div/div[2]/div/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div/div[2]/div/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var radio')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var radio')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'No')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;radio_object&quot;]//label[contains(text(),'Yes')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>css=select</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='singleSelectOptions_object']</td>
+	<td>Selected number: 3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div/div[2]/div[2]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var singleSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var singleSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Red</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>red</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>red</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the red color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): red</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): red</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Green</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>green</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>green</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the green color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): green</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): green</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Blue</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>blue</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>blue</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the blue color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): blue</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): blue</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>Yellow</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>yellow</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//div[@id='multiSelect_object']/select</td>
+	<td>yellow</td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>You choose the yellow color</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): yellow</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='multiSelectOptions_object']</td>
+	<td>Selected color(s): yellow</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[3]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var multiSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var multiSelect')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='check_object']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s):</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s):</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Pencil')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil,rubber</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil,rubber</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]/../input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil,rubber,square</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='checkOptions_object']</td>
+	<td>Selected object(s): pencil,rubber,square</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[4]/div[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var check')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var check')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Rubber')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='check_object']//label[contains(text(),'Square')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[3]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var checkOptions')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var checkOptions')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//div[@id='radio_object']/ul</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[contains(text(),'to show the other components!')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[contains(text(),'to show the other components!')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=See Final Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

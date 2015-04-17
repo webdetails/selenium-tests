@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0002_Open_CDE_Open_Demos</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0002_Open_CDE_Open_Demos</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.busy-indicator-container.waitPopup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;buttonWrapper&quot;]//button[contains(text(),'Browse Files')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;buttonWrapper&quot;]//button[contains(text(),'Browse Files')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowser']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='fileBrowser']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFolders']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFiles']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserButtons']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='spinner large-spinner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='spinner large-spinner'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]</td>
+	<td>Public</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]</td>
+	<td>Webdetails Doc</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td>CDE Open Demos</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;fileBrowserFiles&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id=&quot;fileBrowserFiles&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td>CDE Open Demos</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id=&quot;fileBrowserFiles&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;fileBrowserButtons&quot;]//button[contains(text(),'Open')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id=&quot;fileBrowserButtons&quot;]//button[contains(text(),'Open')]</td>
+	<td>Open</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id=&quot;fileBrowserButtons&quot;]//button[contains(text(),'Open')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.busy-indicator-container.waitPopup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.busy-indicator-container.waitPopup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;solutionNavigatorAndContentPanel&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id=&quot;solutionNavigatorAndContentPanel&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td>CDE Open Demos</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id=&quot;solutionNavigatorAndContentPanel&quot;]//div[contains(text(),'CDE Open Demos')]</td>
+	<td>CDE Open Demos</td>
+</tr>
+</tbody></table>
+</body>
+</html>

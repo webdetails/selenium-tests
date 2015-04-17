@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -55,7 +55,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PrptComponent {
+public class PrptComponent{
 
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
@@ -446,7 +446,6 @@ public class PrptComponent {
     new File(downloadDir + "\\InventorybyLine.rtf").delete();
 
     // ## Step 8
-    //TODO - pageable/text
     driver.switchTo().defaultContent();
     driver.switchTo().frame("sampleObject_prptFrame");
     select = new Select(ElementHelper.FindElement(driver, By.xpath("//div[@class='parameter']/div[2]/select")));

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0008_Home_CDE_Open_Demos</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0003_Home_CDE_Open_Demos</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3APublicDemo%3APublicDemo.wcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTitle</td>
+	<td>CDE Open Demos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=span.open.render &gt; p</td>
+	<td>View</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=img.navSlideImage.navigationActive</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.open.render &gt; p</td>
+	<td>View</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.open.edit &gt; p</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#navButtonSlideShow &gt; span.arrow.next</td>
+	<td></td>
+</tr>
+<!--click next-->
+<tr>
+	<td>click</td>
+	<td>css=#navButtonSlideShow &gt; span.arrow.next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#info &gt; p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#info &gt; p</td>
+	<td>CTOOLS DEMO: PRODUCT SALES.</td>
+</tr>
+<!--click next-->
+<tr>
+	<td>click</td>
+	<td>css=#navButtonSlideShow &gt; span.arrow.next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#info &gt; p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#info &gt; p</td>
+	<td>CTOOLS DEMO: ORLANDO, USA - AUG 2011.</td>
+</tr>
+<!--click next-->
+<tr>
+	<td>click</td>
+	<td>css=#navButtonSlideShow &gt; span.arrow.next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#info &gt; p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#info &gt; p</td>
+	<td>CTOOLS DEMO: UTRECHT, NETHERLANDS - MAY 2011.</td>
+</tr>
+<!--click next-->
+<tr>
+	<td>click</td>
+	<td>css=#navButtonSlideShow &gt; span.arrow.next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#info &gt; p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#info &gt; p</td>
+	<td>CTOOLS DEMO: WELCOME TO THE GEEK SIDE.</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#navButtonSlideShow &gt; span.arrow.previous</td>
+	<td></td>
+</tr>
+<!--click previous < previous-->
+<tr>
+	<td>click</td>
+	<td>css=#navButtonSlideShow &gt; span.arrow.previous</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#navButtonSlideShow &gt; span.arrow.previous</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#info &gt; p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#info &gt; p</td>
+	<td>CTOOLS DEMO: ORLANDO, USA - AUG 2011.</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=span.open.edit &gt; p</td>
+	<td></td>
+</tr>
+<!--clicar em Edit-->
+<tr>
+	<td>click</td>
+	<td>css=span.open.edit &gt; p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAllWindowTitles</td>
+	<td>CDE Open Demos,Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAllWindowTitles</td>
+	<td>CDE Open Demos,Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTitle</td>
+	<td>Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=panel-layout_panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Webdetails CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAllWindowTitles</td>
+	<td>CDE Open Demos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAllWindowTitles</td>
+	<td>CDE Open Demos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=CDE Open Demos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>CDE Open Demos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=span.open.render &gt; p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.open.render</td>
+	<td>View</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.open.render</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAllWindowTitles</td>
+	<td>CDE Open Demos,Dashboardland</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAllWindowTitles</td>
+	<td>CDE Open Demos,Dashboardland</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=Dashboardland</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='blockUI blockOverlay']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTitle</td>
+	<td>Dashboardland</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Dashboardland</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAllWindowTitles</td>
+	<td>CDE Open Demos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAllWindowTitles</td>
+	<td>CDE Open Demos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=CDE Open Demos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>CDE Open Demos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#info &gt; p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#info &gt; p</td>
+	<td>CTOOLS DEMO: ORLANDO, USA - AUG 2011.</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=p</td>
+	<td>Here you have some samples projects wich you can edit, so you can learn with real dashboards using CTools.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p</td>
+	<td>Here you have some samples projects wich you can edit, so you can learn with real dashboards using CTools.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='info']/p[2]</td>
+	<td>This is a nice demo that let you learn about using selector, parameters, charts, tables including addins.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

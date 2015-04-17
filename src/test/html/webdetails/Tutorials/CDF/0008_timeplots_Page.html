@@ -1,0 +1,1231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>0008_timeplots_Page</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0008_timeplots_Page</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A5-timeplot%3Atimeplot.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<!--Verificar Intro-->
+<tr>
+	<td>waitForText</td>
+	<td>css=h1</td>
+	<td>Timeplots and Date Pickers</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h1</td>
+	<td>Timeplots and Date Pickers</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Intro</td>
+	<td>Intro</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step1</td>
+	<td>Step1</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step2</td>
+	<td>Step2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step3</td>
+	<td>Step3</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Step4</td>
+	<td>Step4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=Step4</td>
+	<td>Step4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=th</td>
+	<td>What we will learn</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[4]/th</td>
+	<td>Components that will be used</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Summary</td>
+</tr>
+<!--Verificar Step 1-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Date Range:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Date Range:</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step1']/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step1']/h3</td>
+	<td>Step 1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=dateRange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dateRange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Last 7 days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Last 7 days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Month to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Month to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Year to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Year to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=The previous Month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=The previous Month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Specific Date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Specific Date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=All Dates Before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=All Dates Before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=All Dates After</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=All Dates After</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dateRangeObject']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dateRange')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dateRange')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Verificar Step 2-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step2']/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step2']/h3</td>
+	<td>Step 2</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Date Range:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Date Range:</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='timePlot_object']/div/span</td>
+	<td>Total Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='timePlot_object']/div/span</td>
+	<td>Total Sales</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dateRange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Last 7 days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Last 7 days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Month to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Month to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Year to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Year to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=The previous Month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=The previous Month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Specific Date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Specific Date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=All Dates Before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=All Dates Before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=All Dates After</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=All Dates After</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Timeplot (c) SIMILE - http://simile.mit.edu/timeplot/']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@title='Timeplot (c) SIMILE - http://simile.mit.edu/timeplot/']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.simile-widgets.org/timeplot/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.simile-widgets.org/timeplot/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='timePlot_object']/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='timePlot_object']/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dateRangeObject']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dateRange')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dateRange')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='timePlot_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='timePlot_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var timePlot')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var timePlot')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Verificar Step 3-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step3']/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step3']/h3</td>
+	<td>Step 3</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Date Range:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Date Range:</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='timePlot_object']/div/span</td>
+	<td>Total Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='timePlot_object']/div/span</td>
+	<td>Total Sales</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dateRange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Last 7 days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Last 7 days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Month to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Month to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Year to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Year to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=The previous Month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=The previous Month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Specific Date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Specific Date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=All Dates Before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=All Dates Before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=All Dates After</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=All Dates After</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='timePlot_object']/div[2]/div/div[10]</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='timePlot_object']/div[2]/div/div[10]</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Timeplot (c) SIMILE - http://simile.mit.edu/timeplot/']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@title='Timeplot (c) SIMILE - http://simile.mit.edu/timeplot/']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.simile-widgets.org/timeplot/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.simile-widgets.org/timeplot/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='timePlot_object']/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='timePlot_object']/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dateRangeObject']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dateRange')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dateRange')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='timePlot_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='timePlot_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var timePlot')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var timePlot')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<!--Verificar Step 4-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='step4']/h3</td>
+	<td>Step 4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='step4']/h3</td>
+	<td>Step 4</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Date Range:</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='dashboard']/div/div</td>
+	<td>Date Range:</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='timePlot_object']/div/span</td>
+	<td>Total Sales</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='timePlot_object']/div/span</td>
+	<td>Total Sales</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dateRange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Last 7 days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Last 7 days</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Month to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Month to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Year to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Year to date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=The previous Month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=The previous Month</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Specific Date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Specific Date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=All Dates Before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=All Dates Before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=All Dates After</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=All Dates After</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='timePlot_object']/div[2]/div/div[10]</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='timePlot_object']/div[2]/div/div[10]</td>
+	<td>2004</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Timeplot (c) SIMILE - http://simile.mit.edu/timeplot/']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@title='Timeplot (c) SIMILE - http://simile.mit.edu/timeplot/']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForLocation</td>
+	<td>http://www.simile-widgets.org/timeplot/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.simile-widgets.org/timeplot/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBack</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Step4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Step4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='timePlot_object']/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='timePlot_object']/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='productChart_object']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='productChart_object']/map/area@title</td>
+	<td>(Sales, Vintage Cars) = 1.013.064,9</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='productChart_object']/map/area@title</td>
+	<td>(Sales, Vintage Cars) = 1.013.064,9</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dateRange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Date Range</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=span.ui-icon.ui-icon-circle-triangle-e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.ui-icon.ui-icon-circle-triangle-e</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=31</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=31</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/div/div/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[2]/div/div/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/div/table/tbody/tr/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[2]/div/table/tbody/tr/td/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='productChart_object']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAttribute</td>
+	<td>//div[@id='productChart_object']/map/area@title</td>
+	<td>(Sales, Vintage Cars) = 891.928,09</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//div[@id='productChart_object']/map/area@title</td>
+	<td>(Sales, Vintage Cars) = 891.928,09</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//div[@id='timePlot_object']/div[2]/div/div[10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='timePlot_object']/div/span</td>
+	<td>Total Sales = 0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='timePlot_object']/div/span</td>
+	<td>Total Sales = 0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='dateRangeObject']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dateRange')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var dateRange')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='timePlot_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='timePlot_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var timePlot')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var timePlot')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='productChart_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='productChart_object_tooltip']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var productChart')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='brownJqistate_state0']//textarea[contains(text(),'var productChart')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=brownJqi_state0_buttonClose</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=See Final Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=See Final Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>focus</td>
+	<td>//div[@id='fancybox-content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//pre[contains(text(),'&lt;!-- The dashboard layout --&gt;')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=fancybox-close</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

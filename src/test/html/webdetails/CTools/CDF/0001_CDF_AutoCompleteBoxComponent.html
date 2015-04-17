@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>0001_CDF_AutoCompleteBoxComponent</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0001_CDF_AutoCompleteBoxComponent</td></tr>
+</thead><tbody>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/pentaho/api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:58-AutocompleteBoxComponent:autocomplete_component.xcdf/generatedContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Community Dashboard Framework</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='dashboardContent']/div/div/div/h2/span[2]</td>
+	<td>AutocompleteBoxComponent</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Code</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#code &gt; button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=sampleObjectautoboxInput</td>
+	<td>a</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=listElement</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li/input</td>
+	<td>Australian Collectors, Co.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[2]/input</td>
+	<td>AV Stores, Co.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[3]/input</td>
+	<td>Anna's Decorations, Ltd</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[4]/input</td>
+	<td>Amica Models &amp; Co.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[5]/input</td>
+	<td>Auto Canal+ Petit</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[6]/input</td>
+	<td>Alpha Cognac</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[7]/input</td>
+	<td>Auto Associés &amp; Cie.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[8]/input</td>
+	<td>Australian Collectables, Ltd</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[9]/input</td>
+	<td>Australian Gift Network, Co</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[10]/input</td>
+	<td>Auto-Moto Classics Inc.</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>xpath=//ul[@class='autobox-list']/li[11]/input</td>
+	<td>Atelier graphique</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

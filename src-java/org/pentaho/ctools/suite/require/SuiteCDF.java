@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2014 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -26,6 +26,7 @@ import org.junit.runners.Suite;
 import org.pentaho.ctools.cdf.require.AutoCompleteBoxComponent;
 import org.pentaho.ctools.cdf.require.ButtonComponent;
 import org.pentaho.ctools.cdf.require.CheckComponent;
+import org.pentaho.ctools.cdf.require.CommentComponent;
 import org.pentaho.ctools.cdf.require.DateInputComponent;
 import org.pentaho.ctools.cdf.require.DateRangeInputComponent;
 import org.pentaho.ctools.cdf.require.DialComponent;
@@ -37,6 +38,7 @@ import org.pentaho.ctools.cdf.require.MonthPickerComponent;
 import org.pentaho.ctools.cdf.require.MultiButtonComponent;
 import org.pentaho.ctools.cdf.require.OpenFlashChartComponent;
 import org.pentaho.ctools.cdf.require.PrptComponent;
+import org.pentaho.ctools.cdf.require.QueryComponent;
 import org.pentaho.ctools.cdf.require.RadioComponent;
 import org.pentaho.ctools.cdf.require.SchedulePrptComponent;
 import org.pentaho.ctools.cdf.require.SelectComponent;
@@ -55,7 +57,7 @@ import org.pentaho.ctools.cdf.require.XactionComponent;
   AutoCompleteBoxComponent.class,
   ButtonComponent.class,
   CheckComponent.class,
-  //CommentComponent.class,
+  CommentComponent.class,
   DateInputComponent.class,
   DateRangeInputComponent.class,
   DialComponent.class,
@@ -67,7 +69,7 @@ import org.pentaho.ctools.cdf.require.XactionComponent;
   MultiButtonComponent.class,
   OpenFlashChartComponent.class,
   PrptComponent.class,
-  //QueryComponent.class,
+  QueryComponent.class,
   RadioComponent.class,
   SchedulePrptComponent.class,
   SelectComponent.class,
@@ -81,4 +83,4 @@ import org.pentaho.ctools.cdf.require.XactionComponent;
   VisualizationAPIComponent.class,
   XactionComponent.class
 })
-public class SuiteCDF {}
+public class SuiteCDF{}

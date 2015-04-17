@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/pentaho/" />
+<title>0002_CDA_Mondrianjndi</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0002_CDA_Mondrianjndi</td></tr>
+</thead><tbody>
+<tr>
+	<td>setTimeout</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/pentaho/plugin/cda/api/previewQuery?path=%2Fpublic%2Fplugin-samples%2Fcda%2Fcdafiles%2Fmondrian-jndi.cda</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//span[@id='fileid']</td>
+	<td>/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//span[@id='fileid']</td>
+	<td>/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='previewerTable']/span</td>
+	<td>Please select a Data Access ID</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select[@id='dataAccessSelector']</td>
+	<td>label=Mdx Query on SampleData - Jndi</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//select[@id='dataAccessSelector']/option[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='contents']/tbody/tr/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='contents_length']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@id='status']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>//input[@id='status']</td>
+	<td>Shipped</td>
+</tr>
+<!--Check only three rows exists-->
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//table[@id='contents']/tbody/tr[4]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr/td</td>
+	<td>All Years</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[2]/td</td>
+	<td>All Years</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[3]/td</td>
+	<td>All Years</td>
+</tr>
+<!--Check Price-->
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr/td[3]</td>
+	<td>3573701.2500000023</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[2]/td[3]</td>
+	<td>4750205.889999998</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[3]/td[3]</td>
+	<td>1513074.4600000002</td>
+</tr>
+<!--Check PriceInk-->
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr/td[4]</td>
+	<td>3.5737012500000023</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[2]/td[4]</td>
+	<td>4.750205889999998</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[3]/td[4]</td>
+	<td>1.5130744600000001</td>
+</tr>
+<!--Order ny price-->
+<tr>
+	<td>click</td>
+	<td>//table[@id='contents']/thead/tr/th[3]</td>
+	<td></td>
+</tr>
+<!--Check Price-->
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr/td[3]</td>
+	<td>1513074.4600000002</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[2]/td[3]</td>
+	<td>3573701.2500000023</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[3]/td[3]</td>
+	<td>4750205.889999998</td>
+</tr>
+<!--Check PriceInk-->
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr/td[4]</td>
+	<td>1.5130744600000001</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[2]/td[4]</td>
+	<td>3.5737012500000023</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='contents']/tbody/tr[3]/td[4]</td>
+	<td>4.750205889999998</td>
+</tr>
+<!--Export as xls-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='exportButton']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id='exportButton']/button[@onclick=&quot;exportFunc(lastQuery)&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='exportButton']/button</td>
+	<td>Export as .xls</td>
+</tr>
+</tbody></table>
+</body>
+</html>
