@@ -178,8 +178,8 @@ public class CDE417 {
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[8]"));
     assertEquals("Export", text);
     text = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div[2]/img"), "src");
-    assertEquals("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", text);
-    assertEquals(200, HttpUtils.GetResponseCode("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", "admin", "password"));
+    assertEquals("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", text);
+    assertEquals(200, HttpUtils.GetResponseCode(text, "admin", "password"));
     ElementHelper.Click(driver, By.id("fancybox-close"));
     assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[1]")));
 
@@ -204,8 +204,8 @@ public class CDE417 {
     text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[8]"));
     assertEquals("Export", text);
     text = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div[2]/img"), "src");
-    assertEquals("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=svg&paramwidth=350&paramheight=200", text);
-    assertEquals(200, HttpUtils.GetResponseCode("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/public/plugin-samples/pentaho-cdf-dd/tests/ExportPopup/BarChart.js&outputType=png&paramwidth=350&paramheight=200", "admin", "password"));
+    assertEquals("http://localhost:8080/pentaho/plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", text);
+    assertEquals(200, HttpUtils.GetResponseCode(text, "admin", "password"));
     ElementHelper.Click(driver, By.id("fancybox-close"));
     assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@id='fancybox-content']/div/div/div/div/div[1]")));
 
