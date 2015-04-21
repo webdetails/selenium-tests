@@ -47,6 +47,7 @@ import org.pentaho.ctools.issues.cdf.CDF486;
   CDF469.class,
   CDF474.class,
   CDF486.class
-
 })
-public class SuiteCDF {}
+public class SuiteCDF {
+  //It runs the SuiteCDF
+}

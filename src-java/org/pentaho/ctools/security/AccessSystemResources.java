@@ -25,30 +25,33 @@ public class AccessSystemResources {
   private String baseUrl;
   
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(this.driver);
 
   @Before
   public void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    this.driver = CToolsTestSuite.getDriver();
+    this.wait = CToolsTestSuite.getWait();
+    this.baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
   @Test(timeout = 60000)
   public void testLoginPentaho() throws Exception {
-    String url = baseUrl + "plugin/pentaho-cdf-dd/api/resources/system/jackrabbit/repository.xml?v=1406646663089";
-    driver.get(url);
+    String url = this.baseUrl + "plugin/pentaho-cdf-dd/api/resources/system/jackrabbit/repository.xml?v=1406646663089";
+    this.driver.get(url);
 
     //Wait for form display
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//body")));
-    assertEquals(driver.getTitle(), "Unavailable");
-    assertEquals(driver.findElement(By.xpath("//body/div/div/div")).getText(), "Sorry. We really did try.");
-    assertEquals(driver.findElement(By.xpath("//body/div/div/div[2]")).getText(), "Something went wrong. Please try again");
-    assertEquals(driver.findElement(By.xpath("//body/div/div/div[3]")).getText(), "or contact your administrator.");
+    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//body")));
+    assertEquals(this.driver.getTitle(), "Unavailable");
+    assertEquals(this.driver.findElement(By.xpath("//body/div/div/div")).getText(), "Sorry. We really did try.");
+    assertEquals(this.driver.findElement(By.xpath("//body/div/div/div[2]")).getText(), "Something went wrong. Please try again");
+    assertEquals(this.driver.findElement(By.xpath("//body/div/div/div[3]")).getText(), "or contact your administrator.");
     //Check if return HTTP Status 401
     assertEquals(HttpUtils.GetHttpStatus(url), HttpURLConnection.HTTP_UNAUTHORIZED);
   }
-
+  
+  
   @After
-  public void tearDown(){}
+  public void tearDown(){
+    //To use after test case run.
+  }
 }

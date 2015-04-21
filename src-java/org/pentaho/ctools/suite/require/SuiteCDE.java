@@ -46,4 +46,6 @@ import org.pentaho.ctools.cde.require.SampleDashboard;
   PopupComponent.class
 
 })
-public class SuiteCDE{}
+public class SuiteCDE{
+  //It runs the Suite.SuiteClasses
+}

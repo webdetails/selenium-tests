@@ -47,6 +47,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class VisualizationAPIComponent {
+
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -246,5 +247,7 @@ public class VisualizationAPIComponent {
   }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    //To use when class run all test cases.
+  }
 }

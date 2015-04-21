@@ -48,7 +48,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ExecutePrptComponent {
+public class ExecutePrptComponent{
 
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
@@ -219,7 +219,7 @@ public class ExecutePrptComponent {
     assertNotNull(ElementHelper.FindElement(driver, By.id("reportControlPanel")));
     ElementHelper.FindElement(driver, By.xpath("//span[@id='toolbar-parameterToggle']/span")).click();
     ElementHelper.WaitForElementInvisibility(driver, By.id("reportControlPanel"));
-    assertTrue(!ElementHelper.WaitForElementNotPresent(driver, By.id("reportControlPanel"), 2));
+    assertTrue( ! ElementHelper.WaitForElementNotPresent(driver, By.id("reportControlPanel"), 2));
 
     // ## Step 2
     ElementHelper.FindElement(driver, By.xpath("//span[@id='toolbar-parameterToggle']/span")).click();
@@ -313,7 +313,7 @@ public class ExecutePrptComponent {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test(timeout = 60000)
+  @Test(timeout = 90000)
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() throws InterruptedException {
     log.debug("tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised");
     driver.switchTo().defaultContent();

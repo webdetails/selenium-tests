@@ -129,16 +129,16 @@ public class MondrianJNDI{
     ElementHelper.FindElement(driver, By.linkText("About")).click();
     //element 'fileid'
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fileid")));
-    String textElementFileid = ElementHelper.WaitForElementPresentGetText(driver, By.id("fileid"));
+    final String textElementFileid = ElementHelper.WaitForElementPresentGetText(driver, By.id("fileid"));
     //element image
-    WebElement elemImg = ElementHelper.FindElement(driver, By.cssSelector("img"));
-    String imgAttrSrc = elemImg.getAttribute("src");
+    final WebElement elemImg = ElementHelper.FindElement(driver, By.cssSelector("img"));
+    final String imgAttrSrc = elemImg.getAttribute("src");
     //element //div[@id='aboutSubContainerLeft']/div[2]/p
-    String textFirstParagExpected = "CDA is a Pentaho plugin designed for accessing data with great flexibility. Born to overcoming some cons of the older implementation, CDA allows you to access any of the various Pentaho data sources and:";
-    String textFirstParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='aboutSubContainerLeft']/div[2]/p"));
+    final String textFirstParagExpected = "CDA is a Pentaho plugin designed for accessing data with great flexibility. Born to overcoming some cons of the older implementation, CDA allows you to access any of the various Pentaho data sources and:";
+    final String textFirstParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='aboutSubContainerLeft']/div[2]/p"));
     //element //div[@id='aboutSubContainerLeft']/div[2]/p[2]
-    String textSecondParagExpected = "CDA can be used as a standalone plugin on the Pentaho BI server or in combination with CDE / CDF.";
-    String textSecondParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='aboutSubContainerLeft']/div[2]/p[2]"));
+    final String textSecondParagExpected = "CDA can be used as a standalone plugin on the Pentaho BI server or in combination with CDE / CDF.";
+    final String textSecondParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='aboutSubContainerLeft']/div[2]/p[2]"));
 
     assertEquals("Hello!", textElementFileid);
     assertEquals(baseUrl + "api/repos/cda/static/img/cda.png", imgAttrSrc);
@@ -179,12 +179,12 @@ public class MondrianJNDI{
     /*
      * ## Step 1
      */
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
+    final Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Mdx Query on SampleData - Jndi");
     //wait to render page
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
+    final WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
     String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
@@ -356,7 +356,7 @@ public class MondrianJNDI{
     textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("empty (filter 3 elements)", textPaging);
     //Check if table is empty
-    String textNoResult = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
+    final String textNoResult = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
     assertEquals("No results.", textNoResult);
 
     //Clean data
@@ -385,19 +385,19 @@ public class MondrianJNDI{
     /*
      * ## Step 1
      */
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
+    final Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Mdx Query on SampleData - Jndi");
     //wait to render page
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
+    final WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
+    final String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 3 of 3 elements", textPaging);
 
     //Click in export as xls
-    WebElement buttonExport = ElementHelper.FindElement(driver, By.id("export"));
+    final WebElement buttonExport = ElementHelper.FindElement(driver, By.id("export"));
     try {
       //Delete the existence if exist
       new File(downloadDir + "\\cda-export.xls").delete();
@@ -414,7 +414,7 @@ public class MondrianJNDI{
 
       new File(downloadDir + "\\cda-export.xls").delete();
     }
-    catch(Exception e) {
+    catch (final Exception e) {
       log.error(e.getMessage());
     }
   }
@@ -437,28 +437,28 @@ public class MondrianJNDI{
     /*
      * ## Step 1
      */
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
+    final Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Mdx Query on SampleData - Jndi");
     //wait to render page
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
+    final WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
+    final String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 3 of 3 elements", textPaging);
 
     // Check query url
-    WebElement buttonQueryUrl = ElementHelper.FindElement(driver, By.id("queryUrl"));
+    final WebElement buttonQueryUrl = ElementHelper.FindElement(driver, By.id("queryUrl"));
     assertEquals("Query URL", buttonQueryUrl.getText());
     buttonQueryUrl.click();
 
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("queryUrlDialog")));
-    String dialogTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='queryUrlDialog']/p"));
+    final String dialogTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='queryUrlDialog']/p"));
     assertEquals("Query Execution URL:", dialogTitle);
 
-    WebElement inputQueryUrl = ElementHelper.FindElement(driver, By.xpath("//input[@id='doQueryUrl']"));
-    String queryUrl = inputQueryUrl.getAttribute("value");
+    final WebElement inputQueryUrl = ElementHelper.FindElement(driver, By.xpath("//input[@id='doQueryUrl']"));
+    final String queryUrl = inputQueryUrl.getAttribute("value");
     log.debug("Query URL: " + queryUrl);
 
     ElementHelper.FindElement(driver, By.linkText("Close")).click();
@@ -467,8 +467,8 @@ public class MondrianJNDI{
      * ## Step 2
      */
     driver.get(queryUrl);
-    String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"String\",\"colName\":\"PriceInK\"}]}";
-    String jsonQueryActual = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("body"));
+    final String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"String\",\"colName\":\"PriceInK\"}]}";
+    final String jsonQueryActual = ElementHelper.WaitForElementPresentGetText(driver, By.cssSelector("body"));
     assertEquals(jsonQueryExpected, jsonQueryActual);
   }
 
@@ -489,20 +489,20 @@ public class MondrianJNDI{
   @Test(timeout = 240000)
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
     log.info("tc5_CacheThisSimple_ScheduleIsSetSuccessful");
-    String selectedHours = "21";
+    final String selectedHours = "21";
 
     /*
      * ## Step 1
      */
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
+    final Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
     select.selectByVisibleText("Mdx Query on SampleData - Jndi");
     //wait to render page
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
+    final WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
     assertEquals("Shipped", elemStatus.getAttribute("value"));
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
+    final String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
     assertEquals("View 1 to 3 of 3 elements", textPaging);
 
     /*
@@ -511,15 +511,15 @@ public class MondrianJNDI{
     //Click in 'Cache this'
     ElementHelper.FindElement(driver, By.id("cachethis")).click();
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='dialog']")));
-    String questionActual = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dialog']/p"));
-    String questionExpect = "What schedule should this query run on? (advanced)";
+    final String questionActual = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dialog']/p"));
+    final String questionExpect = "What schedule should this query run on? (advanced)";
     assertEquals(questionExpect, questionActual);
 
     /*
      * ## Step 3
      */
-    String parentWindowHandle = driver.getWindowHandle();
-    Select selectPeriod = new Select(ElementHelper.FindElement(driver, By.id("periodType")));
+    final String parentWindowHandle = driver.getWindowHandle();
+    final Select selectPeriod = new Select(ElementHelper.FindElement(driver, By.id("periodType")));
     selectPeriod.selectByValue("1");//every day
 
     ElementHelper.FindElement(driver, By.xpath("//input[@id='startAt']")).clear();
@@ -532,36 +532,36 @@ public class MondrianJNDI{
     listWindows = driver.getWindowHandles();
     //Get popup id
     WebDriver cdaCacheManager = null;
-    Iterator<String> iterWindows = listWindows.iterator();
-    while(iterWindows.hasNext()) {
-      String windowHandle = iterWindows.next();
+    final Iterator<String> iterWindows = listWindows.iterator();
+    while (iterWindows.hasNext()) {
+      final String windowHandle = iterWindows.next();
       cdaCacheManager = driver.switchTo().window(windowHandle);
-      if(cdaCacheManager.getTitle().equals("CDA Cache Manager")) {
+      if (cdaCacheManager.getTitle().equals("CDA Cache Manager")) {
         break;
       }
     }
     //Validate page:
     //Title
-    String titleCdaCacheManager = cdaCacheManager.getTitle();
+    final String titleCdaCacheManager = cdaCacheManager.getTitle();
     assertEquals("CDA Cache Manager", titleCdaCacheManager);
     //Scheduled queries
-    String subTitleText = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='scheduledQueries']/div"));
+    final String subTitleText = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='scheduledQueries']/div"));
     assertEquals("Scheduled Queries", subTitleText);
 
     /*
      * ## Step 4
      */
     //Validate Query
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    String strToday = sdf.format(new Date());
-    String queryName = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[1]"));
-    String queryParam1 = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dt"));
-    String queryParam2 = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dd"));
-    String queryLExec = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[3]"));
-    String queryNExec = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[4]"));
-    String queryCron = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[5]"));
-    String queryTime = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[6]"));
-    String queryStatus = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[7]"));
+    final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    final String strToday = sdf.format(new Date());
+    final String queryName = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[1]"));
+    final String queryParam1 = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dt"));
+    final String queryParam2 = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[2]//dl//dd"));
+    final String queryLExec = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[3]"));
+    final String queryNExec = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[4]"));
+    final String queryCron = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[5]"));
+    final String queryTime = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[6]"));
+    final String queryStatus = ElementHelper.WaitForElementPresentGetText(cdaCacheManager, By.xpath("//div[@id='lines']/div/div[7]"));
 
     try {
       assertEquals("/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda (1)", queryName);
@@ -575,7 +575,7 @@ public class MondrianJNDI{
       assertEquals("-1", queryTime);
       assertEquals("Success", queryStatus);
     }
-    catch(AssertionError ae) {
+    catch (final AssertionError ae) {
       log.error(ae.getMessage());
 
       //Remove schedule
@@ -607,15 +607,15 @@ public class MondrianJNDI{
 
     elementPresent = ElementHelper.WaitForElementNotPresent(driver, By.cssSelector("img.deleteIcon.button"), 2);
 
-    while( ! elementPresent) {
+    while ( ! elementPresent) {
       //Press to delete schedule
       ElementHelper.FindElement(driver, By.cssSelector("img.deleteIcon.button")).click();
 
       //Wait for pop-up
       wait.until(ExpectedConditions.alertIsPresent());
-      Alert alert = driver.switchTo().alert();
-      String confirmationMsg = alert.getText();
-      String expectedCnfText = "Want to delete this scheduler entry?";
+      final Alert alert = driver.switchTo().alert();
+      final String confirmationMsg = alert.getText();
+      final String expectedCnfText = "Want to delete this scheduler entry?";
       alert.accept();
 
       assertEquals(confirmationMsg, expectedCnfText);
@@ -627,7 +627,9 @@ public class MondrianJNDI{
   }
 
   @After
-  public void tearDownTestCase() {}
+  public void tearDownTestCase() {
+    //To use after test case run.
+  }
 
   @AfterClass
   public static void tearDownClass() {

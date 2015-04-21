@@ -36,4 +36,6 @@ import org.junit.runners.Suite;
   SuiteCDF.class,
 
 })
-public class SuiteIssues{}
+public class SuiteIssues {
+  //It runs the Suite.SuiteClasses
+}

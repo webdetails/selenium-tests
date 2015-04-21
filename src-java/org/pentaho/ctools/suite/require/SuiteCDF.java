@@ -83,4 +83,6 @@ import org.pentaho.ctools.cdf.require.XactionComponent;
   VisualizationAPIComponent.class,
   XactionComponent.class
 })
-public class SuiteCDF{}
+public class SuiteCDF {
+  //It runs Suite.SuiteClasses
+}

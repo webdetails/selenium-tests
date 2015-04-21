@@ -49,7 +49,8 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ExecuteXactionComponent {
+public class ExecuteXactionComponent{
+
   //Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -135,7 +136,7 @@ public class ExecuteXactionComponent {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
+    final int nSampleObject = driver.findElements(By.id("sampleObject")).size();
     assertEquals(1, nSampleObject);
   }
 
@@ -155,7 +156,7 @@ public class ExecuteXactionComponent {
   @Test(timeout = 60000)
   public void tc3_PressToGenerateChart_ChartIsDisplayed() {
     // ## Step 1
-    String buttonName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button/span"));
+    final String buttonName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button/span"));
     assertEquals("Execute XAction", buttonName);
     //Click in button
     ElementHelper.FindElement(driver, By.xpath("//button")).click();
@@ -164,15 +165,15 @@ public class ExecuteXactionComponent {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fancybox-content")));
     driver.switchTo().frame("fancybox-frame");
     //Check the title
-    String chartTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table/tbody/tr/td"));
+    final String chartTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table/tbody/tr/td"));
     assertEquals("Action Successful", chartTitle);
     //Check for the displayed image
-    WebElement xactionElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
+    final WebElement xactionElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
     assertNotNull(xactionElement);
 
-    String attrSrc = xactionElement.getAttribute("src");
-    String attrWidth = xactionElement.getAttribute("width");
-    String attrHeight = xactionElement.getAttribute("height");
+    final String attrSrc = xactionElement.getAttribute("src");
+    final String attrWidth = xactionElement.getAttribute("width");
+    final String attrHeight = xactionElement.getAttribute("height");
 
     assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=tmp_chart_admin-"));
     assertEquals(attrWidth, "500");
@@ -180,12 +181,13 @@ public class ExecuteXactionComponent {
 
     // ## Step 3
     try {
-      URL url = new URL(attrSrc);
-      URLConnection connection = url.openConnection();
+      final URL url = new URL(attrSrc);
+      final URLConnection connection = url.openConnection();
       connection.connect();
 
       assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    } catch (Exception ex) {
+    }
+    catch (final Exception ex) {
       log.error(ex.getMessage());
     }
 
@@ -197,5 +199,7 @@ public class ExecuteXactionComponent {
   }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    //To use when class run all test cases.
+  }
 }

@@ -48,10 +48,10 @@ import org.openqa.selenium.support.ui.Wait;
 
 import com.google.common.base.Function;
 
-public class ElementHelper{
+public class ElementHelper {
 
-  //Log instance
-  private static Logger log = LogManager.getLogger(ElementHelper.class);
+  // Log instance
+  private static Logger log = LogManager.getLogger( ElementHelper.class );
 
   /**
    * This method works as a wrapper for findElement method of WebDriver.
@@ -63,10 +63,10 @@ public class ElementHelper{
    * @param locator
    * @return
    */
-  public static WebElement FindElement(final WebDriver driver, final By locator) {
-    log.debug("FindElement::Enter");
-    WebElement element = WaitForElementPresenceAndVisible(driver, locator, 30);
-    log.debug("FindElement::Exit");
+  public static WebElement FindElement( final WebDriver driver, final By locator ) {
+    log.debug( "FindElement::Enter" );
+    WebElement element = WaitForElementPresenceAndVisible( driver, locator, 30 );
+    log.debug( "FindElement::Exit" );
     return element;
   }
 
@@ -80,38 +80,53 @@ public class ElementHelper{
    * @param locator
    * @return
    */
-  public static WebElement FindElementInvisible(WebDriver driver, By locator) {
-    log.debug("FindElementInvisible::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static WebElement FindElement( final WebDriver driver, final By locator, Integer timeout ) {
+    log.debug( "FindElement::Enter" );
+    WebElement element = WaitForElementPresenceAndVisible( driver, locator, timeout );
+    log.debug( "FindElement::Exit" );
+    return element;
+  }
+
+  /**
+   * This method works as a wrapper for findElement method of WebDriver.
+   * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
+   * the element is not ready in DOM. Hence, to prevent exception, we develop
+   * a function that is the same of findElement but avoid this exception.
+   *
+   * @param driver
+   * @param locator
+   * @return
+   */
+  public static WebElement FindElementInvisible( WebDriver driver, By locator ) {
+    log.debug( "FindElementInvisible::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
     WebElement element = null;
 
     try {
-      WaitForElementPresence(driver, locator);
-      log.debug("Element is presence!");
-      List<WebElement> listElements = driver.findElements(locator);
-      if(listElements.size() > 0) {
-        WebElement elementTmp = listElements.get(0);
-        if(elementTmp.isEnabled()) {
-          log.debug("Return element found it");
+      WaitForElementPresence( driver, locator );
+      log.debug( "Element is presence!" );
+      List<WebElement> listElements = driver.findElements( locator );
+      if ( listElements.size() > 0 ) {
+        WebElement elementTmp = listElements.get( 0 );
+        if ( elementTmp.isEnabled() ) {
+          log.debug( "Return element found it" );
           element = elementTmp;
         } else {
-          log.warn("Trying again! Enabled:" + elementTmp.isEnabled());
-          element = FindElementInvisible(driver, locator);
+          log.warn( "Trying again! Enabled:" + elementTmp.isEnabled() );
+          element = FindElementInvisible( driver, locator );
         }
       } else {
-        log.warn("No element found!");
+        log.warn( "No element found!" );
       }
-    }
-    catch(StaleElementReferenceException s) {
-      log.warn("Stale - got one. Locator: " + locator.toString());
-      element = FindElementInvisible(driver, locator);
-    }
-    catch(TimeoutException te) {
-      log.warn("TimeoutException - got one. Locator: " + locator.toString());
+    } catch ( StaleElementReferenceException s ) {
+      log.warn( "Stale - got one. Locator: " + locator.toString() );
+      element = FindElementInvisible( driver, locator );
+    } catch ( TimeoutException te ) {
+      log.warn( "TimeoutException - got one. Locator: " + locator.toString() );
     }
 
-    log.debug("FindElementInvisible::Exit");
+    log.debug( "FindElementInvisible::Exit" );
     return element;
   }
 
@@ -121,24 +136,22 @@ public class ElementHelper{
    * @param locator
    * @return
    */
-  public static String GetTextElementInvisible(WebDriver driver, By locator) {
-    log.debug("GetTextElementInvisible::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static String GetTextElementInvisible( WebDriver driver, By locator ) {
+    log.debug( "GetTextElementInvisible::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
     String text = "";
     try {
-      WebElement element = FindElementInvisible(driver, locator);
-      text = ((JavascriptExecutor) driver).executeScript("return arguments[0].textContent", element).toString();
-    }
-    catch(StaleElementReferenceException e) {
-      log.warn("Stale Element Reference Exception");
-      text = FindElementInvisible(driver, locator).getText();
-    }
-    catch(Exception e) {
-      log.catching(e);
+      WebElement element = FindElementInvisible( driver, locator );
+      text = ( (JavascriptExecutor) driver ).executeScript( "return arguments[0].textContent", element ).toString();
+    } catch ( StaleElementReferenceException e ) {
+      log.warn( "Stale Element Reference Exception" );
+      text = FindElementInvisible( driver, locator ).getText();
+    } catch ( Exception e ) {
+      log.catching( e );
     }
 
-    log.debug("GetTextElementInvisible::Exit");
+    log.debug( "GetTextElementInvisible::Exit" );
     return text;
   }
 
@@ -150,10 +163,10 @@ public class ElementHelper{
    * @param text
    * @return
    */
-  public static String WaitForTextPresence(WebDriver driver, By locator, String textToWait) {
-    log.debug("WaitForTextPresence(Main)::Enter");
-    String str = WaitForTextPresence(driver, locator, textToWait, 10);
-    log.debug("WaitForTextPresence(Main)::Exit");
+  public static String WaitForTextPresence( WebDriver driver, By locator, String textToWait ) {
+    log.debug( "WaitForTextPresence(Main)::Enter" );
+    String str = WaitForTextPresence( driver, locator, textToWait, 10 );
+    log.debug( "WaitForTextPresence(Main)::Exit" );
     return str;
   }
 
@@ -166,32 +179,30 @@ public class ElementHelper{
    * @param timeout - in seconds
    * @return
    */
-  public static String WaitForTextPresence(WebDriver driver, By locator, String textToWait, Integer timeout) {
-    log.debug("WaitForTextPresence::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static String WaitForTextPresence( WebDriver driver, By locator, String textToWait, Integer timeout ) {
+    log.debug( "WaitForTextPresence::Enter" );
+    log.debug( "Locator: " + locator.toString() );
     String textPresent = "";
 
     try {
-      Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(200, TimeUnit.MILLISECONDS);
+      Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 200, TimeUnit.MILLISECONDS );
 
-      driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
-      boolean isTextPresent = wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, textToWait));
-      if(isTextPresent == true) {
+      boolean isTextPresent = wait.until( ExpectedConditions.textToBePresentInElementLocated( locator, textToWait ) );
+      if ( isTextPresent == true ) {
         textPresent = textToWait;
       }
 
-      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    }
-    catch(StaleElementReferenceException sere) {
-      log.warn("Stale Element Reference Exception");
-      textPresent = WaitForTextPresence(driver, locator, textToWait, timeout);
-    }
-    catch(Exception e) {
-      log.error("Exception");
+      driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    } catch ( StaleElementReferenceException sere ) {
+      log.warn( "Stale Element Reference Exception" );
+      textPresent = WaitForTextPresence( driver, locator, textToWait, timeout );
+    } catch ( Exception e ) {
+      log.error( "Exception" );
     }
 
-    log.debug("WaitForTextPresence::Exit");
+    log.debug( "WaitForTextPresence::Exit" );
     return textPresent;
   }
 
@@ -202,26 +213,25 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static void ClickJS(WebDriver driver, By locator) {
-    log.debug("ClickJS::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static void ClickJS( WebDriver driver, By locator ) {
+    log.debug( "ClickJS::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
-    WebElement element = FindElement(driver, locator);
-    if(element != null) {
+    WebElement element = FindElement( driver, locator );
+    if ( element != null ) {
       try {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
-      }
-      catch(WebDriverException wde) {
-        if(wde.getMessage().contains("arguments[0].click is not a function")) {
+        executor.executeScript( "arguments[0].click();", element );
+      } catch ( WebDriverException wde ) {
+        if ( wde.getMessage().contains( "arguments[0].click is not a function" ) ) {
           element.click();
         }
       }
     } else {
-      log.error("Element is null " + locator.toString());
+      log.error( "Element is null " + locator.toString() );
     }
 
-    log.debug("ClickJS::Exit");
+    log.debug( "ClickJS::Exit" );
   }
 
   /**
@@ -231,22 +241,21 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static void Click(WebDriver driver, By locator) {
-    log.debug("Click::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static void Click( WebDriver driver, By locator ) {
+    log.debug( "Click::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
     try {
-      WebElement element = FindElement(driver, locator);
-      if(element != null) {
+      WebElement element = FindElement( driver, locator );
+      if ( element != null ) {
         element.click();
-        log.debug("Click::Exit");
+        log.debug( "Click::Exit" );
       } else {
-        log.error("Element is null " + locator.toString());
+        log.error( "Element is null " + locator.toString() );
       }
-    }
-    catch(StaleElementReferenceException e) {
-      log.warn("Stale Element Reference Exception");
-      Click(driver, locator);
+    } catch ( StaleElementReferenceException e ) {
+      log.warn( "Stale Element Reference Exception" );
+      Click( driver, locator );
     }
   }
 
@@ -257,26 +266,25 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static void ClickElementInvisible(WebDriver driver, By locator) {
-    log.debug("ClickElementInvisible::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static void ClickElementInvisible( WebDriver driver, By locator ) {
+    log.debug( "ClickElementInvisible::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
-    WebElement element = FindElementInvisible(driver, locator);
-    if(element != null) {
+    WebElement element = FindElementInvisible( driver, locator );
+    if ( element != null ) {
       try {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
-      }
-      catch(WebDriverException wde) {
-        if(wde.getMessage().contains("arguments[0].click is not a function")) {
+        executor.executeScript( "arguments[0].click();", element );
+      } catch ( WebDriverException wde ) {
+        if ( wde.getMessage().contains( "arguments[0].click is not a function" ) ) {
           element.click();
         }
       }
     } else {
-      log.error("Element is null " + locator.toString());
+      log.error( "Element is null " + locator.toString() );
     }
 
-    log.debug("ClickElementInvisible::Exit");
+    log.debug( "ClickElementInvisible::Exit" );
   }
 
   /**
@@ -286,10 +294,10 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static void WaitForElementInvisibility(WebDriver driver, final By locator) {
-    log.debug("WaitForElementInvisibility(Main)::Enter");
-    WaitForElementInvisibility(driver, locator, 30);
-    log.debug("WaitForElementInvisibility(Main)::Exit");
+  public static void WaitForElementInvisibility( WebDriver driver, final By locator ) {
+    log.debug( "WaitForElementInvisibility(Main)::Enter" );
+    WaitForElementInvisibility( driver, locator, 30 );
+    log.debug( "WaitForElementInvisibility(Main)::Exit" );
   }
 
   /**
@@ -300,67 +308,61 @@ public class ElementHelper{
    * @param locator
    * @param timeout
    */
-  public static void WaitForElementInvisibility(final WebDriver driver, final By locator, final Integer timeout) {
-    log.debug("WaitForElementInvisibility::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static void WaitForElementInvisibility( final WebDriver driver, final By locator, final Integer timeout ) {
+    log.debug( "WaitForElementInvisibility::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
-      Runnable r = new Runnable(){
+      Runnable r = new Runnable() {
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
-          //Wait for element invisible
-          wait.until(new Function<WebDriver, Boolean>(){
+          // Wait for element invisible
+          wait.until( new Function<WebDriver, Boolean>() {
 
             @Override
-            public Boolean apply(WebDriver d) {
+            public Boolean apply( WebDriver d ) {
               try {
-                List<WebElement> listElements = d.findElements(locator);
-                if(listElements.size() > 0) {
-                  WebElement elem = listElements.get(0);
+                List<WebElement> listElements = d.findElements( locator );
+                if ( listElements.size() > 0 ) {
+                  WebElement elem = listElements.get( 0 );
                   return elem.isDisplayed() == false;
                 }
-                //The element does not exit, i.e., is not visible and even present
+                // The element does not exit, i.e., is not visible and even present
                 return true;
-              }
-              catch(StaleElementReferenceException sere) {
+              } catch ( StaleElementReferenceException sere ) {
                 return false;
               }
             }
-          });
+          } );
         }
       };
 
       ExecutorService executor = Executors.newSingleThreadExecutor();
-      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       executor.shutdown();
 
-    }
-    catch(TimeoutException te) {
-      log.warn("Webdriver timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(InterruptedException ie) {
-      log.warn("Interrupted Exception");
-    }
-    catch(ExecutionException ee) {
-      log.warn("Interrupted Exception");
-    }
-    catch(java.util.concurrent.TimeoutException cte) {
-      log.warn("Thread timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(Exception e) {
-      log.error("Exception");
-      log.catching(e);
+    } catch ( TimeoutException te ) {
+      log.warn( "Webdriver timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( InterruptedException ie ) {
+      log.warn( "Interrupted Exception" );
+    } catch ( ExecutionException ee ) {
+      log.warn( "Interrupted Exception" );
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( Exception e ) {
+      log.error( "Exception" );
+      log.catching( e );
     }
 
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
-    log.debug("WaitForElementInvisibility::Exit");
+    log.debug( "WaitForElementInvisibility::Exit" );
   }
 
   /**
@@ -374,10 +376,10 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementPresenceAndVisible(WebDriver driver, By locator) {
-    log.debug("WaitForElementPresenceAndVisible(Main)::Enter");
-    WebElement element = WaitForElementPresenceAndVisible(driver, locator, 30);
-    log.debug("WaitForElementPresenceAndVisible(Main)::Exit");
+  public static WebElement WaitForElementPresenceAndVisible( WebDriver driver, By locator ) {
+    log.debug( "WaitForElementPresenceAndVisible(Main)::Enter" );
+    WebElement element = WaitForElementPresenceAndVisible( driver, locator, 30 );
+    log.debug( "WaitForElementPresenceAndVisible(Main)::Exit" );
     return element;
   }
 
@@ -391,19 +393,20 @@ public class ElementHelper{
    * @param locator
    * @param timeout
    */
-  public static WebElement WaitForElementPresenceAndVisible(final WebDriver driver, final By locator, final Integer timeout) {
-    log.debug("WaitForElementPresenceAndVisible::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static WebElement WaitForElementPresenceAndVisible( final WebDriver driver, final By locator,
+      final Integer timeout ) {
+    log.debug( "WaitForElementPresenceAndVisible::Enter" );
+    log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
-      class RunnableObject implements Runnable{
+      class RunnableObject implements Runnable {
 
         private WebElement theElement;
 
-        public RunnableObject(WebElement theElement){
+        public RunnableObject( WebElement theElement ) {
           this.theElement = theElement;
         }
 
@@ -413,59 +416,53 @@ public class ElementHelper{
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
-          //Wait for element visible
-          this.theElement = wait.until(new Function<WebDriver, WebElement>(){
+          // Wait for element visible
+          this.theElement = wait.until( new Function<WebDriver, WebElement>() {
 
             @Override
-            public WebElement apply(WebDriver d) {
+            public WebElement apply( WebDriver d ) {
               try {
-                List<WebElement> listElem = d.findElements(locator);
-                if(listElem.size() > 0) {
-                  WebElement elem = listElem.get(0);
-                  if(elem.isDisplayed() && elem.isEnabled()) {
+                List<WebElement> listElem = d.findElements( locator );
+                if ( listElem.size() > 0 ) {
+                  WebElement elem = listElem.get( 0 );
+                  if ( elem.isDisplayed() && elem.isEnabled() ) {
                     return elem;
                   }
                   return null;
                 }
                 return null;
-              }
-              catch(StaleElementReferenceException sere) {
+              } catch ( StaleElementReferenceException sere ) {
                 return null;
               }
             }
-          });
+          } );
         }
-      };
+      }
 
-      RunnableObject r = new RunnableObject(element);
+      RunnableObject r = new RunnableObject( element );
 
       ExecutorService executor = Executors.newSingleThreadExecutor();
-      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       executor.shutdown();
       element = r.getValue();
-    }
-    catch(TimeoutException te) {
-      log.warn("WebDriver timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(InterruptedException ie) {
-      log.warn("Interrupted Exception");
-    }
-    catch(ExecutionException ee) {
-      log.warn("Execution Exception");
-    }
-    catch(java.util.concurrent.TimeoutException cte) {
-      log.warn("Thread timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(Exception e) {
-      log.error("Exception");
-      log.catching(e);
+    } catch ( TimeoutException te ) {
+      log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( InterruptedException ie ) {
+      log.warn( "Interrupted Exception" );
+    } catch ( ExecutionException ee ) {
+      log.warn( "Execution Exception" );
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( Exception e ) {
+      log.error( "Exception" );
+      log.catching( e );
     }
 
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
-    log.debug("WaitForElementPresenceAndVisible::Exit");
+    log.debug( "WaitForElementPresenceAndVisible::Exit" );
     return element;
   }
 
@@ -476,10 +473,10 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementPresence(WebDriver driver, By locator) {
-    log.debug("WaitForElementPresence(Main)::Enter");
-    WebElement element = WaitForElementPresence(driver, locator, 30);
-    log.debug("WaitForElementPresence(Main)::Exit");
+  public static WebElement WaitForElementPresence( WebDriver driver, By locator ) {
+    log.debug( "WaitForElementPresence(Main)::Enter" );
+    WebElement element = WaitForElementPresence( driver, locator, 30 );
+    log.debug( "WaitForElementPresence(Main)::Exit" );
     return element;
   }
 
@@ -490,19 +487,19 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementPresence(final WebDriver driver, final By locator, final Integer timeout) {
-    log.debug("WaitForElementPresence::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static WebElement WaitForElementPresence( final WebDriver driver, final By locator, final Integer timeout ) {
+    log.debug( "WaitForElementPresence::Enter" );
+    log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
-      class RunnableObject implements Runnable{
+      class RunnableObject implements Runnable {
 
         private WebElement theElement;
 
-        public RunnableObject(WebElement theElement){
+        public RunnableObject( WebElement theElement ) {
           this.theElement = theElement;
         }
 
@@ -512,59 +509,53 @@ public class ElementHelper{
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
-          //Wait for element visible
-          this.theElement = wait.until(new Function<WebDriver, WebElement>(){
+          // Wait for element visible
+          this.theElement = wait.until( new Function<WebDriver, WebElement>() {
 
             @Override
-            public WebElement apply(WebDriver d) {
+            public WebElement apply( WebDriver d ) {
               try {
-                List<WebElement> listElem = d.findElements(locator);
-                if(listElem.size() > 0) {
-                  WebElement elem = listElem.get(0);
-                  if(elem.isEnabled()) {
+                List<WebElement> listElem = d.findElements( locator );
+                if ( listElem.size() > 0 ) {
+                  WebElement elem = listElem.get( 0 );
+                  if ( elem.isEnabled() ) {
                     return elem;
                   }
                   return null;
                 }
                 return null;
-              }
-              catch(StaleElementReferenceException sere) {
+              } catch ( StaleElementReferenceException sere ) {
                 return null;
               }
             }
-          });
+          } );
         }
-      };
+      }
 
-      RunnableObject r = new RunnableObject(element);
+      RunnableObject r = new RunnableObject( element );
 
       ExecutorService executor = Executors.newSingleThreadExecutor();
-      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       executor.shutdown();
       element = r.getValue();
-    }
-    catch(TimeoutException te) {
-      log.warn("WebDriver timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(InterruptedException ie) {
-      log.warn("Interrupted Exception");
-    }
-    catch(ExecutionException ee) {
-      log.warn("Execution Exception");
-    }
-    catch(java.util.concurrent.TimeoutException cte) {
-      log.warn("Thread timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(Exception e) {
-      log.error("Exception");
-      log.catching(e);
+    } catch ( TimeoutException te ) {
+      log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( InterruptedException ie ) {
+      log.warn( "Interrupted Exception" );
+    } catch ( ExecutionException ee ) {
+      log.warn( "Execution Exception" );
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( Exception e ) {
+      log.error( "Exception" );
+      log.catching( e );
     }
 
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
-    log.debug("WaitForElementPresence::Exit");
+    log.debug( "WaitForElementPresence::Exit" );
     return element;
   }
 
@@ -575,36 +566,35 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementVisibility(WebDriver driver, By locator) {
-    log.debug("WaitForElementVisibility::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static WebElement WaitForElementVisibility( WebDriver driver, By locator ) {
+    log.debug( "WaitForElementVisibility::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
     WebElement element = null;
     List<WebElement> elements = null;
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS).ignoring(StaleElementReferenceException.class);
+    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS ).ignoring( StaleElementReferenceException.class );
 
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
-      elements = driver.findElements(locator);
-      if(elements.size() > 0) {
-        //wait for element to appear
-        element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        log.debug("Get element visible.");
+      elements = driver.findElements( locator );
+      if ( elements.size() > 0 ) {
+        // wait for element to appear
+        element = wait.until( ExpectedConditions.visibilityOfElementLocated( locator ) );
+        log.debug( "Get element visible." );
       } else {
-        log.warn("No elements found!");
+        log.warn( "No elements found!" );
       }
-    }
-    catch(Exception e) {
-      log.warn("Something went wrong searching for vi: " + locator.toString());
-      log.catching(e);
+    } catch ( Exception e ) {
+      log.warn( "Something went wrong searching for vi: " + locator.toString() );
+      log.catching( e );
     }
 
-    //------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
-    //when set a new implicitlyWait timeout, we have to set the default
-    //in order to not destroy other invocations of findElement ('WebDriver').
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    log.debug("WaitForElementVisibility::Exit");
+    // ------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
+    // when set a new implicitlyWait timeout, we have to set the default
+    // in order to not destroy other invocations of findElement ('WebDriver').
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    log.debug( "WaitForElementVisibility::Exit" );
     return element;
   }
 
@@ -619,30 +609,29 @@ public class ElementHelper{
    * @param locator
    * @return
    */
-  public static String WaitForElementPresentGetText(WebDriver driver, By locator) {
-    log.debug("WaitForElementPresentGetText::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static String WaitForElementPresentGetText( WebDriver driver, By locator ) {
+    log.debug( "WaitForElementPresentGetText::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
     String text = "";
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(5, TimeUnit.SECONDS).pollingEvery(15, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class).ignoring(StaleElementReferenceException.class);
+    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 5, TimeUnit.SECONDS ).pollingEvery( 15, TimeUnit.MILLISECONDS ).ignoring( NoSuchElementException.class ).ignoring( StaleElementReferenceException.class );
 
-    WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-    if(element != null) {
+    WebElement element = wait.until( ExpectedConditions.presenceOfElementLocated( locator ) );
+    if ( element != null ) {
       try {
-        //Cross-browser, see: http://www.quirksmode.org/dom/html/
-        text = ((JavascriptExecutor) driver).executeScript("return (arguments[0].innerText == null)?arguments[0].textContent:arguments[0].innerText", element).toString();
-        text = text.replaceAll("\\xA0", " ");
-        text = text.replaceAll("\\s+", " ");
-        text = text.replaceAll("\\r\\n|\\r|\\n|\\t", "");
-        text = text.trim();//remove spaces, newlines,...
-      }
-      catch(WebDriverException wde) {
-        log.warn("WebDriver Exception");
-        text = WaitForElementPresentGetText(driver, locator);
+        // Cross-browser, see: http://www.quirksmode.org/dom/html/
+        text = ( (JavascriptExecutor) driver ).executeScript( "return (arguments[0].innerText == null)?arguments[0].textContent:arguments[0].innerText", element ).toString();
+        text = text.replaceAll( "\\xA0", " " );
+        text = text.replaceAll( "\\s+", " " );
+        text = text.replaceAll( "\\r\\n|\\r|\\n|\\t", "" );
+        text = text.trim(); // remove spaces, newlines,...
+      } catch ( WebDriverException wde ) {
+        log.warn( "WebDriver Exception" );
+        text = WaitForElementPresentGetText( driver, locator );
       }
     }
 
-    log.debug("WaitForElementPresentGetText::Exit");
+    log.debug( "WaitForElementPresentGetText::Exit" );
     return text;
   }
 
@@ -653,17 +642,17 @@ public class ElementHelper{
    * @param locator
    * @return
    */
-  public static String GetInputValue(WebDriver driver, By locator) {
-    log.debug("GetInputValue::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static String GetInputValue( WebDriver driver, By locator ) {
+    log.debug( "GetInputValue::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
     String attrValue = "";
-    WebElement element = FindElement(driver, locator);
-    if(element != null) {
-      attrValue = element.getAttribute("value");
+    WebElement element = FindElement( driver, locator );
+    if ( element != null ) {
+      attrValue = element.getAttribute( "value" );
     }
 
-    log.debug("GetInputValue::Exit");
+    log.debug( "GetInputValue::Exit" );
     return attrValue;
   }
 
@@ -675,18 +664,18 @@ public class ElementHelper{
    * @param to
    * @return
    */
-  public static void DragAndDrop(WebDriver driver, By from, By to) {
-    log.debug("DragAndDrop::Enter");
-    log.debug("From: " + from.toString());
-    log.debug("To: " + to.toString());
+  public static void DragAndDrop( WebDriver driver, By from, By to ) {
+    log.debug( "DragAndDrop::Enter" );
+    log.debug( "From: " + from.toString() );
+    log.debug( "To: " + to.toString() );
 
-    WebElement drag = FindElement(driver, from);
-    WebElement drop = FindElement(driver, to);
-    if(drag != null && drop != null) {
-      new Actions(driver).dragAndDrop(drag, drop).build().perform();
+    WebElement drag = FindElement( driver, from );
+    WebElement drop = FindElement( driver, to );
+    if ( drag != null && drop != null ) {
+      new Actions( driver ).dragAndDrop( drag, drop ).build().perform();
     }
 
-    log.debug("DragAndDrop::exit");
+    log.debug( "DragAndDrop::exit" );
   }
 
   /**
@@ -698,13 +687,13 @@ public class ElementHelper{
    * @param element2
    * @return
    */
-  public static boolean ElementsNotOverlap(WebDriver driver, By element1, By element2) {
-    log.debug("ElementsNotOverlap::Enter");
-    log.debug("Locator1: " + element1.toString());
-    log.debug("Locator2: " + element2.toString());
+  public static boolean ElementsNotOverlap( WebDriver driver, By element1, By element2 ) {
+    log.debug( "ElementsNotOverlap::Enter" );
+    log.debug( "Locator1: " + element1.toString() );
+    log.debug( "Locator2: " + element2.toString() );
 
-    WebElement elem1 = ElementHelper.FindElement(driver, element1);
-    WebElement elem2 = ElementHelper.FindElement(driver, element2);
+    WebElement elem1 = ElementHelper.FindElement( driver, element1 );
+    WebElement elem2 = ElementHelper.FindElement( driver, element2 );
 
     // get borders of first element
     Point firstLocation = elem1.getLocation();
@@ -720,15 +709,12 @@ public class ElementHelper{
     int secondTop = secondLocation.getY();
     int secondRight = secondLeft + secondDimension.getWidth();
     int secondBottom = secondTop + secondDimension.getHeight();
-    log.debug(firstTop + " " + firstBottom + " " + firstLeft + " " + firstRight);
-    log.debug(secondTop + " " + secondBottom + " " + secondLeft + " " + secondRight);
-    //if firstElement is either to the left, the right, above or below the second return true
-    boolean notIntersected = firstBottom < secondTop
-      || firstTop > secondBottom
-      || firstLeft > secondRight
-      || firstRight < secondLeft;
+    log.debug( firstTop + " " + firstBottom + " " + firstLeft + " " + firstRight );
+    log.debug( secondTop + " " + secondBottom + " " + secondLeft + " " + secondRight );
+    // if firstElement is either to the left, the right, above or below the second return true
+    boolean notIntersected = firstBottom < secondTop || firstTop > secondBottom || firstLeft > secondRight || firstRight < secondLeft;
 
-    log.debug("ElementsNotOverlap::Exit");
+    log.debug( "ElementsNotOverlap::Exit" );
     return notIntersected;
   }
 
@@ -739,20 +725,20 @@ public class ElementHelper{
    *
    * @param driver
    */
-  public static void WaitForNewWindow(WebDriver driver) {
-    log.debug("WaitForNewWindow::Enter");
+  public static void WaitForNewWindow( WebDriver driver ) {
+    log.debug( "WaitForNewWindow::Enter" );
 
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(500, TimeUnit.MILLISECONDS);
+    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 500, TimeUnit.MILLISECONDS );
 
-    wait.until(new ExpectedCondition<Boolean>(){
+    wait.until( new ExpectedCondition<Boolean>() {
 
       @Override
-      public Boolean apply(WebDriver d) {
+      public Boolean apply( WebDriver d ) {
         return d.getWindowHandles().size() != 1;
       }
-    });
+    } );
 
-    log.debug("WaitForNewWindow::Exit");
+    log.debug( "WaitForNewWindow::Exit" );
   }
 
   /**
@@ -761,28 +747,27 @@ public class ElementHelper{
    *
    * @param driver
    */
-  public static void WaitForAlertNotPresent(WebDriver driver) {
-    log.debug("WaitForAlertNotPresent::Enter");
+  public static void WaitForAlertNotPresent( WebDriver driver ) {
+    log.debug( "WaitForAlertNotPresent::Enter" );
 
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS);
+    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 100, TimeUnit.MILLISECONDS );
 
-    wait.until(new ExpectedCondition<Boolean>(){
+    wait.until( new ExpectedCondition<Boolean>() {
 
       @Override
-      public Boolean apply(WebDriver d) {
+      public Boolean apply( WebDriver d ) {
         Boolean alertExist = false;
         try {
           d.switchTo().alert();
           alertExist = true;
-        }
-        catch(NoAlertPresentException e) {
-          //Ignore the exception
+        } catch ( NoAlertPresentException e ) {
+          // Ignore the exception
         }
         return alertExist != true;
       }
-    });
+    } );
 
-    log.debug("WaitForAlertNotPresent::Exit");
+    log.debug( "WaitForAlertNotPresent::Exit" );
   }
 
   /**
@@ -793,27 +778,27 @@ public class ElementHelper{
    * @param driver
    * @param locator
    */
-  public static void WaitForFrameReady(WebDriver driver, final By locator) {
-    log.debug("WaitForFrameReady::Enter");
-    log.debug("Locator: " + locator.toString());
+  public static void WaitForFrameReady( WebDriver driver, final By locator ) {
+    log.debug( "WaitForFrameReady::Enter" );
+    log.debug( "Locator: " + locator.toString() );
 
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS).pollingEvery(100, TimeUnit.MILLISECONDS);
+    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 100, TimeUnit.MILLISECONDS );
 
-    wait.until(new ExpectedCondition<Boolean>(){
+    wait.until( new ExpectedCondition<Boolean>() {
 
       @Override
-      public Boolean apply(WebDriver d) {
+      public Boolean apply( WebDriver d ) {
         Boolean elementExist = false;
-        List<WebElement> listElements = d.findElements(locator);
+        List<WebElement> listElements = d.findElements( locator );
 
-        if(listElements.size() > 0) {
+        if ( listElements.size() > 0 ) {
           elementExist = true;
         }
         return elementExist;
       }
-    });
+    } );
 
-    log.debug("WaitForFrameReady::Exit");
+    log.debug( "WaitForFrameReady::Exit" );
   }
 
   /**
@@ -824,25 +809,23 @@ public class ElementHelper{
    * @param attributeName
    * @return
    */
-  public static String GetAttribute(WebDriver driver, By locator, String attributeName) {
-    log.debug("GetAttribute::Enter");
+  public static String GetAttribute( WebDriver driver, By locator, String attributeName ) {
+    log.debug( "GetAttribute::Enter" );
 
     String attributeValue = "";
     try {
-      WebElement element = FindElement(driver, locator);
-      if(element != null) {
-        attributeValue = element.getAttribute(attributeName);
+      WebElement element = FindElement( driver, locator );
+      if ( element != null ) {
+        attributeValue = element.getAttribute( attributeName );
+      } else {
+        log.warn( "Element is null - could not get attribute value!" );
       }
-      else {
-        log.warn("Element is null - could not get attribute value!");
-      }
-    }
-    catch(StaleElementReferenceException e) {
-      log.warn("Stale Element Reference Exception");
-      attributeValue = GetAttribute(driver, locator, attributeName);
+    } catch ( StaleElementReferenceException e ) {
+      log.warn( "Stale Element Reference Exception" );
+      attributeValue = GetAttribute( driver, locator, attributeName );
     }
 
-    log.debug("GetAttribute::Exit");
+    log.debug( "GetAttribute::Exit" );
     return attributeValue;
   }
 
@@ -854,10 +837,10 @@ public class ElementHelper{
    * @param locator
    * @return
    */
-  public static Boolean WaitForElementNotPresent(final WebDriver driver, final By locator) {
-    log.debug("WaitForElementNotPresent::Enter");
-    boolean result = WaitForElementNotPresent(driver, locator, 30);
-    log.debug("WaitForElementNotPresent::Exit");
+  public static Boolean WaitForElementNotPresent( final WebDriver driver, final By locator ) {
+    log.debug( "WaitForElementNotPresent::Enter" );
+    boolean result = WaitForElementNotPresent( driver, locator, 30 );
+    log.debug( "WaitForElementNotPresent::Exit" );
     return result;
   }
 
@@ -869,19 +852,19 @@ public class ElementHelper{
    * @param locator
    * @param timeout
    */
-  public static Boolean WaitForElementNotPresent(final WebDriver driver, final By locator, final Integer timeout) {
-    log.debug("WaitForElementNotPresent::Enter");
+  public static Boolean WaitForElementNotPresent( final WebDriver driver, final By locator, final Integer timeout ) {
+    log.debug( "WaitForElementNotPresent::Enter" );
     Boolean NotPresent = false;
-    log.debug("Locator: " + locator.toString());
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    log.debug( "Locator: " + locator.toString() );
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
-      class RunnableObject implements Runnable{
+      class RunnableObject implements Runnable {
 
         private Boolean NotPresent;
 
-        public RunnableObject(Boolean NotPresent){
+        public RunnableObject( Boolean NotPresent ) {
           this.NotPresent = NotPresent;
         }
 
@@ -891,55 +874,49 @@ public class ElementHelper{
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
-          //Wait for element visible
-          this.NotPresent = wait.until(new Function<WebDriver, Boolean>(){
+          // Wait for element visible
+          this.NotPresent = wait.until( new Function<WebDriver, Boolean>() {
 
             @Override
-            public Boolean apply(WebDriver d) {
+            public Boolean apply( WebDriver d ) {
               try {
-                List<WebElement> listElem = d.findElements(locator);
-                if(listElem.size() == 0) {
+                List<WebElement> listElem = d.findElements( locator );
+                if ( listElem.size() == 0 ) {
                   return true;
                 }
                 return false;
-              }
-              catch(StaleElementReferenceException sere) {
+              } catch ( StaleElementReferenceException sere ) {
                 return true;
               }
             }
-          });
+          } );
         }
-      };
+      }
 
-      RunnableObject r = new RunnableObject(NotPresent);
+      RunnableObject r = new RunnableObject( NotPresent );
 
       ExecutorService executor = Executors.newSingleThreadExecutor();
-      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       executor.shutdown();
       NotPresent = r.getValue();
-    }
-    catch(TimeoutException te) {
-      log.warn("WebDriver timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(InterruptedException ie) {
-      log.warn("Interrupted Exception");
-    }
-    catch(ExecutionException ee) {
-      log.warn("Execution Exception");
-    }
-    catch(java.util.concurrent.TimeoutException cte) {
-      log.warn("Thread timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(Exception e) {
-      log.error("Exception");
-      log.catching(e);
+    } catch ( TimeoutException te ) {
+      log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( InterruptedException ie ) {
+      log.warn( "Interrupted Exception" );
+    } catch ( ExecutionException ee ) {
+      log.warn( "Execution Exception" );
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( Exception e ) {
+      log.error( "Exception" );
+      log.catching( e );
     }
 
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
-    log.debug("WaitForElementNotPresent::Exit");
+    log.debug( "WaitForElementNotPresent::Exit" );
     return NotPresent;
   }
 
@@ -952,10 +929,11 @@ public class ElementHelper{
    * @param attributeName
    * @param attributeValue - attribute value to wait.
    */
-  public static void WaitForAttributeValue(final WebDriver driver, final By locator, final String attributeName, final String attributeValue) {
-    log.debug("WaitForAttributeValue(Main)::Enter");
-    WaitForAttributeValue(driver, locator, attributeName, attributeValue, 30);
-    log.debug("WaitForAttributeValue(Main)::Exit");
+  public static void WaitForAttributeValue( final WebDriver driver, final By locator, final String attributeName,
+      final String attributeValue ) {
+    log.debug( "WaitForAttributeValue(Main)::Enter" );
+    WaitForAttributeValue( driver, locator, attributeName, attributeValue, 30 );
+    log.debug( "WaitForAttributeValue(Main)::Exit" );
   }
 
   /**
@@ -967,69 +945,64 @@ public class ElementHelper{
    * @param attributeName
    * @param attributeValue - attribute value to wait.
    */
-  public static void WaitForAttributeValue(final WebDriver driver, final By locator, final String attributeName, final String attributeValue, final Integer timeout) {
-    log.debug("WaitForAttributeValue::Enter");
-    log.debug("Locator: " + locator.toString());
-    log.debug("Attribute: " + attributeName);
-    log.debug("AttributeValue: " + attributeValue);
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+  public static void WaitForAttributeValue( final WebDriver driver, final By locator, final String attributeName,
+      final String attributeValue, final Integer timeout ) {
+    log.debug( "WaitForAttributeValue::Enter" );
+    log.debug( "Locator: " + locator.toString() );
+    log.debug( "Attribute: " + attributeName );
+    log.debug( "AttributeValue: " + attributeValue );
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
-      class RunnableObject implements Runnable{
+      class RunnableObject implements Runnable {
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS).pollingEvery(50, TimeUnit.MILLISECONDS);
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
-          //Wait for element visible
-          wait.until(new Function<WebDriver, Boolean>(){
+          // Wait for element visible
+          wait.until( new Function<WebDriver, Boolean>() {
 
             @Override
-            public Boolean apply(WebDriver d) {
+            public Boolean apply( WebDriver d ) {
               try {
-                List<WebElement> listElements = d.findElements(locator);
-                if(listElements.size() > 0) {
-                  WebElement element = listElements.get(0);
-                  String attrValue = element.getAttribute(attributeName).toLowerCase();
+                List<WebElement> listElements = d.findElements( locator );
+                if ( listElements.size() > 0 ) {
+                  WebElement element = listElements.get( 0 );
+                  String attrValue = element.getAttribute( attributeName ).toLowerCase();
                   String attrValueFor = attributeValue.toLowerCase();
-                  return attrValue.contains(attrValueFor);
+                  return attrValue.contains( attrValueFor );
                 }
                 return false;
-              }
-              catch(StaleElementReferenceException sere) {
+              } catch ( StaleElementReferenceException sere ) {
                 return true;
               }
             }
-          });
+          } );
         }
-      };
+      }
 
       RunnableObject r = new RunnableObject();
 
       ExecutorService executor = Executors.newSingleThreadExecutor();
-      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       executor.shutdown();
-    }
-    catch(TimeoutException te) {
-      log.warn("WebDriver timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(InterruptedException ie) {
-      log.warn("Interrupted Exception");
-    }
-    catch(ExecutionException ee) {
-      log.warn("Execution Exception");
-    }
-    catch(java.util.concurrent.TimeoutException cte) {
-      log.warn("Thread timeout exceeded! Looking for: " + locator.toString());
-    }
-    catch(Exception e) {
-      log.error("Exception");
-      log.catching(e);
+    } catch ( TimeoutException te ) {
+      log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( InterruptedException ie ) {
+      log.warn( "Interrupted Exception" );
+    } catch ( ExecutionException ee ) {
+      log.warn( "Execution Exception" );
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( Exception e ) {
+      log.error( "Exception" );
+      log.catching( e );
     }
 
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
-    log.debug("WaitForAttributeValue::Exit");
+    log.debug( "WaitForAttributeValue::Exit" );
   }
 }

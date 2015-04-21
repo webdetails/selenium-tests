@@ -34,4 +34,6 @@ import org.pentaho.ctools.cda.MondrianJNDI;
   MondrianJNDI.class,
   CDACacheManager.class
 })
-public class SuiteCDA {}
+public class SuiteCDA{
+  //It runs the Suite.Classes
+}

@@ -90,4 +90,6 @@ import org.pentaho.ctools.issues.cde.CDE453;
   CDE452.class,
   CDE453.class
 })
-public class SuiteCDE {}
+public class SuiteCDE{
+  //It runs the Suite.SuiteClasses
+}

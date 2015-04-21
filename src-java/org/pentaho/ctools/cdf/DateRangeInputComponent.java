@@ -53,8 +53,9 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  * Naming convention for test: 'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class DateRangeInputComponent {
+
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -63,7 +64,7 @@ public class DateRangeInputComponent {
   private static String          baseUrl;
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule( driver );
 
   /**
    * Shall initialized the test before run each test case.
@@ -85,90 +86,90 @@ public class DateRangeInputComponent {
     // The URL for the VisualizationAPIComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/DataRangeInputComponent
-    driver.get(baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:43-DateRangeInputComponent:date_range_component.xcdf/generatedContent");
+    driver.get( baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:43-DateRangeInputComponent:date_range_component.xcdf/generatedContent" );
 
     // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name: 
-   * 		Validate Page Contents 
+   *    Validate Page Contents 
    * Description: 
-   * 		Here we want to validate the page contents. 
+   *    Here we want to validate the page contents. 
    * Steps: 
-   * 		1. Check the widget's title.
+   *    1. Check the widget's title.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("DateRangeInputComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals( "Community Dashboard Framework", driver.getTitle() );
+    assertEquals( "DateRangeInputComponent", ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
    * Test Case Name: 
-   * 		Reload Sample 
+   *    Reload Sample 
    * Description: 
-   * 		Reload the sample (not refresh page). 
+   *    Reload the sample (not refresh page). 
    * Steps: 
-   * 		1. Click in Code and then click in button 'Try me'.
+   *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    ElementHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    assertTrue( ElementHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
   }
 
   /**
    * ############################### Test Case 3 ###############################
    *
    * Test Case Name: 
-   * 		Set Date Range Today 
+   *    Set Date Range Today 
    * Description: 
-   * 		When click on Today option an alert is displayed with today date in 
+   *    When click on Today option an alert is displayed with today date in 
    *    range interval.
    * Steps: 
-   * 		1. Click in Today option
+   *    1. Click in Today option
    *    2. Check for Alert
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc3_Today_DateIsSetSuccessful() {
     //## Step 1
-    WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
-    new Actions(driver).click(elemInput).build().perform();
-    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[contains(text(),'Today')])[2]")));
-    ElementHelper.FindElement(driver, By.linkText("Today")).click();
+    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
+    new Actions( driver ).click( elemInput ).build().perform();
+    wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "(//a[contains(text(),'Today')])[2]" ) ) );
+    ElementHelper.FindElement( driver, By.linkText( "Today" ) ).click();
 
     //## Step 2
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    Date dNow = new Date();
-    String strToday = sdf.format(dNow);
+    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+    final Date dNow = new Date();
+    final String strToday = sdf.format( dNow );
 
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "You chose from " + strToday + " to " + strToday;
+    wait.until( ExpectedConditions.alertIsPresent() );
+    final Alert alert = driver.switchTo().alert();
+    final String confirmationMsg = alert.getText();
+    final String expectedCnfText = "You chose from " + strToday + " to " + strToday;
     alert.accept();
 
-    assertEquals(confirmationMsg, expectedCnfText);
+    assertEquals( confirmationMsg, expectedCnfText );
   }
 
   /**
@@ -186,28 +187,28 @@ public class DateRangeInputComponent {
   public void tc4_LastSevenDays_DateIsSetSuccessful() {
     this.tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
-    new Actions(driver).click(elemInput).build().perform();
-    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[contains(text(),'Last 7 days')])[3]")));
+    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
+    new Actions( driver ).click( elemInput ).build().perform();
+    wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "(//a[contains(text(),'Last 7 days')])[3]" ) ) );
     //ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Today')])[2]")).click();
-    ElementHelper.FindElement(driver, By.linkText("Last 7 days")).click();
+    ElementHelper.FindElement( driver, By.linkText( "Last 7 days" ) ).click();
     //The next operation is a TRICK, in order to raise an alert
     //elemInput.click();
 
     //## Step 2
-    Calendar c = Calendar.getInstance();
-    c.add(Calendar.DAY_OF_MONTH, -7);
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    Date dNow = new Date();
-    String strToday = sdf.format(dNow);
+    final Calendar c = Calendar.getInstance();
+    c.add( Calendar.DAY_OF_MONTH, -7 );
+    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+    final Date dNow = new Date();
+    final String strToday = sdf.format( dNow );
 
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "You chose from " + sdf.format(c.getTime()) + " to " + strToday;
+    wait.until( ExpectedConditions.alertIsPresent() );
+    final Alert alert = driver.switchTo().alert();
+    final String confirmationMsg = alert.getText();
+    final String expectedCnfText = "You chose from " + sdf.format( c.getTime() ) + " to " + strToday;
     alert.accept();
 
-    assertEquals(confirmationMsg, expectedCnfText);
+    assertEquals( confirmationMsg, expectedCnfText );
   }
 
   /**
@@ -225,26 +226,26 @@ public class DateRangeInputComponent {
   public void tc5_MonthToDate_DateIsSetSuccessful() {
     this.tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
+    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
     elemInput.click();
-    ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Month to date')])[4]")).sendKeys(Keys.ENTER);
+    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'Month to date')])[4]" ) ).sendKeys( Keys.ENTER );
     //The next operation is a TRICK, in order to raise an alert
     elemInput.click();
 
     //## Step 2
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat sdfMonth = new SimpleDateFormat("yyyy-MM");
-    Date dNow = new Date();
-    String strToday = sdf.format(dNow);
-    String strCurrentMonth = sdfMonth.format(dNow) + "-01";
+    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+    final SimpleDateFormat sdfMonth = new SimpleDateFormat( "yyyy-MM" );
+    final Date dNow = new Date();
+    final String strToday = sdf.format( dNow );
+    final String strCurrentMonth = sdfMonth.format( dNow ) + "-01";
 
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "You chose from " + strCurrentMonth + " to " + strToday;
+    wait.until( ExpectedConditions.alertIsPresent() );
+    final Alert alert = driver.switchTo().alert();
+    final String confirmationMsg = alert.getText();
+    final String expectedCnfText = "You chose from " + strCurrentMonth + " to " + strToday;
     alert.accept();
 
-    assertEquals(confirmationMsg, expectedCnfText);
+    assertEquals( confirmationMsg, expectedCnfText );
   }
 
   /**
@@ -262,26 +263,26 @@ public class DateRangeInputComponent {
   public void tc6_YearToDate_DateIsSetSuccessful() {
     this.tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
+    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
     elemInput.click();
-    ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Year to date')])[5]")).sendKeys(Keys.ENTER);
+    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'Year to date')])[5]" ) ).sendKeys( Keys.ENTER );
     //The next operation is a TRICK, in order to raise an alert
     elemInput.click();
 
     //## Step 2
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
-    Date dNow = new Date();
-    String strToday = sdf.format(dNow);
-    String strBeginYear = sdfYear.format(dNow) + "-01-01";
+    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+    final SimpleDateFormat sdfYear = new SimpleDateFormat( "yyyy" );
+    final Date dNow = new Date();
+    final String strToday = sdf.format( dNow );
+    final String strBeginYear = sdfYear.format( dNow ) + "-01-01";
 
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "You chose from " + strBeginYear + " to " + strToday;
+    wait.until( ExpectedConditions.alertIsPresent() );
+    final Alert alert = driver.switchTo().alert();
+    final String confirmationMsg = alert.getText();
+    final String expectedCnfText = "You chose from " + strBeginYear + " to " + strToday;
     alert.accept();
 
-    assertEquals(confirmationMsg, expectedCnfText);
+    assertEquals( confirmationMsg, expectedCnfText );
   }
 
   /**
@@ -300,30 +301,30 @@ public class DateRangeInputComponent {
   public void tc7_ThePreviousMonth_DateIsSetSuccessful() {
     this.tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    WebElement elemInput = ElementHelper.FindElement(driver, By.id("myInput"));
+    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
     elemInput.click();
-    ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'The previous Month')])[6]")).sendKeys(Keys.ENTER);
+    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'The previous Month')])[6]" ) ).sendKeys( Keys.ENTER );
     //The next operation is a TRICK, in order to raise an alert
     elemInput.click();
 
     //## Step 2
-    Calendar c = Calendar.getInstance();
-    c.add(Calendar.MONTH, -1);
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+    final Calendar c = Calendar.getInstance();
+    c.add( Calendar.MONTH, -1 );
+    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM" );
 
-    String strLastMonthEndDay = sdf.format(c.getTime());
-    String strLastMonthStartDay = sdf.format(c.getTime()) + "-01";
-    c.add(Calendar.MONTH, 1);
-    c.add(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) * -1);
-    strLastMonthEndDay += "-" + c.get(Calendar.DAY_OF_MONTH);
+    String strLastMonthEndDay = sdf.format( c.getTime() );
+    final String strLastMonthStartDay = sdf.format( c.getTime() ) + "-01";
+    c.add( Calendar.MONTH, 1 );
+    c.add( Calendar.DAY_OF_MONTH, c.get( Calendar.DAY_OF_MONTH ) * -1 );
+    strLastMonthEndDay += "-" + c.get( Calendar.DAY_OF_MONTH );
 
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "You chose from " + strLastMonthStartDay + " to " + strLastMonthEndDay;
+    wait.until( ExpectedConditions.alertIsPresent() );
+    final Alert alert = driver.switchTo().alert();
+    final String confirmationMsg = alert.getText();
+    final String expectedCnfText = "You chose from " + strLastMonthStartDay + " to " + strLastMonthEndDay;
     alert.accept();
 
-    assertEquals(confirmationMsg, expectedCnfText);
+    assertEquals( confirmationMsg, expectedCnfText );
   }
 
   /**
@@ -342,8 +343,8 @@ public class DateRangeInputComponent {
   public void tc8_CancelAllDatesAfterDone_DateIsCancelAndThenSetSuccessful() {
     this.tc2_ReloadSample_SampleReadyToUse();
     //## Step 1
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
-    ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'All Dates Before')])[7]")).sendKeys(Keys.ENTER);
+    ElementHelper.FindElement( driver, By.id( "myInput" ) ).click();
+    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'All Dates Before')])[7]" ) ).sendKeys( Keys.ENTER );
     //The next operation is a TRICK, in order to raise an alert
     //ElementHelper.FindElement(driver, By.id("myInput")).click();
 
@@ -354,24 +355,24 @@ public class DateRangeInputComponent {
     System.out.println("Size: " + driver.findElements(By.xpath("(//button[contains(text(),'Cancel')][5])[7]")).size());//3
     System.out.println("Size: " + driver.findElements(By.xpath("(//button[contains(text(),'Cancel')][6])[7]")).size());//2
      */
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//button[contains(text(),'Cancel')])[7]")));
-    driver.findElement(By.xpath("(//button[contains(text(),'Cancel')])[7]")).click();
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "(//button[contains(text(),'Cancel')])[7]" ) ) );
+    driver.findElement( By.xpath( "(//button[contains(text(),'Cancel')])[7]" ) ).click();
     //WebElement elemButtonCancel = ElementHelper.FindElement(driver, By.xpath("(//button[starts-with(@class,'btnCancel')])[7]"));
     //assertNotNull(elemButtonCancel);
     //elemButtonCancel.click();
 
     //## Step 2
     //Click in day 29
-    ElementHelper.FindElement(driver, By.id("myInput")).click();
-    ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'All Dates Before')])[8]")).sendKeys(Keys.ENTER);
-    ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'29')])[2]")).sendKeys(Keys.ENTER);
+    ElementHelper.FindElement( driver, By.id( "myInput" ) ).click();
+    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'All Dates Before')])[8]" ) ).sendKeys( Keys.ENTER );
+    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'29')])[2]" ) ).sendKeys( Keys.ENTER );
 
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    final Alert alert = driver.switchTo().alert();
+    final String confirmationMsg = alert.getText();
     alert.accept();
 
-    assertEquals(confirmationMsg, "");
+    assertEquals( confirmationMsg, "" );
   }
 
   /**
@@ -386,8 +387,12 @@ public class DateRangeInputComponent {
    *    1. Click in Today option
    *    2. Check for Alert
    */
-  public void tc9_CancelDateRangeDone_DateIsCancelAndThenSetSuccessful() {}
+  public void tc9_CancelDateRangeDone_DateIsCancelAndThenSetSuccessful() {
+    //TODO
+  }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    //To use when class run all test cases.
+  }
 }

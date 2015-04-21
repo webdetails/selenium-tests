@@ -24,13 +24,12 @@ package org.pentaho.ctools.suite.require;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-  //Require CDF
-  SuiteCDF.class,
-
-  //Require CDE
-  SuiteCDE.class
-
-})
-public class SuiteRequireJS {}
+@RunWith( Suite.class )
+@Suite.SuiteClasses( {
+    //Require CDF
+    SuiteCDF.class,
+    //Require CDE
+    SuiteCDE.class } )
+public class SuiteRequireJS {
+  //It runs the Suite.SuiteClasses
+}

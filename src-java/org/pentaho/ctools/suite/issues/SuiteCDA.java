@@ -50,4 +50,6 @@ import org.pentaho.ctools.issues.cda.CDA99;
   CDA112.class,
   CDA121.class
 })
-public class SuiteCDA {}
+public class SuiteCDA{
+  //It runs the Suite.SuiteClasses.
+}

@@ -316,5 +316,7 @@ public class CheckComponent {
   }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    //To use when class run all test cases.
+  }
 }

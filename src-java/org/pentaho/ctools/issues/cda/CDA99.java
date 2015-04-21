@@ -60,21 +60,21 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDA99 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver driver;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String baseUrl;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDA99.class);
+  private static Logger log = LogManager.getLogger( CDA99.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( driver );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDA99.class.getSimpleName());
+    log.info( "setUp##" + CDA99.class.getSimpleName() );
     driver = CToolsTestSuite.getDriver();
     baseUrl = CToolsTestSuite.getBaseUrl();
   }
@@ -95,156 +95,156 @@ public class CDA99 {
    *    4. Change the code adding type='olap4j'
    *    5. Perform the preview and the query could be performed
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_PageContent_DisplayContent() {
-    log.info("tc01_PageContent_DisplayContent");
+    log.info( "tc01_PageContent_DisplayContent" );
 
     /*
      * ## Step 1
      */
-    //Go to Olap4j Sample
-    driver.get(baseUrl + "plugin/cda/api/editFile?path=/public/plugin-samples/cda/cdafiles/olap4j.cda");
+    // Go to Olap4j Sample
+    driver.get( baseUrl + "plugin/cda/api/editFile?path=/public/plugin-samples/cda/cdafiles/olap4j.cda" );
 
-    //Wait for buttons: preview, reload, save AND file
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("preview"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("reload"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("save"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("staticfile"));
-    assertNotNull(element);
-    String buttonPreviewText = ElementHelper.WaitForElementPresentGetText(driver, By.id("preview"));
-    String buttonReloadText = ElementHelper.WaitForElementPresentGetText(driver, By.id("reload"));
-    String buttonSaveText = ElementHelper.WaitForElementPresentGetText(driver, By.id("save"));
-    String buttonStaticFileText = ElementHelper.WaitForElementPresentGetText(driver, By.id("staticfile"));
-    assertEquals("Preview", buttonPreviewText);
-    assertEquals("Reload", buttonReloadText);
-    assertEquals("Save", buttonSaveText);
-    assertEquals("/public/plugin-samples/cda/cdafiles/olap4j.cda", buttonStaticFileText);
+    // Wait for buttons: preview, reload, save AND file
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( driver, By.id( "preview" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( driver, By.id( "reload" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( driver, By.id( "save" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( driver, By.id( "staticfile" ) );
+    assertNotNull( element );
+    String buttonPreviewText = ElementHelper.WaitForElementPresentGetText( driver, By.id( "preview" ) );
+    String buttonReloadText = ElementHelper.WaitForElementPresentGetText( driver, By.id( "reload" ) );
+    String buttonSaveText = ElementHelper.WaitForElementPresentGetText( driver, By.id( "save" ) );
+    String buttonStaticFileText = ElementHelper.WaitForElementPresentGetText( driver, By.id( "staticfile" ) );
+    assertEquals( "Preview", buttonPreviewText );
+    assertEquals( "Reload", buttonReloadText );
+    assertEquals( "Save", buttonSaveText );
+    assertEquals( "/public/plugin-samples/cda/cdafiles/olap4j.cda", buttonStaticFileText );
 
-    //Check iframe
-    driver.switchTo().frame("externalEditor");
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//pre/div[2]/div/div[3]/div[1]"));
+    // Check iframe
+    driver.switchTo().frame( "externalEditor" );
+    ElementHelper.WaitForElementVisibility( driver, By.xpath( "//pre/div[2]/div/div[3]/div[1]" ) );
     driver.switchTo().defaultContent();
 
     /*
      * ## Step 2
      */
-    String code = ((JavascriptExecutor) driver).executeScript("return getEditorWindow().editor.getContents();").toString();
-    code = code.replace("<DataAccess id=\"1\" connection=\"1\" type=\"olap4j\" access=\"public\">", "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j.defaultolap4j\" access=\"public\">");
-    ((JavascriptExecutor) driver).executeScript("getEditorWindow().editor.setContents(arguments[0]);", code);
+    String code = ( (JavascriptExecutor) driver ).executeScript( "return getEditorWindow().editor.getContents();" ).toString();
+    code = code.replace( "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j\" access=\"public\">", "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j.defaultolap4j\" access=\"public\">" );
+    ( (JavascriptExecutor) driver ).executeScript( "getEditorWindow().editor.setContents(arguments[0]);", code );
 
-    //Save file
-    ElementHelper.ClickJS(driver, By.id("save"));
-    //Check for the message name
-    String fileSaved = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("notifications")).getText();
-    assertEquals("/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved);
+    // Save file
+    ElementHelper.ClickJS( driver, By.id( "save" ) );
+    // Check for the message name
+    String fileSaved = ElementHelper.WaitForElementPresenceAndVisible( driver, By.id( "notifications" ) ).getText();
+    assertEquals( "/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved );
 
     /*
      * ## Step 3
      */
-    //Perform the preview of this CDA query
-    ElementHelper.ClickJS(driver, By.id("preview"));
+    // Perform the preview of this CDA query
+    ElementHelper.ClickJS( driver, By.id( "preview" ) );
 
     WebDriver previewWindow = null;
     String currentWindowHandle = driver.getWindowHandle();
-    Set<String> listWindows = driver.getWindowHandles();;
+    Set<String> listWindows = driver.getWindowHandles();
 
-    //wait for popup render
-    ElementHelper.WaitForNewWindow(driver);
+    // wait for popup render
+    ElementHelper.WaitForNewWindow( driver );
     listWindows = driver.getWindowHandles();
-    //Get the windowHandler of the new open window
+    // Get the windowHandler of the new open window
     Iterator<String> iterWindows = listWindows.iterator();
-    while (iterWindows.hasNext()) {
+    while ( iterWindows.hasNext() ) {
       String windowHandle = iterWindows.next();
-      if (windowHandle.equals(currentWindowHandle) == false) {
-        previewWindow = driver.switchTo().window(windowHandle);
+      if ( windowHandle.equals( currentWindowHandle ) == false ) {
+        previewWindow = driver.switchTo().window( windowHandle );
         break;
       }
     }
 
-    //Now in the PREVIEW WINDOW we want to check the available options
+    // Now in the PREVIEW WINDOW we want to check the available options
     Boolean selectNotExist = false;
-    //Selector must be present
-    WebElement selector = ElementHelper.FindElement(previewWindow, By.id("dataAccessSelector"));
-    assertNotNull(selector);
+    // Selector must be present
+    WebElement selector = ElementHelper.FindElement( previewWindow, By.id( "dataAccessSelector" ) );
+    assertNotNull( selector );
     try {
-      Select select = new Select(selector);
-      select.selectByIndex(1);
-    } catch (NoSuchElementException see) {
+      Select select = new Select( selector );
+      select.selectByIndex( 1 );
+    } catch ( NoSuchElementException see ) {
       selectNotExist = true;
     }
-    assertTrue(selectNotExist);
+    assertTrue( selectNotExist );
 
-    //Need guarantee we close everything
+    // Need guarantee we close everything
     previewWindow.close();
-    driver.switchTo().window(currentWindowHandle);
+    driver.switchTo().window( currentWindowHandle );
 
     /*
      * ## Step 4
      */
-    String code2 = ((JavascriptExecutor) driver).executeScript("return getEditorWindow().editor.getContents();").toString();
-    code2 = code2.replace("<DataAccess id=\"1\" connection=\"1\" type=\"olap4j.defaultolap4j\" access=\"public\">", "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j\" access=\"public\">");
-    ((JavascriptExecutor) driver).executeScript("getEditorWindow().editor.setContents(arguments[0]);", code2);
+    String code2 = ( (JavascriptExecutor) driver ).executeScript( "return getEditorWindow().editor.getContents();" ).toString();
+    code2 = code2.replace( "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j.defaultolap4j\" access=\"public\">", "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j\" access=\"public\">" );
+    ( (JavascriptExecutor) driver ).executeScript( "getEditorWindow().editor.setContents(arguments[0]);", code2 );
 
-    //Save file
-    ElementHelper.ClickJS(driver, By.id("save"));
-    //Check for the message name
-    String fileSaved2 = ElementHelper.WaitForElementPresentGetText(driver, By.id("notifications"));
-    assertEquals("/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved2);
+    // Save file
+    ElementHelper.ClickJS( driver, By.id( "save" ) );
+    // Check for the message name
+    String fileSaved2 = ElementHelper.WaitForElementPresentGetText( driver, By.id( "notifications" ) );
+    assertEquals( "/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved2 );
 
     /*
      * ## Step 5
      */
-    //Perform the preview of this CDA query
-    ElementHelper.ClickJS(driver, By.id("preview"));
+    // Perform the preview of this CDA query
+    ElementHelper.ClickJS( driver, By.id( "preview" ) );
 
     previewWindow = null;
     listWindows = null;
-    //wait for popup render
-    ElementHelper.WaitForNewWindow(driver);
+    // wait for popup render
+    ElementHelper.WaitForNewWindow( driver );
     listWindows = driver.getWindowHandles();
-    //Get the windowHandler of the new open window
+    // Get the windowHandler of the new open window
     iterWindows = null;
     iterWindows = listWindows.iterator();
-    while (iterWindows.hasNext()) {
+    while ( iterWindows.hasNext() ) {
       String windowHandle = iterWindows.next();
-      if (windowHandle.equals(currentWindowHandle) == false) {
-        previewWindow = driver.switchTo().window(windowHandle);
+      if ( windowHandle.equals( currentWindowHandle ) == false ) {
+        previewWindow = driver.switchTo().window( windowHandle );
         break;
       }
     }
 
-    //Now in the PREVIEW WINDOW we want to check the available options
+    // Now in the PREVIEW WINDOW we want to check the available options
     selectNotExist = false;
-    //wait for file id contains text
-    ElementHelper.WaitForTextPresence(previewWindow, By.id("fileid"), "/public/plugin-samples/cda/cdafiles/olap4j.cda");
-    //Selector must be present
-    selector = ElementHelper.FindElement(previewWindow, By.id("dataAccessSelector"));
-    assertNotNull(selector);
+    // wait for file id contains text
+    ElementHelper.WaitForTextPresence( previewWindow, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/olap4j.cda" );
+    // Selector must be present
+    selector = ElementHelper.FindElement( previewWindow, By.id( "dataAccessSelector" ) );
+    assertNotNull( selector );
 
     try {
-      Select select = new Select(selector);
-      select.selectByIndex(1);
-      //Not we have to wait for loading disappear
-      ElementHelper.WaitForElementInvisibility(previewWindow, By.xpath("//div[@class='blockUI blockOverlay']"));
-      //Get value of status
-      String value = ElementHelper.GetInputValue(previewWindow, By.id("status"));
-      assertEquals("In Process", value);
-    } catch (NoSuchElementException see) {
+      Select select = new Select( selector );
+      select.selectByIndex( 1 );
+      // Not we have to wait for loading disappear
+      ElementHelper.WaitForElementInvisibility( previewWindow, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+      // Get value of status
+      String value = ElementHelper.GetInputValue( previewWindow, By.id( "status" ) );
+      assertEquals( "In Process", value );
+    } catch ( NoSuchElementException see ) {
       selectNotExist = true;
     }
 
-    //Need guarantee we close everything
+    // Need guarantee we close everything
     previewWindow.close();
-    driver.switchTo().window(currentWindowHandle);
+    driver.switchTo().window( currentWindowHandle );
 
-    assertEquals(false, selectNotExist);
+    assertEquals( false, selectNotExist );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDA99.class.getSimpleName());
+    log.info( "tearDown##" + CDA99.class.getSimpleName() );
   }
 }

@@ -162,5 +162,7 @@ public class ButtonComponent {
   }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    //To use after test case run.
+  }
 }

@@ -127,5 +127,7 @@ public class AutoCompleteBoxComponent {
   }
 
   @After
-  public void tearDown() {}
+  public void tearDown() {
+    //To use after test case run.
+  }
 }

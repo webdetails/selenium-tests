@@ -48,6 +48,7 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class VisualizationAPIComponent {
+
   // Instance of the driver (browser emulator)
   private static WebDriver       driver;
   // Instance to be used on wait commands
@@ -138,7 +139,7 @@ public class VisualizationAPIComponent {
   public void tc3_MaxNumber_PresentCorrectValue() {
     // ## Step 1
     String value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 100; i++ ) {
       if (value.equals("35659")) {
         break;
       }
@@ -188,7 +189,7 @@ public class VisualizationAPIComponent {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
 
     String value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 100; i++ ) {
       if (value.equals("0")) {
         break;
       }
@@ -238,7 +239,7 @@ public class VisualizationAPIComponent {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='sample']/div[2]/div/span")));
 
     String value = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='sample']/div[2]/div/span"));
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 100; i++ ) {
       if (value.equals("4787.772727272727")) {
         break;
       }
@@ -250,5 +251,7 @@ public class VisualizationAPIComponent {
   }
 
   @AfterClass
-  public static void tearDown() {}
+  public static void tearDown() {
+    //To use when class run all test cases.
+  }
 }

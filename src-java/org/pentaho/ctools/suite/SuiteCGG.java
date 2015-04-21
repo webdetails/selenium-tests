@@ -34,4 +34,6 @@ import org.pentaho.ctools.cgg.ScatterChart;
   ScatterChart.class,
   DialChart.class
 })
-public class SuiteCGG {}
+public class SuiteCGG {
+  //It runs the Suite.SuiteClasses
+}
