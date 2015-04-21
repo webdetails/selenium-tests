@@ -41,7 +41,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
-import org.pentaho.ctools.suite.require.SuiteRequireJS;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
@@ -57,7 +56,7 @@ import org.pentaho.ctools.suite.require.SuiteRequireJS;
     // CGG
     // SuiteCGG.class,
     // RequireJS
-    SuiteRequireJS.class,
+    //SuiteRequireJS.class,
     // Security
     // AccessSystemResources.class,
     // Issues
@@ -67,13 +66,13 @@ import org.pentaho.ctools.suite.require.SuiteRequireJS;
 public class CToolsTestSuite {
 
   // / Instance of the driver (browser emulator)
-  private static WebDriver driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String baseUrl;
+  private static String BASE_URL;
   // Directory are all download files persist
-  private static String downloadDir;
+  private static String DOWNLOAD_DIR;
 
   // Log instance
   // private static Logger log = LogManager.getLogger(CToolsTestSuite.class);
@@ -86,9 +85,9 @@ public class CToolsTestSuite {
     log.info( "Master setup" );
 
     // Initialize BASEURL
-    baseUrl = "http://localhost:8080/pentaho/";
-    downloadDir = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
-    new File( downloadDir ).mkdir();
+    BASE_URL = "http://localhost:8080/pentaho/";
+    DOWNLOAD_DIR = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
+    new File( DOWNLOAD_DIR ).mkdir();
 
     // System.setProperty("webdriver.log.file", "/dev/stdout");
     // System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
@@ -112,7 +111,7 @@ public class CToolsTestSuite {
     ffProfile.setPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Donwload dir, 2 - specify dir
     ffProfile.setPreference( "browser.helperApps.alwaysAsk.force", false );
     ffProfile.setPreference( "browser.download.manager.showWhenStarting", false );
-    ffProfile.setPreference( "browser.download.dir", downloadDir );
+    ffProfile.setPreference( "browser.download.dir", DOWNLOAD_DIR );
     ffProfile.setPreference( "browser.helperApps.neverAsk.saveToDisk", "table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf" );
 
     // Setting properties for webdriver
@@ -120,7 +119,7 @@ public class CToolsTestSuite {
     // capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
     capabilities.setCapability( FirefoxDriver.PROFILE, ffProfile );
 
-    driver = new FirefoxDriver( capabilities );
+    DRIVER = new FirefoxDriver( capabilities );
 
     /*
      * INTERNET EXPLORER DRIVER
@@ -145,20 +144,20 @@ public class CToolsTestSuite {
      * InternetExplorerDriver();
      */
 
-    driver.manage().window().setPosition( new Point( 0, 0 ) );
-    driver.manage().window().setSize( new Dimension( 1360, 764 ) );
-    driver.manage().timeouts().pageLoadTimeout( 60, TimeUnit.SECONDS );
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-    driver.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );
+    DRIVER.manage().window().setPosition( new Point( 0, 0 ) );
+    DRIVER.manage().window().setSize( new Dimension( 1360, 764 ) );
+    DRIVER.manage().timeouts().pageLoadTimeout( 60, TimeUnit.SECONDS );
+    DRIVER.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    DRIVER.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );
 
     // Initialize WAIT
-    wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 5, TimeUnit.SECONDS );
+    WAIT = new FluentWait<WebDriver>( DRIVER ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 5, TimeUnit.SECONDS );
   }
 
   @AfterClass
   public static void tearDownClass() {
     log.info( "Master tearDown" );
-    driver.quit();
+    DRIVER.quit();
   }
 
   /**
@@ -167,7 +166,7 @@ public class CToolsTestSuite {
    * @return
    */
   public static WebDriver getDriver() {
-    return driver;
+    return DRIVER;
   }
 
   /**
@@ -176,7 +175,7 @@ public class CToolsTestSuite {
    * @return
    */
   public static String getBaseUrl() {
-    return baseUrl;
+    return BASE_URL;
   }
 
   /**
@@ -184,7 +183,7 @@ public class CToolsTestSuite {
    * @return
    */
   public static Wait<WebDriver> getWait() {
-    return wait;
+    return WAIT;
   }
 
   /**
@@ -192,6 +191,6 @@ public class CToolsTestSuite {
    * @return
    */
   public static String getDownloadDir() {
-    return downloadDir;
+    return DOWNLOAD_DIR;
   }
 }

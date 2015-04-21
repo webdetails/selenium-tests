@@ -62,29 +62,29 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDA112 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   //Download directory
-  private static String     downloadDir;
+  private static String DOWNLOAD_DIR;
   // The path for the export file
-  private static String     exportFilePath;
+  private static String EXPORT_FILE_PATH;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDA112.class);
+  private static Logger LOG = LogManager.getLogger( CDA112.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDA112.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
-    downloadDir = CToolsTestSuite.getDownloadDir();
-    exportFilePath = downloadDir + "\\cda-export.xls";
+    LOG.info( "setUp##" + CDA112.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
+    DOWNLOAD_DIR = CToolsTestSuite.getDownloadDir();
+    EXPORT_FILE_PATH = DOWNLOAD_DIR + "\\cda-export.xls";
   }
 
   /**
@@ -101,107 +101,107 @@ public class CDA112 {
    *    3. Export file and assure it has same md5 as expected
    *
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdaFileViewer_ExcelOutputIndex() {
-    log.info("tc01_CdaFileViewer_ExcelOutputIndex");
+    LOG.info( "tc01_CdaFileViewer_ExcelOutputIndex" );
 
     /*
      * ## Step 1
      */
     //Open Issue Sample
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-112/cda112.cda");
+    DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-112/cda112.cda" );
 
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
-    assertNotNull(element);
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
-    select.selectByValue("sqlDummyTWELVE");
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
-    assertNotNull(element);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
+    assertNotNull( element );
+    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    select.selectByValue( "sqlDummyTWELVE" );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
+    assertNotNull( element );
 
     /*
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement(driver, By.id("p1"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p2"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p3"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p4"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p5"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p6"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p7"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p8"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p9"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p10"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p11"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("p12"));
-    assertEquals("Alpha Cognac", elemStatus.getAttribute("value"));
+    WebElement elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p1" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p2" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p3" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p4" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p5" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p6" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p7" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p8" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p9" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p10" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p11" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p12" ) );
+    assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
 
     //Check text on table
-    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
-    assertEquals("242", columnOneRowOne);
-    assertEquals("Alpha Cognac", columnTwoRowOne);
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    assertEquals( "242", columnOneRowOne );
+    assertEquals( "Alpha Cognac", columnTwoRowOne );
 
     /*
      * ## Step 3
      */
-    WebElement buttonExport = ElementHelper.FindElement(driver, By.id("export"));
-    assertNotNull(buttonExport);
+    WebElement buttonExport = ElementHelper.FindElement( DRIVER, By.id( "export" ) );
+    assertNotNull( buttonExport );
     try {
       //Delete the existence if exist
-      new File(exportFilePath).delete();
+      new File( EXPORT_FILE_PATH ).delete();
 
       //Click to export
       buttonExport.click();
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher.WatchForCreate(downloadDir);
+      DirectoryWatcher.WatchForCreate( DOWNLOAD_DIR );
 
       //Check if the file really exist
-      File exportFile = new File(exportFilePath);
-      assertTrue(exportFile.exists());
+      File exportFile = new File( EXPORT_FILE_PATH );
+      assertTrue( exportFile.exists() );
 
       //Wait for the file to be downloaded totally
-      for (int i = 0; i < 50; i++) { //we only try 50 times == 5000 ms
-        long nSize = FileUtils.sizeOf(exportFile);
+      for ( int i = 0; i < 50; i++ ) { //we only try 50 times == 5000 ms
+        long nSize = FileUtils.sizeOf( exportFile );
         //Since the file always contents the same data, we wait for the expected bytes
-        if (nSize >= 13824) {
+        if ( nSize >= 13824 ) {
           break;
         }
-        Thread.sleep(100);
+        Thread.sleep( 100 );
       }
 
       //Check if the file downloaded is the expected
-      String md5 = DigestUtils.md5Hex(Files.readAllBytes(exportFile.toPath()));
-      assertEquals(md5, "f84e5cd4a4a8ffc4499f2e69f62cbcc7");
+      String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
+      assertEquals( md5, "f84e5cd4a4a8ffc4499f2e69f62cbcc7" );
 
       //The delete file
       DeleteFile();
 
-    } catch (Exception e) {
-      log.error(e.getMessage());
+    } catch ( Exception e ) {
+      LOG.error( e.getMessage() );
     }
   }
 
@@ -210,15 +210,15 @@ public class CDA112 {
    */
   public static void DeleteFile() {
     try {
-      Files.deleteIfExists(Paths.get(exportFilePath));
-    } catch (Exception e) {
-      log.error(e.getMessage());
+      Files.deleteIfExists( Paths.get( EXPORT_FILE_PATH ) );
+    } catch ( Exception e ) {
+      LOG.error( e.getMessage() );
     }
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDA112.class.getSimpleName());
+    LOG.info( "tearDown##" + CDA112.class.getSimpleName() );
     //In case something went wrong we delete the file
     DeleteFile();
   }

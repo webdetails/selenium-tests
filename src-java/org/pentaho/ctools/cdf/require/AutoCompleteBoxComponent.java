@@ -46,23 +46,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class AutoCompleteBoxComponent {
   // Instance of the driver (browser emulator)
-  private WebDriver         driver;
+  private WebDriver driver;
   // Instance to be used on wait commands
-  private Wait<WebDriver>   wait;
+  private Wait<WebDriver> wait;
   // The base url to be append the relative url in test
-  private String            baseUrl;
+  private String baseUrl;
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   @Before
   public void setUp() throws Exception {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    this.driver = CToolsTestSuite.getDriver();
+    this.wait = CToolsTestSuite.getWait();
+    this.baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -79,51 +79,51 @@ public class AutoCompleteBoxComponent {
    *    2. Execute the "Try me".
    *    3. Press a on text box and check the autocomplete.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_AutocompleteBox_DataAreListed() {
     //## Step 1
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A58-AutocompleteBoxComponent%3Aautocomplete_component.xcdf/generatedContent");
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A58-AutocompleteBoxComponent%3Aautocomplete_component.xcdf/generatedContent" );
 
     //Not we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     //Wait for visibility of 'AutocompleteBoxComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("AutocompleteBoxComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "AutocompleteBoxComponent", ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     //## Step 2
     //Render again the sample 
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
     //Not we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    assertTrue( ElementHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
 
     //## Step 3
     //Key press 'a'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleObjectautoboxInput")));
-    ElementHelper.FindElement(driver, By.id("sampleObjectautoboxInput")).sendKeys("a");
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectautoboxInput" ) ) );
+    ElementHelper.FindElement( this.driver, By.id( "sampleObjectautoboxInput" ) ).sendKeys( "a" );
 
     //Retrieve data by pressing key 'a'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("listElement")));
-    assertNotNull(ElementHelper.FindElement(driver, By.id("listElement")));
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "listElement" ) ) );
+    assertNotNull( ElementHelper.FindElement( this.driver, By.id( "listElement" ) ) );
 
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[2]/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[3]/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[4]/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[5]/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[6]/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[7]/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[8]/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[9]/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[10]/input")).isEnabled());
-    assertTrue(ElementHelper.FindElement(driver, By.xpath("//ul[@class='autobox-list']/li[11]/input")).isEnabled());
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[2]/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[3]/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[4]/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[5]/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[6]/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[7]/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[8]/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[9]/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[10]/input" ) ).isEnabled() );
+    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[11]/input" ) ).isEnabled() );
   }
 
   @After

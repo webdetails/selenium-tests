@@ -54,23 +54,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDA108 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDA108.class);
+  private static Logger LOG = LogManager.getLogger( CDA108.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDA108.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDA108.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -86,49 +86,49 @@ public class CDA108 {
    *    2. Wait for and assert elements and text on page
    *
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdaFileViewer_XpathSampleWorking() {
-    log.info("tc01_CdaFileViewer_XpathSampleWorking");
+    LOG.info( "tc01_CdaFileViewer_XpathSampleWorking" );
 
     /*
      * ## Step 1
      */
     //Open Xpath Sample
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/xpath.cda");
+    DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/xpath.cda" );
 
-    WebElement element = ElementHelper.WaitForElementPresence(driver, By.id("dataAccessSelector"));
-    assertNotNull(element);
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
-    select.selectByVisibleText("Sample query on SteelWheelsSales");
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
-    assertNotNull(element);
+    WebElement element = ElementHelper.WaitForElementPresence( DRIVER, By.id( "dataAccessSelector" ) );
+    assertNotNull( element );
+    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    select.selectByVisibleText( "Sample query on SteelWheelsSales" );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
+    assertNotNull( element );
 
     /*
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
-    assertNotNull(elemStatus);
-    assertEquals("In Process", elemStatus.getAttribute("value"));
+    WebElement elemStatus = ElementHelper.FindElement( DRIVER, By.id( "status" ) );
+    assertNotNull( elemStatus );
+    assertEquals( "In Process", elemStatus.getAttribute( "value" ) );
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.WaitForElementPresentGetText(driver, By.id("contents_info"));
-    assertEquals("View 1 to 1 of 1 elements", textPaging);
+    String textPaging = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "contents_info" ) );
+    assertEquals( "View 1 to 1 of 1 elements", textPaging );
     //Check text on table
-    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
-    assertEquals("103", columnOneRowOne);
-    assertEquals("Atelier graphique", columnTwoRowOne);
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    assertEquals( "103", columnOneRowOne );
+    assertEquals( "Atelier graphique", columnTwoRowOne );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDA108.class.getSimpleName());
+    LOG.info( "tearDown##" + CDA108.class.getSimpleName() );
   }
 }

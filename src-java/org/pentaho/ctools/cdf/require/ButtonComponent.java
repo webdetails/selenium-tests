@@ -46,26 +46,26 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class ButtonComponent {
   //Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String BASE_URL;
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
     init();
@@ -78,10 +78,10 @@ public class ButtonComponent {
     // The URL for the ButtonComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/ButtonComponent
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A82-ButtonComponent%3Abutton_component.xcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A82-ButtonComponent%3Abutton_component.xcdf/generatedContent" );
 
     // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -94,16 +94,16 @@ public class ButtonComponent {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("ButtonComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "ButtonComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -116,18 +116,18 @@ public class ButtonComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // Not we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
   }
 
   /**
@@ -142,23 +142,23 @@ public class ButtonComponent {
    *    1. Click in button
    *    2. Check for alert
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc3_ClickableButton_AlertMessageDisplayed() {
     // ## Step 1
-    String buttonText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button"));
-    assertEquals("A button", buttonText);
-    ElementHelper.FindElement(driver, By.xpath("//button")).click();
+    String buttonText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//button" ) );
+    assertEquals( "A button", buttonText );
+    ElementHelper.FindElement( DRIVER, By.xpath( "//button" ) ).click();
 
     // ## Step 2
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = DRIVER.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
 
-    buttonText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button"));
+    buttonText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//button" ) );
 
-    assertEquals("Button was clicked", confirmationMsg);
-    assertEquals("Yes, a clickable button", buttonText);
+    assertEquals( "Button was clicked", confirmationMsg );
+    assertEquals( "Yes, a clickable button", buttonText );
   }
 
   @AfterClass

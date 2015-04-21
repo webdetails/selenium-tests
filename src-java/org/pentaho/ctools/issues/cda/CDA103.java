@@ -53,23 +53,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDA103 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDA103.class);
+  private static Logger LOG = LogManager.getLogger( CDA103.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDA103.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDA103.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -87,69 +87,69 @@ public class CDA103 {
    *    3. Click 'CDA Cache'
    *    4. Assert text confirming that the Cache was cleared
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_RefreshCdaCache_ReturnsInfo() {
-    log.info("tc01_RefreshCdaCache_ReturnsInfo");
+    LOG.info( "tc01_RefreshCdaCache_ReturnsInfo" );
 
     /*
      * ## Step 1
      */
     //Go to User Console
-    driver.get(baseUrl);
+    DRIVER.get( BASE_URL );
 
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("filemenu"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("viewmenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("toolsmenu"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("helpmenu"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.id("toolsmenu"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "filemenu" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "viewmenu" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "toolsmenu" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "helpmenu" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.id( "toolsmenu" ) );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("refreshmenu"));
-    assertNotNull(element);
-    String refreshMenuText = ElementHelper.WaitForElementPresentGetText(driver, By.id("refreshmenu"));
-    assertEquals("Refresh", refreshMenuText);
-    ElementHelper.ClickJS(driver, By.id("refreshmenu"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "refreshmenu" ) );
+    assertNotNull( element );
+    String refreshMenuText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "refreshmenu" ) );
+    assertEquals( "Refresh", refreshMenuText );
+    ElementHelper.ClickJS( DRIVER, By.id( "refreshmenu" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("cdaClearCache"));
-    assertNotNull(element);
-    String cdaClearCacheText = ElementHelper.WaitForElementPresentGetText(driver, By.id("cdaClearCache"));
-    assertEquals("CDA Cache", cdaClearCacheText);
-    ElementHelper.Click(driver, By.id("cdaClearCache"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "cdaClearCache" ) );
+    assertNotNull( element );
+    String cdaClearCacheText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "cdaClearCache" ) );
+    assertEquals( "CDA Cache", cdaClearCacheText );
+    ElementHelper.Click( DRIVER, By.id( "cdaClearCache" ) );
 
     /*
      * ## Step 4
      */
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Check tab title and text on iframe
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@title='CDA Cache']"));
-    assertNotNull(element);
-    String cdaTitleText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@title='CDA Cache']"));
-    assertEquals("CDA Cache", cdaTitleText);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='CDA Cache']" ) );
+    assertNotNull( element );
+    String cdaTitleText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@title='CDA Cache']" ) );
+    assertEquals( "CDA Cache", cdaTitleText );
 
-    WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    WebDriver frame = driver.switchTo().frame(elementFrame);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//pre"));
-    assertNotNull(element);
-    String cdaBodyText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre"));
-    assertEquals("Cache Cleared Successfully", cdaBodyText);
+    WebElement elementFrame = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
+    WebDriver frame = DRIVER.switchTo().frame( elementFrame );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//pre" ) );
+    assertNotNull( element );
+    String cdaBodyText = ElementHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre" ) );
+    assertEquals( "Cache Cleared Successfully", cdaBodyText );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDA103.class.getSimpleName());
+    LOG.info( "tearDown##" + CDA103.class.getSimpleName() );
   }
 }

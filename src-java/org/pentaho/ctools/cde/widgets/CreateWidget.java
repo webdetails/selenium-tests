@@ -20,84 +20,80 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
  */
 public class CreateWidget {
   // Instance of the driver (browser emulator)
-  private WebDriver       driver;
+  private WebDriver driver;
   // Instance to be used on wait commands
   private Wait<WebDriver> wait;
   // The base url to be append the relative url in test
-  private String          baseUrl;
+  private String baseUrl;
   // The name for the widget to be created
-  private String          widgetName = "dummyCreateWidget";
+  private String widgetName = "dummyCreateWidget";
   // The name for the parameter to be added
-  private String          paramName  = "paramCreateWidget";
+  private String paramName = "paramCreateWidget";
 
   @Before
   public void setUp() throws Exception {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    this.driver = CToolsTestSuite.getDriver();
+    this.wait = CToolsTestSuite.getWait();
+    this.baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void testCreateWidget() throws Exception {
     //Step 0 - Delete the widget
-    WidgetUtils.RemoveWidgetByName(driver, widgetName);
+    WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
 
     //Create widget with specific parameter
-    driver = WidgetUtils.CreateWidgetWithParameter(driver, widgetName, paramName);
+    this.driver = WidgetUtils.CreateWidgetWithParameter( this.driver, this.widgetName, this.paramName );
   }
 
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void checkExistentWidgetAndParameter() throws Exception {
     //Resuming Steps
     // 1. open the widget
     // 2. check if the parameter exist in settings
     // 3. check if the widget exist in 'widgets' at Component Layout
 
-    driver = WidgetUtils.OpenWidgetEditMode(driver, wait, baseUrl, widgetName);
+    this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
 
     //Step 3 - Check if the parameter exist in 'Settings'
     //Move to the iframe
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe")));
-    WebElement frameCDEDashboard = driver.findElement(By.xpath("//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe"));
-    driver.switchTo().frame(frameCDEDashboard);
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='layoutPanelButton']")));
-    assertTrue(driver.findElement(By.xpath("//div[@class='layoutPanelButton']")).isEnabled());
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) ) );
+    WebElement frameCDEDashboard = this.driver.findElement( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) );
+    this.driver.switchTo().frame( frameCDEDashboard );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@class='layoutPanelButton']" ) ) );
+    assertTrue( this.driver.findElement( By.xpath( "//div[@class='layoutPanelButton']" ) ).isEnabled() );
     //Press 'Settings'
-    driver.findElement(By.xpath("//div[@id='headerLinks']/div[5]/a")).click();
-    wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='popup']")));
-    assertNotNull(driver.findElement(By.xpath("//span[@id='widgetParameters']/div/input")));
+    this.driver.findElement( By.xpath( "//div[@id='headerLinks']/div[5]/a" ) ).click();
+    this.wait.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.xpath( "//div[@id='popup']" ) ) );
+    assertNotNull( this.driver.findElement( By.xpath( "//span[@id='widgetParameters']/div/input" ) ) );
     //The parameter MUST be equal to the one set
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='widgetParameters']/div/span")));
-    assertEquals(driver.findElement(By.xpath("//span[@id='widgetParameters']/div/span")).getText(), paramName);
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//span[@id='widgetParameters']/div/span" ) ) );
+    assertEquals( this.driver.findElement( By.xpath( "//span[@id='widgetParameters']/div/span" ) ).getText(), this.paramName );
     //Press on the check box
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='widgetParameters']/div/input")));
-    assertTrue(driver.findElement(By.xpath("//span[@id='widgetParameters']/div/input")).isSelected());
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//span[@id='widgetParameters']/div/input" ) ) );
+    assertTrue( this.driver.findElement( By.xpath( "//span[@id='widgetParameters']/div/input" ) ).isSelected() );
     //Press button 'Cancel'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonCancel']")));
-    driver.findElement(By.xpath("//div[@class='popupbuttons']/button[@id='popup_state0_buttonCancel']")).click();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@class='popupbuttons']/button[@id='popup_state0_buttonCancel']" ) ) );
+    this.driver.findElement( By.xpath( "//div[@class='popupbuttons']/button[@id='popup_state0_buttonCancel']" ) ).click();
 
     //Step 4 - Click on Component Panel and check if the widget is listed
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='componentsPanelButton']")));
-    driver.findElement(By.xpath("//div[@class='componentsPanelButton']")).click();
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='cdfdd-components-palletePallete']/div[9]/h3/span")));
-    driver.findElement(By.xpath("//div[@id='cdfdd-components-palletePallete']/div[9]/h3/span")).click();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@class='componentsPanelButton']" ) ) );
+    this.driver.findElement( By.xpath( "//div[@class='componentsPanelButton']" ) ).click();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[9]/h3/span" ) ) );
+    this.driver.findElement( By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[9]/h3/span" ) ).click();
     //Getting the element where the widget created is displayed
-    WebElement listOfWidgets = driver.findElement(By.xpath("//div[@id='cdfdd-components-palletePallete']/div[9]/div"));
+    WebElement listOfWidgets = this.driver.findElement( By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[9]/div" ) );
     //Check if the widget created is listed
-    WebElement theWidgetCreated = listOfWidgets.findElement(By.xpath("//a[@class='tooltip' and contains(text(),'" + widgetName + "')]"));
-    assertNotNull(theWidgetCreated);
-    assertEquals(theWidgetCreated.getText(), widgetName);
+    WebElement theWidgetCreated = listOfWidgets.findElement( By.xpath( "//a[@class='tooltip' and contains(text(),'" + this.widgetName + "')]" ) );
+    assertNotNull( theWidgetCreated );
+    assertEquals( theWidgetCreated.getText(), this.widgetName );
 
     //Step 5 - Click in the widget created and check if the widget is add at Components column and Properties
     theWidgetCreated.click();
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[4]/td")));
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td")));
-    assertEquals(driver.findElement(
-                                    By.xpath("//table[@id='table-cdfdd-components-components']/tbody/tr[4]/td")).getText(),
-                                    widgetName + " Widget");
-    assertEquals(driver.findElement(
-                                    By.xpath("//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td")).getText(),
-                                    "Parameter " + paramName);
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[4]/td" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td" ) ) );
+    assertEquals( this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[4]/td" ) ).getText(), this.widgetName + " Widget" );
+    assertEquals( this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td" ) ).getText(), "Parameter " + this.paramName );
   }
 
   @After

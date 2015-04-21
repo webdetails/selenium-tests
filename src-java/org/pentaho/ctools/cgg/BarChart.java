@@ -46,22 +46,22 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class BarChart{
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
+public class BarChart {
 
   // Instance of the driver (browser emulator)
-  private WebDriver         driver;
+  private WebDriver driver;
   // The base url to be append the relative url in test
-  private String            baseUrl;
+  private String baseUrl;
   //Log instance
-  private static Logger     log                = LogManager.getLogger(BarChart.class);
+  private static Logger LOG = LogManager.getLogger( BarChart.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(this.driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   @Before
   public void setUp() {
-    log.debug("setUp");
+    LOG.debug( "setUp" );
     this.driver = CToolsTestSuite.getDriver();
     this.baseUrl = CToolsTestSuite.getBaseUrl();
   }
@@ -76,25 +76,25 @@ public class BarChart{
    * Steps:
    *    1. Open the bar chart.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_BarChart_ImageRendered() {
-    log.debug("tc1_BarChart_ImageRendered");
+    LOG.debug( "tc1_BarChart_ImageRendered" );
     //## Step 1
-    this.driver.get(this.baseUrl + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png");
+    this.driver.get( this.baseUrl + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png" );
 
-    WebElement elementImage = ElementHelper.FindElement(this.driver, By.cssSelector("img"));
-    assertNotNull(elementImage);
-    String attrWidth = elementImage.getAttribute("width");
-    String attrHeight = elementImage.getAttribute("height");
-    String attrSrc = elementImage.getAttribute("src");
+    WebElement elementImage = ElementHelper.FindElement( this.driver, By.cssSelector( "img" ) );
+    assertNotNull( elementImage );
+    String attrWidth = elementImage.getAttribute( "width" );
+    String attrHeight = elementImage.getAttribute( "height" );
+    String attrSrc = elementImage.getAttribute( "src" );
 
-    assertEquals("852", attrWidth);
-    assertEquals("637", attrHeight);
-    assertEquals(this.baseUrl + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png", attrSrc);
+    assertEquals( "852", attrWidth );
+    assertEquals( "637", attrHeight );
+    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png", attrSrc );
   }
 
   @After
   public void tearDown() {
-    log.debug("tearDown");
+    LOG.debug( "tearDown" );
   }
 }

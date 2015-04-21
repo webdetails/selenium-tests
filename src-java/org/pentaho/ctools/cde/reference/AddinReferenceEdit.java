@@ -47,23 +47,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class AddinReferenceEdit {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   //Log instance
-  private static Logger     log                = LogManager.getLogger(AddinReferenceEdit.class);
+  private static Logger LOG = LogManager.getLogger( AddinReferenceEdit.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + AddinReferenceEdit.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + AddinReferenceEdit.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   @Before
@@ -84,66 +84,66 @@ public class AddinReferenceEdit {
    *    2. Edit the sample to have title with font size 34.
    *    3. Check the value on the sample was changed.
    */
-  @Test(timeout = 90000)
+  @Test( timeout = 90000 )
   public void tc01_ChangeAddinReferenceSample_FontSizeWasChanged() {
-    log.info("tc01_ChangeAddinReferenceSample_FontSizeWasChanged");
+    LOG.info( "tc01_ChangeAddinReferenceSample_FontSizeWasChanged" );
 
     /*
      * ## Step 1
      */
     //Go to AddinReference
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent");
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='Title']/span"));
-    WebElement titleWithFontSize18 = ElementHelper.FindElement(driver, By.xpath("//div[@id='Title']/span"));
-    assertEquals("font-size: 18px;", titleWithFontSize18.getAttribute("style"));
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent" );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
+    WebElement titleWithFontSize18 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
+    assertEquals( "font-size: 18px;", titleWithFontSize18.getAttribute( "style" ) );
 
     /*
      * ## Step 2
      */
-    AddinReferenceEdit.ChangeFontSize("34");
+    AddinReferenceEdit.ChangeFontSize( "34" );
 
     /*
      * ## Step 3
      */
     //Go to AddinReference
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent" );
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    titleWithFontSize18 = ElementHelper.FindElement(driver, By.xpath("//div[@id='Title']/span"));
-    assertEquals("font-size: 34px;", titleWithFontSize18.getAttribute("style"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    titleWithFontSize18 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
+    assertEquals( "font-size: 34px;", titleWithFontSize18.getAttribute( "style" ) );
   }
 
   /**
    *
    * @param value
    */
-  private static void ChangeFontSize(String value) {
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/wcdf.edit");
+  private static void ChangeFontSize( String value ) {
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/wcdf.edit" );
 
     //Expand first row - Title
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("span.expander"));
-    ElementHelper.ClickJS(driver, By.cssSelector("span.expander"));
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "span.expander" ) );
+    ElementHelper.ClickJS( DRIVER, By.cssSelector( "span.expander" ) );
     //Click in HTML to open the Properties
-    Actions acts = new Actions(driver);
-    acts.click(ElementHelper.FindElement(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]")));
+    Actions acts = new Actions( DRIVER );
+    acts.click( ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
     acts.build().perform();
     //Click in field 'Font Size' to be editable
-    ElementHelper.ClickJS(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]"));
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
     //Write 34
-    ElementHelper.FindElement(driver, By.name("value")).clear();
-    ElementHelper.FindElement(driver, By.xpath("//form[@class='cdfddInput']/input")).sendKeys(value);
-    ElementHelper.FindElement(driver, By.xpath("//form[@class='cdfddInput']/input")).submit();
+    ElementHelper.FindElement( DRIVER, By.name( "value" ) ).clear();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//form[@class='cdfddInput']/input" ) ).sendKeys( value );
+    ElementHelper.FindElement( DRIVER, By.xpath( "//form[@class='cdfddInput']/input" ) ).submit();
     //Save the changes
-    ElementHelper.Click(driver, By.linkText("Save"));
+    ElementHelper.Click( DRIVER, By.linkText( "Save" ) );
     //Wait for element present and invisible
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@id='notifyBar']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@id='notifyBar']"));
+    ElementHelper.WaitForElementVisibility( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    ChangeFontSize("18");
+    ChangeFontSize( "18" );
 
-    log.info("tearDown##" + AddinReferenceEdit.class.getSimpleName());
+    LOG.info( "tearDown##" + AddinReferenceEdit.class.getSimpleName() );
   }
 }

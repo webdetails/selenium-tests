@@ -47,36 +47,36 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class AjaxRequestReference {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver DRIVER;
   //Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String BASE_URL;
   //Log instance
-  private static Logger          log                = LogManager.getLogger(AjaxRequestReference.class);
+  private static Logger LOG = LogManager.getLogger( AjaxRequestReference.class );
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + AjaxRequestReference.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + AjaxRequestReference.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   @Before
   public void setUpTestCase() {
     //Go to AddinReference
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AAjaxRequest%3AajaxRequest.wcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AAjaxRequest%3AajaxRequest.wcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -89,42 +89,42 @@ public class AjaxRequestReference {
    * Steps:
    *    1. Check page content.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc01_PageContent_InformationPresent() {
-    log.info("tc01_PageContent_InformationPresent");
+    LOG.info( "tc01_PageContent_InformationPresent" );
 
     /*
      * ## Step 1
      */
     //Check page title
-    wait.until(ExpectedConditions.titleIs("Community Dashboard Editor"));
-    assertEquals("Community Dashboard Editor", driver.getTitle());
+    WAIT.until( ExpectedConditions.titleIs( "Community Dashboard Editor" ) );
+    assertEquals( "Community Dashboard Editor", DRIVER.getTitle() );
     //Check title
-    String title = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='Title']/span"));
-    assertEquals("Ajax Request Reference", title);
+    String title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
+    assertEquals( "Ajax Request Reference", title );
     //Check first paragh
     String expParag = "Ajax Request Component provides a way to build an Ajax request. Given an url, a response type and list of parameters it's possible to build an jQuery ajax call, which its result will be stored in the resultvar.";
-    String actParag = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/p"));
-    assertEquals(expParag, actParag);
+    String actParag = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/p" ) );
+    assertEquals( expParag, actParag );
     //Check subtitle
-    String subtitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div"));
-    assertEquals("Component Parameters", subtitle);
+    String subtitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/div" ) );
+    assertEquals( "Component Parameters", subtitle );
     //Check parag 1
-    String parag1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/p[2]"));
-    assertEquals("The Component definition supports the following arguments:", parag1);
+    String parag1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/p[2]" ) );
+    assertEquals( "The Component definition supports the following arguments:", parag1 );
     //Check subtitle2
-    String subtitle2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/div[2]"));
-    assertEquals("Default values", subtitle2);
+    String subtitle2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/div[2]" ) );
+    assertEquals( "Default values", subtitle2 );
     //Check quote
-    String quote = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='DescriptionBody']/blockquote/pre"));
-    assertEquals("defaults: { ajaxRequestType: json, asyncCall: true }", quote);
+    String quote = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/blockquote/pre" ) );
+    assertEquals( "defaults: { ajaxRequestType: json, asyncCall: true }", quote );
     //Check result
-    String result = ElementHelper.WaitForElementPresentGetText(driver, By.id("column1"));
-    assertEquals("{\"queryInfo\":{\"totalRows\":\"19\"},\"resultset\":[[\"Car\",\"Red\",10],[\"Car\",\"Blue\",20],[\"Car\",\"Green\",30],[\"Car\",\"Yellow\",5],[\"Car\",\"Black\",25],[\"Car\",\"White\",7],[\"Bike\",\"Red\",20],[\"Bike\",\"Blue\",20],[\"Bike\",\"Green\",40],[\"Bike\",\"Yellow\",80],[\"Bike\",\"Black\",1],[\"Bike\",\"White\",23],[\"Ship\",\"Red\",2],[\"Ship\",\"Blue\",7],[\"Plane\",\"Red\",5],[\"Plane\",\"Blue\",4],[\"Train\",\"Red\",50],[\"Train\",\"Blue\",50],[\"Train\",\"Green\",7]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"series\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"category\"},{\"colIndex\":2,\"colType\":\"Integer\",\"colName\":\"value\"}]}", result);
+    String result = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "column1" ) );
+    assertEquals( "{\"queryInfo\":{\"totalRows\":\"19\"},\"resultset\":[[\"Car\",\"Red\",10],[\"Car\",\"Blue\",20],[\"Car\",\"Green\",30],[\"Car\",\"Yellow\",5],[\"Car\",\"Black\",25],[\"Car\",\"White\",7],[\"Bike\",\"Red\",20],[\"Bike\",\"Blue\",20],[\"Bike\",\"Green\",40],[\"Bike\",\"Yellow\",80],[\"Bike\",\"Black\",1],[\"Bike\",\"White\",23],[\"Ship\",\"Red\",2],[\"Ship\",\"Blue\",7],[\"Plane\",\"Red\",5],[\"Plane\",\"Blue\",4],[\"Train\",\"Red\",50],[\"Train\",\"Blue\",50],[\"Train\",\"Green\",7]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"series\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"category\"},{\"colIndex\":2,\"colType\":\"Integer\",\"colName\":\"value\"}]}", result );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + AjaxRequestReference.class.getSimpleName());
+    LOG.info( "tearDown##" + AjaxRequestReference.class.getSimpleName() );
   }
 }
