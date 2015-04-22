@@ -94,7 +94,7 @@ public class TableComponent {
     //This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/Table Component
     driver.get( baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:64-TableComponent:table_component.xcdf/generatedContent" );
 
-    //Not we have to wait for loading disappear
+    //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
@@ -140,7 +140,7 @@ public class TableComponent {
     ElementHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
     ElementHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
-    //Not we have to wait for loading disappear
+    //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //The table is now displayed

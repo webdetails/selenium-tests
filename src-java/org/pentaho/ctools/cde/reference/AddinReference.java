@@ -79,7 +79,7 @@ public class AddinReference {
     //Go to the CDE Sample Dashboard web page.
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent" );
 
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 

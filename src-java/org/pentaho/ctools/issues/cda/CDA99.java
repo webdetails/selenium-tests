@@ -227,7 +227,7 @@ public class CDA99 {
     try {
       Select select = new Select( selector );
       select.selectByIndex( 1 );
-      // Not we have to wait for loading disappear
+      // NOTE - we have to wait for loading disappear
       ElementHelper.WaitForElementInvisibility( previewWindow, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
       // Get value of status
       String value = ElementHelper.GetInputValue( previewWindow, By.id( "status" ) );

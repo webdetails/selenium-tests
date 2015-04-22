@@ -89,7 +89,7 @@ public class CDADatasourceTest {
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Acda%3Acda_test.xcdf/generatedContent" );
     //wait for element to be visible
     ElementHelper.WaitForElementVisibility( DRIVER, By.xpath( "//table[@id='testTable']/tbody/tr[15]/td" ) );
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Test Link CDA Documentation

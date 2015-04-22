@@ -95,7 +95,7 @@ public class JFreeChartComponent {
     // Reference/Core Components/jFreeChartComponent
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A22-JFreeChartComponent%3Ajfreechart_component.xcdf/generatedContent");
 
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
@@ -140,7 +140,7 @@ public class JFreeChartComponent {
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     // Now sample element must be displayed
@@ -178,7 +178,7 @@ public class JFreeChartComponent {
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check if the generated image is different from previews, is not something static
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']")));
@@ -209,7 +209,7 @@ public class JFreeChartComponent {
     title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
     assertTrue(title.equals("Top 10 Customers"));
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
     //Check if the generated image is different from previews, is not something static
     assertNotNull(ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']")));
@@ -261,7 +261,7 @@ public class JFreeChartComponent {
     acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
     acts2.perform();
     ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']"));
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     WebDriver popup = null;

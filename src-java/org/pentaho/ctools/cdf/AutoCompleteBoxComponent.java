@@ -84,7 +84,7 @@ public class AutoCompleteBoxComponent {
     //## Step 1
     this.driver.get( this.baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:58-AutocompleteBoxComponent:autocomplete_component.xcdf/generatedContent" );
 
-    //Not we have to wait for loading disappear
+    //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
@@ -99,7 +99,7 @@ public class AutoCompleteBoxComponent {
     //Render again the sample 
     ElementHelper.Click( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
     ElementHelper.Click( this.driver, By.xpath( "//div[@id='code']/button" ) );
-    //Not we have to wait for loading disappear
+    //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );

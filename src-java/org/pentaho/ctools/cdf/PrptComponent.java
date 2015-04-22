@@ -92,7 +92,7 @@ public class PrptComponent {
     // Reference/Core Components/PrptComponent
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A63-PentahoReportingComponent%3Aprpt_component.xcdf/generatedContent");
 
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
   }
 
@@ -115,7 +115,7 @@ public class PrptComponent {
     ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
     ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
 
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     // Now sample element must be displayed
@@ -146,7 +146,7 @@ public class PrptComponent {
     // ## Step 1
     Select select = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     select.selectByValue("pageable/pdf");
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sampleObject")));
@@ -184,7 +184,7 @@ public class PrptComponent {
     select = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
     select.selectByValue("table/html;page-mode=stream");
 
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sampleObject")));

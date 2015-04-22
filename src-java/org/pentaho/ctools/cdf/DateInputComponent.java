@@ -86,7 +86,7 @@ public class DateInputComponent {
     //## Step 1
     this.driver.get( this.baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:40-DateInputComponent:date_input_component.xcdf/generatedContent" );
 
-    //Not we have to wait for loading disappear
+    //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for visibility of 'DateInputComponent'
@@ -99,7 +99,7 @@ public class DateInputComponent {
     //Render again the sample
     ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
     ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
-    //Not we have to wait for loading disappear
+    //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );

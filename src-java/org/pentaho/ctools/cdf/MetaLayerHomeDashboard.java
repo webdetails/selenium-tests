@@ -98,7 +98,7 @@ public class MetaLayerHomeDashboard {
      */
     driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalyer.xcdf/generatedContent");
 
-    //Not we have to wait for loading disappear
+    //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
@@ -131,7 +131,7 @@ public class MetaLayerHomeDashboard {
     //Check if we have the sizes 500 and 600
     assertTrue(StringUtils.containsIgnoreCase(valueFrameAttrSrc, "action=jpivot.xaction&width=500&height=600"));
 
-    //Not we have to wait for loading disappear
+    //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
 
     //Wait for the element be visible.

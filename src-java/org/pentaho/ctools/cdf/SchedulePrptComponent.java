@@ -98,7 +98,7 @@ public class SchedulePrptComponent {
     driver.get( baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:86-SchedulePrptComponent:schedule_prpt_component.xcdf/generatedContent" );
 
     log.info( ( (JavascriptExecutor) driver ).executeScript( "return document.readyState;" ).toString() );
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
@@ -145,7 +145,7 @@ public class SchedulePrptComponent {
     ElementHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
     ElementHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
-    // Not we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
