@@ -126,30 +126,30 @@ public class MapComponentReference {
      */
     // Validate the sample that we are testing is the one
     assertEquals( "Community Dashboard Editor", DRIVER.getTitle() );
-    final String sampleTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='title']/span" ) );
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='title']/span" ) );
     assertEquals( "Map Component Reference", sampleTitle );
-    final String sampleDesc = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/p" ) );
+    String sampleDesc = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/p" ) );
     assertEquals( "This component allows the user to either navigate through the map and see information about marked locations, or to represent quantities as the fill color of a set of shapes/regions.", sampleDesc );
 
     /*
      * ## Step 2
      */
-    final String subTitleGlobalOptions = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/h3" ) );
+    String subTitleGlobalOptions = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/h3" ) );
     assertEquals( "Global Options", subTitleGlobalOptions );
-    final String goItem1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd/b" ) );
-    final String goItem2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[2]/b" ) );
-    final String goItem3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[3]/b" ) );
-    final String goItem4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[4]/b" ) );
-    final String goItem5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[5]/b" ) );
-    final String goItem6 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[6]/b" ) );
-    final String goItem7 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[7]/b" ) );
-    final String goItem8 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[8]/b" ) );
-    final String goItem9 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[9]/b" ) );
-    final String goItem10 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[10]/b" ) );
-    final String goItem11 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[11]/b" ) );
-    final String goItem12 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[12]/b" ) );
-    final String goItem13 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[13]/b" ) );
-    final String goItem14 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[14]/b" ) );
+    String goItem1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd/b" ) );
+    String goItem2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[2]/b" ) );
+    String goItem3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[3]/b" ) );
+    String goItem4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[4]/b" ) );
+    String goItem5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[5]/b" ) );
+    String goItem6 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[6]/b" ) );
+    String goItem7 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[7]/b" ) );
+    String goItem8 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[8]/b" ) );
+    String goItem9 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[9]/b" ) );
+    String goItem10 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[10]/b" ) );
+    String goItem11 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[11]/b" ) );
+    String goItem12 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[12]/b" ) );
+    String goItem13 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[13]/b" ) );
+    String goItem14 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl/dd[14]/b" ) );
     assertEquals( "listeners:", goItem1 );
     assertEquals( "parameters:", goItem2 );
     assertEquals( "htmlObject:", goItem3 );
@@ -168,18 +168,18 @@ public class MapComponentReference {
     /*
      * ## Step 3
      */
-    final String subTitleOptionsMarker = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/h3[2]" ) );
+    String subTitleOptionsMarker = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/h3[2]" ) );
     assertEquals( "Options valid in Marker mode", subTitleOptionsMarker );
-    final String omItem1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd/b" ) );
-    final String omItem2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[2]/b" ) );
-    final String omItem3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[3]/b" ) );
-    final String omItem4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[4]/b" ) );
-    final String omItem5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[5]/b" ) );
-    final String omItem6 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[6]/b" ) );
-    final String omItem7 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[7]/b" ) );
-    final String omItem8 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[8]/b" ) );
-    final String omItem9 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[9]/b" ) );
-    final String omItem10 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[10]/b" ) );
+    String omItem1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd/b" ) );
+    String omItem2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[2]/b" ) );
+    String omItem3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[3]/b" ) );
+    String omItem4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[4]/b" ) );
+    String omItem5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[5]/b" ) );
+    String omItem6 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[6]/b" ) );
+    String omItem7 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[7]/b" ) );
+    String omItem8 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[8]/b" ) );
+    String omItem9 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[9]/b" ) );
+    String omItem10 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[2]/dd[10]/b" ) );
     assertEquals( "Marker image:", omItem1 );
     assertEquals( "Marker Width:", omItem2 );
     assertEquals( "Marker Height:", omItem3 );
@@ -194,23 +194,23 @@ public class MapComponentReference {
     /*
      * ## Step 4
      */
-    final String subTitleLocationMarker = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/h3[3]" ) );
+    String subTitleLocationMarker = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/h3[3]" ) );
     assertEquals( "Location Result Set in Marker mode", subTitleLocationMarker );
-    final String lmItem1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd/b" ) );
-    final String lmItem2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[2]/b" ) );
-    final String lmItem3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[3]/b" ) );
-    final String lmItem4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[4]/b" ) );
-    final String lmItem5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[5]/b" ) );
-    final String lmItem6 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[6]/b" ) );
-    final String lmItem7 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[7]/b" ) );
-    final String lmItem8 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[8]/b" ) );
-    final String lmItem9 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[9]/b" ) );
-    final String lmItem10 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[10]/b" ) );
-    final String lmItem11 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[11]/b" ) );
-    final String lmItem12 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[12]/b" ) );
-    final String lmItem13 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[13]/b" ) );
-    final String lmItem14 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[14]/b" ) );
-    final String lmItem15 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[15]/b" ) );
+    String lmItem1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd/b" ) );
+    String lmItem2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[2]/b" ) );
+    String lmItem3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[3]/b" ) );
+    String lmItem4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[4]/b" ) );
+    String lmItem5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[5]/b" ) );
+    String lmItem6 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[6]/b" ) );
+    String lmItem7 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[7]/b" ) );
+    String lmItem8 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[8]/b" ) );
+    String lmItem9 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[9]/b" ) );
+    String lmItem10 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[10]/b" ) );
+    String lmItem11 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[11]/b" ) );
+    String lmItem12 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[12]/b" ) );
+    String lmItem13 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[13]/b" ) );
+    String lmItem14 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[14]/b" ) );
+    String lmItem15 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[3]/dd[15]/b" ) );
     assertEquals( "Longitude:", lmItem1 );
     assertEquals( "Latitude:", lmItem2 );
     assertEquals( "Address:", lmItem3 );
@@ -230,12 +230,12 @@ public class MapComponentReference {
     /*
      * ## Step 5
      */
-    final String subTitleOptionsSahpes = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/h3[4]" ) );
+    String subTitleOptionsSahpes = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/h3[4]" ) );
     assertEquals( "Options valid in Shapes mode", subTitleOptionsSahpes );
-    final String osItem1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[4]/dd/b" ) );
-    final String osItem2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[4]/dd[2]/b" ) );
-    final String osItem3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[4]/dd[3]/b" ) );
-    final String osItem4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[4]/dd[4]/b" ) );
+    String osItem1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[4]/dd/b" ) );
+    String osItem2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[4]/dd[2]/b" ) );
+    String osItem3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[4]/dd[3]/b" ) );
+    String osItem4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/dl[4]/dd[4]/b" ) );
     assertEquals( "Shape Definitions:", osItem1 );
     assertEquals( "Shape Mouse Over Function:", osItem2 );
     assertEquals( "Shape Mouse Out Function:", osItem3 );
@@ -331,10 +331,10 @@ public class MapComponentReference {
     WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) ) );
     assertEquals( "200 mi", DRIVER.findElement( By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) ).getText() );
     //Check if we are using OpenLayers
-    final String mapId = DRIVER.findElement( By.xpath( "//div[@id='testTileServices']/div" ) ).getAttribute( "id" );
+    String mapId = DRIVER.findElement( By.xpath( "//div[@id='testTileServices']/div" ) ).getAttribute( "id" );
     assertTrue( mapId.contains( "OpenLayers" ) );
-    final Select mapEngine = new Select( DRIVER.findElement( By.xpath( "//div[@id='selectMapEngineObj']/select" ) ) );
-    final Select mapService = new Select( DRIVER.findElement( By.xpath( "//div[@id='selectTileObj']/select" ) ) );
+    Select mapEngine = new Select( DRIVER.findElement( By.xpath( "//div[@id='selectMapEngineObj']/select" ) ) );
+    Select mapService = new Select( DRIVER.findElement( By.xpath( "//div[@id='selectTileObj']/select" ) ) );
     assertEquals( "openlayers", mapEngine.getFirstSelectedOption().getText() );
     assertEquals( "mapquest-sat", mapService.getFirstSelectedOption().getText() );
 
@@ -345,9 +345,9 @@ public class MapComponentReference {
     //Image with Google (left down corner)
     assertNotNull( DRIVER.findElement( By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
     //Text 'Termos de Utilização (righ down corner)
-    final String strMap = "Map";
-    final String strTerms = "Terms of Use";
-    final String strSat = "Satellite";
+    String strMap = "Map";
+    String strTerms = "Terms of Use";
+    String strSat = "Satellite";
 
     assertEquals( strTerms, DRIVER.findElement( By.xpath( "//div[@id='testTileServices']/div/div[6]/div[2]/a" ) ).getText() );
     //check if we have mapquest-sat/Mapa/Satelite
@@ -387,9 +387,9 @@ public class MapComponentReference {
     /*
      * ## Step 1
      */
-    final WebElement marker1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
-    final WebElement marker2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) );
-    final WebElement marker3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) );
+    WebElement marker1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
+    WebElement marker2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) );
+    WebElement marker3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) );
     assertNotNull( marker1 );
     assertNotNull( marker2 );
     assertNotNull( marker3 );
@@ -408,22 +408,22 @@ public class MapComponentReference {
     marker1.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker1Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    String marker1Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "HiddenContentCol" ) );
+    ElementHelper.Click( DRIVER, By.cssSelector( "div.olPopupCloseBox" ) );
     assertEquals( "Atelier Graphique", marker1Text );
     //Open Marker 2
     marker2.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    String marker2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "HiddenContentCol" ) );
+    ElementHelper.Click( DRIVER, By.cssSelector( "div.olPopupCloseBox" ) );
     assertEquals( "Australian Collectors, Co.", marker2Text );
     //Open Marker 3
     marker3.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker3Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    String marker3Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "HiddenContentCol" ) );
+    ElementHelper.Click( DRIVER, By.cssSelector( "div.olPopupCloseBox" ) );
     assertEquals( "Signal Gift Stores", marker3Text );
   }
 
@@ -447,10 +447,10 @@ public class MapComponentReference {
      */
     //Check if the chart is already rendered
     ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ), 90 );
-    final WebElement marker1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
-    final WebElement marker2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) );
-    final WebElement marker3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) );
-    final WebElement marker4 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][4]" ) );
+    WebElement marker1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
+    WebElement marker2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) );
+    WebElement marker3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) );
+    WebElement marker4 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][4]" ) );
     assertNotNull( marker1 );
     assertNotNull( marker2 );
     assertNotNull( marker3 );
@@ -464,34 +464,34 @@ public class MapComponentReference {
      * ## Step 2
      */
     //Zoom in - in order for the elements to be visible
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div[5]/div[3]" ) ).click();
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div[5]/div[3]" ) );
     //Open Marker 1
     marker1.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker1Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    String marker1Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "HiddenContentCol" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "Atelier Graphique", marker1Text );
     //Open Marker 2
     marker2.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    String marker2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "HiddenContentCol" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "Signal Gift Stores", marker2Text );
     //Open Marker 3
     marker3.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker3Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    String marker3Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "HiddenContentCol" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "La Rochelle Gifts", marker3Text );
     //Open Marker 4
     marker4.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker4Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    String marker4Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "HiddenContentCol" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "Baane Mini Imports", marker4Text );
   }
 
@@ -517,10 +517,10 @@ public class MapComponentReference {
     /*
      * ## Step 1
      */
-    final WebElement shape1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ) );
-    final WebElement shape2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]" ) );
-    final WebElement shape3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]" ) );
-    final WebElement shape4 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]" ) );
+    WebElement shape1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ) );
+    WebElement shape2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]" ) );
+    WebElement shape3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]" ) );
+    WebElement shape4 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]" ) );
     assertNotNull( shape1 );
     assertNotNull( shape2 );
     assertNotNull( shape3 );
@@ -529,10 +529,10 @@ public class MapComponentReference {
     ElementHelper.WaitForAttributeValue( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]" ), "fill", "rgba(183,212,0,255)", 15 );
     ElementHelper.WaitForAttributeValue( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]" ), "fill", "rgba(167,202,0,255)", 15 );
     ElementHelper.WaitForAttributeValue( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]" ), "fill", "rgba(167,202,0,255)", 15 );
-    final String attrFillShape1 = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ), "fill" );
-    final String attrFillShape2 = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]" ), "fill" );
-    final String attrFillShape3 = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]" ), "fill" );
-    final String attrFillShape4 = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]" ), "fill" );
+    String attrFillShape1 = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ), "fill" );
+    String attrFillShape2 = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]" ), "fill" );
+    String attrFillShape3 = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]" ), "fill" );
+    String attrFillShape4 = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]" ), "fill" );
     assertEquals( "rgba(255,8,0,255)", attrFillShape1 );
     assertEquals( "rgba(183,212,0,255)", attrFillShape2 );
     assertEquals( "rgba(167,202,0,255)", attrFillShape3 );
@@ -550,7 +550,7 @@ public class MapComponentReference {
     assertEquals( "red", shapeRed.getAttribute( "fill" ) );
 
     //Related to issue CDE-317
-    final Actions action = new Actions( DRIVER );
+    Actions action = new Actions( DRIVER );
     action.moveToElement( shape2 ).build().perform();
     action.moveToElement( shape1 ).build().perform();
     shapeId = shape1.getAttribute( "id" );
