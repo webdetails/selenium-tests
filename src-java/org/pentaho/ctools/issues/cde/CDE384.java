@@ -54,23 +54,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE384 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE384.class);
+  private static Logger LOG = LogManager.getLogger( CDE384.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE384.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE384.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -95,166 +95,166 @@ public class CDE384 {
    *    7. Click to edit cda file, wait for popup, assert text on path, click "X"
    *    8. Go to Layout Panel, click to edit resource, wait for popup, assert text on path, click "X"
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_ExternalResources_AssertPath() {
-    log.info("tc01_ExternalResources_AssertPath");
+    LOG.info( "tc01_ExternalResources_AssertPath" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@title='Add Resource']"));
+    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//select[@id='resourceType']"));
-    assertNotNull(element);
-    Select select = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceType']")));
-    select.selectByValue("Css");
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//select[@id='resourceSource']"));
-    assertNotNull(element);
-    Select select1 = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceSource']")));
-    select1.selectByValue("file");
-    ElementHelper.Click(driver, By.xpath("//button[@id='popup_state0_buttonOk']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//select[@id='resourceType']" ) );
+    assertNotNull( element );
+    Select select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceType']" ) ) );
+    select.selectByValue( "Css" );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//select[@id='resourceSource']" ) );
+    assertNotNull( element );
+    Select select1 = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceSource']" ) ) );
+    select1.selectByValue( "file" );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@id='popup_state0_buttonOk']" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("container_id"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']"));
-    ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "container_id" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@class='cdfddInput']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//button[@class='cdfddInput']"));
-    WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    WebDriver frame = driver.switchTo().frame(elementFrame);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//span[@id='infoArea']"));
-    assertNotNull(element);
-    String pathText = ElementHelper.WaitForTextPresence(frame, By.xpath("//span[@id='infoArea']"), "/public/plugin-samples/pentaho-cdf-dd/cdeReference.css");
-    assertEquals("/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText);
-    driver.switchTo().defaultContent();
-    ElementHelper.Click(driver, By.id("popup_edit_buttonClose"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
+    WebElement elementFrame = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
+    WebDriver frame = DRIVER.switchTo().frame( elementFrame );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//span[@id='infoArea']" ) );
+    assertNotNull( element );
+    String pathText = ElementHelper.WaitForTextPresence( frame, By.xpath( "//span[@id='infoArea']" ), "/public/plugin-samples/pentaho-cdf-dd/cdeReference.css" );
+    assertEquals( "/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText );
+    DRIVER.switchTo().defaultContent();
+    ElementHelper.Click( DRIVER, By.id( "popup_edit_buttonClose" ) );
 
     /*
      * ## Step 5
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='layoutPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
-    assertNotNull(element);
-    String cdaText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
-    assertEquals("Community Data Access", cdaText);
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='CDA Data Source']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@title='CDA Data Source']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a" ) );
+    assertNotNull( element );
+    String cdaText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a" ) );
+    assertEquals( "Community Data Access", cdaText );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-datasources-pallete']/div/div[2]/h3/a" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='CDA Data Source']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='CDA Data Source']" ) );
 
     /*
      * ## Step 6
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("container_id"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']"));
-    ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "container_id" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/cda/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/cda/']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
 
     /*
      * ## Step 7
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfddInput']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfddInput']"));
-    elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    frame = driver.switchTo().frame(elementFrame);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//span[@id='infoArea']"));
-    assertNotNull(element);
-    String pathText1 = ElementHelper.WaitForTextPresence(frame, By.xpath("//span[@id='infoArea']"), "/public/plugin-samples/cda/cdafiles/compoundJoin.cda");
-    assertEquals("/public/plugin-samples/cda/cdafiles/compoundJoin.cda", pathText1);
-    driver.switchTo().defaultContent();
-    ElementHelper.Click(driver, By.id("popup_edit_buttonClose"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfddInput']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']//button[@class='cdfddInput']" ) );
+    elementFrame = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
+    frame = DRIVER.switchTo().frame( elementFrame );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//span[@id='infoArea']" ) );
+    assertNotNull( element );
+    String pathText1 = ElementHelper.WaitForTextPresence( frame, By.xpath( "//span[@id='infoArea']" ), "/public/plugin-samples/cda/cdafiles/compoundJoin.cda" );
+    assertEquals( "/public/plugin-samples/cda/cdafiles/compoundJoin.cda", pathText1 );
+    DRIVER.switchTo().defaultContent();
+    ElementHelper.Click( DRIVER, By.id( "popup_edit_buttonClose" ) );
 
     /*
      * ## Step 8
      */
-    driver.switchTo().defaultContent();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='layoutPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@class='layoutPanelButton']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@class='cdfddInput']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//button[@class='cdfddInput']"));
-    elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    frame = driver.switchTo().frame(elementFrame);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//span[@id='infoArea']"));
-    assertNotNull(element);
-    String pathText3 = ElementHelper.WaitForTextPresence(frame, By.xpath("//span[@id='infoArea']"), "/public/plugin-samples/pentaho-cdf-dd/cdeReference.css");
-    assertEquals("/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText3);
-    driver.switchTo().defaultContent();
-    ElementHelper.Click(driver, By.id("popup_edit_buttonClose"));
+    DRIVER.switchTo().defaultContent();
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
+    elementFrame = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
+    frame = DRIVER.switchTo().frame( elementFrame );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//span[@id='infoArea']" ) );
+    assertNotNull( element );
+    String pathText3 = ElementHelper.WaitForTextPresence( frame, By.xpath( "//span[@id='infoArea']" ), "/public/plugin-samples/pentaho-cdf-dd/cdeReference.css" );
+    assertEquals( "/public/plugin-samples/pentaho-cdf-dd/cdeReference.css", pathText3 );
+    DRIVER.switchTo().defaultContent();
+    ElementHelper.Click( DRIVER, By.id( "popup_edit_buttonClose" ) );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE384.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE384.class.getSimpleName() );
   }
 }

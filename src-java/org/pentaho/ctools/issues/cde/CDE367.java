@@ -53,23 +53,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE367 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE367.class);
+  private static Logger LOG = LogManager.getLogger( CDE367.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE367.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE367.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -87,59 +87,59 @@ public class CDE367 {
    *    2. Go to Properties, check the box for BackgroundColor and write "#3d558c" on input field
    *    3. Assert input field for "colorpicker_hex" has "3d558c"
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdeDashboard_ColorPickerPaste() {
-    log.info("tc01_CdeDashboard_ColorPickerPaste");
+    LOG.info( "tc01_CdeDashboard_ColorPickerPaste" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@title='Add Row']"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//form[@class='cdfddInput']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorcheck']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorcheck']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
-    ElementHelper.FindElement(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']")).sendKeys("#3d558c");
-    ElementHelper.Click(driver, By.xpath("//form[@class='cdfddInput']/input[@class='colorinput']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//form[@class='cdfddInput']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//form[@class='cdfddInput']/input[@class='colorcheck']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//form[@class='cdfddInput']/input[@class='colorcheck']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) );
+    ElementHelper.FindElement( DRIVER, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) ).sendKeys( "#3d558c" );
+    ElementHelper.Click( DRIVER, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='colorpicker']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='colorpicker']/div[@class='colorpicker_hex']"));
-    assertNotNull(element);
-    String hexText = ElementHelper.GetInputValue(driver, By.xpath("//div[@class='colorpicker']/div[@class='colorpicker_hex']/input"));
-    assertEquals("3d558c", hexText);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='colorpicker']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='colorpicker']/div[@class='colorpicker_hex']" ) );
+    assertNotNull( element );
+    String hexText = ElementHelper.GetInputValue( DRIVER, By.xpath( "//div[@class='colorpicker']/div[@class='colorpicker_hex']/input" ) );
+    assertEquals( "3d558c", hexText );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE367.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE367.class.getSimpleName() );
   }
 }

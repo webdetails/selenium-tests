@@ -62,29 +62,29 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDA121 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   //Download directory
-  private static String     downloadDir;
+  private static String DOWNNLOAD_DIR;
   // The path for the export file
-  private static String     exportFilePath;
+  private static String EXPORT_PATH;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDA121.class);
+  private static Logger LOG = LogManager.getLogger( CDA121.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDA121.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
-    downloadDir = CToolsTestSuite.getDownloadDir();
-    exportFilePath = downloadDir + "\\cda-export.xls";
+    LOG.info( "setUp##" + CDA121.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
+    DOWNNLOAD_DIR = CToolsTestSuite.getDownloadDir();
+    EXPORT_PATH = DOWNNLOAD_DIR + "\\cda-export.xls";
   }
 
   /**
@@ -101,85 +101,85 @@ public class CDA121 {
    *    3. Export file and assure it has same md5 as expected
    *
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdaFileViewer_ExcelSqlQuery() {
-    log.info("tc01_CdaFileViewer_ExcelSqlQuery");
+    LOG.info( "tc01_CdaFileViewer_ExcelSqlQuery" );
 
     /*
      * ## Step 1
      */
     //Go to sql-jdbc CDA sample
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda");
+    DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda" );
 
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = ElementHelper.FindElement(driver, By.id("dataAccessSelector"));
-    assertNotNull(element);
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
-    select.selectByVisibleText("Sql Query on SampleData - Jdbc");
-    element = ElementHelper.FindElement(driver, By.xpath("//button[@id='button']"));
-    assertNotNull(element);
-    element = ElementHelper.FindElement(driver, By.xpath("//button[@id='cachethis']"));
-    assertNotNull(element);
-    element = ElementHelper.FindElement(driver, By.xpath("//button[@id='queryUrl']"));
-    assertNotNull(element);
+    WebElement element = ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) );
+    assertNotNull( element );
+    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    select.selectByVisibleText( "Sql Query on SampleData - Jdbc" );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//button[@id='button']" ) );
+    assertNotNull( element );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
+    assertNotNull( element );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
+    assertNotNull( element );
 
     /*
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement(driver, By.id("status"));
-    assertEquals("Shipped", elemStatus.getAttribute("value"));
-    elemStatus = ElementHelper.FindElement(driver, By.id("orderDate"));
-    assertEquals("2003-03-01", elemStatus.getAttribute("value"));
+    WebElement elemStatus = ElementHelper.FindElement( DRIVER, By.id( "status" ) );
+    assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
+    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "orderDate" ) );
+    assertEquals( "2003-03-01", elemStatus.getAttribute( "value" ) );
     //Check text on table
-    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td"));
-    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[2]"));
-    assertEquals("Shipped", columnOneRowOne);
-    assertEquals("2003", columnTwoRowOne);
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    assertEquals( "Shipped", columnOneRowOne );
+    assertEquals( "2003", columnTwoRowOne );
 
     /*
      * ## Step 3
      */
-    WebElement buttonExport = ElementHelper.FindElement(driver, By.id("export"));
-    assertNotNull(buttonExport);
+    WebElement buttonExport = ElementHelper.FindElement( DRIVER, By.id( "export" ) );
+    assertNotNull( buttonExport );
     try {
       //Delete the existence if exist
-      new File(exportFilePath).delete();
+      new File( EXPORT_PATH ).delete();
 
       //Click to export
       buttonExport.click();
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher.WatchForCreate(downloadDir);
+      DirectoryWatcher.WatchForCreate( DOWNNLOAD_DIR );
 
       //Check if the file really exist
-      File exportFile = new File(exportFilePath);
-      assertTrue(exportFile.exists());
+      File exportFile = new File( EXPORT_PATH );
+      assertTrue( exportFile.exists() );
 
       //Wait for the file to be downloaded totally
-      for (int i = 0; i < 50; i++) { //we only try 50 times == 5000 ms
-        long nSize = FileUtils.sizeOf(exportFile);
+      for ( int i = 0; i < 50; i++ ) { //we only try 50 times == 5000 ms
+        long nSize = FileUtils.sizeOf( exportFile );
         //Since the file always contents the same data, we wait for the expected bytes
-        if (nSize >= 249856) {
+        if ( nSize >= 249856 ) {
           break;
         }
-        Thread.sleep(100);
+        Thread.sleep( 100 );
       }
 
       //Check if the file downloaded is the expected
-      String md5 = DigestUtils.md5Hex(Files.readAllBytes(exportFile.toPath()));
-      assertEquals(md5, "7091d02397d0f5b978f74809ebec34e2");
+      String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
+      assertEquals( md5, "7091d02397d0f5b978f74809ebec34e2" );
 
       //The delete file
       DeleteFile();
 
-    } catch (Exception e) {
-      log.error(e.getMessage());
+    } catch ( Exception e ) {
+      LOG.error( e.getMessage() );
     }
   }
 
@@ -188,15 +188,15 @@ public class CDA121 {
    */
   public static void DeleteFile() {
     try {
-      Files.deleteIfExists(Paths.get(exportFilePath));
-    } catch (Exception e) {
-      log.error(e.getMessage());
+      Files.deleteIfExists( Paths.get( EXPORT_PATH ) );
+    } catch ( Exception e ) {
+      LOG.error( e.getMessage() );
     }
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDA121.class.getSimpleName());
+    LOG.info( "tearDown##" + CDA121.class.getSimpleName() );
     //In case something went wrong we delete the file
     DeleteFile();
   }

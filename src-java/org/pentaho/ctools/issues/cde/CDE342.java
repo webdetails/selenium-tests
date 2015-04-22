@@ -53,23 +53,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE342 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE342.class);
+  private static Logger LOG = LogManager.getLogger( CDE342.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE342.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE342.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -87,55 +87,55 @@ public class CDE342 {
    *    2. Write something where no options should be available
    *    3. Write something where only one option should be available
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CDEDashboard_AutocompleteWorks() {
-    log.info("tc01_CDEDashboard_AutocompleteWorks");
+    LOG.info( "tc01_CDEDashboard_AutocompleteWorks" );
 
     /*
      * ## Step 1
      */
     //Go to Issue sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Wait for Input field
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("col1"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//input[@class='ui-autocomplete-input']"));
-    assertNotNull(element);
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).sendKeys("A");
-    String option1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
-    String option2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));
-    String option3 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li[3]/a"));
-    String option4 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li[4]/a"));
-    String option5 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li[5]/a"));
-    assertEquals("Anna's Decorations, Ltd", option1);
-    assertEquals("Australian Collectors, Co.", option2);
-    assertEquals("Souveniers And Things Co.", option3);
-    assertEquals("Australian Gift Network, Co", option4);
-    assertEquals("Australian Collectables, Ltd", option5);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "col1" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//input[@class='ui-autocomplete-input']" ) );
+    assertNotNull( element );
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "A" );
+    String option1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    String option2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
+    String option3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[3]/a" ) );
+    String option4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[4]/a" ) );
+    String option5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[5]/a" ) );
+    assertEquals( "Anna's Decorations, Ltd", option1 );
+    assertEquals( "Australian Collectors, Co.", option2 );
+    assertEquals( "Souveniers And Things Co.", option3 );
+    assertEquals( "Australian Gift Network, Co", option4 );
+    assertEquals( "Australian Collectables, Ltd", option5 );
 
     /*
      * ## Step 2
      */
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).clear();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).sendKeys("ert");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).clear();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "ert" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
 
     /*
      * ## Step 3
      */
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).clear();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='col1']/input")).sendKeys("Anna");
-    option2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//ul[@id='ui-id-1']/li/a"));
-    assertEquals("Anna's Decorations, Ltd", option2);
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//ul[@id='ui-id-1']/li[2]/a"));
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).clear();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "Anna" );
+    option2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    assertEquals( "Anna's Decorations, Ltd", option2 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE342.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE342.class.getSimpleName() );
   }
 }

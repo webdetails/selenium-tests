@@ -54,23 +54,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDA46 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDA46.class);
+  private static Logger LOG = LogManager.getLogger( CDA46.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDA46.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDA46.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -88,48 +88,48 @@ public class CDA46 {
    *    3. Wait for popup and the assert text on it
    *
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdaFileViewer_OutputInfo() {
-    log.info("tc01_CdaFileViewer_OutputInfo");
+    LOG.info( "tc01_CdaFileViewer_OutputInfo" );
 
     /*
      * ## Step 1
      */
     //Open Sql-Jdbc Sample
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda");
+    DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda" );
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
-    assertNotNull(element);
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
-    select.selectByValue("1");
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
-    assertNotNull(element);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
+    assertNotNull( element );
+    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    select.selectByValue( "1" );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
+    assertNotNull( element );
 
-    ElementHelper.WaitForElementPresence(driver, By.id("outputIndexId"));
-    ElementHelper.FindElement(driver, By.id("outputIndexId")).click();
-    ElementHelper.WaitForElementVisibility(driver, By.xpath("//div[@class='helpButton helpButtonShort']"));
-    ElementHelper.ClickJS(driver, By.xpath("//div[@class='helpButton helpButtonShort']"));
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "outputIndexId" ) );
+    ElementHelper.FindElement( DRIVER, By.id( "outputIndexId" ) ).click();
+    ElementHelper.WaitForElementVisibility( DRIVER, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
 
     /*
      * ## Step 2
      */
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='outputIndexHelp']"));
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='outputIndexHelp']/p"));
-    ElementHelper.WaitForElementPresence(driver, By.xpath("//div[@id='outputIndexHelp']/p[2]"));
-    String p1Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='outputIndexHelp']/p"));
-    String p2Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='outputIndexHelp']/p[2]"));
-    assertEquals("Output Index Id", p1Text);
-    assertEquals("This Id is used to select the desired set of Output Options for the current Data Access.", p2Text);
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='outputIndexHelp']" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='outputIndexHelp']/p" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='outputIndexHelp']/p[2]" ) );
+    String p1Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='outputIndexHelp']/p" ) );
+    String p2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='outputIndexHelp']/p[2]" ) );
+    assertEquals( "Output Index Id", p1Text );
+    assertEquals( "This Id is used to select the desired set of Output Options for the current Data Access.", p2Text );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDA46.class.getSimpleName());
+    LOG.info( "tearDown##" + CDA46.class.getSimpleName() );
   }
 }

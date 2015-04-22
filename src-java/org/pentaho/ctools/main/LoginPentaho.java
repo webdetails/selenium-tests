@@ -47,23 +47,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class LoginPentaho {
   // Instance of the driver (browser emulator)
-  private WebDriver         driver;
+  private WebDriver driver;
   // Instance to be used on wait commands
-  private Wait<WebDriver>   wait;
+  private Wait<WebDriver> wait;
   // The base url to be append the relative url in test
-  private String            baseUrl;
+  private String baseUrl;
   //Log instance
-  private static Logger     log                = LogManager.getLogger(LoginPentaho.class);
+  private static Logger LOG = LogManager.getLogger( LoginPentaho.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(this.driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   @Before
   public void setUp() {
-    log.debug("setUp");
+    LOG.debug( "setUp" );
     this.driver = CToolsTestSuite.getDriver();
     this.wait = CToolsTestSuite.getWait();
     this.baseUrl = CToolsTestSuite.getBaseUrl();
@@ -82,40 +82,40 @@ public class LoginPentaho {
    *    2. Enter user and password.
    *    3. User authenticated, and user name of logged user is displayed.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_Login_SuccessAuthentication() {
-    log.debug("tc1_Login_SuccessAuthentication");
+    LOG.debug( "tc1_Login_SuccessAuthentication" );
     //## Step 1
-    this.driver.get(this.baseUrl + "Login");
+    this.driver.get( this.baseUrl + "Login" );
 
     //Wait for form display
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='login-form-container']/div/h1")));
-    assertEquals("User Console", this.driver.findElement(By.xpath("//div[@id='login-form-container']/div/h1")).getText());
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='login-form-container']/div/h1" ) ) );
+    assertEquals( "User Console", this.driver.findElement( By.xpath( "//div[@id='login-form-container']/div/h1" ) ).getText() );
 
     //## Step 2
     //Wait for all all elements in the form to be visible
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_username")));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_password")));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.btn")));
-    this.driver.findElement(By.id("j_username")).clear();
-    this.driver.findElement(By.id("j_username")).sendKeys("admin");
-    this.driver.findElement(By.id("j_password")).clear();
-    this.driver.findElement(By.id("j_password")).sendKeys("password");
-    this.driver.findElement(By.cssSelector("button.btn")).click();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "j_username" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "j_password" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.cssSelector( "button.btn" ) ) );
+    this.driver.findElement( By.id( "j_username" ) ).clear();
+    this.driver.findElement( By.id( "j_username" ) ).sendKeys( "admin" );
+    this.driver.findElement( By.id( "j_password" ) ).clear();
+    this.driver.findElement( By.id( "j_password" ) ).sendKeys( "password" );
+    this.driver.findElement( By.cssSelector( "button.btn" ) ).click();
 
     //## Step 3
     //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(this.driver, By.xpath("//div[@class='busy-indicator-container waitPopup']"));
+    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    this.wait.until(ExpectedConditions.titleContains("Pentaho User Console"));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")));
-    this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[@id='home.perspective']")));
-    assertNotNull(this.driver.findElement(By.xpath("//iframe[@id='home.perspective']")));
-    assertEquals("Pentaho User Console", this.driver.getTitle());
+    this.wait.until( ExpectedConditions.titleContains( "Pentaho User Console" ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//iframe[@id='home.perspective']" ) ) );
+    assertNotNull( this.driver.findElement( By.xpath( "//iframe[@id='home.perspective']" ) ) );
+    assertEquals( "Pentaho User Console", this.driver.getTitle() );
 
     //Logged as ADMIN user
-    assertEquals("admin", this.driver.findElement(By.xpath("//div[@id='pucUserDropDown']/table/tbody/tr/td/div")).getText());
+    assertEquals( "admin", this.driver.findElement( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ).getText() );
 
     //Go to the Home Perspective [IFRAME]
     //driver.switchTo().frame("home.perspective");
@@ -124,6 +124,6 @@ public class LoginPentaho {
 
   @After
   public void tearDown() {
-    log.debug("tearDown");
+    LOG.debug( "tearDown" );
   }
 }

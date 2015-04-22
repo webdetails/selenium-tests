@@ -52,32 +52,32 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDACacheManager {
   // Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String BASE_URL;
   //Log instance
-  private static Logger          log                = LogManager.getLogger(CDACacheManager.class);
+  private static Logger LOG = LogManager.getLogger( CDACacheManager.class );
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDACacheManager.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDACacheManager.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   @Before
   public void setUpTestCase() {
     //Go to the CDA Cache Manager web page.
-    driver.get(baseUrl + "plugin/cda/api/manageCache");
+    DRIVER.get( BASE_URL + "plugin/cda/api/manageCache" );
   }
 
   /**
@@ -91,28 +91,28 @@ public class CDACacheManager {
    *    1. Check for text 'Queries in cache'
    *    2. Check for button 'Clear Cache'
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_PageContent_CachedQueries() {
-    log.info("tc1_PageContent_CachedQueries");
+    LOG.info( "tc1_PageContent_CachedQueries" );
 
-    wait.until(ExpectedConditions.titleContains("CDA Cache Manager"));
-    assertEquals("CDA Cache Manager", driver.getTitle());
+    WAIT.until( ExpectedConditions.titleContains( "CDA Cache Manager" ) );
+    assertEquals( "CDA Cache Manager", DRIVER.getTitle() );
     //Go to Cached Queries
-    WebElement buttonCachedQueries = ElementHelper.FindElement(driver, By.id("cacheButton"));
-    assertNotNull(buttonCachedQueries);
+    WebElement buttonCachedQueries = ElementHelper.FindElement( DRIVER, By.id( "cacheButton" ) );
+    assertNotNull( buttonCachedQueries );
     buttonCachedQueries.click();
 
     /*
      * ## Step 1
      */
-    String subTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='cachedQueries']/div[3]"));
-    assertEquals("Queries in cache", subTitle);
+    String subTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cachedQueries']/div[3]" ) );
+    assertEquals( "Queries in cache", subTitle );
 
     /*
      * ## Step 2
      */
-    String buttonTextClearCache = ElementHelper.WaitForElementPresentGetText(driver, By.id("clearCacheButton"));
-    assertEquals("Clear Cache", buttonTextClearCache);
+    String buttonTextClearCache = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "clearCacheButton" ) );
+    assertEquals( "Clear Cache", buttonTextClearCache );
   }
 
   /**
@@ -126,46 +126,46 @@ public class CDACacheManager {
    *    1. Press to clear cache
    *    2. Check no query is listed
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc2_ClearCache_AllQueriesWhereRemove() {
-    log.info("tc2_ClearCache_AllQueriesWhereRemove");
+    LOG.info( "tc2_ClearCache_AllQueriesWhereRemove" );
 
     //Go to Cached Queries
-    WebElement buttonCachedQueries = ElementHelper.FindElement(driver, By.id("cacheButton"));
-    assertNotNull(buttonCachedQueries);
+    WebElement buttonCachedQueries = ElementHelper.FindElement( DRIVER, By.id( "cacheButton" ) );
+    assertNotNull( buttonCachedQueries );
     buttonCachedQueries.click();
 
     //Click in clear cache
-    ElementHelper.FindElement(driver, By.id("clearCacheButton")).click();
+    ElementHelper.FindElement( DRIVER, By.id( "clearCacheButton" ) ).click();
 
     /*
      * ## Step 1
      */
     //Wait for pop-up 1
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = DRIVER.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "This will remove ALL items from cache. Are you sure?";
     alert.accept();
-    assertEquals(confirmationMsg, expectedCnfText);
+    assertEquals( confirmationMsg, expectedCnfText );
 
     //Wait for pop-up 2
-    wait.until(ExpectedConditions.alertIsPresent());
-    alert = driver.switchTo().alert();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    alert = DRIVER.switchTo().alert();
     confirmationMsg = alert.getText();
     expectedCnfText = "items have been removed from cache";
     alert.accept();
-    assertThat("The displayed popup: " + confirmationMsg, confirmationMsg, CoreMatchers.containsString(expectedCnfText));
+    assertThat( "The displayed popup: " + confirmationMsg, confirmationMsg, CoreMatchers.containsString( expectedCnfText ) );
 
     /*
      * ## Step 2
      */
-    String textEmptyCache = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='cachedQueriesOverviewLines']/div"));
-    assertEquals("Cache is empty.", textEmptyCache);
+    String textEmptyCache = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cachedQueriesOverviewLines']/div" ) );
+    assertEquals( "Cache is empty.", textEmptyCache );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDACacheManager.class.getSimpleName());
+    LOG.info( "tearDown##" + CDACacheManager.class.getSimpleName() );
   }
 }

@@ -53,23 +53,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE149 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE149.class);
+  private static Logger LOG = LogManager.getLogger( CDE149.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE149.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE149.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -88,87 +88,87 @@ public class CDE149 {
    *    3. Assert parameter popup and buttons. Add 15 parameters
    *    4. Assert that last three parameter's fields do not intercept any of the buttons
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdeDashboard_ParametersNotOverlap() {
-    log.info("tc01_CdeDashboard_ParametersNotOverlap");
+    LOG.info( "tc01_CdeDashboard_ParametersNotOverlap" );
 
     /*
      * ## Step 1
      */
 
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Assert elements on page and go to Datasources Panel
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("previewButton"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='layoutPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "previewButton" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
 
     /*
      * ## Step 2
      */
     //Add MDX query element and click Parameters
-    ElementHelper.ClickElementInvisible(driver, By.xpath("//a[@title='denormalizedMdx over mondrianJdbc']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@title='Parameters to be sent to the xaction']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[9]/td[2]"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[9]/td[2]"));
+    ElementHelper.ClickElementInvisible( DRIVER, By.xpath( "//a[@title='denormalizedMdx over mondrianJdbc']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//td[@title='Parameters to be sent to the xaction']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[9]/td[2]" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[9]/td[2]" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("popupbox"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("ParameterList"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("popup_state0_buttonOk"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("popup_state0_buttonCancel"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//input[@class='ParameterListAddButton']"));
-    assertNotNull(element);
-    for (int i = 1; i < 16; i++) {
-      ElementHelper.Click(driver, By.xpath("//input[@class='ParameterListAddButton']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popupbox" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "ParameterList" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state0_buttonOk" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state0_buttonCancel" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//input[@class='ParameterListAddButton']" ) );
+    assertNotNull( element );
+    for ( int i = 1; i < 16; i++ ) {
+      ElementHelper.Click( DRIVER, By.xpath( "//input[@class='ParameterListAddButton']" ) );
     }
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[16]/td/div/input"));
-    assertNotNull(element);
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[16]/td[4]/div/input"), By.id("popup_state0_buttonCancel")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[16]/td[5]/input"), By.id("popup_state0_buttonCancel")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[16]/td[4]/div/input"), By.id("popup_state0_buttonOk")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[16]/td[5]/input"), By.id("popup_state0_buttonOk")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[16]/td[4]/div/input"), By.xpath("//input[@class='ParameterListAddButton']")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[16]/td[5]/input"), By.xpath("//input[@class='ParameterListAddButton']")));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[15]/td/div/input"));
-    assertNotNull(element);
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[15]/td[4]/div/input"), By.id("popup_state0_buttonCancel")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[15]/td[5]/input"), By.id("popup_state0_buttonCancel")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[15]/td[4]/div/input"), By.id("popup_state0_buttonOk")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[15]/td[5]/input"), By.id("popup_state0_buttonOk")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[15]/td[4]/div/input"), By.xpath("//input[@class='ParameterListAddButton']")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[15]/td[5]/input"), By.xpath("//input[@class='ParameterListAddButton']")));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[16]/td/div/input"));
-    assertNotNull(element);
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[14]/td[4]/div/input"), By.id("popup_state0_buttonCancel")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[14]/td[5]/input"), By.id("popup_state0_buttonCancel")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[14]/td[4]/div/input"), By.id("popup_state0_buttonOk")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[14]/td[5]/input"), By.id("popup_state0_buttonOk")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[14]/td[4]/div/input"), By.xpath("//input[@class='ParameterListAddButton']")));
-    assertTrue(ElementHelper.ElementsNotOverlap(driver, By.xpath("//div[@class='ParameterList']/table/tbody/tr[14]/td[5]/input"), By.xpath("//input[@class='ParameterListAddButton']")));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td/div/input" ) );
+    assertNotNull( element );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[4]/div/input" ), By.id( "popup_state0_buttonCancel" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[5]/input" ), By.id( "popup_state0_buttonCancel" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[4]/div/input" ), By.id( "popup_state0_buttonOk" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[5]/input" ), By.id( "popup_state0_buttonOk" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[4]/div/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[5]/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td/div/input" ) );
+    assertNotNull( element );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[4]/div/input" ), By.id( "popup_state0_buttonCancel" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[5]/input" ), By.id( "popup_state0_buttonCancel" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[4]/div/input" ), By.id( "popup_state0_buttonOk" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[5]/input" ), By.id( "popup_state0_buttonOk" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[4]/div/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[5]/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td/div/input" ) );
+    assertNotNull( element );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[4]/div/input" ), By.id( "popup_state0_buttonCancel" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[5]/input" ), By.id( "popup_state0_buttonCancel" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[4]/div/input" ), By.id( "popup_state0_buttonOk" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[5]/input" ), By.id( "popup_state0_buttonOk" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[4]/div/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
+    assertTrue( ElementHelper.ElementsNotOverlap( DRIVER, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[5]/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE149.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE149.class.getSimpleName() );
   }
 }

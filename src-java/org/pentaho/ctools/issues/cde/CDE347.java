@@ -53,23 +53,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE347 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE347.class);
+  private static Logger LOG = LogManager.getLogger( CDE347.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE347.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE347.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -87,65 +87,65 @@ public class CDE347 {
    *    2. Click preview button and focus on fancybox
    *    3. Assert charts are rendered correctly
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_BulletChartTestCase_ChartsRendered() {
-    log.info("tc01_BulletChartTestCase_ChartsRendered");
+    LOG.info( "tc01_BulletChartTestCase_ChartsRendered" );
 
     /*
      * ## Step 1
      */
     //Go to Bullet Chart sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Wait for buttons: Layout. Components, Datasources AND Preview
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@title='Datasources Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@title='Components Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@title='Layout Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@title='Preview your Dashboard']"));
-    assertNotNull(element);
-    String c1r1Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr/td"));
-    String c2r1Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr/td[2]"));
-    String c1r4Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[6]/td"));
-    String c2r4Text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//tr[6]/td[2]"));
-    assertEquals("Resource", c1r1Text);
-    assertEquals("template", c2r1Text);
-    assertEquals("Row", c1r4Text);
-    assertEquals("obj1", c2r4Text);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Datasources Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Components Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Layout Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Preview your Dashboard']" ) );
+    assertNotNull( element );
+    String c1r1Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr/td" ) );
+    String c2r1Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr/td[2]" ) );
+    String c1r4Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[6]/td" ) );
+    String c2r4Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[6]/td[2]" ) );
+    assertEquals( "Resource", c1r1Text );
+    assertEquals( "template", c2r1Text );
+    assertEquals( "Row", c1r4Text );
+    assertEquals( "obj1", c2r4Text );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@title='Preview your Dashboard']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.id("previewButton"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("fancybox-content"));
-    assertNotNull(element);
-    WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    WebDriver frame = driver.switchTo().frame(elementFrame);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Preview your Dashboard']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.id( "previewButton" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fancybox-content" ) );
+    assertNotNull( element );
+    WebElement elementFrame = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
+    WebDriver frame = DRIVER.switchTo().frame( elementFrame );
 
     /*
      * ## Step 3
      */
-    ElementHelper.WaitForElementInvisibility(frame, By.xpath("//div[@class='blockUI blockOverlay']"));
-    WebElement obj1 = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='obj1protovis']//*[local-name()='path']"));
-    WebElement obj2 = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='obj1protovis']//*[local-name()='path'][2]"));
-    WebElement obj3 = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='obj2protovis']//*[local-name()='g'][2]/*[local-name()='rect']"));
-    WebElement obj4 = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='obj3protovis']//*[local-name()='path']"));
-    WebElement obj5 = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='obj4protovis']//*[local-name()='path']"));
-    WebElement obj6 = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='obj5protovis']//*[local-name()='path']"));
-    assertNotNull(obj1);
-    assertNotNull(obj2);
-    assertNotNull(obj3);
-    assertNotNull(obj4);
-    assertNotNull(obj5);
-    assertNotNull(obj6);
+    ElementHelper.WaitForElementInvisibility( frame, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement obj1 = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='obj1protovis']//*[local-name()='path']" ) );
+    WebElement obj2 = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='obj1protovis']//*[local-name()='path'][2]" ) );
+    WebElement obj3 = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='obj2protovis']//*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    WebElement obj4 = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='obj3protovis']//*[local-name()='path']" ) );
+    WebElement obj5 = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='obj4protovis']//*[local-name()='path']" ) );
+    WebElement obj6 = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='obj5protovis']//*[local-name()='path']" ) );
+    assertNotNull( obj1 );
+    assertNotNull( obj2 );
+    assertNotNull( obj3 );
+    assertNotNull( obj4 );
+    assertNotNull( obj5 );
+    assertNotNull( obj6 );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE347.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE347.class.getSimpleName() );
   }
 }
