@@ -38,6 +38,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -155,8 +156,9 @@ public class DateRangeInputComponent {
      * ## Step 1
      */
     ElementHelper.Click( driver, By.id( "myInput" ) );
-    ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.Click( driver, By.xpath( "(//a[text()='Today'])[2]" ) );
+    //ElementHelper.Click( driver, By.id( "myInput2" ) );
+    //ElementHelper.FindElement( driver, By.xpath( "(//a[text()='Today'])[2]" ) ).sendKeys(Keys.ENTER);
+	ElementHelper.FindElement( driver, By.linkText( "Today" ) ).sendKeys(Keys.ENTER);
 
     /*
      * ## Step 2
@@ -192,8 +194,9 @@ public class DateRangeInputComponent {
      * ## Step 1
      */
     ElementHelper.Click( driver, By.id( "myInput" ) );
-    ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.Click( driver, By.xpath( "(//a[text()='Last 7 days'])[2]" ) );
+    //ElementHelper.Click( driver, By.id( "myInput2" ) );
+    //ElementHelper.Click( driver, By.xpath( "(//a[text()='Last 7 days'])[2]" ) );
+	ElementHelper.FindElement( driver, By.linkText( "Last 7 days" ) ).sendKeys(Keys.ENTER);
 
     /*
      * ## Step 2
@@ -231,9 +234,10 @@ public class DateRangeInputComponent {
      * ## Step 1
      */
     ElementHelper.Click( driver, By.id( "myInput" ) );
-    ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.Click( driver, By.xpath( "(//a[text()='Month to date'])[2]" ) );
-
+    //Add this line to run in Win8: ElementHelper.Click( driver, By.id( "myInput2" ) );
+    //ElementHelper.Click( driver, By.xpath( "(//a[text()='Month to date'])[2]" ) );
+	ElementHelper.FindElement( driver, By.linkText( "Month to date" ) ).sendKeys(Keys.ENTER);
+	
     /*
      * ## Step 2
      */
@@ -270,8 +274,9 @@ public class DateRangeInputComponent {
      * ## Step 1
      */
     ElementHelper.Click( driver, By.id( "myInput" ) );
-    ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.Click( driver, By.xpath( "(//a[text()='Year to date'])[2]" ) );
+    //ElementHelper.Click( driver, By.id( "myInput2" ) );
+    //ElementHelper.Click( driver, By.xpath( "(//a[text()='Year to date'])[2]" ) );
+	ElementHelper.FindElement( driver, By.linkText( "Year to date" ) ).sendKeys(Keys.ENTER);
 
     /*
      * ## Step 2
@@ -310,8 +315,9 @@ public class DateRangeInputComponent {
      * ## Step 1
      */
     ElementHelper.Click( driver, By.id( "myInput" ) );
-    ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.Click( driver, By.xpath( "(//a[text()='The previous Month'])[2]" ) );
+    //ElementHelper.Click( driver, By.id( "myInput2" ) );
+    //ElementHelper.Click( driver, By.xpath( "(//a[text()='The previous Month'])[2]" ) );
+	ElementHelper.FindElement( driver, By.linkText( "The previous Month" ) ).sendKeys(Keys.ENTER);
 
     /*
      * ## Step 2
@@ -354,8 +360,9 @@ public class DateRangeInputComponent {
      * ## Step 1
      */
     ElementHelper.Click( driver, By.id( "myInput" ) );
-    ElementHelper.Click( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ) );
-    ElementHelper.Click( driver, By.xpath( "(//button[contains(text(),'Cancel')])[7]" ) );
+    //ElementHelper.Click( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ) );
+	ElementHelper.FindElement( driver, By.linkText( "All Dates Before" ) ).sendKeys(Keys.ENTER);
+	ElementHelper.Click( driver, By.xpath( "(//button[contains(text(),'Cancel')])[7]" ) );
     ElementHelper.WaitForElementInvisibility( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ), 5 );
     WebElement dataPickerDisable = ElementHelper.WaitForElementPresence( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ), 1 );
     assertFalse( dataPickerDisable.isDisplayed() );
@@ -365,9 +372,11 @@ public class DateRangeInputComponent {
      */
     //Click in day 29
     ElementHelper.Click( driver, By.id( "myInput" ) );
-    ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.Click( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ) );
-    ElementHelper.Click( driver, By.xpath( "(//a[contains(text(),'29')])[4]" ) );
+    //ElementHelper.Click( driver, By.id( "myInput2" ) );
+    //ElementHelper.Click( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ) );
+    //ElementHelper.Click( driver, By.xpath( "(//a[contains(text(),'29')])[4]" ) );
+	ElementHelper.FindElement( driver, By.linkText( "All Dates Before" ) ).sendKeys(Keys.ENTER);
+	ElementHelper.FindElement( driver, By.linkText( "29" ) ).sendKeys(Keys.ENTER);
 
     /*
      * ## Step 3
