@@ -45,21 +45,21 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class DialChart {
   // Instance of the driver (browser emulator)
-  private WebDriver         driver;
+  private WebDriver driver;
   // The base url to be append the relative url in test
-  private String            baseUrl;
+  private String baseUrl;
   //Log instance
-  private static Logger     log                = LogManager.getLogger(DialChart.class);
+  private static Logger LOG = LogManager.getLogger( DialChart.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(this.driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   @Before
   public void setUp() {
-    log.debug("setUp");
+    LOG.debug( "setUp" );
     this.driver = CToolsTestSuite.getDriver();
     this.baseUrl = CToolsTestSuite.getBaseUrl();
   }
@@ -74,31 +74,31 @@ public class DialChart {
    * Steps:
    *    1. Open the dial chart.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_DialChart_ImageRendered() {
-    log.debug("tc1_DialChart_ImageRendered");
+    LOG.debug( "tc1_DialChart_ImageRendered" );
     /*
      * ## Step 1
      */
-    this.driver.get(this.baseUrl + "plugin/cgg/api/services/draw?script=/public/dial.js&outputType=svg&paramvalue=35 ");
+    this.driver.get( this.baseUrl + "plugin/cgg/api/services/draw?script=/public/dial.js&outputType=svg&paramvalue=35 " );
 
     //Check Pointer
-    WebElement elemPointer = ElementHelper.FindElement(this.driver, By.xpath("//*[local-name()='g'][6]/*[local-name()='polygon'][@id='ponteiro' and @transform='rotate(62.99999999999999,300,275)']"));
-    WebElement basePointers = ElementHelper.FindElement(this.driver, By.xpath("//*[local-name()='g'][6]/*[local-name()='path'][@id='base_ponteiro']"));
-    assertNotNull(elemPointer);
-    assertNotNull(basePointers);
+    WebElement elemPointer = ElementHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='polygon'][@id='ponteiro' and @transform='rotate(62.99999999999999,300,275)']" ) );
+    WebElement basePointers = ElementHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='path'][@id='base_ponteiro']" ) );
+    assertNotNull( elemPointer );
+    assertNotNull( basePointers );
 
     //Check Colors
-    WebElement elemColor1 = ElementHelper.FindElement(this.driver, By.xpath("//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][@fill='rgb(255,0,0)']"));
-    WebElement elemColor2 = ElementHelper.FindElement(this.driver, By.xpath("//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][2][@fill='rgb(255,255,0)']"));
-    WebElement elemColor3 = ElementHelper.FindElement(this.driver, By.xpath("//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][3][@fill='rgb(0,128,0)']"));
-    assertNotNull(elemColor1);
-    assertNotNull(elemColor2);
-    assertNotNull(elemColor3);
+    WebElement elemColor1 = ElementHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][@fill='rgb(255,0,0)']" ) );
+    WebElement elemColor2 = ElementHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][2][@fill='rgb(255,255,0)']" ) );
+    WebElement elemColor3 = ElementHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][3][@fill='rgb(0,128,0)']" ) );
+    assertNotNull( elemColor1 );
+    assertNotNull( elemColor2 );
+    assertNotNull( elemColor3 );
   }
 
   @After
   public void tearDown() {
-    log.debug("tearDown");
+    LOG.debug( "tearDown" );
   }
 }

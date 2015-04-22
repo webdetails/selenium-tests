@@ -55,41 +55,40 @@ import org.pentaho.ctools.issues.cde.CDE446;
 import org.pentaho.ctools.issues.cde.CDE452;
 import org.pentaho.ctools.issues.cde.CDE453;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-  //Issues CDE
-  CDE149.class,
-  CDE269.class,
-  CDE270.class,
-  CDE286.class,
-  CDE342.class,
-  CDE347.class,
-  CDE367.class,
-  CDE384.class,
-  CDE388.class,
-  CDE392.class,
-  CDE394.class,
-  CDE395.class,
-  CDE396.class,
-  CDE399.class,
-  CDE402.class,
-  CDE403.class,
-  CDE404.class,
-  CDE406.class,
-  CDE407.class,
-  CDE408.class,
-  CDE410.class,
-  CDE412.class,
-  CDE413.class,
-  CDE417.class,
-  CDE425.class,
-  CDE432.class,
-  CDE438.class,
-  CDE439.class,
-  CDE446.class,
-  CDE452.class,
-  CDE453.class
-})
-public class SuiteCDE{
+@RunWith( Suite.class )
+@Suite.SuiteClasses( {
+    //Issues CDE
+    CDE149.class,
+    CDE269.class,
+    CDE270.class,
+    CDE286.class,
+    CDE342.class,
+    CDE347.class,
+    CDE367.class,
+    CDE384.class,
+    CDE388.class,
+    CDE392.class,
+    CDE394.class,
+    CDE395.class,
+    CDE396.class,
+    CDE399.class,
+    CDE402.class,
+    CDE403.class,
+    CDE404.class,
+    CDE406.class,
+    CDE407.class,
+    CDE408.class,
+    CDE410.class,
+    CDE412.class,
+    CDE413.class,
+    CDE417.class,
+    CDE425.class,
+    CDE432.class,
+    CDE438.class,
+    CDE439.class,
+    CDE446.class,
+    CDE452.class,
+    CDE453.class } )
+public class SuiteCDE {
   //It runs the Suite.SuiteClasses
 }

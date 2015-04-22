@@ -38,10 +38,10 @@ import org.apache.logging.log4j.Logger;
 public class DirectoryWatcher {
 
   //Log instance
-  private static final Logger log = LogManager.getLogger(DirectoryWatcher.class);
+  private static final Logger LOG = LogManager.getLogger( DirectoryWatcher.class );
 
-  public static boolean WatchForCreate(final String path) {
-    return WatchForCreate(path, 15);
+  public static boolean WatchForCreate( final String path ) {
+    return WatchForCreate( path, 15 );
   }
 
   /**
@@ -53,17 +53,17 @@ public class DirectoryWatcher {
    * @return true  - file was created in dir
    *         false - otherwise
    */
-  public static boolean WatchForCreate(final String path, final long timeout) {
+  public static boolean WatchForCreate( final String path, final long timeout ) {
     boolean bFileCreated = false;
 
     try {
       class RunnableObject implements Runnable {
 
-        private final Logger log = LogManager.getLogger(RunnableObject.class);
+        private final Logger log = LogManager.getLogger( RunnableObject.class );
 
-        private boolean      isFileCreated;
+        private boolean isFileCreated;
 
-        public RunnableObject(final boolean isFileCreated) {
+        public RunnableObject( final boolean isFileCreated ) {
           this.isFileCreated = isFileCreated;
         }
 
@@ -75,59 +75,56 @@ public class DirectoryWatcher {
         public void run() {
           try {
             final WatchService watcher = FileSystems.getDefault().newWatchService();
-            final Path dir = Paths.get(path);
-            dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE);
+            final Path dir = Paths.get( path );
+            dir.register( watcher, StandardWatchEventKinds.ENTRY_CREATE );
 
-            while (!this.isFileCreated) {
+            while ( !this.isFileCreated ) {
               WatchKey key;
               try {
                 key = watcher.take();
-              }
-              catch (final InterruptedException ex) {
-                this.log.error(ex.getMessage());
+              } catch ( final InterruptedException ex ) {
+                this.log.error( ex.getMessage() );
                 break;
               }
 
-              for (final WatchEvent<?> event: key.pollEvents()) {
+              for ( final WatchEvent<?> event : key.pollEvents() ) {
                 final WatchEvent.Kind<?> kind = event.kind();
 
-                if (kind == StandardWatchEventKinds.OVERFLOW) {
+                if ( kind == StandardWatchEventKinds.OVERFLOW ) {
                   continue;
                 }
 
-                @SuppressWarnings("unchecked")
+                @SuppressWarnings( "unchecked" )
                 final WatchEvent<Path> ev = (WatchEvent<Path>) event;
                 final Path fileName = ev.context();
 
-                this.log.info(kind.name() + ": " + fileName);
-                if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
+                this.log.info( kind.name() + ": " + fileName );
+                if ( kind == StandardWatchEventKinds.ENTRY_CREATE ) {
                   this.isFileCreated = true;
-                  this.log.info("The file was created: " + fileName);
+                  this.log.info( "The file was created: " + fileName );
                 }
               }
 
               final boolean valid = key.reset();
-              if (!valid) {
+              if ( !valid ) {
                 break;
               }
             }
-          }
-          catch (final Exception e) {
-            this.log.error(e.getMessage());
+          } catch ( final Exception e ) {
+            this.log.error( e.getMessage() );
           }
         }
       }
 
-      final RunnableObject r = new RunnableObject(bFileCreated);
+      final RunnableObject r = new RunnableObject( bFileCreated );
 
       final ExecutorService executor = Executors.newSingleThreadExecutor();
-      executor.submit(r).get(timeout + 2, TimeUnit.SECONDS);
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       executor.shutdown();
       bFileCreated = r.getValue();
 
-    }
-    catch (final Exception e) {
-      log.error(e.getMessage());
+    } catch ( final Exception e ) {
+      LOG.error( e.getMessage() );
     }
 
     return bFileCreated;

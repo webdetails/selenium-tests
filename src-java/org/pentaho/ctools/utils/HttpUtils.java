@@ -40,9 +40,9 @@ import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 
-public class HttpUtils{
+public class HttpUtils {
 
-  private static Logger log = LogManager.getLogger(CDACacheManager.class);
+  private static Logger LOG = LogManager.getLogger( CDACacheManager.class );
 
   /**
    * This method shall return the status of HTTP request.
@@ -51,17 +51,16 @@ public class HttpUtils{
    * @return
    * @throws Exception
    */
-  public static int GetHttpStatus(String url) {
+  public static int GetHttpStatus( String url ) {
     int nHttpStatus = HttpStatus.SC_EXPECTATION_FAILED;
 
     try {
-      URL oUrl = new URL(url);
+      URL oUrl = new URL( url );
       URLConnection uc = oUrl.openConnection();
       uc.connect();
-      nHttpStatus = ((HttpURLConnection) uc).getResponseCode();
-    }
-    catch(Exception ex) {
-      log.error(ex.getMessage());
+      nHttpStatus = ( (HttpURLConnection) uc ).getResponseCode();
+    } catch ( Exception ex ) {
+      LOG.error( ex.getMessage() );
     }
 
     return nHttpStatus;
@@ -75,24 +74,22 @@ public class HttpUtils{
    * @return
    * @throws Exception
    */
-  public static boolean GetHttpError(WebDriver driver, String ErrorNumber) {
+  public static boolean GetHttpError( WebDriver driver, String ErrorNumber ) {
     Boolean errorFound = false;
-    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 1, TimeUnit.SECONDS );
 
-    for(int i = 0; i < 1000; i ++ ) {
+    for ( int i = 0; i < 1000; i++ ) {
       try {
-        driver.findElement(By.id("web_" + ErrorNumber));
+        driver.findElement( By.id( "web_" + ErrorNumber ) );
         errorFound = true;
-      }
-      catch(NoSuchElementException s) {
-        log.error("NoSuchElement - got it.");
+      } catch ( NoSuchElementException s ) {
+        LOG.error( "NoSuchElement - got it." );
         break;
-      }
-      catch(StaleElementReferenceException s) {
-        log.error("Stale - got it.");
+      } catch ( StaleElementReferenceException s ) {
+        LOG.error( "Stale - got it." );
       }
     }
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
     return errorFound;
   }
 
@@ -102,18 +99,16 @@ public class HttpUtils{
    * @param url
    * @return
    */
-  public static int GetResponseCode(String url) {
+  public static int GetResponseCode( String url ) {
     int nResponseCode = HttpStatus.SC_BAD_REQUEST;
 
     try {
       WebClient client = new WebClient();
-      nResponseCode = client.getPage(url).getWebResponse().getStatusCode();
-    }
-    catch(IOException ioe) {
-      log.error("IOException");
-    }
-    catch(FailingHttpStatusCodeException fhscr) {
-      log.warn("FailingHttpStatusCodeException");
+      nResponseCode = client.getPage( url ).getWebResponse().getStatusCode();
+    } catch ( IOException ioe ) {
+      LOG.error( "IOException" );
+    } catch ( FailingHttpStatusCodeException fhscr ) {
+      LOG.warn( "FailingHttpStatusCodeException" );
       nResponseCode = fhscr.getStatusCode();
     }
 
@@ -129,21 +124,19 @@ public class HttpUtils{
    * @return
    * @throws Exception
    */
-  public static int GetResponseCode(String url, String username, String password) {
+  public static int GetResponseCode( String url, String username, String password ) {
     int nResponseCode = HttpStatus.SC_BAD_REQUEST;
 
     try {
       //set proxy username and password
       WebClient client = new WebClient();
       final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) client.getCredentialsProvider();
-      credentialsProvider.addCredentials(username, password);
-      nResponseCode = client.getPage(url).getWebResponse().getStatusCode();
-    }
-    catch(IOException ioe) {
-      log.error("IOException");
-    }
-    catch(FailingHttpStatusCodeException fhscr) {
-      log.warn("FailingHttpStatusCodeException");
+      credentialsProvider.addCredentials( username, password );
+      nResponseCode = client.getPage( url ).getWebResponse().getStatusCode();
+    } catch ( IOException ioe ) {
+      LOG.error( "IOException" );
+    } catch ( FailingHttpStatusCodeException fhscr ) {
+      LOG.warn( "FailingHttpStatusCodeException" );
       nResponseCode = fhscr.getStatusCode();
     }
     return nResponseCode;

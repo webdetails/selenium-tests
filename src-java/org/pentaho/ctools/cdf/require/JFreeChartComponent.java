@@ -57,30 +57,30 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class JFreeChartComponent {
 
   //Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String BASE_URL;
   //Log instance
-  private static Logger          log                = LogManager.getLogger(JFreeChartComponent.class);
+  private static Logger LOG = LogManager.getLogger( JFreeChartComponent.class );
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    log.info("setUp##" + JFreeChartComponent.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + JFreeChartComponent.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
     init();
@@ -93,10 +93,10 @@ public class JFreeChartComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/jFreeChartComponent
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A22-JFreeChartComponent%3Ajfreechart_component.xcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A22-JFreeChartComponent%3Ajfreechart_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -109,17 +109,17 @@ public class JFreeChartComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
-    log.info("tc1_PageContent_DisplayTitle");
+    LOG.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("jFreeChartComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "jFreeChartComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -132,24 +132,24 @@ public class JFreeChartComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
-    log.info("tc2_ReloadSample_SampleReadyToUse");
+    LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
-    assertEquals(1, nSampleObject);
+    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
+    assertEquals( 1, nSampleObject );
   }
 
   /**
@@ -166,72 +166,72 @@ public class JFreeChartComponent {
    *    3. Open Bar Chart
    *    4. Click on chart
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc3_ClickOnChart_AlertDisplayed() {
-    log.info("tc3_ClickOnChart_AlertDisplayed");
+    LOG.info( "tc3_ClickOnChart_AlertDisplayed" );
     String title = "";
 
-    String firstChart = ElementHelper.GetAttribute(driver, By.xpath("//img[@id='sampleObjectimage']"), "src");
+    String firstChart = ElementHelper.GetAttribute( DRIVER, By.xpath( "//img[@id='sampleObjectimage']" ), "src" );
 
-    ActionsHelper actsHelper = new ActionsHelper(driver);
-    actsHelper.MouseOver(By.xpath("//div[contains(text(),'Details')]"));
-    title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
-    assertTrue(title.equals("Top 10 Customers"));
-    ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
+    ActionsHelper actsHelper = new ActionsHelper( DRIVER );
+    actsHelper.MouseOver( By.xpath( "//div[contains(text(),'Details')]" ) );
+    title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "sampleObjectcaptiontitle" ) );
+    assertTrue( title.equals( "Top 10 Customers" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='sampleObjectcaptionchartType']" ) );
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check if the generated image is different from previews, is not something static
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']")));
-    String secondChart = ElementHelper.GetAttribute(driver, By.xpath("//img[@id='sampleObjectimage']"), "src");
-    assertNotEquals(firstChart, secondChart);
+    assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//img[@id='sampleObjectimage']" ) ) );
+    String secondChart = ElementHelper.GetAttribute( DRIVER, By.xpath( "//img[@id='sampleObjectimage']" ), "src" );
+    assertNotEquals( firstChart, secondChart );
 
     // ## Step 2
     //Click in 'Dragon Souveniers, Ltd.'
-    ElementHelper.Click(driver, By.xpath("//map[@id='sampleObjectimageMap']/area[4]"));
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
+    ElementHelper.Click( DRIVER, By.xpath( "//map[@id='sampleObjectimageMap']/area[4]" ) );
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = DRIVER.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
-    assertEquals("You clicked Dragon Souveniers, Ltd.", confirmationMsg);
+    assertEquals( "You clicked Dragon Souveniers, Ltd.", confirmationMsg );
     //Click in 'Mini Gifts Distributors Ltd'
-    ElementHelper.FindElement(driver, By.xpath("//map[@id='sampleObjectimageMap']/area[9]")).click();
-    wait.until(ExpectedConditions.alertIsPresent());
-    alert = driver.switchTo().alert();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//map[@id='sampleObjectimageMap']/area[9]" ) ).click();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    alert = DRIVER.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
-    assertEquals("You clicked Mini Gifts Distributors Ltd.", confirmationMsg);
+    assertEquals( "You clicked Mini Gifts Distributors Ltd.", confirmationMsg );
 
     // ## Step 3
-    Actions acts2 = new Actions(driver);
-    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    Actions acts2 = new Actions( DRIVER );
+    acts2.moveToElement( ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(text(),'Details')]" ) ) );
     acts2.perform();
     //Open the Pie Chart
-    title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
-    assertTrue(title.equals("Top 10 Customers"));
-    ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
+    title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "sampleObjectcaptiontitle" ) );
+    assertTrue( title.equals( "Top 10 Customers" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='sampleObjectcaptionchartType']" ) );
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check if the generated image is different from previews, is not something static
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//img[@id='sampleObjectimage']")));
-    String thirdChart = ElementHelper.GetAttribute(driver, By.xpath("//img[@id='sampleObjectimage']"), "src");
-    assertNotEquals(firstChart, thirdChart);
-    assertNotEquals(secondChart, thirdChart);
+    assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//img[@id='sampleObjectimage']" ) ) );
+    String thirdChart = ElementHelper.GetAttribute( DRIVER, By.xpath( "//img[@id='sampleObjectimage']" ), "src" );
+    assertNotEquals( firstChart, thirdChart );
+    assertNotEquals( secondChart, thirdChart );
 
     // ## Step 3
     //Click in 'Australian Collectors, Co.'
-    ElementHelper.FindElement(driver, By.xpath("//map[@id='sampleObjectimageMap']/area[8]")).click();
-    wait.until(ExpectedConditions.alertIsPresent());
-    alert = driver.switchTo().alert();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//map[@id='sampleObjectimageMap']/area[8]" ) ).click();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    alert = DRIVER.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
-    assertEquals("You clicked Australian Collectors, Co.", confirmationMsg);
+    assertEquals( "You clicked Australian Collectors, Co.", confirmationMsg );
     //Click in 'Down Under Souveniers, Inc'
-    ElementHelper.FindElement(driver, By.xpath("//map[@id='sampleObjectimageMap']/area[5]")).click();
-    wait.until(ExpectedConditions.alertIsPresent());
-    alert = driver.switchTo().alert();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//map[@id='sampleObjectimageMap']/area[5]" ) ).click();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    alert = DRIVER.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
-    assertEquals("You clicked Down Under Souveniers, Inc", confirmationMsg);
+    assertEquals( "You clicked Down Under Souveniers, Inc", confirmationMsg );
   }
 
   /**
@@ -246,93 +246,93 @@ public class JFreeChartComponent {
    *    1. Zoom on Bar Chart
    *    2. Zoom on Pie Chart
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc4_PreviewChart_NewWindowDisplayed() {
-    log.info("tc4_PreviewChart_NewWindowDisplayed");
+    LOG.info( "tc4_PreviewChart_NewWindowDisplayed" );
     String title = "";
     // ## Step 1
     //Check bar title
-    Actions acts2 = new Actions(driver);
-    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    Actions acts2 = new Actions( DRIVER );
+    acts2.moveToElement( ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(text(),'Details')]" ) ) );
     acts2.perform();
-    title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
-    assertTrue(title.equals("Top 10 Customers"));
+    title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "sampleObjectcaptiontitle" ) );
+    assertTrue( title.equals( "Top 10 Customers" ) );
     //Click in Zoom
-    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    acts2.moveToElement( ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(text(),'Details')]" ) ) );
     acts2.perform();
-    ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']"));
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='sampleObjectcaptionzoom']" ) );
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     WebDriver popup = null;
-    String parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
-    Set<String> setWindows = driver.getWindowHandles();
+    String parentWindowHandle = DRIVER.getWindowHandle(); // save the current window handle.
+    Set<String> setWindows = DRIVER.getWindowHandles();
     //wait for popup render
-    ElementHelper.WaitForNewWindow(driver);
-    setWindows = driver.getWindowHandles();
+    ElementHelper.WaitForNewWindow( DRIVER );
+    setWindows = DRIVER.getWindowHandles();
     //Get popup id
     Iterator<String> windowIterator = setWindows.iterator();
-    while (windowIterator.hasNext()) {
+    while ( windowIterator.hasNext() ) {
       String windowHandle = windowIterator.next();
-      popup = driver.switchTo().window(windowHandle);
-      if (popup.getTitle().isEmpty()) {
+      popup = DRIVER.switchTo().window( windowHandle );
+      if ( popup.getTitle().isEmpty() ) {
         break;
       }
     }
 
-    String attrSrcPopup = ElementHelper.GetAttribute(popup, By.cssSelector("img"), "src");
-    assertEquals(HttpStatus.SC_OK, HttpUtils.GetResponseCode(attrSrcPopup));
+    String attrSrcPopup = ElementHelper.GetAttribute( popup, By.cssSelector( "img" ), "src" );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetResponseCode( attrSrcPopup ) );
     popup.close();
 
-    driver = driver.switchTo().window(parentWindowHandle);
-    assertTrue(driver.getWindowHandles().size() == 1);
-    driver.switchTo().defaultContent();
+    DRIVER = DRIVER.switchTo().window( parentWindowHandle );
+    assertTrue( DRIVER.getWindowHandles().size() == 1 );
+    DRIVER.switchTo().defaultContent();
 
     // ## Step 2
     //Change to pie chart
-    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    acts2.moveToElement( ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(text(),'Details')]" ) ) );
     acts2.perform();
-    ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionchartType']"));
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='sampleObjectcaptionchartType']" ) );
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check bar title
-    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    acts2.moveToElement( ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(text(),'Details')]" ) ) );
     acts2.perform();
-    title = ElementHelper.WaitForElementPresentGetText(driver, By.id("sampleObjectcaptiontitle"));
-    assertTrue(title.equals("Top 10 Customers"));
+    title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "sampleObjectcaptiontitle" ) );
+    assertTrue( title.equals( "Top 10 Customers" ) );
     //Zoom
-    acts2.moveToElement(ElementHelper.FindElement(driver, By.xpath("//div[contains(text(),'Details')]")));
+    acts2.moveToElement( ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(text(),'Details')]" ) ) );
     acts2.perform();
-    ElementHelper.Click(driver, By.xpath("//div[@id='sampleObjectcaptionzoom']"));
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='sampleObjectcaptionzoom']" ) );
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
-    setWindows = driver.getWindowHandles();
+    parentWindowHandle = DRIVER.getWindowHandle(); // save the current window handle.
+    setWindows = DRIVER.getWindowHandles();
     //wait for popup render
-    ElementHelper.WaitForNewWindow(driver);
-    setWindows = driver.getWindowHandles();
+    ElementHelper.WaitForNewWindow( DRIVER );
+    setWindows = DRIVER.getWindowHandles();
     //Get popup id
     windowIterator = setWindows.iterator();
-    while (windowIterator.hasNext()) {
+    while ( windowIterator.hasNext() ) {
       String windowHandle = windowIterator.next();
-      popup = driver.switchTo().window(windowHandle);
-      if (popup.getTitle().isEmpty()) {
+      popup = DRIVER.switchTo().window( windowHandle );
+      if ( popup.getTitle().isEmpty() ) {
         break;
       }
     }
 
-    attrSrcPopup = ElementHelper.GetAttribute(popup, By.cssSelector("img"), "src");
-    assertEquals(HttpStatus.SC_OK, HttpUtils.GetResponseCode(attrSrcPopup));
+    attrSrcPopup = ElementHelper.GetAttribute( popup, By.cssSelector( "img" ), "src" );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetResponseCode( attrSrcPopup ) );
 
     popup.close();
-    driver.switchTo().window(parentWindowHandle);
-    assertTrue(driver.getWindowHandles().size() == 1);
+    DRIVER.switchTo().window( parentWindowHandle );
+    assertTrue( DRIVER.getWindowHandles().size() == 1 );
   }
 
   @AfterClass
   public static void tearDown() {
-    log.debug("tearDown");
+    LOG.debug( "tearDown" );
 
   }
 }

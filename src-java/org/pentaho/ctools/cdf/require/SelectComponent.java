@@ -49,29 +49,29 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class SelectComponent {
   //Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String BASE_URL;
   //Log instance
-  private static Logger          log                = LogManager.getLogger(SelectComponent.class);
+  private static Logger LOG = LogManager.getLogger( SelectComponent.class );
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    log.info("setUp##" + SelectComponent.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + SelectComponent.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
     init();
@@ -84,10 +84,10 @@ public class SelectComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/SelectComponent
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A16-SelectComponent%3Aselect_component.xcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A16-SelectComponent%3Aselect_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -100,18 +100,18 @@ public class SelectComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
-    log.info("tc1_PageContent_DisplayTitle");
+    LOG.info( "tc1_PageContent_DisplayTitle" );
 
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("SelectComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "SelectComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -124,25 +124,25 @@ public class SelectComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
-    log.info("tc2_ReloadSample_SampleReadyToUse");
+    LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
 
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
-    assertEquals(1, nSampleObject);
+    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
+    assertEquals( 1, nSampleObject );
   }
 
   /**
@@ -156,31 +156,31 @@ public class SelectComponent {
    *    1. Select Dusseldorf
    *    2. Select Lisbon
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc3_SelectEachItem_AlertDisplayed() {
-    log.info("tc3_SelectEachItem_AlertDisplayed");
+    LOG.info( "tc3_SelectEachItem_AlertDisplayed" );
 
     // ## Step 1
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("select")));
-    Select list = new Select(ElementHelper.FindElement(driver, By.cssSelector("select")));
-    list.selectByValue("2");
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.cssSelector( "select" ) ) );
+    Select list = new Select( ElementHelper.FindElement( DRIVER, By.cssSelector( "select" ) ) );
+    list.selectByValue( "2" );
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = DRIVER.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
-    assertEquals("You chose: 2", confirmationMsg);
+    assertEquals( "You chose: 2", confirmationMsg );
 
     // ## Step 2
-    list.selectByValue("1");
-    wait.until(ExpectedConditions.alertIsPresent());
-    alert = driver.switchTo().alert();
+    list.selectByValue( "1" );
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    alert = DRIVER.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
-    assertEquals("You chose: 1", confirmationMsg);
+    assertEquals( "You chose: 1", confirmationMsg );
   }
 
   @AfterClass
   public static void tearDown() {
-    log.info("tearDown##" + SelectComponent.class.getSimpleName());
+    LOG.info( "tearDown##" + SelectComponent.class.getSimpleName() );
   }
 }

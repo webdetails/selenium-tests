@@ -27,13 +27,12 @@ import org.pentaho.ctools.cda.CDACacheManager;
 import org.pentaho.ctools.cda.CDADatasourceTest;
 import org.pentaho.ctools.cda.MondrianJNDI;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-  //CDA
-  CDADatasourceTest.class,
-  MondrianJNDI.class,
-  CDACacheManager.class
-})
-public class SuiteCDA{
+@RunWith( Suite.class )
+@Suite.SuiteClasses( {
+    //CDA
+    CDADatasourceTest.class,
+    MondrianJNDI.class,
+    CDACacheManager.class } )
+public class SuiteCDA {
   //It runs the Suite.Classes
 }

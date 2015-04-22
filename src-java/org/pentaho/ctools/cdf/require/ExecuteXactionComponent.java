@@ -48,29 +48,29 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ExecuteXactionComponent{
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
+public class ExecuteXactionComponent {
 
   //Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String BASE_URL;
   //Log instance
-  private static Logger          log                = LogManager.getLogger(ExecuteXactionComponent.class);
+  private static Logger LOG = LogManager.getLogger( ExecuteXactionComponent.class );
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
     init();
@@ -83,10 +83,10 @@ public class ExecuteXactionComponent{
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/ExecuteXactionComponent
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A76-ExecuteXactionComponent%3Aexecute_xaction_component.xcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A76-ExecuteXactionComponent%3Aexecute_xaction_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -99,16 +99,16 @@ public class ExecuteXactionComponent{
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("ExecuteXactionComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "ExecuteXactionComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -121,23 +121,23 @@ public class ExecuteXactionComponent{
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    final int nSampleObject = driver.findElements(By.id("sampleObject")).size();
-    assertEquals(1, nSampleObject);
+    final int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
+    assertEquals( 1, nSampleObject );
   }
 
   /**
@@ -153,49 +153,48 @@ public class ExecuteXactionComponent{
    *    2. Check if a chart was generated
    *    3. Check the http request for the image generated
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc3_PressToGenerateChart_ChartIsDisplayed() {
     // ## Step 1
-    final String buttonName = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//button/span"));
-    assertEquals("Execute XAction", buttonName);
+    final String buttonName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//button/span" ) );
+    assertEquals( "Execute XAction", buttonName );
     //Click in button
-    ElementHelper.FindElement(driver, By.xpath("//button")).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//button" ) ).click();
 
     // ## Step 1
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("fancybox-content")));
-    driver.switchTo().frame("fancybox-frame");
+    WAIT.until( ExpectedConditions.presenceOfElementLocated( By.id( "fancybox-content" ) ) );
+    DRIVER.switchTo().frame( "fancybox-frame" );
     //Check the title
-    final String chartTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table/tbody/tr/td"));
-    assertEquals("Action Successful", chartTitle);
+    final String chartTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table/tbody/tr/td" ) );
+    assertEquals( "Action Successful", chartTitle );
     //Check for the displayed image
-    final WebElement xactionElement = ElementHelper.FindElement(driver, By.cssSelector("img"));
-    assertNotNull(xactionElement);
+    final WebElement xactionElement = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) );
+    assertNotNull( xactionElement );
 
-    final String attrSrc = xactionElement.getAttribute("src");
-    final String attrWidth = xactionElement.getAttribute("width");
-    final String attrHeight = xactionElement.getAttribute("height");
+    final String attrSrc = xactionElement.getAttribute( "src" );
+    final String attrWidth = xactionElement.getAttribute( "width" );
+    final String attrHeight = xactionElement.getAttribute( "height" );
 
-    assertTrue(attrSrc.startsWith(baseUrl + "getImage?image=tmp_chart_admin-"));
-    assertEquals(attrWidth, "500");
-    assertEquals(attrHeight, "600");
+    assertTrue( attrSrc.startsWith( BASE_URL + "getImage?image=tmp_chart_admin-" ) );
+    assertEquals( attrWidth, "500" );
+    assertEquals( attrHeight, "600" );
 
     // ## Step 3
     try {
-      final URL url = new URL(attrSrc);
+      final URL url = new URL( attrSrc );
       final URLConnection connection = url.openConnection();
       connection.connect();
 
-      assertEquals(HttpStatus.SC_OK, ((HttpURLConnection) connection).getResponseCode());
-    }
-    catch (final Exception ex) {
-      log.error(ex.getMessage());
+      assertEquals( HttpStatus.SC_OK, ( (HttpURLConnection) connection ).getResponseCode() );
+    } catch ( final Exception ex ) {
+      LOG.error( ex.getMessage() );
     }
 
     //Close pop-up window
-    driver.switchTo().defaultContent();
-    ElementHelper.FindElement(driver, By.id("fancybox-close")).click();
-    ElementHelper.WaitForElementInvisibility(driver, By.id("fancybox-content"));
-    assertNotNull(ElementHelper.FindElement(driver, By.xpath("//button")));
+    DRIVER.switchTo().defaultContent();
+    ElementHelper.FindElement( DRIVER, By.id( "fancybox-close" ) ).click();
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "fancybox-content" ) );
+    assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//button" ) ) );
   }
 
   @AfterClass

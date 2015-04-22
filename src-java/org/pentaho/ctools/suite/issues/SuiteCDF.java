@@ -34,20 +34,19 @@ import org.pentaho.ctools.issues.cdf.CDF469;
 import org.pentaho.ctools.issues.cdf.CDF474;
 import org.pentaho.ctools.issues.cdf.CDF486;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-  //Issues CDF
-  CDF149.class,
-  CDF379.class,
-  CDF406.class,
-  CDF424.class,
-  CDF430.class,
-  CDF435.class,
-  CDF442.class,
-  CDF469.class,
-  CDF474.class,
-  CDF486.class
-})
+@RunWith( Suite.class )
+@Suite.SuiteClasses( {
+    //Issues CDF
+    CDF149.class,
+    CDF379.class,
+    CDF406.class,
+    CDF424.class,
+    CDF430.class,
+    CDF435.class,
+    CDF442.class,
+    CDF469.class,
+    CDF474.class,
+    CDF486.class } )
 public class SuiteCDF {
   //It runs the SuiteCDF
 }

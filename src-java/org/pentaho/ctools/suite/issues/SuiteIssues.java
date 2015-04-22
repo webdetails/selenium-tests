@@ -24,18 +24,14 @@ package org.pentaho.ctools.suite.issues;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-  //Issues CDA
-  SuiteCDA.class,
-
-  //Issues CDE
-  SuiteCDE.class,
-
-  //Issues CDF
-  SuiteCDF.class,
-
-})
+@RunWith( Suite.class )
+@Suite.SuiteClasses( {
+    //Issues CDA
+    SuiteCDA.class,
+    //Issues CDE
+    SuiteCDE.class,
+    //Issues CDF
+    SuiteCDF.class } )
 public class SuiteIssues {
   //It runs the Suite.SuiteClasses
 }
