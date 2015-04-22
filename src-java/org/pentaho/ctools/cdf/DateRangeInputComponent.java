@@ -23,6 +23,7 @@
 package org.pentaho.ctools.cdf;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
@@ -37,10 +38,8 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -57,14 +56,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class DateRangeInputComponent {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver driver;
   // Instance to be used on wait commands
   private static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String baseUrl;
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule( driver );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( driver );
 
   /**
    * Shall initialized the test before run each test case.
@@ -95,11 +94,11 @@ public class DateRangeInputComponent {
   /**
    * ############################### Test Case 1 ###############################
    *
-   * Test Case Name: 
-   *    Validate Page Contents 
-   * Description: 
-   *    Here we want to validate the page contents. 
-   * Steps: 
+   * Test Case Name:
+   *    Validate Page Contents
+   * Description:
+   *    Here we want to validate the page contents.
+   * Steps:
    *    1. Check the widget's title.
    */
   @Test( timeout = 60000 )
@@ -117,11 +116,11 @@ public class DateRangeInputComponent {
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: 
-   *    Reload Sample 
-   * Description: 
-   *    Reload the sample (not refresh page). 
-   * Steps: 
+   * Test Case Name:
+   *    Reload Sample
+   * Description:
+   *    Reload the sample (not refresh page).
+   * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test( timeout = 60000 )
@@ -141,32 +140,35 @@ public class DateRangeInputComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: 
-   *    Set Date Range Today 
-   * Description: 
-   *    When click on Today option an alert is displayed with today date in 
+   * Test Case Name:
+   *    Set Date Range Today
+   * Description:
+   *    When click on Today option an alert is displayed with today date in
    *    range interval.
-   * Steps: 
+   * Steps:
    *    1. Click in Today option
    *    2. Check for Alert
    */
   @Test( timeout = 60000 )
   public void tc3_Today_DateIsSetSuccessful() {
-    //## Step 1
-    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
-    new Actions( driver ).click( elemInput ).build().perform();
-    wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "(//a[contains(text(),'Today')])[2]" ) ) );
-    ElementHelper.FindElement( driver, By.linkText( "Today" ) ).click();
+    /*
+     * ## Step 1
+     */
+    ElementHelper.Click( driver, By.id( "myInput" ) );
+    ElementHelper.Click( driver, By.id( "myInput2" ) );
+    ElementHelper.Click( driver, By.xpath( "(//a[text()='Today'])[2]" ) );
 
-    //## Step 2
-    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
-    final Date dNow = new Date();
-    final String strToday = sdf.format( dNow );
+    /*
+     * ## Step 2
+     */
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+    Date dNow = new Date();
+    String strToday = sdf.format( dNow );
 
     wait.until( ExpectedConditions.alertIsPresent() );
-    final Alert alert = driver.switchTo().alert();
-    final String confirmationMsg = alert.getText();
-    final String expectedCnfText = "You chose from " + strToday + " to " + strToday;
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + strToday + " to " + strToday;
     alert.accept();
 
     assertEquals( confirmationMsg, expectedCnfText );
@@ -184,28 +186,28 @@ public class DateRangeInputComponent {
    *    1. Click in Last 7 Days option
    *    2. Check for Alert
    */
+  @Test( timeout = 60000 )
   public void tc4_LastSevenDays_DateIsSetSuccessful() {
-    this.tc2_ReloadSample_SampleReadyToUse();
-    //## Step 1
-    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
-    new Actions( driver ).click( elemInput ).build().perform();
-    wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "(//a[contains(text(),'Last 7 days')])[3]" ) ) );
-    //ElementHelper.FindElement(driver, By.xpath("(//a[contains(text(),'Today')])[2]")).click();
-    ElementHelper.FindElement( driver, By.linkText( "Last 7 days" ) ).click();
-    //The next operation is a TRICK, in order to raise an alert
-    //elemInput.click();
+    /*
+     * ## Step 1
+     */
+    ElementHelper.Click( driver, By.id( "myInput" ) );
+    ElementHelper.Click( driver, By.id( "myInput2" ) );
+    ElementHelper.Click( driver, By.xpath( "(//a[text()='Last 7 days'])[2]" ) );
 
-    //## Step 2
-    final Calendar c = Calendar.getInstance();
+    /*
+     * ## Step 2
+     */
+    Calendar c = Calendar.getInstance();
     c.add( Calendar.DAY_OF_MONTH, -7 );
-    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
-    final Date dNow = new Date();
-    final String strToday = sdf.format( dNow );
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+    Date dNow = new Date();
+    String strToday = sdf.format( dNow );
 
     wait.until( ExpectedConditions.alertIsPresent() );
-    final Alert alert = driver.switchTo().alert();
-    final String confirmationMsg = alert.getText();
-    final String expectedCnfText = "You chose from " + sdf.format( c.getTime() ) + " to " + strToday;
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + sdf.format( c.getTime() ) + " to " + strToday;
     alert.accept();
 
     assertEquals( confirmationMsg, expectedCnfText );
@@ -223,26 +225,28 @@ public class DateRangeInputComponent {
    *    1. Click in Month to date option
    *    2. Check for Alert
    */
+  @Test( timeout = 60000 )
   public void tc5_MonthToDate_DateIsSetSuccessful() {
-    this.tc2_ReloadSample_SampleReadyToUse();
-    //## Step 1
-    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
-    elemInput.click();
-    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'Month to date')])[4]" ) ).sendKeys( Keys.ENTER );
-    //The next operation is a TRICK, in order to raise an alert
-    elemInput.click();
+    /*
+     * ## Step 1
+     */
+    ElementHelper.Click( driver, By.id( "myInput" ) );
+    ElementHelper.Click( driver, By.id( "myInput2" ) );
+    ElementHelper.Click( driver, By.xpath( "(//a[text()='Month to date'])[2]" ) );
 
-    //## Step 2
-    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
-    final SimpleDateFormat sdfMonth = new SimpleDateFormat( "yyyy-MM" );
-    final Date dNow = new Date();
-    final String strToday = sdf.format( dNow );
-    final String strCurrentMonth = sdfMonth.format( dNow ) + "-01";
+    /*
+     * ## Step 2
+     */
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+    SimpleDateFormat sdfMonth = new SimpleDateFormat( "yyyy-MM" );
+    Date dNow = new Date();
+    String strToday = sdf.format( dNow );
+    String strCurrentMonth = sdfMonth.format( dNow ) + "-01";
 
     wait.until( ExpectedConditions.alertIsPresent() );
-    final Alert alert = driver.switchTo().alert();
-    final String confirmationMsg = alert.getText();
-    final String expectedCnfText = "You chose from " + strCurrentMonth + " to " + strToday;
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + strCurrentMonth + " to " + strToday;
     alert.accept();
 
     assertEquals( confirmationMsg, expectedCnfText );
@@ -260,26 +264,28 @@ public class DateRangeInputComponent {
    *    1. Click in Year to date option
    *    2. Check for Alert
    */
+  @Test( timeout = 60000 )
   public void tc6_YearToDate_DateIsSetSuccessful() {
-    this.tc2_ReloadSample_SampleReadyToUse();
-    //## Step 1
-    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
-    elemInput.click();
-    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'Year to date')])[5]" ) ).sendKeys( Keys.ENTER );
-    //The next operation is a TRICK, in order to raise an alert
-    elemInput.click();
+    /*
+     * ## Step 1
+     */
+    ElementHelper.Click( driver, By.id( "myInput" ) );
+    ElementHelper.Click( driver, By.id( "myInput2" ) );
+    ElementHelper.Click( driver, By.xpath( "(//a[text()='Year to date'])[2]" ) );
 
-    //## Step 2
-    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
-    final SimpleDateFormat sdfYear = new SimpleDateFormat( "yyyy" );
-    final Date dNow = new Date();
-    final String strToday = sdf.format( dNow );
-    final String strBeginYear = sdfYear.format( dNow ) + "-01-01";
+    /*
+     * ## Step 2
+     */
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+    SimpleDateFormat sdfYear = new SimpleDateFormat( "yyyy" );
+    Date dNow = new Date();
+    String strToday = sdf.format( dNow );
+    String strBeginYear = sdfYear.format( dNow ) + "-01-01";
 
     wait.until( ExpectedConditions.alertIsPresent() );
-    final Alert alert = driver.switchTo().alert();
-    final String confirmationMsg = alert.getText();
-    final String expectedCnfText = "You chose from " + strBeginYear + " to " + strToday;
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + strBeginYear + " to " + strToday;
     alert.accept();
 
     assertEquals( confirmationMsg, expectedCnfText );
@@ -298,30 +304,32 @@ public class DateRangeInputComponent {
    *    1. Click in The Previous Month option
    *    2. Check for Alert
    */
+  @Test( timeout = 60000 )
   public void tc7_ThePreviousMonth_DateIsSetSuccessful() {
-    this.tc2_ReloadSample_SampleReadyToUse();
-    //## Step 1
-    final WebElement elemInput = ElementHelper.FindElement( driver, By.id( "myInput" ) );
-    elemInput.click();
-    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'The previous Month')])[6]" ) ).sendKeys( Keys.ENTER );
-    //The next operation is a TRICK, in order to raise an alert
-    elemInput.click();
+    /*
+     * ## Step 1
+     */
+    ElementHelper.Click( driver, By.id( "myInput" ) );
+    ElementHelper.Click( driver, By.id( "myInput2" ) );
+    ElementHelper.Click( driver, By.xpath( "(//a[text()='The previous Month'])[2]" ) );
 
-    //## Step 2
-    final Calendar c = Calendar.getInstance();
+    /*
+     * ## Step 2
+     */
+    Calendar c = Calendar.getInstance();
     c.add( Calendar.MONTH, -1 );
-    final SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM" );
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM" );
 
     String strLastMonthEndDay = sdf.format( c.getTime() );
-    final String strLastMonthStartDay = sdf.format( c.getTime() ) + "-01";
+    String strLastMonthStartDay = sdf.format( c.getTime() ) + "-01";
     c.add( Calendar.MONTH, 1 );
     c.add( Calendar.DAY_OF_MONTH, c.get( Calendar.DAY_OF_MONTH ) * -1 );
     strLastMonthEndDay += "-" + c.get( Calendar.DAY_OF_MONTH );
 
     wait.until( ExpectedConditions.alertIsPresent() );
-    final Alert alert = driver.switchTo().alert();
-    final String confirmationMsg = alert.getText();
-    final String expectedCnfText = "You chose from " + strLastMonthStartDay + " to " + strLastMonthEndDay;
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "You chose from " + strLastMonthStartDay + " to " + strLastMonthEndDay;
     alert.accept();
 
     assertEquals( confirmationMsg, expectedCnfText );
@@ -333,62 +341,43 @@ public class DateRangeInputComponent {
    * Test Case Name:
    *    Set Date Range Today
    * Description:
-   *    When click on Today option an alert is displayed with today date in
-   *    range interval.
+   *    When click on All Dates Before option an alert is displayed with an 
+   *    interval starting from '2014-04-22'  to the selected date.
    * Steps:
    *    1. Click in Today option and then Cancel
    *    2. Click in Today option and then Done
    *    3. Check for Alert
    */
-  public void tc8_CancelAllDatesAfterDone_DateIsCancelAndThenSetSuccessful() {
-    this.tc2_ReloadSample_SampleReadyToUse();
-    //## Step 1
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).click();
-    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'All Dates Before')])[7]" ) ).sendKeys( Keys.ENTER );
-    //The next operation is a TRICK, in order to raise an alert
-    //ElementHelper.FindElement(driver, By.id("myInput")).click();
-
-    /*System.out.println("Size: " + driver.findElements(By.xpath("(//button[contains(text(),'Cancel')])[7]")).size());//27
-    System.out.println("Size: " + driver.findElements(By.xpath("(//button[contains(text(),'Cancel')][2])[7]")).size());//6
-    System.out.println("Size: " + driver.findElements(By.xpath("(//button[contains(text(),'Cancel')][3])[7]")).size());//5
-    System.out.println("Size: " + driver.findElements(By.xpath("(//button[contains(text(),'Cancel')][4])[7]")).size());//4
-    System.out.println("Size: " + driver.findElements(By.xpath("(//button[contains(text(),'Cancel')][5])[7]")).size());//3
-    System.out.println("Size: " + driver.findElements(By.xpath("(//button[contains(text(),'Cancel')][6])[7]")).size());//2
+  @Test( timeout = 60000 )
+  public void tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful() {
+    /*
+     * ## Step 1
      */
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "(//button[contains(text(),'Cancel')])[7]" ) ) );
-    driver.findElement( By.xpath( "(//button[contains(text(),'Cancel')])[7]" ) ).click();
-    //WebElement elemButtonCancel = ElementHelper.FindElement(driver, By.xpath("(//button[starts-with(@class,'btnCancel')])[7]"));
-    //assertNotNull(elemButtonCancel);
-    //elemButtonCancel.click();
+    ElementHelper.Click( driver, By.id( "myInput" ) );
+    ElementHelper.Click( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ) );
+    ElementHelper.Click( driver, By.xpath( "(//button[contains(text(),'Cancel')])[7]" ) );
+    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ), 5 );
+    WebElement dataPickerDisable = ElementHelper.WaitForElementPresence( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ), 1 );
+    assertFalse( dataPickerDisable.isDisplayed() );
 
-    //## Step 2
+    /*
+     * ## Step 2
+     */
     //Click in day 29
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).click();
-    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'All Dates Before')])[8]" ) ).sendKeys( Keys.ENTER );
-    ElementHelper.FindElement( driver, By.xpath( "(//a[contains(text(),'29')])[2]" ) ).sendKeys( Keys.ENTER );
+    ElementHelper.Click( driver, By.id( "myInput" ) );
+    ElementHelper.Click( driver, By.id( "myInput2" ) );
+    ElementHelper.Click( driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ) );
+    ElementHelper.Click( driver, By.xpath( "(//a[contains(text(),'29')])[4]" ) );
 
+    /*
+     * ## Step 3
+     */
     wait.until( ExpectedConditions.alertIsPresent() );
-    final Alert alert = driver.switchTo().alert();
-    final String confirmationMsg = alert.getText();
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
     alert.accept();
 
-    assertEquals( confirmationMsg, "" );
-  }
-
-  /**
-   * ############################### Test Case 9 ###############################
-   *
-   * Test Case Name:
-   *    Set Date Range Today
-   * Description:
-   *    When click on Today option an alert is displayed with today date in
-   *    range interval.
-   * Steps:
-   *    1. Click in Today option
-   *    2. Check for Alert
-   */
-  public void tc9_CancelDateRangeDone_DateIsCancelAndThenSetSuccessful() {
-    //TODO
+    assertEquals( "You chose from 2014-04-22 to 2014-09-29", confirmationMsg );
   }
 
   @AfterClass
