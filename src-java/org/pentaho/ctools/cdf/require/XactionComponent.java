@@ -50,23 +50,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class XactionComponent {
 
   //Instance of the driver (browser emulator)
-  private static WebDriver driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String baseUrl;
+  private static String BASE_URL;
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( driver );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
     init();
@@ -79,10 +79,11 @@ public class XactionComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/XactionComponent
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A10-XactionComponent%3Axaction_component.xcdf/generatedContent" );
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A10-XactionComponent%3Axaction_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -98,13 +99,13 @@ public class XactionComponent {
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "XactionComponent", ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "XactionComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -121,18 +122,19 @@ public class XactionComponent {
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -151,14 +153,14 @@ public class XactionComponent {
   @Test( timeout = 60000 )
   public void tc3_GenerateChart_ChartIsDisplayed() {
     // ## Step 1
-    WebElement xactionElement = ElementHelper.FindElement( driver, By.cssSelector( "img" ) );
+    WebElement xactionElement = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) );
     assertNotNull( xactionElement );
 
-    String attrSrc = ElementHelper.FindElement( driver, By.cssSelector( "img" ) ).getAttribute( "src" );
-    String attrWidth = ElementHelper.FindElement( driver, By.cssSelector( "img" ) ).getAttribute( "width" );
-    String attrHeight = ElementHelper.FindElement( driver, By.cssSelector( "img" ) ).getAttribute( "height" );
+    String attrSrc = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "src" );
+    String attrWidth = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "width" );
+    String attrHeight = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "height" );
 
-    assertTrue( attrSrc.startsWith( baseUrl + "getImage?image=tmp_chart_admin-" ) );
+    assertTrue( attrSrc.startsWith( BASE_URL + "getImage?image=tmp_chart_admin-" ) );
     assertEquals( attrWidth, "500" );
     assertEquals( attrHeight, "600" );
 
