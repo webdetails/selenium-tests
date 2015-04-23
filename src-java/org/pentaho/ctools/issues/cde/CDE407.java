@@ -53,23 +53,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE407 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE407.class);
+  private static Logger LOG = LogManager.getLogger( CDE407.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE407.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE407.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -88,62 +88,62 @@ public class CDE407 {
    *    3. Wait for Spacer to appear on layout confirm it's highlighted and then click "Duplicate Layout Element" twice
    *    4. Wait for Spacers to appear on layout and then confirm there are three of them
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_NewCdeDashboard_DuplicateSpacers() {
-    log.info("tc01_NewCdeDashboard_DuplicateSpacers");
+    LOG.info( "tc01_NewCdeDashboard_DuplicateSpacers" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@title='Add Row']"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Space']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@title='Add Space']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Space']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='Add Space']" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Duplicate Layout Element']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@title='Duplicate Layout Element']"));
-    ElementHelper.Click(driver, By.xpath("//a[@title='Duplicate Layout Element']"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Duplicate Layout Element']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='Duplicate Layout Element']" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='Duplicate Layout Element']" ) );
 
     /*
      * ## Step 4
      */
-    String tr1tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr/td"));
-    String tr2tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td"));
-    String tr3tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[3]/td"));
-    String tr4tdText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td"));
-    assertEquals("Row", tr1tdText);
-    assertEquals("Space", tr2tdText);
-    assertEquals("Space", tr3tdText);
-    assertEquals("Space", tr4tdText);
+    String tr1tdText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    String tr2tdText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td" ) );
+    String tr3tdText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[3]/td" ) );
+    String tr4tdText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td" ) );
+    assertEquals( "Row", tr1tdText );
+    assertEquals( "Space", tr2tdText );
+    assertEquals( "Space", tr3tdText );
+    assertEquals( "Space", tr4tdText );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE407.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE407.class.getSimpleName() );
   }
 }

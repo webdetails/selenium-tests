@@ -54,23 +54,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE446 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE446.class);
+  private static Logger LOG = LogManager.getLogger( CDE446.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE446.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE446.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -89,47 +89,47 @@ public class CDE446 {
    *    3. Assert data shown is expected
    *
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdeDashboard_KettleDatasourceWorks() {
-    log.info("tc01_CdeDashboard_KettleDatasourceWorks");
+    LOG.info( "tc01_CdeDashboard_KettleDatasourceWorks" );
 
     /*
      * ## Step 1
      */
     //Open created dashboard's cda file
-    driver.get(baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDE/CDE-446/CDE-446.cda");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=/public/Issues/CDE/CDE-446/CDE-446.cda" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dataAccessSelector"));
-    assertNotNull(element);
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("dataAccessSelector")));
-    select.selectByVisibleText("DataAccess ID: kettleTransform");
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
+    assertNotNull( element );
+    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    select.selectByVisibleText( "DataAccess ID: kettleTransform" );
 
     //Wait for buttons: button, Cache This AND Query URL
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='button']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='cachethis']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//button[@id='queryUrl']"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
+    assertNotNull( element );
 
     /*
      * ## Step 2
      */
     //Check text on table
-    String text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr/td[3]"));
-    assertEquals("District Manager", text);
-    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[2]/td[3]"));
-    assertEquals("Senior Sales Rep", text);
-    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[3]/td[3]"));
-    assertEquals("Sales Rep", text);
-    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='contents']/tbody/tr[4]/td[3]"));
-    assertEquals("Account Executive", text);
+    String text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
+    assertEquals( "District Manager", text );
+    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
+    assertEquals( "Senior Sales Rep", text );
+    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
+    assertEquals( "Sales Rep", text );
+    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[4]/td[3]" ) );
+    assertEquals( "Account Executive", text );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE446.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE446.class.getSimpleName() );
   }
 }

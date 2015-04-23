@@ -52,23 +52,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDF379 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDF379.class);
+  private static Logger LOG = LogManager.getLogger( CDF379.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDF379.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDF379.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -84,62 +84,62 @@ public class CDF379 {
    * Steps:
    *    1. Assert chart is displayed correctly
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CCCProperties_DisplayChart() {
-    log.info("tc01_CCCProperties_DisplayChart");
+    LOG.info( "tc01_CCCProperties_DisplayChart" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][5]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][6]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][2]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][3]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][4]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][5]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][6]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='rect']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='rect'][2]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][2]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='rect']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='rect'][2]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='rect'][3]"));
-    assertNotNull(element);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][5]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][6]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][2]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][3]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][4]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][5]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][6]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='rect']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='rect'][2]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][2]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='rect']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='rect'][2]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'RowObject1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='rect'][3]" ) );
+    assertNotNull( element );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDF379.class.getSimpleName());
+    LOG.info( "tearDown##" + CDF379.class.getSimpleName() );
   }
 }

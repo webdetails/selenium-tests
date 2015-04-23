@@ -53,23 +53,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDF486 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDF486.class);
+  private static Logger LOG = LogManager.getLogger( CDF486.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDF486.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDF486.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -86,32 +86,32 @@ public class CDF486 {
    *    2. Open same sample adding clean option to URL and assert position of elements is different
    *
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdfDashboardType_CleanStyle() {
-    log.info("tc01_CdfDashboardType_CleanStyle");
+    LOG.info( "tc01_CdfDashboardType_CleanStyle" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='panelTitle']/div[@class='container']/div[2]"));
-    assertNotNull(element);
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='panelTitle']/div[@class='container']/div[2]" ) );
+    assertNotNull( element );
     int imagex = element.getLocation().x;
     int imagey = element.getLocation().y;
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("pieChart_object"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "pieChart_object" ) );
+    assertNotNull( element );
     element.getLocation();
     element.getLocation();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("barChart_object"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "barChart_object" ) );
+    assertNotNull( element );
     int barChartx = element.getLocation().x;
     int barCharty = element.getLocation().y;
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dialChart_object"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dialChart_object" ) );
+    assertNotNull( element );
     int dialChartx = element.getLocation().x;
     int dialCharty = element.getLocation().y;
 
@@ -119,36 +119,36 @@ public class CDF486 {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent?dashboardType=clean");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent?dashboardType=clean" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='panelTitle']/div[@class='container']/div[2]"));
-    assertNotNull(element);
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='panelTitle']/div[@class='container']/div[2]" ) );
+    assertNotNull( element );
     int imagex1 = element.getLocation().x;
     int imagey1 = element.getLocation().y;
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("pieChart_object"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "pieChart_object" ) );
+    assertNotNull( element );
     element.getLocation();
     element.getLocation();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("barChart_object"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "barChart_object" ) );
+    assertNotNull( element );
     int barChartx1 = element.getLocation().x;
     int barCharty1 = element.getLocation().y;
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("dialChart_object"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dialChart_object" ) );
+    assertNotNull( element );
     int dialChartx1 = element.getLocation().x;
     int dialCharty1 = element.getLocation().y;
-    assertTrue(imagex != imagex1);
-    assertTrue(imagey != imagey1);
-    assertTrue(barChartx != barChartx1);
-    assertTrue(barCharty != barCharty1);
-    assertTrue(dialChartx != dialChartx1);
-    assertTrue(dialCharty != dialCharty1);
+    assertTrue( imagex != imagex1 );
+    assertTrue( imagey != imagey1 );
+    assertTrue( barChartx != barChartx1 );
+    assertTrue( barCharty != barCharty1 );
+    assertTrue( dialChartx != dialChartx1 );
+    assertTrue( dialCharty != dialCharty1 );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDF486.class.getSimpleName());
+    LOG.info( "tearDown##" + CDF486.class.getSimpleName() );
   }
 }

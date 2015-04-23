@@ -54,23 +54,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE394 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE394.class);
+  private static Logger LOG = LogManager.getLogger( CDE394.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE394.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE394.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -88,49 +88,49 @@ public class CDE394 {
    *    2. Get "cx" for rightmost dots
    *    3. Assert "cx" are smaller than chart's width
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_NewCdeDashboard_LineChartContained() {
-    log.info("tc01_NewCdeDashboard_LineChartContained");
+    LOG.info( "tc01_NewCdeDashboard_LineChartContained" );
 
     /*
      * ## Step 1
      */
     //Go to Issue Sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    ElementHelper.WaitForElementVisibility(driver, By.id("column1protovis"));
-    WebElement element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']"));
-    assertNotNull(element);
-    String widthText = element.getAttribute("width");
-    double width = Double.parseDouble(widthText);
+    ElementHelper.WaitForElementVisibility( DRIVER, By.id( "column1protovis" ) );
+    WebElement element = ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    assertNotNull( element );
+    String widthText = element.getAttribute( "width" );
+    double width = Double.parseDouble( widthText );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][14]"));
-    assertNotNull(element);
-    String cx1Text = element.getAttribute("cx");
-    double cx1 = Double.parseDouble(cx1Text);
-    element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='circle'][14]"));
-    assertNotNull(element);
-    String cx2Text = element.getAttribute("cx");
-    double cx2 = Double.parseDouble(cx2Text);
-    element = ElementHelper.FindElement(driver, By.xpath("//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][9]/*[local-name()='circle'][14]"));
-    assertNotNull(element);
-    String cx3Text = element.getAttribute("cx");
-    double cx3 = Double.parseDouble(cx3Text);
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][14]" ) );
+    assertNotNull( element );
+    String cx1Text = element.getAttribute( "cx" );
+    double cx1 = Double.parseDouble( cx1Text );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='circle'][14]" ) );
+    assertNotNull( element );
+    String cx2Text = element.getAttribute( "cx" );
+    double cx2 = Double.parseDouble( cx2Text );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][9]/*[local-name()='circle'][14]" ) );
+    assertNotNull( element );
+    String cx3Text = element.getAttribute( "cx" );
+    double cx3 = Double.parseDouble( cx3Text );
 
     /*
      * ## Step 3
      */
-    assertEquals(width, NumberUtils.max(width, cx1, cx3), NumberUtils.max(width, cx2, cx3));
+    assertEquals( width, NumberUtils.max( width, cx1, cx3 ), NumberUtils.max( width, cx2, cx3 ) );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE394.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE394.class.getSimpleName() );
   }
 }

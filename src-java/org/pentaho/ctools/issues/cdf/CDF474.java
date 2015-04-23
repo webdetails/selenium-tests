@@ -53,23 +53,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDF474 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDF474.class);
+  private static Logger LOG = LogManager.getLogger( CDF474.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDF474.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDF474.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -84,36 +84,36 @@ public class CDF474 {
    * Steps:
    *    1. Open Issue's prepared sample, click to expand drop down and assert it's style
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_SelectComponent_Select2AutoWidth() {
-    log.info("tc01_SelectComponent_Select2AutoWidth");
+    LOG.info( "tc01_SelectComponent_Select2AutoWidth" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/:public:Issues:CDF:CDF-474:CDF-474.wcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/:public:Issues:CDF:CDF-474:CDF-474.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='col1']/div/a/span[2]/b"));
-    assertNotNull(element);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='col1']/div/a/span[2]/b" ) );
+    assertNotNull( element );
     element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("select2-drop"));
-    assertNotNull(element);
-    String text = element.getAttribute("style");
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='col2']/div/a/span[2]/b"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "select2-drop" ) );
+    assertNotNull( element );
+    String text = element.getAttribute( "style" );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='col2']/div/a/span[2]/b" ) );
+    assertNotNull( element );
     element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("select2-drop"));
-    assertNotNull(element);
-    String text1 = element.getAttribute("style");
-    assertTrue(text != text1);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "select2-drop" ) );
+    assertNotNull( element );
+    String text1 = element.getAttribute( "style" );
+    assertTrue( text != text1 );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDF474.class.getSimpleName());
+    LOG.info( "tearDown##" + CDF474.class.getSimpleName() );
   }
 }

@@ -12,36 +12,36 @@
 <tr><td rowspan="1" colspan="3">0003_CGG_Dial</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/pentaho/plugin/cgg/api/services/draw?script=/public/dial.js&amp;outputType=svg&amp;paramvalue=35 </td>
-	<td></td>
+  <td>open</td>
+  <td>/pentaho/plugin/cgg/api/services/draw?script=/public/dial.js&amp;outputType=svg&amp;paramvalue=35 </td>
+  <td></td>
 </tr>
 <!--Assert the pointer-->
 <tr>
-	<td>assertElementPresent</td>
-	<td>//*[local-name()='g'][6]/*[local-name()='polygon'][@id='ponteiro' and @transform='rotate(62.99999999999999,300,275)']</td>
-	<td></td>
+  <td>assertElementPresent</td>
+  <td>//*[local-name()='g'][6]/*[local-name()='polygon'][@id='ponteiro' and @transform='rotate(62.99999999999999,300,275)']</td>
+  <td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//*[local-name()='g'][6]/*[local-name()='path'][@id='base_ponteiro']</td>
-	<td></td>
+  <td>assertElementPresent</td>
+  <td>//*[local-name()='g'][6]/*[local-name()='path'][@id='base_ponteiro']</td>
+  <td></td>
 </tr>
 <!--Assert 'escala cor'-->
 <tr>
-	<td>assertElementPresent</td>
-	<td>//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][@fill='rgb(255,0,0)']</td>
-	<td></td>
+  <td>assertElementPresent</td>
+  <td>//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][@fill='rgb(255,0,0)']</td>
+  <td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][2][@fill='rgb(255,255,0)']</td>
-	<td></td>
+  <td>assertElementPresent</td>
+  <td>//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][2][@fill='rgb(255,255,0)']</td>
+  <td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][3][@fill='rgb(0,128,0)']</td>
-	<td></td>
+  <td>assertElementPresent</td>
+  <td>//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][3][@fill='rgb(0,128,0)']</td>
+  <td></td>
 </tr>
 </tbody></table>
 </body>

@@ -57,23 +57,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE403 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE403.class);
+  private static Logger LOG = LogManager.getLogger( CDE403.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE403.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE403.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -89,69 +89,69 @@ public class CDE403 {
    * Steps:
    *    testtest
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdeDashboard_InputFieldFocus() {
-    log.info("tc01_CdeDashboard_InputFieldFocus");
+    LOG.info( "tc01_CdeDashboard_InputFieldFocus" );
 
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     /*
      * ## Step 1
      */
     //Assert elements on page and go to Datasources Panel
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("previewButton"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='layoutPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "previewButton" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
 
     /*
      * ## Step 2
      */
     //Add MDX query element and click Parameters
-    ElementHelper.ClickElementInvisible(driver, By.xpath("//a[@title='denormalizedMdx over mondrianJdbc']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//td[@title='Query to be executed in the selected datasource']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button"));
+    ElementHelper.ClickElementInvisible( DRIVER, By.xpath( "//a[@title='denormalizedMdx over mondrianJdbc']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//td[@title='Query to be executed in the selected datasource']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("wizardDialogBody"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("wizardEditor"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "wizardDialogBody" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "wizardEditor" ) );
+    assertNotNull( element );
     Robot robot;
     try {
       robot = new Robot();
-      robot.keyPress(KeyEvent.VK_T);
-      robot.keyRelease(KeyEvent.VK_T);
-      robot.keyPress(KeyEvent.VK_E);
-      robot.keyRelease(KeyEvent.VK_E);
-      robot.keyPress(KeyEvent.VK_S);
-      robot.keyRelease(KeyEvent.VK_S);
-      robot.keyPress(KeyEvent.VK_T);
-      robot.keyRelease(KeyEvent.VK_T);
-    } catch (AWTException e) {
+      robot.keyPress( KeyEvent.VK_T );
+      robot.keyRelease( KeyEvent.VK_T );
+      robot.keyPress( KeyEvent.VK_E );
+      robot.keyRelease( KeyEvent.VK_E );
+      robot.keyPress( KeyEvent.VK_S );
+      robot.keyRelease( KeyEvent.VK_S );
+      robot.keyPress( KeyEvent.VK_T );
+      robot.keyRelease( KeyEvent.VK_T );
+    } catch ( AWTException e ) {
       e.printStackTrace();
     }
 
     /*
      * ## Step 4
      */
-    String text = ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div"), "testselect {} ON COLUMNS,");
-    assertEquals("testselect {} ON COLUMNS,", text);
+    String text = ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div" ), "testselect {} ON COLUMNS," );
+    assertEquals( "testselect {} ON COLUMNS,", text );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE403.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE403.class.getSimpleName() );
   }
 }

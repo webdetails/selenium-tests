@@ -54,23 +54,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDF469 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDF469.class);
+  private static Logger LOG = LogManager.getLogger( CDF469.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDF469.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDF469.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -86,43 +86,43 @@ public class CDF469 {
    * Steps:
    *    1. Open created dashboard and assert each legend is shown once and only once.
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CCCProperties_MeasureOnLegend() {
-    log.info("tc01_CCCProperties_MeasureOnLegend");
+    LOG.info( "tc01_CCCProperties_MeasureOnLegend" );
 
     /*
      * ## Step 1
      */
     //Open created dashboard
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-469%3Acdf-469.wcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-469%3Acdf-469.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Assert legends are there once and only once
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']"));
-    assertNotNull(element);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    assertNotNull( element );
     String text = element.getText();
-    assertEquals("London / Count", text);
-    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='text']"), 30));
-    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][2]"), 30));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']"));
-    assertNotNull(element);
+    assertEquals( "London / Count", text );
+    assertTrue( ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='text']" ), 30 ) );
+    assertTrue( ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][2]" ), 30 ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    assertNotNull( element );
     text = element.getText();
-    assertEquals("Paris / Count", text);
-    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]/*[local-name()='text']"), 30));
-    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text'][2]"), 30));
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']"));
-    assertNotNull(element);
+    assertEquals( "Paris / Count", text );
+    assertTrue( ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]/*[local-name()='text']" ), 30 ) );
+    assertTrue( ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text'][2]" ), 30 ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    assertNotNull( element );
     text = element.getText();
-    assertEquals("Lisbon / Count", text);
-    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][3]/*[local-name()='text']"), 30));
-    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text'][2]"), 30));
+    assertEquals( "Lisbon / Count", text );
+    assertTrue( ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][3]/*[local-name()='text']" ), 30 ) );
+    assertTrue( ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[contains(@id,'chartObj')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text'][2]" ), 30 ) );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDF469.class.getSimpleName());
+    LOG.info( "tearDown##" + CDF469.class.getSimpleName() );
   }
 }

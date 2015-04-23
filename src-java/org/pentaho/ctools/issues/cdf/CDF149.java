@@ -57,23 +57,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDF149 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDF149.class);
+  private static Logger LOG = LogManager.getLogger( CDF149.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDF149.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDF149.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -92,114 +92,114 @@ public class CDF149 {
    *    3. Click Preview and assert bars are rendered as percentage of total
    *
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CCCBarChart_ValuesNormalized() {
-    log.info("tc01_CCCBarChart_ValuesNormalized");
+    LOG.info( "tc01_CCCBarChart_ValuesNormalized" );
 
     /*
      * ## Step 1
      */
     //Open CDE Sample
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/wcdf.edit");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/wcdf.edit" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Assert Panel selectors and select Components
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='cdfdd-modes']/div[@title='Datasources Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='cdfdd-modes']/div[@title='Components Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='cdfdd-modes']/div[@title='Layout Panel']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@class='cdfdd-modes']/div[@title='Components Panel']/a"));
-    String text = ElementHelper.GetAttribute(driver, By.xpath("//div[@class='cdfdd-modes']/div[@title='Components Panel']"), "class");
-    assertEquals("panelButton panelButton-active", text);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Datasources Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Layout Panel']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']/a" ) );
+    String text = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ), "class" );
+    assertEquals( "panelButton panelButton-active", text );
 
     //Select Bar Chart
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-components-components']//tr[@id='CHARTS']/td/span"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']//tr[@id='CHARTS']/td/span" ) );
+    assertNotNull( element );
     element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-components-components']//tr[2]/td"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]/td" ) );
+    assertNotNull( element );
     text = element.getText();
-    assertEquals("CCC Bar Chart", text);
+    assertEquals( "CCC Bar Chart", text );
     element.click();
-    text = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='cdfdd-components-components']//tr[2]"), "class");
-    assertEquals("child-of-CHARTS initialized collapsed ui-state-active", text);
+    text = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]" ), "class" );
+    assertEquals( "child-of-CHARTS initialized collapsed ui-state-active", text );
 
     /*
      * ## Step 2
      */
     //Click Advanced Properties
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    assertNotNull( element );
     element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[@title='Priority for component execution component. Lower values have higher priority']"));
-    assertNotNull(element);
-    text = ElementHelper.GetAttribute(driver, By.xpath("//div[@id='cdfdd-components-properties']/div/div/div[3]"), "class");
-    assertEquals("advancedProperties propertiesSelected", text);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Priority for component execution component. Lower values have higher priority']" ) );
+    assertNotNull( element );
+    text = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class" );
+    assertEquals( "advancedProperties propertiesSelected", text );
 
     //Find Values Normalized property and set it's value to True
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
+    assertNotNull( element );
     element.click();
     Robot robot;
     try {
       robot = new Robot();
-      robot.keyPress(KeyEvent.VK_T);
-      robot.keyRelease(KeyEvent.VK_T);
-      robot.keyPress(KeyEvent.VK_R);
-      robot.keyRelease(KeyEvent.VK_R);
-      robot.keyPress(KeyEvent.VK_U);
-      robot.keyRelease(KeyEvent.VK_U);
-      robot.keyPress(KeyEvent.VK_E);
-      robot.keyRelease(KeyEvent.VK_E);
-      robot.keyPress(KeyEvent.VK_ENTER);
-      robot.keyRelease(KeyEvent.VK_ENTER);
-    } catch (AWTException e) {
+      robot.keyPress( KeyEvent.VK_T );
+      robot.keyRelease( KeyEvent.VK_T );
+      robot.keyPress( KeyEvent.VK_R );
+      robot.keyRelease( KeyEvent.VK_R );
+      robot.keyPress( KeyEvent.VK_U );
+      robot.keyRelease( KeyEvent.VK_U );
+      robot.keyPress( KeyEvent.VK_E );
+      robot.keyRelease( KeyEvent.VK_E );
+      robot.keyPress( KeyEvent.VK_ENTER );
+      robot.keyRelease( KeyEvent.VK_ENTER );
+    } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    text = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]"));
-    assertEquals("True", text);
+    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
+    assertEquals( "True", text );
 
     /*
      * ## Step 3
      */
     //Click Preview button
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("previewButton"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "previewButton" ) );
+    assertNotNull( element );
     element.click();
 
     //Wait for fancybox and assert chart is rendered and height legends are to 100
-    WebElement elementFrame = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    WebDriver frame = driver.switchTo().frame(elementFrame);
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.id("chartprotovis"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][2]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][3]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][1]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][4]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][5]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][6]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][7]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(frame, By.xpath("//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']//*[local-name()='text'][text()='100']"));
-    assertNotNull(element);
+    WebElement elementFrame = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
+    WebDriver frame = DRIVER.switchTo().frame( elementFrame );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.id( "chartprotovis" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][2]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][3]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][1]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][4]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][5]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][6]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][7]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']//*[local-name()='text'][text()='100']" ) );
+    assertNotNull( element );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDF149.class.getSimpleName());
+    LOG.info( "tearDown##" + CDF149.class.getSimpleName() );
   }
 }

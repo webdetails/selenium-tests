@@ -12,186 +12,186 @@
 <tr><td rowspan="1" colspan="3">0002_CDA_Mondrianjndi_CacheThis</td></tr>
 </thead><tbody>
 <tr>
-	<td>setTimeout</td>
-	<td>60000</td>
-	<td></td>
+  <td>setTimeout</td>
+  <td>60000</td>
+  <td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/pentaho/plugin/cda/api/previewQuery?path=%2Fpublic%2Fplugin-samples%2Fcda%2Fcdafiles%2Fmondrian-jndi.cda</td>
-	<td></td>
+  <td>open</td>
+  <td>/pentaho/plugin/cda/api/previewQuery?path=%2Fpublic%2Fplugin-samples%2Fcda%2Fcdafiles%2Fmondrian-jndi.cda</td>
+  <td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//span[@id='fileid']</td>
-	<td>/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda</td>
+  <td>waitForText</td>
+  <td>//span[@id='fileid']</td>
+  <td>/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@id='previewerTable']/span</td>
-	<td>Please select a Data Access ID</td>
+  <td>assertText</td>
+  <td>//div[@id='previewerTable']/span</td>
+  <td>Please select a Data Access ID</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>//select[@id='dataAccessSelector']</td>
-	<td>label=Mdx Query on SampleData - Jndi</td>
+  <td>select</td>
+  <td>//select[@id='dataAccessSelector']</td>
+  <td>label=Mdx Query on SampleData - Jndi</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//select[@id='dataAccessSelector']/option[2]</td>
-	<td></td>
+  <td>click</td>
+  <td>//select[@id='dataAccessSelector']/option[2]</td>
+  <td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='contents_length']/select</td>
-	<td></td>
+  <td>waitForElementPresent</td>
+  <td>//div[@id='contents_length']/select</td>
+  <td></td>
 </tr>
 <!--Check only three rows exists-->
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>//table[@id='contents']/tbody/tr[4]/td</td>
-	<td></td>
+  <td>assertElementNotPresent</td>
+  <td>//table[@id='contents']/tbody/tr[4]/td</td>
+  <td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//table[@id='contents']/tbody/tr/td</td>
-	<td>All Years</td>
+  <td>assertText</td>
+  <td>//table[@id='contents']/tbody/tr/td</td>
+  <td>All Years</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//table[@id='contents']/tbody/tr[2]/td</td>
-	<td>All Years</td>
+  <td>assertText</td>
+  <td>//table[@id='contents']/tbody/tr[2]/td</td>
+  <td>All Years</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//table[@id='contents']/tbody/tr[3]/td</td>
-	<td>All Years</td>
+  <td>assertText</td>
+  <td>//table[@id='contents']/tbody/tr[3]/td</td>
+  <td>All Years</td>
 </tr>
 <!--Click on 'Cache this'-->
 <tr>
-	<td>click</td>
-	<td>id=cachethis</td>
-	<td></td>
+  <td>click</td>
+  <td>id=cachethis</td>
+  <td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>css=p.dialogTitle</td>
-	<td>exact:What schedule should this query run on? (advanced)</td>
+  <td>waitForText</td>
+  <td>css=p.dialogTitle</td>
+  <td>exact:What schedule should this query run on? (advanced)</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=p.dialogTitle</td>
-	<td>exact:What schedule should this query run on? (advanced)</td>
+  <td>assertText</td>
+  <td>css=p.dialogTitle</td>
+  <td>exact:What schedule should this query run on? (advanced)</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=periodType</td>
-	<td>label=every day</td>
+  <td>select</td>
+  <td>id=periodType</td>
+  <td>label=every day</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=startAt</td>
-	<td>12</td>
+  <td>type</td>
+  <td>id=startAt</td>
+  <td>12</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Ok</td>
-	<td></td>
+  <td>click</td>
+  <td>link=Ok</td>
+  <td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
+  <td>pause</td>
+  <td>10000</td>
+  <td></td>
 </tr>
 <tr>
-	<td>selectWindow</td>
-	<td>title=CDA Cache Manager</td>
-	<td></td>
+  <td>selectWindow</td>
+  <td>title=CDA Cache Manager</td>
+  <td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>id=versionInfo</td>
-	<td>Version TRUNK-SNAPSHOT</td>
+  <td>assertText</td>
+  <td>id=versionInfo</td>
+  <td>Version TRUNK-SNAPSHOT</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@id='scheduledQueries']/div</td>
-	<td>Scheduled Queries</td>
+  <td>assertText</td>
+  <td>//div[@id='scheduledQueries']/div</td>
+  <td>Scheduled Queries</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[2]/div[2]/div/div[5]</td>
-	<td>exact:0 0 12 * * ? *</td>
+  <td>assertText</td>
+  <td>//div[2]/div[2]/div/div[5]</td>
+  <td>exact:0 0 12 * * ? *</td>
 </tr>
 <tr>
-	<td>storeEval</td>
-	<td>var daySum=0;var d=new Date();if(d.getHours()&gt;11){daySum=1;}<br />d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)<br />+'-'+('0'+(d.getDate()+daySum)).slice(-2);</td>
-	<td>dateToday</td>
+  <td>storeEval</td>
+  <td>var daySum=0;var d=new Date();if(d.getHours()&gt;11){daySum=1;}<br />d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)<br />+'-'+('0'+(d.getDate()+daySum)).slice(-2);</td>
+  <td>dateToday</td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>${dateToday}</td>
-	<td></td>
+  <td>echo</td>
+  <td>${dateToday}</td>
+  <td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[2]/div[2]/div/div[4]</td>
-	<td>${dateToday}<br />12:00:00</td>
+  <td>assertText</td>
+  <td>//div[2]/div[2]/div/div[4]</td>
+  <td>${dateToday}<br />12:00:00</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=img.deleteIcon.button</td>
-	<td></td>
+  <td>click</td>
+  <td>css=img.deleteIcon.button</td>
+  <td></td>
 </tr>
 <tr>
-	<td>waitForConfirmationPresent</td>
-	<td></td>
-	<td></td>
+  <td>waitForConfirmationPresent</td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Want to delete this scheduler entry?</td>
-	<td></td>
+  <td>assertConfirmation</td>
+  <td>Want to delete this scheduler entry?</td>
+  <td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=cacheButton</td>
-	<td></td>
+  <td>click</td>
+  <td>id=cacheButton</td>
+  <td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>id=clearCacheButton</td>
-	<td></td>
+  <td>waitForElementPresent</td>
+  <td>id=clearCacheButton</td>
+  <td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=clearCacheButton</td>
-	<td></td>
+  <td>click</td>
+  <td>id=clearCacheButton</td>
+  <td></td>
 </tr>
 <tr>
-	<td>waitForConfirmationPresent</td>
-	<td></td>
-	<td></td>
+  <td>waitForConfirmationPresent</td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>This will remove ALL items from cache. Are you sure?</td>
-	<td></td>
+  <td>assertConfirmation</td>
+  <td>This will remove ALL items from cache. Are you sure?</td>
+  <td></td>
 </tr>
 <tr>
-	<td>waitForAlertPresent</td>
-	<td></td>
-	<td></td>
+  <td>waitForAlertPresent</td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
-	<td>assertAlert</td>
-	<td>* items have been removed from cache</td>
-	<td></td>
+  <td>assertAlert</td>
+  <td>* items have been removed from cache</td>
+  <td></td>
 </tr>
 <tr>
-	<td>close</td>
-	<td></td>
-	<td></td>
+  <td>close</td>
+  <td></td>
+  <td></td>
 </tr>
 </tbody></table>
 </body>

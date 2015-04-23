@@ -54,24 +54,24 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE404 {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE404.class);
+  private static Logger LOG = LogManager.getLogger( CDE404.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE404.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE404.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -90,89 +90,89 @@ public class CDE404 {
    *    3. Select file
    *    4. Edit resource and assert elements on external editor
    */
-  @Test(timeout = 180000)
+  @Test( timeout = 180000 )
   public void tc01_ExternalResources_PluginDashboard() {
-    log.info("tc01_ExternalResources_PluginDashboard");
+    LOG.info( "tc01_ExternalResources_PluginDashboard" );
 
     /*
      * ## Step 1
      */
 
     //Open plugin dashboard
-    driver.get(baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=Test.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit");
+    DRIVER.get( BASE_URL + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=Test.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"), 60);
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
 
-    WebElement element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Save as Template']"));
-    assertNotNull(element);
-    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Apply Template']"));
-    assertNotNull(element);
-    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Add Resource']"));
-    assertNotNull(element);
-    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Add FreeForm']"));
-    assertNotNull(element);
-    element = ElementHelper.FindElement(driver, By.xpath("//a[@title='Add Row']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@title='Add Resource']"));
+    WebElement element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    assertNotNull( element );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    assertNotNull( element );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceType']"));
-    assertNotNull(element);
-    Select select = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceType']")));
-    select.selectByValue("Css");
-    element = ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceSource']"));
-    assertNotNull(element);
-    Select select1 = new Select(ElementHelper.FindElement(driver, By.xpath("//select[@id='resourceSource']")));
-    select1.selectByValue("file");
-    ElementHelper.Click(driver, By.xpath("//button[@id='popup_state0_buttonOk']"));
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceType']" ) );
+    assertNotNull( element );
+    Select select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceType']" ) ) );
+    select.selectByValue( "Css" );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceSource']" ) );
+    assertNotNull( element );
+    Select select1 = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceSource']" ) ) );
+    select1.selectByValue( "file" );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@id='popup_state0_buttonOk']" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//button[@class='cdfdd-resourceFileExplorerRender']"));
-    element = ElementHelper.FindElement(driver, By.id("container_id"));
-    assertNotNull(element);
-    element = ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@rel='static/']"));
-    element = ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@rel='static/system/']"));
-    element = ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/css/']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@rel='static/system/css/']"));
-    element = ElementHelper.FindElement(driver, By.xpath("//a[@rel='static/system/css/cpk.css']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//a[@rel='static/system/css/cpk.css']"));
-    ElementHelper.Click(driver, By.xpath("//button[@id='popup_browse_buttonOk']"));
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    element = ElementHelper.FindElement( DRIVER, By.id( "container_id" ) );
+    assertNotNull( element );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@rel='static/']" ) );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/']" ) );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/css/']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/css/']" ) );
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.FindElement(driver, By.xpath("//button[@class='cdfddInput']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//button[@class='cdfddInput']"));
-    WebElement elementframe = ElementHelper.FindElement(driver, By.xpath("//iframe"));
-    WebDriver frame = driver.switchTo().frame(elementframe);
-    element = ElementHelper.FindElement(frame, By.xpath("//span[@id='infoArea']"));
-    assertNotNull(element);
-    String pathText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//span[@id='infoArea']"));
-    assertEquals("/system/CDE404/static/system/css/cpk.css", pathText);
-    String lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div/span"));
-    assertEquals("/* This Source Code Form is subject to the terms of the Mozilla Public", lineText);
-    lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div[2]/span"));
-    assertEquals("* License, v. 2.0. If a copy of the MPL was not distributed with this file,", lineText);
-    lineText = ElementHelper.WaitForElementPresentGetText(frame, By.xpath("//pre[@id='editArea']/div[2]/div/div[3]/div[3]/span"));
-    assertEquals("* You can obtain one at http://mozilla.org/MPL/2.0/. */", lineText);
+    element = ElementHelper.FindElement( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
+    WebElement elementframe = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
+    WebDriver frame = DRIVER.switchTo().frame( elementframe );
+    element = ElementHelper.FindElement( frame, By.xpath( "//span[@id='infoArea']" ) );
+    assertNotNull( element );
+    String pathText = ElementHelper.WaitForElementPresentGetText( frame, By.xpath( "//span[@id='infoArea']" ) );
+    assertEquals( "/system/CDE404/static/system/css/cpk.css", pathText );
+    String lineText = ElementHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre[@id='editArea']/div[2]/div/div[3]/div/span" ) );
+    assertEquals( "/* This Source Code Form is subject to the terms of the Mozilla Public", lineText );
+    lineText = ElementHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre[@id='editArea']/div[2]/div/div[3]/div[2]/span" ) );
+    assertEquals( "* License, v. 2.0. If a copy of the MPL was not distributed with this file,", lineText );
+    lineText = ElementHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre[@id='editArea']/div[2]/div/div[3]/div[3]/span" ) );
+    assertEquals( "* You can obtain one at http://mozilla.org/MPL/2.0/. */", lineText );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE404.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE404.class.getSimpleName() );
   }
 }

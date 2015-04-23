@@ -53,23 +53,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE395 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE395.class);
+  private static Logger LOG = LogManager.getLogger( CDE395.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE395.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE395.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -86,40 +86,40 @@ public class CDE395 {
    *    1. Create New Dashboard, assert elements on page and click "Settings"
    *    4. Focus on popup, assert elements and assert Bootstrap option is selected by default
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_NewCdeDashboard_DefaultRendererBootstrap() {
-    log.info("tc01_NewCdeDashboard_DefaultRendererBootstrap");
+    LOG.info( "tc01_NewCdeDashboard_DefaultRendererBootstrap" );
 
     /*
      * ## Step 1
      */
     //Create new CDE dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons and click Settings
-    String newText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div/a"));
-    String saveText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[2]/a"));
-    String saveasText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[3]/a"));
-    String reloadText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[4]/a"));
-    String settingsText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
-    assertEquals("New", newText);
-    assertEquals("Save", saveText);
-    assertEquals("Save as...", saveasText);
-    assertEquals("Reload", reloadText);
-    assertEquals("Settings", settingsText);
-    ElementHelper.ClickJS(driver, By.xpath("//div[@id='headerLinks']/div[5]/a"));
+    String newText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
+    String saveText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    String saveasText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
+    String reloadText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
+    String settingsText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    assertEquals( "New", newText );
+    assertEquals( "Save", saveText );
+    assertEquals( "Save as...", saveasText );
+    assertEquals( "Reload", reloadText );
+    assertEquals( "Settings", settingsText );
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
 
     /*
      * ## Step 4
      */
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("popup"));
-    assertNotNull(element);
-    WebElement obj1 = ElementHelper.FindElement(driver, By.xpath("//select[@id='rendererInput']/option[@value='bootstrap']"));
-    assertEquals(obj1.isSelected(), true);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup" ) );
+    assertNotNull( element );
+    WebElement obj1 = ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
+    assertEquals( obj1.isSelected(), true );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE395.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE395.class.getSimpleName() );
   }
 }

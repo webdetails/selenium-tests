@@ -52,23 +52,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDF442 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDF442.class);
+  private static Logger LOG = LogManager.getLogger( CDF442.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDF442.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDF442.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -84,27 +84,27 @@ public class CDF442 {
    *    1. Open sample and assert div with id cdfErrorDiv doesn't exist
    *
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CCCBarChart_NoErrorThrown() {
-    log.info("tc01_CCCBarChart_NoErrorThrown");
+    LOG.info( "tc01_CCCBarChart_NoErrorThrown" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-442%3ACDF442.wcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-442%3ACDF442.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //assert Elements loaded
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("col1protovis"));
-    assertNotNull(element);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "col1protovis" ) );
+    assertNotNull( element );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDF442.class.getSimpleName());
+    LOG.info( "tearDown##" + CDF442.class.getSimpleName() );
   }
 }

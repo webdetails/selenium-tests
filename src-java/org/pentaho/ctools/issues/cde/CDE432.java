@@ -57,23 +57,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE432 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE432.class);
+  private static Logger LOG = LogManager.getLogger( CDE432.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE432.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE432.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -91,85 +91,85 @@ public class CDE432 {
    *    3. Click down arrow twice and click enter
    *    4. Assert "Left" option is selected for the "Text Align" property
    **/
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdeDashboard_NoExtraOptions() {
-    log.info("tc01_CdeDashboard_NoExtraOptions");
+    LOG.info( "tc01_CdeDashboard_NoExtraOptions" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='layoutPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    assertNotNull(element);
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    assertNotNull( element );
 
     /*
      * ## Step 2
      */
-    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody"));
+    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
     Robot robot;
     try {
       robot = new Robot();
-      robot.keyPress(KeyEvent.VK_R);
-      robot.keyRelease(KeyEvent.VK_R);
-    } catch (AWTException e) {
+      robot.keyPress( KeyEvent.VK_R );
+      robot.keyRelease( KeyEvent.VK_R );
+    } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr/td"));
-    assertNotNull(element);
-    String text = ElementHelper.WaitForTextPresence(driver, By.xpath("//table[@id='table-cdfdd-layout-tree']/tbody/tr/td"), "Row");
-    assertEquals("Row", text);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]"));
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    assertNotNull( element );
+    String text = ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
+    assertEquals( "Row", text );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
 
     /*
      * ## Step 3
      */
     try {
       robot = new Robot();
-      robot.keyPress(KeyEvent.VK_DOWN);
-      robot.keyRelease(KeyEvent.VK_DOWN);
-      robot.keyPress(KeyEvent.VK_DOWN);
-      robot.keyRelease(KeyEvent.VK_DOWN);
-      robot.keyPress(KeyEvent.VK_ENTER);
-      robot.keyRelease(KeyEvent.VK_ENTER);
-      robot.keyPress(KeyEvent.VK_ENTER);
-      robot.keyRelease(KeyEvent.VK_ENTER);
-    } catch (AWTException e) {
+      robot.keyPress( KeyEvent.VK_DOWN );
+      robot.keyRelease( KeyEvent.VK_DOWN );
+      robot.keyPress( KeyEvent.VK_DOWN );
+      robot.keyRelease( KeyEvent.VK_DOWN );
+      robot.keyPress( KeyEvent.VK_ENTER );
+      robot.keyRelease( KeyEvent.VK_ENTER );
+      robot.keyPress( KeyEvent.VK_ENTER );
+      robot.keyRelease( KeyEvent.VK_ENTER );
+    } catch ( AWTException e ) {
       e.printStackTrace();
     }
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]"));
-    assertNotNull(element);
-    String align = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]"));
-    assertEquals("Left", align);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
+    assertNotNull( element );
+    String align = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
+    assertEquals( "Left", align );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE432.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE432.class.getSimpleName() );
   }
 }

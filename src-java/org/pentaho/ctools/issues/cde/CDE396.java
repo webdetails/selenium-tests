@@ -51,23 +51,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE396 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE396.class);
+  private static Logger LOG = LogManager.getLogger( CDE396.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE396.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE396.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -84,22 +84,22 @@ public class CDE396 {
    *    1. Assert confirmation text
    *
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_RefreshCde_ReturnsInfo() {
-    log.info("tc01_RefreshCde_ReturnsInfo");
+    LOG.info( "tc01_RefreshCde_ReturnsInfo" );
 
     //Go to User Console
-    driver.get(baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh");
+    DRIVER.get( BASE_URL + "plugin/pentaho-cdf-dd/api/renderer/refresh" );
 
     /*
      * ## Step 1
      */
-    String confirmationText = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//body/pre"));
-    assertEquals("Refreshed CDE Successfully", confirmationText);
+    String confirmationText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//body/pre" ) );
+    assertEquals( "Refreshed CDE Successfully", confirmationText );
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE396.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE396.class.getSimpleName() );
   }
 }

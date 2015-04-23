@@ -54,23 +54,24 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE388 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  driver;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     baseUrl;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     log                = LogManager.getLogger(CDE388.class);
+  private static Logger LOG = LogManager.getLogger( CDE388.class );
+
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
-    log.info("setUp##" + CDE388.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + CDE388.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -84,86 +85,86 @@ public class CDE388 {
    *    it works as expected.
    *
    * Steps:
-   *    1. Wait for new Dashboard to be created, assert elements on page and go to Datasources
-   *    2. Assert Datasources Panel is shown, click "Wizards", click "OLAP Chart Wizard"
+   *    1. Wait for new Dashboard to be created, assert elements on page and go to data sources
+   *    2. Assert data sources Panel is shown, click "Wizards", click "OLAP Chart Wizard"
    *    3. Assert Wizard is shown, expand "Markets", drag "Territory" to "Rows" and "Quantity" to "Columns"
    *    4. Assert chart is shown on Preview
    */
-  @Test(timeout = 120000)
+  @Test( timeout = 120000 )
   public void tc01_CdeDashboard_OlapWizardDragAndDrop() {
-    log.info("tc01_CdeDashboard_OlapWizardDragAndDrop");
+    LOG.info( "tc01_CdeDashboard_OlapWizardDragAndDrop" );
 
     /*
      * ## Step 1
      */
 
     //Go to New CDE Dashboard
-    driver.get(baseUrl + "api/repos/wcdf/new");
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Save as Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Apply Template']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Resource']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Bootstrap Panel']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add FreeForm']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//a[@title='Add Row']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("previewButton"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='layoutPanelButton']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='componentsPanelButton']"));
-    assertNotNull(element);
-    ElementHelper.Click(driver, By.xpath("//div[@class='datasourcesPanelButton']"));
+    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "previewButton" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    assertNotNull( element );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
 
     /*
      * ## Step 2
      */
-    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='cdfdd-datasources-datasources']/div/div/div"), "Datasources");
-    ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='cdfdd-datasources-properties']/div/div/div"), "Properties");
-    String classText = ElementHelper.FindElement(driver, By.xpath("//div[@title='Datasources Panel']")).getAttribute("class");
-    assertEquals("panelButton panelButton-active", classText);
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-datasources-palletePallete']/div/h3/span"));
-    ElementHelper.Click(driver, By.xpath("//div[@id='cdfdd-datasources-palletePallete']/div/div/ul/li[2]/a"));
+    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='cdfdd-datasources-datasources']/div/div/div" ), "Datasources" );
+    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='cdfdd-datasources-properties']/div/div/div" ), "Properties" );
+    String classText = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@title='Datasources Panel']" ) ).getAttribute( "class" );
+    assertEquals( "panelButton panelButton-active", classText );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div/h3/span" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div/div/ul/li[2]/a" ) );
 
     /*
      * ## Step 3
      */
-    String text = ElementHelper.WaitForTextPresence(driver, By.xpath("//div[@id='wizardDialog']/div/div/h1"), "OLAP Wizard");
-    assertEquals("OLAP Wizard", text);
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("cdfddOlapCatalogSelect")));
-    select.selectByVisibleText("SteelWheels");
-    Select select1 = new Select(ElementHelper.FindElement(driver, By.id("cdfddOlapCubeSelect")));
-    select1.selectByVisibleText("SteelWheelsSales");
-    ElementHelper.Click(driver, By.xpath("//table[@id='cdfddOlapDimensionSelector']/tbody/tr/td/span"));
-    ElementHelper.DragAndDrop(driver, By.xpath("//table[@id='cdfddOlapDimensionSelector']/tbody/tr[2]/td"), By.id("cdfdd-olap-rows"));
-    ElementHelper.DragAndDrop(driver, By.xpath("//table[@id='cdfddOlapMeasureSelector']/tbody/tr/td"), By.id("cdfdd-olap-columns"));
+    String text = ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ), "OLAP Wizard" );
+    assertEquals( "OLAP Wizard", text );
+    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "cdfddOlapCatalogSelect" ) ) );
+    select.selectByVisibleText( "SteelWheels" );
+    Select select1 = new Select( ElementHelper.FindElement( DRIVER, By.id( "cdfddOlapCubeSelect" ) ) );
+    select1.selectByVisibleText( "SteelWheelsSales" );
+    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='cdfddOlapDimensionSelector']/tbody/tr/td/span" ) );
+    ElementHelper.DragAndDrop( DRIVER, By.xpath( "//table[@id='cdfddOlapDimensionSelector']/tbody/tr[2]/td" ), By.id( "cdfdd-olap-rows" ) );
+    ElementHelper.DragAndDrop( DRIVER, By.xpath( "//table[@id='cdfddOlapMeasureSelector']/tbody/tr/td" ), By.id( "cdfdd-olap-columns" ) );
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("cdfdd-olap-preview-areaprotovis"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-olap-preview-areaprotovis']//*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-olap-preview-areaprotovis']//*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-olap-preview-areaprotovis']//*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='cdfdd-olap-preview-areaprotovis']//*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]"));
-    assertNotNull(element);
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "cdfdd-olap-preview-areaprotovis" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-olap-preview-areaprotovis']//*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect']" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-olap-preview-areaprotovis']//*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-olap-preview-areaprotovis']//*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-olap-preview-areaprotovis']//*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]" ) );
+    assertNotNull( element );
 
   }
 
   @AfterClass
   public static void tearDownClass() {
-    log.info("tearDown##" + CDE388.class.getSimpleName());
+    LOG.info( "tearDown##" + CDE388.class.getSimpleName() );
   }
 }
