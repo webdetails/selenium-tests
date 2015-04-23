@@ -838,9 +838,9 @@ public class ElementHelper {
    * @return
    */
   public static Boolean WaitForElementNotPresent( final WebDriver driver, final By locator ) {
-    log.debug( "WaitForElementNotPresent::Enter" );
+    log.debug( "WaitForElementNotPresent(Main)::Enter" );
     boolean result = WaitForElementNotPresent( driver, locator, 30 );
-    log.debug( "WaitForElementNotPresent::Exit" );
+    log.debug( "WaitForElementNotPresent(Main)::Exit" );
     return result;
   }
 

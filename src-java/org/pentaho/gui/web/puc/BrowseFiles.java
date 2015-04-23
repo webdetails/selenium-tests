@@ -128,7 +128,7 @@ public class BrowseFiles {
     log.info( "Enter: SelectFile" );
     boolean selected = true;
     String[] folders = path.split( "/" );
-    log.info( "Enter: Expanding Path" );
+    log.info( "Enter: Expanding Path [" + path + "]" );
 
     String currentFolder = "";
     for ( int i = 1; i < folders.length; i++ ) {
@@ -168,17 +168,17 @@ public class BrowseFiles {
         }
       } else {
         // Check if folder is opened
-        WebElement elemFolderOpened = ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.folder.open[path='" + currentFolder + "']" ), 1 );
-        if ( elemFolderOpened == null ) {
+        String selector = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']";
+        String isFolderOpen = ElementHelper.GetAttribute( this.driver, By.xpath( selector ), "class" );
+        if ( !isFolderOpen.contains( "open" ) ) {
           // If folder exists select it
-          String selector = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']";
           String selectorExpand = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']/div/div[@class='expandCollapse']";
           WebElement folderToExpand = ElementHelper.WaitForElementPresence( this.driver, By.xpath( selectorExpand ) );
           if ( folderToExpand != null ) {
             ElementHelper.Click( this.driver, By.xpath( selectorExpand ) );
             ElementHelper.WaitForAttributeValue( this.driver, By.xpath( selector ), "class", "open" );
-            String text = ElementHelper.GetAttribute( this.driver, By.xpath( selector ), "class" );
-            assertTrue( text.contains( "open" ) );
+            String checkFolderOpen = ElementHelper.GetAttribute( this.driver, By.xpath( selector ), "class" );
+            assertTrue( checkFolderOpen.contains( "open" ) );
             log.info( "Exit: Expanding Path" );
           } else {
             log.info( "Folder " + currentFolder + " was not found" );
@@ -363,9 +363,10 @@ public class BrowseFiles {
       this.driver.switchTo().defaultContent();
       ElementHelper.Click( this.driver, By.id( "okButton" ) );
       // wait for invisibility of waiting pop-up
-      ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      ElementHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      ElementHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       // Wait for loading disappear
-      ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+      //ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
       // Wait for loading views Folders and Files
       ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='spinner large-spinner']" ) );
       ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
