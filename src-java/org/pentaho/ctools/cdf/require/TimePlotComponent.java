@@ -90,7 +90,7 @@ public class TimePlotComponent {
 
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementNotPresent( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -126,7 +126,7 @@ public class TimePlotComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  //@Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
     LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -136,7 +136,7 @@ public class TimePlotComponent {
 
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementNotPresent( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );

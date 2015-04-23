@@ -53,7 +53,7 @@ import org.pentaho.ctools.suite.require.SuiteRequireJS;
     // CDE
     //SuiteCDE.class,
     // CDA
-    SuiteCDA.class,
+    //SuiteCDA.class,
     // CGG
     //SuiteCGG.class,
     // RequireJS

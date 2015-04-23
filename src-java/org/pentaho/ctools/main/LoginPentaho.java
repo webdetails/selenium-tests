@@ -105,7 +105,8 @@ public class LoginPentaho {
 
     //## Step 3
     //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    ElementHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    ElementHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
     this.wait.until( ExpectedConditions.titleContains( "Pentaho User Console" ) );

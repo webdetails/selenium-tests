@@ -331,7 +331,7 @@ public class ElementHelper {
                 List<WebElement> listElements = d.findElements( locator );
                 if ( listElements.size() > 0 ) {
                   WebElement elem = listElements.get( 0 );
-                  return elem.isDisplayed() == false;
+                  return ( !elem.isDisplayed() ) ? true : false;
                 }
                 // The element does not exit, i.e., is not visible and even present
                 return true;
