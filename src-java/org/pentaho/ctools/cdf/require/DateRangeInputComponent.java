@@ -380,7 +380,12 @@ public class DateRangeInputComponent {
     String confirmationMsg = alert.getText();
     alert.accept();
 
-    assertEquals( "You chose from 2014-04-22 to 2014-09-29", confirmationMsg );
+    Calendar c = Calendar.getInstance();
+    c.add( Calendar.YEAR, -1 );
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+    String beginDate = sdf.format( c.getTime() );
+
+    assertEquals( "You chose from " + beginDate + " to 2014-09-29", confirmationMsg );
   }
 
   @AfterClass

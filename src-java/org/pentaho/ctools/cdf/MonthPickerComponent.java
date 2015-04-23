@@ -53,29 +53,29 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class MonthPickerComponent {
   //Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String BASE_URL;
   //Log instance
-  private static Logger          log                = LogManager.getLogger(MonthPickerComponent.class);
+  private static Logger LOG = LogManager.getLogger( MonthPickerComponent.class );
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    log.info("setUp##" + MonthPickerComponent.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + MonthPickerComponent.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
     init();
@@ -88,10 +88,10 @@ public class MonthPickerComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/MonthPickerComponent
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A46-MonthPickerComponent%3Amonth_picker_component.xcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A46-MonthPickerComponent%3Amonth_picker_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -104,17 +104,17 @@ public class MonthPickerComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
-    log.info("tc1_PageContent_DisplayTitle");
+    LOG.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("MonthPickerComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "MonthPickerComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -127,24 +127,24 @@ public class MonthPickerComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
-    log.info("tc2_ReloadSample_SampleReadyToUse");
+    LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
-    assertEquals(1, nSampleObject);
+    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
+    assertEquals( 1, nSampleObject );
   }
 
   /**
@@ -158,32 +158,32 @@ public class MonthPickerComponent {
    * Steps:
    *    1. Pick a month and check for alert
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc3_SelectMonth_AlertDisplayed() {
-    log.info("tc3_SelectMonth_AlertDisplayed");
+    LOG.info( "tc3_SelectMonth_AlertDisplayed" );
 
     //## Step 1
     Calendar c = Calendar.getInstance();
-    c.add(Calendar.YEAR, 2006 - c.get(Calendar.YEAR));
-    c.add(Calendar.MONTH, 2);
+    c.add( Calendar.YEAR, 2006 - c.get( Calendar.YEAR ) );
+    c.add( Calendar.MONTH, 2 );
     Date timeToPick = c.getTime();
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-    String strTimeToPick = sdf.format(timeToPick);
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM" );
+    String strTimeToPick = sdf.format( timeToPick );
 
-    Select select = new Select(ElementHelper.FindElement(driver, By.id("myInput")));
-    select.selectByValue(strTimeToPick);
+    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ) );
+    select.selectByValue( strTimeToPick );
 
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = DRIVER.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
 
-    assertEquals("You chose: " + strTimeToPick, confirmationMsg);
+    assertEquals( "You chose: " + strTimeToPick, confirmationMsg );
   }
 
   @AfterClass
   public static void tearDown() {
-    log.info("tearDown##" + MonthPickerComponent.class.getSimpleName());
+    LOG.info( "tearDown##" + MonthPickerComponent.class.getSimpleName() );
   }
 }

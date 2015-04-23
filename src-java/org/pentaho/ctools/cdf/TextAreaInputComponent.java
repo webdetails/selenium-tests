@@ -49,29 +49,29 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TextAreaInputComponent{
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
+public class TextAreaInputComponent {
 
   //Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String BASE_URL;
   //Log instance
-  private static Logger          log                = LogManager.getLogger(TextAreaInputComponent.class);
+  private static Logger LOG = LogManager.getLogger( TextAreaInputComponent.class );
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -80,10 +80,10 @@ public class TextAreaInputComponent{
   @Before
   public void setUpTestCase() {
     //Go to AddinReference
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextAreaInputComponent%3Atext_area_input_component.xcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextAreaInputComponent%3Atext_area_input_component.xcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -97,45 +97,45 @@ public class TextAreaInputComponent{
    *    1. Check sample title.
    *    2. Check sample description.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_PageContent_ContentPresent() {
-    log.info("tc1_PageContent_ContentPresent");
+    LOG.info( "tc1_PageContent_ContentPresent" );
 
     /*
      * ## Step 1
      */
     // Page title
-    assertEquals("Community Dashboard Framework", driver.getTitle());
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
     //Sample Title
-    String sampleTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//span[2]"));
-    assertEquals("TextAreaInputComponent", sampleTitle);
+    String sampleTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//span[2]" ) );
+    assertEquals( "TextAreaInputComponent", sampleTitle );
 
     /*
      * ## Step 2
      */
     //Sample Description
-    String sampleDescTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//h3"));
-    String sampleDescription = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//p"));
-    assertEquals("Description", sampleDescTitle);
-    assertEquals("Renders a multi-line text input box to collect user input. Change event is fired after user edits the content and removes the focus from the box. Pre/postChange functions can be used to make data validation.", sampleDescription);
+    String sampleDescTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//h3" ) );
+    String sampleDescription = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//p" ) );
+    assertEquals( "Description", sampleDescTitle );
+    assertEquals( "Renders a multi-line text input box to collect user input. Change event is fired after user edits the content and removes the focus from the box. Pre/postChange functions can be used to make data validation.", sampleDescription );
 
     /*
      * ## Step 3
      */
     //Options
-    String optionsTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//h3[2]"));
-    String options1 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//dt[7]"));
-    String options2 = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//dt[8]"));
-    assertEquals("Options", optionsTitle);
-    assertEquals("charWidth", options1);
-    assertEquals("maxChars", options2);
+    String optionsTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//h3[2]" ) );
+    String options1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//dt[7]" ) );
+    String options2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//dt[8]" ) );
+    assertEquals( "Options", optionsTitle );
+    assertEquals( "charWidth", options1 );
+    assertEquals( "maxChars", options2 );
 
     /*
      * ## Step 4
      */
     //Samples
-    String samplesTitle = ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//h3[3]"));
-    assertEquals("Sample", samplesTitle);
+    String samplesTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//h3[3]" ) );
+    assertEquals( "Sample", samplesTitle );
   }
 
   /**
@@ -148,23 +148,23 @@ public class TextAreaInputComponent{
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
-    assertEquals(1, nSampleObject);
+    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
+    assertEquals( 1, nSampleObject );
   }
 
   /**
@@ -179,22 +179,22 @@ public class TextAreaInputComponent{
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc3_InputSmallPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World!";
-    ElementHelper.FindElement(driver, By.id("myInput")).clear();
-    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(strInputString);
-    ElementHelper.FindElement(driver, By.xpath("//h3[3]")).click();
+    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).clear();
+    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( strInputString );
+    ElementHelper.FindElement( DRIVER, By.xpath( "//h3[3]" ) ).click();
 
     // ## Step 2
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = DRIVER.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
 
-    assertEquals(expectedCnfText, confirmationMsg);
+    assertEquals( expectedCnfText, confirmationMsg );
   }
 
   /**
@@ -209,7 +209,7 @@ public class TextAreaInputComponent{
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc4_InputLongPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!";
@@ -217,18 +217,18 @@ public class TextAreaInputComponent{
     strInputString += strInputString;
     strInputString += strInputString;
     strInputString += strInputString;
-    ElementHelper.FindElement(driver, By.id("myInput")).clear();
-    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(strInputString);
-    ElementHelper.FindElement(driver, By.xpath("//h3[3]")).click();
+    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).clear();
+    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( strInputString );
+    ElementHelper.FindElement( DRIVER, By.xpath( "//h3[3]" ) ).click();
 
     // ## Step 2
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = DRIVER.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
 
-    assertEquals(expectedCnfText, confirmationMsg);
+    assertEquals( expectedCnfText, confirmationMsg );
   }
 
   /**
@@ -244,26 +244,26 @@ public class TextAreaInputComponent{
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
-    ElementHelper.FindElement(driver, By.id("myInput")).clear();
-    ElementHelper.FindElement(driver, By.id("myInput")).sendKeys(strInputString);
-    ElementHelper.FindElement(driver, By.xpath("//h3[3]")).click();
+    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).clear();
+    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( strInputString );
+    ElementHelper.FindElement( DRIVER, By.xpath( "//h3[3]" ) ).click();
 
     // ## Step 2
-    wait.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = DRIVER.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
 
-    assertEquals(expectedCnfText, confirmationMsg);
+    assertEquals( expectedCnfText, confirmationMsg );
   }
 
   @AfterClass
   public static void tearDown() {
-    log.info("tearDown##" + TextAreaInputComponent.class.getSimpleName());
+    LOG.info( "tearDown##" + TextAreaInputComponent.class.getSimpleName() );
   }
 }

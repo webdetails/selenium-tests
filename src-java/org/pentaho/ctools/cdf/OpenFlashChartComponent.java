@@ -48,30 +48,30 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class OpenFlashChartComponent{
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
+public class OpenFlashChartComponent {
 
   //Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private static String BASE_URL;
   //Log instance
-  private static Logger          log                = LogManager.getLogger(OpenFlashChartComponent.class);
+  private static Logger LOG = LogManager.getLogger( OpenFlashChartComponent.class );
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule(driver);
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    log.info("setUp##" + OpenFlashChartComponent.class.getSimpleName());
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
+    LOG.info( "setUp##" + OpenFlashChartComponent.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
+    BASE_URL = CToolsTestSuite.getBaseUrl();
 
     // Go to sample
     init();
@@ -84,10 +84,10 @@ public class OpenFlashChartComponent{
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/OpenFlashChartComponent
-    driver.get(baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A26-OpenFlashChartComponent%3Aopenflashchart_component.xcdf/generatedContent");
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A26-OpenFlashChartComponent%3Aopenflashchart_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -100,18 +100,18 @@ public class OpenFlashChartComponent{
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
-    log.info("tc1_PageContent_DisplayTitle");
+    LOG.info( "tc1_PageContent_DisplayTitle" );
 
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals("Community Dashboard Framework", driver.getTitle());
-    assertEquals("OpenFlashChartComponent", ElementHelper.WaitForElementPresentGetText(driver, By.xpath("//div[@id='dashboardContent']/div/div/div/h2/span[2]")));
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "OpenFlashChartComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -124,24 +124,24 @@ public class OpenFlashChartComponent{
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
-    log.info("tc2_ReloadSample_SampleReadyToUse");
+    LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='example']/ul/li[2]/a")).click();
-    ElementHelper.FindElement(driver, By.xpath("//div[@id='code']/button")).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='blockUI blockOverlay']"));
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue(ElementHelper.FindElement(driver, By.id("sample")).isDisplayed());
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements(By.id("sampleObject")).size();
-    assertEquals(1, nSampleObject);
+    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
+    assertEquals( 1, nSampleObject );
   }
 
   /**
@@ -154,25 +154,25 @@ public class OpenFlashChartComponent{
    * Steps:
    *    1. Check that component generate a flash object
    */
-  @Test(timeout = 60000)
+  @Test( timeout = 60000 )
   public void tc3_OpenFlashChart_ChartDisplayed() {
-    log.info("tc3_OpenFlashChart_ChartDisplayed");
+    LOG.info( "tc3_OpenFlashChart_ChartDisplayed" );
 
-    assertNotNull(ElementHelper.FindElement(driver, By.cssSelector("object")));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.cssSelector("embed"));
-    String attrWidth = ElementHelper.GetAttribute(driver, By.cssSelector("embed"), "width");
-    String attrHeight = ElementHelper.GetAttribute(driver, By.cssSelector("embed"), "height");
-    String attrType = ElementHelper.GetAttribute(driver, By.cssSelector("embed"), "type");
-    String attrSrc = ElementHelper.GetAttribute(driver, By.cssSelector("embed"), "src");
+    assertNotNull( ElementHelper.FindElement( DRIVER, By.cssSelector( "object" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "embed" ) );
+    String attrWidth = ElementHelper.GetAttribute( DRIVER, By.cssSelector( "embed" ), "width" );
+    String attrHeight = ElementHelper.GetAttribute( DRIVER, By.cssSelector( "embed" ), "height" );
+    String attrType = ElementHelper.GetAttribute( DRIVER, By.cssSelector( "embed" ), "type" );
+    String attrSrc = ElementHelper.GetAttribute( DRIVER, By.cssSelector( "embed" ), "src" );
 
-    assertEquals("500", attrWidth);
-    assertEquals("500", attrHeight);
-    assertEquals("application/x-shockwave-flash", attrType);
-    assertTrue(attrSrc.contains("/pentaho/openflashchart/open-flash-chart-full-embedded-font.swf?get-data="));
+    assertEquals( "500", attrWidth );
+    assertEquals( "500", attrHeight );
+    assertEquals( "application/x-shockwave-flash", attrType );
+    assertTrue( attrSrc.contains( "/pentaho/openflashchart/open-flash-chart-full-embedded-font.swf?get-data=" ) );
   }
 
   @AfterClass
   public static void tearDown() {
-    log.info("tearDown##" + OpenFlashChartComponent.class.getSimpleName());
+    LOG.info( "tearDown##" + OpenFlashChartComponent.class.getSimpleName() );
   }
 }
