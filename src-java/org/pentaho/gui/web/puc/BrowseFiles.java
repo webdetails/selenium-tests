@@ -365,8 +365,6 @@ public class BrowseFiles {
       // wait for invisibility of waiting pop-up
       ElementHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       ElementHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-      // Wait for loading disappear
-      //ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
       // Wait for loading views Folders and Files
       ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='spinner large-spinner']" ) );
       ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
