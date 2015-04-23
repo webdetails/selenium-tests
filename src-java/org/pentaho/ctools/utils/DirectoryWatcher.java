@@ -36,12 +36,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class DirectoryWatcher {
-
+  //Time to wait for a file or something new get in directory
+  private static final long WAIT_TIMEOUT = 30;
   //Log instance
-  private static Logger LOG = LogManager.getLogger( DirectoryWatcher.class );
+  private static final Logger LOG = LogManager.getLogger( DirectoryWatcher.class );
 
   public static boolean WatchForCreate( String path ) {
-    return WatchForCreate( path, 15 );
+    return WatchForCreate( path, WAIT_TIMEOUT );
   }
 
   /**
