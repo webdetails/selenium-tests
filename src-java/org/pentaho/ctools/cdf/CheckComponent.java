@@ -37,7 +37,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
-import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
@@ -58,7 +57,7 @@ public class CheckComponent {
   // The base url to be append the relative url in test
   private static String BASE_URL;
   //Log instance
-  private static Logger LOG = LogManager.getLogger( LoginPentaho.class );
+  private static Logger LOG = LogManager.getLogger( CheckComponent.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );

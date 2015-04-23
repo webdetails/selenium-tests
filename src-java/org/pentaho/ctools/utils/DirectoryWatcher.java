@@ -38,9 +38,9 @@ import org.apache.logging.log4j.Logger;
 public class DirectoryWatcher {
 
   //Log instance
-  private static final Logger LOG = LogManager.getLogger( DirectoryWatcher.class );
+  private static Logger LOG = LogManager.getLogger( DirectoryWatcher.class );
 
-  public static boolean WatchForCreate( final String path ) {
+  public static boolean WatchForCreate( String path ) {
     return WatchForCreate( path, 15 );
   }
 
@@ -53,17 +53,17 @@ public class DirectoryWatcher {
    * @return true  - file was created in dir
    *         false - otherwise
    */
-  public static boolean WatchForCreate( final String path, final long timeout ) {
+  public static boolean WatchForCreate( final String path, long timeout ) {
     boolean bFileCreated = false;
 
     try {
       class RunnableObject implements Runnable {
 
-        private final Logger log = LogManager.getLogger( RunnableObject.class );
+        private Logger log = LogManager.getLogger( RunnableObject.class );
 
         private boolean isFileCreated;
 
-        public RunnableObject( final boolean isFileCreated ) {
+        public RunnableObject( boolean isFileCreated ) {
           this.isFileCreated = isFileCreated;
         }
 
@@ -74,29 +74,29 @@ public class DirectoryWatcher {
         @Override
         public void run() {
           try {
-            final WatchService watcher = FileSystems.getDefault().newWatchService();
-            final Path dir = Paths.get( path );
+            WatchService watcher = FileSystems.getDefault().newWatchService();
+            Path dir = Paths.get( path );
             dir.register( watcher, StandardWatchEventKinds.ENTRY_CREATE );
 
             while ( !this.isFileCreated ) {
               WatchKey key;
               try {
                 key = watcher.take();
-              } catch ( final InterruptedException ex ) {
+              } catch ( InterruptedException ex ) {
                 this.log.error( ex.getMessage() );
                 break;
               }
 
-              for ( final WatchEvent<?> event : key.pollEvents() ) {
-                final WatchEvent.Kind<?> kind = event.kind();
+              for ( WatchEvent<?> event : key.pollEvents() ) {
+                WatchEvent.Kind<?> kind = event.kind();
 
                 if ( kind == StandardWatchEventKinds.OVERFLOW ) {
                   continue;
                 }
 
                 @SuppressWarnings( "unchecked" )
-                final WatchEvent<Path> ev = (WatchEvent<Path>) event;
-                final Path fileName = ev.context();
+                WatchEvent<Path> ev = (WatchEvent<Path>) event;
+                Path fileName = ev.context();
 
                 this.log.info( kind.name() + ": " + fileName );
                 if ( kind == StandardWatchEventKinds.ENTRY_CREATE ) {
@@ -105,25 +105,25 @@ public class DirectoryWatcher {
                 }
               }
 
-              final boolean valid = key.reset();
+              boolean valid = key.reset();
               if ( !valid ) {
                 break;
               }
             }
-          } catch ( final Exception e ) {
+          } catch ( Exception e ) {
             this.log.error( e.getMessage() );
           }
         }
       }
 
-      final RunnableObject r = new RunnableObject( bFileCreated );
+      RunnableObject r = new RunnableObject( bFileCreated );
 
-      final ExecutorService executor = Executors.newSingleThreadExecutor();
+      ExecutorService executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       executor.shutdown();
       bFileCreated = r.getValue();
 
-    } catch ( final Exception e ) {
+    } catch ( Exception e ) {
       LOG.error( e.getMessage() );
     }
 

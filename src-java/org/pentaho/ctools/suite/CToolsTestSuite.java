@@ -49,13 +49,13 @@ import org.pentaho.ctools.suite.require.SuiteRequireJS;
     // Start Tests
     LoginPentaho.class,
     // CDF
-    SuiteCDF.class,
+    //SuiteCDF.class,
     // CDE
-    SuiteCDE.class,
+    //SuiteCDE.class,
     // CDA
     SuiteCDA.class,
     // CGG
-    SuiteCGG.class,
+    //SuiteCGG.class,
     // RequireJS
     SuiteRequireJS.class,
     // Security
