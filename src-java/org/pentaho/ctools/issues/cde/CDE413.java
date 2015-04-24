@@ -96,64 +96,59 @@ public class CDE413 {
      * ## Step 1
      */
     //Go to New CDE Dashboard
+    //Go to New CDE Dashboard
     DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
-    assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    WebElement buttonSaveTemplate = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement buttonApplyTemplate = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    WebElement buttonAddResource = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    WebElement buttonAddBoostrap = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    WebElement buttonAddFreeForm = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    WebElement buttonAddRow = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    WebElement buttonLayout = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    WebElement buttonComponents = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    WebElement buttonDatasources = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    assertNotNull( buttonSaveTemplate );
+    assertNotNull( buttonApplyTemplate );
+    assertNotNull( buttonAddResource );
+    assertNotNull( buttonAddBoostrap );
+    assertNotNull( buttonAddFreeForm );
+    assertNotNull( buttonAddRow );
+    assertNotNull( buttonLayout );
+    assertNotNull( buttonComponents );
+    assertNotNull( buttonDatasources );
+    ElementHelper.Click( DRIVER, By.cssSelector( "div.componentsPanelButton" ) );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
-    assertNotNull( element );
     String otherText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
     assertEquals( "Others", otherText );
     ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='table Component']" ) );
-    assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='table Component']" ) );
+    WebElement optionTableComponent = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "a[title='table Component']" ) );
+    assertNotNull( optionTableComponent );
+    ElementHelper.Click( DRIVER, By.cssSelector( "a[title='table Component']" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[5]/td[2]" ) );
-    assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[5]/td[2]" ) );
+    //Click in the columnTypes - property
+    WebElement propertyColumnTypes = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
+    assertNotNull( propertyColumnTypes );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
+    //We need to wait for the animation finish for the display popup
+    ElementHelper.WaitForAttributeValueEqualsTo( DRIVER, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popupstates']//input[@class='StringArrayAddButton']" ) );
-    assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='popupstates']//input[@class='StringArrayAddButton']" ) );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='popupstates']//input[@class='StringArrayAddButton']" ) );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//span[@class='StringArrayTextLabel']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//input[@id='arg_0']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//input[@value='']" ) );
-    assertNotNull( element );
-    String argText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//span[@class='StringArrayTextLabel']" ) );
-    assertEquals( "Arg", argText );
-
+    ElementHelper.Click( DRIVER, By.cssSelector( "input.StringArrayAddButton" ) );
+    WebElement arg0RemoveElement = ElementHelper.FindElement( DRIVER, By.id( "remove_button_0" ) );
+    WebElement arg0InputElement = ElementHelper.FindElement( DRIVER, By.id( "arg_0" ) );
+    WebElement arg0DragDropIconElement = ElementHelper.FindElement( DRIVER, By.cssSelector( "div.StringArrayDragIcon" ) );
+    assertNotNull( arg0RemoveElement );
+    assertNotNull( arg0InputElement );
+    assertNotNull( arg0DragDropIconElement );
   }
 
   @AfterClass

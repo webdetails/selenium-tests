@@ -1005,4 +1005,141 @@ public class ElementHelper {
 
     log.debug( "WaitForAttributeValue::Exit" );
   }
+
+  /**
+   * The method pretends to wait for an element reach the expected attribute
+   * value. The default timeout is 30 seconds.
+   *
+   * @param driver
+   * @param locator
+   * @param attributeName
+   * @param attributeValue - attribute value to wait.
+   */
+  public static void WaitForAttributeValueEqualsTo( final WebDriver driver, final By locator,
+      final String attributeName, final String attributeValue ) {
+    log.debug( "WaitForAttributeValue(Main)::Enter" );
+    WaitForAttributeValueEqualsTo( driver, locator, attributeName, attributeValue, 30 );
+    log.debug( "WaitForAttributeValue(Main)::Exit" );
+  }
+
+  /**
+   * The method pretends to wait for an element reach the expected attribute
+   * value, specifying a timeout.
+   *
+   * @param driver
+   * @param locator
+   * @param attributeName
+   * @param attributeValue - attribute value to wait.
+   */
+  public static void WaitForAttributeValueEqualsTo( final WebDriver driver, final By locator,
+      final String attributeName, final String attributeValue, final Integer timeout ) {
+    log.debug( "WaitForAttributeValue::Enter" );
+    log.debug( "Locator: " + locator.toString() );
+    log.debug( "Attribute: " + attributeName );
+    log.debug( "AttributeValue: " + attributeValue );
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+
+    try {
+
+      class RunnableObject implements Runnable {
+
+        @Override
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+
+          // Wait for element visible
+          wait.until( new Function<WebDriver, Boolean>() {
+
+            @Override
+            public Boolean apply( WebDriver d ) {
+              try {
+                List<WebElement> listElements = d.findElements( locator );
+                if ( listElements.size() > 0 ) {
+                  WebElement element = listElements.get( 0 );
+                  String attrValue = element.getAttribute( attributeName ).toLowerCase();
+                  String attrValueFor = attributeValue.toLowerCase();
+                  return attrValue.equals( attrValueFor );
+                }
+                return false;
+              } catch ( StaleElementReferenceException sere ) {
+                return true;
+              }
+            }
+          } );
+        }
+      }
+
+      RunnableObject r = new RunnableObject();
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
+      executor.shutdown();
+    } catch ( TimeoutException te ) {
+      log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( InterruptedException ie ) {
+      log.warn( "Interrupted Exception" );
+    } catch ( ExecutionException ee ) {
+      log.warn( "Execution Exception" );
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+    } catch ( Exception e ) {
+      log.error( "Exception" );
+      log.catching( e );
+    }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+    log.debug( "WaitForAttributeValue::Exit" );
+  }
+
+  /**
+   * This method shall focus on the element and then add the text.
+   * 
+   * @param driver
+   * @param locator
+   * @param text
+   */
+  public static void ClickAndSendKeys( final WebDriver driver, final By locator, final CharSequence... keysToSend ) {
+    log.debug( "SendKeys::Enter" );
+    log.debug( "Locator: " + locator.toString() );
+
+    try {
+      WebElement element = WaitForElementPresenceAndVisible( driver, locator );
+      if ( element != null ) {
+        element.click();
+        element.sendKeys( keysToSend );
+      } else {
+        log.error( "Element is null!" );
+      }
+    } catch ( StaleElementReferenceException e ) {
+      log.warn( "Stale Element Reference Exception" );
+      ClickAndSendKeys( driver, locator, keysToSend );
+    }
+    log.debug( "SendKeys::Exit" );
+  }
+
+  /**
+   * This method find the element and sendkeys.
+   * 
+   * @param driver
+   * @param locator
+   * @param text
+   */
+  public static void SendKeys( final WebDriver driver, final By locator, final CharSequence... keysToSend ) {
+    log.debug( "SendKeys::Enter" );
+    log.debug( "Locator: " + locator.toString() );
+
+    try {
+      WebElement element = WaitForElementPresenceAndVisible( driver, locator );
+      if ( element != null ) {
+        element.sendKeys( keysToSend );
+      } else {
+        log.error( "Element is null!" );
+      }
+    } catch ( StaleElementReferenceException e ) {
+      log.warn( "Stale Element Reference Exception" );
+      ClickAndSendKeys( driver, locator, keysToSend );
+    }
+    log.debug( "SendKeys::Exit" );
+  }
 }
