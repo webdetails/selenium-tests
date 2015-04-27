@@ -45,7 +45,7 @@ import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
- * Testing the functionalities related with Bullert Chart test case.
+ * Testing the functionalities related with Bullet Chart test case.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'
