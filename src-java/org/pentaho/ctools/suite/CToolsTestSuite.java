@@ -50,9 +50,8 @@ import org.pentaho.ctools.suite.security.SuiteSecurity;
     // ##### Execution Order #####
     // Start Tests
     LoginPentaho.class,
-	org.pentaho.ctools.cde.reference.BullertChartTestCase.class
     // CDF
-    /*SuiteCDF.class,
+    SuiteCDF.class,
     // CDE
     SuiteCDE.class,
     // CDA
@@ -66,7 +65,7 @@ import org.pentaho.ctools.suite.security.SuiteSecurity;
     // Issues
     SuiteIssues.class,
     // End Tests
-    LogoutPentaho.class*/ } )
+    LogoutPentaho.class } )
 public class CToolsTestSuite {
 
   // / Instance of the driver (browser emulator)

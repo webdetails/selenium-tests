@@ -105,7 +105,7 @@ public class LoginPentaho {
 
     //## Step 3
     //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    ElementHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 4 );
     ElementHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
@@ -117,10 +117,6 @@ public class LoginPentaho {
 
     //Logged as ADMIN user
     assertEquals( "admin", this.driver.findElement( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ).getText() );
-
-    //Go to the Home Perspective [IFRAME]
-    //driver.switchTo().frame("home.perspective");
-    //wait.until(ExpectedConditions.elementToBeClickable(By.id("btnCreateNew")));
   }
 
   @After
