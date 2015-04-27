@@ -23,6 +23,7 @@ package org.pentaho.ctools.cde.reference;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -156,12 +157,12 @@ public class BullertChartTestCase {
     /*
      * ## Step 3
      */
-    //Chart 3
-    //Chart 31
+    //>Chart 3
+    //>>Chart 31
     //Check title
     String subtitle3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "subtitle3" ) );
     assertEquals( "Returning name and value", subtitle3 );
-    //Check serie title and subtitle
+    //Check series title and subtitle
     String cht31Title1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']" ) );
     assertEquals( "Atelier graphique", cht31Title1 );
     String cht31Subtitle1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='text']" ) );
@@ -173,8 +174,8 @@ public class BullertChartTestCase {
     WebElement cht31RectWhite1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='path'][1]" ) );
     assertNotNull( cht31RectWhite1 );
     assertEquals( "translate(596,10) ", cht31RectWhite1.getAttribute( "transform" ) );
-    //Chart 32
-    //Check serie title and subtitle
+    //>>Chart 32
+    //Check series title and subtitle
     String cht32Title1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][6]/*[local-name()='text']" ) );
     assertEquals( "Signal Gift Stores", cht32Title1 );
     String cht32Subtitle1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][7]/*[local-name()='text']" ) );
@@ -186,8 +187,8 @@ public class BullertChartTestCase {
     WebElement cht32RectWhite1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]/*[local-name()='path'][1]" ) );
     assertNotNull( cht32RectWhite1 );
     assertEquals( "translate(596,10) ", cht32RectWhite1.getAttribute( "transform" ) );
-    //Chart 33
-    //Check serie title and subtitle
+    //>>Chart 33
+    //Check series title and subtitle
     String cht33Title1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][6]/*[local-name()='text']" ) );
     assertEquals( "Australian Collectors, Co.", cht33Title1 );
     String cht33Subtitle1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][7]/*[local-name()='text']" ) );
@@ -199,6 +200,74 @@ public class BullertChartTestCase {
     WebElement cht33RectWhite1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][3]/*[local-name()='path'][1]" ) );
     assertNotNull( cht33RectWhite1 );
     assertEquals( "translate(457.2890025575448,10) ", cht33RectWhite1.getAttribute( "transform" ) );
+    //>>Chart 34
+    String cht34Title1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][6]/*[local-name()='text']" ) );
+    assertEquals( "La Rochelle Gifts", cht34Title1 );
+    String cht34Subtitle1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][7]/*[local-name()='text']" ) );
+    assertEquals( "Customer", cht34Subtitle1 );
+    //Check chart
+    WebElement cht34SizeBar = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    assertNotNull( cht34SizeBar );
+    //assertEquals( "894", cht34SizeBar.getAttribute( "width" ) );
+    WebElement cht34RectWhite1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g'][3]/*[local-name()='path'][1]" ) );
+    assertNotNull( cht34RectWhite1 );
+    //assertEquals( "translate(457.2890025575448,10) ", cht34RectWhite1.getAttribute( "transform" ) );
+    LOG.info( "cht34SizeBar" + cht34SizeBar.getAttribute( "width" ) );
+    LOG.info( "cht34RectWhite1" + cht34RectWhite1.getAttribute( "transform" ) );
+    //>>Chart 35
+    String cht35Title1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g'][6]/*[local-name()='text']" ) );
+    assertEquals( "Baane Mini Imports", cht35Title1 );
+    String cht35Subtitle1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g'][7]/*[local-name()='text']" ) );
+    assertEquals( "Customer", cht35Subtitle1 );
+    //Check chart
+    WebElement cht35SizeBar = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    assertNotNull( cht35SizeBar );
+    //assertEquals( "894", cht35SizeBar.getAttribute( "width" ) );
+    WebElement cht35RectWhite1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g'][3]/*[local-name()='path'][1]" ) );
+    assertNotNull( cht35RectWhite1 );
+    //assertEquals( "translate(457.2890025575448,10) ", cht35RectWhite1.getAttribute( "transform" ) );
+    LOG.info( "cht35SizeBar" + cht35SizeBar.getAttribute( "width" ) );
+    LOG.info( "cht35RectWhite1" + cht35RectWhite1.getAttribute( "transform" ) );
+    //>>Chart 36
+    String cht36Title1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='g'][6]/*[local-name()='text']" ) );
+    assertEquals( "Mini Gifts Distributors Ltd.", cht36Title1 );
+    String cht36Subtitle1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='g'][7]/*[local-name()='text']" ) );
+    assertEquals( "Customer", cht36Subtitle1 );
+    //Check chart
+    WebElement cht36SizeBar = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    assertNotNull( cht36SizeBar );
+    //assertEquals( "894", cht36SizeBar.getAttribute( "width" ) );
+    WebElement cht36RectWhite1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='g'][3]/*[local-name()='path'][1]" ) );
+    assertNotNull( cht36RectWhite1 );
+    //assertEquals( "translate(457.2890025575448,10) ", cht36RectWhite1.getAttribute( "transform" ) );
+    LOG.info( "cht36SizeBar" + cht36SizeBar.getAttribute( "width" ) );
+    LOG.info( "cht36RectWhite1" + cht36RectWhite1.getAttribute( "transform" ) );
+    //>>Chart 37
+    String cht37Title1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='g'][6]/*[local-name()='text']" ) );
+    assertEquals( "Havel & Zbyszek Co", cht37Title1 );
+    String cht37Subtitle1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='g'][7]/*[local-name()='text']" ) );
+    assertEquals( "Customer", cht37Subtitle1 );
+    //Check chart
+    WebElement cht37SizeBar = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    assertNull( cht37SizeBar );
+    WebElement cht37RectWhite1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][7]/*[local-name()='g'][3]/*[local-name()='path'][1]" ) );
+    assertNotNull( cht37RectWhite1 );
+    //assertEquals( "translate(457.2890025575448,10) ", cht37RectWhite1.getAttribute( "transform" ) );
+    LOG.info( "cht37RectWhite1" + cht37RectWhite1.getAttribute( "transform" ) );
+    //>>Chart 38
+    String cht38Title1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='g'][6]/*[local-name()='text']" ) );
+    assertEquals( "Blauer See Auto, Co.", cht38Title1 );
+    String cht38Subtitle1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='g'][7]/*[local-name()='text']" ) );
+    assertEquals( "Customer", cht38Subtitle1 );
+    //Check chart
+    WebElement cht38SizeBar = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    assertNotNull( cht38SizeBar );
+    //assertEquals( "894", cht38SizeBar.getAttribute( "width" ) );
+    LOG.info( "cht38SizeBar" + cht38SizeBar.getAttribute( "width" ) );
+    WebElement cht38RectWhite1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='obj3']/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][8]/*[local-name()='g'][3]/*[local-name()='path'][1]" ) );
+    assertNotNull( cht38RectWhite1 );
+    //assertEquals( "translate(457.2890025575448,10) ", cht38RectWhite1.getAttribute( "transform" ) );
+    LOG.info( "cht38RectWhite1" + cht38RectWhite1.getAttribute( "transform" ) );
 
     /*
      * ## Step 4
