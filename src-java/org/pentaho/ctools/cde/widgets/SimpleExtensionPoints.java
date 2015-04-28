@@ -67,7 +67,7 @@ public class SimpleExtensionPoints {
     WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
 
     //##Step 1 - Create a widget
-    this.driver = WidgetUtils.CreateWidget( this.driver, this.widgetName );
+    WidgetUtils.CreateWidget( this.driver, this.widgetName );
 
     //##Step 2 - Add a chart
     // Click in Datasources panel and add a CDA Datasource

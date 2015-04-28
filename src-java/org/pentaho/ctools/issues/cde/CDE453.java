@@ -21,6 +21,7 @@
  ******************************************************************************/
 package org.pentaho.ctools.issues.cde;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
@@ -55,10 +56,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE453 {
+  // The widget name that we what to create
+  private static final String WIDGET_NAME = "CDE453";
+  //The location of all widgets created through CDE Dashboard
+  private static final String FOLDER_WIDGETS = "/public/cde/widgets";
+  // Indicator to check if any assert fails in the test case
+  private static boolean noAssertFails = false;
   // Instance of the driver (browser emulator)
   private static WebDriver DRIVER;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE453.class );
   // Getting screenshot when test fails
@@ -69,7 +74,6 @@ public class CDE453 {
   public static void setUpClass() {
     LOG.info( "setUp##" + CDE453.class.getSimpleName() );
     DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -86,84 +90,49 @@ public class CDE453 {
    *    1. Open New Dashboard and save as Widget
    *    2. Open New Dashboard and assert new Widget is present in components panel
    *    3. Delete newly created Widget
-   *    4. Assert public/cde isn't shown (CDE442)
    *
    */
   @Test( timeout = 120000 )
-  public void tc01_NewCDEDashboard_NewWidgetPresent() throws Exception {
+  public void tc01_NewCDEDashboard_NewWidgetPresent() {
     LOG.info( "tc01_NewCDEDashboard_NewWidgetPresent" );
 
     /*
      * ## Step 1
      */
-    WidgetUtils.CreateWidget( DRIVER, "CDE453" );
+    WidgetUtils.CreateWidget( DRIVER, WIDGET_NAME );
 
     /*
      * ## Step 2
      */
-    //Create new CDE dashboard
-    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-
-    //assert buttons and click "Save"
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@id='Save']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
-    assertNotNull( element );
-    element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//h3[@id='ui-accordion-cdfdd-components-palletePallete-header-8']/span" ) );
-    assertNotNull( element );
-    element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='CDE453 Widget']" ) );
-    assertNotNull( element );
-    element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tr[@id='WIDGETS']" ) );
-    assertNotNull( element );
+    //Go to Components Panel
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    //Expand Widgets option
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//h3[@id='ui-accordion-cdfdd-components-palletePallete-header-8']/span" ) );
+    //Check the widget created is visible in the list of Widgets
+    WebElement widgetCDE453 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.linkText( WIDGET_NAME ) );
+    assertNotNull( widgetCDE453 );
+    ElementHelper.Click( DRIVER, By.linkText( WIDGET_NAME ) );
+    //Check the widget was added to the list of components
+    String groupName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[@id='WIDGETS']/td[2]" ) );
+    assertEquals( "Widgets", groupName );
+    // Check the group added is Widgets
+    String displayWidgetName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[2]/td" ) );
+    String expectedWidgetName = WIDGET_NAME + " Widget";
+    assertEquals( expectedWidgetName, displayWidgetName );
 
     /*
      * ## Step 3
      */
-    WidgetUtils.RemoveWidgetByName( DRIVER, "CDE453" );
-
-    /*
-     * ## Step 4
-     */
-    /*driver.get(baseUrl + "Home");
-    driver.switchTo().frame("home.perspective");
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@class='well sidebar']"));
-    ElementHelper.Click(driver, By.xpath("//div[@class='well sidebar']/button"));//Click in 'Browse Files'
-
-    //Now we have to navigate to 'Public/cde/widgets
-    driver.switchTo().defaultContent();
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("applicationShell"));
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//iframe[@id='browser.perspective']"));
-    driver.switchTo().frame("browser.perspective");
-
-    ElementHelper.WaitForElementPresenceAndVisible(driver, By.id("fileBrowser"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-
-    ElementHelper.Click(driver, By.id("refreshBrowserIcon"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("//div[@class='spinner large-spinner']"));
-    ElementHelper.WaitForElementInvisibility(driver, By.xpath("(//div[@class='spinner large-spinner'])[2]"));
-
-    //Public
-    assertNotNull(ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@id='fileBrowserFolders']")));
-    assertNotNull(ElementHelper.WaitForElementPresenceAndVisible(driver, By.xpath("//div[@path='/public']")));
-    driver.findElement(By.xpath("//div[@path='/public']")).findElement(By.className("expandCollapse")).click();
-    //CDE
-    assertTrue(ElementHelper.WaitForElementNotPresent(driver, By.xpath("//div[@path='/public/cde']")));*/
-
+    WidgetUtils.RemoveWidgetByName( DRIVER, WIDGET_NAME );
+    noAssertFails = true;
   }
 
   @AfterClass
   public static void tearDownClass() {
     LOG.info( "tearDown##" + CDE453.class.getSimpleName() );
+
+    if ( !noAssertFails ) {
+      WidgetUtils.RemoveWidgetByName( DRIVER, WIDGET_NAME );
+    }
   }
 }

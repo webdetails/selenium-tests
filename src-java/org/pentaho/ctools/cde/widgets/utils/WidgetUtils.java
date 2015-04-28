@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,12 +15,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
-import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
-import org.pentaho.ctools.utils.PUCSettings;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.gui.web.puc.BrowseFiles;
 
 public class WidgetUtils {
+  // The location of all widgets created through CDE Dashboard
+  private static final String FOLDER_WIDGETS = "/public/cde/widgets";
+  // Log instance
+  private static final Logger LOG = LogManager.getLogger( WidgetUtils.class );
 
   /**
    * This method is responsible to remove the widget from 'Browse Files'.
@@ -27,16 +32,12 @@ public class WidgetUtils {
    * @param wait
    * @param widgetName
    */
-  public static void RemoveWidgetByName( WebDriver driver, String widgetName ) {
-    driver.switchTo().defaultContent();
-
-    CToolsTestSuite.getBaseUrl();
+  public static void RemoveWidgetByName( final WebDriver driver, final String widgetName ) {
+    LOG.info( "RemoveWidgetByName::Enter" );
     BrowseFiles browser = new BrowseFiles( driver );
-    if ( PUCSettings.SHOWHIDDENFILES == false ) {
-      browser.CheckShowHiddenFiles();
-    }
-    browser.DeleteMultipleFilesByName( "/public/cde/widgets", widgetName );
-
+    browser.CheckShowHiddenFiles();
+    browser.DeleteMultipleFilesByName( FOLDER_WIDGETS, widgetName );
+    LOG.info( "RemoveWidgetByName::Exit" );
   }
 
   /**
@@ -53,8 +54,7 @@ public class WidgetUtils {
     throws Exception {
     //Step 1 - Go to homepage
     driver.switchTo().defaultContent();
-    String baseUrl = CToolsTestSuite.getBaseUrl();
-    driver.get( baseUrl + "Home" );
+    driver.get( PageUrl.PUC );
     //wait for visibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     //Wait for the visibility of Menu and frame contents
@@ -164,31 +164,71 @@ public class WidgetUtils {
    * @param paramName
    * @return
    */
-  public static WebDriver CreateWidget( WebDriver driver, String widgetName ) {
+  public static void CreateWidget( final WebDriver driver, final String widgetName ) {
+    LOG.info( "CreateWidget::Enter" );
+
     //Open New CDE Dashboard
-    driver.switchTo().defaultContent();
-    String baseUrl = CToolsTestSuite.getBaseUrl();
-    driver.get( baseUrl + "api/repos/wcdf/new" );
-    //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebDriver thedriver = driver.switchTo().defaultContent();
+
+    thedriver.get( PageUrl.CDE_DASHBOARD );
+
+    //wait for some contents loaded
+    WebElement elemLogo = ElementHelper.WaitForElementPresence( thedriver, By.cssSelector( "div.cdfdd-toolbar-logo" ) );
+    WebElement buttonSave = ElementHelper.WaitForElementPresence( thedriver, By.id( "Save" ) );
+    WebElement buttonSaveAs = ElementHelper.WaitForElementPresence( thedriver, By.id( "SaveAs" ) );
+    WebElement buttonReload = ElementHelper.WaitForElementPresence( thedriver, By.id( "cdfdd-main-Reload" ) );
+    WebElement buttonSaveTemplate = ElementHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement buttonApplyTemplate = ElementHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Apply Template']" ) );
+    WebElement buttonAddResource = ElementHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Add Resource']" ) );
+    WebElement buttonAddBoostrap = ElementHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    WebElement buttonAddFreeForm = ElementHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Add FreeForm']" ) );
+    WebElement buttonAddRow = ElementHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Add Row']" ) );
+    WebElement buttonLayout = ElementHelper.WaitForElementPresenceAndVisible( thedriver, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    WebElement buttonComponents = ElementHelper.WaitForElementPresenceAndVisible( thedriver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    WebElement buttonDatasources = ElementHelper.WaitForElementPresenceAndVisible( thedriver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    assertNotNull( elemLogo );
+    assertNotNull( buttonSave );
+    assertNotNull( buttonSaveAs );
+    assertNotNull( buttonReload );
+    assertNotNull( buttonSaveTemplate );
+    assertNotNull( buttonApplyTemplate );
+    assertNotNull( buttonAddResource );
+    assertNotNull( buttonAddBoostrap );
+    assertNotNull( buttonAddFreeForm );
+    assertNotNull( buttonAddRow );
+    assertNotNull( buttonLayout );
+    assertNotNull( buttonComponents );
+    assertNotNull( buttonDatasources );
 
     //Save the widget
-    ElementHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) ).click();
-    ElementHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup']" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='container_id']/ul/li" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//input[@id='widgetRadio']" ) ).click();
+    ElementHelper.Click( thedriver, By.id( "Save" ) );
+    //WaitFor popup visible
+    ElementHelper.WaitForElementPresence( thedriver, By.id( "popupbox" ) );
+    ElementHelper.WaitForElementPresence( thedriver, By.id( "popupfade" ) );
+    //We need to wait for the animation finish for the display popup
+    ElementHelper.WaitForAttributeValueEqualsTo( thedriver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -267.5px; z-index: 1000; width: 515px;" );
+    //Wait for contents display
+    ElementHelper.WaitForElementPresenceAndVisible( thedriver, By.cssSelector( "li.directory.collapsed" ) );
+    ElementHelper.ClickJS( thedriver, By.id( "widgetRadio" ) );
+    // Wait for explorer disabled
+    ElementHelper.WaitForElementInvisibility( thedriver, By.id( "container_id" ) );
 
     //Insert file name
-    ElementHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//input[@id='fileInput']" ) ).sendKeys( widgetName );
+    ElementHelper.ClickAndSendKeys( thedriver, By.id( "fileInput" ), widgetName );
     //Insert widget name
-    ElementHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//input[@id='componentInput']" ) ).sendKeys( widgetName );
+    ElementHelper.ClickAndSendKeys( thedriver, By.id( "componentInput" ), widgetName );
     //Press OK (SAVING)
-    ElementHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='popup_state0_buttonOk']" ) ).click();
+    ElementHelper.ClickJS( thedriver, By.id( "popup_state0_buttonOk" ) );
     //Wait for the pop-up exit
-    ElementHelper.WaitForElementInvisibility( driver, By.id( "popupbox" ) );
+    ElementHelper.WaitForElementInvisibility( thedriver, By.id( "popupbox" ) );
 
-    return driver;
+    //Wait For the NotifyBar not present
+    ElementHelper.WaitForElementNotPresent( thedriver, By.id( "notifyBar" ) );
+
+    //Wait for the page refreshed
+    ElementHelper.WaitForTextPresence( thedriver, By.cssSelector( "div.cdfdd-title" ), widgetName );
+
+    LOG.info( "CreateWidget::Exit" );
   }
 
   /**
