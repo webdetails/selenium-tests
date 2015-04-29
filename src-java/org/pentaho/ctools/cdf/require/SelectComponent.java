@@ -36,7 +36,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
@@ -72,33 +71,35 @@ public class SelectComponent {
     DRIVER = CToolsTestSuite.getDriver();
     WAIT = CToolsTestSuite.getWait();
     BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
-  }
-
-  /**
-   * Go to the SelectComponent web page.
-   */
-  public static void init() {
-    // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/SelectComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A16-SelectComponent%3Aselect_component.xcdf/generatedContent" );
-
-    // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
    * Test Case Name:
-   *    Reload Sample
+   *    Open Sample Page
+   */
+  @Test( timeout = 60000 )
+  public void tc0_OpenSamplePage() {
+    // The URL for the SelectComponent under CDF samples
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
+    // Reference/Core Components/SelectComponent
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A16-SelectComponent%3Aselect_component.xcdf/generatedContent" );
+
+    // NOTE - we have to wait for loading disappear
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+  }
+
+  /**
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Page Content
    * Description:
-   *    Reload the sample (not refresh page).
+   *    Check the contents presented in the page.
    * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
+   *    1. Validate the title and subtitle.
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
@@ -134,7 +135,8 @@ public class SelectComponent {
     ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
@@ -161,9 +163,7 @@ public class SelectComponent {
     LOG.info( "tc3_SelectEachItem_AlertDisplayed" );
 
     // ## Step 1
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.cssSelector( "select" ) ) );
-    Select list = new Select( ElementHelper.FindElement( DRIVER, By.cssSelector( "select" ) ) );
-    list.selectByValue( "2" );
+    ElementHelper.SelectByValue( DRIVER, By.cssSelector( "select" ), "2" );
     WAIT.until( ExpectedConditions.alertIsPresent() );
     Alert alert = DRIVER.switchTo().alert();
     String confirmationMsg = alert.getText();
@@ -171,7 +171,7 @@ public class SelectComponent {
     assertEquals( "You chose: 2", confirmationMsg );
 
     // ## Step 2
-    list.selectByValue( "1" );
+    ElementHelper.SelectByValue( DRIVER, By.cssSelector( "select" ), "1" );
     WAIT.until( ExpectedConditions.alertIsPresent() );
     alert = DRIVER.switchTo().alert();
     confirmationMsg = alert.getText();

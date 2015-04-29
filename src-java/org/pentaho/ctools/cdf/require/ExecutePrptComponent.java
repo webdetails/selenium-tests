@@ -86,7 +86,7 @@ public class ExecutePrptComponent {
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A85-ExecutePrptComponent%3Aexecute_prpt_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
@@ -130,7 +130,7 @@ public class ExecutePrptComponent {
     ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
@@ -315,8 +315,8 @@ public class ExecutePrptComponent {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test( timeout = 90000 )
-  public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() throws InterruptedException {
+  @Test( timeout = 120000 )
+  public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
     LOG.debug( "tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised" );
     DRIVER.switchTo().defaultContent();
     WebElement elemIFrame = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );

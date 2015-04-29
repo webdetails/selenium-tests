@@ -58,8 +58,6 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CDE453 {
   // The widget name that we what to create
   private static final String WIDGET_NAME = "CDE453";
-  //The location of all widgets created through CDE Dashboard
-  private static final String FOLDER_WIDGETS = "/public/cde/widgets";
   // Indicator to check if any assert fails in the test case
   private static boolean noAssertFails = false;
   // Instance of the driver (browser emulator)

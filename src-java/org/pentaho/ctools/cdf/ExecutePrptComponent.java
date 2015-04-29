@@ -313,8 +313,8 @@ public class ExecutePrptComponent {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test( timeout = 60000 )
-  public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() throws InterruptedException {
+  @Test( timeout = 120000 )
+  public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
     LOG.debug( "tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised" );
     DRIVER.switchTo().defaultContent();
     WebElement elemIFrame = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
@@ -434,7 +434,6 @@ public class ExecutePrptComponent {
     new File( downloadDir + "\\InventorybyLine.rtf" ).delete();
 
     // ## Step 8
-    //TODO - pageable/text
     select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/text" );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );

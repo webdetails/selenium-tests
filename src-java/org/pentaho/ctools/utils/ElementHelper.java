@@ -33,7 +33,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
@@ -44,6 +43,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 
 import com.google.common.base.Function;
@@ -176,31 +176,98 @@ public class ElementHelper {
    * @param driver
    * @param locator
    * @param text
-   * @param timeout - in seconds
    * @return
    */
   public static String WaitForTextPresence( WebDriver driver, By locator, String textToWait, Integer timeout ) {
+    log.debug( "WaitForTextPresence(Main2)::Enter" );
+    String str = WaitForTextPresence( driver, locator, textToWait, timeout, 50 );
+    log.debug( "WaitForTextPresence(Main2)::Exit" );
+    return str;
+  }
+
+  /**
+   * This method wait for text to be present.
+   *
+   * @param driver
+   * @param locator
+   * @param text
+   * @param timeout - in seconds
+   * @return
+   */
+  public static String WaitForTextPresence( final WebDriver driver, final By locator, final String textToWait,
+      final Integer timeout, final Integer pollingTime ) {
     log.debug( "WaitForTextPresence::Enter" );
     log.debug( "Locator: " + locator.toString() );
     String textPresent = "";
 
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+
     try {
-      Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 200, TimeUnit.MILLISECONDS );
 
-      driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+      class RunnableObject implements Runnable {
 
-      boolean isTextPresent = wait.until( ExpectedConditions.textToBePresentInElementLocated( locator, textToWait ) );
-      if ( isTextPresent == true ) {
-        textPresent = textToWait;
+        private Boolean textIsEquals;
+
+        public Boolean isTextEquals() {
+          return this.textIsEquals;
+        }
+
+        @Override
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
+
+          // Wait for element visible
+          this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {
+
+            @Override
+            public Boolean apply( WebDriver d ) {
+              try {
+                List<WebElement> listElem = d.findElements( locator );
+                if ( listElem.size() > 0 ) {
+                  WebElement elem = listElem.get( 0 );
+                  if ( elem.isEnabled() ) {
+                    String text = elem.getText();
+                    return text.equals( textToWait ); //If true we stop waiting for.
+                  }
+                  return false;
+                }
+                return false;
+              } catch ( StaleElementReferenceException sere ) {
+                return false;
+              }
+            }
+          } );
+        }
       }
 
-      driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-    } catch ( StaleElementReferenceException sere ) {
-      log.warn( "Stale Element Reference Exception" );
-      textPresent = WaitForTextPresence( driver, locator, textToWait, timeout );
+      RunnableObject r = new RunnableObject();
+
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
+      executor.shutdown();
+      if ( r.isTextEquals() ) { // If the text is equals then send the text that we wait for.
+        textPresent = textToWait;
+        log.debug( "Wait for text successful!" );
+      }
+    } catch ( InterruptedException ie ) {
+      log.warn( "Interrupted Exception" );
+      log.warn( ie.getMessage() );
+    } catch ( ExecutionException ee ) {
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
+        log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+      } else {
+        log.warn( "Execution Exception" );
+        log.warn( ee.getMessage() );
+      }
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      log.warn( cte.getMessage() );
     } catch ( Exception e ) {
       log.error( "Exception" );
+      log.catching( e );
     }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     log.debug( "WaitForTextPresence::Exit" );
     return textPresent;
@@ -349,14 +416,17 @@ public class ElementHelper {
 
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
+      log.warn( ie.getMessage() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
+        log.warn( ee.getMessage() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      log.warn( cte.getMessage() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -451,14 +521,17 @@ public class ElementHelper {
       element = r.getValue();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
+      log.warn( ie.getMessage() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
+        log.warn( ee.getMessage() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      log.warn( cte.getMessage() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -486,12 +559,27 @@ public class ElementHelper {
 
   /**
    * This method pretends to check if the element is present, if it doesn't
+   * we wait for presence for a specific timeout (30 seconds).
+   *
+   * @param driver
+   * @param locator
+   */
+  public static WebElement WaitForElementPresence( WebDriver driver, By locator, Integer timeout ) {
+    log.debug( "WaitForElementPresence(Main2)::Enter" );
+    WebElement element = WaitForElementPresence( driver, locator, timeout, 50 );
+    log.debug( "WaitForElementPresence(Main2)::Exit" );
+    return element;
+  }
+
+  /**
+   * This method pretends to check if the element is present, if it doesn't
    * we wait for presence for a specific timeout (input).
    *
    * @param driver
    * @param locator
    */
-  public static WebElement WaitForElementPresence( final WebDriver driver, final By locator, final Integer timeout ) {
+  public static WebElement WaitForElementPresence( final WebDriver driver, final By locator, final Integer timeout,
+      final Integer pollingtime ) {
     log.debug( "WaitForElementPresence::Enter" );
     log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
@@ -513,7 +601,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingtime, TimeUnit.MILLISECONDS );
 
           // Wait for element visible
           this.theElement = wait.until( new Function<WebDriver, WebElement>() {
@@ -546,14 +634,17 @@ public class ElementHelper {
       element = r.getValue();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
+      log.warn( ie.getMessage() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
+        log.warn( ee.getMessage() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      log.warn( cte.getMessage() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -607,6 +698,7 @@ public class ElementHelper {
   /**
    * This method check if the element is present, if don't waits for it.
    * And then returns the textContent.
+   * The max timeout set for this function is 5 seconds.
    *
    * NOTE - the method was created to help on the tool tips, when mouse over an
    * element and we want to read the elements.
@@ -615,14 +707,12 @@ public class ElementHelper {
    * @param locator
    * @return
    */
-  public static String WaitForElementPresentGetText( WebDriver driver, By locator ) {
+  public static String WaitForElementPresentGetText( final WebDriver driver, final By locator ) {
     log.debug( "WaitForElementPresentGetText::Enter" );
     log.debug( "Locator: " + locator.toString() );
-
     String text = "";
-    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 5, TimeUnit.SECONDS ).pollingEvery( 15, TimeUnit.MILLISECONDS ).ignoring( NoSuchElementException.class ).ignoring( StaleElementReferenceException.class );
 
-    WebElement element = wait.until( ExpectedConditions.presenceOfElementLocated( locator ) );
+    WebElement element = WaitForElementPresence( driver, locator, 5, 15 );
     if ( element != null ) {
       try {
         // Cross-browser, see: http://www.quirksmode.org/dom/html/
@@ -635,6 +725,8 @@ public class ElementHelper {
         log.warn( "WebDriver Exception" );
         text = WaitForElementPresentGetText( driver, locator );
       }
+    } else {
+      log.warn( "Element does not exist! [null eleemnt]" );
     }
 
     log.debug( "WaitForElementPresentGetText::Exit" );
@@ -909,14 +1001,17 @@ public class ElementHelper {
       NotPresent = r.getValue();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
+      log.warn( ie.getMessage() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
+        log.warn( ee.getMessage() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      log.warn( cte.getMessage() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -998,14 +1093,17 @@ public class ElementHelper {
       executor.shutdown();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
+      log.warn( ie.getMessage() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
+        log.warn( ee.getMessage() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      log.warn( cte.getMessage() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -1086,14 +1184,17 @@ public class ElementHelper {
       executor.shutdown();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
+      log.warn( ie.getMessage() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
+        log.warn( ee.getMessage() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      log.warn( cte.getMessage() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -1150,8 +1251,35 @@ public class ElementHelper {
       }
     } catch ( StaleElementReferenceException e ) {
       log.warn( "Stale Element Reference Exception" );
-      ClickAndSendKeys( driver, locator, keysToSend );
+      SendKeys( driver, locator, keysToSend );
     }
     log.debug( "SendKeys::Exit" );
   }
+
+  /**
+   * This method shall select an element on a drop-down list by Value.
+   * 
+   * @param driver
+   * @param locator
+   * @param value
+   */
+  public static void SelectByValue( final WebDriver driver, final By locator, final String value ) {
+    log.debug( "SelectByValue::Enter" );
+    log.debug( "Locator: " + locator.toString() );
+
+    try {
+      WebElement elementSelector = WaitForElementPresence( driver, locator );
+      if ( elementSelector != null ) {
+        Select list = new Select( elementSelector );
+        list.selectByValue( value );
+      } else {
+        log.warn( "The element does not exist [null]. Could perform the select action!" );
+      }
+    } catch ( StaleElementReferenceException e ) {
+      log.warn( "Stale Element Reference Exception" );
+      SelectByValue( driver, locator, value );
+    }
+    log.debug( "SelectByValue::Exit" );
+  }
+
 }
