@@ -361,36 +361,44 @@ public class ElementHelper {
    * @param driver
    * @param locator
    */
-  public static void WaitForElementInvisibility( WebDriver driver, final By locator ) {
+  public static boolean WaitForElementInvisibility( WebDriver driver, final By locator ) {
     log.debug( "WaitForElementInvisibility(Main)::Enter" );
-    WaitForElementInvisibility( driver, locator, 30 );
+    boolean isElemVisible = WaitForElementInvisibility( driver, locator, 30 );
     log.debug( "WaitForElementInvisibility(Main)::Exit" );
+	
+	return isElemVisible;
   }
 
   /**
    * This method pretends to check if the element is present, if it doesn't
    * then don't wait, if element is present, wait for its invisibility.
-   *
+   * true - element  invisible
+   * false - element visible
    * @param driver
    * @param locator
    * @param timeout
    */
-  public static void WaitForElementInvisibility( final WebDriver driver, final By locator, final Integer timeout ) {
+  public static boolean WaitForElementInvisibility( final WebDriver driver, final By locator, final Integer timeout ) {
     log.debug( "WaitForElementInvisibility::Enter" );
     log.debug( "Locator: " + locator.toString() );
+	boolean isElemVisible = false;
 
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
+       class RunnableObject implements Runnable {
 
-      Runnable r = new Runnable() {
+        private boolean isVisible;
 
-        @Override
+        public boolean getVisibility() {
+          return this.isVisible;
+        }
+
         public void run() {
           Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
           // Wait for element invisible
-          wait.until( new Function<WebDriver, Boolean>() {
+          this.isVisible = wait.until( new Function<WebDriver, Boolean>() {
 
             @Override
             public Boolean apply( WebDriver d ) {
@@ -408,25 +416,23 @@ public class ElementHelper {
             }
           } );
         }
-      };
+      }
 
+      RunnableObject r = new RunnableObject( );
       ExecutorService executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       executor.shutdown();
-
+      isElemVisible = r.getVisibility();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
-      log.warn( ie.getMessage() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
-        log.warn( ee.getMessage() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
-      log.warn( cte.getMessage() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -435,6 +441,8 @@ public class ElementHelper {
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     log.debug( "WaitForElementInvisibility::Exit" );
+	
+	return isElemVisible;
   }
 
   /**
@@ -709,7 +717,6 @@ public class ElementHelper {
    */
   public static String WaitForElementPresentGetText( final WebDriver driver, final By locator ) {
     log.debug( "WaitForElementPresentGetText::Enter" );
-    log.debug( "Locator: " + locator.toString() );
     String text = "";
 
     WebElement element = WaitForElementPresence( driver, locator, 5, 15 );
