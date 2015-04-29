@@ -251,17 +251,17 @@ public class ElementHelper {
       }
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
-      log.warn( ie.getMessage() );
+      log.warn( ie.toString() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
-        log.warn( ee.getMessage() );
+        log.warn( ee.toString() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
-      log.warn( cte.getMessage() );
+      log.warn( cte.toString() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -365,8 +365,8 @@ public class ElementHelper {
     log.debug( "WaitForElementInvisibility(Main)::Enter" );
     boolean isElemVisible = WaitForElementInvisibility( driver, locator, 30 );
     log.debug( "WaitForElementInvisibility(Main)::Exit" );
-	
-	return isElemVisible;
+
+    return isElemVisible;
   }
 
   /**
@@ -381,12 +381,12 @@ public class ElementHelper {
   public static boolean WaitForElementInvisibility( final WebDriver driver, final By locator, final Integer timeout ) {
     log.debug( "WaitForElementInvisibility::Enter" );
     log.debug( "Locator: " + locator.toString() );
-	boolean isElemVisible = false;
+    boolean isElemVisible = false;
 
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
-       class RunnableObject implements Runnable {
+      class RunnableObject implements Runnable {
 
         private boolean isVisible;
 
@@ -418,7 +418,7 @@ public class ElementHelper {
         }
       }
 
-      RunnableObject r = new RunnableObject( );
+      RunnableObject r = new RunnableObject();
       ExecutorService executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       executor.shutdown();
@@ -441,8 +441,8 @@ public class ElementHelper {
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     log.debug( "WaitForElementInvisibility::Exit" );
-	
-	return isElemVisible;
+
+    return isElemVisible;
   }
 
   /**
@@ -529,17 +529,17 @@ public class ElementHelper {
       element = r.getValue();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
-      log.warn( ie.getMessage() );
+      log.warn( ie.toString() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
-        log.warn( ee.getMessage() );
+        log.warn( ee.toString() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
-      log.warn( cte.getMessage() );
+      log.warn( cte.toString() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -642,17 +642,17 @@ public class ElementHelper {
       element = r.getValue();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
-      log.warn( ie.getMessage() );
+      log.warn( ie.toString() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
-        log.warn( ee.getMessage() );
+        log.warn( ee.toString() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
-      log.warn( cte.getMessage() );
+      log.warn( cte.toString() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -730,6 +730,7 @@ public class ElementHelper {
         text = text.trim(); // remove spaces, newlines,...
       } catch ( WebDriverException wde ) {
         log.warn( "WebDriver Exception" );
+        log.warn( wde.toString() );
         text = WaitForElementPresentGetText( driver, locator );
       }
     } else {
@@ -1008,17 +1009,17 @@ public class ElementHelper {
       NotPresent = r.getValue();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
-      log.warn( ie.getMessage() );
+      log.warn( ie.toString() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
-        log.warn( ee.getMessage() );
+        log.warn( ee.toString() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
-      log.warn( cte.getMessage() );
+      log.warn( cte.toString() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -1100,17 +1101,17 @@ public class ElementHelper {
       executor.shutdown();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
-      log.warn( ie.getMessage() );
+      log.warn( ie.toString() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
-        log.warn( ee.getMessage() );
+        log.warn( ee.toString() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
-      log.warn( cte.getMessage() );
+      log.warn( cte.toString() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
@@ -1191,17 +1192,17 @@ public class ElementHelper {
       executor.shutdown();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
-      log.warn( ie.getMessage() );
+      log.warn( ie.toString() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
         log.warn( "Execution Exception" );
-        log.warn( ee.getMessage() );
+        log.warn( ee.toString() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
-      log.warn( cte.getMessage() );
+      log.warn( cte.toString() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );

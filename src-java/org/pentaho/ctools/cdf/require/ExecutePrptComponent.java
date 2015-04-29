@@ -83,11 +83,10 @@ public class ExecutePrptComponent {
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/ExecutePrptComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A85-ExecutePrptComponent%3Aexecute_prpt_component.xcdf/generatedContent" );
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A85-ExecutePrptComponent%3Aexecute_prpt_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -130,8 +129,7 @@ public class ExecutePrptComponent {
     ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
@@ -140,6 +138,9 @@ public class ExecutePrptComponent {
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
+
+    WebElement elemButton = ElementHelper.FindElement( DRIVER, By.cssSelector( "button span" ) );
+    assertNotNull( elemButton );
   }
 
   /**
@@ -166,6 +167,9 @@ public class ExecutePrptComponent {
     WebElement elemIFrame = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
     String attrId = elemIFrame.getAttribute( "id" );
     DRIVER.switchTo().frame( attrId );
+    //Wait for glasspane display and disable
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check presence of tool bar elements
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='toolbar']/div" ) ) );
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='toolbar']/div[2]" ) ) );
@@ -219,13 +223,12 @@ public class ExecutePrptComponent {
 
     // ## Step 1
     assertNotNull( ElementHelper.FindElement( DRIVER, By.id( "reportControlPanel" ) ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) ).click();
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "reportControlPanel" ) );
-    assertTrue( !ElementHelper.WaitForElementNotPresent( DRIVER, By.id( "reportControlPanel" ), 2 ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) );
+    assertTrue( ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "reportControlPanel" ) ) );
 
     // ## Step 2
-    ElementHelper.FindElement( DRIVER, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) ).click();
-    assertNotNull( ElementHelper.FindElement( DRIVER, By.id( "reportControlPanel" ) ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) );
+    assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "reportControlPanel" ) ) );
   }
 
   /**
@@ -254,6 +257,7 @@ public class ExecutePrptComponent {
     String text = element.getText();
     assertEquals( "Classic Cars", text );
     element.click();
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     DRIVER.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tbody/tr" ) );
@@ -280,6 +284,7 @@ public class ExecutePrptComponent {
     text = element.getText();
     assertEquals( "Motorcycles", text );
     element.click();
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     DRIVER.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tbody/tr" ) );
@@ -328,6 +333,7 @@ public class ExecutePrptComponent {
     // ## Step 1
     Select select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/html;page-mode=page" );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check the generated image
     DRIVER.switchTo().frame( "reportContent" );
@@ -352,6 +358,7 @@ public class ExecutePrptComponent {
     DRIVER.switchTo().frame( attrIframeId );
     select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/html;page-mode=stream" );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check the generated image
     DRIVER.switchTo().frame( "reportContent" );
@@ -376,6 +383,7 @@ public class ExecutePrptComponent {
     DRIVER.switchTo().frame( attrIframeId );
     select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/pdf" );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check the generated image
     DRIVER.switchTo().frame( "reportContent" );
@@ -401,6 +409,7 @@ public class ExecutePrptComponent {
     select.selectByValue( "table/excel;page-mode=flow" );
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate( downloadDir );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.xls" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xls" ).delete();
@@ -411,6 +420,7 @@ public class ExecutePrptComponent {
     select.selectByValue( "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow" );
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate( downloadDir );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.xlsx" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xlsx" ).delete();
@@ -421,6 +431,7 @@ public class ExecutePrptComponent {
     select.selectByValue( "table/csv;page-mode=stream" );
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate( downloadDir );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.csv" ).exists() );
     new File( downloadDir + "\\InventorybyLine.csv" ).delete();
@@ -431,14 +442,15 @@ public class ExecutePrptComponent {
     select.selectByValue( "table/rtf;page-mode=flow" );
     //Wait for file to be created in the destination dir
     DirectoryWatcher.WatchForCreate( downloadDir );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.rtf" ).exists() );
     new File( downloadDir + "\\InventorybyLine.rtf" ).delete();
 
     // ## Step 8
-    //TODO - pageable/text
     select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/text" );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check the generated image
     DRIVER.switchTo().frame( "reportContent" );
