@@ -38,8 +38,14 @@ public class PageUrl {
    */
 
   /*
-   * CDE
+   * CDE - NON-REQUIRE
    */
+  public static final String MAP_COMPONENT_REFERENCE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Amaps.wcdf/generatedContent";
+
+  /*
+   * CDE - REQUIRE
+   */
+  public static final String MAP_COMPONENT_REFERENCE_REQUIRE = BASE_URL + "/api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3ANewMapComponent%3Amaps.wcdf/generatedContent";
 
   /*
    * CDA
