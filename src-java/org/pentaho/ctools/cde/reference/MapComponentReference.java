@@ -468,34 +468,34 @@ public class MapComponentReference {
      * ## Step 2
      */
     //Zoom in - in order for the elements to be visible
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div[5]/div[3]" ) ).click();
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div[5]/div[3]" ) );
     //Open Marker 1
     marker1.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     final String marker1Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    ElementHelper.Click( DRIVER, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "Atelier Graphique", marker1Text );
     //Open Marker 2
     marker2.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     final String marker2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    ElementHelper.Click( DRIVER, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "Signal Gift Stores", marker2Text );
     //Open Marker 3
     marker3.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     final String marker3Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    ElementHelper.Click( DRIVER, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "La Rochelle Gifts", marker3Text );
     //Open Marker 4
     marker4.click();
     //Wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     final String marker4Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
+    ElementHelper.Click( DRIVER, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "Baane Mini Imports", marker4Text );
   }
 

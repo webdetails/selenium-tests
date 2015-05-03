@@ -266,12 +266,12 @@ public class MapComponentReference {
     WAIT.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "10000 km" ) );
 
     //## Step1
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='subtitle0']/span" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='subtitle0']/span" ) );
     assertEquals( "Map with no markers and no shapes - Simple Case", DRIVER.findElement( By.xpath( "//div[@id='subtitle0']/span" ) ).getText() );
     //Scale
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
     assertEquals( "200 km", DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
     assertEquals( "200 mi", DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
     //ButtonLayer
     assertNotNull( DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div[7]/div[2]/img" ) ) );
@@ -280,24 +280,24 @@ public class MapComponentReference {
     assertNotNull( DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div/div/img[12]" ) ) );
 
     //## Step2
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='simpleTest']/div/div[5]/div" ) ) );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) ) );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='simpleTest']/div/div[5]/div[3]" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[5]/div" ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[5]/div[3]" ) );
     DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div[5]/div" ) ).click();
     //wait for the field update
     WAIT.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km" ) );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
     assertEquals( "100 km", DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
     assertEquals( "100 mi", DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
 
     //## Step3
     DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) ).click();
     //wait for the field update
     WAIT.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "100 km" ) );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
     assertEquals( "10000 km", DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
     assertEquals( "5000 mi", DRIVER.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
   }
 
@@ -321,19 +321,19 @@ public class MapComponentReference {
     WAIT.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ), "10000 km" ) );
 
     //## Step1
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='subtitle1']/span" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='subtitle1']/span" ) );
     assertEquals( "Map engine and map tile services", DRIVER.findElement( By.xpath( "//div[@id='subtitle1']/span" ) ).getText() );
     //mapEngine and service
     assertEquals( "Select map engine:", DRIVER.findElement( By.xpath( "//div[@id='content']/div/div[6]/div/div/div" ) ).getText() );
     assertEquals( "Select tile map service:", DRIVER.findElement( By.xpath( "//div[@id='content']/div/div[6]/div/div[2]/div" ) ).getText() );
     //Zoom
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='testTileServices']/div/div[5]/div" ) ) );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='testTileServices']/div/div[5]/div[2]" ) ) );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='testTileServices']/div/div[5]/div[3]" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='testTileServices']/div/div[5]/div" ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='testTileServices']/div/div[5]/div[2]" ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='testTileServices']/div/div[5]/div[3]" ) );
     //Scale
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) );
     assertEquals( "200 km", DRIVER.findElement( By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) ).getText() );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) );
     assertEquals( "200 mi", DRIVER.findElement( By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) ).getText() );
     //Check if we are using OpenLayers
     String mapId = DRIVER.findElement( By.xpath( "//div[@id='testTileServices']/div" ) ).getAttribute( "id" );
@@ -346,7 +346,7 @@ public class MapComponentReference {
     //## Step2
     mapEngine.selectByValue( "google" );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='testTileServices']/div[@class='gm-style']" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='testTileServices']/div[@class='gm-style']" ) );
     //Image with Google (left down corner)
     assertNotNull( DRIVER.findElement( By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
     //Text 'Termos de Utilização (righ down corner)
