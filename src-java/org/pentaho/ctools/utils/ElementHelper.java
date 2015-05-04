@@ -425,14 +425,18 @@ public class ElementHelper {
       isElemVisible = r.getVisibility();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
+      log.warn( ie.toString() );
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+        log.warn( ee.toString() );
       } else {
         log.warn( "Execution Exception" );
+        log.warn( ee.toString() );
       }
     } catch ( java.util.concurrent.TimeoutException cte ) {
       log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      log.warn( cte.toString() );
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
