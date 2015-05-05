@@ -28,7 +28,6 @@ import static org.junit.Assert.assertNotNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -40,6 +39,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -57,8 +57,6 @@ public class MapComponentFullTest {
 
   // Instance of the driver (browser emulator)
   private static WebDriver DRIVER;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
   // Log instance
   private static Logger LOG = LogManager.getLogger( MapComponentFullTest.class );
 
@@ -72,17 +70,6 @@ public class MapComponentFullTest {
   public static void setUp() {
     LOG.info( "setUp##" + MapComponentFullTest.class.getSimpleName() );
     DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
-
-  @Before
-  public void setUpTestCase() {
-    // Go to MapComponentFullTest
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3ANewMapComponent%3AFullMapTest.wcdf/generatedContent" );
-
-    // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -97,7 +84,41 @@ public class MapComponentFullTest {
    *    2. Check Sample title
    *    3. Check Map title
    */
-  @Test( timeout = 60000 )
+  @Test( timeout = 360000 )
+  public void tc00_LoadPage() {
+    LOG.info( "tc00_LoadPage" );
+
+    // Go to MapComponentFullTest
+    DRIVER.get( PageUrl.MAP_COMPONENT_FULL_TEST_REQUIRE );
+
+    // NOTE - we have to wait for loading disappear
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+
+    // Check if the chart is already rendered
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][1]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][2]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][3]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][4]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][5]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][6]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][7]" ), 30 );
+
+  }
+
+  /**
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Validate Page Contents
+   * Description:
+   *    Here we want to validate the page contents.
+   * Steps:
+   *    1. Check the widget's title.
+   *    2. Check Sample title
+   *    3. Check Map title
+   */
+  @Test( timeout = 30000 )
   public void tc01_PageContent_DisplayContents() {
     LOG.info( "tc01_PageContent_DisplayContents" );
 
@@ -127,22 +148,13 @@ public class MapComponentFullTest {
    *    3. Check tooltip
    *    4. Check disabling series in pie chart
    */
-  @Test( timeout = 280000 )
+  @Test( timeout = 90000 )
   public void tc02_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed() {
     LOG.info( "tc02_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed" );
 
     /*
      * ## Step 1
      */
-    // Check if the chart is already rendered
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][1]" ), 90 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][2]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][3]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][4]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][5]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][6]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][7]" ), 30 );
-
     WebElement marker1 = ElementHelper.FindElement( DRIVER, By.xpath( "//*[local-name()='image'][1]" ) );
     WebElement marker2 = ElementHelper.FindElement( DRIVER, By.xpath( "//*[local-name()='image'][2]" ) );
     WebElement marker3 = ElementHelper.FindElement( DRIVER, By.xpath( "//*[local-name()='image'][3]" ) );

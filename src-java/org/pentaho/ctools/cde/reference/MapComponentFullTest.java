@@ -28,7 +28,6 @@ import static org.junit.Assert.assertNotNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -40,6 +39,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -57,8 +57,6 @@ public class MapComponentFullTest {
 
   // Instance of the driver (browser emulator)
   private static WebDriver DRIVER;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
   // Log instance
   private static Logger LOG = LogManager.getLogger( MapComponentFullTest.class );
 
@@ -72,16 +70,6 @@ public class MapComponentFullTest {
   public static void setUp() {
     LOG.info( "setUp##" + MapComponentFullTest.class.getSimpleName() );
     DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
-
-  @Before
-  public void setUpTestCase() {
-    // Go to AddinReference
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AFullMapTest.wcdf/generatedContent" );
-
-    // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 180 );
   }
 
   /**
@@ -96,7 +84,40 @@ public class MapComponentFullTest {
    *    2. Check Sample title
    *    3. Check Map title
    */
-  @Test( timeout = 60000 )
+  @Test( timeout = 360000 )
+  public void tc00_LoadPage() {
+    LOG.info( "tc00_LoadPage" );
+
+    // Go to MapComponentFullTest
+    DRIVER.get( PageUrl.MAP_COMPONENT_FULL_TEST );
+
+    // NOTE - we have to wait for loading disappear
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
+
+    // Check if the chart is already rendered
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][1]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][2]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][3]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][4]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][5]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][6]" ), 30 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][7]" ), 30 );
+
+  }
+
+  /**
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Validate Page Contents
+   * Description:
+   *    Here we want to validate the page contents.
+   * Steps:
+   *    1. Check the widget's title.
+   *    2. Check Sample title
+   *    3. Check Map title
+   */
+  @Test( timeout = 30000 )
   public void tc01_PageContent_DisplayContents() {
     LOG.info( "tc01_PageContent_DisplayContents" );
 
@@ -126,22 +147,13 @@ public class MapComponentFullTest {
    *    3. Check tooltip
    *    4. Check disabling series in pie chart
    */
-  @Test( timeout = 280000 )
+  @Test( timeout = 90000 )
   public void tc02_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed() {
     LOG.info( "tc02_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed" );
 
     /*
      * ## Step 1
      */
-    // Check if the chart is already rendered
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][1]" ), 90 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][2]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][3]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][4]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][5]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][6]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][7]" ), 30 );
-
     WebElement marker1 = ElementHelper.FindElement( DRIVER, By.xpath( "//*[local-name()='image'][1]" ) );
     WebElement marker2 = ElementHelper.FindElement( DRIVER, By.xpath( "//*[local-name()='image'][2]" ) );
     WebElement marker3 = ElementHelper.FindElement( DRIVER, By.xpath( "//*[local-name()='image'][3]" ) );
@@ -169,13 +181,13 @@ public class MapComponentFullTest {
      */
     // Zoom in - in order for the elements to be visible
     ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div[5]/div[3]" ) ).click();
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     Actions acts2 = new Actions( DRIVER );
     acts2.moveToElement( DRIVER.findElement( By.id( "dfooter" ) ) ).perform();
     // >>> Open Marker 1
     DRIVER.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) ).click();
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker1Serie1 = ElementHelper.GetTextElementInvisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
@@ -199,7 +211,7 @@ public class MapComponentFullTest {
     // >>> Open Marker 2
     DRIVER.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) ).click();
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker2Serie1 = ElementHelper.GetTextElementInvisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
@@ -221,7 +233,7 @@ public class MapComponentFullTest {
     // >>> Open Marker 3
     DRIVER.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) ).click();
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker3Serie1 = ElementHelper.GetTextElementInvisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
@@ -241,7 +253,7 @@ public class MapComponentFullTest {
     // >>> Open Marker 4
     DRIVER.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][4]" ) ).click();
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker4Serie1 = ElementHelper.GetTextElementInvisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
@@ -259,7 +271,7 @@ public class MapComponentFullTest {
     // >>> Open Marker 5
     DRIVER.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][5]" ) ).click();
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker5Serie1 = ElementHelper.GetTextElementInvisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
@@ -285,7 +297,7 @@ public class MapComponentFullTest {
     // >>> Open Marker 6
     DRIVER.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][6]" ) ).click();
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker6Serie1 = ElementHelper.GetTextElementInvisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
@@ -311,7 +323,7 @@ public class MapComponentFullTest {
     // >>> Open Marker 7
     DRIVER.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][7]" ) ).click();
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker7Serie1 = ElementHelper.GetTextElementInvisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
@@ -331,7 +343,7 @@ public class MapComponentFullTest {
      */
     DRIVER.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][5]" ) ).click();
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Move mouse to element
     WebElement marker5SeriesClassicCars = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][1]" ) );

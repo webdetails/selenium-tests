@@ -25,6 +25,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -37,6 +39,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -52,17 +55,17 @@ public class AutoCompleteBoxComponent {
   private WebDriver driver;
   // Instance to be used on wait commands
   private Wait<WebDriver> wait;
-  // The base url to be append the relative url in test
-  private String baseUrl;
+  //Log instance
+  private Logger LOG = LogManager.getLogger( AutoCompleteBoxComponent.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
+    this.LOG.info( "setUp##" + AutoCompleteBoxComponent.class.getSimpleName() );
     this.driver = CToolsTestSuite.getDriver();
     this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
   /**
@@ -81,19 +84,21 @@ public class AutoCompleteBoxComponent {
    */
   @Test( timeout = 90000 )
   public void tc1_AutocompleteBox_DataAreListed() {
+    this.LOG.info( "tc1_AutocompleteBox_DataAreListed" );
     //## Step 1
-    this.driver.get( this.baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:58-AutocompleteBoxComponent:autocomplete_component.xcdf/generatedContent" );
+    this.driver.get( PageUrl.AUTOCOMPLETE_BOX_COMPONENT );
 
     //NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
     this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
-    //Wait for visibility of 'AutocompleteBoxComponent'
-    ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
     // Validate the sample that we are testing is the one
     assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
-    assertEquals( "AutocompleteBoxComponent", ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+
+    String expectedSampleTitle = "AutocompleteBoxComponent";
+    String actualSampleTitle = ElementHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), expectedSampleTitle );
+    assertEquals( expectedSampleTitle, actualSampleTitle );
 
     //## Step 2
     //Render again the sample 
@@ -129,5 +134,6 @@ public class AutoCompleteBoxComponent {
   @After
   public void tearDown() {
     //To use after test case run.
+    this.LOG.info( "tearDown##" + AutoCompleteBoxComponent.class.getSimpleName() );
   }
 }
