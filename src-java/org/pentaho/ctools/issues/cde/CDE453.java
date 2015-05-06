@@ -90,7 +90,7 @@ public class CDE453 {
    *    3. Delete newly created Widget
    *
    */
-  @Test( timeout = 120000 )
+  @Test( timeout = 180000 )
   public void tc01_NewCDEDashboard_NewWidgetPresent() {
     LOG.info( "tc01_NewCDEDashboard_NewWidgetPresent" );
 
