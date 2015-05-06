@@ -284,7 +284,7 @@ public class ElementHelper {
     log.debug( "ClickJS::Enter" );
     log.debug( "Locator: " + locator.toString() );
 
-    WebElement element = FindElement( driver, locator );
+    WebElement element = WaitForElementPresenceAndVisible( driver, locator );
     if ( element != null ) {
       try {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -313,7 +313,7 @@ public class ElementHelper {
     log.debug( "Locator: " + locator.toString() );
 
     try {
-      WebElement element = FindElement( driver, locator );
+      WebElement element = WaitForElementPresenceAndVisible( driver, locator );
       if ( element != null ) {
         element.click();
         log.debug( "Click::Exit" );

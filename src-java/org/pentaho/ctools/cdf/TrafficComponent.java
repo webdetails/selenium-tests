@@ -25,6 +25,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -37,8 +39,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
+import org.pentaho.ctools.cde.reference.MapComponentFullTest;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -52,43 +56,45 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class TrafficComponent {
 
   //Instance of the driver (browser emulator)
-  private static WebDriver driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
-  // The base url to be append the relative url in test
-  private static String baseUrl;
+  private static Wait<WebDriver> WAIT;
+  // Log instance
+  private static Logger LOG = LogManager.getLogger( MapComponentFullTest.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( driver );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
    * Shall initialized the test before run each test case.
    */
   @BeforeClass
   public static void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
+    LOG.info( "setUp##" + TrafficComponent.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
   }
 
   /**
-   * Go to the TrafficComponent web page.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Load Page
    */
-  public static void init() {
+  @Test( timeout = 60000 )
+  public void tc0_LoadPage() {
+    LOG.info( "tc0_LoadPage" );
+
     // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/TrafficComponent
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A28-TrafficComponent%3Atraffic_component.xcdf/generatedContent" );
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TrafficComponent
+    DRIVER.get( PageUrl.TRAFFIC_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
-   * ############################### Test Case 2 ###############################
+   * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
    *    Reload Sample
@@ -99,14 +105,15 @@ public class TrafficComponent {
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
+    LOG.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "TrafficComponent", ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "TrafficComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -121,20 +128,23 @@ public class TrafficComponent {
    */
   @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
-    // ## Step 1
+    LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
+    /*
+     *  ## Step 1
+     */
     // Render again the sample
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -152,17 +162,21 @@ public class TrafficComponent {
      */
   @Test( timeout = 60000 )
   public void tc3_MouseOverTrafficLight_TooltipDisplayed() {
-    // ## Step 1
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.cssSelector( "div.img.trafficYellow" ) ) );
-    WebElement elemTraffic = ElementHelper.FindElement( driver, By.cssSelector( "div.img.trafficYellow" ) );
+    LOG.info( "tc3_MouseOverTrafficLight_TooltipDisplayed" );
+    /*
+     *  ## Step 1
+     */
+    WebElement elemTraffic = ElementHelper.FindElement( DRIVER, By.cssSelector( "div.img.trafficYellow" ) );
     assertNotNull( elemTraffic );
 
-    // ## Step 2
-    Actions acts = new Actions( driver );
+    /*
+     *  ## Step 2
+     */
+    Actions acts = new Actions( DRIVER );
     acts.moveToElement( elemTraffic, 5, 5 );
     acts.build().perform();
 
-    String text = ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='ui-tooltip-content']" ) );
+    String text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='ui-tooltip-content']" ) );
     String expectedTextV1 = "Value: 1.43199389E8";
     String expectedTextV2 = "70000000";
     String expectedTextV3 = "150000000";
@@ -174,5 +188,6 @@ public class TrafficComponent {
   @AfterClass
   public static void tearDown() {
     //To use when class run all test cases.
+    LOG.info( "tearDown##" + TrafficComponent.class.getSimpleName() );
   }
 }

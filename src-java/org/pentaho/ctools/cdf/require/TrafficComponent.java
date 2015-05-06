@@ -25,6 +25,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -37,8 +39,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
+import org.pentaho.ctools.cde.reference.MapComponentFullTest;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -55,8 +59,8 @@ public class TrafficComponent {
   private static WebDriver DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
+  // Log instance
+  private static Logger LOG = LogManager.getLogger( MapComponentFullTest.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -66,22 +70,24 @@ public class TrafficComponent {
    */
   @BeforeClass
   public static void setUp() {
+    LOG.info( "setUp##" + TrafficComponent.class.getSimpleName() );
     DRIVER = CToolsTestSuite.getDriver();
     WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
   }
 
   /**
-   * Go to the TrafficComponent web page.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Load Page
    */
-  public static void init() {
+  @Test( timeout = 60000 )
+  public void tc0_LoadPage() {
+    LOG.info( "tc0_LoadPage" );
+
     // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/TrafficComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A28-TrafficComponent%3Atraffic_component.xcdf/generatedContent" );
+    // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/TrafficComponent
+    DRIVER.get( PageUrl.TRAFFIC_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -100,6 +106,7 @@ public class TrafficComponent {
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
+    LOG.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
     WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -122,13 +129,15 @@ public class TrafficComponent {
    */
   @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
-    // ## Step 1
+    LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
+    /*
+     *  ## Step 1
+     */
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
@@ -154,12 +163,16 @@ public class TrafficComponent {
    */
   @Test( timeout = 60000 )
   public void tc3_MouseOverTrafficLight_TooltipDisplayed() {
-    // ## Step 1
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.cssSelector( "div.img.trafficYellow" ) ) );
+    LOG.info( "tc3_MouseOverTrafficLight_TooltipDisplayed" );
+    /*
+     *  ## Step 1
+     */
     WebElement elemTraffic = ElementHelper.FindElement( DRIVER, By.cssSelector( "div.img.trafficYellow" ) );
     assertNotNull( elemTraffic );
 
-    // ## Step 2
+    /*
+     *  ## Step 2
+     */
     Actions acts = new Actions( DRIVER );
     acts.moveToElement( elemTraffic );
     acts.build().perform();
@@ -176,5 +189,6 @@ public class TrafficComponent {
   @AfterClass
   public static void tearDown() {
     //To use when class run all test cases.
+    LOG.info( "tearDown##" + TrafficComponent.class.getSimpleName() );
   }
 }
