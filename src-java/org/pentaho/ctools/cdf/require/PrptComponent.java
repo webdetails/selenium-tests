@@ -95,6 +95,8 @@ public class PrptComponent {
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 10 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
   }
 
   /**
@@ -119,6 +121,8 @@ public class PrptComponent {
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 10 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
 
     // Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
