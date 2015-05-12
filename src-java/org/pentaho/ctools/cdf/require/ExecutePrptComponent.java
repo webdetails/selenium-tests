@@ -38,6 +38,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.DirectoryWatcher;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -54,8 +55,6 @@ public class ExecutePrptComponent {
   private static WebDriver DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
   //Log instance
   private static Logger LOG = LogManager.getLogger( ExecutePrptComponent.class );
 
@@ -70,34 +69,39 @@ public class ExecutePrptComponent {
     LOG.debug( "setup" );
     DRIVER = CToolsTestSuite.getDriver();
     WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
   }
 
   /**
-   * Go to the PrptComponent web page.
-   */
-  public static void init() {
-    // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/ExecutePrptComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A85-ExecutePrptComponent%3Aexecute_prpt_component.xcdf/generatedContent" );
-
-    // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-  }
-
-  /**
-   * ############################### Test Case 2 ###############################
+   * ############################### Test Case 0 ###############################
    *
    * Test Case Name:
-   *    Reload Sample
+   *    Display Content
    * Description:
-   *    Reload the sample (not refresh page).
+   *    Check if the contents present in page is the expected.
    * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
+   *    1. Check title web page and sample title.
+   */
+  @Test( timeout = 60000 )
+  public void tc0_OpenSamplePage() {
+    // The URL for the ExecutePrptComponent under CDF samples
+    // This sample is in: 
+    // ::Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/ExecutePrptComponent
+    DRIVER.get( PageUrl.EXECUTE_PRPT_COMPONENT_REQUIRE );
+
+    // NOTE - we have to wait for loading disappear
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+  }
+
+  /**
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Display Content
+   * Description:
+   *    Check if the contents present in page is the expected.
+   * Steps:
+   *    1. Check title web page and sample title.
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
@@ -125,11 +129,12 @@ public class ExecutePrptComponent {
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
@@ -175,7 +180,8 @@ public class ExecutePrptComponent {
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='toolbar']/div[2]" ) ) );
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='toolbar']/span" ) ) );
     //Check the Product Name and Output Type
-    String prodName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//td/div/div" ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "div.parameter-label" ) );
+    String prodName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "div.parameter-label" ) );
     assertEquals( "Line", prodName );
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//td/div/div[2]/select" ) ) );
     String outputTypeName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select/../../div" ) );

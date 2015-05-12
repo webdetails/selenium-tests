@@ -45,6 +45,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.DirectoryWatcher;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -61,8 +62,6 @@ public class PrptComponent {
   private static WebDriver DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
   //Log instance
   private static Logger LOG = LogManager.getLogger( PrptComponent.class );
 
@@ -77,25 +76,62 @@ public class PrptComponent {
     LOG.info( "setUp##" + PrptComponent.class.getSimpleName() );
     DRIVER = CToolsTestSuite.getDriver();
     WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
   }
 
   /**
-   * Go to the PrptComponent web page.
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Display Content
+   * Description:
+   *    Check if the contents present in page is the expected.
+   * Steps:
+   *    1. Check title web page and sample title.
    */
-  public static void init() {
-    // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/PrptComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A63-PentahoReportingComponent%3Aprpt_component.xcdf/generatedContent" );
+  @Test( timeout = 60000 )
+  public void tc0_OpenSamplePage() {
+    // The URL for the PrptComponent under CDF samples
+    // This sample is in: 
+    // ::Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/PrptComponent
+    DRIVER.get( PageUrl.PRPT_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 10 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
+
+    //Check if the some elements are already displayed
+    //Check if element with "Line" is visible
+    DRIVER.switchTo().frame( "sampleObject_prptFrame" );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "div.parameter-label" ) );
+    //Check if element with "LINE: Classic Cars" is visible
+    DRIVER.switchTo().frame( "reportContent" );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tr/td" ) );
+
+    //Back to root
+    DRIVER.switchTo().defaultContent();
+  }
+
+  /**
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Display Content
+   * Description:
+   *    Check if the contents present in page is the expected.
+   * Steps:
+   *    1. Check title web page and sample title.
+   */
+  @Test( timeout = 60000 )
+  public void tc1_PageContent_DisplayTitle() {
+    // Wait for title become visible and with value 'Community Dashboard Framework'
+    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    // Wait for visibility of 'VisualizationAPIComponent'
+    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+
+    // Validate the sample that we are testing is the one
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "PrptComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -121,6 +157,17 @@ public class PrptComponent {
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 10 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
+
+    //Check if the some elements are already displayed
+    //Check if element with "Line" is visible
+    DRIVER.switchTo().frame( "sampleObject_prptFrame" );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "div.parameter-label" ) );
+    //Check if element with "LINE: Classic Cars" is visible
+    DRIVER.switchTo().frame( "reportContent" );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tr/td" ) );
+
+    //Back to root
+    DRIVER.switchTo().defaultContent();
 
     // Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
