@@ -99,9 +99,17 @@ public class MapComponentReference {
     //Wait for page render on each map test
     ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km", 90 );
     ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ), "200 km", 90 );
+    //Wait for the three marks
     ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ), 90 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ), 90 );
+    //Wait for the three marks
     ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][4]" ), 90 );
+    //Wait for shapes
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ), 90 );
 
     //Just check if the sample title is displayed.
     String actualSampleTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "div#title span" ) );

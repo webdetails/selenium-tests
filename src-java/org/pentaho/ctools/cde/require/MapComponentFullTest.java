@@ -97,13 +97,12 @@ public class MapComponentFullTest {
 
     // Check if the chart is already rendered
     ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][1]" ), 90 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][2]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][3]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][4]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][5]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][6]" ), 30 );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][7]" ), 30 );
-
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][2]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][3]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][4]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][5]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][6]" ), 90 );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//*[local-name()='image'][7]" ), 90 );
   }
 
   /**
