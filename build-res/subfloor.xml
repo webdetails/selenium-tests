@@ -680,6 +680,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
 	<target name="clean-common" description="Detect common resources.">
 		<delete dir="${tmp.dir}" />
+		<delete>
+			<fileset dir="${basedir}" includes="junit*.properties"/>
+		</delete>
 	</target>
 
 	<!--=======================================================================
