@@ -85,8 +85,8 @@ public class MapComponentFullTest {
    *    3. Check Map title
    */
   @Test( timeout = 360000 )
-  public void tc00_LoadPage() {
-    LOG.info( "tc00_LoadPage" );
+  public void tc0_OpenSamplePage() {
+    LOG.info( "tc0_OpenSamplePage" );
 
     // Go to MapComponentFullTest
     DRIVER.get( PageUrl.MAP_COMPONENT_FULL_TEST_REQUIRE );
@@ -118,8 +118,8 @@ public class MapComponentFullTest {
    *    3. Check Map title
    */
   @Test( timeout = 30000 )
-  public void tc01_PageContent_DisplayContents() {
-    LOG.info( "tc01_PageContent_DisplayContents" );
+  public void tc1_PageContent_DisplayContents() {
+    LOG.info( "tc1_PageContent_DisplayContents" );
 
     /*
      * ## Step 1
@@ -148,8 +148,8 @@ public class MapComponentFullTest {
    *    4. Check disabling series in pie chart
    */
   @Test( timeout = 120000 )
-  public void tc02_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed() {
-    LOG.info( "tc02_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed" );
+  public void tc2_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed() {
+    LOG.info( "tc2_MapCGGMarkersAndPopupWindows_MarkersAndPopupsDisplayed" );
 
     /*
      * ## Step 1

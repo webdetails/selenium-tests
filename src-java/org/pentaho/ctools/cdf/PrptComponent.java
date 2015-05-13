@@ -88,7 +88,7 @@ public class PrptComponent {
    * Steps:
    *    1. Check title web page and sample title.
    */
-  @Test( timeout = 60000 )
+  @Test( timeout = 120000 )
   public void tc0_OpenSamplePage() {
     // The URL for the PrptComponent under CDF samples
     // This sample is in: 
@@ -97,17 +97,16 @@ public class PrptComponent {
 
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 10 );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
 
     //Check if the some elements are already displayed
     //Check if element with "Line" is visible
-    DRIVER.switchTo().frame( "sampleObject_prptFrame" );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "div.parameter-label" ) );
+    WebDriver frameSamplePrpt = DRIVER.switchTo().frame( "sampleObject_prptFrame" );
+    WebElement elemLine = ElementHelper.WaitForElementPresenceAndVisible( frameSamplePrpt, By.cssSelector( "div.parameter-label" ), 45 );
+    assertNotNull( elemLine );
     //Check if element with "LINE: Classic Cars" is visible
-    DRIVER.switchTo().frame( "reportContent" );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tr/td" ) );
-
+    WebDriver frameReportContent = frameSamplePrpt.switchTo().frame( "reportContent" );
+    WebElement elemLineClassic = ElementHelper.WaitForElementPresenceAndVisible( frameReportContent, By.xpath( "//tr/td" ), 45 );
+    assertNotNull( elemLineClassic );
     //Back to root
     DRIVER.switchTo().defaultContent();
   }
@@ -155,17 +154,16 @@ public class PrptComponent {
 
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 10 );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
 
     //Check if the some elements are already displayed
     //Check if element with "Line" is visible
-    DRIVER.switchTo().frame( "sampleObject_prptFrame" );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "div.parameter-label" ) );
+    WebDriver frameSamplePrpt = DRIVER.switchTo().frame( "sampleObject_prptFrame" );
+    WebElement elemLine = ElementHelper.WaitForElementPresenceAndVisible( frameSamplePrpt, By.cssSelector( "div.parameter-label" ), 45 );
+    assertNotNull( elemLine );
     //Check if element with "LINE: Classic Cars" is visible
-    DRIVER.switchTo().frame( "reportContent" );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tr/td" ) );
-
+    WebDriver frameReportContent = frameSamplePrpt.switchTo().frame( "reportContent" );
+    WebElement elemLineClassic = ElementHelper.WaitForElementPresenceAndVisible( frameReportContent, By.xpath( "//tr/td" ), 45 );
+    assertNotNull( elemLineClassic );
     //Back to root
     DRIVER.switchTo().defaultContent();
 

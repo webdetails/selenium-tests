@@ -81,7 +81,7 @@ public class CCCV2ShowCase {
    *    Open sample page.
    */
   @Test( timeout = 60000 )
-  public void tc00_OpenSamplePage() {
+  public void tc0_OpenSamplePage() {
     // Go to AddinReference
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AtestCCCv2-II.wcdf/generatedContent" );
 
@@ -121,8 +121,8 @@ public class CCCV2ShowCase {
    *    1. Check Bar Chart
    */
   @Test( timeout = 60000 )
-  public void tc01_ChartContent_DisplayedCorrect() {
-    LOG.info( "tc01_ChartContent_DisplayedCorrect" );
+  public void tc1_ChartContent_DisplayedCorrect() {
+    LOG.info( "tc1_ChartContent_DisplayedCorrect" );
 
     /*
      * ## Step 1 - Bar Chart
@@ -191,8 +191,8 @@ public class CCCV2ShowCase {
    *    1. Check Line Chart
    */
   @Test( timeout = 90000 )
-  public void tc02_ChartContent_DisplayedCorrect() {
-    LOG.info( "tc02_ChartContent_DisplayedCorrect" );
+  public void tc2_ChartContent_DisplayedCorrect() {
+    LOG.info( "tc2_ChartContent_DisplayedCorrect" );
 
     /*
      * ## Step 1 - Line Chart
@@ -248,8 +248,8 @@ public class CCCV2ShowCase {
    *    1. Check Pie Chart
    */
   @Test( timeout = 90000 )
-  public void tc03_ChartContent_DisplayedCorrect() {
-    LOG.info( "tc03_ChartContent_DisplayedCorrect" );
+  public void tc3_ChartContent_DisplayedCorrect() {
+    LOG.info( "tc3_ChartContent_DisplayedCorrect" );
 
     /*
      * ## Step 3 - Pie Chart

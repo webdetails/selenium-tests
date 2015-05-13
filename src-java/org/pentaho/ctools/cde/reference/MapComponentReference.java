@@ -86,8 +86,8 @@ public class MapComponentReference {
    *    Open the sample page
    */
   @Test( timeout = 360000 )
-  public void tc0_OpenPage() {
-    LOG.info( "tc0_OpenSample" );
+  public void tc0_OpenSamplePage() {
+    LOG.info( "tc0_OpenSamplePage" );
 
     //Go to MapComponentReference
     DRIVER.get( PageUrl.MAP_COMPONENT_REFERENCE );

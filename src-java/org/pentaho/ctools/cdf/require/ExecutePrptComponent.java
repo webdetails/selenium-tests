@@ -180,7 +180,8 @@ public class ExecutePrptComponent {
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='toolbar']/div[2]" ) ) );
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='toolbar']/span" ) ) );
     //Check the Product Name and Output Type
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "div.parameter-label" ) );
+    WebElement elemtLine = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "div.parameter-label" ), 45 );
+    assertNotNull( elemtLine );
     String prodName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "div.parameter-label" ) );
     assertEquals( "Line", prodName );
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//td/div/div[2]/select" ) ) );
