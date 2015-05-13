@@ -90,6 +90,7 @@ public class PrptComponent {
    */
   @Test( timeout = 120000 )
   public void tc0_OpenSamplePage() {
+    LOG.info( "tc0_OpenSamplePage" );
     // The URL for the PrptComponent under CDF samples
     // This sample is in: 
     // ::Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/PrptComponent
@@ -125,6 +126,7 @@ public class PrptComponent {
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
+    LOG.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
     WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -349,7 +351,7 @@ public class PrptComponent {
 
     // ## Step 2
     DRIVER.switchTo().defaultContent();
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='pentaho-toggle-button-container']/div/div[2]/button" ) );
     assertNotNull( element );

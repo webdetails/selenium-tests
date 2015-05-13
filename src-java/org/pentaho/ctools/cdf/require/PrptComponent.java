@@ -90,6 +90,7 @@ public class PrptComponent {
    */
   @Test( timeout = 60000 )
   public void tc0_OpenSamplePage() {
+    LOG.info( "tc0_OpenSamplePage" );
     // The URL for the PrptComponent under CDF samples
     // This sample is in: 
     // ::Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/PrptComponent
@@ -126,6 +127,7 @@ public class PrptComponent {
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
+    LOG.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
     WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'

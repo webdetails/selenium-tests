@@ -24,8 +24,10 @@ package org.pentaho.ctools.cdf.require;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,8 +39,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
+import org.pentaho.ctools.cdf.PrptComponent;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -52,20 +56,23 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class DateInputComponent {
 
   // Instance of the driver (browser emulator)
-  private WebDriver driver;
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
-  private Wait<WebDriver> wait;
-  // The base url to be append the relative url in test
-  private String baseUrl;
+  private static Wait<WebDriver> WAIT;
+  //Log instance
+  private static Logger LOG = LogManager.getLogger( PrptComponent.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
-  @Before
-  public void setUp() throws Exception {
-    this.driver = CToolsTestSuite.getDriver();
-    this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
+  /**
+   * Shall initialized the test before run each test case.
+   */
+  @BeforeClass
+  public static void setUp() {
+    LOG.info( "setUp##" + DateInputComponent.class.getSimpleName() );
+    DRIVER = CToolsTestSuite.getDriver();
+    WAIT = CToolsTestSuite.getWait();
   }
 
   /**
@@ -83,45 +90,53 @@ public class DateInputComponent {
    */
   @Test( timeout = 60000 )
   public void tc1_DataInput_DisplayPopupWithPickedDate() {
-    //## Step 1
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A40-DateInputComponent%3Adate_input_component.xcdf/generatedContent" );
+    /*
+     * ## Step 1
+     */
+    DRIVER.get( PageUrl.DATEINPUT_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for visibility of 'DateInputComponent'
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+    ElementHelper.WaitForElementVisibility( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
-    assertEquals( "DateInputComponent", ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
+    assertEquals( "DateInputComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
-    //## Step 2
+    /*
+     * ## Step 2
+     */
     //Render again the sample
-    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='code']/button" ) );
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
-    //## Step 3
+    /*
+     * ## Step 3
+     */
     //Pick a date
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "myInput" ) ) );
-    ElementHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( "''" );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "myInput" ) );
+    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( "''" );
 
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "ui-datepicker-div" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.className( "ui-datepicker-month" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.className( "ui-datepicker-year" ) ) );
-    final Select month = new Select( ElementHelper.FindElement( this.driver, By.className( "ui-datepicker-month" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "ui-datepicker-div" ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.className( "ui-datepicker-month" ) );
+    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.className( "ui-datepicker-year" ) );
+    Select month = new Select( ElementHelper.FindElement( DRIVER, By.className( "ui-datepicker-month" ) ) );
     month.selectByValue( "9" );
-    final Select year = new Select( ElementHelper.FindElement( this.driver, By.className( "ui-datepicker-year" ) ) );
+    Select year = new Select( ElementHelper.FindElement( DRIVER, By.className( "ui-datepicker-year" ) ) );
     year.selectByValue( "2011" );
     //Day 23
-    ElementHelper.FindElement( this.driver, By.xpath( "//table[@class='ui-datepicker-calendar']//tbody//tr[5]/td/a" ) ).sendKeys( Keys.ENTER );
+    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@class='ui-datepicker-calendar']//tbody//tr[5]/td/a" ) ).sendKeys( Keys.ENTER );
 
-    this.wait.until( ExpectedConditions.alertIsPresent() );
-    final Alert alert = this.driver.switchTo().alert();
-    final String confirmationMsg = alert.getText();
+    WAIT.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = DRIVER.switchTo().alert();
+    String confirmationMsg = alert.getText();
     alert.accept();
 
     /*##########################################################################
@@ -131,8 +146,8 @@ public class DateInputComponent {
     assertEquals( confirmationMsg, "You chose: 2011-10-23" );
   }
 
-  @After
-  public void tearDown() {
-    //To use after test case run.
+  @AfterClass
+  public static void tearDown() {
+    LOG.info( "tearDown##" + DateInputComponent.class.getSimpleName() );
   }
 }
