@@ -48,6 +48,7 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ActionsHelper;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.HttpUtils;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -64,8 +65,6 @@ public class JFreeChartComponent {
   private static WebDriver DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
   //Log instance
   private static Logger LOG = LogManager.getLogger( JFreeChartComponent.class );
 
@@ -80,23 +79,23 @@ public class JFreeChartComponent {
     LOG.info( "setUp##" + JFreeChartComponent.class.getSimpleName() );
     DRIVER = CToolsTestSuite.getDriver();
     WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
   }
 
   /**
-   * Go to the jFreeChartComponent web page.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  public static void init() {
+  @Test( timeout = 60000 )
+  public void tc0_OpenSamplePage() {
     // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/jFreeChartComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A22-JFreeChartComponent%3Ajfreechart_component.xcdf/generatedContent" );
+    // This sample is in: 
+    // ::Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/jFreeChartComponent
+    DRIVER.get( PageUrl.JFREE_CHART_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -137,11 +136,11 @@ public class JFreeChartComponent {
     LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
