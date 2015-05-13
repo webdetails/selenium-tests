@@ -49,6 +49,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -65,8 +66,6 @@ public class CommentComponent {
   private static WebDriver DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
   //Log instance
   private static Logger LOG = LogManager.getLogger( CommentComponent.class );
 
@@ -78,26 +77,27 @@ public class CommentComponent {
    */
   @BeforeClass
   public static void setUp() {
-    LOG.debug( "setup" );
+    LOG.info( "setUp##" + CommentComponent.class.getSimpleName() );
     DRIVER = CToolsTestSuite.getDriver();
     WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
   }
 
   /**
-   * Go to the CommentComponent web page.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  public static void init() {
-    // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/CommentComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A79-CommentsComponent%3Acomments_component.xcdf/generatedContent" );
+  @Test( timeout = 60000 )
+  public void tc0_OpenSamplePage() {
+    LOG.debug( "tc0_OpenSamplePage" );
+    // The URL for the CommentComponent under CDF samples
+    // This sample is in: 
+    // ::Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/CommentComponent
+    DRIVER.get( PageUrl.COMMENT_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -112,6 +112,7 @@ public class CommentComponent {
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
+    LOG.debug( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
     WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -133,13 +134,14 @@ public class CommentComponent {
    *    1. Click in Code and then click in button 'Try me'.
    */
   public void tc2_ReloadSample_SampleReadyToUse() {
+    LOG.debug( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
@@ -162,7 +164,7 @@ public class CommentComponent {
    */
   @Test( timeout = 60000 )
   public void tc3_DisplayComponent_CheckDisplayedPage() {
-    LOG.debug( "tc3_SelectEachItem_AlertDisplayed" );
+    LOG.debug( "tc3_DisplayComponent_CheckDisplayedPage" );
     /*
      * Guarantee no comments displayed
      */
@@ -193,7 +195,7 @@ public class CommentComponent {
    */
   @Test( timeout = 60000 )
   public void tc4_AddComponent_CommentIsDisplayed() {
-    LOG.debug( "tc3_SelectEachItem_AlertDisplayed" );
+    LOG.debug( "tc4_AddComponent_CommentIsDisplayed" );
     /*
      * Guarantee no comments displayed
      */
@@ -207,7 +209,7 @@ public class CommentComponent {
     /*
      * ## Step 1
      */
-    ElementHelper.FindElement( DRIVER, By.cssSelector( "div.addComment" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.cssSelector( "div.addComment" ) );
     //After click in add, check if the button add, save and cancel are displayed
     String noComments = ElementHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "div.comment" ) );
     assertEquals( "No Comments to show!", noComments );
@@ -219,12 +221,15 @@ public class CommentComponent {
     assertEquals( "Save", saveComments );
     //Insert the text
     ElementHelper.FindElement( DRIVER, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( smallText );
-    ElementHelper.FindElement( DRIVER, By.cssSelector( "div.saveComment" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.cssSelector( "div.saveComment" ) );
     Date timeAddedComment1 = new Date();
     //wait for the page rendered
     WAIT.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
     //Check if the comment was added
     String strCommentTimeAdded = "admin, " + sdf.format( timeAddedComment1 );
+    // Need to remove the last digit of minutes to avoid failing. Because, we 
+    // could catch something like 14:22 and the comment was added at 14:21:59
+    strCommentTimeAdded = strCommentTimeAdded.substring( 0, strCommentTimeAdded.length() - 1 );
     String commentDetails1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
     assertThat( "Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString( strCommentTimeAdded ) );
     String commentAdded1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
@@ -233,7 +238,7 @@ public class CommentComponent {
     /*
      * ## Step 2
      */
-    ElementHelper.FindElement( DRIVER, By.cssSelector( "div.addComment" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.cssSelector( "div.addComment" ) );
     //After click in add, check if the button add, save and cancel are displayed
     addComments = ElementHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "div.addComment" ) );
     assertEquals( "Add Comment", addComments );
@@ -243,7 +248,7 @@ public class CommentComponent {
     assertEquals( "Save", saveComments );
     //Insert the text
     ElementHelper.FindElement( DRIVER, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( longText );
-    ElementHelper.FindElement( DRIVER, By.cssSelector( "div.saveComment" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.cssSelector( "div.saveComment" ) );
     Date timeAddedComment2 = new Date();
     //wait for the page rendered (and for the two added comments persist
     WAIT.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
@@ -252,6 +257,9 @@ public class CommentComponent {
     //Check if the comment was added
     //Comment added 2
     String strCommentTimeAdded2 = "admin, " + sdf.format( timeAddedComment2 );
+    // Need to remove the last digit of minutes to avoid failing. Because, we 
+    // could catch something like 14:22 and the comment was added at 14:21:59
+    strCommentTimeAdded2 = strCommentTimeAdded2.substring( 0, strCommentTimeAdded2.length() - 1 );
     String commentDetails2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
     assertThat( "Comment added: " + commentDetails2, commentDetails2, CoreMatchers.containsString( strCommentTimeAdded2 ) );
     String commentAdded2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
@@ -265,7 +273,7 @@ public class CommentComponent {
     /*
      * ## Step 3
      */
-    ElementHelper.FindElement( DRIVER, By.cssSelector( "div.addComment" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.cssSelector( "div.addComment" ) );
     //After click in add, check if the button add, save and cancel are displayed
     addComments = ElementHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "div.addComment" ) );
     assertEquals( "Add Comment", addComments );
@@ -275,7 +283,7 @@ public class CommentComponent {
     assertEquals( "Save", saveComments );
     //Insert the text
     ElementHelper.FindElement( DRIVER, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( specCharText );
-    ElementHelper.FindElement( DRIVER, By.cssSelector( "div.saveComment" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.cssSelector( "div.saveComment" ) );
     Date timeAddedComment3 = new Date();
     //wait for the page rendered (and for the two added comments persist
     WAIT.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
@@ -285,6 +293,9 @@ public class CommentComponent {
     //Check if the comment was added
     //Comment added 3
     String strCommentTimeAdded3 = "admin, " + sdf.format( timeAddedComment3 );
+    // Need to remove the last digit of minutes to avoid failing. Because, we 
+    // could catch something like 14:22 and the comment was added at 14:21:59
+    strCommentTimeAdded3 = strCommentTimeAdded3.substring( 0, strCommentTimeAdded3.length() - 1 );
     String commentDetails3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
     assertThat( "Comment added: " + commentDetails3, commentDetails3, CoreMatchers.containsString( strCommentTimeAdded3 ) );
     String commentAdded3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
@@ -330,10 +341,10 @@ public class CommentComponent {
     /*
      * ## Step 1
      */
-    ElementHelper.FindElement( DRIVER, By.cssSelector( "div.addComment" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.cssSelector( "div.addComment" ) );
     //Insert the text
     ElementHelper.FindElement( DRIVER, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( commentText );
-    ElementHelper.FindElement( DRIVER, By.cssSelector( "div.saveComment" ) ).click();
+    ElementHelper.ClickJS( DRIVER, By.cssSelector( "div.saveComment" ) );
     //wait for the page rendered
     WAIT.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
     //Check if the comment was added
@@ -387,7 +398,7 @@ public class CommentComponent {
 
   @AfterClass
   public static void tearDown() {
-    LOG.debug( "tearDown" );
+    LOG.info( "tearDown##" + CommentComponent.class.getSimpleName() );
     cleanAllComments();
   }
 }
