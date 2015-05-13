@@ -230,7 +230,7 @@ public class WidgetUtils {
     //Insert widget name
     ElementHelper.ClickAndSendKeys( thedriver, By.id( "componentInput" ), widgetName );
     //Press OK (SAVING)
-    ElementHelper.ClickJS( thedriver, By.id( "popup_state0_buttonOk" ) );
+    ElementHelper.Click( thedriver, By.id( "popup_state0_buttonOk" ) );
     //Wait for the pop-up exit
     ElementHelper.WaitForElementInvisibility( thedriver, By.id( "popupbox" ) );
 

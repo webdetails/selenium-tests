@@ -199,7 +199,7 @@ public class ElementHelper {
     log.debug( "WaitForTextPresence::Enter" );
     log.debug( "Locator: " + locator.toString() );
     String textPresent = "";
-
+    ExecutorService executor = null;
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
@@ -242,9 +242,8 @@ public class ElementHelper {
 
       RunnableObject r = new RunnableObject();
 
-      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      executor.shutdown();
       if ( r.isTextEquals() ) { // If the text is equals then send the text that we wait for.
         textPresent = textToWait;
         log.debug( "Wait for text successful!" );
@@ -265,6 +264,10 @@ public class ElementHelper {
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
     }
 
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
@@ -382,6 +385,7 @@ public class ElementHelper {
     log.debug( "WaitForElementInvisibility::Enter" );
     log.debug( "Locator: " + locator.toString() );
     boolean isElemVisible = false;
+    ExecutorService executor = null;
 
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
@@ -419,9 +423,8 @@ public class ElementHelper {
       }
 
       RunnableObject r = new RunnableObject();
-      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      executor.shutdown();
       isElemVisible = r.getVisibility();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
@@ -440,6 +443,10 @@ public class ElementHelper {
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
     }
 
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
@@ -482,6 +489,7 @@ public class ElementHelper {
     log.debug( "WaitForElementPresenceAndVisible::Enter" );
     log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
+    ExecutorService executor = null;
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
@@ -526,10 +534,8 @@ public class ElementHelper {
       }
 
       RunnableObject r = new RunnableObject( element );
-
-      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      executor.shutdown();
       element = r.getValue();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
@@ -547,6 +553,10 @@ public class ElementHelper {
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
     }
 
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
@@ -595,6 +605,7 @@ public class ElementHelper {
     log.debug( "WaitForElementPresence::Enter" );
     log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
+    ExecutorService executor = null;
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
@@ -639,10 +650,8 @@ public class ElementHelper {
       }
 
       RunnableObject r = new RunnableObject( element );
-
-      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      executor.shutdown();
       element = r.getValue();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
@@ -660,6 +669,10 @@ public class ElementHelper {
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
     }
 
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
@@ -964,7 +977,8 @@ public class ElementHelper {
    */
   public static Boolean WaitForElementNotPresent( final WebDriver driver, final By locator, final Integer timeout ) {
     log.debug( "WaitForElementNotPresent::Enter" );
-    Boolean NotPresent = false;
+    Boolean notPresent = false;
+    ExecutorService executor = null;
     log.debug( "Locator: " + locator.toString() );
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
@@ -1005,12 +1019,10 @@ public class ElementHelper {
         }
       }
 
-      RunnableObject r = new RunnableObject( NotPresent );
-
-      ExecutorService executor = Executors.newSingleThreadExecutor();
+      RunnableObject r = new RunnableObject( notPresent );
+      executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      executor.shutdown();
-      NotPresent = r.getValue();
+      notPresent = r.getValue();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
       log.warn( ie.toString() );
@@ -1029,10 +1041,14 @@ public class ElementHelper {
       log.catching( e );
     }
 
+    if ( executor != null ) {
+      executor.shutdown();
+    }
+
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     log.debug( "WaitForElementNotPresent::Exit" );
-    return NotPresent;
+    return notPresent;
   }
 
   /**
@@ -1066,6 +1082,7 @@ public class ElementHelper {
     log.debug( "Locator: " + locator.toString() );
     log.debug( "Attribute: " + attributeName );
     log.debug( "AttributeValue: " + attributeValue );
+    ExecutorService executor = null;
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
@@ -1099,10 +1116,8 @@ public class ElementHelper {
       }
 
       RunnableObject r = new RunnableObject();
-
-      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      executor.shutdown();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
       log.warn( ie.toString() );
@@ -1119,6 +1134,10 @@ public class ElementHelper {
     } catch ( Exception e ) {
       log.error( "Exception" );
       log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
     }
 
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
@@ -1157,6 +1176,7 @@ public class ElementHelper {
     log.debug( "Locator: " + locator.toString() );
     log.debug( "Attribute: " + attributeName );
     log.debug( "AttributeValue: " + attributeValue );
+    ExecutorService executor = null;
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
@@ -1190,10 +1210,8 @@ public class ElementHelper {
       }
 
       RunnableObject r = new RunnableObject();
-
-      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      executor.shutdown();
     } catch ( InterruptedException ie ) {
       log.warn( "Interrupted Exception" );
       log.warn( ie.toString() );
@@ -1212,6 +1230,10 @@ public class ElementHelper {
       log.catching( e );
     }
 
+    if ( executor != null ) {
+      executor.shutdown();
+    }
+
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     log.debug( "WaitForAttributeValue::Exit" );
@@ -1225,7 +1247,7 @@ public class ElementHelper {
    * @param text
    */
   public static void ClickAndSendKeys( final WebDriver driver, final By locator, final CharSequence... keysToSend ) {
-    log.debug( "SendKeys::Enter" );
+    log.debug( "ClickAndSendKeys::Enter" );
     log.debug( "Locator: " + locator.toString() );
 
     try {
@@ -1240,7 +1262,7 @@ public class ElementHelper {
       log.warn( "Stale Element Reference Exception" );
       ClickAndSendKeys( driver, locator, keysToSend );
     }
-    log.debug( "SendKeys::Exit" );
+    log.debug( "ClickAndSendKeys::Exit" );
   }
 
   /**
