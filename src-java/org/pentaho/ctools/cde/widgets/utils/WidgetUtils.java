@@ -24,6 +24,8 @@ public class WidgetUtils {
   private static final String FOLDER_WIDGETS = "/public/cde/widgets";
   // Log instance
   private static final Logger LOG = LogManager.getLogger( WidgetUtils.class );
+  // TODO 
+  private static Boolean firstTimeLoadingCDEDashboardEditor = true;
 
   /**
    * This method is responsible to remove the widget from 'Browse Files'.
@@ -171,6 +173,16 @@ public class WidgetUtils {
     WebDriver thedriver = driver.switchTo().defaultContent();
 
     thedriver.get( PageUrl.CDE_DASHBOARD );
+
+    if ( firstTimeLoadingCDEDashboardEditor ) {
+      firstTimeLoadingCDEDashboardEditor = false;
+      try {
+        //TODO - remove this sleep after upgrade Selenium from version 2.44 to upper.
+        Thread.sleep( 8000 );
+      } catch ( InterruptedException e ) {
+        //e.printStackTrace();
+      }
+    }
 
     //wait for some contents loaded
     WebElement elemLogo = ElementHelper.WaitForElementPresence( thedriver, By.cssSelector( "div.cdfdd-toolbar-logo" ) );
