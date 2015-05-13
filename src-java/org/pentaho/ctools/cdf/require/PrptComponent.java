@@ -101,10 +101,12 @@ public class PrptComponent {
 
     //Check if the some elements are already displayed
     //Check if element with "Line" is visible
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     WebDriver frameSamplePrpt = DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     WebElement elemLine = ElementHelper.WaitForElementPresenceAndVisible( frameSamplePrpt, By.cssSelector( "div.parameter-label" ), 45 );
     assertNotNull( elemLine );
     //Check if element with "LINE: Classic Cars" is visible
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     WebDriver frameReportContent = frameSamplePrpt.switchTo().frame( "reportContent" );
     WebElement elemLineClassic = ElementHelper.WaitForElementPresenceAndVisible( frameReportContent, By.xpath( "//tr/td" ), 45 );
     assertNotNull( elemLineClassic );
@@ -159,10 +161,12 @@ public class PrptComponent {
 
     //Check if the some elements are already displayed
     //Check if element with "Line" is visible
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     WebDriver frameSamplePrpt = DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     WebElement elemLine = ElementHelper.WaitForElementPresenceAndVisible( frameSamplePrpt, By.cssSelector( "div.parameter-label" ), 45 );
     assertNotNull( elemLine );
     //Check if element with "LINE: Classic Cars" is visible
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     WebDriver frameReportContent = frameSamplePrpt.switchTo().frame( "reportContent" );
     WebElement elemLineClassic = ElementHelper.WaitForElementPresenceAndVisible( frameReportContent, By.xpath( "//tr/td" ), 45 );
     assertNotNull( elemLineClassic );
@@ -200,7 +204,7 @@ public class PrptComponent {
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    WAIT.until( ExpectedConditions.presenceOfElementLocated( By.id( "sampleObject" ) ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     //Check presence of tool bar elements
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='toolbar']/div" ) ) );
@@ -218,6 +222,7 @@ public class PrptComponent {
     String buttonName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//button/span" ) );
     assertEquals( "View Report", buttonName );
     //Check the generated image
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     DRIVER.switchTo().frame( "reportContent" );
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']" ) );
     assertNotNull( element );
@@ -239,7 +244,7 @@ public class PrptComponent {
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    WAIT.until( ExpectedConditions.presenceOfElementLocated( By.id( "sampleObject" ) ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     //Check presence of tool bar elements
     assertNotNull( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='toolbar']/div" ) ) );
@@ -256,6 +261,7 @@ public class PrptComponent {
     buttonName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//button/span" ) );
     assertEquals( "View Report", buttonName );
     //Check the generated image
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     DRIVER.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
@@ -289,6 +295,7 @@ public class PrptComponent {
     DRIVER.switchTo().defaultContent();
 
     // ## Step 1
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     assertNotNull( ElementHelper.FindElement( DRIVER, By.id( "reportControlPanel" ) ) );
     ElementHelper.FindElement( DRIVER, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) ).click();
@@ -317,6 +324,7 @@ public class PrptComponent {
   public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
     LOG.info( "tc5_SelectSeveralProducts_ReportIsRefreshed" );
     DRIVER.switchTo().defaultContent();
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
 
     // ## Step 1
@@ -326,6 +334,7 @@ public class PrptComponent {
     assertEquals( "Classic Cars", text );
     element.click();
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     DRIVER.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
@@ -343,6 +352,7 @@ public class PrptComponent {
 
     // ## Step 2
     DRIVER.switchTo().defaultContent();
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='pentaho-toggle-button-container']/div/div[2]/button" ) );
     assertNotNull( element );
@@ -350,6 +360,7 @@ public class PrptComponent {
     assertEquals( "Motorcycles", text );
     element.click();
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     DRIVER.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
@@ -393,11 +404,13 @@ public class PrptComponent {
     String downloadDir = CToolsTestSuite.getDownloadDir();
 
     // ## Step 1
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     Select select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/html;page-mode=page" );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check the generated image
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     DRIVER.switchTo().frame( "reportContent" );
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
@@ -415,11 +428,13 @@ public class PrptComponent {
 
     // ## Step 2
     DRIVER.switchTo().defaultContent();
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/html;page-mode=stream" );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check the generated image
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     DRIVER.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
@@ -437,11 +452,13 @@ public class PrptComponent {
 
     // ## Step 3
     DRIVER.switchTo().defaultContent();
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/pdf" );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check the generated image
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     DRIVER.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']" ) );
     assertNotNull( element );
@@ -457,6 +474,7 @@ public class PrptComponent {
 
     // ## Step 4
     DRIVER.switchTo().defaultContent();
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     new File( downloadDir + "\\InventorybyLine.xls" ).delete();
     select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
@@ -499,11 +517,13 @@ public class PrptComponent {
 
     // ## Step 8
     DRIVER.switchTo().defaultContent();
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div#sampleObject iframe" ) );
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/text" );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check the generated image
+    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
     DRIVER.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//pre" ) );
     assertNotNull( element );
