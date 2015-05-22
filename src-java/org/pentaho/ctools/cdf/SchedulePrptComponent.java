@@ -219,6 +219,7 @@ public class SchedulePrptComponent {
     //Start - tomorrow
     ElementHelper.FindElement( driver, By.id( "rangeStartIn" ) ).clear();
     ElementHelper.FindElement( driver, By.id( "rangeStartIn" ) ).sendKeys( sdf.format( dTomorrow ) );
+	ElementHelper.FindElement( driver, By.id( "rangeStartIn" ) ).click();
     wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@class='ui-datepicker-calendar']" ) ) );
     WebElement dateCalendar = ElementHelper.FindElement( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     List<WebElement> columns = dateCalendar.findElements( By.tagName( "td" ) );
@@ -235,6 +236,7 @@ public class SchedulePrptComponent {
     wait.until( ExpectedConditions.elementToBeClickable( By.id( "endByRadio" ) ) );
     ElementHelper.FindElement( driver, By.id( "endByRadio" ) ).click();
     ElementHelper.FindElement( driver, By.id( "endByIn" ) ).sendKeys( sdf.format( d40days ) );
+	ElementHelper.FindElement( driver, By.id( "endByIn" ) ).click();
     wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@class='ui-datepicker-calendar']" ) ) );
     WebElement dateCalendar2 = ElementHelper.FindElement( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     List<WebElement> columns2 = dateCalendar2.findElements( By.tagName( "td" ) );
