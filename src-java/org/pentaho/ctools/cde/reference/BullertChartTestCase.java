@@ -105,8 +105,8 @@ public class BullertChartTestCase {
      * ## Step 0
      */
     //Check page title
-    WAIT.until( ExpectedConditions.titleIs( "Community Dashboard Editor" ) );
-    assertEquals( "Community Dashboard Editor", DRIVER.getTitle() );
+    WAIT.until( ExpectedConditions.titleIs( "Bullet chart testcase" ) );
+    assertEquals( "Bullet chart testcase", DRIVER.getTitle() );
     //Check title
     String title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "#title > span" ) );
     assertEquals( "Bullet chart test case", title );

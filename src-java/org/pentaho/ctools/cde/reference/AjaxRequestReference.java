@@ -97,8 +97,8 @@ public class AjaxRequestReference {
      * ## Step 1
      */
     //Check page title
-    WAIT.until( ExpectedConditions.titleIs( "Community Dashboard Editor" ) );
-    assertEquals( "Community Dashboard Editor", DRIVER.getTitle() );
+    WAIT.until( ExpectedConditions.titleIs( "Ajax Request Reference" ) );
+    assertEquals( "Ajax Request Reference", DRIVER.getTitle() );
     //Check title
     String title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
     assertEquals( "Ajax Request Reference", title );

@@ -111,8 +111,8 @@ public class AutoCompleteBoxComponent {
 
     //## Step 3
     //Key press 'a'
-    ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "sampleObjectautoboxInput" ) );
-    ElementHelper.FindElement( this.driver, By.id( "sampleObjectautoboxInput" ) ).sendKeys( "a" );
+    ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "input.autocomplete-input.ui-autocomplete-input" ) );
+    ElementHelper.FindElement( this.driver, By.cssSelector( "input.autocomplete-input.ui-autocomplete-input" ) ).sendKeys( "a" );
 
     //Retrieve data by pressing key 'a'
     ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "listElement" ), 45 );

@@ -138,7 +138,7 @@ public class MapComponentReference {
      * ## Step 1
      */
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Editor", DRIVER.getTitle() );
+    assertEquals( "Map Component Reference", DRIVER.getTitle() );
     String sampleTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='title']/span" ) );
     assertEquals( "Map Component Reference", sampleTitle );
     String sampleDesc = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='documentation']/p" ) );
