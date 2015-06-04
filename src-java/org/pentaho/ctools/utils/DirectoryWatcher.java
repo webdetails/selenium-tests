@@ -126,6 +126,7 @@ public class DirectoryWatcher {
 
     } catch ( Exception e ) {
       LOG.error( e.getMessage() );
+      LOG.error( e.toString() );
     }
 
     return bFileCreated;

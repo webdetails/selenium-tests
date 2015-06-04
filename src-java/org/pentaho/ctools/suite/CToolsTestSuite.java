@@ -24,6 +24,7 @@ package org.pentaho.ctools.suite;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,12 +37,14 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
-import org.pentaho.ctools.suite.issues.SuiteIssues;
 import org.pentaho.ctools.suite.require.SuiteRequireJS;
 import org.pentaho.ctools.suite.security.SuiteSecurity;
 
@@ -63,7 +66,7 @@ import org.pentaho.ctools.suite.security.SuiteSecurity;
     // Security
     SuiteSecurity.class,
     // Issues
-    SuiteIssues.class,
+    //SuiteIssues.class,
     // End Tests
     LogoutPentaho.class } )
 public class CToolsTestSuite {
@@ -79,30 +82,30 @@ public class CToolsTestSuite {
 
   // Log instance
   // private static Logger log = LogManager.getLogger(CToolsTestSuite.class);
-  private static Logger log;
+  private static Logger LOG;
 
   @BeforeClass
   public static void setUpClass() throws IOException {
     System.setProperty( "log4j.configurationFile", "log4j2.xml" );
-    log = LogManager.getLogger( CToolsTestSuite.class );
-    log.info( "Master setup" );
+    LOG = LogManager.getLogger( CToolsTestSuite.class );
+    LOG.info( "Master setup" );
 
     // Initialize BASEURL
     BASE_URL = "http://localhost:8080/pentaho/";
     DOWNLOAD_DIR = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
     new File( DOWNLOAD_DIR ).mkdir();
 
-    // System.setProperty("webdriver.log.file", "/dev/stdout");
-    // System.setProperty("webdriver.firefox.logfile", "/dev/stdout");
+    System.setProperty( "webdriver.log.file", "/dev/stdout" );
+    //System.setProperty( "webdriver.firefox.logfile", "/dev/stdout" );
 
     // Setting log preferences
-    // LoggingPreferences logs = new LoggingPreferences();
-    // logs.enable(LogType.BROWSER, Level.ALL);
-    // logs.enable(LogType.SERVER, Level.ALL);
-    // logs.enable(LogType.DRIVER, Level.ALL);
-    // logs.enable(LogType.PROFILER, Level.ALL);
-    // logs.enable(LogType.CLIENT, Level.ALL);
-    // logs.enable(LogType.PERFORMANCE, Level.ALL);
+    LoggingPreferences logs = new LoggingPreferences();
+    logs.enable( LogType.BROWSER, Level.WARNING );
+    /*logs.enable( LogType.SERVER, Level.WARNING );
+    logs.enable( LogType.DRIVER, Level.WARNING );
+    logs.enable( LogType.PROFILER, Level.WARNING );
+    logs.enable( LogType.CLIENT, Level.WARNING );
+    logs.enable( LogType.PERFORMANCE, Level.WARNING );*/
 
     /*
      * INTERNET EXPLORER DRIVER
@@ -119,7 +122,7 @@ public class CToolsTestSuite {
 
     // Setting properties for webdriver
     DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-    // capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
+    capabilities.setCapability( CapabilityType.LOGGING_PREFS, logs );
     capabilities.setCapability( FirefoxDriver.PROFILE, ffProfile );
 
     DRIVER = new FirefoxDriver( capabilities );
@@ -159,7 +162,13 @@ public class CToolsTestSuite {
 
   @AfterClass
   public static void tearDownClass() {
-    log.info( "Master tearDown" );
+    LOG.info( "Master tearDown" );
+
+    /*LogEntries logEntries = DRIVER.manage().logs().get( LogType.BROWSER );
+    for ( LogEntry logEntry : logEntries ) {
+      LOG.info( logEntry.getMessage() );
+    }*/
+
     DRIVER.quit();
   }
 
