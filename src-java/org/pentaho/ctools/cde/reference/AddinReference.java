@@ -101,8 +101,8 @@ public class AddinReference {
      * ## Step 1
      */
     //Check title
-    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Editor" ) );
-    assertEquals( "Community Dashboard Editor", DRIVER.getTitle() );
+    WAIT.until( ExpectedConditions.titleContains( "AddIn Reference" ) );
+    assertEquals( "AddIn Reference", DRIVER.getTitle() );
 
     //Check subtitle
     String textSubTitle1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
@@ -405,9 +405,9 @@ public class AddinReference {
     String chartRow1Col2Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div" ) );
     String chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div" ) );
     String chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "50.00€", chartRow1Col2Value );
-    assertEquals( "77.00€", chartRow2Col2Value );
-    assertEquals( "-65.00€", chartRow3Col2Value );
+    assertEquals( "50.00ï¿½", chartRow1Col2Value );
+    assertEquals( "77.00ï¿½", chartRow2Col2Value );
+    assertEquals( "-65.00ï¿½", chartRow3Col2Value );
 
     /*
      * ## Step 2
@@ -427,9 +427,9 @@ public class AddinReference {
     chartRow1Col2Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div" ) );
     chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div" ) );
     chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "-65.00€", chartRow1Col2Value );
-    assertEquals( "77.00€", chartRow2Col2Value );
-    assertEquals( "50.00€", chartRow3Col2Value );
+    assertEquals( "-65.00ï¿½", chartRow1Col2Value );
+    assertEquals( "77.00ï¿½", chartRow2Col2Value );
+    assertEquals( "50.00ï¿½", chartRow3Col2Value );
 
     //Check ordering - Custom trendArrow
     ElementHelper.ClickJS( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/thead/tr/th[3]" ) );
@@ -444,9 +444,9 @@ public class AddinReference {
     chartRow1Col2Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div" ) );
     chartRow2Col2Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div" ) );
     chartRow3Col2Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "-65.00€", chartRow1Col2Value );
-    assertEquals( "50.00€", chartRow2Col2Value );
-    assertEquals( "77.00€", chartRow3Col2Value );
+    assertEquals( "-65.00ï¿½", chartRow1Col2Value );
+    assertEquals( "50.00ï¿½", chartRow2Col2Value );
+    assertEquals( "77.00ï¿½", chartRow3Col2Value );
   }
 
   /**

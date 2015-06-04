@@ -99,8 +99,8 @@ public class SampleDashboard {
      * ## Step 1
      */
     //Check title
-    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Editor" ) );
-    assertEquals( "Community Dashboard Editor", DRIVER.getTitle() );
+    WAIT.until( ExpectedConditions.titleContains( "CDE Sample Dashboard" ) );
+    assertEquals( "CDE Sample Dashboard", DRIVER.getTitle() );
 
     //Check subtitle
     String textSubTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='body']/div[2]/div" ) );

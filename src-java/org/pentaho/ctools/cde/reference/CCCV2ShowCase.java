@@ -88,8 +88,8 @@ public class CCCV2ShowCase {
     ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Check page title
-    WAIT.until( ExpectedConditions.titleIs( "Community Dashboard Editor" ) );
-    assertEquals( "Community Dashboard Editor", DRIVER.getTitle() );
+    WAIT.until( ExpectedConditions.titleIs( "CCC V2 ShowCase" ) );
+    assertEquals( "CCC V2 ShowCase", DRIVER.getTitle() );
     // Check title
     String title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Headers']/div" ) );
     assertEquals( "CCC v2 - Show Case", title );

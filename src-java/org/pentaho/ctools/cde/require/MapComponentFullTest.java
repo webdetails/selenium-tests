@@ -125,7 +125,7 @@ public class MapComponentFullTest {
      * ## Step 1
      */
     // Check page title
-    assertEquals( "Community Dashboard Editor", DRIVER.getTitle() );
+    assertEquals( "Map Component Full Test", DRIVER.getTitle() );
     // Check sample title
     String sampleTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[2]/div[2]/div/div/span" ) );
     assertEquals( "Map Component Full Test", sampleTitle );

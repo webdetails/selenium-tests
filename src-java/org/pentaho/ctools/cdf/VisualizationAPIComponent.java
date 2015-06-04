@@ -79,7 +79,7 @@ public class VisualizationAPIComponent {
     // The URL for the VisualizationAPIComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/VisualizationAPIComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualizationapi_component.xcdf/generatedContent" );
+    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualization_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
