@@ -85,6 +85,7 @@ public class LogoutPentaho {
   @Test( timeout = 120000 )
   public void tc1_Logout_SuccessLogOutReturnHomePage() {
     log.debug( "tc1_Logout_SuccessLogOutReturnHomePage" );
+
     //## Step 1
     this.driver.get( this.baseUrl + "Home" );
 

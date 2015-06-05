@@ -85,7 +85,9 @@ public class AutoCompleteBoxComponent {
   @Test( timeout = 90000 )
   public void tc1_AutocompleteBox_DataAreListed() {
     this.LOG.info( "tc1_AutocompleteBox_DataAreListed" );
-    //## Step 1
+    /*
+     * ## Step 1
+     */
     this.driver.get( PageUrl.AUTOCOMPLETE_BOX_COMPONENT );
 
     //NOTE - we have to wait for loading disappear
@@ -100,7 +102,9 @@ public class AutoCompleteBoxComponent {
     String actualSampleTitle = ElementHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), expectedSampleTitle );
     assertEquals( expectedSampleTitle, actualSampleTitle );
 
-    //## Step 2
+    /*
+     * ## Step 2
+     */
     //Render again the sample 
     ElementHelper.Click( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
     ElementHelper.Click( this.driver, By.xpath( "//div[@id='code']/button" ) );
@@ -109,26 +113,34 @@ public class AutoCompleteBoxComponent {
     //Now sample element must be displayed
     assertTrue( ElementHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
 
-    //## Step 3
+    /*
+     * ## Step 3
+     */
     //Key press 'a'
     ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "input.autocomplete-input.ui-autocomplete-input" ) );
     ElementHelper.FindElement( this.driver, By.cssSelector( "input.autocomplete-input.ui-autocomplete-input" ) ).sendKeys( "a" );
 
     //Retrieve data by pressing key 'a'
-    ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "listElement" ), 45 );
-    assertNotNull( ElementHelper.FindElement( this.driver, By.id( "listElement" ) ) );
+    ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "ul.ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content.ui-corner-all" ), 45 );
+    assertNotNull( ElementHelper.FindElement( this.driver, By.cssSelector( "ul.ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content.ui-corner-all" ) ) );
 
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[2]/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[3]/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[4]/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[5]/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[6]/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[7]/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[8]/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[9]/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[10]/input" ) ).isEnabled() );
-    assertTrue( ElementHelper.FindElement( this.driver, By.xpath( "//ul[@class='autobox-list']/li[11]/input" ) ).isEnabled() );
+    //Check the values presented
+    ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='autocomplete-container']/ul/li[1]/a" ) );
+    String value1 = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='autocomplete-container']/ul/li[1]/a" ) );
+    String value2 = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='autocomplete-container']/ul/li[2]/a" ) );
+    String value3 = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='autocomplete-container']/ul/li[3]/a" ) );
+    String value4 = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='autocomplete-container']/ul/li[4]/a" ) );
+    String value5 = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='autocomplete-container']/ul/li[5]/a" ) );
+    String value6 = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='autocomplete-container']/ul/li[6]/a" ) );
+    String value7 = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='autocomplete-container']/ul/li[7]/a" ) );
+    assertEquals( "Australian Collectors, Co.", value1 );
+    assertEquals( "AV Stores, Co.", value2 );
+    assertEquals( "Anna's Decorations, Ltd", value3 );
+    assertEquals( "Amica Models & Co.", value4 );
+    assertEquals( "Auto Canal+ Petit", value5 );
+    assertEquals( "Alpha Cognac", value6 );
+    assertEquals( "Auto Associés & Cie.", value7 );
+
   }
 
   @After
