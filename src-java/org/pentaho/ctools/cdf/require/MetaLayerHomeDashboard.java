@@ -146,8 +146,8 @@ public class MetaLayerHomeDashboard {
     WAIT.until( ExpectedConditions.elementToBeClickable( By.id( "fancybox-close" ) ) );
     String background = ElementHelper.FindElement( DRIVER, By.cssSelector( "#fancybox-close" ) ).getCssValue( "background-image" );
     String background1 = background.substring( background.indexOf( 34 ) + 1, background.lastIndexOf( 34 ) );
-    assertEquals( "http://localhost:8080/pentaho/api/repos/pentaho-cdf/js/compressed/lib/fancybox/fancybox.png", background1 );
-    ElementHelper.FindElement( DRIVER, By.id( "fancybox-close" ) ).click();
+    assertEquals( BASE_URL + "plugin/pentaho-cdf/api/resources/js/compressed/lib/fancybox/fancybox.png", background1 );
+    ElementHelper.ClickJS( DRIVER, By.id( "fancybox-close" ) );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "fancybox-content" ) );
     assertEquals( "200", Integer.toString( HttpUtils.GetResponseCode( background1, "admin", "password" ) ) );
 
