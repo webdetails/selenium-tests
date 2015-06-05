@@ -74,8 +74,9 @@ public class DirectoryWatcher {
 
         @Override
         public void run() {
-          try {
-            WatchService watcher = FileSystems.getDefault().newWatchService();
+
+          try (WatchService watcher = FileSystems.getDefault().newWatchService()) {
+
             Path dir = Paths.get( path );
             dir.register( watcher, StandardWatchEventKinds.ENTRY_CREATE );
 

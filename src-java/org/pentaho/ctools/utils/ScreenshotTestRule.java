@@ -67,15 +67,12 @@ public class ScreenshotTestRule implements MethodRule {
         try {
           final String createDir = "reports-java/" + dir;
           new File( createDir ).mkdirs(); // Insure directory is there
-          FileOutputStream out = null;
-          try {
-            out = new FileOutputStream( createDir + "screenshot-" + fileName + ".png" );
+          try (FileOutputStream out = new FileOutputStream( createDir + "screenshot-" + fileName + ".png" )) {
             out.write( ( (TakesScreenshot) ScreenshotTestRule.this.driver ).getScreenshotAs( OutputType.BYTES ) );
-            out.close();
           } catch ( final FileNotFoundException fnfe ) {
             // File not found
           } catch ( final Exception e ) {
-            out.close();
+            //Any exception
           }
         } catch ( final Exception e ) {
           // No need to crash the tests if the screenshot fails
