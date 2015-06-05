@@ -523,13 +523,14 @@ public class PrptComponent {
     DRIVER.switchTo().frame( "sampleObject_prptFrame" );
     select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/text" );
+    ElementHelper.WaitForElementPresence( DRIVER, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.id( "glasspane" ) );
     //Check the generated image
     ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "iframe#reportContent" ) );
-    DRIVER.switchTo().frame( "reportContent" );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//pre" ) );
+    WebDriver reportContentFrame = DRIVER.switchTo().frame( "reportContent" );
+    element = ElementHelper.WaitForElementPresenceAndVisible( reportContentFrame, By.xpath( "//pre" ) );
     assertNotNull( element );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//pre" ) );
+    text = ElementHelper.WaitForElementPresentGetText( reportContentFrame, By.xpath( "//pre" ) );
     assertTrue( text.contains( "LINE: Motorcycles" ) );
 
   }
