@@ -57,11 +57,11 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CDE439 {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private static WebDriver  DRIVER;
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private static String     BASE_URL;
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE439.class );
+  private static Logger     LOG                = LogManager.getLogger( CDE439.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -83,10 +83,10 @@ public class CDE439 {
    *    The test pretends validate the CDE-439 issue, so Duplicate Component Sample works correctly.
    *
    * Steps:
-   *    1. Open Cgg Component sample and assert elements on page
-   *    2. Assert first chart is rendered and click first "Duplicate" link
-   *    3. Assert second chart is rendered and click second "Duplicate" link
-   *    4. Assert third chart is rendered
+   *    1. Open Duplicate Component sample and assert elements on page
+   *    2. Assert elements on page and click first "Duplicate" link
+   *    3. Assert elements are duplicated correctly and click second "Duplicate" link
+   *    4. Assert elements are duplicated correctly
    */
   @Test( timeout = 120000 )
   public void tc01_CDEDashboard_DuplicateComponentWorks() {
@@ -101,47 +101,67 @@ public class CDE439 {
     // NOTE - we have to wait for loading disappear
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='content']/div/div[2]/div" ) );
-    assertNotNull( element );
+    //Get Title of sample
     String title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='content']/div/div[2]/div" ) );
     assertEquals( "Duplicate Component sample", title );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "column1" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "column2" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "column4" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='column1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='column1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path'][2]" ) );
-    assertNotNull( element );
+
+    //Assert presence of elements
+    WebElement userLabel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div/div" ) );
+    WebElement userText = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div/div[2]/input" ) );
+    WebElement userButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div/div[3]/button" ) );
+    WebElement passLabel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div[2]/div" ) );
+    WebElement passText = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div[2]/div[2]/input" ) );
+    WebElement passButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div[2]/div[3]/button" ) );
+    assertNotNull( userLabel );
+    assertNotNull( userText );
+    assertNotNull( userButton );
+    assertNotNull( passLabel );
+    assertNotNull( passText );
+    assertNotNull( passButton );
 
     /*
      * ## Step 2
      */
+    //Duplicate elements to Target HTML (default)
+    WebElement firstDuplicate = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dup1Col']/a" ) );
+    assertNotNull( firstDuplicate );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='dup1Col']/a" ) );
 
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='column2']/a" ) );
-    assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='column2']/a" ) );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "column1_1" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='column1_1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='column1_1']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path'][2]" ) );
-    assertNotNull( element );
+    //Assert presence of elements
+    WebElement userLabel1 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div/div" ) );
+    WebElement userText1 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div/div[2]/input" ) );
+    WebElement userButton1 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div/div[3]/button" ) );
+    WebElement passLabel1 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div[2]/div" ) );
+    WebElement passText1 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div[2]/div[2]/input" ) );
+    WebElement passButton1 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div[2]/div[3]/button" ) );
+    assertNotNull( userLabel1 );
+    assertNotNull( userText1 );
+    assertNotNull( userButton1 );
+    assertNotNull( passLabel1 );
+    assertNotNull( passText1 );
+    assertNotNull( passButton1 );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='column4']/a" ) );
-    assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='column4']/a" ) );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "column1_2" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='column1_2']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path']" ) );
-    assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='column1_2']//*[local-name()='g'][6]/*[local-name()='g']/*[local-name()='path'][2]" ) );
-    assertNotNull( element );
+    //Duplicate elements to Target HTML (default)
+    WebElement secondDuplicate = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dup1Col']/a" ) );
+    assertNotNull( secondDuplicate );
+    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='dup2Col']/a" ) );
+
+    //Assert presence of elements
+    WebElement userLabel2 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div/div" ) );
+    WebElement userText2 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div/div[2]/input" ) );
+    WebElement userButton2 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div/div[3]/button" ) );
+    WebElement passLabel2 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div[2]/div" ) );
+    WebElement passText2 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div[2]/div[2]/input" ) );
+    WebElement passButton2 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div[2]/div[3]/button" ) );
+    assertNotNull( userLabel2 );
+    assertNotNull( userText2 );
+    assertNotNull( userButton2 );
+    assertNotNull( passLabel2 );
+    assertNotNull( passText2 );
+    assertNotNull( passButton2 );
 
   }
 
