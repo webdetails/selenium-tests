@@ -52,11 +52,11 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CDADatasourceTest {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private static WebDriver  DRIVER;
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private static String     BASE_URL;
   //Log instance
-  private static Logger LOG = LogManager.getLogger( CDADatasourceTest.class );
+  private static Logger     LOG                = LogManager.getLogger( CDADatasourceTest.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -78,7 +78,7 @@ public class CDADatasourceTest {
    * Steps:
    *    1. Check the result displayed
    */
-  @Test( timeout = 60000 )
+  @Test( timeout = 180000 )
   public void tc1_DatasourceTest_ResultOK() {
     LOG.info( "tc1_DatasourceTest_ResultOK" );
 
