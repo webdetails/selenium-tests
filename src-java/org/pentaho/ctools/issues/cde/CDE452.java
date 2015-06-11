@@ -55,17 +55,18 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE452 {
+
   // Instance of the driver (browser emulator)
   private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private static String    BASE_URL;
 
   //Failing Variable  1- Logged in as Admin; 2- Logged in as other user; 3- Logged out
-  private static int failure = 1;
+  private static int       failure = 1;
 
   //Function for logging in as admin in case of failure
   private static void failed() {
-    if ( failure == 2 ) {
+    if (failure == 2) {
       //Log out
       DRIVER.get( BASE_URL + "Home" );
       ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
@@ -105,10 +106,11 @@ public class CDE452 {
       assertNotNull( element );
 
       //Logged as ADMIN user
+      ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
       text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
       assertEquals( "admin", text );
 
-    } else if ( failure == 3 ) {
+    } else if (failure == 3) {
       //Wait for all all elements in the form to be visible
       WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "j_username" ) );
       assertNotNull( element );
@@ -132,13 +134,14 @@ public class CDE452 {
       assertNotNull( element );
 
       //Logged as ADMIN user
+      ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
       String text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
       assertEquals( "admin", text );
     }
   }
 
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE452.class );
+  private static Logger     LOG                = LogManager.getLogger( CDE452.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -245,6 +248,7 @@ public class CDE452 {
     assertNotNull( element );
 
     //Logged as ADMIN user
+    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "suzy" );
     text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
     assertEquals( "suzy", text );
 
@@ -308,6 +312,7 @@ public class CDE452 {
     assertNotNull( element );
 
     //Logged as ADMIN user
+    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "pat" );
     text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
     assertEquals( "pat", text );
 
@@ -371,6 +376,7 @@ public class CDE452 {
     assertNotNull( element );
 
     //Logged as ADMIN user
+    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "tiffany" );
     text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
     assertEquals( "tiffany", text );
 
@@ -423,6 +429,17 @@ public class CDE452 {
 
     //wait for visibility of waiting pop-up
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+
+    //Wait to load the new page
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    assertNotNull( element );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//iframe[@id='home.perspective']" ) );
+    assertNotNull( element );
+
+    //Logged as ADMIN user
+    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
+    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    assertEquals( "admin", text );
 
   }
 

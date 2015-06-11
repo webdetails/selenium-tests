@@ -56,12 +56,13 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE384 {
+
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private static WebDriver  DRIVER;
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private static String     BASE_URL;
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE384.class );
+  private static Logger     LOG                = LogManager.getLogger( CDE384.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -153,6 +154,9 @@ public class CDE384 {
     assertNotNull( element );
     ElementHelper.Click( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/plugin-samples/pentaho-cdf-dd/cdeReference.css']" ) );
     ElementHelper.Click( DRIVER, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
+    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@class='cdfdd-resourceFileNameRender']" ), "${solution:/public/plugin-samples/pentaho-cdf-dd/cdeReference.css}" );
+    String pathToResource = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='cdfdd-resourceFileNameRender']" ) ).getText();
+    assertEquals( "${solution:/public/plugin-samples/pentaho-cdf-dd/cdeReference.css}", pathToResource );
 
     /*
      * ## Step 4

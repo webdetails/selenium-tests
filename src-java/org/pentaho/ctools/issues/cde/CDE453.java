@@ -56,17 +56,18 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE453 {
+
   // The widget name that we what to create
-  private static final String WIDGET_NAME = "CDE453";
+  private static final String WIDGET_NAME        = "CDE453";
   // Indicator to check if any assert fails in the test case
-  private static boolean noAssertFails = false;
+  private static boolean      noAssertFails      = false;
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private static WebDriver    DRIVER;
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE453.class );
+  private static Logger       LOG                = LogManager.getLogger( CDE453.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
+  public ScreenshotTestRule   screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
@@ -90,7 +91,7 @@ public class CDE453 {
    *    3. Delete newly created Widget
    *
    */
-  @Test( timeout = 180000 )
+  @Test( timeout = 240000 )
   public void tc01_NewCDEDashboard_NewWidgetPresent() {
     LOG.info( "tc01_NewCDEDashboard_NewWidgetPresent" );
 
@@ -129,7 +130,7 @@ public class CDE453 {
   public static void tearDownClass() {
     LOG.info( "tearDown##" + CDE453.class.getSimpleName() );
 
-    if ( !noAssertFails ) {
+    if (!noAssertFails) {
       WidgetUtils.RemoveWidgetByName( DRIVER, WIDGET_NAME );
     }
   }

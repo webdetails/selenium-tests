@@ -59,14 +59,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class PrptComponent {
 
   //Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private static WebDriver       DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
   //Log instance
-  private static Logger LOG = LogManager.getLogger( PrptComponent.class );
+  private static Logger          LOG                = LogManager.getLogger( PrptComponent.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
+  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   /**
   adm   * Shall initialized the test before run each test case.
@@ -398,7 +398,7 @@ public class PrptComponent {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test( timeout = 60000 )
+  @Test( timeout = 180000 )
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
     LOG.info( "tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised" );
     DRIVER.switchTo().defaultContent();
