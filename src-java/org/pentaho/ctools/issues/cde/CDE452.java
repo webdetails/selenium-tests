@@ -100,9 +100,9 @@ public class CDE452 {
       ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
       //Wait to load the new page
-      element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+      element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "pucUserDropDown" ) );
       assertNotNull( element );
-      element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//iframe[@id='home.perspective']" ) );
+      element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "home.perspective" ) );
       assertNotNull( element );
 
       //Logged as ADMIN user
@@ -128,9 +128,9 @@ public class CDE452 {
       ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
       //Wait to load the new page
-      element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+      element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "pucUserDropDown" ) );
       assertNotNull( element );
-      element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//iframe[@id='home.perspective']" ) );
+      element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "home.perspective" ) );
       assertNotNull( element );
 
       //Logged as ADMIN user
@@ -242,9 +242,9 @@ public class CDE452 {
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "pucUserDropDown" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//iframe[@id='home.perspective']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "home.perspective" ) );
     assertNotNull( element );
 
     //Logged as ADMIN user
@@ -306,9 +306,9 @@ public class CDE452 {
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "pucUserDropDown" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//iframe[@id='home.perspective']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "home.perspective" ) );
     assertNotNull( element );
 
     //Logged as ADMIN user
@@ -370,9 +370,9 @@ public class CDE452 {
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "pucUserDropDown" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//iframe[@id='home.perspective']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "home.perspective" ) );
     assertNotNull( element );
 
     //Logged as ADMIN user
@@ -431,9 +431,9 @@ public class CDE452 {
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "pucUserDropDown" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//iframe[@id='home.perspective']" ) );
+    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "home.perspective" ) );
     assertNotNull( element );
 
     //Logged as ADMIN user

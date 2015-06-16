@@ -89,7 +89,7 @@ public class CDE267 {
    *    3. Find map with alterations, click a marker and assert shown popup has chosen width and height
    */
 
-  @Test( timeout = 120000 )
+  @Test( timeout = 240000 )
   public void tc01_CdeDashboard_MapPopupDimensions() {
     LOG.info( "tc01_CdeDashboard_MapPopupDimensions" );
 

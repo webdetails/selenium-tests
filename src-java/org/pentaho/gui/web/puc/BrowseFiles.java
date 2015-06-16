@@ -39,8 +39,9 @@ import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.PUCSettings;
 
 public class BrowseFiles {
+
   // The driver
-  private WebDriver DRIVER;
+  private WebDriver     DRIVER;
   // Logging instance
   private static Logger LOG = LogManager.getLogger( BrowseFiles.class );
 
@@ -111,7 +112,7 @@ public class BrowseFiles {
     // If Trash not empty, empty it
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[@class='emptyFolder']" ), 3 );
     LOG.info( "Exit: Checking if Trash is empty" );
-    if ( element == null ) {
+    if (element == null) {
       LOG.info( "Enter: Emptying Trash" );
       assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']//button[@id='purge']" ) ) );
       ElementHelper.Click( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']//button[@id='purge']" ) );
@@ -126,7 +127,7 @@ public class BrowseFiles {
       ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
       ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
       assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div" ) ) );
-      text = ElementHelper.WaitForTextPresence( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div/span" ), "There are no files in this folder." );
+      text = ElementHelper.WaitForTextPresence( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div/span" ), "There are no files in this folder.", 60 );
       assertEquals( "There are no files in this folder.", text );
       LOG.info( "Exit: Emptying Trash" );
     }
@@ -161,12 +162,12 @@ public class BrowseFiles {
     LOG.info( "Enter: Expanding Select File [" + fileToSelect + "]" );
 
     folderSelected = SelectFolder( pathWithOnlyFolders );
-    if ( folderSelected ) {
+    if (folderSelected) {
       LOG.info( "Enter: Selecting File" );
       String selector = "//div[@id='fileBrowserFiles']/div[2]/div[@path='" + path + "']";
       String selectorExpand = "//div[@id='fileBrowserFiles']/div[2]/div[@path='" + path + "']/div[2]";
       WebElement selectFile = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( selectorExpand ), 3 );
-      if ( selectFile != null ) {
+      if (selectFile != null) {
         ElementHelper.Click( this.DRIVER, By.xpath( selectorExpand ) );
         ElementHelper.WaitForAttributeValue( this.DRIVER, By.xpath( selector ), "class", "file selected" );
         String text = ElementHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
@@ -206,15 +207,15 @@ public class BrowseFiles {
     String currentFolder = "";
     LOG.info( "Enter: Expanding Path [" + path + "]" );
 
-    for ( int i = 1; i < folders.length; i++ ) {
+    for (int i = 1; i < folders.length; i++) {
       currentFolder = currentFolder + "/" + folders[i];
       LOG.info( "Expanding Path [" + currentFolder + "]" );
 
-      if ( i == folders.length - 1 ) {
+      if (i == folders.length - 1) {
         String selector = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']";
         String selectorTitle = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']/div/div[3]";
         WebElement selectFolder = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( selectorTitle ), 2 );
-        if ( selectFolder != null ) {
+        if (selectFolder != null) {
           ElementHelper.Click( this.DRIVER, By.xpath( selectorTitle ) );
           ElementHelper.WaitForAttributeValue( this.DRIVER, By.xpath( selector ), "class", "selected" );
           String text = ElementHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
@@ -228,13 +229,13 @@ public class BrowseFiles {
         // Check if folder is opened
         String selector = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']";
         WebElement folderExist = ElementHelper.WaitForElementPresence( this.DRIVER, By.xpath( selector ), 1 );
-        if ( folderExist != null ) {
+        if (folderExist != null) {
           String isFolderOpen = ElementHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
-          if ( !isFolderOpen.contains( "open" ) ) {
+          if (!isFolderOpen.contains( "open" )) {
             // If folder exists select it
             String selectorExpand = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']/div/div[@class='expandCollapse']";
             WebElement folderToExpand = ElementHelper.WaitForElementPresence( this.DRIVER, By.xpath( selectorExpand ) );
-            if ( folderToExpand != null ) {
+            if (folderToExpand != null) {
               ElementHelper.Click( this.DRIVER, By.xpath( selectorExpand ) );
               ElementHelper.WaitForAttributeValue( this.DRIVER, By.xpath( selector ), "class", "open" );
               String checkFolderOpen = ElementHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
@@ -265,7 +266,7 @@ public class BrowseFiles {
    *
    */
   public void CheckShowHiddenFiles() {
-    if ( !PUCSettings.SHOWHIDDENFILES ) {
+    if (!PUCSettings.SHOWHIDDENFILES) {
       // This is being done because this method is called from within browse files and view menu is on PUC
       this.DRIVER.switchTo().defaultContent();
 
@@ -275,7 +276,7 @@ public class BrowseFiles {
       element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
       assertNotNull( element );
       String text = element.getAttribute( "class" );
-      if ( text.equals( "gwt-MenuItem-checkbox-unchecked" ) ) {
+      if (text.equals( "gwt-MenuItem-checkbox-unchecked" )) {
         element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
         element.click();
         // wait for visibility of waiting pop-up
@@ -316,7 +317,7 @@ public class BrowseFiles {
    *
    */
   public void UncheckShowHiddenFiles() {
-    if ( !PUCSettings.SHOWHIDDENFILES ) {
+    if (!PUCSettings.SHOWHIDDENFILES) {
       // This is being done because this method is called from within browse files and view menu is on PUC
       this.DRIVER.switchTo().defaultContent();
 
@@ -326,7 +327,7 @@ public class BrowseFiles {
       element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
       assertNotNull( element );
       String text = element.getAttribute( "class" );
-      if ( text.equals( "gwt-MenuItem-checkbox-checked" ) ) {
+      if (text.equals( "gwt-MenuItem-checkbox-checked" )) {
         element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
         element.click();
         // wait for visibility of waiting pop-up
@@ -373,7 +374,7 @@ public class BrowseFiles {
     boolean fileDelete = false;
 
     // Check if the file exist
-    if ( SelectFile( path ) ) {
+    if (SelectFile( path )) {
       ElementHelper.Click( this.DRIVER, By.id( "deleteButton" ) );
 
       this.DRIVER.switchTo().defaultContent();
@@ -406,13 +407,13 @@ public class BrowseFiles {
    * @param path
    */
   public void EmptyFolder( String path ) {
-    if ( SelectFolder( path ) ) {
+    if (SelectFolder( path )) {
       WebElement listFiles = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]" ) );
       List<WebElement> AllFolderFiles = listFiles.findElements( By.xpath( "//div[@class='title']" ) );
 
       // Check if the widget named exist
-      if ( AllFolderFiles != null ) {
-        if ( AllFolderFiles.size() > 0 ) {
+      if (AllFolderFiles != null) {
+        if (AllFolderFiles.size() > 0) {
           WebElement[] arrayAllFolderFiles = new WebElement[AllFolderFiles.size()];
           AllFolderFiles.toArray( arrayAllFolderFiles );
 
@@ -423,7 +424,7 @@ public class BrowseFiles {
           // To do that we select each file (using the CONTROL key) and delete them.
           Actions action = new Actions( this.DRIVER );
           action.keyDown( Keys.CONTROL );
-          for ( WebElement arrayAllFolderFile : arrayAllFolderFiles ) {
+          for (WebElement arrayAllFolderFile: arrayAllFolderFiles) {
             action.click( arrayAllFolderFile );
           }
           action.keyUp( Keys.CONTROL );
@@ -465,17 +466,17 @@ public class BrowseFiles {
    */
   public void DeleteMultipleFilesByName( String path, String name ) {
     LOG.debug( "DeleteMultipleFilesByName::Enter" );
-    if ( SelectFolder( path ) ) {
+    if (SelectFolder( path )) {
       LOG.debug( "Deleting [" + path + "] with name [" + name + "]" );
 
       WebElement elemWidgetFile = ElementHelper.WaitForElementPresence( this.DRIVER, By.cssSelector( "div[title='" + name + ".wcdf']" ), 1 );
-      if ( elemWidgetFile != null ) {
+      if (elemWidgetFile != null) {
         WebElement listFiles = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]" ) );
         List<WebElement> theNamedFiles = listFiles.findElements( By.xpath( "//div[@class='title' and contains(text(),'" + name + "')]" ) );
 
         // Check if the widget named exist
-        if ( theNamedFiles != null ) {
-          if ( theNamedFiles.size() > 0 ) {
+        if (theNamedFiles != null) {
+          if (theNamedFiles.size() > 0) {
             WebElement[] arraytheNamedFiles = new WebElement[theNamedFiles.size()];
             theNamedFiles.toArray( arraytheNamedFiles );
 
@@ -486,7 +487,7 @@ public class BrowseFiles {
             // To do that we select each file (using the CONTROL key) and delete them.
             Actions action = new Actions( this.DRIVER );
             action.keyDown( Keys.CONTROL );
-            for ( WebElement arraytheNamedFile : arraytheNamedFiles ) {
+            for (WebElement arraytheNamedFile: arraytheNamedFiles) {
               action.click( arraytheNamedFile );
             }
             action.keyUp( Keys.CONTROL );

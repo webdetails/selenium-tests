@@ -55,12 +55,13 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE412 {
+
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private static WebDriver  DRIVER;
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private static String     BASE_URL;
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE412.class );
+  private static Logger     LOG                = LogManager.getLogger( CDE412.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -134,9 +135,9 @@ public class CDE412 {
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/div/button" ) );
     assertNotNull( element );
     ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/div/button" ) );
-    title = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) ).getText();
+    title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
     assertEquals( "MQL Editor", title );
-    text = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div[2]" ) ).getText();
+    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div[2]" ) );
     assertEquals( "<mql>", text );
     ElementHelper.Click( DRIVER, By.id( "cdfdd-wizard-button-ok" ) );
     ElementHelper.Click( DRIVER, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
