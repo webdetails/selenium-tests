@@ -1,0 +1,8 @@
+Testing Embedding Scenario
+1. Edit the settings.xml file located at server/pentaho-solutions/system/pentaho-cdf adding the following line:
+     <allow-cross-domain-resources>true</allow-cross-domain-resources>
+2. Start the server
+3. Start the miniweb server, notice the URL provided on the server window in my case it is: http://169.254.153.98:8000/
+4. Open the following dashboards, make sure no console/server log errors appear and test the samples:
+     http://169.254.153.98:8000/embeddedSampleCDE/embedded.html
+	 http://169.254.153.98:8000/embeddedSampleCDF/embedded.html

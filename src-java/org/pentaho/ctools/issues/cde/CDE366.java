@@ -217,7 +217,7 @@ public class CDE366 {
 
     //Open Dashboard in edit mode
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3ACDE366.wcdf/wcdf.edit" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    //ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Check template is applied
     columnExpander = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );

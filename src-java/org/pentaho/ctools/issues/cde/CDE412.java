@@ -120,9 +120,9 @@ public class CDE412 {
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
     assertNotNull( element );
     ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
-    String title = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) ).getText();
+    String title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
     assertEquals( "MDX Editor", title );
-    String text = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) ).getText();
+    String text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
     assertEquals( "select {} ON COLUMNS,", text );
     ElementHelper.Click( DRIVER, By.id( "cdfdd-wizard-button-ok" ) );
     ElementHelper.Click( DRIVER, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
@@ -150,9 +150,9 @@ public class CDE412 {
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]/td[2]/div/button" ) );
     assertNotNull( element );
     ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]/td[2]/div/button" ) );
-    title = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) ).getText();
+    title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
     assertEquals( "Scriptable Editor", title );
-    text = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) ).getText();
+    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
     assertEquals( "import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;", text );
     ElementHelper.Click( DRIVER, By.id( "cdfdd-wizard-button-ok" ) );
     ElementHelper.Click( DRIVER, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
@@ -167,7 +167,7 @@ public class CDE412 {
     ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[7]/td[2]/div/button" ) );
     title = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) ).getText();
     assertEquals( "Sql Editor", title );
-    text = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) ).getText();
+    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
     assertEquals( "", text );
     ElementHelper.Click( DRIVER, By.id( "cdfdd-wizard-button-ok" ) );
     ElementHelper.Click( DRIVER, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
