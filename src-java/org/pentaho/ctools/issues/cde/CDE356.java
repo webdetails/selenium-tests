@@ -64,7 +64,7 @@ public class CDE356 {
   // Log instance
   private static Logger     LOG                = LogManager.getLogger( CDE356.class );
   //Failure variable ==1 if test did not fail
-  private static int        Failure            = 0;
+  private static int        Failure            = 2;
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -89,8 +89,8 @@ public class CDE356 {
    *    1. Wait for new Dashboard to be created, add Row and click New
    *    2. CLick cancel on the popup and assert row is still present. Click New
    *    3. Click Ok on the popup, assert row is no longer present, add row and save dashboard
-   *    4. Click new, click cancel and assert same dashboard is shown
-   *    5. Click new, click Ok and assert new dashboard is shown
+   *    4. Click new,and assert new dashboard is shown
+   *    5. Delete created files
    */
   @Test( timeout = 240000 )
   public void tc01_CdeDashboard_CreateNewFromEdit() {
@@ -147,7 +147,7 @@ public class CDE356 {
      * ## Step 3
      */
     //Click Ok and assert row is not present
-    WebElement okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state0_buttonCancel" ) );
+    WebElement okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state0_buttonOk" ) );
     assertNotNull( okButton );
     okButton.click();
     ElementHelper.WaitForElementNotPresent( DRIVER, By.id( "popup_state_state0" ) );
@@ -166,11 +166,38 @@ public class CDE356 {
     WebElement saveButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.save()']" ) );
     assertNotNull( saveButton );
     saveButton.click();
+    WebElement savePopup = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state_state0" ) );
+    assertNotNull( savePopup );
+    WebElement publicFolder = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    assertNotNull( publicFolder );
+    publicFolder.click();
+    WebElement inputField = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fileInput" ) );
+    assertNotNull( inputField );
+    inputField.click();
+    inputField.sendKeys( "CDE356" );
+    okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state0_buttonOk" ) );
+    okButton.click();
+    Failure = 0;
+    ElementHelper.WaitForElementNotPresent( DRIVER, By.id( "popup_state_state0" ) );
+    WebElement dashTitle = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='CDE356']" ) );
+    assertNotNull( dashTitle );
 
     /*
      * ## Step 4
      */
-    //Save dashboard and click save
+    //Click New
+    newButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.newDashboard()']" ) );
+    assertNotNull( newButton );
+    newButton.click();
+    ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[@title='CDE356']" ) );
+    ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+
+    /*
+     * ## Step 5
+     */
+    BrowseFiles browse = new BrowseFiles( DRIVER );
+    browse.DeleteMultipleFilesByName( "/public", "CDE356" );
+    browse.EmptyTrash();
     Failure = 1;
   }
 
@@ -178,7 +205,7 @@ public class CDE356 {
   public static void tearDownClass() {
     if (Failure == 0) {
       BrowseFiles browse = new BrowseFiles( DRIVER );
-      browse.DeleteMultipleFilesByName( "/public", "CDE366" );
+      browse.DeleteMultipleFilesByName( "/public", "CDE356" );
       browse.EmptyTrash();
     }
     LOG.info( "tearDown##" + CDE356.class.getSimpleName() );
