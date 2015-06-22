@@ -44,10 +44,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 import org.pentaho.gui.web.puc.BrowseFiles;
 
 /**
- * The script is testing the issue: - http://jira.pentaho.com/browse/CDE-417
- *
- * and the automation test is described: - http://jira.pentaho.com/browse/QUALITY-1017
- *
+ * The script is testing the issue:
+ *  - http://jira.pentaho.com/browse/CDE-417
+ *  - http://jira.pentaho.com/browse/CDE-424
+ *    
+ * and the automation test is described:
+ *  - http://jira.pentaho.com/browse/QUALITY-1017
+ *  - http://jira.pentaho.com/browse/QUALITY-1019
+ *  
  * NOTE To test this script it is required to have CDE plugin installed.
  *
  * Naming convention for test: 'tcN_StateUnderTest_ExpectedBehavior'
@@ -57,11 +61,11 @@ import org.pentaho.gui.web.puc.BrowseFiles;
 public class CDE417 {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private static WebDriver  DRIVER;
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private static String     BASE_URL;
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE417.class );
+  private static Logger     LOG                = LogManager.getLogger( CDE417.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -88,11 +92,11 @@ public class CDE417 {
    * 424
    *    1. Open PUC and click Browse Files
    *    2. Go to dashboard folder, click BarChart.js file and click Move To Trash
-   *    3. Open Export Popup Sample and save Dashboard
+   *    3. Open Export Popup Sample and save Dashboard  
    * 417
-   *    4. Assert elements on dashboard
-   *    5. Click to export chart as PNG, click export, assert chart is shown
-   *    6. Click to export chart as SVG, click export, assert chart is shown
+   *    5. Assert elements on dashboard
+   *    6. Click to export chart as PNG, click export, assert chart is shown
+   *    7. Click to export chart as SVG, click export, assert chart is shown
    * 
    * @throws InterruptedException
    *
@@ -106,7 +110,7 @@ public class CDE417 {
      */
     // Show Hidden Files
     BrowseFiles browser = new BrowseFiles( DRIVER );
-    if ( !PUCSettings.SHOWHIDDENFILES ) {
+    if (!PUCSettings.SHOWHIDDENFILES) {
       browser.CheckShowHiddenFiles();
     }
 
@@ -129,8 +133,10 @@ public class CDE417 {
     /*
      * ## Step 3
      */
-    // Go to Export Popup Component sample
+    // Go to Export Popup Component sample in Edit mode
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AExportPopup%3AExportPopupComponent.wcdf/edit" );
+
+    //Save Dashboard
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Save" ) );
     assertNotNull( element );
     ElementHelper.Click( DRIVER, By.id( "Save" ) );
@@ -140,8 +146,8 @@ public class CDE417 {
     assertEquals( "Dashboard saved successfully", saveMessage );
 
     /* 
-     * ## Step 4 
-     */
+      * ## Step 4 
+      */
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AExportPopup%3AExportPopupComponent.wcdf/generatedContent" );
     ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     // Assert chart and export buttons

@@ -42,10 +42,12 @@ import org.pentaho.gui.web.puc.BrowseFiles;
 
 /**
  * The script is testing the issue:
- * - http://jira.pentaho.com/browse/CDE-366
+ * - http://jira.pentaho.com/browse/CDE-356
+ * - http://jira.pentaho.com/browse/CDE-397
  *
  * and the automation test is described:
- * - http://jira.pentaho.com/browse/QUALITY-948
+ * - http://jira.pentaho.com/browse/QUALITY-1083
+ * - http://jira.pentaho.com/browse/QUALITY-1084
  *
  * NOTE
  * To test this script it is required to have CDE plugin installed.
@@ -88,9 +90,10 @@ public class CDE356 {
    * Steps:
    *    1. Wait for new Dashboard to be created, add Row and click New
    *    2. CLick cancel on the popup and assert row is still present. Click New
-   *    3. Click Ok on the popup, assert row is no longer present, add row and save dashboard
-   *    4. Click new,and assert new dashboard is shown
-   *    5. Delete created files
+   *    3. Click Ok on the popup, assert row is no longer present, add row
+   *    4. Try to save dashboard with no name and assert it throws error (CDE-397)
+   *    5. Save dashboard, click new,and assert new dashboard is shown
+   *    6. Delete created files
    */
   @Test( timeout = 240000 )
   public void tc01_CdeDashboard_CreateNewFromEdit() {
@@ -162,7 +165,10 @@ public class CDE356 {
     elementName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertEquals( "Row", elementName );
 
-    //Save dashboard
+    /*
+     * ## Step 4
+     */
+    //Save dashboard with no name
     WebElement saveButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.save()']" ) );
     assertNotNull( saveButton );
     saveButton.click();
@@ -173,6 +179,22 @@ public class CDE356 {
     publicFolder.click();
     WebElement inputField = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fileInput" ) );
     assertNotNull( inputField );
+    okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state0_buttonOk" ) );
+    okButton.click();
+    WebElement saveError = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupmessage']" ) );
+    assertNotNull( saveError );
+    String errorMessage = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupmessage']" ) );
+    assertEquals( "Please insert a valid file name.", errorMessage );
+    okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupbuttons']/button[@id='popup_state0_buttonOk']" ) );
+    assertNotNull( okButton );
+    okButton.click();
+
+    /*
+     * ## Step 5
+     */
+    //Save dashboard
+    inputField = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fileInput" ) );
+    assertNotNull( inputField );
     inputField.click();
     inputField.sendKeys( "CDE356" );
     okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state0_buttonOk" ) );
@@ -182,9 +204,6 @@ public class CDE356 {
     WebElement dashTitle = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='CDE356']" ) );
     assertNotNull( dashTitle );
 
-    /*
-     * ## Step 4
-     */
     //Click New
     newButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.newDashboard()']" ) );
     assertNotNull( newButton );
@@ -193,7 +212,7 @@ public class CDE356 {
     ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
 
     /*
-     * ## Step 5
+     * ## Step 6
      */
     BrowseFiles browse = new BrowseFiles( DRIVER );
     browse.DeleteMultipleFilesByName( "/public", "CDE356" );
