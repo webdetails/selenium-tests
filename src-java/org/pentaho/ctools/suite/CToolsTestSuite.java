@@ -45,47 +45,46 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
-import org.pentaho.ctools.suite.issues.SuiteIssues;
 import org.pentaho.ctools.suite.require.SuiteRequireJS;
 import org.pentaho.ctools.suite.security.SuiteSecurity;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
-  // ##### Execution Order #####
-  // Start Tests
-  LoginPentaho.class,
-  // CDF
-  SuiteCDF.class,
-  // CDE
-  SuiteCDE.class,
-  // CDA
-  SuiteCDA.class,
-  // CGG
-  SuiteCGG.class,
-  // RequireJS
-  SuiteRequireJS.class,
-  // Security
-  SuiteSecurity.class,
-  // Issues
-  SuiteIssues.class,
-  //Marketplace
-  //SuiteMarketplace.class,
-  // End Tests
-  LogoutPentaho.class } )
+    // ##### Execution Order #####
+    // Start Tests
+    LoginPentaho.class,
+    // CDF
+    SuiteCDF.class,
+    // CDE
+    SuiteCDE.class,
+    // CDA
+    SuiteCDA.class,
+    // CGG
+    SuiteCGG.class,
+    // RequireJS
+    SuiteRequireJS.class,
+    // Security
+    SuiteSecurity.class,
+    // Issues
+    //SuiteIssues.class,
+    //Marketplace
+    //SuiteMarketplace.class,
+    // End Tests
+    LogoutPentaho.class } )
 public class CToolsTestSuite {
 
-  // / Instance of the driver (browser emulator)
-  private static WebDriver       DRIVER;
+  // Instance of the driver (browser emulator)
+  private static WebDriver DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
-  private static String          BASE_URL;
+  private static String BASE_URL;
   // Directory are all download files persist
-  private static String          DOWNLOAD_DIR;
+  private static String DOWNLOAD_DIR;
 
   // Log instance
   // private static Logger log = LogManager.getLogger(CToolsTestSuite.class);
-  private static Logger          LOG;
+  private static Logger LOG;
 
   @BeforeClass
   public static void setUpClass() throws IOException {
@@ -117,7 +116,7 @@ public class CToolsTestSuite {
     FirefoxProfile ffProfile = new FirefoxProfile();
     ffProfile.setPreference( "general.useragent.locale", "en-US" );
     ffProfile.setPreference( "intl.accept_languages", "en-US, en" );
-    ffProfile.setPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Donwload dir, 2 - specify dir
+    ffProfile.setPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Download dir, 2 - specify dir
     ffProfile.setPreference( "browser.helperApps.alwaysAsk.force", false );
     ffProfile.setPreference( "browser.download.manager.showWhenStarting", false );
     ffProfile.setPreference( "browser.download.dir", DOWNLOAD_DIR );
