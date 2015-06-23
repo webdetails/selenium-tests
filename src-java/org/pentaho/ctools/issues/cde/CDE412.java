@@ -42,10 +42,12 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 /**
  * The script is testing the issue:
  * - http://jira.pentaho.com/browse/CDE-412
- *
+ * - http://jira.pentaho.com/browse/CDE-465
+ * 
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-993
- *
+ * - http://jira.pentaho.com/browse/QUALITY-1091
+ * 
  * NOTE
  * To test this script it is required to have CDE plugin installed.
  *
@@ -87,8 +89,9 @@ public class CDE412 {
    *    1. Assert elements on page and go to Datasources Panel
    *    2. Add MDX Query element, click Query button and assert title and default text. Remove MDX query
    *    3. Add MQL Query element, click Query button and assert title and default text. Remove MQL query
-   *    4. Add Scriptable Query element, click Query button and assert title and default text. Remove Scriptable query
-   *    4. Add Sql Query element, click Query button and assert title and default text. Remove Sql query
+   *    4. Add Scriptable Query element, assert sample query is shown and language is set to Beanshell (CDE-465),
+   *       click Query button and assert title and default text. Remove Scriptable query
+   *    5. Add Sql Query element, click Query button and assert title and default text. Remove Sql query
    */
   @Test( timeout = 120000 )
   public void tc01_CdeDashboard_QueryEditor() {
@@ -149,6 +152,14 @@ public class CDE412 {
     ElementHelper.ClickElementInvisible( DRIVER, By.xpath( "//a[@title='scriptable over scripting']" ) );
     element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]/td[2]/div/button" ) );
     assertNotNull( element );
+
+    //CDE465
+    String codeLanguage = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//td[@title='Language the script is written in']/../td[2]" ) );
+    assertEquals( "beanshell", codeLanguage );
+    String codeSample = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//td[@title='Query to be executed in the selected datasource']/../td[2]/div/code" ) );
+    assertEquals( "import org.pentaho.r (...)", codeSample );
+
+    //View default query
     ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]/td[2]/div/button" ) );
     title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
     assertEquals( "Scriptable Editor", title );
