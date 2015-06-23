@@ -44,10 +44,12 @@ import org.pentaho.gui.web.puc.BrowseFiles;
  * The script is testing the issue:
  * - http://jira.pentaho.com/browse/CDE-356
  * - http://jira.pentaho.com/browse/CDE-397
+ * - http://jira.pentaho.com/browse/CDE-468
  *
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-1083
  * - http://jira.pentaho.com/browse/QUALITY-1084
+ * - http://jira.pentaho.com/browse/QUALITY-1092
  *
  * NOTE
  * To test this script it is required to have CDE plugin installed.
@@ -92,7 +94,7 @@ public class CDE356 {
    *    2. CLick cancel on the popup and assert row is still present. Click New
    *    3. Click Ok on the popup, assert row is no longer present, add row
    *    4. Try to save dashboard with no name and assert it throws error (CDE-397)
-   *    5. Save dashboard, click new,and assert new dashboard is shown
+   *    5. Input name and then click folder (CDE-468), save dashboard, click new,and assert new dashboard is shown
    *    6. Delete created files
    */
   @Test( timeout = 240000 )
@@ -174,9 +176,9 @@ public class CDE356 {
     saveButton.click();
     WebElement savePopup = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state_state0" ) );
     assertNotNull( savePopup );
-    WebElement publicFolder = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
-    assertNotNull( publicFolder );
-    publicFolder.click();
+    WebElement homeFolder = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='home/']" ) );
+    assertNotNull( homeFolder );
+    homeFolder.click();
     WebElement inputField = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fileInput" ) );
     assertNotNull( inputField );
     okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state0_buttonOk" ) );
@@ -197,6 +199,9 @@ public class CDE356 {
     assertNotNull( inputField );
     inputField.click();
     inputField.sendKeys( "CDE356" );
+    WebElement publicFolder = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    assertNotNull( publicFolder );
+    publicFolder.click();
     okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup_state0_buttonOk" ) );
     okButton.click();
     Failure = 0;
