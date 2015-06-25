@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,6 +35,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -50,21 +49,12 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class BarChart {
 
   // Instance of the driver (browser emulator)
-  private WebDriver driver;
-  // The base url to be append the relative url in test
-  private String baseUrl;
+  private WebDriver driver = CToolsTestSuite.getDriver();
   //Log instance
-  private static Logger LOG = LogManager.getLogger( BarChart.class );
+  private final Logger log = LogManager.getLogger( BarChart.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
-
-  @Before
-  public void setUp() {
-    LOG.debug( "setUp" );
-    this.driver = CToolsTestSuite.getDriver();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
-  }
 
   /**
    * ############################### Test Case 1 ###############################
@@ -78,9 +68,9 @@ public class BarChart {
    */
   @Test( timeout = 60000 )
   public void tc1_BarChart_ImageRendered() {
-    LOG.debug( "tc1_BarChart_ImageRendered" );
+    this.log.debug( "tc1_BarChart_ImageRendered" );
     //## Step 1
-    this.driver.get( this.baseUrl + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png" );
+    this.driver.get( PageUrl.BAR_CHART );
 
     WebElement elementImage = ElementHelper.FindElement( this.driver, By.cssSelector( "img" ) );
     assertNotNull( elementImage );
@@ -90,11 +80,7 @@ public class BarChart {
 
     assertEquals( "852", attrWidth );
     assertEquals( "637", attrHeight );
-    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png", attrSrc );
+    assertEquals( PageUrl.BAR_CHART, attrSrc );
   }
 
-  @After
-  public void tearDown() {
-    LOG.debug( "tearDown" );
-  }
 }

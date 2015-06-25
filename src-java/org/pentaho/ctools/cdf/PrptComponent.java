@@ -211,17 +211,20 @@ public class PrptComponent {
     //Check the generated image
     ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );
     this.driver.switchTo().frame( "reportContent" );
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']" ) );
-    assertNotNull( element );
-    ElementHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ), "L I N E :" );
-    String text = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
-    assertEquals( "L I N E :", text );
-    ElementHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ), "C l a s s i c" );
-    text = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
-    assertEquals( "C l a s s i c", text );
-    ElementHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ), "C a r s" );
-    text = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
-    assertEquals( "C a r s", text );
+    WebElement elemTextLayer = ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']" ) );
+    assertNotNull( elemTextLayer );
+    WebElement elemTextLayerDiv = ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
+    assertNotNull( elemTextLayerDiv );
+    WebElement elemTextLayerDiv2 = ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
+    assertNotNull( elemTextLayerDiv2 );
+    WebElement elemTextLayerDiv3 = ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
+    assertNotNull( elemTextLayerDiv3 );
+    String textDiv = ElementHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ), "L I N E :" );
+    assertEquals( "L I N E :", textDiv );
+    String textDiv2 = ElementHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ), "C l a s s i c" );
+    assertEquals( "C l a s s i c", textDiv2 );
+    String textDiv3 = ElementHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ), "C a r s" );
+    assertEquals( "C a r s", textDiv3 );
 
     // ## Step 2
     this.driver.switchTo().defaultContent();
@@ -314,14 +317,16 @@ public class PrptComponent {
     ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.driver.switchTo().frame( "sampleObject_prptFrame" );
 
-    // ## Step 1
+    /*
+     * ## Step 1
+     */
     WebElement element = ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='pentaho-toggle-button-container']/div/div/button" ) );
     assertNotNull( element );
     String text = element.getText();
     assertEquals( "Classic Cars", text );
     element.click();
+    ElementHelper.WaitForElementPresence( this.driver, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
-    ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );
     this.driver.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
@@ -337,7 +342,9 @@ public class PrptComponent {
     text = ElementHelper.GetAttribute( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
     assertEquals( "http://images.google.com/images?q=P-51-D%20Mustang", text );
 
-    // ## Step 2
+    /*
+     *  ## Step 2
+     */
     this.driver.switchTo().defaultContent();
     ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.driver.switchTo().frame( "sampleObject_prptFrame" );
@@ -346,8 +353,8 @@ public class PrptComponent {
     text = element.getText();
     assertEquals( "Motorcycles", text );
     element.click();
+    ElementHelper.WaitForElementPresence( this.driver, By.id( "glasspane" ), 5 );
     ElementHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
-    ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );
     this.driver.switchTo().frame( "reportContent" );
     element = ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
@@ -390,7 +397,9 @@ public class PrptComponent {
 
     String downloadDir = CToolsTestSuite.getDownloadDir();
 
-    // ## Step 1
+    /*
+     *  ## Step 1
+     */
     ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.driver.switchTo().frame( "sampleObject_prptFrame" );
     Select select = new Select( ElementHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
@@ -413,7 +422,9 @@ public class PrptComponent {
     text = ElementHelper.GetAttribute( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
     assertEquals( "http://images.google.com/images?q=1997%20BMW%20F650%20ST", text );
 
-    // ## Step 2
+    /*
+     *  ## Step 2
+     */
     this.driver.switchTo().defaultContent();
     ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.driver.switchTo().frame( "sampleObject_prptFrame" );
@@ -437,7 +448,9 @@ public class PrptComponent {
     text = ElementHelper.GetAttribute( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
     assertEquals( "http://images.google.com/images?q=1997%20BMW%20F650%20ST", text );
 
-    // ## Step 3
+    /*
+     *  ## Step 3
+     */
     this.driver.switchTo().defaultContent();
     ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.driver.switchTo().frame( "sampleObject_prptFrame" );
@@ -465,7 +478,9 @@ public class PrptComponent {
     text = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
     assertEquals( "MSRP", text );
 
-    // ## Step 4
+    /*
+     *  ## Step 4
+     */
     this.driver.switchTo().defaultContent();
     ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.driver.switchTo().frame( "sampleObject_prptFrame" );
@@ -478,7 +493,9 @@ public class PrptComponent {
     assertTrue( new File( downloadDir + "\\InventorybyLine.xls" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xls" ).delete();
 
-    // ## Step 5
+    /*
+     *  ## Step 5
+     */
     new File( downloadDir + "\\InventorybyLine.xlsx" ).delete();
     select = new Select( ElementHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow" );
@@ -488,7 +505,9 @@ public class PrptComponent {
     assertTrue( new File( downloadDir + "\\InventorybyLine.xlsx" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xlsx" ).delete();
 
-    // ## Step 6
+    /*
+     *  ## Step 6
+     */
     new File( downloadDir + "\\InventorybyLine.csv" ).delete();
     select = new Select( ElementHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/csv;page-mode=stream" );
@@ -498,7 +517,9 @@ public class PrptComponent {
     assertTrue( new File( downloadDir + "\\InventorybyLine.csv" ).exists() );
     new File( downloadDir + "\\InventorybyLine.csv" ).delete();
 
-    // ## Step 7
+    /*
+     *  ## Step 7
+     */
     new File( downloadDir + "\\InventorybyLine.rtf" ).delete();
     select = new Select( ElementHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/rtf;page-mode=flow" );
@@ -508,7 +529,9 @@ public class PrptComponent {
     assertTrue( new File( downloadDir + "\\InventorybyLine.rtf" ).exists() );
     new File( downloadDir + "\\InventorybyLine.rtf" ).delete();
 
-    // ## Step 8
+    /*
+     *  ## Step 8
+     */
     this.driver.switchTo().defaultContent();
     ElementHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.driver.switchTo().frame( "sampleObject_prptFrame" );

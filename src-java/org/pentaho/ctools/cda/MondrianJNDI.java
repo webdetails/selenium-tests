@@ -36,10 +36,6 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hamcrest.CoreMatchers;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -55,6 +51,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.DirectoryWatcher;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -68,31 +65,30 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class MondrianJNDI {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private static Wait<WebDriver> WAIT;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   //Download directory
-  private static String DOWNLOAD_DIR;
+  private final String downloadDir = CToolsTestSuite.getDownloadDir();
   //Log instance
-  private static Logger LOG = LogManager.getLogger( MondrianJNDI.class );
+  private final Logger log = LogManager.getLogger( MondrianJNDI.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
-  @BeforeClass
-  public static void setUpClass() {
-    DRIVER = CToolsTestSuite.getDriver();
-    WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-    DOWNLOAD_DIR = CToolsTestSuite.getDownloadDir();
-  }
-
-  @Before
-  public void setUpTestCase() {
+  /**
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Page Content
+   * Description:
+   *    The test case pretends to validate if the field filename and about
+   *    are present and the about works as expected.
+   */
+  @Test( timeout = 120000 )
+  public void tc0_OpenSamplePage() {
     // This samples is in: Public/plugin-samples/CDA/cdafiles/mondrian-jndi
-    DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=%2Fpublic%2Fplugin-samples%2Fcda%2Fcdafiles%2Fmondrian-jndi.cda" );
+    this.driver.get( PageUrl.MONDRIAN_JNDI );
   }
 
   /**
@@ -109,15 +105,15 @@ public class MondrianJNDI {
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayeFilenameAndAbout() {
-    LOG.info( "tc1_PageContent_DisplayeFilenameAndAbout" );
+    this.log.info( "tc1_PageContent_DisplayeFilenameAndAbout" );
 
     /*
      * ## Step 1
      */
     //Check if the field 'filename' exist and expected value
 
-    String filename = ElementHelper.WaitForTextPresence( DRIVER, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );
-    String pleaseSelect = ElementHelper.WaitForTextPresence( DRIVER, By.id( "pleaseselect" ), "Please select a Data Access ID" );
+    String filename = ElementHelper.WaitForTextPresence( this.driver, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );
+    String pleaseSelect = ElementHelper.WaitForTextPresence( this.driver, By.id( "pleaseselect" ), "Please select a Data Access ID" );
 
     assertEquals( "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda", filename );
     assertEquals( "Please select a Data Access ID", pleaseSelect );
@@ -126,34 +122,34 @@ public class MondrianJNDI {
      * ## Step 2
      */
     //Check the About
-    ElementHelper.FindElement( DRIVER, By.linkText( "About" ) ).click();
+    ElementHelper.FindElement( this.driver, By.linkText( "About" ) ).click();
     //element 'fileid'
-    WAIT.until( ExpectedConditions.presenceOfElementLocated( By.id( "fileid" ) ) );
-    String textElementFileid = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "fileid" ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "fileid" ) ) );
+    String textElementFileid = ElementHelper.WaitForElementPresentGetText( this.driver, By.id( "fileid" ) );
     //element image
-    WebElement elemImg = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) );
+    WebElement elemImg = ElementHelper.FindElement( this.driver, By.cssSelector( "img" ) );
     String imgAttrSrc = elemImg.getAttribute( "src" );
     //element //div[@id='aboutSubContainerLeft']/div[2]/p
     String textFirstParagExpected = "CDA is a Pentaho plugin designed for accessing data with great flexibility. Born to overcoming some cons of the older implementation, CDA allows you to access any of the various Pentaho data sources and:";
-    String textFirstParag = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='aboutSubContainerLeft']/div[2]/p" ) );
+    String textFirstParag = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='aboutSubContainerLeft']/div[2]/p" ) );
     //element //div[@id='aboutSubContainerLeft']/div[2]/p[2]
     String textSecondParagExpected = "CDA can be used as a standalone plugin on the Pentaho BI server or in combination with CDE / CDF.";
-    String textSecondParag = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='aboutSubContainerLeft']/div[2]/p[2]" ) );
+    String textSecondParag = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='aboutSubContainerLeft']/div[2]/p[2]" ) );
 
     assertEquals( "Hello!", textElementFileid );
-    assertEquals( BASE_URL + "api/repos/cda/static/img/cda.png", imgAttrSrc );
+    assertEquals( CToolsTestSuite.getBaseUrl() + "api/repos/cda/static/img/cda.png", imgAttrSrc );
     assertEquals( textFirstParagExpected, textFirstParag );
     assertEquals( textSecondParagExpected, textSecondParag );
 
     //Back to Mondrian JNDI
-    ElementHelper.Click( DRIVER, By.linkText( "Back to CDA" ) );
+    ElementHelper.Click( this.driver, By.linkText( "Back to CDA" ) );
     //Check if we are in the correct page
-    filename = ElementHelper.WaitForTextPresence( DRIVER, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );
-    pleaseSelect = ElementHelper.WaitForTextPresence( DRIVER, By.id( "pleaseselect" ), "Please select a Data Access ID" );
+    filename = ElementHelper.WaitForTextPresence( this.driver, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );
+    pleaseSelect = ElementHelper.WaitForTextPresence( this.driver, By.id( "pleaseselect" ), "Please select a Data Access ID" );
 
     assertEquals( "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda", filename );
     assertEquals( "Please select a Data Access ID", pleaseSelect );
-    assertNotNull( ElementHelper.FindElement( DRIVER, By.linkText( "About" ) ) );
+    assertNotNull( ElementHelper.FindElement( this.driver, By.linkText( "About" ) ) );
   }
 
   /**
@@ -174,46 +170,46 @@ public class MondrianJNDI {
    */
   @Test( timeout = 60000 )
   public void tc2_SelectDataAccess_DisplayDataForSelectedDataAccess() {
-    LOG.info( "tc2_SelectDataAccess_DisplayDataForSelectedDataAccess" );
+    this.log.info( "tc2_SelectDataAccess_DisplayDataForSelectedDataAccess" );
 
     /*
      * ## Step 1
      */
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( ElementHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
     //wait to render page
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement( DRIVER, By.id( "status" ) );
+    WebElement elemStatus = ElementHelper.FindElement( this.driver, By.id( "status" ) );
     assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "contents_info" ) );
+    String textPaging = ElementHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
     //Column Time
-    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
-    String columnOneRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
-    String columnOneRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td" ) );
+    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    String columnOneRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
+    String columnOneRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td" ) );
     assertEquals( "All Years", columnOneRowOne );
     assertEquals( "All Years", columnOneRowTwo );
     assertEquals( "All Years", columnOneRowThree );
     //Column Year
-    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
-    String columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
-    String columnTwoRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[2]" ) );
+    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    String columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
+    String columnTwoRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[2]" ) );
     assertEquals( "2003", columnTwoRowOne );
     assertEquals( "2004", columnTwoRowTwo );
     assertEquals( "2005", columnTwoRowThree );
     //Column Price
-    String columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
-    String columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
-    String columnThreeRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
+    String columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
+    String columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
+    String columnThreeRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
     assertEquals( "3573701.2500000023", columnThreeRowOne );
     assertEquals( "4750205.889999998", columnThreeRowTwo );
     assertEquals( "1513074.4600000002", columnThreeRowThree );
     //Column PriceInk
-    String columnFourRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
-    String columnFourRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[4]" ) );
-    String columnFourRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
+    String columnFourRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
+    String columnFourRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[4]" ) );
+    String columnFourRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
     assertEquals( "3.5737012500000023", columnFourRowOne );
     assertEquals( "4.750205889999998", columnFourRowTwo );
     assertEquals( "1.5130744600000001", columnFourRowThree );
@@ -222,34 +218,34 @@ public class MondrianJNDI {
      * ## Step 2
      */
     //Click Asc
-    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) ).click();
     //Click Desc
-    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) ).click();
     //Column Time
-    columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
-    columnOneRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
-    columnOneRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td" ) );
+    columnOneRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    columnOneRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
+    columnOneRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td" ) );
     assertEquals( "All Years", columnOneRowOne );
     assertEquals( "All Years", columnOneRowTwo );
     assertEquals( "All Years", columnOneRowThree );
     //Column Year
-    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
-    columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
-    columnTwoRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[2]" ) );
+    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
+    columnTwoRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[2]" ) );
     assertEquals( "2005", columnTwoRowOne );
     assertEquals( "2004", columnTwoRowTwo );
     assertEquals( "2003", columnTwoRowThree );
     //Column Price
-    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
-    columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
-    columnThreeRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
+    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
+    columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
+    columnThreeRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
     assertEquals( "1513074.4600000002", columnThreeRowOne );
     assertEquals( "4750205.889999998", columnThreeRowTwo );
     assertEquals( "3573701.2500000023", columnThreeRowThree );
     //Column PriceInk
-    columnFourRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
-    columnFourRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[4]" ) );
-    columnFourRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
+    columnFourRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
+    columnFourRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[4]" ) );
+    columnFourRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
     assertEquals( "1.5130744600000001", columnFourRowOne );
     assertEquals( "4.750205889999998", columnFourRowTwo );
     assertEquals( "3.5737012500000023", columnFourRowThree );
@@ -258,34 +254,34 @@ public class MondrianJNDI {
      * ## Step 3
      */
     //Click Asc
-    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[3]" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[3]" ) ).click();
     //Click Desc
-    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[3]" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[3]" ) ).click();
     //Column Time
-    columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
-    columnOneRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
-    columnOneRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td" ) );
+    columnOneRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    columnOneRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
+    columnOneRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td" ) );
     assertEquals( "All Years", columnOneRowOne );
     assertEquals( "All Years", columnOneRowTwo );
     assertEquals( "All Years", columnOneRowThree );
     //Column Year
-    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
-    columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
-    columnTwoRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[2]" ) );
+    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
+    columnTwoRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[2]" ) );
     assertEquals( "2004", columnTwoRowOne );
     assertEquals( "2003", columnTwoRowTwo );
     assertEquals( "2005", columnTwoRowThree );
     //Column Price
-    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
-    columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
-    columnThreeRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
+    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
+    columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
+    columnThreeRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
     assertEquals( "4750205.889999998", columnThreeRowOne );
     assertEquals( "3573701.2500000023", columnThreeRowTwo );
     assertEquals( "1513074.4600000002", columnThreeRowThree );
     //Column PriceInk
-    columnFourRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
-    columnFourRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[4]" ) );
-    columnFourRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
+    columnFourRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
+    columnFourRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[4]" ) );
+    columnFourRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
     assertEquals( "4.750205889999998", columnFourRowOne );
     assertEquals( "3.5737012500000023", columnFourRowTwo );
     assertEquals( "1.5130744600000001", columnFourRowThree );
@@ -294,34 +290,34 @@ public class MondrianJNDI {
      * ## Step 4
      */
     //Click Asc
-    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[4]" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[4]" ) ).click();
     //Click Desc
-    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[4]" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[4]" ) ).click();
     //Column Time
-    columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
-    columnOneRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
-    columnOneRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td" ) );
+    columnOneRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    columnOneRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
+    columnOneRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td" ) );
     assertEquals( "All Years", columnOneRowOne );
     assertEquals( "All Years", columnOneRowTwo );
     assertEquals( "All Years", columnOneRowThree );
     //Column Year
-    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
-    columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
-    columnTwoRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[2]" ) );
+    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
+    columnTwoRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[2]" ) );
     assertEquals( "2004", columnTwoRowOne );
     assertEquals( "2003", columnTwoRowTwo );
     assertEquals( "2005", columnTwoRowThree );
     //Column Price
-    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
-    columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
-    columnThreeRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
+    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
+    columnThreeRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
+    columnThreeRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
     assertEquals( "4750205.889999998", columnThreeRowOne );
     assertEquals( "3573701.2500000023", columnThreeRowTwo );
     assertEquals( "1513074.4600000002", columnThreeRowThree );
     //Column PriceInk
-    columnFourRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
-    columnFourRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[4]" ) );
-    columnFourRowThree = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
+    columnFourRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
+    columnFourRowTwo = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[4]" ) );
+    columnFourRowThree = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
     assertEquals( "4.750205889999998", columnFourRowOne );
     assertEquals( "3.5737012500000023", columnFourRowTwo );
     assertEquals( "1.5130744600000001", columnFourRowThree );
@@ -329,43 +325,43 @@ public class MondrianJNDI {
     /*
      * ## Step 5
      */
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='contents_filter']/input" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='contents_filter']/input" ) ).sendKeys( "2004" );
+    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='contents_filter']/input" ) ).clear();
+    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='contents_filter']/input" ) ).sendKeys( "2004" );
     //Check we have only one element
-    textPaging = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "contents_info" ) );
+    textPaging = ElementHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 1 of 1 elements (filter 3 elements)", textPaging );
     //Column Time
-    columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    columnOneRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
     assertEquals( "All Years", columnOneRowOne );
     //Column Year
-    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
     assertEquals( "2004", columnTwoRowOne );
     //Column Price
-    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
+    columnThreeRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
     assertEquals( "4750205.889999998", columnThreeRowOne );
     //Column PriceInk
-    columnFourRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
+    columnFourRowOne = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[4]" ) );
     assertEquals( "4.750205889999998", columnFourRowOne );
 
     /*
      * ## Step 6
      */
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='contents_filter']/input" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='contents_filter']/input" ) ).sendKeys( "Merry" );
+    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='contents_filter']/input" ) ).clear();
+    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='contents_filter']/input" ) ).sendKeys( "Merry" );
     //Check we have only one element
-    textPaging = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "contents_info" ) );
+    textPaging = ElementHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "empty (filter 3 elements)", textPaging );
     //Check if table is empty
-    String textNoResult = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    String textNoResult = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
     assertEquals( "No results.", textNoResult );
 
     //Clean data
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='contents_filter']/input" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='contents_filter']/input" ) ).sendKeys( Keys.RETURN );
+    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='contents_filter']/input" ) ).clear();
+    ElementHelper.FindElement( this.driver, By.xpath( "//div[@id='contents_filter']/input" ) ).sendKeys( Keys.RETURN );
     //Order by Year
-    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) ).click();
     //Order by Time
-    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[1]" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[1]" ) ).click();
   }
 
   /**
@@ -380,41 +376,41 @@ public class MondrianJNDI {
    */
   @Test( timeout = 60000 )
   public void tc3_ExportXls_FileDownload() {
-    LOG.info( "tc3_ExportXls_FileDownload" );
+    this.log.info( "tc3_ExportXls_FileDownload" );
 
     /*
      * ## Step 1
      */
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( ElementHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
     //wait to render page
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement( DRIVER, By.id( "status" ) );
+    WebElement elemStatus = ElementHelper.FindElement( this.driver, By.id( "status" ) );
     assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "contents_info" ) );
+    String textPaging = ElementHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
 
     //Click in export as xls
-    WebElement buttonExport = ElementHelper.FindElement( DRIVER, By.id( "export" ) );
+    WebElement buttonExport = ElementHelper.FindElement( this.driver, By.id( "export" ) );
     assertNotNull( buttonExport );
     try {
       //Delete the existence if exist
-      new File( DOWNLOAD_DIR + "\\cda-export.xls" ).delete();
+      new File( this.downloadDir + "\\cda-export.xls" ).delete();
 
       //Click to export
-      ElementHelper.Click( DRIVER, By.id( "export" ) );
+      ElementHelper.ClickJS( this.driver, By.id( "export" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher.WatchForCreate( DOWNLOAD_DIR );
+      DirectoryWatcher.WatchForCreate( this.downloadDir );
 
       //Check if file was download
-      assertTrue( new File( DOWNLOAD_DIR + "\\cda-export.xls" ).exists() );
+      assertTrue( new File( this.downloadDir + "\\cda-export.xls" ).exists() );
 
-      new File( DOWNLOAD_DIR + "\\cda-export.xls" ).delete();
+      new File( this.downloadDir + "\\cda-export.xls" ).delete();
     } catch ( Exception e ) {
-      LOG.error( e.getMessage() );
+      this.log.error( e.getMessage() );
     }
   }
 
@@ -431,44 +427,50 @@ public class MondrianJNDI {
    */
   @Test( timeout = 60000 )
   public void tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage() {
-    LOG.info( "tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" );
+    this.log.info( "tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" );
 
     /*
      * ## Step 1
      */
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( ElementHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
     //wait to render page
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement( DRIVER, By.id( "status" ) );
+    WebElement elemStatus = ElementHelper.FindElement( this.driver, By.id( "status" ) );
     assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "contents_info" ) );
+    String textPaging = ElementHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
 
     // Check query url
-    WebElement buttonQueryUrl = ElementHelper.FindElement( DRIVER, By.id( "queryUrl" ) );
+    WebElement buttonQueryUrl = ElementHelper.FindElement( this.driver, By.id( "queryUrl" ) );
     assertEquals( "Query URL", buttonQueryUrl.getText() );
     buttonQueryUrl.click();
 
-    WAIT.until( ExpectedConditions.presenceOfElementLocated( By.id( "queryUrlDialog" ) ) );
-    String dialogTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='queryUrlDialog']/p" ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "queryUrlDialog" ) ) );
+    String dialogTitle = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='queryUrlDialog']/p" ) );
     assertEquals( "Query Execution URL:", dialogTitle );
 
-    WebElement inputQueryUrl = ElementHelper.FindElement( DRIVER, By.xpath( "//input[@id='doQueryUrl']" ) );
+    WebElement inputQueryUrl = ElementHelper.FindElement( this.driver, By.xpath( "//input[@id='doQueryUrl']" ) );
     String queryUrl = inputQueryUrl.getAttribute( "value" );
-    LOG.debug( "Query URL: " + queryUrl );
+    this.log.debug( "Query URL: " + queryUrl );
 
-    ElementHelper.FindElement( DRIVER, By.linkText( "Close" ) ).click();
+    ElementHelper.FindElement( this.driver, By.linkText( "Close" ) ).click();
 
     /*
      * ## Step 2
      */
-    DRIVER.get( queryUrl );
+    this.driver.get( queryUrl );
     String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"String\",\"colName\":\"PriceInK\"}]}";
-    String jsonQueryActual = ElementHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "body" ) );
+    String jsonQueryActual = ElementHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "body" ) );
     assertEquals( jsonQueryExpected, jsonQueryActual );
+
+    this.driver.get( PageUrl.MONDRIAN_JNDI );
+    String filename = ElementHelper.WaitForTextPresence( this.driver, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );
+    String pleaseSelect = ElementHelper.WaitForTextPresence( this.driver, By.id( "pleaseselect" ), "Please select a Data Access ID" );
+    assertEquals( "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda", filename );
+    assertEquals( "Please select a Data Access ID", pleaseSelect );
   }
 
   /**
@@ -487,54 +489,54 @@ public class MondrianJNDI {
    */
   @Test( timeout = 240000 )
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
-    LOG.info( "tc5_CacheThisSimple_ScheduleIsSetSuccessful" );
+    this.log.info( "tc5_CacheThisSimple_ScheduleIsSetSuccessful" );
     String selectedHours = "21";
 
     /*
      * ## Step 1
      */
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( ElementHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
     //wait to render page
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement( DRIVER, By.id( "status" ) );
+    WebElement elemStatus = ElementHelper.FindElement( this.driver, By.id( "status" ) );
     assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
     //Check we have three elements and no more than that
-    String textPaging = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "contents_info" ) );
+    String textPaging = ElementHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
 
     /*
      * ## Step 2
      */
     //Click in 'Cache this'
-    ElementHelper.FindElement( DRIVER, By.id( "cachethis" ) ).click();
-    WAIT.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='dialog']" ) ) );
-    String questionActual = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dialog']/p" ) );
+    ElementHelper.FindElement( this.driver, By.id( "cachethis" ) ).click();
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='dialog']" ) ) );
+    String questionActual = ElementHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dialog']/p" ) );
     String questionExpect = "What schedule should this query run on? (advanced)";
     assertEquals( questionExpect, questionActual );
 
     /*
      * ## Step 3
      */
-    String parentWindowHandle = DRIVER.getWindowHandle();
-    Select selectPeriod = new Select( ElementHelper.FindElement( DRIVER, By.id( "periodType" ) ) );
+    String parentWindowHandle = this.driver.getWindowHandle();
+    Select selectPeriod = new Select( ElementHelper.FindElement( this.driver, By.id( "periodType" ) ) );
     selectPeriod.selectByValue( "1" ); //every day
 
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@id='startAt']" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@id='startAt']" ) ).sendKeys( selectedHours );
-    ElementHelper.FindElement( DRIVER, By.linkText( "Ok" ) ).click();
+    ElementHelper.FindElement( this.driver, By.xpath( "//input[@id='startAt']" ) ).clear();
+    ElementHelper.FindElement( this.driver, By.xpath( "//input[@id='startAt']" ) ).sendKeys( selectedHours );
+    ElementHelper.FindElement( this.driver, By.linkText( "Ok" ) ).click();
 
-    Set<String> listWindows = DRIVER.getWindowHandles();
+    Set<String> listWindows = this.driver.getWindowHandles();
     //wait for popup render
-    ElementHelper.WaitForNewWindow( DRIVER );
-    listWindows = DRIVER.getWindowHandles();
+    ElementHelper.WaitForNewWindow( this.driver );
+    listWindows = this.driver.getWindowHandles();
     //Get popup id
     WebDriver cdaCacheManager = null;
     Iterator<String> iterWindows = listWindows.iterator();
     while ( iterWindows.hasNext() ) {
       String windowHandle = iterWindows.next();
-      cdaCacheManager = DRIVER.switchTo().window( windowHandle );
+      cdaCacheManager = this.driver.switchTo().window( windowHandle );
       if ( cdaCacheManager.getTitle().equals( "CDA Cache Manager" ) ) {
         break;
       }
@@ -574,14 +576,14 @@ public class MondrianJNDI {
       assertEquals( "-1", queryTime );
       assertEquals( "Success", queryStatus );
     } catch ( AssertionError ae ) {
-      LOG.error( ae.getMessage() );
+      this.log.error( ae.getMessage() );
 
       //Remove schedule
       this.removeFirstSchedule();
 
       //Need guarantee we close everything
       cdaCacheManager.close();
-      DRIVER.switchTo().window( parentWindowHandle );
+      this.driver.switchTo().window( parentWindowHandle );
 
       //raise the exception
       fail( ae.getMessage() );
@@ -593,8 +595,8 @@ public class MondrianJNDI {
     this.removeFirstSchedule();
 
     cdaCacheManager.close();
-    DRIVER.switchTo().window( parentWindowHandle );
-    assertTrue( DRIVER.getWindowHandles().size() == 1 );
+    this.driver.switchTo().window( parentWindowHandle );
+    assertTrue( this.driver.getWindowHandles().size() == 1 );
   }
 
   /**
@@ -603,34 +605,24 @@ public class MondrianJNDI {
   public void removeFirstSchedule() {
     boolean elementPresent = false;
 
-    elementPresent = ElementHelper.WaitForElementNotPresent( DRIVER, By.cssSelector( "img.deleteIcon.button" ), 2 );
+    elementPresent = ElementHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "img.deleteIcon.button" ), 2 );
 
     while ( !elementPresent ) {
       //Press to delete schedule
-      ElementHelper.FindElement( DRIVER, By.cssSelector( "img.deleteIcon.button" ) ).click();
+      ElementHelper.FindElement( this.driver, By.cssSelector( "img.deleteIcon.button" ) ).click();
 
       //Wait for pop-up
-      WAIT.until( ExpectedConditions.alertIsPresent() );
-      Alert alert = DRIVER.switchTo().alert();
+      this.wait.until( ExpectedConditions.alertIsPresent() );
+      Alert alert = this.driver.switchTo().alert();
       String confirmationMsg = alert.getText();
       String expectedCnfText = "Want to delete this scheduler entry?";
       alert.accept();
 
       assertEquals( confirmationMsg, expectedCnfText );
-      ElementHelper.WaitForAlertNotPresent( DRIVER );
-      DRIVER.switchTo().defaultContent();
+      ElementHelper.WaitForAlertNotPresent( this.driver );
+      this.driver.switchTo().defaultContent();
 
-      elementPresent = ElementHelper.WaitForElementNotPresent( DRIVER, By.cssSelector( "img.deleteIcon.button" ), 2 );
+      elementPresent = ElementHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "img.deleteIcon.button" ), 2 );
     }
-  }
-
-  @After
-  public void tearDownTestCase() {
-    //To use after test case run.
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown" );
   }
 }
