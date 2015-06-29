@@ -59,6 +59,8 @@ public class DateInputComponent {
   private static WebDriver DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private static Logger LOG = LogManager.getLogger( PrptComponent.class );
 
@@ -96,43 +98,43 @@ public class DateInputComponent {
     DRIVER.get( PageUrl.DATEINPUT_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for visibility of 'DateInputComponent'
-    ElementHelper.WaitForElementVisibility( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+    this.elemHelper.WaitForElementVisibility( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
     // Validate the sample that we are testing is the one
     assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
-    assertEquals( "DateInputComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "DateInputComponent", this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     /*
      * ## Step 2
      */
     //Render again the sample
-    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( DRIVER, By.xpath( "//div[@id='code']/button" ) );
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     /*
      * ## Step 3
      */
     //Pick a date
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "myInput" ) );
-    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( "''" );
+    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "myInput" ) );
+    this.elemHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( "''" );
 
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "ui-datepicker-div" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.className( "ui-datepicker-month" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.className( "ui-datepicker-year" ) );
-    Select month = new Select( ElementHelper.FindElement( DRIVER, By.className( "ui-datepicker-month" ) ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "ui-datepicker-div" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.className( "ui-datepicker-month" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.className( "ui-datepicker-year" ) );
+    Select month = new Select( this.elemHelper.FindElement( DRIVER, By.className( "ui-datepicker-month" ) ) );
     month.selectByValue( "9" );
-    Select year = new Select( ElementHelper.FindElement( DRIVER, By.className( "ui-datepicker-year" ) ) );
+    Select year = new Select( this.elemHelper.FindElement( DRIVER, By.className( "ui-datepicker-year" ) ) );
     year.selectByValue( "2011" );
     //Day 23
-    ElementHelper.FindElement( DRIVER, By.xpath( "//table[@class='ui-datepicker-calendar']//tbody//tr[5]/td/a" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//table[@class='ui-datepicker-calendar']//tbody//tr[5]/td/a" ) ).sendKeys( Keys.ENTER );
 
     WAIT.until( ExpectedConditions.alertIsPresent() );
     Alert alert = DRIVER.switchTo().alert();

@@ -59,6 +59,8 @@ public class CDE413 {
   private static WebDriver DRIVER;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE413.class );
   // Getting screenshot when test fails
@@ -99,15 +101,15 @@ public class CDE413 {
     //Go to New CDE Dashboard
     DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
     //assert buttons
-    WebElement buttonSaveTemplate = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
-    WebElement buttonApplyTemplate = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
-    WebElement buttonAddResource = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
-    WebElement buttonAddBoostrap = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
-    WebElement buttonAddFreeForm = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
-    WebElement buttonAddRow = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
-    WebElement buttonLayout = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
-    WebElement buttonComponents = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
-    WebElement buttonDatasources = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement buttonApplyTemplate = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    WebElement buttonAddResource = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    WebElement buttonAddBoostrap = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    WebElement buttonAddFreeForm = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    WebElement buttonAddRow = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    WebElement buttonLayout = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    WebElement buttonComponents = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    WebElement buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( buttonSaveTemplate );
     assertNotNull( buttonApplyTemplate );
     assertNotNull( buttonAddResource );
@@ -117,35 +119,35 @@ public class CDE413 {
     assertNotNull( buttonLayout );
     assertNotNull( buttonComponents );
     assertNotNull( buttonDatasources );
-    ElementHelper.Click( DRIVER, By.cssSelector( "div.componentsPanelButton" ) );
+    this.elemHelper.Click( DRIVER, By.cssSelector( "div.componentsPanelButton" ) );
 
     /*
      * ## Step 2
      */
-    String otherText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    String otherText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
     assertEquals( "Others", otherText );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
-    WebElement optionTableComponent = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "a[title='table Component']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    WebElement optionTableComponent = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "a[title='table Component']" ) );
     assertNotNull( optionTableComponent );
-    ElementHelper.Click( DRIVER, By.cssSelector( "a[title='table Component']" ) );
+    this.elemHelper.Click( DRIVER, By.cssSelector( "a[title='table Component']" ) );
 
     /*
      * ## Step 3
      */
     //Click in the columnTypes - property
-    WebElement propertyColumnTypes = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
+    WebElement propertyColumnTypes = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
     assertNotNull( propertyColumnTypes );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
     //We need to wait for the animation finish for the display popup
-    ElementHelper.WaitForAttributeValueEqualsTo( DRIVER, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
+    this.elemHelper.WaitForAttributeValueEqualsTo( DRIVER, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
 
     /*
      * ## Step 4
      */
-    ElementHelper.Click( DRIVER, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement arg0RemoveElement = ElementHelper.FindElement( DRIVER, By.id( "remove_button_0" ) );
-    WebElement arg0InputElement = ElementHelper.FindElement( DRIVER, By.id( "arg_0" ) );
-    WebElement arg0DragDropIconElement = ElementHelper.FindElement( DRIVER, By.cssSelector( "div.StringArrayDragIcon" ) );
+    this.elemHelper.Click( DRIVER, By.cssSelector( "input.StringArrayAddButton" ) );
+    WebElement arg0RemoveElement = this.elemHelper.FindElement( DRIVER, By.id( "remove_button_0" ) );
+    WebElement arg0InputElement = this.elemHelper.FindElement( DRIVER, By.id( "arg_0" ) );
+    WebElement arg0DragDropIconElement = this.elemHelper.FindElement( DRIVER, By.cssSelector( "div.StringArrayDragIcon" ) );
     assertNotNull( arg0RemoveElement );
     assertNotNull( arg0InputElement );
     assertNotNull( arg0DragDropIconElement );

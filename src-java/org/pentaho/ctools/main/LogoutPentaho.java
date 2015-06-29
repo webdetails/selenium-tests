@@ -56,6 +56,8 @@ public class LogoutPentaho {
   private Wait<WebDriver> wait;
   // The base url to be append the relative url in test
   private String baseUrl;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private static Logger log = LogManager.getLogger( LogoutPentaho.class );
 
@@ -90,7 +92,7 @@ public class LogoutPentaho {
     this.driver.get( this.baseUrl + "Home" );
 
     //waiting pop-up to be visible
-    ElementHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //## Step 2
     //wait for frame to load
@@ -109,14 +111,14 @@ public class LogoutPentaho {
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) ) );
     this.wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) ) );
     assertEquals( "Log Out", this.driver.findElement( By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) ).getText() );
-    ElementHelper.Click( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
 
     //## Step 3
     //Wait for form display (login form)
-    WebElement elForm = ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
+    WebElement elForm = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
     assertNotNull( elForm );
   }
 

@@ -53,6 +53,8 @@ public class AddinReferenceEdit {
   private static WebDriver DRIVER;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  // Access to wrapper for webdriver
+  private static ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private static Logger LOG = LogManager.getLogger( AddinReferenceEdit.class );
 
@@ -93,8 +95,8 @@ public class AddinReferenceEdit {
      */
     //Go to AddinReference
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent" );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
-    WebElement titleWithFontSize18 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
+    elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
+    WebElement titleWithFontSize18 = elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
     assertEquals( "font-size: 18px;", titleWithFontSize18.getAttribute( "style" ) );
 
     /*
@@ -108,8 +110,8 @@ public class AddinReferenceEdit {
     //Go to AddinReference
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent" );
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    titleWithFontSize18 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
+    elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    titleWithFontSize18 = elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
     assertEquals( "font-size: 34px;", titleWithFontSize18.getAttribute( "style" ) );
   }
 
@@ -121,23 +123,23 @@ public class AddinReferenceEdit {
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/wcdf.edit" );
 
     //Expand first row - Title
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "span.expander" ) );
-    ElementHelper.ClickJS( DRIVER, By.cssSelector( "span.expander" ) );
+    elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "span.expander" ) );
+    elemHelper.ClickJS( DRIVER, By.cssSelector( "span.expander" ) );
     //Click in HTML to open the Properties
     Actions acts = new Actions( DRIVER );
-    acts.click( ElementHelper.FindElement( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
+    acts.click( elemHelper.FindElement( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
     acts.build().perform();
     //Click in field 'Font Size' to be editable
-    ElementHelper.ClickJS( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
+    elemHelper.ClickJS( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
     //Write 34
-    ElementHelper.FindElement( DRIVER, By.name( "value" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//form[@class='cdfddInput']/input" ) ).sendKeys( value );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//form[@class='cdfddInput']/input" ) ).submit();
+    elemHelper.FindElement( DRIVER, By.name( "value" ) ).clear();
+    elemHelper.FindElement( DRIVER, By.xpath( "//form[@class='cdfddInput']/input" ) ).sendKeys( value );
+    elemHelper.FindElement( DRIVER, By.xpath( "//form[@class='cdfddInput']/input" ) ).submit();
     //Save the changes
-    ElementHelper.Click( DRIVER, By.linkText( "Save" ) );
+    elemHelper.Click( DRIVER, By.linkText( "Save" ) );
     //Wait for element present and invisible
-    ElementHelper.WaitForElementVisibility( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
+    elemHelper.WaitForElementVisibility( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
+    elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
   }
 
   @AfterClass

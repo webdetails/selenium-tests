@@ -63,6 +63,8 @@ public class CDE432 {
   private static WebDriver DRIVER;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE432.class );
   // Getting screenshot when test fails
@@ -100,31 +102,31 @@ public class CDE432 {
      */
     //Go to New CDE Dashboard
     DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( element );
 
     /*
      * ## Step 2
      */
-    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
     Robot robot;
     try {
       robot = new Robot();
@@ -133,13 +135,13 @@ public class CDE432 {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertNotNull( element );
-    String text = ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
+    String text = this.elemHelper.WaitForTextPresence( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
     assertEquals( "Row", text );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
 
     /*
      * ## Step 3
@@ -161,9 +163,9 @@ public class CDE432 {
     /*
      * ## Step 4
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
     assertNotNull( element );
-    String align = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
+    String align = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[5]/td[2]" ) );
     assertEquals( "Left", align );
 
   }

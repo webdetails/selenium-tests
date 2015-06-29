@@ -24,8 +24,6 @@ package org.pentaho.ctools.cdf.require;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,41 +46,32 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CheckComponent {
-  //Instance of the DRIVER (browser emulator)
-  private static WebDriver DRIVER;
+  //Instance of the this.driver (browser emulator)
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private static Wait<WebDriver> WAIT;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
-   * Shall initialized the test before run each test case.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample
    */
-  @BeforeClass
-  public static void setUp() {
-    DRIVER = CToolsTestSuite.getDriver();
-    WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
-  }
-
-  /**
-   * Go to the CheckComponent web page.
-   */
-  public static void init() {
+  public void tc0_OpenSamplePage_Display() {
     // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/CheckComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A55-CheckComponent%3Acheck_component.xcdf/generatedContent" );
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/CheckComponent
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A55-CheckComponent%3Acheck_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -98,13 +87,13 @@ public class CheckComponent {
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
-    assertEquals( "CheckComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "CheckComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -121,15 +110,15 @@ public class CheckComponent {
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
   }
 
   /**
@@ -151,40 +140,40 @@ public class CheckComponent {
     String confirmationMsg = "";
     // ## Step 1
     //Click in Southern
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern", confirmationMsg );
 
     // ## Step 2
     //Click in Eastern
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Eastern']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Eastern']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern", confirmationMsg );
 
     // ## Step 3
     //Click in Central
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern,Central", confirmationMsg );
 
     // ## Step 4
     //Click in Western
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Western']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Western']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern,Central,Western", confirmationMsg );
@@ -209,40 +198,40 @@ public class CheckComponent {
     String confirmationMsg = "";
     // ## Step 1
     //Click in Southern
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Eastern,Central,Western", confirmationMsg );
 
     // ## Step 2
     //Click in Eastern
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Eastern']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Eastern']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Central,Western", confirmationMsg );
 
     // ## Step 3
     //Click in Central
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Western", confirmationMsg );
 
     // ## Step 4
     //Click in Western
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Western']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Western']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: ", confirmationMsg );
@@ -263,62 +252,57 @@ public class CheckComponent {
   public void tc5_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed() {
     String confirmationMsg = "";
     //Click in Central
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Central", confirmationMsg );
 
     //Click in Southern
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Central", confirmationMsg );
 
     //UnChecked Southern
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Central", confirmationMsg );
 
     //Click in Western
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Western']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Western']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Central,Western", confirmationMsg );
 
     //Click in Western
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Eastern']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Eastern']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Eastern,Central,Western", confirmationMsg );
 
     //Unchecked Central
-    ElementHelper.Click( DRIVER, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Eastern,Western", confirmationMsg );
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    //To use when class run all test cases.
   }
 }

@@ -25,8 +25,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -54,21 +52,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE396 {
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE396.class );
+  private final Logger log = LogManager.getLogger( CDE396.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE396.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -85,21 +78,16 @@ public class CDE396 {
    *
    */
   @Test( timeout = 120000 )
-  public void tc01_RefreshCde_ReturnsInfo() {
-    LOG.info( "tc01_RefreshCde_ReturnsInfo" );
+  public void tc1_RefreshCde_ReturnsInfo() {
+    this.log.info( "tc1_RefreshCde_ReturnsInfo" );
 
     //Go to User Console
-    DRIVER.get( BASE_URL + "plugin/pentaho-cdf-dd/api/renderer/refresh" );
+    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh" );
 
     /*
      * ## Step 1
      */
-    String confirmationText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//body/pre" ) );
+    String confirmationText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/pre" ) );
     assertEquals( "Refreshed CDE Successfully", confirmationText );
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE396.class.getSimpleName() );
   }
 }

@@ -72,6 +72,8 @@ public class CDA112 {
   private static String DOWNLOAD_DIR;
   // The path for the export file
   private static String EXPORT_FILE_PATH;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDA112.class );
   // Getting screenshot when test fails
@@ -112,62 +114,62 @@ public class CDA112 {
     DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-112/cda112.cda" );
 
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
     assertNotNull( element );
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "sqlDummyTWELVE" );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( element );
 
     /*
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Check the presented contains
-    WebElement elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p1" ) );
+    WebElement elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p1" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p2" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p2" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p3" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p3" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p4" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p4" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p5" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p5" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p6" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p6" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p7" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p7" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p8" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p8" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p9" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p9" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p10" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p10" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p11" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p11" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
-    elemStatus = ElementHelper.FindElement( DRIVER, By.id( "p12" ) );
+    elemStatus = this.elemHelper.FindElement( DRIVER, By.id( "p12" ) );
     assertEquals( "Alpha Cognac", elemStatus.getAttribute( "value" ) );
 
     //Check text on table
-    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
-    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    String columnOneRowOne = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    String columnTwoRowOne = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
     assertEquals( "242", columnOneRowOne );
     assertEquals( "Alpha Cognac", columnTwoRowOne );
 
     /*
      * ## Step 3
      */
-    WebElement buttonExport = ElementHelper.FindElement( DRIVER, By.id( "export" ) );
+    WebElement buttonExport = this.elemHelper.FindElement( DRIVER, By.id( "export" ) );
     assertNotNull( buttonExport );
     try {
       //Delete the existence if exist

@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -56,21 +54,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE269 {
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE269.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE269.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -93,20 +86,14 @@ public class CDE269 {
      */
 
     //Open URL
-    DRIVER.get( BASE_URL + "plugin/pentaho-cdf-dd/api/renderer/getHeaders?solution=&path=/public/plugin-samples/pentaho-cdf-dd&file=cde_sample1.wcdf&absolute=true&root=localhost:8080&scheme=https" );
+    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/getHeaders?solution=&path=/public/plugin-samples/pentaho-cdf-dd&file=cde_sample1.wcdf&absolute=true&root=localhost:8080&scheme=https" );
 
     //Wait for Elements and assert them
-    WebElement element = ElementHelper.FindElement( DRIVER, By.xpath( "//body/pre" ) );
+    WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//body/pre" ) );
     assertNotNull( element );
-    String text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//body/pre" ) );
+    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/pre" ) );
     text = text.replaceAll( "v=\\S+\"", "\"" );
 
     assertEquals( "<title>CDE Sample Dashboard</title><!-- cdf-blueprint-script-includes --> <script language=\"javascript\" type=\"text/javascript\" src=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf/js/cdf-blueprint-script-includes.js?\"></script> <!-- cdf-blueprint-style-includes --> <link href=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf/css/cdf-blueprint-style-includes.css?\" rel=\"stylesheet\" type=\"text/css\" /> <!-- cdf-blueprint-ie8style-includes --><!--[if lte IE 8]> <link href=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf/js-legacy/lib/blueprint/ie.css?\" rel=\"stylesheet\" type=\"text/css\" /> <![endif]--> <!-- cdf-cdf-dashboard-script-includes --> <script language=\"javascript\" type=\"text/javascript\" src=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf/js-legacy/lib/sparkline/jquery.sparkline.js?\"></script> <!-- cdf-cdf-dashboard-style-includes --> <script language=\"javascript\" type=\"text/javascript\" src=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf-dd/js/CDF.js?\"></script> <link href=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf-dd/css/CDF-CSS.css?\" rel=\"stylesheet\" type=\"text/css\" />", text );
-
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE269.class.getSimpleName() );
   }
 }

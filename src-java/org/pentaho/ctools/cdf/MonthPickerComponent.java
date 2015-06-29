@@ -61,6 +61,8 @@ public class MonthPickerComponent {
   private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private static Logger LOG = LogManager.getLogger( MonthPickerComponent.class );
 
@@ -76,26 +78,28 @@ public class MonthPickerComponent {
     DRIVER = CToolsTestSuite.getDriver();
     WAIT = CToolsTestSuite.getWait();
     BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
   }
 
   /**
-   * Go to the MonthPickerComponent web page.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  public static void init() {
+  public void tc0_PageContent_DisplayTitle() {
+    LOG.info( "tc0_PageContent_DisplayTitle" );
+
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/MonthPickerComponent
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A46-MonthPickerComponent%3Amonth_picker_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
-   * ############################### Test Case 2 ###############################
+   * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
    *    Reload Sample
@@ -114,7 +118,7 @@ public class MonthPickerComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
-    assertEquals( "MonthPickerComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "MonthPickerComponent", this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -132,14 +136,14 @@ public class MonthPickerComponent {
     LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
@@ -171,7 +175,7 @@ public class MonthPickerComponent {
     SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM" );
     String strTimeToPick = sdf.format( timeToPick );
 
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( DRIVER, By.id( "myInput" ) ) );
     select.selectByValue( strTimeToPick );
 
     WAIT.until( ExpectedConditions.alertIsPresent() );

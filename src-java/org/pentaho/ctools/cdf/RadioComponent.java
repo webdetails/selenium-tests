@@ -27,8 +27,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -51,47 +49,40 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class RadioComponent {
-  //Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
-  // Instance to be used on wait commands
-  private static Wait<WebDriver> WAIT;
+  //Instance of the this.driver (browser emulator)
+  private final WebDriver driver = CToolsTestSuite.getDriver();
+  // Instance to be used on this.wait commands
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
-  //Log instance
-  private static Logger LOG = LogManager.getLogger( RadioComponent.class );
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webthis.driver
+  private final ElementHelper elemHelper = new ElementHelper();
+  //this.log instance
+  private final Logger log = LogManager.getLogger( RadioComponent.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
-   * Shall initialized the test before run each test case.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  @BeforeClass
-  public static void setUp() {
-    LOG.info( "setUp##" + RadioComponent.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
-  }
-
-  /**
-   * Go to the RadioComponent web page.
-   */
-  public static void init() {
-    // The URL for the CheckComponent under CDF samples
+  @Test
+  public void tc0_OpenSamplePage_Display() {
+    this.log.info( "tc0_OpenSamplePage_Display" );
+    // The URL for the RadioComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/RadioComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A52-RadioComponent%3Aradio_component.xcdf/generatedContent" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A52-RadioComponent%3Aradio_component.xcdf/generatedContent" );
 
-    // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    // NOTE - we have to this.wait for loading disappear
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
-   * ############################### Test Case 2 ###############################
+   * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
    *    Reload Sample
@@ -102,16 +93,16 @@ public class RadioComponent {
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
-    LOG.info( "tc1_PageContent_DisplayTitle" );
+    this.log.info( "tc1_PageContent_DisplayTitle" );
 
-    // Wait for title become visible and with value 'Community Dashboard Framework'
-    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
-    // Wait for visibility of 'VisualizationAPIComponent'
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    // this.wait for title become visible and with value 'Community Dashboard Framework'
+    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    // this.wait for visibility of 'VisualizationAPIComponent'
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
-    assertEquals( "RadioComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "RadioComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -126,22 +117,22 @@ public class RadioComponent {
    */
   @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
-    LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
+    this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
-    // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    // NOTE - we have to this.wait for loading disappear
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -160,63 +151,63 @@ public class RadioComponent {
    */
   @Test( timeout = 60000 )
   public void tc3_SelectEachItem_AlertDisplayed() {
-    LOG.info( "tc3_SelectEachItem_AlertDisplayed" );
+    this.log.info( "tc3_SelectEachItem_AlertDisplayed" );
 
     // ## Step 1
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Eastern']" ) ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).click();
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Eastern']" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).click();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Eastern", confirmationMsg );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
 
     // ## Step 2
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Central']" ) ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).click();
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Central']" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).click();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Central", confirmationMsg );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
 
     // ## Step 3
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Western']" ) ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).click();
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Western']" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).click();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Western", confirmationMsg );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
 
     // ## Step 4
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Southern']" ) ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).click();
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Southern']" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).click();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern", confirmationMsg );
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
   }
 
   /**
@@ -234,67 +225,62 @@ public class RadioComponent {
    */
   @Test( timeout = 60000 )
   public void tc4_SelectArbitrary_AlertDisplayed() {
-    LOG.info( "tc4_SelectArbitrary_AlertDisplayed" );
+    this.log.info( "tc4_SelectArbitrary_AlertDisplayed" );
 
     // ## Step 1
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Western']" ) ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).click();
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Western']" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).click();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Western", confirmationMsg );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
 
     // ## Step 2
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Southern']" ) ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).click();
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Southern']" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).click();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern", confirmationMsg );
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
 
     // ## Step 3
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Central']" ) ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).click();
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Central']" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).click();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Central", confirmationMsg );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
 
     // ## Step 4
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Western']" ) ) );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).click();
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//input[@value='Western']" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).click();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Western", confirmationMsg );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
-    assertFalse( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Central']" ) ).isSelected() );
-    assertTrue( ElementHelper.FindElement( DRIVER, By.xpath( "//input[@value='Western']" ) ).isSelected() );
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    LOG.info( "tearDown##" + RadioComponent.class.getSimpleName() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Southern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Eastern']" ) ).isSelected() );
+    assertFalse( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Central']" ) ).isSelected() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//input[@value='Western']" ) ).isSelected() );
   }
 }

@@ -50,8 +50,10 @@ public class BarChart {
 
   // Instance of the driver (browser emulator)
   private WebDriver driver = CToolsTestSuite.getDriver();
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private final Logger log = LogManager.getLogger( BarChart.class );
+  private static final Logger LOG = LogManager.getLogger( BarChart.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -68,11 +70,11 @@ public class BarChart {
    */
   @Test( timeout = 60000 )
   public void tc1_BarChart_ImageRendered() {
-    this.log.debug( "tc1_BarChart_ImageRendered" );
+    LOG.debug( "tc1_BarChart_ImageRendered" );
     //## Step 1
     this.driver.get( PageUrl.BAR_CHART );
 
-    WebElement elementImage = ElementHelper.FindElement( this.driver, By.cssSelector( "img" ) );
+    WebElement elementImage = this.elemHelper.FindElement( this.driver, By.cssSelector( "img" ) );
     assertNotNull( elementImage );
     String attrWidth = elementImage.getAttribute( "width" );
     String attrHeight = elementImage.getAttribute( "height" );

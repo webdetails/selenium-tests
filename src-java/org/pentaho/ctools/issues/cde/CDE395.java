@@ -59,6 +59,8 @@ public class CDE395 {
   private static WebDriver DRIVER;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE395.class );
   // Getting screenshot when test fails
@@ -95,26 +97,26 @@ public class CDE395 {
      */
     //Create new CDE dashboard
     DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons and click Settings
-    String newText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
-    String saveText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
-    String saveasText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
-    String reloadText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
-    String settingsText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    String newText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
+    String saveText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    String saveasText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
+    String reloadText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
+    String settingsText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
     assertEquals( "New", newText );
     assertEquals( "Save", saveText );
     assertEquals( "Save as...", saveasText );
     assertEquals( "Reload", reloadText );
     assertEquals( "Settings", settingsText );
-    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    this.elemHelper.ClickJS( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
 
     /*
      * ## Step 4
      */
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup" ) );
     assertNotNull( element );
-    WebElement obj1 = ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
+    WebElement obj1 = this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
     assertEquals( obj1.isSelected(), true );
   }
 

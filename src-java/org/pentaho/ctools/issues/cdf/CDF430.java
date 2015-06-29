@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -56,21 +54,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDF430 {
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDF430.class );
+  private final Logger log = LogManager.getLogger( CDF430.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDF430.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -89,94 +82,90 @@ public class CDF430 {
    */
   @Test( timeout = 120000 )
   public void tc01_i18nMessages_PioritizedCorrectly() {
-    LOG.info( "tc01_i18nMessages_PioritizedCorrectly" );
+    this.log.info( "tc01_i18nMessages_PioritizedCorrectly" );
 
     /*
      * ## Step 1
      */
     //Set locale
-    DRIVER.get( BASE_URL + "Home?locale=en-US" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.driver.get( this.baseUrl + "Home?locale=en-US" );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Go to Sparkl sample
-    DRIVER.get( BASE_URL + "plugin/CDE404/api/i18ntest" );
+    this.driver.get( this.baseUrl + "plugin/CDE404/api/i18ntest" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //assert Elements loaded
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Panel_1" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Panel_1" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Panel_2" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Panel_2" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Panel_3" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Panel_3" ) );
     assertNotNull( element );
-    ElementHelper.WaitForTextPresence( DRIVER, By.id( "Panel_1" ), "my message 1, coming from messages.properties" );
-    String text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "Panel_1" ) );
+    this.elemHelper.WaitForTextPresence( this.driver, By.id( "Panel_1" ), "my message 1, coming from messages.properties" );
+    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "Panel_1" ) );
     assertEquals( text, "my message 1, coming from messages.properties" );
-    ElementHelper.WaitForTextPresence( DRIVER, By.id( "Panel_2" ), "my message 2, overriden by messages_en.properties" );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "Panel_2" ) );
+    this.elemHelper.WaitForTextPresence( this.driver, By.id( "Panel_2" ), "my message 2, overriden by messages_en.properties" );
+    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "Panel_2" ) );
     assertEquals( text, "my message 2, overriden by messages_en.properties" );
-    ElementHelper.WaitForTextPresence( DRIVER, By.id( "Panel_3" ), "my message 3, overriden by messages_en-US.properties" );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "Panel_3" ) );
+    this.elemHelper.WaitForTextPresence( this.driver, By.id( "Panel_3" ), "my message 3, overriden by messages_en-US.properties" );
+    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "Panel_3" ) );
     assertEquals( text, "my message 3, overriden by messages_en-US.properties" );
 
     /*
      * ## Step 2
      */
     //Go to CDE sample
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/generatedContent" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //assert Elements loaded
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Panel_1" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Panel_1" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Panel_2" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Panel_2" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Panel_3" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Panel_3" ) );
     assertNotNull( element );
-    ElementHelper.WaitForTextPresence( DRIVER, By.id( "Panel_1" ), "my message 1, coming from messages.properties" );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "Panel_1" ) );
+    this.elemHelper.WaitForTextPresence( this.driver, By.id( "Panel_1" ), "my message 1, coming from messages.properties" );
+    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "Panel_1" ) );
     assertEquals( text, "my message 1, coming from messages.properties" );
-    ElementHelper.WaitForTextPresence( DRIVER, By.id( "Panel_2" ), "my message 2, overriden by messages_en.properties" );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "Panel_2" ) );
+    this.elemHelper.WaitForTextPresence( this.driver, By.id( "Panel_2" ), "my message 2, overriden by messages_en.properties" );
+    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "Panel_2" ) );
     assertEquals( text, "my message 2, overriden by messages_en.properties" );
-    ElementHelper.WaitForTextPresence( DRIVER, By.id( "Panel_3" ), "my message 3, overriden by messages_en-US.properties" );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "Panel_3" ) );
+    this.elemHelper.WaitForTextPresence( this.driver, By.id( "Panel_3" ), "my message 3, overriden by messages_en-US.properties" );
+    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "Panel_3" ) );
     assertEquals( text, "my message 3, overriden by messages_en-US.properties" );
 
     /*
      * ## Step 3
      */
     //Go to CDE sample
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDF%3Acdf_i18nTest.xcdf/generatedContent?locale=en-US" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDF%3Acdf_i18nTest.xcdf/generatedContent?locale=en-US" );
 
     // Wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //assert Elements loaded
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='sampleButton01']/button/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='sampleButton01']/button/span" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='sampleButton02']/button/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='sampleButton02']/button/span" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='sampleButton03']/button/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='sampleButton03']/button/span" ) );
     assertNotNull( element );
-    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='sampleButton01']/button/span" ), "My button 01 label" );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='sampleButton01']/button/span" ) );
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='sampleButton01']/button/span" ), "My button 01 label" );
+    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleButton01']/button/span" ) );
     assertEquals( text, "My button 01 label" );
-    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='sampleButton02']/button/span" ), "messages_en button 02 label" );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='sampleButton02']/button/span" ) );
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='sampleButton02']/button/span" ), "messages_en button 02 label" );
+    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleButton02']/button/span" ) );
     assertEquals( text, "messages_en button 02 label" );
-    ElementHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='sampleButton03']/button/span" ), "messages_en-US button 03 label" );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='sampleButton03']/button/span" ) );
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='sampleButton03']/button/span" ), "messages_en-US button 03 label" );
+    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleButton03']/button/span" ) );
     assertEquals( text, "messages_en-US button 03 label" );
 
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDF430.class.getSimpleName() );
-  }
 }

@@ -3,7 +3,6 @@ package org.pentaho.ctools.cde.widgets;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -21,27 +20,21 @@ import org.pentaho.ctools.utils.ElementHelper;
 public class SelectCdaFileAsDatasource {
 
   // Instance of the driver (browser emulator)
-  private WebDriver driver;
+  private WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private Wait<WebDriver> wait;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private String baseUrl;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
   // The name for the widget to be created
   private final String widgetName = "dummyWidgetSelectCdaDatasource";
-
-  @Before
-  public void setUp() throws Exception {
-    this.driver = CToolsTestSuite.getDriver();
-    this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
-
-    this.init();
-  }
 
   /**
    * Where we do stuff (like: clean, prepare data) before start testing.
    */
-  public void init() {
+  @Before
+  public void setUp() {
     // ##Step 0 - Delete the widget
     WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
   }
@@ -85,35 +78,35 @@ public class SelectCdaFileAsDatasource {
     // ##Step 4 - Add the cda file
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "table-cdfdd-datasources-properties" ) ) );
     // Click in the property to add the file
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/button" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/button" ) );
     this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/button" ) ).click();
-    assertNotNull( ElementHelper.WaitForElementVisibility( this.driver, By.id( "popupbox" ) ) );
-    assertNotNull( ElementHelper.WaitForElementVisibility( this.driver, By.id( "popup_state_browse" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementVisibility( this.driver, By.id( "popupbox" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementVisibility( this.driver, By.id( "popup_state_browse" ) ) );
     // Click in 'Public'
     this.wait.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.id( "container_id" ) ) );
     final WebElement listFolders = this.driver.findElement( By.xpath( "//div[@id='container_id']" ) );
     listFolders.findElement( By.xpath( "//a[@rel='public/']" ) ).click();
     // Click in 'plugin-samples'
     this.wait.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.id( "container_id" ) ) );
-    assertNotNull( ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//a[@rel='public/plugin-samples/']" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//a[@rel='public/plugin-samples/']" ) ) );
     this.driver.findElement( By.xpath( "//a[@rel='public/plugin-samples/']" ) ).click();
     // Click in 'cda'
-    assertNotNull( ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//a[@rel='public/plugin-samples/cda/']" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//a[@rel='public/plugin-samples/cda/']" ) ) );
     this.driver.findElement( By.xpath( "//a[@rel='public/plugin-samples/cda/']" ) ).click();
     // Click in 'cdafiles'
-    assertNotNull( ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//a[@rel='public/plugin-samples/cda/cdafiles/']" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//a[@rel='public/plugin-samples/cda/cdafiles/']" ) ) );
     this.driver.findElement( By.xpath( "//a[@rel='public/plugin-samples/cda/cdafiles/']" ) ).click();
     // Select a file
-    assertNotNull( ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']" ) ) );
     this.driver.findElement( By.xpath( "//a[@rel='public/plugin-samples/cda/cdafiles/compoundJoin.cda']" ) ).click();
     // Click OK
     this.wait.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.id( "popup_browse_buttonOk" ) ) );
     this.driver.findElement( By.id( "popup_browse_buttonOk" ) ).click();
-    ElementHelper.WaitForElementInvisibility( this.driver, By.id( "popup_browse_buttonOk" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "popup_browse_buttonOk" ) );
     // SAVE the widget
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
     this.driver.findElement( By.xpath( "//div[@id='headerLinks']/div[2]/a" ) ).click();
-    ElementHelper.WaitForElementInvisibility( this.driver, By.id( "notifyBar" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "notifyBar" ) );
 
     // ## Step 5 - Check if the file persist after SAVE widget
     this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
@@ -138,10 +131,5 @@ public class SelectCdaFileAsDatasource {
      #######################################*/
     assertEquals( "Path", this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td" ) ).getText() );
     assertEquals( "/public/plugin-samples/cda/cdafiles/compoundJoin.cda", this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/div" ) ).getText() );
-  }
-
-  @After
-  public void tearDown() {
-    // To use after test case run.
   }
 }

@@ -26,11 +26,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -56,21 +53,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE342 {
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE342.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE342.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -87,27 +79,26 @@ public class CDE342 {
    *    2. Write something where no options should be available
    *    3. Write something where only one option should be available
    */
-  @Test( timeout = 120000 )
-  public void tc01_CDEDashboard_AutocompleteWorks() {
-    LOG.info( "tc01_CDEDashboard_AutocompleteWorks" );
+  public void tc1_CDEDashboard_AutocompleteWorks() {
+    LOG.info( "tc1_CDEDashboard_AutocompleteWorks" );
 
     /*
      * ## Step 1
      */
     //Go to Issue sample
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent" );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Wait for Input field
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "col1" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "col1" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//input[@class='ui-autocomplete-input']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//input[@class='ui-autocomplete-input']" ) );
     assertNotNull( element );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "A" );
-    String option1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
-    String option2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
-    String option3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[3]/a" ) );
-    String option4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[4]/a" ) );
-    String option5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[5]/a" ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "A" );
+    String option1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    String option2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
+    String option3 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[3]/a" ) );
+    String option4 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[4]/a" ) );
+    String option5 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[5]/a" ) );
     assertEquals( "Anna's Decorations, Ltd", option1 );
     assertEquals( "Australian Collectors, Co.", option2 );
     assertEquals( "Souveniers And Things Co.", option3 );
@@ -117,25 +108,20 @@ public class CDE342 {
     /*
      * ## Step 2
      */
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "ert" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).clear();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "ert" );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
 
     /*
      * ## Step 3
      */
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "Anna" );
-    option2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).clear();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "Anna" );
+    option2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
     assertEquals( "Anna's Decorations, Ltd", option2 );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
 
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE342.class.getSimpleName() );
   }
 }

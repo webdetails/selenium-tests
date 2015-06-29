@@ -26,8 +26,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -51,43 +49,36 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class SelectMultiComponent {
-  //Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  // Instance of the driver (browser emulator)
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private static Wait<WebDriver> WAIT;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
-  //Log instance
-  private static Logger LOG = LogManager.getLogger( SelectMultiComponent.class );
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  // Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
+  // Log instance
+  private final Logger log = LogManager.getLogger( SelectMultiComponent.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
-   * Shall initialized the test before run each test case.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  @BeforeClass
-  public static void setUp() {
-    LOG.info( "setUp##" + SelectMultiComponent.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
+  @Test
+  public void tc0_OpenSamplePage_Display() {
+    this.log.info( "tc0_OpenSamplePage_Display" );
 
-    // Go to sample
-    init();
-  }
-
-  /**
-   * Go to the SelectMultiComponent web page.
-   */
-  public static void init() {
-    // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/SelectMultiComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A19-SelectMultiComponent%3Aselect_multi_component.xcdf/generatedContent" );
+    // The URL for the SelectMultiComponent under CDF samples
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/SelectMultiComponent
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A19-SelectMultiComponent%3Aselect_multi_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -102,16 +93,16 @@ public class SelectMultiComponent {
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
-    LOG.info( "tc1_PageContent_DisplayTitle" );
+    this.log.info( "tc1_PageContent_DisplayTitle" );
 
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
-    assertEquals( "SelectMultiComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "SelectMultiComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -126,22 +117,22 @@ public class SelectMultiComponent {
    */
   @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
-    LOG.info( "tc2_ReloadSample_SampleReadyToUse" );
+    this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -160,61 +151,61 @@ public class SelectMultiComponent {
    */
   @Test( timeout = 60000 )
   public void tc3_SelectEachItem_AlertDisplayed() {
-    LOG.info( "tc3_SelectEachItem_AlertDisplayed" );
+    this.log.info( "tc3_SelectEachItem_AlertDisplayed" );
 
     // ## Step 1
-    WAIT.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.cssSelector( "select" ) ) );
-    Select list = new Select( ElementHelper.FindElement( DRIVER, By.cssSelector( "select" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.cssSelector( "select" ) ) );
+    Select list = new Select( this.elemHelper.FindElement( this.driver, By.cssSelector( "select" ) ) );
     list.selectByValue( "Southern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern", confirmationMsg );
 
     // ## Step 2
     list.deselectByValue( "Southern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     alert.accept();
 
     list.selectByValue( "Eastern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Eastern", confirmationMsg );
 
     // ## Step 3
     list.deselectByValue( "Eastern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     alert.accept();
 
     list.selectByValue( "Central" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Central", confirmationMsg );
 
     // ## Step 4
     list.deselectByValue( "Central" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     alert.accept();
 
     list.selectByValue( "Western" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Western", confirmationMsg );
 
     //RESET
     list.deselectByValue( "Western" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     alert.accept();
   }
 
@@ -231,65 +222,65 @@ public class SelectMultiComponent {
    */
   @Test( timeout = 60000 )
   public void tc4_SelectAll_AlertDisplayed() {
-    LOG.info( "tc4_SelectAll_AlertDisplayed" );
+    this.log.info( "tc4_SelectAll_AlertDisplayed" );
 
     // ## Step 1
-    WAIT.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.cssSelector( "select" ) ) );
-    Select list = new Select( ElementHelper.FindElement( DRIVER, By.cssSelector( "select" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.cssSelector( "select" ) ) );
+    Select list = new Select( this.elemHelper.FindElement( this.driver, By.cssSelector( "select" ) ) );
     list.selectByValue( "Southern" );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern", confirmationMsg );
 
     list.selectByValue( "Eastern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern", confirmationMsg );
 
     list.selectByValue( "Central" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern,Central", confirmationMsg );
 
     list.selectByValue( "Western" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern,Central,Western", confirmationMsg );
 
     // ## Step 2
     list.deselectByValue( "Southern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Eastern,Central,Western", confirmationMsg );
 
     list.deselectByValue( "Eastern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Central,Western", confirmationMsg );
 
     list.deselectByValue( "Central" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Western", confirmationMsg );
 
     list.deselectByValue( "Western" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: ", confirmationMsg );
@@ -307,63 +298,58 @@ public class SelectMultiComponent {
    */
   @Test( timeout = 60000 )
   public void tc5_SelectArbitrary_AlertDisplayed() {
-    LOG.info( "tc5_SelectArbitrary_AlertDisplayed" );
+    this.log.info( "tc5_SelectArbitrary_AlertDisplayed" );
 
     // ## Step 1
-    WAIT.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.cssSelector( "select" ) ) );
-    Select list = new Select( ElementHelper.FindElement( DRIVER, By.cssSelector( "select" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfAllElementsLocatedBy( By.cssSelector( "select" ) ) );
+    Select list = new Select( this.elemHelper.FindElement( this.driver, By.cssSelector( "select" ) ) );
     list.selectByValue( "Eastern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Eastern", confirmationMsg );
 
     list.selectByValue( "Central" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Eastern,Central", confirmationMsg );
 
     list.selectByValue( "Southern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern,Central", confirmationMsg );
 
     list.deselectByValue( "Eastern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Central", confirmationMsg );
 
     list.selectByValue( "Eastern" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern,Central", confirmationMsg );
 
     list.selectByValue( "Western" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern,Central,Western", confirmationMsg );
 
     list.deselectByValue( "Central" );
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( "you chose: Southern,Eastern,Western", confirmationMsg );
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    LOG.info( "tearDown##" + SelectMultiComponent.class.getSimpleName() );
   }
 }

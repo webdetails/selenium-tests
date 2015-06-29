@@ -58,6 +58,8 @@ public class TextAreaInputComponent {
   private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private static Logger LOG = LogManager.getLogger( TextAreaInputComponent.class );
 
@@ -83,7 +85,7 @@ public class TextAreaInputComponent {
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextAreaInputComponent%3Atext_area_input_component.xcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -107,15 +109,15 @@ public class TextAreaInputComponent {
     // Page title
     assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
     //Sample Title
-    String sampleTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//span[2]" ) );
+    String sampleTitle = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//span[2]" ) );
     assertEquals( "TextAreaInputComponent", sampleTitle );
 
     /*
      * ## Step 2
      */
     //Sample Description
-    String sampleDescTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//h3" ) );
-    String sampleDescription = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//p" ) );
+    String sampleDescTitle = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//h3" ) );
+    String sampleDescription = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//p" ) );
     assertEquals( "Description", sampleDescTitle );
     assertEquals( "Renders a multi-line text input box to collect user input. Change event is fired after user edits the content and removes the focus from the box. Pre/postChange functions can be used to make data validation.", sampleDescription );
 
@@ -123,9 +125,9 @@ public class TextAreaInputComponent {
      * ## Step 3
      */
     //Options
-    String optionsTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//h3[2]" ) );
-    String options1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//dt[7]" ) );
-    String options2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//dt[8]" ) );
+    String optionsTitle = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//h3[2]" ) );
+    String options1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//dt[7]" ) );
+    String options2 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//dt[8]" ) );
     assertEquals( "Options", optionsTitle );
     assertEquals( "charWidth", options1 );
     assertEquals( "maxChars", options2 );
@@ -134,7 +136,7 @@ public class TextAreaInputComponent {
      * ## Step 4
      */
     //Samples
-    String samplesTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//h3[3]" ) );
+    String samplesTitle = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//h3[3]" ) );
     assertEquals( "Sample", samplesTitle );
   }
 
@@ -152,14 +154,14 @@ public class TextAreaInputComponent {
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
@@ -183,9 +185,9 @@ public class TextAreaInputComponent {
   public void tc3_InputSmallPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World!";
-    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( strInputString );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//h3[3]" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//h3[3]" ) ).click();
 
     // ## Step 2
     WAIT.until( ExpectedConditions.alertIsPresent() );
@@ -217,9 +219,9 @@ public class TextAreaInputComponent {
     strInputString += strInputString;
     strInputString += strInputString;
     strInputString += strInputString;
-    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( strInputString );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//h3[3]" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//h3[3]" ) ).click();
 
     // ## Step 2
     WAIT.until( ExpectedConditions.alertIsPresent() );
@@ -248,9 +250,9 @@ public class TextAreaInputComponent {
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
-    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).clear();
-    ElementHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( strInputString );
-    ElementHelper.FindElement( DRIVER, By.xpath( "//h3[3]" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( DRIVER, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//h3[3]" ) ).click();
 
     // ## Step 2
     WAIT.until( ExpectedConditions.alertIsPresent() );

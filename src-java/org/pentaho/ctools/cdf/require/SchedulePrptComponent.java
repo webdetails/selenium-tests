@@ -34,8 +34,7 @@ import java.util.Locale;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -60,47 +59,40 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class SchedulePrptComponent {
-
-  // Instance of the driver (browser emulator)
-  private static WebDriver       driver;
+  // Flag to delete schedule.
+  private boolean bRemoveSchedule = false;
+  // Instance of the this.driver (browser emulator)
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private static String          baseUrl;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   // The schedule name for TC3
-  private static String          schNameTc3         = "SchedulePSTc3";
+  private final String schNameTc3 = "SchedulePSTc3";
+  //Access to wrapper for webthis.driver
+  private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private static Logger          log                = LogManager.getLogger( SchedulePrptComponent.class );
+  private final Logger log = LogManager.getLogger( SchedulePrptComponent.class );
 
   @Rule
-  public ScreenshotTestRule      screenshotTestRule = new ScreenshotTestRule( driver );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
-   * Shall initialized the test before run each test case.
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  @BeforeClass
-  public static void setUp() {
-    log.info( "setUp##" + SchedulePrptComponent.class.getSimpleName() );
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
-  }
-
-  /**
-   * Go to the TableComponent web page.
-   */
-  public static void init() {
+  @Test
+  public void tc0_OpenSamplePage_Display() {
     // The URL for the VisualizationAPIComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/SchedulePrptComponent
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A86-SchedulePrptComponent%3Aschedule_prpt_component.xcdf/generatedContent" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A86-SchedulePrptComponent%3Aschedule_prpt_component.xcdf/generatedContent" );
 
-    log.info( ((JavascriptExecutor) driver).executeScript( "return document.readyState;" ).toString() );
+    this.log.info( ( (JavascriptExecutor) this.driver ).executeScript( "return document.readyState;" ).toString() );
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -115,16 +107,16 @@ public class SchedulePrptComponent {
    */
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
-    log.info( "tc1_PageContent_DisplayTitle" );
+    this.log.info( "tc1_PageContent_DisplayTitle" );
 
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "SchedulePrptComponent", ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "SchedulePrptComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -139,18 +131,18 @@ public class SchedulePrptComponent {
    */
   @Test( timeout = 60000 )
   public void tc2_ReloadSample_SampleReadyToUse() {
-    log.info( "tc2_ReloadSample_SampleReadyToUse" );
+    this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
   }
 
   /**
@@ -170,8 +162,8 @@ public class SchedulePrptComponent {
    */
   @Test( timeout = 150000 )
   public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() {
-    log.info( "tc3_SchedulePrpt_ScheduleCreatedSuccessful" );
-
+    this.log.info( "tc3_SchedulePrpt_ScheduleCreatedSuccessful" );
+    this.bRemoveSchedule = true;
     String schLocation = "/public";
 
     //Initialize some data
@@ -186,79 +178,79 @@ public class SchedulePrptComponent {
     Date d40days = c.getTime();
 
     // ## Step 1
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='sampleObject']/button" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObject']/button" ) ).click();
 
     // ## Step 2
-    wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "jqistate_basicState" ) ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "jqistate_basicState" ) ) );
     //Set schedule name
-    ElementHelper.FindElement( driver, By.id( "nameIn" ) ).clear();
-    ElementHelper.FindElement( driver, By.id( "nameIn" ) ).sendKeys( schNameTc3 );
+    this.elemHelper.FindElement( this.driver, By.id( "nameIn" ) ).clear();
+    this.elemHelper.FindElement( this.driver, By.id( "nameIn" ) ).sendKeys( this.schNameTc3 );
     //Set schedule location
-    ElementHelper.FindElement( driver, By.id( "locationIn" ) ).clear();
-    ElementHelper.FindElement( driver, By.id( "locationIn" ) ).sendKeys( schLocation );
+    this.elemHelper.FindElement( this.driver, By.id( "locationIn" ) ).clear();
+    this.elemHelper.FindElement( this.driver, By.id( "locationIn" ) ).sendKeys( schLocation );
     //Select Monthly
-    Select slRecurrence = new Select( ElementHelper.FindElement( driver, By.id( "recurrId" ) ) );
+    Select slRecurrence = new Select( this.elemHelper.FindElement( this.driver, By.id( "recurrId" ) ) );
     slRecurrence.selectByValue( "monthly" );
     //Select Hour
-    Select slHours = new Select( ElementHelper.FindElement( driver, By.id( "hours" ) ) );
+    Select slHours = new Select( this.elemHelper.FindElement( this.driver, By.id( "hours" ) ) );
     slHours.selectByValue( "9" );
     //Select Minutes
-    Select slMinutes = new Select( ElementHelper.FindElement( driver, By.id( "minutes" ) ) );
+    Select slMinutes = new Select( this.elemHelper.FindElement( this.driver, By.id( "minutes" ) ) );
     slMinutes.selectByValue( "17" );
     //Select AM/FM
-    Select slAMFM = new Select( ElementHelper.FindElement( driver, By.id( "amPm" ) ) );
+    Select slAMFM = new Select( this.elemHelper.FindElement( this.driver, By.id( "amPm" ) ) );
     slAMFM.selectByValue( "pm" );
     //Select Option 'The x y of every month
-    ElementHelper.Click( driver, By.xpath( "//div[@id='patternMonth']/input[2]" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='patternMonth']/input[2]" ) );
     //Select Month
-    Select slOccDay = new Select( ElementHelper.FindElement( driver, By.id( "monthOpt1Select" ) ) );
+    Select slOccDay = new Select( this.elemHelper.FindElement( this.driver, By.id( "monthOpt1Select" ) ) );
     slOccDay.selectByValue( "1" );
     //Select Wednesday
-    Select slWeekday = new Select( ElementHelper.FindElement( driver, By.id( "monthOpt2Select" ) ) );
+    Select slWeekday = new Select( this.elemHelper.FindElement( this.driver, By.id( "monthOpt2Select" ) ) );
     slWeekday.selectByValue( "3" );
     //Select Range Of Recurrence
     //Start - tomorrow
-    ElementHelper.FindElement( driver, By.id( "rangeStartIn" ) ).clear();
-    ElementHelper.FindElement( driver, By.id( "rangeStartIn" ) ).sendKeys( sdf.format( dTomorrow ) );
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@class='ui-datepicker-calendar']" ) ) );
-    WebElement dateCalendar = ElementHelper.FindElement( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
+    this.elemHelper.FindElement( this.driver, By.id( "rangeStartIn" ) ).clear();
+    this.elemHelper.FindElement( this.driver, By.id( "rangeStartIn" ) ).sendKeys( sdf.format( dTomorrow ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@class='ui-datepicker-calendar']" ) ) );
+    WebElement dateCalendar = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     List<WebElement> columns = dateCalendar.findElements( By.tagName( "td" ) );
     String tomorrowDay = sdfDay.format( dTomorrow );
-    for (WebElement cell: columns) {
+    for ( WebElement cell : columns ) {
       String strCell = cell.getText();
-      if (strCell.equals( tomorrowDay )) {
+      if ( strCell.equals( tomorrowDay ) ) {
         cell.findElement( By.linkText( tomorrowDay ) ).click();
         break;
       }
     }
     //End
     //Select End Date
-    wait.until( ExpectedConditions.elementToBeClickable( By.id( "endByRadio" ) ) );
-    ElementHelper.FindElement( driver, By.id( "endByRadio" ) ).click();
-    ElementHelper.FindElement( driver, By.id( "endByIn" ) ).sendKeys( sdf.format( d40days ) );
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@class='ui-datepicker-calendar']" ) ) );
-    WebElement dateCalendar2 = ElementHelper.FindElement( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
+    this.wait.until( ExpectedConditions.elementToBeClickable( By.id( "endByRadio" ) ) );
+    this.elemHelper.FindElement( this.driver, By.id( "endByRadio" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.id( "endByIn" ) ).sendKeys( sdf.format( d40days ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@class='ui-datepicker-calendar']" ) ) );
+    WebElement dateCalendar2 = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     List<WebElement> columns2 = dateCalendar2.findElements( By.tagName( "td" ) );
     String day = sdfDay.format( d40days );
-    for (WebElement cell2: columns2) {
+    for ( WebElement cell2 : columns2 ) {
       String strCell2 = cell2.getText();
-      if (strCell2.equals( day )) {
+      if ( strCell2.equals( day ) ) {
         cell2.findElement( By.linkText( day ) ).click();
         break;
       }
     }
 
     //Submit Form
-    wait.until( ExpectedConditions.elementToBeClickable( By.id( "jqi_basicState_buttonOk" ) ) );
-    ElementHelper.FindElement( driver, By.id( "jqi_basicState_buttonOk" ) ).click();
+    this.wait.until( ExpectedConditions.elementToBeClickable( By.id( "jqi_basicState_buttonOk" ) ) );
+    this.elemHelper.FindElement( this.driver, By.id( "jqi_basicState_buttonOk" ) ).click();
     //Wait for the new window.
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "jqistate_mailState" ) ) );
-    wait.until( ExpectedConditions.elementToBeClickable( By.id( "jqi_mailState_buttonOk" ) ) );
-    ElementHelper.FindElement( driver, By.id( "jqi_mailState_buttonOk" ) ).click();
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "jqistate_mailState" ) ) );
+    this.wait.until( ExpectedConditions.elementToBeClickable( By.id( "jqi_mailState_buttonOk" ) ) );
+    this.elemHelper.FindElement( this.driver, By.id( "jqi_mailState_buttonOk" ) ).click();
 
     // ## Step 3
-    wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = driver.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
     assertEquals( confirmationMsg, "Successfully scheduled." );
@@ -266,29 +258,29 @@ public class SchedulePrptComponent {
     // ## Step 4
     //-->Need to check if the schedule was created
     //Go to home page
-    driver.get( baseUrl + "Home" );
+    this.driver.get( this.baseUrl + "Home" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Click in Schedule
-    wait.until( ExpectedConditions.titleContains( "Pentaho User Console" ) );
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ) );
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//iframe[@id='home.perspective']" ) ) );
-    wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]" ) ) );
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]" ) ).click();
-    WebElement listMenyTr = ElementHelper.FindElement( driver, By.xpath( "//div[@id='customDropdownPopupMajor']/div/div/table/tbody" ) );
+    this.wait.until( ExpectedConditions.titleContains( "Pentaho User Console" ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//iframe[@id='home.perspective']" ) ) );
+    this.wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]" ) ).click();
+    WebElement listMenyTr = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='customDropdownPopupMajor']/div/div/table/tbody" ) );
     List<WebElement> listMenuElementsTrs = listMenyTr.findElements( By.xpath( "//td[@class='gwt-MenuItem']" ) );
-    for (int i = 0; i < listMenuElementsTrs.size(); i++) {
+    for ( int i = 0; i < listMenuElementsTrs.size(); i++ ) {
       WebElement element = listMenuElementsTrs.get( i );
-      if (element.getText().equals( "Schedules" )) {
+      if ( element.getText().equals( "Schedules" ) ) {
         element.click();
         break;
       }
     }
-    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.workspaceHeading" ) ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.workspaceHeading" ) ) );
     // Now we are in Schedule page
-    List<WebElement> listScheduleTrs = ElementHelper.FindElement( driver, By.xpath( "//table[@id='schedule-table']/tbody" ) ).findElements( By.tagName( "tr" ) );
+    List<WebElement> listScheduleTrs = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='schedule-table']/tbody" ) ).findElements( By.tagName( "tr" ) );
     String scheduleName = "";
     String scheduleRepeats = "";
     String scheduleSourceFile = "";
@@ -297,35 +289,34 @@ public class SchedulePrptComponent {
     String scheduleNextRun = "";
     String scheduleCreatedBy = "";
     String scheduleStatus = "";
-    for (int j = 1; j <= listScheduleTrs.size(); j++) {
-      WebElement elementFirstDiv = ElementHelper.FindElement( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td/div" ) );
+    for ( int j = 1; j <= listScheduleTrs.size(); j++ ) {
+      WebElement elementFirstDiv = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td/div" ) );
       scheduleName = elementFirstDiv.getText();
-      if (scheduleName.equals( schNameTc3 )) {
+      if ( scheduleName.equals( this.schNameTc3 ) ) {
 
-        scheduleRepeats = ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[2]/div" ) );
-        scheduleSourceFile = ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[3]/div" ) );
-        scheduleOuputLocation = ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[4]/div" ) );
-        scheduleLastRun = ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[5]/div" ) );
-        scheduleNextRun = ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[6]/div" ) );
-        scheduleCreatedBy = ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[7]/div" ) );
-        scheduleStatus = ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[8]/div" ) );
+        scheduleRepeats = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[2]/div" ) );
+        scheduleSourceFile = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[3]/div" ) );
+        scheduleOuputLocation = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[4]/div" ) );
+        scheduleLastRun = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[5]/div" ) );
+        scheduleNextRun = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[6]/div" ) );
+        scheduleCreatedBy = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[7]/div" ) );
+        scheduleStatus = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td[8]/div" ) );
         break;
       }
     }
 
     //Getting the week day of next run
     String dayOfWeek = "";
-    if (!scheduleNextRun.isEmpty()) {
+    if ( !scheduleNextRun.isEmpty() ) {
       try {
         Date dateNextRun = new SimpleDateFormat( "yyyy MMM dd HH:mm:ss", Locale.US ).parse( scheduleNextRun );
         dayOfWeek = new SimpleDateFormat( "EE", Locale.US ).format( dateNextRun );
-      }
-      catch (ParseException pe) {
-        log.error( pe.getMessage() );
+      } catch ( ParseException pe ) {
+        this.log.error( pe.getMessage() );
       }
     }
 
-    assertEquals( schNameTc3, scheduleName );
+    assertEquals( this.schNameTc3, scheduleName );
     assertEquals( "The second Wednesday of every month at 21:17:00", scheduleRepeats );
     assertEquals( "/public/Steel Wheels/Widget Library/Report Snippets/InventorybyLine", scheduleSourceFile );
     assertEquals( schLocation, scheduleOuputLocation );
@@ -339,67 +330,68 @@ public class SchedulePrptComponent {
    * This method will remove all created schedules on the tests.
    * Note - for a new schedule update code.
    */
-  private static void removeAllCreatedSchedules() {
+  private void removeAllCreatedSchedules() {
+    this.log.info( "removeAllCreatedSchedules" );
     //Go to home page
-    driver.get( baseUrl + "Home" );
+    this.driver.get( this.baseUrl + "Home" );
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Click in Schedule
-    wait.until( ExpectedConditions.titleContains( "Pentaho User Console" ) );
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ) );
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//iframe[@id='home.perspective']" ) ) );
-    wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]" ) ) );
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]" ) ).click();
-    WebElement listMenyTr = ElementHelper.FindElement( driver, By.xpath( "//div[@id='customDropdownPopupMajor']/div/div/table/tbody" ) );
+    this.wait.until( ExpectedConditions.titleContains( "Pentaho User Console" ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//iframe[@id='home.perspective']" ) ) );
+    this.wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]" ) ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='mantle-perspective-switcher']/table/tbody/tr/td[2]" ) ).click();
+    WebElement listMenyTr = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='customDropdownPopupMajor']/div/div/table/tbody" ) );
     List<WebElement> listMenuElementsTrs = listMenyTr.findElements( By.xpath( "//td[@class='gwt-MenuItem']" ) );
-    for (int i = 0; i < listMenuElementsTrs.size(); i++) {
+    for ( int i = 0; i < listMenuElementsTrs.size(); i++ ) {
       WebElement element = listMenuElementsTrs.get( i );
-      if (element.getText().equals( "Schedules" )) {
+      if ( element.getText().equals( "Schedules" ) ) {
         element.click();
         break;
       }
     }
 
-    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.workspaceHeading" ) ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.workspaceHeading" ) ) );
 
     // Now we are in Schedule page
     Boolean someThingToDelete = true;
     int listElements = 0;
     int listElementsPrevious = -1;
-    while (someThingToDelete) {
+    while ( someThingToDelete ) {
       someThingToDelete = false;
-      List<WebElement> listScheduleTrs = ElementHelper.FindElement( driver, By.xpath( "//table[@id='schedule-table']/tbody" ) ).findElements( By.tagName( "tr" ) );
+      List<WebElement> listScheduleTrs = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='schedule-table']/tbody" ) ).findElements( By.tagName( "tr" ) );
       listElements = listScheduleTrs.size();
 
       //The new list must be different from previous list
-      while (listElements == listElementsPrevious) {
-        listScheduleTrs = ElementHelper.FindElement( driver, By.xpath( "//table[@id='schedule-table']/tbody" ) ).findElements( By.tagName( "tr" ) );
+      while ( listElements == listElementsPrevious ) {
+        listScheduleTrs = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='schedule-table']/tbody" ) ).findElements( By.tagName( "tr" ) );
         listElements = listScheduleTrs.size();
       }
 
-      for (int j = 1; j <= listElements; j++) {
-        WebElement elementFirstDiv = ElementHelper.FindElement( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td/div" ) );
+      for ( int j = 1; j <= listElements; j++ ) {
+        WebElement elementFirstDiv = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]/td/div" ) );
 
-        if (elementFirstDiv.getText().equals( schNameTc3 )) {
+        if ( elementFirstDiv.getText().equals( this.schNameTc3 ) ) {
           elementFirstDiv.click(); //Select the row
 
           //Wait for row to be selected
-          for (int t = 0; t < 100; t++) {
-            WebElement elementRow = ElementHelper.FindElement( driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]" ) );
+          for ( int t = 0; t < 100; t++ ) {
+            WebElement elementRow = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='schedule-table']/tbody/tr[" + j + "]" ) );
 
-            if (elementRow.getAttribute( "class" ).contains( "cellTableSelectedRow" )) {
+            if ( elementRow.getAttribute( "class" ).contains( "cellTableSelectedRow" ) ) {
               break;
             }
           }
 
           //Click to remove the schedule item (the selected row)
-          ElementHelper.FindElement( driver, By.cssSelector( "img.gwt-Image.pentaho-deletebutton" ) ).click();
+          this.elemHelper.FindElement( this.driver, By.cssSelector( "img.gwt-Image.pentaho-deletebutton" ) ).click();
 
-          wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@class='pentaho-dialog']" ) ) );
-          ElementHelper.FindElement( driver, By.id( "okButton" ) ).click();
+          this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@class='pentaho-dialog']" ) ) );
+          this.elemHelper.FindElement( this.driver, By.id( "okButton" ) ).click();
 
-          ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='pentaho-dialog']" ) );
+          this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='pentaho-dialog']" ) );
 
           someThingToDelete = true; //Continue checking if there is something to delete
           break;
@@ -409,9 +401,10 @@ public class SchedulePrptComponent {
     }
   }
 
-  @AfterClass
-  public static void tearDown() {
-    log.info( "tearDown##" + SchedulePrptComponent.class.getSimpleName() );
-    removeAllCreatedSchedules();
+  @After
+  public void tearDown() {
+    if ( this.bRemoveSchedule ) {
+      removeAllCreatedSchedules();
+    }
   }
 }

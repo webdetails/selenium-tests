@@ -24,7 +24,6 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.apache.http.HttpStatus;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -49,12 +48,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class XactionComponent {
 
-  //Instance of the driver (browser emulator)
+  // Instance of the driver (browser emulator)
   private static WebDriver DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  // Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -67,23 +68,23 @@ public class XactionComponent {
     DRIVER = CToolsTestSuite.getDriver();
     WAIT = CToolsTestSuite.getWait();
     BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
   }
 
   /**
-   * Go to the XactionComponent web page.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  public static void init() {
-    // The URL for the CheckComponent under CDF samples
+  public void tc0_PageContent_DisplayTitle() {
+    // The URL for the XactionComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component
     // Reference/Core Components/XactionComponent
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A10-XactionComponent%3Axaction_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -105,7 +106,7 @@ public class XactionComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
-    assertEquals( "XactionComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "XactionComponent", this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -122,15 +123,15 @@ public class XactionComponent {
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
@@ -153,12 +154,12 @@ public class XactionComponent {
   @Test( timeout = 60000 )
   public void tc3_GenerateChart_ChartIsDisplayed() {
     // ## Step 1
-    WebElement xactionElement = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) );
+    WebElement xactionElement = this.elemHelper.FindElement( DRIVER, By.cssSelector( "img" ) );
     assertNotNull( xactionElement );
 
-    String attrSrc = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "src" );
-    String attrWidth = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "width" );
-    String attrHeight = ElementHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "height" );
+    String attrSrc = this.elemHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "src" );
+    String attrWidth = this.elemHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "width" );
+    String attrHeight = this.elemHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "height" );
 
     assertTrue( attrSrc.startsWith( BASE_URL + "getImage?image=tmp_chart_admin-" ) );
     assertEquals( attrWidth, "500" );
@@ -175,10 +176,5 @@ public class XactionComponent {
     } catch ( Exception ex ) {
       ex.printStackTrace();
     }
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    //To use when class run all test cases.
   }
 }

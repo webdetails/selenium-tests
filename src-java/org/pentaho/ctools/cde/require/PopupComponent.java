@@ -55,6 +55,8 @@ public class PopupComponent {
   private static WebDriver DRIVER;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private static Logger LOG = LogManager.getLogger( PopupComponent.class );
 
@@ -74,8 +76,8 @@ public class PopupComponent {
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3APopupComponent%3Apopup.wcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -96,11 +98,11 @@ public class PopupComponent {
     /*
      * ## Step 1
      */
-    String strTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Title']" ) );
-    String strDescription = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionTitle']" ) );
-    String strUsage = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Usage']" ) );
-    String strUsageDesc = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='UsageDesc']/p" ) );
-    String strUsageDescNote = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='UsageDesc']/i" ) );
+    String strTitle = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Title']" ) );
+    String strDescription = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionTitle']" ) );
+    String strUsage = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Usage']" ) );
+    String strUsageDesc = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='UsageDesc']/p" ) );
+    String strUsageDescNote = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='UsageDesc']/i" ) );
 
     assertEquals( "Popup Component Reference", strTitle );
     assertEquals( "Description", strDescription );
@@ -127,9 +129,9 @@ public class PopupComponent {
     /*
      * ## Step 1
      */
-    String strExampleTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Example1Title']" ) );
-    String strExampleDesc = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Example1Desc']/p" ) );
-    String strButtonName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='example1Obj']/button" ) );
+    String strExampleTitle = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Example1Title']" ) );
+    String strExampleDesc = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Example1Desc']/p" ) );
+    String strButtonName = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='example1Obj']/button" ) );
 
     assertEquals( "Example 1", strExampleTitle );
     assertEquals( "Button popup with the default settings. You can drag it around and close on the button", strExampleDesc );
@@ -138,18 +140,18 @@ public class PopupComponent {
     /*
      * ## Step 2
      */
-    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example1Obj']/button" ) );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='popupContent1']" ) );
+    this.elemHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example1Obj']/button" ) );
+    this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='popupContent1']" ) );
     //Wait for the charts load
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//*[3][@width>13]" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//*[3][@width>13]" ) );
     //Check text
-    String textInPopup = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='text']" ) );
+    String textInPopup = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='text']" ) );
     assertEquals( "This will appear in the popup", textInPopup );
     //Check rect in chart
-    WebElement elemRect1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][1]" ) );
-    WebElement elemRect2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]" ) );
-    WebElement elemRect3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]" ) );
-    WebElement elemRect4 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]" ) );
+    WebElement elemRect1 = this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][1]" ) );
+    WebElement elemRect2 = this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]" ) );
+    WebElement elemRect3 = this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]" ) );
+    WebElement elemRect4 = this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][4]" ) );
     assertNotNull( elemRect1 );
     assertNotNull( elemRect2 );
     assertNotNull( elemRect3 );
@@ -161,12 +163,12 @@ public class PopupComponent {
     //Check subtitles
     Actions acts = new Actions( DRIVER );
     acts.moveToElement( elemRect2 ).perform();
-    String tooltipValue = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[3]/span" ) );
+    String tooltipValue = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[3]/span" ) );
     assertEquals( "49,578", tooltipValue );
     //Close popup
-    ElementHelper.ClickJS( DRIVER, By.cssSelector( "a.close" ) );
+    this.elemHelper.ClickJS( DRIVER, By.cssSelector( "a.close" ) );
     //wait for popup disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "a.close" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "a.close" ) );
     WebElement element = DRIVER.findElement( By.cssSelector( "a.close" ) );
     assertFalse( element.isDisplayed() );
   }
@@ -189,9 +191,9 @@ public class PopupComponent {
     /*
      * ## Step 1
      */
-    String strExampleTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Example2Title']" ) );
-    String strExampleDesc = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Example2Desc']/p" ) );
-    String strButtonName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='example2Obj']/button" ) );
+    String strExampleTitle = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Example2Title']" ) );
+    String strExampleDesc = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Example2Desc']/p" ) );
+    String strButtonName = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='example2Obj']/button" ) );
 
     assertEquals( "Example 2", strExampleTitle );
     assertEquals( "Button popup appearing in the west, can't be dragged and clicking anywhere outside the element will popup the button", strExampleDesc );
@@ -200,15 +202,15 @@ public class PopupComponent {
     /*
      * ## Step 2
      */
-    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example2Obj']/button" ) );
-    ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='popupContent2']" ) );
+    this.elemHelper.ClickJS( DRIVER, By.xpath( "//div[@id='example2Obj']/button" ) );
+    this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//div[@id='popupContent2']" ) );
     //Check text
-    String textInPopup = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='popupContent2']" ) );
+    String textInPopup = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='popupContent2']" ) );
     assertEquals( "A simple text that can be used as a tooltip", textInPopup );
     //Close popup
-    ElementHelper.ClickJS( DRIVER, By.xpath( "//div[8]/a" ) );
+    this.elemHelper.ClickJS( DRIVER, By.xpath( "//div[8]/a" ) );
     //wait for popup disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[8]/a" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[8]/a" ) );
 
   }
 

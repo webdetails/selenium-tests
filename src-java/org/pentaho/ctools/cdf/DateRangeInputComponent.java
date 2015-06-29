@@ -30,8 +30,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -57,39 +55,30 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class DateRangeInputComponent {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private static Wait<WebDriver> WAIT;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
-
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
-   * Shall initialized the test before run each test case.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  @BeforeClass
-  public static void setUp() {
-    DRIVER = CToolsTestSuite.getDriver();
-    WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
-  }
-
-  /**
-   * Go to the DataRangeInput web page.
-   */
-  public static void init() {
-    // The URL for the VisualizationAPIComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/DataRangeInputComponent
-    DRIVER.get( BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:43-DateRangeInputComponent:date_range_component.xcdf/generatedContent" );
+  @Test
+  public void tc0_OpenSamplePage_Display() {
+    // The URL for the DateRangeInputComponent under CDF samples
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/DataRangeInputComponent
+    this.driver.get( this.baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:43-DateRangeInputComponent:date_range_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -105,13 +94,13 @@ public class DateRangeInputComponent {
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
-    assertEquals( "DateRangeInputComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "DateRangeInputComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -128,15 +117,15 @@ public class DateRangeInputComponent {
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
   }
 
   /**
@@ -156,9 +145,9 @@ public class DateRangeInputComponent {
     /*
      * ## Step 1
      */
-    ElementHelper.Click( DRIVER, By.id( "myInput" ) );
-    //ADD THIS LINE TO RUN IN WIN8: ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.FindElement( DRIVER, By.linkText( "Today" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.Click( this.driver, By.id( "myInput" ) );
+    //ADD THIS LINE TO RUN IN WIN8: this.elemHelper.Click( driver, By.id( "myInput2" ) );
+    this.elemHelper.FindElement( this.driver, By.linkText( "Today" ) ).sendKeys( Keys.ENTER );
 
     /*
      * ## Step 2
@@ -167,8 +156,8 @@ public class DateRangeInputComponent {
     Date dNow = new Date();
     String strToday = sdf.format( dNow );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "You chose from " + strToday + " to " + strToday;
     alert.accept();
@@ -193,9 +182,9 @@ public class DateRangeInputComponent {
     /*
      * ## Step 1
      */
-    ElementHelper.Click( DRIVER, By.id( "myInput" ) );
-    //ADD THIS LINE TO RUN IN WIN8: ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.FindElement( DRIVER, By.linkText( "Last 7 days" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.Click( this.driver, By.id( "myInput" ) );
+    //ADD THIS LINE TO RUN IN WIN8: this.elemHelper.Click( driver, By.id( "myInput2" ) );
+    this.elemHelper.FindElement( this.driver, By.linkText( "Last 7 days" ) ).sendKeys( Keys.ENTER );
 
     /*
      * ## Step 2
@@ -206,8 +195,8 @@ public class DateRangeInputComponent {
     Date dNow = new Date();
     String strToday = sdf.format( dNow );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "You chose from " + sdf.format( c.getTime() ) + " to " + strToday;
     alert.accept();
@@ -232,9 +221,9 @@ public class DateRangeInputComponent {
     /*
      * ## Step 1
      */
-    ElementHelper.Click( DRIVER, By.id( "myInput" ) );
-    //ADD THIS LINE TO RUN IN WIN8: ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.FindElement( DRIVER, By.linkText( "Month to date" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.Click( this.driver, By.id( "myInput" ) );
+    //ADD THIS LINE TO RUN IN WIN8: this.elemHelper.Click( driver, By.id( "myInput2" ) );
+    this.elemHelper.FindElement( this.driver, By.linkText( "Month to date" ) ).sendKeys( Keys.ENTER );
 
     /*
      * ## Step 2
@@ -245,8 +234,8 @@ public class DateRangeInputComponent {
     String strToday = sdf.format( dNow );
     String strCurrentMonth = sdfMonth.format( dNow ) + "-01";
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "You chose from " + strCurrentMonth + " to " + strToday;
     alert.accept();
@@ -271,9 +260,9 @@ public class DateRangeInputComponent {
     /*
      * ## Step 1
      */
-    ElementHelper.Click( DRIVER, By.id( "myInput" ) );
-    //ADD THIS LINE TO RUN IN WIN8: ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.FindElement( DRIVER, By.linkText( "Year to date" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.Click( this.driver, By.id( "myInput" ) );
+    //ADD THIS LINE TO RUN IN WIN8: this.elemHelper.Click( driver, By.id( "myInput2" ) );
+    this.elemHelper.FindElement( this.driver, By.linkText( "Year to date" ) ).sendKeys( Keys.ENTER );
 
     /*
      * ## Step 2
@@ -284,8 +273,8 @@ public class DateRangeInputComponent {
     String strToday = sdf.format( dNow );
     String strBeginYear = sdfYear.format( dNow ) + "-01-01";
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "You chose from " + strBeginYear + " to " + strToday;
     alert.accept();
@@ -311,9 +300,9 @@ public class DateRangeInputComponent {
     /*
      * ## Step 1
      */
-    ElementHelper.Click( DRIVER, By.id( "myInput" ) );
-    //ADD THIS LINE TO RUN IN WIN8: ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.FindElement( DRIVER, By.linkText( "The previous Month" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.Click( this.driver, By.id( "myInput" ) );
+    //ADD THIS LINE TO RUN IN WIN8: this.elemHelper.Click( driver, By.id( "myInput2" ) );
+    this.elemHelper.FindElement( this.driver, By.linkText( "The previous Month" ) ).sendKeys( Keys.ENTER );
 
     /*
      * ## Step 2
@@ -328,8 +317,8 @@ public class DateRangeInputComponent {
     c.add( Calendar.DAY_OF_MONTH, c.get( Calendar.DAY_OF_MONTH ) * -1 );
     strLastMonthEndDay += "-" + c.get( Calendar.DAY_OF_MONTH );
 
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "You chose from " + strLastMonthStartDay + " to " + strLastMonthEndDay;
     alert.accept();
@@ -355,27 +344,27 @@ public class DateRangeInputComponent {
     /*
      * ## Step 1
      */
-    ElementHelper.Click( DRIVER, By.id( "myInput" ) );
-    ElementHelper.FindElement( DRIVER, By.linkText( "All Dates Before" ) ).sendKeys( Keys.ENTER );
-    ElementHelper.Click( DRIVER, By.xpath( "(//button[contains(text(),'Cancel')])[7]" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "(//a[text()='All Dates Before'])[2]" ), 5 );
-    WebElement dataPickerDisable = ElementHelper.WaitForElementPresence( DRIVER, By.xpath( "(//a[text()='All Dates Before'])[2]" ), 1 );
+    this.elemHelper.Click( this.driver, By.id( "myInput" ) );
+    this.elemHelper.FindElement( this.driver, By.linkText( "All Dates Before" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.Click( this.driver, By.xpath( "(//button[contains(text(),'Cancel')])[7]" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ), 5 );
+    WebElement dataPickerDisable = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "(//a[text()='All Dates Before'])[2]" ), 1 );
     assertFalse( dataPickerDisable.isDisplayed() );
 
     /*
      * ## Step 2
      */
     //Click in day 29
-    ElementHelper.Click( DRIVER, By.id( "myInput" ) );
-    //ADD THIS LINE TO RUN IN WIN8: ElementHelper.Click( driver, By.id( "myInput2" ) );
-    ElementHelper.FindElement( DRIVER, By.linkText( "All Dates Before" ) ).sendKeys( Keys.ENTER );
-    ElementHelper.FindElement( DRIVER, By.linkText( "29" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.Click( this.driver, By.id( "myInput" ) );
+    //ADD THIS LINE TO RUN IN WIN8: this.elemHelper.Click( driver, By.id( "myInput2" ) );
+    this.elemHelper.FindElement( this.driver, By.linkText( "All Dates Before" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.FindElement( this.driver, By.linkText( "29" ) ).sendKeys( Keys.ENTER );
 
     /*
      * ## Step 3
      */
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     alert.accept();
 
@@ -385,10 +374,5 @@ public class DateRangeInputComponent {
     String beginDate = sdf.format( c.getTime() );
 
     assertEquals( "You chose from " + beginDate + " to 2014-09-29", confirmationMsg );
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    //To use when class run all test cases.
   }
 }

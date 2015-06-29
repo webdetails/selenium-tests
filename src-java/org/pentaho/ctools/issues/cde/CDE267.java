@@ -26,7 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -57,11 +56,13 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CDE267 {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver  DRIVER;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     BASE_URL;
+  private static String BASE_URL;
   // Log instance
-  private static Logger     LOG                = LogManager.getLogger( CDE267.class );
+  private static Logger LOG = LogManager.getLogger( CDE267.class );
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -98,29 +99,29 @@ public class CDE267 {
      */
     //Open sample in edit mode
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Amaps.wcdf/wcdf.edit" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //assert buttons and go to Components Panel
-    WebElement layoutPanel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    WebElement layoutPanel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
     assertNotNull( layoutPanel );
-    WebElement componentPanel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    WebElement componentPanel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( componentPanel );
-    WebElement dataPanel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    WebElement dataPanel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( dataPanel );
     componentPanel.click();
 
     //Assert components table and expand Maps
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@id='cdfdd-panels']/div[@id='panel-layout_panel']" ) );
-    WebElement componentsPanel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-panels']/div[@id='panel-componentens_panel']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@id='cdfdd-panels']/div[@id='panel-layout_panel']" ) );
+    WebElement componentsPanel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-panels']/div[@id='panel-componentens_panel']" ) );
     assertNotNull( componentsPanel );
-    WebElement tableTitle = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='panel-componentens_panel']//div[@id='cdfdd-components-components']/div/div/div" ) );
+    WebElement tableTitle = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='panel-componentens_panel']//div[@id='cdfdd-components-components']/div/div/div" ) );
     assertNotNull( tableTitle );
-    WebElement groupExpander = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']/div/div[2]/table/tbody/tr/td/span" ) );
+    WebElement groupExpander = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']/div/div[2]/table/tbody/tr/td/span" ) );
     assertNotNull( groupExpander );
     groupExpander.click();
 
     //Find and select GeoLocalized Map
-    WebElement geoMap = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']/div/div[2]/table/tbody//td[contains(text(), 'GeoLocalizedMap')]" ) );
+    WebElement geoMap = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']/div/div[2]/table/tbody//td[contains(text(), 'GeoLocalizedMap')]" ) );
     assertNotNull( geoMap );
     geoMap.click();
 
@@ -128,34 +129,34 @@ public class CDE267 {
      * ## Step 2
      */
     //Click Advanced Properties and wait for it to be selected
-    WebElement advancedProperties = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[@class='advancedProperties propertiesUnSelected']" ) );
+    WebElement advancedProperties = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[@class='advancedProperties propertiesUnSelected']" ) );
     assertNotNull( advancedProperties );
     advancedProperties.click();
-    ElementHelper.WaitForAttributeValueEqualsTo( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class", "advancedProperties propertiesSelected" );
+    this.elemHelper.WaitForAttributeValueEqualsTo( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class", "advancedProperties propertiesSelected" );
 
     //Look for Popup Height and change it's value to 100
-    WebElement popupHeight = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Height for the popup window']/../td[2]" ) );
+    WebElement popupHeight = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Height for the popup window']/../td[2]" ) );
     assertNotNull( popupHeight );
     popupHeight.click();
-    WebElement inputHeight = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Height for the popup window']/../td[2]/form/input" ) );
+    WebElement inputHeight = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Height for the popup window']/../td[2]/form/input" ) );
     inputHeight.clear();
     inputHeight.sendKeys( "100" );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Height for the popup window']" ) ).click();
+    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Height for the popup window']" ) ).click();
 
     //Look for Popup Width and change it's value to 300
-    WebElement popupWidth = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Width for the popup window ']/../td[2]" ) );
+    WebElement popupWidth = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Width for the popup window ']/../td[2]" ) );
     assertNotNull( popupWidth );
     popupWidth.click();
-    WebElement inputWidth = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Width for the popup window ']/../td[2]/form/input" ) );
+    WebElement inputWidth = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Width for the popup window ']/../td[2]/form/input" ) );
     inputWidth.clear();
     inputWidth.sendKeys( "300" );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Width for the popup window ']" ) ).click();
+    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Width for the popup window ']" ) ).click();
 
     //Click Preview and wait for fancybox to show
-    WebElement previewButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "previewButton" ) );
+    WebElement previewButton = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "previewButton" ) );
     assertNotNull( previewButton );
     previewButton.click();
-    WebElement fancyboxFrame = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fancybox-frame" ) );
+    WebElement fancyboxFrame = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fancybox-frame" ) );
     assertNotNull( fancyboxFrame );
 
     /*
@@ -165,24 +166,18 @@ public class CDE267 {
     DRIVER.switchTo().frame( fancyboxFrame );
 
     //Wait for blocker to disappear
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Look for map that was changed and assert it's width and height
-    WebElement mapWithGeo = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "testWithGeoLocalization" ) );
+    WebElement mapWithGeo = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "testWithGeoLocalization" ) );
     assertNotNull( mapWithGeo );
-    WebElement marker = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
+    WebElement marker = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
     assertNotNull( marker );
     marker.click();
-    WebElement popup = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='featurePopup394246_contentDiv']" ) );
+    WebElement popup = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='featurePopup394246_contentDiv']" ) );
     assertNotNull( popup );
 
     assertEquals( "width: 300px; height: 100px; position: relative;", popup.getAttribute( "style" ) );
-
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE267.class.getSimpleName() );
   }
 }

@@ -26,11 +26,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -58,21 +55,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CDA110 {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver  DRIVER;
+  private WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String     BASE_URL;
+  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger     LOG                = LogManager.getLogger( CDA110.class );
+  private static Logger LOG = LogManager.getLogger( CDA110.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDA110.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -87,56 +79,49 @@ public class CDA110 {
    *    2. Wait for and assert elements and text on page
    *    
    */
-  @Test( timeout = 120000 )
-  public void tc01_CdaFileViewer_FullOuterJoin() {
-    LOG.info( "tc01_CdaFileViewer_FullOuterJoin" );
+  public void tc1_CdaFileViewer_FullOuterJoin() {
+    LOG.info( "tc1_CdaFileViewer_FullOuterJoin" );
 
     /*
      * ## Step 1
      */
     //Open sample CDA file
-    DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-110/cda110.cda" );
+    this.driver.get( this.baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-110/cda110.cda" );
 
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement selector = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
+    WebElement selector = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dataAccessSelector" ) );
     assertNotNull( selector );
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "fullOuter" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    WebElement refreshButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );
-    WebElement cacheButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
+    WebElement cacheButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( cacheButton );
-    WebElement urlButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
+    WebElement urlButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( urlButton );
 
     /*
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Check text on table
-    String firstColumn = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th" ) );
-    String secondColumn = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) );
-    String thirdColumn = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[3]" ) );
-    String fourthColumn = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[4]" ) );
-    String fifthColumn = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[5]" ) );
-    String sixthColumn = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/thead/tr/th[6]" ) );
+    String firstColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th" ) );
+    String secondColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) );
+    String thirdColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[3]" ) );
+    String fourthColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[4]" ) );
+    String fifthColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[5]" ) );
+    String sixthColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[6]" ) );
     assertEquals( "YEAR_ID", firstColumn );
     assertEquals( "STATUS", secondColumn );
     assertEquals( "TOTALPRICE", thirdColumn );
     assertEquals( "YEAR_ID_1", fourthColumn );
     assertEquals( "STATUS_1", fifthColumn );
     assertEquals( "TRIPLEPRICE", sixthColumn );
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDA110.class.getSimpleName() );
-
   }
 }

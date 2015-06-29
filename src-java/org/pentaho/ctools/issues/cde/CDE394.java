@@ -27,11 +27,8 @@ import static org.junit.Assert.assertNotNull;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -57,21 +54,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE394 {
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE394.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE394.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -88,20 +80,19 @@ public class CDE394 {
    *    2. Get "cx" for rightmost dots
    *    3. Assert "cx" are smaller than chart's width
    */
-  @Test( timeout = 120000 )
-  public void tc01_NewCdeDashboard_LineChartContained() {
-    LOG.info( "tc01_NewCdeDashboard_LineChartContained" );
+  public void tc1_NewCdeDashboard_LineChartContained() {
+    LOG.info( "tc1_NewCdeDashboard_LineChartContained" );
 
     /*
      * ## Step 1
      */
     //Go to Issue Sample
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent" );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    ElementHelper.WaitForElementVisibility( DRIVER, By.id( "column1protovis" ) );
-    WebElement element = ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "column1protovis" ) );
+    WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']" ) );
     assertNotNull( element );
     String widthText = element.getAttribute( "width" );
     double width = Double.parseDouble( widthText );
@@ -109,15 +100,15 @@ public class CDE394 {
     /*
      * ## Step 2
      */
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][14]" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][14]" ) );
     assertNotNull( element );
     String cx1Text = element.getAttribute( "cx" );
     double cx1 = Double.parseDouble( cx1Text );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='circle'][14]" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='circle'][14]" ) );
     assertNotNull( element );
     String cx2Text = element.getAttribute( "cx" );
     double cx2 = Double.parseDouble( cx2Text );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][9]/*[local-name()='circle'][14]" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][9]/*[local-name()='circle'][14]" ) );
     assertNotNull( element );
     String cx3Text = element.getAttribute( "cx" );
     double cx3 = Double.parseDouble( cx3Text );
@@ -129,8 +120,4 @@ public class CDE394 {
 
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE394.class.getSimpleName() );
-  }
 }

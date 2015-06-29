@@ -31,8 +31,10 @@ import org.openqa.selenium.interactions.Actions;
 
 public class ActionsHelper extends Actions {
 
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private static Logger log = LogManager.getLogger( ActionsHelper.class );
+  private final Logger log = LogManager.getLogger( ActionsHelper.class );
   //The driver to access the page
   private WebDriver driver;
 
@@ -53,11 +55,11 @@ public class ActionsHelper extends Actions {
    */
   public void MouseOver( By locator ) {
     try {
-      WebElement element = ElementHelper.WaitForElementPresenceAndVisible( this.driver, locator );
+      WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, locator );
       this.moveToElement( element );
       this.perform();
     } catch ( StaleElementReferenceException sere ) {
-      log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception" );
       this.MouseOver( locator );
     }
   }

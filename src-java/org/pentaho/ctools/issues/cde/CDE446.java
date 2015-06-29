@@ -26,7 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -60,6 +59,8 @@ public class CDE446 {
   private static WebDriver DRIVER;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE446.class );
   // Getting screenshot when test fails
@@ -90,46 +91,40 @@ public class CDE446 {
    *
    */
   @Test( timeout = 120000 )
-  public void tc01_CdeDashboard_KettleDatasourceWorks() {
-    LOG.info( "tc01_CdeDashboard_KettleDatasourceWorks" );
+  public void tc1_CdeDashboard_KettleDatasourceWorks() {
+    LOG.info( "tc1_CdeDashboard_KettleDatasourceWorks" );
 
     /*
      * ## Step 1
      */
     //Open created dashboard's cda file
     DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=/public/Issues/CDE/CDE-446/CDE-446.cda" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
     assertNotNull( element );
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "DataAccess ID: kettleTransform" );
 
     //Wait for buttons: button, Cache This AND Query URL
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( element );
 
     /*
      * ## Step 2
      */
     //Check text on table
-    String text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
+    String text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
     assertEquals( "District Manager", text );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[3]" ) );
     assertEquals( "Senior Sales Rep", text );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[3]" ) );
     assertEquals( "Sales Rep", text );
-    text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[4]/td[3]" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[4]/td[3]" ) );
     assertEquals( "Account Executive", text );
-
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE446.class.getSimpleName() );
   }
 }

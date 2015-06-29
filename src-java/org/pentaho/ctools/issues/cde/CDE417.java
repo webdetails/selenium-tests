@@ -61,11 +61,13 @@ import org.pentaho.gui.web.puc.BrowseFiles;
 public class CDE417 {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver  DRIVER;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     BASE_URL;
+  private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger     LOG                = LogManager.getLogger( CDE417.class );
+  private static Logger LOG = LogManager.getLogger( CDE417.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -110,7 +112,7 @@ public class CDE417 {
      */
     // Show Hidden Files
     BrowseFiles browser = new BrowseFiles( DRIVER );
-    if (!PUCSettings.SHOWHIDDENFILES) {
+    if ( !PUCSettings.SHOWHIDDENFILES ) {
       browser.CheckShowHiddenFiles();
     }
 
@@ -126,8 +128,8 @@ public class CDE417 {
 
     DRIVER.switchTo().defaultContent();
     WebDriver frame = DRIVER.switchTo().frame( "browser.perspective" );
-    ElementHelper.WaitForAttributeValue( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title", "ExportPopupComponent.cda" );
-    String nameOfExportPopupCda = ElementHelper.GetAttribute( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title" );
+    this.elemHelper.WaitForAttributeValue( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title", "ExportPopupComponent.cda" );
+    String nameOfExportPopupCda = this.elemHelper.GetAttribute( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title" );
     assertEquals( "ExportPopupComponent.cda", nameOfExportPopupCda );
 
     /*
@@ -137,29 +139,29 @@ public class CDE417 {
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AExportPopup%3AExportPopupComponent.wcdf/edit" );
 
     //Save Dashboard
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Save" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Save" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.id( "Save" ) );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "div.notify-bar-message" ) );
+    this.elemHelper.Click( DRIVER, By.id( "Save" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "div.notify-bar-message" ) );
     assertNotNull( element );
-    String saveMessage = ElementHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "div.notify-bar-message" ) );
+    String saveMessage = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.cssSelector( "div.notify-bar-message" ) );
     assertEquals( "Dashboard saved successfully", saveMessage );
 
     /* 
       * ## Step 4 
       */
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AExportPopup%3AExportPopupComponent.wcdf/generatedContent" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     // Assert chart and export buttons
-    WebElement elem = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='ChartExportPNGExporting']/div" ) );
+    WebElement elem = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='ChartExportPNGExporting']/div" ) );
     assertNotNull( elem );
-    elem = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='ChartExportSVGExporting']/div" ) );
+    elem = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='ChartExportSVGExporting']/div" ) );
     assertNotNull( elem );
-    String serie1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][2]/*[name()='text']" ) );
-    String serie2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][2]/*[name()='g'][2]/*[name()='text']" ) );
-    String serie3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][3]/*[name()='g'][2]/*[name()='text']" ) );
-    String serie4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][4]/*[name()='g'][2]/*[name()='text']" ) );
-    String serie5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][5]/*[name()='g'][2]/*[name()='text']" ) );
+    String serie1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][2]/*[name()='text']" ) );
+    String serie2 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][2]/*[name()='g'][2]/*[name()='text']" ) );
+    String serie3 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][3]/*[name()='g'][2]/*[name()='text']" ) );
+    String serie4 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][4]/*[name()='g'][2]/*[name()='text']" ) );
+    String serie5 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][5]/*[name()='g'][2]/*[name()='text']" ) );
     assertEquals( "Car", serie1 );
     assertEquals( "Bike", serie2 );
     assertEquals( "Ship", serie3 );
@@ -169,16 +171,16 @@ public class CDE417 {
     /* 
      * ## Step 5 
      */
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='ChartExportPNGExporting']/div" ) );
-    elem = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='exportElement']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='ChartExportPNGExporting']/div" ) );
+    elem = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='exportElement']" ) );
     assertNotNull( elem );
     elem.click();
-    String exportOptions = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) );
-    String exportOptions1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[2]" ) );
-    String exportOptions2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[3]" ) );
-    String exportOptions3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[4]" ) );
-    String exportOptions4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[5]" ) );
-    String exportOptions5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[8]" ) );
+    String exportOptions = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) );
+    String exportOptions1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[2]" ) );
+    String exportOptions2 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[3]" ) );
+    String exportOptions3 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[4]" ) );
+    String exportOptions4 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[5]" ) );
+    String exportOptions5 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[8]" ) );
     assertEquals( "Export Options", exportOptions );
     assertEquals( "Small", exportOptions1 );
     assertEquals( "Medium", exportOptions2 );
@@ -186,27 +188,27 @@ public class CDE417 {
     assertEquals( "Custom", exportOptions4 );
     assertEquals( "Export", exportOptions5 );
     // Check URL of displayed image
-    String chartSRCUrl = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
+    String chartSRCUrl = this.elemHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
     assertEquals( BASE_URL + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", chartSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( chartSRCUrl, "admin", "password" ) );
     // Close dialog box
-    ElementHelper.Click( DRIVER, By.id( "fancybox-close" ) );
-    assertTrue( ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
+    this.elemHelper.Click( DRIVER, By.id( "fancybox-close" ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
 
     /* 
      * ## Step 6 
      */
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div/div[@class='exportElement']" ) );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='ChartExportSVGExporting']/div" ) );
-    elem = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[9]/div[@class='exportElement']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div/div[@class='exportElement']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='ChartExportSVGExporting']/div" ) );
+    elem = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[9]/div[@class='exportElement']" ) );
     assertNotNull( elem );
     elem.click();
-    String exportOptionsSvg = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) );
-    String exportOptionsSvg1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[2]" ) );
-    String exportOptionsSvg2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[3]" ) );
-    String exportOptionsSvg3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[4]" ) );
-    String exportOptionsSvg4 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[5]" ) );
-    String exportOptionsSvg5 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[8]" ) );
+    String exportOptionsSvg = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) );
+    String exportOptionsSvg1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[2]" ) );
+    String exportOptionsSvg2 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[3]" ) );
+    String exportOptionsSvg3 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[4]" ) );
+    String exportOptionsSvg4 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[5]" ) );
+    String exportOptionsSvg5 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[8]" ) );
     assertEquals( "Export Options", exportOptionsSvg );
     assertEquals( "Small", exportOptionsSvg1 );
     assertEquals( "Medium", exportOptionsSvg2 );
@@ -214,12 +216,12 @@ public class CDE417 {
     assertEquals( "Custom", exportOptionsSvg4 );
     assertEquals( "Export", exportOptionsSvg5 );
     // Check URL of displayed image
-    String chartSvgSRCUrl = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
+    String chartSvgSRCUrl = this.elemHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
     assertEquals( BASE_URL + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", chartSvgSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( chartSvgSRCUrl, "admin", "password" ) );
     // Close dialog box
-    ElementHelper.Click( DRIVER, By.id( "fancybox-close" ) );
-    assertTrue( ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
+    this.elemHelper.Click( DRIVER, By.id( "fancybox-close" ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
   }
 
   @AfterClass

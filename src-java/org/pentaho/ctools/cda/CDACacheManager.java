@@ -60,6 +60,8 @@ public class CDACacheManager {
   private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private static Logger LOG = LogManager.getLogger( CDACacheManager.class );
 
@@ -98,20 +100,20 @@ public class CDACacheManager {
     WAIT.until( ExpectedConditions.titleContains( "CDA Cache Manager" ) );
     assertEquals( "CDA Cache Manager", DRIVER.getTitle() );
     //Go to Cached Queries
-    WebElement buttonCachedQueries = ElementHelper.FindElement( DRIVER, By.id( "cacheButton" ) );
+    WebElement buttonCachedQueries = this.elemHelper.FindElement( DRIVER, By.id( "cacheButton" ) );
     assertNotNull( buttonCachedQueries );
     buttonCachedQueries.click();
 
     /*
      * ## Step 1
      */
-    String subTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cachedQueries']/div[3]" ) );
+    String subTitle = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cachedQueries']/div[3]" ) );
     assertEquals( "Queries in cache", subTitle );
 
     /*
      * ## Step 2
      */
-    String buttonTextClearCache = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "clearCacheButton" ) );
+    String buttonTextClearCache = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.id( "clearCacheButton" ) );
     assertEquals( "Clear Cache", buttonTextClearCache );
   }
 
@@ -131,12 +133,12 @@ public class CDACacheManager {
     LOG.info( "tc2_ClearCache_AllQueriesWhereRemove" );
 
     //Go to Cached Queries
-    WebElement buttonCachedQueries = ElementHelper.FindElement( DRIVER, By.id( "cacheButton" ) );
+    WebElement buttonCachedQueries = this.elemHelper.FindElement( DRIVER, By.id( "cacheButton" ) );
     assertNotNull( buttonCachedQueries );
     buttonCachedQueries.click();
 
     //Click in clear cache
-    ElementHelper.FindElement( DRIVER, By.id( "clearCacheButton" ) ).click();
+    this.elemHelper.FindElement( DRIVER, By.id( "clearCacheButton" ) ).click();
 
     /*
      * ## Step 1
@@ -160,7 +162,7 @@ public class CDACacheManager {
     /*
      * ## Step 2
      */
-    String textEmptyCache = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cachedQueriesOverviewLines']/div" ) );
+    String textEmptyCache = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cachedQueriesOverviewLines']/div" ) );
     assertEquals( "Cache is empty.", textEmptyCache );
   }
 

@@ -59,13 +59,15 @@ import org.pentaho.gui.web.puc.BrowseFiles;
 public class CDE366 {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver  DRIVER;
+  private static WebDriver DRIVER;
   // The base url to be append the relative url in test
-  private static String     BASE_URL;
+  private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger     LOG                = LogManager.getLogger( CDE366.class );
+  private static Logger LOG = LogManager.getLogger( CDE366.class );
   //Failure variable ==1 if test did not fail
-  private static int        Failure            = 0;
+  private static int Failure = 0;
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
@@ -103,109 +105,109 @@ public class CDE366 {
      */
     //Go to New CDE Dashboard
     DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Open Dashboard Settings
-    WebElement settingsLink = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
+    WebElement settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
     assertNotNull( settingsLink );
     settingsLink.click();
-    WebElement settingsPopup = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']" ) );
+    WebElement settingsPopup = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']" ) );
     assertNotNull( settingsPopup );
 
     //Click save and assert user gets a message of "Error saving settings"
-    WebElement saveButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
+    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
     assertNotNull( saveButton );
     saveButton.click();
-    WebElement notifyError = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
+    WebElement notifyError = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
     assertNotNull( notifyError );
-    String errorMessage = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='notifyBar']/div[@class='notify-bar-message']" ) );
+    String errorMessage = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='notifyBar']/div[@class='notify-bar-message']" ) );
     assertEquals( "Errors saving settings", errorMessage );
 
     /*
      * ## Step 2
      */
     //Click Apply Template and wait for popup
-    WebElement applyTemplate = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='table-cdfdd-layout-treeOperations']/a[@title='Apply Template']" ) );
+    WebElement applyTemplate = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='table-cdfdd-layout-treeOperations']/a[@title='Apply Template']" ) );
     assertNotNull( applyTemplate );
     applyTemplate.click();
-    WebElement templatePopup = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popupTemplate']" ) );
+    WebElement templatePopup = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popupTemplate']" ) );
     assertNotNull( templatePopup );
 
     //Find the Two Columns Template and apply it
-    ElementHelper.WaitForFrameReady( DRIVER, By.id( "popupTemplatebox" ) );
-    String templateText = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]/p" ) ).getText();
+    this.elemHelper.WaitForFrameReady( DRIVER, By.id( "popupTemplatebox" ) );
+    String templateText = this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]/p" ) ).getText();
     assertEquals( "Two Columns Template", templateText );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]/p" ) );
-    ElementHelper.WaitForAttributeValue( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]" ), "class", "hover active" );
-    String text = ElementHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]" ), "class" );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]/p" ) );
+    this.elemHelper.WaitForAttributeValue( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]" ), "class", "hover active" );
+    String text = this.elemHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]" ), "class" );
     assertEquals( "hover active", text );
-    WebElement okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
+    WebElement okButton = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
     assertNotNull( okButton );
     okButton.click();
-    WebElement confirmationMessage = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupTemplatemessage']" ) );
+    WebElement confirmationMessage = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupTemplatemessage']" ) );
     assertNotNull( confirmationMessage );
-    String warningText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='popupTemplatemessage']" ) );
+    String warningText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='popupTemplatemessage']" ) );
     assertEquals( "Are you sure you want to load the template?WARNING: Dashboard Layout will be overwritten!", warningText );
-    okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
+    okButton = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
     assertNotNull( okButton );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
 
     //Assert Template was applied
-    WebElement columnExpander = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
+    WebElement columnExpander = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
     assertNotNull( columnExpander );
-    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
-    WebElement firstPanel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
+    WebElement firstPanel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
     assertNotNull( firstPanel );
-    WebElement secondPanel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
+    WebElement secondPanel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
     assertNotNull( secondPanel );
-    String tr6tdText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td" ) );
-    String tr6td2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]" ) );
-    String tr7tdText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td" ) );
-    String tr7td2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]" ) );
+    String tr6tdText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td" ) );
+    String tr6td2Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]" ) );
+    String tr7tdText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td" ) );
+    String tr7td2Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]" ) );
     assertEquals( "Column", tr6tdText );
     assertEquals( "Panel_1", tr6td2Text );
     assertEquals( "Column", tr7tdText );
     assertEquals( "Panel_2", tr7td2Text );
 
     //Save Dashboard
-    WebElement saveDashboard = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@id='Save']" ) );
+    WebElement saveDashboard = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@id='Save']" ) );
     assertNotNull( saveDashboard );
     saveDashboard.click();
-    WebElement folderSelector = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    WebElement folderSelector = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
     assertNotNull( folderSelector );
     folderSelector.click();
-    WebElement inputName = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fileInput" ) );
+    WebElement inputName = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fileInput" ) );
     assertNotNull( inputName );
     inputName.sendKeys( "CDE366" );
-    okButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupbuttons']/button[@id='popup_state0_buttonOk']" ) );
+    okButton = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupbuttons']/button[@id='popup_state0_buttonOk']" ) );
     okButton.click();
-    ElementHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[@class='popupbuttons']" ) );
-    WebElement title = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='CDE366']" ) );
+    this.elemHelper.WaitForElementNotPresent( DRIVER, By.xpath( "//div[@class='popupbuttons']" ) );
+    WebElement title = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='CDE366']" ) );
     assertNotNull( title );
 
     /*
      * ## Step 3
      */
     //Open Dashboard Settings
-    settingsLink = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
+    settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
     assertNotNull( settingsLink );
     settingsLink.click();
-    settingsPopup = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']" ) );
+    settingsPopup = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']" ) );
     assertNotNull( settingsPopup );
 
     //Edit Style and Dashboard Type
-    Select style = new Select( ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "styleInput" ) ) );
+    Select style = new Select( this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "styleInput" ) ) );
     style.selectByVisibleText( "WDDocs" );
-    Select dashType = new Select( ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "rendererInput" ) ) );
+    Select dashType = new Select( this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "rendererInput" ) ) );
     dashType.selectByVisibleText( "blueprint" );
 
     //Click save and assert user gets a message of "Error saving settings"
-    saveButton = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
+    saveButton = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
     assertNotNull( saveButton );
     saveButton.click();
-    WebElement notifySuccess = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
+    WebElement notifySuccess = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
     assertNotNull( notifySuccess );
-    String successMessage = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='notifyBar']/div[@class='notify-bar-message']" ) );
+    String successMessage = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='notifyBar']/div[@class='notify-bar-message']" ) );
     assertEquals( "Dashboard Settings saved successfully", successMessage );
 
     /*
@@ -213,39 +215,39 @@ public class CDE366 {
      */
     //Open Home Folder
     DRIVER.get( BASE_URL );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Open Dashboard in edit mode
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3ACDE366.wcdf/wcdf.edit" );
-    //ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    //this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Check template is applied
-    columnExpander = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
+    columnExpander = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
     assertNotNull( columnExpander );
-    ElementHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
-    firstPanel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
+    firstPanel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
     assertNotNull( firstPanel );
-    secondPanel = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
+    secondPanel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
     assertNotNull( secondPanel );
-    tr6tdText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td" ) );
-    tr6td2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]" ) );
-    tr7tdText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td" ) );
-    tr7td2Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]" ) );
+    tr6tdText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td" ) );
+    tr6td2Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]" ) );
+    tr7tdText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td" ) );
+    tr7td2Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]" ) );
     assertEquals( "Column", tr6tdText );
     assertEquals( "Panel_1", tr6td2Text );
     assertEquals( "Column", tr7tdText );
     assertEquals( "Panel_2", tr7td2Text );
 
     //Open Settings and assert Style and Dashboard Type were saved 
-    settingsLink = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
+    settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
     assertNotNull( settingsLink );
     settingsLink.click();
-    settingsPopup = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']" ) );
+    settingsPopup = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='popup']//div[@id='popupstates']" ) );
     assertNotNull( settingsPopup );
-    WebElement selectedStyle = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//select[@id='styleInput']/option[@selected='']" ) );
+    WebElement selectedStyle = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//select[@id='styleInput']/option[@selected='']" ) );
     String selectedValue = selectedStyle.getAttribute( "value" );
     assertEquals( "WDDocs", selectedValue );
-    WebElement selectedDash = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//select[@id='rendererInput']/option[@selected='']" ) );
+    WebElement selectedDash = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//select[@id='rendererInput']/option[@selected='']" ) );
     selectedValue = selectedDash.getAttribute( "value" );
     assertEquals( "blueprint", selectedValue );
 
@@ -260,7 +262,7 @@ public class CDE366 {
 
   @AfterClass
   public static void tearDownClass() {
-    if (Failure == 0) {
+    if ( Failure == 0 ) {
       BrowseFiles browse = new BrowseFiles( DRIVER );
       browse.DeleteMultipleFilesByName( "/public", "CDE366" );
       browse.EmptyTrash();

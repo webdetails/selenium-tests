@@ -61,6 +61,8 @@ public class CDE404 {
   private static WebDriver DRIVER;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE404.class );
   // Getting screenshot when test fails
@@ -101,72 +103,72 @@ public class CDE404 {
     //Open plugin dashboard
     DRIVER.get( BASE_URL + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=Test.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     //wait for invisibility of waiting pop-up
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
 
-    WebElement element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( element );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
     assertNotNull( element );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
     assertNotNull( element );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceType']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceType']" ) );
     assertNotNull( element );
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceType']" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceType']" ) ) );
     select.selectByValue( "Css" );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceSource']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceSource']" ) );
     assertNotNull( element );
-    Select select1 = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceSource']" ) ) );
+    Select select1 = new Select( this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceSource']" ) ) );
     select1.selectByValue( "file" );
-    ElementHelper.Click( DRIVER, By.xpath( "//button[@id='popup_state0_buttonOk']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//button[@id='popup_state0_buttonOk']" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
-    element = ElementHelper.FindElement( DRIVER, By.id( "container_id" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.id( "container_id" ) );
     assertNotNull( element );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/']" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//a[@rel='static/']" ) );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//a[@rel='static/']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/']" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/']" ) );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/css/']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/css/']" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/css/']" ) );
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/css/']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
-    ElementHelper.Click( DRIVER, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.FindElement( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
+    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
-    WebElement elementframe = ElementHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
+    WebElement elementframe = this.elemHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
     WebDriver frame = DRIVER.switchTo().frame( elementframe );
-    element = ElementHelper.FindElement( frame, By.xpath( "//span[@id='infoArea']" ) );
+    element = this.elemHelper.FindElement( frame, By.xpath( "//span[@id='infoArea']" ) );
     assertNotNull( element );
-    String pathText = ElementHelper.WaitForElementPresentGetText( frame, By.xpath( "//span[@id='infoArea']" ) );
+    String pathText = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//span[@id='infoArea']" ) );
     assertEquals( "/system/CDE404/static/system/css/cpk.css", pathText );
-    String lineText = ElementHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre[@id='editArea']/div[2]/div/div[3]/div/span" ) );
+    String lineText = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre[@id='editArea']/div[2]/div/div[3]/div/span" ) );
     assertEquals( "/* This Source Code Form is subject to the terms of the Mozilla Public", lineText );
-    lineText = ElementHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre[@id='editArea']/div[2]/div/div[3]/div[2]/span" ) );
+    lineText = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre[@id='editArea']/div[2]/div/div[3]/div[2]/span" ) );
     assertEquals( "* License, v. 2.0. If a copy of the MPL was not distributed with this file,", lineText );
-    lineText = ElementHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre[@id='editArea']/div[2]/div/div[3]/div[3]/span" ) );
+    lineText = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//pre[@id='editArea']/div[2]/div/div[3]/div[3]/span" ) );
     assertEquals( "* You can obtain one at http://mozilla.org/MPL/2.0/. */", lineText );
 
   }

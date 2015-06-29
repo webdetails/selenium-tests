@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,11 +23,11 @@ import org.pentaho.ctools.utils.ElementHelper;
 public class SimpleExtensionPoints {
 
   // Instance of the driver (browser emulator)
-  private WebDriver driver;
+  private WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private Wait<WebDriver> wait;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private String baseUrl;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   // The name for the widget to be created
   private final String widgetName = "dummyWidgetExtensionPoint";
   // The param to add in Extension Point
@@ -37,13 +36,8 @@ public class SimpleExtensionPoints {
   private final String paramValue = "My Extension Point";
   // The new value for the extension point
   private final String paramValueEditable = "My New Editable Extension Point";
-
-  @Before
-  public void setUp() throws Exception {
-    this.driver = CToolsTestSuite.getDriver();
-    this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
-  }
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
 
   /**
    * ############################### Test Case 1 ###############################
@@ -88,7 +82,7 @@ public class SimpleExtensionPoints {
     //Click in "Advanced Properties"
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-properties']/caption/div[3][contains(text(),'Advanced Properties')]" ) ) );
     this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/caption/div[3][contains(text(),'Advanced Properties')]" ) ).click();
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']" ) );
     //Click in 'Extension Point'
     WebElement extensionPoint = this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']/.." ) );
     //Get the two elements 'td' and click in the td element that represent the value list of 'Extension Points' property
@@ -97,29 +91,29 @@ public class SimpleExtensionPoints {
     WebElement valueExtension = listOfElements.get( 1 );
     valueExtension.click();
     //Wait for the popup window is displayed
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "popup" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.cssSelector( "input.StringListAddButton" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "popup" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.cssSelector( "input.StringListAddButton" ) );
     final WebElement addButton = this.driver.findElement( By.cssSelector( "input.StringListAddButton" ) );
     final String addButtonText = addButton.getAttribute( "value" );
     assertEquals( addButtonText, "Add" );
     addButton.click();
     //Wait for the pair arg and value
     //Thread.sleep(100);
-    ElementHelper.WaitForElementPresence( this.driver, By.id( "parameters_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.id( "parameters_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
     //Clicking in '...'
     this.driver.findElement( By.id( "parameter_button_0" ) ).click();
     //Show popup
-    ElementHelper.WaitForElementVisibility( this.driver, By.cssSelector( "div.ace_line" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.cssSelector( "div.ace_line" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) );
     this.driver.findElement( By.cssSelector( "textarea.ace_text-input" ) ).clear();
     this.driver.findElement( By.cssSelector( "textarea.ace_text-input" ) ).sendKeys( this.paramValue );
     this.driver.findElement( By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) ).click();
     //dismiss popup
     this.wait.until( ExpectedConditions.invisibilityOfElementLocated( By.xpath( "(//div[@id='popupbox'])[2]" ) ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
     this.driver.findElement( By.id( "arg_0" ) ).sendKeys( this.paramArg );
     this.driver.findElement( By.xpath( "//button[@id='popup_state0_buttonOk']" ) ).click();
     this.wait.until( ExpectedConditions.invisibilityOfElementLocated( By.xpath( "//div[@id='popupbox']" ) ) );
@@ -127,7 +121,7 @@ public class SimpleExtensionPoints {
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-properties']" ) ) );
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='headerLinks']/div[2]/a" ) ) );
     this.driver.findElement( By.xpath( "//div[@id='headerLinks']/div[2]/a" ) ).click();
-    ElementHelper.WaitForElementInvisibility( this.driver, By.id( "notifyBar" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "notifyBar" ) );
 
     //## Step 4 - Check if the value persist
     this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
@@ -148,7 +142,7 @@ public class SimpleExtensionPoints {
     //Click in "Advanced Properties"
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-properties']/caption/div[3][contains(text(),'Advanced Properties')]" ) ) );
     this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/caption/div[3][contains(text(),'Advanced Properties')]" ) ).click();
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']" ) );
     //Click in 'Extension Point'
     extensionPoint = this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']/.." ) );
     //Get the two elements 'td' and click in the td element that represent the value list of 'Extension Points' property
@@ -157,17 +151,17 @@ public class SimpleExtensionPoints {
     valueExtension = listOfElements.get( 1 );
     valueExtension.click();
     //Wait for the popup window is displayed
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "popup" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.cssSelector( "input.StringListAddButton" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "popup" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.cssSelector( "input.StringListAddButton" ) );
     //Wait for the pair arg and value
-    ElementHelper.WaitForElementPresence( this.driver, By.id( "parameters_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.id( "parameters_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
     assertEquals( this.paramArg, this.driver.findElement( By.id( "arg_0" ) ).getAttribute( "value" ) );
     //Clicking in '...'
     this.driver.findElement( By.id( "parameter_button_0" ) ).click();
-    ElementHelper.WaitForElementVisibility( this.driver, By.cssSelector( "div.ace_line" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.cssSelector( "div.ace_line" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) );
     assertEquals( this.paramValue, this.driver.findElement( By.cssSelector( "div.ace_content" ) ).getText() );
   }
 
@@ -209,7 +203,7 @@ public class SimpleExtensionPoints {
     //Click in "Advanced Properties"
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-properties']/caption/div[3][contains(text(),'Advanced Properties')]" ) ) );
     this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/caption/div[3][contains(text(),'Advanced Properties')]" ) ).click();
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']" ) );
     //Click in 'Extension Point'
     WebElement extensionPoint = this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']/.." ) );
     //Get the two elements 'td' and click in the td element that represent the value list of 'Extension Points' property
@@ -218,17 +212,17 @@ public class SimpleExtensionPoints {
     WebElement valueExtension = listOfElements.get( 1 );
     valueExtension.click();
     //Wait for the popup window is displayed
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "popup" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.cssSelector( "input.StringListAddButton" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "popup" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.cssSelector( "input.StringListAddButton" ) );
     //Wait for the pair arg and value
-    ElementHelper.WaitForElementPresence( this.driver, By.id( "parameters_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.id( "parameters_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
     assertEquals( this.paramArg, this.driver.findElement( By.id( "arg_0" ) ).getAttribute( "value" ) );
     //Clicking in '...'
     this.driver.findElement( By.id( "parameter_button_0" ) ).click();
-    ElementHelper.WaitForElementVisibility( this.driver, By.cssSelector( "div.ace_line" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.cssSelector( "div.ace_line" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) );
     assertEquals( this.paramValue, this.driver.findElement( By.cssSelector( "div.ace_content" ) ).getText() );
     //Add a new value
     this.driver.findElement( By.cssSelector( "textarea.ace_text-input" ) ).clear();
@@ -236,15 +230,15 @@ public class SimpleExtensionPoints {
     this.driver.findElement( By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) ).click();
     //dismiss popup
     this.wait.until( ExpectedConditions.invisibilityOfElementLocated( By.xpath( "(//div[@id='popupbox'])[2]" ) ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
     this.driver.findElement( By.xpath( "//button[@id='popup_state0_buttonOk']" ) ).click();
     this.wait.until( ExpectedConditions.invisibilityOfElementLocated( By.xpath( "//div[@id='popupbox']" ) ) );
     //Click in button SAVE
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-properties']" ) ) );
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='headerLinks']/div[2]/a" ) ) );
     this.driver.findElement( By.xpath( "//div[@id='headerLinks']/div[2]/a" ) ).click();
-    ElementHelper.WaitForElementInvisibility( this.driver, By.id( "notifyBar" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "notifyBar" ) );
 
     //## Step 3 - Check if the value persist
     this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
@@ -265,7 +259,7 @@ public class SimpleExtensionPoints {
     //Click in "Advanced Properties"
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-properties']/caption/div[3][contains(text(),'Advanced Properties')]" ) ) );
     this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/caption/div[3][contains(text(),'Advanced Properties')]" ) ).click();
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']" ) );
     //Click in 'Extension Point'
     extensionPoint = this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title='CCC Extension points']/.." ) );
     //Get the two elements 'td' and click in the td element that represent the value list of 'Extension Points' property
@@ -274,17 +268,17 @@ public class SimpleExtensionPoints {
     valueExtension = listOfElements.get( 1 );
     valueExtension.click();
     //Wait for the popup window is displayed
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "popup" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.cssSelector( "input.StringListAddButton" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "popup" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.cssSelector( "input.StringListAddButton" ) );
     //Wait for the pair arg and value
-    ElementHelper.WaitForElementPresence( this.driver, By.id( "parameters_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.id( "parameters_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "parameter_button_0" ) );
     assertEquals( this.paramArg, this.driver.findElement( By.id( "arg_0" ) ).getAttribute( "value" ) );
     //Clicking in '...'
     this.driver.findElement( By.id( "parameter_button_0" ) ).click();
-    ElementHelper.WaitForElementVisibility( this.driver, By.cssSelector( "div.ace_line" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.cssSelector( "div.ace_line" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "(//button[@id='popup_state0_buttonOk'])[2]" ) );
     assertEquals( this.paramValueEditable, this.driver.findElement( By.cssSelector( "div.ace_content" ) ).getText() );
   }
 

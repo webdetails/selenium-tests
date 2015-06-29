@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -50,24 +48,18 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class LoginPentaho {
   // Instance of the driver (browser emulator)
-  private WebDriver driver;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private Wait<WebDriver> wait;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private String baseUrl;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private static Logger LOG = LogManager.getLogger( LoginPentaho.class );
+  private final Logger log = LogManager.getLogger( LoginPentaho.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
-
-  @Before
-  public void setUp() {
-    LOG.debug( "setUp" );
-    this.driver = CToolsTestSuite.getDriver();
-    this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
-  }
 
   /**
    * ############################### Test Case 1 ###############################
@@ -84,7 +76,7 @@ public class LoginPentaho {
    */
   @Test( timeout = 60000 )
   public void tc1_Login_SuccessAuthentication() {
-    LOG.debug( "tc1_Login_SuccessAuthentication" );
+    this.log.debug( "tc1_Login_SuccessAuthentication" );
     //## Step 1
     this.driver.get( this.baseUrl + "Login" );
 
@@ -105,8 +97,8 @@ public class LoginPentaho {
 
     //## Step 3
     //wait for visibility of waiting pop-up
-    ElementHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 4 );
-    ElementHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 4 );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
     this.wait.until( ExpectedConditions.titleContains( "Pentaho User Console" ) );
@@ -117,10 +109,5 @@ public class LoginPentaho {
 
     //Logged as ADMIN user
     assertEquals( "admin", this.driver.findElement( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ).getText() );
-  }
-
-  @After
-  public void tearDown() {
-    LOG.debug( "tearDown" );
   }
 }

@@ -65,6 +65,8 @@ public class CDE392 {
   private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDE392.class );
   // Getting screenshot when test fails
@@ -106,91 +108,91 @@ public class CDE392 {
      */
     //Go to New CDE Dashboard
     DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
     assertNotNull( element );
-    String newText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
-    String saveText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
-    String saveasText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
-    String reloadText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
-    String settingsText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    String newText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
+    String saveText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    String saveasText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
+    String reloadText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
+    String settingsText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
     assertEquals( "New", newText );
     assertEquals( "Save", saveText );
     assertEquals( "Save as...", saveasText );
     assertEquals( "Reload", reloadText );
     assertEquals( "Settings", settingsText );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
 
     /*
      * ## Step 2
      */
-    WebElement obj1 = ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
+    WebElement obj1 = this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
     assertEquals( obj1.isSelected(), true );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='popupclose']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='popupclose']" ) );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
     assertNotNull( element );
-    String otherText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    String otherText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
     assertEquals( "Others", otherText );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='table Component']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='table Component']" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//a[@title='table Component']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//a[@title='table Component']" ) );
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
     assertNotNull( element );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']" ) );
     assertNotNull( element );
-    String styleText = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']" ) );
-    String style1Text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']/../td[2]" ) );
+    String styleText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']" ) );
+    String style1Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']/../td[2]" ) );
     assertEquals( "Style", styleText );
     assertEquals( "Bootstrap", style1Text );
 
     /*
      * ## Step 5
      */
-    String newText1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
-    String saveText1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
-    String saveasText1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
-    String reloadText1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
-    String settingsText1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    String newText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
+    String saveText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    String saveasText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
+    String reloadText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
+    String settingsText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
     assertEquals( "New", newText1 );
     assertEquals( "Save", saveText1 );
     assertEquals( "Save as...", saveasText1 );
     assertEquals( "Reload", reloadText1 );
     assertEquals( "Settings", settingsText1 );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
 
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//select[@id='rendererInput']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//select[@id='rendererInput']" ) );
     assertNotNull( element );
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']" ) ) );
     select.selectByValue( "blueprint" );
-    ElementHelper.Click( DRIVER, By.xpath( "//button[@id='popup_state0_buttonSave']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//button[@id='popup_state0_buttonSave']" ) );
 
     /*
      * ## Step 6

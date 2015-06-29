@@ -28,8 +28,6 @@ import static org.junit.Assert.assertThat;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -54,58 +52,52 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CCCV2ShowCase {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private static Wait<WebDriver> WAIT;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CCCV2ShowCase.class );
+  private final Logger log = LogManager.getLogger( CCCV2ShowCase.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CCCV2ShowCase.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
-   * ############################### Test Case 1 ###############################
+   * ############################### Test Case 0 ###############################
    *
    * Test Case Name:
    *    Open sample page.
    */
-  @Test( timeout = 60000 )
-  public void tc00_OpenSamplePage() {
+  @Test
+  public void tc0_OpenSamplePage_Display() {
     // Go to AddinReference
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AtestCCCv2-II.wcdf/generatedContent" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AtestCCCv2-II.wcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Check page title
-    WAIT.until( ExpectedConditions.titleIs( "CCC V2 ShowCase" ) );
-    assertEquals( "CCC V2 ShowCase", DRIVER.getTitle() );
+    this.wait.until( ExpectedConditions.titleIs( "CCC V2 ShowCase" ) );
+    assertEquals( "CCC V2 ShowCase", this.driver.getTitle() );
     // Check title
-    String title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Headers']/div" ) );
+    String title = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='Headers']/div" ) );
     assertEquals( "CCC v2 - Show Case", title );
     // Wait for the charts load
     // search for width of barchartrect1
     // search for width of barchartrect2
     // search for width of barchartrect3
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1][@width>192]" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2][@width>249]" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3][@width>100]" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1][@width>192]" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2][@width>249]" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3][@width>100]" ) );
     // search for cy of line1
     // search for cy of line7
     // search for cy of line11
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1][@cy>120]" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7][@cy>136]" ) );
-    ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11][@cy>24]" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1][@cy>120]" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7][@cy>136]" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11][@cy>24]" ) );
   }
 
   /**
@@ -119,19 +111,19 @@ public class CCCV2ShowCase {
    *    1. Check Bar Chart
    */
   @Test( timeout = 60000 )
-  public void tc01_ChartContent_DisplayedCorrect() {
-    LOG.info( "tc01_ChartContent_DisplayedCorrect" );
+  public void tc1_ChartContent_DisplayedCorrect() {
+    this.log.info( "tc1_ChartContent_DisplayedCorrect" );
 
     /*
      * ## Step 1 - Bar Chart
      */
-    String barChartTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "BarChartTitleRow" ) );
+    String barChartTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "BarChartTitleRow" ) );
     assertEquals( "Bar Chart", barChartTitle );
     // Check bars
-    ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2]" ) );
-    WebElement barChartRect1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1]" ) );
-    WebElement barChartRect2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2]" ) );
-    WebElement barChartRect3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3]" ) );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2]" ) );
+    WebElement barChartRect1 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1]" ) );
+    WebElement barChartRect2 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2]" ) );
+    WebElement barChartRect3 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3]" ) );
     assertNotNull( barChartRect1 );
     assertNotNull( barChartRect2 );
     assertNotNull( barChartRect3 );
@@ -142,28 +134,28 @@ public class CCCV2ShowCase {
     assertThat( "Current width: " + barChartRect2Width, barChartRect2Width, greaterThan( Double.valueOf( 250 ) ) );
     assertThat( "Current width: " + barChartRect3Width, barChartRect3Width, greaterThan( Double.valueOf( 100 ) ) );
     // Check bars value
-    String barChartRectValue1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][1]" ) );
-    String barChartRectValue2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][2]" ) );
-    String barChartRectValue3 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][3]" ) );
+    String barChartRectValue1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][1]" ) );
+    String barChartRectValue2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][2]" ) );
+    String barChartRectValue3 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text'][3]" ) );
     assertEquals( "3.68M", barChartRectValue1 );
     assertEquals( "4.99M", barChartRectValue2 );
     assertEquals( "1.98M", barChartRectValue3 );
 
     // Mouse hover elements
-    Actions acts = new Actions( DRIVER );
+    Actions acts = new Actions( this.driver );
     acts.moveToElement( barChartRect2 );
     acts.perform();
-    String seriesLabel = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[1]/span" ) );
+    String seriesLabel = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[1]/span" ) );
     acts.perform();
-    String seriesValue = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[3]/span" ) );
+    String seriesValue = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[3]/span" ) );
     acts.perform();
-    String timeLabel = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[1]/span" ) );
+    String timeLabel = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[1]/span" ) );
     acts.perform();
-    String timeValue = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[3]/span" ) );
+    String timeValue = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[3]/span" ) );
     acts.perform();
-    String valueLabel = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[1]/span" ) );
+    String valueLabel = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[1]/span" ) );
     acts.perform();
-    String valueValue = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[3]/span" ) );
+    String valueValue = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[3]/span" ) );
     assertEquals( "Series", seriesLabel );
     assertEquals( "Sales", seriesValue );
     assertEquals( "Time", timeLabel );
@@ -172,8 +164,8 @@ public class CCCV2ShowCase {
     assertEquals( "4,987,739.84", valueValue );
 
     //To move the focus to another element, in order to remove the tooltip
-    Actions acts2 = new Actions( DRIVER );
-    acts2.moveToElement( ElementHelper.FindElement( DRIVER, By.id( "BarChartTitleRow" ) ) );
+    Actions acts2 = new Actions( this.driver );
+    acts2.moveToElement( this.elemHelper.FindElement( this.driver, By.id( "BarChartTitleRow" ) ) );
     acts2.click();
     acts2.perform();
   }
@@ -190,17 +182,17 @@ public class CCCV2ShowCase {
    */
   @Test( timeout = 90000 )
   public void tc02_ChartContent_DisplayedCorrect() {
-    LOG.info( "tc02_ChartContent_DisplayedCorrect" );
+    this.log.info( "tc02_ChartContent_DisplayedCorrect" );
 
     /*
      * ## Step 2 - Line Chart
      */
-    String lineChartTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "LineChartTitleRow" ) );
+    String lineChartTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "LineChartTitleRow" ) );
     assertEquals( "Line Chart", lineChartTitle );
     // Check lines
-    WebElement lineChartCircle1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1]" ) );
-    WebElement lineChartCircle2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7]" ) );
-    WebElement lineChartCircle3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11]" ) );
+    WebElement lineChartCircle1 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1]" ) );
+    WebElement lineChartCircle2 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7]" ) );
+    WebElement lineChartCircle3 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11]" ) );
     Double lineChartCircle1Cy = Double.parseDouble( lineChartCircle1.getAttribute( "cy" ) );
     Double lineChartCircle2Cy = Double.parseDouble( lineChartCircle2.getAttribute( "cy" ) );
     Double lineChartCircle3Cy = Double.parseDouble( lineChartCircle3.getAttribute( "cy" ) );
@@ -209,19 +201,19 @@ public class CCCV2ShowCase {
     assertThat( "Current cy: " + lineChartCircle3Cy, lineChartCircle3Cy, greaterThan( Double.valueOf( 24 ) ) );
 
     // Mouse hover elements
-    WebElement lineChartCircle4 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][2]" ) );
-    Actions acts = new Actions( DRIVER );
+    WebElement lineChartCircle4 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][2]" ) );
+    Actions acts = new Actions( this.driver );
     acts.moveToElement( lineChartCircle4 );
     acts.perform();
-    String measuresLabel = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[1]/span" ) );
+    String measuresLabel = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[1]/span" ) );
     acts.perform();
-    String measuresValue = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[3]/span" ) );
+    String measuresValue = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[3]/span" ) );
     acts.perform();
-    String categoryLabel = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[1]/span" ) );
+    String categoryLabel = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[1]/span" ) );
     acts.perform();
-    String categoryValue = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[3]/span" ) );
+    String categoryValue = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[2]/td[3]/span" ) );
     acts.perform();
-    String valueLineValue = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[4]/td[3]/span" ) );
+    String valueLineValue = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[4]/td[3]/span" ) );
     assertEquals( "Measures", measuresLabel );
     assertEquals( "Quantity", measuresValue );
     assertEquals( "Category", categoryLabel );
@@ -229,8 +221,8 @@ public class CCCV2ShowCase {
     assertEquals( "7,959", valueLineValue );
 
     //To move the focus to another element, in order to remove the tooltip
-    Actions acts2 = new Actions( DRIVER );
-    acts2.moveToElement( ElementHelper.FindElement( DRIVER, By.id( "LineChartTitleRow" ) ) );
+    Actions acts2 = new Actions( this.driver );
+    acts2.moveToElement( this.elemHelper.FindElement( this.driver, By.id( "LineChartTitleRow" ) ) );
     acts2.click();
     acts2.perform();
   }
@@ -247,36 +239,31 @@ public class CCCV2ShowCase {
    */
   @Test( timeout = 90000 )
   public void tc03_ChartContent_DisplayedCorrect() {
-    LOG.info( "tc03_ChartContent_DisplayedCorrect" );
+    this.log.info( "tc03_ChartContent_DisplayedCorrect" );
 
     /*
       * ## Step 1 - Pie Chart
       */
-    String pieChartTitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "PieChartTitleRow" ) );
+    String pieChartTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "PieChartTitleRow" ) );
     assertEquals( "Pie Chart", pieChartTitle );
     // Check pies
-    WebElement pieChartCircle1 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][1]" ) );
-    WebElement pieChartCircle2 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ) );
-    WebElement pieChartCircle3 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]" ) );
+    WebElement pieChartCircle1 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][1]" ) );
+    WebElement pieChartCircle2 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ) );
+    WebElement pieChartCircle3 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]" ) );
     assertNotNull( pieChartCircle1 );
     assertNotNull( pieChartCircle2 );
     assertNotNull( pieChartCircle3 );
     // Interact with pie chart disabling two series
     // Series 2003
-    WebElement serie2003 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    WebElement serie2003 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='text']" ) );
     serie2003.click();
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][3]" ) );
     // Series 2004
-    WebElement serie2004 = ElementHelper.FindElement( DRIVER, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    WebElement serie2004 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']" ) );
     serie2004.click();
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ) );
     // Check value of the serie2005
-    String serie2005Value = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    String serie2005Value = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='PieChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']" ) );
     assertEquals( "1.98M", serie2005Value );
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CCCV2ShowCase.class.getSimpleName() );
   }
 }

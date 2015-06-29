@@ -59,6 +59,8 @@ public class TrafficComponent {
   private static WebDriver DRIVER;
   // Instance to be used on wait commands
   private static Wait<WebDriver> WAIT;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( MapComponentFullTest.class );
 
@@ -81,7 +83,6 @@ public class TrafficComponent {
    * Test Case Name:
    *    Load Page
    */
-  @Test( timeout = 60000 )
   public void tc0_LoadPage() {
     LOG.info( "tc0_LoadPage" );
 
@@ -90,7 +91,7 @@ public class TrafficComponent {
     DRIVER.get( PageUrl.TRAFFIC_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -113,7 +114,7 @@ public class TrafficComponent {
 
     // Validate the sample that we are testing is the one
     assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
-    assertEquals( "TrafficComponent", ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "TrafficComponent", this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -133,14 +134,14 @@ public class TrafficComponent {
      *  ## Step 1
      */
     // Render again the sample
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
@@ -166,7 +167,7 @@ public class TrafficComponent {
     /*
      *  ## Step 1
      */
-    WebElement elemTraffic = ElementHelper.FindElement( DRIVER, By.cssSelector( "div.img.trafficYellow" ) );
+    WebElement elemTraffic = this.elemHelper.FindElement( DRIVER, By.cssSelector( "div.img.trafficYellow" ) );
     assertNotNull( elemTraffic );
 
     /*
@@ -176,7 +177,7 @@ public class TrafficComponent {
     acts.moveToElement( elemTraffic, 5, 5 );
     acts.build().perform();
 
-    String text = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='ui-tooltip-content']" ) );
+    String text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='ui-tooltip-content']" ) );
     String expectedTextV1 = "Value: 1.43199389E8";
     String expectedTextV2 = "70000000";
     String expectedTextV3 = "150000000";

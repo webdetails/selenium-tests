@@ -3,8 +3,6 @@ package org.pentaho.ctools.cde.widgets;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -20,27 +18,23 @@ import org.pentaho.ctools.utils.ElementHelper;
  * NOTE - The test was created regarding issue CDF-308
  */
 public class AddParamTableComponent {
-  // Instance of the driver (browser emulator)
-  private WebDriver driver;
-  // Instance to be used on wait commands
-  private Wait<WebDriver> wait;
-  // The base url to be append the relative url in test
-  private String baseUrl;
+
+  //Instance of the driver (browser emulator)
+  private WebDriver driver = CToolsTestSuite.getDriver();
   // The name for the widget to be created
-  private String widgetName = "dummyWidgetTableComponent";
+  private final String widgetName = "dummyWidgetTableComponent";
   // The name for the parameter to be added
-  private String paramName = "paramT2";
+  private final String paramName = "paramT2";
   // The name of the parameter to be assigned to the param value
-  private String paramArgName = "argT2";
+  private final String paramArgName = "argT2";
+  // Instance to be used on wait commands
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
+  // The base url to be append the relative url in test
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
 
-  @Before
-  public void setUp() throws Exception {
-    this.driver = CToolsTestSuite.getDriver();
-    this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
-  }
-
-  @Test( timeout = 60000 )
+  @Test
   public void testCheckParametersAddingWidgetParameter() throws Exception {
     //Step 0 - Delete the widget
     WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
@@ -65,20 +59,20 @@ public class AddParamTableComponent {
     WebElement elementListedOthers = this.driver.findElement( By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/div" ) );
     elementListedOthers.findElement( By.xpath( "//a[@title='table Component']" ) ).click();
     //Click in parameters
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "table-cdfdd-components-properties" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "table-cdfdd-components-properties" ) );
     this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) ).click();
 
     //Step 4 - Add the pair arg & value (use the parameter of the widget as value)
     //Wait for the parameters Window
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/input[@class='StringListAddButton']" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/input[@class='StringListAddButton']" ) );
     Thread.sleep( 100 );
     //Click on Add (insert pair Arg & Value)
     this.driver.findElement( By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/input[@class='StringListAddButton']" ) ).click();
     //Click on '...' to add the parameter of the widget as a value.
     ////wait for the list of Args
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div[2]" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div[2]" ) );
     this.wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "//div[@id='popupbox']//div[@class='StringListValues']/input" ) ) );
     this.driver.findElement( By.xpath( "//div[@id='popupbox']//div[@class='StringListValues']/input" ) ).click();
     //Go to List parameters Values (in the widget) and add the parameter
@@ -89,17 +83,17 @@ public class AddParamTableComponent {
     assertNotNull( parameterElement );
     parameterElement.click();
     // Add the Arg
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "val_0" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.id( "popup_state0_buttonOk" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "arg_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "val_0" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "popup_state0_buttonOk" ) );
     this.driver.findElement( By.id( "arg_0" ) ).sendKeys( this.paramArgName );
     this.driver.findElement( By.id( "val_0" ) ).sendKeys( Keys.RETURN );
     this.driver.findElement( By.id( "popup_state0_buttonOk" ) ).click();
 
     //Step 5 - Save the widget
     this.wait.until( ExpectedConditions.invisibilityOfElementLocated( By.id( "popupbox" ) ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
     this.driver.findElement( By.xpath( "//div[@id='headerLinks']/div[2]/a" ) ).click();
 
     //Step 6 - Go bact to the widget and check if the parameters set previous are correct
@@ -115,17 +109,17 @@ public class AddParamTableComponent {
     //Expand the 'Table Components' (column 'Components')
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-components']" ) ) );
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='table-cdfdd-components-properties']" ) ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[3]/td/span" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[3]/td/span" ) );
     this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[3]/td/span" ) ).click();
     this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[4]/td" ) ).click();
     //Click in Parameters (column 'Properties')
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "table-cdfdd-components-properties" ) ) );
     this.driver.findElement( By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) ).click();
     //Wait for the parameters Window
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/input[@class='StringListAddButton']" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div" ) );
-    ElementHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div[2]" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/input[@class='StringListAddButton']" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='popupbox']/div[2]/div/div[2]/div/div/div/div/div/div[2]" ) );
 
     /*#######################################
       EXPECT RESULT:
@@ -135,10 +129,5 @@ public class AddParamTableComponent {
     String tempValueName = this.driver.findElement( By.xpath( "//input[@id='val_0']" ) ).getAttribute( "value" );
     assertEquals( tempArgName, this.paramArgName );
     assertEquals( tempValueName, "${p:" + this.paramName + "}" );
-  }
-
-  @After
-  public void tearDown() {
-    //To use after test case run.
   }
 }

@@ -26,11 +26,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -54,24 +51,19 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDA45 {
   // Instance of the driver (browser emulator)
-  private static WebDriver  DRIVER;
+  private WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String     BASE_URL;
+  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger     LOG                = LogManager.getLogger(CDA45.class);
+  private static Logger LOG = LogManager.getLogger( CDA45.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(DRIVER);
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info("setUp##" + CDA45.class.getSimpleName());
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -89,66 +81,60 @@ public class CDA45 {
    *    4. Click "orderDate:" input field and check info button's style property for "display: block;"
    *
    */
-  @Test(timeout = 120000)
-  public void tc01_CdaFileViewer_OutputInfo() {
-    LOG.info("tc01_CdaFileViewer_OutputInfo");
+  public void tc1_CdaFileViewer_OutputInfo() {
+    LOG.info( "t01_CdaFileViewer_OutputInfo" );
 
     /*
      * ## Step 1
      */
     //Open Sql-Jdbc Sample
-    DRIVER.get(BASE_URL + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda");
+    this.driver.get( this.baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda" );
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.id("dataAccessSelector"));
-    assertNotNull(element);
-    Select select = new Select(ElementHelper.FindElement(DRIVER, By.id("dataAccessSelector")));
-    select.selectByValue("1");
-    element = ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.xpath("//button[@id='button']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.xpath("//button[@id='cachethis']"));
-    assertNotNull(element);
-    element = ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.xpath("//button[@id='queryUrl']"));
-    assertNotNull(element);
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dataAccessSelector" ) );
+    assertNotNull( element );
+    Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
+    select.selectByValue( "1" );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='button']" ) );
+    assertNotNull( element );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='cachethis']" ) );
+    assertNotNull( element );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='queryUrl']" ) );
+    assertNotNull( element );
 
     //wait to render page
-    ElementHelper.WaitForElementInvisibility(DRIVER, By.xpath("//div[@class='blockUI blockOverlay']"));
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     /*
      * ## Step 2
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.id("outputIndexId"));
-    assertNotNull(element);
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "outputIndexId" ) );
+    assertNotNull( element );
     element.click();
-    ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.xpath("//div[@class='helpButton helpButtonShort']"));
-    String styleText = ElementHelper.FindElement(DRIVER, By.id("outputIndexId")).getAttribute("class");
-    assertEquals("cdaButton cdaButtonShort cdaButtonSelected", styleText);
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
+    String styleText = this.elemHelper.FindElement( this.driver, By.id( "outputIndexId" ) ).getAttribute( "class" );
+    assertEquals( "cdaButton cdaButtonShort cdaButtonSelected", styleText );
 
     /*
      * ## Step 3
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.id("status"));
-    assertNotNull(element);
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "status" ) );
+    assertNotNull( element );
     element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.xpath("//div[@class='helpButton']"));
-    assertNotNull(element);
-    String styleText1 = ElementHelper.FindElement(DRIVER, By.id("status")).getAttribute("class");
-    assertEquals("cdaButton cdaButtonSelected", styleText1);
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='helpButton']" ) );
+    assertNotNull( element );
+    String styleText1 = this.elemHelper.FindElement( this.driver, By.id( "status" ) ).getAttribute( "class" );
+    assertEquals( "cdaButton cdaButtonSelected", styleText1 );
 
     /*
      * ## Step 4
      */
-    element = ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.id("orderDate"));
-    assertNotNull(element);
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "orderDate" ) );
+    assertNotNull( element );
     element.click();
-    element = ElementHelper.WaitForElementPresenceAndVisible(DRIVER, By.xpath("//div[@id='parameterHolder']/div[2]/div[2]/div"));
-    assertNotNull(element);
-    String styleText2 = ElementHelper.FindElement(DRIVER, By.id("orderDate")).getAttribute("class");
-    assertEquals("cdaButton cdaButtonSelected", styleText2);
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info("tearDown##" + CDA45.class.getSimpleName());
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='parameterHolder']/div[2]/div[2]/div" ) );
+    assertNotNull( element );
+    String styleText2 = this.elemHelper.FindElement( this.driver, By.id( "orderDate" ) ).getAttribute( "class" );
+    assertEquals( "cdaButton cdaButtonSelected", styleText2 );
   }
 }

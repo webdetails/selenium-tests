@@ -25,7 +25,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -56,6 +55,8 @@ public class AjaxRequestReference {
   private static Wait<WebDriver> WAIT;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private static Logger LOG = LogManager.getLogger( AjaxRequestReference.class );
 
@@ -76,7 +77,7 @@ public class AjaxRequestReference {
     DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AajaxRequest.wcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -100,32 +101,27 @@ public class AjaxRequestReference {
     WAIT.until( ExpectedConditions.titleIs( "Ajax Request Reference" ) );
     assertEquals( "Ajax Request Reference", DRIVER.getTitle() );
     //Check title
-    String title = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
+    String title = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
     assertEquals( "Ajax Request Reference", title );
     //Check first paragh
     String expParag = "Ajax Request Component provides a way to build an Ajax request. Given an url, a response type and list of parameters it's possible to build an jQuery ajax call, which its result will be stored in the resultvar.";
-    String actParag = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/p" ) );
+    String actParag = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/p" ) );
     assertEquals( expParag, actParag );
     //Check subtitle
-    String subtitle = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/div" ) );
+    String subtitle = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/div" ) );
     assertEquals( "Component Parameters", subtitle );
     //Check parag 1
-    String parag1 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/p[2]" ) );
+    String parag1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/p[2]" ) );
     assertEquals( "The Component definition supports the following arguments:", parag1 );
     //Check subtitle2
-    String subtitle2 = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/div[2]" ) );
+    String subtitle2 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/div[2]" ) );
     assertEquals( "Default values", subtitle2 );
     //Check quote
-    String quote = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/blockquote/pre" ) );
+    String quote = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='DescriptionBody']/blockquote/pre" ) );
     assertEquals( "defaults: { ajaxRequestType: json, asyncCall: true }", quote );
     //Check result
-    ElementHelper.WaitForTextPresence( DRIVER, By.id( "column1" ), "{\"queryInfo\":{\"totalRows\":\"19\"},\"resultset\":[[\"Car\",\"Red\",10],[\"Car\",\"Blue\",20],[\"Car\",\"Green\",30],[\"Car\",\"Yellow\",5],[\"Car\",\"Black\",25],[\"Car\",\"White\",7],[\"Bike\",\"Red\",20],[\"Bike\",\"Blue\",20],[\"Bike\",\"Green\",40],[\"Bike\",\"Yellow\",80],[\"Bike\",\"Black\",1],[\"Bike\",\"White\",23],[\"Ship\",\"Red\",2],[\"Ship\",\"Blue\",7],[\"Plane\",\"Red\",5],[\"Plane\",\"Blue\",4],[\"Train\",\"Red\",50],[\"Train\",\"Blue\",50],[\"Train\",\"Green\",7]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"series\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"category\"},{\"colIndex\":2,\"colType\":\"Integer\",\"colName\":\"value\"}]}" );
-    String result = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "column1" ) );
+    this.elemHelper.WaitForTextPresence( DRIVER, By.id( "column1" ), "{\"queryInfo\":{\"totalRows\":\"19\"},\"resultset\":[[\"Car\",\"Red\",10],[\"Car\",\"Blue\",20],[\"Car\",\"Green\",30],[\"Car\",\"Yellow\",5],[\"Car\",\"Black\",25],[\"Car\",\"White\",7],[\"Bike\",\"Red\",20],[\"Bike\",\"Blue\",20],[\"Bike\",\"Green\",40],[\"Bike\",\"Yellow\",80],[\"Bike\",\"Black\",1],[\"Bike\",\"White\",23],[\"Ship\",\"Red\",2],[\"Ship\",\"Blue\",7],[\"Plane\",\"Red\",5],[\"Plane\",\"Blue\",4],[\"Train\",\"Red\",50],[\"Train\",\"Blue\",50],[\"Train\",\"Green\",7]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"series\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"category\"},{\"colIndex\":2,\"colType\":\"Integer\",\"colName\":\"value\"}]}" );
+    String result = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.id( "column1" ) );
     assertEquals( "{\"queryInfo\":{\"totalRows\":\"19\"},\"resultset\":[[\"Car\",\"Red\",10],[\"Car\",\"Blue\",20],[\"Car\",\"Green\",30],[\"Car\",\"Yellow\",5],[\"Car\",\"Black\",25],[\"Car\",\"White\",7],[\"Bike\",\"Red\",20],[\"Bike\",\"Blue\",20],[\"Bike\",\"Green\",40],[\"Bike\",\"Yellow\",80],[\"Bike\",\"Black\",1],[\"Bike\",\"White\",23],[\"Ship\",\"Red\",2],[\"Ship\",\"Blue\",7],[\"Plane\",\"Red\",5],[\"Plane\",\"Blue\",4],[\"Train\",\"Red\",50],[\"Train\",\"Blue\",50],[\"Train\",\"Green\",7]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"series\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"category\"},{\"colIndex\":2,\"colType\":\"Integer\",\"colName\":\"value\"}]}", result );
-  }
-
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + AjaxRequestReference.class.getSimpleName() );
   }
 }

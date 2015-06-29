@@ -24,8 +24,6 @@ package org.pentaho.ctools.cdf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -50,44 +48,36 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class TextInputComponent {
 
-  //Instance of the driver (browser emulator)
-  private static WebDriver driver;
+  //Instance of the this.driver (browser emulator)
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private static Wait<WebDriver> wait;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private static String baseUrl;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  //Access to wrapper for webthis.driver
+  private final ElementHelper elemHelper = new ElementHelper();
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( driver );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
-   * Shall initialized the test before run each test case.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  @BeforeClass
-  public static void setUp() {
-    driver = CToolsTestSuite.getDriver();
-    wait = CToolsTestSuite.getWait();
-    baseUrl = CToolsTestSuite.getBaseUrl();
-
-    // Go to sample
-    init();
-  }
-
-  /**
-   * Go to the TextInputComponent web page.
-   */
-  public static void init() {
-    // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/TextInputComponent
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A37-TextInputComponent%3Atext_input_component.xcdf/generatedContent" );
+  @Test
+  public void tc0_OpenSamplePage_Display() {
+    // The URL for the TextInputComponent under CDF samples
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TextInputComponent
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A37-TextInputComponent%3Atext_input_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
-   * ############################### Test Case 2 ###############################
+   * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
    *    Reload Sample
@@ -99,13 +89,13 @@ public class TextInputComponent {
   @Test( timeout = 60000 )
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "TextInputComponent", ElementHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "TextInputComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -122,18 +112,18 @@ public class TextInputComponent {
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    ElementHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    ElementHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue( ElementHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -153,13 +143,13 @@ public class TextInputComponent {
   public void tc3_InputSmallPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World!";
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).clear();
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( Keys.ENTER );
 
     // ## Step 2
-    wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = driver.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
@@ -187,18 +177,18 @@ public class TextInputComponent {
     strInputString += strInputString;
     strInputString += strInputString;
     strInputString += strInputString;
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).clear();
     //After clean text, we need to trait the pop-up
-    wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = driver.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     alert.accept();
 
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( Keys.ENTER );
 
     // ## Step 2
-    wait.until( ExpectedConditions.alertIsPresent() );
-    alert = driver.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
@@ -223,27 +213,22 @@ public class TextInputComponent {
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).clear();
     //After clean text, we need to trait the pop-up
-    wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = driver.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     alert.accept();
 
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
-    ElementHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( Keys.ENTER );
 
     // ## Step 2
-    wait.until( ExpectedConditions.alertIsPresent() );
-    alert = driver.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
 
     assertEquals( expectedCnfText, confirmationMsg );
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    //To use when class run all test cases.
   }
 }

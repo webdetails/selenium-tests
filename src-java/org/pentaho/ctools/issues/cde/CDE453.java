@@ -58,16 +58,18 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CDE453 {
 
   // The widget name that we what to create
-  private static final String WIDGET_NAME        = "CDE453";
+  private static final String WIDGET_NAME = "CDE453";
   // Indicator to check if any assert fails in the test case
-  private static boolean      noAssertFails      = false;
+  private static boolean noAssertFails = false;
   // Instance of the driver (browser emulator)
-  private static WebDriver    DRIVER;
+  private static WebDriver DRIVER;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger       LOG                = LogManager.getLogger( CDE453.class );
+  private static Logger LOG = LogManager.getLogger( CDE453.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule   screenshotTestRule = new ScreenshotTestRule( DRIVER );
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
 
   @BeforeClass
   public static void setUpClass() {
@@ -104,18 +106,18 @@ public class CDE453 {
      * ## Step 2
      */
     //Go to Components Panel
-    ElementHelper.Click( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
     //Expand Widgets option
-    ElementHelper.ClickJS( DRIVER, By.xpath( "//h3[@id='ui-accordion-cdfdd-components-palletePallete-header-8']/span" ) );
+    this.elemHelper.ClickJS( DRIVER, By.xpath( "//h3[@id='ui-accordion-cdfdd-components-palletePallete-header-8']/span" ) );
     //Check the widget created is visible in the list of Widgets
-    WebElement widgetCDE453 = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.linkText( WIDGET_NAME ) );
+    WebElement widgetCDE453 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.linkText( WIDGET_NAME ) );
     assertNotNull( widgetCDE453 );
-    ElementHelper.Click( DRIVER, By.linkText( WIDGET_NAME ) );
+    this.elemHelper.Click( DRIVER, By.linkText( WIDGET_NAME ) );
     //Check the widget was added to the list of components
-    String groupName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[@id='WIDGETS']/td[2]" ) );
+    String groupName = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[@id='WIDGETS']/td[2]" ) );
     assertEquals( "Widgets", groupName );
     // Check the group added is Widgets
-    String displayWidgetName = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[2]/td" ) );
+    String displayWidgetName = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[2]/td" ) );
     String expectedWidgetName = WIDGET_NAME + " Widget";
     assertEquals( expectedWidgetName, displayWidgetName );
 
@@ -130,7 +132,7 @@ public class CDE453 {
   public static void tearDownClass() {
     LOG.info( "tearDown##" + CDE453.class.getSimpleName() );
 
-    if (!noAssertFails) {
+    if ( !noAssertFails ) {
       WidgetUtils.RemoveWidgetByName( DRIVER, WIDGET_NAME );
     }
   }

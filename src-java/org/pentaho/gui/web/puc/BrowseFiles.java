@@ -41,7 +41,9 @@ import org.pentaho.ctools.utils.PUCSettings;
 public class BrowseFiles {
 
   // The driver
-  private WebDriver     DRIVER;
+  private WebDriver DRIVER;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Logging instance
   private static Logger LOG = LogManager.getLogger( BrowseFiles.class );
 
@@ -59,35 +61,35 @@ public class BrowseFiles {
     LOG.info( "Enter: GoToBrowseFiles" );
 
     this.DRIVER.get( CToolsTestSuite.getBaseUrl() );
-    ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     this.DRIVER.switchTo().frame( "home.perspective" );
-    ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@class='well sidebar']" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@class='well sidebar']" ) );
 
     LOG.info( "Enter: Click Browse Files Button" );
     // Click in 'Browse Files'
-    ElementHelper.Click( this.DRIVER, By.xpath( "//div[@class='well sidebar']/button" ) );
+    this.elemHelper.Click( this.DRIVER, By.xpath( "//div[@class='well sidebar']/button" ) );
     LOG.info( "Exit: Click Browse Files Button" );
 
     LOG.info( "Enter: Assert browser perspective shown" );
     // Focus Browser Perspective and refresh repository
     this.DRIVER.switchTo().defaultContent();
-    assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "applicationShell" ) ) );
-    assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//iframe[@id='browser.perspective']" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "applicationShell" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//iframe[@id='browser.perspective']" ) ) );
     this.DRIVER.switchTo().frame( "browser.perspective" );
 
-    assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "fileBrowser" ) ) );
-    ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-    ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "fileBrowser" ) ) );
+    this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
 
-    ElementHelper.Click( this.DRIVER, By.id( "refreshBrowserIcon" ) );
-    ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-    ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+    this.elemHelper.Click( this.DRIVER, By.id( "refreshBrowserIcon" ) );
+    this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
 
     // Assert Panels
-    assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFolders']" ) ) );
-    assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']" ) ) );
-    assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFolders']" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']" ) ) );
     LOG.info( "Exit: Assert browser perspective shown" );
     LOG.info( "Exit: GoToBrowseFiles" );
   }
@@ -104,30 +106,30 @@ public class BrowseFiles {
     LOG.info( "Enter: EmptyTrash" );
     LOG.info( "Enter: Checking if Trash is empty" );
     // Select Trash folder
-    assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@path='.trash']/div/div[@class='title']" ) ) );
-    ElementHelper.Click( this.DRIVER, By.xpath( "//div[@path='.trash']/div/div[@class='title']" ) );
-    ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-    ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@path='.trash']/div/div[@class='title']" ) ) );
+    this.elemHelper.Click( this.DRIVER, By.xpath( "//div[@path='.trash']/div/div[@class='title']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
 
     // If Trash not empty, empty it
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[@class='emptyFolder']" ), 3 );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[@class='emptyFolder']" ), 3 );
     LOG.info( "Exit: Checking if Trash is empty" );
-    if (element == null) {
+    if ( element == null ) {
       LOG.info( "Enter: Emptying Trash" );
-      assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']//button[@id='purge']" ) ) );
-      ElementHelper.Click( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']//button[@id='purge']" ) );
+      assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']//button[@id='purge']" ) ) );
+      this.elemHelper.Click( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']//button[@id='purge']" ) );
       this.DRIVER.switchTo().defaultContent();
-      assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@class='dialogTopCenterInner']" ) ) );
-      String text = ElementHelper.WaitForTextPresence( this.DRIVER, By.xpath( "//div[@class='dialogTopCenterInner']/div" ), "Empty Trash" );
+      assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@class='dialogTopCenterInner']" ) ) );
+      String text = this.elemHelper.WaitForTextPresence( this.DRIVER, By.xpath( "//div[@class='dialogTopCenterInner']/div" ), "Empty Trash" );
       assertEquals( "Empty Trash", text );
-      assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "okButton" ) ) );
-      ElementHelper.Click( this.DRIVER, By.id( "okButton" ) );
+      assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "okButton" ) ) );
+      this.elemHelper.Click( this.DRIVER, By.id( "okButton" ) );
       this.DRIVER.switchTo().frame( "browser.perspective" );
-      ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-      ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-      ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
-      assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div" ) ) );
-      text = ElementHelper.WaitForTextPresence( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div/span" ), "There are no files in this folder.", 60 );
+      this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+      this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+      assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div" ) ) );
+      text = this.elemHelper.WaitForTextPresence( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div/span" ), "There are no files in this folder.", 60 );
       assertEquals( "There are no files in this folder.", text );
       LOG.info( "Exit: Emptying Trash" );
     }
@@ -162,15 +164,15 @@ public class BrowseFiles {
     LOG.info( "Enter: Expanding Select File [" + fileToSelect + "]" );
 
     folderSelected = SelectFolder( pathWithOnlyFolders );
-    if (folderSelected) {
+    if ( folderSelected ) {
       LOG.info( "Enter: Selecting File" );
       String selector = "//div[@id='fileBrowserFiles']/div[2]/div[@path='" + path + "']";
       String selectorExpand = "//div[@id='fileBrowserFiles']/div[2]/div[@path='" + path + "']/div[2]";
-      WebElement selectFile = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( selectorExpand ), 3 );
-      if (selectFile != null) {
-        ElementHelper.Click( this.DRIVER, By.xpath( selectorExpand ) );
-        ElementHelper.WaitForAttributeValue( this.DRIVER, By.xpath( selector ), "class", "file selected" );
-        String text = ElementHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
+      WebElement selectFile = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( selectorExpand ), 3 );
+      if ( selectFile != null ) {
+        this.elemHelper.Click( this.DRIVER, By.xpath( selectorExpand ) );
+        this.elemHelper.WaitForAttributeValue( this.DRIVER, By.xpath( selector ), "class", "file selected" );
+        String text = this.elemHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
         assertEquals( "file selected", text );
 
         selected = true;
@@ -207,18 +209,18 @@ public class BrowseFiles {
     String currentFolder = "";
     LOG.info( "Enter: Expanding Path [" + path + "]" );
 
-    for (int i = 1; i < folders.length; i++) {
+    for ( int i = 1; i < folders.length; i++ ) {
       currentFolder = currentFolder + "/" + folders[i];
       LOG.info( "Expanding Path [" + currentFolder + "]" );
 
-      if (i == folders.length - 1) {
+      if ( i == folders.length - 1 ) {
         String selector = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']";
         String selectorTitle = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']/div/div[3]";
-        WebElement selectFolder = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( selectorTitle ), 2 );
-        if (selectFolder != null) {
-          ElementHelper.Click( this.DRIVER, By.xpath( selectorTitle ) );
-          ElementHelper.WaitForAttributeValue( this.DRIVER, By.xpath( selector ), "class", "selected" );
-          String text = ElementHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
+        WebElement selectFolder = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( selectorTitle ), 2 );
+        if ( selectFolder != null ) {
+          this.elemHelper.Click( this.DRIVER, By.xpath( selectorTitle ) );
+          this.elemHelper.WaitForAttributeValue( this.DRIVER, By.xpath( selector ), "class", "selected" );
+          String text = this.elemHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
           assertTrue( text.contains( "selected" ) );
 
           selected = true;
@@ -228,17 +230,17 @@ public class BrowseFiles {
       } else {
         // Check if folder is opened
         String selector = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']";
-        WebElement folderExist = ElementHelper.WaitForElementPresence( this.DRIVER, By.xpath( selector ), 1 );
-        if (folderExist != null) {
-          String isFolderOpen = ElementHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
-          if (!isFolderOpen.contains( "open" )) {
+        WebElement folderExist = this.elemHelper.WaitForElementPresence( this.DRIVER, By.xpath( selector ), 1 );
+        if ( folderExist != null ) {
+          String isFolderOpen = this.elemHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
+          if ( !isFolderOpen.contains( "open" ) ) {
             // If folder exists select it
             String selectorExpand = "//div[@id='fileBrowserFolders']/div[2]//div[@path='" + currentFolder + "']/div/div[@class='expandCollapse']";
-            WebElement folderToExpand = ElementHelper.WaitForElementPresence( this.DRIVER, By.xpath( selectorExpand ) );
-            if (folderToExpand != null) {
-              ElementHelper.Click( this.DRIVER, By.xpath( selectorExpand ) );
-              ElementHelper.WaitForAttributeValue( this.DRIVER, By.xpath( selector ), "class", "open" );
-              String checkFolderOpen = ElementHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
+            WebElement folderToExpand = this.elemHelper.WaitForElementPresence( this.DRIVER, By.xpath( selectorExpand ) );
+            if ( folderToExpand != null ) {
+              this.elemHelper.Click( this.DRIVER, By.xpath( selectorExpand ) );
+              this.elemHelper.WaitForAttributeValue( this.DRIVER, By.xpath( selector ), "class", "open" );
+              String checkFolderOpen = this.elemHelper.GetAttribute( this.DRIVER, By.xpath( selector ), "class" );
               assertTrue( checkFolderOpen.contains( "open" ) );
 
             } else {
@@ -266,44 +268,44 @@ public class BrowseFiles {
    *
    */
   public void CheckShowHiddenFiles() {
-    if (!PUCSettings.SHOWHIDDENFILES) {
+    if ( !PUCSettings.SHOWHIDDENFILES ) {
       // This is being done because this method is called from within browse files and view menu is on PUC
       this.DRIVER.switchTo().defaultContent();
 
-      WebElement element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
+      WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
       assertNotNull( element );
       element.click();
-      element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
       assertNotNull( element );
       String text = element.getAttribute( "class" );
-      if (text.equals( "gwt-MenuItem-checkbox-unchecked" )) {
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
+      if ( text.equals( "gwt-MenuItem-checkbox-unchecked" ) ) {
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
         element.click();
         // wait for visibility of waiting pop-up
-        ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+        this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
-        ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-        ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+        this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+        this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
 
-        ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "filemenu" ) );
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
+        this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "filemenu" ) );
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
         assertNotNull( element );
         element.click();
 
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
         assertNotNull( element );
         text = element.getAttribute( "class" );
         assertEquals( "gwt-MenuItem-checkbox-checked", text );
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
         assertNotNull( element );
         element.click();
       } else {
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
         element.click();
       }
 
       // back to browse files
-      assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//iframe[@id='browser.perspective']" ) ) );
+      assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//iframe[@id='browser.perspective']" ) ) );
       this.DRIVER.switchTo().frame( "browser.perspective" );
 
       PUCSettings.SHOWHIDDENFILES = true;
@@ -317,43 +319,43 @@ public class BrowseFiles {
    *
    */
   public void UncheckShowHiddenFiles() {
-    if (!PUCSettings.SHOWHIDDENFILES) {
+    if ( !PUCSettings.SHOWHIDDENFILES ) {
       // This is being done because this method is called from within browse files and view menu is on PUC
       this.DRIVER.switchTo().defaultContent();
 
-      WebElement element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
+      WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
       assertNotNull( element );
       element.click();
-      element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
       assertNotNull( element );
       String text = element.getAttribute( "class" );
-      if (text.equals( "gwt-MenuItem-checkbox-checked" )) {
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
+      if ( text.equals( "gwt-MenuItem-checkbox-checked" ) ) {
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
         element.click();
         // wait for visibility of waiting pop-up
-        ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+        this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
-        ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-        ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+        this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+        this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
 
-        ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "filemenu" ) );
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
+        this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "filemenu" ) );
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
         assertNotNull( element );
         element.click();
 
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//td[@id='showHiddenFilesMenuItem']" ) );
         assertNotNull( element );
         text = element.getAttribute( "class" );
         assertEquals( "gwt-MenuItem-checkbox-unchecked", text );
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
         assertNotNull( element );
         element.click();
       } else {
-        element = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
+        element = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "viewmenu" ) );
         element.click();
       }
       // back to browse files
-      assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//iframe[@id='browser.perspective']" ) ) );
+      assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//iframe[@id='browser.perspective']" ) ) );
       this.DRIVER.switchTo().frame( "browser.perspective" );
 
       PUCSettings.SHOWHIDDENFILES = false;
@@ -374,20 +376,20 @@ public class BrowseFiles {
     boolean fileDelete = false;
 
     // Check if the file exist
-    if (SelectFile( path )) {
-      ElementHelper.Click( this.DRIVER, By.id( "deleteButton" ) );
+    if ( SelectFile( path ) ) {
+      this.elemHelper.Click( this.DRIVER, By.id( "deleteButton" ) );
 
       this.DRIVER.switchTo().defaultContent();
-      ElementHelper.Click( this.DRIVER, By.id( "okButton" ) );
+      this.elemHelper.Click( this.DRIVER, By.id( "okButton" ) );
       // wait for invisibility of waiting pop-up
-      ElementHelper.WaitForElementPresence( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-      ElementHelper.WaitForElementNotPresent( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      this.elemHelper.WaitForElementPresence( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      this.elemHelper.WaitForElementNotPresent( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       // Wait for loading views Folders and Files
-      ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-      ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+      this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+      this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
 
       this.DRIVER.switchTo().frame( "browser.perspective" );
-      fileDelete = ElementHelper.WaitForElementNotPresent( this.DRIVER, By.cssSelector( "div.file[path='" + path + "']" ) );
+      fileDelete = this.elemHelper.WaitForElementNotPresent( this.DRIVER, By.cssSelector( "div.file[path='" + path + "']" ) );
     } else {
       fileDelete = true; // since it does not exist
       LOG.warn( "The file to delete is not found" );
@@ -407,13 +409,13 @@ public class BrowseFiles {
    * @param path
    */
   public void EmptyFolder( String path ) {
-    if (SelectFolder( path )) {
-      WebElement listFiles = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]" ) );
+    if ( SelectFolder( path ) ) {
+      WebElement listFiles = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]" ) );
       List<WebElement> AllFolderFiles = listFiles.findElements( By.xpath( "//div[@class='title']" ) );
 
       // Check if the widget named exist
-      if (AllFolderFiles != null) {
-        if (AllFolderFiles.size() > 0) {
+      if ( AllFolderFiles != null ) {
+        if ( AllFolderFiles.size() > 0 ) {
           WebElement[] arrayAllFolderFiles = new WebElement[AllFolderFiles.size()];
           AllFolderFiles.toArray( arrayAllFolderFiles );
 
@@ -424,25 +426,25 @@ public class BrowseFiles {
           // To do that we select each file (using the CONTROL key) and delete them.
           Actions action = new Actions( this.DRIVER );
           action.keyDown( Keys.CONTROL );
-          for (WebElement arrayAllFolderFile: arrayAllFolderFiles) {
+          for ( WebElement arrayAllFolderFile : arrayAllFolderFiles ) {
             action.click( arrayAllFolderFile );
           }
           action.keyUp( Keys.CONTROL );
           action.build().perform();
 
           // Here we still in the iframe
-          assertNotNull( ElementHelper.WaitForElementVisibility( this.DRIVER, By.id( "deleteButton" ) ) );
-          ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "deleteButton" ) ).click();
+          assertNotNull( this.elemHelper.WaitForElementVisibility( this.DRIVER, By.id( "deleteButton" ) ) );
+          this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "deleteButton" ) ).click();
           // Go back to root html
           this.DRIVER.switchTo().defaultContent();
-          assertEquals( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.cssSelector( "div.gwt-HTML" ) ).getText(), "Are you sure you want to move all selected items to the trash?" );
-          ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "okButton" ) ).click();
+          assertEquals( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.cssSelector( "div.gwt-HTML" ) ).getText(), "Are you sure you want to move all selected items to the trash?" );
+          this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "okButton" ) ).click();
 
           // wait for visibility of waiting pop-up
-          ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+          this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
-          ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-          ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+          this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+          this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
 
         }
       }
@@ -466,17 +468,17 @@ public class BrowseFiles {
    */
   public void DeleteMultipleFilesByName( String path, String name ) {
     LOG.debug( "DeleteMultipleFilesByName::Enter" );
-    if (SelectFolder( path )) {
+    if ( SelectFolder( path ) ) {
       LOG.debug( "Deleting [" + path + "] with name [" + name + "]" );
 
-      WebElement elemWidgetFile = ElementHelper.WaitForElementPresence( this.DRIVER, By.cssSelector( "div[title='" + name + ".wcdf']" ), 1 );
-      if (elemWidgetFile != null) {
-        WebElement listFiles = ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]" ) );
+      WebElement elemWidgetFile = this.elemHelper.WaitForElementPresence( this.DRIVER, By.cssSelector( "div[title='" + name + ".wcdf']" ), 1 );
+      if ( elemWidgetFile != null ) {
+        WebElement listFiles = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]" ) );
         List<WebElement> theNamedFiles = listFiles.findElements( By.xpath( "//div[@class='title' and contains(text(),'" + name + "')]" ) );
 
         // Check if the widget named exist
-        if (theNamedFiles != null) {
-          if (theNamedFiles.size() > 0) {
+        if ( theNamedFiles != null ) {
+          if ( theNamedFiles.size() > 0 ) {
             WebElement[] arraytheNamedFiles = new WebElement[theNamedFiles.size()];
             theNamedFiles.toArray( arraytheNamedFiles );
 
@@ -487,39 +489,39 @@ public class BrowseFiles {
             // To do that we select each file (using the CONTROL key) and delete them.
             Actions action = new Actions( this.DRIVER );
             action.keyDown( Keys.CONTROL );
-            for (WebElement arraytheNamedFile: arraytheNamedFiles) {
+            for ( WebElement arraytheNamedFile : arraytheNamedFiles ) {
               action.click( arraytheNamedFile );
             }
             action.keyUp( Keys.CONTROL );
             action.build().perform();
 
             // Here we still in the iframe
-            assertNotNull( ElementHelper.WaitForElementVisibility( this.DRIVER, By.id( "deleteButton" ) ) );
-            ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "deleteButton" ) ).click();
+            assertNotNull( this.elemHelper.WaitForElementVisibility( this.DRIVER, By.id( "deleteButton" ) ) );
+            this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "deleteButton" ) ).click();
             // Go back to root html
             this.DRIVER.switchTo().defaultContent();
-            assertEquals( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.cssSelector( "div.gwt-HTML" ) ).getText(), "Are you sure you want to move all selected items to the trash?" );
-            ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "okButton" ) ).click();
+            assertEquals( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.cssSelector( "div.gwt-HTML" ) ).getText(), "Are you sure you want to move all selected items to the trash?" );
+            this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "okButton" ) ).click();
 
             // wait for visibility of waiting pop-up
-            ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+            this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
-            assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "applicationShell" ) ) );
-            assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//iframe[@id='browser.perspective']" ) ) );
+            assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "applicationShell" ) ) );
+            assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//iframe[@id='browser.perspective']" ) ) );
             this.DRIVER.switchTo().frame( "browser.perspective" );
 
-            assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "fileBrowser" ) ) );
-            ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-            ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+            assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.id( "fileBrowser" ) ) );
+            this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+            this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
 
-            ElementHelper.Click( this.DRIVER, By.id( "refreshBrowserIcon" ) );
-            ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
-            ElementHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
+            this.elemHelper.Click( this.DRIVER, By.id( "refreshBrowserIcon" ) );
+            this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
+            this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
 
             // Assert Panels
-            assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFolders']" ) ) );
-            assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']" ) ) );
-            assertNotNull( ElementHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']" ) ) );
+            assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFolders']" ) ) );
+            assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']" ) ) );
+            assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserButtons']" ) ) );
             LOG.info( "Exit: Assert browser perspective shown" );
           } else {
             LOG.debug( "No file exist!" );

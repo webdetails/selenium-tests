@@ -60,6 +60,8 @@ public class CDA55 {
   private static WebDriver DRIVER;
   // The base url to be append the relative url in test
   private static String BASE_URL;
+  //Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private static Logger LOG = LogManager.getLogger( CDA55.class );
   // Getting screenshot when test fails
@@ -97,37 +99,37 @@ public class CDA55 {
     //Go to User Console
     DRIVER.get( BASE_URL + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-55/sample-kettle-ParamArray.cda" );
 
-    WebElement element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "dataAccessSelector" ) );
     assertNotNull( element );
-    Select select = new Select( ElementHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( DRIVER, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Sample query on SteelWheelsSales" );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='button']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( element );
-    element = ElementHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( element );
 
     /*
      * ## Step 2
      */
     //wait to render page
-    ElementHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check the presented contains
-    WebElement elemCountries = ElementHelper.FindElement( DRIVER, By.id( "countries" ) );
+    WebElement elemCountries = this.elemHelper.FindElement( DRIVER, By.id( "countries" ) );
     assertEquals( "France;USA", elemCountries.getAttribute( "value" ) );
-    WebElement elemCostumers = ElementHelper.FindElement( DRIVER, By.id( "Costumers" ) );
+    WebElement elemCostumers = this.elemHelper.FindElement( DRIVER, By.id( "Costumers" ) );
     assertEquals( "103;112", elemCostumers.getAttribute( "value" ) );
     //Check we have two elements and no more than that
-    String textPaging = ElementHelper.WaitForElementPresentGetText( DRIVER, By.id( "contents_info" ) );
+    String textPaging = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.id( "contents_info" ) );
     assertEquals( "View 1 to 2 of 2 elements", textPaging );
     //Check text on table
-    String columnOneRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
-    String columnTwoRowOne = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    String columnOneRowOne = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    String columnTwoRowOne = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
     assertEquals( "103", columnOneRowOne );
     assertEquals( "Atelier graphique", columnTwoRowOne );
-    String columnOneRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
-    String columnTwoRowTwo = ElementHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
+    String columnOneRowTwo = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td" ) );
+    String columnTwoRowTwo = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[2]" ) );
     assertEquals( "112", columnOneRowTwo );
     assertEquals( "Signal Gift Stores", columnTwoRowTwo );
 
