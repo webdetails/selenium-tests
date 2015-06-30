@@ -60,7 +60,7 @@ public class CDF406 {
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDF406.class );
+  private final Logger log = LogManager.getLogger( CDF406.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -80,7 +80,7 @@ public class CDF406 {
    */
   @Test( timeout = 120000 )
   public void tc01_SunburstComponent_RenderedCorrectly() {
-    LOG.info( "tc01_SunburstComponent_RenderedCorrectly" );
+    this.log.info( "tc01_SunburstComponent_RenderedCorrectly" );
 
     /*
      * ## Step 1

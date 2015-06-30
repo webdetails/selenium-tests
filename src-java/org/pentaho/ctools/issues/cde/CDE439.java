@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -55,25 +53,17 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE439 {
-
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE439.class );
+  private final Logger log = LogManager.getLogger( CDE439.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE439.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -92,28 +82,28 @@ public class CDE439 {
    */
   @Test( timeout = 120000 )
   public void tc01_CDEDashboard_DuplicateComponentWorks() {
-    LOG.info( "tc01_CDEDashboard_DuplicateComponentWorks" );
+    this.log.info( "tc01_CDEDashboard_DuplicateComponentWorks" );
 
     /*
      * ## Step 1
      */
     //Open CGG Component sample
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ADuplicateComponent%3AduplicateComponent.wcdf/generatedContent" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ADuplicateComponent%3AduplicateComponent.wcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Get Title of sample
-    String title = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='content']/div/div[2]/div" ) );
+    String title = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='content']/div/div[2]/div" ) );
     assertEquals( "Duplicate Component sample", title );
 
     //Assert presence of elements
-    WebElement userLabel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div/div" ) );
-    WebElement userText = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div/div[2]/input" ) );
-    WebElement userButton = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div/div[3]/button" ) );
-    WebElement passLabel = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div[2]/div" ) );
-    WebElement passText = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div[2]/div[2]/input" ) );
-    WebElement passButton = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML']/div/div/div/div[2]/div[3]/button" ) );
+    WebElement userLabel = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML']/div/div/div/div/div" ) );
+    WebElement userText = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML']/div/div/div/div/div[2]/input" ) );
+    WebElement userButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML']/div/div/div/div/div[3]/button" ) );
+    WebElement passLabel = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML']/div/div/div/div[2]/div" ) );
+    WebElement passText = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML']/div/div/div/div[2]/div[2]/input" ) );
+    WebElement passButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML']/div/div/div/div[2]/div[3]/button" ) );
     assertNotNull( userLabel );
     assertNotNull( userText );
     assertNotNull( userButton );
@@ -125,17 +115,17 @@ public class CDE439 {
      * ## Step 2
      */
     //Duplicate elements to Target HTML (default)
-    WebElement firstDuplicate = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dup1Col']/a" ) );
+    WebElement firstDuplicate = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='dup1Col']/a" ) );
     assertNotNull( firstDuplicate );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='dup1Col']/a" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='dup1Col']/a" ) );
 
     //Assert presence of elements
-    WebElement userLabel1 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div/div" ) );
-    WebElement userText1 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div/div[2]/input" ) );
-    WebElement userButton1 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div/div[3]/button" ) );
-    WebElement passLabel1 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div[2]/div" ) );
-    WebElement passText1 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div[2]/div[2]/input" ) );
-    WebElement passButton1 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div[2]/div[3]/button" ) );
+    WebElement userLabel1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div/div" ) );
+    WebElement userText1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div/div[2]/input" ) );
+    WebElement userButton1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div/div[3]/button" ) );
+    WebElement passLabel1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div[2]/div" ) );
+    WebElement passText1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div[2]/div[2]/input" ) );
+    WebElement passButton1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='targetHTML_1']/div/div/div/div[2]/div[3]/button" ) );
     assertNotNull( userLabel1 );
     assertNotNull( userText1 );
     assertNotNull( userButton1 );
@@ -147,17 +137,17 @@ public class CDE439 {
      * ## Step 3
      */
     //Duplicate elements to Target HTML (default)
-    WebElement secondDuplicate = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dup1Col']/a" ) );
+    WebElement secondDuplicate = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='dup1Col']/a" ) );
     assertNotNull( secondDuplicate );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='dup2Col']/a" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='dup2Col']/a" ) );
 
     //Assert presence of elements
-    WebElement userLabel2 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div/div" ) );
-    WebElement userText2 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div/div[2]/input" ) );
-    WebElement userButton2 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div/div[3]/button" ) );
-    WebElement passLabel2 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div[2]/div" ) );
-    WebElement passText2 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div[2]/div[2]/input" ) );
-    WebElement passButton2 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div[2]/div[3]/button" ) );
+    WebElement userLabel2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div/div" ) );
+    WebElement userText2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div/div[2]/input" ) );
+    WebElement userButton2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div/div[3]/button" ) );
+    WebElement passLabel2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div[2]/div" ) );
+    WebElement passText2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div[2]/div[2]/input" ) );
+    WebElement passButton2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='dupContainer']/div[@id='targetHTML_2']/div/div/div/div[2]/div[3]/button" ) );
     assertNotNull( userLabel2 );
     assertNotNull( userText2 );
     assertNotNull( userButton2 );
@@ -167,8 +157,4 @@ public class CDE439 {
 
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE439.class.getSimpleName() );
-  }
 }

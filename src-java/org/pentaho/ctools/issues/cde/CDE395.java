@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,6 +35,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -56,23 +55,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE395 {
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE395.class );
+  private final Logger log = LogManager.getLogger( CDE395.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE395.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -90,38 +80,34 @@ public class CDE395 {
    */
   @Test( timeout = 120000 )
   public void tc01_NewCdeDashboard_DefaultRendererBootstrap() {
-    LOG.info( "tc01_NewCdeDashboard_DefaultRendererBootstrap" );
+    this.log.info( "tc01_NewCdeDashboard_DefaultRendererBootstrap" );
 
     /*
      * ## Step 1
      */
     //Create new CDE dashboard
-    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons and click Settings
-    String newText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
-    String saveText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
-    String saveasText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
-    String reloadText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
-    String settingsText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    String newText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div/a" ) );
+    String saveText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    String saveasText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
+    String reloadText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
+    String settingsText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
     assertEquals( "New", newText );
     assertEquals( "Save", saveText );
     assertEquals( "Save as...", saveasText );
     assertEquals( "Reload", reloadText );
     assertEquals( "Settings", settingsText );
-    this.elemHelper.ClickJS( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
 
     /*
      * ## Step 4
      */
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popup" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup" ) );
     assertNotNull( element );
-    WebElement obj1 = this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
+    WebElement obj1 = this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
     assertEquals( obj1.isSelected(), true );
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE395.class.getSimpleName() );
-  }
 }

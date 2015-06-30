@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,6 +35,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -56,23 +55,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE413 {
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE413.class );
+  private final Logger log = LogManager.getLogger( CDE413.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE413.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -92,24 +82,24 @@ public class CDE413 {
    */
   @Test( timeout = 120000 )
   public void tc01_NewCdeDashboard_ColumnTypeEditor() {
-    LOG.info( "tc01_NewCdeDashboard_ColumnTypeEditor" );
+    this.log.info( "tc01_NewCdeDashboard_ColumnTypeEditor" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
     //Go to New CDE Dashboard
-    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
+    this.driver.get( PageUrl.CDE_DASHBOARD );
     //assert buttons
-    WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
-    WebElement buttonApplyTemplate = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
-    WebElement buttonAddResource = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
-    WebElement buttonAddBoostrap = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
-    WebElement buttonAddFreeForm = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
-    WebElement buttonAddRow = this.elemHelper.WaitForElementPresence( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
-    WebElement buttonLayout = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
-    WebElement buttonComponents = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
-    WebElement buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement buttonApplyTemplate = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
+    WebElement buttonAddResource = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
+    WebElement buttonAddBoostrap = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    WebElement buttonAddFreeForm = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) );
+    WebElement buttonAddRow = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add Row']" ) );
+    WebElement buttonLayout = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    WebElement buttonComponents = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    WebElement buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( buttonSaveTemplate );
     assertNotNull( buttonApplyTemplate );
     assertNotNull( buttonAddResource );
@@ -119,42 +109,38 @@ public class CDE413 {
     assertNotNull( buttonLayout );
     assertNotNull( buttonComponents );
     assertNotNull( buttonDatasources );
-    this.elemHelper.Click( DRIVER, By.cssSelector( "div.componentsPanelButton" ) );
+    this.elemHelper.Click( this.driver, By.cssSelector( "div.componentsPanelButton" ) );
 
     /*
      * ## Step 2
      */
-    String otherText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    String otherText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
     assertEquals( "Others", otherText );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
-    WebElement optionTableComponent = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "a[title='table Component']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    WebElement optionTableComponent = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "a[title='table Component']" ) );
     assertNotNull( optionTableComponent );
-    this.elemHelper.Click( DRIVER, By.cssSelector( "a[title='table Component']" ) );
+    this.elemHelper.Click( this.driver, By.cssSelector( "a[title='table Component']" ) );
 
     /*
      * ## Step 3
      */
     //Click in the columnTypes - property
-    WebElement propertyColumnTypes = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
+    WebElement propertyColumnTypes = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
     assertNotNull( propertyColumnTypes );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
     //We need to wait for the animation finish for the display popup
-    this.elemHelper.WaitForAttributeValueEqualsTo( DRIVER, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
+    this.elemHelper.WaitForAttributeValueEqualsTo( this.driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
 
     /*
      * ## Step 4
      */
-    this.elemHelper.Click( DRIVER, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement arg0RemoveElement = this.elemHelper.FindElement( DRIVER, By.id( "remove_button_0" ) );
-    WebElement arg0InputElement = this.elemHelper.FindElement( DRIVER, By.id( "arg_0" ) );
-    WebElement arg0DragDropIconElement = this.elemHelper.FindElement( DRIVER, By.cssSelector( "div.StringArrayDragIcon" ) );
+    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringArrayAddButton" ) );
+    WebElement arg0RemoveElement = this.elemHelper.FindElement( this.driver, By.id( "remove_button_0" ) );
+    WebElement arg0InputElement = this.elemHelper.FindElement( this.driver, By.id( "arg_0" ) );
+    WebElement arg0DragDropIconElement = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.StringArrayDragIcon" ) );
     assertNotNull( arg0RemoveElement );
     assertNotNull( arg0InputElement );
     assertNotNull( arg0DragDropIconElement );
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE413.class.getSimpleName() );
-  }
 }

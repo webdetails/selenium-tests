@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,6 +36,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -56,25 +55,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE402 {
-
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE402.class );
-  // Getting screenshot when test fails
+  private final Logger log = LogManager.getLogger( CDE402.class );
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE402.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -96,86 +84,82 @@ public class CDE402 {
    */
   @Test( timeout = 60000 )
   public void tc01_NewCdeDashboard_ApplyTemplate() {
-    LOG.info( "tc01_NewCdeDashboard_ApplyTemplate" );
+    this.log.info( "tc01_NewCdeDashboard_ApplyTemplate" );
 
     /*
      * ## Step 1
      */
-    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //assert buttons and click Apply template
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
 
     /*
      * ## Step 4
      */
-    DRIVER.switchTo().defaultContent();
-    this.elemHelper.WaitForFrameReady( DRIVER, By.id( "popupTemplatebox" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popupTemplatebox" ) );
+    this.driver.switchTo().defaultContent();
+    this.elemHelper.WaitForFrameReady( this.driver, By.id( "popupTemplatebox" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popupTemplatebox" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "thumbs" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "thumbs" ) );
     assertNotNull( element );
-    String templateText = this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]/p" ) ).getText();
+    String templateText = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='thumbs']/div[2]/p" ) ).getText();
     assertEquals( "Two Columns Template", templateText );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]/p" ) );
-    this.elemHelper.WaitForAttributeValue( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]" ), "class", "hover active" );
-    String text = this.elemHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='thumbs']/div[2]" ), "class" );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='thumbs']/div[2]/p" ) );
+    this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//div[@id='thumbs']/div[2]" ), "class", "hover active" );
+    String text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='thumbs']/div[2]" ), "class" );
     assertEquals( "hover active", text );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
 
     /*
      * ## Step 5
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupTemplatemessage']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='popupTemplatemessage']" ) );
     assertNotNull( element );
-    WebElement elem = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "popupTemplate" ) );
+    WebElement elem = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popupTemplate" ) );
     assertNotNull( elem );
     Dimension size = elem.getSize();
     int height = size.getHeight();
     assertEquals( height, 183 );
     int width = size.getWidth();
     assertEquals( width, 743 );
-    String warningText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@class='popupTemplatemessage']" ) );
+    String warningText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='popupTemplatemessage']" ) );
     assertEquals( "Are you sure you want to load the template?WARNING: Dashboard Layout will be overwritten!", warningText );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
 
     /*
      * ## Step 6
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
     assertNotNull( element );
-    String tr6tdText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td" ) );
-    String tr6td2Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]" ) );
-    String tr7tdText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td" ) );
-    String tr7td2Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]" ) );
+    String tr6tdText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td" ) );
+    String tr6td2Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[2]" ) );
+    String tr7tdText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td" ) );
+    String tr7td2Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]/td[2]" ) );
     assertEquals( "Column", tr6tdText );
     assertEquals( "Panel_1", tr6td2Text );
     assertEquals( "Column", tr7tdText );
     assertEquals( "Panel_2", tr7td2Text );
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE402.class.getSimpleName() );
-  }
 }

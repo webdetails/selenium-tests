@@ -26,8 +26,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,6 +37,7 @@ import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.cde.widgets.utils.WidgetUtils;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -58,24 +58,18 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CDE453 {
 
   // The widget name that we what to create
-  private static final String WIDGET_NAME = "CDE453";
+  private final String WIDGET_NAME = "CDE453";
   // Indicator to check if any assert fails in the test case
-  private static boolean noAssertFails = false;
+  private boolean noAssertFails = false;
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE453.class );
+  private final Logger log = LogManager.getLogger( CDE453.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE453.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -95,45 +89,48 @@ public class CDE453 {
    */
   @Test( timeout = 240000 )
   public void tc01_NewCDEDashboard_NewWidgetPresent() {
-    LOG.info( "tc01_NewCDEDashboard_NewWidgetPresent" );
+    this.log.info( "tc01_NewCDEDashboard_NewWidgetPresent" );
 
     /*
      * ## Step 1
      */
-    WidgetUtils.CreateWidget( DRIVER, WIDGET_NAME );
+    WidgetUtils.CreateWidget( this.driver, this.WIDGET_NAME );
 
     /*
      * ## Step 2
      */
+    //New CDE dashboard
+    this.driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Go to Components Panel
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     //Expand Widgets option
-    this.elemHelper.ClickJS( DRIVER, By.xpath( "//h3[@id='ui-accordion-cdfdd-components-palletePallete-header-8']/span" ) );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//h3[@id='ui-accordion-cdfdd-components-palletePallete-header-8']/span" ) );
     //Check the widget created is visible in the list of Widgets
-    WebElement widgetCDE453 = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.linkText( WIDGET_NAME ) );
+    WebElement widgetCDE453 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.linkText( this.WIDGET_NAME ) );
     assertNotNull( widgetCDE453 );
-    this.elemHelper.Click( DRIVER, By.linkText( WIDGET_NAME ) );
+    this.elemHelper.Click( this.driver, By.linkText( this.WIDGET_NAME ) );
     //Check the widget was added to the list of components
-    String groupName = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[@id='WIDGETS']/td[2]" ) );
+    String groupName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr[@id='WIDGETS']/td[2]" ) );
     assertEquals( "Widgets", groupName );
     // Check the group added is Widgets
-    String displayWidgetName = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[2]/td" ) );
-    String expectedWidgetName = WIDGET_NAME + " Widget";
+    String displayWidgetName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr[2]/td" ) );
+    String expectedWidgetName = this.WIDGET_NAME + " Widget";
     assertEquals( expectedWidgetName, displayWidgetName );
 
     /*
      * ## Step 3
      */
-    WidgetUtils.RemoveWidgetByName( DRIVER, WIDGET_NAME );
-    noAssertFails = true;
+    WidgetUtils.RemoveWidgetByName( this.driver, this.WIDGET_NAME );
+    this.noAssertFails = true;
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE453.class.getSimpleName() );
+  @After
+  public void tearDownClass() {
+    this.log.info( "tearDown##" + CDE453.class.getSimpleName() );
 
-    if ( !noAssertFails ) {
-      WidgetUtils.RemoveWidgetByName( DRIVER, WIDGET_NAME );
+    if ( !this.noAssertFails ) {
+      WidgetUtils.RemoveWidgetByName( this.driver, this.WIDGET_NAME );
     }
   }
 }

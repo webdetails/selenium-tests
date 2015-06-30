@@ -53,13 +53,13 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE438 {
   // Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE438.class );
+  private final Logger log = LogManager.getLogger( CDE438.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -79,7 +79,7 @@ public class CDE438 {
    *    3. Assert second chart is rendered
    */
   public void tc1_CDEDashboard_CggComponentWorks() {
-    LOG.info( "tc1_CDEDashboard_CggComponentWorks" );
+    this.log.info( "tc1_CDEDashboard_CggComponentWorks" );
 
     /*
      * ## Step 1

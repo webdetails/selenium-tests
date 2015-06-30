@@ -54,13 +54,13 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE394 {
   // Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE394.class );
+  private final Logger log = LogManager.getLogger( CDE394.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -81,7 +81,7 @@ public class CDE394 {
    *    3. Assert "cx" are smaller than chart's width
    */
   public void tc1_NewCdeDashboard_LineChartContained() {
-    LOG.info( "tc1_NewCdeDashboard_LineChartContained" );
+    this.log.info( "tc1_NewCdeDashboard_LineChartContained" );
 
     /*
      * ## Step 1

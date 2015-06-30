@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -56,23 +54,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE347 {
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE347.class );
+  private final Logger log = LogManager.getLogger( CDE347.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE347.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -91,27 +82,27 @@ public class CDE347 {
    */
   @Test( timeout = 120000 )
   public void tc01_BulletChartTestCase_ChartsRendered() {
-    LOG.info( "tc01_BulletChartTestCase_ChartsRendered" );
+    this.log.info( "tc01_BulletChartTestCase_ChartsRendered" );
 
     /*
      * ## Step 1
      */
     //Go to Bullet Chart sample
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit" );
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit" );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Wait for buttons: Layout. Components, Datasources AND Preview
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Datasources Panel']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Datasources Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Components Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Components Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Layout Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Layout Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Preview your Dashboard']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Preview your Dashboard']" ) );
     assertNotNull( element );
-    String c1r1Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr/td" ) );
-    String c2r1Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr/td[2]" ) );
-    String c1r4Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[6]/td" ) );
-    String c2r4Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//tr[6]/td[2]" ) );
+    String c1r1Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr/td" ) );
+    String c2r1Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr/td[2]" ) );
+    String c1r4Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr[6]/td" ) );
+    String c2r4Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr[6]/td[2]" ) );
     assertEquals( "Resource", c1r1Text );
     assertEquals( "template", c2r1Text );
     assertEquals( "Row", c1r4Text );
@@ -120,13 +111,13 @@ public class CDE347 {
     /*
      * ## Step 2
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@title='Preview your Dashboard']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Preview your Dashboard']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.id( "previewButton" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "fancybox-content" ) );
+    this.elemHelper.Click( this.driver, By.id( "previewButton" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "fancybox-content" ) );
     assertNotNull( element );
-    WebElement elementFrame = this.elemHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
-    WebDriver frame = DRIVER.switchTo().frame( elementFrame );
+    WebElement elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe" ) );
+    WebDriver frame = this.driver.switchTo().frame( elementFrame );
 
     /*
      * ## Step 3
@@ -146,8 +137,4 @@ public class CDE347 {
     assertNotNull( obj6 );
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE347.class.getSimpleName() );
-  }
 }

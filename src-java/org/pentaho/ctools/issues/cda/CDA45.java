@@ -53,14 +53,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDA45 {
-  // Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  //Instance of the driver (browser emulator)
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDA45.class );
+  private final Logger log = LogManager.getLogger( CDA45.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -82,7 +82,7 @@ public class CDA45 {
    *
    */
   public void tc1_CdaFileViewer_OutputInfo() {
-    LOG.info( "t01_CdaFileViewer_OutputInfo" );
+    this.log.info( "t01_CdaFileViewer_OutputInfo" );
 
     /*
      * ## Step 1

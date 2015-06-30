@@ -59,7 +59,7 @@ public class CDF379 {
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDF379.class );
+  private final Logger log = LogManager.getLogger( CDF379.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -79,7 +79,7 @@ public class CDF379 {
    */
   @Test( timeout = 120000 )
   public void tc01_CCCProperties_DisplayChart() {
-    LOG.info( "tc01_CCCProperties_DisplayChart" );
+    this.log.info( "tc01_CCCProperties_DisplayChart" );
 
     /*
      * ## Step 1

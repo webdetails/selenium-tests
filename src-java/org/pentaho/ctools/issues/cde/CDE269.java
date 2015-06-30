@@ -54,13 +54,13 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE269 {
   // Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE269.class );
+  private final Logger log = LogManager.getLogger( CDE269.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -79,7 +79,7 @@ public class CDE269 {
    */
   @Test( timeout = 120000 )
   public void tc01_CdeGetHeaders_CorrectInfo() {
-    LOG.info( "tc01_CdeGetHeaders_CorrectInfo" );
+    this.log.info( "tc01_CdeGetHeaders_CorrectInfo" );
 
     /*
      * ## Step 1

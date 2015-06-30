@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -56,25 +54,17 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE404 {
-
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE404.class );
+  private final Logger log = LogManager.getLogger( CDE404.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE404.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -94,72 +84,72 @@ public class CDE404 {
    */
   @Test( timeout = 180000 )
   public void tc01_ExternalResources_PluginDashboard() {
-    LOG.info( "tc01_ExternalResources_PluginDashboard" );
+    this.log.info( "tc01_ExternalResources_PluginDashboard" );
 
     /*
      * ## Step 1
      */
 
     //Open plugin dashboard
-    DRIVER.get( BASE_URL + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=Test.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
+    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=Test.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     //wait for invisibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
 
-    WebElement element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Add Row']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
 
     /*
      * ## Step 2
      */
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceType']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='resourceType']" ) );
     assertNotNull( element );
-    Select select = new Select( this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceType']" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='resourceType']" ) ) );
     select.selectByValue( "Css" );
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceSource']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='resourceSource']" ) );
     assertNotNull( element );
-    Select select1 = new Select( this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='resourceSource']" ) ) );
+    Select select1 = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='resourceSource']" ) ) );
     select1.selectByValue( "file" );
-    this.elemHelper.Click( DRIVER, By.xpath( "//button[@id='popup_state0_buttonOk']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//button[@id='popup_state0_buttonOk']" ) );
 
     /*
      * ## Step 3
      */
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
-    element = this.elemHelper.FindElement( DRIVER, By.id( "container_id" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.id( "container_id" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@rel='static/']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//a[@rel='static/']" ) );
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//a[@rel='static/']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@rel='static/system/']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/']" ) );
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/css/']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//a[@rel='static/system/']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@rel='static/system/css/']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/css/']" ) );
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//a[@rel='static/system/css/']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
-    this.elemHelper.Click( DRIVER, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
 
     /*
      * ## Step 4
      */
-    element = this.elemHelper.FindElement( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//button[@class='cdfddInput']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//button[@class='cdfddInput']" ) );
-    WebElement elementframe = this.elemHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
-    WebDriver frame = DRIVER.switchTo().frame( elementframe );
+    this.elemHelper.Click( this.driver, By.xpath( "//button[@class='cdfddInput']" ) );
+    WebElement elementframe = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe" ) );
+    WebDriver frame = this.driver.switchTo().frame( elementframe );
     element = this.elemHelper.FindElement( frame, By.xpath( "//span[@id='infoArea']" ) );
     assertNotNull( element );
     String pathText = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//span[@id='infoArea']" ) );
@@ -173,8 +163,4 @@ public class CDE404 {
 
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE404.class.getSimpleName() );
-  }
 }

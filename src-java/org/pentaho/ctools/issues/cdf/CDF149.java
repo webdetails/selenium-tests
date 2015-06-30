@@ -30,8 +30,6 @@ import java.awt.event.KeyEvent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -59,24 +57,17 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDF149 {
-  // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  //Instance of the driver (browser emulator)
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDF149.class );
+  private final Logger log = LogManager.getLogger( CDF149.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDF149.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -96,56 +87,56 @@ public class CDF149 {
    */
   @Test( timeout = 120000 )
   public void tc01_CCCBarChart_ValuesNormalized() {
-    LOG.info( "tc01_CCCBarChart_ValuesNormalized" );
+    this.log.info( "tc01_CCCBarChart_ValuesNormalized" );
 
     /*
      * ## Step 1
      */
     //Open CDE Sample
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/wcdf.edit" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/wcdf.edit" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Assert Panel selectors and select Components
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Datasources Panel']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Datasources Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Layout Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Layout Panel']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']/a" ) );
-    String text = this.elemHelper.GetAttribute( DRIVER, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ), "class" );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']/a" ) );
+    String text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ), "class" );
     assertEquals( "panelButton panelButton-active", text );
 
     //Select Bar Chart
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']//tr[@id='CHARTS']/td/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-components']//tr[@id='CHARTS']/td/span" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]/td" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]/td" ) );
     assertNotNull( element );
     text = element.getText();
     assertEquals( "CCC Bar Chart", text );
     element.click();
-    text = this.elemHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]" ), "class" );
+    text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]" ), "class" );
     assertEquals( "child-of-CHARTS initialized collapsed ui-state-active", text );
 
     /*
      * ## Step 2
      */
     //Click Advanced Properties
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Priority for component execution component. Lower values have higher priority']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Priority for component execution component. Lower values have higher priority']" ) );
     assertNotNull( element );
-    text = this.elemHelper.GetAttribute( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class" );
+    text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class" );
     assertEquals( "advancedProperties propertiesSelected", text );
 
     //Find Values Normalized property and set it's value to True
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
     assertNotNull( element );
     element.click();
     Robot robot;
@@ -164,21 +155,21 @@ public class CDF149 {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
     assertEquals( "True", text );
 
     /*
      * ## Step 3
      */
     //Click Preview button
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "previewButton" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "previewButton" ) );
     assertNotNull( element );
     element.click();
 
     //Wait for fancybox and assert chart is rendered and height legends are to 100
-    WebElement elementFrame = this.elemHelper.FindElement( DRIVER, By.xpath( "//iframe" ) );
-    WebDriver frame = DRIVER.switchTo().frame( elementFrame );
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe" ) );
+    WebDriver frame = this.driver.switchTo().frame( elementFrame );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.id( "chartprotovis" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][2]" ) );
@@ -200,8 +191,4 @@ public class CDF149 {
 
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDF149.class.getSimpleName() );
-  }
 }

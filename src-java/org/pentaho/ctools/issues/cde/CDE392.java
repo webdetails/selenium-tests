@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,6 +39,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -60,26 +59,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE392 {
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   //Instance to be used on wait commands
-  private static Wait<WebDriver> WAIT;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE392.class );
+  private final Logger log = LogManager.getLogger( CDE392.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDE392.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-    WAIT = CToolsTestSuite.getWait();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -101,104 +90,104 @@ public class CDE392 {
    */
   @Test( timeout = 120000 )
   public void tc01_NewCdeDashboard_TableInheritsRenderer() {
-    LOG.info( "tc01_NewCdeDashboard_TableInheritsRenderer" );
+    this.log.info( "tc01_NewCdeDashboard_TableInheritsRenderer" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    DRIVER.get( BASE_URL + "api/repos/wcdf/new" );
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Apply Template']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Resource']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add FreeForm']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='Add Row']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Row']" ) );
     assertNotNull( element );
-    String newText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
-    String saveText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
-    String saveasText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
-    String reloadText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
-    String settingsText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    String newText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div/a" ) );
+    String saveText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    String saveasText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
+    String reloadText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
+    String settingsText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
     assertEquals( "New", newText );
     assertEquals( "Save", saveText );
     assertEquals( "Save as...", saveasText );
     assertEquals( "Reload", reloadText );
     assertEquals( "Settings", settingsText );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
 
     /*
      * ## Step 2
      */
-    WebElement obj1 = this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
+    WebElement obj1 = this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
     assertEquals( obj1.isSelected(), true );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='popupclose']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='popupclose']" ) );
 
     /*
      * ## Step 3
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@class='componentsPanelButton']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
     assertNotNull( element );
-    String otherText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    String otherText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
     assertEquals( "Others", otherText );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//a[@title='table Component']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='table Component']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//a[@title='table Component']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//a[@title='table Component']" ) );
 
     /*
      * ## Step 4
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
     assertNotNull( element );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']" ) );
     assertNotNull( element );
-    String styleText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']" ) );
-    String style1Text = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']/../td[2]" ) );
+    String styleText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']" ) );
+    String style1Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Table style']/../td[2]" ) );
     assertEquals( "Style", styleText );
     assertEquals( "Bootstrap", style1Text );
 
     /*
      * ## Step 5
      */
-    String newText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div/a" ) );
-    String saveText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
-    String saveasText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
-    String reloadText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
-    String settingsText1 = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    String newText1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div/a" ) );
+    String saveText1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    String saveasText1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
+    String reloadText1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
+    String settingsText1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
     assertEquals( "New", newText1 );
     assertEquals( "Save", saveText1 );
     assertEquals( "Save as...", saveasText1 );
     assertEquals( "Reload", reloadText1 );
     assertEquals( "Settings", settingsText1 );
-    this.elemHelper.Click( DRIVER, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
 
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//select[@id='rendererInput']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//select[@id='rendererInput']" ) );
     assertNotNull( element );
-    Select select = new Select( this.elemHelper.FindElement( DRIVER, By.xpath( "//select[@id='rendererInput']" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='rendererInput']" ) ) );
     select.selectByValue( "blueprint" );
-    this.elemHelper.Click( DRIVER, By.xpath( "//button[@id='popup_state0_buttonSave']" ) );
+    this.elemHelper.Click( this.driver, By.xpath( "//button[@id='popup_state0_buttonSave']" ) );
 
     /*
      * ## Step 6
      */
-    WAIT.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = DRIVER.switchTo().alert();
+    this.wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = this.driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "The dashboard contains Table Components whose 'Table Style' property needs to be updated.\nWould you like to UPDATE those properties?";
     alert.accept();
@@ -206,8 +195,4 @@ public class CDE392 {
 
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDE392.class.getSimpleName() );
-  }
 }

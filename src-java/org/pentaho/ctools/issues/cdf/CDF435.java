@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -56,24 +54,17 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDF435 {
-  // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  //Instance of the driver (browser emulator)
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDF435.class );
+  private final Logger log = LogManager.getLogger( CDF435.class );
   // Getting screenshot when test fails
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + CDF435.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -92,24 +83,24 @@ public class CDF435 {
    */
   @Test( timeout = 120000 )
   public void tc01_PrptComponent_RenderedResponsive() {
-    LOG.info( "tc01_PrptComponent_RenderedResponsive" );
+    this.log.info( "tc01_PrptComponent_RenderedResponsive" );
 
     /*
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-435%3AIssue_435.wcdf/generatedContent" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-435%3AIssue_435.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //assert Elements loaded
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "Panel_1" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Panel_1" ) );
     assertNotNull( element );
 
     //focus iframe
-    WebElement elementFrame = this.elemHelper.FindElement( DRIVER, By.xpath( "//iframe[@name='report_prptFrame']" ) );
-    WebDriver frame = DRIVER.switchTo().frame( elementFrame );
+    WebElement elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe[@name='report_prptFrame']" ) );
+    WebDriver frame = this.driver.switchTo().frame( elementFrame );
 
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.id( "pageControl" ) );
     assertNotNull( element );
@@ -127,8 +118,8 @@ public class CDF435 {
     assertEquals( "[Time].[2003]", yearText );
 
     //focus iframe2
-    elementFrame = this.elemHelper.FindElement( DRIVER, By.xpath( "//iframe[@id='reportContent']" ) );
-    frame = DRIVER.switchTo().frame( elementFrame );
+    elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe[@id='reportContent']" ) );
+    frame = this.driver.switchTo().frame( elementFrame );
 
     //Check content of table
     String r1c1Text = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//tbody/tr[2]/td" ) );
@@ -159,24 +150,24 @@ public class CDF435 {
     /*
      * ## Step 2
      */
-    DRIVER.switchTo().defaultContent();
-    Select select = new Select( this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='Panel_1']/select" ) ) );
+    this.driver.switchTo().defaultContent();
+    Select select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='Panel_1']/select" ) ) );
     select.deselectAll();
     select.selectByVisibleText( "2004" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     /*
      * ## Step 3
      */
     //focus iframe
-    elementFrame = this.elemHelper.FindElement( DRIVER, By.xpath( "//iframe[@name='report_prptFrame']" ) );
-    frame = DRIVER.switchTo().frame( elementFrame );
+    elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe[@name='report_prptFrame']" ) );
+    frame = this.driver.switchTo().frame( elementFrame );
 
-    element = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='promptPanel']//button/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='promptPanel']//button/span" ) );
     assertNotNull( element );
-    buttonText = this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='promptPanel']//button/span" ) );
+    buttonText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='promptPanel']//button/span" ) );
     assertEquals( "View Report", buttonText );
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//input[@value='[Time].[2004]']" ) );
     assertNotNull( element );
@@ -184,8 +175,8 @@ public class CDF435 {
     assertEquals( "[Time].[2004]", yearText );
 
     //focus iframe2
-    elementFrame = this.elemHelper.FindElement( DRIVER, By.xpath( "//iframe[@id='reportContent']" ) );
-    frame = DRIVER.switchTo().frame( elementFrame );
+    elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe[@id='reportContent']" ) );
+    frame = this.driver.switchTo().frame( elementFrame );
 
     //Check content of table
     r1c1Text = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//tbody/tr[2]/td" ) );
@@ -215,8 +206,4 @@ public class CDF435 {
 
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    LOG.info( "tearDown##" + CDF435.class.getSimpleName() );
-  }
 }

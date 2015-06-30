@@ -53,13 +53,13 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class CDE342 {
   // Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
-  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static Logger LOG = LogManager.getLogger( CDE342.class );
+  private final Logger log = LogManager.getLogger( CDE342.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -80,7 +80,7 @@ public class CDE342 {
    *    3. Write something where only one option should be available
    */
   public void tc1_CDEDashboard_AutocompleteWorks() {
-    LOG.info( "tc1_CDEDashboard_AutocompleteWorks" );
+    this.log.info( "tc1_CDEDashboard_AutocompleteWorks" );
 
     /*
      * ## Step 1
