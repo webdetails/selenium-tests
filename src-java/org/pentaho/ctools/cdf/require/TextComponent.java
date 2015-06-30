@@ -33,7 +33,6 @@ import java.util.TimeZone;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hamcrest.CoreMatchers;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -59,16 +58,16 @@ public class TextComponent {
 
   //Time of day
   private Date dNow;
-  //Instance of the this.driver (browser emulator)
+  //Instance of the driver (browser emulator)
   private final WebDriver driver = CToolsTestSuite.getDriver();
-  // Instance to be used on this.wait commands
+  // Instance to be used on wait commands
   private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
   private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webthis.driver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private final Logger log = LogManager.getLogger( CommentComponent.class );
+  private final Logger log = LogManager.getLogger( TextComponent.class );
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
@@ -98,7 +97,7 @@ public class TextComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
@@ -120,15 +119,14 @@ public class TextComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
-    this.dNow = new Date();
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
 
-    // NOTE - we have to this.wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
@@ -136,7 +134,7 @@ public class TextComponent {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    final int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -151,32 +149,28 @@ public class TextComponent {
    * Steps:
    *    1. Validate the displayed text
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_DisplayedText_ContainsExpectedText() {
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObject" ) ) );
+    this.dNow = new Date();
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "sampleObject" ) );
 
-    final SimpleDateFormat sdf = new SimpleDateFormat( "EE MMM dd yyyy HH:mm", Locale.US );
-    final String strToday = sdf.format( this.dNow );
+    SimpleDateFormat sdf = new SimpleDateFormat( "EE MMM dd yyyy HH:mm", Locale.US );
+    String strToday = sdf.format( this.dNow );
 
-    final String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "sampleObject" ) );
-    final String expectedText = "My text generated in " + strToday;
+    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "sampleObject" ) );
+    String expectedText = "My text generated in " + strToday;
 
-    final boolean displayTime = text.startsWith( expectedText );
+    boolean displayTime = text.startsWith( expectedText );
     if ( !displayTime ) {
       this.log.error( "Displayed time: " + text );
       this.log.error( "Expected time: " + expectedText );
     }
 
-    final TimeZone tz = Calendar.getInstance().getTimeZone();
-    final int offset = tz.getOffset( System.currentTimeMillis() );
-    final String offsetText = String.format( "%s%02d%02d", offset >= 0 ? "+" : "-", offset / 3600000, offset / 60000 % 60 );
+    TimeZone tz = Calendar.getInstance().getTimeZone();
+    int offset = tz.getOffset( System.currentTimeMillis() );
+    String offsetText = String.format( "%s%02d%02d", offset >= 0 ? "+" : "-", offset / 3600000, offset / 60000 % 60 );
 
     Assert.assertThat( "Displayed time: " + text + "Expected time: " + expectedText, text, CoreMatchers.containsString( expectedText ) );
     Assert.assertThat( "Displayed time: " + text, text, CoreMatchers.containsString( "GMT" + offsetText ) );
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    //To use when class run all test cases.
   }
 }

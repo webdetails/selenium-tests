@@ -29,6 +29,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -50,9 +51,9 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CDADatasourceTest {
 
   // Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDADatasourceTest.class );
 
@@ -69,6 +70,7 @@ public class CDADatasourceTest {
    * Steps:
    *    1. Check the result displayed
    */
+  @Test
   public void tc1_DatasourceTest_ResultOK() {
     this.log.info( "tc1_DatasourceTest_ResultOK" );
 

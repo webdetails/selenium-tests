@@ -67,13 +67,13 @@ public class CCCV2ShowCase {
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
-   * ############################### Test Case 1 ###############################
+   * ############################### Test Case 0 ###############################
    *
    * Test Case Name:
    *    Open sample page.
    */
   @Test
-  public void tc0_OpenSamplePage() {
+  public void tc00_OpenSamplePage_Display() {
     // Go to AddinReference
     this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AtestCCCv2-II.wcdf/generatedContent" );
 
@@ -112,8 +112,8 @@ public class CCCV2ShowCase {
    * Steps:
    *    1. Check Bar Chart
    */
-  @Test( timeout = 60000 )
-  public void tc1_ChartContent_DisplayedCorrect() {
+  @Test
+  public void tc01_ChartContent_DisplayedCorrect() {
     this.log.info( "tc1_ChartContent_DisplayedCorrect" );
 
     /*
@@ -182,8 +182,8 @@ public class CCCV2ShowCase {
    * Steps:
    *    1. Check Line Chart
    */
-  @Test( timeout = 90000 )
-  public void tc2_ChartContent_DisplayedCorrect() {
+  @Test
+  public void tc02_ChartContent_DisplayedCorrect() {
     this.log.info( "tc2_ChartContent_DisplayedCorrect" );
 
     /*
@@ -239,8 +239,8 @@ public class CCCV2ShowCase {
    * Steps:
    *    1. Check Pie Chart
    */
-  @Test( timeout = 90000 )
-  public void tc3_ChartContent_DisplayedCorrect() {
+  @Test
+  public void tc03_ChartContent_DisplayedCorrect() {
     this.log.info( "tc3_ChartContent_DisplayedCorrect" );
 
     /*

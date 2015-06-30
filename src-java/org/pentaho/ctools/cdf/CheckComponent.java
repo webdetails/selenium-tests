@@ -70,7 +70,7 @@ public class CheckComponent {
    */
   @Test
   public void tc0_OpenSamplePage_Dipslay() {
-    // The URL for the regionSelector under CDF samples
+    // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/CheckComponent
     this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A55-CheckComponent%3Acheck_component.xcdf/generatedContent" );
 
@@ -88,7 +88,7 @@ public class CheckComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
@@ -111,7 +111,7 @@ public class CheckComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -141,7 +141,7 @@ public class CheckComponent {
    *    3. Check in Central and validate alert
    *    4. Check in Western and validate alert
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_CheckEachOption_AfterCheckAnAlertIsDisplayed() {
     this.log.info( "tc3_CheckEachOption_AfterCheckAnAlertIsDisplayed" );
     String confirmationMsg = "";
@@ -200,7 +200,7 @@ public class CheckComponent {
    *    3. Unchecked Central and validate alert
    *    4. Unchecked Western and validate alert
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc4_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed() {
     this.log.info( "tc4_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed" );
     String confirmationMsg = "";
@@ -256,7 +256,7 @@ public class CheckComponent {
    * Steps:
    *    1. Check and unchecked arbitrary, and validate alert message
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc5_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed() {
     this.log.info( "tc5_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed" );
     String confirmationMsg = "";

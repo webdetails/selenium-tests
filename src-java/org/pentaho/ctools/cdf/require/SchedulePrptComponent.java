@@ -41,7 +41,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -85,13 +84,12 @@ public class SchedulePrptComponent {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
-    // The URL for the VisualizationAPIComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/SchedulePrptComponent
+    // The URL for the SchedulePrptComponent under CDF samples
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/SchedulePrptComponent
     this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A86-SchedulePrptComponent%3Aschedule_prpt_component.xcdf/generatedContent" );
 
-    this.log.info( ( (JavascriptExecutor) this.driver ).executeScript( "return document.readyState;" ).toString() );
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
@@ -105,7 +103,7 @@ public class SchedulePrptComponent {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -129,7 +127,7 @@ public class SchedulePrptComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
@@ -160,7 +158,7 @@ public class SchedulePrptComponent {
    *    4. On Schedule Manager, it is set the schedule.
    * @throws InterruptedException
    */
-  @Test( timeout = 150000 )
+  @Test
   public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() {
     this.log.info( "tc3_SchedulePrpt_ScheduleCreatedSuccessful" );
     this.bRemoveSchedule = true;
@@ -386,10 +384,9 @@ public class SchedulePrptComponent {
           }
 
           //Click to remove the schedule item (the selected row)
-          this.elemHelper.FindElement( this.driver, By.cssSelector( "img.gwt-Image.pentaho-deletebutton" ) ).click();
-
-          this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@class='pentaho-dialog']" ) ) );
-          this.elemHelper.FindElement( this.driver, By.id( "okButton" ) ).click();
+          this.elemHelper.Click( this.driver, By.cssSelector( "img.gwt-Image.pentaho-deletebutton" ) );
+          this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='pentaho-dialog']" ) );
+          this.elemHelper.Click( this.driver, By.id( "okButton" ) );
 
           this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='pentaho-dialog']" ) );
 

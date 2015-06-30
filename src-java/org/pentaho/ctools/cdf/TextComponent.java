@@ -67,7 +67,7 @@ public class TextComponent {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private final Logger log = LogManager.getLogger( CommentComponent.class );
+  private final Logger log = LogManager.getLogger( TextComponent.class );
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
@@ -97,7 +97,7 @@ public class TextComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
@@ -119,13 +119,12 @@ public class TextComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
-    this.dNow = new Date();
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
@@ -150,9 +149,10 @@ public class TextComponent {
    * Steps:
    *    1. Validate the displayed text
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_DisplayedText_ContainsExpectedText() {
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObject" ) ) );
+    this.dNow = new Date();
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "sampleObject" ) );
 
     SimpleDateFormat sdf = new SimpleDateFormat( "EE MMM dd yyyy HH:mm", Locale.US );
     String strToday = sdf.format( this.dNow );

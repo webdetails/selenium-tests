@@ -114,6 +114,7 @@ public class CToolsTestSuite {
      */
     // Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
+    //ffProfile.setEnableNativeEvents( true );
     ffProfile.setPreference( "general.useragent.locale", "en-US" );
     ffProfile.setPreference( "intl.accept_languages", "en-US, en" );
     ffProfile.setPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Download dir, 2 - specify dir

@@ -24,7 +24,6 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.apache.http.HttpStatus;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,26 +48,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class XactionComponent {
 
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
-  private static Wait<WebDriver> WAIT;
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   // Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  /**
-   * Shall initialized the test before run each test case.
-   */
-  @BeforeClass
-  public static void setUp() {
-    DRIVER = CToolsTestSuite.getDriver();
-    WAIT = CToolsTestSuite.getWait();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 0 ###############################
@@ -76,15 +65,15 @@ public class XactionComponent {
    * Test Case Name:
    *    Open Sample Page
    */
+  @Test
   public void tc0_PageContent_DisplayTitle() {
     // The URL for the XactionComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/XactionComponent
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A10-XactionComponent%3Axaction_component.xcdf/generatedContent" );
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/XactionComponent
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A10-XactionComponent%3Axaction_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -97,16 +86,16 @@ public class XactionComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    WAIT.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    WAIT.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", DRIVER.getTitle() );
-    assertEquals( "XactionComponent", this.elemHelper.WaitForElementPresentGetText( DRIVER, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "XactionComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -119,23 +108,23 @@ public class XactionComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( DRIVER, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = DRIVER.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -151,17 +140,17 @@ public class XactionComponent {
    *    1. Check if a graphic was generated
    *    2. Check the http request for the image generated
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_GenerateChart_ChartIsDisplayed() {
     // ## Step 1
-    WebElement xactionElement = this.elemHelper.FindElement( DRIVER, By.cssSelector( "img" ) );
+    WebElement xactionElement = this.elemHelper.FindElement( this.driver, By.cssSelector( "img" ) );
     assertNotNull( xactionElement );
 
-    String attrSrc = this.elemHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "src" );
-    String attrWidth = this.elemHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "width" );
-    String attrHeight = this.elemHelper.FindElement( DRIVER, By.cssSelector( "img" ) ).getAttribute( "height" );
+    String attrSrc = this.elemHelper.FindElement( this.driver, By.cssSelector( "img" ) ).getAttribute( "src" );
+    String attrWidth = this.elemHelper.FindElement( this.driver, By.cssSelector( "img" ) ).getAttribute( "width" );
+    String attrHeight = this.elemHelper.FindElement( this.driver, By.cssSelector( "img" ) ).getAttribute( "height" );
 
-    assertTrue( attrSrc.startsWith( BASE_URL + "getImage?image=tmp_chart_admin-" ) );
+    assertTrue( attrSrc.startsWith( this.baseUrl + "getImage?image=tmp_chart_admin-" ) );
     assertEquals( attrWidth, "500" );
     assertEquals( attrHeight, "600" );
 

@@ -358,6 +358,30 @@ public class ElementHelper {
   }
 
   /**
+   * The function will search for the element present (doesn't matter
+   * if element is visible or not) and then click on it.
+   *
+   * @param driver
+   * @param locator
+   */
+  public void MoveToElementAndClick( WebDriver driver, By locator ) {
+    this.log.debug( "ClickElementInvisible::Enter" );
+    this.log.debug( "Locator: " + locator.toString() );
+
+    WebElement element = FindElementInvisible( driver, locator );
+    if ( element != null ) {
+      Actions builder = new Actions( driver );
+      builder.moveToElement( element ).click( element );
+      builder.perform();
+
+    } else {
+      this.log.error( "Element is null " + locator.toString() );
+    }
+
+    this.log.debug( "ClickElementInvisible::Exit" );
+  }
+
+  /**
    * This method pretends to check if the element is present, if it doesn't
    * then don't wait, if element is present, wait for its invisibility.
    *
