@@ -67,8 +67,7 @@ public class VisualizationAPIComponent {
   @Test
   public void tc0_OpenSamplePage_Display() {
     // The URL for the VisualizationAPIComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/VisualizationAPIComponent
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/VisualizationAPIComponent
     this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualization_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
@@ -85,10 +84,9 @@ public class VisualizationAPIComponent {
    * Steps: 
    *    1. Check the widget's title.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
-    // Wait for title become visible and with value 'Community Dashboard
-    // Framework'
+    // Wait for title become visible and with value 'Community Dashboard Framework'
     this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
@@ -101,10 +99,14 @@ public class VisualizationAPIComponent {
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: Reload Sample Description: Reload the sample (not refresh
-   * page). Steps: 1. Click in Code and then click in button 'Try me'.
+   * Test Case Name:
+   *    Reload Sample
+   * Description: 
+   *    Reload the sample (not refresh page).
+   * Steps: 
+   *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -121,11 +123,15 @@ public class VisualizationAPIComponent {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name: Validate MAX number Description: When the user access the
-   * component, it is presented the max number of array set. Steps: 1. Check the
-   * presented value for MAX.
+   * Test Case Name:
+   *    Validate MAX number
+   * Description: 
+   *    When the user access the component, it is presented the max number of 
+   *    array set.
+   * Steps: 
+   *    1. Check the presented value for MAX.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_MaxNumber_PresentCorrectValue() {
     // ## Step 1
     String value = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
@@ -143,16 +149,22 @@ public class VisualizationAPIComponent {
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name: Validate MIN number Description: When the user access the
-   * component, it is presented the min number of array set. Steps: 1. Change
-   * the option parameter to MIN and reload sample 2. Check the presented value
-   * for MIN.
+   * Test Case Name:
+   *    Validate MIN number
+   * Description: 
+   *    When the user access the component, it is presented the min number of 
+   *    array set. 
+   * Steps: 
+   *    1. Change the option parameter to MIN and reload sample.
+   *    2. Check the presented value for MIN.
    *
    * @throws InterruptedException
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc4_MinNumber_PresentCorrectValue() {
-    // ## Step 1 - Change the option parameter to MIN and reload sample
+    /*
+     * ## Step 1 - Change the option parameter to MIN and reload sample
+     */
     // Render again the sample
     this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
 
@@ -179,7 +191,9 @@ public class VisualizationAPIComponent {
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
 
-    // ## Step 2 - Check the presented value for MIN.
+    /*
+     * ## Step 2 - Check the presented value for MIN.
+     */
     this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']" ) ) );
     this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']/div[2]/div/span" ) ) );
 
@@ -198,16 +212,20 @@ public class VisualizationAPIComponent {
   /**
    * ############################### Test Case 5 ###############################
    *
-   * Test Case Name: Validate AVG number Description: When the user access the
-   * component, it is presented the avg number of array set. Steps: 1. Change
-   * the option parameter to AVG and reload sample 2. Check the presented value
-   * for AVG.
-   *
-   * @throws InterruptedException
+   * Test Case Name: 
+   *    Validate AVG number
+   * Description: 
+   *    When the user access the component, it is presented the avg number of 
+   *    array set.
+   * Steps: 
+   *    1. Change the option parameter to AVG and reload sample 
+   *    2. Check the presented value for AVG.
    */
-  @Test( timeout = 60000 )
-  public void tc5_AvgNumber_PresentCorrectValue() throws InterruptedException {
-    // ## Step 1 - Change the option parameter to AVG and reload sample
+  @Test
+  public void tc5_AvgNumber_PresentCorrectValue() {
+    /*
+     * ## Step 1 - Change the option parameter to AVG and reload sample
+     */
     // Render again the sample
     this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
 
@@ -223,7 +241,9 @@ public class VisualizationAPIComponent {
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
 
-    // ## Step 2 - Check the presented value for MIN.
+    /*
+     * ## Step 2 - Check the presented value for MIN.
+     */
     this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']" ) ) );
     this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']/div[2]/div/span" ) ) );
 

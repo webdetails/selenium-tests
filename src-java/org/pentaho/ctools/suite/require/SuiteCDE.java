@@ -26,23 +26,26 @@ import org.junit.runners.Suite;
 import org.pentaho.ctools.cde.require.AddinReference;
 import org.pentaho.ctools.cde.require.AddinReferenceEdit;
 import org.pentaho.ctools.cde.require.AjaxRequestReference;
+import org.pentaho.ctools.cde.require.BullertChartTestCase;
 import org.pentaho.ctools.cde.require.CCCV2ShowCase;
+import org.pentaho.ctools.cde.require.MapComponentFullTest;
+import org.pentaho.ctools.cde.require.MapComponentReference;
 import org.pentaho.ctools.cde.require.OlapSelectorComponent;
 import org.pentaho.ctools.cde.require.PopupComponent;
 import org.pentaho.ctools.cde.require.SampleDashboard;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
-  SampleDashboard.class,
-  AddinReference.class,
-  AddinReferenceEdit.class,
-  AjaxRequestReference.class,
-  //BullertChartTestCase.class,
-  CCCV2ShowCase.class,
-  //MapComponentFullTest.class,
-  //MapComponentReference.class,
-  OlapSelectorComponent.class,
-  PopupComponent.class } )
+    SampleDashboard.class,
+    AddinReference.class,
+    AddinReferenceEdit.class,
+    AjaxRequestReference.class,
+    BullertChartTestCase.class,
+    CCCV2ShowCase.class,
+    MapComponentFullTest.class,
+    MapComponentReference.class,
+    OlapSelectorComponent.class,
+    PopupComponent.class } )
 public class SuiteCDE {
   //It runs the Suite.SuiteClasses
 }

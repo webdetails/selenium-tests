@@ -120,7 +120,7 @@ public class MapComponentReference {
    *    4. Check Location Result Set in Marker mode
    *    5. Check Options valid in Shapes mode
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -257,7 +257,7 @@ public class MapComponentReference {
    *    2. Perform a zoom
    *    3. Click in Globe
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_MapWithNoMarkersAndShapes_MapMustBeVisible() {
     this.log.info( "tc2_MapWithNoMarkersAndShapes_MapMustBeVisible" );
     //wait for initialize
@@ -312,7 +312,7 @@ public class MapComponentReference {
    *    2. Chance map to Google
    *    3. Change map service to 'mapbox-world-dark'
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_MapEngineAndTileServices_MapDisplayedAfterChanges() {
     this.log.info( "tc3_MapEngineAndTileServices_MapDisplayedAfterChanges" );
     //wait for initialize
@@ -384,7 +384,7 @@ public class MapComponentReference {
    *    1. Check the data exist
    *    2. Chick in each marker
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc4_MapWithMarkersBasedLongLat_MarkersShouldDisplayCorrectContents() {
     this.log.info( "tc4_MapWithMarkersBasedLongLat_MarkersShouldDisplayCorrectContents" );
     /*
@@ -442,7 +442,7 @@ public class MapComponentReference {
    *    1. Check the data exist
    *    2. Chick in each marker
    */
-  @Test( timeout = 150000 )
+  @Test
   public void tc5_MapWithMarkersBasedCity_MarkersShouldDisplayCorrectContents() {
     this.log.info( "tc5_MapWithMarkersBasedCity_MarkersShouldDisplayCorrectContents" );
     /*
@@ -510,7 +510,7 @@ public class MapComponentReference {
    *    1. Check the data exist
    *    2. Chick in a shape country
    */
-  @Test( timeout = 90000 )
+  @Test
   public void tc6_MapWithShapes_ShapesAreClickable() {
     this.log.info( "tc6_MapWithShapes_ShapesAreClickable" );
 

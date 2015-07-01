@@ -91,16 +91,16 @@ public class TimePlotComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    //wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    //this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    //assertEquals("Community Dashboard Framework", driver.getTitle());
+    //assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
     assertEquals( "timePlotComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
@@ -114,7 +114,7 @@ public class TimePlotComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -146,25 +146,28 @@ public class TimePlotComponent {
    *    1. Check if the graphic is presented
    *    2. Move mouse over graphic and check the expected value for Total Price
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_MouseOverPlot_TotalPriceChanged() {
     this.log.info( "tc3_MouseOverPlot_TotalPriceChanged" );
-    // ## Step 1
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/span" ) ) );
+    /*
+     * ## Step 1
+     */
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='sampleObject']/div/span" ) );
     assertEquals( "Total order income", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span" ) ) );
     assertEquals( "Total Price", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) ) );
 
     WebElement element2004 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[contains(text(), '2004')]" ) );
     assertNotNull( element2004 );
 
-    // ## Step 2
+    /*
+     * ## Step 2
+     */
     Actions acts = new Actions( this.driver );
     acts.moveToElement( this.elemHelper.FindElement( this.driver, By.cssSelector( "canvas.timeplot-canvas" ) ), 10, 10 );
     acts.build().perform();
 
-    String expectedText = "Total Price = 6,864";
-    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) );
-
-    assertTrue( text.startsWith( expectedText ) );
+    String totalExpected = "Total Price = 6,864";
+    String totalText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) );
+    assertTrue( totalText.startsWith( totalExpected ) );
   }
 }

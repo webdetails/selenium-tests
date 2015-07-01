@@ -72,15 +72,14 @@ public class TimePlotComponent {
    *    Open Sample Page
    */
   @Test
-  public void tc0_OpenSample_Page() {
+  public void tc0_OpenSamplePage_Dsiplay() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // The URL for the TimePlotComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/TimePlotComponent
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TimePlotComponent
     this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A31-TimePlotComponent%3Atimeplot_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
@@ -94,16 +93,16 @@ public class TimePlotComponent {
    * Steps:
    *    1. Open Sample
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    //wait.until(ExpectedConditions.titleContains("Community Dashboard Framework"));
+    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    //assertEquals("Community Dashboard Framework", driver.getTitle());
+    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
     assertEquals( "timePlotComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
@@ -117,7 +116,7 @@ public class TimePlotComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  //@Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -150,10 +149,12 @@ public class TimePlotComponent {
    *    1. Check if the graphic is presented
    *    2. Move mouse over graphic and check the expected value for Total Price
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_MouseOverPlot_TotalPriceChanged() {
     this.log.info( "tc3_MouseOverPlot_TotalPriceChanged" );
-    // ## Step 1
+    /*
+     * ## Step 1
+     */
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='sampleObject']/div/span" ) );
     assertEquals( "Total order income", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span" ) ) );
     assertEquals( "Total Price", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) ) );
@@ -161,14 +162,16 @@ public class TimePlotComponent {
     WebElement element2004 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[contains(text(), '2004')]" ) );
     assertNotNull( element2004 );
 
-    // ## Step 2
+    /*
+     * ## Step 2
+     */
     Actions acts = new Actions( this.driver );
     acts.moveToElement( this.elemHelper.FindElement( this.driver, By.cssSelector( "canvas.timeplot-canvas" ) ), 10, 10 );
     acts.build().perform();
 
-    String expectedText = "54702";
-    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='timeplot-div timeplot-valueflag']" ) );
-    assertEquals( text, expectedText );
-    // assertTrue(text.startsWith(expectedText));
+    String valueChartExpected = "54702";
+    String valueChart = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='timeplot-div timeplot-valueflag']" ) );
+    assertEquals( valueChartExpected, valueChart );
+    assertTrue( valueChart.startsWith( valueChartExpected ) );
   }
 }
