@@ -53,13 +53,13 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class AddinReference {
 
   // Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   // Instance to be used on wait commands
   private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   //Log instance
-  private static Logger LOG = LogManager.getLogger( AddinReference.class );
+  private final Logger log = LogManager.getLogger( AddinReference.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -68,16 +68,13 @@ public class AddinReference {
    * ############################### Test Case 0 ###############################
    *
    * Test Case Name:
-   *    Open Page
-   * Description:
-   *    The test case shall open the sample page.
+   *    Open Sample Page
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc00_OpenSamplePage_Display() {
-    LOG.info( "tc00_OpenSamplePage_Display" );
-    // The URL for the CommentComponent under CDF samples
-    // This sample is in: 
-    // ::Public/plugin-samples/CDE/Require Samples/CDE Reference/Addins
+    this.log.info( "tc00_OpenSamplePage_Display" );
+    // The URL for the AddinReference under CDF samples
+    // This sample is in: Public/plugin-samples/CDE/Require Samples/CDE Reference/Addins
     this.driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
@@ -97,7 +94,7 @@ public class AddinReference {
    */
   @Test( timeout = 60000 )
   public void tc01_PageContent_ContentDisplayed() {
-    LOG.info( "tc01_PageContent_CachedQueries" );
+    this.log.info( "tc01_PageContent_CachedQueries" );
 
     /*
      * ## Step 1
@@ -148,7 +145,7 @@ public class AddinReference {
    */
   @Test( timeout = 120000 )
   public void tc02_Sparkline_SampleWorks() {
-    LOG.info( "tc02_Sparkline_SampleWorks" );
+    this.log.info( "tc02_Sparkline_SampleWorks" );
 
     /*
      * ## Step 1
@@ -206,7 +203,7 @@ public class AddinReference {
    */
   @Test( timeout = 60000 )
   public void tc03_pvSparkline_SampleWorks() {
-    LOG.info( "tc03_pvSparkline_SampleWorks" );
+    this.log.info( "tc03_pvSparkline_SampleWorks" );
 
     /*
      * ## Step 1
@@ -269,7 +266,7 @@ public class AddinReference {
    */
   @Test( timeout = 60000 )
   public void tc04_dataBar_SampleWorks() {
-    LOG.info( "tc04_dataBar_SampleWorks" );
+    this.log.info( "tc04_dataBar_SampleWorks" );
 
     /*
      * ## Step 1
@@ -368,7 +365,7 @@ public class AddinReference {
    */
   @Test( timeout = 60000 )
   public void tc05_trendArrow_SampleWorks() {
-    LOG.info( "tc05_trendArrow_SampleWorks" );
+    this.log.info( "tc05_trendArrow_SampleWorks" );
 
     /*
      * ## Step 1
@@ -464,7 +461,7 @@ public class AddinReference {
    */
   @Test( timeout = 60000 )
   public void tc06_hyperlink_SampleWorks() {
-    LOG.info( "tc06_hyperlink_SampleWorks" );
+    this.log.info( "tc06_hyperlink_SampleWorks" );
 
     /*
      * ## Step 1
@@ -566,7 +563,7 @@ public class AddinReference {
    */
   @Test( timeout = 60000 )
   public void tc07_Circle_SampleWorks() {
-    LOG.info( "tc07_Circle_SampleWorks" );
+    this.log.info( "tc07_Circle_SampleWorks" );
 
     /*
      * ## Step 1
@@ -683,7 +680,7 @@ public class AddinReference {
    */
   @Test( timeout = 60000 )
   public void tc08_FormattedText_SampleWorks() {
-    LOG.info( "tc08_FormattedText_SampleWorks" );
+    this.log.info( "tc08_FormattedText_SampleWorks" );
 
     /*
      * ## Step 1
@@ -784,7 +781,7 @@ public class AddinReference {
    */
   @Test( timeout = 60000 )
   public void tc09_CCCBulletChart_SampleWorks() {
-    LOG.info( "tc09_CCCBulletChart_SampleWorks" );
+    this.log.info( "tc09_CCCBulletChart_SampleWorks" );
 
     /*
      * ## Step 1
@@ -859,9 +856,9 @@ public class AddinReference {
    *    1. Check if the sample for 'groupHeaders' has its contents present
    *    3. Order the table
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc10_GroupHeaderst_SampleWorks() {
-    LOG.info( "tc10_GroupHeaderst_SampleWorks" );
+    this.log.info( "tc10_GroupHeaderst_SampleWorks" );
 
     /*
      * ## Step 1

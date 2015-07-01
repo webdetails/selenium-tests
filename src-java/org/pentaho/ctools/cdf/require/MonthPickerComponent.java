@@ -77,8 +77,7 @@ public class MonthPickerComponent {
   public void tc0_OpenSamplePage_Display() {
     this.log.info( "tc0_OpenSamplePage_Display" );
     // The URL for the MonthPickerComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/MonthPickerComponent
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/MonthPickerComponent
     this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A46-MonthPickerComponent%3Amonth_picker_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
@@ -95,7 +94,7 @@ public class MonthPickerComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
@@ -118,7 +117,7 @@ public class MonthPickerComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -149,7 +148,7 @@ public class MonthPickerComponent {
    * Steps:
    *    1. Pick a month and check for alert
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_SelectMonth_AlertDisplayed() {
     this.log.info( "tc3_SelectMonth_AlertDisplayed" );
 

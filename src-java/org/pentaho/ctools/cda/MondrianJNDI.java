@@ -65,15 +65,15 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class MondrianJNDI {
 
   // Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   // Instance to be used on wait commands
   private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   //Download directory
   private final String downloadDir = CToolsTestSuite.getDownloadDir();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private static Logger LOG = LogManager.getLogger( MondrianJNDI.class );
+  private final Logger log = LogManager.getLogger( MondrianJNDI.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -82,13 +82,10 @@ public class MondrianJNDI {
    * ############################### Test Case 0 ###############################
    *
    * Test Case Name:
-   *    Page Content
-   * Description:
-   *    The test case pretends to validate if the field filename and about
-   *    are present and the about works as expected.
+   *    Open Sample Page
    */
   @Test
-  public void tc0_OpenSamplePage() {
+  public void tc0_OpenSamplePage_Display() {
     // This samples is in: Public/plugin-samples/CDA/cdafiles/mondrian-jndi
     this.driver.get( PageUrl.MONDRIAN_JNDI );
   }
@@ -105,9 +102,9 @@ public class MondrianJNDI {
    *    1. Check if we are reading the correct file
    *    2. Check if About is working
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayeFilenameAndAbout() {
-    LOG.info( "tc1_PageContent_DisplayeFilenameAndAbout" );
+    this.log.info( "tc1_PageContent_DisplayeFilenameAndAbout" );
 
     /*
      * ## Step 1
@@ -170,9 +167,9 @@ public class MondrianJNDI {
    *    5. Search existence content
    *    6. Search inexistance content
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_SelectDataAccess_DisplayDataForSelectedDataAccess() {
-    LOG.info( "tc2_SelectDataAccess_DisplayDataForSelectedDataAccess" );
+    this.log.info( "tc2_SelectDataAccess_DisplayDataForSelectedDataAccess" );
 
     /*
      * ## Step 1
@@ -376,9 +373,9 @@ public class MondrianJNDI {
    * Steps:
    *    1. Press in Export.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_ExportXls_FileDownload() {
-    LOG.info( "tc3_ExportXls_FileDownload" );
+    this.log.info( "tc3_ExportXls_FileDownload" );
 
     /*
      * ## Step 1
@@ -402,7 +399,7 @@ public class MondrianJNDI {
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
 
       //Click to export
-      this.elemHelper.ClickJS( this.driver, By.id( "export" ) );
+      this.elemHelper.MoveToElementAndClick( this.driver, By.id( "export" ) );
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher.WatchForCreate( this.downloadDir );
@@ -412,7 +409,7 @@ public class MondrianJNDI {
 
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
     } catch ( Exception e ) {
-      LOG.error( e.getMessage() );
+      this.log.error( e.getMessage() );
     }
   }
 
@@ -427,9 +424,9 @@ public class MondrianJNDI {
    *    1. Check query url diaLOG
    *    2. Open a new browser with query url
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage() {
-    LOG.info( "tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" );
+    this.log.info( "tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" );
 
     /*
      * ## Step 1
@@ -446,19 +443,19 @@ public class MondrianJNDI {
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
 
     // Check query url
-    WebElement buttonQueryUrl = this.elemHelper.FindElement( this.driver, By.id( "queryUrl" ) );
+    WebElement buttonQueryUrl = this.elemHelper.WaitForElementPresence( this.driver, By.id( "queryUrl" ) );
     assertEquals( "Query URL", buttonQueryUrl.getText() );
-    buttonQueryUrl.click();
+    this.elemHelper.ClickJS( this.driver, By.id( "queryUrl" ) );
 
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "queryUrlDiaLOG" ) ) );
-    String diaLOGTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='queryUrlDiaLOG']/p" ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "queryUrlDialog" ) ) );
+    String diaLOGTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div#queryUrlDialog p.dialogTitle" ) );
     assertEquals( "Query Execution URL:", diaLOGTitle );
 
-    WebElement inputQueryUrl = this.elemHelper.FindElement( this.driver, By.xpath( "//input[@id='doQueryUrl']" ) );
+    WebElement inputQueryUrl = this.elemHelper.FindElement( this.driver, By.id( "doQueryUrl" ) );
     String queryUrl = inputQueryUrl.getAttribute( "value" );
-    LOG.debug( "Query URL: " + queryUrl );
+    this.log.debug( "Query URL: " + queryUrl );
 
-    this.elemHelper.FindElement( this.driver, By.linkText( "Close" ) ).click();
+    this.elemHelper.ClickJS( this.driver, By.linkText( "Close" ) );
 
     /*
      * ## Step 2
@@ -489,9 +486,9 @@ public class MondrianJNDI {
    *    4. In the new window, check the schedule
    *    5. Remove the schedule
    */
-  @Test( timeout = 240000 )
+  @Test
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
-    LOG.info( "tc5_CacheThisSimple_ScheduleIsSetSuccessful" );
+    this.log.info( "tc5_CacheThisSimple_ScheduleIsSetSuccessful" );
     String selectedHours = "21";
 
     /*
@@ -512,9 +509,9 @@ public class MondrianJNDI {
      * ## Step 2
      */
     //Click in 'Cache this'
-    this.elemHelper.FindElement( this.driver, By.id( "cachethis" ) ).click();
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='diaLOG']" ) ) );
-    String questionActual = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='diaLOG']/p" ) );
+    this.elemHelper.ClickJS( this.driver, By.id( "cachethis" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dialog" ) );
+    String questionActual = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "p.dialogTitle" ) );
     String questionExpect = "What schedule should this query run on? (advanced)";
     assertEquals( questionExpect, questionActual );
 
@@ -578,7 +575,7 @@ public class MondrianJNDI {
       assertEquals( "-1", queryTime );
       assertEquals( "Success", queryStatus );
     } catch ( AssertionError ae ) {
-      LOG.error( ae.getMessage() );
+      this.log.error( ae.getMessage() );
 
       //Remove schedule
       this.removeFirstSchedule();
