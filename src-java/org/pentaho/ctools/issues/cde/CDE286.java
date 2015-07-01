@@ -45,9 +45,11 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 /**
  * The script is testing the issue:
  * - http://jira.pentaho.com/browse/CDE-286
- *
+ * - http://jira.pentaho.com/browse/CDE-450
+ * 
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-1016
+ * - http://jira.pentaho.com/browse/QUALITY-1087
  *
  * NOTE
  * To test this script it is required to have CDE plugin installed.
@@ -155,20 +157,23 @@ public class CDE286 {
     this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_1" ), strColor2 );
     //Add the third color
     this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_2" ), strColor3 );
+    //CDE-450 assert able to change order of colors
+    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_0']/div/span" ), By.xpath( "//div[@id='parameters_2']" ) );
+    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_1']/div/span" ), By.xpath( "//div[@id='parameters_2']" ) );
     //Submit
     this.elemHelper.Click( this.driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear
     this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popupbox" ) );
     //Check the colors array
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ), "[\"" + strColor1 + "\",\"" + strColor2 + "\",\"" + strColor3 + "\"]" );
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ), "[\"" + strColor3 + "\",\"" + strColor2 + "\",\"" + strColor1 + "\"]" );
     String rangeColorArray = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ) );
-    assertEquals( "[\"blue\",\"green\",\"brown\"]", rangeColorArray );
+    assertEquals( "[\"brown\",\"green\",\"blue\"]", rangeColorArray );
 
     //Add Intervals Array
-    String strInterval0 = "0";
-    String strInterval1 = "25";
-    String strInterval2 = "50";
-    String strInterval3 = "100";
+    String strInterval0 = "100";
+    String strInterval1 = "50";
+    String strInterval2 = "25";
+    String strInterval3 = "0";
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) );
     //We need to wait for the animation finish for the display popup
     this.elemHelper.WaitForAttributeValueEqualsTo( this.driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
@@ -193,11 +198,16 @@ public class CDE286 {
     this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_2" ), strInterval2 );
     //Add interval 3
     this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_3" ), strInterval3 );
-
+    //CDE-450 assert able to change order of intervals
+    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_0']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
+    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_1']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
+    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_2']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
     // Submit
     this.elemHelper.ClickJS( this.driver, By.id( "popup_state0_buttonOk" ) );
+    //Wait For Popup Disappear
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popupbox" ) );
     //Check if was saved
-    String expectedIntervalArray = "[\"" + strInterval0 + "\",\"" + strInterval1 + "\",\"" + strInterval2 + "\",\"" + strInterval3 + "\"]";
+    String expectedIntervalArray = "[\"" + strInterval3 + "\",\"" + strInterval2 + "\",\"" + strInterval1 + "\",\"" + strInterval0 + "\"]";
     this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ), expectedIntervalArray );
     String actualIntervalsArray = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) );
     assertEquals( expectedIntervalArray, actualIntervalsArray );
@@ -218,13 +228,13 @@ public class CDE286 {
     String actualHeight = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[6]/td[2]" ) );
     assertEquals( expectedHeight, actualHeight );
 
-    //Add With
-    String expectedWith = "215";
+    //Add Width
+    String expectedWidth = "215";
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]" ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]/form/input" ) ).sendKeys( expectedWith );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]/form/input" ) ).sendKeys( expectedWidth );
     this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]/form/input" ) ).submit();
-    String actualWith = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]" ) );
-    assertEquals( expectedWith, actualWith );
+    String actualWidth = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]" ) );
+    assertEquals( expectedWidth, actualWidth );
 
     /*
      * ## Step 3
@@ -248,7 +258,7 @@ public class CDE286 {
     this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cggDialog']/div/input" ) );
     this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cggDialog']/div/button" ) );
     String actualUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='cggDialog']/div/div/input" ), "value" );
-    String expectedURL = "http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/system/pentaho-cdf-dd/resources/custom/components/cgg/charts/dial.js&paramcolors=" + strColor1 + "&paramcolors=" + strColor2 + "&paramcolors=" + strColor3 + "&paramscale=" + strInterval0 + "&paramscale=" + strInterval1 + "&paramscale=" + strInterval2 + "&paramscale=" + strInterval3 + "&height=" + expectedHeight + "&width=" + expectedWith + "&outputType=png";
+    String expectedURL = "http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/system/pentaho-cdf-dd/resources/custom/components/cgg/charts/dial.js&paramcolors=" + strColor3 + "&paramcolors=" + strColor2 + "&paramcolors=" + strColor1 + "&paramscale=" + strInterval3 + "&paramscale=" + strInterval2 + "&paramscale=" + strInterval1 + "&paramscale=" + strInterval0 + "&height=" + expectedHeight + "&width=" + expectedWidth + "&outputType=png";
     assertEquals( expectedURL, actualUrl );
 
     /*

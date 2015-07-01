@@ -45,11 +45,13 @@ import org.pentaho.gui.web.puc.BrowseFiles;
  * - http://jira.pentaho.com/browse/CDE-356
  * - http://jira.pentaho.com/browse/CDE-397
  * - http://jira.pentaho.com/browse/CDE-468
+ * - http://jira.pentaho.com/browse/CDE-536
  *
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-1083
  * - http://jira.pentaho.com/browse/QUALITY-1084
  * - http://jira.pentaho.com/browse/QUALITY-1092
+ * - http://jira.pentaho.com/browse/QUALITY-1101
  *
  * NOTE
  * To test this script it is required to have CDE plugin installed.
@@ -88,7 +90,7 @@ public class CDE356 {
    *    2. CLick cancel on the popup and assert row is still present. Click New
    *    3. Click Ok on the popup, assert row is no longer present, add row
    *    4. Try to save dashboard with no name and assert it throws error (CDE-397)
-   *    5. Input name and then click folder (CDE-468), save dashboard, click new,and assert new dashboard is shown
+   *    5. Input name with "$"at the start (CDE-536) and then click folder (CDE-468), save dashboard, click new,and assert new dashboard is shown
    *    6. Delete created files
    */
   @Test( timeout = 240000 )
@@ -192,7 +194,7 @@ public class CDE356 {
     inputField = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "fileInput" ) );
     assertNotNull( inputField );
     inputField.click();
-    inputField.sendKeys( "CDE356" );
+    inputField.sendKeys( "$CDE356" );
     WebElement publicFolder = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
     assertNotNull( publicFolder );
     publicFolder.click();
@@ -200,21 +202,21 @@ public class CDE356 {
     okButton.click();
     this.failure = 0;
     this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popup_state_state0" ) );
-    WebElement dashTitle = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='CDE356']" ) );
+    WebElement dashTitle = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='$CDE356']" ) );
     assertNotNull( dashTitle );
 
     //Click New
     newButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.newDashboard()']" ) );
     assertNotNull( newButton );
     newButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@title='CDE356']" ) );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@title='$CDE356']" ) );
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
 
     /*
      * ## Step 6
      */
     BrowseFiles browse = new BrowseFiles( this.driver );
-    browse.DeleteMultipleFilesByName( "/public", "CDE356" );
+    browse.DeleteMultipleFilesByName( "/public", "$CDE356" );
     browse.EmptyTrash();
     this.failure = 1;
   }
@@ -224,7 +226,7 @@ public class CDE356 {
     this.log.info( "tearDown##" + CDE356.class.getSimpleName() );
     if ( this.failure == 0 ) {
       BrowseFiles browse = new BrowseFiles( this.driver );
-      browse.DeleteMultipleFilesByName( "/public", "CDE356" );
+      browse.DeleteMultipleFilesByName( "/public", "$CDE356" );
       browse.EmptyTrash();
     }
 
