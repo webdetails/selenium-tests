@@ -114,7 +114,7 @@ public class TimePlotComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  //@Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1

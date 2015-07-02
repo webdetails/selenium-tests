@@ -32,6 +32,7 @@ public class PageUrl {
    * PUC
    */
   public static final String PUC = BASE_URL + "Home";
+  public static final String PUC_LOGIN = BASE_URL + "Login";
 
   /*
    * CDF

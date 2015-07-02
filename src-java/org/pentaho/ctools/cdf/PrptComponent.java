@@ -109,7 +109,7 @@ public class PrptComponent {
    * Steps:
    *    1. Check title web page and sample title.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
@@ -132,7 +132,7 @@ public class PrptComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
@@ -179,7 +179,7 @@ public class PrptComponent {
    *    1. Select PDF
    *    2. Select HTML
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_SelectHTMLAndPDF_PageDisplayedAccording() {
     this.log.info( "tc3_SelectHTMLAndPDF_PageDisplayedAccording" );
 
@@ -276,7 +276,7 @@ public class PrptComponent {
    *    1. Enable prompt panel
    *    2. Disable prompt panel
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
     this.log.info( "tc4_TogglePromptPanel_PromptPanelEnableDisable" );
     this.driver.switchTo().defaultContent();
@@ -307,7 +307,7 @@ public class PrptComponent {
    *    2. Enable Motorcycles and assert results
    *
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
     this.log.info( "tc5_SelectSeveralProducts_ReportIsRefreshed" );
     this.driver.switchTo().defaultContent();
@@ -385,9 +385,8 @@ public class PrptComponent {
    *    6. Select: Comma Separated Value
    *    7. Select: Rich-Text-Format
    *    8. Select: Text
-   * @throws InterruptedException
    */
-  @Test( timeout = 120000 )
+  @Test
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
     this.log.info( "tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised" );
     this.driver.switchTo().defaultContent();

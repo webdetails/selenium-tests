@@ -32,10 +32,9 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -49,10 +48,6 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class LoginPentaho {
   // Instance of the driver (browser emulator)
   private final WebDriver driver = CToolsTestSuite.getDriver();
-  // Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
@@ -78,17 +73,17 @@ public class LoginPentaho {
   public void tc1_Login_SuccessAuthentication() {
     this.log.debug( "tc1_Login_SuccessAuthentication" );
     //## Step 1
-    this.driver.get( this.baseUrl + "Login" );
+    this.driver.get( PageUrl.PUC_LOGIN );
 
     //Wait for form display
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='login-form-container']/div/h1" ) ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
     assertEquals( "User Console", this.driver.findElement( By.xpath( "//div[@id='login-form-container']/div/h1" ) ).getText() );
 
     //## Step 2
     //Wait for all all elements in the form to be visible
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "j_username" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "j_password" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.cssSelector( "button.btn" ) ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
     this.driver.findElement( By.id( "j_username" ) ).clear();
     this.driver.findElement( By.id( "j_username" ) ).sendKeys( "admin" );
     this.driver.findElement( By.id( "j_password" ) ).clear();
@@ -101,9 +96,9 @@ public class LoginPentaho {
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    this.wait.until( ExpectedConditions.titleContains( "Pentaho User Console" ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//iframe[@id='home.perspective']" ) ) );
+    this.elemHelper.WaitForTitle( this.driver, "Pentaho User Console" );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//iframe[@id='home.perspective']" ) );
     assertNotNull( this.driver.findElement( By.xpath( "//iframe[@id='home.perspective']" ) ) );
     assertEquals( "Pentaho User Console", this.driver.getTitle() );
 

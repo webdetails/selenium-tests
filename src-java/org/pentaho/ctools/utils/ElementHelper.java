@@ -54,6 +54,101 @@ public class ElementHelper {
   private final Logger log = LogManager.getLogger( ElementHelper.class );
 
   /**
+   * This method shall wait for the title and return it.
+   * 
+   * @param driver
+   * @param title
+   * @return
+   */
+  public String WaitForTitle( final WebDriver driver, final String title ) {
+    this.log.debug( "WaitForTitle(Main)::Enter" );
+    String returnTitle = this.WaitForTitle( driver, title, 30, 150 );
+    this.log.debug( "WaitForTitle(Main)::Exit" );
+    return returnTitle;
+  }
+
+  /**
+   * This method shall wait for the title and return it. The developer can
+   * specify the timeout and pollingTime.
+   * 
+   * 
+   * @param driver
+   * @param title
+   * @param timeout
+   * @param pollingTime
+   * @return
+   */
+  public String WaitForTitle( final WebDriver driver, final String title, final Integer timeout,
+      final Integer pollingTime ) {
+    this.log.debug( "WaitForTitle::Enter" );
+    String returnTitle = "";
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+
+    ExecutorService executor = null;
+
+    try {
+
+      class RunnableObject implements Runnable {
+
+        private Boolean textIsEquals;
+
+        public Boolean isTextEquals() {
+          return this.textIsEquals;
+        }
+
+        @Override
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
+
+          // Wait for element visible
+          this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {
+
+            @Override
+            public Boolean apply( WebDriver d ) {
+              String currentTitle = driver.getTitle();
+              return currentTitle != null && currentTitle.contains( title );
+            }
+          } );
+        }
+      }
+
+      RunnableObject r = new RunnableObject();
+
+      executor = Executors.newSingleThreadExecutor();
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
+      if ( r.isTextEquals() ) { // If the text is equals then send the text that we wait for.
+        returnTitle = title;
+        this.log.debug( "Wait for text successful!" );
+      }
+    } catch ( InterruptedException ie ) {
+      this.log.warn( "Interrupted Exception" );
+      this.log.warn( ie.toString() );
+    } catch ( ExecutionException ee ) {
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
+        this.log.warn( "WebDriver timeout exceeded!" );
+      } else {
+        this.log.warn( "Execution Exception" );
+        this.log.warn( ee.toString() );
+      }
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      this.log.warn( "Thread timeout exceeded!" );
+      this.log.warn( cte.toString() );
+    } catch ( Exception e ) {
+      this.log.error( "Exception" );
+      this.log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
+    }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+    this.log.debug( "WaitForTitle::Exit" );
+    return returnTitle;
+  }
+
+  /**
    * This method works as a wrapper for findElement method of WebDriver.
    * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
    * the element is not ready in DOM. Hence, to prevent exception, we develop
