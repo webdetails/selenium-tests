@@ -25,18 +25,17 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -48,24 +47,17 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class AddinReferenceEdit {
+  // Font size as changed
+  private Boolean bFontChanged = false;
   // Instance of the driver (browser emulator)
-  private static WebDriver DRIVER;
-  // The base url to be append the relative url in test
-  private static String BASE_URL;
-  //Access to wrapper for webdriver
-  private static ElementHelper elemHelper = new ElementHelper();
+  private final WebDriver driver = CToolsTestSuite.getDriver();
+  // Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private static Logger LOG = LogManager.getLogger( AddinReferenceEdit.class );
+  private final Logger log = LogManager.getLogger( AddinReferenceEdit.class );
 
   @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( DRIVER );
-
-  @BeforeClass
-  public static void setUpClass() {
-    LOG.info( "setUp##" + AddinReferenceEdit.class.getSimpleName() );
-    DRIVER = CToolsTestSuite.getDriver();
-    BASE_URL = CToolsTestSuite.getBaseUrl();
-  }
+  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -80,66 +72,74 @@ public class AddinReferenceEdit {
    *    2. Edit the sample to have title with font size 34.
    *    3. Check the value on the sample was changed.
    */
-  @Test( timeout = 90000 )
+  @Test
   public void tc01_ChangeAddinReferenceSample_FontSizeWasChanged() {
-    LOG.info( "tc01_ChangeAddinReferenceSample_FontSizeWasChanged" );
+    this.log.info( "tc01_ChangeAddinReferenceSample_FontSizeWasChanged" );
 
     /*
      * ## Step 1
      */
     //Go to AddinReference
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AAddIns%3AaddIns.wcdf/generatedContent" );
-    elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
-    WebElement titleWithFontSize18 = elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
-    assertEquals( "font-size: 18px;", titleWithFontSize18.getAttribute( "style" ) );
+    this.driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
+    //NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    // Wait for title
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='Title']/span" ) );
+    String fontSize18 = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='Title']/span" ), "style" );
+    assertEquals( "font-size: 18px;", fontSize18 );
 
     /*
      * ## Step 2
      */
-    AddinReferenceEdit.ChangeFontSize( "34" );
+    this.ChangeFontSize( "34" );
 
     /*
      * ## Step 3
      */
     //Go to AddinReference
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AAddIns%3AaddIns.wcdf/generatedContent" );
+    this.driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
     //NOTE - we have to wait for loading disappear
-    elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    titleWithFontSize18 = elemHelper.FindElement( DRIVER, By.xpath( "//div[@id='Title']/span" ) );
-    assertEquals( "font-size: 34px;", titleWithFontSize18.getAttribute( "style" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    String fontSize34 = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='Title']/span" ), "style" );
+    assertEquals( "font-size: 34px;", fontSize34 );
   }
 
   /**
    *
    * @param value
    */
-  private static void ChangeFontSize( String value ) {
-    DRIVER.get( BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AAddIns%3AaddIns.wcdf/wcdf.edit" );
+  private void ChangeFontSize( String value ) {
+    this.log.info( "ChangeFontSize" );
+    this.driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE_EDIT );
 
     //Expand first row - Title
-    elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "span.expander" ) );
-    elemHelper.ClickJS( DRIVER, By.cssSelector( "span.expander" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "span.expander" ) );
+    this.elemHelper.ClickJS( this.driver, By.cssSelector( "span.expander" ) );
     //Click in HTML to open the Properties
-    Actions acts = new Actions( DRIVER );
-    acts.click( elemHelper.FindElement( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
+    Actions acts = new Actions( this.driver );
+    acts.click( this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
     acts.build().perform();
     //Click in field 'Font Size' to be editable
-    elemHelper.ClickJS( DRIVER, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
     //Write 34
-    elemHelper.FindElement( DRIVER, By.name( "value" ) ).clear();
-    elemHelper.FindElement( DRIVER, By.xpath( "//form[@class='cdfddInput']/input" ) ).sendKeys( value );
-    elemHelper.FindElement( DRIVER, By.xpath( "//form[@class='cdfddInput']/input" ) ).submit();
+    this.elemHelper.FindElement( this.driver, By.name( "value" ) ).clear();
+    this.elemHelper.ClickAndSendKeys( this.driver, By.xpath( "//form[@class='cdfddInput']/input" ), value );
+    this.elemHelper.FindElement( this.driver, By.xpath( "//form[@class='cdfddInput']/input" ) ).submit();
+    this.bFontChanged = true;
     //Save the changes
-    elemHelper.Click( DRIVER, By.linkText( "Save" ) );
+    this.elemHelper.ClickJS( this.driver, By.linkText( "Save" ) );
     //Wait for element present and invisible
-    elemHelper.WaitForElementVisibility( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
-    elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@id='notifyBar']" ) );
+    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='notifyBar']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@id='notifyBar']" ) );
   }
 
-  @AfterClass
-  public static void tearDownClass() {
-    ChangeFontSize( "18" );
-
-    LOG.info( "tearDown##" + AddinReferenceEdit.class.getSimpleName() );
+  @After
+  public void tearDown() {
+    this.log.info( "tearDown##" + AddinReferenceEdit.class.getSimpleName() );
+    if ( this.bFontChanged ) {
+      ChangeFontSize( "18" );
+    }
   }
 }

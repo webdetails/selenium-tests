@@ -37,12 +37,12 @@ import org.apache.logging.log4j.Logger;
 
 public class DirectoryWatcher {
   //Time to wait for a file or something new get in directory
-  private static final long WAIT_TIMEOUT = 30;
+  private final long waitTimeout = 30;
   //Log instance
-  private static final Logger LOG = LogManager.getLogger( DirectoryWatcher.class );
+  private final Logger log = LogManager.getLogger( DirectoryWatcher.class );
 
-  public static boolean WatchForCreate( String path ) {
-    return WatchForCreate( path, WAIT_TIMEOUT );
+  public boolean WatchForCreate( String path ) {
+    return WatchForCreate( path, this.waitTimeout );
   }
 
   /**
@@ -54,8 +54,10 @@ public class DirectoryWatcher {
    * @return true  - file was created in dir
    *         false - otherwise
    */
-  public static boolean WatchForCreate( final String path, long timeout ) {
+  public boolean WatchForCreate( final String path, long timeout ) {
+    this.log.debug( "WatchForCreate::Enter" );
     boolean bFileCreated = false;
+    ExecutorService executor = null;
 
     try {
       class RunnableObject implements Runnable {
@@ -120,16 +122,19 @@ public class DirectoryWatcher {
 
       RunnableObject r = new RunnableObject( bFileCreated );
 
-      ExecutorService executor = Executors.newSingleThreadExecutor();
+      executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      executor.shutdown();
       bFileCreated = r.getValue();
 
     } catch ( Exception e ) {
-      LOG.error( e.getMessage() );
-      LOG.error( e.toString() );
+      this.log.error( e.getMessage() );
+      this.log.error( e.toString() );
     }
 
+    if ( executor != null ) {
+      executor.shutdown();
+    }
+    this.log.debug( "WatchForCreate::Exit" );
     return bFileCreated;
   }
 }

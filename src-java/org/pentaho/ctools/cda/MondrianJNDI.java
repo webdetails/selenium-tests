@@ -380,6 +380,7 @@ public class MondrianJNDI {
     /*
      * ## Step 1
      */
+    /*
     Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
     //wait to render page
@@ -387,6 +388,7 @@ public class MondrianJNDI {
     //Check the presented contains
     WebElement elemStatus = this.elemHelper.FindElement( this.driver, By.id( "status" ) );
     assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
+    */
     //Check we have three elements and no more than that
     String textPaging = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
@@ -399,11 +401,12 @@ public class MondrianJNDI {
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
 
       //Click to export
-      Thread.sleep( 3000 );//TODO - we have an issue that the click doesn't work same times, now I'm testing if the next test don't fail.
-      this.elemHelper.ClickJS( this.driver, By.id( "export" ) );
+      Thread.sleep( 5000 );//TODO - we have an issue that the click doesn't work same times, now I'm testing if the next test don't fail.
+      this.elemHelper.MoveToElementAndClick( this.driver, By.id( "export" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher.WatchForCreate( this.downloadDir );
+      DirectoryWatcher dw = new DirectoryWatcher();
+      dw.WatchForCreate( this.downloadDir );
 
       //Check if file was download
       assertTrue( new File( this.downloadDir + "\\cda-export.xls" ).exists() );
@@ -432,6 +435,7 @@ public class MondrianJNDI {
     /*
      * ## Step 1
      */
+    /*
     Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
     //wait to render page
@@ -439,6 +443,7 @@ public class MondrianJNDI {
     //Check the presented contains
     WebElement elemStatus = this.elemHelper.FindElement( this.driver, By.id( "status" ) );
     assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
+    */
     //Check we have three elements and no more than that
     String textPaging = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );

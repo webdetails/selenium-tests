@@ -89,7 +89,7 @@ public class ExecutePrptComponent {
    * Steps:
    *    1. Check title web page and sample title.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
@@ -111,7 +111,7 @@ public class ExecutePrptComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -145,7 +145,7 @@ public class ExecutePrptComponent {
    * Steps:
    *    1. Check the contents presented
    */
-  @Test( timeout = 90000 )
+  @Test
   public void tc3_CheckDisplayPage_DataIsDisplayedAsExpected() {
     LOG.debug( "tc3_CheckDisplayPage_DataIsDisplayedAsExpected" );
 
@@ -206,7 +206,7 @@ public class ExecutePrptComponent {
    *    1. Enable prompt panel
    *    2. Disable prompt panel
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
     LOG.debug( "tc4_TogglePromptPanel_PromptPanelEnableDisable" );
     this.driver.switchTo().defaultContent();
@@ -237,7 +237,7 @@ public class ExecutePrptComponent {
    *    1. Disable Classic Cars and assert results
    *    2. Enable Motorcycles and assert results
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
     LOG.debug( "tc5_SelectSeveralProducts_ReportIsRefreshed" );
     this.driver.switchTo().defaultContent();
@@ -318,11 +318,12 @@ public class ExecutePrptComponent {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test( timeout = 240000 )
+  @Test
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
     LOG.debug( "tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised" );
 
     String downloadDir = CToolsTestSuite.getDownloadDir();
+    DirectoryWatcher dw = new DirectoryWatcher();
 
     /*
      *  ## Step 1
@@ -416,7 +417,7 @@ public class ExecutePrptComponent {
     select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/excel;page-mode=flow" );
     //Wait for file to be created in the destination dir
-    DirectoryWatcher.WatchForCreate( downloadDir );
+    dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.xls" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xls" ).delete();
@@ -428,7 +429,7 @@ public class ExecutePrptComponent {
     select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow" );
     //Wait for file to be created in the destination dir
-    DirectoryWatcher.WatchForCreate( downloadDir );
+    dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.xlsx" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xlsx" ).delete();
@@ -440,7 +441,7 @@ public class ExecutePrptComponent {
     select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/csv;page-mode=stream" );
     //Wait for file to be created in the destination dir
-    DirectoryWatcher.WatchForCreate( downloadDir );
+    dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.csv" ).exists() );
     new File( downloadDir + "\\InventorybyLine.csv" ).delete();
@@ -452,7 +453,7 @@ public class ExecutePrptComponent {
     select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/rtf;page-mode=flow" );
     //Wait for file to be created in the destination dir
-    DirectoryWatcher.WatchForCreate( downloadDir );
+    dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.rtf" ).exists() );
     new File( downloadDir + "\\InventorybyLine.rtf" ).delete();
@@ -487,7 +488,7 @@ public class ExecutePrptComponent {
    * Steps:
    *    1. Click in close window
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc7_ClosePrpt_PopUpIsClosed() {
     LOG.debug( "tc7_ClosePrpt_PopUpIsClosed" );
 

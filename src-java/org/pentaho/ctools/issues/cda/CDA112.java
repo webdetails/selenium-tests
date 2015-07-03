@@ -169,7 +169,8 @@ public class CDA112 {
       buttonExport.click();
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher.WatchForCreate( this.downloadDir );
+      DirectoryWatcher dw = new DirectoryWatcher();
+      dw.WatchForCreate( this.downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath );

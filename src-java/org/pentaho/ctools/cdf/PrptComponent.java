@@ -398,6 +398,7 @@ public class PrptComponent {
     this.driver.switchTo().defaultContent();
 
     String downloadDir = CToolsTestSuite.getDownloadDir();
+    DirectoryWatcher dw = new DirectoryWatcher();
 
     /*
      *  ## Step 1
@@ -497,7 +498,7 @@ public class PrptComponent {
     select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/excel;page-mode=flow" );
     //Wait for file to be created in the destination dir
-    DirectoryWatcher.WatchForCreate( downloadDir );
+    dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.xls" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xls" ).delete();
@@ -509,7 +510,7 @@ public class PrptComponent {
     select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow" );
     //Wait for file to be created in the destination dir
-    DirectoryWatcher.WatchForCreate( downloadDir );
+    dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.xlsx" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xlsx" ).delete();
@@ -521,7 +522,7 @@ public class PrptComponent {
     select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/csv;page-mode=stream" );
     //Wait for file to be created in the destination dir
-    DirectoryWatcher.WatchForCreate( downloadDir );
+    dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.csv" ).exists() );
     new File( downloadDir + "\\InventorybyLine.csv" ).delete();
@@ -533,7 +534,7 @@ public class PrptComponent {
     select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/rtf;page-mode=flow" );
     //Wait for file to be created in the destination dir
-    DirectoryWatcher.WatchForCreate( downloadDir );
+    dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.rtf" ).exists() );
     new File( downloadDir + "\\InventorybyLine.rtf" ).delete();

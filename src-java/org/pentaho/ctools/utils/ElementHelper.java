@@ -460,20 +460,23 @@ public class ElementHelper {
    * @param locator
    */
   public void MoveToElementAndClick( WebDriver driver, By locator ) {
-    this.log.debug( "ClickElementInvisible::Enter" );
-    this.log.debug( "Locator: " + locator.toString() );
+    this.log.debug( "MoveToElementAndClick::Enter" );
 
-    WebElement element = FindElementInvisible( driver, locator );
-    if ( element != null ) {
-      Actions builder = new Actions( driver );
-      builder.moveToElement( element ).click( element );
-      builder.perform();
-
-    } else {
-      this.log.error( "Element is null " + locator.toString() );
+    try {
+      WebElement element = WaitForElementPresenceAndVisible( driver, locator );
+      if ( element != null ) {
+        Actions builder = new Actions( driver );
+        builder.moveToElement( element ).click( element );
+        builder.perform();
+      } else {
+        this.log.error( "Element is null " + locator.toString() );
+      }
+    } catch ( StaleElementReferenceException sere ) {
+      //Repeat it again
+      MoveToElementAndClick( driver, locator );
     }
 
-    this.log.debug( "ClickElementInvisible::Exit" );
+    this.log.debug( "MoveToElementAndClick::Exit" );
   }
 
   /**
