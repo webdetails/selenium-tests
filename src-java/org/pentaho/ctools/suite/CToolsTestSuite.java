@@ -156,7 +156,7 @@ public class CToolsTestSuite {
     DRIVER.manage().window().setPosition( new Point( 0, 0 ) );
     DRIVER.manage().window().setSize( new Dimension( 1360, 764 ) );
     DRIVER.manage().timeouts().pageLoadTimeout( 120, TimeUnit.SECONDS );
-    DRIVER.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+    DRIVER.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
     DRIVER.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );
 
     // Initialize WAIT

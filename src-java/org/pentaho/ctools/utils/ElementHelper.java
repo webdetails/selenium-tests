@@ -82,6 +82,7 @@ public class ElementHelper {
       final Integer pollingTime ) {
     this.log.debug( "WaitForTitle::Enter" );
     String returnTitle = "";
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     ExecutorService executor = null;
 
@@ -140,6 +141,8 @@ public class ElementHelper {
     if ( executor != null ) {
       executor.shutdown();
     }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     this.log.debug( "WaitForTitle::Exit" );
     return returnTitle;
@@ -292,6 +295,7 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     String textPresent = "";
     ExecutorService executor = null;
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -360,6 +364,8 @@ public class ElementHelper {
     if ( executor != null ) {
       executor.shutdown();
     }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     this.log.debug( "WaitForTextPresence::Exit" );
     return textPresent;
@@ -500,6 +506,8 @@ public class ElementHelper {
     boolean isElemVisible = false;
     ExecutorService executor = null;
 
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+
     try {
       class RunnableObject implements Runnable {
 
@@ -560,6 +568,8 @@ public class ElementHelper {
       executor.shutdown();
     }
 
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
     this.log.debug( "WaitForElementInvisibility::Exit" );
 
     return isElemVisible;
@@ -598,6 +608,7 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
     ExecutorService executor = null;
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -666,6 +677,8 @@ public class ElementHelper {
       executor.shutdown();
     }
 
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
     this.log.debug( "WaitForElementPresenceAndVisible::Exit" );
     return element;
   }
@@ -711,6 +724,7 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
     ExecutorService executor = null;
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -779,6 +793,8 @@ public class ElementHelper {
       executor.shutdown();
     }
 
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
     this.log.debug( "WaitForElementPresence::Exit" );
     return element;
   }
@@ -798,6 +814,8 @@ public class ElementHelper {
     List<WebElement> elements = null;
     Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS ).ignoring( StaleElementReferenceException.class );
 
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+
     try {
       elements = driver.findElements( locator );
       if ( elements.size() > 0 ) {
@@ -815,7 +833,7 @@ public class ElementHelper {
     // ------------ ALWAYS REQUIRE TO SET THE DEFAULT VALUE --------------------
     // when set a new implicitlyWait timeout, we have to set the default
     // in order to not destroy other invocations of findElement ('WebDriver').
-
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
     this.log.debug( "WaitForElementVisibility::Exit" );
     return element;
   }
@@ -1080,6 +1098,7 @@ public class ElementHelper {
     Boolean notPresent = false;
     ExecutorService executor = null;
     this.log.debug( "Locator: " + locator.toString() );
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1144,6 +1163,8 @@ public class ElementHelper {
       executor.shutdown();
     }
 
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
     this.log.debug( "WaitForElementNotPresent::Exit" );
     return notPresent;
   }
@@ -1180,6 +1201,7 @@ public class ElementHelper {
     this.log.debug( "Attribute: " + attributeName );
     this.log.debug( "AttributeValue: " + attributeValue );
     ExecutorService executor = null;
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1236,6 +1258,8 @@ public class ElementHelper {
       executor.shutdown();
     }
 
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
     this.log.debug( "WaitForAttributeValue::Exit" );
   }
 
@@ -1271,6 +1295,7 @@ public class ElementHelper {
     this.log.debug( "Attribute: " + attributeName );
     this.log.debug( "AttributeValue: " + attributeValue );
     ExecutorService executor = null;
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1326,6 +1351,8 @@ public class ElementHelper {
     if ( executor != null ) {
       executor.shutdown();
     }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     this.log.debug( "WaitForAttributeValue::Exit" );
   }
