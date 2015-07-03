@@ -247,6 +247,12 @@ public class PrptComponent {
     //Check for View Report button
     buttonName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//button/span" ) );
     assertEquals( "View Report", buttonName );
+    try { //TODO - just perform some testing on this feature.
+      Thread.sleep( 3000 );
+    } catch ( InterruptedException e ) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     //Check the generated image
     this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );
     WebDriver driverReportContent = this.driver.switchTo().frame( "reportContent" );
@@ -452,6 +458,13 @@ public class PrptComponent {
     this.driver.switchTo().frame( "sampleObject_prptFrame" );
     select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/pdf" );
+    //TODO - testing this, to avoid failing. After we see that the sleep helps - we study an alternative.
+    try {
+      Thread.sleep( 10000 );
+    } catch ( InterruptedException e ) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
     //Check the generated image
     this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );

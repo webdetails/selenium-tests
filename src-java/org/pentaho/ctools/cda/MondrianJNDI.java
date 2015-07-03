@@ -399,7 +399,8 @@ public class MondrianJNDI {
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
 
       //Click to export
-      this.elemHelper.MoveToElementAndClick( this.driver, By.id( "export" ) );
+      Thread.sleep( 3000 );//TODO - we have an issue that the click doesn't work same times, now I'm testing if the next test don't fail.
+      this.elemHelper.ClickJS( this.driver, By.id( "export" ) );
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher.WatchForCreate( this.downloadDir );
