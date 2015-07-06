@@ -28,9 +28,12 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,6 +44,12 @@ public class DirectoryWatcher {
   //Log instance
   private final Logger log = LogManager.getLogger( DirectoryWatcher.class );
 
+  /**
+   * Constructor
+   * 
+   * @param path
+   * @return
+   */
   public boolean WatchForCreate( String path ) {
     return WatchForCreate( path, this.waitTimeout );
   }
@@ -57,84 +66,88 @@ public class DirectoryWatcher {
   public boolean WatchForCreate( final String path, long timeout ) {
     this.log.debug( "WatchForCreate::Enter" );
     boolean bFileCreated = false;
-    ExecutorService executor = null;
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+
+    CallCheckFolder r = new CallCheckFolder( path );
+    Future<Boolean> future = executor.submit( r );
 
     try {
-      class RunnableObject implements Runnable {
-
-        private Logger log = LogManager.getLogger( RunnableObject.class );
-
-        private boolean isFileCreated;
-
-        public RunnableObject( boolean isFileCreated ) {
-          this.isFileCreated = isFileCreated;
-        }
-
-        public boolean getValue() {
-          return this.isFileCreated;
-        }
-
-        @Override
-        public void run() {
-
-          try (WatchService watcher = FileSystems.getDefault().newWatchService()) {
-
-            Path dir = Paths.get( path );
-            dir.register( watcher, StandardWatchEventKinds.ENTRY_CREATE );
-
-            while ( !this.isFileCreated ) {
-              WatchKey key;
-              try {
-                key = watcher.take();
-              } catch ( InterruptedException ex ) {
-                this.log.error( ex.getMessage() );
-                break;
-              }
-
-              for ( WatchEvent<?> event : key.pollEvents() ) {
-                WatchEvent.Kind<?> kind = event.kind();
-
-                if ( kind == StandardWatchEventKinds.OVERFLOW ) {
-                  continue;
-                }
-
-                @SuppressWarnings( "unchecked" )
-                WatchEvent<Path> ev = (WatchEvent<Path>) event;
-                Path fileName = ev.context();
-
-                this.log.info( kind.name() + ": " + fileName );
-                if ( kind == StandardWatchEventKinds.ENTRY_CREATE ) {
-                  this.isFileCreated = true;
-                  this.log.info( "The file was created: " + fileName );
-                }
-              }
-
-              boolean valid = key.reset();
-              if ( !valid ) {
-                break;
-              }
-            }
-          } catch ( Exception e ) {
-            this.log.error( e.getMessage() );
-          }
-        }
-      }
-
-      RunnableObject r = new RunnableObject( bFileCreated );
-
-      executor = Executors.newSingleThreadExecutor();
-      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      bFileCreated = r.getValue();
-
+      this.log.debug( "Started..." );
+      bFileCreated = future.get( timeout, TimeUnit.SECONDS );
+      this.log.debug( "Finished!" );
+    } catch ( TimeoutException e ) {
+      future.cancel( true );
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );
       this.log.error( e.toString() );
     }
 
-    if ( executor != null ) {
-      executor.shutdown();
-    }
+    /*
+     * This will send an interrupted signal to the thread
+     * http://stackoverflow.com/questions/2275443/how-to-timeout-a-thread
+     */
+    executor.shutdownNow();
+
     this.log.debug( "WatchForCreate::Exit" );
     return bFileCreated;
+  }
+}
+
+class CallCheckFolder implements Callable<Boolean> {
+  private Logger log = LogManager.getLogger( CallCheckFolder.class );
+  private boolean isFileCreated;
+  private String path;
+
+  public CallCheckFolder( String path ) {
+    this.path = path;
+  }
+
+  @Override
+  public Boolean call() {
+
+    try (WatchService watcher = FileSystems.getDefault().newWatchService()) {
+
+      Path dir = Paths.get( this.path );
+      dir.register( watcher, StandardWatchEventKinds.ENTRY_CREATE );
+
+      while ( !this.isFileCreated ) {
+        this.log.debug( "Start watching..." );
+        WatchKey key;
+        try {
+          key = watcher.take();
+        } catch ( InterruptedException ex ) {
+          this.log.error( ex.toString() );
+          break;
+        }
+
+        for ( WatchEvent<?> event : key.pollEvents() ) {
+          WatchEvent.Kind<?> kind = event.kind();
+
+          if ( kind == StandardWatchEventKinds.OVERFLOW ) {
+            continue;
+          }
+
+          @SuppressWarnings( "unchecked" )
+          WatchEvent<Path> ev = (WatchEvent<Path>) event;
+          Path fileName = ev.context();
+
+          this.log.info( kind.name() + ": " + fileName );
+          if ( kind == StandardWatchEventKinds.ENTRY_CREATE ) {
+            this.isFileCreated = true;
+            this.log.info( "The file was created: " + fileName );
+          }
+        }
+
+        boolean valid = key.reset();
+        if ( !valid ) {
+          break;
+        }
+      }
+    } catch ( Exception e ) {
+      this.log.error( e.toString() );
+    }
+
+    this.log.debug( "Stop watched!" );
+    return this.isFileCreated;
   }
 }

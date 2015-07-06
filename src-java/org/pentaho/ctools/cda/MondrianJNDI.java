@@ -42,6 +42,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -380,15 +381,6 @@ public class MondrianJNDI {
     /*
      * ## Step 1
      */
-    /*
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
-    select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
-    //wait to render page
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    //Check the presented contains
-    WebElement elemStatus = this.elemHelper.FindElement( this.driver, By.id( "status" ) );
-    assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
-    */
     //Check we have three elements and no more than that
     String textPaging = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
@@ -401,8 +393,16 @@ public class MondrianJNDI {
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
 
       //Click to export
-      Thread.sleep( 5000 );//TODO - we have an issue that the click doesn't work same times, now I'm testing if the next test don't fail.
-      this.elemHelper.MoveToElementAndClick( this.driver, By.id( "export" ) );
+      //Thread.sleep( 5000 );//TODO - we have an issue that the click doesn't work same times, now I'm testing if the next test don't fail.
+      //this.elemHelper.Click( this.driver, By.id( "export" ) );
+
+      String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+      String onClickScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('click', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onclick');}";
+
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      //executor.executeScript( "arguments[0].click();", element );
+      js.executeScript( mouseOverScript, buttonExport );
+      js.executeScript( onClickScript, buttonExport );
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
@@ -428,22 +428,13 @@ public class MondrianJNDI {
    *    1. Check query url diaLOG
    *    2. Open a new browser with query url
    */
-  @Test
+  //@Test
   public void tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage() {
     this.log.info( "tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" );
 
     /*
      * ## Step 1
      */
-    /*
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
-    select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
-    //wait to render page
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    //Check the presented contains
-    WebElement elemStatus = this.elemHelper.FindElement( this.driver, By.id( "status" ) );
-    assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
-    */
     //Check we have three elements and no more than that
     String textPaging = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
@@ -492,7 +483,7 @@ public class MondrianJNDI {
    *    4. In the new window, check the schedule
    *    5. Remove the schedule
    */
-  @Test
+  //@Test
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
     this.log.info( "tc5_CacheThisSimple_ScheduleIsSetSuccessful" );
     String selectedHours = "21";
