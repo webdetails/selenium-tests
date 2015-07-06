@@ -1447,6 +1447,7 @@ public class ElementHelper {
    * @param yOffset
    */
   public void MoveToElement( final WebDriver driver, final By toLocator, final int xOffset, final int yOffset ) {
+    this.log.debug( "MoveToElement::Enter" );
     try {
       WebElement element = WaitForElementPresenceAndVisible( driver, toLocator );
       if ( element != null ) {
@@ -1460,6 +1461,7 @@ public class ElementHelper {
       this.log.warn( "Stale Element Reference Exception" );
       MoveToElement( driver, toLocator, xOffset, yOffset );
     }
+    this.log.debug( "MoveToElement::Exit" );
   }
 
   /**
@@ -1469,7 +1471,8 @@ public class ElementHelper {
    * @param driver
    * @param locator
    */
-  public void MouseOverElementAndClick( WebDriver driver, By locator ) {
+  public void MouseOverElementAndClick( final WebDriver driver, final By locator ) {
+    this.log.debug( "MouseOverElementAndClick::Enter" );
     WebElement elementToOver = WaitForElementPresenceAndVisible( driver, locator );
     if ( elementToOver != null ) {
       String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
@@ -1478,7 +1481,10 @@ public class ElementHelper {
       JavascriptExecutor js = (JavascriptExecutor) driver;
       js.executeScript( mouseOverScript, elementToOver );
       js.executeScript( onClickScript, elementToOver );
+    } else {
+      this.log.warn( "Element null!" );
     }
+    this.log.debug( "MouseOverElementAndClick::Exit" );
   }
 
 }
