@@ -428,7 +428,7 @@ public class MondrianJNDI {
    *    1. Check query url diaLOG
    *    2. Open a new browser with query url
    */
-  //@Test
+  @Test
   public void tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage() {
     this.log.info( "tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" );
 
@@ -483,7 +483,7 @@ public class MondrianJNDI {
    *    4. In the new window, check the schedule
    *    5. Remove the schedule
    */
-  //@Test
+  @Test
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
     this.log.info( "tc5_CacheThisSimple_ScheduleIsSetSuccessful" );
     String selectedHours = "21";
