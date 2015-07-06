@@ -34,7 +34,6 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -74,7 +73,7 @@ public class TrafficComponent {
   public void tc0_OpenSamplePage_Display() {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
-    // The URL for the CheckComponent under CDF samples
+    // The URL for the TrafficComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TrafficComponent
     this.driver.get( PageUrl.TRAFFIC_COMPONENT );
 
@@ -92,16 +91,16 @@ public class TrafficComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    String title = this.elemHelper.WaitForTitle( this.driver, "Community Dashboard Framework" );
     // Wait for visibility of 'VisualizationAPIComponent'
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "Community Dashboard Framework", title );
     assertEquals( "TrafficComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
@@ -115,7 +114,7 @@ public class TrafficComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     /*
@@ -149,7 +148,7 @@ public class TrafficComponent {
      *    1. Check if the plot is presented
      *    2. Move mouse over graphic and check the expected value for Total Price
      */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_MouseOverTrafficLight_TooltipDisplayed() {
     this.log.info( "tc3_MouseOverTrafficLight_TooltipDisplayed" );
     /*
@@ -161,9 +160,7 @@ public class TrafficComponent {
     /*
      *  ## Step 2
      */
-    Actions acts = new Actions( this.driver );
-    acts.moveToElement( elemTraffic, 5, 5 );
-    acts.build().perform();
+    this.elemHelper.MoveToElement( this.driver, By.cssSelector( "div.img.trafficYellow" ), 5, 5 );
 
     String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='ui-tooltip-content']" ) );
     String expectedTextV1 = "Value: 1.43199389E8";

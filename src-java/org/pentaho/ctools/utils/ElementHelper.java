@@ -1437,4 +1437,48 @@ public class ElementHelper {
     this.log.debug( "SelectByValue::Exit" );
   }
 
+  /**
+   * This method shall perform the MoveToElement wrap function of WebDriver.
+   * We have to do this wrap to avoid StaleElement exceptions.
+   * 
+   * @param driver
+   * @param toLocator
+   * @param xOffset
+   * @param yOffset
+   */
+  public void MoveToElement( final WebDriver driver, final By toLocator, final int xOffset, final int yOffset ) {
+    try {
+      WebElement element = WaitForElementPresenceAndVisible( driver, toLocator );
+      if ( element != null ) {
+        Actions acts = new Actions( driver );
+        acts.moveToElement( element, xOffset, yOffset );
+        acts.build().perform();
+      } else {
+        this.log.warn( "Element null!" );
+      }
+    } catch ( StaleElementReferenceException sere ) {
+      this.log.warn( "Stale Element Reference Exception" );
+      MoveToElement( driver, toLocator, xOffset, yOffset );
+    }
+  }
+
+  /**
+   * The method shall move mouse over the element and fire the event
+   * onclick when clicking on the element.
+   * 
+   * @param driver
+   * @param locator
+   */
+  public void MouseOverElementAndClick( WebDriver driver, By locator ) {
+    WebElement elementToOver = WaitForElementPresenceAndVisible( driver, locator );
+    if ( elementToOver != null ) {
+      String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+      String onClickScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('click', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onclick');}";
+
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript( mouseOverScript, elementToOver );
+      js.executeScript( onClickScript, elementToOver );
+    }
+  }
+
 }
