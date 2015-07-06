@@ -41,10 +41,12 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 /**
  * The script is testing the issue:
  * - http://jira.pentaho.com/browse/CDE-413
+ * - http://jira.pentaho.com/browse/CDE-569
  *
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-936
- *
+ * - http://jira.pentaho.com/browse/QUALITY-1146
+ * 
  * NOTE
  * To test this script it is required to have CDE plugin installed.
  *
@@ -72,13 +74,16 @@ public class CDE413 {
    *
    * Description:
    *    The test pretends validate the CDE-413 issue, so when user edits column types of a table component
-   *    the editor has nothing written other than the title of the input fields.
+   *    the editor has nothing written other than the title of the input fields. Also validating the CDE-569
+   *    issue where after adding arg and value to parameters and clicking OK, added data persists.
    *
    * Steps:
    *    1. Wait for new Dashboard to be created, assert elements on page and click "Components Panel"
    *    2. Wait for Components panel to be shown, expand "Others" and click "Table COmponent"
    *    3. Wait for table Component to be added and then click "Column Types" to edit
-   *    4. Wait for popup to appear, click "Add" and then assert all elements on popup
+   *    4. Wait for popup to appear, click "Add" and then assert all elements on popup. Close popup
+   *    5. Open Parameters popup and add 3 pairs of arg/value
+   *    6. Click Ok, assert values are shown, open popup and assert pairs are still there
    */
   @Test( timeout = 120000 )
   public void tc01_NewCdeDashboard_ColumnTypeEditor() {
@@ -87,7 +92,6 @@ public class CDE413 {
     /*
      * ## Step 1
      */
-    //Go to New CDE Dashboard
     //Go to New CDE Dashboard
     this.driver.get( PageUrl.CDE_DASHBOARD );
     //assert buttons
@@ -138,9 +142,86 @@ public class CDE413 {
     WebElement arg0RemoveElement = this.elemHelper.FindElement( this.driver, By.id( "remove_button_0" ) );
     WebElement arg0InputElement = this.elemHelper.FindElement( this.driver, By.id( "arg_0" ) );
     WebElement arg0DragDropIconElement = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.StringArrayDragIcon" ) );
+    WebElement closeButton = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.popupclose" ) );
     assertNotNull( arg0RemoveElement );
     assertNotNull( arg0InputElement );
     assertNotNull( arg0DragDropIconElement );
+    assertNotNull( closeButton );
+    closeButton.click();
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popupstates" ) );
+
+    /*
+     * ## Step 5
+     */
+    String arg0 = "0";
+    String arg1 = "1";
+    String arg2 = "2";
+    String val0 = "a";
+    String val1 = "b";
+    String val2 = "c";
+
+    //Open parameters popup
+    WebElement parameterButton = this.elemHelper.FindElement( this.driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
+    assertNotNull( parameterButton );
+    parameterButton.click();
+    WebElement parameterList = this.elemHelper.FindElement( this.driver, By.id( "StringList" ) );
+    assertNotNull( parameterList );
+
+    //Add 3 pairs arg/value
+    WebElement arg0Input = this.elemHelper.FindElement( this.driver, By.id( "arg_0" ) );
+    WebElement value0Input = this.elemHelper.FindElement( this.driver, By.id( "val_0" ) );
+    assertNotNull( arg0Input );
+    assertNotNull( value0Input );
+    arg0Input.sendKeys( arg0 );
+    value0Input.sendKeys( val0 );
+    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringListAddButton" ) );
+    WebElement arg1Input = this.elemHelper.FindElement( this.driver, By.id( "arg_1" ) );
+    WebElement value1Input = this.elemHelper.FindElement( this.driver, By.id( "val_1" ) );
+    assertNotNull( arg1Input );
+    assertNotNull( value1Input );
+    arg1Input.sendKeys( arg1 );
+    value1Input.sendKeys( val1 );
+    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringListAddButton" ) );
+    WebElement arg2Input = this.elemHelper.FindElement( this.driver, By.id( "arg_2" ) );
+    WebElement value2Input = this.elemHelper.FindElement( this.driver, By.id( "val_2" ) );
+    assertNotNull( arg2Input );
+    assertNotNull( value2Input );
+    arg2Input.sendKeys( arg2 );
+    value2Input.sendKeys( val2 );
+    WebElement okButton = this.elemHelper.FindElement( this.driver, By.id( "popup_state0_buttonOk" ) );
+    assertNotNull( okButton );
+    okButton.click();
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popupstates" ) );
+
+    /*
+     * ## Step 6
+     */
+    //Assert parameter text is shown
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ), "[[\"0\",\"a\"],[\"1\",\"b\"] (...)" );
+    String parameterText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
+    assertEquals( "[[\"0\",\"a\"],[\"1\",\"b\"] (...)", parameterText );
+
+    //Open parameter popup
+    parameterButton = this.elemHelper.FindElement( this.driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
+    assertNotNull( parameterButton );
+    parameterButton.click();
+    parameterList = this.elemHelper.FindElement( this.driver, By.id( "StringList" ) );
+    assertNotNull( parameterList );
+
+    //Assert values are kept
+    String arg0Actual = this.elemHelper.GetAttribute( this.driver, By.id( "arg_0" ), "value" );
+    String val0Actual = this.elemHelper.GetAttribute( this.driver, By.id( "val_0" ), "value" );
+    String arg1Actual = this.elemHelper.GetAttribute( this.driver, By.id( "arg_1" ), "value" );
+    String val1Actual = this.elemHelper.GetAttribute( this.driver, By.id( "val_1" ), "value" );
+    String arg2Actual = this.elemHelper.GetAttribute( this.driver, By.id( "arg_2" ), "value" );
+    String val2Actual = this.elemHelper.GetAttribute( this.driver, By.id( "val_2" ), "value" );
+    assertEquals( arg0, arg0Actual );
+    assertEquals( arg1, arg1Actual );
+    assertEquals( arg2, arg2Actual );
+    assertEquals( val0, val0Actual );
+    assertEquals( val1, val1Actual );
+    assertEquals( val2, val2Actual );
+
   }
 
 }
