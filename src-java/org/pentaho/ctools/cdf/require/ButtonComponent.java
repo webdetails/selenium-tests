@@ -28,13 +28,11 @@ import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -47,13 +45,9 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class ButtonComponent {
   //Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
-  // Instance to be used on wait commands
-  private Wait<WebDriver> wait = CToolsTestSuite.getWait();
-  // The base url to be append the relative url in test
-  private String baseUrl = CToolsTestSuite.getBaseUrl();
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -67,12 +61,12 @@ public class ButtonComponent {
   @Test
   public void tc0_OpenSamplePage_Display() {
     // The URL for the ButtonComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component
-    // Reference/Core Components/ButtonComponent
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A82-ButtonComponent%3Abutton_component.xcdf/generatedContent" );
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/ButtonComponent
+    this.driver.get( PageUrl.BUTTON_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -85,16 +79,16 @@ public class ButtonComponent {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    String pageTitle = this.elemHelper.WaitForTitle( this.driver, "Community Dashboard Framework" );
     // Wait for visibility of 'VisualizationAPIComponent'
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    String sampleTitle = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "ButtonComponent" );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
-    assertEquals( "ButtonComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", pageTitle );
+    assertEquals( "ButtonComponent", sampleTitle );
   }
 
   /**
@@ -107,15 +101,18 @@ public class ButtonComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
-    // ## Step 1
+    /*
+     * ## Step 1
+     */
     // Render again the sample
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
@@ -133,22 +130,20 @@ public class ButtonComponent {
    *    1. Click in button
    *    2. Check for alert
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc3_ClickableButton_AlertMessageDisplayed() {
-    // ## Step 1
+    /*
+     * ## Step 1
+     */
     String buttonText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//button" ) );
     assertEquals( "A button", buttonText );
     this.elemHelper.FindElement( this.driver, By.xpath( "//button" ) ).click();
 
     // ## Step 2
-    this.wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = this.driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    alert.accept();
-
-    buttonText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//button" ) );
+    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
+    String buttonTextAfterClick = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//button" ), "Yes, a clickable button" );
 
     assertEquals( "Button was clicked", confirmationMsg );
-    assertEquals( "Yes, a clickable button", buttonText );
+    assertEquals( "Yes, a clickable button", buttonTextAfterClick );
   }
 }

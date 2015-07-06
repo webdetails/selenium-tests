@@ -42,6 +42,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -392,7 +393,12 @@ public class MondrianJNDI {
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
 
       //Click to export
-      this.elemHelper.MouseOverElementAndClick( this.driver, By.id( "export" ) );
+      //this.elemHelper.MouseOverElementAndClick( this.driver, By.id( "export" ) );
+      String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+      String onClickScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('click', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onclick');}";
+      JavascriptExecutor js = (JavascriptExecutor) this.driver;
+      js.executeScript( mouseOverScript, buttonExport );
+      js.executeScript( onClickScript, buttonExport );
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();

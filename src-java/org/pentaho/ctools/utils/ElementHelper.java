@@ -22,6 +22,7 @@
 package org.pentaho.ctools.utils;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -29,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -1487,4 +1489,87 @@ public class ElementHelper {
     this.log.debug( "MouseOverElementAndClick::Exit" );
   }
 
+  /**
+   * Wait for alert display and return the presented text on the alert window.
+   * 
+   * @param driver
+   * @return
+   */
+  public String WaitForAlertReturnConfirmationMsg( WebDriver driver ) {
+    this.log.debug( "WaitForAlertReturnConfirmationMsg::Enter" );
+    String confirmationMsg = "";
+    Alert alert = WaitForAlert( driver, 10, 15 );
+
+    if ( alert != null ) {
+      confirmationMsg = alert.getText();
+      alert.accept();
+    }
+
+    this.log.debug( "WaitForAlertReturnConfirmationMsg::Exit" );
+    return confirmationMsg;
+  }
+
+  /**
+   * This method shall wait for an alert shows-up.
+   * 
+   * @param driver
+   * @param timeout
+   * @param pollingTime
+   * @return
+   */
+  public Alert WaitForAlert( final WebDriver driver, final long timeout, final long pollingTime ) {
+    this.log.debug( "WaitForAlert::Enter" );
+    ExecutorService executor = null;
+
+    Alert alert = null;
+
+    try {
+      class CheckForAlert implements Callable<Alert> {
+
+        @Override
+        public Alert call() {
+          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
+
+          return wait.until( new Function<WebDriver, Alert>() {
+
+            @Override
+            public Alert apply( WebDriver driver ) {
+              try {
+                return driver.switchTo().alert();
+              } catch ( NoAlertPresentException e ) {
+                return null;
+              }
+            }
+          } );
+        }
+      }
+
+      CheckForAlert call = new CheckForAlert();
+      executor = Executors.newSingleThreadExecutor();
+      alert = executor.submit( call ).get( timeout + 2, TimeUnit.SECONDS );
+
+    } catch ( InterruptedException ie ) {
+      this.log.warn( "Interrupted Exception" );
+      this.log.warn( ie.toString() );
+    } catch ( ExecutionException ee ) {
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
+        this.log.warn( "WebDriver timeout exceeded!" );
+      } else {
+        this.log.warn( "Execution Exception" );
+        this.log.warn( ee.toString() );
+      }
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      this.log.warn( "Thread timeout exceeded!" );
+      this.log.warn( cte.toString() );
+    } catch ( Exception e ) {
+      this.log.error( "Exception" );
+      this.log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
+    }
+    this.log.debug( "WaitForAlert::Exit" );
+    return alert;
+  }
 }
