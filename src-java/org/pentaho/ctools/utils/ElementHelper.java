@@ -642,7 +642,7 @@ public class ElementHelper {
                 List<WebElement> listElem = d.findElements( locator );
                 if ( listElem.size() > 0 ) {
                   WebElement elem = listElem.get( 0 );
-                  if ( elem.isDisplayed() && elem.isEnabled() ) {
+                  if ( elem != null && ( ( elem.isEnabled() == true ) && ( elem.isDisplayed() == true ) ) ) {
                     return elem;
                   }
                   return null;

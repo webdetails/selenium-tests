@@ -40,11 +40,14 @@ import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.DirectoryWatcher;
 import org.pentaho.ctools.utils.ElementHelper;
@@ -59,16 +62,18 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class MondrianJNDI {
+public class CopyOfMondrianJNDI3 {
 
   // Instance of the driver (browser emulator)
   private final WebDriver driver = CToolsTestSuite.getDriver();
+  // Instance to be used on wait commands
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   //Download directory
   private final String downloadDir = CToolsTestSuite.getDownloadDir();
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private final Logger log = LogManager.getLogger( MondrianJNDI.class );
+  private final Logger log = LogManager.getLogger( CopyOfMondrianJNDI3.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -118,7 +123,7 @@ public class MondrianJNDI {
     //Check the About
     this.elemHelper.FindElement( this.driver, By.linkText( "About" ) ).click();
     //element 'fileid'
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "fileid" ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "fileid" ) ) );
     String textElementFileid = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "fileid" ) );
     //element image
     WebElement elemImg = this.elemHelper.FindElement( this.driver, By.cssSelector( "img" ) );
@@ -387,7 +392,7 @@ public class MondrianJNDI {
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
 
       //Click to export
-      this.elemHelper.MouseOverElementAndClick( this.driver, By.cssSelector( "button#export.cdaButton" ) );
+      this.elemHelper.MoveToElementAndClick( this.driver, By.cssSelector( "button#export.cdaButton" ) );
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
@@ -429,7 +434,7 @@ public class MondrianJNDI {
     assertEquals( "Query URL", buttonQueryUrl.getText() );
     this.elemHelper.ClickJS( this.driver, By.id( "queryUrl" ) );
 
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "queryUrlDialog" ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "queryUrlDialog" ) ) );
     String diaLOGTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div#queryUrlDialog p.dialogTitle" ) );
     assertEquals( "Query Execution URL:", diaLOGTitle );
 
@@ -590,13 +595,16 @@ public class MondrianJNDI {
 
     while ( !elementPresent ) {
       //Press to delete schedule
-      this.elemHelper.ClickJS( this.driver, By.cssSelector( "img.deleteIcon.button" ) );
+      this.elemHelper.FindElement( this.driver, By.cssSelector( "img.deleteIcon.button" ) ).click();
 
       //Wait for pop-up
-      String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
+      this.wait.until( ExpectedConditions.alertIsPresent() );
+      Alert alert = this.driver.switchTo().alert();
+      String confirmationMsg = alert.getText();
       String expectedCnfText = "Want to delete this scheduler entry?";
-      assertEquals( confirmationMsg, expectedCnfText );
+      alert.accept();
 
+      assertEquals( confirmationMsg, expectedCnfText );
       this.elemHelper.WaitForAlertNotPresent( this.driver );
       this.driver.switchTo().defaultContent();
 

@@ -40,11 +40,14 @@ import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.DirectoryWatcher;
 import org.pentaho.ctools.utils.ElementHelper;
@@ -59,16 +62,18 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class MondrianJNDI {
+public class CopyOfMondrianJNDI2 {
 
   // Instance of the driver (browser emulator)
   private final WebDriver driver = CToolsTestSuite.getDriver();
+  // Instance to be used on wait commands
+  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   //Download directory
   private final String downloadDir = CToolsTestSuite.getDownloadDir();
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private final Logger log = LogManager.getLogger( MondrianJNDI.class );
+  private final Logger log = LogManager.getLogger( CopyOfMondrianJNDI2.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -97,7 +102,7 @@ public class MondrianJNDI {
    *    1. Check if we are reading the correct file
    *    2. Check if About is working
    */
-  @Test
+  //@Test
   public void tc1_PageContent_DisplayeFilenameAndAbout() {
     this.log.info( "tc1_PageContent_DisplayeFilenameAndAbout" );
 
@@ -118,7 +123,7 @@ public class MondrianJNDI {
     //Check the About
     this.elemHelper.FindElement( this.driver, By.linkText( "About" ) ).click();
     //element 'fileid'
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "fileid" ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "fileid" ) ) );
     String textElementFileid = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "fileid" ) );
     //element image
     WebElement elemImg = this.elemHelper.FindElement( this.driver, By.cssSelector( "img" ) );
@@ -162,7 +167,7 @@ public class MondrianJNDI {
    *    5. Search existence content
    *    6. Search inexistance content
    */
-  @Test
+  //@Test
   public void tc2_SelectDataAccess_DisplayDataForSelectedDataAccess() {
     this.log.info( "tc2_SelectDataAccess_DisplayDataForSelectedDataAccess" );
 
@@ -372,6 +377,21 @@ public class MondrianJNDI {
   public void tc3_ExportXls_FileDownload() {
     this.log.info( "tc3_ExportXls_FileDownload" );
 
+    //Check if the field 'filename' exist and expected value
+    String filename = this.elemHelper.WaitForTextPresence( this.driver, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );
+    String pleaseSelect = this.elemHelper.WaitForTextPresence( this.driver, By.id( "pleaseselect" ), "Please select a Data Access ID" );
+
+    assertEquals( "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda", filename );
+    assertEquals( "Please select a Data Access ID", pleaseSelect );
+
+    Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
+    select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
+    //wait to render page
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    //Check the presented contains
+    WebElement elemStatus = this.elemHelper.FindElement( this.driver, By.id( "status" ) );
+    assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
+
     /*
      * ## Step 1
      */
@@ -429,7 +449,7 @@ public class MondrianJNDI {
     assertEquals( "Query URL", buttonQueryUrl.getText() );
     this.elemHelper.ClickJS( this.driver, By.id( "queryUrl" ) );
 
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "queryUrlDialog" ) );
+    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "queryUrlDialog" ) ) );
     String diaLOGTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div#queryUrlDialog p.dialogTitle" ) );
     assertEquals( "Query Execution URL:", diaLOGTitle );
 
@@ -590,13 +610,16 @@ public class MondrianJNDI {
 
     while ( !elementPresent ) {
       //Press to delete schedule
-      this.elemHelper.ClickJS( this.driver, By.cssSelector( "img.deleteIcon.button" ) );
+      this.elemHelper.FindElement( this.driver, By.cssSelector( "img.deleteIcon.button" ) ).click();
 
       //Wait for pop-up
-      String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
+      this.wait.until( ExpectedConditions.alertIsPresent() );
+      Alert alert = this.driver.switchTo().alert();
+      String confirmationMsg = alert.getText();
       String expectedCnfText = "Want to delete this scheduler entry?";
-      assertEquals( confirmationMsg, expectedCnfText );
+      alert.accept();
 
+      assertEquals( confirmationMsg, expectedCnfText );
       this.elemHelper.WaitForAlertNotPresent( this.driver );
       this.driver.switchTo().defaultContent();
 

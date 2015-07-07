@@ -43,6 +43,12 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.pentaho.ctools.cda.CDACacheManager;
+import org.pentaho.ctools.cda.CDADatasourceTest;
+import org.pentaho.ctools.cda.CopyOfMondrianJNDI2;
+import org.pentaho.ctools.cda.CopyOfMondrianJNDI3;
+import org.pentaho.ctools.cda.CopyOfMondrianJNDI4;
+import org.pentaho.ctools.cda.CopyOfMondrianJNDI5;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
 import org.pentaho.ctools.suite.require.SuiteRequireJS;
@@ -59,6 +65,23 @@ import org.pentaho.ctools.suite.security.SuiteSecurity;
     SuiteCDE.class,
     // CDA
     SuiteCDA.class,
+
+    CDACacheManager.class,
+    CDADatasourceTest.class,
+    CopyOfMondrianJNDI2.class,
+
+    CDACacheManager.class,
+    CDADatasourceTest.class,
+    CopyOfMondrianJNDI3.class,
+
+    CDACacheManager.class,
+    CDADatasourceTest.class,
+    CopyOfMondrianJNDI4.class,
+
+    CDACacheManager.class,
+    CDADatasourceTest.class,
+    CopyOfMondrianJNDI5.class,
+
     // CGG
     SuiteCGG.class,
     // RequireJS
