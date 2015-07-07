@@ -45,6 +45,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
+import org.pentaho.ctools.suite.require.SuiteRequireJS;
 import org.pentaho.ctools.suite.security.SuiteSecurity;
 
 @RunWith( Suite.class )
@@ -61,7 +62,7 @@ import org.pentaho.ctools.suite.security.SuiteSecurity;
     // CGG
     SuiteCGG.class,
     // RequireJS
-    //SuiteRequireJS.class,
+    SuiteRequireJS.class,
     // Security
     SuiteSecurity.class,
     // Issues

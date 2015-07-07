@@ -82,7 +82,7 @@ public class DialChart {
     /*
      * ## Step 1
      */
-    this.driver.get( this.baseUrl + "plugin/cgg/api/services/draw?script=/public/dial.js&outputType=svg&paramvalue=35 " );
+    this.driver.get( this.baseUrl + "plugin/cgg/api/services/draw?script=/public/dial.js&outputType=svg&paramvalue=35" );
 
     //Check Pointer
     WebElement elemPointer = this.elemHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='polygon'][@id='ponteiro' and @transform='rotate(62.99999999999999,300,275)']" ) );
