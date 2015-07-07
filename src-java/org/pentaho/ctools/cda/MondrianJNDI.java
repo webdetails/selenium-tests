@@ -375,26 +375,38 @@ public class MondrianJNDI {
     /*
      * ## Step 1
      */
-    //Check we have three elements and no more than that
+    // Check we have three elements and no more than that
     String textPaging = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
 
-    //Click in export as xls
-    WebElement buttonExport = this.elemHelper.FindElement( this.driver, By.cssSelector( "button#export.cdaButton" ) );
+    // Click in export as xls
+    WebElement buttonExport = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button#export.cdaButton" ) );
     assertNotNull( buttonExport );
     try {
-      //Delete the existence if exist
+      // Delete the existence if exist
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
 
-      //Click to export
-      this.elemHelper.MouseOverElementAndClick( this.driver, By.cssSelector( "button#export.cdaButton" ) );
+      // Click to export
+      WebElement elemButton = this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "button#export.cdaButton" ) );
+      elemButton.click();
 
-      //Wait for file to be created in the destination dir
+      // Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
       dw.WatchForCreate( this.downloadDir );
 
-      //Check if file was download
-      assertTrue( new File( this.downloadDir + "\\cda-export.xls" ).exists() );
+      // Check if file was download
+      boolean fileExist = new File( this.downloadDir + "\\cda-export.xls" ).exists();
+      if ( fileExist == false ) {
+        // >> Retrying to download the file again
+        elemButton = this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "button#export.cdaButton" ) );
+        elemButton.click();
+
+        //Wait for file to be created in the destination dir
+        dw.WatchForCreate( this.downloadDir );
+
+        fileExist = new File( this.downloadDir + "\\cda-export.xls" ).exists();
+      }
+      assertTrue( fileExist );
 
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
     } catch ( Exception e ) {
