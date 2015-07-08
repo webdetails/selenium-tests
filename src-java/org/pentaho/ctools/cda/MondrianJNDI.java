@@ -387,8 +387,7 @@ public class MondrianJNDI {
       new File( this.downloadDir + "\\cda-export.xls" ).delete();
 
       // Click to export
-      WebElement elemButton = this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "button#export.cdaButton" ) );
-      elemButton.click();
+      this.elemHelper.MouseOverElementAndClick( this.driver, By.cssSelector( "button#export.cdaButton" ) );
 
       // Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
@@ -398,8 +397,7 @@ public class MondrianJNDI {
       boolean fileExist = new File( this.downloadDir + "\\cda-export.xls" ).exists();
       if ( fileExist == false ) {
         // >> Retrying to download the file again
-        elemButton = this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "button#export.cdaButton" ) );
-        elemButton.click();
+        this.elemHelper.MouseOverElementAndClick( this.driver, By.cssSelector( "button#export.cdaButton" ) );
 
         //Wait for file to be created in the destination dir
         dw.WatchForCreate( this.downloadDir );

@@ -121,11 +121,11 @@ public class TimePlotComponent {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
     // Render again the sample
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
@@ -155,7 +155,8 @@ public class TimePlotComponent {
     /*
      * ## Step 1
      */
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='sampleObject']/div/span" ) );
+    WebElement sampleObj = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='sampleObject']/div/span" ) );
+    assertNotNull( sampleObj );
     assertEquals( "Total order income", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span" ) ) );
     assertEquals( "Total Price", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) ) );
 
