@@ -85,7 +85,7 @@ public class CDF149 {
    *    3. Click Preview and assert bars are rendered as percentage of total
    *
    */
-  @Test( timeout = 120000 )
+  @Test
   public void tc01_CCCBarChart_ValuesNormalized() {
     this.log.info( "tc01_CCCBarChart_ValuesNormalized" );
 
@@ -94,9 +94,6 @@ public class CDF149 {
      */
     //Open CDE Sample
     this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/wcdf.edit" );
-
-    // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Assert Panel selectors and select Components
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Datasources Panel']" ) );
@@ -162,9 +159,7 @@ public class CDF149 {
      * ## Step 3
      */
     //Click Preview button
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "previewButton" ) );
-    assertNotNull( element );
-    element.click();
+    this.elemHelper.Click( this.driver, By.id( "previewButton" ) );
 
     //Wait for fancybox and assert chart is rendered and height legends are to 100
     WebElement elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe" ) );
