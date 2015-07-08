@@ -190,12 +190,9 @@ public class PrptComponent {
   public void tc3_SelectHTMLAndPDF_PageDisplayedAccording() {
     this.log.info( "tc3_SelectHTMLAndPDF_PageDisplayedAccording" );
 
-    // ## Step 1
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.cssSelector( "select" ) ) );
-    select.selectByValue( "pageable/pdf" );
-    // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-
+    /*
+     * ## Step 1
+     */
     this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.driver.switchTo().frame( "sampleObject_prptFrame" );
     //Check presence of tool bar elements
@@ -203,7 +200,9 @@ public class PrptComponent {
     assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolbar']/div[2]" ) ) );
     assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolbar']/span" ) ) );
     //Check the Product Name and Output Type
-    String prodName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//td/div/div" ) );
+    WebElement elemtLine = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.parameter-label" ), 45 );
+    assertNotNull( elemtLine );
+    String prodName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.parameter-label" ) );
     assertEquals( "Line", prodName );
     assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//td/div/div[2]/select" ) ) );
     String outputTypeName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select/../../div" ) );
@@ -212,54 +211,6 @@ public class PrptComponent {
     //Check for View Report button
     String buttonName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//button/span" ) );
     assertEquals( "View Report", buttonName );
-    //Check the generated image
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );
-    this.driver.switchTo().frame( "reportContent" );
-    WebElement elemTextLayer = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']" ) );
-    assertNotNull( elemTextLayer );
-    WebElement elemTextLayerDiv = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
-    assertNotNull( elemTextLayerDiv );
-    WebElement elemTextLayerDiv2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
-    assertNotNull( elemTextLayerDiv2 );
-    WebElement elemTextLayerDiv3 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
-    assertNotNull( elemTextLayerDiv3 );
-    String textDiv = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ), "L I N E :" );
-    assertEquals( "L I N E :", textDiv );
-    String textDiv2 = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ), "C l a s s i c" );
-    assertEquals( "C l a s s i c", textDiv2 );
-    String textDiv3 = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ), "C a r s" );
-    assertEquals( "C a r s", textDiv3 );
-
-    // ## Step 2
-    this.driver.switchTo().defaultContent();
-    select = new Select( this.elemHelper.FindElement( this.driver, By.cssSelector( "select" ) ) );
-    select.selectByValue( "table/html;page-mode=stream" );
-
-    // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
-    //Check presence of tool bar elements
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolbar']/div" ) ) );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolbar']/div[2]" ) ) );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolbar']/span" ) ) );
-    //Check the Product Name and Output Type
-    prodName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//td/div/div" ) );
-    assertEquals( "Line", prodName );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//td/div/div[2]/select" ) ) );
-    outputTypeName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select/../../div" ) );
-    assertEquals( "Output Type", outputTypeName );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
-    //Check for View Report button
-    buttonName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//button/span" ) );
-    assertEquals( "View Report", buttonName );
-    try { //TODO - just perform some testing on this feature.
-      Thread.sleep( 3000 );
-    } catch ( InterruptedException e ) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
     //Check the generated image
     this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );
     WebDriver driverReportContent = this.driver.switchTo().frame( "reportContent" );
@@ -289,7 +240,7 @@ public class PrptComponent {
    *    1. Enable prompt panel
    *    2. Disable prompt panel
    */
-  @Test( timeout = 60000 )
+  //@Test
   public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
     this.log.info( "tc4_TogglePromptPanel_PromptPanelEnableDisable" );
     this.driver.switchTo().defaultContent();
@@ -320,7 +271,7 @@ public class PrptComponent {
    *    2. Enable Motorcycles and assert results
    *
    */
-  @Test
+  //@Test
   public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
     this.log.info( "tc5_SelectSeveralProducts_ReportIsRefreshed" );
     this.driver.switchTo().defaultContent();
@@ -400,7 +351,7 @@ public class PrptComponent {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test
+  //@Test
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
     this.log.info( "tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised" );
     this.driver.switchTo().defaultContent();
