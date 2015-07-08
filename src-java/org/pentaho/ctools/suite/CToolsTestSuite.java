@@ -45,8 +45,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
-import org.pentaho.ctools.suite.require.SuiteRequireJS;
-import org.pentaho.ctools.suite.security.SuiteSecurity;
+import org.pentaho.ctools.suite.issues.SuiteIssues;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
@@ -54,19 +53,19 @@ import org.pentaho.ctools.suite.security.SuiteSecurity;
     // Start Tests
     LoginPentaho.class,
     // CDF
-    SuiteCDF.class,
-    // CDE
-    SuiteCDE.class,
-    // CDA
-    SuiteCDA.class,
-    // CGG
-    SuiteCGG.class,
-    // RequireJS
-    SuiteRequireJS.class,
-    // Security
-    SuiteSecurity.class,
+    /* SuiteCDF.class,
+     // CDE
+     SuiteCDE.class,
+     // CDA
+     SuiteCDA.class,
+     // CGG
+     SuiteCGG.class,
+     // RequireJS
+     SuiteRequireJS.class,
+     // Security
+     SuiteSecurity.class,*/
     // Issues
-    //SuiteIssues.class,
+    SuiteIssues.class,
     //Marketplace
     //SuiteMarketplace.class,
     // End Tests
@@ -94,7 +93,8 @@ public class CToolsTestSuite {
 
     // Initialize BASEURL
     BASE_URL = "http://localhost:8080/pentaho/";
-    DOWNLOAD_DIR = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
+    DOWNLOAD_DIR = "C:\\Users\\Eduardo\\Downloads";
+    //System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
     new File( DOWNLOAD_DIR ).mkdir();
 
     System.setProperty( "webdriver.log.file", "/dev/stdout" );

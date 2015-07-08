@@ -382,8 +382,8 @@ public class BrowseFiles {
       this.DRIVER.switchTo().defaultContent();
       this.elemHelper.Click( this.DRIVER, By.id( "okButton" ) );
       // wait for invisibility of waiting pop-up
-      this.elemHelper.WaitForElementPresence( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-      this.elemHelper.WaitForElementNotPresent( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      //this.elemHelper.WaitForElementPresence( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      //this.elemHelper.WaitForElementNotPresent( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       // Wait for loading views Folders and Files
       this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
       this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
