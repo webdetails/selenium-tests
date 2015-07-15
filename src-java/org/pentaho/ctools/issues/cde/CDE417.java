@@ -25,6 +25,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -44,7 +47,9 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.DirectoryWatcher;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.HttpUtils;
+import org.pentaho.ctools.utils.PUCSettings;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
+import org.pentaho.gui.web.puc.BrowseFiles;
 
 /**
  * The script is testing the issue:
@@ -136,8 +141,7 @@ public class CDE417 {
     /*
      * ## Step 1
      */
-    /*
-    // Show Hidden Files
+    //Show Hidden Files
     BrowseFiles browser = new BrowseFiles( this.driver );
     if ( !PUCSettings.SHOWHIDDENFILES ) {
       browser.CheckShowHiddenFiles();
@@ -146,7 +150,6 @@ public class CDE417 {
     /*
      * ## Step 2
      */
-    /*
     //String pathChart = "/public/Issues/CDF-548/chart.js";
     //String pathCdfChart = "/public/Issues/CDF-548/CDF-548_chart.js";
     String pathCountryChart = "/public/Issues/CDF-548/countryChart.js";
@@ -169,7 +172,6 @@ public class CDE417 {
     /*
      * ## Step 3
      */
-    /*
     // Go to Export Popup Component sample in Edit mode
     this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-548%3ACDF-548.wcdf/edit" );
 
@@ -185,7 +187,6 @@ public class CDE417 {
     /* 
      * ## Step 4 
       */
-    /*
     //Go to components panel and expand "Others"
     WebElement componentsPanelButton = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.componentsPanelButton" ) );
     assertNotNull( componentsPanelButton );
@@ -227,7 +228,6 @@ public class CDE417 {
     /* 
      * ## Step 5 
       */
-    /*
     //Open options for Data Component to Export and assert "table", "chart" and "countryChart"
     WebElement dataExportProperty = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Data Component to Export']/../td[2]" ) );
     assertNotNull( dataExportProperty );

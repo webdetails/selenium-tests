@@ -89,7 +89,7 @@ public class CDE366 {
    *    4. Close and reopen Dashboard, assert applied template and settings changes persist
    *    5. Delete created dashboard
    */
-  @Test( timeout = 240000 )
+  @Test
   public void tc01_CdeDashboard_SettingsPersist() {
     this.log.info( "tc01_CdeDashboard_SettingsPersist" );
 

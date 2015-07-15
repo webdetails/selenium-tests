@@ -29,6 +29,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -80,6 +81,7 @@ public class CDE394 {
    *    2. Get "cx" for rightmost dots
    *    3. Assert "cx" are smaller than chart's width
    */
+  @Test
   public void tc1_NewCdeDashboard_LineChartContained() {
     this.log.info( "tc1_NewCdeDashboard_LineChartContained" );
 

@@ -28,6 +28,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -79,6 +80,7 @@ public class CDE342 {
    *    2. Write something where no options should be available
    *    3. Write something where only one option should be available
    */
+  @Test
   public void tc1_CDEDashboard_AutocompleteWorks() {
     this.log.info( "tc1_CDEDashboard_AutocompleteWorks" );
 
