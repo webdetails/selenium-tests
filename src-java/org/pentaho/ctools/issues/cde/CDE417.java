@@ -165,7 +165,7 @@ public class CDE417 {
 
     this.driver.switchTo().defaultContent();
     WebDriver frame = this.driver.switchTo().frame( "browser.perspective" );
-    this.elemHelper.WaitForAttributeValue( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title", "CDF-548.wcdf" );
+    this.elemHelper.WaitForAttributeValue( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title", "CDF-548.cda" );
     String nameOfCdf548Wcdf = this.elemHelper.GetAttribute( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title" );
     assertEquals( "CDF-548.wcdf", nameOfCdf548Wcdf );
 

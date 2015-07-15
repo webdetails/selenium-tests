@@ -26,7 +26,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -253,7 +253,7 @@ public class CDE366 {
     this.failure = 1;
   }
 
-  @AfterClass
+  @After
   public void tearDown() {
     this.log.info( "tearDown##" + CDE366.class.getSimpleName() );
     if ( this.failure == 0 ) {
