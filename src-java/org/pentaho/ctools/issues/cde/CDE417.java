@@ -150,10 +150,10 @@ public class CDE417 {
     /*
      * ## Step 2
      */
-    //String pathChart = "/public/Issues/CDF-548/chart.js";
-    //String pathCdfChart = "/public/Issues/CDF-548/CDF-548_chart.js";
-    String pathCountryChart = "/public/Issues/CDF-548/countryChart.js";
-    String pathCdfCountryChart = "/public/Issues/CDF-548/CDF-548_countryChart.js";
+    //String pathChart = "/public/Issues/CDF/CDF-548/chart.js";
+    //String pathCdfChart = "/public/Issues/CDF/CDF-548/CDF-548_chart.js";
+    String pathCountryChart = "/public/Issues/CDF/CDF-548/countryChart.js";
+    String pathCdfCountryChart = "/public/Issues/CDF/CDF-548/CDF-548_countryChart.js";
     //boolean fileDeleteChart = browser.DeleteFile( pathChart );
     //boolean fileDeleteCdfChart = browser.DeleteFile( pathCdfChart );
     boolean fileDeleteCountryChart = browser.DeleteFile( pathCountryChart );
@@ -173,7 +173,7 @@ public class CDE417 {
      * ## Step 3
      */
     // Go to Export Popup Component sample in Edit mode
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-548%3ACDF-548.wcdf/edit" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/edit" );
 
     //Save Dashboard
     WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Save" ) );
@@ -255,7 +255,7 @@ public class CDE417 {
     /* 
      * ## Step 6 
      */
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-548%3ACDF-548.wcdf/generatedContent" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/generatedContent" );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Click export Button
@@ -274,7 +274,7 @@ public class CDE417 {
 
     // Check URL of displayed image
     String chartSRCUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2FIssues%2FCDF-548%2Fchart.js&paramcountries=France&paramcountries=USA&paramwidth=400&paramheight=400", chartSRCUrl );
+    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2Fchart.js&paramcountries=France&paramcountries=USA&paramwidth=400&paramheight=400", chartSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( chartSRCUrl, "admin", "password" ) );
 
     // Export chart and assert export was successful
@@ -345,7 +345,7 @@ public class CDE417 {
 
     // Check URL of displayed image
     String countryChartSRCUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2FIssues%2FCDF-548%2FcountryChart.js&paramwidth=400&paramheight=300", countryChartSRCUrl );
+    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2FcountryChart.js&paramwidth=400&paramheight=300", countryChartSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( countryChartSRCUrl, "admin", "password" ) );
 
     // Export chart and assert export was successful
