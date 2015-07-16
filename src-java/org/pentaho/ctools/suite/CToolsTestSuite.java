@@ -43,9 +43,11 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.pentaho.ctools.issues.cde.CDE425;
+import org.pentaho.ctools.issues.cde.CDE430;
+import org.pentaho.ctools.issues.cde.CDE432;
 import org.pentaho.ctools.main.LoginPentaho;
 import org.pentaho.ctools.main.LogoutPentaho;
-import org.pentaho.ctools.suite.issues.SuiteIssues;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
@@ -65,7 +67,9 @@ import org.pentaho.ctools.suite.issues.SuiteIssues;
     // Security
     SuiteSecurity.class,*/
     // Issues
-    SuiteIssues.class,
+    CDE425.class,
+    CDE430.class,
+    CDE432.class,
     //Marketplace
     //SuiteMarketplace.class,
     // End Tests

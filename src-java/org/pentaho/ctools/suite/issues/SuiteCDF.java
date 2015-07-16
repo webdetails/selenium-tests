@@ -33,6 +33,7 @@ import org.pentaho.ctools.issues.cdf.CDF442;
 import org.pentaho.ctools.issues.cdf.CDF469;
 import org.pentaho.ctools.issues.cdf.CDF474;
 import org.pentaho.ctools.issues.cdf.CDF486;
+import org.pentaho.ctools.issues.cdf.CDF501;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
@@ -46,7 +47,8 @@ import org.pentaho.ctools.issues.cdf.CDF486;
     CDF442.class,
     CDF469.class,
     CDF474.class,
-    CDF486.class } )
+    CDF486.class,
+    CDF501.class } )
 public class SuiteCDF {
   //It runs the SuiteCDF
 }
