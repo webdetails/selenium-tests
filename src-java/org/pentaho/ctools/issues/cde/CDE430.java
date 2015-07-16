@@ -137,7 +137,7 @@ public class CDE430 {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    WebElement listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li/a" ) );
+    WebElement listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li/a" ), 30 );
     assertNotNull( listOption1 );
     String textOption1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li/a" ) );
     assertEquals( "png", textOption1 );
