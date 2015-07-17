@@ -119,7 +119,7 @@ public class CDE425 {
     /*
      * ## Step 2
      */
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
+    //this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
     Robot robot;
     try {
       robot = new Robot();
@@ -128,7 +128,18 @@ public class CDE425 {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), 30 );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    if ( element == null ) {
+      this.log.info( "Element was null!!" );
+      try {
+        robot = new Robot();
+        robot.keyPress( KeyEvent.VK_R );
+        robot.keyRelease( KeyEvent.VK_R );
+      } catch ( AWTException e ) {
+        e.printStackTrace();
+      }
+    }
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertNotNull( element );
     this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
 
