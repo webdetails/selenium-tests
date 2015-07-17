@@ -50,10 +50,16 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 /**
  * The script is testing the issue:
  * - http://jira.pentaho.com/browse/CDA-118
+ * - http://jira.pentaho.com/browse/CDA-123
+ * - http://jira.pentaho.com/browse/CDA-147
+ * - http://jira.pentaho.com/browse/CDA-145
  *
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-1119
- *
+ * - http://jira.pentaho.com/browse/QUALITY-1122
+ * - http://jira.pentaho.com/browse/QUALITY-1140
+ * - http://jira.pentaho.com/browse/QUALITY-1129
+ *  
  * NOTE
  * To test this script it is required to have CDA plugin installed.
  *
@@ -85,12 +91,17 @@ public class CDA118 {
    * Test Case Name:
    *    Asserting that export to excel works when exporting query with more then 10 parameters
    * Description:
-   *    The test pretends validate the CDA-118 issue, asserting that export to excel works when exporting query with an integer parameter.
+   *    CDA-118: asserting that export to excel works when exporting query with an integer parameter.
+   *    CDA-123: Feedback given when query fails
+   *    CDA-147: Can change parameter when query fails and refresh query
+   *    CDA-145: Adding outputColumnName to the URL filters the query results
    *
    * Steps:
-   *    1. Select "Sql Query on SampleData - Jndi" on "dataAccessSelector"
-   *    2. Wait for and assert elements and text on page
-   *    3. Export file and assure it has same md5 as expected
+   *    1. Select "Sql Query on SampleData - Jndi" on "dataAccessSelector" and assert error message
+   *    2. Change value on salesParam box to 10000 and refresh query
+   *    3. Wait for and assert elements and text on page
+   *    4. Export file and assure it has same md5 as expected
+   *    5. Open the query with outpuColumnName in the URL and assert results were filtered
    *
    */
   @Test( timeout = 120000 )
@@ -106,27 +117,45 @@ public class CDA118 {
     //wait for invisibility of waiting pop-up
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
-    //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dataAccessSelector" ) );
-    assertNotNull( element );
+    //Wait for data selector and select available option
+    WebElement dataAccess = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dataAccessSelector" ) );
+    assertNotNull( dataAccess );
     Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Sql Query on SampleData - Jndi" );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='button']" ) );
-    assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='cachethis']" ) );
-    assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='queryUrl']" ) );
-    assertNotNull( element );
+
+    //wait to render page
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
+    //Assert error message
+    String errorMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "span.error-status" ) );
+    assertEquals( "Error Executing Query", errorMessage );
 
     /*
      * ## Step 2
      */
+    WebElement salesParam = this.elemHelper.FindElement( this.driver, By.id( "sales" ) );
+    assertNotNull( salesParam );
+    salesParam.clear();
+    salesParam.sendKeys( "10000" );
+    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='button']" ) );
+    assertNotNull( refreshButton );
+    refreshButton.click();
+
+    /*
+     * ## Step 3
+     */
     //wait to render page
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
+    //Assert elements on page
+    WebElement cacheButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='cachethis']" ) );
+    assertNotNull( cacheButton );
+    WebElement queryButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='queryUrl']" ) );
+    assertNotNull( queryButton );
+
     //Check the presented contains
-    WebElement salesParam = this.elemHelper.FindElement( this.driver, By.id( "sales" ) );
-    assertEquals( "10000", salesParam.getAttribute( "value" ) );
+    WebElement newSalesParam = this.elemHelper.FindElement( this.driver, By.id( "sales" ) );
+    assertEquals( "10000", newSalesParam.getAttribute( "value" ) );
 
     //Check text on table
     String columnOneRowOne = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
@@ -135,7 +164,7 @@ public class CDA118 {
     assertEquals( "2004", columnTwoRowOne );
 
     /*
-     * ## Step 3
+     * ## Step 4
      */
     WebElement buttonExport = this.elemHelper.FindElement( this.driver, By.id( "export" ) );
     assertNotNull( buttonExport );
@@ -174,6 +203,16 @@ public class CDA118 {
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );
     }
+
+    /*
+     * ## Step 5
+     */
+    //Open Sample with outpuColumnName in the URL
+    this.driver.get( this.baseUrl + "plugin/cda/api/doQuery?paramsales=10000&paramorderDate=2004-03-01&path=%2Fpublic%2FIssues%2FCDA%2FCDA-118%2Fsql-jndi.cda&dataAccessId=1&outputIndexId=1&&outputColumnName=STATUS" );
+
+    //Assert query result
+    String result = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body" ) );
+    assertEquals( "{\"queryInfo\":{\"totalRows\":\"6\"},\"resultset\":[[\"Shipped\"],[\"Cancelled\"],[\"Shipped\"],[\"Disputed\"],[\"On Hold\"],[\"In Process\"]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"STATUS\"}]}", result );
   }
 
   /**
