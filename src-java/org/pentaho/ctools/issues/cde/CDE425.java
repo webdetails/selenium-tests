@@ -120,15 +120,15 @@ public class CDE425 {
      * ## Step 2
      */
     //this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
-    Robot robot;
+    Robot robot1;
     try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_R );
-      robot.keyRelease( KeyEvent.VK_R );
+      robot1 = new Robot();
+      robot1.keyPress( KeyEvent.VK_R );
+      robot1.keyRelease( KeyEvent.VK_R );
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    /*element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     if ( element == null ) {
       this.log.info( "Element was null!!" );
       try {
@@ -138,7 +138,7 @@ public class CDE425 {
       } catch ( AWTException e ) {
         e.printStackTrace();
       }
-    }
+    }*/
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertNotNull( element );
     this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
@@ -147,6 +147,7 @@ public class CDE425 {
      * ## Step 3
      */
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    Robot robot;
     try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_C );
@@ -162,6 +163,7 @@ public class CDE425 {
      * ## Step 4
      */
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td" ) );
+
     try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_H );

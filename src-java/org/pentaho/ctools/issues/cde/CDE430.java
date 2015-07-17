@@ -129,16 +129,16 @@ public class CDE430 {
     assertNotNull( inputChart );
     inputChart.clear();
 
-    Robot robot;
+    Robot robot1;
     try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
+      robot1 = new Robot();
+      robot1.keyPress( KeyEvent.VK_DOWN );
+      robot1.keyRelease( KeyEvent.VK_DOWN );
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
     WebElement listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li/a" ) );
-    if ( listOption1 == null ) {
+    /*if ( listOption1 == null ) {
       this.log.info( "Element was null!!" );
       try {
         robot = new Robot();
@@ -149,7 +149,7 @@ public class CDE430 {
       }
     }
 
-    listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li/a" ) );
+    listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li/a" ) );*/
     assertNotNull( listOption1 );
     String textOption1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li/a" ) );
     assertEquals( "png", textOption1 );
@@ -170,9 +170,9 @@ public class CDE430 {
     inputData.clear();
 
     try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
+      robot1 = new Robot();
+      robot1.keyPress( KeyEvent.VK_DOWN );
+      robot1.keyRelease( KeyEvent.VK_DOWN );
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
