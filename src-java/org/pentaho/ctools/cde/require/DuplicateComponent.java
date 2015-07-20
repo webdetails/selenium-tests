@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package org.pentaho.ctools.issues.cde;
+package org.pentaho.ctools.cde.require;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -35,46 +35,38 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
- * The script is testing the issue:
- * - http://jira.pentaho.com/browse/CDE-439
+ * Testing the functionalities related with Duplicate Component (Sniff Test).
  *
- * and the automation test is described:
- * - http://jira.pentaho.com/browse/QUALITY-998
- *
- * NOTE
- * To test this script it is required to have CDE plugin installed.
- *
- * Naming convention for test:
- *  'tcN_StateUnderTest_ExpectedBehavior'
+ * Naming convention for test: 'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class CDE439 {
+public class DuplicateComponent {
+
   // Instance of the driver (browser emulator)
   private final WebDriver driver = CToolsTestSuite.getDriver();
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private final Logger log = LogManager.getLogger( CDE439.class );
-  // Getting screenshot when test fails
+  private final Logger log = LogManager.getLogger( DuplicateComponent.class );
+
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 1 ###############################
    *
-   * Test Case Name:
-   *    Assert Duplicate Component Sample works properly
+      * Test Case Name:
+   *    Sniff test to sample
    *
    * Description:
-   *    The test pretends validate the CDE-439 issue, so Duplicate Component Sample works correctly.
+   *    This test is to assert simple functionality of sample 
    *
-   * Steps:
+      * Steps:
    *    1. Open Duplicate Component sample and assert elements on page
    *    2. Assert elements on page and click first "Duplicate" link
    *    3. Assert elements are duplicated correctly and click second "Duplicate" link
@@ -88,7 +80,7 @@ public class CDE439 {
      * ## Step 1
      */
     //Open CGG Component sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ADuplicateComponent%3AduplicateComponent.wcdf/generatedContent" );
+    this.driver.get( PageUrl.DUPLICATE_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
@@ -154,7 +146,5 @@ public class CDE439 {
     assertNotNull( passLabel2 );
     assertNotNull( passText2 );
     assertNotNull( passButton2 );
-
   }
-
 }

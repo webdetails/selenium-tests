@@ -23,6 +23,7 @@ package org.pentaho.ctools.suite.issues;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.pentaho.ctools.issues.cdf.AutoIncludes;
 import org.pentaho.ctools.issues.cdf.CDF149;
 import org.pentaho.ctools.issues.cdf.CDF379;
 import org.pentaho.ctools.issues.cdf.CDF406;
@@ -34,6 +35,7 @@ import org.pentaho.ctools.issues.cdf.CDF469;
 import org.pentaho.ctools.issues.cdf.CDF474;
 import org.pentaho.ctools.issues.cdf.CDF486;
 import org.pentaho.ctools.issues.cdf.CDF501;
+import org.pentaho.ctools.issues.cdf.TableComponent;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
@@ -48,7 +50,9 @@ import org.pentaho.ctools.issues.cdf.CDF501;
     CDF469.class,
     CDF474.class,
     CDF486.class,
-    CDF501.class } )
+    CDF501.class,
+    TableComponent.class,
+    AutoIncludes.class } )
 public class SuiteCDF {
   //It runs the SuiteCDF
 }

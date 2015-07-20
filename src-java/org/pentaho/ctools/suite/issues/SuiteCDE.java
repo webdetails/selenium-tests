@@ -54,7 +54,6 @@ import org.pentaho.ctools.issues.cde.CDE425;
 import org.pentaho.ctools.issues.cde.CDE430;
 import org.pentaho.ctools.issues.cde.CDE432;
 import org.pentaho.ctools.issues.cde.CDE438;
-import org.pentaho.ctools.issues.cde.CDE439;
 import org.pentaho.ctools.issues.cde.CDE446;
 import org.pentaho.ctools.issues.cde.CDE452;
 import org.pentaho.ctools.issues.cde.CDE453;
@@ -94,7 +93,6 @@ import org.pentaho.ctools.issues.cde.CDE505;
     CDE430.class,
     CDE432.class,
     CDE438.class,
-    CDE439.class,
     CDE446.class,
     CDE452.class,
     CDE453.class,
