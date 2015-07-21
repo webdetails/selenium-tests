@@ -40,6 +40,7 @@ import org.pentaho.ctools.cdf.require.OpenFlashChartComponent;
 import org.pentaho.ctools.cdf.require.PrptComponent;
 import org.pentaho.ctools.cdf.require.QueryComponent;
 import org.pentaho.ctools.cdf.require.RadioComponent;
+import org.pentaho.ctools.cdf.require.SchedulePrptComponent;
 import org.pentaho.ctools.cdf.require.SelectComponent;
 import org.pentaho.ctools.cdf.require.SelectMultiComponent;
 import org.pentaho.ctools.cdf.require.TableComponent;
@@ -48,6 +49,7 @@ import org.pentaho.ctools.cdf.require.TextComponent;
 import org.pentaho.ctools.cdf.require.TextInputComponent;
 import org.pentaho.ctools.cdf.require.TimePlotComponent;
 import org.pentaho.ctools.cdf.require.TrafficComponent;
+import org.pentaho.ctools.cdf.require.VisualizationAPIComponent;
 import org.pentaho.ctools.cdf.require.XactionComponent;
 
 @RunWith( Suite.class )
@@ -69,7 +71,7 @@ import org.pentaho.ctools.cdf.require.XactionComponent;
     PrptComponent.class,
     QueryComponent.class,
     RadioComponent.class,
-    //SchedulePrptComponent.class,
+    SchedulePrptComponent.class,
     SelectComponent.class,
     SelectMultiComponent.class,
     TableComponent.class,
@@ -78,7 +80,7 @@ import org.pentaho.ctools.cdf.require.XactionComponent;
     TextInputComponent.class,
     TimePlotComponent.class,
     TrafficComponent.class,
-    //VisualizationAPIComponent.class,
+    VisualizationAPIComponent.class,
     XactionComponent.class } )
 public class SuiteCDF {
   //It runs Suite.SuiteClasses
