@@ -90,7 +90,7 @@ public class PopupComponent {
    * Steps:
    *    1. Check page content
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc01_PageContent_DisplayContent() {
     log.info( "tc01_PageContent_DisplayContent" );
 
@@ -121,7 +121,7 @@ public class PopupComponent {
    *    1. Check page contents
    *    2. Check popup display
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc02_PopupExample1_PopupDisplay() {
     log.info( "tc02_PopupExample1_PopupDisplay" );
 
@@ -183,7 +183,7 @@ public class PopupComponent {
    *    1. Check page contents
    *    2. Check popup display
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc03_PopupExample2_PopupDisplay() {
     log.info( "tc03_PopupExample2_PopupDisplay" );
 

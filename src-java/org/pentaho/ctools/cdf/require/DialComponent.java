@@ -96,7 +96,7 @@ public class DialComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
@@ -119,7 +119,7 @@ public class DialComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -146,7 +146,7 @@ public class DialComponent {
    *    1. Check if a graphic was generated
    *    2. Check the http request for the generated image
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_GenerateGraphic_GraphicGeneratedAndHttp200() {
     this.log.info( "tc3_GenerateGraphic_GraphicGeneratedAndHttp200" );
     // ## Step 1

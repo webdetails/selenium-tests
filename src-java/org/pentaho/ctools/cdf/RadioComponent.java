@@ -91,7 +91,7 @@ public class RadioComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -115,7 +115,7 @@ public class RadioComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
@@ -149,7 +149,7 @@ public class RadioComponent {
    *    3. Select Western
    *    4. Select Southern
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_SelectEachItem_AlertDisplayed() {
     this.log.info( "tc3_SelectEachItem_AlertDisplayed" );
 
@@ -223,7 +223,7 @@ public class RadioComponent {
    *    3. Select Central
    *    4. Select Western
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc4_SelectArbitrary_AlertDisplayed() {
     this.log.info( "tc4_SelectArbitrary_AlertDisplayed" );
 

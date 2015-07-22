@@ -89,7 +89,7 @@ public class ExecuteXactionComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
@@ -111,7 +111,7 @@ public class ExecuteXactionComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -143,7 +143,7 @@ public class ExecuteXactionComponent {
    *    2. Check if a chart was generated
    *    3. Check the http request for the image generated
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_PressToGenerateChart_ChartIsDisplayed() {
     // ## Step 1
     final String buttonName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//button/span" ) );

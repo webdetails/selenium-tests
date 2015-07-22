@@ -79,7 +79,7 @@ public class CDE367 {
    *    2. Go to Properties, check the box for BackgroundColor and write "#3d558c" on input field
    *    3. Assert input field for "colorpicker_hex" has "3d558c"
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_ColorPickerPaste() {
     this.log.info( "tc01_CdeDashboard_ColorPickerPaste" );
 

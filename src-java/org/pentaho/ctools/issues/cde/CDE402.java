@@ -82,7 +82,7 @@ public class CDE402 {
    *    5. Wait for confirmation of command and confirm
    *    6. Assert that selected template was applied
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc01_NewCdeDashboard_ApplyTemplate() {
     this.log.info( "tc01_NewCdeDashboard_ApplyTemplate" );
 

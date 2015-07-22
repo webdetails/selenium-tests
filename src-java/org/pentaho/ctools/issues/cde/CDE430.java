@@ -83,7 +83,7 @@ public class CDE430 {
    *  3. Assert list is shown for Chart Export Type
    *  4. Assert list is shown for Data Export Type
    */
-  @Test( timeout = 360000 )
+  @ Test
   public void tc01_PopupExportComponent_TypeListShown() {
     this.log.info( "tc01_PopupExportComponent_TypeListShown" );
 

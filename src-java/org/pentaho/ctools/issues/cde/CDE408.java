@@ -84,7 +84,7 @@ public class CDE408 {
    *    3. Wait for table Component to be added and then click "Advanced Properties"
    *    4. Assert existence of scroller
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_NewCdeDashboard_AddedScrollers() {
     this.log.info( "tc01_NewCdeDashboard_AddedScrollers" );
 

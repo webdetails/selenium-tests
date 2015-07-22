@@ -88,7 +88,7 @@ public class CDA99 {
    *    4. Change the code adding type='olap4j'
    *    5. Perform the preview and the query could be performed
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_PageContent_DisplayContent() {
     this.log.info( "tc01_PageContent_DisplayContent" );
 

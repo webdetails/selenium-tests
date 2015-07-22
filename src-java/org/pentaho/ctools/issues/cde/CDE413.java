@@ -85,7 +85,7 @@ public class CDE413 {
    *    5. Open Parameters popup and add 3 pairs of arg/value
    *    6. Click Ok, assert values are shown, open popup and assert pairs are still there
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_NewCdeDashboard_ColumnTypeEditor() {
     this.log.info( "tc01_NewCdeDashboard_ColumnTypeEditor" );
 

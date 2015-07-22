@@ -79,7 +79,7 @@ public class AutoIncludes {
    *    2. Assert alert shows expected text
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc1_CdfAutoIncludes_ReturnsValues() {
     this.log.info( "tc1_CdfAutoIncludes_ReturnsValues" );
 

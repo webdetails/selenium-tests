@@ -89,7 +89,7 @@ public class WidgetReference {
    * Steps:
    *    1. Check page content
    */
-  @Test( timeout = 30000 )
+  @Test
   public void tc01_PageContent_DisplayContent() {
     LOG.info( "tc01_PageContent_DisplayContent" );
 
@@ -123,7 +123,7 @@ public class WidgetReference {
    *    3. Disable series
    *    4. Check tooltip
    */
-  @Test( timeout = 90000 )
+  @Test
   public void tc02_WidgetChart_ContentsDisplayCorrect() {
     LOG.info( "tc02_WidgetChart_ContentsDisplayCorrect" );
 

@@ -77,7 +77,7 @@ public class CDE396 {
    *    1. Assert confirmation text
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc1_RefreshCde_ReturnsInfo() {
     this.log.info( "tc1_RefreshCde_ReturnsInfo" );
 

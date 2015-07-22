@@ -61,7 +61,7 @@ public class MarketPlacePage {
    * Steps:
    *    1. Check layout
    */
-  @Test( timeout = 180000 )
+  @ Test
   public void tc1_MarketPlacePage_GeneralLayout() {
 
     /*

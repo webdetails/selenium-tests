@@ -78,7 +78,7 @@ public class CDE395 {
    *    1. Create New Dashboard, assert elements on page and click "Settings"
    *    4. Focus on popup, assert elements and assert Bootstrap option is selected by default
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_NewCdeDashboard_DefaultRendererBootstrap() {
     this.log.info( "tc01_NewCdeDashboard_DefaultRendererBootstrap" );
 

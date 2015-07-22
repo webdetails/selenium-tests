@@ -77,7 +77,7 @@ public class ScatterChart {
    * Steps:
    *    1. Open the scatter chart.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_ScatterChart_ImageRendered() {
     LOG.debug( "tc1_ScatterChart_ImageRendered" );
     //## Step 1

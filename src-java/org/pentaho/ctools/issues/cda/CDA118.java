@@ -104,7 +104,7 @@ public class CDA118 {
    *    5. Open the query with outpuColumnName in the URL and assert results were filtered
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdaFileViewer_ExcelOutputIndex() {
     this.log.info( "tc01_CdaFileViewer_ExcelOutputIndex" );
 

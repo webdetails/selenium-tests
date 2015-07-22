@@ -77,7 +77,7 @@ public class OlapSelectorComponent {
    *    3. Make options and click ok, assert options were correctly selected
    *    
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_OlapSelectorComponent_SniffTestSample() {
     this.log.info( "tc1_OlapSelectorComponent_SniffTestSample" );
 

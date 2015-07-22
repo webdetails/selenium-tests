@@ -83,7 +83,7 @@ public class CDE432 {
    *    3. Click down arrow twice and click enter
    *    4. Assert "Left" option is selected for the "Text Align" property
    **/
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_NoExtraOptions() {
     this.log.info( "tc01_CdeDashboard_NoExtraOptions" );
 

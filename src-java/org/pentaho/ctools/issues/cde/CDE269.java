@@ -77,7 +77,7 @@ public class CDE269 {
    * Steps:
    *    1. Open URL and assert information shown
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeGetHeaders_CorrectInfo() {
     this.log.info( "tc01_CdeGetHeaders_CorrectInfo" );
 

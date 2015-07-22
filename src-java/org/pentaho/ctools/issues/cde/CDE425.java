@@ -86,7 +86,7 @@ public class CDE425 {
    *    5. Click row element and click "shift+d" and assert row was duplicated
    *    6. Click newly created row element and click "shift+x" and assert row was deleted
    **/
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_LayoutShorcuts() {
     this.log.info( "tc01_CdeDashboard_LayoutShortcuts" );
 

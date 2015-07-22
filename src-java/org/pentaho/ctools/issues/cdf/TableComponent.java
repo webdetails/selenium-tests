@@ -81,7 +81,7 @@ public class TableComponent {
    *    3. Change page and expand second row asserting expansion was successful
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc1_CdfTableComponent_ExpandRows() {
     this.log.info( "tc1_CdfTableComponent_ExpandRows" );
 

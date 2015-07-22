@@ -82,7 +82,7 @@ public class CDE446 {
    *    3. Assert data shown is expected
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc1_CdeDashboard_KettleDatasourceWorks() {
     this.log.info( "tc1_CdeDashboard_KettleDatasourceWorks" );
 

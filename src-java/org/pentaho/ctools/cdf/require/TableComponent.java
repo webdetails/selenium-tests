@@ -99,7 +99,7 @@ public class TableComponent {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -123,7 +123,7 @@ public class TableComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
@@ -152,7 +152,7 @@ public class TableComponent {
    *    3. Go to the end page and check the data.
    *    4. Go to the first page and check the data.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_Paging_NavigateBetweenPages() {
     this.log.info( "tc3_Paging_NavigateBetweenPages" );
 
@@ -235,7 +235,7 @@ public class TableComponent {
    *    6. Go to the end page and check the data.
    *    7. Go to the first page and check the data.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc4_Sort_ElementsAreSort() {
     this.log.info( "tc4_Sort_ElementsAreSort" );
 
@@ -363,7 +363,7 @@ public class TableComponent {
    *    1. Select 25 and paging
    *    2. Select 50 (no paging)
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected() {
     this.log.info( "tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected" );
 
@@ -444,7 +444,7 @@ public class TableComponent {
    *    2. Search for 'Euro' (Check paging, display entries, sort)
    *    3. Search for 'TODO' (no result)
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc6_SearchEngine_TableDisplayedContentSearch() {
     this.log.info( "tc6_SearchEngine_TableDisplayedContentSearch" );
 

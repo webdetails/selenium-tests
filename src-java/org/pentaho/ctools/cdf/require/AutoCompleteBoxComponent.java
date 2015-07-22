@@ -83,7 +83,7 @@ public class AutoCompleteBoxComponent {
    *    2. Execute the "Try me".
    *    3. Press a on text box and check the autocomplete.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_AutocompleteBox_DataAreListed() {
     this.LOG.info( "tc1_AutocompleteBox_DataAreListed" );
     /*

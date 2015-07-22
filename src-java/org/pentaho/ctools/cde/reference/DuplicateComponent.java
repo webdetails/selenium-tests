@@ -72,7 +72,7 @@ public class DuplicateComponent {
    *    3. Assert elements are duplicated correctly and click second "Duplicate" link
    *    4. Assert elements are duplicated correctly
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CDEDashboard_DuplicateComponentWorks() {
     this.log.info( "tc01_CDEDashboard_DuplicateComponentWorks" );
 

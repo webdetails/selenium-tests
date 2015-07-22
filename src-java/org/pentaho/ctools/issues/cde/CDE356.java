@@ -93,7 +93,7 @@ public class CDE356 {
    *    5. Input name with "$"at the start (CDE-536) and then click folder (CDE-468), save dashboard, click new,and assert new dashboard is shown
    *    6. Delete created files
    */
-  @Test( timeout = 240000 )
+  @ Test
   public void tc01_CdeDashboard_CreateNewFromEdit() {
     this.log.info( "tc01_CdeDashboard_CreateNewFromEdit" );
 

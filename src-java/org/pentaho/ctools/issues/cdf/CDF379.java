@@ -77,7 +77,7 @@ public class CDF379 {
    * Steps:
    *    1. Assert chart is displayed correctly
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CCCProperties_DisplayChart() {
     this.log.info( "tc01_CCCProperties_DisplayChart" );
 

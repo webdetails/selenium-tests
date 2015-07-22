@@ -78,7 +78,7 @@ public class CDF406 {
    *    1. Open created sample and assert chart renders correctly
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_SunburstComponent_RenderedCorrectly() {
     this.log.info( "tc01_SunburstComponent_RenderedCorrectly" );
 

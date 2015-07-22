@@ -95,7 +95,7 @@ public class CDE505 {
    *    
    */
 
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_ParametersList_SortedAlphabetically() {
     this.log.info( "tc01_ParametersList_SortedAlphabetically" );
 

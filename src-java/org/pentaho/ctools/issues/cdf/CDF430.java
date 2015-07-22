@@ -80,7 +80,7 @@ public class CDF430 {
    *    3. Open created CDF sample dashboard and assert text is displayed as expected
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_i18nMessages_PioritizedCorrectly() {
     this.log.info( "tc01_i18nMessages_PioritizedCorrectly" );
 

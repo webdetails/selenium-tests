@@ -84,7 +84,7 @@ public class LogoutPentaho {
    *    2. Press Log Out.
    *    3. The user is logged out and is redirect to home page (login page).
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc1_Logout_SuccessLogOutReturnHomePage() {
     log.debug( "tc1_Logout_SuccessLogOutReturnHomePage" );
 

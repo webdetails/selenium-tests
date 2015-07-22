@@ -63,7 +63,7 @@ public class PluginsList {
    * Steps:
    *    1. Check presence of plugins
    */
-  @Test( timeout = 180000 )
+  @ Test
   public void tc1_MarketPlacePage_PluginList() {
 
     /*

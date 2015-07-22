@@ -80,7 +80,7 @@ public class CDA103 {
    *    3. Click 'CDA Cache'
    *    4. Assert text confirming that the Cache was cleared
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_RefreshCdaCache_ReturnsInfo() {
     this.log.info( "tc01_RefreshCdaCache_ReturnsInfo" );
 

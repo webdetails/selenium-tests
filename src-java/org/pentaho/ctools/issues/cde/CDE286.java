@@ -88,7 +88,7 @@ public class CDE286 {
    * @throws InterruptedException 
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_NewCdeDashboard_CggDialComponentExport() {
     this.log.info( "tc01_NewCdeDashboard_CggDialComponentExport" );
 

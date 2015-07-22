@@ -90,7 +90,7 @@ public class MultiButtonComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
@@ -113,7 +113,7 @@ public class MultiButtonComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -147,7 +147,7 @@ public class MultiButtonComponent {
    *    3. Click in Western
    *    4. Click in Southern
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_ClickInEachOption_AlertDisplayed() {
     this.log.info( "tc3_ClickInEachOption_AlertDisplayed" );
 
@@ -198,7 +198,7 @@ public class MultiButtonComponent {
    *    3. Click in Eastern
    *    4. Click in Southern
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc4_ClickArbitrary_AlertDisplayed() {
     this.log.debug( "tc4_ClickArbitrary_AlertDisplayed" );
 

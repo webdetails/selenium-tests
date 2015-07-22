@@ -78,7 +78,7 @@ public class CDF501 {
    *    3. Assert text on alert and click OK
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc1_CdfDashboardUrl_ParamSuccessfull() {
     this.log.info( "tc1_CdfDashboardUrl_ParamSuccessfull" );
 

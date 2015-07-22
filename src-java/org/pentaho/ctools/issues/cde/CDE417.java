@@ -134,7 +134,7 @@ public class CDE417 {
    *
    */
 
-  @Test( timeout = 360000 )
+  @ Test
   public void tc01_PopupExportComponent_PreviewerRendersChart() throws InterruptedException {
     this.log.info( "tc01_PopupExportComponent_PreviewerRendersChart" );
 

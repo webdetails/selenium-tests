@@ -89,7 +89,7 @@ public class DateInputComponent {
    *    2. Render the component again.
    *    3. Choose the date '2011-10-23'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_DataInput_DisplayPopupWithPickedDate() {
     /*
      * ## Step 1

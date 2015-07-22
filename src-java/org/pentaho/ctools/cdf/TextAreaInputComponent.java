@@ -99,7 +99,7 @@ public class TextAreaInputComponent {
    *    1. Check sample title.
    *    2. Check sample description.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_ContentPresent() {
     LOG.info( "tc1_PageContent_ContentPresent" );
 
@@ -150,7 +150,7 @@ public class TextAreaInputComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -181,7 +181,7 @@ public class TextAreaInputComponent {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_InputSmallPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World!";
@@ -211,7 +211,7 @@ public class TextAreaInputComponent {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc4_InputLongPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!";
@@ -246,7 +246,7 @@ public class TextAreaInputComponent {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";

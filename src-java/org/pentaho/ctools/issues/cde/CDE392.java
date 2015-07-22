@@ -83,7 +83,7 @@ public class CDE392 {
    *    5. Go to Settings and select another rendering option
    *    6. Assert confirmation popup is shown
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_NewCdeDashboard_TableInheritsRenderer() {
     this.log.info( "tc01_NewCdeDashboard_TableInheritsRenderer" );
 

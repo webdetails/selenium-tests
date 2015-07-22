@@ -55,7 +55,7 @@ public class SimpleExtensionPoints {
    *
    * @throws Exception
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_AddSimpleExtensionPoint_ExtensionPointAdded() throws Exception {
     //##Step 0 - Delete the widget
     WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
@@ -180,7 +180,7 @@ public class SimpleExtensionPoints {
    *
    * @throws Exception
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_EditSimpleExtensionPoint_ExtensionPointEditable() throws Exception {
     //##Step 1 - Access to widget in Edit mode
     this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );

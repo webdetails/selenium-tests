@@ -82,7 +82,7 @@ public class CDE388 {
    *    3. Assert Wizard is shown, expand "Markets", drag "Territory" to "Rows" and "Quantity" to "Columns"
    *    4. Assert chart is shown on Preview
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_OlapWizardDragAndDrop() {
     this.log.info( "tc01_CdeDashboard_OlapWizardDragAndDrop" );
 

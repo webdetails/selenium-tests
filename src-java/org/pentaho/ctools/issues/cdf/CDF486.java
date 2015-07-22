@@ -79,7 +79,7 @@ public class CDF486 {
    *    2. Open same sample adding clean option to URL and assert position of elements is different
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc1_CdfDashboardType_CleanStyle() {
     this.log.info( "tc1_CdfDashboardType_CleanStyle" );
 

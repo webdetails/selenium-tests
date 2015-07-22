@@ -82,7 +82,7 @@ public class CDE404 {
    *    3. Select file
    *    4. Edit resource and assert elements on external editor
    */
-  @Test( timeout = 180000 )
+  @ Test
   public void tc01_ExternalResources_PluginDashboard() {
     this.log.info( "tc01_ExternalResources_PluginDashboard" );
 
