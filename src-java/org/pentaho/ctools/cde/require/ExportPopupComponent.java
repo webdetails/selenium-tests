@@ -118,7 +118,7 @@ public class ExportPopupComponent {
    *    7. Export to XML and assert file
    *    
    */
-  @Test( timeout = 120000 )
+  @Test
   public void tc01_CDEDashboard_ExportPopupComponentWorks() {
     this.log.info( "tc01_CDEDashboard_ExportPopupComponentWorks" );
 
