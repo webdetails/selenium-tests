@@ -44,9 +44,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.main.LoginPentaho;
-import org.pentaho.ctools.main.LogoutPentaho;
-import org.pentaho.ctools.suite.require.SuiteRequireJS;
-import org.pentaho.ctools.suite.security.SuiteSecurity;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
@@ -54,7 +51,7 @@ import org.pentaho.ctools.suite.security.SuiteSecurity;
     // Start Tests
     LoginPentaho.class,
     // CDF
-    SuiteCDF.class,
+    /*SuiteCDF.class,
     // CDE
     SuiteCDE.class,
     // CDA
@@ -70,7 +67,9 @@ import org.pentaho.ctools.suite.security.SuiteSecurity;
     //Marketplace
     //SuiteMarketplace.class,
     // End Tests
-    LogoutPentaho.class } )
+    LogoutPentaho.class*/
+    org.pentaho.ctools.cde.reference.ExportPopupComponent.class,
+    org.pentaho.ctools.cde.require.ExportPopupComponent.class } )
 public class CToolsTestSuite {
 
   // Instance of the driver (browser emulator)
