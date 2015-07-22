@@ -86,7 +86,7 @@ public class CDE425 {
    *    5. Click row element and click "shift+d" and assert row was duplicated
    *    6. Click newly created row element and click "shift+x" and assert row was deleted
    **/
-  @ Test
+  @Test
   public void tc01_CdeDashboard_LayoutShorcuts() {
     this.log.info( "tc01_CdeDashboard_LayoutShortcuts" );
 
@@ -128,18 +128,21 @@ public class CDE425 {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    /*element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
-    if ( element == null ) {
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    while ( element == null ) {
       this.log.info( "Element was null!!" );
+      Robot robot;
       try {
         robot = new Robot();
         robot.keyPress( KeyEvent.VK_R );
         robot.keyRelease( KeyEvent.VK_R );
       } catch ( AWTException e ) {
+        // TODO Auto-generated catch block
         e.printStackTrace();
       }
-    }*/
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    }
+
     assertNotNull( element );
     this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
 
