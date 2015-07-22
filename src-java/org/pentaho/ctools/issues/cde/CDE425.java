@@ -129,20 +129,6 @@ public class CDE425 {
       e.printStackTrace();
     }
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
-    while ( element == null ) {
-      this.log.info( "Element was null!!" );
-      Robot robot;
-      try {
-        robot = new Robot();
-        robot.keyPress( KeyEvent.VK_R );
-        robot.keyRelease( KeyEvent.VK_R );
-      } catch ( AWTException e ) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
-    }
-
     assertNotNull( element );
     this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
 
