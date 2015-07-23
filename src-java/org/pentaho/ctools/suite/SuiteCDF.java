@@ -48,6 +48,7 @@ import org.pentaho.ctools.cdf.TextAreaInputComponent;
 import org.pentaho.ctools.cdf.TextInputComponent;
 import org.pentaho.ctools.cdf.TimePlotComponent;
 import org.pentaho.ctools.cdf.TrafficComponent;
+import org.pentaho.ctools.cdf.VisualizationAPIComponent;
 import org.pentaho.ctools.cdf.XactionComponent;
 
 @RunWith( Suite.class )
@@ -79,7 +80,7 @@ import org.pentaho.ctools.cdf.XactionComponent;
     TextInputComponent.class,
     TimePlotComponent.class,
     TrafficComponent.class,
-    //VisualizationAPIComponent.class,
+    VisualizationAPIComponent.class,
     XactionComponent.class } )
 public class SuiteCDF {
   //It runs the Suite.SuiteClasses

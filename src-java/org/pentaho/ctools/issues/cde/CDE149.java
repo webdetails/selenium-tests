@@ -80,7 +80,7 @@ public class CDE149 {
    *    3. Assert parameter popup and buttons. Add 15 parameters
    *    4. Assert that last three parameter's fields do not intercept any of the buttons
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_ParametersNotOverlap() {
     this.log.info( "tc01_CdeDashboard_ParametersNotOverlap" );
 

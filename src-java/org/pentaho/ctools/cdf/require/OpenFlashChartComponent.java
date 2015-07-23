@@ -92,7 +92,7 @@ public class OpenFlashChartComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -116,7 +116,7 @@ public class OpenFlashChartComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -146,7 +146,7 @@ public class OpenFlashChartComponent {
    * Steps:
    *    1. Check that component generate a flash object
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_OpenFlashChart_ChartDisplayed() {
     this.log.info( "tc3_OpenFlashChart_ChartDisplayed" );
 

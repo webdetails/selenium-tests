@@ -53,7 +53,7 @@ public class SelectCdaFileAsDatasource {
    *
    * @throws Exception
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_SelectCdaFileAsDatasource_PathOfCdaFileCorrect() throws Exception {
     // ##Step 1 - Create widget with specific parameter
     WidgetUtils.CreateWidget( this.driver, this.widgetName );

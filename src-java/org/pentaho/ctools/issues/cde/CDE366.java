@@ -26,7 +26,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -89,7 +89,7 @@ public class CDE366 {
    *    4. Close and reopen Dashboard, assert applied template and settings changes persist
    *    5. Delete created dashboard
    */
-  @Test( timeout = 240000 )
+  @Test
   public void tc01_CdeDashboard_SettingsPersist() {
     this.log.info( "tc01_CdeDashboard_SettingsPersist" );
 
@@ -253,7 +253,7 @@ public class CDE366 {
     this.failure = 1;
   }
 
-  @AfterClass
+  @After
   public void tearDown() {
     this.log.info( "tearDown##" + CDE366.class.getSimpleName() );
     if ( this.failure == 0 ) {

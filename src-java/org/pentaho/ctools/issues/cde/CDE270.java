@@ -80,7 +80,7 @@ public class CDE270 {
    *    3. Drag 3rd set into 2nd column of first set and assert layout elements
    *    4. Drag 2nd column of first set into row of 2nd set (located in 1st column of first set) and assert layout elements
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_LayoutDragAndDrop() {
     this.log.info( "tc01_CdeDashboard_LayoutDragAndDrop" );
 

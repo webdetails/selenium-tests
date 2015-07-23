@@ -81,7 +81,7 @@ public class CDF435 {
    *    2. Select 2004 on 'select multiple=""'
    *    3. Assert Elements and Text on Dashboard
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_PrptComponent_RenderedResponsive() {
     this.log.info( "tc01_PrptComponent_RenderedResponsive" );
 

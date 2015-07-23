@@ -77,7 +77,7 @@ public class CDF474 {
    * Steps:
    *    1. Open Issue's prepared sample, click to expand drop down and assert it's style
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_SelectComponent_Select2AutoWidth() {
     this.log.info( "tc01_SelectComponent_Select2AutoWidth" );
 

@@ -94,7 +94,7 @@ public class DateRangeInputComponent {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
@@ -116,7 +116,7 @@ public class DateRangeInputComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -143,7 +143,7 @@ public class DateRangeInputComponent {
    *    1. Click in Today option
    *    2. Check for Alert
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_Today_DateIsSetSuccessful() {
     /*
      * ## Step 1
@@ -180,7 +180,7 @@ public class DateRangeInputComponent {
    *    1. Click in Last 7 Days option
    *    2. Check for Alert
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc4_LastSevenDays_DateIsSetSuccessful() {
     /*
      * ## Step 1
@@ -219,7 +219,7 @@ public class DateRangeInputComponent {
    *    1. Click in Month to date option
    *    2. Check for Alert
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc5_MonthToDate_DateIsSetSuccessful() {
     /*
      * ## Step 1
@@ -258,7 +258,7 @@ public class DateRangeInputComponent {
    *    1. Click in Year to date option
    *    2. Check for Alert
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc6_YearToDate_DateIsSetSuccessful() {
     /*
      * ## Step 1
@@ -298,7 +298,7 @@ public class DateRangeInputComponent {
    *    1. Click in The Previous Month option
    *    2. Check for Alert
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc7_ThePreviousMonth_DateIsSetSuccessful() {
     /*
      * ## Step 1
@@ -342,7 +342,7 @@ public class DateRangeInputComponent {
    *    2. Click in Today option and then Done
    *    3. Check for Alert
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful() {
     /*
      * ## Step 1

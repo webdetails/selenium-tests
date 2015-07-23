@@ -103,7 +103,7 @@ public class SchedulePrptComponent {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -127,7 +127,7 @@ public class SchedulePrptComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
@@ -158,7 +158,7 @@ public class SchedulePrptComponent {
    *    4. On Schedule Manager, it is set the schedule.
    * @throws InterruptedException
    */
-  @Test( timeout = 150000 )
+  @Test
   public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() {
     this.log.info( "tc3_SchedulePrpt_ScheduleCreatedSuccessful" );
     this.bRemoveSchedule = true;

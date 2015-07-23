@@ -25,6 +25,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -44,7 +47,9 @@ import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.DirectoryWatcher;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.HttpUtils;
+import org.pentaho.ctools.utils.PUCSettings;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
+import org.pentaho.gui.web.puc.BrowseFiles;
 
 /**
  * The script is testing the issue:
@@ -129,15 +134,14 @@ public class CDE417 {
    *
    */
 
-  @Test( timeout = 360000 )
+  @ Test
   public void tc01_PopupExportComponent_PreviewerRendersChart() throws InterruptedException {
     this.log.info( "tc01_PopupExportComponent_PreviewerRendersChart" );
 
     /*
      * ## Step 1
      */
-    /*
-    // Show Hidden Files
+    //Show Hidden Files
     BrowseFiles browser = new BrowseFiles( this.driver );
     if ( !PUCSettings.SHOWHIDDENFILES ) {
       browser.CheckShowHiddenFiles();
@@ -146,11 +150,10 @@ public class CDE417 {
     /*
      * ## Step 2
      */
-    /*
-    //String pathChart = "/public/Issues/CDF-548/chart.js";
-    //String pathCdfChart = "/public/Issues/CDF-548/CDF-548_chart.js";
-    String pathCountryChart = "/public/Issues/CDF-548/countryChart.js";
-    String pathCdfCountryChart = "/public/Issues/CDF-548/CDF-548_countryChart.js";
+    //String pathChart = "/public/Issues/CDF/CDF-548/chart.js";
+    //String pathCdfChart = "/public/Issues/CDF/CDF-548/CDF-548_chart.js";
+    String pathCountryChart = "/public/Issues/CDF/CDF-548/countryChart.js";
+    String pathCdfCountryChart = "/public/Issues/CDF/CDF-548/CDF-548_countryChart.js";
     //boolean fileDeleteChart = browser.DeleteFile( pathChart );
     //boolean fileDeleteCdfChart = browser.DeleteFile( pathCdfChart );
     boolean fileDeleteCountryChart = browser.DeleteFile( pathCountryChart );
@@ -162,16 +165,15 @@ public class CDE417 {
 
     this.driver.switchTo().defaultContent();
     WebDriver frame = this.driver.switchTo().frame( "browser.perspective" );
-    this.elemHelper.WaitForAttributeValue( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title", "CDF-548.wcdf" );
+    this.elemHelper.WaitForAttributeValue( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title", "CDF-548.cda" );
     String nameOfCdf548Wcdf = this.elemHelper.GetAttribute( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title" );
-    assertEquals( "CDF-548.wcdf", nameOfCdf548Wcdf );
+    assertEquals( "CDF-548.cda", nameOfCdf548Wcdf );
 
     /*
      * ## Step 3
      */
-    /*
     // Go to Export Popup Component sample in Edit mode
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-548%3ACDF-548.wcdf/edit" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/edit" );
 
     //Save Dashboard
     WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Save" ) );
@@ -185,7 +187,6 @@ public class CDE417 {
     /* 
      * ## Step 4 
       */
-    /*
     //Go to components panel and expand "Others"
     WebElement componentsPanelButton = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.componentsPanelButton" ) );
     assertNotNull( componentsPanelButton );
@@ -227,7 +228,6 @@ public class CDE417 {
     /* 
      * ## Step 5 
       */
-    /*
     //Open options for Data Component to Export and assert "table", "chart" and "countryChart"
     WebElement dataExportProperty = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Data Component to Export']/../td[2]" ) );
     assertNotNull( dataExportProperty );
@@ -255,7 +255,7 @@ public class CDE417 {
     /* 
      * ## Step 6 
      */
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF-548%3ACDF-548.wcdf/generatedContent" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/generatedContent" );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Click export Button
@@ -274,7 +274,7 @@ public class CDE417 {
 
     // Check URL of displayed image
     String chartSRCUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2FIssues%2FCDF-548%2Fchart.js&paramcountries=France&paramcountries=USA&paramwidth=400&paramheight=400", chartSRCUrl );
+    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2Fchart.js&paramcountries=France&paramcountries=USA&paramwidth=400&paramheight=400", chartSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( chartSRCUrl, "admin", "password" ) );
 
     // Export chart and assert export was successful
@@ -345,7 +345,7 @@ public class CDE417 {
 
     // Check URL of displayed image
     String countryChartSRCUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2FIssues%2FCDF-548%2FcountryChart.js&paramwidth=400&paramheight=300", countryChartSRCUrl );
+    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2FcountryChart.js&paramwidth=400&paramheight=300", countryChartSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( countryChartSRCUrl, "admin", "password" ) );
 
     // Export chart and assert export was successful

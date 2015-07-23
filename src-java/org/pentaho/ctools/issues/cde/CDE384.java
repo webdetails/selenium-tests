@@ -88,7 +88,7 @@ public class CDE384 {
    *    7. Click to edit cda file, wait for popup, assert text on path, click "X"
    *    8. Go to Layout Panel, click to edit resource, wait for popup, assert text on path, click "X"
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_ExternalResources_AssertPath() {
     this.log.info( "tc01_ExternalResources_AssertPath" );
 

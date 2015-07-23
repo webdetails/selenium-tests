@@ -80,7 +80,7 @@ public class CDE407 {
    *    3. Wait for Spacer to appear on layout confirm it's highlighted and then click "Duplicate Layout Element" twice
    *    4. Wait for Spacers to appear on layout and then confirm there are three of them
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_NewCdeDashboard_DuplicateSpacers() {
     this.log.info( "tc01_NewCdeDashboard_DuplicateSpacers" );
 

@@ -30,6 +30,7 @@ import org.pentaho.ctools.issues.cda.CDA108;
 import org.pentaho.ctools.issues.cda.CDA109;
 import org.pentaho.ctools.issues.cda.CDA110;
 import org.pentaho.ctools.issues.cda.CDA112;
+import org.pentaho.ctools.issues.cda.CDA118;
 import org.pentaho.ctools.issues.cda.CDA121;
 import org.pentaho.ctools.issues.cda.CDA45;
 import org.pentaho.ctools.issues.cda.CDA46;
@@ -38,19 +39,20 @@ import org.pentaho.ctools.issues.cda.CDA99;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
-  //Issues CDA
-  CDA45.class,
-  CDA46.class,
-  CDA55.class,
-  CDA99.class,
-  CDA100.class,
-  CDA103.class,
-  CDA106.class,
-  CDA108.class,
-  CDA109.class,
-  CDA110.class,
-  CDA112.class,
-  CDA121.class } )
+    //Issues CDA
+    CDA45.class,
+    CDA46.class,
+    CDA55.class,
+    CDA99.class,
+    CDA100.class,
+    CDA103.class,
+    CDA106.class,
+    CDA108.class,
+    CDA109.class,
+    CDA110.class,
+    CDA112.class,
+    CDA118.class,
+    CDA121.class } )
 public class SuiteCDA {
   //It runs the Suite.SuiteClasses.
 }

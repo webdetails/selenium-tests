@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package org.pentaho.ctools.issues.cde;
+package org.pentaho.ctools.issues.cdf;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,7 +29,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
@@ -37,20 +36,20 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
  * The script is testing the issue:
- * - http://jira.pentaho.com/browse/CDE-396
+ * - http://jira.pentaho.com/browse/CDF-501
  *
  * and the automation test is described:
- * - http://jira.pentaho.com/browse/QUALITY-926
+ * - http://jira.pentaho.com/browse/QUALITY-1109
  *
  * NOTE
- * To test this script it is required to have CDE plugin installed.
+ * To test this script it is required to have CDF plugin installed.
  *
  * Naming convention for test:
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class CDE396 {
+public class CDF501 {
   // Instance of the driver (browser emulator)
   private final WebDriver driver = CToolsTestSuite.getDriver();
   // The base url to be append the relative url in test
@@ -58,7 +57,7 @@ public class CDE396 {
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private final Logger log = LogManager.getLogger( CDE396.class );
+  private final Logger log = LogManager.getLogger( CDF501.class );
   // Getting screenshot when test fails
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
@@ -67,27 +66,39 @@ public class CDE396 {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Asserting refreshing CDE returns confirmation
+   *    Assert that parameters passed on the URL are received by the dashboard
    *
    * Description:
-   *    The test pretends validate the CDE-396 issue, so when user refreshes CDE a confirmation
-   *    that the request was concluded is received.
+   *    When adding paramType=test to the URL Dashboards.context.params.type is created with the value "test".
+   *    When adding type=test to the URL Dashboards.getQueryParameter("type") is created with the value "test"
    *
    * Steps:
-   *    1. Assert confirmation text
+   *    1. Open created sample adding both parameters to the URL
+   *    2. Assert text on alert and click OK
+   *    3. Assert text on alert and click OK
    *
    */
   @ Test
-  public void tc1_RefreshCde_ReturnsInfo() {
-    this.log.info( "tc1_RefreshCde_ReturnsInfo" );
-
-    //Go to User Console
-    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh" );
+  public void tc1_CdfDashboardUrl_ParamSuccessfull() {
+    this.log.info( "tc1_CdfDashboardUrl_ParamSuccessfull" );
 
     /*
      * ## Step 1
      */
-    String confirmationText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/pre" ) );
-    assertEquals( "Refreshed CDE Successfully", confirmationText );
+    //Open Created sample with params on the URL
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-501%3Aurl_param.wcdf/generatedContent?paramtype=success&type=awesome" );
+
+    /*
+     * ## Step 2
+     */
+    String alertMessage = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
+    assertEquals( "Direct Access: success", alertMessage );
+
+    /*
+     * ## Step 3
+     */
+    String alertMessage1 = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
+    assertEquals( "Function: awesome", alertMessage1 );
+
   }
 }

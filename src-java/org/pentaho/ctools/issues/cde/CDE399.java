@@ -78,7 +78,7 @@ public class CDE399 {
    *    2. Wait for Components panel to be shown and expand "Others"
    *    3. Wait for "Others" to expand and then click "Others" to collapse it, after that assert it has been collapsed
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_NewCdeDashboard_AccordionMenuCollapses() {
     this.log.info( "tc01_NewCdeDashboard_AccordionMenuCollapses" );
 

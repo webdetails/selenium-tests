@@ -85,7 +85,7 @@ public class CDE412 {
    *       click Query button and assert title and default text. Remove Scriptable query
    *    5. Add Sql Query element, click Query button and assert title and default text. Remove Sql query
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_QueryEditor() {
     this.log.info( "tc01_CdeDashboard_QueryEditor" );
 

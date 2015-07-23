@@ -87,7 +87,7 @@ public class CDE410 {
    *    5. Repeat steps 2, 3 and 4 for Components Panel
    *    6. Repeat steps 2, 3 and 4 for Datasources Panel
    **/
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_LayoutShortcuts() {
     this.log.info( "tc01_CdeDashboard_LayoutShortcuts" );
 

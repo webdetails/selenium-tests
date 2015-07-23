@@ -79,7 +79,7 @@ public class CDA109 {
    *    2. Assert query is correctly shown
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdaFileEditor_SpacePathWorks() {
     this.log.info( "tc01_CdaFileEditor_SpacePathWorks" );
 

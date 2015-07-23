@@ -77,7 +77,7 @@ public class CDF442 {
    *    1. Open sample and assert div with id cdfErrorDiv doesn't exist
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CCCBarChart_NoErrorThrown() {
     this.log.info( "tc01_CCCBarChart_NoErrorThrown" );
 

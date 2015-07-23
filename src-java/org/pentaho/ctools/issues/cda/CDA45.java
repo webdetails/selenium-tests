@@ -28,6 +28,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -81,6 +82,7 @@ public class CDA45 {
    *    4. Click "orderDate:" input field and check info button's style property for "display: block;"
    *
    */
+  @Test
   public void tc1_CdaFileViewer_OutputInfo() {
     this.log.info( "t01_CdaFileViewer_OutputInfo" );
 

@@ -86,7 +86,7 @@ public class CDE425 {
    *    5. Click row element and click "shift+d" and assert row was duplicated
    *    6. Click newly created row element and click "shift+x" and assert row was deleted
    **/
-  @Test( timeout = 120000 )
+  @Test
   public void tc01_CdeDashboard_LayoutShorcuts() {
     this.log.info( "tc01_CdeDashboard_LayoutShortcuts" );
 
@@ -119,12 +119,12 @@ public class CDE425 {
     /*
      * ## Step 2
      */
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
-    Robot robot;
+    //this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
+    Robot robot1;
     try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_R );
-      robot.keyRelease( KeyEvent.VK_R );
+      robot1 = new Robot();
+      robot1.keyPress( KeyEvent.VK_R );
+      robot1.keyRelease( KeyEvent.VK_R );
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
@@ -136,6 +136,7 @@ public class CDE425 {
      * ## Step 3
      */
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    Robot robot;
     try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_C );
@@ -151,6 +152,7 @@ public class CDE425 {
      * ## Step 4
      */
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td" ) );
+
     try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_H );

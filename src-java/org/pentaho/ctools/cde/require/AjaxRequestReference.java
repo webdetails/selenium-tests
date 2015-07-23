@@ -71,7 +71,7 @@ public class AjaxRequestReference {
    * Steps:
    *    1. Check page content.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc01_PageContent_InformationPresent() {
     this.log.info( "tc01_PageContent_InformationPresent" );
 

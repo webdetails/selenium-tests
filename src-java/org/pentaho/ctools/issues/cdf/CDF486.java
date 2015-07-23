@@ -79,7 +79,7 @@ public class CDF486 {
    *    2. Open same sample adding clean option to URL and assert position of elements is different
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc1_CdfDashboardType_CleanStyle() {
     this.log.info( "tc1_CdfDashboardType_CleanStyle" );
 
@@ -109,7 +109,7 @@ public class CDF486 {
     int dialCharty = element.getLocation().y;
 
     /*
-     * ## Step 1
+     * ## Step 2
      */
     //Go to New CDE Dashboard
     this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent?dashboardType=clean" );

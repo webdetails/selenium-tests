@@ -28,6 +28,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -79,6 +80,7 @@ public class CDA110 {
    *    2. Wait for and assert elements and text on page
    *    
    */
+  @Test
   public void tc1_CdaFileViewer_FullOuterJoin() {
     this.log.info( "tc1_CdaFileViewer_FullOuterJoin" );
 

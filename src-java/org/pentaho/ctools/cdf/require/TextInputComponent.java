@@ -87,7 +87,7 @@ public class TextInputComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
@@ -109,7 +109,7 @@ public class TextInputComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -140,7 +140,7 @@ public class TextInputComponent {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_InputSmallPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World!";
@@ -170,7 +170,7 @@ public class TextInputComponent {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc4_InputLongPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!";
@@ -210,7 +210,7 @@ public class TextInputComponent {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";

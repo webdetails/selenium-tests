@@ -76,7 +76,7 @@ public class DialChart {
    * Steps:
    *    1. Open the dial chart.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_DialChart_ImageRendered() {
     LOG.debug( "tc1_DialChart_ImageRendered" );
     /*

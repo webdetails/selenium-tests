@@ -69,7 +69,7 @@ public class MarketplaceFilters {
    *    2. Uncheck "Analysis" and "Data" and assert plugins shown
    *    3. Uncheck "Apps", check "Visualization" and "Language Packs" and assert plugins shown
    */
-  @Test( timeout = 180000 )
+  @ Test
   public void tc1_MarketPlacePage_TypeFilter() {
     MarketPlace market = new MarketPlace( this.driver );
     market.GoToMarketPlace();
@@ -195,7 +195,7 @@ public class MarketplaceFilters {
    *    2. Uncheck "Customer", Check Customer stages 1 and 3 and assert plugins shown
    *    3. Uncheck checked filters, check "Community", uncheck  stages 1 and 4 and assert plugins shown
    */
-  @Test( timeout = 180000 )
+  @ Test
   public void tc2_MarketPlacePage_DevStageFilter() {
     MarketPlace market = new MarketPlace( this.driver );
 
@@ -293,7 +293,7 @@ public class MarketplaceFilters {
    *    3. Input 'D3' on search field and assert shown plugins
    *    4. Input 'failure' on search field and assert shown plugins
    */
-  @Test( timeout = 180000 )
+  @ Test
   public void tc3_MarketPlacePage_SearchFilter() {
     MarketPlace market = new MarketPlace( this.driver );
     /*
@@ -380,7 +380,7 @@ public class MarketplaceFilters {
    *    3. Input 'D3' on search field, check "Community", uncheck  stages 1 and 4 and check "Visualization" and "Language Packs" on Type and assert shown plugins
    *
    **/
-  @Test( timeout = 180000 )
+  @ Test
   public void tc4_MarketPlacePage_FiltersCombined() {
     MarketPlace market = new MarketPlace( this.driver );
     /*

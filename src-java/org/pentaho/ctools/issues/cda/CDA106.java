@@ -94,7 +94,7 @@ public class CDA106 {
    *    6. Assert Last Execution has changed and remove schedule
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdaCacheManager_ButtonsHaveTooltips() throws InterruptedException {
     this.log.info( "tc01_CdaCacheManager_ButtonsHaveTooltips" );
 

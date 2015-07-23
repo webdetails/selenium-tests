@@ -102,7 +102,7 @@ public class CommentComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.debug( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
@@ -154,7 +154,7 @@ public class CommentComponent {
    * Steps:
    *    1. Check the contents of display page
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_DisplayComponent_CheckDisplayedPage() {
     this.log.debug( "tc3_DisplayComponent_CheckDisplayedPage" );
     /*
@@ -185,7 +185,7 @@ public class CommentComponent {
    *    2. Add another comment
    *    3. Add another comment
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc4_AddComponent_CommentIsDisplayed() {
     this.log.debug( "tc4_AddComponent_CommentIsDisplayed" );
     /*
@@ -316,7 +316,7 @@ public class CommentComponent {
    *    1. Add a comment
    *    2. Remove added comment
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc5_RemoveCoomment_CommentRemoved() {
     this.log.debug( "tc5_RemoveCoomment_CommentRemoved" );
     this.tcRemoveComment = true;

@@ -81,7 +81,7 @@ public class CDE403 {
    * Steps:
    *    testtest
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_InputFieldFocus() {
     this.log.info( "tc01_CdeDashboard_InputFieldFocus" );
 

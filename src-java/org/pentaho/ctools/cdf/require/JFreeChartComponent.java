@@ -99,7 +99,7 @@ public class JFreeChartComponent {
    * Steps:
    *    1. Check for web page title and sample title.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
@@ -122,7 +122,7 @@ public class JFreeChartComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -157,7 +157,7 @@ public class JFreeChartComponent {
    *    3. Open Bar Chart
    *    4. Click on chart
    */
-  @Test( timeout = 60000 )
+  @ Test
   public void tc3_ClickOnChart_AlertDisplayed() {
     this.log.info( "tc3_ClickOnChart_AlertDisplayed" );
     String title = "";
@@ -237,7 +237,7 @@ public class JFreeChartComponent {
    *    1. Zoom on Bar Chart
    *    2. Zoom on Pie Chart
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc4_PreviewChart_NewWindowDisplayed() {
     this.log.info( "tc4_PreviewChart_NewWindowDisplayed" );
     String title = "";

@@ -93,7 +93,7 @@ public class CDA112 {
    *    3. Export file and assure it has same md5 as expected
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdaFileViewer_ExcelOutputIndex() {
     this.log.info( "tc01_CdaFileViewer_ExcelOutputIndex" );
 

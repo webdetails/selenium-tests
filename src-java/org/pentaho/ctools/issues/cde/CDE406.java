@@ -80,7 +80,7 @@ public class CDE406 {
    *    3. Drag 3rd set into 2nd column of first set and assert layout elements
    *    4. Drag 2nd set into Freeform of first set and assert layout elements
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdeDashboard_FreeformDragAndDrop() {
     this.log.info( "tc01_CdeDashboard_FreeformDragAndDrop" );
 

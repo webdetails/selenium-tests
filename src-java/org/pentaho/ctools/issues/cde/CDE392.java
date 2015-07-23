@@ -30,13 +30,10 @@ import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
 import org.pentaho.ctools.utils.PageUrl;
@@ -60,8 +57,6 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class CDE392 {
   // Instance of the driver (browser emulator)
   private final WebDriver driver = CToolsTestSuite.getDriver();
-  //Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
@@ -88,7 +83,7 @@ public class CDE392 {
    *    5. Go to Settings and select another rendering option
    *    6. Assert confirmation popup is shown
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_NewCdeDashboard_TableInheritsRenderer() {
     this.log.info( "tc01_NewCdeDashboard_TableInheritsRenderer" );
 
@@ -186,11 +181,8 @@ public class CDE392 {
     /*
      * ## Step 6
      */
-    this.wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = this.driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
+    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
     String expectedCnfText = "The dashboard contains Table Components whose 'Table Style' property needs to be updated.\nWould you like to UPDATE those properties?";
-    alert.accept();
     assertEquals( confirmationMsg, expectedCnfText );
 
   }

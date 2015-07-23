@@ -80,7 +80,7 @@ public class CDE347 {
    *    2. Click preview button and focus on fancybox
    *    3. Assert charts are rendered correctly
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_BulletChartTestCase_ChartsRendered() {
     this.log.info( "tc01_BulletChartTestCase_ChartsRendered" );
 

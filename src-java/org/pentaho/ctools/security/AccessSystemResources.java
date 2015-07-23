@@ -34,7 +34,7 @@ public class AccessSystemResources {
     this.baseUrl = CToolsTestSuite.getBaseUrl();
   }
 
-  @Test( timeout = 60000 )
+  @ Test
   public void testLoginPentaho() throws Exception {
     String url = this.baseUrl + "plugin/pentaho-cdf-dd/api/resources/system/jackrabbit/repository.xml?v=1406646663089";
     this.driver.get( url );

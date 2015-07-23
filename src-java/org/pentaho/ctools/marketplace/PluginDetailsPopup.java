@@ -61,7 +61,7 @@ public class PluginDetailsPopup {
    * Steps:
    *    1. Check presence of plugins
    */
-  @Test( timeout = 180000 )
+  @ Test
   public void tc1_MarketPlacePage_PluginPopup() {
 
     /*

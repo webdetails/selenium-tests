@@ -29,6 +29,8 @@ import org.pentaho.ctools.cde.reference.AddinReferenceEdit;
 import org.pentaho.ctools.cde.reference.AjaxRequestReference;
 import org.pentaho.ctools.cde.reference.BullertChartTestCase;
 import org.pentaho.ctools.cde.reference.CCCV2ShowCase;
+import org.pentaho.ctools.cde.reference.DuplicateComponent;
+import org.pentaho.ctools.cde.reference.ExportPopupComponent;
 import org.pentaho.ctools.cde.reference.MapComponentFullTest;
 import org.pentaho.ctools.cde.reference.MapComponentReference;
 import org.pentaho.ctools.cde.reference.OlapSelectorComponent;
@@ -45,6 +47,8 @@ import org.pentaho.ctools.cde.reference.WidgetReference;
     AjaxRequestReference.class,
     BullertChartTestCase.class,
     CCCV2ShowCase.class,
+    DuplicateComponent.class,
+    ExportPopupComponent.class,
     MapComponentFullTest.class,
     MapComponentReference.class,
     OlapSelectorComponent.class,

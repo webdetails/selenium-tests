@@ -77,7 +77,7 @@ public class CDF424 {
    * Steps:
    *    1. Assert color of axis elements is correct
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CCCProperties_PrioritizedCorrectly() {
     this.log.info( "tc01_CCCProperties_PrioritizedCorrectly" );
 

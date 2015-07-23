@@ -79,7 +79,7 @@ public class CDF469 {
    * Steps:
    *    1. Open created dashboard and assert each legend is shown once and only once.
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CCCProperties_MeasureOnLegend() {
     this.log.info( "tc01_CCCProperties_MeasureOnLegend" );
 

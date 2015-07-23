@@ -79,7 +79,7 @@ public class CDA108 {
    *    2. Wait for and assert elements and text on page
    *
    */
-  @Test( timeout = 120000 )
+  @ Test
   public void tc01_CdaFileViewer_XpathSampleWorking() {
     this.log.info( "tc01_CdaFileViewer_XpathSampleWorking" );
 
