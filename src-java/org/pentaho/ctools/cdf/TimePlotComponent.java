@@ -34,11 +34,9 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -53,10 +51,6 @@ public class TimePlotComponent {
 
   //Instance of the driver (browser emulator)
   private final WebDriver driver = CToolsTestSuite.getDriver();
-  // Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
@@ -75,10 +69,10 @@ public class TimePlotComponent {
   public void tc0_OpenSamplePage_Display() {
     // The URL for the TimePlotComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TimePlotComponent
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A31-TimePlotComponent%3Atimeplot_component.xcdf/generatedContent" );
+    this.driver.get( PageUrl.TIMEPLOT_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -94,14 +88,11 @@ public class TimePlotComponent {
   @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
-    // Wait for title become visible and with value 'Community Dashboard Framework'
-    //this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    String sampleTitle = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "timePlotComponent" );
 
     // Validate the sample that we are testing is the one
-    //assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
-    assertEquals( "timePlotComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "timePlotComponent", sampleTitle );
   }
 
   /**
@@ -114,16 +105,18 @@ public class TimePlotComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  //@Test
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
-    // ## Step 1
+    /*
+     *  ## Step 1
+     */
     // Render again the sample
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
@@ -132,6 +125,22 @@ public class TimePlotComponent {
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
+
+    //It could be possible to raise an error of "Error processing component" and the workaround is refresh the page.
+    WebElement chart = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
+    if ( chart == null ) {
+      this.driver.navigate().refresh();
+      this.log.debug( "Refreshing" );
+      this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+      chart = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
+      if ( chart == null ) {
+        this.driver.navigate().refresh();
+        this.log.debug( "Refreshing" );
+        this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+        chart = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
+        assertNotNull( chart );
+      }
+    }
   }
 
   /**
@@ -162,9 +171,7 @@ public class TimePlotComponent {
     /*
      * ## Step 2
      */
-    Actions acts = new Actions( this.driver );
-    acts.moveToElement( this.elemHelper.FindElement( this.driver, By.cssSelector( "canvas.timeplot-canvas" ) ), 10, 10 );
-    acts.build().perform();
+    this.elemHelper.MoveToElement( this.driver, By.cssSelector( "canvas.timeplot-canvas" ), 10, 10 );
 
     String totalExpected = "Total Price = 6,864";
     String totalText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) );

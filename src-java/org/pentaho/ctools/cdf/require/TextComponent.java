@@ -40,10 +40,9 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -57,13 +56,9 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 public class TextComponent {
 
   //Time of day
-  private Date dNow;
+  private Date dNow = new Date();
   //Instance of the driver (browser emulator)
   private final WebDriver driver = CToolsTestSuite.getDriver();
-  // Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
@@ -79,16 +74,16 @@ public class TextComponent {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
-    // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TextComponent
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A34-TextComponent%3Atext_component.xcdf/generatedContent" );
+    // The URL for the TextComponent under CDF samples
+    // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/TextComponent
+    this.driver.get( PageUrl.TEXT_COMPONENT_REQUIRE );
 
     // NOTE - we have to this.wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
-   * ############################### Test Case 2 ###############################
+   * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
    *    Reload Sample
@@ -100,13 +95,13 @@ public class TextComponent {
   @Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    String title = this.elemHelper.WaitForTitle( this.driver, "Community Dashboard Framework" );
     // Wait for visibility of 'VisualizationAPIComponent'
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    String sampleTitle = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "TextComponent" );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
-    assertEquals( "TextComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", title );
+    assertEquals( "TextComponent", sampleTitle );
   }
 
   /**
@@ -128,6 +123,7 @@ public class TextComponent {
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.dNow = Calendar.getInstance().getTime();
 
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
