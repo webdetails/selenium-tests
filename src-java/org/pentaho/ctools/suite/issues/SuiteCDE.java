@@ -26,12 +26,10 @@ import org.junit.runners.Suite;
 import org.pentaho.ctools.issues.cde.CDE149;
 import org.pentaho.ctools.issues.cde.CDE267;
 import org.pentaho.ctools.issues.cde.CDE269;
-import org.pentaho.ctools.issues.cde.CDE270;
 import org.pentaho.ctools.issues.cde.CDE286;
 import org.pentaho.ctools.issues.cde.CDE342;
 import org.pentaho.ctools.issues.cde.CDE347;
 import org.pentaho.ctools.issues.cde.CDE356;
-import org.pentaho.ctools.issues.cde.CDE366;
 import org.pentaho.ctools.issues.cde.CDE367;
 import org.pentaho.ctools.issues.cde.CDE384;
 import org.pentaho.ctools.issues.cde.CDE388;
@@ -40,24 +38,20 @@ import org.pentaho.ctools.issues.cde.CDE394;
 import org.pentaho.ctools.issues.cde.CDE395;
 import org.pentaho.ctools.issues.cde.CDE396;
 import org.pentaho.ctools.issues.cde.CDE399;
-import org.pentaho.ctools.issues.cde.CDE402;
 import org.pentaho.ctools.issues.cde.CDE403;
 import org.pentaho.ctools.issues.cde.CDE404;
-import org.pentaho.ctools.issues.cde.CDE406;
-import org.pentaho.ctools.issues.cde.CDE407;
 import org.pentaho.ctools.issues.cde.CDE408;
 import org.pentaho.ctools.issues.cde.CDE410;
 import org.pentaho.ctools.issues.cde.CDE412;
 import org.pentaho.ctools.issues.cde.CDE413;
 import org.pentaho.ctools.issues.cde.CDE417;
-import org.pentaho.ctools.issues.cde.CDE425;
 import org.pentaho.ctools.issues.cde.CDE430;
-import org.pentaho.ctools.issues.cde.CDE432;
 import org.pentaho.ctools.issues.cde.CDE438;
 import org.pentaho.ctools.issues.cde.CDE446;
 import org.pentaho.ctools.issues.cde.CDE452;
 import org.pentaho.ctools.issues.cde.CDE453;
 import org.pentaho.ctools.issues.cde.CDE505;
+import org.pentaho.ctools.issues.cde.CDELayoutPanel;
 
 @RunWith( Suite.class )
 @Suite.SuiteClasses( {
@@ -65,12 +59,10 @@ import org.pentaho.ctools.issues.cde.CDE505;
     CDE149.class,
     CDE267.class,
     CDE269.class,
-    CDE270.class,
     CDE286.class,
     CDE342.class,
     CDE347.class,
     CDE356.class,
-    CDE366.class,
     CDE367.class,
     CDE384.class,
     CDE388.class,
@@ -79,24 +71,20 @@ import org.pentaho.ctools.issues.cde.CDE505;
     CDE395.class,
     CDE396.class,
     CDE399.class,
-    CDE402.class,
     CDE403.class,
     CDE404.class,
-    CDE406.class,
-    CDE407.class,
     CDE408.class,
     CDE410.class,
     CDE412.class,
     CDE413.class,
     CDE417.class,
-    CDE425.class,
     CDE430.class,
-    CDE432.class,
     CDE438.class,
     CDE446.class,
     CDE452.class,
     CDE453.class,
-    CDE505.class } )
+    CDE505.class,
+    CDELayoutPanel.class } )
 public class SuiteCDE {
   //It runs the Suite.SuiteClasses
 }
