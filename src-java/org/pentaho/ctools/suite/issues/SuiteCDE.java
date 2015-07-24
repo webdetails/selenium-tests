@@ -41,7 +41,6 @@ import org.pentaho.ctools.issues.cde.CDE399;
 import org.pentaho.ctools.issues.cde.CDE403;
 import org.pentaho.ctools.issues.cde.CDE404;
 import org.pentaho.ctools.issues.cde.CDE408;
-import org.pentaho.ctools.issues.cde.CDE410;
 import org.pentaho.ctools.issues.cde.CDE412;
 import org.pentaho.ctools.issues.cde.CDE413;
 import org.pentaho.ctools.issues.cde.CDE417;
@@ -76,7 +75,6 @@ import org.pentaho.ctools.issues.cde.CDELayoutPanel;
     CDE403.class,
     CDE404.class,
     CDE408.class,
-    CDE410.class,
     CDE412.class,
     CDE413.class,
     CDE417.class,
