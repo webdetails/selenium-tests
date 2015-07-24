@@ -51,6 +51,8 @@ import org.pentaho.ctools.issues.cde.CDE446;
 import org.pentaho.ctools.issues.cde.CDE452;
 import org.pentaho.ctools.issues.cde.CDE453;
 import org.pentaho.ctools.issues.cde.CDE505;
+import org.pentaho.ctools.issues.cde.CDEComponentPanel;
+import org.pentaho.ctools.issues.cde.CDEDataPanel;
 import org.pentaho.ctools.issues.cde.CDELayoutPanel;
 
 @RunWith( Suite.class )
@@ -84,7 +86,9 @@ import org.pentaho.ctools.issues.cde.CDELayoutPanel;
     CDE452.class,
     CDE453.class,
     CDE505.class,
-    CDELayoutPanel.class } )
+    CDELayoutPanel.class,
+    CDEComponentPanel.class,
+    CDEDataPanel.class } )
 public class SuiteCDE {
   //It runs the Suite.SuiteClasses
 }
