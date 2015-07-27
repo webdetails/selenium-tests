@@ -23,6 +23,7 @@ package org.pentaho.ctools.issues.cdf;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,6 +32,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.pentaho.ctools.suite.CToolsTestSuite;
@@ -39,9 +41,13 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
  * The script is testing the issue:
+ * - http://jira.pentaho.com/browse/CDE-328
+ * - http://jira.pentaho.com/browse/CDF-357
  * - http://jira.pentaho.com/browse/CDF-548
  *
  * and the automation test is described:
+ * - http://jira.pentaho.com/browse/QUALITY-957
+ * - http://jira.pentaho.com/browse/QUALITY-945
  * - http://jira.pentaho.com/browse/QUALITY-1149
  *
  * NOTE
@@ -69,31 +75,64 @@ public class TableComponent {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Assert table expanding behavior
+   *    Table Component tests
    *
    * Description:
-   *    Expand row, go to next page and expand a row.
-   *    Expand row, refresh component and expand same row again.
+   *    CDE-328 - Use more than one parameter for the expand
+   *    CDF-357 - Assert search gives back expected results
+   *    CDF-548 - Assert no problems with expanding after refresh/change pages
    *
    * Steps:
-   *    1. Open created sample expand first row and assert expansion was successful 
+   *    1. Open created sample search for "class", assert expected result, clear search and assert all is shown
+   *    2. Expand first row and assert expansion was successful 
    *    2. Click Refresh button and expand same row asserting expansion was successful
    *    3. Change page and expand second row asserting expansion was successful
    *
    */
-  @ Test
-  public void tc1_CdfTableComponent_ExpandRows() {
-    this.log.info( "tc1_CdfTableComponent_ExpandRows" );
+  @Test
+  public void tc1_CdfTableComponent_TestIssues() {
+    this.log.info( "tc1_CdfTableComponent_TestIssues" );
 
     /*
      * ## Step 1
      */
     //Open Created sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ATable Expand Test%3AtableExpandTest.wcdf/generatedContent" );
+    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ATableExpandTest%3AtableExpandTest.wcdf/generatedContent" );
 
     //Wait for loading to finish
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
+    //search for "Mot" and assert shown result
+    WebElement searchInput = this.elemHelper.FindElement( this.driver, By.xpath( "//input[@type='search']" ) );
+    assertNotNull( searchInput );
+    searchInput.sendKeys( "class" );
+    WebElement firstResult = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
+    assertNotNull( firstResult );
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ), "Classic Cars" );
+    String resultClass = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
+    assertEquals( "Classic Cars", resultClass );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) ) );
+
+    //Clear search and assert all results shown
+    searchInput = this.elemHelper.FindElement( this.driver, By.xpath( "//input[@type='search']" ) );
+    assertNotNull( searchInput );
+    searchInput.sendKeys( Keys.BACK_SPACE );
+    searchInput.sendKeys( Keys.BACK_SPACE );
+    searchInput.sendKeys( Keys.BACK_SPACE );
+    searchInput.sendKeys( Keys.BACK_SPACE );
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ), "Motorcycles" );
+    String resultOne = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
+    assertEquals( "Motorcycles", resultOne );
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ), "Classic Cars" );
+    String resultTwo = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) );
+    assertEquals( "Classic Cars", resultTwo );
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[3]/td" ), "Trucks and Buses" );
+    String resultThree = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[3]/td" ) );
+    assertEquals( "Trucks and Buses", resultThree );
+
+    /*
+     * ## Step 2
+     */
     //Click first row and assert expansion was successful
     WebElement firstRow = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
     assertNotNull( firstRow );
