@@ -26,8 +26,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,10 +33,9 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
+import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
@@ -51,26 +48,14 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class LogoutPentaho {
   // Instance of the driver (browser emulator)
-  private WebDriver driver;
-  // Instance to be used on wait commands
-  private Wait<WebDriver> wait;
-  // The base url to be append the relative url in test
-  private String baseUrl;
+  private final WebDriver driver = CToolsTestSuite.getDriver();
   //Access to wrapper for webdriver
-  private ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private static Logger log = LogManager.getLogger( LogoutPentaho.class );
+  private final Logger log = LogManager.getLogger( LogoutPentaho.class );
 
   @Rule
   public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
-
-  @Before
-  public void setUp() {
-    log.debug( "setUp" );
-    this.driver = CToolsTestSuite.getDriver();
-    this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
-  }
 
   /**
    * ############################### Test Case 1 ###############################
@@ -84,46 +69,44 @@ public class LogoutPentaho {
    *    2. Press Log Out.
    *    3. The user is logged out and is redirect to home page (login page).
    */
-  @ Test
+  @Test
   public void tc1_Logout_SuccessLogOutReturnHomePage() {
-    log.debug( "tc1_Logout_SuccessLogOutReturnHomePage" );
+    this.log.debug( "tc1_Logout_SuccessLogOutReturnHomePage" );
 
     //## Step 1
-    this.driver.get( this.baseUrl + "Home" );
+    this.driver.get( PageUrl.PUC );
 
     //waiting pop-up to be visible
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //## Step 2
     //wait for frame to load
-    this.wait.until( ExpectedConditions.titleContains( "Pentaho User Console" ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//iframe[@id='home.perspective']" ) ) );
-    assertEquals( "Pentaho User Console", this.driver.getTitle() );
-    assertNotNull( this.driver.findElement( By.xpath( "//iframe[@id='home.perspective']" ) ) );
+    String title = this.elemHelper.WaitForTitle( this.driver, "Pentaho User Console" );
+    assertEquals( "Pentaho User Console", title );
+
+    WebElement logoutMenu = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    WebElement homePerpective = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//iframe[@id='home.perspective']" ) );
+    assertNotNull( logoutMenu );
+    assertNotNull( homePerpective );
 
     //User drop down available
-    this.wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ) );
-    assertEquals( "admin", this.driver.findElement( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ).getText() );
-    this.driver.findElement( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ).click();
+    String userName = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
+    assertEquals( "admin", userName );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
 
     //Logout option available
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) ) );
-    this.wait.until( ExpectedConditions.elementToBeClickable( By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) ) );
-    assertEquals( "Log Out", this.driver.findElement( By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) ).getText() );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    WebElement logoutElement = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    assertNotNull( logoutElement );
+    String logoutText = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ), "Log Out" );
+    assertEquals( "Log Out", logoutText );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
 
     //## Step 3
     //Wait for form display (login form)
     WebElement elForm = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
+    assertNotNull( elForm );
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
-    assertNotNull( elForm );
-  }
-
-  @After
-  public void tearDown() {
-    log.debug( "tearDown" );
   }
 }
