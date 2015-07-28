@@ -120,10 +120,10 @@ public class TextComponent {
     // Render again the sample
     this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
     this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
+    this.dNow = Calendar.getInstance().getTime();
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    this.dNow = Calendar.getInstance().getTime();
 
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
