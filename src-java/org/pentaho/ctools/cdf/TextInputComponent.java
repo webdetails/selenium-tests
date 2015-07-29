@@ -22,6 +22,7 @@
 package org.pentaho.ctools.cdf;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.FixMethodOrder;
@@ -86,7 +87,7 @@ public class TextInputComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @ Test
+  @Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
@@ -108,7 +109,7 @@ public class TextInputComponent {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @ Test
+  @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
@@ -139,7 +140,7 @@ public class TextInputComponent {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @ Test
+  @Test
   public void tc3_InputSmallPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World!";
@@ -153,8 +154,11 @@ public class TextInputComponent {
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
-
     assertEquals( expectedCnfText, confirmationMsg );
+
+    //For validation of CDF-292 assert no second alert is shown
+    assertNull( this.elemHelper.WaitForAlert( this.driver, 2, 500 ) );
+
   }
 
   /**
@@ -169,7 +173,7 @@ public class TextInputComponent {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @ Test
+  @Test
   public void tc4_InputLongPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!";
@@ -192,8 +196,11 @@ public class TextInputComponent {
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
-
     assertEquals( expectedCnfText, confirmationMsg );
+
+    //For validation of CDF-292 assert no second alert is shown
+    assertNull( this.elemHelper.WaitForAlert( this.driver, 2, 500 ) );
+
   }
 
   /**
@@ -209,7 +216,7 @@ public class TextInputComponent {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @ Test
+  @Test
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
@@ -228,7 +235,10 @@ public class TextInputComponent {
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
-
     assertEquals( expectedCnfText, confirmationMsg );
+
+    //For validation of CDF-292 assert no second alert is shown
+    assertNull( this.elemHelper.WaitForAlert( this.driver, 2, 500 ) );
+
   }
 }

@@ -25,10 +25,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -42,8 +38,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.pentaho.ctools.suite.CToolsTestSuite;
 import org.pentaho.ctools.utils.ElementHelper;
-import org.pentaho.ctools.utils.PageUrl;
 import org.pentaho.ctools.utils.ScreenshotTestRule;
+import org.pentaho.gui.cde.CdeEdit;
 import org.pentaho.gui.web.puc.BrowseFiles;
 
 /**
@@ -58,18 +54,6 @@ import org.pentaho.gui.web.puc.BrowseFiles;
  * - http://jira.pentaho.com/browse/CDE-432
  * - http://jira.pentaho.com/browse/CDE-527
  * - http://jira.pentaho.com/browse/CDE-528
- *
- * and the automation test is described:
- * - http://jira.pentaho.com/browse/QUALITY-943
- * - http://jira.pentaho.com/browse/QUALITY-948
- * - http://jira.pentaho.com/browse/QUALITY-927
- * - http://jira.pentaho.com/browse/QUALITY-992
- * - http://jira.pentaho.com/browse/QUALITY-928
- * - http://jira.pentaho.com/browse/QUALITY-994
- * - http://jira.pentaho.com/browse/QUALITY-995
- * - http://jira.pentaho.com/browse/QUALITY-997
- * - http://jira.pentaho.com/browse/QUALITY-1141
- * - http://jira.pentaho.com/browse/QUALITY-1142
  * 
  * NOTE
  * To test this script it is required to have CDE plugin installed.
@@ -88,7 +72,7 @@ public class CDELayoutPanel {
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //this.failure variable ==1 if test did not fail
-  private int failure = 0;
+  private int failure = 1;
 
   // Getting screenshot when test fails
   @Rule
@@ -130,8 +114,7 @@ public class CDELayoutPanel {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    this.driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    CdeEdit dashboard = new CdeEdit( this.driver );
 
     //Open Dashboard Settings and assert bootstrap is selected as renderer
     WebElement settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
@@ -152,38 +135,17 @@ public class CDELayoutPanel {
      */
     //Add Row and verify that columsn and html can not be added outside of rows
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
-    Robot robot;
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_C );
-      robot.keyRelease( KeyEvent.VK_C );
-      robot.keyPress( KeyEvent.VK_H );
-      robot.keyRelease( KeyEvent.VK_H );
-      robot.keyPress( KeyEvent.VK_R );
-      robot.keyRelease( KeyEvent.VK_R );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( 67 );
+    dashboard.KeyShortcut( 72 );
+    dashboard.KeyShortcut( 82 );
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
 
     //Add Column
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_C );
-      robot.keyRelease( KeyEvent.VK_C );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( 67 );
 
     //Add Html
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_H );
-      robot.keyRelease( KeyEvent.VK_H );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( 72 );
 
     //Assert elements were successfully created
     WebElement row = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
@@ -213,15 +175,7 @@ public class CDELayoutPanel {
     String spacerText = spacer.getText();
     assertEquals( "Space", spacerText );
     spacer.click();
-    try {
-      robot = new Robot();
-      robot.keyPress( 16 );
-      robot.keyPress( KeyEvent.VK_D );
-      robot.keyRelease( KeyEvent.VK_D );
-      robot.keyRelease( 16 );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.ShiftKeyShortcut( 68 );
     WebElement spacer2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td" ) );
     assertNotNull( spacer2 );
     this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td" ), "Space" );
@@ -230,37 +184,21 @@ public class CDELayoutPanel {
 
     //Delete elements and assert they are no longer present
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
-    try {
-      robot = new Robot();
-      robot.keyPress( 16 );
-      robot.keyPress( KeyEvent.VK_X );
-      robot.keyRelease( KeyEvent.VK_X );
-      robot.keyRelease( 16 );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.ShiftKeyShortcut( 88 );
     assertTrue( this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) ) );
 
     /*
      * ## Step 3
      */
     //Add elements
-    WebElement addRow = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Row']" ) );
-    assertNotNull( addRow );
-    addRow.click();
-    WebElement addColumn = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Columns']" ) );
-    WebElement addFreeForm = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) );
-    WebElement addBootstrap = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
-    assertNotNull( addFreeForm );
-    assertNotNull( addColumn );
-    assertNotNull( addBootstrap );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Row']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Row']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Columns']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Columns']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) ).click();
+    dashboard.AddRow();
+    dashboard.AddBootstrap();
+    dashboard.AddRow();
+    dashboard.AddFreeform();
+    dashboard.AddRow();
+    dashboard.AddColumn();
+    dashboard.AddColumn();
+    dashboard.AddFreeform();
 
     //Assert elements on Layout
     String row1 = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
@@ -312,29 +250,7 @@ public class CDELayoutPanel {
      * ## Step 4
      */
     //Apply template
-    WebElement templateButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
-    assertNotNull( templateButton );
-    templateButton.click();
-    this.elemHelper.WaitForFrameReady( this.driver, By.id( "popupTemplatebox" ) );
-    WebElement templatePopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popupTemplatebox" ) );
-    assertNotNull( templatePopup );
-    String templateText = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='thumbs']/div[2]/p" ) ).getText();
-    assertEquals( "Two Columns Template", templateText );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='thumbs']/div[2]/p" ) );
-    this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//div[@id='thumbs']/div[2]" ), "class", "hover active" );
-    String thumbClass = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='thumbs']/div[2]" ), "class" );
-    assertEquals( "hover active", thumbClass );
-    WebElement templateOk = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
-    assertNotNull( templateOk );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
-    WebElement confirmationPopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='popupTemplatemessage']" ) );
-    assertNotNull( confirmationPopup );
-    String warningText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='popupTemplatemessage']" ) );
-    assertEquals( "Are you sure you want to load the template?WARNING: Dashboard Layout will be overwritten!", warningText );
-    WebElement confirmationOk = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
-    assertNotNull( confirmationOk );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='popupTemplatemessage']" ) );
+    dashboard.ApplyTemplate( "Two Columns Template" );
 
     //Asset elements were created
     String trtdText = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
@@ -353,13 +269,7 @@ public class CDELayoutPanel {
     this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     String firstRowClass = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr" ) ).getAttribute( "class" );
     assertEquals( firstRowClass, "ui-draggable ui-droppable initialized parent collapsed ui-state-active" );
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( "DOWN" );
     this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]" ), "class", "ui-draggable ui-droppable initialized ui-state-active" );
     String secondRowClass = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]" ) ).getAttribute( "class" );
     assertEquals( secondRowClass, "ui-draggable ui-droppable initialized ui-state-active" );
@@ -367,107 +277,55 @@ public class CDELayoutPanel {
     //Assert columns aren't visible, go to row and expand it and then assert columns are visible
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
-
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_RIGHT );
-      robot.keyRelease( KeyEvent.VK_RIGHT );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "RIGHT" );
     WebElement firstColumn = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
     assertNotNull( firstColumn );
     WebElement secondColumn = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
     assertNotNull( secondColumn );
 
     //Go to second column and back to first and assert first column is selected
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_C );
-      robot.keyRelease( KeyEvent.VK_C );
-      robot.keyPress( KeyEvent.VK_TAB );
-      robot.keyRelease( KeyEvent.VK_TAB );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( 67 );
+    dashboard.KeyShortcut( "TAB" );
     this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ), "class", "child-of-9b5e4665-60dd-d123-d49a-7cb9072a0540 ui-draggable ui-droppable initialized ui-state-active" );
     String firstColumnClass = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ) ).getAttribute( "class" );
     assertEquals( firstColumnClass, "child-of-9b5e4665-60dd-d123-d49a-7cb9072a0540 ui-draggable ui-droppable initialized ui-state-active" );
 
     //Click tab key and assert focus has changed to properties table
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_TAB );
-      robot.keyRelease( KeyEvent.VK_TAB );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( "TAB" );
     this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr" ), "class", "initialized ui-state-active" );
     String firstPropertyClass = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr" ) ).getAttribute( "class" );
     assertEquals( firstPropertyClass, "initialized ui-state-active" );
 
     //Click enter to change following properties "Name", "Span size" and "Right border"
-    try {
-      robot = new Robot();
-      //change "Name
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-      robot.keyPress( KeyEvent.VK_A );
-      robot.keyRelease( KeyEvent.VK_A );
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( "ENTER" );
+    dashboard.KeyShortcut( "A" );
+    dashboard.KeyShortcut( "ENTER" );
+    dashboard.KeyShortcut( "DOWN" );
+
     //Change "Extra Small Devices" and "Text Align"
     this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]" ), "class", "initialized ui-state-active" );
     String xsInput = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]" ) ).getAttribute( "class" );
     assertEquals( xsInput, "initialized ui-state-active" );
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-      robot.keyPress( KeyEvent.VK_DELETE );
-      robot.keyRelease( KeyEvent.VK_DELETE );
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( "ENTER" );
+    dashboard.KeyShortcut( "BACKSPACE" );
+    dashboard.KeyShortcut( "ENTER" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "ENTER" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "DOWN" );
+    dashboard.KeyShortcut( "ENTER" );
+    dashboard.KeyShortcut( "ENTER" );
+
     //assert values are changed
     String columnName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr/td[2]" ) );
     assertEquals( columnName, "a" );
@@ -476,31 +334,16 @@ public class CDELayoutPanel {
     String alignValue = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[10]/td[2]" ) );
     assertEquals( alignValue, "Left" );
     //Click tab and assert focus has gone back to first table
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_TAB );
-      robot.keyRelease( KeyEvent.VK_TAB );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( "TAB" );
     this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[8]" ), "class", "initialized" );
     String columnClass = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[8]" ) ).getAttribute( "class" );
     assertEquals( columnClass, "initialized" );
 
     //Collapse Row and assert columns aren't showing
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_UP );
-      robot.keyRelease( KeyEvent.VK_UP );
-      robot.keyPress( KeyEvent.VK_UP );
-      robot.keyRelease( KeyEvent.VK_UP );
-      robot.keyPress( KeyEvent.VK_UP );
-      robot.keyRelease( KeyEvent.VK_UP );
-      robot.keyPress( KeyEvent.VK_LEFT );
-      robot.keyRelease( KeyEvent.VK_LEFT );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    dashboard.KeyShortcut( "UP" );
+    dashboard.KeyShortcut( "UP" );
+    dashboard.KeyShortcut( "UP" );
+    dashboard.KeyShortcut( "LEFT" );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ) );
@@ -509,42 +352,17 @@ public class CDELayoutPanel {
      * ## Step 6
      */
     //Save Dashboard
-    WebElement saveDashboard = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@id='Save']" ) );
-    assertNotNull( saveDashboard );
-    saveDashboard.click();
-    WebElement folderSelector = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
-    assertNotNull( folderSelector );
-    folderSelector.click();
-    WebElement inputName = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "fileInput" ) );
-    assertNotNull( inputName );
-    inputName.sendKeys( "CDE366" );
-    WebElement okButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='popupbuttons']/button[@id='popup_state0_buttonOk']" ) );
-    okButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='popupbuttons']" ) );
+    dashboard.SaveDashboard( "CDE366", "/public" );
     WebElement title = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='CDE366']" ) );
     assertNotNull( title );
+    this.failure = 0;
 
-    //Open Dashboard Settings
-    settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
-    assertNotNull( settingsLink );
-    settingsLink.click();
-    settingsPopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']" ) );
-    assertNotNull( settingsPopup );
+    //Open Dashboard Settings and edit Style and Dashboard Type
+    String selectedValue = dashboard.DashboardSettings( "WDDocs", "blueprint" );
+    assertEquals( "WDDocs,blueprint", selectedValue );
 
-    //Edit Style and Dashboard Type
-    Select style = new Select( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "styleInput" ) ) );
-    style.selectByVisibleText( "WDDocs" );
-    Select dashType = new Select( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "rendererInput" ) ) );
-    dashType.selectByVisibleText( "blueprint" );
-
-    //Click save and assert user gets a message of "Saved Successfully"
-    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
-    assertNotNull( saveButton );
-    saveButton.click();
-    WebElement notifySuccess = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='notifyBar']" ) );
-    assertNotNull( notifySuccess );
-    String successMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='notifyBar']/div[@class='notify-bar-message']" ) );
-    assertEquals( "Dashboard Settings saved successfully", successMessage );
+    //Assert user gets a message of "Saved Successfully"
+    assertTrue( dashboard.NotifyBannerMessage( "Dashboard Settings saved successfully" ) );
 
     //Open dashboard in preview mode
     this.driver.get( "http://localhost:8080/pentaho/api/repos/:public:CDE366.wcdf/generatedContent" );
@@ -560,17 +378,8 @@ public class CDELayoutPanel {
     this.driver.get( "http://localhost:8080/pentaho/api/repos/:public:CDE366.wcdf/edit" );
 
     //Open Settings and assert Style and Dashboard Type were saved 
-    settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
-    assertNotNull( settingsLink );
-    settingsLink.click();
-    settingsPopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']" ) );
-    assertNotNull( settingsPopup );
-    WebElement selectedStyle = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//select[@id='styleInput']/option[@selected='']" ) );
-    String selectedValue = selectedStyle.getAttribute( "value" );
-    assertEquals( "WDDocs", selectedValue );
-    WebElement selectedDash = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//select[@id='rendererInput']/option[@selected='']" ) );
-    selectedValue = selectedDash.getAttribute( "value" );
-    assertEquals( "blueprint", selectedValue );
+    selectedValue = dashboard.DashboardSettings( "", "" );
+    assertEquals( "WDDocs,blueprint", selectedValue );
 
     /*
      * ## Step 7

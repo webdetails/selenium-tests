@@ -39,10 +39,10 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
 
 /**
  * The script is testing the issue:
- * - http://jira.pentaho.com/browse/CDF-548
+ * - http://jira.pentaho.com/browse/CDF-595
  *
  * and the automation test is described:
- * - http://jira.pentaho.com/browse/QUALITY-1149
+ * - http://jira.pentaho.com/browse/QUALITY-1154
  *
  * NOTE
  * To test this script it is required to have CDF plugin installed.
@@ -79,7 +79,7 @@ public class AutoIncludes {
    *    2. Assert alert shows expected text
    *
    */
-  @ Test
+  @Test
   public void tc1_CdfAutoIncludes_ReturnsValues() {
     this.log.info( "tc1_CdfAutoIncludes_ReturnsValues" );
 
