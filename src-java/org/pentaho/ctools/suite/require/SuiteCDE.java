@@ -28,6 +28,7 @@ import org.pentaho.ctools.cde.require.AddinReferenceEdit;
 import org.pentaho.ctools.cde.require.AjaxRequestReference;
 import org.pentaho.ctools.cde.require.BullertChartTestCase;
 import org.pentaho.ctools.cde.require.CCCV2ShowCase;
+import org.pentaho.ctools.cde.require.DashboardComponent;
 import org.pentaho.ctools.cde.require.DuplicateComponent;
 import org.pentaho.ctools.cde.require.ExportPopupComponent;
 import org.pentaho.ctools.cde.require.MapComponentFullTest;
@@ -44,6 +45,7 @@ import org.pentaho.ctools.cde.require.SampleDashboard;
     AjaxRequestReference.class,
     BullertChartTestCase.class,
     CCCV2ShowCase.class,
+    DashboardComponent.class,
     DuplicateComponent.class,
     ExportPopupComponent.class,
     MapComponentFullTest.class,
