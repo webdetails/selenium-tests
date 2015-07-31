@@ -172,6 +172,8 @@ public class MondrianJNDI {
     Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
     //wait to render page
+    WebElement progressIndicator = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    assertNotNull( progressIndicator );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check the presented contains
     WebElement elemStatus = this.elemHelper.FindElement( this.driver, By.id( "status" ) );
