@@ -99,22 +99,22 @@ public class CDEDataPanel {
     this.elemHelper.Click( this.driver, By.xpath( "//div[@title='Datasources Panel']/a" ) );
 
     //Add some Datasources
-    WebElement mdxExpander = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[6]/h3/span" ) );
+    WebElement mdxExpander = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[5]/h3/span" ) );
     assertNotNull( mdxExpander );
     mdxExpander.click();
-    WebElement addDenormalMdx = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[6]//a[@title='denormalizedMdx over mondrianJdbc']" ) );
+    WebElement addDenormalMdx = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[5]//a[@title='denormalizedMdx over mondrianJdbc']" ) );
     assertNotNull( addDenormalMdx );
     addDenormalMdx.click();
-    WebElement addMDX = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[6]//a[@title='mdx over mondrianJndi']" ) );
+    WebElement addMDX = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[5]//a[@title='mdx over mondrianJndi']" ) );
     assertNotNull( addMDX );
     addMDX.click();
-    WebElement sqlExpander = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[12]/h3/span" ) );
+    WebElement sqlExpander = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[11]/h3/span" ) );
     assertNotNull( sqlExpander );
     sqlExpander.click();
-    WebElement addSqlJdbc = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[12]//a[@title='sql over sqlJdbc']" ) );
+    WebElement addSqlJdbc = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[11]//a[@title='sql over sqlJdbc']" ) );
     assertNotNull( addSqlJdbc );
     addSqlJdbc.click();
-    WebElement addSqlJndi = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[12]//a[@title='sql over sqlJndi']" ) );
+    WebElement addSqlJndi = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[11]//a[@title='sql over sqlJndi']" ) );
     assertNotNull( addSqlJndi );
     addSqlJndi.click();
 

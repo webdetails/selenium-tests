@@ -93,7 +93,7 @@ public class CDE356 {
    *    5. Input name with "$"at the start (CDE-536) and then click folder (CDE-468), save dashboard, click new,and assert new dashboard is shown
    *    6. Delete created files
    */
-  @ Test
+  @Test
   public void tc01_CdeDashboard_CreateNewFromEdit() {
     this.log.info( "tc01_CdeDashboard_CreateNewFromEdit" );
 
@@ -119,6 +119,7 @@ public class CDE356 {
     newButton.click();
     WebElement warningPopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup_state_state0" ) );
     assertNotNull( warningPopup );
+    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='popup_state_state0']/div/span" ), "Unsaved changes will be lost." );
     String warningMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='popup_state_state0']/div/span" ) );
     assertEquals( "Unsaved changes will be lost.", warningMessage );
 
