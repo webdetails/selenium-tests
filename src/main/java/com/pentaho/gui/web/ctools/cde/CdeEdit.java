@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package org.pentaho.gui.cde;
+package com.pentaho.gui.web.ctools.cde;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -33,8 +33,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.pentaho.ctools.utils.ElementHelper;
-import org.pentaho.ctools.utils.PageUrl;
+
+import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 
 public class CdeEdit {
 

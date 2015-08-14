@@ -19,25 +19,21 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package org.pentaho.ctools.cde.require;
+package com.pentaho.ctools.cde.require;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.FixMethodOrder;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.pentaho.ctools.suite.CToolsTestSuite;
-import org.pentaho.ctools.utils.ElementHelper;
-import org.pentaho.ctools.utils.PageUrl;
-import org.pentaho.ctools.utils.ScreenshotTestRule;
+import org.testng.annotations.Test;
+
+import com.pentaho.ctools.utils.BaseTest;
+import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 
 /**
  * Smoketest for the Dashboard Component.
@@ -46,17 +42,11 @@ import org.pentaho.ctools.utils.ScreenshotTestRule;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-@FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class DashboardComponent {
-  //Instance of the driver (browser emulator)
-  private final WebDriver driver = CToolsTestSuite.getDriver();
+public class DashboardComponent extends BaseTest {
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( DashboardComponent.class );
-
-  @Rule
-  public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule( this.driver );
 
   /**
    * ############################### Test Case 0 ###############################
