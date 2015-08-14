@@ -30,14 +30,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -53,10 +50,6 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class TableComponent extends BaseTest {
-  // Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
@@ -74,10 +67,10 @@ public class TableComponent extends BaseTest {
 
     //The URL for the TableComponent under CDF samples
     //This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/Table Component
-    this.driver.get( this.baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:64-TableComponent:table_component.xcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:30-component_reference:10-core:64-TableComponent:table_component.xcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -95,13 +88,13 @@ public class TableComponent extends BaseTest {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
-    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     //Wait for visibility of 'TableComponent'
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
-    assertEquals( "TableComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", driver.getTitle() );
+    assertEquals( "TableComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -119,14 +112,14 @@ public class TableComponent extends BaseTest {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
     //Render again the sample
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //The table is now displayed
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
   }
 
   /**
@@ -147,66 +140,66 @@ public class TableComponent extends BaseTest {
   public void tc3_Paging_NavigateBetweenPages() {
     this.log.info( "tc3_Paging_NavigateBetweenPages" );
 
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable_length" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable_filter" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable_info" ) ) );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable_paginate" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable_length" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable_filter" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable_info" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable_paginate" ) ) );
 
     //## Step 1
-    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 2
     //Where we press NEXT
-    WebElement page2 = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) );
+    WebElement page2 = this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) );
     assertNotNull( page2 );
     page2.sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
-    assertEquals( "Showing 11 to 20 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Danish Wholesale Imports", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "145,042", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "174,140", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Extreme Desk Decorations, Ltd", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Handji Gifts& Co", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "115,499", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
+    assertEquals( "Showing 11 to 20 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Danish Wholesale Imports", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "145,042", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "174,140", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Extreme Desk Decorations, Ltd", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Handji Gifts& Co", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "115,499", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 3
     //Where we press 5
-    WebElement page5 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5]" ) );
+    WebElement page5 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5]" ) );
     assertNotNull( page5 );
     page5.sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']" ) ) );
-    assertEquals( "Showing 41 to 50 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Suominen Souveniers", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "113,961", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "160,010", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Toys of Finland, Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Vitachrome Inc.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "88,041", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']" ) ) );
+    assertEquals( "Showing 41 to 50 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Suominen Souveniers", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "113,961", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "160,010", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Toys of Finland, Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Vitachrome Inc.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "88,041", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 4
-    this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_previous']" ) ).sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[4][@class='paginate_button current']" ) ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_previous']" ) ).sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']" ) ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_previous']" ) ).sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_previous']" ) ).sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[@class='paginate_button current']" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_previous']" ) ).sendKeys( Keys.ENTER );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[4][@class='paginate_button current']" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_previous']" ) ).sendKeys( Keys.ENTER );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_previous']" ) ).sendKeys( Keys.ENTER );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_previous']" ) ).sendKeys( Keys.ENTER );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[@class='paginate_button current']" ) ) );
 
-    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
   }
 
   /**
@@ -231,115 +224,115 @@ public class TableComponent extends BaseTest {
     this.log.info( "tc4_Sort_ElementsAreSort" );
 
     //## Step 1
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_asc']" ) ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th" ) ).click(); //Set to DESC
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_desc']" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_asc']" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th" ) ).click(); //Set to DESC
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_desc']" ) ) );
     //Check Data
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
-    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Vitachrome Inc.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "88,041", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "118,008", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertTrue( this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ).contains( "Toms" ) );
-    assertEquals( "Suominen Souveniers", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "113,961", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
+    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Vitachrome Inc.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "88,041", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "118,008", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertTrue( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ).contains( "Toms" ) );
+    assertEquals( "Suominen Souveniers", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "113,961", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 2
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[2]" ) ).click(); //Sort Sales to ASC
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[2][@class='column1 numeric sorting_asc']" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[2]" ) ).click(); //Sort Sales to ASC
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[2][@class='column1 numeric sorting_asc']" ) ) );
     //Check Data
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
-    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Collectable Mini Designs Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "87,489", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "88,805", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertTrue( this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ).contains( "Toms" ) );
-    assertEquals( "100,307", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
+    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Collectable Mini Designs Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "87,489", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "88,805", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertTrue( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ).contains( "Toms" ) );
+    assertEquals( "100,307", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 3
-    WebElement page3 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3]" ) );
+    WebElement page3 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3]" ) );
     assertNotNull( page3 );
     page3.sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']" ) ) );
     //Check Data
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']" ) ) );
-    assertEquals( "Showing 21 to 30 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Handji Gifts& Co", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "115,499", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "117,714", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Corrida Auto Replicas, Ltd", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Scandinavian Gift Ideas", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "134,259", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']" ) ) );
+    assertEquals( "Showing 21 to 30 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Handji Gifts& Co", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "115,499", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "117,714", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Corrida Auto Replicas, Ltd", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Scandinavian Gift Ideas", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "134,259", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 4
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[2]" ) ).click(); //Sort Sales to DESC
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[2][@class='column1 numeric sorting_desc']" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[2]" ) ).click(); //Sort Sales to DESC
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[2][@class='column1 numeric sorting_desc']" ) ) );
     //Check Data
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
-    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Euro+ Shopping Channel", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "912,294", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Down Under Souveniers, Inc", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Kelly's Gift Shop", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "158,345", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
+    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Euro+ Shopping Channel", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "912,294", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Down Under Souveniers, Inc", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Kelly's Gift Shop", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "158,345", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 5
-    WebElement page2 = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) );
+    WebElement page2 = this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) );
     assertNotNull( page2 );
     page2.sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
-    assertEquals( "Showing 11 to 20 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "AV Stores, Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "157,808", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "151,571", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Danish Wholesale Imports", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Reims Collectables", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "135,043", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
+    assertEquals( "Showing 11 to 20 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "AV Stores, Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "157,808", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "151,571", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Danish Wholesale Imports", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Reims Collectables", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "135,043", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 6
-    this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) ).sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']" ) ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) ).sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[4][@class='paginate_button current']" ) ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) ).sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']" ) ) );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']" ) ) );
-    assertEquals( "Showing 41 to 50 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertTrue( this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ).contains( "Toms" ) );
-    assertEquals( "100,307", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "98,496", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Collectable Mini Designs Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "87,489", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) ).sendKeys( Keys.ENTER );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[3][@class='paginate_button current']" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) ).sendKeys( Keys.ENTER );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[4][@class='paginate_button current']" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) ).sendKeys( Keys.ENTER );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5][@class='paginate_button current']" ) ) );
+    assertEquals( "Showing 41 to 50 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ).contains( "Toms" ) );
+    assertEquals( "100,307", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "98,496", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Collectable Mini Designs Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "87,489", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 7
-    WebElement page1 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) );
+    WebElement page1 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) );
     assertNotNull( page1 );
     page1.sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
     //Check Data
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
-    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Euro+ Shopping Channel", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "912,294", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Down Under Souveniers, Inc", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Kelly's Gift Shop", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "158,345", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1][@class='paginate_button current']" ) ) );
+    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Euro+ Shopping Channel", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "912,294", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Down Under Souveniers, Inc", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Kelly's Gift Shop", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "158,345", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //reset to initial state
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th" ) ).click(); //Set Customers to ASC
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_asc']" ) ) );
-    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th" ) ).click(); //Set Customers to ASC
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//table[@id='sampleObjectTable']/thead/tr/th[@class='column0 string sorting_asc']" ) ) );
+    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
   }
 
   /**
@@ -358,68 +351,68 @@ public class TableComponent extends BaseTest {
   public void tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected() {
     this.log.info( "tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected" );
 
-    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
 
     //## Step 1
-    Select displayEntries = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_length']/label/select" ) ) );
+    Select displayEntries = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_length']/label/select" ) ) );
     displayEntries.selectByValue( "25" );
-    assertEquals( "Showing 1 to 25 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertEquals( "Showing 1 to 25 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
     //11 to 25
-    assertEquals( "Dragon Souveniers, Ltd.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[14]/td" ) ) );
-    assertEquals( "172,990", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[14]/td[2]" ) ) );
-    assertEquals( "98,924", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[17]/td[2]" ) ) );
-    assertEquals( "Handji Gifts& Co", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[20]/td" ) ) );
-    assertEquals( "La Corne D'abondance, Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[25]/td" ) ) );
-    assertEquals( "97,204", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[25]/td[2]" ) ) );
+    assertEquals( "Dragon Souveniers, Ltd.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[14]/td" ) ) );
+    assertEquals( "172,990", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[14]/td[2]" ) ) );
+    assertEquals( "98,924", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[17]/td[2]" ) ) );
+    assertEquals( "Handji Gifts& Co", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[20]/td" ) ) );
+    assertEquals( "La Corne D'abondance, Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[25]/td" ) ) );
+    assertEquals( "97,204", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[25]/td[2]" ) ) );
 
     //## Step 2
-    displayEntries = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_length']/label/select" ) ) );
+    displayEntries = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_length']/label/select" ) ) );
     displayEntries.selectByValue( "50" );
-    assertEquals( "Showing 1 to 50 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertEquals( "Showing 1 to 50 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
     //11 to 25
-    assertEquals( "Dragon Souveniers, Ltd.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[14]/td" ) ) );
-    assertEquals( "172,990", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[14]/td[2]" ) ) );
-    assertEquals( "98,924", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[17]/td[2]" ) ) );
-    assertEquals( "Handji Gifts& Co", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[20]/td" ) ) );
-    assertEquals( "La Corne D'abondance, Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[25]/td" ) ) );
-    assertEquals( "97,204", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[25]/td[2]" ) ) );
+    assertEquals( "Dragon Souveniers, Ltd.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[14]/td" ) ) );
+    assertEquals( "172,990", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[14]/td[2]" ) ) );
+    assertEquals( "98,924", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[17]/td[2]" ) ) );
+    assertEquals( "Handji Gifts& Co", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[20]/td" ) ) );
+    assertEquals( "La Corne D'abondance, Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[25]/td" ) ) );
+    assertEquals( "97,204", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[25]/td[2]" ) ) );
     //26 to 50
-    assertEquals( "Muscle Machine Inc", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[31]/td" ) ) );
-    assertEquals( "197,737", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[31]/td[2]" ) ) );
-    assertEquals( "151,571", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[39]/td[2]" ) ) );
-    assertEquals( "Toys of Finland, Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[46]/td" ) ) );
-    assertEquals( "Vitachrome Inc.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[50]/td" ) ) );
-    assertEquals( "88,041", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[50]/td[2]" ) ) );
+    assertEquals( "Muscle Machine Inc", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[31]/td" ) ) );
+    assertEquals( "197,737", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[31]/td[2]" ) ) );
+    assertEquals( "151,571", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[39]/td[2]" ) ) );
+    assertEquals( "Toys of Finland, Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[46]/td" ) ) );
+    assertEquals( "Vitachrome Inc.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[50]/td" ) ) );
+    assertEquals( "88,041", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[50]/td[2]" ) ) );
 
     //Reset display to 10
-    displayEntries = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_length']/label/select" ) ) );
+    displayEntries = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_length']/label/select" ) ) );
     displayEntries.selectByValue( "10" );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5]" ) ) );
-    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[5]" ) ) );
+    assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "200,995", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Baane Mini Imports", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "94,016", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
   }
 
   /**
@@ -440,53 +433,53 @@ public class TableComponent extends BaseTest {
     this.log.info( "tc6_SearchEngine_TableDisplayedContentSearch" );
 
     //## Step 1
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).sendKeys( "Co." );
-    assertEquals( "Showing 1 to 10 of 13 entries (filtered from 50 total entries)", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_previous" ) ).isDisplayed() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_previous" ) ).isEnabled() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_next" ) ).isDisplayed() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_next" ) ).isEnabled() );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).sendKeys( "Co." );
+    assertEquals( "Showing 1 to 10 of 13 entries (filtered from 50 total entries)", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_previous" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_previous" ) ).isEnabled() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_next" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_next" ) ).isEnabled() );
     //check paging 1 and 2
-    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) ).isEnabled() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) ).isDisplayed() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2]" ) ).isEnabled() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2]" ) ).isDisplayed() );
-    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
-    assertEquals( "157,808", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
-    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
-    assertEquals( "Saveley & Henriot, Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
-    assertEquals( "142,874", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
+    assertTrue( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) ).isEnabled() );
+    assertTrue( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2]" ) ).isEnabled() );
+    assertTrue( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2]" ) ).isDisplayed() );
+    assertEquals( "Amica Models & Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "94,117", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    assertEquals( "157,808", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    assertEquals( "Cruz & Sons Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[6]/td" ) ) );
+    assertEquals( "Saveley & Henriot, Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td" ) ) );
+    assertEquals( "142,874", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[10]/td[2]" ) ) );
     //Click Next
-    this.elemHelper.FindElement( this.driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) ).sendKeys( Keys.ENTER );
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
-    assertEquals( "Souveniers And Things Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[1]/td" ) ) );
-    assertEquals( "Toys of Finland, Co.", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td" ) ) );
-    assertEquals( "111,250", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//a[@id='sampleObjectTable_next']" ) ).sendKeys( Keys.ENTER );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2][@class='paginate_button current']" ) ) );
+    assertEquals( "Souveniers And Things Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[1]/td" ) ) );
+    assertEquals( "Toys of Finland, Co.", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td" ) ) );
+    assertEquals( "111,250", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr[3]/td[2]" ) ) );
 
     //## Step 2
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).clear();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).sendKeys( "Euro" );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_previous" ) ).isDisplayed() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_previous" ) ).isEnabled() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_next" ) ).isDisplayed() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_next" ) ).isEnabled() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) ).isEnabled() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) ).isDisplayed() );
-    assertTrue( this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2]" ), 2 ) );
-    assertEquals( "Showing 1 to 1 of 1 entries (filtered from 50 total entries)", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "Euro+ Shopping Channel", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
-    assertEquals( "912,294", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).sendKeys( "Euro" );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_previous" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_previous" ) ).isEnabled() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_next" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_next" ) ).isEnabled() );
+    assertTrue( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) ).isEnabled() );
+    assertTrue( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[2]" ), 2 ) );
+    assertEquals( "Showing 1 to 1 of 1 entries (filtered from 50 total entries)", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "Euro+ Shopping Channel", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    assertEquals( "912,294", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td[2]" ) ) );
 
     //## Step 3
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).clear();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).sendKeys( "TODO" );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_previous" ) ).isDisplayed() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_previous" ) ).isEnabled() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_next" ) ).isDisplayed() );
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sampleObjectTable_next" ) ).isEnabled() );
-    assertTrue( this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ), 2 ) );
-    assertEquals( "Showing 0 to 0 of 0 entries (filtered from 50 total entries)", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
-    assertEquals( "No matching records found", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObjectTable_filter']/label/input" ) ).sendKeys( "TODO" );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_previous" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_previous" ) ).isEnabled() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_next" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sampleObjectTable_next" ) ).isEnabled() );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='sampleObjectTable_paginate']/span/a[1]" ), 2 ) );
+    assertEquals( "Showing 0 to 0 of 0 entries (filtered from 50 total entries)", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
+    assertEquals( "No matching records found", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='sampleObjectTable']/tbody/tr/td" ) ) );
   }
 }

@@ -43,13 +43,13 @@ import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
   // Instance of the driver (browser emulator)
-  protected WebDriver driver;
+  protected static WebDriver driver;
   // Instance to be used on wait commands
-  private static Wait<WebDriver> WAIT;
+  protected static Wait<WebDriver> wait;
   // The base url to be append the relative url in test
-  private static String BASE_URL;
+  protected static String baseUrl;
   // Directory are all download files persist
-  private static String DOWNLOAD_DIR;
+  protected static String downloadDir;
 
   // Log instance
   private final Logger log = LogManager.getLogger( BaseTest.class );
@@ -59,9 +59,9 @@ public class BaseTest {
     this.log.info( "Master setup" );
 
     // Initialize BASEURL
-    BASE_URL = "http://localhost:8080/pentaho/";
-    DOWNLOAD_DIR = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
-    new File( DOWNLOAD_DIR ).mkdir();
+    baseUrl = "http://localhost:8080/pentaho/";
+    downloadDir = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
+    new File( downloadDir ).mkdir();
 
     System.setProperty( "webdriver.log.file", "/dev/stdout" );
     //System.setProperty( "webdriver.firefox.logfile", "/dev/stdout" );
@@ -86,7 +86,7 @@ public class BaseTest {
     ffProfile.setPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Download dir, 2 - specify dir
     ffProfile.setPreference( "browser.helperApps.alwaysAsk.force", false );
     ffProfile.setPreference( "browser.download.manager.showWhenStarting", false );
-    ffProfile.setPreference( "browser.download.dir", DOWNLOAD_DIR );
+    ffProfile.setPreference( "browser.download.dir", downloadDir );
     ffProfile.setPreference( "browser.helperApps.neverAsk.saveToDisk", "table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf" );
 
     // Setting properties for webdriver
@@ -94,7 +94,7 @@ public class BaseTest {
     capabilities.setCapability( CapabilityType.LOGGING_PREFS, logs );
     capabilities.setCapability( FirefoxDriver.PROFILE, ffProfile );
 
-    this.driver = new FirefoxDriver( capabilities );
+    BaseTest.driver = new FirefoxDriver( capabilities );
 
     /*
      * INTERNET EXPLORER DRIVER
@@ -119,14 +119,14 @@ public class BaseTest {
      * InternetExplorerDriver();
      */
 
-    this.driver.manage().window().setPosition( new Point( 0, 0 ) );
-    this.driver.manage().window().setSize( new Dimension( 1360, 764 ) );
-    this.driver.manage().timeouts().pageLoadTimeout( 120, TimeUnit.SECONDS );
-    this.driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-    this.driver.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );
+    BaseTest.driver.manage().window().setPosition( new Point( 0, 0 ) );
+    BaseTest.driver.manage().window().setSize( new Dimension( 1360, 764 ) );
+    BaseTest.driver.manage().timeouts().pageLoadTimeout( 120, TimeUnit.SECONDS );
+    BaseTest.driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    BaseTest.driver.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );
 
     // Initialize WAIT
-    WAIT = new FluentWait<WebDriver>( this.driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 5, TimeUnit.SECONDS );
+    wait = new FluentWait<WebDriver>( BaseTest.driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 5, TimeUnit.SECONDS );
   }
 
   @AfterSuite
@@ -138,7 +138,7 @@ public class BaseTest {
       log.info( logEntry.getMessage() );
     }*/
 
-    this.driver.quit();
+    BaseTest.driver.quit();
   }
 
   /**
@@ -147,7 +147,7 @@ public class BaseTest {
    * @return
    */
   public static String getBaseUrl() {
-    return BASE_URL;
+    return baseUrl;
   }
 
   /**
@@ -155,7 +155,7 @@ public class BaseTest {
    * @return
    */
   public static Wait<WebDriver> getWait() {
-    return WAIT;
+    return wait;
   }
 
   /**
@@ -163,6 +163,6 @@ public class BaseTest {
    * @return
    */
   public static String getDownloadDir() {
-    return DOWNLOAD_DIR;
+    return downloadDir;
   }
 }

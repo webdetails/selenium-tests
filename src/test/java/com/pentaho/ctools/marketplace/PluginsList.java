@@ -51,7 +51,7 @@ public class PluginsList extends BaseTest {
     /*
      *  Step 1
      */
-    MarketPlace market = new MarketPlace( this.driver );
+    MarketPlace market = new MarketPlace( driver );
     market.GoToMarketPlace();
     assertTrue( market.PluginExists( "Pentaho Marketplace", "Pentaho" ) );
     assertTrue( market.PluginExists( "Community Dashboards Framework", "Webdetails" ) );

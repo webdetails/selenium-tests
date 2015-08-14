@@ -43,7 +43,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class DateInputComponent extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( DateInputComponent.class );
@@ -67,48 +67,48 @@ public class DateInputComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.driver.get( PageUrl.DATEINPUT_COMPONENT_REQUIRE );
+    driver.get( PageUrl.DATEINPUT_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for visibility of 'DateInputComponent'
-    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+    this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
-    assertEquals( "DateInputComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", driver.getTitle() );
+    assertEquals( "DateInputComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     /*
      * ## Step 2
      */
     //Render again the sample
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
     /*
      * ## Step 3
      */
     //Pick a date
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "myInput" ) );
-    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( "''" );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "myInput" ) );
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( "''" );
 
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "ui-datepicker-div" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.className( "ui-datepicker-month" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.className( "ui-datepicker-year" ) );
-    Select month = new Select( this.elemHelper.FindElement( this.driver, By.className( "ui-datepicker-month" ) ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "ui-datepicker-div" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.className( "ui-datepicker-month" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.className( "ui-datepicker-year" ) );
+    Select month = new Select( this.elemHelper.FindElement( driver, By.className( "ui-datepicker-month" ) ) );
     month.selectByValue( "9" );
-    Select year = new Select( this.elemHelper.FindElement( this.driver, By.className( "ui-datepicker-year" ) ) );
+    Select year = new Select( this.elemHelper.FindElement( driver, By.className( "ui-datepicker-year" ) ) );
     year.selectByValue( "2011" );
     //Day 23
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@class='ui-datepicker-calendar']//tbody//tr[5]/td/a" ) ).sendKeys( Keys.ENTER );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@class='ui-datepicker-calendar']//tbody//tr[5]/td/a" ) ).sendKeys( Keys.ENTER );
 
-    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
+    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
 
     /*##########################################################################
       EXPECTED RESULT:

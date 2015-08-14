@@ -30,7 +30,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -49,9 +48,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDE438 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE438.class );
@@ -78,62 +75,62 @@ public class CDE438 extends BaseTest {
      * ## Step 1
      */
     //Open CGG Component sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ACggComponent%3AcggComponent.wcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ACggComponent%3AcggComponent.wcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='content']/div/div[2]/div" ) );
+    WebElement element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='content']/div/div[2]/div" ) );
     assertNotNull( element );
-    String title = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='content']/div/div[2]/div" ) );
+    String title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='content']/div/div[2]/div" ) );
     assertEquals( "Cgg Component sample", title );
-    element = this.elemHelper.FindElement( this.driver, By.id( "column1" ) );
+    element = this.elemHelper.FindElement( driver, By.id( "column1" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.id( "column2" ) );
+    element = this.elemHelper.FindElement( driver, By.id( "column2" ) );
     assertNotNull( element );
 
     /*
      * ## Step 2
      */
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][1]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][1]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][2]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][2]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][3]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][3]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][4]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][4]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][5]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][5]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][6]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][6]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][7]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][7]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][8]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][8]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][9]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][9]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][10]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][10]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][11]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column1']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][11]" ) );
     assertNotNull( element );
 
     /*
      * ## Step 3
      */
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][1]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][1]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][2]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][2]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][3]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][3]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][4]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][4]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][5]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][5]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][6]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][6]" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][7]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='column2']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='rect'][7]" ) );
     assertNotNull( element );
   }
 }

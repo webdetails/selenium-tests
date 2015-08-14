@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package com.pentaho.ctools.cde.require;
+package com.pentaho.ctools.cde.reference;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -59,11 +59,11 @@ public class BulletChartTestCase extends BaseTest {
   @Test
   public void tc00_OpenSamplePage_Display() {
     this.log.info( "tc00_OpenSamplePage_Display" );
-    //Go to BullertChartTestCase
-    driver.get( PageUrl.BULLET_CHART_TEST_CASE_REQUIRE );
+
+    //Go to AddinReference
+    driver.get( PageUrl.BULLET_CHART_TEST_CASE );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 

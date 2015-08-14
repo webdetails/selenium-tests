@@ -30,7 +30,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -49,9 +48,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDF424 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDF424.class );
@@ -75,29 +72,28 @@ public class CDF424 extends BaseTest {
     /*
      * ## Step 1
      */
-
     //Go to Issue Sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-424%3ACDF-424.wcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-424%3ACDF-424.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //assert Elements loaded
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "placeprotovis" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "placeprotovis" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='text']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='text']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']" ) );
     assertNotNull( element );
 
-    String axis1Text = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) ).getAttribute( "fill" );
-    String axis2Text = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']" ) ).getAttribute( "fill" );
-    String axis3Text = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='text']" ) ).getAttribute( "fill" );
-    String axis4Text = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']" ) ).getAttribute( "fill" );
+    String axis1Text = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) ).getAttribute( "fill" );
+    String axis2Text = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='text']" ) ).getAttribute( "fill" );
+    String axis3Text = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='text']" ) ).getAttribute( "fill" );
+    String axis4Text = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(@id,'placeprotovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='text']" ) ).getAttribute( "fill" );
     assertEquals( "rgb(0,0,255)", axis3Text );
     assertEquals( "rgb(0,0,255)", axis4Text );
     assertEquals( "rgb(255,0,0)", axis1Text );

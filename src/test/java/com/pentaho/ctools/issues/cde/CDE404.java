@@ -32,7 +32,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -51,9 +50,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDE404 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE404.class );
@@ -81,67 +78,66 @@ public class CDE404 extends BaseTest {
     /*
      * ## Step 1
      */
-
     //Open plugin dashboard
-    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=Test.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=Test.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     //wait for invisibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
 
-    WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement element = this.elemHelper.FindElement( driver, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//a[@title='Add Resource']" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//a[@title='Add FreeForm']" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@title='Add Row']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//a[@title='Add Row']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//a[@title='Add Resource']" ) );
 
     /*
      * ## Step 2
      */
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='resourceType']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//select[@id='resourceType']" ) );
     assertNotNull( element );
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='resourceType']" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//select[@id='resourceType']" ) ) );
     select.selectByValue( "Css" );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='resourceSource']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//select[@id='resourceSource']" ) );
     assertNotNull( element );
-    Select select1 = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='resourceSource']" ) ) );
+    Select select1 = new Select( this.elemHelper.FindElement( driver, By.xpath( "//select[@id='resourceSource']" ) ) );
     select1.selectByValue( "file" );
-    this.elemHelper.Click( this.driver, By.xpath( "//button[@id='popup_state0_buttonOk']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//button[@id='popup_state0_buttonOk']" ) );
 
     /*
      * ## Step 3
      */
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
-    element = this.elemHelper.FindElement( this.driver, By.id( "container_id" ) );
+    this.elemHelper.Click( driver, By.xpath( "//button[@class='cdfdd-resourceFileExplorerRender']" ) );
+    element = this.elemHelper.FindElement( driver, By.id( "container_id" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@rel='static/']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//a[@rel='static/']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//a[@rel='static/']" ) );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@rel='static/system/']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//a[@rel='static/']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//a[@rel='static/system/']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//a[@rel='static/system/']" ) );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@rel='static/system/css/']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//a[@rel='static/system/']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//a[@rel='static/system/css/']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//a[@rel='static/system/css/']" ) );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//a[@rel='static/system/css/']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
-    this.elemHelper.Click( this.driver, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//a[@rel='static/system/css/cpk.css']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//button[@id='popup_browse_buttonOk']" ) );
 
     /*
      * ## Step 4
      */
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//button[@class='cdfddInput']" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//button[@class='cdfddInput']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//button[@class='cdfddInput']" ) );
-    WebElement elementframe = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe" ) );
-    WebDriver frame = this.driver.switchTo().frame( elementframe );
+    this.elemHelper.Click( driver, By.xpath( "//button[@class='cdfddInput']" ) );
+    WebElement elementframe = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
+    WebDriver frame = driver.switchTo().frame( elementframe );
     element = this.elemHelper.FindElement( frame, By.xpath( "//span[@id='infoArea']" ) );
     assertNotNull( element );
     String pathText = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//span[@id='infoArea']" ) );

@@ -31,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -50,9 +49,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDA45 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDA45.class );
@@ -81,53 +78,53 @@ public class CDA45 extends BaseTest {
      * ## Step 1
      */
     //Open Sql-Jdbc Sample
-    this.driver.get( this.baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda" );
+    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda" );
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dataAccessSelector" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dataAccessSelector" ) );
     assertNotNull( element );
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "1" );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='button']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='cachethis']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='queryUrl']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( element );
 
     //wait to render page
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     /*
      * ## Step 2
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "outputIndexId" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "outputIndexId" ) );
     assertNotNull( element );
     element.click();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
-    String styleText = this.elemHelper.FindElement( this.driver, By.id( "outputIndexId" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
+    String styleText = this.elemHelper.FindElement( driver, By.id( "outputIndexId" ) ).getAttribute( "class" );
     assertEquals( "cdaButton cdaButtonShort cdaButtonSelected", styleText );
 
     /*
      * ## Step 3
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "status" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "status" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='helpButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='helpButton']" ) );
     assertNotNull( element );
-    String styleText1 = this.elemHelper.FindElement( this.driver, By.id( "status" ) ).getAttribute( "class" );
+    String styleText1 = this.elemHelper.FindElement( driver, By.id( "status" ) ).getAttribute( "class" );
     assertEquals( "cdaButton cdaButtonSelected", styleText1 );
 
     /*
      * ## Step 4
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "orderDate" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "orderDate" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='parameterHolder']/div[2]/div[2]/div" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='parameterHolder']/div[2]/div[2]/div" ) );
     assertNotNull( element );
-    String styleText2 = this.elemHelper.FindElement( this.driver, By.id( "orderDate" ) ).getAttribute( "class" );
+    String styleText2 = this.elemHelper.FindElement( driver, By.id( "orderDate" ) ).getAttribute( "class" );
     assertEquals( "cdaButton cdaButtonSelected", styleText2 );
   }
 }

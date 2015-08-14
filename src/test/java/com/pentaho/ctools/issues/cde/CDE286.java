@@ -55,7 +55,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class CDE286 extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE286.class );
@@ -86,17 +86,17 @@ public class CDE286 extends BaseTest {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    this.driver.get( PageUrl.CDE_DASHBOARD );
+    driver.get( PageUrl.CDE_DASHBOARD );
     //assert buttons
-    WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Save as Template']" ) );
-    WebElement buttonApplyTemplate = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
-    WebElement buttonAddResource = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
-    WebElement buttonAddBoostrap = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
-    WebElement buttonAddFreeForm = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) );
-    WebElement buttonAddRow = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add Row']" ) );
-    WebElement buttonLayout = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
-    WebElement buttonComponents = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
-    WebElement buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement buttonApplyTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Apply Template']" ) );
+    WebElement buttonAddResource = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Add Resource']" ) );
+    WebElement buttonAddBoostrap = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    WebElement buttonAddFreeForm = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Add FreeForm']" ) );
+    WebElement buttonAddRow = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Add Row']" ) );
+    WebElement buttonLayout = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    WebElement buttonComponents = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    WebElement buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( buttonSaveTemplate );
     assertNotNull( buttonApplyTemplate );
     assertNotNull( buttonAddResource );
@@ -106,57 +106,57 @@ public class CDE286 extends BaseTest {
     assertNotNull( buttonLayout );
     assertNotNull( buttonComponents );
     assertNotNull( buttonDatasources );
-    this.elemHelper.Click( this.driver, By.cssSelector( "div.componentsPanelButton" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "div.componentsPanelButton" ) );
 
     /*
      * ## Step 2
      */
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/h3/span" ) );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/div/ul/li[24]/a[@title='CGG Dial Chart']" ) );
-    String componentName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]/td" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/h3/span" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/div/ul/li[24]/a[@title='CGG Dial Chart']" ) );
+    String componentName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]/td" ) );
     assertEquals( "CGG Dial Chart", componentName );
 
     //Add Name
     String expectedChartName = "dial";
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]/form/input" ) ).sendKeys( "dial" );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]/form/input" ) ).submit();
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]" ), "dial" );
-    String actualChartName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]/form/input" ) ).sendKeys( "dial" );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]/form/input" ) ).submit();
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]" ), "dial" );
+    String actualChartName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]" ) );
     assertEquals( expectedChartName, actualChartName );
 
     //Add Color Range
     String strColor1 = "blue";
     String strColor2 = "green";
     String strColor3 = "brown";
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ) );
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ) );
     //We need to wait for the animation finish for the display popup
-    this.elemHelper.WaitForAttributeValueEqualsTo( this.driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
+    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
     //Add Colors
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement elemArg0 = this.elemHelper.FindElement( this.driver, By.cssSelector( "input#arg_0" ) );
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement elemArg1 = this.elemHelper.FindElement( this.driver, By.cssSelector( "input#arg_1" ) );
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement elemArg2 = this.elemHelper.FindElement( this.driver, By.cssSelector( "input#arg_2" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
+    WebElement elemArg0 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_0" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
+    WebElement elemArg1 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_1" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
+    WebElement elemArg2 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_2" ) );
     assertNotNull( elemArg0 );
     assertNotNull( elemArg1 );
     assertNotNull( elemArg2 );
     //Add the first color
-    this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_0" ), strColor1 );
+    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_0" ), strColor1 );
     //Add the second color
-    this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_1" ), strColor2 );
+    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_1" ), strColor2 );
     //Add the third color
-    this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_2" ), strColor3 );
+    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_2" ), strColor3 );
     //CDE-450 assert able to change order of colors
-    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_0']/div/span" ), By.xpath( "//div[@id='parameters_2']" ) );
-    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_1']/div/span" ), By.xpath( "//div[@id='parameters_2']" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_0']/div/span" ), By.xpath( "//div[@id='parameters_2']" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_1']/div/span" ), By.xpath( "//div[@id='parameters_2']" ) );
     //Submit
-    this.elemHelper.Click( this.driver, By.id( "popup_state0_buttonOk" ) );
+    this.elemHelper.Click( driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popupbox" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupbox" ) );
     //Check the colors array
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ), "[\"" + strColor3 + "\",\"" + strColor2 + "\",\"" + strColor1 + "\"]" );
-    String rangeColorArray = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ), "[\"" + strColor3 + "\",\"" + strColor2 + "\",\"" + strColor1 + "\"]" );
+    String rangeColorArray = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ) );
     assertEquals( "[\"brown\",\"green\",\"blue\"]", rangeColorArray );
 
     //Add Intervals Array
@@ -164,66 +164,66 @@ public class CDE286 extends BaseTest {
     String strInterval1 = "50";
     String strInterval2 = "25";
     String strInterval3 = "0";
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) );
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) );
     //We need to wait for the animation finish for the display popup
-    this.elemHelper.WaitForAttributeValueEqualsTo( this.driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
+    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
     //Add intervals
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement elemInterArg0 = this.elemHelper.FindElement( this.driver, By.cssSelector( "input#arg_0" ) );
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringArrayAddButton" ) ); // Add arg1
-    WebElement elemInterArg1 = this.elemHelper.FindElement( this.driver, By.cssSelector( "input#arg_1" ) );
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringArrayAddButton" ) ); // Add arg2
-    WebElement elemInterArg2 = this.elemHelper.FindElement( this.driver, By.cssSelector( "input#arg_2" ) );
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringArrayAddButton" ) ); // Add arg3
-    WebElement elemInterArg3 = this.elemHelper.FindElement( this.driver, By.cssSelector( "input#arg_3" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
+    WebElement elemInterArg0 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_0" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) ); // Add arg1
+    WebElement elemInterArg1 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_1" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) ); // Add arg2
+    WebElement elemInterArg2 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_2" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) ); // Add arg3
+    WebElement elemInterArg3 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_3" ) );
     assertNotNull( elemInterArg0 );
     assertNotNull( elemInterArg1 );
     assertNotNull( elemInterArg2 );
     assertNotNull( elemInterArg3 );
     //Add interval 0
-    this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_0" ), strInterval0 );
+    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_0" ), strInterval0 );
     //Add interval 1
-    this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_1" ), strInterval1 );
+    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_1" ), strInterval1 );
     //Add interval 2
-    this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_2" ), strInterval2 );
+    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_2" ), strInterval2 );
     //Add interval 3
-    this.elemHelper.ClickAndSendKeys( this.driver, By.cssSelector( "input#arg_3" ), strInterval3 );
+    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_3" ), strInterval3 );
     //CDE-450 assert able to change order of intervals
-    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_0']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
-    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_1']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
-    this.elemHelper.DragAndDrop( this.driver, By.xpath( "//div[@id='parameters_2']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_0']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_1']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_2']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
     // Submit
-    this.elemHelper.ClickJS( this.driver, By.id( "popup_state0_buttonOk" ) );
+    this.elemHelper.ClickJS( driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popupbox" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupbox" ) );
     //Check if was saved
     String expectedIntervalArray = "[\"" + strInterval3 + "\",\"" + strInterval2 + "\",\"" + strInterval1 + "\",\"" + strInterval0 + "\"]";
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ), expectedIntervalArray );
-    String actualIntervalsArray = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ), expectedIntervalArray );
+    String actualIntervalsArray = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) );
     assertEquals( expectedIntervalArray, actualIntervalsArray );
 
     //Add Parameter
     String expectedParameter = "27";
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]/td[2]" ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]/td[2]/form/input" ) ).sendKeys( expectedParameter );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]/td[2]/form/input" ) ).submit();
-    String actualParameter = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]/td[2]" ) );
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]/td[2]" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]/td[2]/form/input" ) ).sendKeys( expectedParameter );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]/td[2]/form/input" ) ).submit();
+    String actualParameter = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]/td[2]" ) );
     assertEquals( expectedParameter, actualParameter );
 
     //Add Height
     String expectedHeight = "321";
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[6]/td[2]" ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[6]/td[2]/form/input" ) ).sendKeys( expectedHeight );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[6]/td[2]/form/input" ) ).submit();
-    String actualHeight = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[6]/td[2]" ) );
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[6]/td[2]" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[6]/td[2]/form/input" ) ).sendKeys( expectedHeight );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[6]/td[2]/form/input" ) ).submit();
+    String actualHeight = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[6]/td[2]" ) );
     assertEquals( expectedHeight, actualHeight );
 
     //Add Width
     String expectedWidth = "215";
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]" ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]/form/input" ) ).sendKeys( expectedWidth );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]/form/input" ) ).submit();
-    String actualWidth = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]" ) );
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]/form/input" ) ).sendKeys( expectedWidth );
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]/form/input" ) ).submit();
+    String actualWidth = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[7]/td[2]" ) );
     assertEquals( expectedWidth, actualWidth );
 
     /*
@@ -239,25 +239,25 @@ public class CDE286 extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    WebElement cggDialog = this.elemHelper.WaitForElementPresence( this.driver, By.id( "cggDialog" ) );
+    WebElement cggDialog = this.elemHelper.WaitForElementPresence( driver, By.id( "cggDialog" ) );
     assertNotNull( cggDialog );
-    String actualCggDialogTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='cggDialog']/h3" ) );
+    String actualCggDialogTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cggDialog']/h3" ) );
     assertEquals( "Choose what charts to render as CGG", actualCggDialogTitle );
-    String actualChartNameTorender = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='cggDialog']/div/span" ) );
+    String actualChartNameTorender = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cggDialog']/div/span" ) );
     assertEquals( expectedChartName, actualChartNameTorender );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cggDialog']/div/input" ) );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cggDialog']/div/button" ) );
-    String actualUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='cggDialog']/div/div/input" ), "value" );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cggDialog']/div/input" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cggDialog']/div/button" ) );
+    String actualUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='cggDialog']/div/div/input" ), "value" );
     String expectedURL = "http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/system/pentaho-cdf-dd/resources/custom/components/cgg/charts/dial.js&paramcolors=" + strColor3 + "&paramcolors=" + strColor2 + "&paramcolors=" + strColor1 + "&paramscale=" + strInterval3 + "&paramscale=" + strInterval2 + "&paramscale=" + strInterval1 + "&paramscale=" + strInterval0 + "&height=" + expectedHeight + "&width=" + expectedWidth + "&outputType=png";
     assertEquals( expectedURL, actualUrl );
 
     /*
      * ## Step 4
      */
-    this.driver.get( expectedURL + "&paramvalue=25" );
-    WebElement elemImg = this.elemHelper.FindElement( this.driver, By.cssSelector( "img" ) );
+    driver.get( expectedURL + "&paramvalue=25" );
+    WebElement elemImg = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
     assertNotNull( elemImg );
-    String actualImgUrl = this.elemHelper.GetAttribute( this.driver, By.cssSelector( "img" ), "src" );
+    String actualImgUrl = this.elemHelper.GetAttribute( driver, By.cssSelector( "img" ), "src" );
     assertEquals( expectedURL + "&paramvalue=25", actualImgUrl );
 
   }

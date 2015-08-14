@@ -41,7 +41,7 @@ public class CdeEdit {
 
   // The driver
   private WebDriver DRIVER;
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private ElementHelper elemHelper = new ElementHelper();
   // Logging instance
   private static Logger LOG = LogManager.getLogger( CdeEdit.class );

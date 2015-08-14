@@ -41,7 +41,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class LoginPentaho extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( LoginPentaho.class );
@@ -66,36 +66,36 @@ public class LoginPentaho extends BaseTest {
     /*
      * ## Step 1
      */
-    this.driver.get( PageUrl.PUC_LOGIN );
+    driver.get( PageUrl.PUC_LOGIN );
 
     //Wait for form display
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
-    assertEquals( "User Console", this.driver.findElement( By.xpath( "//div[@id='login-form-container']/div/h1" ) ).getText() );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
+    assertEquals( "User Console", driver.findElement( By.xpath( "//div[@id='login-form-container']/div/h1" ) ).getText() );
 
     //## Step 2
     //Wait for all all elements in the form to be visible
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
-    this.driver.findElement( By.id( "j_username" ) ).clear();
-    this.driver.findElement( By.id( "j_username" ) ).sendKeys( "admin" );
-    this.driver.findElement( By.id( "j_password" ) ).clear();
-    this.driver.findElement( By.id( "j_password" ) ).sendKeys( "password" );
-    this.driver.findElement( By.cssSelector( "button.btn" ) ).click();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "button.btn" ) );
+    driver.findElement( By.id( "j_username" ) ).clear();
+    driver.findElement( By.id( "j_username" ) ).sendKeys( "admin" );
+    driver.findElement( By.id( "j_password" ) ).clear();
+    driver.findElement( By.id( "j_password" ) ).sendKeys( "password" );
+    driver.findElement( By.cssSelector( "button.btn" ) ).click();
 
     //## Step 3
     //wait for visibility of waiting pop-up
-    this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 10 );
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 10 );
+    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    this.elemHelper.WaitForTitle( this.driver, "Pentaho User Console" );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//iframe[@id='home.perspective']" ) );
-    assertNotNull( this.driver.findElement( By.xpath( "//iframe[@id='home.perspective']" ) ) );
-    assertEquals( "Pentaho User Console", this.driver.getTitle() );
+    this.elemHelper.WaitForTitle( driver, "Pentaho User Console" );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//iframe[@id='home.perspective']" ) );
+    assertNotNull( driver.findElement( By.xpath( "//iframe[@id='home.perspective']" ) ) );
+    assertEquals( "Pentaho User Console", driver.getTitle() );
 
     //Logged as ADMIN user
-    assertEquals( "admin", this.driver.findElement( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ).getText() );
+    assertEquals( "admin", driver.findElement( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ).getText() );
   }
 }

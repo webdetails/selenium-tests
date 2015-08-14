@@ -31,7 +31,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -50,9 +49,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDA109 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDA109.class );
@@ -79,27 +76,27 @@ public class CDA109 extends BaseTest {
      * ## Step 1
      */
     //Go to User Console
-    this.driver.get( this.baseUrl + "plugin/cda/api/editFile?path=/public/Issues/CDA/CDA%20-%20109/.cda" );
+    driver.get( baseUrl + "plugin/cda/api/editFile?path=/public/Issues/CDA/CDA%20-%20109/.cda" );
 
     //Wait for Elements outside of iFrame
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='webdetailsLogo']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='webdetailsLogo']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//span[@id='staticfile']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//span[@id='staticfile']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='save']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='save']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='reload']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='reload']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='preview']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='preview']" ) );
     assertNotNull( element );
-    String filePath = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//span[@id='staticfile']" ) );
+    String filePath = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//span[@id='staticfile']" ) );
     assertEquals( "/public/Issues/CDA/CDA - 109/.cda", filePath );
 
     /*
      * ## Step 2
      */
-    WebElement elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe" ) );
-    WebDriver frame = this.driver.switchTo().frame( elementFrame );
+    WebElement elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
+    WebDriver frame = driver.switchTo().frame( elementFrame );
 
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//pre[@id='editArea']/div[2]/div[1]/div[3]" ) );
     assertNotNull( element );

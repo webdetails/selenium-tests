@@ -30,7 +30,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -41,9 +40,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class OlapSelectorComponent extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( OlapSelectorComponent.class );
@@ -71,17 +68,17 @@ public class OlapSelectorComponent extends BaseTest {
      * ## Step 1
      */
     // Go to Olap Selector Sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AOlapSelector%3AolapSelector.wcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AOlapSelector%3AolapSelector.wcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Check page title
-    String pageTitle = this.elemHelper.WaitForTitle( this.driver, "olapSelector" );
+    String pageTitle = this.elemHelper.WaitForTitle( driver, "olapSelector" );
     assertEquals( "olapSelector", pageTitle );
 
     // Wait for Selector button
-    WebElement selectorButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='column1']/div/div/div[@class='title']" ) );
+    WebElement selectorButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='title']" ) );
     assertNotNull( selectorButton );
 
     /*
@@ -91,29 +88,29 @@ public class OlapSelectorComponent extends BaseTest {
     selectorButton.click();
 
     //Assert Options are shown
-    WebElement optionList = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
+    WebElement optionList = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
     assertNotNull( optionList );
-    WebElement firstSelection = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='options']//span[@title='Alpha Cognac']" ) );
+    WebElement firstSelection = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='options']//span[@title='Alpha Cognac']" ) );
     assertNotNull( firstSelection );
     String firstName = firstSelection.getText();
-    WebElement secondSelection = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='options']//span[@title='Asian Shopping Network, Co']" ) );
+    WebElement secondSelection = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='options']//span[@title='Asian Shopping Network, Co']" ) );
     assertNotNull( secondSelection );
     String secondName = secondSelection.getText();
-    WebElement thirdSelection = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='options']//span[@title='Diecast Collectables']" ) );
+    WebElement thirdSelection = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='options']//span[@title='Diecast Collectables']" ) );
     assertNotNull( thirdSelection );
     String thirdName = thirdSelection.getText();
 
     /*
      * ## Step 3
      */
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='options']//span[@title='Alpha Cognac']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='options']//span[@title='Asian Shopping Network, Co']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='options']//span[@title='Diecast Collectables']" ) ).click();
-    WebElement applyButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='footer']/div[@class='button validate']" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='options']//span[@title='Alpha Cognac']" ) ).click();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='options']//span[@title='Asian Shopping Network, Co']" ) ).click();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='options']//span[@title='Diecast Collectables']" ) ).click();
+    WebElement applyButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='footer']/div[@class='button validate']" ) );
     assertNotNull( applyButton );
     applyButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
-    String selectedCustomers = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "columnLabel" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
+    String selectedCustomers = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "columnLabel" ) );
     String expectedCustomers = "[\"[Customers].[" + firstName + "]\"\"[Customers].[" + secondName + "]\"\"[Customers].[" + thirdName + "]\"]";
     assertEquals( expectedCustomers, selectedCustomers );
   }

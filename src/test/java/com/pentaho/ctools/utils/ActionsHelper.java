@@ -31,7 +31,7 @@ import org.openqa.selenium.interactions.Actions;
 
 public class ActionsHelper extends Actions {
 
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( ActionsHelper.class );

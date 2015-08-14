@@ -32,7 +32,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -51,9 +50,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDF435 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDF435.class );
@@ -81,18 +78,18 @@ public class CDF435 extends BaseTest {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-435%3AIssue_435.wcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-435%3AIssue_435.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //assert Elements loaded
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Panel_1" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "Panel_1" ) );
     assertNotNull( element );
 
     //focus iframe
-    WebElement elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe[@name='report_prptFrame']" ) );
-    WebDriver frame = this.driver.switchTo().frame( elementFrame );
+    WebElement elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe[@name='report_prptFrame']" ) );
+    WebDriver frame = driver.switchTo().frame( elementFrame );
 
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.id( "pageControl" ) );
     assertNotNull( element );
@@ -110,8 +107,8 @@ public class CDF435 extends BaseTest {
     assertEquals( "[Time].[2003]", yearText );
 
     //focus iframe2
-    elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe[@id='reportContent']" ) );
-    frame = this.driver.switchTo().frame( elementFrame );
+    elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe[@id='reportContent']" ) );
+    frame = driver.switchTo().frame( elementFrame );
 
     //Check content of table
     String r1c1Text = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//tbody/tr[2]/td" ) );
@@ -142,24 +139,24 @@ public class CDF435 extends BaseTest {
     /*
      * ## Step 2
      */
-    this.driver.switchTo().defaultContent();
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='Panel_1']/select" ) ) );
+    driver.switchTo().defaultContent();
+    Select select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='Panel_1']/select" ) ) );
     select.deselectAll();
     select.selectByVisibleText( "2004" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     /*
      * ## Step 3
      */
     //focus iframe
-    elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe[@name='report_prptFrame']" ) );
-    frame = this.driver.switchTo().frame( elementFrame );
+    elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe[@name='report_prptFrame']" ) );
+    frame = driver.switchTo().frame( elementFrame );
 
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='promptPanel']//button/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='promptPanel']//button/span" ) );
     assertNotNull( element );
-    buttonText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='promptPanel']//button/span" ) );
+    buttonText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='promptPanel']//button/span" ) );
     assertEquals( "View Report", buttonText );
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//input[@value='[Time].[2004]']" ) );
     assertNotNull( element );
@@ -167,8 +164,8 @@ public class CDF435 extends BaseTest {
     assertEquals( "[Time].[2004]", yearText );
 
     //focus iframe2
-    elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe[@id='reportContent']" ) );
-    frame = this.driver.switchTo().frame( elementFrame );
+    elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe[@id='reportContent']" ) );
+    frame = driver.switchTo().frame( elementFrame );
 
     //Check content of table
     r1c1Text = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//tbody/tr[2]/td" ) );

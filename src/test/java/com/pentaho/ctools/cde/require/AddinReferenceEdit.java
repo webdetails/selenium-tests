@@ -70,13 +70,13 @@ public class AddinReferenceEdit extends BaseTest {
      * ## Step 1
      */
     //Go to AddinReference
-    this.driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
+    driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     // Wait for title
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='Title']/span" ) );
-    String fontSize18 = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='Title']/span" ), "style" );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='Title']/span" ) );
+    String fontSize18 = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='Title']/span" ), "style" );
     assertEquals( "font-size: 18px;", fontSize18 );
 
     /*
@@ -88,11 +88,11 @@ public class AddinReferenceEdit extends BaseTest {
      * ## Step 3
      */
     //Go to AddinReference
-    this.driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
+    driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    String fontSize34 = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='Title']/span" ), "style" );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    String fontSize34 = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='Title']/span" ), "style" );
     assertEquals( "font-size: 34px;", fontSize34 );
   }
 
@@ -102,27 +102,27 @@ public class AddinReferenceEdit extends BaseTest {
    */
   private void ChangeFontSize( String value ) {
     this.log.info( "ChangeFontSize" );
-    this.driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE_EDIT );
+    driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE_EDIT );
 
     //Expand first row - Title
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "span.expander" ) );
-    this.elemHelper.ClickJS( this.driver, By.cssSelector( "span.expander" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "span.expander" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "span.expander" ) );
     //Click in HTML to open the Properties
-    Actions acts = new Actions( this.driver );
-    acts.click( this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
+    Actions acts = new Actions( driver );
+    acts.click( this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
     acts.build().perform();
     //Click in field 'Font Size' to be editable
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
     //Write 34
-    this.elemHelper.FindElement( this.driver, By.name( "value" ) ).clear();
-    this.elemHelper.ClickAndSendKeys( this.driver, By.xpath( "//form[@class='cdfddInput']/input" ), value );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//form[@class='cdfddInput']/input" ) ).submit();
+    this.elemHelper.FindElement( driver, By.name( "value" ) ).clear();
+    this.elemHelper.ClickAndSendKeys( driver, By.xpath( "//form[@class='cdfddInput']/input" ), value );
+    this.elemHelper.FindElement( driver, By.xpath( "//form[@class='cdfddInput']/input" ) ).submit();
     this.bFontChanged = true;
     //Save the changes
-    this.elemHelper.ClickJS( this.driver, By.linkText( "Save" ) );
+    this.elemHelper.ClickJS( driver, By.linkText( "Save" ) );
     //Wait for element present and invisible
-    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@id='notifyBar']" ) );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@id='notifyBar']" ) );
+    this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//div[@id='notifyBar']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='notifyBar']" ) );
   }
 
   @AfterTest

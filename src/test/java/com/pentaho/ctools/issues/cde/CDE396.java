@@ -28,7 +28,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -47,9 +46,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDE396 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE396.class );
@@ -73,12 +70,12 @@ public class CDE396 extends BaseTest {
     this.log.info( "tc1_RefreshCde_ReturnsInfo" );
 
     //Go to User Console
-    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh" );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh" );
 
     /*
      * ## Step 1
      */
-    String confirmationText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/pre" ) );
+    String confirmationText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/pre" ) );
     assertEquals( "Refreshed CDE Successfully", confirmationText );
   }
 }

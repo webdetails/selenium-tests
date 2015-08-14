@@ -30,14 +30,11 @@ import org.apache.logging.log4j.Logger;
 import org.hamcrest.CoreMatchers;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -49,11 +46,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDACacheManager extends BaseTest {
-  // Instance to be used on wait commands
-  private Wait<WebDriver> wait = CToolsTestSuite.getWait();
-  // The base url to be append the relative url in test
-  private String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( CDACacheManager.class );
@@ -61,7 +54,7 @@ public class CDACacheManager extends BaseTest {
   @BeforeTest
   public void setUpTestCase() {
     //Go to the CDA Cache Manager web page.
-    this.driver.get( this.baseUrl + "plugin/cda/api/manageCache" );
+    driver.get( baseUrl + "plugin/cda/api/manageCache" );
   }
 
   /**
@@ -79,23 +72,23 @@ public class CDACacheManager extends BaseTest {
   public void tc1_PageContent_CachedQueries() {
     this.log.info( "tc1_PageContent_CachedQueries" );
 
-    this.wait.until( ExpectedConditions.titleContains( "CDA Cache Manager" ) );
-    assertEquals( "CDA Cache Manager", this.driver.getTitle() );
+    wait.until( ExpectedConditions.titleContains( "CDA Cache Manager" ) );
+    assertEquals( "CDA Cache Manager", driver.getTitle() );
     //Go to Cached Queries
-    WebElement buttonCachedQueries = this.elemHelper.FindElement( this.driver, By.id( "cacheButton" ) );
+    WebElement buttonCachedQueries = this.elemHelper.FindElement( driver, By.id( "cacheButton" ) );
     assertNotNull( buttonCachedQueries );
     buttonCachedQueries.click();
 
     /*
      * ## Step 1
      */
-    String subTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='cachedQueries']/div[3]" ) );
+    String subTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cachedQueries']/div[3]" ) );
     assertEquals( "Queries in cache", subTitle );
 
     /*
      * ## Step 2
      */
-    String buttonTextClearCache = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "clearCacheButton" ) );
+    String buttonTextClearCache = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "clearCacheButton" ) );
     assertEquals( "Clear Cache", buttonTextClearCache );
   }
 
@@ -115,27 +108,27 @@ public class CDACacheManager extends BaseTest {
     this.log.info( "tc2_ClearCache_AllQueriesWhereRemove" );
 
     //Go to Cached Queries
-    WebElement buttonCachedQueries = this.elemHelper.FindElement( this.driver, By.id( "cacheButton" ) );
+    WebElement buttonCachedQueries = this.elemHelper.FindElement( driver, By.id( "cacheButton" ) );
     assertNotNull( buttonCachedQueries );
     buttonCachedQueries.click();
 
     //Click in clear cache
-    this.elemHelper.FindElement( this.driver, By.id( "clearCacheButton" ) ).click();
+    this.elemHelper.FindElement( driver, By.id( "clearCacheButton" ) ).click();
 
     /*
      * ## Step 1
      */
     //Wait for pop-up 1
-    this.wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = this.driver.switchTo().alert();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "This will remove ALL items from cache. Are you sure?";
     alert.accept();
     assertEquals( confirmationMsg, expectedCnfText );
 
     //Wait for pop-up 2
-    this.wait.until( ExpectedConditions.alertIsPresent() );
-    alert = this.driver.switchTo().alert();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    alert = driver.switchTo().alert();
     confirmationMsg = alert.getText();
     expectedCnfText = "items have been removed from cache";
     alert.accept();
@@ -144,7 +137,7 @@ public class CDACacheManager extends BaseTest {
     /*
      * ## Step 2
      */
-    String textEmptyCache = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='cachedQueriesOverviewLines']/div" ) );
+    String textEmptyCache = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cachedQueriesOverviewLines']/div" ) );
     assertEquals( "Cache is empty.", textEmptyCache );
   }
 }

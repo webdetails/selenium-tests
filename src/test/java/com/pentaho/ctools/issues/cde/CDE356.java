@@ -61,7 +61,7 @@ public class CDE356 extends BaseTest {
   private int failure = 2;
   // Log instance
   private final Logger log = LogManager.getLogger( CDE356.class );
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
 
   /**
@@ -89,89 +89,89 @@ public class CDE356 extends BaseTest {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    this.driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Add Row and assert it was added
-    WebElement addRow = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='table-cdfdd-layout-treeOperations']//a[@title='Add Row']" ) );
+    WebElement addRow = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='table-cdfdd-layout-treeOperations']//a[@title='Add Row']" ) );
     assertNotNull( addRow );
     addRow.click();
-    WebElement addedRow = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    WebElement addedRow = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertNotNull( addedRow );
-    String elementName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    String elementName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertEquals( "Row", elementName );
 
     //Click New
-    WebElement newButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.newDashboard()']" ) );
+    WebElement newButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.newDashboard()']" ) );
     assertNotNull( newButton );
     newButton.click();
-    WebElement warningPopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup_state_state0" ) );
+    WebElement warningPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state_state0" ) );
     assertNotNull( warningPopup );
-    String warningMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='popup_state_state0']/div/span" ) );
+    String warningMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popup_state_state0']/div/span" ) );
     assertEquals( "Unsaved changes will be lost.", warningMessage );
 
     /*
      * ## Step 2
      */
     //Click Cancel and assert row is still there
-    WebElement cancelButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup_state0_buttonCancel" ) );
+    WebElement cancelButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonCancel" ) );
     assertNotNull( cancelButton );
     cancelButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popup_state_state0" ) );
-    addedRow = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup_state_state0" ) );
+    addedRow = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertNotNull( addedRow );
-    elementName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    elementName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertEquals( "Row", elementName );
 
     //Click New
-    newButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.newDashboard()']" ) );
+    newButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.newDashboard()']" ) );
     assertNotNull( newButton );
     newButton.click();
-    warningPopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup_state_state0" ) );
+    warningPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state_state0" ) );
     assertNotNull( warningPopup );
-    warningMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='popup_state_state0']/div/span" ) );
+    warningMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popup_state_state0']/div/span" ) );
     assertEquals( "Unsaved changes will be lost.", warningMessage );
 
     /*
      * ## Step 3
      */
     //Click Ok and assert row is not present
-    WebElement okButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup_state0_buttonOk" ) );
+    WebElement okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
     assertNotNull( okButton );
     okButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popup_state_state0" ) );
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup_state_state0" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
 
     //Add row
-    addRow = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='table-cdfdd-layout-treeOperations']//a[@title='Add Row']" ) );
+    addRow = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='table-cdfdd-layout-treeOperations']//a[@title='Add Row']" ) );
     assertNotNull( addRow );
     addRow.click();
-    addedRow = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    addedRow = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertNotNull( addedRow );
-    elementName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    elementName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     assertEquals( "Row", elementName );
 
     /*
      * ## Step 4
      */
     //Save dashboard with no name
-    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.save()']" ) );
+    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.save()']" ) );
     assertNotNull( saveButton );
     saveButton.click();
-    WebElement savePopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup_state_state0" ) );
+    WebElement savePopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state_state0" ) );
     assertNotNull( savePopup );
-    WebElement homeFolder = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='container_id']//a[@rel='home/']" ) );
+    WebElement homeFolder = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='container_id']//a[@rel='home/']" ) );
     assertNotNull( homeFolder );
     homeFolder.click();
-    WebElement inputField = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "fileInput" ) );
+    WebElement inputField = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "fileInput" ) );
     assertNotNull( inputField );
-    okButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup_state0_buttonOk" ) );
+    okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
     okButton.click();
-    WebElement saveError = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupmessage']" ) );
+    WebElement saveError = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupmessage']" ) );
     assertNotNull( saveError );
-    String errorMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupmessage']" ) );
+    String errorMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupmessage']" ) );
     assertEquals( "Please insert a valid file name.", errorMessage );
-    okButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupbuttons']/button[@id='popup_state0_buttonOk']" ) );
+    okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupbuttons']/button[@id='popup_state0_buttonOk']" ) );
     assertNotNull( okButton );
     okButton.click();
 
@@ -179,31 +179,31 @@ public class CDE356 extends BaseTest {
      * ## Step 5
      */
     //Save dashboard
-    inputField = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "fileInput" ) );
+    inputField = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "fileInput" ) );
     assertNotNull( inputField );
     inputField.click();
     inputField.sendKeys( "$CDE356" );
-    WebElement publicFolder = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    WebElement publicFolder = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
     assertNotNull( publicFolder );
     publicFolder.click();
-    okButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup_state0_buttonOk" ) );
+    okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
     okButton.click();
     this.failure = 0;
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popup_state_state0" ) );
-    WebElement dashTitle = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='$CDE356']" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup_state_state0" ) );
+    WebElement dashTitle = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@title='$CDE356']" ) );
     assertNotNull( dashTitle );
 
     //Click New
-    newButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.newDashboard()']" ) );
+    newButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.newDashboard()']" ) );
     assertNotNull( newButton );
     newButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@title='$CDE356']" ) );
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@title='$CDE356']" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
 
     /*
      * ## Step 6
      */
-    BrowseFiles browse = new BrowseFiles( this.driver );
+    BrowseFiles browse = new BrowseFiles( driver );
     browse.DeleteMultipleFilesByName( "/public", "$CDE356" );
     browse.EmptyTrash();
     this.failure = 1;
@@ -213,7 +213,7 @@ public class CDE356 extends BaseTest {
   public void tearDown() {
     this.log.info( "tearDown##" + CDE356.class.getSimpleName() );
     if ( this.failure == 0 ) {
-      BrowseFiles browse = new BrowseFiles( this.driver );
+      BrowseFiles browse = new BrowseFiles( driver );
       browse.DeleteMultipleFilesByName( "/public", "$CDE356" );
       browse.EmptyTrash();
     }

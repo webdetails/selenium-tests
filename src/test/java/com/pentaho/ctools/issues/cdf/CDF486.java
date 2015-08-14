@@ -30,7 +30,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -49,9 +48,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDF486 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDF486.class );
@@ -77,23 +74,23 @@ public class CDF486 extends BaseTest {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='panelTitle']/div[@class='container']/div[2]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='panelTitle']/div[@class='container']/div[2]" ) );
     assertNotNull( element );
     int imagex = element.getLocation().x;
     int imagey = element.getLocation().y;
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "pieChart_object" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "pieChart_object" ) );
     assertNotNull( element );
     element.getLocation();
     element.getLocation();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "barChart_object" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "barChart_object" ) );
     assertNotNull( element );
     int barChartx = element.getLocation().x;
     int barCharty = element.getLocation().y;
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dialChart_object" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dialChart_object" ) );
     assertNotNull( element );
     int dialChartx = element.getLocation().x;
     int dialCharty = element.getLocation().y;
@@ -102,23 +99,23 @@ public class CDF486 extends BaseTest {
      * ## Step 2
      */
     //Go to New CDE Dashboard
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent?dashboardType=clean" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent?dashboardType=clean" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='panelTitle']/div[@class='container']/div[2]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='panelTitle']/div[@class='container']/div[2]" ) );
     assertNotNull( element );
     int imagex1 = element.getLocation().x;
     int imagey1 = element.getLocation().y;
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "pieChart_object" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "pieChart_object" ) );
     assertNotNull( element );
     element.getLocation();
     element.getLocation();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "barChart_object" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "barChart_object" ) );
     assertNotNull( element );
     int barChartx1 = element.getLocation().x;
     int barCharty1 = element.getLocation().y;
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dialChart_object" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dialChart_object" ) );
     assertNotNull( element );
     int dialChartx1 = element.getLocation().x;
     int dialCharty1 = element.getLocation().y;

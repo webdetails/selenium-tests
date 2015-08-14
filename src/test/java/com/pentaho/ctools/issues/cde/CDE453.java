@@ -55,7 +55,7 @@ public class CDE453 extends BaseTest {
   private final String WIDGET_NAME = "CDE453";
   // Indicator to check if any assert fails in the test case
   private boolean noAssertFails = false;
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE453.class );
@@ -83,34 +83,34 @@ public class CDE453 extends BaseTest {
     /*
      * ## Step 1
      */
-    WidgetUtils.CreateWidget( this.driver, this.WIDGET_NAME );
+    WidgetUtils.CreateWidget( driver, this.WIDGET_NAME );
 
     /*
      * ## Step 2
      */
     //New CDE dashboard
-    this.driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Go to Components Panel
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     //Expand Widgets option
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//h3[@id='ui-accordion-cdfdd-components-palletePallete-header-8']/span" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//h3[@id='ui-accordion-cdfdd-components-palletePallete-header-8']/span" ) );
     //Check the widget created is visible in the list of Widgets
-    WebElement widgetCDE453 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.linkText( this.WIDGET_NAME ) );
+    WebElement widgetCDE453 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.linkText( this.WIDGET_NAME ) );
     assertNotNull( widgetCDE453 );
-    this.elemHelper.Click( this.driver, By.linkText( this.WIDGET_NAME ) );
+    this.elemHelper.Click( driver, By.linkText( this.WIDGET_NAME ) );
     //Check the widget was added to the list of components
-    String groupName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr[@id='WIDGETS']/td[2]" ) );
+    String groupName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tr[@id='WIDGETS']/td[2]" ) );
     assertEquals( "Widgets", groupName );
     // Check the group added is Widgets
-    String displayWidgetName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr[2]/td" ) );
+    String displayWidgetName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tr[2]/td" ) );
     String expectedWidgetName = this.WIDGET_NAME + " Widget";
     assertEquals( expectedWidgetName, displayWidgetName );
 
     /*
      * ## Step 3
      */
-    WidgetUtils.RemoveWidgetByName( this.driver, this.WIDGET_NAME );
+    WidgetUtils.RemoveWidgetByName( driver, this.WIDGET_NAME );
     this.noAssertFails = true;
   }
 
@@ -119,7 +119,7 @@ public class CDE453 extends BaseTest {
     this.log.info( "tearDown##" + CDE453.class.getSimpleName() );
 
     if ( !this.noAssertFails ) {
-      WidgetUtils.RemoveWidgetByName( this.driver, this.WIDGET_NAME );
+      WidgetUtils.RemoveWidgetByName( driver, this.WIDGET_NAME );
     }
   }
 }

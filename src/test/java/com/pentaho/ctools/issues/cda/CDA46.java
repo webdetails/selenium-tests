@@ -31,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -50,9 +49,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDA46 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDA46.class );
@@ -80,33 +77,33 @@ public class CDA46 extends BaseTest {
      * ## Step 1
      */
     //Open Sql-Jdbc Sample
-    this.driver.get( this.baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda" );
+    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda" );
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dataAccessSelector" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dataAccessSelector" ) );
     assertNotNull( element );
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "1" );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='button']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='cachethis']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='queryUrl']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( element );
 
-    this.elemHelper.WaitForElementPresence( this.driver, By.id( "outputIndexId" ) );
-    this.elemHelper.FindElement( this.driver, By.id( "outputIndexId" ) ).click();
-    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.id( "outputIndexId" ) );
+    this.elemHelper.FindElement( driver, By.id( "outputIndexId" ) ).click();
+    this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
 
     /*
      * ## Step 2
      */
-    this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@id='outputIndexHelp']" ) );
-    this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@id='outputIndexHelp']/p" ) );
-    this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@id='outputIndexHelp']/p[2]" ) );
-    String p1Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='outputIndexHelp']/p" ) );
-    String p2Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='outputIndexHelp']/p[2]" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='outputIndexHelp']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='outputIndexHelp']/p" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='outputIndexHelp']/p[2]" ) );
+    String p1Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='outputIndexHelp']/p" ) );
+    String p2Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='outputIndexHelp']/p[2]" ) );
     assertEquals( "Output Index Id", p1Text );
     assertEquals( "This Id is used to select the desired set of Output Options for the current Data Access.", p2Text );
   }

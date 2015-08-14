@@ -9,11 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.cde.widgets.utils.WidgetUtils;
-import com.pentaho.ctools.suite.CToolsTestSuite;
 
 /**
  * NOTE - The test was created regarding issue CDF-318
@@ -29,13 +27,6 @@ public class CreateWidget {
   private String widgetName = "dummyCreateWidget";
   // The name for the parameter to be added
   private String paramName = "paramCreateWidget";
-
-  @BeforeClass
-  public void setUp() throws Exception {
-    this.driver = CToolsTestSuite.getDriver();
-    this.wait = CToolsTestSuite.getWait();
-    this.baseUrl = CToolsTestSuite.getBaseUrl();
-  }
 
   @Test
   public void testCreateWidget() throws Exception {

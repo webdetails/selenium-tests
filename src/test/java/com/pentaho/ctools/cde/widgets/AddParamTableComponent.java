@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.cde.widgets.utils.WidgetUtils;
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.ElementHelper;
 
 /**
@@ -21,7 +20,7 @@ import com.pentaho.ctools.utils.ElementHelper;
 public class AddParamTableComponent {
 
   //Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  private WebDriver driver = null;
   // The name for the widget to be created
   private final String widgetName = "dummyWidgetTableComponent";
   // The name for the parameter to be added
@@ -29,10 +28,10 @@ public class AddParamTableComponent {
   // The name of the parameter to be assigned to the param value
   private final String paramArgName = "argT2";
   // Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
+  private final Wait<WebDriver> wait = null;
   // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  private final String baseUrl = null;
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
 
   @Test

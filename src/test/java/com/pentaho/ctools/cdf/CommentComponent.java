@@ -36,15 +36,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hamcrest.CoreMatchers;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
@@ -59,9 +56,7 @@ import com.pentaho.ctools.utils.PageUrl;
 public class CommentComponent extends BaseTest {
   // Indicate if pass over the test case remove comment
   private Boolean tcRemoveComment = false;
-  // Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( CommentComponent.class );
@@ -78,10 +73,10 @@ public class CommentComponent extends BaseTest {
     // The URL for the CommentComponent under CDF samples
     // This sample is in: 
     // ::Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/CommentComponent
-    this.driver.get( PageUrl.COMMENT_COMPONENT );
+    driver.get( PageUrl.COMMENT_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -98,13 +93,13 @@ public class CommentComponent extends BaseTest {
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
-    assertEquals( "CommentsComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", driver.getTitle() );
+    assertEquals( "CommentsComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -121,18 +116,18 @@ public class CommentComponent extends BaseTest {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
     // Render again the sample
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'nCommentComponent'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nCommentComponent = this.driver.findElements( By.cssSelector( "commentComponent" ) ).size();
+    int nCommentComponent = driver.findElements( By.cssSelector( "commentComponent" ) ).size();
     assertEquals( 1, nCommentComponent );
   }
 
@@ -155,13 +150,13 @@ public class CommentComponent extends BaseTest {
     cleanAllComments();
 
     // ## Step 1
-    String noComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.comment" ) );
+    String noComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.comment" ) );
     assertEquals( "No Comments to show!", noComments );
 
-    String addComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.addComment" ) );
+    String addComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.addComment" ) );
     assertEquals( "Add Comment", addComments );
 
-    String refreshComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.navigateRefresh" ) );
+    String refreshComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.navigateRefresh" ) );
     assertEquals( "Refresh", refreshComments );
   }
 
@@ -193,107 +188,107 @@ public class CommentComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.ClickJS( this.driver, By.cssSelector( "div.addComment" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.addComment" ) );
     //After click in add, check if the button add, save and cancel are displayed
-    String noComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.comment" ) );
+    String noComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.comment" ) );
     assertEquals( "No Comments to show!", noComments );
-    String addComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.addComment" ) );
+    String addComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.addComment" ) );
     assertEquals( "Add Comment", addComments );
-    String cancelComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.cancelComment" ) );
+    String cancelComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.cancelComment" ) );
     assertEquals( "Cancel", cancelComments );
-    String saveComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.saveComment" ) );
+    String saveComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.saveComment" ) );
     assertEquals( "Save", saveComments );
     //Insert the text
-    this.elemHelper.FindElement( this.driver, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( smallText );
-    this.elemHelper.ClickJS( this.driver, By.cssSelector( "div.saveComment" ) );
+    this.elemHelper.FindElement( driver, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( smallText );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.saveComment" ) );
     Date timeAddedComment1 = new Date();
     //wait for the page rendered
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
     //Check if the comment was added
     String strCommentTimeAdded = "admin, " + sdf.format( timeAddedComment1 );
     // Need to remove the last digit of minutes to avoid failing. Because, we 
     // could catch something like 14:22 and the comment was added at 14:21:59
     strCommentTimeAdded = strCommentTimeAdded.substring( 0, strCommentTimeAdded.length() - 1 );
-    String commentDetails1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
+    String commentDetails1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
     assertThat( "Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString( strCommentTimeAdded ) );
-    String commentAdded1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
+    String commentAdded1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
     assertEquals( commentAdded1, smallText );
 
     /*
      * ## Step 2
      */
-    this.elemHelper.ClickJS( this.driver, By.cssSelector( "div.addComment" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.addComment" ) );
     //After click in add, check if the button add, save and cancel are displayed
-    addComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.addComment" ) );
+    addComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.addComment" ) );
     assertEquals( "Add Comment", addComments );
-    cancelComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.cancelComment" ) );
+    cancelComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.cancelComment" ) );
     assertEquals( "Cancel", cancelComments );
-    saveComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.saveComment" ) );
+    saveComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.saveComment" ) );
     assertEquals( "Save", saveComments );
     //Insert the text
-    this.elemHelper.FindElement( this.driver, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( longText );
-    this.elemHelper.ClickJS( this.driver, By.cssSelector( "div.saveComment" ) );
+    this.elemHelper.FindElement( driver, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( longText );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.saveComment" ) );
     Date timeAddedComment2 = new Date();
     //wait for the page rendered (and for the two added comments persist
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[1]" ) ) );
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[2]" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[1]" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[2]" ) ) );
     //Check if the comment was added
     //Comment added 2
     String strCommentTimeAdded2 = "admin, " + sdf.format( timeAddedComment2 );
     // Need to remove the last digit of minutes to avoid failing. Because, we 
     // could catch something like 14:22 and the comment was added at 14:21:59
     strCommentTimeAdded2 = strCommentTimeAdded2.substring( 0, strCommentTimeAdded2.length() - 1 );
-    String commentDetails2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
+    String commentDetails2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
     assertThat( "Comment added: " + commentDetails2, commentDetails2, CoreMatchers.containsString( strCommentTimeAdded2 ) );
-    String commentAdded2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
+    String commentAdded2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
     assertEquals( commentAdded2, longText );
     //Comment added 1
-    commentDetails1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div" ) );
+    commentDetails1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div" ) );
     assertThat( "Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString( strCommentTimeAdded ) );
-    commentAdded1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div[2]/div" ) );
+    commentAdded1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div[2]/div" ) );
     assertEquals( commentAdded1, smallText );
 
     /*
      * ## Step 3
      */
-    this.elemHelper.ClickJS( this.driver, By.cssSelector( "div.addComment" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.addComment" ) );
     //After click in add, check if the button add, save and cancel are displayed
-    addComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.addComment" ) );
+    addComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.addComment" ) );
     assertEquals( "Add Comment", addComments );
-    cancelComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.cancelComment" ) );
+    cancelComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.cancelComment" ) );
     assertEquals( "Cancel", cancelComments );
-    saveComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.saveComment" ) );
+    saveComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.saveComment" ) );
     assertEquals( "Save", saveComments );
     //Insert the text
-    this.elemHelper.FindElement( this.driver, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( specCharText );
-    this.elemHelper.ClickJS( this.driver, By.cssSelector( "div.saveComment" ) );
+    this.elemHelper.FindElement( driver, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( specCharText );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.saveComment" ) );
     Date timeAddedComment3 = new Date();
     //wait for the page rendered (and for the two added comments persist
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[1]" ) ) );
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[2]" ) ) );
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[3]" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[1]" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[2]" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[3]" ) ) );
     //Check if the comment was added
     //Comment added 3
     String strCommentTimeAdded3 = "admin, " + sdf.format( timeAddedComment3 );
     // Need to remove the last digit of minutes to avoid failing. Because, we 
     // could catch something like 14:22 and the comment was added at 14:21:59
     strCommentTimeAdded3 = strCommentTimeAdded3.substring( 0, strCommentTimeAdded3.length() - 1 );
-    String commentDetails3 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
+    String commentDetails3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
     assertThat( "Comment added: " + commentDetails3, commentDetails3, CoreMatchers.containsString( strCommentTimeAdded3 ) );
-    String commentAdded3 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
+    String commentAdded3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
     assertEquals( commentAdded3, specCharText );
     //Comment added 2
     strCommentTimeAdded2 = "" + sdf.format( timeAddedComment2 );
-    commentDetails2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div" ) );
+    commentDetails2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div" ) );
     assertThat( "Comment added: " + commentDetails2, commentDetails2, CoreMatchers.containsString( strCommentTimeAdded2 ) );
-    commentAdded2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div[2]/div" ) );
+    commentAdded2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div[2]/div" ) );
     assertEquals( commentAdded2, longText );
     //Comment added 1
-    commentDetails1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[3]/div" ) );
+    commentDetails1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[3]/div" ) );
     assertThat( "Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString( strCommentTimeAdded ) );
-    commentAdded1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[3]/div[2]/div" ) );
+    commentAdded1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[3]/div[2]/div" ) );
     assertEquals( commentAdded1, smallText );
   }
 
@@ -318,40 +313,40 @@ public class CommentComponent extends BaseTest {
     cleanAllComments();
 
     String commentText = "Some comment!";
-    String noComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.comment" ) );
+    String noComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.comment" ) );
     assertEquals( "No Comments to show!", noComments );
-    String addComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.addComment" ) );
+    String addComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.addComment" ) );
     assertEquals( "Add Comment", addComments );
 
     /*
      * ## Step 1
      */
-    this.elemHelper.ClickJS( this.driver, By.cssSelector( "div.addComment" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.addComment" ) );
     //Insert the text
-    this.elemHelper.FindElement( this.driver, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( commentText );
-    this.elemHelper.ClickJS( this.driver, By.cssSelector( "div.saveComment" ) );
+    this.elemHelper.FindElement( driver, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( commentText );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.saveComment" ) );
     //wait for the page rendered
-    this.wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
     //Check if the comment was added
-    String commentAdded = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
+    String commentAdded = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
     assertEquals( commentAdded, commentText );
 
     /*
      * ## Step 2
      */
-    Actions acts = new Actions( this.driver );
-    acts.moveToElement( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) ) );
+    Actions acts = new Actions( driver );
+    acts.moveToElement( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) ) );
     acts.build().perform();
     acts.perform();
-    acts.moveToElement( this.elemHelper.FindElement( this.driver, By.cssSelector( "div.archive" ) ) );
+    acts.moveToElement( this.elemHelper.FindElement( driver, By.cssSelector( "div.archive" ) ) );
     acts.click();
     acts.perform();
     //Check we don't have more comments
-    noComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.comment" ) );
+    noComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.comment" ) );
     assertEquals( "No Comments to show!", noComments );
-    addComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.addComment" ) );
+    addComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.addComment" ) );
     assertEquals( "Add Comment", addComments );
-    String refreshComments = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.navigateRefresh" ) );
+    String refreshComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.navigateRefresh" ) );
     assertEquals( "Refresh", refreshComments );
   }
 
@@ -362,24 +357,24 @@ public class CommentComponent extends BaseTest {
     this.log.info( "Remove comments" );
     ElementHelper nElemHelper = new ElementHelper();
 
-    this.driver.manage().timeouts().implicitlyWait( 2, TimeUnit.SECONDS );
+    driver.manage().timeouts().implicitlyWait( 2, TimeUnit.SECONDS );
 
-    List<WebElement> listEraseComments = this.driver.findElements( By.cssSelector( "div.archive" ) );
+    List<WebElement> listEraseComments = driver.findElements( By.cssSelector( "div.archive" ) );
     int nIteractions = listEraseComments.size();
     this.log.info( "Number elements to remove: " + nIteractions );
     if ( nIteractions > 0 ) {
       this.log.debug( "We have comments to remove" );
       for ( int i = 1; i <= nIteractions; i++ ) {
-        Actions acts = new Actions( this.driver );
-        acts.moveToElement( nElemHelper.FindElement( this.driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) ) );
+        Actions acts = new Actions( driver );
+        acts.moveToElement( nElemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) ) );
         acts.perform();
-        acts.moveToElement( nElemHelper.FindElement( this.driver, By.cssSelector( "div.archive" ) ) );
+        acts.moveToElement( nElemHelper.FindElement( driver, By.cssSelector( "div.archive" ) ) );
         acts.click();
         acts.perform();
         this.log.debug( "One comment removed." );
       }
     }
-    this.driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
   }
 
   @AfterTest

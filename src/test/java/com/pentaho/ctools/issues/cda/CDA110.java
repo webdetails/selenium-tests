@@ -31,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -50,9 +49,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDA110 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDA110.class );
@@ -78,37 +75,37 @@ public class CDA110 extends BaseTest {
      * ## Step 1
      */
     //Open sample CDA file
-    this.driver.get( this.baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-110/cda110.cda" );
+    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-110/cda110.cda" );
 
     //wait for invisibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait for buttons: button, Cache This AND Query URL
-    WebElement selector = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dataAccessSelector" ) );
+    WebElement selector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dataAccessSelector" ) );
     assertNotNull( selector );
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "fullOuter" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='button']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );
-    WebElement cacheButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='cachethis']" ) );
+    WebElement cacheButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( cacheButton );
-    WebElement urlButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='queryUrl']" ) );
+    WebElement urlButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( urlButton );
 
     /*
      * ## Step 2
      */
     //wait to render page
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Check text on table
-    String firstColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th" ) );
-    String secondColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) );
-    String thirdColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[3]" ) );
-    String fourthColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[4]" ) );
-    String fifthColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[5]" ) );
-    String sixthColumn = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/thead/tr/th[6]" ) );
+    String firstColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/thead/tr/th" ) );
+    String secondColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) );
+    String thirdColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/thead/tr/th[3]" ) );
+    String fourthColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/thead/tr/th[4]" ) );
+    String fifthColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/thead/tr/th[5]" ) );
+    String sixthColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/thead/tr/th[6]" ) );
     assertEquals( "YEAR_ID", firstColumn );
     assertEquals( "STATUS", secondColumn );
     assertEquals( "TOTALPRICE", thirdColumn );

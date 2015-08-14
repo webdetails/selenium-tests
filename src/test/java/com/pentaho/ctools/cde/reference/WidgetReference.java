@@ -33,7 +33,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -45,9 +44,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class WidgetReference extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( WidgetReference.class );
@@ -55,10 +52,10 @@ public class WidgetReference extends BaseTest {
   @BeforeTest
   public void setUpTestCase() {
     //Go to AddinReference
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Awidgets.wcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Awidgets.wcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -78,11 +75,11 @@ public class WidgetReference extends BaseTest {
     /*
      * ## Step 1
      */
-    String sampleTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='Title']/span" ) );
-    String firstParag = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='DescriptionBody']/p" ) );
-    String sampleSubTitle1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='DescriptionBody']/div" ) );
-    String sampleSubTitle2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='DescriptionBody']/div[2]" ) );
-    String lastParag = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='DescriptionBody']/p[7]" ) );
+    String sampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='Title']/span" ) );
+    String firstParag = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='DescriptionBody']/p" ) );
+    String sampleSubTitle1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='DescriptionBody']/div" ) );
+    String sampleSubTitle2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='DescriptionBody']/div[2]" ) );
+    String lastParag = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='DescriptionBody']/p[7]" ) );
 
     assertEquals( "Widget reference", sampleTitle );
     assertEquals( "Widgets are a way to turn complex component and layout setups into reusable components. Widgets are developed as if they were dashboards and used as if they were components in client dashboards.", firstParag );
@@ -112,34 +109,34 @@ public class WidgetReference extends BaseTest {
     /*
      * ## Step 1
      */
-    String widgetTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='SampleTitle']" ) );
-    String widgetDesc = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='SampleDescHtml']/p" ) );
+    String widgetTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='SampleTitle']" ) );
+    String widgetDesc = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='SampleDescHtml']/p" ) );
     assertEquals( "Sample Widget", widgetTitle );
     assertEquals( "This is a simple sample Widget. The widget contains only a single bar chart and a year parameter, and the parameter is linked to the documentation dashboard's year parameter, which is exposed in the pulldown.", widgetDesc );
 
     /*
      * ## Step 2
      */
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//select" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//select" ) ) );
     //>Select 2003
     select.selectByValue( "2003" );
     //wait for loading bar disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    WebElement rect = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement rect = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]" ) );
     this.log.info( rect.getAttribute( "height" ) );
     assertEquals( "185.54946181445413", rect.getAttribute( "height" ) ); //185.54946181445413
     //>Select 2004
     select.selectByValue( "2004" );
     //wait for loading bar disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    rect = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    rect = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]" ) );
     this.log.info( rect.getAttribute( "height" ) );
     assertEquals( "122.4067513368984", rect.getAttribute( "height" ) ); //122.4067513368984
     //>Select 2005
     select.selectByValue( "2005" );
     //wait for loading bar disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    rect = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    rect = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]" ) );
     this.log.info( rect.getAttribute( "height" ) );
     assertEquals( "133.12012705746463", rect.getAttribute( "height" ) ); //133.12012705746463
 
@@ -147,23 +144,23 @@ public class WidgetReference extends BaseTest {
      * ## Step 3
      */
     //Click in Classic Cars
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='text']" ) );
     //Click in Motorcycles
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text']" ) );
     //Click Planes
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']" ) );
     //Click in Ships
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][4]/*[local-name()='g'][2]/*[local-name()='text']" ) );
     //Click in Trains
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]/*[local-name()='g'][2]/*[local-name()='text']" ) );
     //Click in Vintage Cars
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='text']" ) );
     //Wait for the previous series disable
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]" ) );
     //Check chart
-    WebElement rect1 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][1]" ) );
-    WebElement rect2 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]" ) );
-    WebElement rect3 = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]" ) );
+    WebElement rect1 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][1]" ) );
+    WebElement rect2 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]" ) );
+    WebElement rect3 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][3]" ) );
     assertNotNull( rect1 );
     assertNotNull( rect2 );
     assertNotNull( rect3 );
@@ -178,10 +175,10 @@ public class WidgetReference extends BaseTest {
      * ## Step 4
      */
     //Check tooltip
-    Actions acts = new Actions( this.driver );
+    Actions acts = new Actions( driver );
     acts.moveToElement( rect1 );
     acts.perform();
-    String tooltipValue = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]" ) );
+    String tooltipValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]" ) );
     assertEquals( "Trucks and Buses, APAC: 488", tooltipValue );
 
   }

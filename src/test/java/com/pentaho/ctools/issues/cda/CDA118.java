@@ -39,7 +39,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
@@ -65,13 +64,9 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDA118 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Download directory
-  private final String downloadDir = CToolsTestSuite.getDownloadDir();
   // The path for the export file
-  private final String exportFilePath = this.downloadDir + "\\cda-export.xls";
-  //Access to wrapper for webdriver
+  private final String exportFilePath = downloadDir + "\\cda-export.xls";
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDA118.class );
@@ -103,32 +98,32 @@ public class CDA118 extends BaseTest {
      * ## Step 1
      */
     //Open Issue Sample
-    this.driver.get( this.baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-118/sql-jndi.cda" );
+    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-118/sql-jndi.cda" );
 
     //wait for invisibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait for data selector and select available option
-    WebElement dataAccess = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "dataAccessSelector" ) );
+    WebElement dataAccess = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dataAccessSelector" ) );
     assertNotNull( dataAccess );
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.id( "dataAccessSelector" ) ) );
+    Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Sql Query on SampleData - Jndi" );
 
     //wait to render page
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Assert error message
-    String errorMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "span.error-status" ) );
+    String errorMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "span.error-status" ) );
     assertEquals( "Error Executing Query", errorMessage );
 
     /*
      * ## Step 2
      */
-    WebElement salesParam = this.elemHelper.FindElement( this.driver, By.id( "sales" ) );
+    WebElement salesParam = this.elemHelper.FindElement( driver, By.id( "sales" ) );
     assertNotNull( salesParam );
     salesParam.clear();
     salesParam.sendKeys( "10000" );
-    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='button']" ) );
+    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );
     refreshButton.click();
 
@@ -136,28 +131,28 @@ public class CDA118 extends BaseTest {
      * ## Step 3
      */
     //wait to render page
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Assert elements on page
-    WebElement cacheButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='cachethis']" ) );
+    WebElement cacheButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( cacheButton );
-    WebElement queryButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//button[@id='queryUrl']" ) );
+    WebElement queryButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( queryButton );
 
     //Check the presented contains
-    WebElement newSalesParam = this.elemHelper.FindElement( this.driver, By.id( "sales" ) );
+    WebElement newSalesParam = this.elemHelper.FindElement( driver, By.id( "sales" ) );
     assertEquals( "10000", newSalesParam.getAttribute( "value" ) );
 
     //Check text on table
-    String columnOneRowOne = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
-    String columnTwoRowOne = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
+    String columnOneRowOne = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
+    String columnTwoRowOne = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
     assertEquals( "Cancelled", columnOneRowOne );
     assertEquals( "2004", columnTwoRowOne );
 
     /*
      * ## Step 4
      */
-    WebElement buttonExport = this.elemHelper.FindElement( this.driver, By.id( "export" ) );
+    WebElement buttonExport = this.elemHelper.FindElement( driver, By.id( "export" ) );
     assertNotNull( buttonExport );
     try {
       //Delete the existence if exist
@@ -168,7 +163,7 @@ public class CDA118 extends BaseTest {
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( this.downloadDir );
+      dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath );
@@ -199,10 +194,10 @@ public class CDA118 extends BaseTest {
      * ## Step 5
      */
     //Open Sample with outpuColumnName in the URL
-    this.driver.get( this.baseUrl + "plugin/cda/api/doQuery?paramsales=10000&paramorderDate=2004-03-01&path=%2Fpublic%2FIssues%2FCDA%2FCDA-118%2Fsql-jndi.cda&dataAccessId=1&outputIndexId=1&&outputColumnName=STATUS" );
+    driver.get( baseUrl + "plugin/cda/api/doQuery?paramsales=10000&paramorderDate=2004-03-01&path=%2Fpublic%2FIssues%2FCDA%2FCDA-118%2Fsql-jndi.cda&dataAccessId=1&outputIndexId=1&&outputColumnName=STATUS" );
 
     //Assert query result
-    String result = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body" ) );
+    String result = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( "{\"queryInfo\":{\"totalRows\":\"6\"},\"resultset\":[[\"Shipped\"],[\"Cancelled\"],[\"Shipped\"],[\"Disputed\"],[\"On Hold\"],[\"In Process\"]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"STATUS\"}]}", result );
   }
 

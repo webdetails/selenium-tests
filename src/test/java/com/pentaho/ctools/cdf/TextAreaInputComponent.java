@@ -28,13 +28,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -46,11 +43,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class TextAreaInputComponent extends BaseTest {
-  // Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( TextAreaInputComponent.class );
@@ -60,11 +53,11 @@ public class TextAreaInputComponent extends BaseTest {
    */
   @BeforeTest
   public void setUpTestCase() {
-    //Go to AddinReference
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextAreaInputComponent%3Atext_area_input_component.xcdf/generatedContent" );
+    //Go to TextAreaInputComponent
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextAreaInputComponent%3Atext_area_input_component.xcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -86,17 +79,17 @@ public class TextAreaInputComponent extends BaseTest {
      * ## Step 1
      */
     // Page title
-    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
+    assertEquals( "Community Dashboard Framework", driver.getTitle() );
     //Sample Title
-    String sampleTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//span[2]" ) );
+    String sampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//span[2]" ) );
     assertEquals( "TextAreaInputComponent", sampleTitle );
 
     /*
      * ## Step 2
      */
     //Sample Description
-    String sampleDescTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//h3" ) );
-    String sampleDescription = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//p" ) );
+    String sampleDescTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//h3" ) );
+    String sampleDescription = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//p" ) );
     assertEquals( "Description", sampleDescTitle );
     assertEquals( "Renders a multi-line text input box to collect user input. Change event is fired after user edits the content and removes the focus from the box. Pre/postChange functions can be used to make data validation.", sampleDescription );
 
@@ -104,9 +97,9 @@ public class TextAreaInputComponent extends BaseTest {
      * ## Step 3
      */
     //Options
-    String optionsTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//h3[2]" ) );
-    String options1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//dt[7]" ) );
-    String options2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//dt[8]" ) );
+    String optionsTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//h3[2]" ) );
+    String options1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//dt[7]" ) );
+    String options2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//dt[8]" ) );
     assertEquals( "Options", optionsTitle );
     assertEquals( "charWidth", options1 );
     assertEquals( "maxChars", options2 );
@@ -115,7 +108,7 @@ public class TextAreaInputComponent extends BaseTest {
      * ## Step 4
      */
     //Samples
-    String samplesTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//h3[3]" ) );
+    String samplesTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//h3[3]" ) );
     assertEquals( "Sample", samplesTitle );
   }
 
@@ -133,18 +126,18 @@ public class TextAreaInputComponent extends BaseTest {
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -164,13 +157,13 @@ public class TextAreaInputComponent extends BaseTest {
   public void tc3_InputSmallPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World!";
-    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).clear();
-    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( strInputString );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//h3[3]" ) ).click();
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( driver, By.xpath( "//h3[3]" ) ).click();
 
     // ## Step 2
-    this.wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = this.driver.switchTo().alert();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
@@ -198,13 +191,13 @@ public class TextAreaInputComponent extends BaseTest {
     strInputString += strInputString;
     strInputString += strInputString;
     strInputString += strInputString;
-    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).clear();
-    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( strInputString );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//h3[3]" ) ).click();
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( driver, By.xpath( "//h3[3]" ) ).click();
 
     // ## Step 2
-    this.wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = this.driver.switchTo().alert();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();
@@ -229,13 +222,13 @@ public class TextAreaInputComponent extends BaseTest {
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
-    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).clear();
-    this.elemHelper.FindElement( this.driver, By.id( "myInput" ) ).sendKeys( strInputString );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//h3[3]" ) ).click();
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( driver, By.xpath( "//h3[3]" ) ).click();
 
     // ## Step 2
-    this.wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = this.driver.switchTo().alert();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = driver.switchTo().alert();
     String confirmationMsg = alert.getText();
     String expectedCnfText = "you typed: " + strInputString;
     alert.accept();

@@ -35,7 +35,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -54,9 +53,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDF149 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDF149.class );
@@ -84,47 +81,47 @@ public class CDF149 extends BaseTest {
      * ## Step 1
      */
     //Open CDE Sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/wcdf.edit" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/wcdf.edit" );
 
     //Assert Panel selectors and select Components
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Datasources Panel']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Datasources Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Layout Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Layout Panel']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']/a" ) );
-    String text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ), "class" );
+    this.elemHelper.Click( driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']/a" ) );
+    String text = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Components Panel']" ), "class" );
     assertEquals( "panelButton panelButton-active", text );
 
     //Select Bar Chart
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-components']//tr[@id='CHARTS']/td/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-components']//tr[@id='CHARTS']/td/span" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]/td" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]/td" ) );
     assertNotNull( element );
     text = element.getText();
     assertEquals( "CCC Bar Chart", text );
     element.click();
-    text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]" ), "class" );
+    text = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='cdfdd-components-components']//tr[2]" ), "class" );
     assertEquals( "child-of-CHARTS initialized collapsed ui-state-active", text );
 
     /*
      * ## Step 2
      */
     //Click Advanced Properties
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Priority for component execution component. Lower values have higher priority']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Priority for component execution component. Lower values have higher priority']" ) );
     assertNotNull( element );
-    text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class" );
+    text = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class" );
     assertEquals( "advancedProperties propertiesSelected", text );
 
     //Find Values Normalized property and set it's value to True
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
     assertNotNull( element );
     element.click();
     Robot robot;
@@ -143,19 +140,19 @@ public class CDF149 extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
     assertEquals( "True", text );
 
     /*
      * ## Step 3
      */
     //Click Preview button
-    this.elemHelper.Click( this.driver, By.id( "previewButton" ) );
+    this.elemHelper.Click( driver, By.id( "previewButton" ) );
 
     //Wait for fancybox and assert chart is rendered and height legends are to 100
-    WebElement elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe" ) );
-    WebDriver frame = this.driver.switchTo().frame( elementFrame );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
+    WebDriver frame = driver.switchTo().frame( elementFrame );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.id( "chartprotovis" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][4]/*[local-name()='rect'][2]" ) );

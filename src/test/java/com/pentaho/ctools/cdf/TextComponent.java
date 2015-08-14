@@ -66,10 +66,10 @@ public class TextComponent extends BaseTest {
   public void tc0_OpenSamplePage_Display() {
     // The URL for the TextComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TextComponent
-    this.driver.get( PageUrl.TEXT_COMPONENT );
+    driver.get( PageUrl.TEXT_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
   }
 
   /**
@@ -85,9 +85,9 @@ public class TextComponent extends BaseTest {
   @Test
   public void tc1_PageContent_DisplayTitle() {
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    String title = this.elemHelper.WaitForTitle( this.driver, "Community Dashboard Framework" );
+    String title = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
     // Wait for visibility of 'VisualizationAPIComponent'
-    String sampleTitle = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "TextComponent" );
+    String sampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "TextComponent" );
 
     // Validate the sample that we are testing is the one
     assertEquals( "Community Dashboard Framework", title );
@@ -108,19 +108,19 @@ public class TextComponent extends BaseTest {
   public void tc2_ReloadSample_SampleReadyToUse() {
     // ## Step 1
     // Render again the sample
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
     this.dNow = Calendar.getInstance().getTime();
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     // Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -137,12 +137,12 @@ public class TextComponent extends BaseTest {
    */
   @Test
   public void tc3_DisplayedText_ContainsExpectedText() {
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "sampleObject" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sampleObject" ) );
 
     SimpleDateFormat sdf = new SimpleDateFormat( "EE MMM dd yyyy HH:mm", Locale.US );
     String strToday = sdf.format( this.dNow );
 
-    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "sampleObject" ) );
+    String text = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "sampleObject" ) );
     String expectedText = "My text generated in " + strToday;
 
     boolean displayTime = text.startsWith( expectedText );

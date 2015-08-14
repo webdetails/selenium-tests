@@ -30,7 +30,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -49,9 +48,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDE269 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE269.class );
@@ -75,14 +72,13 @@ public class CDE269 extends BaseTest {
     /*
      * ## Step 1
      */
-
     //Open URL
-    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/getHeaders?solution=&path=/public/plugin-samples/pentaho-cdf-dd&file=cde_sample1.wcdf&absolute=true&root=localhost:8080&scheme=https" );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/getHeaders?solution=&path=/public/plugin-samples/pentaho-cdf-dd&file=cde_sample1.wcdf&absolute=true&root=localhost:8080&scheme=https" );
 
     //Wait for Elements and assert them
-    WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//body/pre" ) );
+    WebElement element = this.elemHelper.FindElement( driver, By.xpath( "//body/pre" ) );
     assertNotNull( element );
-    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/pre" ) );
+    String text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/pre" ) );
     text = text.replaceAll( "v=\\S+\"", "\"" );
 
     assertEquals( "<title>CDE Sample Dashboard</title><!-- cdf-blueprint-script-includes --> <script language=\"javascript\" type=\"text/javascript\" src=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf/js/cdf-blueprint-script-includes.js?\"></script> <!-- cdf-blueprint-style-includes --> <link href=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf/css/cdf-blueprint-style-includes.css?\" rel=\"stylesheet\" type=\"text/css\" /> <!-- cdf-blueprint-ie8style-includes --><!--[if lte IE 8]> <link href=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf/js-legacy/lib/blueprint/ie.css?\" rel=\"stylesheet\" type=\"text/css\" /> <![endif]--> <!-- cdf-cdf-dashboard-script-includes --> <script language=\"javascript\" type=\"text/javascript\" src=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf/js-legacy/lib/sparkline/jquery.sparkline.js?\"></script> <!-- cdf-cdf-dashboard-style-includes --> <script language=\"javascript\" type=\"text/javascript\" src=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf-dd/js/CDF.js?\"></script> <link href=\"https://localhost:8080/pentaho/api/repos/pentaho-cdf-dd/css/CDF-CSS.css?\" rel=\"stylesheet\" type=\"text/css\" />", text );

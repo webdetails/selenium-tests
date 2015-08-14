@@ -51,7 +51,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class CDE413 extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE413.class );
@@ -83,17 +83,17 @@ public class CDE413 extends BaseTest {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    this.driver.get( PageUrl.CDE_DASHBOARD );
+    driver.get( PageUrl.CDE_DASHBOARD );
     //assert buttons
-    WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Save as Template']" ) );
-    WebElement buttonApplyTemplate = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
-    WebElement buttonAddResource = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
-    WebElement buttonAddBoostrap = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
-    WebElement buttonAddFreeForm = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) );
-    WebElement buttonAddRow = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//a[@title='Add Row']" ) );
-    WebElement buttonLayout = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
-    WebElement buttonComponents = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
-    WebElement buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement buttonApplyTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Apply Template']" ) );
+    WebElement buttonAddResource = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Add Resource']" ) );
+    WebElement buttonAddBoostrap = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    WebElement buttonAddFreeForm = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Add FreeForm']" ) );
+    WebElement buttonAddRow = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Add Row']" ) );
+    WebElement buttonLayout = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    WebElement buttonComponents = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    WebElement buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( buttonSaveTemplate );
     assertNotNull( buttonApplyTemplate );
     assertNotNull( buttonAddResource );
@@ -103,42 +103,42 @@ public class CDE413 extends BaseTest {
     assertNotNull( buttonLayout );
     assertNotNull( buttonComponents );
     assertNotNull( buttonDatasources );
-    this.elemHelper.Click( this.driver, By.cssSelector( "div.componentsPanelButton" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "div.componentsPanelButton" ) );
 
     /*
      * ## Step 2
      */
-    String otherText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    String otherText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
     assertEquals( "Others", otherText );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
-    WebElement optionTableComponent = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "a[title='table Component']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    WebElement optionTableComponent = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "a[title='table Component']" ) );
     assertNotNull( optionTableComponent );
-    this.elemHelper.Click( this.driver, By.cssSelector( "a[title='table Component']" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "a[title='table Component']" ) );
 
     /*
      * ## Step 3
      */
     //Click in the columnTypes - property
-    WebElement propertyColumnTypes = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
+    WebElement propertyColumnTypes = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
     assertNotNull( propertyColumnTypes );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
     //We need to wait for the animation finish for the display popup
-    this.elemHelper.WaitForAttributeValueEqualsTo( this.driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
+    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
 
     /*
      * ## Step 4
      */
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement arg0RemoveElement = this.elemHelper.FindElement( this.driver, By.id( "remove_button_0" ) );
-    WebElement arg0InputElement = this.elemHelper.FindElement( this.driver, By.id( "arg_0" ) );
-    WebElement arg0DragDropIconElement = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.StringArrayDragIcon" ) );
-    WebElement closeButton = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.popupclose" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
+    WebElement arg0RemoveElement = this.elemHelper.FindElement( driver, By.id( "remove_button_0" ) );
+    WebElement arg0InputElement = this.elemHelper.FindElement( driver, By.id( "arg_0" ) );
+    WebElement arg0DragDropIconElement = this.elemHelper.FindElement( driver, By.cssSelector( "div.StringArrayDragIcon" ) );
+    WebElement closeButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.popupclose" ) );
     assertNotNull( arg0RemoveElement );
     assertNotNull( arg0InputElement );
     assertNotNull( arg0DragDropIconElement );
     assertNotNull( closeButton );
     closeButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popupstates" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
 
     /*
      * ## Step 5
@@ -151,60 +151,60 @@ public class CDE413 extends BaseTest {
     String val2 = "c";
 
     //Open parameters popup
-    WebElement parameterButton = this.elemHelper.FindElement( this.driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
+    WebElement parameterButton = this.elemHelper.FindElement( driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
     assertNotNull( parameterButton );
     parameterButton.click();
-    WebElement parameterList = this.elemHelper.FindElement( this.driver, By.id( "StringList" ) );
+    WebElement parameterList = this.elemHelper.FindElement( driver, By.id( "StringList" ) );
     assertNotNull( parameterList );
 
     //Add 3 pairs arg/value
-    WebElement arg0Input = this.elemHelper.FindElement( this.driver, By.id( "arg_0" ) );
-    WebElement value0Input = this.elemHelper.FindElement( this.driver, By.id( "val_0" ) );
+    WebElement arg0Input = this.elemHelper.FindElement( driver, By.id( "arg_0" ) );
+    WebElement value0Input = this.elemHelper.FindElement( driver, By.id( "val_0" ) );
     assertNotNull( arg0Input );
     assertNotNull( value0Input );
     arg0Input.sendKeys( arg0 );
     value0Input.sendKeys( val0 );
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringListAddButton" ) );
-    WebElement arg1Input = this.elemHelper.FindElement( this.driver, By.id( "arg_1" ) );
-    WebElement value1Input = this.elemHelper.FindElement( this.driver, By.id( "val_1" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringListAddButton" ) );
+    WebElement arg1Input = this.elemHelper.FindElement( driver, By.id( "arg_1" ) );
+    WebElement value1Input = this.elemHelper.FindElement( driver, By.id( "val_1" ) );
     assertNotNull( arg1Input );
     assertNotNull( value1Input );
     arg1Input.sendKeys( arg1 );
     value1Input.sendKeys( val1 );
-    this.elemHelper.Click( this.driver, By.cssSelector( "input.StringListAddButton" ) );
-    WebElement arg2Input = this.elemHelper.FindElement( this.driver, By.id( "arg_2" ) );
-    WebElement value2Input = this.elemHelper.FindElement( this.driver, By.id( "val_2" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "input.StringListAddButton" ) );
+    WebElement arg2Input = this.elemHelper.FindElement( driver, By.id( "arg_2" ) );
+    WebElement value2Input = this.elemHelper.FindElement( driver, By.id( "val_2" ) );
     assertNotNull( arg2Input );
     assertNotNull( value2Input );
     arg2Input.sendKeys( arg2 );
     value2Input.sendKeys( val2 );
-    WebElement okButton = this.elemHelper.FindElement( this.driver, By.id( "popup_state0_buttonOk" ) );
+    WebElement okButton = this.elemHelper.FindElement( driver, By.id( "popup_state0_buttonOk" ) );
     assertNotNull( okButton );
     okButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popupstates" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
 
     /*
      * ## Step 6
      */
     //Assert parameter text is shown
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ), "[[\"0\",\"a\"],[\"1\",\"b\"] (...)" );
-    String parameterText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ), "[[\"0\",\"a\"],[\"1\",\"b\"] (...)" );
+    String parameterText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
     assertEquals( "[[\"0\",\"a\"],[\"1\",\"b\"] (...)", parameterText );
 
     //Open parameter popup
-    parameterButton = this.elemHelper.FindElement( this.driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
+    parameterButton = this.elemHelper.FindElement( driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
     assertNotNull( parameterButton );
     parameterButton.click();
-    parameterList = this.elemHelper.FindElement( this.driver, By.id( "StringList" ) );
+    parameterList = this.elemHelper.FindElement( driver, By.id( "StringList" ) );
     assertNotNull( parameterList );
 
     //Assert values are kept
-    String arg0Actual = this.elemHelper.GetAttribute( this.driver, By.id( "arg_0" ), "value" );
-    String val0Actual = this.elemHelper.GetAttribute( this.driver, By.id( "val_0" ), "value" );
-    String arg1Actual = this.elemHelper.GetAttribute( this.driver, By.id( "arg_1" ), "value" );
-    String val1Actual = this.elemHelper.GetAttribute( this.driver, By.id( "val_1" ), "value" );
-    String arg2Actual = this.elemHelper.GetAttribute( this.driver, By.id( "arg_2" ), "value" );
-    String val2Actual = this.elemHelper.GetAttribute( this.driver, By.id( "val_2" ), "value" );
+    String arg0Actual = this.elemHelper.GetAttribute( driver, By.id( "arg_0" ), "value" );
+    String val0Actual = this.elemHelper.GetAttribute( driver, By.id( "val_0" ), "value" );
+    String arg1Actual = this.elemHelper.GetAttribute( driver, By.id( "arg_1" ), "value" );
+    String val1Actual = this.elemHelper.GetAttribute( driver, By.id( "val_1" ), "value" );
+    String arg2Actual = this.elemHelper.GetAttribute( driver, By.id( "arg_2" ), "value" );
+    String val2Actual = this.elemHelper.GetAttribute( driver, By.id( "val_2" ), "value" );
     assertEquals( arg0, arg0Actual );
     assertEquals( arg1, arg1Actual );
     assertEquals( arg2, arg2Actual );

@@ -49,7 +49,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class CDE395 extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE395.class );
@@ -76,27 +76,27 @@ public class CDE395 extends BaseTest {
      * ## Step 1
      */
     //Create new CDE dashboard
-    this.driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons and click Settings
-    String newText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div/a" ) );
-    String saveText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
-    String saveasText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
-    String reloadText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
-    String settingsText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    String newText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='headerLinks']/div/a" ) );
+    String saveText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='headerLinks']/div[2]/a" ) );
+    String saveasText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='headerLinks']/div[3]/a" ) );
+    String reloadText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='headerLinks']/div[4]/a" ) );
+    String settingsText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
     assertEquals( "New", newText );
     assertEquals( "Save", saveText );
     assertEquals( "Save as...", saveasText );
     assertEquals( "Reload", reloadText );
     assertEquals( "Settings", settingsText );
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='headerLinks']/div[5]/a" ) );
 
     /*
      * ## Step 2
      */
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup" ) );
     assertNotNull( element );
-    WebElement obj1 = this.elemHelper.FindElement( this.driver, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
+    WebElement obj1 = this.elemHelper.FindElement( driver, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
     assertEquals( obj1.isSelected(), true );
   }
 }

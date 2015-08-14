@@ -21,12 +21,11 @@
  ******************************************************************************/
 package com.pentaho.ctools.utils;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 
 public class PageUrl {
 
   //The current base url to navigate between pages.
-  private static final String BASE_URL = CToolsTestSuite.getBaseUrl();
+  private static final String BASE_URL = BaseTest.baseUrl;
 
   /*
    * PUC

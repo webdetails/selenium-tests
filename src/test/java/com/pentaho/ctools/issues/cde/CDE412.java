@@ -51,7 +51,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class CDE412 extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE412.class );
@@ -83,85 +83,85 @@ public class CDE412 extends BaseTest {
      */
 
     //Go to New CDE Dashboard
-    this.driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Assert elements on page and go to Datasources Panel
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "previewButton" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "previewButton" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
 
     /*
      * ## Step 2
      */
     //Add MDX query element and click Parameters
-    this.elemHelper.ClickElementInvisible( this.driver, By.xpath( "//a[@title='denormalizedMdx over mondrianJdbc']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
+    this.elemHelper.ClickElementInvisible( driver, By.xpath( "//a[@title='denormalizedMdx over mondrianJdbc']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
-    String title = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
+    String title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
     assertEquals( "MDX Editor", title );
-    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
+    String text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
     assertEquals( "select {} ON COLUMNS,", text );
-    this.elemHelper.Click( this.driver, By.id( "cdfdd-wizard-button-ok" ) );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
+    this.elemHelper.Click( driver, By.id( "cdfdd-wizard-button-ok" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
 
     /*
      * ## Step 3
      */
     //Add MQL query element and click Parameters
-    this.elemHelper.ClickElementInvisible( this.driver, By.xpath( "//a[@title='mql over metadata']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/div/button" ) );
+    this.elemHelper.ClickElementInvisible( driver, By.xpath( "//a[@title='mql over metadata']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/div/button" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/div/button" ) );
-    title = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/div/button" ) );
+    title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
     assertEquals( "MQL Editor", title );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div[2]" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div[2]" ) );
     assertEquals( "<mql>", text );
-    this.elemHelper.Click( this.driver, By.id( "cdfdd-wizard-button-ok" ) );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
+    this.elemHelper.Click( driver, By.id( "cdfdd-wizard-button-ok" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
 
     /*
      * ## Step 4
      */
     //Add Scriptable query element and click Parameters
-    this.elemHelper.ClickElementInvisible( this.driver, By.xpath( "//a[@title='scriptable over scripting']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]/td[2]/div/button" ) );
+    this.elemHelper.ClickElementInvisible( driver, By.xpath( "//a[@title='scriptable over scripting']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]/td[2]/div/button" ) );
     assertNotNull( element );
 
     //CDE465
-    String codeLanguage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//td[@title='Language the script is written in']/../td[2]" ) );
+    String codeLanguage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//td[@title='Language the script is written in']/../td[2]" ) );
     assertEquals( "beanshell", codeLanguage );
-    String codeSample = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//td[@title='Query to be executed in the selected datasource']/../td[2]/div/code" ) );
+    String codeSample = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//td[@title='Query to be executed in the selected datasource']/../td[2]/div/code" ) );
     assertEquals( "import org.pentaho.r (...)", codeSample );
 
     //View default query
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]/td[2]/div/button" ) );
-    title = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]/td[2]/div/button" ) );
+    title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
     assertEquals( "Scriptable Editor", title );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
     assertEquals( "import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;", text );
-    this.elemHelper.Click( this.driver, By.id( "cdfdd-wizard-button-ok" ) );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
+    this.elemHelper.Click( driver, By.id( "cdfdd-wizard-button-ok" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
 
     /*
      * ## Step 5
      */
     //Add SQL query element and click Parameters
-    this.elemHelper.ClickElementInvisible( this.driver, By.xpath( "//a[@title='sql over sqlJdbc']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[7]/td[2]/div/button" ) );
+    this.elemHelper.ClickElementInvisible( driver, By.xpath( "//a[@title='sql over sqlJdbc']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[7]/td[2]/div/button" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[7]/td[2]/div/button" ) );
-    title = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) ).getText();
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[7]/td[2]/div/button" ) );
+    title = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) ).getText();
     assertEquals( "Sql Editor", title );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
     assertEquals( "", text );
-    this.elemHelper.Click( this.driver, By.id( "cdfdd-wizard-button-ok" ) );
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
+    this.elemHelper.Click( driver, By.id( "cdfdd-wizard-button-ok" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
   }
 }

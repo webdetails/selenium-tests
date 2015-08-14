@@ -53,7 +53,7 @@ public class MarketplaceFilters extends BaseTest {
   @Test
   public void tc1_MarketPlacePage_TypeFilter() {
     this.log.info( "tc1_MarketPlacePage_TypeFilter" );
-    MarketPlace market = new MarketPlace( this.driver );
+    MarketPlace market = new MarketPlace( driver );
     market.GoToMarketPlace();
 
     /*
@@ -179,7 +179,7 @@ public class MarketplaceFilters extends BaseTest {
    */
   @Test
   public void tc2_MarketPlacePage_DevStageFilter() {
-    MarketPlace market = new MarketPlace( this.driver );
+    MarketPlace market = new MarketPlace( driver );
 
     /*
      *  Step 1
@@ -277,7 +277,7 @@ public class MarketplaceFilters extends BaseTest {
    */
   @Test
   public void tc3_MarketPlacePage_SearchFilter() {
-    MarketPlace market = new MarketPlace( this.driver );
+    MarketPlace market = new MarketPlace( driver );
     /*
      *  Step 1
      */
@@ -364,7 +364,7 @@ public class MarketplaceFilters extends BaseTest {
    **/
   @Test
   public void tc4_MarketPlacePage_FiltersCombined() {
-    MarketPlace market = new MarketPlace( this.driver );
+    MarketPlace market = new MarketPlace( driver );
     /*
      *  Step 1
      */

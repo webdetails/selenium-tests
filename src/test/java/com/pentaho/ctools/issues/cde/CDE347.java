@@ -31,7 +31,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -50,9 +49,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDE347 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE347.class );
@@ -80,21 +77,21 @@ public class CDE347 extends BaseTest {
      * ## Step 1
      */
     //Go to Bullet Chart sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Wait for buttons: Layout. Components, Datasources AND Preview
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Datasources Panel']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@title='Datasources Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Components Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@title='Components Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Layout Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@title='Layout Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Preview your Dashboard']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@title='Preview your Dashboard']" ) );
     assertNotNull( element );
-    String c1r1Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr/td" ) );
-    String c2r1Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr/td[2]" ) );
-    String c1r4Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr[6]/td" ) );
-    String c2r4Text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tr[6]/td[2]" ) );
+    String c1r1Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tr/td" ) );
+    String c2r1Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tr/td[2]" ) );
+    String c1r4Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tr[6]/td" ) );
+    String c2r4Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tr[6]/td[2]" ) );
     assertEquals( "Resource", c1r1Text );
     assertEquals( "template", c2r1Text );
     assertEquals( "Row", c1r4Text );
@@ -103,13 +100,13 @@ public class CDE347 extends BaseTest {
     /*
      * ## Step 2
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@title='Preview your Dashboard']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@title='Preview your Dashboard']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.id( "previewButton" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "fancybox-content" ) );
+    this.elemHelper.Click( driver, By.id( "previewButton" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "fancybox-content" ) );
     assertNotNull( element );
-    WebElement elementFrame = this.elemHelper.FindElement( this.driver, By.xpath( "//iframe" ) );
-    WebDriver frame = this.driver.switchTo().frame( elementFrame );
+    WebElement elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
+    WebDriver frame = driver.switchTo().frame( elementFrame );
 
     /*
      * ## Step 3

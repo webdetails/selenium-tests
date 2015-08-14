@@ -51,7 +51,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class CDE430 extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE430.class );
@@ -80,41 +80,41 @@ public class CDE430 extends BaseTest {
      * ## Step 1 
      */
     //New CDE dashboard
-    this.driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Go to components Panel
-    WebElement componentsButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    WebElement componentsButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( componentsButton );
     componentsButton.click();
-    WebElement componentsPanel = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "panel-componentens_panel" ) );
+    WebElement componentsPanel = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "panel-componentens_panel" ) );
     assertNotNull( componentsPanel );
 
     /* 
      * ## Step 2 
      */
     //Add Export Popup Component
-    WebElement expandOthers = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-pallete']/div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    WebElement expandOthers = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-pallete']/div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
     assertNotNull( expandOthers );
     expandOthers.click();
-    WebElement exportPopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']//a[@title='Export Popup Component']" ) );
+    WebElement exportPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']//a[@title='Export Popup Component']" ) );
     assertNotNull( exportPopup );
     exportPopup.click();
 
     //Click Advanced Properties
-    WebElement advancedProperties = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[@class='advancedProperties propertiesUnSelected']" ) );
+    WebElement advancedProperties = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[@class='advancedProperties propertiesUnSelected']" ) );
     assertNotNull( advancedProperties );
     advancedProperties.click();
-    this.elemHelper.WaitForAttributeValueEqualsTo( this.driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class", "advancedProperties propertiesSelected" );
+    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class", "advancedProperties propertiesSelected" );
 
     /* 
      * ## Step 3 
      */
     //Assert list appears for Chart Types to Export
-    WebElement chartType = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//td[@title='Type for Chart Image to Export']/../td[2]" ) );
+    WebElement chartType = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Chart Image to Export']/../td[2]" ) );
     assertNotNull( chartType );
     chartType.click();
-    WebElement inputChart = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//td[@title='Type for Chart Image to Export']/../td[2]/form/input" ) );
+    WebElement inputChart = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Chart Image to Export']/../td[2]/form/input" ) );
     assertNotNull( inputChart );
     inputChart.clear();
 
@@ -126,7 +126,7 @@ public class CDE430 extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    WebElement listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li/a" ) );
+    WebElement listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/ul/li/a" ) );
     /*if ( listOption1 == null ) {
       this.log.info( "Element was null!!" );
       try {
@@ -138,23 +138,23 @@ public class CDE430 extends BaseTest {
       }
     }
 
-    listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li/a" ) );*/
+    listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/ul/li/a" ) );*/
     assertNotNull( listOption1 );
-    String textOption1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li/a" ) );
+    String textOption1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li/a" ) );
     assertEquals( "png", textOption1 );
-    WebElement listOption2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li[2]/a" ) );
+    WebElement listOption2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/ul/li[2]/a" ) );
     assertNotNull( listOption2 );
-    String textOption2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li[2]/a" ) );
+    String textOption2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li[2]/a" ) );
     assertEquals( "svg", textOption2 );
 
     /* 
      * ## Step 4 
      */
     //Assert list appears for Data Types to Export
-    WebElement dataType = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//td[@title='Type for Data File to Export']/../td[2]" ) );
+    WebElement dataType = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Data File to Export']/../td[2]" ) );
     assertNotNull( dataType );
     dataType.click();
-    WebElement inputData = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//td[@title='Type for Data File to Export']/../td[2]/form/input" ) );
+    WebElement inputData = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Data File to Export']/../td[2]/form/input" ) );
     assertNotNull( inputData );
     inputData.clear();
 
@@ -165,21 +165,21 @@ public class CDE430 extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li/a" ) );
+    listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/ul/li/a" ) );
     assertNotNull( listOption1 );
-    textOption1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li/a" ) );
+    textOption1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li/a" ) );
     assertEquals( "xls", textOption1 );
-    listOption2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li[2]/a" ) );
+    listOption2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/ul/li[2]/a" ) );
     assertNotNull( listOption2 );
-    textOption2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li[2]/a" ) );
+    textOption2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li[2]/a" ) );
     assertEquals( "csv", textOption2 );
-    WebElement listOption3 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li[3]/a" ) );
+    WebElement listOption3 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/ul/li[3]/a" ) );
     assertNotNull( listOption3 );
-    String textOption3 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li[3]/a" ) );
+    String textOption3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li[3]/a" ) );
     assertEquals( "xml", textOption3 );
-    WebElement listOption4 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/ul/li[4]/a" ) );
+    WebElement listOption4 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/ul/li[4]/a" ) );
     assertNotNull( listOption4 );
-    String textOption4 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li[4]/a" ) );
+    String textOption4 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li[4]/a" ) );
     assertEquals( "json", textOption4 );
   }
 }

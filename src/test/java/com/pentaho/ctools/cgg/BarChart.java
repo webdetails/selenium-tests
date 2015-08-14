@@ -42,7 +42,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class BarChart extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( BarChart.class );
@@ -64,9 +64,9 @@ public class BarChart extends BaseTest {
     /*
      * ## Step 1
      */
-    this.driver.get( PageUrl.BAR_CHART );
+    driver.get( PageUrl.BAR_CHART );
 
-    WebElement elementImage = this.elemHelper.FindElement( this.driver, By.cssSelector( "img" ) );
+    WebElement elementImage = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
     assertNotNull( elementImage );
     String attrWidth = elementImage.getAttribute( "width" );
     String attrHeight = elementImage.getAttribute( "height" );

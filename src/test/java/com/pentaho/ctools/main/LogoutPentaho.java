@@ -30,7 +30,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
+import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 
@@ -41,10 +41,10 @@ import com.pentaho.ctools.utils.PageUrl;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-public class LogoutPentaho extends CToolsTestSuite {
+public class LogoutPentaho extends BaseTest {
   // Instance of the driver (browser emulator)
   //
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( LogoutPentaho.class );
@@ -66,39 +66,39 @@ public class LogoutPentaho extends CToolsTestSuite {
     this.log.info( "tc1_Logout_SuccessLogOutReturnHomePage" );
 
     //## Step 1
-    DRIVER.get( PageUrl.PUC );
+    driver.get( PageUrl.PUC );
 
     //waiting pop-up to be visible
-    this.elemHelper.WaitForElementInvisibility( DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //## Step 2
     //wait for frame to load
-    String title = this.elemHelper.WaitForTitle( DRIVER, "Pentaho User Console" );
+    String title = this.elemHelper.WaitForTitle( driver, "Pentaho User Console" );
     assertEquals( "Pentaho User Console", title );
 
-    WebElement logoutMenu = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
-    WebElement homePerpective = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//iframe[@id='home.perspective']" ) );
+    WebElement logoutMenu = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    WebElement homePerpective = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//iframe[@id='home.perspective']" ) );
     assertNotNull( logoutMenu );
     assertNotNull( homePerpective );
 
     //User drop down available
-    String userName = this.elemHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
+    String userName = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
     assertEquals( "admin", userName );
-    this.elemHelper.ClickJS( DRIVER, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
 
     //Logout option available
-    WebElement logoutElement = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    WebElement logoutElement = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
     assertNotNull( logoutElement );
-    String logoutText = this.elemHelper.WaitForTextPresence( DRIVER, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ), "Log Out" );
+    String logoutText = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ), "Log Out" );
     assertEquals( "Log Out", logoutText );
-    this.elemHelper.ClickJS( DRIVER, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
 
     //## Step 3
     //Wait for form display (login form)
-    WebElement elForm = this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
+    WebElement elForm = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
     assertNotNull( elForm );
-    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "j_username" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.id( "j_password" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( DRIVER, By.cssSelector( "button.btn" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "button.btn" ) );
   }
 }

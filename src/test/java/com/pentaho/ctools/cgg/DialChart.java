@@ -41,7 +41,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class DialChart extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( DialChart.class );
@@ -62,18 +62,18 @@ public class DialChart extends BaseTest {
     /*
      * ## Step 1
      */
-    this.driver.get( PageUrl.DIAL_CHART );
+    driver.get( PageUrl.DIAL_CHART );
 
     //Check Pointer
-    WebElement elemPointer = this.elemHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='polygon'][@id='ponteiro' and @transform='rotate(62.99999999999999,300,275)']" ) );
-    WebElement basePointers = this.elemHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='path'][@id='base_ponteiro']" ) );
+    WebElement elemPointer = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='polygon'][@id='ponteiro' and @transform='rotate(62.99999999999999,300,275)']" ) );
+    WebElement basePointers = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='path'][@id='base_ponteiro']" ) );
     assertNotNull( elemPointer );
     assertNotNull( basePointers );
 
     //Check Colors
-    WebElement elemColor1 = this.elemHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][@fill='rgb(255,0,0)']" ) );
-    WebElement elemColor2 = this.elemHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][2][@fill='rgb(255,255,0)']" ) );
-    WebElement elemColor3 = this.elemHelper.FindElement( this.driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][3][@fill='rgb(0,128,0)']" ) );
+    WebElement elemColor1 = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][@fill='rgb(255,0,0)']" ) );
+    WebElement elemColor2 = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][2][@fill='rgb(255,255,0)']" ) );
+    WebElement elemColor3 = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][3][@fill='rgb(0,128,0)']" ) );
     assertNotNull( elemColor1 );
     assertNotNull( elemColor2 );
     assertNotNull( elemColor3 );

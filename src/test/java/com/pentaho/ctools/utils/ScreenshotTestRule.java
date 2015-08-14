@@ -40,10 +40,10 @@ import org.openqa.selenium.WebDriver;
  */
 public class ScreenshotTestRule implements MethodRule {
 
-  WebDriver driver;
+  static WebDriver driver;
 
   public ScreenshotTestRule( final WebDriver inDriver ) {
-    this.driver = inDriver;
+    driver = inDriver;
   }
 
   @Override
@@ -68,7 +68,7 @@ public class ScreenshotTestRule implements MethodRule {
           final String createDir = "reports-java/" + dir;
           new File( createDir ).mkdirs(); // Insure directory is there
           try (FileOutputStream out = new FileOutputStream( createDir + "screenshot-" + fileName + ".png" )) {
-            out.write( ( (TakesScreenshot) ScreenshotTestRule.this.driver ).getScreenshotAs( OutputType.BYTES ) );
+            out.write( ( (TakesScreenshot) ScreenshotTestRule.driver ).getScreenshotAs( OutputType.BYTES ) );
           } catch ( final FileNotFoundException fnfe ) {
             // File not found
           } catch ( final Exception e ) {

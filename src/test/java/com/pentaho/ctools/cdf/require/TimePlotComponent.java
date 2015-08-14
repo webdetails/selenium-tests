@@ -43,7 +43,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class TimePlotComponent extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( TimePlotComponent.class );
@@ -60,11 +60,11 @@ public class TimePlotComponent extends BaseTest {
 
     // The URL for the TimePlotComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/TimePlotComponent
-    this.driver.get( PageUrl.TIME_COMPONENT_REQUIRE );
+    driver.get( PageUrl.TIME_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -81,9 +81,9 @@ public class TimePlotComponent extends BaseTest {
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    String pageTitle = this.elemHelper.WaitForTitle( this.driver, "Community Dashboard Framework" );
+    String pageTitle = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
     // Wait for visibility of 'timePlotComponent'    
-    String sampleTitle = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "timePlotComponent" );
+    String sampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "timePlotComponent" );
 
     // Validate the sample that we are testing is the one
     assertEquals( pageTitle, "Community Dashboard Framework" );
@@ -108,35 +108,35 @@ public class TimePlotComponent extends BaseTest {
      * ## Step 1
      */
     // Render again the sample
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
 
     //It could be possible to raise an error of "Error processing component" and the workaround is refresh the page.
-    WebElement chart = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
+    WebElement chart = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
     if ( chart == null ) {
-      this.driver.navigate().refresh();
+      driver.navigate().refresh();
       this.log.debug( "Refreshing" );
-      this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-      this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-      chart = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
+      this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+      this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+      chart = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
       if ( chart == null ) {
-        this.driver.navigate().refresh();
+        driver.navigate().refresh();
         this.log.debug( "Refreshing" );
-        this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-        this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-        chart = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
+        this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+        this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+        chart = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
         assertNotNull( chart );
       }
     }
@@ -161,21 +161,21 @@ public class TimePlotComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    WebElement sampleObj = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='sampleObject']/div/span" ) );
+    WebElement sampleObj = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sampleObject']/div/span" ) );
     assertNotNull( sampleObj );
-    assertEquals( "Total order income", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span" ) ) );
-    assertEquals( "Total Price", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) ) );
+    assertEquals( "Total order income", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/span" ) ) );
+    assertEquals( "Total Price", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) ) );
 
-    WebElement element2004 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[contains(text(), '2004')]" ) );
+    WebElement element2004 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[contains(text(), '2004')]" ) );
     assertNotNull( element2004 );
 
     /*
      * ## Step 2
      */
-    this.elemHelper.MoveToElement( this.driver, By.cssSelector( "canvas.timeplot-canvas" ), 10, 10 );
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "canvas.timeplot-canvas" ), 10, 10 );
 
     String valueChartExpected = "54702";
-    String valueChart = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='timeplot-div timeplot-valueflag']" ) );
+    String valueChart = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='timeplot-div timeplot-valueflag']" ) );
     assertEquals( valueChartExpected, valueChart );
     assertTrue( valueChart.startsWith( valueChartExpected ) );
   }

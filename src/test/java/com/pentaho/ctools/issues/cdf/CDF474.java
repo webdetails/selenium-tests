@@ -30,7 +30,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -49,9 +48,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDF474 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDF474.class );
@@ -76,21 +73,21 @@ public class CDF474 extends BaseTest {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    this.driver.get( this.baseUrl + "api/repos/:public:Issues:CDF:CDF-474:CDF-474.wcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/:public:Issues:CDF:CDF-474:CDF-474.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='col1']/div/a/span[2]/b" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='col1']/div/a/span[2]/b" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "select2-drop" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "select2-drop" ) );
     assertNotNull( element );
     String text = element.getAttribute( "style" );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='col2']/div/a/span[2]/b" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='col2']/div/a/span[2]/b" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "select2-drop" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "select2-drop" ) );
     assertNotNull( element );
     String text1 = element.getAttribute( "style" );
     assertTrue( text != text1 );

@@ -41,7 +41,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class ButtonComponent extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( ButtonComponent.class );
@@ -58,11 +58,11 @@ public class ButtonComponent extends BaseTest {
 
     // The URL for the ButtonComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/ButtonComponent
-    this.driver.get( PageUrl.BUTTON_COMPONENT_REQUIRE );
+    driver.get( PageUrl.BUTTON_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -79,9 +79,9 @@ public class ButtonComponent extends BaseTest {
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    String pageTitle = this.elemHelper.WaitForTitle( this.driver, "Community Dashboard Framework" );
+    String pageTitle = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
     // Wait for visibility of 'VisualizationAPIComponent'
-    String sampleTitle = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "ButtonComponent" );
+    String sampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "ButtonComponent" );
 
     // Validate the sample that we are testing is the one
     assertEquals( pageTitle, "Community Dashboard Framework" );
@@ -106,15 +106,15 @@ public class ButtonComponent extends BaseTest {
      * ## Step 1
      */
     // Render again the sample
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
   }
 
   /**
@@ -136,13 +136,13 @@ public class ButtonComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    String buttonText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//button" ) );
+    String buttonText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button" ) );
     assertEquals( "A button", buttonText );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//button" ) ).click();
+    this.elemHelper.FindElement( driver, By.xpath( "//button" ) ).click();
 
     // ## Step 2
-    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
-    String buttonTextAfterClick = this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//button" ), "Yes, a clickable button" );
+    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    String buttonTextAfterClick = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//button" ), "Yes, a clickable button" );
 
     assertEquals( "Button was clicked", confirmationMsg );
     assertEquals( "Yes, a clickable button", buttonTextAfterClick );

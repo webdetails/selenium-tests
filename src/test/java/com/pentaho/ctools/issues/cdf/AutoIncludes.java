@@ -30,7 +30,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -49,9 +48,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class AutoIncludes extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( AutoIncludes.class );
@@ -77,17 +74,17 @@ public class AutoIncludes extends BaseTest {
      * ## Step 1
      */
     //Open Created sample and click button
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-595%3ACDF-595.wcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-595%3ACDF-595.wcdf/generatedContent" );
 
     //Click Query button
-    WebElement queryButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='table']/button" ) );
+    WebElement queryButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='table']/button" ) );
     assertNotNull( queryButton );
     queryButton.click();
 
     /*
      * ## Step 2
      */
-    String alertMessage = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
+    String alertMessage = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
     assertEquals( "Shipped,2004,4114929.960000002,4.114929960000002,Shipped,2005,1513074.4600000002,1.5130744600000001", alertMessage );
   }
 }

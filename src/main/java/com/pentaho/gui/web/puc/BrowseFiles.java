@@ -35,15 +35,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PUCSettings;
+import com.pentaho.ctools.utils.PageUrl;
 
 public class BrowseFiles {
 
   // The driver
   private WebDriver DRIVER;
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private ElementHelper elemHelper = new ElementHelper();
   // Logging instance
   private static Logger LOG = LogManager.getLogger( BrowseFiles.class );
@@ -61,7 +61,7 @@ public class BrowseFiles {
   private void GoToBrowseFiles() {
     LOG.info( "Enter: GoToBrowseFiles" );
 
-    this.DRIVER.get( CToolsTestSuite.getBaseUrl() );
+    this.DRIVER.get( PageUrl.PUC );
     this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     this.DRIVER.switchTo().frame( "home.perspective" );
@@ -100,7 +100,7 @@ public class BrowseFiles {
    *
    * It will first check if the Trash is empty and if not, proceed to emptying it.
    *
-   * This method must be called from the Browse Files page with the this.driver set to the browser perspective
+   * This method must be called from the Browse Files page with the driver set to the browser perspective
    *
    */
   public void EmptyTrash() {
@@ -265,7 +265,7 @@ public class BrowseFiles {
   /**
    * This method will check the Show Hidden Files option on the View menu
    *
-   * It has to be called from the Browse Files page and will end with the this.driver set to the browser.perspective
+   * It has to be called from the Browse Files page and will end with the driver set to the browser.perspective
    *
    */
   public void CheckShowHiddenFiles() {
@@ -316,7 +316,7 @@ public class BrowseFiles {
   /**
    * This method will uncheck the Show Hidden Files option on the View menu
    *
-   * It has to be called from the Browse Files page and will end with the this.driver set to the browser.perspective
+   * It has to be called from the Browse Files page and will end with the driver set to the browser.perspective
    *
    */
   public void UncheckShowHiddenFiles() {

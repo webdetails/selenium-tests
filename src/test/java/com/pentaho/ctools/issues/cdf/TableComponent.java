@@ -32,7 +32,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -55,9 +54,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class TableComponent extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( TableComponent.class );
@@ -88,100 +85,100 @@ public class TableComponent extends BaseTest {
      * ## Step 1
      */
     //Open Created sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ATableExpandTest%3AtableExpandTest.wcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ATableExpandTest%3AtableExpandTest.wcdf/generatedContent" );
 
     //Wait for loading to finish
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //search for "Mot" and assert shown result
-    WebElement searchInput = this.elemHelper.FindElement( this.driver, By.xpath( "//input[@type='search']" ) );
+    WebElement searchInput = this.elemHelper.FindElement( driver, By.xpath( "//input[@type='search']" ) );
     assertNotNull( searchInput );
     searchInput.sendKeys( "class" );
-    WebElement firstResult = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
+    WebElement firstResult = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
     assertNotNull( firstResult );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ), "Classic Cars" );
-    String resultClass = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ), "Classic Cars" );
+    String resultClass = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
     assertEquals( "Classic Cars", resultClass );
-    assertTrue( this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) ) );
 
     //Clear search and assert all results shown
-    searchInput = this.elemHelper.FindElement( this.driver, By.xpath( "//input[@type='search']" ) );
+    searchInput = this.elemHelper.FindElement( driver, By.xpath( "//input[@type='search']" ) );
     assertNotNull( searchInput );
     searchInput.sendKeys( Keys.BACK_SPACE );
     searchInput.sendKeys( Keys.BACK_SPACE );
     searchInput.sendKeys( Keys.BACK_SPACE );
     searchInput.sendKeys( Keys.BACK_SPACE );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ), "Motorcycles" );
-    String resultOne = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ), "Motorcycles" );
+    String resultOne = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
     assertEquals( "Motorcycles", resultOne );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ), "Classic Cars" );
-    String resultTwo = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ), "Classic Cars" );
+    String resultTwo = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) );
     assertEquals( "Classic Cars", resultTwo );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[3]/td" ), "Trucks and Buses" );
-    String resultThree = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[3]/td" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[3]/td" ), "Trucks and Buses" );
+    String resultThree = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[3]/td" ) );
     assertEquals( "Trucks and Buses", resultThree );
 
     /*
      * ## Step 2
      */
     //Click first row and assert expansion was successful
-    WebElement firstRow = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
+    WebElement firstRow = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
     assertNotNull( firstRow );
     firstRow.click();
-    WebElement subTable = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr/td" ) );
+    WebElement subTable = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr/td" ) );
     assertNotNull( subTable );
-    String tableTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblSubTable']/thead/tr/th/div" ) );
+    String tableTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblSubTable']/thead/tr/th/div" ) );
     assertEquals( "PRODUCTNAME", tableTitle );
-    String thirdRow = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[3]/td" ) );
+    String thirdRow = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[3]/td" ) );
     assertEquals( "2003 Harley-Davidson Eagle Drag Bike", thirdRow );
-    String ninthRow = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[9]/td" ) );
+    String ninthRow = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[9]/td" ) );
     assertEquals( "1982 Ducati 900 Monster", ninthRow );
 
     /*
      * ## Step 2
      */
     //Click Refresh button
-    WebElement refreshButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='btnRefresh']/button" ) );
+    WebElement refreshButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='btnRefresh']/button" ) );
     assertNotNull( refreshButton );
     refreshButton.click();
 
     //Wait for loading to finish
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Click first row and assert expansion was successful
-    firstRow = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
+    firstRow = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
     assertNotNull( firstRow );
     firstRow.click();
-    subTable = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr/td" ) );
+    subTable = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr/td" ) );
     assertNotNull( subTable );
-    tableTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblSubTable']/thead/tr/th/div" ) );
+    tableTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblSubTable']/thead/tr/th/div" ) );
     assertEquals( "PRODUCTNAME", tableTitle );
-    thirdRow = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[3]/td" ) );
+    thirdRow = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[3]/td" ) );
     assertEquals( "2003 Harley-Davidson Eagle Drag Bike", thirdRow );
-    ninthRow = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[9]/td" ) );
+    ninthRow = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[9]/td" ) );
     assertEquals( "1982 Ducati 900 Monster", ninthRow );
 
     /*
      * ## Step 3
      */
     //Click Next page button
-    WebElement nextPage = this.elemHelper.FindElement( this.driver, By.id( "tblMainTable_next" ) );
+    WebElement nextPage = this.elemHelper.FindElement( driver, By.id( "tblMainTable_next" ) );
     assertNotNull( nextPage );
     nextPage.click();
 
     //Click second row and assert expansion was successful
-    WebElement secondRow = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) );
+    WebElement secondRow = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) );
     assertNotNull( secondRow );
     String secondProduct = secondRow.getText();
     assertEquals( "Planes", secondProduct );
     secondRow.click();
-    subTable = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr/td" ) );
+    subTable = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr/td" ) );
     assertNotNull( subTable );
-    tableTitle = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblSubTable']/thead/tr/th/div" ) );
+    tableTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblSubTable']/thead/tr/th/div" ) );
     assertEquals( "PRODUCTNAME", tableTitle );
-    thirdRow = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[3]/td" ) );
+    thirdRow = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[3]/td" ) );
     assertEquals( "1928 British Royal Navy Airplane", thirdRow );
-    ninthRow = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[9]/td" ) );
+    ninthRow = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr[9]/td" ) );
     assertEquals( "ATA: B757-300", ninthRow );
   }
 }

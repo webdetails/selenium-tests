@@ -20,8 +20,6 @@ import com.pentaho.ctools.utils.HttpUtils;
 public class MarketPlace {
 
   private WebDriver driver;
-  //private String        baseURL;
-  //Access to wrapper for webdriver
   private ElementHelper elemHelper = new ElementHelper();
   private static Logger log = LogManager.getLogger( MarketPlace.class );
 

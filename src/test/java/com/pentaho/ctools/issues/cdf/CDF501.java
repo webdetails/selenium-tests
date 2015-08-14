@@ -27,7 +27,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -46,9 +45,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDF501 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDF501.class );
@@ -77,18 +74,18 @@ public class CDF501 extends BaseTest {
      * ## Step 1
      */
     //Open Created sample with params on the URL
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-501%3Aurl_param.wcdf/generatedContent?paramtype=success&type=awesome" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-501%3Aurl_param.wcdf/generatedContent?paramtype=success&type=awesome" );
 
     /*
      * ## Step 2
      */
-    String alertMessage = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
+    String alertMessage = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
     assertEquals( "Direct Access: success", alertMessage );
 
     /*
      * ## Step 3
      */
-    String alertMessage1 = this.elemHelper.WaitForAlertReturnConfirmationMsg( this.driver );
+    String alertMessage1 = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
     assertEquals( "Function: awesome", alertMessage1 );
   }
 }

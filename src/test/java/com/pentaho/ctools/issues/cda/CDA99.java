@@ -39,7 +39,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -58,9 +57,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDA99 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webthis.driver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDA99.class );
@@ -89,63 +86,63 @@ public class CDA99 extends BaseTest {
      * ## Step 1
      */
     // Go to Olap4j Sample
-    this.driver.get( this.baseUrl + "plugin/cda/api/editFile?path=/public/plugin-samples/cda/cdafiles/olap4j.cda" );
+    driver.get( baseUrl + "plugin/cda/api/editFile?path=/public/plugin-samples/cda/cdafiles/olap4j.cda" );
 
     // Wait for buttons: preview, reload, save AND file
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "preview" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "preview" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "reload" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "reload" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "save" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "save" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "staticfile" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "staticfile" ) );
     assertNotNull( element );
-    String buttonPreviewText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "preview" ) );
-    String buttonReloadText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "reload" ) );
-    String buttonSaveText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "save" ) );
-    String buttonStaticFileText = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "staticfile" ) );
+    String buttonPreviewText = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "preview" ) );
+    String buttonReloadText = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "reload" ) );
+    String buttonSaveText = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "save" ) );
+    String buttonStaticFileText = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "staticfile" ) );
     assertEquals( "Preview", buttonPreviewText );
     assertEquals( "Reload", buttonReloadText );
     assertEquals( "Save", buttonSaveText );
     assertEquals( "/public/plugin-samples/cda/cdafiles/olap4j.cda", buttonStaticFileText );
 
     // Check iframe
-    this.driver.switchTo().frame( "externalEditor" );
-    this.elemHelper.WaitForElementVisibility( this.driver, By.xpath( "//pre/div[2]/div/div[3]/div[1]" ) );
-    this.driver.switchTo().defaultContent();
+    driver.switchTo().frame( "externalEditor" );
+    this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//pre/div[2]/div/div[3]/div[1]" ) );
+    driver.switchTo().defaultContent();
 
     /*
      * ## Step 2
      */
-    String code = ( (JavascriptExecutor) this.driver ).executeScript( "return getEditorWindow().editor.getContents();" ).toString();
+    String code = ( (JavascriptExecutor) driver ).executeScript( "return getEditorWindow().editor.getContents();" ).toString();
     code = code.replace( "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j\" access=\"public\">", "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j.defaultolap4j\" access=\"public\">" );
-    ( (JavascriptExecutor) this.driver ).executeScript( "getEditorWindow().editor.setContents(arguments[0]);", code );
+    ( (JavascriptExecutor) driver ).executeScript( "getEditorWindow().editor.setContents(arguments[0]);", code );
 
     // Save file
-    this.elemHelper.ClickJS( this.driver, By.id( "save" ) );
+    this.elemHelper.ClickJS( driver, By.id( "save" ) );
     // Check for the message name
-    String fileSaved = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "notifications" ) ).getText();
+    String fileSaved = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "notifications" ) ).getText();
     assertEquals( "/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved );
 
     /*
      * ## Step 3
      */
     // Perform the preview of this CDA query
-    this.elemHelper.ClickJS( this.driver, By.id( "preview" ) );
+    this.elemHelper.ClickJS( driver, By.id( "preview" ) );
 
     WebDriver previewWindow = null;
-    String currentWindowHandle = this.driver.getWindowHandle();
-    Set<String> listWindows = this.driver.getWindowHandles();
+    String currentWindowHandle = driver.getWindowHandle();
+    Set<String> listWindows = driver.getWindowHandles();
 
     // wait for popup render
-    this.elemHelper.WaitForNewWindow( this.driver );
-    listWindows = this.driver.getWindowHandles();
+    this.elemHelper.WaitForNewWindow( driver );
+    listWindows = driver.getWindowHandles();
     // Get the windowHandler of the new open window
     Iterator<String> iterWindows = listWindows.iterator();
     while ( iterWindows.hasNext() ) {
       String windowHandle = iterWindows.next();
       if ( windowHandle.equals( currentWindowHandle ) == false ) {
-        previewWindow = this.driver.switchTo().window( windowHandle );
+        previewWindow = driver.switchTo().window( windowHandle );
         break;
       }
     }
@@ -165,39 +162,39 @@ public class CDA99 extends BaseTest {
 
     // Need guarantee we close everything
     previewWindow.close();
-    this.driver.switchTo().window( currentWindowHandle );
+    driver.switchTo().window( currentWindowHandle );
 
     /*
      * ## Step 4
      */
-    String code2 = ( (JavascriptExecutor) this.driver ).executeScript( "return getEditorWindow().editor.getContents();" ).toString();
+    String code2 = ( (JavascriptExecutor) driver ).executeScript( "return getEditorWindow().editor.getContents();" ).toString();
     code2 = code2.replace( "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j.defaultolap4j\" access=\"public\">", "<DataAccess id=\"1\" connection=\"1\" type=\"olap4j\" access=\"public\">" );
-    ( (JavascriptExecutor) this.driver ).executeScript( "getEditorWindow().editor.setContents(arguments[0]);", code2 );
+    ( (JavascriptExecutor) driver ).executeScript( "getEditorWindow().editor.setContents(arguments[0]);", code2 );
 
     // Save file
-    this.elemHelper.ClickJS( this.driver, By.id( "save" ) );
+    this.elemHelper.ClickJS( driver, By.id( "save" ) );
     // Check for the message name
-    String fileSaved2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "notifications" ) );
+    String fileSaved2 = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "notifications" ) );
     assertEquals( "/public/plugin-samples/cda/cdafiles/olap4j.cda saved ok.", fileSaved2 );
 
     /*
      * ## Step 5
      */
     // Perform the preview of this CDA query
-    this.elemHelper.ClickJS( this.driver, By.id( "preview" ) );
+    this.elemHelper.ClickJS( driver, By.id( "preview" ) );
 
     previewWindow = null;
     listWindows = null;
     // wait for popup render
-    this.elemHelper.WaitForNewWindow( this.driver );
-    listWindows = this.driver.getWindowHandles();
+    this.elemHelper.WaitForNewWindow( driver );
+    listWindows = driver.getWindowHandles();
     // Get the windowHandler of the new open window
     iterWindows = null;
     iterWindows = listWindows.iterator();
     while ( iterWindows.hasNext() ) {
       String windowHandle = iterWindows.next();
       if ( windowHandle.equals( currentWindowHandle ) == false ) {
-        previewWindow = this.driver.switchTo().window( windowHandle );
+        previewWindow = driver.switchTo().window( windowHandle );
         break;
       }
     }
@@ -224,7 +221,7 @@ public class CDA99 extends BaseTest {
 
     // Need guarantee we close everything
     previewWindow.close();
-    this.driver.switchTo().window( currentWindowHandle );
+    driver.switchTo().window( currentWindowHandle );
 
     assertFalse( selectNotExist );
   }

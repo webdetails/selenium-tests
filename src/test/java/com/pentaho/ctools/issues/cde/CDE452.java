@@ -31,9 +31,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 
 /**
  * The script is testing the issue:
@@ -52,9 +52,7 @@ import com.pentaho.ctools.utils.ElementHelper;
 public class CDE452 extends BaseTest {
   //Failing Variable  1- Logged in as Admin; 2- Logged in as other user; 3- Logged out
   private int failure = 1;
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE452.class );
@@ -83,41 +81,41 @@ public class CDE452 extends BaseTest {
      * ## Step 1
      */
     //Open system dashboard in edit mode and assert elements on page
-    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "previewButton" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "previewButton" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( element );
 
     //Open repository dashboard in edit mode and assert elements on page
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "previewButton" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "previewButton" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( element );
 
     /*
      * ## Step 2
      */
     //Log out
-    this.driver.get( this.baseUrl + "Home" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
+    driver.get( PageUrl.PUC );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
     assertNotNull( element );
-    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    String text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
     assertEquals( "Log Out", text );
     element.click();
 
@@ -125,63 +123,63 @@ public class CDE452 extends BaseTest {
     this.failure = 3;
 
     //Wait for form display
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
     assertEquals( "User Console", text );
 
     //Wait for all all elements in the form to be visible
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "button.btn" ) );
     assertNotNull( element );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).clear();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).sendKeys( "suzy" );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).clear();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).sendKeys( "password" );
-    this.elemHelper.Click( this.driver, By.cssSelector( "button.btn" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).clear();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).sendKeys( "suzy" );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).clear();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).sendKeys( "password" );
+    this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
     //Logged in  as other user
     this.failure = 2;
 
     //wait for visibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "pucUserDropDown" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "pucUserDropDown" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "home.perspective" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "home.perspective" ) );
     assertNotNull( element );
 
     //Logged as ADMIN user
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "suzy" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "suzy" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
     assertEquals( "suzy", text );
 
     //Open system dashboard in edit mode and assert elements on page
-    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body" ) );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( "Access Denied to file /system/CDE404/dashboards/i18nTest.wcdf", text );
 
     //Open repository dashboard in edit mode and assert elements on page
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body" ) );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( "Access Denied to file /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf", text );
 
     /*
      * ## Step 3
      */
     //Log out
-    this.driver.get( this.baseUrl + "Home" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
+    driver.get( PageUrl.PUC );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
     assertNotNull( element );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
     assertEquals( "Log Out", text );
     element.click();
 
@@ -189,63 +187,63 @@ public class CDE452 extends BaseTest {
     this.failure = 3;
 
     //Wait for form display
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
     assertEquals( "User Console", text );
 
     //Wait for all all elements in the form to be visible
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "button.btn" ) );
     assertNotNull( element );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).clear();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).sendKeys( "pat" );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).clear();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).sendKeys( "password" );
-    this.elemHelper.Click( this.driver, By.cssSelector( "button.btn" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).clear();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).sendKeys( "pat" );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).clear();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).sendKeys( "password" );
+    this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
     //Logged in  as other user
     this.failure = 2;
 
     //wait for visibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "pucUserDropDown" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "pucUserDropDown" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "home.perspective" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "home.perspective" ) );
     assertNotNull( element );
 
     //Logged as ADMIN user
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "pat" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "pat" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
     assertEquals( "pat", text );
 
     //Open system dashboard in edit mode and assert elements on page
-    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body" ) );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( "Access Denied to file /system/CDE404/dashboards/i18nTest.wcdf", text );
 
     //Open repository dashboard in edit mode and assert elements on page
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body" ) );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( "Access Denied to file /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf", text );
 
     /*
      * ## Step 4
      */
     //Log out
-    this.driver.get( this.baseUrl + "Home" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
+    driver.get( PageUrl.PUC );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
     assertNotNull( element );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
     assertEquals( "Log Out", text );
     element.click();
 
@@ -253,60 +251,60 @@ public class CDE452 extends BaseTest {
     this.failure = 3;
 
     //Wait for form display
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
     assertEquals( "User Console", text );
 
     //Wait for all all elements in the form to be visible
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "button.btn" ) );
     assertNotNull( element );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).clear();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).sendKeys( "tiffany" );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).clear();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).sendKeys( "password" );
-    this.elemHelper.Click( this.driver, By.cssSelector( "button.btn" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).clear();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).sendKeys( "tiffany" );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).clear();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).sendKeys( "password" );
+    this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
     //Logged in  as other user
     this.failure = 2;
 
     //wait for visibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "pucUserDropDown" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "pucUserDropDown" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "home.perspective" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "home.perspective" ) );
     assertNotNull( element );
 
     //Logged as ADMIN user
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "tiffany" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "tiffany" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
     assertEquals( "tiffany", text );
 
     //Open system dashboard in edit mode and assert elements on page
-    this.driver.get( this.baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body" ) );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( "Access Denied to file /system/CDE404/dashboards/i18nTest.wcdf", text );
 
     //Open repository dashboard in edit mode and assert elements on page
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body" ) );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( "Access Denied to file /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf", text );
 
     //Log out
-    this.driver.get( this.baseUrl + "Home" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
+    driver.get( PageUrl.PUC );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
     assertNotNull( element );
     element.click();
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
     assertNotNull( element );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
     assertEquals( "Log Out", text );
     element.click();
 
@@ -314,37 +312,37 @@ public class CDE452 extends BaseTest {
     this.failure = 3;
 
     //Wait for form display
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
     assertEquals( "User Console", text );
 
     //Wait for all all elements in the form to be visible
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "button.btn" ) );
     assertNotNull( element );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).clear();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).sendKeys( "admin" );
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).clear();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).sendKeys( "password" );
-    this.elemHelper.Click( this.driver, By.cssSelector( "button.btn" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).clear();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).sendKeys( "admin" );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).clear();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).sendKeys( "password" );
+    this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
     //Logged in as Admin
     this.failure = 1;
 
     //wait for visibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "pucUserDropDown" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "pucUserDropDown" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "home.perspective" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "home.perspective" ) );
     assertNotNull( element );
 
     //Logged as ADMIN user
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
     assertEquals( "admin", text );
   }
 
@@ -352,73 +350,73 @@ public class CDE452 extends BaseTest {
   private void failed() {
     if ( this.failure == 2 ) {
       //Log out
-      this.driver.get( this.baseUrl + "Home" );
-      this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-      WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
+      driver.get( PageUrl.PUC );
+      this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
       assertNotNull( element );
       element.click();
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
       assertNotNull( element );
-      String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
+      String text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='customDropdownPopupMinor']/div/div/table/tbody/tr/td" ) );
       assertEquals( "Log Out", text );
       element.click();
 
       //Wait for form display
-      text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
+      text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
       assertEquals( "User Console", text );
 
       //Wait for all all elements in the form to be visible
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) );
       assertNotNull( element );
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) );
       assertNotNull( element );
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "button.btn" ) );
       assertNotNull( element );
-      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).clear();
-      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).sendKeys( "admin" );
-      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).clear();
-      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).sendKeys( "password" );
-      this.elemHelper.Click( this.driver, By.cssSelector( "button.btn" ) );
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).clear();
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).sendKeys( "admin" );
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).clear();
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).sendKeys( "password" );
+      this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
       //wait for visibility of waiting pop-up
-      this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
       //Wait to load the new page
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "pucUserDropDown" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "pucUserDropDown" ) );
       assertNotNull( element );
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "home.perspective" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "home.perspective" ) );
       assertNotNull( element );
 
       //Logged as ADMIN user
-      this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
-      text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+      this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
+      text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
       assertEquals( "admin", text );
     } else if ( this.failure == 3 ) {
       //Wait for all all elements in the form to be visible
-      WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
+      WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) );
       assertNotNull( element );
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) );
       assertNotNull( element );
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "button.btn" ) );
       assertNotNull( element );
-      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).clear();
-      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) ).sendKeys( "admin" );
-      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).clear();
-      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) ).sendKeys( "password" );
-      this.elemHelper.Click( this.driver, By.cssSelector( "button.btn" ) );
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).clear();
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) ).sendKeys( "admin" );
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).clear();
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_password" ) ).sendKeys( "password" );
+      this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
       //wait for visibility of waiting pop-up
-      this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+      this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
       //Wait to load the new page
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "pucUserDropDown" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "pucUserDropDown" ) );
       assertNotNull( element );
-      element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "home.perspective" ) );
+      element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "home.perspective" ) );
       assertNotNull( element );
 
       //Logged as ADMIN user
-      this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
-      String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+      this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), "admin" );
+      String text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
       assertEquals( "admin", text );
     }
   }

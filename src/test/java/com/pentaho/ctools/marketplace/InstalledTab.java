@@ -49,7 +49,7 @@ public class InstalledTab extends BaseTest {
     /*
      *  Step 1
      */
-    MarketPlace market = new MarketPlace( this.driver );
+    MarketPlace market = new MarketPlace( driver );
     market.GoToMarketPlace();
     market.CheckInstalledTab();
     market.CheckPluginListLayout();

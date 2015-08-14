@@ -14,7 +14,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.cde.widgets.utils.WidgetUtils;
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.ElementHelper;
 
 /**
@@ -23,11 +22,11 @@ import com.pentaho.ctools.utils.ElementHelper;
 public class SimpleExtensionPoints {
 
   // Instance of the driver (browser emulator)
-  private WebDriver driver = CToolsTestSuite.getDriver();
+  private WebDriver driver;
   // Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
+  private final Wait<WebDriver> wait = null;
   // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
+  private final String baseUrl = null;
   // The name for the widget to be created
   private final String widgetName = "dummyWidgetExtensionPoint";
   // The param to add in Extension Point
@@ -36,7 +35,7 @@ public class SimpleExtensionPoints {
   private final String paramValue = "My Extension Point";
   // The new value for the extension point
   private final String paramValueEditable = "My New Editable Extension Point";
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
 
   /**

@@ -55,7 +55,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class CDEComponentPanel extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDEComponentPanel.class );
@@ -85,29 +85,29 @@ public class CDEComponentPanel extends BaseTest {
      * ## Step 1
      */
     //Open CDE sample in edit mode
-    this.driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Go to Components Panel
-    this.elemHelper.Click( this.driver, By.xpath( "//div[@title='Components Panel']/a" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@title='Components Panel']/a" ) );
 
     //Add some Components
-    WebElement chartExpander = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/h3/span" ) );
+    WebElement chartExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/h3/span" ) );
     assertNotNull( chartExpander );
     chartExpander.click();
-    WebElement addAreaChart = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div//a[@title='CCC Area Chart']" ) );
+    WebElement addAreaChart = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div//a[@title='CCC Area Chart']" ) );
     assertNotNull( addAreaChart );
     addAreaChart.click();
-    WebElement addBulletChart = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div//a[@title='CCC Bullet Chart']" ) );
+    WebElement addBulletChart = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div//a[@title='CCC Bullet Chart']" ) );
     assertNotNull( addBulletChart );
     addBulletChart.click();
-    WebElement otherExpander = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/span" ) );
+    WebElement otherExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/span" ) );
     assertNotNull( otherExpander );
     otherExpander.click();
-    WebElement addTable = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]//a[@title='table Component']" ) );
+    WebElement addTable = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]//a[@title='table Component']" ) );
     assertNotNull( addTable );
     addTable.click();
-    WebElement addButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]//a[@title='Button Component']" ) );
+    WebElement addButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]//a[@title='Button Component']" ) );
     assertNotNull( addButton );
     addButton.click();
 
@@ -115,15 +115,15 @@ public class CDEComponentPanel extends BaseTest {
      * ## Step 2
      */
     //Select first chart group
-    this.elemHelper.Click( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr/td" ) );
-    this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr" ), "class", "expanded initialized parent ui-state-active" );
-    String chartGroup = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr" ) ).getAttribute( "class" );
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr/td" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr" ), "class", "expanded initialized parent ui-state-active" );
+    String chartGroup = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr" ) ).getAttribute( "class" );
     assertEquals( chartGroup, "expanded initialized parent ui-state-active" );
 
     //Assert groups are expanded and clicking left will collapse them, also assert down arrow moves between showing elements
-    WebElement areaChart = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) );
+    WebElement areaChart = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) );
     assertNotNull( areaChart );
-    WebElement tableComponent = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
+    WebElement tableComponent = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
     assertNotNull( tableComponent );
     Robot robot;
     try {
@@ -137,11 +137,11 @@ public class CDEComponentPanel extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[4]" ), "class", "initialized parent ui-state-active collapsed" );
-    String otherGroup = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[4]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[4]" ), "class", "initialized parent ui-state-active collapsed" );
+    String otherGroup = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[4]" ) ).getAttribute( "class" );
     assertEquals( otherGroup, "initialized parent ui-state-active collapsed" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
 
     //Assert clicking right arrow expands groups    
     try {
@@ -155,9 +155,9 @@ public class CDEComponentPanel extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    areaChart = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) );
+    areaChart = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) );
     assertNotNull( areaChart );
-    tableComponent = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
+    tableComponent = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
     assertNotNull( tableComponent );
 
     //Go to to area chart and assert it's selected
@@ -168,8 +168,8 @@ public class CDEComponentPanel extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ), "class", "child-of-CHARTS initialized collapsed ui-state-active" );
-    String areaChartClass = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ), "class", "child-of-CHARTS initialized collapsed ui-state-active" );
+    String areaChartClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) ).getAttribute( "class" );
     assertEquals( areaChartClass, "child-of-CHARTS initialized collapsed ui-state-active" );
 
     /*
@@ -183,8 +183,8 @@ public class CDEComponentPanel extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr" ), "class", "initialized ui-state-active" );
-    String nameProperty = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr" ), "class", "initialized ui-state-active" );
+    String nameProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr" ) ).getAttribute( "class" );
     assertEquals( nameProperty, "initialized ui-state-active" );
 
     //Click enter to change following properties "Name" and "Parameters"
@@ -211,8 +211,8 @@ public class CDEComponentPanel extends BaseTest {
      * ## Step 4
      */
     //Change "Parameter" and assert using down arrow to navigate is blocked
-    this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ), "class", "initialized ui-state-active" );
-    String parameterProperty = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ), "class", "initialized ui-state-active" );
+    String parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
     try {
       robot = new Robot();
@@ -230,12 +230,12 @@ public class CDEComponentPanel extends BaseTest {
       e.printStackTrace();
     }
 
-    this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ), "class", "initialized ui-state-active" );
-    parameterProperty = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ), "class", "initialized ui-state-active" );
+    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
 
     //assert values are changed
-    String nameValue = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]" ) );
+    String nameValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]" ) );
     assertEquals( nameValue, "a" );
 
     //Click tab and assert focus has gone back to first table
@@ -246,8 +246,8 @@ public class CDEComponentPanel extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    this.elemHelper.WaitForAttributeValue( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ), "class", "initialized" );
-    parameterProperty = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ), "class", "initialized" );
+    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized" );
   }
 }

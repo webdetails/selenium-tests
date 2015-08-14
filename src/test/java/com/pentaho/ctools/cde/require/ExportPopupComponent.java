@@ -37,7 +37,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
@@ -51,26 +50,22 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class ExportPopupComponent extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( ExportPopupComponent.class );
-  //The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Download directory
-  private final String downloadDir = CToolsTestSuite.getDownloadDir();
   // The path for the export file
-  private final String exportFilePath = this.downloadDir + "\\export_chart_png.png";
+  private final String exportFilePath = downloadDir + "\\export_chart_png.png";
   // The path for the export file
-  private final String exportFilePath2 = this.downloadDir + "\\export_chart_svg.svg";
+  private final String exportFilePath2 = downloadDir + "\\export_chart_svg.svg";
   // The path for the export file
-  private final String exportFilePath3 = this.downloadDir + "\\export.csv";
+  private final String exportFilePath3 = downloadDir + "\\export.csv";
   // The path for the export file
-  private final String exportFilePath4 = this.downloadDir + "\\export.xls";
+  private final String exportFilePath4 = downloadDir + "\\export.xls";
   // The path for the export file
-  private final String exportFilePath5 = this.downloadDir + "\\export.json";
+  private final String exportFilePath5 = downloadDir + "\\export.json";
   // The path for the export file
-  private final String exportFilePath6 = this.downloadDir + "\\export.xml";
+  private final String exportFilePath6 = downloadDir + "\\export.xml";
 
   /**
    * The function will delete the export file.
@@ -116,22 +111,22 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 1
      */
     //Open Duplicate Component sample
-    this.driver.get( PageUrl.EXPORT_POPUP_COMPONENT_REQUIRE );
+    driver.get( PageUrl.EXPORT_POPUP_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Get Title of sample
-    String title = this.elemHelper.WaitForElementPresentGetText( this.driver, By.id( "Title" ) );
+    String title = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "Title" ) );
     assertEquals( "Export Popup Component Reference", title );
 
     //Assert presence of elements
-    WebElement chart = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "TheChartprotovis" ) );
-    WebElement chartBar = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g']/*[name()='g'][2]/*[name()='rect'][4]" ) );
-    WebElement chartLegend = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g'][4]/*[name()='g']/*[name()='g'][6]/*[name()='text']" ) );
-    WebElement table = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "TheTableTable" ) );
-    WebElement columnHeader = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='TheTableTable']/thead/tr/th" ) );
-    WebElement c2r6 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//table[@id='TheTableTable']/tbody/tr[6]/td[2]" ) );
+    WebElement chart = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "TheChartprotovis" ) );
+    WebElement chartBar = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g']/*[name()='g'][2]/*[name()='rect'][4]" ) );
+    WebElement chartLegend = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g'][4]/*[name()='g']/*[name()='g'][6]/*[name()='text']" ) );
+    WebElement table = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "TheTableTable" ) );
+    WebElement columnHeader = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='TheTableTable']/thead/tr/th" ) );
+    WebElement c2r6 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='TheTableTable']/tbody/tr[6]/td[2]" ) );
     assertNotNull( chart );
     assertNotNull( chartBar );
     assertNotNull( chartLegend );
@@ -143,24 +138,24 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 2
      */
     //Click to Export to PNG
-    WebElement exportPNG = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='ChartExportPNGExporting']/div" ) );
+    WebElement exportPNG = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='ChartExportPNGExporting']/div" ) );
     assertNotNull( exportPNG );
     exportPNG.click();
-    WebElement linkExport = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.exportElement" ) );
+    WebElement linkExport = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.exportElement" ) );
     assertNotNull( linkExport );
     linkExport.click();
 
     //Assert chart popup
-    WebElement exportChartPopup = this.elemHelper.FindElement( this.driver, By.id( "fancybox-content" ) );
+    WebElement exportChartPopup = this.elemHelper.FindElement( driver, By.id( "fancybox-content" ) );
     assertNotNull( exportChartPopup );
 
     // Check URL of displayed image
-    String chartSRCUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Fpentaho-cdf-dd-require%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", chartSRCUrl );
+    String chartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
+    assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Fpentaho-cdf-dd-require%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", chartSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( chartSRCUrl, "admin", "password" ) );
 
     // Export chart and assert export was successful
-    WebElement chartExportButton = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
+    WebElement chartExportButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
     assertNotNull( chartExportButton );
 
     //Click export and assert file is correctly downloaded
@@ -173,7 +168,7 @@ public class ExportPopupComponent extends BaseTest {
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( this.downloadDir );
+      dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath );
@@ -204,34 +199,34 @@ public class ExportPopupComponent extends BaseTest {
     }
 
     // Close dialog box
-    this.elemHelper.Click( this.driver, By.id( "fancybox-close" ) );
-    assertTrue( this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
+    this.elemHelper.Click( driver, By.id( "fancybox-close" ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
 
     /*
      * ## Step 3
      */
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.exportElement" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.exportElement" ) );
     //Click export Button
-    WebElement exportCountryChartButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='ChartExportSVGExporting']/div" ) );
+    WebElement exportCountryChartButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='ChartExportSVGExporting']/div" ) );
     assertNotNull( exportCountryChartButton );
     exportCountryChartButton.click();
 
     //Assert popup and click Export Chart link
-    WebElement exportCountryChartLink = this.elemHelper.FindElement( this.driver, By.xpath( "//body/div[9]/div[1]" ) );
+    WebElement exportCountryChartLink = this.elemHelper.FindElement( driver, By.xpath( "//body/div[9]/div[1]" ) );
     assertNotNull( exportCountryChartLink );
     exportCountryChartLink.click();
 
     //Assert chart popup
-    WebElement exportCountryChartPopup = this.elemHelper.FindElement( this.driver, By.id( "fancybox-content" ) );
+    WebElement exportCountryChartPopup = this.elemHelper.FindElement( driver, By.id( "fancybox-content" ) );
     assertNotNull( exportCountryChartPopup );
 
     // Check URL of displayed image
-    String countryChartSRCUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Fpentaho-cdf-dd-require%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", countryChartSRCUrl );
+    String countryChartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
+    assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Fpentaho-cdf-dd-require%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", countryChartSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( countryChartSRCUrl, "admin", "password" ) );
 
     // Export chart and assert export was successful
-    WebElement countryChartExportButton = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
+    WebElement countryChartExportButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
     assertNotNull( countryChartExportButton );
 
     //Click export and assert file is correctly downloaded
@@ -244,7 +239,7 @@ public class ExportPopupComponent extends BaseTest {
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( this.downloadDir );
+      dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath2 );
@@ -275,17 +270,17 @@ public class ExportPopupComponent extends BaseTest {
     }
 
     // Close dialog box
-    this.elemHelper.Click( this.driver, By.id( "fancybox-close" ) );
-    assertTrue( this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
+    this.elemHelper.Click( driver, By.id( "fancybox-close" ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
 
     /*
      * ## Step 4
      */
     //Click to Export to CSV
-    WebElement exportCSV = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='DataExportCSVExporting']/div" ) );
+    WebElement exportCSV = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='DataExportCSVExporting']/div" ) );
     assertNotNull( exportCSV );
     exportCSV.click();
-    linkExport = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/div[10]/div[1]" ) );
+    linkExport = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/div[10]/div[1]" ) );
     assertNotNull( linkExport );
 
     //Click export and assert file is correctly downloaded
@@ -298,7 +293,7 @@ public class ExportPopupComponent extends BaseTest {
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( this.downloadDir );
+      dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath3 );
@@ -332,10 +327,10 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 5
      */
     //Click to Export to CSV
-    WebElement exportXLS = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='DataExportXLSExporting']/div" ) );
+    WebElement exportXLS = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='DataExportXLSExporting']/div" ) );
     assertNotNull( exportXLS );
     exportXLS.click();
-    linkExport = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/div[11]/div[1]" ) );
+    linkExport = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/div[11]/div[1]" ) );
     assertNotNull( linkExport );
 
     //Click export and assert file is correctly downloaded
@@ -348,7 +343,7 @@ public class ExportPopupComponent extends BaseTest {
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( this.downloadDir );
+      dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath4 );
@@ -382,10 +377,10 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 6
      */
     //Click to Export to JSON
-    WebElement exportJSON = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='DataExportJSONExporting']/div" ) );
+    WebElement exportJSON = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='DataExportJSONExporting']/div" ) );
     assertNotNull( exportJSON );
     exportJSON.click();
-    linkExport = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/div[12]/div[1]" ) );
+    linkExport = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/div[12]/div[1]" ) );
     assertNotNull( linkExport );
 
     //Click export and assert file is correctly downloaded
@@ -398,7 +393,7 @@ public class ExportPopupComponent extends BaseTest {
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( this.downloadDir );
+      dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath5 );
@@ -432,10 +427,10 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 7
      */
     //Click to Export to XML
-    WebElement exportXML = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='DataExportXMLExporting']/div" ) );
+    WebElement exportXML = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='DataExportXMLExporting']/div" ) );
     assertNotNull( exportXML );
     exportXML.click();
-    linkExport = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//body/div[13]/div[1]" ) );
+    linkExport = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/div[13]/div[1]" ) );
     assertNotNull( linkExport );
 
     //Click export and assert file is correctly downloaded
@@ -448,7 +443,7 @@ public class ExportPopupComponent extends BaseTest {
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( this.downloadDir );
+      dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath6 );

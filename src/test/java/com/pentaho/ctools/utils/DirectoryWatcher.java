@@ -51,7 +51,7 @@ public class DirectoryWatcher {
    * @return
    */
   public boolean WatchForCreate( String path ) {
-    return WatchForCreate( path, this.waitTimeout );
+    return WatchForCreate( path, waitTimeout );
   }
 
   /**

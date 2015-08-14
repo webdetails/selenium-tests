@@ -35,10 +35,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
@@ -52,9 +50,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class PrptComponent extends BaseTest {
-  // Instance to be used on wait commands
-  private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( PrptComponent.class );
@@ -70,24 +66,24 @@ public class PrptComponent extends BaseTest {
     this.log.info( "tc0_OpenSamplePage_Display" );
     // The URL for the PrptComponent under CDF samples
     // This sample is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/PrptComponent
-    this.driver.get( PageUrl.PRPT_COMPONENT );
+    driver.get( PageUrl.PRPT_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Check if the some elements are already displayed
     //Check if element with "Line" is visible
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    WebDriver frameSamplePrpt = this.driver.switchTo().frame( "sampleObject_prptFrame" );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    WebDriver frameSamplePrpt = driver.switchTo().frame( "sampleObject_prptFrame" );
     WebElement elemLine = this.elemHelper.WaitForElementPresenceAndVisible( frameSamplePrpt, By.cssSelector( "div.parameter-label" ), 45 );
     assertNotNull( elemLine );
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
     //Check if element with "LINE: Classic Cars" is visible
     WebDriver frameReportContent = frameSamplePrpt.switchTo().frame( "reportContent" );
     WebElement elemLineClassic = this.elemHelper.WaitForElementPresenceAndVisible( frameReportContent, By.xpath( "//tr/td" ), 45 );
     assertNotNull( elemLineClassic );
     //Back to root
-    this.driver.switchTo().defaultContent();
+    driver.switchTo().defaultContent();
   }
 
   /**
@@ -104,13 +100,13 @@ public class PrptComponent extends BaseTest {
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    this.wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", this.driver.getTitle() );
-    assertEquals( "PrptComponent", this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "Community Dashboard Framework", driver.getTitle() );
+    assertEquals( "PrptComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -129,32 +125,32 @@ public class PrptComponent extends BaseTest {
 
     // ## Step 1
     // Render again the sample
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.ClickJS( this.driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Check if the some elements are already displayed
     //Check if element with "Line" is visible
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    WebDriver frameSamplePrpt = this.driver.switchTo().frame( "sampleObject_prptFrame" );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    WebDriver frameSamplePrpt = driver.switchTo().frame( "sampleObject_prptFrame" );
     WebElement elemLine = this.elemHelper.WaitForElementPresenceAndVisible( frameSamplePrpt, By.cssSelector( "div.parameter-label" ), 45 );
     assertNotNull( elemLine );
     //Check if element with "LINE: Classic Cars" is visible
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
     WebDriver frameReportContent = frameSamplePrpt.switchTo().frame( "reportContent" );
     WebElement elemLineClassic = this.elemHelper.WaitForElementPresenceAndVisible( frameReportContent, By.xpath( "//tr/td" ), 45 );
     assertNotNull( elemLineClassic );
     //Back to root
-    this.driver.switchTo().defaultContent();
+    driver.switchTo().defaultContent();
 
     // Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( this.driver, By.id( "sample" ) ).isDisplayed() );
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -176,27 +172,27 @@ public class PrptComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    driver.switchTo().frame( "sampleObject_prptFrame" );
     //Check presence of tool bar elements
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolbar']/div" ) ) );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolbar']/div[2]" ) ) );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolbar']/span" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='toolbar']/div" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='toolbar']/div[2]" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='toolbar']/span" ) ) );
     //Check the Product Name and Output Type
-    WebElement elemtLine = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.parameter-label" ), 45 );
+    WebElement elemtLine = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.parameter-label" ), 45 );
     assertNotNull( elemtLine );
-    String prodName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.parameter-label" ) );
+    String prodName = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.parameter-label" ) );
     assertEquals( "Line", prodName );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//td/div/div[2]/select" ) ) );
-    String outputTypeName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select/../../div" ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//td/div/div[2]/select" ) ) );
+    String outputTypeName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='parameter']/div[2]/select/../../div" ) );
     assertEquals( "Output Type", outputTypeName );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     //Check for View Report button
-    String buttonName = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//button/span" ) );
+    String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
     assertEquals( "View Report", buttonName );
     //Check the generated image
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "iframe#reportContent" ) );
-    WebDriver driverReportContent = this.driver.switchTo().frame( "reportContent" );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
+    WebDriver driverReportContent = driver.switchTo().frame( "reportContent" );
     WebElement elemReport = this.elemHelper.WaitForElementPresenceAndVisible( driverReportContent, By.xpath( "//tbody/tr" ) );
     assertNotNull( elemReport );
     this.elemHelper.WaitForTextPresence( driverReportContent, By.xpath( "//tbody/tr" ), "LINE: Classic Cars" );
@@ -226,19 +222,19 @@ public class PrptComponent extends BaseTest {
   @Test
   public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
     this.log.info( "tc4_TogglePromptPanel_PromptPanelEnableDisable" );
-    this.driver.switchTo().defaultContent();
+    driver.switchTo().defaultContent();
 
     // ## Step 1
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.id( "reportControlPanel" ) ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) ).click();
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "reportControlPanel" ) );
-    assertFalse( this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "reportControlPanel" ), 2 ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    driver.switchTo().frame( "sampleObject_prptFrame" );
+    assertNotNull( this.elemHelper.FindElement( driver, By.id( "reportControlPanel" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) ).click();
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "reportControlPanel" ) );
+    assertFalse( this.elemHelper.WaitForElementNotPresent( driver, By.id( "reportControlPanel" ), 2 ) );
 
     // ## Step 2
-    this.elemHelper.FindElement( this.driver, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) ).click();
-    assertNotNull( this.elemHelper.FindElement( this.driver, By.id( "reportControlPanel" ) ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) ).click();
+    assertNotNull( this.elemHelper.FindElement( driver, By.id( "reportControlPanel" ) ) );
   }
 
   /**
@@ -257,61 +253,61 @@ public class PrptComponent extends BaseTest {
   @Test
   public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
     this.log.info( "tc5_SelectSeveralProducts_ReportIsRefreshed" );
-    this.driver.switchTo().defaultContent();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
+    driver.switchTo().defaultContent();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    driver.switchTo().frame( "sampleObject_prptFrame" );
 
     /*
      * ## Step 1
      */
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='pentaho-toggle-button-container']/div/div/button" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='pentaho-toggle-button-container']/div/div/button" ) );
     assertNotNull( element );
     String text = element.getText();
     assertEquals( "Classic Cars", text );
     element.click();
-    this.elemHelper.WaitForElementPresence( this.driver, By.id( "glasspane" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
-    this.driver.switchTo().frame( "reportContent" );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//tbody/tr" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.id( "glasspane" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
+    driver.switchTo().frame( "reportContent" );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr" ), "LINE: Planes" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr" ), "LINE: Planes" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr" ) );
     assertEquals( "LINE: Planes", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr[3]/td" ), "Autoart Studio Design" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr[3]/td" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr[3]/td" ), "Autoart Studio Design" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr[3]/td" ) );
     assertEquals( "Autoart Studio Design", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "P-51-D Mustang" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "P-51-D Mustang" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ) );
     assertEquals( "P-51-D Mustang", text );
-    text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
+    text = this.elemHelper.GetAttribute( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
     assertEquals( "http://images.google.com/images?q=P-51-D%20Mustang", text );
 
     /*
      *  ## Step 2
      */
-    this.driver.switchTo().defaultContent();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='pentaho-toggle-button-container']/div/div[2]/button" ) );
+    driver.switchTo().defaultContent();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    driver.switchTo().frame( "sampleObject_prptFrame" );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='pentaho-toggle-button-container']/div/div[2]/button" ) );
     assertNotNull( element );
     text = element.getText();
     assertEquals( "Motorcycles", text );
     element.click();
-    this.elemHelper.WaitForElementPresence( this.driver, By.id( "glasspane" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
-    this.driver.switchTo().frame( "reportContent" );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//tbody/tr" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.id( "glasspane" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
+    driver.switchTo().frame( "reportContent" );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr" ), "LINE: Motorcycles" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr" ), "LINE: Motorcycles" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr" ) );
     assertEquals( "LINE: Motorcycles", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr[3]/td" ), "Autoart Studio Design" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr[3]/td" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr[3]/td" ), "Autoart Studio Design" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr[3]/td" ) );
     assertEquals( "Autoart Studio Design", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "1997 BMW F650 ST" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "1997 BMW F650 ST" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ) );
     assertEquals( "1997 BMW F650 ST", text );
-    text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
+    text = this.elemHelper.GetAttribute( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
     assertEquals( "http://images.google.com/images?q=1997%20BMW%20F650%20ST", text );
 
   }
@@ -336,69 +332,68 @@ public class PrptComponent extends BaseTest {
   @Test
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
     this.log.info( "tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised" );
-    this.driver.switchTo().defaultContent();
+    driver.switchTo().defaultContent();
 
-    String downloadDir = CToolsTestSuite.getDownloadDir();
     DirectoryWatcher dw = new DirectoryWatcher();
 
     /*
      *  ## Step 1
      */
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
-    Select select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    driver.switchTo().frame( "sampleObject_prptFrame" );
+    Select select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/html;page-mode=page" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     //Check the generated image
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "iframe#reportContent" ) );
-    this.driver.switchTo().frame( "reportContent" );
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//tbody/tr" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "iframe#reportContent" ) );
+    driver.switchTo().frame( "reportContent" );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr" ), "LINE: Motorcycles" );
-    String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr" ), "LINE: Motorcycles" );
+    String text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr" ) );
     assertEquals( "LINE: Motorcycles", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr[3]/td" ), "Autoart Studio Design" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr[3]/td" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr[3]/td" ), "Autoart Studio Design" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr[3]/td" ) );
     assertEquals( "Autoart Studio Design", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "1997 BMW F650 ST" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "1997 BMW F650 ST" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ) );
     assertEquals( "1997 BMW F650 ST", text );
-    text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
+    text = this.elemHelper.GetAttribute( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
     assertEquals( "http://images.google.com/images?q=1997%20BMW%20F650%20ST", text );
 
     /*
      *  ## Step 2
      */
-    this.driver.switchTo().defaultContent();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
-    select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
+    driver.switchTo().defaultContent();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    driver.switchTo().frame( "sampleObject_prptFrame" );
+    select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/html;page-mode=stream" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     //Check the generated image
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "iframe#reportContent" ) );
-    this.driver.switchTo().frame( "reportContent" );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//tbody/tr" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "iframe#reportContent" ) );
+    driver.switchTo().frame( "reportContent" );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//tbody/tr" ) );
     assertNotNull( element );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr" ), "LINE: Motorcycles" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr" ), "LINE: Motorcycles" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr" ) );
     assertEquals( "LINE: Motorcycles", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr[3]/td" ), "Autoart Studio Design" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr[3]/td" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr[3]/td" ), "Autoart Studio Design" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr[3]/td" ) );
     assertEquals( "Autoart Studio Design", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "1997 BMW F650 ST" );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "1997 BMW F650 ST" );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ) );
     assertEquals( "1997 BMW F650 ST", text );
-    text = this.elemHelper.GetAttribute( this.driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
+    text = this.elemHelper.GetAttribute( driver, By.xpath( "//tbody/tr[5]/td[3]/a" ), "href" );
     assertEquals( "http://images.google.com/images?q=1997%20BMW%20F650%20ST", text );
 
     /*
      *  ## Step 3
      */
-    this.driver.switchTo().defaultContent();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
-    select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
+    driver.switchTo().defaultContent();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    driver.switchTo().frame( "sampleObject_prptFrame" );
+    select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/pdf" );
     //TODO - testing this, to avoid failing. After we see that the sleep helps - we study an alternative.
     try {
@@ -407,40 +402,40 @@ public class PrptComponent extends BaseTest {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     //Check the generated image
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "iframe#reportContent" ) );
-    this.driver.switchTo().frame( "reportContent" );
-    WebElement elemTextLayer = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "iframe#reportContent" ) );
+    driver.switchTo().frame( "reportContent" );
+    WebElement elemTextLayer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']" ) );
     assertNotNull( elemTextLayer );
-    WebElement elemTextLayerdiv1 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
+    WebElement elemTextLayerdiv1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
     assertNotNull( elemTextLayerdiv1 );
-    WebElement elemTextLayerdiv2 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
+    WebElement elemTextLayerdiv2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
     assertNotNull( elemTextLayerdiv2 );
-    WebElement elemTextLayerdiv3 = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
+    WebElement elemTextLayerdiv3 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
     assertNotNull( elemTextLayerdiv3 );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ), "L I N E :", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ), "L I N E :", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
     assertEquals( "L I N E :", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ), "M o t o r c y c l e s", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ), "M o t o r c y c l e s", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
     assertEquals( "M o t o r c y c l e s", text );
-    this.elemHelper.WaitForTextPresence( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ), "MSRP", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ), "MSRP", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
     assertEquals( "MSRP", text );
 
     /*
      *  ## Step 4
      */
-    this.driver.switchTo().defaultContent();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
+    driver.switchTo().defaultContent();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    driver.switchTo().frame( "sampleObject_prptFrame" );
     new File( downloadDir + "\\InventorybyLine.xls" ).delete();
-    select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
+    select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/excel;page-mode=flow" );
     //Wait for file to be created in the destination dir
     dw.WatchForCreate( downloadDir );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.xls" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xls" ).delete();
 
@@ -448,11 +443,11 @@ public class PrptComponent extends BaseTest {
      *  ## Step 5
      */
     new File( downloadDir + "\\InventorybyLine.xlsx" ).delete();
-    select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
+    select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow" );
     //Wait for file to be created in the destination dir
     dw.WatchForCreate( downloadDir );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.xlsx" ).exists() );
     new File( downloadDir + "\\InventorybyLine.xlsx" ).delete();
 
@@ -460,11 +455,11 @@ public class PrptComponent extends BaseTest {
      *  ## Step 6
      */
     new File( downloadDir + "\\InventorybyLine.csv" ).delete();
-    select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
+    select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/csv;page-mode=stream" );
     //Wait for file to be created in the destination dir
     dw.WatchForCreate( downloadDir );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.csv" ).exists() );
     new File( downloadDir + "\\InventorybyLine.csv" ).delete();
 
@@ -472,27 +467,27 @@ public class PrptComponent extends BaseTest {
      *  ## Step 7
      */
     new File( downloadDir + "\\InventorybyLine.rtf" ).delete();
-    select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
+    select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/rtf;page-mode=flow" );
     //Wait for file to be created in the destination dir
     dw.WatchForCreate( downloadDir );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     assertTrue( new File( downloadDir + "\\InventorybyLine.rtf" ).exists() );
     new File( downloadDir + "\\InventorybyLine.rtf" ).delete();
 
     /*
      *  ## Step 8
      */
-    this.driver.switchTo().defaultContent();
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div#sampleObject iframe" ) );
-    this.driver.switchTo().frame( "sampleObject_prptFrame" );
-    select = new Select( this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
+    driver.switchTo().defaultContent();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#sampleObject iframe" ) );
+    driver.switchTo().frame( "sampleObject_prptFrame" );
+    select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/text" );
-    this.elemHelper.WaitForElementPresence( this.driver, By.id( "glasspane" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "glasspane" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.id( "glasspane" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     //Check the generated image
-    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "iframe#reportContent" ) );
-    WebDriver reportContentFrame = this.driver.switchTo().frame( "reportContent" );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "iframe#reportContent" ) );
+    WebDriver reportContentFrame = driver.switchTo().frame( "reportContent" );
     element = this.elemHelper.WaitForElementPresenceAndVisible( reportContentFrame, By.xpath( "//pre" ) );
     assertNotNull( element );
     text = this.elemHelper.WaitForElementPresentGetText( reportContentFrame, By.xpath( "//pre" ) );

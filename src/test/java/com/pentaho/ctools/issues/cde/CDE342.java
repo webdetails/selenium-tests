@@ -30,7 +30,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -49,9 +48,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDE342 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE342.class );
@@ -63,8 +60,8 @@ public class CDE342 extends BaseTest {
    *    Assert autocomplete works properly
    *
    * Description:
-   *    The test pretends validate the CDE-342 issue, so when user writes on the autocomplete input field, the options
-   *    available update accordingly.
+   *    The test pretends validate the CDE-342 issue, so when user writes on the 
+   *    autocomplete input field, the options available update accordingly.
    *
    * Steps:
    *    1. Write on input field and check options available
@@ -79,19 +76,19 @@ public class CDE342 extends BaseTest {
      * ## Step 1
      */
     //Go to Issue sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Wait for Input field
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "col1" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "col1" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//input[@class='ui-autocomplete-input']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//input[@class='ui-autocomplete-input']" ) );
     assertNotNull( element );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "A" );
-    String option1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
-    String option2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
-    String option3 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[3]/a" ) );
-    String option4 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[4]/a" ) );
-    String option5 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[5]/a" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "A" );
+    String option1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    String option2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
+    String option3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[3]/a" ) );
+    String option4 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[4]/a" ) );
+    String option5 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[5]/a" ) );
     assertEquals( "Anna's Decorations, Ltd", option1 );
     assertEquals( "Australian Collectors, Co.", option2 );
     assertEquals( "Souveniers And Things Co.", option3 );
@@ -101,20 +98,20 @@ public class CDE342 extends BaseTest {
     /*
      * ## Step 2
      */
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).clear();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "ert" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='col1']/input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "ert" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
 
     /*
      * ## Step 3
      */
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).clear();
-    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "Anna" );
-    option2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='col1']/input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='col1']/input" ) ).sendKeys( "Anna" );
+    option2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li/a" ) );
     assertEquals( "Anna's Decorations, Ltd", option2 );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
 
   }
 }

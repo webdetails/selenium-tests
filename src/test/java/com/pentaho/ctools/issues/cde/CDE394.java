@@ -31,7 +31,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 
@@ -50,9 +49,7 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDE394 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE394.class );
@@ -80,12 +77,12 @@ public class CDE394 extends BaseTest {
      * ## Step 1
      */
     //Go to Issue Sample
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    this.elemHelper.WaitForElementVisibility( this.driver, By.id( "column1protovis" ) );
-    WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']" ) );
+    this.elemHelper.WaitForElementVisibility( driver, By.id( "column1protovis" ) );
+    WebElement element = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']" ) );
     assertNotNull( element );
     String widthText = element.getAttribute( "width" );
     double width = Double.parseDouble( widthText );
@@ -93,15 +90,15 @@ public class CDE394 extends BaseTest {
     /*
      * ## Step 2
      */
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][14]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][14]" ) );
     assertNotNull( element );
     String cx1Text = element.getAttribute( "cx" );
     double cx1 = Double.parseDouble( cx1Text );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='circle'][14]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][6]/*[local-name()='circle'][14]" ) );
     assertNotNull( element );
     String cx2Text = element.getAttribute( "cx" );
     double cx2 = Double.parseDouble( cx2Text );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][9]/*[local-name()='circle'][14]" ) );
+    element = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][5]/*[local-name()='g']/*[local-name()='g'][9]/*[local-name()='circle'][14]" ) );
     assertNotNull( element );
     String cx3Text = element.getAttribute( "cx" );
     double cx3 = Double.parseDouble( cx3Text );

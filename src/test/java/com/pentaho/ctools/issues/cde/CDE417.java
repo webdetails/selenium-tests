@@ -41,7 +41,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.suite.CToolsTestSuite;
 import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
@@ -70,15 +69,11 @@ import com.pentaho.gui.web.puc.BrowseFiles;
  *
  */
 public class CDE417 extends BaseTest {
-  // The base url to be append the relative url in test
-  private final String baseUrl = CToolsTestSuite.getBaseUrl();
-  //Download directory
-  private final String downloadDir = CToolsTestSuite.getDownloadDir();
   // The path for the export file
-  private final String exportFilePath = this.downloadDir + "\\export.png";
+  private final String exportFilePath = downloadDir + "\\export.png";
   // The path for the export file
-  private final String exportFilePath2 = this.downloadDir + "\\export.svg";
-  //Access to wrapper for webdriver
+  private final String exportFilePath2 = downloadDir + "\\export.svg";
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE417.class );
@@ -133,7 +128,7 @@ public class CDE417 extends BaseTest {
      * ## Step 1
      */
     //Show Hidden Files
-    BrowseFiles browser = new BrowseFiles( this.driver );
+    BrowseFiles browser = new BrowseFiles( driver );
     if ( !PUCSettings.SHOWHIDDENFILES ) {
       browser.CheckShowHiddenFiles();
     }
@@ -154,8 +149,8 @@ public class CDE417 extends BaseTest {
     assertTrue( fileDeleteCountryChart );
     assertTrue( fileDeleteCdfCountryChart );
 
-    this.driver.switchTo().defaultContent();
-    WebDriver frame = this.driver.switchTo().frame( "browser.perspective" );
+    driver.switchTo().defaultContent();
+    WebDriver frame = driver.switchTo().frame( "browser.perspective" );
     this.elemHelper.WaitForAttributeValue( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title", "CDF-548.cda" );
     String nameOfCdf548Wcdf = this.elemHelper.GetAttribute( frame, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div[1]" ), "title" );
     assertEquals( "CDF-548.cda", nameOfCdf548Wcdf );
@@ -164,40 +159,40 @@ public class CDE417 extends BaseTest {
      * ## Step 3
      */
     // Go to Export Popup Component sample in Edit mode
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/edit" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/edit" );
 
     //Save Dashboard
-    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Save" ) );
+    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "Save" ) );
     assertNotNull( saveButton );
-    this.elemHelper.Click( this.driver, By.id( "Save" ) );
-    WebElement saveNotify = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.notify-bar-message" ) );
+    this.elemHelper.Click( driver, By.id( "Save" ) );
+    WebElement saveNotify = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.notify-bar-message" ) );
     assertNotNull( saveNotify );
-    String saveMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.notify-bar-message" ) );
+    String saveMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.notify-bar-message" ) );
     assertEquals( "Dashboard saved successfully", saveMessage );
 
     /* 
      * ## Step 4 
       */
     //Go to components panel and expand "Others"
-    WebElement componentsPanelButton = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.componentsPanelButton" ) );
+    WebElement componentsPanelButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.componentsPanelButton" ) );
     assertNotNull( componentsPanelButton );
     componentsPanelButton.click();
-    WebElement componentsTable = this.elemHelper.FindElement( this.driver, By.id( "cdfdd-components-components" ) );
+    WebElement componentsTable = this.elemHelper.FindElement( driver, By.id( "cdfdd-components-components" ) );
     assertNotNull( componentsTable );
-    WebElement othersExpander = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']//tr[@id='OTHERCOMPONENTS']/td/span" ) );
+    WebElement othersExpander = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']//tr[@id='OTHERCOMPONENTS']/td/span" ) );
     assertNotNull( othersExpander );
     othersExpander.click();
 
     //Select Export Popup Component
-    WebElement exportPopupElement = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-components']//td[contains(text(),'exportPopup')]" ) );
+    WebElement exportPopupElement = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']//td[contains(text(),'exportPopup')]" ) );
     assertNotNull( exportPopupElement );
     exportPopupElement.click();
 
     //Open options for Chart Component to Export and assert "chart" and "countryChart"
-    WebElement chartExportProperty = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Chart Component to Export']/../td[2]" ) );
+    WebElement chartExportProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Chart Component to Export']/../td[2]" ) );
     assertNotNull( chartExportProperty );
     chartExportProperty.click();
-    WebElement chartExportInput = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Chart Component to Export']/../td[2]/form/input" ) );
+    WebElement chartExportInput = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Chart Component to Export']/../td[2]/form/input" ) );
     assertNotNull( chartExportInput );
     chartExportInput.clear();
     Robot robot;
@@ -208,22 +203,22 @@ public class CDE417 extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    WebElement chartExportOptions = this.elemHelper.FindElement( this.driver, By.xpath( "//body/ul" ) );
+    WebElement chartExportOptions = this.elemHelper.FindElement( driver, By.xpath( "//body/ul" ) );
     assertNotNull( chartExportOptions );
-    String chartOption1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li/a" ) );
-    String chartOption2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li[2]/a" ) );
+    String chartOption1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li/a" ) );
+    String chartOption2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li[2]/a" ) );
     assertEquals( "chart", chartOption1 );
     assertEquals( "countryChart", chartOption2 );
-    this.elemHelper.Click( this.driver, By.xpath( "//body/ul/li/a" ) );
+    this.elemHelper.Click( driver, By.xpath( "//body/ul/li/a" ) );
 
     /* 
      * ## Step 5 
       */
     //Open options for Data Component to Export and assert "table", "chart" and "countryChart"
-    WebElement dataExportProperty = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Data Component to Export']/../td[2]" ) );
+    WebElement dataExportProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Data Component to Export']/../td[2]" ) );
     assertNotNull( dataExportProperty );
     dataExportProperty.click();
-    WebElement dataExportInput = this.elemHelper.FindElement( this.driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Data Component to Export']/../td[2]/form/input" ) );
+    WebElement dataExportInput = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Id for Data Component to Export']/../td[2]/form/input" ) );
     assertNotNull( dataExportInput );
     dataExportInput.clear();
     Robot robot1;
@@ -234,11 +229,11 @@ public class CDE417 extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    WebElement dataExportOptions = this.elemHelper.FindElement( this.driver, By.xpath( "//body/ul" ) );
+    WebElement dataExportOptions = this.elemHelper.FindElement( driver, By.xpath( "//body/ul" ) );
     assertNotNull( dataExportOptions );
-    String dataOption1 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li/a" ) );
-    String dataOption2 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li[2]/a" ) );
-    String dataOption3 = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//body/ul/li[3]/a" ) );
+    String dataOption1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li/a" ) );
+    String dataOption2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li[2]/a" ) );
+    String dataOption3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li[3]/a" ) );
     assertEquals( "table", dataOption1 );
     assertEquals( "chart", dataOption2 );
     assertEquals( "countryChart", dataOption3 );
@@ -246,30 +241,30 @@ public class CDE417 extends BaseTest {
     /* 
      * ## Step 6 
      */
-    this.driver.get( this.baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/generatedContent" );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/generatedContent" );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Click export Button
-    WebElement exportChartButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='export']/div" ) );
+    WebElement exportChartButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='export']/div" ) );
     assertNotNull( exportChartButton );
     exportChartButton.click();
 
     //Assert popup and click Export Chart link
-    WebElement exportChartLink = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.exportElement" ) );
+    WebElement exportChartLink = this.elemHelper.FindElement( driver, By.cssSelector( "div.exportElement" ) );
     assertNotNull( exportChartLink );
     exportChartLink.click();
 
     //Assert chart popup
-    WebElement exportChartPopup = this.elemHelper.FindElement( this.driver, By.id( "fancybox-content" ) );
+    WebElement exportChartPopup = this.elemHelper.FindElement( driver, By.id( "fancybox-content" ) );
     assertNotNull( exportChartPopup );
 
     // Check URL of displayed image
-    String chartSRCUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2Fchart.js&paramcountries=France&paramcountries=USA&paramwidth=400&paramheight=400", chartSRCUrl );
+    String chartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
+    assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2Fchart.js&paramcountries=France&paramcountries=USA&paramwidth=400&paramheight=400", chartSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( chartSRCUrl, "admin", "password" ) );
 
     // Export chart and assert export was successful
-    WebElement chartExportButton = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
+    WebElement chartExportButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
     assertNotNull( chartExportButton );
 
     //Click export and assert file is correctly downloaded
@@ -282,7 +277,7 @@ public class CDE417 extends BaseTest {
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( this.downloadDir );
+      dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath );
@@ -313,34 +308,34 @@ public class CDE417 extends BaseTest {
     }
 
     // Close dialog box
-    this.elemHelper.Click( this.driver, By.id( "fancybox-close" ) );
-    assertTrue( this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
+    this.elemHelper.Click( driver, By.id( "fancybox-close" ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
 
     /* 
      * ## Step 7
      */
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.exportElement" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.exportElement" ) );
     //Click export Button
-    WebElement exportCountryChartButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='export2']/div" ) );
+    WebElement exportCountryChartButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='export2']/div" ) );
     assertNotNull( exportCountryChartButton );
     exportCountryChartButton.click();
 
     //Assert popup and click Export Chart link
-    WebElement exportCountryChartLink = this.elemHelper.FindElement( this.driver, By.xpath( "//div[contains(text(),'Export Chart2')]" ) );
+    WebElement exportCountryChartLink = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(text(),'Export Chart2')]" ) );
     assertNotNull( exportCountryChartLink );
     exportCountryChartLink.click();
 
     //Assert chart popup
-    WebElement exportCountryChartPopup = this.elemHelper.FindElement( this.driver, By.id( "fancybox-content" ) );
+    WebElement exportCountryChartPopup = this.elemHelper.FindElement( driver, By.id( "fancybox-content" ) );
     assertNotNull( exportCountryChartPopup );
 
     // Check URL of displayed image
-    String countryChartSRCUrl = this.elemHelper.GetAttribute( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( this.baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2FcountryChart.js&paramwidth=400&paramheight=300", countryChartSRCUrl );
+    String countryChartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
+    assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2FcountryChart.js&paramwidth=400&paramheight=300", countryChartSRCUrl );
     assertEquals( 200, HttpUtils.GetResponseCode( countryChartSRCUrl, "admin", "password" ) );
 
     // Export chart and assert export was successful
-    WebElement countryChartExportButton = this.elemHelper.FindElement( this.driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
+    WebElement countryChartExportButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
     assertNotNull( countryChartExportButton );
 
     //Click export and assert file is correctly downloaded
@@ -353,7 +348,7 @@ public class CDE417 extends BaseTest {
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( this.downloadDir );
+      dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath2 );
@@ -384,7 +379,7 @@ public class CDE417 extends BaseTest {
     }
 
     // Close dialog box
-    this.elemHelper.Click( this.driver, By.id( "fancybox-close" ) );
-    assertTrue( this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
+    this.elemHelper.Click( driver, By.id( "fancybox-close" ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
   }
 }

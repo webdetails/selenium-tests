@@ -106,5 +106,12 @@
 			<class name="com.pentaho.ctools.main.LogoutPentaho" />
 		</classes>
 	</test>
+	<!-- 
+	MarketPlacePage.class,
+  MarketplaceFilters.class,
+  PluginsList.class,
+  InstalledTab.class,
+  PluginDetailsPopup.class
+	 -->
 
 </suite>

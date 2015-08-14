@@ -49,7 +49,7 @@ import com.pentaho.ctools.utils.PageUrl;
  *
  */
 public class CDE367 extends BaseTest {
-  //Access to wrapper for webdriver
+  // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CDE367.class );
@@ -77,45 +77,45 @@ public class CDE367 extends BaseTest {
      * ## Step 1
      */
     //Go to New CDE Dashboard
-    this.driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
-    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Save as Template']" ) );
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Resource']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Add Resource']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add FreeForm']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Add FreeForm']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Add Row']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Add Row']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//a[@title='Add Row']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//a[@title='Add Row']" ) );
 
     /*
      * ## Step 2
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//form[@class='cdfddInput']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//form[@class='cdfddInput']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorcheck']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorcheck']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorcheck']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorcheck']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) );
     assertNotNull( element );
-    this.elemHelper.Click( this.driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) );
-    this.elemHelper.FindElement( this.driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) ).sendKeys( "#3d558c" );
-    this.elemHelper.Click( this.driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) ).sendKeys( "#3d558c" );
+    this.elemHelper.Click( driver, By.xpath( "//form[@class='cdfddInput']/input[@class='colorinput']" ) );
 
     /*
      * ## Step 3
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='colorpicker']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='colorpicker']" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='colorpicker']/div[@class='colorpicker_hex']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='colorpicker']/div[@class='colorpicker_hex']" ) );
     assertNotNull( element );
-    String hexText = this.elemHelper.GetInputValue( this.driver, By.xpath( "//div[@class='colorpicker']/div[@class='colorpicker_hex']/input" ) );
+    String hexText = this.elemHelper.GetInputValue( driver, By.xpath( "//div[@class='colorpicker']/div[@class='colorpicker_hex']/input" ) );
     assertEquals( "3d558c", hexText );
 
   }
