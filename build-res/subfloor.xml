@@ -168,13 +168,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="ivy.local.default.root" value="C:\.ivy2" description="Dir of ivy cache" />
 	<property name="ivy.clean.pattern" value="pentaho" description="Clean CTools" />
 
-
-
 	<!-- TEST propertis -->
 	<property name="test.html.reports.dir" value="${basedir}/reports-html" description="Directory to drag reports for the selenium html scripts" />
 	<property name="test.java.reports.dir" value="${basedir}/reports-java" description="Directory to drag reports" />
 	<property name="test.java.reports.html.dir" value="${basedir}/reports-java/html" description="Directory for the generated report in HTML" />
-	<property name="test.testng.suite.file" value="SmokeTests-CE.xml"/>
+	<property name="test.testng.suite.file" value="SmokeTests-CE.xml" />
 
 	<taskdef resource="testngtasks" classpath="${basedir}/lib/testng-6.9.6.jar" />
 
@@ -289,51 +287,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         This process shall execute Selenium Java tests.
         ====================================================================-->
-	<fileset id="mixed.tests" dir="${classes.dir}">
-		<include name="**/CToolsTestSuite.class" />
-	</fileset>
-
 	<target name="run-test-java">
 		<mkdir dir="${test.java.reports.dir}" />
 
 		<testng classpathref="test.java.classpath" outputdir="${test.java.reports.dir}">
+			<!-- The JVM arg is need to configure the logging system -->
 			<jvmarg value="-Dlog4j.configurationFile=./log4j2.xml" />
 			<xmlfileset dir="${src.test.suite.dir}" includes="${test.testng.suite.file}" />
 		</testng>
-	</target>
-
-	<!--
-  <junit fork="yes" printsummary="true" showoutput="true" haltonfailure="false" haltonerror="false">
-    <classpath refid="test.java.classpath" />
-
-    <formatter type="plain"/>
-    <formatter type="xml"/>
-
-    <batchtest todir="${test.java.reports.dir}">
-      <fileset dir="${classes.dir}" includes="**/CToolsTestSuite.class"/>
-    </batchtest>
-  </junit>
-  <junitreport todir="${test.java.reports.dir}">
-    <fileset dir="${test.java.reports.dir}">
-      <include name="${test.java.reports.dir}/TEST-*.xml"/>
-    </fileset>
-    <report format="frames" todir="${test.java.reports.dir}/html"/>
-  </junitreport>
-  -->
-
-
-	<!--=======================================================================
-        generate-junit-report
-
-        This process shall generate the html report of the executed tests.
-        ====================================================================-->
-	<target name="generate-junit-report">
-		<junitreport todir="${test.java.reports.dir}">
-			<fileset dir="${test.java.reports.dir}">
-				<include name="TEST-*.xml" />
-			</fileset>
-			<report format="frames" todir="${test.java.reports.html.dir}" />
-		</junitreport>
 	</target>
 
 	<!--=======================================================================

@@ -41,30 +41,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-/*
-@RunWith( Suite.class )
-@Suite.SuiteClasses( {
-    // ##### Execution Order #####
-    // Start Tests
-    LoginPentaho.class,
-    // CDF
-    SuiteCDF.class,
-    // CDE
-    SuiteCDE.class,
-    // CDA
-    SuiteCDA.class,
-    // CGG
-    SuiteCGG.class,
-    // RequireJS
-    SuiteRequireJS.class,
-    // Security
-    SuiteSecurity.class,
-    // Issues
-    //SuiteIssues.class,
-    //Marketplace
-    //SuiteMarketplace.class,
-    // End Tests
-    LogoutPentaho.class } )*/
 public class BaseTest {
   // Instance of the driver (browser emulator)
   protected WebDriver driver;

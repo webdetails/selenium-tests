@@ -47,13 +47,13 @@ import com.pentaho.ctools.utils.PageUrl;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-public class BullertChartTestCase extends BaseTest {
+public class BullerChartTestCase extends BaseTest {
   //Instance to be used on this.wait commands
   private final Wait<WebDriver> wait = CToolsTestSuite.getWait();
   //Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private final Logger log = LogManager.getLogger( BullertChartTestCase.class );
+  private final Logger log = LogManager.getLogger( BullerChartTestCase.class );
 
   /**
    * ############################### Test Case 0 ###############################
