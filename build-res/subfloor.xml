@@ -173,9 +173,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<!-- TEST propertis -->
 	<property name="test.html.reports.dir" value="${basedir}/reports-html" description="Directory to drag reports for the selenium html scripts" />
 	<property name="test.java.reports.dir" value="${basedir}/reports-java" description="Directory to drag reports" />
-	<property name="test.java.reports.html.dir" value="${basedir}/reports-java/html" description="Directory to drag " />
-
-	<property name="log4j2" value="${basedir}/log4j2.xml" />
+	<property name="test.java.reports.html.dir" value="${basedir}/reports-java/html" description="Directory for the generated report in HTML" />
+	<property name="test.testng.suite.file" value="SmokeTests-CE.xml"/>
 
 	<taskdef resource="testngtasks" classpath="${basedir}/lib/testng-6.9.6.jar" />
 
@@ -299,7 +298,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 		<testng classpathref="test.java.classpath" outputdir="${test.java.reports.dir}">
 			<jvmarg value="-Dlog4j.configurationFile=./log4j2.xml" />
-			<xmlfileset dir="${src.test.suite.dir}" includes="SmokeTests-CE.xml" />
+			<xmlfileset dir="${src.test.suite.dir}" includes="${test.testng.suite.file}" />
 		</testng>
 	</target>
 
