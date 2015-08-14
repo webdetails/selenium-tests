@@ -68,7 +68,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 <project name="subfloor" basedir="." default="default" xmlns:ivy="antlib:org.apache.ivy.ant">
-	<description>
+	
+  <description>
         -------------------------------------------------------------------------------
         subfloor.xml provides tasks needed to perform a project build.
         It is typically not used directly but imported by each project's build.xml
@@ -132,7 +133,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 	<!-- Compile properties -->
 	<property name="bin.dir" value="${basedir}/bin" description="Base directory for all non-dist build output" />
-	<property name="src.java.dir" value="${basedir}/src-java" description="Source code of Selenium Java tests." />
+	<property name="src.java.dir" value="${basedir}/src/main/java" description="Source code of PageFactory for Selenium tests." />
+	<property name="src.test.java.dir" value="${basedir}/src/test/java" description="Source code of test to run." />
+	<property name="src.test.suite.dir" value="${basedir}/src/test/resources/TestNG_suites" description="Location of all xml files." />
 	<property name="build.dir" value="${basedir}/build" description="Build directory." />
 	<property name="classes.dir" value="${build.dir}/classes" description="Classes directory created during compilation."/>
 	<property name="jar.dir" value="${build.dir}/jar" description="Jar directory created during compilation."/>
@@ -191,7 +194,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="test.html.reports.dir" value="${basedir}/reports-html" description="Directory to drag reports for the selenium html scripts"/>
 	<property name="test.java.reports.dir" value="${basedir}/reports-java" description="Directory to drag reports"/>
 	<property name="test.java.reports.html.dir" value="${basedir}/reports-java/html" description="Directory to drag "/>
+	
+	<property name="log4j2" value="${basedir}/log4j2.xml" />
 
+	<taskdef resource="testngtasks" classpath="${basedir}/lib/testng-6.9.6.jar" />
+	
 	<!-- CLASSPATH FOR TEST-JAVA -->
 	<path id="test.java.classpath">
 		<fileset dir="${lib.ext.dir}" includes="**/*" />
@@ -263,12 +270,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
 	<target name="compile" depends="resolve-test-java">
 		<mkdir dir="${classes.dir}"/>
-		<javac srcdir="${src.java.dir}" destdir="${classes.dir}"
+		<javac srcdir="${src.java.dir};${src.test.java.dir}" destdir="${classes.dir}"
                fork="yes"
                debug="true"
                includeAntRuntime="false"
                classpathref="test.java.classpath"
-               nowarn="true"/>
+               nowarn="true">
+			 <!--<compilerarg value="-Xlint"/>-->
+			</javac>
 	</target>
 
 	<!--=======================================================================
@@ -306,25 +315,38 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         This process shall execute Selenium Java tests.
         ====================================================================-->
+	<fileset id="mixed.tests" dir="${classes.dir}">
+	    <include name="**/CToolsTestSuite.class"/>
+	</fileset>
+
 	<target name="run-test-java">
 		<mkdir dir="${test.java.reports.dir}"/>
-		<junit fork="yes" printsummary="true" showoutput="true" haltonfailure="false" haltonerror="false">
-			<classpath refid="test.java.classpath" />
-
-			<formatter type="plain"/>
-			<formatter type="xml"/>
-
-			<batchtest todir="${test.java.reports.dir}">
-				<fileset dir="${classes.dir}" includes="**/CToolsTestSuite.class"/>
-			</batchtest>
-		</junit>
-		<junitreport todir="${test.java.reports.dir}">
-			<fileset dir="${test.java.reports.dir}">
-				<include name="${test.java.reports.dir}/TEST-*.xml"/>
-			</fileset>
-			<report format="frames" todir="${test.java.reports.dir}/html"/>
-		</junitreport>
+		
+		<testng classpathref="test.java.classpath" outputdir="${test.java.reports.dir}">
+			<jvmarg value="-Dlog4j.configurationFile=./log4j2.xml"/>
+      <xmlfileset dir="${src.test.suite.dir}" includes="SmokeTests-CE.xml"/>
+		</testng>		
 	</target>
+  
+  <!--
+  <junit fork="yes" printsummary="true" showoutput="true" haltonfailure="false" haltonerror="false">
+    <classpath refid="test.java.classpath" />
+
+    <formatter type="plain"/>
+    <formatter type="xml"/>
+
+    <batchtest todir="${test.java.reports.dir}">
+      <fileset dir="${classes.dir}" includes="**/CToolsTestSuite.class"/>
+    </batchtest>
+  </junit>
+  <junitreport todir="${test.java.reports.dir}">
+    <fileset dir="${test.java.reports.dir}">
+      <include name="${test.java.reports.dir}/TEST-*.xml"/>
+    </fileset>
+    <report format="frames" todir="${test.java.reports.dir}/html"/>
+  </junitreport>
+  -->
+	
 
 	<!--=======================================================================
         generate-junit-report

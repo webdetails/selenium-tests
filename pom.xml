@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.pentaho</groupId>
+	<artifactId>webdetails-qa</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+
+	<name>Pentaho Test Automation</name>
+	<description>Automation Tests for CTools</description>
+	<url>http://www.pentaho.com</url>
+
+	<organization>
+		<name>Pentaho</name>
+		<url>http://www.pentaho.com</url>
+	</organization>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<compile.source.version>1.7</compile.source.version>
+		<compile.target.version>1.7</compile.target.version>
+		
+		<dependency.org.seleniumhq.selenium>2.44.0</dependency.org.seleniumhq.selenium>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>qaprosoft_releases</id>
+			<name>Qaprosoft Releases</name>
+			<url>http://ci.qaprosoft.com:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>qaprosoft_snapshots</id>
+			<name>Qaprosoft Snapshots</name>
+			<url>http://ci.qaprosoft.com:8081/nexus/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+			<id>private-3rd-party-release</id>
+			<url>http://nexus.pentaho.org/content/repositories/private-3rd-party-release</url>
+		</repository>
+		<repository>
+			<id>public-6.0-release</id>
+			<url>http://nexus.pentaho.org/content/repositories/public-6.0-release</url>
+		</repository>
+		<repository>
+			<id>public-6.0-nightly</id>
+			<url>http://nexus.pentaho.org/content/repositories/public-6.0-nightly</url>
+		</repository>
+		<repository>
+			<id>public-5.4-release</id>
+			<url>http://nexus.pentaho.org/content/repositories/public-5.4-release</url>
+		</repository>
+		<repository>
+			<id>public-5.4-nightly</id>
+			<url>http://nexus.pentaho.org/content/repositories/public-5.4-nightly</url>
+		</repository>
+		<repository>
+			<id>public-legacy</id>
+			<url>http://nexus.pentaho.org/content/repositories/public-legacy</url>
+		</repository>
+		<repository>
+			<id>public-3rd-party-release</id>
+			<url>http://nexus.pentaho.org/content/repositories/public-3rd-party-release</url>
+		</repository>
+		<repository>
+			<id>hosted-nightly-repos</id>
+			<url>http://nexus.pentaho.org/content/repositories/hosted-nightly-repos</url>
+		</repository>
+		<repository>
+			<id>public-release</id>
+			<url>http://nexus.pentaho.org/content/repositories/public-release</url>
+		</repository>
+		<repository>
+			<id>proxy-maven-central</id>
+			<url>http://nexus.pentaho.org/content/repositories/proxy-maven-central</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+
+		<!-- Selenium Java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${dependency.org.seleniumhq.selenium}</version>
+		</dependency>
+		<!-- LOGGING -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<!-- ###-Testing-### -->
+		<!-- TestNG -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.6</version>
+		</dependency>
+		<!-- Assertations -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${compile.source.version}</source>
+					<target>${compile.target.version}</target>
+					<includes>
+					   <include>**/src/test/java/com/pentaho/ctools/utils/ElementHelper.java</include>
+					   <include>**/src/test/java/com/pentaho/ctools/utils/CToolsTestSuite.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<useSystemClassLoader>false</useSystemClassLoader>
+					<reportsDirectory>${project.build.directory}/surefire</reportsDirectory>
+					<suiteXmlFiles>
+						<suiteXmlFile>${project.build.directory}/test-classes/TestNG_suites/${suite}.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

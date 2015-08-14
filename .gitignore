@@ -1,5 +1,7 @@
 build/
 reports-java/
+target/
+test-output/
 lib/ext/
 /.settings/
 /.project
