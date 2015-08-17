@@ -34,7 +34,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -567,9 +567,9 @@ public class CDELayoutPanel extends BaseTest {
     this.failure = 1;
   }
 
-  @AfterTest
+  @AfterClass( alwaysRun = true )
   public void tearDown() {
-    this.log.info( "tearDown##" + CDELayoutPanel.class.getSimpleName() );
+    this.log.info( "tearDownClass" );
     if ( this.failure == 0 ) {
       BrowseFiles browse = new BrowseFiles( driver );
       browse.DeleteMultipleFilesByName( "/public", "CDE366" );

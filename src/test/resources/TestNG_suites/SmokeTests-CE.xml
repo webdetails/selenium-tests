@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="SmokeTests-CE" verbose="1">
-
-	<test verbose="1" name="All CE Tests">
+<suite name="SmokeTests-CE" verbose="10" >
+	<test name="All CE Tests" verbose="10" >
 		<classes>
-			<!-- LOGIN -->
+			     <!-- LOGIN -->
       <class name="com.pentaho.ctools.main.LoginPentaho" />
       <!-- CDF -->
       <class name="com.pentaho.ctools.cdf.AutoCompleteBoxComponent" />

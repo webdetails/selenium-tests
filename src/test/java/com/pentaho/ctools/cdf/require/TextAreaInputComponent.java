@@ -29,7 +29,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -51,7 +51,7 @@ public class TextAreaInputComponent extends BaseTest {
   /**
    * Go to the TextAreaInputComponent web page.
    */
-  @BeforeTest
+  @BeforeClass
   public void setUpTestCase() {
     //Go to AddinReference
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextareaInputComponent%3Atext_area_input_component.xcdf/generatedContent" );

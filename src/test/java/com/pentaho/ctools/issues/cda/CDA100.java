@@ -35,7 +35,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -178,9 +178,9 @@ public class CDA100 extends BaseTest {
     }
   }
 
-  @AfterTest
-  public void tearDown() {
-    this.log.info( "tearDown##" + CDA100.class.getSimpleName() );
+  @AfterClass( alwaysRun = true )
+  public void tearDownClass() {
+    this.log.info( "tearDownClass" );
     //In case something went wrong we delete the file
     DeleteFile();
   }

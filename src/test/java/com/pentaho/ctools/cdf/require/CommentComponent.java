@@ -38,7 +38,7 @@ import org.hamcrest.CoreMatchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -380,10 +380,10 @@ public class CommentComponent extends BaseTest {
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
   }
 
-  @AfterTest
-  public void tearDown() {
+  @AfterClass( alwaysRun = true )
+  public void tearDownClass() {
     if ( this.tcRemoveComment ) {
-      this.log.debug( "tearDown" );
+      this.log.info( "tearDownClass" );
       cleanAllComments();
     }
   }

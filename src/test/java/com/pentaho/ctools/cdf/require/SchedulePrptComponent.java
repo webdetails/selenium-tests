@@ -39,7 +39,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -392,9 +392,10 @@ public class SchedulePrptComponent extends BaseTest {
     }
   }
 
-  @AfterTest
-  public void tearDown() {
+  @AfterClass( alwaysRun = true )
+  public void tearDownClass() {
     if ( this.bRemoveSchedule ) {
+      this.log.info( "tearDownClass" );
       removeAllCreatedSchedules();
     }
   }

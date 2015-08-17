@@ -28,7 +28,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -421,9 +421,9 @@ public class CDE452 extends BaseTest {
     }
   }
 
-  @AfterTest
-  public void tearDown() {
+  @AfterClass( alwaysRun = true )
+  public void tearDownClass() {
+    this.log.info( "tearDownClass" );
     failed();
-    this.log.info( "tearDown##" + CDE452.class.getSimpleName() );
   }
 }

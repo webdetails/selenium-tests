@@ -30,7 +30,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -49,8 +49,8 @@ public class WidgetReference extends BaseTest {
   //Log instance
   private final Logger log = LogManager.getLogger( WidgetReference.class );
 
-  @BeforeTest
-  public void setUpTestCase() {
+  @BeforeClass
+  public void setUpClass() {
     //Go to AddinReference
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Awidgets.wcdf/generatedContent" );
 
@@ -180,6 +180,5 @@ public class WidgetReference extends BaseTest {
     acts.perform();
     String tooltipValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]" ) );
     assertEquals( "Trucks and Buses, APAC: 488", tooltipValue );
-
   }
 }

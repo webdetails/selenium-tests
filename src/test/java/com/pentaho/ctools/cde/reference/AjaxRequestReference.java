@@ -27,7 +27,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -46,15 +45,6 @@ public class AjaxRequestReference extends BaseTest {
   //Log instance
   private final Logger log = LogManager.getLogger( AjaxRequestReference.class );
 
-  @BeforeTest
-  public void setUpTestCase() {
-    //Go to AddinReference
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AajaxRequest.wcdf/generatedContent" );
-
-    //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-  }
-
   /**
    * ############################### Test Case 1 ###############################
    *
@@ -68,6 +58,11 @@ public class AjaxRequestReference extends BaseTest {
   @Test
   public void tc01_PageContent_InformationPresent() {
     this.log.info( "tc01_PageContent_InformationPresent" );
+
+    //Go to AddinReference
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AajaxRequest.wcdf/generatedContent" );
+    //NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     /*
      * ## Step 1

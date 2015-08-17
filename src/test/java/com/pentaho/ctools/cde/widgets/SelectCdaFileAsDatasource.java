@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.cde.widgets.utils.WidgetUtils;
@@ -18,7 +18,6 @@ import com.pentaho.ctools.utils.ElementHelper;
  * NOTE - The test was created regarding issue CDE-140
  */
 public class SelectCdaFileAsDatasource {
-
   // Instance of the driver (browser emulator)
   private WebDriver driver;
   // Instance to be used on wait commands
@@ -33,8 +32,8 @@ public class SelectCdaFileAsDatasource {
   /**
    * Where we do stuff (like: clean, prepare data) before start testing.
    */
-  @BeforeTest
-  public void setUp() {
+  @BeforeClass
+  public void setUpClass() {
     // ##Step 0 - Delete the widget
     WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
   }

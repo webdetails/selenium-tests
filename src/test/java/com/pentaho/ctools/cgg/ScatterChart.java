@@ -51,7 +51,7 @@ public class ScatterChart extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Bar Chart
+   *    Scatter Chart
    * Description:
    *    We pretend to check if an image is displayed with in a chart.
    * Steps:

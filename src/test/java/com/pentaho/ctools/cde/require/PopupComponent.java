@@ -30,7 +30,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -49,7 +49,7 @@ public class PopupComponent extends BaseTest {
   //Log instance
   private final Logger log = LogManager.getLogger( PopupComponent.class );
 
-  @BeforeTest
+  @BeforeClass
   public void setUpTestCase() {
     //Go to AddinReference
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3APopupComponent%3Apopup.wcdf/generatedContent" );

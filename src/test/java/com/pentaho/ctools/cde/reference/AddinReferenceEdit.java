@@ -27,7 +27,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -123,9 +123,9 @@ public class AddinReferenceEdit extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='notifyBar']" ) );
   }
 
-  @AfterTest
-  public void tearDown() {
-    this.log.info( "tearDown##" + AddinReferenceEdit.class.getSimpleName() );
+  @AfterClass( alwaysRun = true )
+  public void tearDownClass() {
+    this.log.info( "tearDownClass##" + AddinReferenceEdit.class.getSimpleName() );
     if ( this.bFontChanged ) {
       ChangeFontSize( "18" );
     }

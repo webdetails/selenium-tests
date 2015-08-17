@@ -28,7 +28,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.cde.widgets.utils.WidgetUtils;
@@ -114,9 +114,9 @@ public class CDE453 extends BaseTest {
     this.noAssertFails = true;
   }
 
-  @AfterTest
+  @AfterClass( alwaysRun = true )
   public void tearDownClass() {
-    this.log.info( "tearDown##" + CDE453.class.getSimpleName() );
+    this.log.info( "tearDownClass" );
 
     if ( !this.noAssertFails ) {
       WidgetUtils.RemoveWidgetByName( driver, this.WIDGET_NAME );

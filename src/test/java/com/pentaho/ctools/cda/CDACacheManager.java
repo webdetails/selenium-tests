@@ -32,7 +32,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -51,7 +51,7 @@ public class CDACacheManager extends BaseTest {
   //Log instance
   private final Logger log = LogManager.getLogger( CDACacheManager.class );
 
-  @BeforeTest
+  @BeforeClass
   public void setUpTestCase() {
     //Go to the CDA Cache Manager web page.
     driver.get( baseUrl + "plugin/cda/api/manageCache" );
