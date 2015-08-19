@@ -123,9 +123,9 @@ public class ButtonComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    String buttonText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button" ) );
-    assertEquals( "A button", buttonText );
-    this.elemHelper.FindElement( driver, By.xpath( "//button" ) ).click();
+    String buttonText = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//button" ), "A button" );
+    assertEquals( buttonText, "A button" );
+    this.elemHelper.Click( driver, By.xpath( "//button" ) );
 
     /*
      * ## Step 2

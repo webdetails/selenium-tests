@@ -129,8 +129,12 @@ public class CommentComponent extends BaseTest {
 
     //Check the number of divs with id 'nCommentComponent'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nCommentComponent = driver.findElements( By.cssSelector( "commentComponent" ) ).size();
-    assertEquals( 1, nCommentComponent );
+    int nCommentComponent = 0;
+    WebElement divComment = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.commentComponent" ) );
+    if ( divComment != null ) {
+      nCommentComponent = driver.findElements( By.cssSelector( "div.commentComponent" ) ).size();
+    }
+    assertEquals( nCommentComponent, 1 );
   }
 
   /**

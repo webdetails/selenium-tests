@@ -21,16 +21,6 @@
  ******************************************************************************/
 package com.pentaho.ctools.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
-import org.junit.rules.MethodRule;
-import org.junit.runners.model.FrameworkMethod;
-import org.junit.runners.model.Statement;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 
 /**
  * The code was extracted from:
@@ -38,6 +28,7 @@ import org.openqa.selenium.WebDriver;
  * 
  * @author webdetails
  */
+/*
 public class ScreenshotTestRule implements MethodRule {
 
   static WebDriver driver;
@@ -80,4 +71,4 @@ public class ScreenshotTestRule implements MethodRule {
       }
     };
   }
-}
+}*/

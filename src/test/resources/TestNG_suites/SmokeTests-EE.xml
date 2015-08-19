@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="SmokeTests-CE" verbose="1">
-	<test name="All CE Tests" verbose="1" >
+<suite name="SmokeTests-EE" verbose="2">
+	<test name="All EE Tests">
 		<classes>
 			<!-- LOGIN -->
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
@@ -105,12 +105,7 @@
 			<class name="com.pentaho.ctools.main.LogoutPentaho" />
 		</classes>
 	</test>
-	<!-- 
-	MarketPlacePage.class,
-  MarketplaceFilters.class,
-  PluginsList.class,
-  InstalledTab.class,
-  PluginDetailsPopup.class
-	 -->
+	<!-- MarketPlacePage.class, MarketplaceFilters.class, PluginsList.class, 
+		InstalledTab.class, PluginDetailsPopup.class -->
 
 </suite>
