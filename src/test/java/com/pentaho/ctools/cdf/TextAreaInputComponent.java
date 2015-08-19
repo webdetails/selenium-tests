@@ -26,9 +26,7 @@ import static org.testng.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -157,16 +155,13 @@ public class TextAreaInputComponent extends BaseTest {
   public void tc3_InputSmallPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "Hello World!";
-    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
-    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
-    this.elemHelper.FindElement( driver, By.xpath( "//h3[3]" ) ).click();
+
+    this.elemHelper.SendKeys( driver, By.id( "myInput" ), strInputString );
+    this.elemHelper.Click( driver, By.xpath( "//h3[3]" ) );
 
     // ## Step 2
-    wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
+    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
     String expectedCnfText = "you typed: " + strInputString;
-    alert.accept();
 
     assertEquals( expectedCnfText, confirmationMsg );
   }
@@ -191,16 +186,15 @@ public class TextAreaInputComponent extends BaseTest {
     strInputString += strInputString;
     strInputString += strInputString;
     strInputString += strInputString;
-    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
-    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
-    this.elemHelper.FindElement( driver, By.xpath( "//h3[3]" ) ).click();
+
+    this.elemHelper.Clear( driver, By.id( "myInput" ) );
+    this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    this.elemHelper.SendKeys( driver, By.id( "myInput" ), strInputString );
+    this.elemHelper.Click( driver, By.xpath( "//h3[3]" ) );
 
     // ## Step 2
-    wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
+    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
     String expectedCnfText = "you typed: " + strInputString;
-    alert.accept();
 
     assertEquals( expectedCnfText, confirmationMsg );
   }
@@ -222,16 +216,15 @@ public class TextAreaInputComponent extends BaseTest {
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
     String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
-    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
-    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
-    this.elemHelper.FindElement( driver, By.xpath( "//h3[3]" ) ).click();
+
+    this.elemHelper.Clear( driver, By.id( "myInput" ) );
+    this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    this.elemHelper.SendKeys( driver, By.id( "myInput" ), strInputString );
+    this.elemHelper.Click( driver, By.xpath( "//h3[3]" ) );
 
     // ## Step 2
-    wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
+    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
     String expectedCnfText = "you typed: " + strInputString;
-    alert.accept();
 
     assertEquals( expectedCnfText, confirmationMsg );
   }

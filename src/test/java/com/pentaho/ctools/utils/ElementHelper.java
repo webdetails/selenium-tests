@@ -1371,7 +1371,6 @@ public class ElementHelper {
    */
   public void ClickAndSendKeys( final WebDriver driver, final By locator, final CharSequence... keysToSend ) {
     this.log.debug( "ClickAndSendKeys::Enter" );
-    this.log.debug( "Locator: " + locator.toString() );
 
     try {
       WebElement element = WaitForElementPresenceAndVisible( driver, locator );
@@ -1397,7 +1396,6 @@ public class ElementHelper {
    */
   public void SendKeys( final WebDriver driver, final By locator, final CharSequence... keysToSend ) {
     this.log.debug( "SendKeys::Enter" );
-    this.log.debug( "Locator: " + locator.toString() );
 
     try {
       WebElement element = WaitForElementPresenceAndVisible( driver, locator );
@@ -1409,6 +1407,30 @@ public class ElementHelper {
     } catch ( StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception" );
       SendKeys( driver, locator, keysToSend );
+    }
+    this.log.debug( "SendKeys::Exit" );
+  }
+
+  /**
+   * This method find the element and clear the contents in the element 
+   * (input or textarea).
+   * 
+   * @param driver
+   * @param locator
+   */
+  public void Clear( final WebDriver driver, final By locator ) {
+    this.log.debug( "Clear::Enter" );
+
+    try {
+      WebElement element = WaitForElementPresenceAndVisible( driver, locator );
+      if ( element != null ) {
+        element.clear();
+      } else {
+        this.log.error( "Element is null!" );
+      }
+    } catch ( StaleElementReferenceException e ) {
+      this.log.warn( "Stale Element Reference Exception" );
+      Clear( driver, locator );
     }
     this.log.debug( "SendKeys::Exit" );
   }
