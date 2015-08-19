@@ -79,6 +79,7 @@
       <class name="com.pentaho.ctools.cdf.require.SelectComponent" />
       <class name="com.pentaho.ctools.cdf.require.SelectMultiComponent" />
       <class name="com.pentaho.ctools.cdf.require.TableComponent" />
+      <class name="com.pentaho.ctools.cdf.require.TemplateComponent" />
       <class name="com.pentaho.ctools.cdf.require.TextAreaInputComponent" />
       <class name="com.pentaho.ctools.cdf.require.TextComponent" />
       <class name="com.pentaho.ctools.cdf.require.TextInputComponent" />
