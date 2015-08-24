@@ -69,7 +69,8 @@ public class MapComponentReference extends BaseTest {
     driver.get( PageUrl.MAP_COMPONENT_REFERENCE );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
 
     //Wait for page render on each map test
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km", 90 );

@@ -67,7 +67,7 @@ public class MapComponentFullTest extends BaseTest {
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 300 );
 
     // Check if the chart is already rendered
     this.elemHelper.WaitForElementPresence( driver, By.xpath( "//*[local-name()='image'][1]" ), 90 );
