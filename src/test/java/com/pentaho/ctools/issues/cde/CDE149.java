@@ -108,45 +108,36 @@ public class CDE149 extends BaseTest {
      */
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popupbox" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "ParameterList" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonCancel" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//input[@class='ParameterListAddButton']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@class='popup-add-row-button']" ) );
     assertNotNull( element );
     for ( int i = 1; i < 16; i++ ) {
-      this.elemHelper.Click( driver, By.xpath( "//input[@class='ParameterListAddButton']" ) );
+      this.elemHelper.Click( driver, By.xpath( "//button[@class='popup-add-row-button']" ) );
     }
 
     /*
      * ## Step 4
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td/div/input" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "parameters_16" ) );
     assertNotNull( element );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[4]/div/input" ), By.id( "popup_state0_buttonCancel" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[5]/input" ), By.id( "popup_state0_buttonCancel" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[4]/div/input" ), By.id( "popup_state0_buttonOk" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[5]/input" ), By.id( "popup_state0_buttonOk" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[4]/div/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td[5]/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td/div/input" ) );
+    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.id( "parameters_16" ), By.id( "popup_state0_buttonCancel" ) ) );
+    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.id( "parameters_16" ), By.id( "popup_state0_buttonOk" ) ) );
+    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.id( "parameters_16" ), By.xpath( "//button[@class='popup-add-row-button']" ) ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "parameters_15" ) );
     assertNotNull( element );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[4]/div/input" ), By.id( "popup_state0_buttonCancel" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[5]/input" ), By.id( "popup_state0_buttonCancel" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[4]/div/input" ), By.id( "popup_state0_buttonOk" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[5]/input" ), By.id( "popup_state0_buttonOk" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[4]/div/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[15]/td[5]/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[16]/td/div/input" ) );
+    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.id( "parameters_15" ), By.id( "popup_state0_buttonCancel" ) ) );
+    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.id( "parameters_15" ), By.id( "popup_state0_buttonOk" ) ) );
+    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.id( "parameters_15" ), By.xpath( "//button[@class='popup-add-row-button']" ) ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "parameters_14" ) );
     assertNotNull( element );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[4]/div/input" ), By.id( "popup_state0_buttonCancel" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[5]/input" ), By.id( "popup_state0_buttonCancel" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[4]/div/input" ), By.id( "popup_state0_buttonOk" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[5]/input" ), By.id( "popup_state0_buttonOk" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[4]/div/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
-    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.xpath( "//div[@class='ParameterList']/table/tbody/tr[14]/td[5]/input" ), By.xpath( "//input[@class='ParameterListAddButton']" ) ) );
+    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.id( "parameters_14" ), By.id( "popup_state0_buttonCancel" ) ) );
+    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.id( "parameters_14" ), By.id( "popup_state0_buttonOk" ) ) );
+    assertTrue( this.elemHelper.ElementsNotOverlap( driver, By.id( "parameters_14" ), By.xpath( "//button[@class='popup-add-row-button']" ) ) );
   }
 
 }

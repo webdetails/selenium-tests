@@ -543,6 +543,13 @@ public class MondrianJNDI extends BaseTest {
     String queryTime = this.elemHelper.WaitForElementPresentGetText( cdaCacheManager, By.xpath( "//div[@id='lines']/div/div[6]" ) );
     String queryStatus = this.elemHelper.WaitForElementPresentGetText( cdaCacheManager, By.xpath( "//div[@id='lines']/div/div[7]" ) );
 
+    //AssertPopup for execute and delete
+    WebElement delete = this.elemHelper.FindElement( cdaCacheManager, By.xpath( "//a/img[@title='Remove Query']" ) );
+    WebElement execute = this.elemHelper.FindElement( cdaCacheManager, By.xpath( "//a/img[@title='Execute Query']" ) );
+    assertNotNull( execute );
+    assertNotNull( delete );
+
+    //Validate execution details
     try {
       assertEquals( "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda (1)", queryName );
       assertEquals( "status", queryParam1 );

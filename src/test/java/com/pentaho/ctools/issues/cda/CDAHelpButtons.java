@@ -112,16 +112,9 @@ public class CDAHelpButtons extends BaseTest {
     String p2Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='outputIndexHelp']/p[2]" ) );
     assertEquals( "Output Index Id", p1Text );
     assertEquals( "This Id is used to select the desired set of Output Options for the current Data Access.", p2Text );
-
-    /*
-     * ## Step 3
-     */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "outputIndexId" ) );
-    assertNotNull( element );
-    element.click();
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
-    String styleText = this.elemHelper.FindElement( driver, By.id( "outputIndexId" ) ).getAttribute( "class" );
-    assertEquals( "cdaButton cdaButtonShort cdaButtonSelected", styleText );
+    WebElement closeButton = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='outputIndexHelp']//a[@class='jqmClose']" ) );
+    assertNotNull( closeButton );
+    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='outputIndexHelp']//a[@class='jqmClose']" ) ).click();
 
     /*
      * ## Step 3
@@ -144,5 +137,15 @@ public class CDAHelpButtons extends BaseTest {
     assertNotNull( element );
     String styleText2 = this.elemHelper.FindElement( driver, By.id( "orderDate" ) ).getAttribute( "class" );
     assertEquals( "cdaButton cdaButtonSelected", styleText2 );
+
+    /*
+     * ## Step 5
+     */
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "outputIndexId" ) );
+    assertNotNull( element );
+    element.click();
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
+    String styleText = this.elemHelper.FindElement( driver, By.id( "outputIndexId" ) ).getAttribute( "class" );
+    assertEquals( "cdaButton cdaButtonShort cdaButtonSelected", styleText );
   }
 }
