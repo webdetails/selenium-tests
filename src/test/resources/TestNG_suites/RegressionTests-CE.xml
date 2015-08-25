@@ -6,6 +6,69 @@
 	<test verbose="1" name="All CE Tests">
 		<classes>
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
+			
+			<!-- CDA -->
+			<class name="com.pentaho.ctools.issues.cda.CDA45"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA46"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA55"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA99"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA100"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA103"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA106"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA108"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA109"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA110"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA112"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA118"/>
+			<class name="com.pentaho.ctools.issues.cda.CDA121"/>
+			
+			<!-- CDE -->
+			<class name="com.pentaho.ctools.issues.cde.CDE149"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE267"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE269"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE286"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE342"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE347"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE356"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE367"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE384"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE388"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE392"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE394"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE395"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE396"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE399"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE403"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE404"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE408"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE412"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE413"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE417"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE430"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE438"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE446"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE452"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE453"/>
+			<class name="com.pentaho.ctools.issues.cde.CDE505"/>
+			<class name="com.pentaho.ctools.issues.cde.CDEComponentPanel"/>
+			<class name="com.pentaho.ctools.issues.cde.CDEDataPanel"/>
+			<class name="com.pentaho.ctools.issues.cde.CDELayoutPanel"/>
+			
+			<!-- CDF -->
+			<class name="com.pentaho.ctools.issues.cdf.AutoIncludes"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF149"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF379"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF406"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF424"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF430"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF435"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF442"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF469"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF474"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF486"/>
+			<class name="com.pentaho.ctools.issues.cdf.CDF501"/>
+			<class name="com.pentaho.ctools.issues.cdf.TableComponent"/>
+			
 			<class name="com.pentaho.ctools.main.LogoutPentaho" />
 		</classes>
 	</test>
