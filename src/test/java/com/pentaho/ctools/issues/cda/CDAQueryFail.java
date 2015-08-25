@@ -52,11 +52,11 @@ import com.pentaho.ctools.utils.ElementHelper;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-public class CDA118 extends BaseTest {
+public class CDAQueryFail extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private final Logger log = LogManager.getLogger( CDA118.class );
+  private final Logger log = LogManager.getLogger( CDAQueryFail.class );
 
   /**
    * ############################### Test Case 1 ###############################

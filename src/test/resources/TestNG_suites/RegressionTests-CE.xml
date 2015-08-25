@@ -8,16 +8,16 @@
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
 			
 			<!-- CDA -->
-			<class name="com.pentaho.ctools.issues.cda.CDA45"/>
-			<class name="com.pentaho.ctools.issues.cda.CDA46"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA55"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA99"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA103"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA106"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA109"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA110"/>
-			<class name="com.pentaho.ctools.issues.cda.CDA118"/>
 			<class name="com.pentaho.ctools.issues.cda.CDAExportToXls"/>
+			<class name="com.pentaho.ctools.issues.cda.CDAHelpButtons"/>
+			<class name="com.pentaho.ctools.issues.cda.CDAQueryFail"/>
+			
 			
 			<!-- CDE -->
 			<class name="com.pentaho.ctools.issues.cde.CDE149"/>
