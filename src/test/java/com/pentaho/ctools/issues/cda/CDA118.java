@@ -23,35 +23,24 @@ package com.pentaho.ctools.issues.cda;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
-import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
 
 /**
  * The script is testing the issue:
- * - http://jira.pentaho.com/browse/CDA-118
  * - http://jira.pentaho.com/browse/CDA-123
  * - http://jira.pentaho.com/browse/CDA-147
  * - http://jira.pentaho.com/browse/CDA-145
  *
  * and the automation test is described:
- * - http://jira.pentaho.com/browse/QUALITY-1119
  * - http://jira.pentaho.com/browse/QUALITY-1122
  * - http://jira.pentaho.com/browse/QUALITY-1140
  * - http://jira.pentaho.com/browse/QUALITY-1129
@@ -64,8 +53,6 @@ import com.pentaho.ctools.utils.ElementHelper;
  *
  */
 public class CDA118 extends BaseTest {
-  // The path for the export file
-  private final String exportFilePath = downloadDir + "\\cda-export.xls";
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
@@ -75,9 +62,8 @@ public class CDA118 extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Asserting that export to excel works when exporting query with more then 10 parameters
+   *    Asserting functionalities on query fail
    * Description:
-   *    CDA-118: asserting that export to excel works when exporting query with an integer parameter.
    *    CDA-123: Feedback given when query fails
    *    CDA-147: Can change parameter when query fails and refresh query
    *    CDA-145: Adding outputColumnName to the URL filters the query results
@@ -86,13 +72,12 @@ public class CDA118 extends BaseTest {
    *    1. Select "Sql Query on SampleData - Jndi" on "dataAccessSelector" and assert error message
    *    2. Change value on salesParam box to 10000 and refresh query
    *    3. Wait for and assert elements and text on page
-   *    4. Export file and assure it has same md5 as expected
-   *    5. Open the query with outpuColumnName in the URL and assert results were filtered
+   *    4. Open the query with outpuColumnName in the URL and assert results were filtered
    *
    */
   @Test
-  public void tc01_CdaFileViewer_ExcelOutputIndex() {
-    this.log.info( "tc01_CdaFileViewer_ExcelOutputIndex" );
+  public void tc01_CdaFileViewer_QueryFail() {
+    this.log.info( "tc01_CdaFileViewer_QueryFail" );
 
     /*
      * ## Step 1
@@ -152,47 +137,6 @@ public class CDA118 extends BaseTest {
     /*
      * ## Step 4
      */
-    WebElement buttonExport = this.elemHelper.FindElement( driver, By.id( "export" ) );
-    assertNotNull( buttonExport );
-    try {
-      //Delete the existence if exist
-      new File( this.exportFilePath ).delete();
-
-      //Click to export
-      buttonExport.click();
-
-      //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher();
-      dw.WatchForCreate( downloadDir );
-
-      //Check if the file really exist
-      File exportFile = new File( this.exportFilePath );
-      assertTrue( exportFile.exists() );
-
-      //Wait for the file to be downloaded totally
-      for ( int i = 0; i < 50; i++ ) { //we only try 50 times == 5000 ms
-        long nSize = FileUtils.sizeOf( exportFile );
-        //Since the file always contents the same data, we wait for the expected bytes
-        if ( nSize >= 13824 ) {
-          break;
-        }
-        Thread.sleep( 100 );
-      }
-
-      //Check if the file downloaded is the expected
-      String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
-      assertEquals( md5, "b82cf42595b697b00eebf2a9c083c3b7" );
-
-      //The delete file
-      DeleteFile();
-
-    } catch ( Exception e ) {
-      this.log.error( e.getMessage() );
-    }
-
-    /*
-     * ## Step 5
-     */
     //Open Sample with outpuColumnName in the URL
     driver.get( baseUrl + "plugin/cda/api/doQuery?paramsales=10000&paramorderDate=2004-03-01&path=%2Fpublic%2FIssues%2FCDA%2FCDA-118%2Fsql-jndi.cda&dataAccessId=1&outputIndexId=1&&outputColumnName=STATUS" );
 
@@ -201,21 +145,4 @@ public class CDA118 extends BaseTest {
     assertEquals( "{\"queryInfo\":{\"totalRows\":\"6\"},\"resultset\":[[\"Shipped\"],[\"Cancelled\"],[\"Shipped\"],[\"Disputed\"],[\"On Hold\"],[\"In Process\"]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"STATUS\"}]}", result );
   }
 
-  /**
-   * The function will delete the export file.
-   */
-  public void DeleteFile() {
-    try {
-      Files.deleteIfExists( Paths.get( this.exportFilePath ) );
-    } catch ( Exception e ) {
-      this.log.error( e.getMessage() );
-    }
-  }
-
-  @AfterClass( alwaysRun = true )
-  public void tearDownClass() {
-    this.log.info( "tearDownClass" );
-    //In case something went wrong we delete the file
-    DeleteFile();
-  }
 }

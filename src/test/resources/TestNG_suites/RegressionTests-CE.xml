@@ -12,15 +12,12 @@
 			<class name="com.pentaho.ctools.issues.cda.CDA46"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA55"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA99"/>
-			<class name="com.pentaho.ctools.issues.cda.CDA100"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA103"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA106"/>
-			<class name="com.pentaho.ctools.issues.cda.CDA108"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA109"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA110"/>
-			<class name="com.pentaho.ctools.issues.cda.CDA112"/>
 			<class name="com.pentaho.ctools.issues.cda.CDA118"/>
-			<class name="com.pentaho.ctools.issues.cda.CDA121"/>
+			<class name="com.pentaho.ctools.issues.cda.CDAExportToXls"/>
 			
 			<!-- CDE -->
 			<class name="com.pentaho.ctools.issues.cde.CDE149"/>
