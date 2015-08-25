@@ -130,26 +130,26 @@ public class CDE286 extends BaseTest {
     String strColor3 = "brown";
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ) );
     //We need to wait for the animation finish for the display popup
-    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
+    this.elemHelper.FindElement( driver, By.id( "popup" ) );
     //Add Colors
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement elemArg0 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_0" ) );
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement elemArg1 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_1" ) );
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement elemArg2 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_2" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) );
+    WebElement elemArg0 = this.elemHelper.FindElement( driver, By.id( "arg_0" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) );
+    WebElement elemArg1 = this.elemHelper.FindElement( driver, By.id( "arg_1" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) );
+    WebElement elemArg2 = this.elemHelper.FindElement( driver, By.id( "arg_2" ) );
     assertNotNull( elemArg0 );
     assertNotNull( elemArg1 );
     assertNotNull( elemArg2 );
     //Add the first color
-    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_0" ), strColor1 );
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_0" ), strColor1 );
     //Add the second color
-    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_1" ), strColor2 );
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_1" ), strColor2 );
     //Add the third color
-    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_2" ), strColor3 );
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_2" ), strColor3 );
     //CDE-450 assert able to change order of colors
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_0']/div/span" ), By.xpath( "//div[@id='parameters_2']" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_1']/div/span" ), By.xpath( "//div[@id='parameters_2']" ) );
+    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_0" ), By.id( "drag_icon_2" ) );
+    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_1" ), By.id( "drag_icon_2" ) );
     //Submit
     this.elemHelper.Click( driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear
@@ -166,32 +166,32 @@ public class CDE286 extends BaseTest {
     String strInterval3 = "0";
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]/td[2]" ) );
     //We need to wait for the animation finish for the display popup
-    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
+    this.elemHelper.FindElement( driver, By.id( "popup" ) );
     //Add intervals
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
-    WebElement elemInterArg0 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_0" ) );
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) ); // Add arg1
-    WebElement elemInterArg1 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_1" ) );
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) ); // Add arg2
-    WebElement elemInterArg2 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_2" ) );
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) ); // Add arg3
-    WebElement elemInterArg3 = this.elemHelper.FindElement( driver, By.cssSelector( "input#arg_3" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) );
+    WebElement elemInterArg0 = this.elemHelper.FindElement( driver, By.id( "arg_0" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) ); // Add arg1
+    WebElement elemInterArg1 = this.elemHelper.FindElement( driver, By.id( "arg_1" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) ); // Add arg2
+    WebElement elemInterArg2 = this.elemHelper.FindElement( driver, By.id( "arg_2" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) ); // Add arg3
+    WebElement elemInterArg3 = this.elemHelper.FindElement( driver, By.id( "arg_3" ) );
     assertNotNull( elemInterArg0 );
     assertNotNull( elemInterArg1 );
     assertNotNull( elemInterArg2 );
     assertNotNull( elemInterArg3 );
     //Add interval 0
-    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_0" ), strInterval0 );
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_0" ), strInterval0 );
     //Add interval 1
-    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_1" ), strInterval1 );
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_1" ), strInterval1 );
     //Add interval 2
-    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_2" ), strInterval2 );
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_2" ), strInterval2 );
     //Add interval 3
-    this.elemHelper.ClickAndSendKeys( driver, By.cssSelector( "input#arg_3" ), strInterval3 );
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_3" ), strInterval3 );
     //CDE-450 assert able to change order of intervals
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_0']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_1']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='parameters_2']/div/span" ), By.xpath( "//div[@id='parameters_3']" ) );
+    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_0" ), By.id( "drag_icon_3" ) );
+    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_1" ), By.id( "drag_icon_3" ) );
+    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_2" ), By.id( "drag_icon_3" ) );
     // Submit
     this.elemHelper.ClickJS( driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear

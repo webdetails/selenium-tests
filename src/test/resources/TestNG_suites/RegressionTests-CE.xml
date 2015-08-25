@@ -22,13 +22,13 @@
 			<!-- class name="com.pentaho.ctools.issues.cde.CDE149"/-->
 			<class name="com.pentaho.ctools.issues.cde.CDE267"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE269"/>
-			<!-- class name="com.pentaho.ctools.issues.cde.CDE286"/-->
+			<class name="com.pentaho.ctools.issues.cde.CDE286"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE342"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE347"/>
-			<!-- class name="com.pentaho.ctools.issues.cde.CDE356"/-->
+			<class name="com.pentaho.ctools.issues.cde.CDE356"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE367"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE384"/>
-			<!--  class name="com.pentaho.ctools.issues.cde.CDE388"/-->
+			<class name="com.pentaho.ctools.issues.cde.CDE388"/>
 			<!-- class name="com.pentaho.ctools.issues.cde.CDE392"/-->
 			<class name="com.pentaho.ctools.issues.cde.CDE394"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE395"/>

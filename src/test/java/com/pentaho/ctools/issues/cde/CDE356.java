@@ -107,7 +107,7 @@ public class CDE356 extends BaseTest {
     newButton.click();
     WebElement warningPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state_state0" ) );
     assertNotNull( warningPopup );
-    String warningMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popup_state_state0']/div/span" ) );
+    String warningMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popup_state_state0']//span[@class='description']" ) );
     assertEquals( "Unsaved changes will be lost.", warningMessage );
 
     /*
@@ -129,7 +129,7 @@ public class CDE356 extends BaseTest {
     newButton.click();
     warningPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state_state0" ) );
     assertNotNull( warningPopup );
-    warningMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popup_state_state0']/div/span" ) );
+    warningMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popup_state_state0']//span[@class='description']" ) );
     assertEquals( "Unsaved changes will be lost.", warningMessage );
 
     /*
@@ -160,7 +160,7 @@ public class CDE356 extends BaseTest {
     saveButton.click();
     WebElement savePopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state_state0" ) );
     assertNotNull( savePopup );
-    WebElement homeFolder = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='container_id']//a[@rel='home/']" ) );
+    WebElement homeFolder = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='saveAsFolderExplorer']//a[@rel='home/']" ) );
     assertNotNull( homeFolder );
     homeFolder.click();
     WebElement inputField = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "fileInput" ) );
@@ -169,7 +169,7 @@ public class CDE356 extends BaseTest {
     okButton.click();
     WebElement saveError = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupmessage']" ) );
     assertNotNull( saveError );
-    String errorMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupmessage']" ) );
+    String errorMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popup-body-container']" ) );
     assertEquals( "Please insert a valid file name.", errorMessage );
     okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupbuttons']/button[@id='popup_state0_buttonOk']" ) );
     assertNotNull( okButton );
@@ -183,7 +183,7 @@ public class CDE356 extends BaseTest {
     assertNotNull( inputField );
     inputField.click();
     inputField.sendKeys( "$CDE356" );
-    WebElement publicFolder = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    WebElement publicFolder = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='saveAsFolderExplorer']//a[@rel='public/']" ) );
     assertNotNull( publicFolder );
     publicFolder.click();
     okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );

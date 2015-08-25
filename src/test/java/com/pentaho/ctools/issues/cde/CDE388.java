@@ -118,15 +118,19 @@ public class CDE388 extends BaseTest {
     /*
      * ## Step 3
      */
-    String text = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ), "OLAP Wizard" );
+    String text = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='wizardDialog']//div[@class='popup-title-container']" ), "OLAP Wizard" );
     assertEquals( "OLAP Wizard", text );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "cdfddOlapCatalogSelect" ) ) );
     select.selectByVisibleText( "SteelWheels" );
     Select select1 = new Select( this.elemHelper.FindElement( driver, By.id( "cdfddOlapCubeSelect" ) ) );
     select1.selectByVisibleText( "SteelWheelsSales" );
-    this.elemHelper.Click( driver, By.xpath( "//table[@id='cdfddOlapDimensionSelector']/tbody/tr/td/span" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//table[@id='cdfddOlapDimensionSelector']/tbody/tr[2]/td" ), By.id( "cdfdd-olap-rows" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//table[@id='cdfddOlapMeasureSelector']/tbody/tr/td" ), By.id( "cdfdd-olap-columns" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfddOlapDimensionSelector']//span[@class='prompt-caption-more-less']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='prompt-dimensions-accordion']/div/h3/span" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='dimRow-Markets']/ul/li" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='dimRow-Markets']/ul/li" ), By.id( "cdfdd-olap-rows" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfddOlapMeasureSelector']//span[@class='prompt-caption-more-less']" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='prompt-measures-accordion']/div/ul/li" ), By.id( "cdfdd-olap-columns" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     /*
      * ## Step 4
