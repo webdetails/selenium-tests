@@ -40,10 +40,12 @@ import com.pentaho.ctools.utils.PageUrl;
 
 /**
  * The script is testing the issue:
+ * - http://jira.pentaho.com/browse/CDE-399
  * - http://jira.pentaho.com/browse/CDE-410
  * - http://jira.pentaho.com/browse/CDE-529
  *
  * and the automation test is described:
+ * - http://jira.pentaho.com/browse/QUALITY-966
  * - http://jira.pentaho.com/browse/QUALITY-994
  * - http://jira.pentaho.com/browse/QUALITY-1143 
  *
@@ -67,9 +69,10 @@ public class CDEComponentPanel extends BaseTest {
    *    This test validates all issues related to CDE's Component Panel
    *
    * Description:
+   *    399: Accordion works as expected
    *    410: Shortcuts work
    *    529: Opening a popup blocks the use of the shortcuts to navigate
-   *
+   *    
    * Steps:
    *    1. Open CDE sample in edit mode, go to components panel and add some components
    *    2. Assert down, up, left and right shortcuts work on components panel
@@ -91,6 +94,21 @@ public class CDEComponentPanel extends BaseTest {
     //Go to Components Panel
     this.elemHelper.Click( driver, By.xpath( "//div[@title='Components Panel']/a" ) );
 
+    //Assert behavior of accordion
+    WebElement otherExpander = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    assertNotNull( otherExpander );
+    String otherText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    assertEquals( "Others", otherText );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
+    WebElement tableComponent = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='table Component']" ) );
+    assertNotNull( tableComponent );
+    WebElement genericExpander = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[3]/h3/a" ) );
+    assertNotNull( genericExpander );
+    String genericText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[3]/h3/a" ) );
+    assertEquals( "Generic", genericText );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[3]/h3/a" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//a[@title='table Component']" ) );
+
     //Add some Components
     WebElement chartExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/h3/span" ) );
     assertNotNull( chartExpander );
@@ -101,7 +119,7 @@ public class CDEComponentPanel extends BaseTest {
     WebElement addBulletChart = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div//a[@title='CCC Bullet Chart']" ) );
     assertNotNull( addBulletChart );
     addBulletChart.click();
-    WebElement otherExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/span" ) );
+    otherExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]/h3/span" ) );
     assertNotNull( otherExpander );
     otherExpander.click();
     WebElement addTable = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div[2]//a[@title='table Component']" ) );
@@ -123,7 +141,7 @@ public class CDEComponentPanel extends BaseTest {
     //Assert groups are expanded and clicking left will collapse them, also assert down arrow moves between showing elements
     WebElement areaChart = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) );
     assertNotNull( areaChart );
-    WebElement tableComponent = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
+    tableComponent = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
     assertNotNull( tableComponent );
     Robot robot;
     try {

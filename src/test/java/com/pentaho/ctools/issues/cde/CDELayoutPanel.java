@@ -46,6 +46,7 @@ import com.pentaho.gui.web.puc.BrowseFiles;
  * The script is testing the issue:
  * - http://jira.pentaho.com/browse/CDE-270
  * - http://jira.pentaho.com/browse/CDE-366
+ * - http://jira.pentaho.com/browse/CDE-395
  * - http://jira.pentaho.com/browse/CDE-402
  * - http://jira.pentaho.com/browse/CDE-406
  * - http://jira.pentaho.com/browse/CDE-407
@@ -58,6 +59,7 @@ import com.pentaho.gui.web.puc.BrowseFiles;
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-943
  * - http://jira.pentaho.com/browse/QUALITY-948
+ * - http://jira.pentaho.com/browse/QUALITY-925
  * - http://jira.pentaho.com/browse/QUALITY-927
  * - http://jira.pentaho.com/browse/QUALITY-992
  * - http://jira.pentaho.com/browse/QUALITY-928
@@ -91,6 +93,7 @@ public class CDELayoutPanel extends BaseTest {
    * Description:
    *    CDE-270: Layout elements are draggable
    *    CDE-366: Style and Dashboard type changes are kept when saving dashboard
+   *    CDE-395: Bootstrap is default renderer
    *    CDE-402: When applying template, user is asked for confirmation before it is applied
    *    CDE-406: Drag and Drop of Freeform elements works
    *    CDE-407: Able to duplicate spacers

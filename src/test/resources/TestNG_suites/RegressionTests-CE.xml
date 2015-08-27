@@ -31,9 +31,7 @@
 			<class name="com.pentaho.ctools.issues.cde.CDE388"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE392"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE394"/>
-			<class name="com.pentaho.ctools.issues.cde.CDE395"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE396"/>
-			<class name="com.pentaho.ctools.issues.cde.CDE399"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE403"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE404"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE408"/>
