@@ -76,7 +76,7 @@ import com.pentaho.gui.web.puc.BrowseFiles;
  */
 public class CDELayoutPanel extends BaseTest {
   // this.failure variable ==1 if test did not fail
-  private int failure = 0;
+  private int failure = 1;
   // Log instance
   private final Logger log = LogManager.getLogger( CDELayoutPanel.class );
   // Access to wrapper for webdriver
@@ -301,26 +301,24 @@ public class CDELayoutPanel extends BaseTest {
     WebElement templateButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( templateButton );
     templateButton.click();
-    this.elemHelper.WaitForFrameReady( driver, By.id( "popupTemplatebox" ) );
-    WebElement templatePopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popupTemplatebox" ) );
+    this.elemHelper.WaitForFrameReady( driver, By.id( "popup" ) );
+    WebElement templatePopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup" ) );
     assertNotNull( templatePopup );
-    String templateText = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='thumbs']/div[2]/p" ) ).getText();
-    assertEquals( "Two Columns Template", templateText );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='thumbs']/div[2]/p" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@id='thumbs']/div[2]" ), "class", "hover active" );
-    String thumbClass = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='thumbs']/div[2]" ), "class" );
-    assertEquals( "hover active", thumbClass );
-    WebElement templateOk = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
+    String templateText = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='template-scroll']/div[2]/span" ) ).getText();
+    assertEquals( "2 Columns Template", templateText );
+    this.elemHelper.Click( driver, By.xpath( "//div[@class='template-scroll']/div[2]/div/img" ) );
+    WebElement templateOk = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
     assertNotNull( templateOk );
-    this.elemHelper.Click( driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
-    WebElement confirmationPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='popupTemplatemessage']" ) );
+    this.elemHelper.Click( driver, By.id( "popup_state0_buttonOk" ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup" ) ) );
+    WebElement confirmationPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup" ) );
     assertNotNull( confirmationPopup );
-    String warningText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='popupTemplatemessage']" ) );
+    String warningText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='popup-body-container layout-popup']" ) );
     assertEquals( "Are you sure you want to load the template?WARNING: Dashboard Layout will be overwritten!", warningText );
-    WebElement confirmationOk = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
+    WebElement confirmationOk = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
     assertNotNull( confirmationOk );
-    this.elemHelper.Click( driver, By.xpath( "//div[@class='popupTemplatebuttons']/button[@id='popupTemplate_state0_buttonOk']" ) );
-    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='popupTemplatemessage']" ) );
+    this.elemHelper.Click( driver, By.id( "popup_state0_buttonOk" ) );
+    this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup" ) );
 
     //Asset elements were created
     String trtdText = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
@@ -382,9 +380,9 @@ public class CDELayoutPanel extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ), "class", "child-of-9b5e4665-60dd-d123-d49a-7cb9072a0540 ui-draggable ui-droppable initialized ui-state-active" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ), "class", "ui-state-active" );
     String firstColumnClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ) ).getAttribute( "class" );
-    assertEquals( firstColumnClass, "child-of-9b5e4665-60dd-d123-d49a-7cb9072a0540 ui-draggable ui-droppable initialized ui-state-active" );
+    assertTrue( firstColumnClass.contains( "ui-state-active" ) );
 
     //Click tab key and assert focus has changed to properties table
     try {
@@ -498,7 +496,7 @@ public class CDELayoutPanel extends BaseTest {
     WebElement saveDashboard = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@id='Save']" ) );
     assertNotNull( saveDashboard );
     saveDashboard.click();
-    WebElement folderSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='container_id']//a[@rel='public/']" ) );
+    WebElement folderSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='saveAsFEContainer']//a[@rel='public/']" ) );
     assertNotNull( folderSelector );
     folderSelector.click();
     WebElement inputName = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "fileInput" ) );
@@ -509,6 +507,7 @@ public class CDELayoutPanel extends BaseTest {
     this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='popupbuttons']" ) );
     WebElement title = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@title='CDE366']" ) );
     assertNotNull( title );
+    this.failure = 0;
 
     //Open Dashboard Settings
     settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );

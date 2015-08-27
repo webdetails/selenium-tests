@@ -221,12 +221,12 @@ public class WidgetUtils {
     elemHelper.WaitForElementPresence( thedriver, By.id( "popupbox" ) );
     elemHelper.WaitForElementPresence( thedriver, By.id( "popupfade" ) );
     //We need to wait for the animation finish for the display popup
-    elemHelper.WaitForAttributeValueEqualsTo( thedriver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -267.5px; z-index: 1000; width: 515px;" );
+    elemHelper.FindElement( thedriver, By.id( "popup" ) );
     //Wait for contents display
     elemHelper.WaitForElementPresenceAndVisible( thedriver, By.cssSelector( "li.directory.collapsed" ) );
-    elemHelper.ClickJS( thedriver, By.id( "widgetRadio" ) );
+    elemHelper.ClickJS( thedriver, By.xpath( "//label[@for='widgetRadio']" ) );
     // Wait for explorer disabled
-    elemHelper.WaitForElementInvisibility( thedriver, By.id( "container_id" ) );
+    elemHelper.WaitForElementInvisibility( thedriver, By.id( "saveAsFEContainer" ) );
 
     //Insert file name
     elemHelper.ClickAndSendKeys( thedriver, By.id( "fileInput" ), widgetName );
@@ -242,6 +242,8 @@ public class WidgetUtils {
 
     //Wait for the page refreshed
     elemHelper.WaitForTextPresence( thedriver, By.cssSelector( "div.cdfdd-title" ), widgetName );
+    String widgetTitle = elemHelper.WaitForElementPresentGetText( thedriver, By.cssSelector( "div.cdfdd-title" ) );
+    assertEquals( widgetName, widgetTitle );
 
     LOG.info( "CreateWidget::Exit" );
   }

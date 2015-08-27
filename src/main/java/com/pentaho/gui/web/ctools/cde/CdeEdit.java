@@ -87,7 +87,7 @@ public class CdeEdit {
     String currentFolder = "";
     for ( int i = 1; i < folders.length; i++ ) {
       currentFolder = currentFolder + folders[i] + "/";
-      WebElement folderSelector = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='container_id']//a[@rel='" + currentFolder + "']" ) );
+      WebElement folderSelector = this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='saveAsFEContainer']//a[@rel='" + currentFolder + "']" ) );
       assertNotNull( folderSelector );
       folderSelector.click();
     }

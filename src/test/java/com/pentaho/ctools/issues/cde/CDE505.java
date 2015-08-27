@@ -193,30 +193,34 @@ public class CDE505 extends BaseTest {
      * ## Step 4
      */
     //Click button to open parameter list
-    WebElement paramPopupButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "parameter_button_0" ) );
+    WebElement paramPopupButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "val_0" ) );
     assertNotNull( paramPopupButton );
     paramPopupButton.click();
-    WebElement paramList = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "parameterList" ) );
+    Robot robot1;
+    try {
+      robot1 = new Robot();
+      robot1.keyPress( KeyEvent.VK_DOWN );
+      robot1.keyRelease( KeyEvent.VK_DOWN );
+    } catch ( AWTException e ) {
+      e.printStackTrace();
+    }
+    WebElement paramList = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "ui-id-1" ) );
     assertNotNull( paramList );
 
     //Assert list of parameters is alphabetically ordered
-    String param1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='parameterList']/ul/li[1]/div" ) );
-    String param2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='parameterList']/ul/li[2]/div" ) );
-    String param3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='parameterList']/ul/li[3]/div" ) );
-    String param4 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='parameterList']/ul/li[4]/div" ) );
-    String param5 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='parameterList']/ul/li[5]/div" ) );
-    String param6 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='parameterList']/ul/li[6]/div" ) );
+    String param1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[1]/a" ) );
+    String param2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[2]/a" ) );
+    String param3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[3]/a" ) );
+    String param4 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[4]/a" ) );
+    String param5 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[5]/a" ) );
+    String param6 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//ul[@id='ui-id-1']/li[6]/a" ) );
     assertEquals( "...", param1 );
     assertEquals( "a", param2 );
     assertEquals( "b", param3 );
     assertEquals( "test", param4 );
     assertEquals( "test.ing", param5 );
     assertEquals( "testing", param6 );
-    WebElement cancelButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='parameterList']/../..//button[@id='popup_state0_buttonCancel']" ) );
-    assertNotNull( cancelButton );
-    cancelButton.click();
-    this.elemHelper.WaitForElementNotPresent( driver, By.id( "parameterList" ) );
-    cancelButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonCancel" ) );
+    WebElement cancelButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonCancel" ) );
     assertNotNull( cancelButton );
     cancelButton.click();
     this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
@@ -229,6 +233,9 @@ public class CDE505 extends BaseTest {
     columnTypes.click();
     WebElement columnPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup" ) );
     assertNotNull( columnPopup );
+    WebElement columnType = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "arg_0" ) );
+    assertNotNull( columnType );
+    columnType.click();
     Robot robot;
     try {
       robot = new Robot();
@@ -237,9 +244,9 @@ public class CDE505 extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    WebElement columnList = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='StringArray']/ul" ) );
+    WebElement columnList = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup_state_state0']//ul" ) );
     assertNotNull( columnList );
-    WebElement hiddenOption = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='StringArray']/ul//a[contains(text(),'hidden')]" ) );
+    WebElement hiddenOption = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup_state_state0']//ul//a[contains(text(),'hidden')]" ) );
     assertNotNull( hiddenOption );
 
   }

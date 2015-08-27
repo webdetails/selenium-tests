@@ -109,6 +109,7 @@ public class CDE452 extends BaseTest {
      */
     //Log out
     driver.get( PageUrl.PUC );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
     assertNotNull( element );
@@ -143,6 +144,7 @@ public class CDE452 extends BaseTest {
     this.failure = 2;
 
     //wait for visibility of waiting pop-up
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
@@ -173,6 +175,7 @@ public class CDE452 extends BaseTest {
      */
     //Log out
     driver.get( PageUrl.PUC );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
     assertNotNull( element );
@@ -207,6 +210,7 @@ public class CDE452 extends BaseTest {
     this.failure = 2;
 
     //wait for visibility of waiting pop-up
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
@@ -237,6 +241,7 @@ public class CDE452 extends BaseTest {
      */
     //Log out
     driver.get( PageUrl.PUC );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
     assertNotNull( element );
@@ -271,6 +276,7 @@ public class CDE452 extends BaseTest {
     this.failure = 2;
 
     //wait for visibility of waiting pop-up
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
@@ -332,6 +338,7 @@ public class CDE452 extends BaseTest {
     this.failure = 1;
 
     //wait for visibility of waiting pop-up
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
     //Wait to load the new page
@@ -351,6 +358,7 @@ public class CDE452 extends BaseTest {
     if ( this.failure == 2 ) {
       //Log out
       driver.get( PageUrl.PUC );
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
       assertNotNull( element );
@@ -379,6 +387,7 @@ public class CDE452 extends BaseTest {
       this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
       //wait for visibility of waiting pop-up
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
       //Wait to load the new page
@@ -406,6 +415,7 @@ public class CDE452 extends BaseTest {
       this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
       //wait for visibility of waiting pop-up
+      this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
       //Wait to load the new page
