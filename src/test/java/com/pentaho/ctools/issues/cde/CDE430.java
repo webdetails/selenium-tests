@@ -117,6 +117,9 @@ public class CDE430 extends BaseTest {
     WebElement inputChart = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Chart Image to Export']/../td[2]/form/input" ) );
     assertNotNull( inputChart );
     inputChart.clear();
+    chartType = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Chart Image to Export']/../td[2]" ) );
+    assertNotNull( chartType );
+    chartType.click();
 
     Robot robot1;
     try {
@@ -157,6 +160,9 @@ public class CDE430 extends BaseTest {
     WebElement inputData = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Data File to Export']/../td[2]/form/input" ) );
     assertNotNull( inputData );
     inputData.clear();
+    dataType = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Data File to Export']/../td[2]" ) );
+    assertNotNull( dataType );
+    dataType.click();
 
     try {
       robot1 = new Robot();

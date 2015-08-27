@@ -237,6 +237,12 @@ public class CDEComponentPanel extends BaseTest {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_ENTER );
       robot.keyRelease( KeyEvent.VK_ENTER );
+    } catch ( AWTException e ) {
+      e.printStackTrace();
+    }
+    assertNotNull( this.elemHelper.FindElement( driver, By.id( "popup" ) ) );
+    try {
+      robot = new Robot();
       robot.keyPress( KeyEvent.VK_TAB );
       robot.keyRelease( KeyEvent.VK_TAB );
       robot.keyPress( KeyEvent.VK_DOWN );
