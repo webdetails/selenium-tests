@@ -88,7 +88,7 @@ public class CDEDataPanel extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@title='Datasources Panel']/a" ) );
 
     //Add some Datasources
-    WebElement mdxExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[6]/h3/span" ) );
+    WebElement mdxExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']//a[contains(text(),'MDX Queries')]/../span" ) );
     assertNotNull( mdxExpander );
     mdxExpander.click();
     WebElement addDenormalMdx = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div[6]//a[@title='denormalizedMdx over mondrianJdbc']" ) );
