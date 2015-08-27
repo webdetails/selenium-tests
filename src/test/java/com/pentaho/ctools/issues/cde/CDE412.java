@@ -104,9 +104,9 @@ public class CDE412 extends BaseTest {
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
     assertNotNull( element );
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[8]/td[2]/div/button" ) );
-    String title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
+    String title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']//div[@class='popup-title-container']" ) );
     assertEquals( "MDX Editor", title );
-    String text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
+    String text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//pre[@id='wizardEditor']/div[2]/div/div[3]/div" ) );
     assertEquals( "select {} ON COLUMNS,", text );
     this.elemHelper.Click( driver, By.id( "cdfdd-wizard-button-ok" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
@@ -119,10 +119,10 @@ public class CDE412 extends BaseTest {
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/div/button" ) );
     assertNotNull( element );
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[4]/td[2]/div/button" ) );
-    title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
+    title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']//div[@class='popup-title-container']" ) );
     assertEquals( "MQL Editor", title );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div[2]" ) );
-    assertEquals( "<mql>", text );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//pre[@id='wizardEditor']/div[2]/div/div[3]/div" ) );
+    assertEquals( "<![CDATA[<?xml version=\"1.0\" encoding=\"UTF-8\"?>", text );
     this.elemHelper.Click( driver, By.id( "cdfdd-wizard-button-ok" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
 
@@ -142,9 +142,9 @@ public class CDE412 extends BaseTest {
 
     //View default query
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]/td[2]/div/button" ) );
-    title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) );
+    title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']//div[@class='popup-title-container']" ) );
     assertEquals( "Scriptable Editor", title );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//pre[@id='wizardEditor']/div[2]/div/div[3]/div" ) );
     assertEquals( "import org.pentaho.reporting.engine.classic.core.util.TypedTableModel;", text );
     this.elemHelper.Click( driver, By.id( "cdfdd-wizard-button-ok" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
@@ -157,9 +157,9 @@ public class CDE412 extends BaseTest {
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[7]/td[2]/div/button" ) );
     assertNotNull( element );
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[7]/td[2]/div/button" ) );
-    title = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='wizardDialog']/div/div/h1" ) ).getText();
+    title = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='wizardDialog']//div[@class='popup-title-container']" ) ).getText();
     assertEquals( "Sql Editor", title );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialogBody']/form/div[2]/div/div/pre/div[2]/div/div[3]/div" ) );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//pre[@id='wizardEditor']/div[2]/div/div[3]/div" ) );
     assertEquals( "", text );
     this.elemHelper.Click( driver, By.id( "cdfdd-wizard-button-ok" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );

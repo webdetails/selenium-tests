@@ -128,7 +128,7 @@ public class CDE403 extends BaseTest {
     /*
      * ## Step 4
      */
-    String text = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='wizardDialogCenterSection']/div/div/pre/div[2]/div/div[3]/div" ), "testselect {} ON COLUMNS," );
+    String text = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//pre[@id='wizardEditor']/div[2]/div/div[3]/div" ), "testselect {} ON COLUMNS," );
     assertEquals( "testselect {} ON COLUMNS,", text );
   }
 }

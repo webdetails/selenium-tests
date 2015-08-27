@@ -123,21 +123,22 @@ public class CDE413 extends BaseTest {
     assertNotNull( propertyColumnTypes );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-properties']//tr[4]/td[2]" ) );
     //We need to wait for the animation finish for the display popup
-    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.id( "popup" ), "style", "position: absolute; top: 15%; left: 50%; margin-left: -143px; z-index: 1000;" );
+    this.elemHelper.FindElement( driver, By.id( "popup" ) );
 
     /*
      * ## Step 4
      */
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringArrayAddButton" ) );
+    WebElement arg0AddElement = this.elemHelper.FindElement( driver, By.cssSelector( "button.popup-add-row-button" ) );
     WebElement arg0RemoveElement = this.elemHelper.FindElement( driver, By.id( "remove_button_0" ) );
     WebElement arg0InputElement = this.elemHelper.FindElement( driver, By.id( "arg_0" ) );
-    WebElement arg0DragDropIconElement = this.elemHelper.FindElement( driver, By.cssSelector( "div.StringArrayDragIcon" ) );
-    WebElement closeButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.popupclose" ) );
+    WebElement arg0DragDropIconElement = this.elemHelper.FindElement( driver, By.cssSelector( "div.drag-icon-overlay" ) );
+    WebElement cancelButton = this.elemHelper.FindElement( driver, By.id( "popup_state0_buttonCancel" ) );
+    assertNotNull( arg0AddElement );
     assertNotNull( arg0RemoveElement );
     assertNotNull( arg0InputElement );
     assertNotNull( arg0DragDropIconElement );
-    assertNotNull( closeButton );
-    closeButton.click();
+    assertNotNull( cancelButton );
+    cancelButton.click();
     this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
 
     /*
@@ -154,7 +155,7 @@ public class CDE413 extends BaseTest {
     WebElement parameterButton = this.elemHelper.FindElement( driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
     assertNotNull( parameterButton );
     parameterButton.click();
-    WebElement parameterList = this.elemHelper.FindElement( driver, By.id( "StringList" ) );
+    WebElement parameterList = this.elemHelper.FindElement( driver, By.id( "parameters_0" ) );
     assertNotNull( parameterList );
 
     //Add 3 pairs arg/value
@@ -164,14 +165,14 @@ public class CDE413 extends BaseTest {
     assertNotNull( value0Input );
     arg0Input.sendKeys( arg0 );
     value0Input.sendKeys( val0 );
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringListAddButton" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) );
     WebElement arg1Input = this.elemHelper.FindElement( driver, By.id( "arg_1" ) );
     WebElement value1Input = this.elemHelper.FindElement( driver, By.id( "val_1" ) );
     assertNotNull( arg1Input );
     assertNotNull( value1Input );
     arg1Input.sendKeys( arg1 );
     value1Input.sendKeys( val1 );
-    this.elemHelper.Click( driver, By.cssSelector( "input.StringListAddButton" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) );
     WebElement arg2Input = this.elemHelper.FindElement( driver, By.id( "arg_2" ) );
     WebElement value2Input = this.elemHelper.FindElement( driver, By.id( "val_2" ) );
     assertNotNull( arg2Input );
@@ -195,7 +196,7 @@ public class CDE413 extends BaseTest {
     parameterButton = this.elemHelper.FindElement( driver, By.xpath( "//td[@title=' Parameters to pass to the component']/../td[2]" ) );
     assertNotNull( parameterButton );
     parameterButton.click();
-    parameterList = this.elemHelper.FindElement( driver, By.id( "StringList" ) );
+    parameterList = this.elemHelper.FindElement( driver, By.id( "parameters_0" ) );
     assertNotNull( parameterList );
 
     //Assert values are kept
