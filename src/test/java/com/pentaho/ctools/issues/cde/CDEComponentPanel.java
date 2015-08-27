@@ -245,6 +245,8 @@ public class CDEComponentPanel extends BaseTest {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_TAB );
       robot.keyRelease( KeyEvent.VK_TAB );
+      robot.keyPress( KeyEvent.VK_TAB );
+      robot.keyRelease( KeyEvent.VK_TAB );
       robot.keyPress( KeyEvent.VK_DOWN );
       robot.keyRelease( KeyEvent.VK_DOWN );
       robot.keyPress( KeyEvent.VK_DOWN );

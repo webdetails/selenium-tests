@@ -113,7 +113,7 @@ public class CDE392 extends BaseTest {
      */
     WebElement obj1 = this.elemHelper.FindElement( driver, By.xpath( "//select[@id='rendererInput']/option[@value='bootstrap']" ) );
     assertEquals( obj1.isSelected(), true );
-    this.elemHelper.Click( driver, By.xpath( "//div[@class='popupclose']" ) );
+    this.elemHelper.Click( driver, By.id( "popup_state0_buttonCancel" ) );
 
     /*
      * ## Step 3

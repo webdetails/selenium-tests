@@ -150,13 +150,13 @@ public class CDE286 extends BaseTest {
     this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_2" ), strColor3 );
     //CDE-450 assert able to change order of colors
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameter_1" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
     String firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
-    assertEquals( "parameter_1", firstParameter );
+    assertEquals( "parameters_1", firstParameter );
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameter_2" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
-    assertEquals( "parameter_2", firstParameter );
+    assertEquals( "parameters_2", firstParameter );
     //Submit
     this.elemHelper.Click( driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear
@@ -197,17 +197,17 @@ public class CDE286 extends BaseTest {
     this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_3" ), strInterval3 );
     //CDE-450 assert able to change order of intervals
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.xpath( "//div[@id='drag_icon_3']/span" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameter_1" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
-    assertEquals( "parameter_1", firstParameter );
+    assertEquals( "parameters_1", firstParameter );
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.xpath( "//div[@id='drag_icon_3']/span" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameter_2" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
-    assertEquals( "parameter_2", firstParameter );
+    assertEquals( "parameters_2", firstParameter );
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_2']/span" ), By.xpath( "//div[@id='drag_icon_3']/span" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameter_3" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_3" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
-    assertEquals( "parameter_3", firstParameter );
+    assertEquals( "parameters_3", firstParameter );
     // Submit
     this.elemHelper.ClickJS( driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear
