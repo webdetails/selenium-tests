@@ -87,6 +87,7 @@ public class CDE286 extends BaseTest {
      */
     //Go to New CDE Dashboard
     driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //assert buttons
     WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Save as Template']" ) );
     WebElement buttonApplyTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Apply Template']" ) );
@@ -148,8 +149,8 @@ public class CDE286 extends BaseTest {
     //Add the third color
     this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_2" ), strColor3 );
     //CDE-450 assert able to change order of colors
-    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_0" ), By.id( "drag_icon_2" ) );
-    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_1" ), By.id( "drag_icon_2" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
     //Submit
     this.elemHelper.Click( driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear
@@ -189,9 +190,9 @@ public class CDE286 extends BaseTest {
     //Add interval 3
     this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_3" ), strInterval3 );
     //CDE-450 assert able to change order of intervals
-    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_0" ), By.id( "drag_icon_3" ) );
-    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_1" ), By.id( "drag_icon_3" ) );
-    this.elemHelper.DragAndDrop( driver, By.id( "drag_icon_2" ), By.id( "drag_icon_3" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.xpath( "//div[@id='drag_icon_3']/span" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.xpath( "//div[@id='drag_icon_3']/span" ) );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_2']/span" ), By.xpath( "//div[@id='drag_icon_3']/span" ) );
     // Submit
     this.elemHelper.ClickJS( driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear
