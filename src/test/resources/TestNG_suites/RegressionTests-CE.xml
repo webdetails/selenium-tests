@@ -38,14 +38,14 @@
 			<class name="com.pentaho.ctools.issues.cde.CDE412"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE413"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE417"/>
-			<!-- class name="com.pentaho.ctools.issues.cde.CDE430"/-->
+			<class name="com.pentaho.ctools.issues.cde.CDE430"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE438"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE446"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE452"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE453"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE505"/>
 			<class name="com.pentaho.ctools.issues.cde.CDEComponentPanel"/>
-			<!-- class name="com.pentaho.ctools.issues.cde.CDEDataPanel"/-->
+			<class name="com.pentaho.ctools.issues.cde.CDEDataPanel"/>
 			<class name="com.pentaho.ctools.issues.cde.CDELayoutPanel"/>
 			
 			<!-- CDF -->

@@ -23,6 +23,7 @@ package com.pentaho.ctools.issues.cde;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -224,17 +225,24 @@ public class CDEDataPanel extends BaseTest {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_ENTER );
       robot.keyRelease( KeyEvent.VK_ENTER );
+      robot.keyPress( KeyEvent.VK_TAB );
+      robot.keyRelease( KeyEvent.VK_TAB );
+      robot.keyPress( KeyEvent.VK_TAB );
+      robot.keyRelease( KeyEvent.VK_TAB );
       robot.keyPress( KeyEvent.VK_DOWN );
       robot.keyRelease( KeyEvent.VK_DOWN );
       robot.keyPress( KeyEvent.VK_DOWN );
       robot.keyRelease( KeyEvent.VK_DOWN );
       robot.keyPress( KeyEvent.VK_UP );
       robot.keyRelease( KeyEvent.VK_UP );
-      robot.keyPress( KeyEvent.VK_ESCAPE );
-      robot.keyRelease( KeyEvent.VK_ESCAPE );
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
+
+    WebElement closePopup = this.elemHelper.FindElement( driver, By.id( "popup_state0_buttonCancel" ) );
+    assertNotNull( closePopup );
+    closePopup.click();
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup" ) ) );
 
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]" ), "class", "initialized ui-state-active" );
     parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]" ) ).getAttribute( "class" );
