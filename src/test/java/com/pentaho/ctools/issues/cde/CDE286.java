@@ -32,6 +32,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -149,13 +151,19 @@ public class CDE286 extends BaseTest {
     //Add the third color
     this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_2" ), strColor3 );
     //CDE-450 assert able to change order of colors
-    //this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.id( "arg_2" ) );
+    WebElement fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_0']/span" ) );
+    WebElement toParameter = this.elemHelper.FindElement( driver, By.id( "arg_2" ) );
+    Actions builder = new Actions( driver );
+    Action dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, 0, 5 ).release( toParameter ).build();
+    dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
     String firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
     assertEquals( "parameters_1", firstParameter );
-    //this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.id( "arg_2" ) );
+    fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_1']/span" ) );
+    toParameter = this.elemHelper.FindElement( driver, By.id( "arg_2" ) );
+    builder = new Actions( driver );
+    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, 0, 5 ).release( toParameter ).build();
+    dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
     assertEquals( "parameters_2", firstParameter );
@@ -198,18 +206,27 @@ public class CDE286 extends BaseTest {
     //Add interval 3
     this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_3" ), strInterval3 );
     //CDE-450 assert able to change order of intervals
-    //this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.xpath( "//div[@id='drag_icon_3']/span" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.id( "arg_3" ) );
+    fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_0']/span" ) );
+    toParameter = this.elemHelper.FindElement( driver, By.id( "arg_3" ) );
+    builder = new Actions( driver );
+    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, 0, 5 ).release( toParameter ).build();
+    dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
     assertEquals( "parameters_1", firstParameter );
-    //this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.xpath( "//div[@id='drag_icon_3']/span" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.id( "arg_3" ) );
+    fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_1']/span" ) );
+    toParameter = this.elemHelper.FindElement( driver, By.id( "arg_3" ) );
+    builder = new Actions( driver );
+    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, 0, 5 ).release( toParameter ).build();
+    dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
     assertEquals( "parameters_2", firstParameter );
-    //this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_2']/span" ), By.xpath( "//div[@id='drag_icon_3']/span" ) );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_2']/span" ), By.id( "arg_3" ) );
+    fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_2']/span" ) );
+    toParameter = this.elemHelper.FindElement( driver, By.id( "arg_3" ) );
+    builder = new Actions( driver );
+    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, 0, 5 ).release( toParameter ).build();
+    dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_3" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
     assertEquals( "parameters_3", firstParameter );

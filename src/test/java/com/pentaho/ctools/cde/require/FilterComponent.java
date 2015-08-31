@@ -131,7 +131,7 @@ public class FilterComponent extends BaseTest {
     multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     assertNotNull( multiSelector );
     multiSelector.click();
-    WebElement selectThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='mCSB_2_container']//div[@title='Three']/../div" ) );
+    WebElement selectThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Three']/../div" ) );
     assertNotNull( selectThree );
     selectThree.click();
     WebElement cancelButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='filter-control-buttons']//button[contains(text(),'Cancel')]" ) );
@@ -154,13 +154,13 @@ public class FilterComponent extends BaseTest {
     WebElement filterMultiSearch = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='filter-root-container multi-select expanded']//input[@class='filter-filter-input']" ) );
     assertNotNull( filterMultiSearch );
     filterMultiSearch.sendKeys( "th" );
-    selectThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='mCSB_2_container']//div[@title='Three']/../div" ) );
+    selectThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Three']/../div" ) );
     assertNotNull( selectThree );
     selectThree.click();
-    WebElement selectThirteen = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='mCSB_2_container']//div[@title='Thirteen']/../div" ) );
+    WebElement selectThirteen = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Thirteen']/../div" ) );
     assertNotNull( selectThirteen );
     selectThirteen.click();
-    WebElement selectTwentyThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='mCSB_2_container']//div[@title='Twenty-three']/../div" ) );
+    WebElement selectTwentyThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-three']/../div" ) );
     assertNotNull( selectTwentyThree );
     selectTwentyThree.click();
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='mCSB_2_container']//div[@title='One']/../div" ) ) );
