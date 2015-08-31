@@ -22,7 +22,7 @@
 			<class name="com.pentaho.ctools.issues.cde.CDE149"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE267"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE269"/>
-			<!-- class name="com.pentaho.ctools.issues.cde.CDE286"/-->
+			<class name="com.pentaho.ctools.issues.cde.CDE286"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE342"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE347"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE356"/>
