@@ -252,16 +252,5 @@ public class CDEDataPanel extends BaseTest {
     String nameValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr/td[2]" ) );
     assertEquals( nameValue, "a" );
 
-    //Click tab and assert focus has gone back to first table
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_TAB );
-      robot.keyRelease( KeyEvent.VK_TAB );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[6]" ), "class", "initialized" );
-    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[6]" ) ).getAttribute( "class" );
-    assertEquals( parameterProperty, "initialized" );
   }
 }

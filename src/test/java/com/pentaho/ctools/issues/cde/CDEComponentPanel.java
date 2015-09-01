@@ -184,12 +184,18 @@ public class CDEComponentPanel extends BaseTest {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_DOWN );
       robot.keyRelease( KeyEvent.VK_DOWN );
+      robot.keyPress( KeyEvent.VK_DOWN );
+      robot.keyRelease( KeyEvent.VK_DOWN );
+      robot.keyPress( KeyEvent.VK_DOWN );
+      robot.keyRelease( KeyEvent.VK_DOWN );
+      robot.keyPress( KeyEvent.VK_DOWN );
+      robot.keyRelease( KeyEvent.VK_DOWN );
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ), "class", "child-of-CHARTS initialized collapsed ui-state-active" );
-    String areaChartClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) ).getAttribute( "class" );
-    assertEquals( areaChartClass, "child-of-CHARTS initialized collapsed ui-state-active" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ), "class", "child-of-OTHERCOMPONENTS initialized collapsed ui-state-active" );
+    String tableClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) ).getAttribute( "class" );
+    assertEquals( tableClass, "child-of-OTHERCOMPONENTS initialized collapsed ui-state-active" );
 
     /*
      * ## Step 3
@@ -220,8 +226,6 @@ public class CDEComponentPanel extends BaseTest {
       robot.keyRelease( KeyEvent.VK_DOWN );
       robot.keyPress( KeyEvent.VK_DOWN );
       robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
@@ -230,8 +234,8 @@ public class CDEComponentPanel extends BaseTest {
      * ## Step 4
      */
     //Change "Parameter" and assert using down arrow to navigate is blocked
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ), "class", "initialized ui-state-active" );
-    String parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
+    String parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
     try {
       robot = new Robot();
@@ -245,14 +249,16 @@ public class CDEComponentPanel extends BaseTest {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_TAB );
       robot.keyRelease( KeyEvent.VK_TAB );
-      robot.keyPress( KeyEvent.VK_TAB );
-      robot.keyRelease( KeyEvent.VK_TAB );
+    } catch ( AWTException e ) {
+      e.printStackTrace();
+    }
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
+    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
+    assertEquals( parameterProperty, "initialized ui-state-active" );
+    try {
+      robot = new Robot();
       robot.keyPress( KeyEvent.VK_DOWN );
       robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_UP );
-      robot.keyRelease( KeyEvent.VK_UP );
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
@@ -260,13 +266,8 @@ public class CDEComponentPanel extends BaseTest {
     assertNotNull( closePopup );
     closePopup.click();
     assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup" ) ) );
-
-    //assert values are changed
-    String nameValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]" ) );
-    assertEquals( nameValue, "a" );
-
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ), "class", "initialized ui-state-active" );
-    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
+    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
 
     //Click tab and assert focus has gone back to first table
@@ -277,8 +278,12 @@ public class CDEComponentPanel extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ), "class", "initialized" );
-    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[4]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized" );
+    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized" );
+
+    //assert values are changed
+    String nameValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]" ) );
+    assertEquals( nameValue, "a" );
   }
 }

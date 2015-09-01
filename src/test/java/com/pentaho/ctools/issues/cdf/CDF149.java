@@ -24,13 +24,10 @@ package com.pentaho.ctools.issues.cdf;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -124,22 +121,10 @@ public class CDF149 extends BaseTest {
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
     assertNotNull( element );
     element.click();
-    Robot robot;
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_T );
-      robot.keyRelease( KeyEvent.VK_T );
-      robot.keyPress( KeyEvent.VK_R );
-      robot.keyRelease( KeyEvent.VK_R );
-      robot.keyPress( KeyEvent.VK_U );
-      robot.keyRelease( KeyEvent.VK_U );
-      robot.keyPress( KeyEvent.VK_E );
-      robot.keyRelease( KeyEvent.VK_E );
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    WebElement normalizedInput = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]/form/input" ) );
+    normalizedInput.clear();
+    normalizedInput.sendKeys( "True" );
+    normalizedInput.sendKeys( Keys.ENTER );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']/../td[2]" ) );
     assertEquals( "True", text );
 
