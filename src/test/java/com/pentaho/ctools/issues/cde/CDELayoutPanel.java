@@ -423,6 +423,11 @@ public class CDELayoutPanel extends BaseTest {
       e.printStackTrace();
     }*/
     a.sendKeys( Keys.ENTER ).sendKeys( "a" ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).build().perform();
+
+    //assert name has changed
+    String columnName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr/td[2]" ) );
+    assertEquals( columnName, "a" );
+
     //Change "Extra Small Devices" and "Text Align"
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]" ), "class", "initialized ui-state-active" );
     String xsInput = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]" ) ).getAttribute( "class" );
@@ -464,12 +469,15 @@ public class CDELayoutPanel extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }*/
-    a.sendKeys( Keys.ENTER ).sendKeys( Keys.DELETE ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.ENTER ).sendKeys( Keys.ENTER ).build().perform();
+    a.sendKeys( Keys.ENTER ).build().perform();
+    this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]/td[2]/form/input" ) ).clear();
+    a.sendKeys( Keys.SPACE ).sendKeys( Keys.ENTER ).build().perform();
+
     //assert values are changed
-    String columnName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr/td[2]" ) );
-    assertEquals( columnName, "a" );
     String xsValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]/td[2]" ) );
     assertEquals( xsValue, "-" );
+
+    a.sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.ENTER ).sendKeys( Keys.ENTER ).build().perform();
     String alignValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[10]/td[2]" ) );
     assertEquals( alignValue, "Left" );
     //Click tab and assert focus has gone back to first table
