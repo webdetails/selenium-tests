@@ -38,7 +38,7 @@
 			<class name="com.pentaho.ctools.issues.cde.CDE412"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE413"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE417"/>
-			<class name="com.pentaho.ctools.issues.cde.CDE430"/>
+			<!-- class name="com.pentaho.ctools.issues.cde.CDE430"/-->
 			<class name="com.pentaho.ctools.issues.cde.CDE438"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE446"/>
 			<class name="com.pentaho.ctools.issues.cde.CDE452"/>
