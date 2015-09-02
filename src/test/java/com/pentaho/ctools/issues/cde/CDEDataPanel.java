@@ -242,7 +242,7 @@ public class CDEDataPanel extends BaseTest {
     } catch ( AWTException e ) {
       e.printStackTrace();
     }*/
-    a.sendKeys( Keys.ENTER ).sendKeys( Keys.TAB ).sendKeys( Keys.TAB ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.UP ).build().perform();
+    a.sendKeys( Keys.ENTER ).sendKeys( Keys.TAB ).sendKeys( Keys.TAB ).sendKeys( Keys.TAB ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.UP ).build().perform();
 
     WebElement closePopup = this.elemHelper.FindElement( driver, By.id( "popup_state0_buttonCancel" ) );
     assertNotNull( closePopup );
