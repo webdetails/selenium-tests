@@ -24,14 +24,12 @@ package com.pentaho.ctools.issues.cde;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -196,14 +194,16 @@ public class CDE505 extends BaseTest {
     WebElement paramPopupButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "val_0" ) );
     assertNotNull( paramPopupButton );
     paramPopupButton.click();
-    Robot robot1;
+    /*Robot robot1;
     try {
       robot1 = new Robot();
       robot1.keyPress( KeyEvent.VK_DOWN );
       robot1.keyRelease( KeyEvent.VK_DOWN );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    Actions a = new Actions( driver );
+    a.sendKeys( Keys.DOWN ).build().perform();
     WebElement paramList = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "ui-id-1" ) );
     assertNotNull( paramList );
 
@@ -236,14 +236,15 @@ public class CDE505 extends BaseTest {
     WebElement columnType = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "arg_0" ) );
     assertNotNull( columnType );
     columnType.click();
-    Robot robot;
+    /*Robot robot;
     try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_DOWN );
       robot.keyRelease( KeyEvent.VK_DOWN );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( Keys.DOWN ).build().perform();
     WebElement columnList = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup_state_state0']//ul" ) );
     assertNotNull( columnList );
     WebElement hiddenOption = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup_state_state0']//ul//a[contains(text(),'hidden')]" ) );

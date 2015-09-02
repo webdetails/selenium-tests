@@ -24,14 +24,12 @@ package com.pentaho.ctools.issues.cde;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BaseTest;
@@ -118,18 +116,20 @@ public class CDE430 extends BaseTest {
     assertNotNull( inputChart );
     inputChart.clear();
 
-    Robot robot1;
-    try {
-      robot1 = new Robot();
-      robot1.keyPress( KeyEvent.VK_ENTER );
-      robot1.keyRelease( KeyEvent.VK_ENTER );
-      robot1.keyPress( KeyEvent.VK_ENTER );
-      robot1.keyRelease( KeyEvent.VK_ENTER );
-      robot1.keyPress( KeyEvent.VK_DOWN );
-      robot1.keyRelease( KeyEvent.VK_DOWN );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    /* Robot robot1;
+     try {
+       robot1 = new Robot();
+       robot1.keyPress( KeyEvent.VK_ENTER );
+       robot1.keyRelease( KeyEvent.VK_ENTER );
+       robot1.keyPress( KeyEvent.VK_ENTER );
+       robot1.keyRelease( KeyEvent.VK_ENTER );
+       robot1.keyPress( KeyEvent.VK_DOWN );
+       robot1.keyRelease( KeyEvent.VK_DOWN );
+     } catch ( AWTException e ) {
+       e.printStackTrace();
+     }*/
+    Actions a = new Actions( driver );
+    a.sendKeys( Keys.ENTER ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).build().perform();
     WebElement listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/ul/li/a" ) );
     assertNotNull( listOption1 );
     String textOption1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li/a" ) );
@@ -150,7 +150,7 @@ public class CDE430 extends BaseTest {
     assertNotNull( inputData );
     inputData.clear();
 
-    try {
+    /*try {
       robot1 = new Robot();
       robot1.keyPress( KeyEvent.VK_ENTER );
       robot1.keyRelease( KeyEvent.VK_ENTER );
@@ -160,7 +160,8 @@ public class CDE430 extends BaseTest {
       robot1.keyRelease( KeyEvent.VK_DOWN );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( Keys.ENTER ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).build().perform();
     listOption1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//body/ul/li/a" ) );
     assertNotNull( listOption1 );
     textOption1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li/a" ) );

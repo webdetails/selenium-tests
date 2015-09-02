@@ -25,14 +25,12 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
@@ -141,7 +139,7 @@ public class CDELayoutPanel extends BaseTest {
      */
     //Add Row and verify that columsn and html can not be added outside of rows
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
-    Robot robot;
+    /*Robot robot;
     try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_C );
@@ -152,27 +150,31 @@ public class CDELayoutPanel extends BaseTest {
       robot.keyRelease( KeyEvent.VK_R );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    Actions a = new Actions( driver );
+    a.sendKeys( "c" ).sendKeys( "h" ).sendKeys( "r" ).build().perform();
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
 
     //Add Column
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_C );
       robot.keyRelease( KeyEvent.VK_C );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( "c" ).build().perform();
 
     //Add Html
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_H );
       robot.keyRelease( KeyEvent.VK_H );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( "h" ).build().perform();
 
     //Assert elements were successfully created
     WebElement row = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
@@ -202,7 +204,7 @@ public class CDELayoutPanel extends BaseTest {
     String spacerText = spacer.getText();
     assertEquals( "Space", spacerText );
     spacer.click();
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( 16 );
       robot.keyPress( KeyEvent.VK_D );
@@ -210,7 +212,8 @@ public class CDELayoutPanel extends BaseTest {
       robot.keyRelease( 16 );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.keyDown( Keys.SHIFT ).sendKeys( "d" ).keyUp( Keys.SHIFT ).build().perform();
     WebElement spacer2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td" ) );
     assertNotNull( spacer2 );
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td" ), "Space" );
@@ -219,7 +222,7 @@ public class CDELayoutPanel extends BaseTest {
 
     //Delete elements and assert they are no longer present
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( 16 );
       robot.keyPress( KeyEvent.VK_X );
@@ -227,7 +230,8 @@ public class CDELayoutPanel extends BaseTest {
       robot.keyRelease( 16 );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.keyDown( Keys.SHIFT ).sendKeys( "x" ).keyUp( Keys.SHIFT ).build().perform();
     assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) ) );
 
     /*
@@ -340,13 +344,14 @@ public class CDELayoutPanel extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
     String firstRowClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr" ) ).getAttribute( "class" );
     assertEquals( firstRowClass, "ui-draggable ui-droppable initialized parent collapsed ui-state-active" );
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_DOWN );
       robot.keyRelease( KeyEvent.VK_DOWN );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( Keys.DOWN ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]" ), "class", "ui-draggable ui-droppable initialized ui-state-active" );
     String secondRowClass = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]" ) ).getAttribute( "class" );
     assertEquals( secondRowClass, "ui-draggable ui-droppable initialized ui-state-active" );
@@ -355,7 +360,7 @@ public class CDELayoutPanel extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
 
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_DOWN );
       robot.keyRelease( KeyEvent.VK_DOWN );
@@ -363,44 +368,47 @@ public class CDELayoutPanel extends BaseTest {
       robot.keyRelease( KeyEvent.VK_RIGHT );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( Keys.DOWN ).sendKeys( Keys.RIGHT ).build().perform();
     WebElement firstColumn = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
     assertNotNull( firstColumn );
     WebElement secondColumn = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
     assertNotNull( secondColumn );
 
     //Go to second column and back to first and assert first column is selected
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_C );
-      robot.keyRelease( KeyEvent.VK_C );
-      robot.keyPress( KeyEvent.VK_TAB );
-      robot.keyRelease( KeyEvent.VK_TAB );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    /* try {
+       robot = new Robot();
+       robot.keyPress( KeyEvent.VK_DOWN );
+       robot.keyRelease( KeyEvent.VK_DOWN );
+       robot.keyPress( KeyEvent.VK_DOWN );
+       robot.keyRelease( KeyEvent.VK_DOWN );
+       robot.keyPress( KeyEvent.VK_C );
+       robot.keyRelease( KeyEvent.VK_C );
+       robot.keyPress( KeyEvent.VK_TAB );
+       robot.keyRelease( KeyEvent.VK_TAB );
+     } catch ( AWTException e ) {
+       e.printStackTrace();
+     }*/
+    a.sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( "c" ).sendKeys( Keys.TAB ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ), "class", "ui-state-active" );
     String firstColumnClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ) ).getAttribute( "class" );
     assertTrue( firstColumnClass.contains( "ui-state-active" ) );
 
     //Click tab key and assert focus has changed to properties table
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_TAB );
       robot.keyRelease( KeyEvent.VK_TAB );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( Keys.TAB ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr" ), "class", "initialized ui-state-active" );
     String firstPropertyClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr" ) ).getAttribute( "class" );
     assertEquals( firstPropertyClass, "initialized ui-state-active" );
 
     //Click enter to change following properties "Name", "Span size" and "Right border"
-    try {
+    /*try {
       robot = new Robot();
       //change "Name
       robot.keyPress( KeyEvent.VK_ENTER );
@@ -413,12 +421,13 @@ public class CDELayoutPanel extends BaseTest {
       robot.keyRelease( KeyEvent.VK_DOWN );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( Keys.ENTER ).sendKeys( "a" ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).build().perform();
     //Change "Extra Small Devices" and "Text Align"
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]" ), "class", "initialized ui-state-active" );
     String xsInput = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]" ) ).getAttribute( "class" );
     assertEquals( xsInput, "initialized ui-state-active" );
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_ENTER );
       robot.keyRelease( KeyEvent.VK_ENTER );
@@ -454,7 +463,8 @@ public class CDELayoutPanel extends BaseTest {
       robot.keyRelease( KeyEvent.VK_ENTER );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( Keys.ENTER ).sendKeys( Keys.DELETE ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.ENTER ).sendKeys( Keys.ENTER ).build().perform();
     //assert values are changed
     String columnName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr/td[2]" ) );
     assertEquals( columnName, "a" );
@@ -463,19 +473,20 @@ public class CDELayoutPanel extends BaseTest {
     String alignValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[10]/td[2]" ) );
     assertEquals( alignValue, "Left" );
     //Click tab and assert focus has gone back to first table
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_TAB );
       robot.keyRelease( KeyEvent.VK_TAB );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( Keys.TAB ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[8]" ), "class", "initialized" );
     String columnClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[8]" ) ).getAttribute( "class" );
     assertEquals( columnClass, "initialized" );
 
     //Collapse Row and assert columns aren't showing
-    try {
+    /*try {
       robot = new Robot();
       robot.keyPress( KeyEvent.VK_UP );
       robot.keyRelease( KeyEvent.VK_UP );
@@ -487,7 +498,8 @@ public class CDELayoutPanel extends BaseTest {
       robot.keyRelease( KeyEvent.VK_LEFT );
     } catch ( AWTException e ) {
       e.printStackTrace();
-    }
+    }*/
+    a.sendKeys( Keys.UP ).sendKeys( Keys.UP ).sendKeys( Keys.UP ).sendKeys( Keys.LEFT ).build().perform();
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ) );

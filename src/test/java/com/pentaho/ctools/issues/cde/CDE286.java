@@ -24,13 +24,10 @@ package com.pentaho.ctools.issues.cde;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -154,7 +151,7 @@ public class CDE286 extends BaseTest {
     WebElement fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_0']/span" ) );
     WebElement toParameter = this.elemHelper.FindElement( driver, By.id( "arg_2" ) );
     Actions builder = new Actions( driver );
-    Action dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 5 ).release( toParameter ).build();
+    Action dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 10 ).release( toParameter ).build();
     dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
     String firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
@@ -162,7 +159,7 @@ public class CDE286 extends BaseTest {
     fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_1']/span" ) );
     toParameter = this.elemHelper.FindElement( driver, By.id( "arg_2" ) );
     builder = new Actions( driver );
-    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 5 ).release( toParameter ).build();
+    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 10 ).release( toParameter ).build();
     dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
@@ -209,7 +206,7 @@ public class CDE286 extends BaseTest {
     fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_0']/span" ) );
     toParameter = this.elemHelper.FindElement( driver, By.id( "arg_3" ) );
     builder = new Actions( driver );
-    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 5 ).release( toParameter ).build();
+    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 10 ).release( toParameter ).build();
     dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
@@ -217,7 +214,7 @@ public class CDE286 extends BaseTest {
     fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_1']/span" ) );
     toParameter = this.elemHelper.FindElement( driver, By.id( "arg_3" ) );
     builder = new Actions( driver );
-    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 5 ).release( toParameter ).build();
+    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 10 ).release( toParameter ).build();
     dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
@@ -225,7 +222,7 @@ public class CDE286 extends BaseTest {
     fromParameter = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='drag_icon_2']/span" ) );
     toParameter = this.elemHelper.FindElement( driver, By.id( "arg_3" ) );
     builder = new Actions( driver );
-    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 5 ).release( toParameter ).build();
+    dragAndDrop = builder.clickAndHold( fromParameter ).moveToElement( toParameter, -0, 10 ).release( toParameter ).build();
     dragAndDrop.perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_3" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
@@ -267,16 +264,18 @@ public class CDE286 extends BaseTest {
     /*
      * ## Step 3
      */
-    Robot robot;
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_SHIFT );
-      robot.keyPress( KeyEvent.VK_G );
-      robot.keyRelease( KeyEvent.VK_G );
-      robot.keyRelease( KeyEvent.VK_SHIFT );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }
+    /* Robot robot;
+     try {
+       robot = new Robot();
+       robot.keyPress( KeyEvent.VK_SHIFT );
+       robot.keyPress( KeyEvent.VK_G );
+       robot.keyRelease( KeyEvent.VK_G );
+       robot.keyRelease( KeyEvent.VK_SHIFT );
+     } catch ( AWTException e ) {
+       e.printStackTrace();
+     }*/
+    Actions a = new Actions( driver );
+    a.keyDown( Keys.SHIFT ).sendKeys( "g" ).keyUp( Keys.SHIFT ).build().perform();
     WebElement cggDialog = this.elemHelper.WaitForElementPresence( driver, By.id( "cggDialog" ) );
     assertNotNull( cggDialog );
     String actualCggDialogTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cggDialog']/h3" ) );
