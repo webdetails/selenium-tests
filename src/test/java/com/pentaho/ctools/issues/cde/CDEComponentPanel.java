@@ -142,18 +142,6 @@ public class CDEComponentPanel extends BaseTest {
     assertNotNull( areaChart );
     tableComponent = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
     assertNotNull( tableComponent );
-    /*Robot robot;
-    try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_LEFT );
-      robot.keyRelease( KeyEvent.VK_LEFT );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_LEFT );
-      robot.keyRelease( KeyEvent.VK_LEFT );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }*/
     Actions a = new Actions( driver );
     a.sendKeys( Keys.LEFT ).sendKeys( Keys.DOWN ).sendKeys( Keys.LEFT ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[4]" ), "class", "initialized parent ui-state-active collapsed" );
@@ -163,17 +151,6 @@ public class CDEComponentPanel extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
 
     //Assert clicking right arrow expands groups    
-    /*try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_RIGHT );
-      robot.keyRelease( KeyEvent.VK_RIGHT );
-      robot.keyPress( KeyEvent.VK_UP );
-      robot.keyRelease( KeyEvent.VK_UP );
-      robot.keyPress( KeyEvent.VK_RIGHT );
-      robot.keyRelease( KeyEvent.VK_RIGHT );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }*/
     a.sendKeys( Keys.RIGHT ).sendKeys( Keys.UP ).sendKeys( Keys.RIGHT ).build().perform();
     areaChart = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]" ) );
     assertNotNull( areaChart );
@@ -181,19 +158,6 @@ public class CDEComponentPanel extends BaseTest {
     assertNotNull( tableComponent );
 
     //Go to to area chart and assert it's selected
-    /*try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }*/
     a.sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ), "class", "child-of-OTHERCOMPONENTS initialized collapsed ui-state-active" );
     String tableClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) ).getAttribute( "class" );
@@ -203,35 +167,12 @@ public class CDEComponentPanel extends BaseTest {
      * ## Step 3
      */
     //Click tab key and assert focus has changed to properties table
-    /*try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_TAB );
-      robot.keyRelease( KeyEvent.VK_TAB );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }*/
     a.sendKeys( Keys.TAB ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr" ), "class", "initialized ui-state-active" );
     String nameProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr" ) ).getAttribute( "class" );
     assertEquals( nameProperty, "initialized ui-state-active" );
 
     //Click enter to change following properties "Name" and "Parameters"
-    /*try {
-      robot = new Robot();
-      //change "Name
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-      robot.keyPress( KeyEvent.VK_A );
-      robot.keyRelease( KeyEvent.VK_A );
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }*/
     a.sendKeys( Keys.ENTER ).sendKeys( "a" ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).build().perform();
 
     /*
@@ -241,33 +182,12 @@ public class CDEComponentPanel extends BaseTest {
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
     String parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
-    /*try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_ENTER );
-      robot.keyRelease( KeyEvent.VK_ENTER );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }*/
     a.sendKeys( Keys.ENTER ).build().perform();
     assertNotNull( this.elemHelper.FindElement( driver, By.id( "popup" ) ) );
-    /*try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_TAB );
-      robot.keyRelease( KeyEvent.VK_TAB );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }*/
     a.sendKeys( Keys.TAB ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
     parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
-    /*try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_DOWN );
-      robot.keyRelease( KeyEvent.VK_DOWN );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }*/
     a.sendKeys( Keys.DOWN ).build().perform();
     WebElement closePopup = this.elemHelper.FindElement( driver, By.id( "popup_state0_buttonCancel" ) );
     assertNotNull( closePopup );
@@ -278,13 +198,6 @@ public class CDEComponentPanel extends BaseTest {
     assertEquals( parameterProperty, "initialized ui-state-active" );
 
     //Click tab and assert focus has gone back to first table
-    /*try {
-      robot = new Robot();
-      robot.keyPress( KeyEvent.VK_TAB );
-      robot.keyRelease( KeyEvent.VK_TAB );
-    } catch ( AWTException e ) {
-      e.printStackTrace();
-    }*/
     a.sendKeys( Keys.TAB ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized" );
     parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
