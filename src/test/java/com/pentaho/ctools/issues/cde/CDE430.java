@@ -138,6 +138,8 @@ public class CDE430 extends BaseTest {
     assertNotNull( listOption2 );
     String textOption2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body/ul/li[2]/a" ) );
     assertEquals( "svg", textOption2 );
+    a.sendKeys( Keys.ENTER ).sendKeys( Keys.ENTER ).build().perform();
+    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//body/ul/li/a" ) );
 
     /* 
      * ## Step 4 
