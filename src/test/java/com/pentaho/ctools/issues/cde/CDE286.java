@@ -147,14 +147,14 @@ public class CDE286 extends BaseTest {
     //Add the third color
     this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_2" ), strColor3 );
     //CDE-450 assert able to change order of colors
-    this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), 0, 0 );
-    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_0" ), "class", "popup_drag_hover" );
+    this.elemHelper.MoveToElementAndClick( driver, By.xpath( "//div[@id='drag_icon_0']/span" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_0" ), "class", "popup_drag_hover", 2 );
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.id( "arg_2" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
     String firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
     assertEquals( "parameters_1", firstParameter );
-    this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), 0, 0 );
-    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_1" ), "class", "popup_drag_hover" );
+    this.elemHelper.MoveToElementAndClick( driver, By.xpath( "//div[@id='drag_icon_1']/span" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_1" ), "class", "popup_drag_hover", 2 );
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.id( "arg_2" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
@@ -198,20 +198,20 @@ public class CDE286 extends BaseTest {
     //Add interval 3
     this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_3" ), strInterval3 );
     //CDE-450 assert able to change order of intervals
-    this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), 0, 0 );
-    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_0" ), "class", "popup_drag_hover" );
+    this.elemHelper.MoveToElementAndClick( driver, By.xpath( "//div[@id='drag_icon_0']/span" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_0" ), "class", "popup_drag_hover", 2 );
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.id( "arg_3" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
     assertEquals( "parameters_1", firstParameter );
-    this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), 0, 0 );
-    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_1" ), "class", "popup_drag_hover" );
+    this.elemHelper.MoveToElementAndClick( driver, By.xpath( "//div[@id='drag_icon_1']/span" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_1" ), "class", "popup_drag_hover", 2 );
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.id( "arg_3" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
     assertEquals( "parameters_2", firstParameter );
-    this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='drag_icon_2']/span" ), 0, 0 );
-    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_2" ), "class", "popup_drag_hover" );
+    this.elemHelper.MoveToElementAndClick( driver, By.xpath( "//div[@id='drag_icon_2']/span" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_2" ), "class", "popup_drag_hover", 2 );
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_2']/span" ), By.id( "arg_3" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_3" );
     firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
