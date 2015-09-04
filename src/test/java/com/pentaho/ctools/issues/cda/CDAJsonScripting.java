@@ -36,9 +36,11 @@ import com.pentaho.ctools.utils.ElementHelper;
 
 /**
  * The script is testing the issue:
+ * - http://jira.pentaho.com/browse/CDA-127
  * - http://jira.pentaho.com/browse/CDA-130
  *
  * and the automation test is described:
+ * - http://jira.pentaho.com/browse/QUALITY-1123
  * - http://jira.pentaho.com/browse/QUALITY-1124
  *
  * NOTE
@@ -58,10 +60,11 @@ public class CDAJsonScripting extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Asserting that Json Scripting datasource accepts null values
+   *    Json Scripting  datasource testing
    * Description:
-   *    The test pretends validate the CDA-130 issue, asserting that Json Scripting datasource accepts null values.
-   *
+   *    CDA-127 - How Json Scripting datasource handles invalid numbers (0/0)
+   *    CDA-130 - asserting that Json Scripting datasource accepts null values.
+   *       
    * Steps:
    *    1. Open sample and select "Sample query on SteelWheelsSales" on the datasources
    *    2. Wait for and assert elements and text on page
@@ -105,11 +108,13 @@ public class CDAJsonScripting extends BaseTest {
     String thirdColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td[3]" ) );
     String fourthColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
     String fifthColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[5]" ) );
+    String sixthColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td[6]" ) );
     assertEquals( "South", firstColumn );
     assertEquals( "14", secondColumn );
     assertEquals( "null", thirdColumn );
     assertEquals( "null", fourthColumn );
     assertEquals( "null", fifthColumn );
+    assertEquals( "LibFormulaErrorValue{errorCode=503, errorMessage=Arithmetic Error}", sixthColumn );
 
   }
 }
