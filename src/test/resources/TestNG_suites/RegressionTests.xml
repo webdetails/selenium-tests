@@ -15,6 +15,7 @@
 			<class name="com.pentaho.ctools.issues.cda.CDA110"/>
 			<class name="com.pentaho.ctools.issues.cda.CDAExportToXls"/>
 			<class name="com.pentaho.ctools.issues.cda.CDAHelpButtons"/>
+			<class name="com.pentaho.ctools.issues.cda.CDAJsonScripting"/>
 			<class name="com.pentaho.ctools.issues.cda.CDAQueryFail"/>
 			
 			
