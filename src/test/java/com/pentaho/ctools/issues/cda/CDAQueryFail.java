@@ -95,6 +95,7 @@ public class CDAQueryFail extends BaseTest {
     select.selectByVisibleText( "Sql Query on SampleData - Jndi" );
 
     //wait to render page
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Assert error message

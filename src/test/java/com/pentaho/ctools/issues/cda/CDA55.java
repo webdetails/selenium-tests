@@ -82,6 +82,8 @@ public class CDA55 extends BaseTest {
     assertNotNull( element );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Sample query on SteelWheelsSales" );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );

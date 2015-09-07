@@ -123,6 +123,7 @@ public class CDAExportToXls extends BaseTest {
     assertNotNull( DataSelector );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Sql Query on SampleData - Jdbc" );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );
@@ -226,6 +227,7 @@ public class CDAExportToXls extends BaseTest {
     assertNotNull( DataSelector );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "sqlDummyTWELVE" );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );
@@ -287,6 +289,7 @@ public class CDAExportToXls extends BaseTest {
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
       dw.WatchForCreate( downloadDir );
+      Thread.sleep( 5000 );
 
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath );
@@ -349,7 +352,7 @@ public class CDAExportToXls extends BaseTest {
     /*
       * ## Step 2
       */
-    //wait to render page
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Assert elements on page
@@ -443,6 +446,7 @@ public class CDAExportToXls extends BaseTest {
     assertNotNull( DataSelector );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Sql Query with String Array on SampleData - Jndi" );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );

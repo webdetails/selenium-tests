@@ -85,6 +85,7 @@ public class CDA110 extends BaseTest {
     assertNotNull( selector );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "fullOuter" );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );

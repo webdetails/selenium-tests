@@ -88,6 +88,8 @@ public class CDAHelpButtons extends BaseTest {
     assertNotNull( element );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "1" );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );
