@@ -6,7 +6,7 @@
 	<test verbose="1" name="Everyday Testing">
 		<classes>
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
-			<class name="com.pentaho.ctools.issues.cde.CDE286"/>
+			<class name="com.pentaho.ctools.cdf.ExecuteAnalyzerComponent"/>
 		</classes>
 	</test>
 	

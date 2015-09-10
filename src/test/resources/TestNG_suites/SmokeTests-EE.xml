@@ -7,6 +7,7 @@
 			<!-- LOGIN -->
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
 			<!-- CDF -->
+			<class name="com.pentaho.ctools.cdf.AnalyzerComponent" />
 			<class name="com.pentaho.ctools.cdf.AutoCompleteBoxComponent" />
 			<class name="com.pentaho.ctools.cdf.ButtonComponent" />
 			<class name="com.pentaho.ctools.cdf.CheckComponent" />
@@ -14,6 +15,7 @@
 			<class name="com.pentaho.ctools.cdf.DateInputComponent" />
 			<class name="com.pentaho.ctools.cdf.DateRangeInputComponent" />
 			<class name="com.pentaho.ctools.cdf.DialComponent" />
+			<class name="com.pentaho.ctools.cdf.ExecuteAnalyzerComponent" />
 			<class name="com.pentaho.ctools.cdf.ExecutePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.ExecuteXactionComponent" />
 			<class name="com.pentaho.ctools.cdf.JFreeChartComponent" />
@@ -59,6 +61,7 @@
 			<class name="com.pentaho.ctools.cgg.ScatterChart" />
 			<class name="com.pentaho.ctools.cgg.DialChart" />
 			<!-- CDF-RequireJS -->
+			<class name="com.pentaho.ctools.cdf.require.AnalyzerComponent" />
 			<class name="com.pentaho.ctools.cdf.require.AutoCompleteBoxComponent" />
 			<class name="com.pentaho.ctools.cdf.require.ButtonComponent" />
 			<class name="com.pentaho.ctools.cdf.require.CheckComponent" />
@@ -66,6 +69,7 @@
 			<class name="com.pentaho.ctools.cdf.require.DateInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.DateRangeInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.DialComponent" />
+			<class name="com.pentaho.ctools.cdf.require.ExecuteAnalyzerComponent" />
 			<class name="com.pentaho.ctools.cdf.require.ExecutePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.require.ExecuteXactionComponent" />
 			<class name="com.pentaho.ctools.cdf.require.JFreeChartComponent" />
