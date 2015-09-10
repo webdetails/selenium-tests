@@ -84,18 +84,16 @@ public class CDA55 extends BaseTest {
     select.selectByVisibleText( "Sample query on SteelWheelsSales" );
     this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
-    assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='queryUrl']" ) );
+    assertNotNull( element );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( element );
 
     /*
      * ## Step 2
      */
-    //wait to render page
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     //Check the presented contains
     WebElement elemCountries = this.elemHelper.FindElement( driver, By.id( "countries" ) );
     assertEquals( "France;USA", elemCountries.getAttribute( "value" ) );

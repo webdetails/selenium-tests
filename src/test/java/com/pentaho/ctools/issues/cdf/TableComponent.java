@@ -165,11 +165,12 @@ public class TableComponent extends BaseTest {
     WebElement nextPage = this.elemHelper.FindElement( driver, By.id( "tblMainTable_next" ) );
     assertNotNull( nextPage );
     nextPage.click();
+    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr/td" ) );
 
     //Click second row and assert expansion was successful
     WebElement secondRow = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) );
     assertNotNull( secondRow );
-    String secondProduct = secondRow.getText();
+    String secondProduct = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) ).getText();
     assertEquals( "Planes", secondProduct );
     secondRow.click();
     subTable = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblSubTable']/tbody/tr/td" ) );

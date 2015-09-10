@@ -125,12 +125,12 @@ public class CDAExportToXls extends BaseTest {
     select.selectByVisibleText( "Sql Query on SampleData - Jdbc" );
     this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
-    assertNotNull( refreshButton );
     WebElement cacheButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( cacheButton );
     WebElement queryButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( queryButton );
+    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
+    assertNotNull( refreshButton );
 
     /*
      * ## Step 2
@@ -229,12 +229,12 @@ public class CDAExportToXls extends BaseTest {
     select.selectByValue( "sqlDummyTWELVE" );
     this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
-    assertNotNull( refreshButton );
     WebElement cacheButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );
     assertNotNull( cacheButton );
     WebElement queryButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='queryUrl']" ) );
     assertNotNull( queryButton );
+    WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
+    assertNotNull( refreshButton );
 
     /*
      * ## Step 2
