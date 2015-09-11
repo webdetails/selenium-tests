@@ -196,9 +196,9 @@ public class CDEComponentPanel extends BaseTest {
     assertNotNull( closePopup );
     closePopup.click();
     assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup" ) ) );
-    //this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
-    //parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
-    //assertEquals( parameterProperty, "initialized ui-state-active" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
+    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
+    assertEquals( parameterProperty, "initialized ui-state-active" );
 
     //assert values are changed
     String nameValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]" ) );
