@@ -63,6 +63,8 @@
 			<class name="com.pentaho.ctools.issues.cdf.CDF474"/>
 			<class name="com.pentaho.ctools.issues.cdf.CDF486"/>
 			<class name="com.pentaho.ctools.issues.cdf.CDF501"/>
+			<class name="com.pentaho.ctools.issues.cdf.CleanDashboard"/>
+			<class name="com.pentaho.ctools.issues.cdf.Select2Component"/>
 			<class name="com.pentaho.ctools.issues.cdf.TableComponent"/>
 			
 			<class name="com.pentaho.ctools.main.LogoutPentaho" />
