@@ -340,7 +340,7 @@ public class CDELayoutPanel extends BaseTest {
     assertEquals( xsInput, "initialized ui-state-active" );
     a.sendKeys( Keys.ENTER ).build().perform();
     this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]/td[2]/form/input" ) ).clear();
-    a.sendKeys( Keys.SPACE ).sendKeys( Keys.ENTER ).build().perform();
+    a.sendKeys( Keys.ENTER ).build().perform();
 
     //assert values are changed
     String xsValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[2]/td[2]" ) );
