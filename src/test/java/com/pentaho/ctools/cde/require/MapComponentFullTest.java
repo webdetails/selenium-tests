@@ -160,9 +160,7 @@ public class MapComponentFullTest extends BaseTest {
     // >>> Open Marker 1
     driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) ).click();
     // Wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker1Serie1 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
@@ -186,58 +184,59 @@ public class MapComponentFullTest extends BaseTest {
     // >>> Open Marker 2
     driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) ).click();
     // Wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker2Serie1 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
     String marker2Serie2 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']" ) );
     String marker2Serie3 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]//*[local-name()='text']" ) );
-    String marker2Serie4 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']" ) );
-    assertEquals( "Classic Cars", marker2Serie1 );
-    assertEquals( "Vintage Cars", marker2Serie2 );
-    assertEquals( "Trucks and Buses", marker2Serie3 );
-    assertEquals( "Ships", marker2Serie4 );
+    assertEquals( "Trucks and Buses", marker2Serie1 );
+    assertEquals( "Ships", marker2Serie2 );
+    assertEquals( "Motorcycles", marker2Serie3 );
     String marker2PopupTitle = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//*[local-name()='svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
     assertEquals( "Sales For Product", marker2PopupTitle );
     // Check the pie chart is present
-    WebElement marker2SeriesShips = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][4]" ) );
-    assertEquals( "rgb(214,39,40)", marker2SeriesShips.getAttribute( "fill" ) );
+    WebElement marker2SeriesShips = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][3]" ) );
+    assertEquals( "rgb(44,160,44)", marker2SeriesShips.getAttribute( "fill" ) );
     // Close popup
     this.elemHelper.FindElement( driver, By.id( "featurePopup_close" ) ).click();
 
     // >>> Open Marker 3
     driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) ).click();
     // Wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker3Serie1 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
     String marker3Serie2 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']" ) );
-    String marker3Serie3 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]//*[local-name()='text']" ) );
-    assertEquals( "Trucks and Buses", marker3Serie1 );
-    assertEquals( "Ships", marker3Serie2 );
-    assertEquals( "Motorcycles", marker3Serie3 );
+    assertEquals( "Motorcycles", marker3Serie1 );
+    assertEquals( "Trains", marker3Serie2 );
     String marker3PopupTitle = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//*[local-name()='svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
     assertEquals( "Sales For Product", marker3PopupTitle );
     // Check the pie chart is present
-    WebElement marker3SeriesMotorcycles = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][3]" ) );
-    assertEquals( "rgb(44,160,44)", marker3SeriesMotorcycles.getAttribute( "fill" ) );
+    WebElement marker3SeriesMotorcycles = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][2]" ) );
+    assertEquals( "rgb(255,127,14)", marker3SeriesMotorcycles.getAttribute( "fill" ) );
     // Close popup
     this.elemHelper.FindElement( driver, By.id( "featurePopup_close" ) ).click();
 
     // >>> Open Marker 4
     driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][4]" ) ).click();
     // Wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker4Serie1 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
     String marker4Serie2 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']" ) );
-    assertEquals( "Motorcycles", marker4Serie1 );
-    assertEquals( "Trains", marker4Serie2 );
+    String marker4Serie3 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]//*[local-name()='text']" ) );
+    String marker4Serie4 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']" ) );
+    String marker4Serie5 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]//*[local-name()='text']" ) );
+    String marker4Serie6 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]//*[local-name()='text']" ) );
+    assertEquals( "Classic Cars", marker4Serie1 );
+    assertEquals( "Vintage Cars", marker4Serie2 );
+    assertEquals( "Trucks and Buses", marker4Serie3 );
+    assertEquals( "Ships", marker4Serie4 );
+    assertEquals( "Motorcycles", marker4Serie5 );
+    assertEquals( "Trains", marker4Serie6 );
     String marker4PopupTitle = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//*[local-name()='svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
     assertEquals( "Sales For Product", marker4PopupTitle );
     // Check the pie chart is present
@@ -249,7 +248,6 @@ public class MapComponentFullTest extends BaseTest {
     // >>> Open Marker 5
     driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][5]" ) ).click();
     // Wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
@@ -276,41 +274,35 @@ public class MapComponentFullTest extends BaseTest {
     // >>> Open Marker 6
     driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][6]" ) ).click();
     // Wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker6Serie1 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
     String marker6Serie2 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']" ) );
-    String marker6Serie3 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]//*[local-name()='text']" ) );
-    String marker6Serie4 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']" ) );
-    String marker6Serie5 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]//*[local-name()='text']" ) );
-    String marker6Serie6 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][3]//*[local-name()='text']" ) );
-    assertEquals( "Classic Cars", marker6Serie1 );
-    assertEquals( "Vintage Cars", marker6Serie2 );
-    assertEquals( "Trucks and Buses", marker6Serie3 );
-    assertEquals( "Ships", marker6Serie4 );
-    assertEquals( "Motorcycles", marker6Serie5 );
-    assertEquals( "Trains", marker6Serie6 );
+    assertEquals( "Trains", marker6Serie1 );
+    assertEquals( "Motorcycles", marker6Serie2 );
     String marker6PopupTitle = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//*[local-name()='svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
     assertEquals( "Sales For Product", marker6PopupTitle );
     // Check the pie chart is present
-    WebElement marker6SeriesTrains = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][6]" ) );
-    assertEquals( "rgb(140,86,75)", marker6SeriesTrains.getAttribute( "fill" ) );
+    WebElement marker6SeriesTrains = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][1]" ) );
+    assertEquals( "rgb(31,119,180)", marker6SeriesTrains.getAttribute( "fill" ) );
     // Close popup
     this.elemHelper.FindElement( driver, By.id( "featurePopup_close" ) ).click();
 
     // >>> Open Marker 7
     driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][7]" ) ).click();
     // Wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Check we have the expect series displayed
     String marker7Serie1 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][1]//*[local-name()='text']" ) );
     String marker7Serie2 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][2]//*[local-name()='text']" ) );
-    assertEquals( "Trains", marker7Serie1 );
-    assertEquals( "Motorcycles", marker7Serie2 );
+    String marker7Serie3 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='g'][3]//*[local-name()='text']" ) );
+    String marker7Serie4 = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][1]//*[local-name()='text']" ) );
+    assertEquals( "Classic Cars", marker7Serie1 );
+    assertEquals( "Vintage Cars", marker7Serie2 );
+    assertEquals( "Trucks and Buses", marker7Serie3 );
+    assertEquals( "Ships", marker7Serie4 );
     String marker7PopupTitle = this.elemHelper.GetTextElementInvisible( driver, By.xpath( "//*[local-name()='svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
     assertEquals( "Sales For Product", marker7PopupTitle );
     // Check the pie chart is present
@@ -324,7 +316,6 @@ public class MapComponentFullTest extends BaseTest {
      */
     driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][5]" ) ).click();
     // Wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     // Move mouse to element
@@ -350,8 +341,8 @@ public class MapComponentFullTest extends BaseTest {
     assertEquals( "Series", tooltipSeries );
     assertEquals( "Quantity", tooltipSeriesValue );
     assertEquals( "Value", tooltipValues );
-    assertEquals( "1,381", tooltipValuesValue );
-    assertEquals( "17%", tooltipValuesValueP );
+    assertEquals( "2,381", tooltipValuesValue );
+    assertEquals( "37.4%", tooltipValuesValueP );
 
     /*
      * ## Step 4
@@ -374,7 +365,7 @@ public class MapComponentFullTest extends BaseTest {
     // Check the values for the pie char for serie Vintage Cars
     String marker5SerieVintageCarsValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text'][1]" ) );
     String marker5SerieVintageCarsValuePer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='text'][2]" ) );
-    assertEquals( "2,753", marker5SerieVintageCarsValue );
+    assertEquals( "1,753", marker5SerieVintageCarsValue );
     assertEquals( "(100%)", marker5SerieVintageCarsValuePer );
   }
 }
