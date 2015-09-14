@@ -161,7 +161,7 @@ public class CDETableComponent extends BaseTest {
     selectedValue = selectedDash.getAttribute( "value" );
     assertEquals( "blueprint", selectedValue );
     select = new Select( this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//select[@id='rendererInput']" ) ) );
-    select.selectByValue( "blueprint" );
+    select.selectByValue( "bootstrap" );
     saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
     assertNotNull( saveButton );
     saveButton.click();
@@ -191,7 +191,7 @@ public class CDETableComponent extends BaseTest {
       String selectedValue = selectedDash.getAttribute( "value" );
       assertEquals( "blueprint", selectedValue );
       Select select = new Select( this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//select[@id='rendererInput']" ) ) );
-      select.selectByValue( "blueprint" );
+      select.selectByValue( "bootstrap" );
       WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
       assertNotNull( saveButton );
       saveButton.click();

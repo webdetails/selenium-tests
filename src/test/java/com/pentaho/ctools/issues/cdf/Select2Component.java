@@ -22,6 +22,7 @@
 package com.pentaho.ctools.issues.cdf;
 
 import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
@@ -84,6 +85,7 @@ public class Select2Component extends BaseTest {
     WebElement selectDrop = this.elemHelper.FindElement( driver, By.id( "select2-drop" ) );
     assertNotNull( selectDrop );
     String elementwidth = selectDrop.getAttribute( "style" );
+    assertEquals( "", elementwidth );
     assertTrue( elementwidth.contains( "width: 64px;" ) );
     selectExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='s2id_autogen1']/a/span[2]/b" ) );
     assertNotNull( selectExpander );
@@ -100,6 +102,7 @@ public class Select2Component extends BaseTest {
     selectDrop = this.elemHelper.FindElement( driver, By.id( "select2-drop" ) );
     assertNotNull( selectDrop );
     String elementwidth2 = selectDrop.getAttribute( "style" );
+    assertEquals( "", elementwidth2 );
     assertTrue( elementwidth2.contains( "width: 181px;" ) );
     selectExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='s2id_autogen3']/a/span[2]/b" ) );
     assertNotNull( selectExpander );
