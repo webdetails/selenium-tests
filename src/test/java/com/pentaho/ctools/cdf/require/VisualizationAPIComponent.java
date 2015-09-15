@@ -174,7 +174,7 @@ public class VisualizationAPIComponent extends BaseTest {
     wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='code']" ) ) );
 
     String text = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']/textarea" ) ).getText().replace( "MAX", "MIN" );
-    text = text.replace( "//Using postFetch to convert data types, because the query is passing //a Numeric field as String and that breaks the sample visualization", "" );
+    text = text.replace( "// Using postFetch to convert data types, because the query is passing //a Numeric field as String and that breaks the sample visualization", "" );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']/textarea" ) ).clear();
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']/textarea" ) ).sendKeys( text );
 
@@ -234,7 +234,7 @@ public class VisualizationAPIComponent extends BaseTest {
     this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
 
     String text = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']/textarea" ) ).getText().replace( "MAX", "AVG" );
-    text = text.replace( "//Using postFetch to convert data types, because the query is passing //a Numeric field as String and that breaks the sample visualization", "" );
+    text = text.replace( "// Using postFetch to convert data types, because the query is passing //a Numeric field as String and that breaks the sample visualization", "" );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']/textarea" ) ).clear();
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']/textarea" ) ).sendKeys( text );
 

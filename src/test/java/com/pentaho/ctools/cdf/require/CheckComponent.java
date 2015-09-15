@@ -137,32 +137,32 @@ public class CheckComponent extends BaseTest {
 
     String confirmationMsg = "";
     // ## Step 1
-    //Click in Southern
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
+    //Click in La Rochelle Gifts
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='La Rochelle Gifts']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Southern", confirmationMsg );
+    assertEquals( "you chose: La Rochelle Gifts", confirmationMsg );
 
     // ## Step 2
-    //Click in Eastern
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Eastern']" ) );
+    //Click in Land of Toys Inc.
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Land of Toys Inc.']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Southern,Eastern", confirmationMsg );
+    assertEquals( "you chose: La Rochelle Gifts,Land of Toys Inc.", confirmationMsg );
 
     // ## Step 3
-    //Click in Central
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
+    //Click in Souveniers And Things Co.
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Souveniers And Things Co.']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Southern,Eastern,Central", confirmationMsg );
+    assertEquals( "you chose: La Rochelle Gifts,Land of Toys Inc.,Souveniers And Things Co.", confirmationMsg );
 
     // ## Step 4
-    //Click in Western
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Western']" ) );
+    //Click in Salzburg Collectables
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Salzburg Collectables']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Southern,Eastern,Central,Western", confirmationMsg );
+    assertEquals( "you chose: La Rochelle Gifts,Land of Toys Inc.,Souveniers And Things Co.,Salzburg Collectables", confirmationMsg );
   }
 
   /**
@@ -185,29 +185,29 @@ public class CheckComponent extends BaseTest {
 
     String confirmationMsg = "";
     // ## Step 1
-    //Click in Southern
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
+    //Click in La Rochelle Gifts
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='La Rochelle Gifts']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Eastern,Central,Western", confirmationMsg );
+    assertEquals( "you chose: Land of Toys Inc.,Souveniers And Things Co.,Salzburg Collectables", confirmationMsg );
 
     // ## Step 2
-    //Click in Eastern
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Eastern']" ) );
+    //Click in Land of Toys Inc.
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Land of Toys Inc.']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Central,Western", confirmationMsg );
+    assertEquals( "you chose: Souveniers And Things Co.,Salzburg Collectables", confirmationMsg );
 
     // ## Step 3
-    //Click in Central
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
+    //Click in Souveniers And Things Co.
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Souveniers And Things Co.']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Western", confirmationMsg );
+    assertEquals( "you chose: Salzburg Collectables", confirmationMsg );
 
     // ## Step 4
-    //Click in Western
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Western']" ) );
+    //Click in Salzburg Collectables
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Salzburg Collectables']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
     assertEquals( "you chose: ", confirmationMsg );
@@ -229,40 +229,40 @@ public class CheckComponent extends BaseTest {
     this.log.info( "tc5_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed" );
 
     String confirmationMsg = "";
-    //Click in Central
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
+    //Click in La Rochelle Gifts
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='La Rochelle Gifts']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Central", confirmationMsg );
+    assertEquals( "you chose: La Rochelle Gifts", confirmationMsg );
 
-    //Click in Southern
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
-
-    confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Southern,Central", confirmationMsg );
-
-    //UnChecked Southern
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Southern']" ) );
+    //Click in Land of Toys Inc.
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Land of Toys Inc.']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Central", confirmationMsg );
+    assertEquals( "you chose: La Rochelle Gifts,Land of Toys Inc.", confirmationMsg );
 
-    //Click in Western
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Western']" ) );
-
-    confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Central,Western", confirmationMsg );
-
-    //Click in Western
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Eastern']" ) );
+    //UnChecked Land of Toys Inc.
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Land of Toys Inc.']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Eastern,Central,Western", confirmationMsg );
+    assertEquals( "you chose: La Rochelle Gifts", confirmationMsg );
 
-    //Unchecked Central
-    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Central']" ) );
+    //Click in Souveniers And Things Co.
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Souveniers And Things Co.']" ) );
 
     confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( "you chose: Eastern,Western", confirmationMsg );
+    assertEquals( "you chose: La Rochelle Gifts,Souveniers And Things Co.", confirmationMsg );
+
+    //Click in Salzburg Collectables
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Salzburg Collectables']" ) );
+
+    confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    assertEquals( "you chose: La Rochelle Gifts,Souveniers And Things Co.,Salzburg Collectables", confirmationMsg );
+
+    //Uncheck Souveniers And Things Co.
+    this.elemHelper.ClickJS( driver, By.xpath( "//input[@name='checkComponent' and @value='Souveniers And Things Co.']" ) );
+
+    confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    assertEquals( "you chose: La Rochelle Gifts,Salzburg Collectables", confirmationMsg );
   }
 }

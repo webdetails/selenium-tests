@@ -73,8 +73,8 @@ public class MapComponentReference extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Wait for page render on each map test
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km", 90 );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ), "200 km", 90 );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "2000 km", 90 );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ), "2000 km", 90 );
     //Wait for the three marks
     this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ), 90 );
     this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ), 90 );
@@ -254,9 +254,9 @@ public class MapComponentReference extends BaseTest {
     assertEquals( "Map with no markers and no shapes - Simple Case", driver.findElement( By.xpath( "//div[@id='subtitle0']/span" ) ).getText() );
     //Scale
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
-    assertEquals( "200 km", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
+    assertEquals( "2000 km", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
-    assertEquals( "200 mi", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
+    assertEquals( "1000 mi", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
     //ButtonLayer
     assertNotNull( driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[7]/div[2]/img" ) ) );
     //Get same images
@@ -271,9 +271,9 @@ public class MapComponentReference extends BaseTest {
     //wait for the field update
     wait.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
-    assertEquals( "100 km", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
+    assertEquals( "1000 km", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
-    assertEquals( "100 mi", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
+    assertEquals( "1000 mi", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
 
     //## Step3
     driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) ).click();
@@ -316,9 +316,9 @@ public class MapComponentReference extends BaseTest {
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[5]/div[3]" ) );
     //Scale
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) );
-    assertEquals( "200 km", driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) ).getText() );
+    assertEquals( "2000 km", driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) ).getText() );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) );
-    assertEquals( "200 mi", driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) ).getText() );
+    assertEquals( "1000 mi", driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) ).getText() );
     //Check if we are using OpenLayers
     String mapId = driver.findElement( By.xpath( "//div[@id='testTileServices']/div" ) ).getAttribute( "id" );
     assertTrue( mapId.contains( "OpenLayers" ) );
@@ -445,9 +445,9 @@ public class MapComponentReference extends BaseTest {
     assertNotNull( marker3 );
     assertNotNull( marker4 );
     assertEquals( "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_grey.png", marker1.getAttribute( "xlink:href" ) );
-    assertEquals( "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_grey02.png", marker2.getAttribute( "xlink:href" ) );
-    assertEquals( "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_orange.png", marker3.getAttribute( "xlink:href" ) );
-    assertEquals( "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_purple.png", marker4.getAttribute( "xlink:href" ) );
+    assertEquals( "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_blue.png", marker2.getAttribute( "xlink:href" ) );
+    assertEquals( "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_grey02.png", marker3.getAttribute( "xlink:href" ) );
+    assertEquals( "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/NewMapComponent/images/marker_orange.png", marker4.getAttribute( "xlink:href" ) );
 
     /*
      * ## Step 2
@@ -467,21 +467,21 @@ public class MapComponentReference extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     String marker2Text = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "HiddenContentCol" ) );
     this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
-    assertEquals( "Signal Gift Stores", marker2Text );
+    assertEquals( "Australian Collectors, Co.", marker2Text );
     //Open Marker 3
     marker3.click();
     //Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     String marker3Text = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "HiddenContentCol" ) );
     this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
-    assertEquals( "La Rochelle Gifts", marker3Text );
+    assertEquals( "Signal Gift Stores", marker3Text );
     //Open Marker 4
     marker4.click();
     //Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     String marker4Text = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "HiddenContentCol" ) );
     this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
-    assertEquals( "Baane Mini Imports", marker4Text );
+    assertEquals( "La Rochelle Gifts", marker4Text );
   }
 
   /**

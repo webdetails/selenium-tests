@@ -74,7 +74,7 @@ public class MetaLayerHomeDashboard extends BaseTest {
     /*
      * ## Step 1
      */
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalyer.xcdf/generatedContent" );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalayer.xcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
@@ -105,9 +105,8 @@ public class MetaLayerHomeDashboard extends BaseTest {
     WebElement frame = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
     String valueFrameAttrSrc = frame.getAttribute( "src" );
 
-    ///pentaho/plugin/jpivot/Pivot?solution=system&path=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf%2Factions&action=jpivot.xaction&width=500&height=600
     //Check if we have the sizes 500 and 600
-    assertTrue( StringUtils.containsIgnoreCase( valueFrameAttrSrc, "action=jpivot.xaction&width=500&height=600" ) );
+    assertTrue( StringUtils.containsIgnoreCase( valueFrameAttrSrc, "&width=500&height=600" ) );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
