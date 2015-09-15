@@ -217,4 +217,94 @@ public class CDEComponentPanel extends BaseTest {
     assertNotNull( baseAxisFont );
 
   }
+
+  /**
+   * ############################### Test Case 2 ###############################
+   *
+   * Test Case Name:
+   *    This test validates all issues related to CDE's Component Panel
+   *
+   * Description:
+   *    450: Able to reorder properties
+   *    
+   * Steps:
+   *    1. Open CDE sample in edit mode, go to components panel and add Dial Chart
+   *    2. Add colors and assert their order can be changed
+   */
+  @Test
+  public void tc02_CDEDashboardEdit_ComponentPropertyReorder() {
+    this.log.info( "tc02_CDEDashboardEdit_ComponentPropertyReorder" );
+
+    /*
+     * ## Step 1
+     */
+    //Open CDE sample in edit mode
+    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
+    //Go to Components Panel
+    this.elemHelper.Click( driver, By.xpath( "//div[@title='Components Panel']/a" ) );
+
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/h3/span" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/div/ul/li[24]/a[@title='CGG Dial Chart']" ) );
+    String componentName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]/td" ) );
+    assertEquals( "CGG Dial Chart", componentName );
+
+    /*
+     * ## Step 2
+     */
+    //Add Name
+    /*String expectedChartName = "dial";
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]/form/input" ) ).sendKeys( "dial" );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]/form/input" ) ).submit();
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]" ), "dial" );
+    String actualChartName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]" ) );
+    assertEquals( expectedChartName, actualChartName );
+
+    //Add Color Range
+    String strColor1 = "blue";
+    String strColor2 = "green";
+    String strColor3 = "brown";
+    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ) );
+    //We need to wait for the animation finish for the display popup
+    this.elemHelper.FindElement( driver, By.id( "popup" ) );
+    //Add Colors
+    //this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) );
+    WebElement elemArg0 = this.elemHelper.FindElement( driver, By.id( "arg_0" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) );
+    WebElement elemArg1 = this.elemHelper.FindElement( driver, By.id( "arg_1" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "button.popup-add-row-button" ) );
+    WebElement elemArg2 = this.elemHelper.FindElement( driver, By.id( "arg_2" ) );
+    assertNotNull( elemArg0 );
+    assertNotNull( elemArg1 );
+    assertNotNull( elemArg2 );
+    //Add the first color
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_0" ), strColor1 );
+    //Add the second color
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_1" ), strColor2 );
+    //Add the third color
+    this.elemHelper.ClickAndSendKeys( driver, By.id( "arg_2" ), strColor3 );
+    //CDE-450 assert able to change order of colors
+    this.elemHelper.MoveToElementAndClick( driver, By.xpath( "//div[@id='drag_icon_0']/span" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_0" ), "class", "popup_drag_hover", 2 );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
+    String firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
+    assertEquals( "parameters_1", firstParameter );
+    this.elemHelper.MoveToElementAndClick( driver, By.xpath( "//div[@id='drag_icon_1']/span" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_1" ), "class", "popup_drag_hover", 2 );
+    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
+    firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
+    assertEquals( "parameters_2", firstParameter );
+    //Submit
+    this.elemHelper.Click( driver, By.id( "popup_state0_buttonOk" ) );
+    //Wait For Popup Disappear
+    this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupbox" ) );
+    //Check the colors array
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ), "[\"" + strColor3 + "\",\"" + strColor2 + "\",\"" + strColor1 + "\"]" );
+    String rangeColorArray = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ) );
+    assertEquals( "[\"brown\",\"green\",\"blue\"]", rangeColorArray );*/
+
+  }
 }
