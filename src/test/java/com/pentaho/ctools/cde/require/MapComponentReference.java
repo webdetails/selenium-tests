@@ -271,7 +271,7 @@ public class MapComponentReference extends BaseTest {
     //wait for the field update
     wait.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
-    assertEquals( "1000 km", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
+    assertEquals( "2000 km", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
     assertEquals( "1000 mi", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
 
