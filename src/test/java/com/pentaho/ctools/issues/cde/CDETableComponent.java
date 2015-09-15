@@ -55,7 +55,7 @@ public class CDETableComponent extends BaseTest {
   // Log instance
   private final Logger log = LogManager.getLogger( CDETableComponent.class );
   // this.failure variable ==1 if test did not fail
-  private int failure = 1;
+  private int failure = 0;
 
   /**
    * ############################### Test Case 1 ###############################
@@ -87,6 +87,7 @@ public class CDETableComponent extends BaseTest {
     assertNotNull( table );
     String tableClass = this.elemHelper.GetAttribute( driver, By.xpath( "//table[@id='RowObject1Table']" ), "class" );
     assertEquals( tableClass, "table table-striped table-bordered form-inline table-responsive dataTable" );
+    this.failure = 1;
 
     /*
      * ## Step 2
@@ -178,7 +179,7 @@ public class CDETableComponent extends BaseTest {
     this.log.info( "tearDownClass" );
     if ( this.failure == 0 ) {
       //open sample in edit mode
-      driver.get( baseUrl + "http://localhost:8080/pentaho/api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
+      driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
       this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
       //Open dashboard settings, assert bootstrap is selected as renderer, select blueprint, assert new selection, save
