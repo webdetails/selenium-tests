@@ -88,7 +88,8 @@ public class CDF435 extends BaseTest {
     assertNotNull( element );
 
     //focus iframe
-    WebElement elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe[@name='report_prptFrame']" ) );
+    WebElement elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe[@name='report_prptFrame']" ), 180 );
+    assertNotNull( elementFrame );
     WebDriver frame = driver.switchTo().frame( elementFrame );
 
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.id( "pageControl" ) );
