@@ -30,8 +30,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.selenium.BaseTest;
 
 /**
  * The script is testing the issue:

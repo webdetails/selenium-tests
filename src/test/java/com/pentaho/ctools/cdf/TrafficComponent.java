@@ -32,9 +32,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
+import com.pentaho.selenium.BaseTest;
 
 /**
  * Testing the functionalities related with Traffic Component.

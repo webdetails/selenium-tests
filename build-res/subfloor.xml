@@ -66,7 +66,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     
 ============================================================================-->
 
-
+<!DOCTYPE project>
 <project name="subfloor" basedir="." default="default" xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<description>
@@ -156,6 +156,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="pentaho.bi.server.url" value="http://localhost:8080/pentaho" description="The URL to access the Pentaho Server." />
 	<property name="pentaho.bi.server.hostname" value="localhost" description="The hostname where BA server is running." />
 	<property name="pentaho.bi.server.port" value="8080" description="The port where BA server is running." />
+	<property name="pentaho.postgres.service.name" value="Pentaho Solution Repository" description="The service name of Postgres" />
+	<property name="pentaho.postgres.hostname" value="localhost" description="The hostname where postgres is running." />
+	<property name="pentaho.postgres.port" value="5432" description="The port where postgres is running." />
+	
 
 	<!-- Ivy properties -->
 	<property name="ivy.settingsurl" value="file:${basedir}/ivysettings.xml" description="URL to the (common) ivysettings.xml.  This file is required by the build to configure IVY.  Note you must escape the ':' if this property exists in a .properties file" />
@@ -267,11 +271,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 	<!--=======================================================================
-        test-html
+         test-html
 
-        This process shall clean the project, download the CTools, and copy to
-        Pentaho Server.
-        ====================================================================-->
+         This process shall clean the project, download the CTools, and copy to
+         Pentaho Server.
+         ====================================================================-->
 	<target name="test-html" depends="clean-html, resolve-plugin, stop-pentaho-bi-server">
 		<!-- copy data to the server -->
 		<antcall target="copy-ctools-and-other-resources" />
@@ -283,25 +287,26 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 	<!--=======================================================================
-        run-test-java
+         run-test-java
 
-        This process shall execute Selenium Java tests.
-        ====================================================================-->
+         This process shall execute Selenium Java tests.
+         ====================================================================-->
 	<target name="run-test-java">
 		<mkdir dir="${test.java.reports.dir}" />
 
 		<testng classpathref="test.java.classpath" outputdir="${test.java.reports.dir}">
 			<!-- The JVM arg is need to configure the logging system -->
 			<jvmarg value="-Dlog4j.configurationFile=./log4j2.xml" />
+			<sysproperty key="pentaho.release.version" value="5.x" />
 			<xmlfileset dir="${src.test.suite.dir}" includes="${test.testng.suite.file}" />
 		</testng>
 	</target>
 
 	<!--=======================================================================
-        copy-ctools-and-other-resources
+         copy-ctools-and-other-resources
 
-        Copy the CTools, samples and other resources to Pentaho server.
-        ====================================================================-->
+         Copy the CTools, samples and other resources to Pentaho server.
+         ====================================================================-->
 	<target name="copy-ctools-and-other-resources" depends="delete-sparkl-plugins">
 		<echo message="Starting copy CTools and other resources." />
 
@@ -384,8 +389,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	</target>
 
 	<!--=======================================================================
-        Will delete plugins sparkls that could be left in ba server by an error.
-        ====================================================================-->
+         Will delete plugins sparkls that could be left in ba server by an error.
+         ====================================================================-->
 	<target name="delete-sparkl-plugins">
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest" />
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest1" />
@@ -393,8 +398,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	</target>
 
 	<!--=======================================================================
-        Wait for tomcat shut-down
-        ====================================================================-->
+         Wait for tomcat shut-down
+         ====================================================================-->
 	<target name="waitfor-pentaho-bi-server-stopped">
 		<waitfor maxwait="6" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
 			<not>
@@ -404,8 +409,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	</target>
 
 	<!--=======================================================================
-        Wait for tomcat start-up
-        ====================================================================-->
+         Wait for tomcat start-up
+         ====================================================================-->
 	<target name="waitfor-pentaho-bi-server-started">
 		<waitfor maxwait="6" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
 			<http url="${pentaho.bi.server.url}" />
@@ -414,8 +419,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 	<!--=======================================================================
-        Shall start the pentaho-server
-        ====================================================================-->
+         Shall start the pentaho-server
+         ====================================================================-->
 	<target name="start-pentaho-bi-server">
 		<echo message="Start the Pentaho BI Server." />
 		<service action="start" service="${pentaho.bi.server.service.name}" />
@@ -423,12 +428,48 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 	<!--=======================================================================
-        Shall stop the pentaho-server
-        ====================================================================-->
+         Shall stop the pentaho-server
+         ====================================================================-->
 	<target name="stop-pentaho-bi-server">
 		<echo message="Stop the Pentaho BI Server." />
 		<service action="stop" service="${pentaho.bi.server.service.name}" />
 	</target>
+	
+	<!--=======================================================================
+	       Shall start the Postgres
+	       ====================================================================-->
+	<target name="start-postgres">
+	  <echo message="Start the postgres service that is used by BA Server." />
+	  <service action="start" service="${pentaho.postgres.service.name}" />
+	</target>
+	
+	<!--=======================================================================
+	       Shall stop the Postgres
+	       ====================================================================-->
+	<target name="stop-postgres">
+	  <echo message="Start the postgres service that is used by BA Server." />
+	  <service action="stop" service="${pentaho.postgres.service.name}" />
+	</target>
+	
+	<!--=======================================================================
+	       Wait for Postgres start-up
+	       ====================================================================-->
+	<target name="waitfor-postgres-started">
+	  <waitfor maxwait="50" maxwaitunit="second" checkevery="5" checkeveryunit="second">
+	  	<socket server="${pentaho.postgres.hostname}" port="${pentaho.postgres.port}" />
+	  </waitfor>
+	</target>
+	
+	 <!--=======================================================================
+	         Wait for tomcat shut-down
+	         ====================================================================-->
+	  <target name="waitfor-postgres-stopped">
+	    <waitfor maxwait="50" maxwaitunit="second" checkevery="5" checkeveryunit="second">
+	      <not>
+	      	<socket server="${pentaho.postgres.hostname}" port="${pentaho.postgres.port}" />
+	      </not>
+	    </waitfor>
+	  </target>
 
 
 	<!--=======================================================================

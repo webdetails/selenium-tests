@@ -30,8 +30,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.gui.web.puc.MarketPlace;
+import com.pentaho.selenium.BaseTest;
 
 public class MarketplaceFilters extends BaseTest {
   private final Logger log = LogManager.getLogger( MarketplaceFilters.class );

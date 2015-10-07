@@ -2,6 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="SmokeTests-EE" verbose="2">
+  <!-- Listener to validate it test case fail and take screenshot -->
+  <listeners>
+    <listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
+  </listeners>
+
 	<test name="All EE Tests">
 		<classes>
 			<!-- LOGIN -->

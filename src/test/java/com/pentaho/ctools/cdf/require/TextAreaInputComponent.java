@@ -30,8 +30,8 @@ import org.openqa.selenium.By;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.selenium.BaseTest;
 
 /**
  * Testing the functionalities related with Text Area Input Component.

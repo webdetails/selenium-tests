@@ -40,9 +40,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.selenium.BaseTest;
 
 /**
  * The script is testing the issue:

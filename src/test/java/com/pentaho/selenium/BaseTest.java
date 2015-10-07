@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package com.pentaho.ctools.utils;
+package com.pentaho.selenium;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -50,6 +50,9 @@ public class BaseTest {
   protected static String baseUrl;
   // Directory are all download files persist
   protected static String downloadDir;
+  // The pentaho's release version that tests are running against.
+  // Possible values = "5.x" "6.x"
+  protected static String pentahoReleaseVersion;
 
   // Log instance
   private final Logger log = LogManager.getLogger( BaseTest.class );
@@ -61,6 +64,8 @@ public class BaseTest {
     // Initialize BASEURL
     baseUrl = "http://localhost:8080/pentaho/";
     downloadDir = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
+    pentahoReleaseVersion = System.getProperty( "pentaho.release.version" );
+
     new File( downloadDir ).mkdir();
 
     System.setProperty( "webdriver.log.file", "/dev/stdout" );
@@ -164,5 +169,13 @@ public class BaseTest {
    */
   public static String getDownloadDir() {
     return downloadDir;
+  }
+
+  /**
+   * Returns the current state of WebDriver.
+   * @return The webdriver instance.
+   */
+  public static WebDriver getDriver() {
+    return driver;
   }
 }

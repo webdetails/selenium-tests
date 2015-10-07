@@ -27,8 +27,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.selenium.BaseTest;
 
 /**
  * The script is testing the issue:

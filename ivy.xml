@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ivy-module version="2.0">
+<!DOCTYPE ivy-module>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
     <info organisation="${ivy.artifact.group}" module="selenium-tests" revision="${project.revision}"/>
     <configurations>
         <conf name="plugin"/>
@@ -10,68 +12,60 @@
         <!--
             CDF
         -->
-        <dependency org="pentaho" name="pentaho-cdf" rev="${dependency.pentaho-cdf-plugin.revision}" changing="true"
-                    transitive="false" conf="plugin->default">
+        <dependency org="pentaho" name="pentaho-cdf" rev="${dependency.pentaho-cdf-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
             <artifact name="pentaho-cdf" type="zip"/><!-- download the zip file, not the jar -->
         </dependency>
         <!--
             CGG
         -->
-        <dependency org="pentaho" name="cgg" rev="${dependency.pentaho-cgg-plugin.revision}" changing="true"
-                    transitive="false" conf="plugin->default">
+        <dependency org="pentaho" name="cgg" rev="${dependency.pentaho-cgg-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
             <artifact name="cgg" type="zip"/><!-- download the zip file, not the jar -->
         </dependency>
         <!--
             CDE
         -->
-        <dependency org="pentaho" name="pentaho-cdf-dd" rev="${dependency.pentaho-cde-plugin.revision}" changing="true"
-                    transitive="false" conf="plugin->default">
+        <dependency org="pentaho" name="pentaho-cdf-dd" rev="${dependency.pentaho-cde-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
             <artifact name="pentaho-cdf-dd" type="zip"/><!-- download the zip file, not the jar -->
         </dependency>
         <!--
             CDA
         -->
-        <dependency org="pentaho" name="cda" rev="${dependency.pentaho-cda-plugin.revision}" changing="true"
-                    transitive="false" conf="plugin->default">
+        <dependency org="pentaho" name="cda" rev="${dependency.pentaho-cda-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
             <artifact name="cda" type="zip"/><!-- download the zip file, not the jar -->
         </dependency>
         <!--
             Sparkl
         -->
-        <dependency org="pentaho" name="sparkl" rev="${dependency.sparkl-plugin.revision}" changing="true"
-                    transitive="false" conf="plugin->default">
+        <dependency org="pentaho" name="sparkl" rev="${dependency.sparkl-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
             <artifact name="sparkl" type="zip"/><!-- download the zip file, not the jar -->
         </dependency>
         
 
         <!-- CTools Samples -->
         <!-- CDF samples -->
-        <dependency org="pentaho" name="pentaho-cdf-samples" rev="${dependency.pentaho-cdf-plugin.revision}" 
-            changing="true" transitive="false" conf="plugin->default">
+        <dependency org="pentaho" name="pentaho-cdf-samples" rev="${dependency.pentaho-cdf-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
           <artifact name="pentaho-cdf-samples" type="zip" /> <!-- download the zip file, not the jar -->
         </dependency>
         <!-- CDE samples -->
-        <dependency org="pentaho" name="pentaho-cdf-dd-solution" rev="${dependency.pentaho-cde-plugin.revision}" 
-            changing="true" transitive="false" conf="plugin->default">
+        <dependency org="pentaho" name="pentaho-cdf-dd-solution" rev="${dependency.pentaho-cde-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
           <artifact name="pentaho-cdf-dd-solution" type="zip" /> <!-- download the zip file, not the jar -->
         </dependency>
         <!-- CDA samples -->
-        <dependency org="pentaho" name="cda-samples" rev="${dependency.pentaho-cda-plugin.revision}" 
-            changing="true" transitive="false" conf="plugin->default">
+        <dependency org="pentaho" name="cda-samples" rev="${dependency.pentaho-cda-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
           <artifact name="cda-samples" type="zip" />
           <!-- download the zip file, not the jar -->
         </dependency>
 
 
         <!-- TestNG -->
-        <dependency org="org.testng" name="testng" rev="6.9.6" conf="test-java->default"/>
-        <!-- Assertations -->
-        <dependency org="org.hamcrest" name="hamcrest-all" rev="1.3" conf="test-java->default"/>
+        <dependency org="org.testng" name="testng" rev="lastest.release" conf="test-java->default"/>
+        <!-- Assertions -->
+        <dependency org="org.hamcrest" name="hamcrest-all" rev="lastest.release" conf="test-java->default"/>
          <!-- Selenium Java -->
         <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="2.44.0" conf="test-java->default"/>
         <!-- LOG4J - logging framework -->
-        <dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.3" conf="test-java->default"/>
-        <dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.3" conf="test-java->default"/>
+        <dependency org="org.apache.logging.log4j" name="log4j-api" rev="lastest.release" conf="test-java->default"/>
+        <dependency org="org.apache.logging.log4j" name="log4j-core" rev="lastest.release" conf="test-java->default"/>
         
     </dependencies>
 </ivy-module>

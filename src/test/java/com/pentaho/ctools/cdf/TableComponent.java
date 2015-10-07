@@ -35,8 +35,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.selenium.BaseTest;
 
 /**
  * Testing the functionals related with Tables, paging, sort, display rows,

@@ -29,9 +29,9 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
+import com.pentaho.selenium.BaseTest;
 
 /**
  * Testing the functionalities related with Login.
@@ -70,7 +70,7 @@ public class LoginPentaho extends BaseTest {
 
     //Wait for form display
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='login-form-container']/div/h1" ) );
-    assertEquals( "User Console", driver.findElement( By.xpath( "//div[@id='login-form-container']/div/h1" ) ).getText() );
+    assertEquals( driver.findElement( By.xpath( "//div[@id='login-form-container']/div/h1" ) ).getText(), "User Console" );
 
     //## Step 2
     //Wait for all all elements in the form to be visible

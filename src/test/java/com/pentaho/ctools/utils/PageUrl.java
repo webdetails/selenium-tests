@@ -21,10 +21,12 @@
  ******************************************************************************/
 package com.pentaho.ctools.utils;
 
-public class PageUrl {
+import com.pentaho.selenium.BaseTest;
+
+public class PageUrl extends BaseTest {
 
   //The current base url to navigate between pages.
-  private static final String BASE_URL = BaseTest.baseUrl;
+  private static final String BASE_URL = baseUrl;
 
   /*
    * PUC

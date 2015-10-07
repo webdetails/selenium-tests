@@ -32,9 +32,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
+import com.pentaho.selenium.BaseTest;
 
 /**
  * This script pretends to validate the sample Map Component Full Test

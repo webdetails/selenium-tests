@@ -1,3 +1,4 @@
+<!DOCTYPE project>
 <project name="selenium-tests" basedir="." default="default">
 
 	<import file="build-res/subfloor.xml" />

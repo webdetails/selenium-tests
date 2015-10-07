@@ -29,9 +29,9 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.BaseTest;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
+import com.pentaho.selenium.BaseTest;
 
 /**
  * Testing the functionalities related with Check Component.
