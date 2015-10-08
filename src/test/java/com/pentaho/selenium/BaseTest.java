@@ -66,6 +66,8 @@ public class BaseTest {
     downloadDir = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
     pentahoReleaseVersion = System.getProperty( "pentaho.release.version" );
 
+    log.info( "pentaho.release.version::" + pentahoReleaseVersion );
+
     new File( downloadDir ).mkdir();
 
     System.setProperty( "webdriver.log.file", "/dev/stdout" );

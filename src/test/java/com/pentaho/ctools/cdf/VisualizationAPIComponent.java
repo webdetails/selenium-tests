@@ -32,6 +32,7 @@ import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.selenium.BaseTest;
+import com.pentaho.selenium.ConfigurationSettings;
 
 /**
  * Testing the functionalities related with component Visualization API.
@@ -123,16 +124,24 @@ public class VisualizationAPIComponent extends BaseTest {
     /*
      * ## Step 1
      */
+    String maxValue = "";
     String value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
+
+    if ( pentahoReleaseVersion.equals( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      maxValue = "35659.00";
+    } else {
+      maxValue = "35659";
+    }
+
     for ( int i = 0; i < 100; i++ ) {
-      if ( value.equals( "35659" ) ) {
+      if ( value.equals( maxValue ) ) {
         break;
       } else {
         value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
       }
     }
 
-    assertEquals( "35659", value );
+    assertEquals( maxValue, value );
   }
 
   /**

@@ -10,7 +10,7 @@
 	<test verbose="1" name="Everyday Testing">
 		<classes>
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
-			<class name="com.pentaho.ctools.cde.require.MapComponentReference"/>
+			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" />
 		</classes>
 	</test>
 	
