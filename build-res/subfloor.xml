@@ -160,8 +160,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="pentaho.postgres.hostname" value="localhost" description="The hostname where postgres is running." />
 	<property name="pentaho.postgres.port" value="5432" description="The port where postgres is running." />
 	<property name="pentaho.release.version" value="5.x" description="Indicate the version that we are going to run the tests against." />
-	<propertyset id="testng-pentaho-settings-id" >
-		<propertyref name="pentaho.release.version"/>
+	<propertyset id="testng-pentaho-settings-id">
+		<propertyref name="pentaho.release.version" />
 	</propertyset>
 
 	<!-- Ivy properties -->
@@ -300,7 +300,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<testng classpathref="test.java.classpath" outputdir="${test.java.reports.dir}">
 			<!-- The JVM arg is need to configure the logging system -->
 			<jvmarg value="-Dlog4j.configurationFile=./log4j2.xml" />
-			<propertyset refid="testng-pentaho-settings-id"/>
+			<propertyset refid="testng-pentaho-settings-id" />
 			<xmlfileset dir="${src.test.suite.dir}" includes="${test.testng.suite.file}" />
 		</testng>
 	</target>
@@ -350,18 +350,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<unzip src="${lib.ext.dir}/plugin/cda-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
 		<!-- copy the files for CGG tests -->
 		<!-- if we are running against 6.x then we have to copy other contents -->
-		<var name="cgg-path" value="${resources.dir}/cgg"/>
+		<var name="cgg-path" value="${resources.dir}/cgg" />
 		<if>
-			<equals arg1="${pentaho.release.version}" arg2="6.x"/>
+			<equals arg1="${pentaho.release.version}" arg2="6.x" />
 			<then>
-				<var name="cgg-path" value="${resources.dir}/cgg60"/>
-		  </then>
+				<var name="cgg-path" value="${resources.dir}/cgg60" />
+			</then>
 		</if>
 		<copy todir="${tmp.dir}/public">
 			<fileset dir="${cgg-path}" />
 		</copy>
-		
-		
+
+
 		<zip destfile="${tmp.dir}/plugin-samples.zip">
 			<zipfileset dir="${tmp.dir}/public" prefix="public" />
 		</zip>
@@ -410,6 +410,50 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/CDE404" />
 	</target>
 
+
+	<!--=======================================================================
+	       Stop BI Server CE
+	       ====================================================================-->
+	<target name="stop-pentaho-bi-ce">
+		<!-- stop bi server ce -->
+		<antcall target="stop-pentaho-bi-server" />
+		<antcall target="waitfor-pentaho-bi-server-stopped" />
+	</target>
+
+	<!--=======================================================================
+	       Start BI Server CE
+	       ====================================================================-->
+	<target name="start-pentaho-bi-ce" depends="stop-pentaho-bi-ce">
+		<!-- start bi server ce -->
+		<antcall target="start-pentaho-bi-server" />
+		<antcall target="waitfor-pentaho-bi-server-started" />
+	</target>
+
+
+	<!--=======================================================================
+	       Stop BI Server EE
+	       ====================================================================-->
+	<target name="stop-pentaho-bi-ee">
+		<!-- stop bi server ee -->
+		<antcall target="stop-pentaho-bi-server" />
+		<antcall target="waitfor-pentaho-bi-server-stopped" />
+		<!-- stop postgres -->
+		<antcall target="stop-postgres" />
+		<antcall target="waitfor-postgres-stopped" />
+	</target>
+
+	<!--=======================================================================
+	       Start BI Server EE
+	       ====================================================================-->
+	<target name="start-pentaho-bi-ee" depends="stop-pentaho-bi-ee">
+		<!-- start postgres -->
+		<antcall target="start-postgres" />
+		<antcall target="waitfor-postgres-started" />
+		<!-- start bi server ee -->
+		<antcall target="start-pentaho-bi-server" />
+		<antcall target="waitfor-pentaho-bi-server-started" />
+	</target>
+
 	<!--=======================================================================
          Wait for tomcat shut-down
          ====================================================================-->
@@ -452,7 +496,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	       Shall start the Postgres
 	       ====================================================================-->
 	<target name="start-postgres">
-		<echo message="Start the postgres service that is used by BA Server." />
+		<echo message="Start the postgres service that is used by BA Server EE." />
 		<service action="start" service="${pentaho.postgres.service.name}" />
 	</target>
 
@@ -460,7 +504,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	       Shall stop the Postgres
 	       ====================================================================-->
 	<target name="stop-postgres">
-		<echo message="Start the postgres service that is used by BA Server." />
+		<echo message="Stop the postgres service that is used by BA Server EE." />
 		<service action="stop" service="${pentaho.postgres.service.name}" />
 	</target>
 
@@ -474,8 +518,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	</target>
 
 	<!--=======================================================================
-	         Wait for tomcat shut-down
-	         ====================================================================-->
+	       Wait for postgres shut-down
+	       ====================================================================-->
 	<target name="waitfor-postgres-stopped">
 		<waitfor maxwait="1" maxwaitunit="minute" checkevery="5" checkeveryunit="second">
 			<not>
