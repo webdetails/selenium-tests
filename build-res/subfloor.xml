@@ -469,7 +469,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          Wait for tomcat start-up
          ====================================================================-->
 	<target name="waitfor-pentaho-bi-server-started">
-		<waitfor maxwait="8" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
+		<waitfor maxwait="15" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
 			<http url="${pentaho.bi.server.url}" />
 		</waitfor>
 	</target>
