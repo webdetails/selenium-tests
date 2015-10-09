@@ -46,10 +46,6 @@ public class ScreenshotListener extends TestListenerAdapter {
       final String dir = className.replace( ".", "/" ) + "/";
       final String createDir = "reports-java/screenshots/" + dir;
 
-      System.out.println( "className" + className );
-      System.out.println( "testCaseName" + testCaseName );
-      System.out.println( "createDir" + createDir );
-
       new File( createDir ).mkdirs(); // Insure directory is there
 
       try (FileOutputStream out = new FileOutputStream( createDir + testCaseName + ".png" )) {
