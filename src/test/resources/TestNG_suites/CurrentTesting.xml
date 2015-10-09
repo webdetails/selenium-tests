@@ -11,6 +11,9 @@
 		<classes>
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
 			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" />
+			<class name="com.pentaho.ctools.cgg.BarChart" />
+      <class name="com.pentaho.ctools.cgg.ScatterChart" />
+      <class name="com.pentaho.ctools.cgg.DialChart" />
 		</classes>
 	</test>
 	
