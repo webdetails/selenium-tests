@@ -349,18 +349,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<unzip src="${lib.ext.dir}/plugin/pentaho-cdf-dd-solution.zip" dest="${tmp.dir}/public/plugin-samples" />
 		<unzip src="${lib.ext.dir}/plugin/cda-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
 		<!-- copy the files for CGG tests -->
-		<!-- if we are running against 6.x then we have to copy other contents -->
-		<var name="cgg-path" value="${resources.dir}/cgg" />
-		<if>
-			<equals arg1="${pentaho.release.version}" arg2="6.x" />
-			<then>
-				<var name="cgg-path" value="${resources.dir}/cgg60" />
-			</then>
-		</if>
 		<copy todir="${tmp.dir}/public">
-			<fileset dir="${cgg-path}" />
+			<fileset dir="${resources.dir}/cgg${pentaho.release.version}" />
 		</copy>
-
 
 		<zip destfile="${tmp.dir}/plugin-samples.zip">
 			<zipfileset dir="${tmp.dir}/public" prefix="public" />
