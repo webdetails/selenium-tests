@@ -133,22 +133,13 @@ public class VisualizationAPIComponent extends BaseTest {
      * ## Step 1
      */
     String maxValue = "";
-    String value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
 
     if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
       maxValue = "35659.00";
     } else {
       maxValue = "35659";
     }
-
-    for ( int i = 0; i < 100; i++ ) {
-      if ( value.equals( maxValue ) ) {
-        break;
-      } else {
-        value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
-      }
-    }
-
+    String value = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), maxValue );
     assertEquals( value, maxValue );
   }
 
@@ -202,15 +193,7 @@ public class VisualizationAPIComponent extends BaseTest {
     } else {
       minValue = "0";
     }
-    String value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
-    for ( int i = 0; i < 100; i++ ) {
-      if ( value.equals( minValue ) ) {
-        break;
-      } else {
-        value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
-      }
-    }
-
+    String value = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), minValue );
     assertEquals( value, minValue );
   }
 
@@ -265,14 +248,7 @@ public class VisualizationAPIComponent extends BaseTest {
     } else {
       avgValue = "4787.772727272727";
     }
-    String value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
-    for ( int i = 0; i < 100; i++ ) {
-      if ( value.equals( avgValue ) ) {
-        break;
-      } else {
-        value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
-      }
-    }
+    String value = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), avgValue );
     assertEquals( value, avgValue );
   }
 }
