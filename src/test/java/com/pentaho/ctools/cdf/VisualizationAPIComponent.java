@@ -25,6 +25,8 @@ package com.pentaho.ctools.cdf;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -43,6 +45,8 @@ import com.pentaho.selenium.ConfigurationSettings;
 public class VisualizationAPIComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
+  // Log instance
+  private final Logger log = LogManager.getLogger( VisualizationAPIComponent.class );
 
   /**
    * ############################### Test Case 0 ###############################
@@ -52,6 +56,7 @@ public class VisualizationAPIComponent extends BaseTest {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
+    this.log.info( "tc0_OpenSamplePage_Display" );
     // The URL for the VisualizationAPIComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/VisualizationAPIComponent
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualization_component.xcdf/generatedContent" );
@@ -72,6 +77,7 @@ public class VisualizationAPIComponent extends BaseTest {
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
+    this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -94,6 +100,7 @@ public class VisualizationAPIComponent extends BaseTest {
    */
   @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
+    this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     /*
      * ## Step 1
      */
@@ -121,13 +128,14 @@ public class VisualizationAPIComponent extends BaseTest {
    */
   @Test
   public void tc3_MaxNumber_PresentCorrectValue() {
+    this.log.info( "tc3_MaxNumber_PresentCorrectValue" );
     /*
      * ## Step 1
      */
     String maxValue = "";
     String value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
 
-    if ( pentahoReleaseVersion.equals( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
       maxValue = "35659.00";
     } else {
       maxValue = "35659";
@@ -141,7 +149,7 @@ public class VisualizationAPIComponent extends BaseTest {
       }
     }
 
-    assertEquals( maxValue, value );
+    assertEquals( value, maxValue );
   }
 
   /**
@@ -158,9 +166,11 @@ public class VisualizationAPIComponent extends BaseTest {
    */
   @Test
   public void tc4_MinNumber_PresentCorrectValue() {
+    this.log.info( "tc4_MinNumber_PresentCorrectValue" );
     /*
      * ## Step 1 - Change the option parameter to MIN and reload sample
      */
+    String minValue = "";
     // Render again the sample
     this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
 
@@ -187,16 +197,21 @@ public class VisualizationAPIComponent extends BaseTest {
     wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']" ) ) );
     wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']/div[2]/div/span" ) ) );
 
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      minValue = "490.00";
+    } else {
+      minValue = "0";
+    }
     String value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
     for ( int i = 0; i < 100; i++ ) {
-      if ( value.equals( "0" ) ) {
+      if ( value.equals( minValue ) ) {
         break;
       } else {
         value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
       }
     }
 
-    assertEquals( "0", value );
+    assertEquals( value, minValue );
   }
 
   /**
@@ -213,6 +228,9 @@ public class VisualizationAPIComponent extends BaseTest {
    */
   @Test
   public void tc5_AvgNumber_PresentCorrectValue() {
+    this.log.info( "tc5_AvgNumber_PresentCorrectValue" );
+    String avgValue = "";
+
     /*
      * ## Step 1 - Change the option parameter to AVG and reload sample
      */
@@ -242,14 +260,19 @@ public class VisualizationAPIComponent extends BaseTest {
     wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']" ) ) );
     wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']/div[2]/div/span" ) ) );
 
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      avgValue = "4787.77";
+    } else {
+      avgValue = "4787.772727272727";
+    }
     String value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
     for ( int i = 0; i < 100; i++ ) {
-      if ( value.equals( "4787.772727272727" ) ) {
+      if ( value.equals( avgValue ) ) {
         break;
       } else {
         value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
       }
     }
-    assertEquals( "4787.772727272727", value );
+    assertEquals( value, avgValue );
   }
 }
