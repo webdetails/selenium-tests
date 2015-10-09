@@ -159,7 +159,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="pentaho.postgres.service.name" value="Pentaho Solution Repository" description="The service name of Postgres" />
 	<property name="pentaho.postgres.hostname" value="localhost" description="The hostname where postgres is running." />
 	<property name="pentaho.postgres.port" value="5432" description="The port where postgres is running." />
-	
+	<property name="pentaho.release.version" value="5.x" description="Indicate the version that we are going to run the tests against." />
+	<propertyset id="testng-pentaho-settings-id" >
+		<propertyref name="pentaho.release.version"/>
+	</propertyset>
 
 	<!-- Ivy properties -->
 	<property name="ivy.settingsurl" value="file:${basedir}/ivysettings.xml" description="URL to the (common) ivysettings.xml.  This file is required by the build to configure IVY.  Note you must escape the ':' if this property exists in a .properties file" />
@@ -297,7 +300,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<testng classpathref="test.java.classpath" outputdir="${test.java.reports.dir}">
 			<!-- The JVM arg is need to configure the logging system -->
 			<jvmarg value="-Dlog4j.configurationFile=./log4j2.xml" />
-			<sysproperty key="pentaho.release.version" value="5.x" />
+			<propertyset refid="testng-pentaho-settings-id"/>
 			<xmlfileset dir="${src.test.suite.dir}" includes="${test.testng.suite.file}" />
 		</testng>
 	</target>
@@ -346,9 +349,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<unzip src="${lib.ext.dir}/plugin/pentaho-cdf-dd-solution.zip" dest="${tmp.dir}/public/plugin-samples" />
 		<unzip src="${lib.ext.dir}/plugin/cda-samples.zip" dest="${tmp.dir}/public/plugin-samples" />
 		<!-- copy the files for CGG tests -->
+		<!-- if we are running against 6.x then we have to copy other contents -->
+		<var name="cgg-path" value="${resources.dir}/cgg"/>
+		<if>
+			<equals arg1="${pentaho.release.version}" arg2="6.x"/>
+			<then>
+				<var name="cgg-path" value="${resources.dir}/cgg60"/>
+		  </then>
+		</if>
 		<copy todir="${tmp.dir}/public">
-			<fileset dir="${resources.dir}/cgg" />
+			<fileset dir="${cgg-path}" />
 		</copy>
+		
+		
 		<zip destfile="${tmp.dir}/plugin-samples.zip">
 			<zipfileset dir="${tmp.dir}/public" prefix="public" />
 		</zip>
@@ -389,8 +402,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	</target>
 
 	<!--=======================================================================
-         Will delete plugins sparkls that could be left in ba server by an error.
-         ====================================================================-->
+        Will delete plugins sparkls that could be left in ba server by an error.
+        ====================================================================-->
 	<target name="delete-sparkl-plugins">
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest" />
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest1" />
@@ -401,7 +414,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          Wait for tomcat shut-down
          ====================================================================-->
 	<target name="waitfor-pentaho-bi-server-stopped">
-		<waitfor maxwait="6" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
+		<waitfor maxwait="8" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
 			<not>
 				<socket server="${pentaho.bi.server.hostname}" port="${pentaho.bi.server.port}" />
 			</not>
@@ -412,7 +425,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          Wait for tomcat start-up
          ====================================================================-->
 	<target name="waitfor-pentaho-bi-server-started">
-		<waitfor maxwait="6" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
+		<waitfor maxwait="8" maxwaitunit="minute" checkevery="15" checkeveryunit="second">
 			<http url="${pentaho.bi.server.url}" />
 		</waitfor>
 	</target>
@@ -434,42 +447,42 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<echo message="Stop the Pentaho BI Server." />
 		<service action="stop" service="${pentaho.bi.server.service.name}" />
 	</target>
-	
+
 	<!--=======================================================================
 	       Shall start the Postgres
 	       ====================================================================-->
 	<target name="start-postgres">
-	  <echo message="Start the postgres service that is used by BA Server." />
-	  <service action="start" service="${pentaho.postgres.service.name}" />
+		<echo message="Start the postgres service that is used by BA Server." />
+		<service action="start" service="${pentaho.postgres.service.name}" />
 	</target>
-	
+
 	<!--=======================================================================
 	       Shall stop the Postgres
 	       ====================================================================-->
 	<target name="stop-postgres">
-	  <echo message="Start the postgres service that is used by BA Server." />
-	  <service action="stop" service="${pentaho.postgres.service.name}" />
+		<echo message="Start the postgres service that is used by BA Server." />
+		<service action="stop" service="${pentaho.postgres.service.name}" />
 	</target>
-	
+
 	<!--=======================================================================
 	       Wait for Postgres start-up
 	       ====================================================================-->
 	<target name="waitfor-postgres-started">
-	  <waitfor maxwait="50" maxwaitunit="second" checkevery="5" checkeveryunit="second">
-	  	<socket server="${pentaho.postgres.hostname}" port="${pentaho.postgres.port}" />
-	  </waitfor>
+		<waitfor maxwait="1" maxwaitunit="minute" checkevery="5" checkeveryunit="second">
+			<socket server="${pentaho.postgres.hostname}" port="${pentaho.postgres.port}" />
+		</waitfor>
 	</target>
-	
-	 <!--=======================================================================
+
+	<!--=======================================================================
 	         Wait for tomcat shut-down
 	         ====================================================================-->
-	  <target name="waitfor-postgres-stopped">
-	    <waitfor maxwait="50" maxwaitunit="second" checkevery="5" checkeveryunit="second">
-	      <not>
-	      	<socket server="${pentaho.postgres.hostname}" port="${pentaho.postgres.port}" />
-	      </not>
-	    </waitfor>
-	  </target>
+	<target name="waitfor-postgres-stopped">
+		<waitfor maxwait="1" maxwaitunit="minute" checkevery="5" checkeveryunit="second">
+			<not>
+				<socket server="${pentaho.postgres.hostname}" port="${pentaho.postgres.port}" />
+			</not>
+		</waitfor>
+	</target>
 
 
 	<!--=======================================================================
