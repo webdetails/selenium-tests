@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Community Dashboard Designer</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+
+
+  <link rel="stylesheet" type="text/css" href="template.css"/>
+  <!-- change your server url here -->
+  <script type="text/javascript" src="http://localhost:8080/pentaho/plugin/pentaho-cdf-dd/api/renderer/cde-embed.js"></script>
+</head>
+
+<body>
+
+<div class="webdetailsWrapper">
+  <div class="webdetailsPanelsContainerWrapper">
+    <div class="webdetailsPanelsContainer">
+      <div class="panelContainer selectedPanel">
+        <div class="webdetailsPanelContainerLeft"></div>
+        <div class="webdetailsPanelContainerCenter">
+          <div id="content" class="webdetailsMainContent">
+            <div class="shadow">
+
+              <div class="contents">
+
+                <h2>CDE Embedded Example</h2>
+
+                <h3>Description</h3>
+
+                <p>Requiring a dashboard via Dashboard Component and mapping it's parameters to assert it works - CDE-637</p>
+
+                <div id="example">
+                  <div id="sample">
+                    <div id="territorySelObj"></div>
+					<div id="content1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+				require(['cdf/Dashboard.Bootstrap','cdf/Logger','cdf/lib/jquery','amd!cdf/lib/underscore','cdf/lib/moment','cdf/lib/CCC/cdo','cdf/dashboard/Utils','cde/components/DashboardComponent','cdf/components/SelectComponent'],
+				function(Dashboard,Logger,$,_,moment,cdo,Utils,DashboardComponent,SelectComponent) {
+					var dashboard = new Dashboard();
+					var render_dashComp = new DashboardComponent({
+						type: "DashboardComponent",
+						name: "render_dashComp",
+						priority: 5,
+						dashboardPath: "/public/plugin-samples/pentaho-cdf-dd/pentaho-cdf-dd-require/cde_sample1.wcdf",
+						parameterMapping: [["territoryParam","territory"]],
+						dataSourceMapping: [],
+						executeAtStart: true,
+						htmlObject: "content1",
+						listeners: []
+					});
+					var render_territorySelect = new SelectComponent({
+						type: "SelectComponent",
+						name: "render_territorySelect",
+						priority: 5,
+						parameter: "territoryParam",
+						htmlObject: "territorySelObj",
+						listeners: [],
+						parameters: [],
+						valuesArray: [["one","EMEA"],["two","APAC"],["three","Japan"],["four","NA"]],
+						valueAsId: true,
+						executeAtStart: true,
+						extraOptions: []
+					});
+					dashboard.addParameter("territoryParam", "");
+					dashboard.setParameterViewMode("territoryParam", "unused");
+					dashboard.addComponents([render_dashComp, render_territorySelect]);
+					dashboard.init();
+					window.dashboard = dashboard
+					return dashboard;
+				});
+            </script>
+
+          </div>
+        </div>
+        <div class="webdetailsPanelContainerRight">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
