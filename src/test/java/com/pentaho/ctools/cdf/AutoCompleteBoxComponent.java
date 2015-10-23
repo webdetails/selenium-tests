@@ -75,11 +75,11 @@ public class AutoCompleteBoxComponent extends BaseTest {
     //Wait for title become visible and with value 'Community Dashboard Framework'
     String titlePage = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", titlePage );
+    assertEquals( titlePage, "Community Dashboard Framework" );
 
     String expectedSampleTitle = "AutocompleteBoxComponent";
     String actualSampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), expectedSampleTitle );
-    assertEquals( expectedSampleTitle, actualSampleTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
 
     /*
      * ## Step 2

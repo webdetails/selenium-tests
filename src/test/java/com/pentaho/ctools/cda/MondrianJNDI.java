@@ -47,6 +47,7 @@ import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
+import com.pentaho.selenium.ConfigurationSettings;
 
 /**
  * Testing the functionalities related with Mondrianjndi.
@@ -85,7 +86,7 @@ public class MondrianJNDI extends BaseTest {
    *    1. Check if we are reading the correct file
    *    2. Check if About is working
    */
-  @Test
+  @Test( dependsOnMethods = { "tc0_OpenSamplePage_Display" } )
   public void tc1_PageContent_DisplayeFilenameAndAbout() {
     this.log.info( "tc1_PageContent_DisplayeFilenameAndAbout" );
 
@@ -150,7 +151,7 @@ public class MondrianJNDI extends BaseTest {
    *    5. Search existence content
    *    6. Search inexistance content
    */
-  @Test
+  @Test( dependsOnMethods = { "tc1_PageContent_DisplayeFilenameAndAbout" } )
   public void tc2_SelectDataAccess_DisplayDataForSelectedDataAccess() {
     this.log.info( "tc2_SelectDataAccess_DisplayDataForSelectedDataAccess" );
 
@@ -356,7 +357,7 @@ public class MondrianJNDI extends BaseTest {
    * Steps:
    *    1. Press in Export.
    */
-  @Test
+  @Test( dependsOnMethods = { "tc2_SelectDataAccess_DisplayDataForSelectedDataAccess" } )
   public void tc3_ExportXls_FileDownload() {
     this.log.info( "tc3_ExportXls_FileDownload" );
 
@@ -411,7 +412,7 @@ public class MondrianJNDI extends BaseTest {
    *    1. Check query url diaLOG
    *    2. Open a new browser with query url
    */
-  @Test
+  @Test( dependsOnMethods = { "tc3_ExportXls_FileDownload" } )
   public void tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage() {
     this.log.info( "tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" );
 
@@ -420,16 +421,16 @@ public class MondrianJNDI extends BaseTest {
      */
     //Check we have three elements and no more than that
     String textPaging = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "contents_info" ) );
-    assertEquals( "View 1 to 3 of 3 elements", textPaging );
+    assertEquals( textPaging, "View 1 to 3 of 3 elements" );
 
     // Check query url
     WebElement buttonQueryUrl = this.elemHelper.WaitForElementPresence( driver, By.id( "queryUrl" ) );
-    assertEquals( "Query URL", buttonQueryUrl.getText() );
+    assertEquals( buttonQueryUrl.getText(), "Query URL" );
     this.elemHelper.ClickJS( driver, By.id( "queryUrl" ) );
 
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "queryUrlDialog" ) );
     String diaLOGTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#queryUrlDialog p.dialogTitle" ) );
-    assertEquals( "Query Execution URL:", diaLOGTitle );
+    assertEquals( diaLOGTitle, "Query Execution URL:" );
 
     WebElement inputQueryUrl = this.elemHelper.FindElement( driver, By.id( "doQueryUrl" ) );
     String queryUrl = inputQueryUrl.getAttribute( "value" );
@@ -441,9 +442,14 @@ public class MondrianJNDI extends BaseTest {
      * ## Step 2
      */
     driver.get( queryUrl );
-    String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"String\",\"colName\":\"PriceInK\"}]}";
     String jsonQueryActual = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "body" ) );
-    assertEquals( jsonQueryExpected, jsonQueryActual );
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      String jsonQueryExpected = "{\"metadata\":[{\"colName\":\"[Time].[(All)]\",\"colType\":\"String\",\"colIndex\":0},{\"colName\":\"Year\",\"colType\":\"String\",\"colIndex\":1},{\"colName\":\"price\",\"colType\":\"Numeric\",\"colIndex\":2},{\"colName\":\"PriceInK\",\"colType\":\"String\",\"colIndex\":3}],\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"queryInfo\":{\"totalRows\":\"3\"}}";
+      assertEquals( jsonQueryActual, jsonQueryExpected );
+    } else {
+      String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"String\",\"colName\":\"PriceInK\"}]}";
+      assertEquals( jsonQueryActual, jsonQueryExpected );
+    }
 
     driver.get( PageUrl.MONDRIAN_JNDI );
     String filename = this.elemHelper.WaitForTextPresence( driver, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );
@@ -466,7 +472,7 @@ public class MondrianJNDI extends BaseTest {
    *    4. In the new window, check the schedule
    *    5. Remove the schedule
    */
-  @Test
+  @Test( dependsOnMethods = { "tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" } )
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
     this.log.info( "tc5_CacheThisSimple_ScheduleIsSetSuccessful" );
     String selectedHours = "21";

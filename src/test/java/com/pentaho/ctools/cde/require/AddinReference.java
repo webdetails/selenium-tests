@@ -263,7 +263,7 @@ public class AddinReference extends BaseTest {
 
     //Check Defaults
     String defaultText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='DataBarDesc']/blockquote/pre" ) );
-    assertEquals( "defaults: { widthRatio:1, height: 10, startColor: \"#55A4D6\", endColor: \"#448FC8\", stroke: null, max: undefined, min: undefined, absValue: true, includeValue: false, valueFormat: function(v, format, st) { return \"\" + dashboard.sprintf(format,v) + \"\"; } }", defaultText );
+    assertEquals( defaultText, "defaults: { widthRatio:1, height: 10, startColor: \"#55A4D6\", endColor: \"#448FC8\", stroke: null, max: undefined, min: undefined, absValue: true, includeValue: false, valueFormat: function(st, opt) { return \"\" + sprintf(st.colFormat || \"%.1f\", st.value); } }" );
 
     //Check Rows
     String row1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='DataBarObjTable']/tbody/tr/td" ) );
@@ -362,7 +362,7 @@ public class AddinReference extends BaseTest {
 
     //Check Defaults
     String defaultText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='TrendArrowDesc']/blockquote/pre" ) );
-    assertEquals( "defaults: { includeValue: false, good: true, valueFormat: function(v,format,st) { return dashboard.sprintf(format,v); } }", defaultText );
+    assertEquals( defaultText, "defaults: { includeValue: false, good: true, valueFormat: function(st, opt) { return sprintf(st.colFormat || \"%.1f\", st.value); } }" );
 
     //Check Rows
     String row1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr/td" ) );
@@ -677,7 +677,7 @@ public class AddinReference extends BaseTest {
 
     //Check Defaults
     String defaultText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='textFormatDesc']/blockquote/pre" ) );
-    assertEquals( "defaults: { textFormat: function(v, st) {return st.colFormat ? dashboard.sprintf(st.colFormat,v) : v;} }", defaultText );
+    assertEquals( defaultText, "defaults: { textFormat: function(st) { return st.colFormat ? dashboard.sprintf(st.colFormat, st.value) : st.value; } }" );
 
     //Check Rows
     String row1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='textFormatObjTable']/tbody/tr/td" ) );
@@ -778,7 +778,7 @@ public class AddinReference extends BaseTest {
 
     //Check Defaults
     String defaultText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='bulletChartDesc']/blockquote/pre" ) );
-    assertEquals( "defaults: { height: 40, animate: false, orientation: \"horizontal\", bulletSize: 16, bulletSpacing: 150, bulletMargin: 5, bulletRanges: [30,80,100], extensionPoints: { \"bulletMarker_shape\":\"triangle\", \"bulletTitle_textStyle\":\"green\", \"bulletMeasure_fillStyle\":\"black\", \"bulletRuleLabel_font\":\"8px sans-serif\", \"bulletRule_height\": 5 } }", defaultText );
+    assertEquals( defaultText, "defaults: { chartOptions: { height: 40, animate: false, orientation: \"horizontal\", bulletSize: 16, bulletSpacing: 150, bulletMargin: 5, bulletRanges: [30,80,100], extensionPoints: { \"bulletMarker_shape\":\"triangle\", \"bulletTitle_textStyle\":\"green\", \"bulletMeasure_fillStyle\":\"black\", \"bulletRuleLabel_font\":\"8px sans-serif\", \"bulletRule_height\": 5 } } ... }" );
 
     //Check Rows
     String row1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='bulletChartObjTable']/tbody/tr/td" ) );

@@ -79,12 +79,13 @@ public class MetaLayerHomeDashboard extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    String titlePage = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
     //Wait for visibility of 'Top Ten Customers'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='titleObject']" ) ) );
+    String expectedSampleTitle = "Top Ten Customers";
+    String actualSampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='titleObject']" ), expectedSampleTitle );
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "Top Ten Customers", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='titleObject']" ) ) );
+    assertEquals( titlePage, "Community Dashboard Framework" );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
 
     /*
      * ## Step 2
