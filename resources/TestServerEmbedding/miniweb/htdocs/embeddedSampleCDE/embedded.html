@@ -76,11 +76,13 @@
                         alert("You chose: " + myDashboard.getParameterValue(this.parameter));
                       }
                     });
+					alert(myDashboard.context);
 
                     myDashboard.addComponent(selectComponent);
-                    myDashboard.init();
+					myDashboard.init();
 
                     var sampleDash = new SampleDash("content1");
+					alert(sampleDash.context.path);
                     sampleDash.render();
                   });
             </script>
