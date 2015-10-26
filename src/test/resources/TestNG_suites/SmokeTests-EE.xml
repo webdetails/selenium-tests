@@ -2,10 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="SmokeTests-EE" verbose="2">
-  <!-- Listener to validate it test case fail and take screenshot -->
-  <listeners>
-    <listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
-  </listeners>
+	<!-- Listener to validate it test case fail and take screenshot -->
+	<listeners>
+		<listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
+	</listeners>
 
 	<test name="All EE Tests">
 		<classes>
@@ -52,9 +52,9 @@
 			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.reference.DuplicateComponent" />
 			<class name="com.pentaho.ctools.cde.reference.ExportPopupComponent" />
-      <class name="com.pentaho.ctools.cde.reference.FilterAddinAccordion" />
-      <class name="com.pentaho.ctools.cde.reference.FilterReference" />
-      <class name="com.pentaho.ctools.cde.reference.FilterVisualGuide" />
+			<class name="com.pentaho.ctools.cde.reference.FilterAddinAccordion" />
+			<class name="com.pentaho.ctools.cde.reference.FilterReference" />
+			<class name="com.pentaho.ctools.cde.reference.FilterVisualGuide" />
 			<class name="com.pentaho.ctools.cde.reference.MapComponentFullTest" />
 			<class name="com.pentaho.ctools.cde.reference.MapComponentReference" />
 			<class name="com.pentaho.ctools.cde.reference.OlapSelectorComponent" />
@@ -111,9 +111,9 @@
 			<class name="com.pentaho.ctools.cde.require.DashboardModuleComponent" />
 			<class name="com.pentaho.ctools.cde.require.DuplicateComponent" />
 			<class name="com.pentaho.ctools.cde.require.ExportPopupComponent" />
-      <class name="com.pentaho.ctools.cde.require.FilterAddinAccordion" />
-      <class name="com.pentaho.ctools.cde.require.FilterReference" />
-      <class name="com.pentaho.ctools.cde.require.FilterVisualGuide" />
+			<class name="com.pentaho.ctools.cde.require.FilterAddinAccordion" />
+			<class name="com.pentaho.ctools.cde.require.FilterReference" />
+			<class name="com.pentaho.ctools.cde.require.FilterVisualGuide" />
 			<class name="com.pentaho.ctools.cde.require.MapComponentFullTest" />
 			<class name="com.pentaho.ctools.cde.require.MapComponentReference" />
 			<class name="com.pentaho.ctools.cde.require.OlapSelectorComponent" />

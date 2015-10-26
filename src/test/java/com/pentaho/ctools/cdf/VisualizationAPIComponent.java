@@ -29,7 +29,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -62,7 +61,7 @@ public class VisualizationAPIComponent extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualization_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -78,14 +77,18 @@ public class VisualizationAPIComponent extends BaseTest {
   @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
+
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    String expectedTitlePage = "Community Dashboard Framework";
+    String actualTitlePage = this.elemHelper.WaitForTitle( driver, expectedTitlePage );
+
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    String expectedSampleTitle = "VisualizationAPIComponent";
+    String actualSampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), expectedSampleTitle );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "VisualizationAPIComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( actualTitlePage, expectedTitlePage );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
   }
 
   /**
@@ -109,7 +112,7 @@ public class VisualizationAPIComponent extends BaseTest {
     this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
@@ -132,15 +135,13 @@ public class VisualizationAPIComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    String maxValue = "";
+    String expectedValue = "35659";
 
     if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
-      maxValue = "35659.00";
-    } else {
-      maxValue = "35659";
+      expectedValue = "35659.00";
     }
-    String value = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), maxValue );
-    assertEquals( value, maxValue );
+    String actualValue = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), expectedValue );
+    assertEquals( actualValue, expectedValue );
   }
 
   /**
@@ -161,40 +162,33 @@ public class VisualizationAPIComponent extends BaseTest {
     /*
      * ## Step 1 - Change the option parameter to MIN and reload sample
      */
-    String minValue = "";
     // Render again the sample
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
 
     // Wait for board load
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='code']" ) ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']" ) );
     // Change contains to MIN
     ( (JavascriptExecutor) driver ).executeScript( "$('#samplecode').text($('#samplecode').text().replace('MAX', 'MIN'));" );
 
-    String strText = "";
-    while ( strText.indexOf( "MIN" ) == -1 ) {
-      strText = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "samplecode" ) );
-    }
-
     // Click in Try me
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
     /*
      * ## Step 2 - Check the presented value for MIN.
      */
-    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']" ) ) );
-    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']/div[2]/div/span" ) ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sample']" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
 
+    String expectedValue = "0";
     if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
-      minValue = "490.00";
-    } else {
-      minValue = "0";
+      expectedValue = "490.00";
     }
-    String value = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), minValue );
-    assertEquals( value, minValue );
+    String actualValue = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), expectedValue );
+    assertEquals( expectedValue, actualValue );
   }
 
   /**
@@ -212,43 +206,35 @@ public class VisualizationAPIComponent extends BaseTest {
   @Test
   public void tc5_AvgNumber_PresentCorrectValue() {
     this.log.info( "tc5_AvgNumber_PresentCorrectValue" );
-    String avgValue = "";
 
     /*
      * ## Step 1 - Change the option parameter to AVG and reload sample
      */
     // Render again the sample
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
 
     // Wait for board load
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='code']" ) ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']" ) );
     // Change contains to AVG
     ( (JavascriptExecutor) driver ).executeScript( "$('#samplecode').text($('#samplecode').text().replace('MIN', 'AVG'));" );
-
-    String strText = "";
-    while ( strText.indexOf( "AVG" ) == -1 ) {
-      strText = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "samplecode" ) );
-    }
-
     // Click in Try me
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
     /*
      * ## Step 2 - Check the presented value for MIN.
      */
-    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']" ) ) );
-    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sample']/div[2]/div/span" ) ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sample']" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
 
+    String expectedValue = "4787.772727272727";
     if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
-      avgValue = "4787.77";
-    } else {
-      avgValue = "4787.772727272727";
+      expectedValue = "4787.77";
     }
-    String value = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), avgValue );
-    assertEquals( value, avgValue );
+    String actualValue = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), expectedValue );
+    assertEquals( expectedValue, actualValue );
   }
 }
