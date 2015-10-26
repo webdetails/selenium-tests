@@ -38,6 +38,7 @@ import org.testng.annotations.Test;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
+import com.pentaho.selenium.ConfigurationSettings;
 
 /**
  * Test all different maps with markers, no markers, shapes.
@@ -66,7 +67,11 @@ public class MapComponentReference extends BaseTest {
     this.log.info( "tc0_OpenSamplePage" );
 
     //Go to MapComponentReference
-    driver.get( PageUrl.MAP_COMPONENT_REFERENCE );
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      driver.get( PageUrl.MAP_COMPONENT_REFERENCE_6x );
+    } else {
+      driver.get( PageUrl.MAP_COMPONENT_REFERENCE );
+    }
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
