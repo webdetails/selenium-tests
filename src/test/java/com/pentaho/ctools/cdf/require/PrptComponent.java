@@ -41,6 +41,7 @@ import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
+import com.pentaho.selenium.ConfigurationSettings;
 
 /**
  * Testing the functionalities related with Prpt Component.
@@ -198,8 +199,13 @@ public class PrptComponent extends BaseTest {
     assertEquals( "Output Type", outputTypeName );
     assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     //Check for View Report button
-    String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
-    assertEquals( "View Report", buttonName );
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "button.pentaho-button" ) );
+      assertEquals( "View Report", buttonName );
+    } else {
+      String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
+      assertEquals( "View Report", buttonName );
+    }
     //Check the generated image
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
     WebDriver driverReportContent = driver.switchTo().frame( "reportContent" );
@@ -229,7 +235,7 @@ public class PrptComponent extends BaseTest {
    *    1. Enable prompt panel
    *    2. Disable prompt panel
    */
-  //@Test
+  @Test
   public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
     this.log.info( "tc4_TogglePromptPanel_PromptPanelEnableDisable" );
     driver.switchTo().defaultContent();
@@ -264,7 +270,7 @@ public class PrptComponent extends BaseTest {
    *    2. Enable Motorcycles and assert results
    *
    */
-  //@Test
+  @Test
   public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
     this.log.info( "tc5_SelectSeveralProducts_ReportIsRefreshed" );
     driver.switchTo().defaultContent();
@@ -344,7 +350,7 @@ public class PrptComponent extends BaseTest {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  //@Test
+  @Test
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
     this.log.info( "tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised" );
     driver.switchTo().defaultContent();

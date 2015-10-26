@@ -85,17 +85,20 @@ public class LoginPentaho extends BaseTest {
 
     //## Step 3
     //wait for visibility of waiting pop-up
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 10 );
-    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ), 20 );
+    this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ) );
 
     //Wait to load the new page
-    this.elemHelper.WaitForTitle( driver, "Pentaho User Console" );
+    String expectedTitlePage = "Pentaho User Console";
+    String actualTitlePage = this.elemHelper.WaitForTitle( driver, expectedTitlePage );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//iframe[@id='home.perspective']" ) );
-    assertNotNull( driver.findElement( By.xpath( "//iframe[@id='home.perspective']" ) ) );
-    assertEquals( "Pentaho User Console", driver.getTitle() );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//iframe[@id='home.perspective']" ) ) );
+    assertEquals( actualTitlePage, "Pentaho User Console", expectedTitlePage );
 
     //Logged as ADMIN user
-    assertEquals( "admin", driver.findElement( By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) ).getText() );
+    String expectedUser = "admin";
+    String actualUser = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ), expectedUser );
+    assertEquals( actualUser, expectedUser );
   }
 }

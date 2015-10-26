@@ -34,6 +34,7 @@ import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
+import com.pentaho.selenium.ConfigurationSettings;
 
 /**
  * Testing the functionalities related with Execute Prpt Component.
@@ -171,8 +172,13 @@ public class ExecutePrptComponent extends BaseTest {
     assertEquals( "Output Type", outputTypeName );
     assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     //Check for View Report button
-    String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
-    assertEquals( "View Report", buttonName );
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "button.pentaho-button" ) );
+      assertEquals( "View Report", buttonName );
+    } else {
+      String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
+      assertEquals( "View Report", buttonName );
+    }
     //Check the generated image
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
     WebDriver driverReportContent = driver.switchTo().frame( "reportContent" );
