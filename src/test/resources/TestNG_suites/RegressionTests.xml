@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="RegressionTests" verbose="1" > 
+<suite name="RegressionTests" verbose="2" > 
 	  <!-- Listener to validate it test case fail and take screenshot -->
   <listeners>
     <listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
   </listeners>
   
-	<test verbose="1" name="All Regression Tests for BA Server CE and EE">
+	<test name="All Regression Tests for BA Server CE and EE" preserve-order="true" parallel="false" group-by-instances="true">
 		<classes>
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
 			
