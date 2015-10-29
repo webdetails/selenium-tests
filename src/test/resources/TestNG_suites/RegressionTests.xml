@@ -7,7 +7,7 @@
     <listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
   </listeners>
   
-	<test verbose="1" name="All Regression Tests for BA Server CE and EE">
+	<test verbose="1" name="All Regression Tests for BA Server CE and EE" preserve-order="true" parallel="false">
 		<classes>
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
 			
