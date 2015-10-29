@@ -104,7 +104,7 @@ public class FilterAddinAccordion extends BaseTest {
    *    5. Click again, select multiple values, click apply and assert text changed
    *        
    */
-  @Test( dependsOnMethods = { "com.pentaho.ctools.cde.require.tc00_OpenSamplePage_Display" } )
+  @Test( dependsOnMethods = { "com.pentaho.ctools.cde.require.FilterAddinAccordion.tc00_OpenSamplePage_Display" } )
   public void tc01_FilterComponent_AddInReference() {
     this.log.info( "tc01_FilterComponent_AddInReference" );
 

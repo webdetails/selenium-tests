@@ -126,7 +126,7 @@ public class FilterVisualGuide extends BaseTest {
   *    7. Assert two last filters are expanded, make selections, assert string and filter still expanded
   *        
   */
-  @Test( dependsOnMethods = { "com.pentaho.ctools.cde.require.tc00_OpenSamplePage_Display" } )
+  @Test( dependsOnMethods = { "com.pentaho.ctools.cde.require.FilterVisualGuide.tc00_OpenSamplePage_Display" } )
   public void tc01_FilterComponent_VisualGuide() {
     this.log.info( "tc01_FilterComponent_VisualGuide" );
 
