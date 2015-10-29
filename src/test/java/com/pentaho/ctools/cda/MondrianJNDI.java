@@ -86,7 +86,7 @@ public class MondrianJNDI extends BaseTest {
    *    1. Check if we are reading the correct file
    *    2. Check if About is working
    */
-  @Test( dependsOnMethods = { "com.pentaho.ctools.cda.MondrianJNDI.tc0_OpenSamplePage_Display" } )
+  @Test
   public void tc1_PageContent_DisplayeFilenameAndAbout() {
     this.log.info( "tc1_PageContent_DisplayeFilenameAndAbout" );
 
@@ -151,7 +151,7 @@ public class MondrianJNDI extends BaseTest {
    *    5. Search existence content
    *    6. Search inexistance content
    */
-  @Test( dependsOnMethods = { "com.pentaho.ctools.cda.MondrianJNDI.tc1_PageContent_DisplayeFilenameAndAbout" } )
+  @Test
   public void tc2_SelectDataAccess_DisplayDataForSelectedDataAccess() {
     this.log.info( "tc2_SelectDataAccess_DisplayDataForSelectedDataAccess" );
 
@@ -357,8 +357,7 @@ public class MondrianJNDI extends BaseTest {
    * Steps:
    *    1. Press in Export.
    */
-  @Test(
-      dependsOnMethods = { "com.pentaho.ctools.cda.MondrianJNDI.tc2_SelectDataAccess_DisplayDataForSelectedDataAccess" } )
+  @Test
   public void tc3_ExportXls_FileDownload() {
     this.log.info( "tc3_ExportXls_FileDownload" );
 
@@ -413,7 +412,7 @@ public class MondrianJNDI extends BaseTest {
    *    1. Check query url diaLOG
    *    2. Open a new browser with query url
    */
-  @Test( dependsOnMethods = { "com.pentaho.ctools.cda.MondrianJNDI.tc3_ExportXls_FileDownload" } )
+  @Test
   public void tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage() {
     this.log.info( "tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" );
 
@@ -473,7 +472,7 @@ public class MondrianJNDI extends BaseTest {
    *    4. In the new window, check the schedule
    *    5. Remove the schedule
    */
-  @Test( dependsOnMethods = { "com.pentaho.ctools.cda.MondrianJNDI.tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage" } )
+  @Test
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
     this.log.info( "tc5_CacheThisSimple_ScheduleIsSetSuccessful" );
     String selectedHours = "21";
