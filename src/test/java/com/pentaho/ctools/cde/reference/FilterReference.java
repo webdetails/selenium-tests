@@ -104,7 +104,7 @@ public class FilterReference extends BaseTest {
    *    4. Click again, select multiple values, click apply and assert text changed
    *        
    */
-  @Test( dependsOnMethods = { "tc00_OpenSamplePage_Display" } )
+  @Test( dependsOnMethods = { "com.pentaho.ctools.cde.reference.tc00_OpenSamplePage_Display" } )
   public void tc01_FilterComponent_FilterReference() {
     this.log.info( "tc01_FilterComponent_FilterReference" );
 

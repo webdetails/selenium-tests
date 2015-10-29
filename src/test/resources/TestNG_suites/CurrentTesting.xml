@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Everyday Testing" verbose="2" preserve-order="true" parallel="false" group-by-instances="true"> 
+<suite name="Everyday Testing" verbose="2" preserve-order="true" parallel="false"> 
 	<!-- Listener to validate it test case fail and take screenshot -->
   <listeners>
     <listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />

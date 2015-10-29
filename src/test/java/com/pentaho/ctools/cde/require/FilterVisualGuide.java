@@ -122,11 +122,11 @@ public class FilterVisualGuide extends BaseTest {
   *    3. Open second set of filters, make selections and assert string
   *    4. Assert third set of filters expanded, make selections, assert string and filter still expanded
   *    5. Open first set of filters, make selections and assert string
-  *    6. Open add in filter and assert colors, make selection and asser string. Assert message on two next filters
+  *    6. Open add in filter and assert colors, make selection and assert string. Assert message on two next filters
   *    7. Assert two last filters are expanded, make selections, assert string and filter still expanded
   *        
   */
-  @Test( dependsOnMethods = { "tc00_OpenSamplePage_Display" } )
+  @Test( dependsOnMethods = { "com.pentaho.ctools.cde.require.tc00_OpenSamplePage_Display" } )
   public void tc01_FilterComponent_VisualGuide() {
     this.log.info( "tc01_FilterComponent_VisualGuide" );
 
