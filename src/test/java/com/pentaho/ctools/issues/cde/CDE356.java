@@ -155,7 +155,7 @@ public class CDE356 extends BaseTest {
      * ## Step 4
      */
     //Save dashboard with no name
-    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.save()']" ) );
+    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "Save" ) );
     assertNotNull( saveButton );
     saveButton.click();
     WebElement savePopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state_state0" ) );
@@ -167,11 +167,11 @@ public class CDE356 extends BaseTest {
     assertNotNull( inputField );
     okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
     okButton.click();
-    WebElement saveError = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupmessage']" ) );
+    WebElement saveError = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#popupbox div#popup div#popupstates div#popup_state_state0 div.popupmessage" ) );
     assertNotNull( saveError );
-    String errorMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popup-body-container']" ) );
+    String errorMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.popupmessage div.popup-body-header.clearfix" ) );
     assertEquals( "Please insert a valid file name.", errorMessage );
-    okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popupbox'][2]//div[@class='popupbuttons']/button[@id='popup_state0_buttonOk']" ) );
+    okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
     assertNotNull( okButton );
     okButton.click();
 
