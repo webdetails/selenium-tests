@@ -112,46 +112,46 @@ public class FilterAddinAccordion extends BaseTest {
      * ## Step 1
      */
     //Click Single Selector and assert filter is opened
-    WebElement singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
+    WebElement singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-collapse-icon.collapsed" ) );
     assertNotNull( singleSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
-    WebElement optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-root-body']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#singleFilterObj_simple  div.filter-collapse-icon.collapsed" ) );
+    WebElement optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-root-body" ) );
     assertNotNull( optionSingleContainer );
 
     //Click Multi Group Selector, assert it is opened and that previous filter is closed
-    WebElement multiGroupSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
+    WebElement multiGroupSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_group div.filter-collapse-icon.collapsed" ) );
     assertNotNull( multiGroupSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
-    WebElement optionMultiGroupContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-root-body']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#multiFilterObj_group div.filter-collapse-icon.collapsed" ) );
+    WebElement optionMultiGroupContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_group div.filter-root-body" ) );
     assertNotNull( optionMultiGroupContainer );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-root-body" ) ) );
 
     //Click Single Group Selector, assert it is opened and that previous filter is closed
-    WebElement singleGroupSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
+    WebElement singleGroupSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_group div.filter-collapse-icon.collapsed" ) );
     assertNotNull( singleGroupSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
-    WebElement optionSingleGroupContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-root-body']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#singleFilterObj_group div.filter-collapse-icon.collapsed" ) );
+    WebElement optionSingleGroupContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_group div.filter-root-body" ) );
     assertNotNull( optionSingleGroupContainer );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_group div.filter-root-body" ) ) );
 
     //Click Multi Selector, assert it is opened and that previous filter is closed
-    WebElement multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
+    WebElement multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-collapse-icon.collapsed" ) );
     assertNotNull( multiSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
-    WebElement optionGroupContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-root-body']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-collapse-icon.collapsed" ) );
+    WebElement optionGroupContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-root-body" ) );
     assertNotNull( optionGroupContainer );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_group div.filter-root-body" ) ) );
 
     /*
      * ## Step 2
      */
     //Click Single Selector and assert filter is opened
-    singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
+    singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-collapse-icon.collapsed" ) );
     assertNotNull( singleSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
-    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-root-body']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-collapse-icon.collapsed" ) );
+    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-root-body" ) );
     assertNotNull( optionSingleContainer );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-root-body" ) ) );
 
     //Search to filter shown options
     WebElement filterSearch = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//input[@class='filter-filter-input']" ) );
@@ -165,7 +165,7 @@ public class FilterAddinAccordion extends BaseTest {
     WebElement zeroSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@title='Zero']/../div" ) );
     assertNotNull( zeroSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@title='Zero']/../div" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-root-body" ) ) );
     String selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_simple']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "Zero", selectedString );
 
@@ -173,20 +173,20 @@ public class FilterAddinAccordion extends BaseTest {
      * ## Step 3
      */
     //Click Multi Selector and assert filter is opened
-    multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
+    multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-collapse-icon.collapsed" ) );
     assertNotNull( multiSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
-    WebElement optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-root-body']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-collapse-icon.collapsed" ) );
+    WebElement optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-root-body" ) );
     assertNotNull( optionMultiContainer );
 
     //Select All, click Apply and assert filter closed and strings correct
-    WebElement allSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-root-selection-icon none-selected']" ) );
+    WebElement allSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-root-selection-icon.none-selected" ) );
     assertNotNull( allSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-root-selection-icon none-selected']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-root-selection-icon.none-selected" ) );
     WebElement applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_simple']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple']//button[contains(text(),'Apply')]" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "All", selectedString );
 
@@ -194,10 +194,10 @@ public class FilterAddinAccordion extends BaseTest {
      * ## Step 4
      */
     //Click Single Selector and assert filter is opened
-    singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
+    singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_group div.filter-collapse-icon.collapsed" ) );
     assertNotNull( singleSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
-    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-root-body']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#singleFilterObj_group div.filter-collapse-icon.collapsed" ) );
+    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_group div.filter-root-body" ) );
     assertNotNull( optionSingleContainer );
 
     //Search to filter shown options, cancel filter and assert One is shown again
@@ -217,7 +217,7 @@ public class FilterAddinAccordion extends BaseTest {
     WebElement oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@title='One']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@title='One']/../div" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_group div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_group']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "One", selectedString );
 
@@ -225,10 +225,10 @@ public class FilterAddinAccordion extends BaseTest {
      * ## Step 5
      */
     //Click Multi Selector and assert filter is opened
-    multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
+    multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_group div.filter-collapse-icon.collapsed" ) );
     assertNotNull( multiSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
-    optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-root-body']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#multiFilterObj_group div.filter-collapse-icon.collapsed" ) );
+    optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_group div.filter-root-body" ) );
     assertNotNull( optionMultiContainer );
 
     //Select 4 options, click Apply and assert filter closed and strings correct
@@ -259,7 +259,7 @@ public class FilterAddinAccordion extends BaseTest {
     applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_group']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//button[contains(text(),'Apply')]" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_group div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "4 / 29", selectedString );
   }

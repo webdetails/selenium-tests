@@ -161,9 +161,7 @@ public class FilterReference extends BaseTest {
     assertNotNull( multiSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     //Search for th, assert shown results and select shown options
-    WebElement filterMultiSearch = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-root-container multi-select expanded']//input[@class='filter-filter-input']" ) );
-    assertNotNull( filterMultiSearch );
-    filterMultiSearch.sendKeys( "th" );
+    this.elemHelper.SendKeys( driver, By.cssSelector( "div#multiFilterObj_group input.filter-filter-input" ), "th" );
     selectThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Three']/../div" ) );
     assertNotNull( selectThree );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Three']/../div" ) );

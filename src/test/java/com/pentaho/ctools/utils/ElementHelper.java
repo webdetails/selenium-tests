@@ -55,6 +55,75 @@ public class ElementHelper {
   // Log instance
   private final Logger log = LogManager.getLogger( ElementHelper.class );
 
+  class RunnableGetText implements Runnable {
+
+    private WebDriver driver;
+    private Integer timeout;
+    private Integer pollingTime;
+    private By locator;
+
+    private String textToWait;
+    private Boolean textIsEquals;
+    private String currentTextPresent;
+
+    public RunnableGetText( WebDriver driver, Integer timeout, Integer pollingTime, By locator, String textToWait ) {
+      super();
+      this.driver = driver;
+      this.timeout = timeout;
+      this.pollingTime = pollingTime;
+      this.locator = locator;
+      this.textToWait = textToWait;
+    }
+
+    public Boolean isTextEquals() {
+      return this.textIsEquals;
+    }
+
+    public String getTextPresent() {
+      return this.currentTextPresent;
+    }
+
+    public void setTextPresent( String text ) {
+      this.currentTextPresent = text;
+    }
+
+    public By getLocator() {
+      return this.locator;
+    }
+
+    public String getTextToWait() {
+      return this.textToWait;
+    }
+
+    @Override
+    public void run() {
+      Wait<WebDriver> wait = new FluentWait<WebDriver>( this.driver ).withTimeout( this.timeout, TimeUnit.SECONDS ).pollingEvery( this.pollingTime, TimeUnit.MILLISECONDS );
+
+      // Wait for element visible
+      this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {
+
+        @Override
+        public Boolean apply( WebDriver d ) {
+          try {
+            List<WebElement> listElem = d.findElements( getLocator() );
+            if ( listElem.size() > 0 ) {
+              WebElement elem = listElem.get( 0 );
+              if ( elem.isEnabled() ) {
+                String text = elem.getText();
+                setTextPresent( text );
+                return getTextPresent().equals( getTextToWait() ); //If true we stop waiting for.
+              }
+              return false;
+            }
+            return false;
+          } catch ( StaleElementReferenceException sere ) {
+            return false;
+          }
+        }
+      } );
+    }
+  }
+
   /**
    * This method shall wait for the title and return it.
    * 
@@ -297,53 +366,18 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     String textPresent = "";
     ExecutorService executor = null;
+    RunnableGetText r = new RunnableGetText( driver, timeout, pollingTime, locator, textToWait );
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
-
-      class RunnableObject implements Runnable {
-
-        private Boolean textIsEquals;
-
-        public Boolean isTextEquals() {
-          return this.textIsEquals;
-        }
-
-        @Override
-        public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
-
-          // Wait for element visible
-          this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {
-
-            @Override
-            public Boolean apply( WebDriver d ) {
-              try {
-                List<WebElement> listElem = d.findElements( locator );
-                if ( listElem.size() > 0 ) {
-                  WebElement elem = listElem.get( 0 );
-                  if ( elem.isEnabled() ) {
-                    String text = elem.getText();
-                    return text.equals( textToWait ); //If true we stop waiting for.
-                  }
-                  return false;
-                }
-                return false;
-              } catch ( StaleElementReferenceException sere ) {
-                return false;
-              }
-            }
-          } );
-        }
-      }
-
-      RunnableObject r = new RunnableObject();
-
       executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       if ( r.isTextEquals() ) { // If the text is equals then send the text that we wait for.
         textPresent = textToWait;
-        this.log.debug( "Wait for text successful!" );
+        this.log.debug( "Wait for text successful! We got this [" + textPresent + "]." );
+      } else {
+        textPresent = r.getTextPresent();
+        this.log.debug( "No text present. We only found this [" + textPresent + "]." );
       }
     } catch ( InterruptedException ie ) {
       this.log.warn( "Interrupted Exception" );
@@ -351,6 +385,7 @@ public class ElementHelper {
     } catch ( ExecutionException ee ) {
       if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+        textPresent = r.getTextPresent();
       } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );

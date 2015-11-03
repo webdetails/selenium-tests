@@ -35,6 +35,7 @@ import org.testng.annotations.Test;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
+import com.pentaho.selenium.ConfigurationSettings;
 
 /**
  * Testing the functionalities related with Filter Component (Sniff Test).
@@ -71,6 +72,9 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( actualPageTitle, expectedPageTitle );
     //Get Title of sample
     String expectedSampleTitle = "Visual Guide to the Filter Component";
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      expectedSampleTitle = "Filter Component Visual Guide";
+    }
     String actualSampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='docHeader']/h1" ), expectedSampleTitle );
     assertEquals( actualSampleTitle, expectedSampleTitle );
 
@@ -136,14 +140,14 @@ public class FilterVisualGuide extends BaseTest {
     WebElement singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
     assertNotNull( singleSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
-    WebElement optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-root-body']" ) );
+    WebElement optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-root-body" ) );
     assertNotNull( optionSingleContainer );
 
     //Select Zero, assert filter closed and strings correct
     WebElement oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@title='One']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@title='One']/../div" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-root-body" ) ) );
     String selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_simple']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "One", selectedString );
 
@@ -151,7 +155,7 @@ public class FilterVisualGuide extends BaseTest {
     WebElement multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
     assertNotNull( multiSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
-    WebElement optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-root-body']" ) );
+    WebElement optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-root-body" ) );
     assertNotNull( optionMultiContainer );
 
     //Select All, click Apply and assert filter closed and strings correct
@@ -161,7 +165,7 @@ public class FilterVisualGuide extends BaseTest {
     WebElement applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_simple']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple']//button[contains(text(),'Apply')]" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_simple']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "All", selectedString );
 
@@ -172,7 +176,7 @@ public class FilterVisualGuide extends BaseTest {
     singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@class='filter-collapse-icon collapsed']" ) );
     assertNotNull( singleSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@class='filter-collapse-icon collapsed']" ) );
-    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@class='filter-root-body']" ) );
+    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_limited div.filter-root-body" ) );
     assertNotNull( optionSingleContainer );
 
     //Select 5 options, assert limit message shown
@@ -200,12 +204,11 @@ public class FilterVisualGuide extends BaseTest {
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@title='Six']/../div" ) );
     WebElement sixNotSelected = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@title='Six']/../../../div[@class='filter-item-container none-selected']" ) );
     assertNotNull( sixNotSelected );
-
     //Apply and assert string
     applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_limited']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_limited']//button[contains(text(),'Apply')]" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_limited div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_limited']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "5 / 19", selectedString );
 
@@ -216,14 +219,14 @@ public class FilterVisualGuide extends BaseTest {
     singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
     assertNotNull( singleSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
-    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-root-body']" ) );
+    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_group div.filter-root-body" ) );
     assertNotNull( optionSingleContainer );
 
     //Select One, assert filter closed and strings correct
     oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@title='One']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@title='One']/../div" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_group div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_group']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "One", selectedString );
 
@@ -231,7 +234,7 @@ public class FilterVisualGuide extends BaseTest {
     multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
     assertNotNull( multiSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
-    optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-root-body']" ) );
+    optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_group div.filter-root-body" ) );
     assertNotNull( optionMultiContainer );
 
     //Select All, click Apply and assert filter closed and strings correct
@@ -241,7 +244,7 @@ public class FilterVisualGuide extends BaseTest {
     applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_group']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//button[contains(text(),'Apply')]" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_group div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "All", selectedString );
 
@@ -249,9 +252,11 @@ public class FilterVisualGuide extends BaseTest {
      * ## Step 4
      */
     //Assert filters are opened
-    WebElement expandedSingleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_expanded']//div[@class='filter-root-body']" ) );
+    WebElement expandedSingleSelector = null;
+    WebElement expandedMultiSelector = null;
+    expandedSingleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_expanded div.filter-root-body" ) );
     assertNotNull( expandedSingleSelector );
-    WebElement expandedMultiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_expanded']//div[@class='filter-root-body']" ) );
+    expandedMultiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_expanded div.filter-root-body" ) );
     assertNotNull( expandedMultiSelector );
 
     //Select One, assert filter closed and strings correct
@@ -272,9 +277,9 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( "All", selectedString );
 
     //Assert filters are opened
-    expandedSingleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_expanded']//div[@class='filter-root-body']" ) );
+    expandedSingleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_expanded div.filter-root-body" ) );
     assertNotNull( expandedSingleSelector );
-    expandedMultiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_expanded']//div[@class='filter-root-body']" ) );
+    expandedMultiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_expanded div.filter-root-body" ) );
     assertNotNull( expandedMultiSelector );
 
     /*
@@ -284,14 +289,14 @@ public class FilterVisualGuide extends BaseTest {
     singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@class='filter-collapse-icon collapsed']" ) );
     assertNotNull( singleSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@class='filter-collapse-icon collapsed']" ) );
-    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@class='filter-root-body']" ) );
+    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_simple_paginated div.filter-root-body" ) );
     assertNotNull( optionSingleContainer );
 
     //Select One, assert filter closed and strings correct
     oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@title='Entry 1']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@title='Entry 1']/../div" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_simple_paginated div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "Entry 1", selectedString );
 
@@ -299,7 +304,7 @@ public class FilterVisualGuide extends BaseTest {
     multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//div[@class='filter-collapse-icon collapsed']" ) );
     assertNotNull( multiSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//div[@class='filter-collapse-icon collapsed']" ) );
-    optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//div[@class='filter-root-body']" ) );
+    optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-body" ) );
     assertNotNull( optionMultiContainer );
 
     //Select All, click Apply and assert filter closed and strings correct
@@ -309,9 +314,9 @@ public class FilterVisualGuide extends BaseTest {
     applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//button[contains(text(),'Apply')]" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//span[@class='filter-root-info-selected-items']" ) );
-    assertEquals( "20 / 1000", selectedString );
+    assertEquals( "50 / 1000", selectedString );
 
     /*
      * ## Step 6
@@ -320,7 +325,7 @@ public class FilterVisualGuide extends BaseTest {
     singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//div[@class='filter-collapse-icon collapsed']" ) );
     assertNotNull( singleSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//div[@class='filter-collapse-icon collapsed']" ) );
-    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//div[@class='filter-root-body']" ) );
+    optionSingleContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_addIn div.filter-root-body" ) );
     assertNotNull( optionSingleContainer );
 
     //Assert different colors
@@ -337,7 +342,7 @@ public class FilterVisualGuide extends BaseTest {
     oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//div[@title='One']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//div[@title='One']/../div" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//div[@class='filter-root-body']" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_addIn div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "One", selectedString );
 
@@ -351,9 +356,9 @@ public class FilterVisualGuide extends BaseTest {
      * ## Step 7
      */
     //Assert filters are opened
-    WebElement valuesSingleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_values']//div[@class='filter-root-body']" ) );
+    WebElement valuesSingleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_values div.filter-root-body" ) );
     assertNotNull( valuesSingleSelector );
-    WebElement valuesMultiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_values']//div[@class='filter-root-body']" ) );
+    WebElement valuesMultiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_values div.filter-root-body" ) );
     assertNotNull( valuesMultiSelector );
 
     //Select One, assert filter closed and strings correct
@@ -384,10 +389,9 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( "All", selectedString );
 
     //Assert filters are opened
-    valuesSingleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_values']//div[@class='filter-root-body']" ) );
+    valuesSingleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_values div.filter-root-body" ) );
     assertNotNull( valuesSingleSelector );
-    valuesMultiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_values']//div[@class='filter-root-body']" ) );
+    valuesMultiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_values div.filter-root-body" ) );
     assertNotNull( valuesMultiSelector );
-
   }
 }
