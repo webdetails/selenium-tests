@@ -270,10 +270,12 @@ public class MapComponentReference extends BaseTest {
     driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[5]/div" ) ).click();
     //wait for the field update
     wait.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
-    assertEquals( "1000 km", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
-    assertEquals( "1000 mi", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
+    String expectedKilometers = "1000 km";
+    String actualKilometers = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), expectedKilometers );
+    assertEquals( actualKilometers, expectedKilometers );
+    String expectedMiles = "1000 mi";
+    String actualMiles = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ), expectedMiles );
+    assertEquals( actualMiles, expectedMiles );
 
     //## Step3
     driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) ).click();
