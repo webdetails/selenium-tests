@@ -162,13 +162,13 @@ public class CDE452 extends BaseTest {
     driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
-    assertEquals( "Access Denied to file /system/CDE404/dashboards/i18nTest.wcdf", text );
+    assertEquals( text, "Access Denied or file not found - /system/CDE404/dashboards/i18nTest.wcdf" );
 
     //Open repository dashboard in edit mode and assert elements on page
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
-    assertEquals( "Access Denied to file /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf", text );
+    assertEquals( text, "Access Denied or file not found - /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf" );
 
     /*
      * ## Step 3
@@ -228,13 +228,13 @@ public class CDE452 extends BaseTest {
     driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
-    assertEquals( "Access Denied to file /system/CDE404/dashboards/i18nTest.wcdf", text );
+    assertEquals( text, "This functionality is limited to users with permission 'Create Content'" );
 
     //Open repository dashboard in edit mode and assert elements on page
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
-    assertEquals( "Access Denied to file /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf", text );
+    assertEquals( text, "This functionality is limited to users with permission 'Create Content'" );
 
     /*
      * ## Step 4
@@ -294,13 +294,13 @@ public class CDE452 extends BaseTest {
     driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
-    assertEquals( "Access Denied to file /system/CDE404/dashboards/i18nTest.wcdf", text );
+    assertEquals( text, "This functionality is limited to users with permission 'Create Content'" );
 
     //Open repository dashboard in edit mode and assert elements on page
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
-    assertEquals( "Access Denied to file /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf", text );
+    assertEquals( text, "This functionality is limited to users with permission 'Create Content'" );
 
     //Log out
     driver.get( PageUrl.PUC );
