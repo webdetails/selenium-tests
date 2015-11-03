@@ -36,6 +36,7 @@ import org.testng.annotations.Test;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
+import com.pentaho.selenium.ConfigurationSettings;
 
 /**
  * Testing the functionalities related with AddinReference.
@@ -263,7 +264,11 @@ public class AddinReference extends BaseTest {
 
     //Check Defaults
     String defaultText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='DataBarDesc']/blockquote/pre" ) );
-    assertEquals( defaultText, "defaults: { widthRatio:1, height: 10, startColor: \"#55A4D6\", endColor: \"#448FC8\", stroke: null, max: undefined, min: undefined, absValue: true, includeValue: false, valueFormat: function(st, opt) { return \"\" + sprintf(st.colFormat || \"%.1f\", st.value); } }" );
+    String expectedText = "defaults: { widthRatio:1, height: 10, startColor: \"#55A4D6\", endColor: \"#448FC8\", stroke: null, max: undefined, min: undefined, absValue: true, includeValue: false, valueFormat: function(st, opt) { return \"\" + sprintf(st.colFormat || \"%.1f\", st.value); } }";
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      expectedText = "defaults: { widthRatio:1, height: 10, startColor: \"#55A4D6\", endColor: \"#448FC8\", stroke: null, max: undefined, min: undefined, absValue: true, includeValue: false, valueFormat: function(v, format, st) { return \"\" + require(\"cdf/dashboard/Sprintf\")(format || \"%.1f\", v); } }";
+    }
+    assertEquals( defaultText, expectedText );
 
     //Check Rows
     String row1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='DataBarObjTable']/tbody/tr/td" ) );
@@ -362,7 +367,11 @@ public class AddinReference extends BaseTest {
 
     //Check Defaults
     String defaultText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='TrendArrowDesc']/blockquote/pre" ) );
-    assertEquals( defaultText, "defaults: { includeValue: false, good: true, valueFormat: function(st, opt) { return sprintf(st.colFormat || \"%.1f\", st.value); } }" );
+    String expectedText = "defaults: { includeValue: false, good: true, valueFormat: function(st, opt) { return sprintf(st.colFormat || \"%.1f\", st.value); } }";
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      expectedText = "defaults: { includeValue: false, good: true, valueFormat: function(v, format, st) { return require(\"cdf/dashboard/Sprintf\")(format || \"%.1f\", v); } }";
+    }
+    assertEquals( defaultText, expectedText );
 
     //Check Rows
     String row1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr/td" ) );
@@ -390,9 +399,9 @@ public class AddinReference extends BaseTest {
     String chartRow1Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div" ) );
     String chartRow2Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div" ) );
     String chartRow3Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "50€", chartRow1Col2Value );
-    assertEquals( "77€", chartRow2Col2Value );
-    assertEquals( "-65€", chartRow3Col2Value );
+    assertEquals( "50.00€", chartRow1Col2Value );
+    assertEquals( "77.00€", chartRow2Col2Value );
+    assertEquals( "-65.00€", chartRow3Col2Value );
 
     /*
      * ## Step 2
@@ -412,9 +421,9 @@ public class AddinReference extends BaseTest {
     chartRow1Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div" ) );
     chartRow2Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div" ) );
     chartRow3Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "-65€", chartRow1Col2Value );
-    assertEquals( "77€", chartRow2Col2Value );
-    assertEquals( "50€", chartRow3Col2Value );
+    assertEquals( "-65.00€", chartRow1Col2Value );
+    assertEquals( "77.00€", chartRow2Col2Value );
+    assertEquals( "50.00€", chartRow3Col2Value );
 
     //Check ordering - Custom trendArrow
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='TrendArrowObjTable']/thead/tr/th[3]" ) );
@@ -429,9 +438,9 @@ public class AddinReference extends BaseTest {
     chartRow1Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div" ) );
     chartRow2Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div" ) );
     chartRow3Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "-65€", chartRow1Col2Value );
-    assertEquals( "50€", chartRow2Col2Value );
-    assertEquals( "77€", chartRow3Col2Value );
+    assertEquals( "-65.00€", chartRow1Col2Value );
+    assertEquals( "50.00€", chartRow2Col2Value );
+    assertEquals( "77.00€", chartRow3Col2Value );
   }
 
   /**
@@ -677,7 +686,11 @@ public class AddinReference extends BaseTest {
 
     //Check Defaults
     String defaultText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='textFormatDesc']/blockquote/pre" ) );
-    assertEquals( defaultText, "defaults: { textFormat: function(st) { return st.colFormat ? dashboard.sprintf(st.colFormat, st.value) : st.value; } }" );
+    String expectedText = "defaults: { textFormat: function(st) { return st.colFormat ? dashboard.sprintf(st.colFormat, st.value) : st.value; } }";
+    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+      expectedText = "defaults: { textFormat: function(v, st) { return st.colFormat ? require(\"cdf/dashboard/Sprintf\")(st.colFormat, v) : v; } }";
+    }
+    assertEquals( defaultText, expectedText );
 
     //Check Rows
     String row1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='textFormatObjTable']/tbody/tr/td" ) );
@@ -840,7 +853,7 @@ public class AddinReference extends BaseTest {
    *    The test case pretends to validate the groupHeaders sample.
    * Steps:
    *    1. Check if the sample for 'groupHeaders' has its contents present
-   *    3. Order the table
+   *    2. Order the table
    */
   @Test
   public void tc10_GroupHeaderst_SampleWorks() {

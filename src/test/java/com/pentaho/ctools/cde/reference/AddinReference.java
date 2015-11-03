@@ -839,7 +839,7 @@ public class AddinReference extends BaseTest {
    *    The test case pretends to validate the groupHeaders sample.
    * Steps:
    *    1. Check if the sample for 'groupHeaders' has its contents present
-   *    3. Order the table
+   *    2. Order the table
    */
   @Test
   public void tc10_GroupHeaderst_SampleWorks() {
