@@ -50,8 +50,8 @@ public class MarketPlace {
     //Focus Browser Perspective and refresh repository
     this.driver.switchTo().defaultContent();
     assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "applicationShell" ) ) );
-    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//iframe[@id='marketplace.perspective']" ) ) );
-    this.driver.switchTo().frame( "marketplace.perspective" );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//iframe[@id='marketplace.perspective.osgi']" ) ) );
+    this.driver.switchTo().frame( "marketplace.perspective.osgi" );
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "floatingBarsG" ) );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "floatingBarsG" ) );
     assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='filterBar clearfix']" ) ) );
@@ -116,7 +116,7 @@ public class MarketPlace {
     CheckStagesPopup();
 
     //Assert Marketplace plugin exists on list
-    assertTrue( PluginExists( "Pentaho Marketplace", "Pentaho" ) );
+    assertTrue( PluginExists( "Pentaho Marketplace ", "Pentaho" ) );
 
     //Assert hyperlink on bottom of page is accurate
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@href='http://community.pentaho.com/marketplace/plugins/']" ) );
@@ -169,6 +169,7 @@ public class MarketPlace {
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@window-class='stagesInfoDialog']//div[@class='dev-stage ng-scope dev-stage-community-04']" ) );
     assertNotNull( element );
     this.elemHelper.Click( this.driver, By.xpath( "//div[@window-class='stagesInfoDialog']/div/button[@class='closeButton']" ) );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='pentaho-tab-deck-panel']/div/div[2]/a" ) );
   }
 
   /**
@@ -392,7 +393,10 @@ public class MarketPlace {
     CheckPluginPopup( 5 );
     Random randomGenerator = new Random();
     for ( int i = 1; i <= 5; i++ ) {
-      int pos = randomGenerator.nextInt( nTotal );
+      int pos = 0;
+      while ( pos < 6 ) {
+        pos = randomGenerator.nextInt( nTotal );
+      }
       CheckPluginPopup( pos );
     }
 
@@ -408,6 +412,7 @@ public class MarketPlace {
    * @param pos
    */
   public void CheckPluginPopup( int pos ) {
+    log.info( "checking plugin in position: " + pos );
     //Get Plugin name and author
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + pos + "]/div/div/div[@class='pluginName ng-binding']" ) );
     assertNotNull( element );
@@ -415,19 +420,34 @@ public class MarketPlace {
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + pos + "]/div/div/div[@class='pluginAuthor ng-binding']" ) );
     assertNotNull( element );
     String author = element.getText();
+    boolean installed = false;
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + pos + "]//div[@class='infoVersionStatusMessage ng-binding']" ) );
+    assertNotNull( element );
+    if ( element.getText() == "Installed" ) {
+      installed = true;
+    }
+
     //Open Plugin
     this.elemHelper.Click( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + pos + "]/div/div/div[@class='pluginName ng-binding']" ) );
 
-    //Assert title and author shown are the same
+    //Wait for popup to open fully
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div/div[2]/div/div[@class='pluginName ng-binding']" ) );
+
+    //Assert title and author shown are the same and image exists
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div/div[2]/div/div[@class='pluginName ng-binding']" ) );
     assertNotNull( element );
     assertEquals( title, element.getText() );
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div/div[2]/div/div[@class='pluginAuthor ng-binding']" ) );
     assertNotNull( element );
     assertEquals( author, element.getText() );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div[2]/div/div[4]/div[2]/a[@class='ng-scope ng-binding']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div[2]/div/div[4]/div[2]/a[@class='ng-binding ng-scope']" ) );
     assertNotNull( element );
     assertEquals( author, element.getText() );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginImage']/img" ) );
+    if ( element != null ) {
+      String text = element.getAttribute( "data-ng-src" );
+      assertEquals( 200, HttpUtils.GetResponseCode( text, "admin", "password" ) );
+    }
 
     //Assert version shown on button is the same as in the info
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div/div/div[2]/button/span[@class='multiselectButtonText ng-binding']" ) );
@@ -437,24 +457,31 @@ public class MarketPlace {
     version = version.replace( " ", "" );
     version = version.replace( ")", "" );
     String[] versions = version.split( "\\(" );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div[2]/div/div[2]/div[2]/span[@class='ng-scope ng-binding']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div[2]/div/div[2]/div[2]/span[@class='ng-binding ng-scope']" ) );
     assertNotNull( element );
     assertEquals( versions[1], element.getText() );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div[2]/div/div[3]/div[2]/span[@class='ng-scope ng-binding']" ) );
+    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div[2]/div/div[3]/div[2]/span[@class='ng-binding ng-scope']" ) );
     assertNotNull( element );
     assertEquals( versions[0], element.getText() );
 
     //Assert buttons are shown
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button" ) );
     assertNotNull( element );
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button[2]" ) );
-    assertNotNull( element );
+    if ( installed ) {
+      element = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button[2]" ) );
+      assertNotNull( element );
+    }
 
     //Assert Screenshot is showing
-    element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='item ng-isolate-scope active']/img" ) );
-    assertNotNull( element );
-    String text = element.getAttribute( "data-ng-src" );
-    assertEquals( 200, HttpUtils.GetResponseCode( text, "admin", "password" ) );
+    element = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='carousel-inner']/div/img" ) );
+    if ( element != null ) {
+      List<WebElement> listElements = this.driver.findElements( By.xpath( "//div[@class='carousel-inner']/div" ) );
+      for ( int i = 1; i < listElements.size(); i++ ) {
+        element = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='carousel-inner']/div[" + i + "]/img" ) );
+        String text = element.getAttribute( "data-ng-src" );
+        assertEquals( 200, HttpUtils.GetResponseCode( text, "admin", "password" ) );
+      }
+    }
 
     //Close popup and assert it is closed
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
