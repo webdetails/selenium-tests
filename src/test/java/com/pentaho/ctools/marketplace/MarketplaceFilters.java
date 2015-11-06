@@ -69,28 +69,30 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Community Dashboard Editor" );
     expectedList.add( "Community Graphics Generator" );
     expectedList.add( "Sparkl - Pentaho Application Builder" );
-    expectedList.add( "Pentaho Repository Synchronizer" );
+    //expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    expectedList.add( "Community Data Validation" );
+    //expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
-    expectedList.add( "Startup Rule Engine" );
+    //expectedList.add( "Startup Rule Engine" );
     expectedList.add( "Saiku Analytics" );
     expectedList.add( "Saiku Chart Plus" );
     expectedList.add( "Pentaho CE Audit" );
+    expectedList.add( "Tapa" );
     expectedList.add( "Pentaho Performance Monitoring" );
     expectedList.add( "IvyBC - Ivy Bootstrap Components (Free)" );
     expectedList.add( "IvyDD - Ivy Dashboard Designer" );
-    expectedList.add( "IvySE - Ivy Schema Editor" );
+    //expectedList.add( "IvySE - Ivy Schema Editor" );
     expectedList.add( "IvyUD - Ivy User Details" );
     expectedList.add( "IvyDC - Ivy Dashboard Components" );
     expectedList.add( "IvyGS - Ivy Git Sync" );
     expectedList.add( "OpenI-Pentaho Plugin" );
     expectedList.add( "Pivot4J Analytics" );
     expectedList.add( "Change Password" );
+    expectedList.add( "Integrator plugin" );
     expectedList.add( "BTable" );
-    expectedList.add( "Alfresco Audit Analysis and Reporting" );
+    //expectedList.add( "Alfresco Audit Analysis and Reporting" );
     expectedList.add( "Pentaho Log Manager" );
     expectedList.add( "Environment Display" );
     expectedList.add( "Pentaho Analytics Shell" );
@@ -98,6 +100,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Bissol Table Data Editor" );
     expectedList.add( "Pentaho Database Inspection Service" );
     expectedList.add( "Pentaho Analysis Editor" );
+    expectedList.add( "Web Adhoc Query Executor" );
     List<String> resultList = new ArrayList<String>();
     resultList = market.CheckFiltersApplied( type, stage, "" );
     assertEquals( expectedList, resultList );
@@ -113,20 +116,22 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Community Dashboard Editor" );
     expectedList.add( "Community Graphics Generator" );
     expectedList.add( "Sparkl - Pentaho Application Builder" );
-    expectedList.add( "Pentaho Repository Synchronizer" );
+    //expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    expectedList.add( "Community Data Validation" );
+    //expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
-    expectedList.add( "Startup Rule Engine" );
+    //expectedList.add( "Startup Rule Engine" );
     expectedList.add( "Pentaho CE Audit" );
+    expectedList.add( "Tapa" );
     expectedList.add( "Pentaho Performance Monitoring" );
     expectedList.add( "IvyBC - Ivy Bootstrap Components (Free)" );
     expectedList.add( "IvyDD - Ivy Dashboard Designer" );
     expectedList.add( "IvyUD - Ivy User Details" );
     expectedList.add( "IvyDC - Ivy Dashboard Components" );
     expectedList.add( "Change Password" );
+    expectedList.add( "Integrator plugin" );
     expectedList.add( "BTable" );
     expectedList.add( "Pentaho Log Manager" );
     expectedList.add( "Environment Display" );
@@ -141,7 +146,7 @@ public class MarketplaceFilters extends BaseTest {
     /*
      *  Step 3
      */
-    type.clear();
+    /*type.clear();
     type.add( 8 );
     type.add( 11 );
     expectedList.clear();
@@ -159,7 +164,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Spanish Language Pack Installer" );
     resultList.clear();
     resultList = market.CheckFiltersApplied( type, stage, "" );
-    assertEquals( expectedList, resultList );
+    assertEquals( expectedList, resultList );*/
 
   }
 
@@ -203,7 +208,7 @@ public class MarketplaceFilters extends BaseTest {
     stage.clear();
     stage.add( 2 );
     stage.add( 4 );
-    expectedList.remove( 0 );
+    expectedList.clear();
     resultList.clear();
     resultList = market.CheckFiltersApplied( type, stage, "" );
     assertEquals( expectedList, resultList );
@@ -217,33 +222,36 @@ public class MarketplaceFilters extends BaseTest {
     stage.add( 11 );
     expectedList.clear();
     expectedList.add( "Sparkl - Pentaho Application Builder" );
-    expectedList.add( "Pentaho Repository Synchronizer" );
+    //expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    expectedList.add( "Community Data Validation" );
+    //expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
-    expectedList.add( "Startup Rule Engine" );
-    expectedList.add( "D3 Component Library" );
+    //expectedList.add( "Startup Rule Engine" );
+    //expectedList.add( "D3 Component Library" );
     expectedList.add( "Saiku Chart Plus" );
     expectedList.add( "Pentaho CE Audit" );
+    expectedList.add( "Tapa" );
+    //expectedList.add( "Pentaho Peformance Monitoring" );
     expectedList.add( "IvyBC - Ivy Bootstrap Components (Free)" );
     expectedList.add( "IvyDD - Ivy Dashboard Designer" );
-    expectedList.add( "IvySE - Ivy Schema Editor" );
+    //expectedList.add( "IvySE - Ivy Schema Editor" );
     expectedList.add( "IvyUD - Ivy User Details" );
     expectedList.add( "IvyDC - Ivy Dashboard Components" );
     expectedList.add( "IvyGS - Ivy Git Sync" );
     expectedList.add( "OpenI-Pentaho Plugin" );
     expectedList.add( "Pivot4J Analytics" );
     expectedList.add( "Change Password" );
+    expectedList.add( "Integrator plugin" );
     expectedList.add( "BTable" );
-    expectedList.add( "Alfresco Audit Analysis and Reporting" );
+    //expectedList.add( "Alfresco Audit Analysis and Reporting" );
     expectedList.add( "Pentaho Log Manager" );
     expectedList.add( "Environment Display" );
     expectedList.add( "Pentaho Analytics Shell" );
     expectedList.add( "Bissol Table Data Editor" );
     expectedList.add( "Mondrian Translator" );
-    expectedList.add( "Catalan Language Pack Installer" );
+    /*expectedList.add( "Catalan Language Pack Installer" );
     expectedList.add( "Dutch Language Pack Installer" );
     expectedList.add( "French Language Pack Installer" );
     expectedList.add( "German Language Pack Installer" );
@@ -253,7 +261,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Korean Language Pack Installer" );
     expectedList.add( "Portuguese (Brazilian variant) Language Pack Installer" );
     expectedList.add( "Portuguese (European variant) Language Pack Installer" );
-    expectedList.add( "Spanish Language Pack Installer" );
+    expectedList.add( "Spanish Language Pack Installer" );*/
     resultList.clear();
     resultList = market.CheckFiltersApplied( type, stage, "" );
     assertEquals( expectedList, resultList );
@@ -289,16 +297,16 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Community Dashboard Editor" );
     expectedList.add( "Community Graphics Generator" );
     expectedList.add( "Sparkl - Pentaho Application Builder" );
-    expectedList.add( "Pentaho Repository Synchronizer" );
+    //expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    expectedList.add( "Community Data Validation" );
+    //expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
-    expectedList.add( "Startup Rule Engine" );
-    expectedList.add( "D3 Component Library" );
+    //expectedList.add( "Startup Rule Engine" );
+    //expectedList.add( "D3 Component Library" );
     expectedList.add( "Environment Display" );
-    expectedList.add( "Catalan Language Pack Installer" );
+    /*expectedList.add( "Catalan Language Pack Installer" );
     expectedList.add( "Dutch Language Pack Installer" );
     expectedList.add( "French Language Pack Installer" );
     expectedList.add( "German Language Pack Installer" );
@@ -308,7 +316,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Korean Language Pack Installer" );
     expectedList.add( "Portuguese (Brazilian variant) Language Pack Installer" );
     expectedList.add( "Portuguese (European variant) Language Pack Installer" );
-    expectedList.add( "Spanish Language Pack Installer" );
+    expectedList.add( "Spanish Language Pack Installer" );*/
     List<String> resultList = new ArrayList<String>();
     resultList = market.CheckFiltersApplied( type, stage, "Webdetails" );
     assertEquals( expectedList, resultList );
@@ -323,7 +331,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Community Graphics Generator" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    expectedList.add( "Community Data Validation" );
+    //expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
     expectedList.add( "IvyDD - Ivy Dashboard Designer" );
@@ -335,7 +343,7 @@ public class MarketplaceFilters extends BaseTest {
      *  Step 3
      */
     expectedList.clear();
-    expectedList.add( "D3 Component Library" );
+    //expectedList.add( "D3 Component Library" );
     resultList = market.CheckFiltersApplied( type, stage, "D3" );
     assertEquals( expectedList, resultList );
 
@@ -389,7 +397,8 @@ public class MarketplaceFilters extends BaseTest {
     stage.clear();
     stage.add( 2 );
     stage.add( 4 );
-    expectedList.remove( 1 );
+    //expectedList.remove( 1 );
+    expectedList.clear();
     resultList.clear();
     resultList = market.CheckFiltersApplied( type, stage, "Community" );
     assertEquals( expectedList, resultList );
@@ -397,7 +406,7 @@ public class MarketplaceFilters extends BaseTest {
     /*
      *  Step 3
      */
-    type.clear();
+    /*type.clear();
     type.add( 8 );
     type.add( 11 );
     stage.clear();
@@ -408,6 +417,6 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "D3 Component Library" );
     resultList.clear();
     resultList = market.CheckFiltersApplied( type, stage, "D3" );
-    assertEquals( expectedList, resultList );
+    assertEquals( expectedList, resultList );*/
   }
 }

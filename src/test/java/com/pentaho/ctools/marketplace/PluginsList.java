@@ -53,35 +53,37 @@ public class PluginsList extends BaseTest {
      */
     MarketPlace market = new MarketPlace( driver );
     market.GoToMarketPlace();
-    assertTrue( market.PluginExists( "Pentaho Marketplace", "Pentaho" ) );
+    assertTrue( market.PluginExists( "Pentaho Marketplace ", "Pentaho" ) );
     assertTrue( market.PluginExists( "Community Dashboards Framework", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Data Access", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Dashboard Editor", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Graphics Generator", "Webdetails" ) );
     assertTrue( market.PluginExists( "Sparkl - Pentaho Application Builder", "Webdetails" ) );
-    assertTrue( market.PluginExists( "Pentaho Repository Synchronizer", "Webdetails" ) );
+    //assertTrue( market.PluginExists( "Pentaho Repository Synchronizer", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Startup Tabs", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Text Editor", "Webdetails" ) );
-    assertTrue( market.PluginExists( "Community Data Validation", "Webdetails" ) );
+    //assertTrue( market.PluginExists( "Community Data Validation", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Distributed Cache", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community File Repository", "Webdetails" ) );
-    assertTrue( market.PluginExists( "Startup Rule Engine", "Webdetails" ) );
-    assertTrue( market.PluginExists( "D3 Component Library", "Webdetails" ) );
+    //assertTrue( market.PluginExists( "Startup Rule Engine", "Webdetails" ) );
+    //assertTrue( market.PluginExists( "D3 Component Library", "Webdetails" ) );
     assertTrue( market.PluginExists( "Saiku Analytics", "Meteorite BI" ) );
     assertTrue( market.PluginExists( "Saiku Chart Plus", "IT4biz" ) );
     assertTrue( market.PluginExists( "Pentaho CE Audit", "IT4biz" ) );
+    assertTrue( market.PluginExists( "Tapa", "Oncase" ) );
     assertTrue( market.PluginExists( "Pentaho Performance Monitoring", "IT4biz" ) );
-    assertTrue( market.PluginExists( "IvyBC - Ivy Bootstrap Components (Free)", "Ivy Information Systems Ltd" ) );
-    assertTrue( market.PluginExists( "IvyDD - Ivy Dashboard Designer", "Ivy Information Systems Ltd" ) );
-    assertTrue( market.PluginExists( "IvySE - Ivy Schema Editor", "Ivy Information Systems" ) );
-    assertTrue( market.PluginExists( "IvyUD - Ivy User Details", "Ivy Information Systems Ltd" ) );
+    assertTrue( market.PluginExists( "IvyBC - Ivy Bootstrap Components (Free)", "Ivy Information Systems" ) );
+    assertTrue( market.PluginExists( "IvyDD - Ivy Dashboard Designer", "Ivy Information Systems" ) );
+    //assertTrue( market.PluginExists( "IvySE - Ivy Schema Editor", "Ivy Information Systems" ) );
+    assertTrue( market.PluginExists( "IvyUD - Ivy User Details", "Ivy Information Systems" ) );
     assertTrue( market.PluginExists( "IvyDC - Ivy Dashboard Components", "Ivy Information Systems" ) );
-    assertTrue( market.PluginExists( "IvyGS - Ivy Git Sync", "Ivy Information Systems Ltd" ) );
+    assertTrue( market.PluginExists( "IvyGS - Ivy Git Sync", "Ivy Information Systems" ) );
     assertTrue( market.PluginExists( "OpenI-Pentaho Plugin", "OpenI" ) );
     assertTrue( market.PluginExists( "Pivot4J Analytics", "Pivot4J Project" ) );
     assertTrue( market.PluginExists( "Change Password", "Kleyson Rios" ) );
+    assertTrue( market.PluginExists( "Integrator plugin", "Kleyson Rios" ) );
     assertTrue( market.PluginExists( "BTable", "Biz Tech" ) );
-    assertTrue( market.PluginExists( "Alfresco Audit Analysis and Reporting", "Francesco Corti" ) );
+    //assertTrue( market.PluginExists( "Alfresco Audit Analysis and Reporting", "Francesco Corti" ) );
     assertTrue( market.PluginExists( "Pentaho Log Manager", "Inquidia Consulting" ) );
     assertTrue( market.PluginExists( "Environment Display", "Webdetails" ) );
     assertTrue( market.PluginExists( "Pentaho Analytics Shell", "Roland Bouman" ) );
@@ -90,7 +92,8 @@ public class PluginsList extends BaseTest {
     assertTrue( market.PluginExists( "Pentaho Database Inspection Service", "Roland Bouman" ) );
     assertTrue( market.PluginExists( "Pentaho Analysis Editor", "Roland Bouman" ) );
     assertTrue( market.PluginExists( "Mondrian Translator", "Nicolas Haquet / Linalis" ) );
-    assertTrue( market.PluginExists( "Catalan Language Pack Installer", "Blau Advisors Strategic Partners,S.L." ) );
+    assertTrue( market.PluginExists( "Web Adhoc Query Executor", "Jortilles" ) );
+    /*assertTrue( market.PluginExists( "Catalan Language Pack Installer", "Blau Advisors Strategic Partners,S.L." ) );
     assertTrue( market.PluginExists( "Dutch Language Pack Installer", "C. van Kemenade" ) );
     assertTrue( market.PluginExists( "French Language Pack Installer", "Sylvain Decloix" ) );
     assertTrue( market.PluginExists( "German Language Pack Installer", "Thomas Starl" ) );
@@ -100,6 +103,6 @@ public class PluginsList extends BaseTest {
     assertTrue( market.PluginExists( "Korean Language Pack Installer", "Xavier Cho" ) );
     assertTrue( market.PluginExists( "Portuguese (Brazilian variant) Language Pack Installer", "Oncase, Open Consulting, IT4biz" ) );
     assertTrue( market.PluginExists( "Portuguese (European variant) Language Pack Installer", "Xpand-IT" ) );
-    assertTrue( market.PluginExists( "Spanish Language Pack Installer", "Domingo Lavin" ) );
+    assertTrue( market.PluginExists( "Spanish Language Pack Installer", "Domingo Lavin" ) );*/
   }
 }
