@@ -59,14 +59,14 @@ public class PluginsList extends BaseTest {
     assertTrue( market.PluginExists( "Community Dashboard Editor", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Graphics Generator", "Webdetails" ) );
     assertTrue( market.PluginExists( "Sparkl - Pentaho Application Builder", "Webdetails" ) );
-    //assertTrue( market.PluginExists( "Pentaho Repository Synchronizer", "Webdetails" ) );
+    assertTrue( market.PluginExists( "Pentaho Repository Synchronizer", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Startup Tabs", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Text Editor", "Webdetails" ) );
     //assertTrue( market.PluginExists( "Community Data Validation", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community Distributed Cache", "Webdetails" ) );
     assertTrue( market.PluginExists( "Community File Repository", "Webdetails" ) );
-    //assertTrue( market.PluginExists( "Startup Rule Engine", "Webdetails" ) );
-    //assertTrue( market.PluginExists( "D3 Component Library", "Webdetails" ) );
+    assertTrue( market.PluginExists( "Startup Rule Engine", "Webdetails" ) );
+    assertTrue( market.PluginExists( "D3 Component Library", "Webdetails" ) );
     assertTrue( market.PluginExists( "Saiku Analytics", "Meteorite BI" ) );
     assertTrue( market.PluginExists( "Saiku Chart Plus", "IT4biz" ) );
     assertTrue( market.PluginExists( "Pentaho CE Audit", "IT4biz" ) );
@@ -93,6 +93,7 @@ public class PluginsList extends BaseTest {
     assertTrue( market.PluginExists( "Pentaho Analysis Editor", "Roland Bouman" ) );
     assertTrue( market.PluginExists( "Mondrian Translator", "Nicolas Haquet / Linalis" ) );
     assertTrue( market.PluginExists( "Web Adhoc Query Executor", "Jortilles" ) );
+    assertTrue( market.PluginExists( "Pentaho Transparent Authentication", "Alberto Mercati and Francesco Corti" ) );
     /*assertTrue( market.PluginExists( "Catalan Language Pack Installer", "Blau Advisors Strategic Partners,S.L." ) );
     assertTrue( market.PluginExists( "Dutch Language Pack Installer", "C. van Kemenade" ) );
     assertTrue( market.PluginExists( "French Language Pack Installer", "Sylvain Decloix" ) );

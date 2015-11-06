@@ -69,13 +69,13 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Community Dashboard Editor" );
     expectedList.add( "Community Graphics Generator" );
     expectedList.add( "Sparkl - Pentaho Application Builder" );
-    //expectedList.add( "Pentaho Repository Synchronizer" );
+    expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
     //expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
-    //expectedList.add( "Startup Rule Engine" );
+    expectedList.add( "Startup Rule Engine" );
     expectedList.add( "Saiku Analytics" );
     expectedList.add( "Saiku Chart Plus" );
     expectedList.add( "Pentaho CE Audit" );
@@ -101,6 +101,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Pentaho Database Inspection Service" );
     expectedList.add( "Pentaho Analysis Editor" );
     expectedList.add( "Web Adhoc Query Executor" );
+    expectedList.add( "Pentaho Transparent Authentication" );
     List<String> resultList = new ArrayList<String>();
     resultList = market.CheckFiltersApplied( type, stage, "" );
     assertEquals( expectedList, resultList );
@@ -116,13 +117,13 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Community Dashboard Editor" );
     expectedList.add( "Community Graphics Generator" );
     expectedList.add( "Sparkl - Pentaho Application Builder" );
-    //expectedList.add( "Pentaho Repository Synchronizer" );
+    expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
     //expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
-    //expectedList.add( "Startup Rule Engine" );
+    expectedList.add( "Startup Rule Engine" );
     expectedList.add( "Pentaho CE Audit" );
     expectedList.add( "Tapa" );
     expectedList.add( "Pentaho Performance Monitoring" );
@@ -222,14 +223,14 @@ public class MarketplaceFilters extends BaseTest {
     stage.add( 11 );
     expectedList.clear();
     expectedList.add( "Sparkl - Pentaho Application Builder" );
-    //expectedList.add( "Pentaho Repository Synchronizer" );
+    expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
     //expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
-    //expectedList.add( "Startup Rule Engine" );
-    //expectedList.add( "D3 Component Library" );
+    expectedList.add( "Startup Rule Engine" );
+    expectedList.add( "D3 Component Library" );
     expectedList.add( "Saiku Chart Plus" );
     expectedList.add( "Pentaho CE Audit" );
     expectedList.add( "Tapa" );
@@ -251,6 +252,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Pentaho Analytics Shell" );
     expectedList.add( "Bissol Table Data Editor" );
     expectedList.add( "Mondrian Translator" );
+    expectedList.add( "Pentaho Transparent Authentication" );
     /*expectedList.add( "Catalan Language Pack Installer" );
     expectedList.add( "Dutch Language Pack Installer" );
     expectedList.add( "French Language Pack Installer" );
@@ -297,14 +299,14 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Community Dashboard Editor" );
     expectedList.add( "Community Graphics Generator" );
     expectedList.add( "Sparkl - Pentaho Application Builder" );
-    //expectedList.add( "Pentaho Repository Synchronizer" );
+    expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
     //expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
-    //expectedList.add( "Startup Rule Engine" );
-    //expectedList.add( "D3 Component Library" );
+    expectedList.add( "Startup Rule Engine" );
+    expectedList.add( "D3 Component Library" );
     expectedList.add( "Environment Display" );
     /*expectedList.add( "Catalan Language Pack Installer" );
     expectedList.add( "Dutch Language Pack Installer" );
@@ -343,7 +345,7 @@ public class MarketplaceFilters extends BaseTest {
      *  Step 3
      */
     expectedList.clear();
-    //expectedList.add( "D3 Component Library" );
+    expectedList.add( "D3 Component Library" );
     resultList = market.CheckFiltersApplied( type, stage, "D3" );
     assertEquals( expectedList, resultList );
 

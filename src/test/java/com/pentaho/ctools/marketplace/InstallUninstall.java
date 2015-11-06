@@ -25,6 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
+import com.pentaho.gui.web.puc.MarketPlace;
 import com.pentaho.selenium.BaseTest;
 
 public class InstallUninstall extends BaseTest {
@@ -40,7 +41,6 @@ public class InstallUninstall extends BaseTest {
    *
    * Steps:
    *    1. Check that CTE plugin is uninstalled and install it
-   *    2. Assert behavior of installation popups and check that plugin is installed
    */
   @Test
   public void tc1_MarketPlacePage_InstallPlugin() {
@@ -49,6 +49,33 @@ public class InstallUninstall extends BaseTest {
     /*
      *  Step 1
      */
+    MarketPlace market = new MarketPlace( driver );
+    market.GoToMarketPlace();
+    market.CheckInstallPlugin( "Community Text Editor", "" );
+
+  }
+
+  /**
+   * ############################### Test Case 2 ###############################
+   *
+   * Test Case Name:
+   *    Asserting Uninstall plugin works as expected
+   * Description:
+   *    This test will validate behavior of uninstalling a plugin
+   *
+   * Steps:
+   *    1. Check that CTE plugin is installed and uninstall it
+   */
+  @Test
+  public void tc2_MarketPlacePage_UnnstallPlugin() {
+    this.log.info( "tc2_MarketPlacePage_UninstallPlugin" );
+
+    /*
+     *  Step 1
+     */
+    MarketPlace market = new MarketPlace( driver );
+    market.GoToMarketPlace();
+    market.CheckUninstallPlugin( "Community Text Editor", "" );
 
   }
 }

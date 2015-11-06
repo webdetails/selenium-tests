@@ -454,15 +454,15 @@ public class MarketPlace {
     assertNotNull( element );
     String version = element.getText();
     version = version.replace( "Version: ", "" );
-    version = version.replace( " ", "" );
+    version = version.trim();
     version = version.replace( ")", "" );
     String[] versions = version.split( "\\(" );
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div[2]/div/div[2]/div[2]/span[@class='ng-binding ng-scope']" ) );
     assertNotNull( element );
-    assertEquals( versions[1], element.getText() );
+    assertEquals( versions[1], element.getText().trim() );
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div[2]/div/div[3]/div[2]/span[@class='ng-binding ng-scope']" ) );
     assertNotNull( element );
-    assertEquals( versions[0], element.getText() );
+    assertEquals( versions[0], element.getText().trim() );
 
     //Assert buttons are shown
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button" ) );
@@ -492,17 +492,132 @@ public class MarketPlace {
   }
 
   /**
-   * This method will check Installing plugin works correctly
+   * This method will check Installing plugin works correctly. It needs the plugin name and the success message in case it is not default.
+   * 
+   * This method must be called from the Marketplace page with the driver set to the marketplace.perspective
+   * 
+   * @param name
+   * @param message
    */
-  public void CheckInstallPlugin() {
-    //TODO
+  public void CheckInstallPlugin( String name, String message ) {
+    //assert plugin exists
+    WebElement plugin = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']" ) );
+    assertNotNull( plugin );
+
+    //assert it is not installed
+    String status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
+    assertEquals( status, "Available" );
+
+    //Check button says "Install" and click it
+    String buttonMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
+    assertEquals( buttonMessage, "Install" );
+    this.elemHelper.Click( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
+
+    //Check popup text
+    String popupMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ) );
+    String expectedMessage = "You are about to install " + name + ". Do you want to proceed?";
+    assertEquals( popupMessage, expectedMessage );
+
+    //Click Ok
+    WebElement okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
+    assertNotNull( okButton );
+    okButton.click();
+
+    //wait for and assert popup message
+    if ( message.length() > 0 ) {
+      expectedMessage = message;
+    } else {
+      expectedMessage = "Plugin " + name + " installed successfully. You must restart your server for changes to take effect.";
+    }
+    this.elemHelper.WaitForTextPresence( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ), expectedMessage, 360 );
+    popupMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ) );
+    assertEquals( popupMessage, expectedMessage );
+
+    //Click Ok and assert dialog is gone
+    okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
+    assertNotNull( okButton );
+    okButton.click();
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@window-class='confirmationDialog']" ) );
+
+    //Assert plugin status is installed
+    status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
+    assertEquals( status, "Installed" );
+
+    //Assert button reads "Up to Date"
+    buttonMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
+    assertEquals( buttonMessage, "Up to Date" );
   }
 
   /**
-   * This method will check Uninstalling plugin works correctly
+   * This method will check Uninstalling plugin works correctly. It needs the plugin name and the success message in case it is not default.
+   * 
+   * This method must be called from the Marketplace page with the driver set to the marketplace.perspective
+   * 
+   * @param name
+   * @param message
    */
-  public void CheckUninstallPlugin() {
-    //TODO
+  public void CheckUninstallPlugin( String name, String message ) {
+    //assert plugin exists
+    WebElement plugin = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']" ) );
+    assertNotNull( plugin );
+
+    //assert it is installed
+    String status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
+    assertEquals( status, "Installed" );
+
+    //Open plugin details
+    plugin = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']" ) );
+    assertNotNull( plugin );
+    plugin.click();
+    this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div/div[2]/div/div[@class='pluginName ng-binding']" ) );
+
+    //assert Uninstall button is enabled and click it
+    WebElement uninstallButton = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button[2]" ) );
+    assertNotNull( uninstallButton );
+    uninstallButton.click();
+
+    //Check popup text
+    String popupMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ) );
+    String expectedMessage = "You are about to uninstall " + name + ". Do you want to proceed?";
+    assertEquals( popupMessage, expectedMessage );
+
+    //Click Ok
+    WebElement okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
+    assertNotNull( okButton );
+    okButton.click();
+
+    //wait for and assert popup message
+    if ( message.length() > 0 ) {
+      expectedMessage = message;
+    } else {
+      expectedMessage = "Plugin " + name + " uninstalled successfully. You must restart your server for changes to take effect.";
+    }
+    this.elemHelper.WaitForTextPresence( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ), expectedMessage, 360 );
+    popupMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ) );
+    assertEquals( popupMessage, expectedMessage );
+
+    //Click Ok and assert dialog is gone
+    okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
+    assertNotNull( okButton );
+    okButton.click();
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@window-class='confirmationDialog']" ) );
+
+    //assert uninstall button is disabled
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button[2]" ) );
+
+    //close popup
+    WebElement closeButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
+    assertNotNull( closeButton );
+    closeButton.click();
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
+
+    //Assert plugin status is installed
+    status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
+    assertEquals( status, "Available" );
+
+    //Assert button reads "Up to Date"
+    String buttonMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
+    assertEquals( buttonMessage, "Install" );
   }
 
   /**
