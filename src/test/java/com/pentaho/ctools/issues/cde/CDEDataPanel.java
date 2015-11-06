@@ -127,6 +127,8 @@ public class CDEDataPanel extends BaseTest {
     assertEquals( otherGroup, "initialized parent ui-state-active collapsed" );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[5]" ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]" ) ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[5]" ) ) );
 
     //Assert clicking right arrow expands groups    
     a.sendKeys( Keys.RIGHT ).sendKeys( Keys.UP ).sendKeys( Keys.RIGHT ).build().perform();
@@ -151,32 +153,35 @@ public class CDEDataPanel extends BaseTest {
     assertEquals( nameProperty, "initialized ui-state-active" );
 
     //Click enter to change following properties "Name"
-    a.sendKeys( Keys.ENTER ).sendKeys( "a" ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).build().perform();
+    a.sendKeys( Keys.ENTER ).sendKeys( "a" ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).build().perform();
 
     /*
      * ## Step 4
      */
     //Change "Parameter" and assert using down arrow to navigate is blocked
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[6]" ), "class", "initialized ui-state-active" );
-    String parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[6]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]" ), "class", "initialized ui-state-active" );
+    String parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
     a.sendKeys( Keys.ENTER ).build().perform();
     assertNotNull( this.elemHelper.FindElement( driver, By.id( "popup" ) ) );
     assertNotNull( this.elemHelper.FindElement( driver, By.id( "arg_0" ) ) );
     assertNotNull( this.elemHelper.FindElement( driver, By.id( "val_0" ) ) );
     a.sendKeys( Keys.TAB ).sendKeys( Keys.TAB ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.UP ).build().perform();
+
+    WebElement elemIntegerHighlight = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "ul#select2-results-1.select2-results li.select2-results-dept-0.select2-result.select2-result-selectable.select2-highlighted" ) );
+    assertNotNull( elemIntegerHighlight );
+
     WebElement closePopup = this.elemHelper.FindElement( driver, By.id( "popup_state0_buttonCancel" ) );
     assertNotNull( closePopup );
     closePopup.click();
-    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup" ) ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup" ), 3 ) );
 
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[6]" ), "class", "initialized ui-state-active" );
-    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[6]" ) ).getAttribute( "class" );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]" ), "class", "initialized ui-state-active" );
+    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[5]" ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
 
     //assert values are changed
     String nameValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr/td[2]" ) );
     assertEquals( nameValue, "a" );
-
   }
 }
