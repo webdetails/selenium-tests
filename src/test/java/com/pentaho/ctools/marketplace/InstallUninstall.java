@@ -31,6 +31,9 @@ import com.pentaho.selenium.BaseTest;
 public class InstallUninstall extends BaseTest {
   private final Logger log = LogManager.getLogger( InstallUninstall.class );
 
+  //BAServerService sc = new BAServerService( pentahoBaServerUrl, pentahoBaServerHostname, pentahoBaServerPort, pentahoBaServerServiceName );
+  //sc.Restart();
+
   /**
    * ############################### Test Case 1 ###############################
    *

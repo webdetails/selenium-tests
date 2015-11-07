@@ -53,6 +53,14 @@ public class BaseTest {
   // The pentaho's release version that tests are running against.
   // Possible values = "5.x" "6.x"
   protected static String pentahoReleaseVersion;
+  // The BA Server URL
+  protected static String pentahoBaServerUrl;
+  // The BA Server hostname
+  protected static String pentahoBaServerHostname;
+  // The BA Server port
+  protected static String pentahoBaServerPort;
+  // The BA Server service name (Windows only)
+  protected static String pentahoBaServerServiceName;
 
   // Log instance
   private final Logger log = LogManager.getLogger( BaseTest.class );
@@ -65,6 +73,10 @@ public class BaseTest {
     baseUrl = "http://localhost:8080/pentaho/";
     downloadDir = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
     pentahoReleaseVersion = System.getProperty( "pentaho.release.version" );
+    pentahoBaServerServiceName = System.getProperty( "pentaho.bi.server.service.name" );
+    pentahoBaServerUrl = System.getProperty( "pentaho.bi.server.url" );
+    pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
+    pentahoBaServerPort = System.getProperty( "pentaho.bi.server.port" );
 
     this.log.info( "pentaho.release.version::" + pentahoReleaseVersion );
 

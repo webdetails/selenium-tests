@@ -23,6 +23,7 @@ package com.pentaho.ctools.utils;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.NoSuchElementException;
@@ -38,11 +39,10 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.pentaho.ctools.cda.CDACacheManager;
 
 public class HttpUtils {
 
-  private static Logger LOG = LogManager.getLogger( CDACacheManager.class );
+  private static Logger LOG = LogManager.getLogger( HttpUtils.class );
 
   /**
    * This method shall return the status of HTTP request.
@@ -52,7 +52,7 @@ public class HttpUtils {
    * @throws Exception
    */
   public static int GetHttpStatus( String url ) {
-    int nHttpStatus = HttpStatus.SC_EXPECTATION_FAILED;
+    int nHttpStatus = HttpStatus.SC_BAD_REQUEST;
 
     try {
       URL oUrl = new URL( url );
@@ -140,5 +140,20 @@ public class HttpUtils {
       nResponseCode = fhscr.getStatusCode();
     }
     return nResponseCode;
+  }
+
+  /**
+   * The method check if a host is listening in the specified port.
+   * 
+   * @param host - Host name.
+   * @param port - Port
+   * @return - true is listening in the port, false otherwise.
+   */
+  public static boolean ServerListening( String host, int port ) {
+    try (Socket s = new Socket( host, port );) {
+      return true;
+    } catch ( Exception e ) {
+      return false;
+    }
   }
 }
