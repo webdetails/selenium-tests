@@ -63,7 +63,8 @@ public class CDAJsonScripting extends BaseTest {
    *    Json Scripting  datasource testing
    * Description:
    *    CDA-127 - How Json Scripting datasource handles invalid numbers (0/0)
-   *    CDA-130 - asserting that Json Scripting datasource accepts null values.
+   *    CDA-130 - Asserting that Json Scripting datasource accepts null values.
+   *    CDA-160 - Invalid values should return null instead "LibFormulaErrorValue{errorCode=503, errorMessage=Arithmetic Error}"
    *       
    * Steps:
    *    1. Open sample and select "Sample query on SteelWheelsSales" on the datasources
@@ -110,12 +111,12 @@ public class CDAJsonScripting extends BaseTest {
     String fourthColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr[3]/td[4]" ) );
     String fifthColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr[2]/td[5]" ) );
     String sixthColumn = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td[6]" ) );
-    assertEquals( "South", firstColumn );
-    assertEquals( "14", secondColumn );
-    assertEquals( "null", thirdColumn );
-    assertEquals( "null", fourthColumn );
-    assertEquals( "null", fifthColumn );
-    assertEquals( "LibFormulaErrorValue{errorCode=503, errorMessage=Arithmetic Error}", sixthColumn );
+    assertEquals( firstColumn, "South" );
+    assertEquals( secondColumn, "14" );
+    assertEquals( thirdColumn, "null" );
+    assertEquals( fourthColumn, "null" );
+    assertEquals( fifthColumn, "null" );
+    assertEquals( sixthColumn, "null" );
 
   }
 }
