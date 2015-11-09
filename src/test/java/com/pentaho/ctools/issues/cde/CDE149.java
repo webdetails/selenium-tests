@@ -66,7 +66,7 @@ public class CDE149 extends BaseTest {
    *
    * Steps:
    *    1. Assert elements on page and go to Datasources Panel
-   *    2. Add a Query element, go to it's poperties and click parameters
+   *    2. Add a Query element, go to it's properties and click parameters
    *    3. Assert parameter popup and buttons. Add 15 parameters
    *    4. Assert that last three parameter's fields do not intercept any of the buttons
    */
@@ -116,7 +116,7 @@ public class CDE149 extends BaseTest {
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@class='popup-add-row-button']" ) );
     assertNotNull( element );
-    for ( int i = 1; i < 16; i++ ) {
+    for ( int i = 1; i <= 16; i++ ) {
       this.elemHelper.Click( driver, By.xpath( "//button[@class='popup-add-row-button']" ) );
     }
 
