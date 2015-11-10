@@ -120,7 +120,8 @@ public class XmlaQuery extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Aqueries%3AXMLADiscover%3AxmlaDiscover.xcdf/generatedContent" );
 
     //Wait for loading to disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
 
     //Assert query results
     WebElement queryResult = this.elemHelper.FindElement( driver, By.id( "sampleObjectResult" ) );
@@ -143,7 +144,8 @@ public class XmlaQuery extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Aqueries%3AXMLA%3Axmla.xcdf/generatedContent" );
 
     //Wait for loading to disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Assert query results
     WebElement queryResult = this.elemHelper.FindElement( driver, By.id( "sampleObjectResult" ) );
