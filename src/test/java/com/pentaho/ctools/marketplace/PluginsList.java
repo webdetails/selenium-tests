@@ -22,6 +22,7 @@
 package com.pentaho.ctools.marketplace;
 
 import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertEquals;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -105,5 +106,7 @@ public class PluginsList extends BaseTest {
     assertTrue( market.PluginExists( "Portuguese (Brazilian variant) Language Pack Installer", "Oncase, Open Consulting, IT4biz" ) );
     assertTrue( market.PluginExists( "Portuguese (European variant) Language Pack Installer", "Xpand-IT" ) );
     assertTrue( market.PluginExists( "Spanish Language Pack Installer", "Domingo Lavin" ) );*/
+    int listSize = market.PluginListSize();
+    assertEquals( listSize, 52 );
   }
 }

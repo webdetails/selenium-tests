@@ -21,18 +21,28 @@
  ******************************************************************************/
 package com.pentaho.ctools.marketplace;
 
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertNull;
+import static org.testng.AssertJUnit.assertTrue;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import com.pentaho.ctools.utils.BAServerService;
+import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.gui.web.puc.LoginPage;
 import com.pentaho.gui.web.puc.MarketPlace;
 import com.pentaho.selenium.BaseTest;
 
 public class InstallUninstall extends BaseTest {
+  // Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
+  // Log instance
   private final Logger log = LogManager.getLogger( InstallUninstall.class );
-
-  //BAServerService sc = new BAServerService( pentahoBaServerUrl, pentahoBaServerHostname, pentahoBaServerPort, pentahoBaServerServiceName );
-  //sc.Restart();
 
   /**
    * ############################### Test Case 1 ###############################
@@ -44,6 +54,8 @@ public class InstallUninstall extends BaseTest {
    *
    * Steps:
    *    1. Check that CTE plugin is uninstalled and install it
+   *    2. Restart server
+   *    3. Assert plugin is installed
    */
   @Test
   public void tc1_MarketPlacePage_InstallPlugin() {
@@ -56,6 +68,22 @@ public class InstallUninstall extends BaseTest {
     market.GoToMarketPlace();
     market.CheckInstallPlugin( "Community Text Editor", "" );
 
+    /*
+     *  Step 2
+     */
+    BAServerService sc = new BAServerService( pentahoBaServerUrl, pentahoBaServerHostname, pentahoBaServerPort, pentahoBaServerServiceName );
+    sc.Restart();
+    LoginPage login = new LoginPage( driver );
+    login.Login( pentahoBaServerUsername, pentahoBaServerPassword );
+
+    /*
+     *  Step 3
+     */
+    market.GoToMarketPlace();
+    assertTrue( market.CheckIfPluginInstalled( "Community Text Editor" ) );
+    driver.get( baseUrl + "plugin/cte/api/edit?path=/public/plugin-samples/pentaho-cdf/template.html" );
+    WebElement pathSpan = this.elemHelper.FindElement( driver, By.cssSelector( "span#infoArea" ) );
+    assertNotNull( pathSpan );
   }
 
   /**
@@ -68,6 +96,8 @@ public class InstallUninstall extends BaseTest {
    *
    * Steps:
    *    1. Check that CTE plugin is installed and uninstall it
+   *    2. Restart server
+   *    3. Assert plugin is uninstalled
    */
   @Test
   public void tc2_MarketPlacePage_UnnstallPlugin() {
@@ -80,5 +110,21 @@ public class InstallUninstall extends BaseTest {
     market.GoToMarketPlace();
     market.CheckUninstallPlugin( "Community Text Editor", "" );
 
+    /*
+     *  Step 2
+     */
+    BAServerService sc = new BAServerService( pentahoBaServerUrl, pentahoBaServerHostname, pentahoBaServerPort, pentahoBaServerServiceName );
+    sc.Restart();
+    LoginPage login = new LoginPage( driver );
+    login.Login( pentahoBaServerUsername, pentahoBaServerPassword );
+
+    /*
+     *  Step 3
+     */
+    market.GoToMarketPlace();
+    assertFalse( market.CheckIfPluginInstalled( "Community Text Editor" ) );
+    driver.get( baseUrl + "plugin/cte/api/edit?path=/public/plugin-samples/pentaho-cdf/template.html" );
+    WebElement pathSpan = this.elemHelper.FindElement( driver, By.cssSelector( "span#infoArea" ) );
+    assertNull( pathSpan );
   }
 }

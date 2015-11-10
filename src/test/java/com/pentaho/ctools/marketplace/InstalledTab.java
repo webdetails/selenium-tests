@@ -21,6 +21,8 @@
  ******************************************************************************/
 package com.pentaho.ctools.marketplace;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
@@ -35,9 +37,9 @@ public class InstalledTab extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Asserting all Plugins from PluginList are available
+   *    Asserting Installed tab is filtering installed plugins correctly
    * Description:
-   *    This test will validate the presence of all plugins on the Marketplace plugin list
+   *    This test will validate the number of plugins and their installation status
    *
    * Steps:
    *    1. Check presence of plugins
@@ -53,5 +55,7 @@ public class InstalledTab extends BaseTest {
     market.GoToMarketPlace();
     market.CheckInstalledTab();
     market.CheckPluginListLayout();
+    int listSize = market.PluginListSize();
+    assertEquals( listSize, 6 );
   }
 }

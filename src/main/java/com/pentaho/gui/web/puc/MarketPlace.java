@@ -3,6 +3,7 @@ package com.pentaho.gui.web.puc;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertFalse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -326,40 +327,38 @@ public class MarketPlace {
             nTotal / 4,
             nTotal / 5 };
         for ( int i : pluginToTest ) {
-          WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div/div[@class='pluginName ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div/div[@class='pluginAuthor ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[2]/div[@data-ng-class='devStageClass']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[3]/div/div[@class='infoVersionStatusMessage ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[3]/div/div[@class='infoVersion ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[3]/button/span[@class='text ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[3]/button/span[@class='icon']" ) );
-          assertNotNull( element );
+          CheckIndividualPluginLayout( i );
         }
       } else {
         for ( int i = 1; i <= nTotal; i++ ) {
-          WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div/div[@class='pluginName ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div/div[@class='pluginAuthor ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[2]/div[@data-ng-class='devStageClass']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[3]/div/div[@class='infoVersionStatusMessage ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[3]/div/div[@class='infoVersion ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[3]/button/span[@class='text ng-binding']" ) );
-          assertNotNull( element );
-          element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[3]/button/span[@class='icon']" ) );
-          assertNotNull( element );
+          CheckIndividualPluginLayout( i );
         }
       }
     }
+  }
+
+  /**
+   * This method will check individual Plugin layout is as expected given the position of said plugin.
+   *
+   * It must be called from the Marketplace, with the driver set to marketplace.perspective.
+   * 
+   * @param position
+   */
+  public void CheckIndividualPluginLayout( int position ) {
+    WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + position + "]/div/div/div[@class='pluginName ng-binding']" ) );
+    assertNotNull( element );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + position + "]/div/div/div[@class='pluginAuthor ng-binding']" ) );
+    assertNotNull( element );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + position + "]/div/div[2]/div[@data-ng-class='devStageClass']" ) );
+    assertNotNull( element );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + position + "]/div/div[3]/div/div[@class='infoVersionStatusMessage ng-binding']" ) );
+    assertNotNull( element );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + position + "]/div/div[3]/div/div[@class='infoVersion ng-binding']" ) );
+    assertNotNull( element );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + position + "]/div/div[3]/button/span[@class='text ng-binding']" ) );
+    assertNotNull( element );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + position + "]/div/div[3]/button/span[@class='icon']" ) );
+    assertNotNull( element );
   }
 
   /**
@@ -492,6 +491,28 @@ public class MarketPlace {
   }
 
   /**
+   * This method will check if plugin is installed. It needs the plugin name.
+   * 
+   * This method must be called from the Marketplace page with the driver set to the marketplace.perspective
+   * 
+   * @param name
+   * @return installed
+   */
+  public boolean CheckIfPluginInstalled( String name ) {
+    boolean installed = false;
+    //assert plugin exists
+    WebElement plugin = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']" ) );
+    assertNotNull( plugin );
+
+    //check if is installed
+    String status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
+    if ( status == "Installed" ) {
+      installed = true;
+    }
+    return installed;
+  }
+
+  /**
    * This method will check Installing plugin works correctly. It needs the plugin name and the success message in case it is not default.
    * 
    * This method must be called from the Marketplace page with the driver set to the marketplace.perspective
@@ -505,8 +526,7 @@ public class MarketPlace {
     assertNotNull( plugin );
 
     //assert it is not installed
-    String status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
-    assertEquals( status, "Available" );
+    assertFalse( CheckIfPluginInstalled( name ) );
 
     //Check button says "Install" and click it
     String buttonMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
@@ -540,8 +560,7 @@ public class MarketPlace {
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@window-class='confirmationDialog']" ) );
 
     //Assert plugin status is installed
-    status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
-    assertEquals( status, "Installed" );
+    assertTrue( CheckIfPluginInstalled( name ) );
 
     //Assert button reads "Up to Date"
     buttonMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
@@ -562,8 +581,7 @@ public class MarketPlace {
     assertNotNull( plugin );
 
     //assert it is installed
-    String status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
-    assertEquals( status, "Installed" );
+    assertTrue( CheckIfPluginInstalled( name ) );
 
     //Open plugin details
     plugin = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']" ) );
@@ -612,8 +630,7 @@ public class MarketPlace {
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
 
     //Assert plugin status is installed
-    status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
-    assertEquals( status, "Available" );
+    assertFalse( CheckIfPluginInstalled( name ) );
 
     //Assert button reads "Up to Date"
     String buttonMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
@@ -630,5 +647,18 @@ public class MarketPlace {
     String text = element.getText();
     assertEquals( "Installed", text );
     element.click();
+  }
+
+  /**
+   * This method will return an integer representing the amount of plugins currently shown on the Marketplace, 
+   * it has to be called from the Marketplacepage with the driver set to marketplace.perspective.
+   *
+   *@return size
+   */
+  public int PluginListSize() {
+    int size = 0;
+    List<WebElement> allPlugins = this.driver.findElements( By.xpath( "//div[@class='filteredPluginsContainer ng-isolate-scope']/div/ul/li" ) );
+    size = allPlugins.size();
+    return size;
   }
 }
