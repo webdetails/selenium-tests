@@ -61,6 +61,10 @@ public class BaseTest {
   protected static String pentahoBaServerPort;
   // The BA Server service name (Windows only)
   protected static String pentahoBaServerServiceName;
+  // The BA Server username to use on tests
+  protected static String pentahoBaServerUsername = "admin";
+  // The BA Server password to use on tests
+  protected static String pentahoBaServerPassword = "password";
 
   // Log instance
   private final Logger log = LogManager.getLogger( BaseTest.class );

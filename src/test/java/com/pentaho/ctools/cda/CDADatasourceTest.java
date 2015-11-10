@@ -73,15 +73,9 @@ public class CDADatasourceTest extends BaseTest {
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    //Test Link CDA Documentation
-    String urlCdaDoc = this.elemHelper.FindElement( driver, By.linkText( "CDA Documentation" ) ).getAttribute( "href" );
-    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( urlCdaDoc ) );
-    //Blog Post
-    String urlBlogPost = this.elemHelper.FindElement( driver, By.linkText( "Blog Post" ) ).getAttribute( "href" );
-    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( urlBlogPost ) );
-    //PDFBrochure
-    String urlPdfBrochure = this.elemHelper.FindElement( driver, By.linkText( "PDF Brochure" ) ).getAttribute( "href" );
-    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( urlPdfBrochure ) );
+    //Test About
+    String urlAbout = this.elemHelper.FindElement( driver, By.linkText( "About" ) ).getAttribute( "href" );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetResponseCode( urlAbout, pentahoBaServerUsername, pentahoBaServerPassword ) );
 
     //sqk,jdbc
     String accessMethod1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='testTable']/tbody/tr[2]/td" ) );
@@ -160,7 +154,7 @@ public class CDADatasourceTest extends BaseTest {
     assertEquals( "cdafiles/mondrian-jndi.cda", sample5 );
     assertNotNull( element5 );
     assertEquals( "mondrian.jdbc (denormalized)", accessMethod6 );
-    assertEquals( "cdafiles/denormalized-mondrian-jndi.cda", sample6 );
+    assertEquals( "cdafiles/denormalized-mondrian-jdbc.cda", sample6 );
     assertNotNull( element6 );
     assertEquals( "mondrian.jndi (denormalized)", accessMethod7 );
     assertEquals( "cdafiles/denormalized-mondrian-jndi.cda", sample7 );

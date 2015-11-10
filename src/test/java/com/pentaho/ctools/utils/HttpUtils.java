@@ -52,6 +52,7 @@ public class HttpUtils {
    * @throws Exception
    */
   public static int GetHttpStatus( String url ) {
+    LOG.debug( "The URL: " + url );
     int nHttpStatus = HttpStatus.SC_BAD_REQUEST;
 
     try {
@@ -59,6 +60,7 @@ public class HttpUtils {
       URLConnection uc = oUrl.openConnection();
       uc.connect();
       nHttpStatus = ( (HttpURLConnection) uc ).getResponseCode();
+      LOG.debug( "HTTP Status:" + nHttpStatus );
     } catch ( Exception ex ) {
       LOG.error( ex.getMessage() );
     }
@@ -100,11 +102,13 @@ public class HttpUtils {
    * @return
    */
   public static int GetResponseCode( String url ) {
+    LOG.debug( "The URL: " + url );
     int nResponseCode = HttpStatus.SC_BAD_REQUEST;
 
     try {
       WebClient client = new WebClient();
       nResponseCode = client.getPage( url ).getWebResponse().getStatusCode();
+      LOG.debug( "HTTP Status:" + nResponseCode );
     } catch ( IOException ioe ) {
       LOG.error( "IOException" );
     } catch ( FailingHttpStatusCodeException fhscr ) {
@@ -125,6 +129,7 @@ public class HttpUtils {
    * @throws Exception
    */
   public static int GetResponseCode( String url, String username, String password ) {
+    LOG.debug( "The URL: " + url );
     int nResponseCode = HttpStatus.SC_BAD_REQUEST;
 
     try {
@@ -133,6 +138,7 @@ public class HttpUtils {
       final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) client.getCredentialsProvider();
       credentialsProvider.addCredentials( username, password );
       nResponseCode = client.getPage( url ).getWebResponse().getStatusCode();
+      LOG.debug( "HTTP Status:" + nResponseCode );
     } catch ( IOException ioe ) {
       LOG.error( "IOException" );
     } catch ( FailingHttpStatusCodeException fhscr ) {
