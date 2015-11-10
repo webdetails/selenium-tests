@@ -197,7 +197,7 @@ public class FilterVisualGuide extends BaseTest {
     assertNotNull( fiveSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@title='Five']/../div" ) );
     String limitMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@class='filter-root-notification']" ) );
-    assertEquals( limitMessage, "The selection limit ( 5 ) for specific items has been reached." );
+    assertEquals( limitMessage, "The selection limit (5) for specific items has been reached." );
 
     //Click one more element and assert not selected
     WebElement sixSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@title='Six']/../div" ) );
