@@ -43,6 +43,14 @@ public class InstallUninstall extends BaseTest {
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( InstallUninstall.class );
+  // The BA Server URL
+  protected static String pentahoBaServerUrl = "http://localhost:8080/pentaho/";
+  // The BA Server hostname
+  protected static String pentahoBaServerHostname = "localhost";
+  // The BA Server port
+  protected static String pentahoBaServerPort = "8080";
+  // The BA Server service name (Windows only)
+  protected static String pentahoBaServerServiceName = "pentahobaserver";
 
   /**
    * ############################### Test Case 1 ###############################
@@ -124,7 +132,7 @@ public class InstallUninstall extends BaseTest {
     market.GoToMarketPlace();
     assertFalse( market.CheckIfPluginInstalled( "Community Text Editor" ) );
     driver.get( baseUrl + "plugin/cte/api/edit?path=/public/plugin-samples/pentaho-cdf/template.html" );
-    WebElement pathSpan = this.elemHelper.FindElement( driver, By.cssSelector( "span#infoArea" ) );
+    WebElement pathSpan = this.elemHelper.FindElement( driver, By.cssSelector( "span#infoArea" ), 5 );
     assertNull( pathSpan );
   }
 }

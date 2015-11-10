@@ -52,7 +52,7 @@ public class LoginPage {
    *
    */
   private void GoToLoginPage() {
-    LOG.info( "Enter: GoToBrowseFiles" );
+    LOG.info( "Enter: Login" );
     this.DRIVER.get( PageUrl.PUC_LOGIN );
     //Wait for form display
     this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='login-form-container']/div/h1" ) );

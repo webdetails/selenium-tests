@@ -55,7 +55,7 @@ public class MarketPlace {
     this.driver.switchTo().frame( "marketplace.perspective.osgi" );
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "floatingBarsG" ) );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "floatingBarsG" ) );
-    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='filterBar clearfix']" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='filterBar clearfix']" ), 60 ) );
     assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='filteredPluginsContainer ng-isolate-scope']" ) ) );
     log.info( "Exit: Assert marketplace perspective shown" );
     log.info( "Exit: GoToMarketPlace" );
@@ -506,7 +506,7 @@ public class MarketPlace {
 
     //check if is installed
     String status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
-    if ( status == "Installed" ) {
+    if ( status.contains( "Installed" ) ) {
       installed = true;
     }
     return installed;
