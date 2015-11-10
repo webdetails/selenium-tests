@@ -47,7 +47,6 @@ import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
-import com.pentaho.selenium.ConfigurationSettings;
 
 /**
  * Testing the functionalities related with Mondrianjndi.
@@ -443,13 +442,8 @@ public class MondrianJNDI extends BaseTest {
      */
     driver.get( queryUrl );
     String jsonQueryActual = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "body" ) );
-    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
-      String jsonQueryExpected = "{\"metadata\":[{\"colName\":\"[Time].[(All)]\",\"colType\":\"String\",\"colIndex\":0},{\"colName\":\"Year\",\"colType\":\"String\",\"colIndex\":1},{\"colName\":\"price\",\"colType\":\"Numeric\",\"colIndex\":2},{\"colName\":\"PriceInK\",\"colType\":\"String\",\"colIndex\":3}],\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"queryInfo\":{\"totalRows\":\"3\"}}";
-      assertEquals( jsonQueryActual, jsonQueryExpected );
-    } else {
-      String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"Numeric\",\"colName\":\"PriceInK\"}]}";
-      assertEquals( jsonQueryActual, jsonQueryExpected );
-    }
+    String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"Numeric\",\"colName\":\"PriceInK\"}]}";
+    assertEquals( jsonQueryActual, jsonQueryExpected );
 
     driver.get( PageUrl.MONDRIAN_JNDI );
     String filename = this.elemHelper.WaitForTextPresence( driver, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );
