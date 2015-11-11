@@ -122,7 +122,7 @@ public class CDE412 extends BaseTest {
     title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='wizardDialog']//div[@class='popup-title-container']" ) );
     assertEquals( "MQL Editor", title );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//pre[@id='wizardEditor']/div[2]/div/div[3]/div" ) );
-    assertEquals( "<![CDATA[<?xml version=\"1.0\" encoding=\"UTF-8\"?>", text );
+    assertEquals( text, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" );
     this.elemHelper.Click( driver, By.id( "cdfdd-wizard-button-ok" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='table-cdfdd-datasources-datasourcesOperations']/a[4]" ) );
 
