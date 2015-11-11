@@ -16,6 +16,7 @@
 			<class name="com.pentaho.ctools.marketplace.MarketplaceFilters" />
 			<class name="com.pentaho.ctools.marketplace.InstalledTab" />
 			<class name="com.pentaho.ctools.marketplace.PluginDetailsPopup" />
+			<class name="com.pentaho.ctools.marketplace.InstallUninstall" />
 			<class name="com.pentaho.ctools.main.LogoutPentaho" />
 		</classes>
 	</test>
