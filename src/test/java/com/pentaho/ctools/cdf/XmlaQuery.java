@@ -121,7 +121,7 @@ public class XmlaQuery extends BaseTest {
 
     //Wait for loading to disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 120 );
 
     //Assert query results
     WebElement queryResult = this.elemHelper.FindElement( driver, By.id( "sampleObjectResult" ) );
