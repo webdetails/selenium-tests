@@ -55,75 +55,6 @@ public class ElementHelper {
   // Log instance
   private final Logger log = LogManager.getLogger( ElementHelper.class );
 
-  class RunnableGetText implements Runnable {
-
-    private WebDriver driver;
-    private Integer timeout;
-    private Integer pollingTime;
-    private By locator;
-
-    private String textToWait;
-    private Boolean textIsEquals;
-    private String currentTextPresent;
-
-    public RunnableGetText( WebDriver driver, Integer timeout, Integer pollingTime, By locator, String textToWait ) {
-      super();
-      this.driver = driver;
-      this.timeout = timeout;
-      this.pollingTime = pollingTime;
-      this.locator = locator;
-      this.textToWait = textToWait;
-    }
-
-    public Boolean isTextEquals() {
-      return this.textIsEquals;
-    }
-
-    public String getTextPresent() {
-      return this.currentTextPresent;
-    }
-
-    public void setTextPresent( String text ) {
-      this.currentTextPresent = text;
-    }
-
-    public By getLocator() {
-      return this.locator;
-    }
-
-    public String getTextToWait() {
-      return this.textToWait;
-    }
-
-    @Override
-    public void run() {
-      Wait<WebDriver> wait = new FluentWait<WebDriver>( this.driver ).withTimeout( this.timeout, TimeUnit.SECONDS ).pollingEvery( this.pollingTime, TimeUnit.MILLISECONDS );
-
-      // Wait for element visible
-      this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {
-
-        @Override
-        public Boolean apply( WebDriver d ) {
-          try {
-            List<WebElement> listElem = d.findElements( getLocator() );
-            if ( listElem.size() > 0 ) {
-              WebElement elem = listElem.get( 0 );
-              if ( elem.isEnabled() ) {
-                String text = elem.getText();
-                setTextPresent( text );
-                return getTextPresent().equals( getTextToWait() ); //If true we stop waiting for.
-              }
-              return false;
-            }
-            return false;
-          } catch ( StaleElementReferenceException sere ) {
-            return false;
-          }
-        }
-      } );
-    }
-  }
-
   /**
    * This method shall wait for the title and return it.
    * 
@@ -366,7 +297,7 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     String textPresent = "";
     ExecutorService executor = null;
-    RunnableGetText r = new RunnableGetText( driver, timeout, pollingTime, locator, textToWait );
+    RunnableWaitForText r = new RunnableWaitForText( driver, timeout, pollingTime, locator, textToWait );
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
@@ -379,6 +310,90 @@ public class ElementHelper {
         textPresent = r.getTextPresent();
         this.log.debug( "No text present. We only found this [" + textPresent + "]." );
       }
+    } catch ( InterruptedException ie ) {
+      this.log.warn( "Interrupted Exception" );
+      this.log.warn( ie.toString() );
+    } catch ( ExecutionException ee ) {
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
+        this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+        textPresent = r.getTextPresent();
+      } else {
+        this.log.warn( "Execution Exception" );
+        this.log.warn( ee.toString() );
+      }
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      this.log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      this.log.warn( cte.toString() );
+    } catch ( Exception e ) {
+      this.log.error( "Exception" );
+      this.log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
+    }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+    this.log.debug( "WaitForTextPresence::Exit" );
+    return textPresent;
+  }
+
+  /**
+   * This method wait for text to be present but should be different from empty 
+   * or null.
+   *
+   * @param driver
+   * @param locator
+   * @param text
+   * @return
+   */
+  public String WaitForTextDifferentEmpty( WebDriver driver, By locator ) {
+    this.log.debug( "WaitForTextDifferentEmpty(Main)::Enter" );
+    String str = WaitForTextDifferentEmpty( driver, locator, 10 );
+    this.log.debug( "WaitForTextDifferentEmpty(Main)::Exit" );
+    return str;
+  }
+
+  /**
+   * This method wait for text to be present but should be different from empty 
+   * or null.
+   *
+   * @param driver
+   * @param locator
+   * @param text
+   * @return
+   */
+  public String WaitForTextDifferentEmpty( WebDriver driver, By locator, Integer timeout ) {
+    this.log.debug( "WaitForTextDifferentEmpty(Main2)::Enter" );
+    String str = WaitForTextDifferentEmpty( driver, locator, timeout, 50 );
+    this.log.debug( "WaitForTextDifferentEmpty(Main2)::Exit" );
+    return str;
+  }
+
+  /**
+   * This method wait for text to be present but should be different from empty 
+   * or null.
+   *
+   * @param driver
+   * @param locator
+   * @param timeout - in seconds
+   * @param pollingTime
+   * @return
+   */
+  public String WaitForTextDifferentEmpty( final WebDriver driver, final By locator, final Integer timeout,
+      final Integer pollingTime ) {
+    this.log.debug( "WaitForTextDifferentEmpty::Enter" );
+    this.log.debug( "Locator: " + locator.toString() );
+    String textPresent = "";
+    ExecutorService executor = null;
+    RunnableWaitForTextDifferentEmpty r = new RunnableWaitForTextDifferentEmpty( driver, timeout, pollingTime, locator );
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+
+    try {
+      executor = Executors.newSingleThreadExecutor();
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
+      textPresent = r.getTextPresent();
     } catch ( InterruptedException ie ) {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );

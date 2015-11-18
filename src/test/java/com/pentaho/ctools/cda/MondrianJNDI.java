@@ -43,6 +43,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
@@ -441,9 +443,12 @@ public class MondrianJNDI extends BaseTest {
      * ## Step 2
      */
     driver.get( queryUrl );
-    String jsonQueryActual = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "body" ) );
+    String jsonQueryActual = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "body" ) );
     String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"Numeric\",\"colName\":\"PriceInK\"}]}";
-    assertEquals( jsonQueryActual, jsonQueryExpected );
+    JsonParser parser = new JsonParser();
+    JsonElement actual = parser.parse( jsonQueryActual );
+    JsonElement expected = parser.parse( jsonQueryExpected );
+    assertEquals( actual, expected );
 
     driver.get( PageUrl.MONDRIAN_JNDI );
     String filename = this.elemHelper.WaitForTextPresence( driver, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );

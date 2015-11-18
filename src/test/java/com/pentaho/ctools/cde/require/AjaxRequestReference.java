@@ -29,6 +29,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.selenium.BaseTest;
 
@@ -92,9 +94,11 @@ public class AjaxRequestReference extends BaseTest {
     String quote = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='DescriptionBody']/blockquote/pre" ) );
     assertEquals( "defaults: { ajaxRequestType: json, asyncCall: true }", quote );
     //Check result
-    String expectedText = "{\"queryInfo\":{\"totalRows\":\"19\"},\"resultset\":[[\"Car\",\"Red\",10],[\"Car\",\"Blue\",20],[\"Car\",\"Green\",30],[\"Car\",\"Yellow\",5],[\"Car\",\"Black\",25],[\"Car\",\"White\",7],[\"Bike\",\"Red\",20],[\"Bike\",\"Blue\",20],[\"Bike\",\"Green\",40],[\"Bike\",\"Yellow\",80],[\"Bike\",\"Black\",1],[\"Bike\",\"White\",23],[\"Ship\",\"Red\",2],[\"Ship\",\"Blue\",7],[\"Plane\",\"Red\",5],[\"Plane\",\"Blue\",4],[\"Train\",\"Red\",50],[\"Train\",\"Blue\",50],[\"Train\",\"Green\",7]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"series\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"category\"},{\"colIndex\":2,\"colType\":\"Integer\",\"colName\":\"value\"}]}";
-    String result = this.elemHelper.WaitForTextPresence( driver, By.id( "column1" ), expectedText );
-    assertEquals( expectedText, result );
+    String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"19\"},\"resultset\":[[\"Car\",\"Red\",10],[\"Car\",\"Blue\",20],[\"Car\",\"Green\",30],[\"Car\",\"Yellow\",5],[\"Car\",\"Black\",25],[\"Car\",\"White\",7],[\"Bike\",\"Red\",20],[\"Bike\",\"Blue\",20],[\"Bike\",\"Green\",40],[\"Bike\",\"Yellow\",80],[\"Bike\",\"Black\",1],[\"Bike\",\"White\",23],[\"Ship\",\"Red\",2],[\"Ship\",\"Blue\",7],[\"Plane\",\"Red\",5],[\"Plane\",\"Blue\",4],[\"Train\",\"Red\",50],[\"Train\",\"Blue\",50],[\"Train\",\"Green\",7]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"series\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"category\"},{\"colIndex\":2,\"colType\":\"Integer\",\"colName\":\"value\"}]}";
+    String jsonQueryActual = this.elemHelper.WaitForTextDifferentEmpty( driver, By.id( "column1" ) );
+    JsonParser parser = new JsonParser();
+    JsonElement actual = parser.parse( jsonQueryActual );
+    JsonElement expected = parser.parse( jsonQueryExpected );
+    assertEquals( actual, expected );
   }
-
 }
