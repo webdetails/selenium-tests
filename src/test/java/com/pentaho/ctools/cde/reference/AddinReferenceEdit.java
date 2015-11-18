@@ -22,6 +22,7 @@
 package com.pentaho.ctools.cde.reference;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -74,9 +75,10 @@ public class AddinReferenceEdit extends BaseTest {
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     // Wait for title
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='Title']/span" ) );
-    String fontSize18 = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='Title']/span" ), "style" );
-    assertEquals( "font-size: 18px;", fontSize18 );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='Title']/span" ), 2 );
+    String fontSize18Expected = "font-size: 18px;";
+    String fontSize18Actual = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='Title']/span" ), "style", 1 );
+    assertTrue( fontSize18Actual.equals( "" ) || fontSize18Actual.equals( fontSize18Expected ) );
 
     /*
      * ## Step 2
@@ -103,8 +105,7 @@ public class AddinReferenceEdit extends BaseTest {
     driver.get( PageUrl.ADDIN_REFERENCE_EDIT );
 
     //Expand first row - Title
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "span.expander" ) );
-    this.elemHelper.ClickJS( driver, By.cssSelector( "span.expander" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
     //Click in HTML to open the Properties
     Actions acts = new Actions( driver );
     acts.click( this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
@@ -113,8 +114,8 @@ public class AddinReferenceEdit extends BaseTest {
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
     //Write 34
     this.elemHelper.FindElement( driver, By.name( "value" ) ).clear();
-    this.elemHelper.ClickAndSendKeys( driver, By.xpath( "//form[@class='cdfddInput']/input" ), value );
-    this.elemHelper.FindElement( driver, By.xpath( "//form[@class='cdfddInput']/input" ) ).submit();
+    this.elemHelper.SendKeys( driver, By.name( "value" ), value );
+    this.elemHelper.FindElement( driver, By.name( "value" ) ).submit();
     this.bFontChanged = true;
     //Save the changes
     this.elemHelper.ClickJS( driver, By.linkText( "Save" ) );

@@ -770,10 +770,9 @@ public class ElementHelper {
 
       class RunnableObject implements Runnable {
 
-        private WebElement theElement;
+        private WebElement theElement = null;
 
-        public RunnableObject( WebElement theElement ) {
-          this.theElement = theElement;
+        public RunnableObject() {
         }
 
         public WebElement getValue() {
@@ -807,7 +806,7 @@ public class ElementHelper {
         }
       }
 
-      RunnableObject r = new RunnableObject( element );
+      RunnableObject r = new RunnableObject();
       executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
       element = r.getValue();
@@ -1095,7 +1094,35 @@ public class ElementHelper {
 
     String attributeValue = "";
     try {
-      WebElement element = FindElement( driver, locator );
+      WebElement element = WaitForElementPresenceAndVisible( driver, locator, 30 );
+      if ( element != null ) {
+        attributeValue = element.getAttribute( attributeName );
+      } else {
+        this.log.warn( "Element is null - could not get attribute value!" );
+      }
+    } catch ( StaleElementReferenceException e ) {
+      this.log.warn( "Stale Element Reference Exception" );
+      attributeValue = GetAttribute( driver, locator, attributeName );
+    }
+
+    this.log.debug( "GetAttribute::Exit" );
+    return attributeValue;
+  }
+
+  /**
+  *
+  *
+  * @param driver
+  * @param locator
+  * @param attributeName
+  * @return
+  */
+  public String GetAttribute( WebDriver driver, By locator, String attributeName, Integer timeout ) {
+    this.log.debug( "GetAttribute::Enter" );
+
+    String attributeValue = "";
+    try {
+      WebElement element = WaitForElementPresenceAndVisible( driver, locator, timeout );
       if ( element != null ) {
         attributeValue = element.getAttribute( attributeName );
       } else {
