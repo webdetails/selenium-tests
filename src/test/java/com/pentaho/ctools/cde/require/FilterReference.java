@@ -144,10 +144,10 @@ public class FilterReference extends BaseTest {
     WebElement selectThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Three']/../div" ) );
     assertNotNull( selectThree );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Three']/../div" ) );
-    WebElement cancelButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='filter-control-buttons']//button[contains(text(),'Cancel')]" ) );
+    WebElement cancelButton = this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Cancel')]" ) );
     assertNotNull( cancelButton );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@class='filter-control-buttons']//button[contains(text(),'Cancel')]" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='filter-control-buttons']//button[contains(text(),'Cancel')]" ) ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//button[contains(text(),'Cancel')]" ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//button[contains(text(),'Cancel')]" ) ) );
     String selectedMultiString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "None", selectedMultiString );
     String selectedMultiItem = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "txt_multiSelectionObj_group" ) );
@@ -173,10 +173,10 @@ public class FilterReference extends BaseTest {
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-three']/../div" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='One']/../div" ) ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Eight']/../div" ) ) );
-    WebElement applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-control-buttons']//button[contains(text(),'Apply')]" ) );
+    WebElement applyButton = this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@class='filter-control-buttons']//button[contains(text(),'Apply')]" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='filter-control-buttons']//button[contains(text(),'Apply')]" ) ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//button[contains(text(),'Apply')]" ) );
+    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//button[contains(text(),'Apply')]" ) ) );
 
     //Assert correct values selected
     selectedMultiString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
