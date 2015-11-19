@@ -111,7 +111,7 @@ public class VisualizationAPIComponent extends BaseTest {
      */
     // Render again the sample
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );

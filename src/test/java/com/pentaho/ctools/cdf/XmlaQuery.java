@@ -60,8 +60,8 @@ public class XmlaQuery extends BaseTest {
     driver.get( baseUrl );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 120 );
 
     //Open File menu and select Manage Data Sources
     WebElement fileMenu = this.elemHelper.FindElement( driver, By.id( "filemenu" ) );
@@ -144,7 +144,8 @@ public class XmlaQuery extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Aqueries%3AXMLA%3Axmla.xcdf/generatedContent" );
 
     //Wait for loading to disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 120 );
 
     //Assert query results
     WebElement queryResult = this.elemHelper.FindElement( driver, By.id( "sampleObjectResult" ) );
