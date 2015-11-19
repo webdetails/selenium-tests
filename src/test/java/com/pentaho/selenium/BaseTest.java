@@ -144,7 +144,7 @@ public class BaseTest {
 
     BaseTest.driver.manage().window().setPosition( new Point( 0, 0 ) );
     BaseTest.driver.manage().window().setSize( new Dimension( 1360, 764 ) );
-    BaseTest.driver.manage().timeouts().pageLoadTimeout( 120, TimeUnit.SECONDS );
+    BaseTest.driver.manage().timeouts().pageLoadTimeout( 180, TimeUnit.SECONDS );
     BaseTest.driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
     BaseTest.driver.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );
 
