@@ -62,6 +62,37 @@ public class ElementHelper {
    * @param title
    * @return
    */
+  public void Get( final WebDriver driver, final String url ) {
+    this.log.debug( "Get(Main)::Enter" );
+
+    driver.get( url );
+
+    String complete = "complete";
+    String state = ( (JavascriptExecutor) driver ).executeScript( "return document.readyState" ).toString();
+    this.log.info( "Page state: " + state );
+    for ( int i = 0; i < 20; i++ )
+      if ( !state.equalsIgnoreCase( complete ) ) {
+        try {
+          Thread.sleep( 500 );
+        } catch ( InterruptedException e ) {
+          e.printStackTrace();
+        }
+        state = ( (JavascriptExecutor) driver ).executeScript( "return document.readyState" ).toString();
+        this.log.info( "Page state: " + state );
+      } else {
+        break;
+      }
+
+    this.log.debug( "Get(Main)::Exit" );
+  }
+
+  /**
+   * This method shall wait for the title and return it.
+   * 
+   * @param driver
+   * @param title
+   * @return
+   */
   public String WaitForTitle( final WebDriver driver, final String title ) {
     this.log.debug( "WaitForTitle(Main)::Enter" );
     String returnTitle = this.WaitForTitle( driver, title, 30, 150 );

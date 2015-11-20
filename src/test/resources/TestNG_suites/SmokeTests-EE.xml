@@ -42,7 +42,7 @@
 			<class name="com.pentaho.ctools.cdf.TrafficComponent" />
 			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" />
 			<class name="com.pentaho.ctools.cdf.XactionComponent" />
-			<class name="com.pentaho.ctools.cdf.XmlaQuery" />
+			<class name="com.pentaho.ctools.cdf.samples.Xmla" />
 			<!-- CDE -->
 			<class name="com.pentaho.ctools.cde.SampleDashboard" />
 			<class name="com.pentaho.ctools.cde.reference.AddinReference" />
@@ -100,7 +100,7 @@
 			<class name="com.pentaho.ctools.cdf.require.TrafficComponent" />
 			<class name="com.pentaho.ctools.cdf.require.VisualizationAPIComponent" />
 			<class name="com.pentaho.ctools.cdf.require.XactionComponent" />
-			<class name="com.pentaho.ctools.cdf.require.XmlaQuery" />
+			<class name="com.pentaho.ctools.cdf.require.samples.Xmla" />
 			<!-- CDE-RequireJS -->
 			<class name="com.pentaho.ctools.cde.require.SampleDashboard" />
 			<class name="com.pentaho.ctools.cde.require.AddinReference" />

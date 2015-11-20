@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package com.pentaho.ctools.cdf;
+package com.pentaho.ctools.cdf.samples;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -32,6 +32,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -41,11 +42,11 @@ import com.pentaho.selenium.BaseTest;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-public class XmlaQuery extends BaseTest {
+public class Xmla extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private final Logger log = LogManager.getLogger( XmlaQuery.class );
+  private final Logger log = LogManager.getLogger( Xmla.class );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -57,11 +58,15 @@ public class XmlaQuery extends BaseTest {
   public void tc1_XmlaQuery_SampleResults() {
     this.log.info( "tc1_XmlaQuery_SampleResults" );
     //To set up this test we must enable xmla for SteelWheels datasource
-    driver.get( baseUrl );
+    this.elemHelper.Get( driver, PageUrl.PUC );
 
-    // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 120 );
+    // NOTE
+    //wait for visibility of waiting pop-up
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ), 20 );
+    this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ) );
+    //Wait to load the new page
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//iframe[@id='home.perspective']" ) );
 
     //Open File menu and select Manage Data Sources
     WebElement fileMenu = this.elemHelper.FindElement( driver, By.id( "filemenu" ) );
@@ -117,11 +122,11 @@ public class XmlaQuery extends BaseTest {
     this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='pentaho-dialog']" ) );
 
     //Open first sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Aqueries%3AXMLADiscover%3AxmlaDiscover.xcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.XMLA_DISCOVER );
 
     //Wait for loading to disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 120 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 240 );
 
     //Assert query results
     WebElement queryResult = this.elemHelper.FindElement( driver, By.id( "sampleObjectResult" ) );
@@ -141,7 +146,7 @@ public class XmlaQuery extends BaseTest {
   public void tc2_XmlaQuery_SecondSampleResults() {
     this.log.info( "tc2_XmlaQuery_SecondSampleResults" );
     //Open the second Xmla sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Aqueries%3AXMLA%3Axmla.xcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.XMLA_QUERY );
 
     //Wait for loading to disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
