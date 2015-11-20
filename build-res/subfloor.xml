@@ -320,18 +320,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<property name="pentaho.plugin.cdf.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf" />
 		<property name="pentaho.plugin.cde.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf-dd" />
 		<property name="pentaho.plugin.sparkl.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/sparkl" />
-		<property name="pentaho.plugin.marketplace.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/marketplace" />
-		<!-- Delete default-content in BA Server -->
+		<!-- Delete CGG, CDA, CDF, CDE, SPARKL at default-content in BA Server -->
 		<delete>
 			<fileset dir="${pentaho.default.content.dir}" includes="**/*" />
 		</delete>
-		<!-- Delete CGG, CDA, CDF, CDE, SPARKL, MARKETPLACE at system in BA Server -->
+		<!-- Delete CGG, CDA, CDF, CDE, SPARKL at system in BA Server -->
 		<delete dir="${pentaho.plugin.cgg.dir}" />
 		<delete dir="${pentaho.plugin.cda.dir}" />
 		<delete dir="${pentaho.plugin.cdf.dir}" />
 		<delete dir="${pentaho.plugin.cde.dir}" />
 		<delete dir="${pentaho.plugin.sparkl.dir}" />
-		<delete dir="${pentaho.plugin.marketplace.dir}" />
 
 		<!-- Unzip the ctools -->
 		<unzip src="${lib.ext.dir}/plugin/cgg.zip" dest="${tmp.dir}" />
@@ -339,7 +337,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<unzip src="${lib.ext.dir}/plugin/pentaho-cdf.zip" dest="${tmp.dir}" />
 		<unzip src="${lib.ext.dir}/plugin/pentaho-cdf-dd.zip" dest="${tmp.dir}" />
 		<unzip src="${lib.ext.dir}/plugin/sparkl.zip" dest="${tmp.dir}" />
-		<unzip src="${lib.ext.dir}/plugin/marketplace.zip" dest="${tmp.dir}" />
 		<!-- unzip the samples -->
 		<!-- 
           1- Create a directory with name 'public'
@@ -360,7 +357,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			<zipfileset dir="${tmp.dir}/public" prefix="public" />
 		</zip>
 
-		<!-- Copy the CTools and SPARKL and MARKETPLACE -->
+		<!-- Copy the CTools and sparkl -->
 		<copy todir="${pentaho.plugin.cgg.dir}">
 			<fileset dir="${tmp.dir}/cgg" />
 		</copy>
@@ -376,10 +373,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<copy todir="${pentaho.plugin.sparkl.dir}">
 			<fileset dir="${tmp.dir}/sparkl" />
 		</copy>
-		<copy todir="${pentaho.plugin.marketplace.dir}">
-			<fileset dir="${tmp.dir}/marketplace" />
-		</copy>
-
 		<copy file="${tmp.dir}/plugin-samples.zip" todir="${pentaho.default.content.dir}" />
 		<!-- copy all issues to default content -->
 		<copy file="${resources.dir}/Issues/public.zip" todir="${pentaho.default.content.dir}" />
