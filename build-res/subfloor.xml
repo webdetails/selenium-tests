@@ -310,7 +310,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
          Copy the CTools, samples and other resources to Pentaho server.
          ====================================================================-->
-	<target name="copy-ctools-and-other-resources" depends="delete-sparkl-plugins">
+	<target name="copy-ctools-and-other-resources" depends="delete-sparkl-plugins, set-up-marketplace">
 		<echo message="Starting copy CTools and other resources." />
 
 		<!-- Delete CTools on server -->
@@ -389,12 +389,31 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 				<include name="**/*" />
 			</fileset>
 		</copy>
+	</target>
 
+
+	<!--=======================================================================
+	    Preparing marketplace to be tested.
+	    So, what we need to do:
+	    1. remove the follwing directories:
+	       - system\marketplace
+	       - system\karaf\data
+	       - system\karaf\data1
+	       - system\karaf\deploy\pentaho-marketplace.kar
+	    2. copy the file "pentaho-marketplace.kar":
+	       - from ${lib.ext.dir} to system\karaf\deploy\ 
+	    =======================================================================-->
+	<target name="set-up-marketplace">
+		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/marketplace" />
+		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/karaf/data" />
+		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/karaf/data1" />
+		<delete file="${pentaho.bi.server.dir}/pentaho-solutions/system/karaf/deploy/pentaho-marketplace.kar" />
+		<copy file="${lib.ext.dir}/plugin/pentaho-marketplace.kar" todir="${pentaho.bi.server.dir}/pentaho-solutions/system/karaf/deploy/" overwrite="true" />
 	</target>
 
 	<!--=======================================================================
-        Will delete plugins sparkls that could be left in ba server by an error.
-        ====================================================================-->
+      Will delete plugins sparkls that could be left in ba server by an error.
+      =======================================================================-->
 	<target name="delete-sparkl-plugins">
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest" />
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest1" />
@@ -403,8 +422,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 	<!--=======================================================================
-	       Stop BI Server CE
-	       ====================================================================-->
+	    Stop BI Server CE
+	    =======================================================================-->
 	<target name="stop-pentaho-bi-ce">
 		<!-- stop bi server ce -->
 		<antcall target="stop-pentaho-bi-server" />
@@ -412,8 +431,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	</target>
 
 	<!--=======================================================================
-	       Start BI Server CE
-	       ====================================================================-->
+	    Start BI Server CE
+	    =======================================================================-->
 	<target name="start-pentaho-bi-ce" depends="stop-pentaho-bi-ce">
 		<!-- start bi server ce -->
 		<antcall target="start-pentaho-bi-server" />

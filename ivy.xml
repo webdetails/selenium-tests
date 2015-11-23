@@ -42,7 +42,7 @@
         <!--
             Marketplace
         -->
-        <dependency org="pentaho" name="marketplace" rev="${dependency.pentaho-marketplace-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
+        <dependency org="org.pentaho" name="pentaho-marketplace" rev="${dependency.pentaho-marketplace-plugin.revision}" changing="true" transitive="false" conf="plugin->default">
             <artifact name="pentaho-marketplace" type="kar"/><!-- download the zip file, not the jar -->
         </dependency>
         
