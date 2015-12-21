@@ -231,27 +231,19 @@ public class FilterAddinAccordion extends BaseTest {
     assertNotNull( optionMultiContainer );
 
     //Select 4 options, click Apply and assert filter closed and strings correct
-    filterSearch = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ) );
-    assertNotNull( filterSearch );
-    filterSearch.sendKeys( "twelve" );
+    this.elemHelper.ClearAndSendKeys( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ), "twelve" );
     WebElement twelveSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twelve']/../div" ) );
     assertNotNull( twelveSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twelve']/../div" ) );
-    filterSearch = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ) );
-    assertNotNull( filterSearch );
-    filterSearch.sendKeys( "twenty" );
+    this.elemHelper.ClearAndSendKeys( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ), "twenty" );
     WebElement twentyFiveSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-five']/../div" ) );
     assertNotNull( twentyFiveSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-five']/../div" ) );
-    filterSearch = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ) );
-    assertNotNull( filterSearch );
-    filterSearch.sendKeys( "six" );
+    this.elemHelper.ClearAndSendKeys( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ), "six" );
     WebElement sixSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Six']/../div" ) );
     assertNotNull( sixSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Six']/../div" ) );
-    filterSearch = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ) );
-    assertNotNull( filterSearch );
-    filterSearch.sendKeys( "eighteen" );
+    this.elemHelper.ClearAndSendKeys( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ), "eighteen" );
     WebElement eighteenSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Eighteen']/../div" ) );
     assertNotNull( eighteenSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Eighteen']/../div" ) );
