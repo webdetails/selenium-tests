@@ -59,8 +59,7 @@ public class ElementHelper {
    * This method shall wait for the title and return it.
    * 
    * @param driver
-   * @param title
-   * @return
+   * @param url - URL to access
    */
   public void Get( final WebDriver driver, final String url ) {
     this.log.debug( "Get(Main)::Enter" );
@@ -69,8 +68,8 @@ public class ElementHelper {
 
     String complete = "complete";
     String state = ( (JavascriptExecutor) driver ).executeScript( "return document.readyState" ).toString();
-    this.log.info( "Page state: " + state );
-    for ( int i = 0; i < 20; i++ )
+    this.log.debug( "Page state: " + state );
+    for ( int i = 0; i < 20; i++ ) {
       if ( !state.equalsIgnoreCase( complete ) ) {
         try {
           Thread.sleep( 500 );
@@ -78,10 +77,11 @@ public class ElementHelper {
           e.printStackTrace();
         }
         state = ( (JavascriptExecutor) driver ).executeScript( "return document.readyState" ).toString();
-        this.log.info( "Page state: " + state );
+        this.log.debug( "Page state: " + state );
       } else {
         break;
       }
+    }
 
     this.log.debug( "Get(Main)::Exit" );
   }

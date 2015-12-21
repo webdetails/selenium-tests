@@ -55,8 +55,8 @@ public class Xmla extends BaseTest {
    *    Assert query results for XMLA first sample
    */
   @Test
-  public void tc1_XmlaQuery_SampleResults() {
-    this.log.info( "tc1_XmlaQuery_SampleResults" );
+  public void tc1_XmlaQueryEnable_CheckForEnable() {
+    this.log.info( "tc1_XmlaQueryEnable_CheckForEnable" );
     //To set up this test we must enable xmla for SteelWheels datasource
     this.elemHelper.Get( driver, PageUrl.PUC );
 
@@ -90,42 +90,56 @@ public class Xmla extends BaseTest {
     editButton.click();
 
     //On new popup select "Manual enter" and set Enable Xmla as true
-    WebElement editPopup = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog'][2]" ) );
-    assertNotNull( editPopup );
-    WebElement manualButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog'][2]//table[@id='manualRadio']//input" ) );
+    WebElement manualButton = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='manualRadio']//input" ) );
     assertNotNull( manualButton );
     manualButton.click();
-    WebElement enableXmla = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog'][2]//div[@id='analysisPreferencesDeck']//div[contains(text(),'EnableXmla')]" ) );
-    assertNotNull( enableXmla );
-    enableXmla.click();
-    WebElement editXmla = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog'][2]//div[@id='editutton']/img" ) );
-    assertNotNull( editXmla );
-    editXmla.click();
-    WebElement editXmlaInput = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog'][3]//input[@id='paramValueTextBox']" ) );
-    assertNotNull( editXmlaInput );
-    editXmlaInput.clear();
-    editXmlaInput.sendKeys( "true" );
-    WebElement okButton = this.elemHelper.FindElement( driver, By.id( "analysisParametersDialog_accept" ) );
-    assertNotNull( okButton );
-    okButton.click();
-    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='pentaho-dialog'][3]" ) );
-    String setAsTrue = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog'][2]//div[@id='analysisPreferencesDeck']//div[contains(text(),'EnableXmla')]/../../td[2]/div" ) ).getText();
-    assertEquals( setAsTrue, "true" );
-    WebElement saveButton = this.elemHelper.FindElementInvisible( driver, By.xpath( "//div[@class='pentaho-dialog'][2]//button[@id='importDialog_accept']" ) );
-    assertNotNull( saveButton );
-    this.elemHelper.ClickElementInvisible( driver, By.xpath( "//div[@class='pentaho-dialog'][2]//button[@id='importDialog_accept']" ) );
-    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='pentaho-dialog'][2]" ) );
-    WebElement closeButton = this.elemHelper.FindElement( driver, By.id( "datasourceAdminDialog_cancel" ) );
-    assertNotNull( closeButton );
-    closeButton.click();
-    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='pentaho-dialog']" ) );
+    //Check if is already "TRUE"
+    String setAsTrue = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='analysisParametersTree']//div[2]//tr[3]/td[2]" ) ).getText();
+    if ( setAsTrue.equalsIgnoreCase( "true" ) ) {
+      assertEquals( setAsTrue, "true" );
+    } else {
+      WebElement enableXmla = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='analysisPreferencesDeck']//div[contains(text(),'EnableXmla')]" ) );
+      assertNotNull( enableXmla );
+      enableXmla.click();
+      WebElement editXmla = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='editutton']/img" ) );
+      assertNotNull( editXmla );
+      editXmla.click();
+      WebElement editXmlaInput = this.elemHelper.FindElement( driver, By.id( "paramValueTextBox" ) );
+      assertNotNull( editXmlaInput );
+      editXmlaInput.clear();
+      editXmlaInput.sendKeys( "true" );
+      WebElement okButton = this.elemHelper.FindElement( driver, By.id( "analysisParametersDialog_accept" ) );
+      assertNotNull( okButton );
+      okButton.click();
+      this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='pentaho-dialog'][3]" ) );
+      setAsTrue = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='analysisParametersTree']//div[2]//tr[3]/td[2]" ) ).getText();
+      assertEquals( setAsTrue, "true" );
+      WebElement saveButton = this.elemHelper.FindElementInvisible( driver, By.id( "importDialog_accept" ) );
+      assertNotNull( saveButton );
+      this.elemHelper.ClickElementInvisible( driver, By.id( "importDialog_accept" ) );
+      this.elemHelper.WaitForElementNotPresent( driver, By.id( "importDialog_accept" ) );
+      WebElement closeButton = this.elemHelper.FindElement( driver, By.id( "datasourceAdminDialog_cancel" ) );
+      assertNotNull( closeButton );
+      closeButton.click();
+      this.elemHelper.WaitForElementNotPresent( driver, By.id( "datasourceAdminDialog_cancel" ) );
+    }
+  }
 
+  /**
+   * ############################### Test Case 2 ###############################
+   *
+   * Test Case Name:
+   *    Assert query results for XMLA Discover
+   */
+  @Test
+  public void tc2_XmlaDiscover_GetSampleResults() {
+    this.log.info( "tc2_XmlaDiscover_GetSampleResults" );
     //Open first sample
     this.elemHelper.Get( driver, PageUrl.XMLA_DISCOVER_REQUIRE );
 
     //Wait for loading to disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 120 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 300 );
 
     //Assert query results
     WebElement queryResult = this.elemHelper.FindElement( driver, By.id( "sampleObjectResult" ) );
@@ -136,14 +150,14 @@ public class Xmla extends BaseTest {
   }
 
   /**
-   * ############################### Test Case 2 ###############################
+   * ############################### Test Case 3 ###############################
    *
    * Test Case Name:
-   *    Assert query results for XMLA second sample
+   *    Assert query results for XMLA Query
    */
   @Test
-  public void tc2_XmlaQuery_SecondSampleResults() {
-    this.log.info( "tc2_XmlaQuery_SecondSampleResults" );
+  public void tc3_XmlaQuery_GetSampleResults() {
+    this.log.info( "tc3_XmlaQuery_GetSampleResults" );
     //Open the second Xmla sample
     this.elemHelper.Get( driver, PageUrl.XMLA_QUERY_REQUIRE );
 
