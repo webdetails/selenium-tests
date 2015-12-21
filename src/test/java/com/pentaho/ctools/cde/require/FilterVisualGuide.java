@@ -87,7 +87,7 @@ public class FilterVisualGuide extends BaseTest {
     WebElement multiGroupFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "multiFilterObj_group" ) );
     WebElement singleExpandedFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "singleFilterObj_expanded" ) );
     WebElement multiExpandedFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "multiFilterObj_expanded" ) );
-    WebElement singlePaginatedFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "singleFilterObj_simple_paginated" ) );
+    WebElement singlePaginatedFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "singleFilterObj_simple_paginated" ), 60 );
     WebElement multiPaginatedFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "multiFilterObj_simple_paginated" ) );
     WebElement singleAddinFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "singleFilterObj_addIn" ) );
     WebElement singleNoDataFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "singleFilterObj_noData" ) );
