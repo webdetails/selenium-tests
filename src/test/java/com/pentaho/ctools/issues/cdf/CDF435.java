@@ -98,9 +98,7 @@ public class CDF435 extends BaseTest {
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='promptPanel']//button" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='promptPanel']//button/span" ) );
-    assertNotNull( element );
-    String buttonText = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//div[@id='promptPanel']//button/span" ) );
+    String buttonText = this.elemHelper.WaitForElementPresentGetText( frame, By.xpath( "//div[@id='promptPanel']//button" ) );
     assertEquals( "View Report", buttonText );
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//input[@value='[Time].[2003]']" ) );
     assertNotNull( element );
@@ -155,9 +153,9 @@ public class CDF435 extends BaseTest {
     elementFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe[@name='report_prptFrame']" ) );
     frame = driver.switchTo().frame( elementFrame );
 
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='promptPanel']//button/span" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='promptPanel']//button" ) );
     assertNotNull( element );
-    buttonText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='promptPanel']//button/span" ) );
+    buttonText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='promptPanel']//button" ) );
     assertEquals( "View Report", buttonText );
     element = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//input[@value='[Time].[2004]']" ) );
     assertNotNull( element );
