@@ -107,13 +107,13 @@ public class CDF149 extends BaseTest {
      * ## Step 2
      */
     //Click Advanced Properties
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.advancedProperties.propertiesUnSelected" ) );
     assertNotNull( element );
     element.click();
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[@title='Priority for component execution component. Lower values have higher priority']" ) );
     assertNotNull( element );
-    text = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class" );
-    assertEquals( "advancedProperties propertiesSelected", text );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.advancedProperties.propertiesSelected" ) );
+    assertNotNull( element );
 
     //Find Values Normalized property and set it's value to True
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']//td[text()='valuesNormalized']" ) );
