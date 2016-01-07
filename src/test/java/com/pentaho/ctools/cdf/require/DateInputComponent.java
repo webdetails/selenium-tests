@@ -70,8 +70,8 @@ public class DateInputComponent extends BaseTest {
     driver.get( PageUrl.DATEINPUT_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Wait for visibility of 'DateInputComponent'
     this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
@@ -86,8 +86,8 @@ public class DateInputComponent extends BaseTest {
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 

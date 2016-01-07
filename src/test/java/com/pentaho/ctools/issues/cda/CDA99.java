@@ -211,7 +211,7 @@ public class CDA99 extends BaseTest {
       Select select = new Select( selector );
       select.selectByIndex( 1 );
       // NOTE - we have to wait for loading disappear
-      this.elemHelper.WaitForElementInvisibility( previewWindow, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+      this.elemHelper.WaitForElementInvisibility( previewWindow, By.cssSelector( "div.blockUI.blockOverlay" ) );
       // Get value of status
       String value = this.elemHelper.GetInputValue( previewWindow, By.id( "status" ) );
       assertEquals( "In Process", value );

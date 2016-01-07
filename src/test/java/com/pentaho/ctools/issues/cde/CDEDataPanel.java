@@ -81,7 +81,7 @@ public class CDEDataPanel extends BaseTest {
      */
     //Open CDE sample in edit mode
     driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Go to Components Panel
     this.elemHelper.Click( driver, By.xpath( "//div[@title='Datasources Panel']/a" ) );

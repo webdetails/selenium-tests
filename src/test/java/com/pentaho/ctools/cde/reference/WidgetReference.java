@@ -55,7 +55,7 @@ public class WidgetReference extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Awidgets.wcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -121,21 +121,21 @@ public class WidgetReference extends BaseTest {
     //>Select 2003
     select.selectByValue( "2003" );
     //wait for loading bar disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     WebElement rect = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]" ) );
     this.log.info( rect.getAttribute( "height" ) );
     assertEquals( "185.54946181445413", rect.getAttribute( "height" ) ); //185.54946181445413
     //>Select 2004
     select.selectByValue( "2004" );
     //wait for loading bar disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     rect = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]" ) );
     this.log.info( rect.getAttribute( "height" ) );
     assertEquals( "122.4067513368984", rect.getAttribute( "height" ) ); //122.4067513368984
     //>Select 2005
     select.selectByValue( "2005" );
     //wait for loading bar disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     rect = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='widgetSample_chartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]//*[local-name()='rect'][4]" ) );
     this.log.info( rect.getAttribute( "height" ) );
     assertEquals( "133.12012705746463", rect.getAttribute( "height" ) ); //133.12012705746463

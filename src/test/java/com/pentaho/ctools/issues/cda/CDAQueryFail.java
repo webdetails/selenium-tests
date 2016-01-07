@@ -95,8 +95,8 @@ public class CDAQueryFail extends BaseTest {
     select.selectByVisibleText( "Sql Query on SampleData - Jndi" );
 
     //wait to render page
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.FindElement( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Assert error message
     String errorMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "span.error-status" ) );
@@ -117,7 +117,7 @@ public class CDAQueryFail extends BaseTest {
      * ## Step 3
      */
     //wait to render page
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Assert elements on page
     WebElement cacheButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );

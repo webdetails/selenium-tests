@@ -72,7 +72,7 @@ public class DuplicateComponent extends BaseTest {
     driver.get( PageUrl.DUPLICATE_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Get Title of sample
     String title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='content']/div/div[2]/div" ) );

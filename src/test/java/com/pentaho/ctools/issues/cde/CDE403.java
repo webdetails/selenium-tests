@@ -77,7 +77,7 @@ public class CDE403 extends BaseTest {
 
     //Go to New CDE Dashboard
     driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     /*
      * ## Step 1
      */

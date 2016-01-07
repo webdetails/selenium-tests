@@ -88,7 +88,7 @@ public class TableComponent extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ATableExpandTest%3AtableExpandTest.wcdf/generatedContent" );
 
     //Wait for loading to finish
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //search for "Mot" and assert shown result
     WebElement searchInput = this.elemHelper.FindElement( driver, By.xpath( "//input[@type='search']" ) );
@@ -143,7 +143,7 @@ public class TableComponent extends BaseTest {
     refreshButton.click();
 
     //Wait for loading to finish
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Click first row and assert expansion was successful
     firstRow = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );

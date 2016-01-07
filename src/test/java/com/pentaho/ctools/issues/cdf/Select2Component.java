@@ -75,7 +75,7 @@ public class Select2Component extends BaseTest {
      */
     //Open Created sample and click button
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-474%3ACDF-474.wcdf/generatedContent" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
 
     //Click first dropdown
     WebElement selectExpander = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='s2id_autogen1']/a/span[2]/b" ) );

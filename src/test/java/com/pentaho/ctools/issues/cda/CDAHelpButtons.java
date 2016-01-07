@@ -88,8 +88,8 @@ public class CDAHelpButtons extends BaseTest {
     assertNotNull( element );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "1" );
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.FindElement( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='cachethis']" ) );
@@ -98,7 +98,7 @@ public class CDAHelpButtons extends BaseTest {
     assertNotNull( element );
 
     //wait to render page
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresence( driver, By.id( "outputIndexId" ) );
     this.elemHelper.FindElement( driver, By.id( "outputIndexId" ) ).click();
     this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );

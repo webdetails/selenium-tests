@@ -114,7 +114,7 @@ public class ExportPopupComponent extends BaseTest {
     driver.get( PageUrl.EXPORT_POPUP_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Get Title of sample
     String title = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "Title" ) );

@@ -334,7 +334,7 @@ public class MapComponentReference extends BaseTest {
 
     //## Step2
     mapEngine.selectByValue( "google" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='testTileServices']/div[@class='gm-style']" ) ) );
     //Image with Google (left down corner)
     assertNotNull( driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
@@ -351,7 +351,7 @@ public class MapComponentReference extends BaseTest {
 
     //## Step3
     mapService.selectByValue( "mapbox-world-dark" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     wait.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ), "mapquest-sat" ) );
     //Image with Google (left down corner)
     assertNotNull( driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
@@ -401,21 +401,21 @@ public class MapComponentReference extends BaseTest {
     //Open Marker 1
     marker1.click();
     //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     final String marker1Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     this.elemHelper.FindElement( driver, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
     assertEquals( "Atelier Graphique", marker1Text );
     //Open Marker 2
     marker2.click();
     //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     final String marker2Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     this.elemHelper.FindElement( driver, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
     assertEquals( "Australian Collectors, Co.", marker2Text );
     //Open Marker 3
     marker3.click();
     //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     final String marker3Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     this.elemHelper.FindElement( driver, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
     assertEquals( "Signal Gift Stores", marker3Text );
@@ -462,28 +462,28 @@ public class MapComponentReference extends BaseTest {
     //Open Marker 1
     marker1.click();
     //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     final String marker1Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "Atelier Graphique", marker1Text );
     //Open Marker 2
     marker2.click();
     //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     final String marker2Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "Signal Gift Stores", marker2Text );
     //Open Marker 3
     marker3.click();
     //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     final String marker3Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "La Rochelle Gifts", marker3Text );
     //Open Marker 4
     marker4.click();
     //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     final String marker4Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
     this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
     assertEquals( "Baane Mini Imports", marker4Text );

@@ -81,7 +81,7 @@ public class CDF435 extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-435%3AIssue_435.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 90 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 90 );
 
     //assert Elements loaded
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "Panel_1" ) );
@@ -146,7 +146,7 @@ public class CDF435 extends BaseTest {
     select.selectByVisibleText( "2004" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     /*
      * ## Step 3

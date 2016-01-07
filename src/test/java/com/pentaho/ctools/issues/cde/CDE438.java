@@ -78,7 +78,7 @@ public class CDE438 extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ACggComponent%3AcggComponent.wcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     WebElement element = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='content']/div/div[2]/div" ) );
     assertNotNull( element );

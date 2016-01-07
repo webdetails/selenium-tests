@@ -83,7 +83,7 @@ public class CDF430 extends BaseTest {
     driver.get( baseUrl + "plugin/CDE404/api/i18ntest" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //assert Elements loaded
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "Panel_1" ) );
@@ -109,7 +109,7 @@ public class CDF430 extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //assert Elements loaded
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "Panel_1" ) );
@@ -135,7 +135,7 @@ public class CDF430 extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDF%3Acdf_i18nTest.xcdf/generatedContent?locale=en-US" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //assert Elements loaded
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sampleButton01']/button/span" ) );

@@ -81,7 +81,7 @@ public class CDE404 extends BaseTest {
     //Open plugin dashboard
     driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=Test.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     //wait for invisibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
 
     WebElement element = this.elemHelper.FindElement( driver, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );

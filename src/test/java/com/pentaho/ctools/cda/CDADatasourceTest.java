@@ -71,7 +71,7 @@ public class CDADatasourceTest extends BaseTest {
     //wait for element to be visible
     this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//table[@id='testTable']/tbody/tr[15]/td" ) );
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Test About
     String urlAbout = this.elemHelper.FindElement( driver, By.linkText( "About" ) ).getAttribute( "href" );

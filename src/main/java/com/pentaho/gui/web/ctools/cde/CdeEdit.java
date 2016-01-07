@@ -60,7 +60,7 @@ public class CdeEdit {
     String currUrl = this.DRIVER.getCurrentUrl();
     if ( currUrl != PageUrl.CDE_DASHBOARD ) {
       this.DRIVER.get( PageUrl.CDE_DASHBOARD );
-      this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+      this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.cssSelector( "div.blockUI.blockOverlay" ) );
     }
   }
 

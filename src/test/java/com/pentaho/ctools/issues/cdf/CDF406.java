@@ -77,7 +77,7 @@ public class CDF406 extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-406%3ACDF406.wcdf/generatedContent" );
 
     // Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //assert Elements loaded
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "col1protovis" ) );

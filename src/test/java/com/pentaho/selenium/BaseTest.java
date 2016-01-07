@@ -74,7 +74,7 @@ public class BaseTest {
     this.log.info( "Master setup" );
 
     // Initialize BASEURL
-    baseUrl = "http://localhost:8080/pentaho/";
+    baseUrl = "http://nicola:8080/pentaho/";
     downloadDir = System.getProperty( "user.home" ) + "\\SeleniumDonwloadDir";
     pentahoReleaseVersion = System.getProperty( "pentaho.release.version" );
     pentahoBaServerServiceName = System.getProperty( "pentaho.bi.server.service.name" );

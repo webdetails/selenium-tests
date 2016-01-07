@@ -76,7 +76,7 @@ public class CleanDashboard extends BaseTest {
     //Open Created sample and click button
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Astart_here.xcdf/generatedContent" );
 
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
 
     //Assert script
     WebElement loadedScript = this.elemHelper.WaitForElementPresence( driver, By.tagName( "script" ) );

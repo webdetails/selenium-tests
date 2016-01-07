@@ -78,7 +78,7 @@ public class CDE394 extends BaseTest {
      */
     //Go to Issue Sample
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
     this.elemHelper.WaitForElementVisibility( driver, By.id( "column1protovis" ) );

@@ -78,7 +78,7 @@ public class CDE347 extends BaseTest {
      */
     //Go to Bullet Chart sample
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Wait for buttons: Layout. Components, Datasources AND Preview
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@title='Datasources Panel']" ) );
     assertNotNull( element );
@@ -111,7 +111,7 @@ public class CDE347 extends BaseTest {
     /*
      * ## Step 3
      */
-    this.elemHelper.WaitForElementInvisibility( frame, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( frame, By.cssSelector( "div.blockUI.blockOverlay" ) );
     WebElement obj1 = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='obj1protovis']//*[local-name()='path']" ) );
     WebElement obj2 = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='obj1protovis']//*[local-name()='path'][2]" ) );
     WebElement obj3 = this.elemHelper.WaitForElementPresenceAndVisible( frame, By.xpath( "//div[@id='obj2protovis']//*[local-name()='g'][2]/*[local-name()='rect']" ) );

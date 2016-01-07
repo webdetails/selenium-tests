@@ -118,7 +118,7 @@ public class CDELayoutPanel extends BaseTest {
      */
     //Go to New CDE Dashboard
     driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Open Dashboard Settings and assert bootstrap is selected as renderer
     WebElement settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
@@ -405,7 +405,7 @@ public class CDELayoutPanel extends BaseTest {
 
     //Open dashboard in preview mode
     driver.get( "http://localhost:8080/pentaho/api/repos/:public:CDE366.wcdf/generatedContent" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Assert Xs is set to 12 as default
     WebElement xsColumn = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='Body']/div[3]" ) );

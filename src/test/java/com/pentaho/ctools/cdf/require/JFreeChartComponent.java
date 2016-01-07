@@ -165,7 +165,7 @@ public class JFreeChartComponent extends BaseTest {
     assertTrue( title.equals( "Top 10 Customers" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='sampleObjectcaptionchartType']" ) );
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Check if the generated image is different from previews, is not something static
     assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//img[@id='sampleObjectimage']" ) ) );
     String secondChart = this.elemHelper.GetAttribute( driver, By.xpath( "//img[@id='sampleObjectimage']" ), "src" );
@@ -200,7 +200,7 @@ public class JFreeChartComponent extends BaseTest {
     assertTrue( title.equals( "Top 10 Customers" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='sampleObjectcaptionchartType']" ) );
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Check if the generated image is different from previews, is not something static
     assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//img[@id='sampleObjectimage']" ) ) );
     String thirdChart = this.elemHelper.GetAttribute( driver, By.xpath( "//img[@id='sampleObjectimage']" ), "src" );
@@ -265,7 +265,7 @@ public class JFreeChartComponent extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@id='sampleObjectcaptionzoom']" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 10 );
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     WebDriver popup = null;
     String parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
@@ -300,7 +300,7 @@ public class JFreeChartComponent extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@id='sampleObjectcaptionchartType']" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 3 );
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Check bar title
     this.elemHelper.Click( driver, By.xpath( "//div[@class='caption-details']" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: -42px", 3 );
@@ -319,7 +319,7 @@ public class JFreeChartComponent extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@id='sampleObjectcaptionzoom']" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 3 );
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     parentWindowHandle = driver.getWindowHandle(); // save the current window handle.
     setWindows = driver.getWindowHandles();

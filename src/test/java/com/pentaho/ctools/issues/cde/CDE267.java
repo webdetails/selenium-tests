@@ -77,7 +77,7 @@ public class CDE267 extends BaseTest {
      */
     //Open sample in edit mode
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Amaps.wcdf/wcdf.edit" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //assert buttons and go to Components Panel
     WebElement layoutPanel = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='layoutPanelButton']" ) );
@@ -144,8 +144,8 @@ public class CDE267 extends BaseTest {
     driver.switchTo().frame( fancyboxFrame );
 
     //Wait for blocker to disappear
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Look for map that was changed and assert it's width and height
     WebElement mapWithGeo = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "testWithGeoLocalization" ) );

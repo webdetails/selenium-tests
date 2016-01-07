@@ -76,7 +76,7 @@ public class MetaLayerHomeDashboard extends BaseTest {
     driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalayer.xcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
     String titlePage = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
@@ -110,7 +110,7 @@ public class MetaLayerHomeDashboard extends BaseTest {
     assertTrue( StringUtils.containsIgnoreCase( valueFrameAttrSrc, "&width=500&height=600" ) );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Wait for the element be visible.
     WebDriver driverFrame = driver.switchTo().frame( frame );

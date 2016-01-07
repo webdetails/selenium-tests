@@ -242,7 +242,7 @@ public class CDE417 extends BaseTest {
      * ## Step 6 
      */
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/generatedContent" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Click export Button
     WebElement exportChartButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='export']/div" ) );

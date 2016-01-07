@@ -70,7 +70,7 @@ public class AutoCompleteBoxComponent extends BaseTest {
     driver.get( PageUrl.AUTOCOMPLETE_BOX_COMPONENT );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
     String titlePage = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
@@ -88,7 +88,7 @@ public class AutoCompleteBoxComponent extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 

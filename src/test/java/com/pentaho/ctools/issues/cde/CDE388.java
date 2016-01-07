@@ -81,7 +81,7 @@ public class CDE388 extends BaseTest {
 
     //Go to New CDE Dashboard
     driver.get( PageUrl.CDE_DASHBOARD );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //assert buttons
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Save as Template']" ) );
     assertNotNull( element );
@@ -130,7 +130,7 @@ public class CDE388 extends BaseTest {
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='dimRow-Markets']/ul/li" ), By.id( "cdfdd-olap-rows" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfddOlapMeasureSelector']//span[@class='prompt-caption-more-less']" ) );
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='prompt-measures-accordion']/div/ul/li" ), By.id( "cdfdd-olap-columns" ) );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     /*
      * ## Step 4

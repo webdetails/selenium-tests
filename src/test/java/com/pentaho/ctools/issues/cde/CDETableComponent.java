@@ -81,7 +81,7 @@ public class CDETableComponent extends BaseTest {
      */
     //Open sample in view mode 
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/generatedContent" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Assert table class
     WebElement table = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='RowObject1Table']" ) );
     assertNotNull( table );
@@ -94,7 +94,7 @@ public class CDETableComponent extends BaseTest {
      */
     //open sample in edit mode
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Go to components panel, expand other components and select table component
     WebElement buttonComponentPanel = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
@@ -138,7 +138,7 @@ public class CDETableComponent extends BaseTest {
      * ## Step 3
      */
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/generatedContent" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Assert table class
     table = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='RowObject1Table']" ) );
     assertNotNull( table );
@@ -150,7 +150,7 @@ public class CDETableComponent extends BaseTest {
      */
     //open sample in edit mode
     driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Open dashboard settings, assert bootstrap is selected as renderer, select blueprint, assert new selection, save
     settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
@@ -180,7 +180,7 @@ public class CDETableComponent extends BaseTest {
     if ( this.failure == 0 ) {
       //open sample in edit mode
       driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
-      this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+      this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
       //Open dashboard settings, assert bootstrap is selected as renderer, select blueprint, assert new selection, save
       WebElement settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );

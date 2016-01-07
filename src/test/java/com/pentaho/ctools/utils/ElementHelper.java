@@ -592,70 +592,76 @@ public class ElementHelper {
     boolean isElemVisible = false;
     ExecutorService executor = null;
 
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
-
     try {
-      class RunnableObject implements Runnable {
 
-        private boolean isVisible;
+      driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
-        public boolean getVisibility() {
-          return this.isVisible;
-        }
+      try {
+        class RunnableObject implements Runnable {
 
-        public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          private boolean isVisible;
 
-          // Wait for element invisible
-          this.isVisible = wait.until( new Function<WebDriver, Boolean>() {
+          public boolean getVisibility() {
+            return this.isVisible;
+          }
 
-            @Override
-            public Boolean apply( WebDriver d ) {
-              try {
-                List<WebElement> listElements = d.findElements( locator );
-                if ( listElements.size() > 0 ) {
-                  WebElement elem = listElements.get( 0 );
-                  return ( !elem.isDisplayed() ) ? true : false;
+          public void run() {
+            Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+
+            // Wait for element invisible
+            this.isVisible = wait.until( new Function<WebDriver, Boolean>() {
+
+              @Override
+              public Boolean apply( WebDriver d ) {
+                try {
+                  List<WebElement> listElements = d.findElements( locator );
+                  if ( listElements.size() > 0 ) {
+                    WebElement elem = listElements.get( 0 );
+                    return ( !elem.isDisplayed() ) ? true : false;
+                  }
+                  // The element does not exit, i.e., is not visible and even present
+                  return true;
+                } catch ( StaleElementReferenceException sere ) {
+                  return false;
                 }
-                // The element does not exit, i.e., is not visible and even present
-                return true;
-              } catch ( StaleElementReferenceException sere ) {
-                return false;
               }
-            }
-          } );
+            } );
+          }
         }
+
+        RunnableObject r = new RunnableObject();
+        executor = Executors.newSingleThreadExecutor();
+        executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
+        isElemVisible = r.getVisibility();
+      } catch ( InterruptedException ie ) {
+        this.log.warn( "Interrupted Exception" );
+        this.log.warn( ie.toString() );
+      } catch ( ExecutionException ee ) {
+        if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
+          this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+          this.log.warn( ee.toString() );
+        } else {
+          this.log.warn( "Execution Exception" );
+          this.log.warn( ee.toString() );
+        }
+      } catch ( java.util.concurrent.TimeoutException cte ) {
+        this.log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+        this.log.warn( cte.toString() );
+      } catch ( Exception e ) {
+        this.log.error( "Exception" );
+        this.log.catching( e );
       }
 
-      RunnableObject r = new RunnableObject();
-      executor = Executors.newSingleThreadExecutor();
-      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
-      isElemVisible = r.getVisibility();
-    } catch ( InterruptedException ie ) {
-      this.log.warn( "Interrupted Exception" );
-      this.log.warn( ie.toString() );
-    } catch ( ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
-        this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-        this.log.warn( ee.toString() );
-      } else {
-        this.log.warn( "Execution Exception" );
-        this.log.warn( ee.toString() );
+      if ( executor != null ) {
+        executor.shutdown();
       }
-    } catch ( java.util.concurrent.TimeoutException cte ) {
-      this.log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
-      this.log.warn( cte.toString() );
-    } catch ( Exception e ) {
+
+      driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+    } catch ( Exception ge ) {
       this.log.error( "Exception" );
-      this.log.catching( e );
+      this.log.catching( ge );
     }
-
-    if ( executor != null ) {
-      executor.shutdown();
-    }
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-
     this.log.debug( "WaitForElementInvisibility::Exit" );
 
     return isElemVisible;

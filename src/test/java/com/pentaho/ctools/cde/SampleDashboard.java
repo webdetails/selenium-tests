@@ -59,7 +59,7 @@ public class SampleDashboard extends BaseTest {
     driver.get( PageUrl.SAMPLE_DASHBOARD );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
