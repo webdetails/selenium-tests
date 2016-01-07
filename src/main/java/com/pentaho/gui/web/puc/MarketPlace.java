@@ -17,6 +17,7 @@ import org.openqa.selenium.WebElement;
 
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.HttpUtils;
+import com.pentaho.ctools.utils.PageUrl;
 
 public class MarketPlace {
 
@@ -34,7 +35,7 @@ public class MarketPlace {
    */
   public void GoToMarketPlace() {
     log.info( "Enter: GoToMarketPlace" );
-    this.driver.get( "http://localhost:8080/pentaho/Home" );
+    this.elemHelper.Get( driver, PageUrl.PUC );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='mantle-perspective-switcher']//div[@class='custom-dropdown-label']" ) );
 
@@ -170,7 +171,7 @@ public class MarketPlace {
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@window-class='stagesInfoDialog']//div[@class='dev-stage ng-scope dev-stage-community-04']" ) );
     assertNotNull( element );
     this.elemHelper.Click( this.driver, By.xpath( "//div[@window-class='stagesInfoDialog']/div/button[@class='closeButton']" ) );
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='pentaho-tab-deck-panel']/div/div[2]/a" ) );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='pentaho-tab-deck-panel']/div/div[2]/a" ), 3 );
   }
 
   /**
@@ -321,8 +322,7 @@ public class MarketPlace {
     int nTotal = allPlugins.size();
     if ( nTotal != 0 ) {
       if ( nTotal >= 5 ) {
-        int[] pluginToTest = {
-            nTotal / 2,
+        int[] pluginToTest = { nTotal / 2,
             nTotal / 3,
             nTotal / 4,
             nTotal / 5 };
@@ -486,7 +486,7 @@ public class MarketPlace {
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
     assertNotNull( element );
     element.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ), 3 );
 
   }
 
@@ -557,7 +557,7 @@ public class MarketPlace {
     okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
     assertNotNull( okButton );
     okButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@window-class='confirmationDialog']" ) );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@window-class='confirmationDialog']" ), 3 );
 
     //Assert plugin status is installed
     assertTrue( CheckIfPluginInstalled( name ) );
@@ -618,16 +618,16 @@ public class MarketPlace {
     okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
     assertNotNull( okButton );
     okButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@window-class='confirmationDialog']" ) );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@window-class='confirmationDialog']" ), 3 );
 
     //assert uninstall button is disabled
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button[2]" ) );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button[2]" ), 3 );
 
     //close popup
     WebElement closeButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
     assertNotNull( closeButton );
     closeButton.click();
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ), 3 );
 
     //Assert plugin status is installed
     assertFalse( CheckIfPluginInstalled( name ) );

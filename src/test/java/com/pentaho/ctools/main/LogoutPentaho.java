@@ -66,7 +66,7 @@ public class LogoutPentaho extends BaseTest {
     this.log.info( "tc1_Logout_SuccessLogOutReturnHomePage" );
 
     //## Step 1
-    driver.get( PageUrl.PUC );
+    this.elemHelper.Get( driver, PageUrl.PUC );
 
     //waiting pop-up to be visible
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
