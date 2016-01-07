@@ -84,7 +84,7 @@ public class CDAChangeProperty extends BaseTest {
     assertNotNull( dataSelector );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "Test1" );
-    this.elemHelper.FindElement( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     WebElement refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );
@@ -116,7 +116,7 @@ public class CDAChangeProperty extends BaseTest {
     WebElement scriptableSource = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]/td" ) );
     assertNotNull( scriptableSource );
     scriptableSource.click();
-    WebElement columnProperty = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Column Configuration']/../td[2]" ) );
+    WebElement columnProperty = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) );
     assertNotNull( columnProperty );
     columnProperty.click();
     WebElement columnPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popupstates" ) );
@@ -133,8 +133,8 @@ public class CDAChangeProperty extends BaseTest {
     assertNotNull( okButton );
     okButton.click();
     this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title='Column Configuration']/../td[2]" ), "[[\"0\",\"testing\"]]" );
-    String columnsParameter = this.elemHelper.FindElement( driver, By.xpath( "//td[@title='Column Configuration']/../td[2]" ) ).getText();
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ), "[[\"0\",\"testing\"]]" );
+    String columnsParameter = this.elemHelper.FindElement( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) ).getText();
     assertEquals( "[[\"0\",\"testing\"]]", columnsParameter );
 
     //Save dashboard
@@ -155,7 +155,7 @@ public class CDAChangeProperty extends BaseTest {
     assertNotNull( dataSelector );
     select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByValue( "Test1" );
-    this.elemHelper.FindElement( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     refreshButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );
@@ -187,7 +187,7 @@ public class CDAChangeProperty extends BaseTest {
     scriptableSource = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]/td" ) );
     assertNotNull( scriptableSource );
     scriptableSource.click();
-    columnProperty = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Column Configuration']/../td[2]" ) );
+    columnProperty = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) );
     assertNotNull( columnProperty );
     columnProperty.click();
     columnPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popupstates" ) );
@@ -206,8 +206,8 @@ public class CDAChangeProperty extends BaseTest {
     assertNotNull( okButton );
     okButton.click();
     this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title='Column Configuration']/../td[2]" ), "[]" );
-    columnsParameter = this.elemHelper.FindElement( driver, By.xpath( "//td[@title='Column Configuration']/../td[2]" ) ).getText();
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ), "[]" );
+    columnsParameter = this.elemHelper.FindElement( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) ).getText();
     assertEquals( "[]", columnsParameter );
 
     //Save dashboard
@@ -237,7 +237,7 @@ public class CDAChangeProperty extends BaseTest {
       WebElement scriptableSource = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[2]/td" ) );
       assertNotNull( scriptableSource );
       scriptableSource.click();
-      WebElement columnProperty = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Column Configuration']/../td[2]" ) );
+      WebElement columnProperty = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) );
       assertNotNull( columnProperty );
       columnProperty.click();
       WebElement columnPopup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popupstates" ) );
@@ -256,8 +256,8 @@ public class CDAChangeProperty extends BaseTest {
       assertNotNull( okButton );
       okButton.click();
       this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
-      this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title='Column Configuration']/../td[2]" ), "[]" );
-      String columnsParameter = this.elemHelper.FindElement( driver, By.xpath( "//td[@title='Column Configuration']/../td[2]" ) ).getText();
+      this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ), "[]" );
+      String columnsParameter = this.elemHelper.FindElement( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) ).getText();
       assertEquals( "[]", columnsParameter );
 
       //Save dashboard
