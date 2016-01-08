@@ -33,6 +33,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -80,7 +81,7 @@ public class CDETableComponent extends BaseTest {
      * ## Step 1
      */
     //Open sample in view mode 
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Assert table class
     WebElement table = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='RowObject1Table']" ) );
@@ -93,7 +94,7 @@ public class CDETableComponent extends BaseTest {
      * ## Step 2
      */
     //open sample in edit mode
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_EDIT );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Go to components panel, expand other components and select table component
@@ -125,9 +126,9 @@ public class CDETableComponent extends BaseTest {
     assertEquals( "bootstrap", selectedValue );
     Select select = new Select( this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//select[@id='rendererInput']" ) ) );
     select.selectByValue( "blueprint" );
-    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
-    assertNotNull( saveButton );
-    saveButton.click();
+    WebElement okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
+    assertNotNull( okButton );
+    okButton.click();
     WebElement notifySuccess = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='notifyBar']" ) );
     assertNotNull( notifySuccess );
     String successMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='notifyBar']/div[@class='notify-bar-message']" ) );
@@ -137,7 +138,7 @@ public class CDETableComponent extends BaseTest {
     /*
      * ## Step 3
      */
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Assert table class
     table = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='RowObject1Table']" ) );
@@ -149,7 +150,7 @@ public class CDETableComponent extends BaseTest {
      * ## Step 4
      */
     //open sample in edit mode
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_EDIT );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Open dashboard settings, assert bootstrap is selected as renderer, select blueprint, assert new selection, save
@@ -163,9 +164,9 @@ public class CDETableComponent extends BaseTest {
     assertEquals( "blueprint", selectedValue );
     select = new Select( this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//select[@id='rendererInput']" ) ) );
     select.selectByValue( "bootstrap" );
-    saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
-    assertNotNull( saveButton );
-    saveButton.click();
+    okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
+    assertNotNull( okButton );
+    okButton.click();
     notifySuccess = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='notifyBar']" ) );
     assertNotNull( notifySuccess );
     successMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='notifyBar']/div[@class='notify-bar-message']" ) );
@@ -179,7 +180,7 @@ public class CDETableComponent extends BaseTest {
     this.log.info( "tearDownClass" );
     if ( this.failure == 0 ) {
       //open sample in edit mode
-      driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
+      this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_EDIT );
       this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
       //Open dashboard settings, assert bootstrap is selected as renderer, select blueprint, assert new selection, save
@@ -193,9 +194,9 @@ public class CDETableComponent extends BaseTest {
       assertEquals( "blueprint", selectedValue );
       Select select = new Select( this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//select[@id='rendererInput']" ) ) );
       select.selectByValue( "bootstrap" );
-      WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
-      assertNotNull( saveButton );
-      saveButton.click();
+      WebElement okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
+      assertNotNull( okButton );
+      okButton.click();
       WebElement notifySuccess = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='notifyBar']" ) );
       assertNotNull( notifySuccess );
       String successMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='notifyBar']/div[@class='notify-bar-message']" ) );
