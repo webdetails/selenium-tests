@@ -137,17 +137,17 @@ public class CDELayoutPanel extends BaseTest {
     /*
      * ## Step 2
      */
-    //Add Row and verify that columsn and html can not be added outside of rows
-    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
+    //Add Row and verify that columns and html can not be added outside of rows
+    this.elemHelper.Click( driver, By.id( "table-cdfdd-layout-tree" ) );
     Actions a = new Actions( driver );
     a.sendKeys( "c" ).sendKeys( "h" ).sendKeys( "r" ).build().perform();
-    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
+    this.elemHelper.Click( driver, By.id( "table-cdfdd-layout-tree" ) );
 
     //Add Column
     a.sendKeys( "c" ).build().perform();
 
     //Add Html
-    this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody" ) );
+    this.elemHelper.Click( driver, By.id( "table-cdfdd-layout-tree" ) );
     a.sendKeys( "h" ).build().perform();
 
     //Assert elements were successfully created
@@ -155,17 +155,17 @@ public class CDELayoutPanel extends BaseTest {
     assertNotNull( row );
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ), "Row" );
     String rowText = row.getText();
-    assertEquals( "Row", rowText );
+    assertEquals( rowText, "Row" );
     WebElement column = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td" ) );
     assertNotNull( column );
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[2]/td" ), "Column" );
     String columnText = column.getText();
-    assertEquals( "Column", columnText );
+    assertEquals( columnText, "Column" );
     WebElement html = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[3]/td" ) );
     assertNotNull( html );
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[3]/td" ), "Html" );
     String htmlText = html.getText();
-    assertEquals( "Html", htmlText );
+    assertEquals( htmlText, "Html" );
 
     //Add spacer and duplicate it
     column.click();
@@ -176,14 +176,20 @@ public class CDELayoutPanel extends BaseTest {
     assertNotNull( spacer );
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td" ), "Space" );
     String spacerText = spacer.getText();
-    assertEquals( "Space", spacerText );
+    assertEquals( spacerText, "Space" );
+    column.click();
     spacer.click();
     a.keyDown( Keys.SHIFT ).sendKeys( "d" ).keyUp( Keys.SHIFT ).build().perform();
-    WebElement spacer2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td" ) );
+    spacer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td" ) );
+    assertNotNull( spacer );
+    WebElement spacer2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td" ) );
     assertNotNull( spacer2 );
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[4]/td" ), "Space" );
+    spacerText = spacer.getText();
+    assertEquals( spacerText, "Space" );
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td" ), "Space" );
     String spacerText2 = spacer2.getText();
-    assertEquals( "Space", spacerText2 );
+    assertEquals( spacerText2, "Space" );
 
     //Delete elements and assert they are no longer present
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr/td" ) );
@@ -261,6 +267,7 @@ public class CDELayoutPanel extends BaseTest {
      * ## Step 4
      */
     //Apply template
+
     WebElement templateButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( templateButton );
     templateButton.click();
@@ -395,16 +402,16 @@ public class CDELayoutPanel extends BaseTest {
     dashType.selectByVisibleText( "blueprint" );
 
     //Click save and assert user gets a message of "Saved Successfully"
-    WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']//button[@id='popup_state0_buttonSave']" ) );
-    assertNotNull( saveButton );
-    saveButton.click();
+    okButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonOk" ) );
+    assertNotNull( okButton );
+    okButton.click();
     WebElement notifySuccess = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='notifyBar']" ) );
     assertNotNull( notifySuccess );
     String successMessage = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='notifyBar']/div[@class='notify-bar-message']" ) );
     assertEquals( "Dashboard Settings saved successfully", successMessage );
 
     //Open dashboard in preview mode
-    driver.get( "http://localhost:8080/pentaho/api/repos/:public:CDE366.wcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_366 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Assert Xs is set to 12 as default
@@ -414,7 +421,7 @@ public class CDELayoutPanel extends BaseTest {
     assertEquals( "col-xs-12 last", xsNumber );
 
     //Open dashboard in edit
-    driver.get( "http://localhost:8080/pentaho/api/repos/:public:CDE366.wcdf/edit" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_366_EDIT );
 
     //Open Settings and assert Style and Dashboard Type were saved 
     settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );

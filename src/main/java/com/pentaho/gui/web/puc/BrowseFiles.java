@@ -130,7 +130,7 @@ public class BrowseFiles {
       this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "//div[@class='spinner large-spinner']" ) );
       this.elemHelper.WaitForElementInvisibility( this.DRIVER, By.xpath( "(//div[@class='spinner large-spinner'])[2]" ) );
       assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div" ) ) );
-      text = this.elemHelper.WaitForTextPresence( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div/span" ), "There are no files in this folder.", 60 );
+      text = this.elemHelper.WaitForTextPresence( this.DRIVER, By.xpath( "//div[@id='fileBrowserFiles']/div[2]/div/span" ), "There are no files in this folder.", 300 );
       assertEquals( "There are no files in this folder.", text );
       LOG.info( "Exit: Emptying Trash" );
     }
