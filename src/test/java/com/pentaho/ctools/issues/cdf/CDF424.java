@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -60,7 +61,9 @@ public class CDF424 extends BaseTest {
    *    Assert CCC chart properties have proper priority level
    *
    * Description:
-   *    The test pretends validate the CDF-424 issue, so when user sets ortho2AxisLabel_textStyle property in a chart it overrides axisLabel_textStyle for the ortho2 axis.
+   *    The test pretends validate the CDF-424 issue, so when user sets 
+   *    ortho2AxisLabel_textStyle property in a chart it overrides 
+   *    axisLabel_textStyle for the ortho2 axis.
    *
    * Steps:
    *    1. Assert color of axis elements is correct
@@ -73,7 +76,7 @@ public class CDF424 extends BaseTest {
      * ## Step 1
      */
     //Go to Issue Sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-424%3ACDF-424.wcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_424 );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

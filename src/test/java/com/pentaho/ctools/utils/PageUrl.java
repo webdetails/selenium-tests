@@ -128,5 +128,5 @@ public class PageUrl extends BaseTest {
   /*
    * Issues
    */
-
+  public static final String ISSUES_CDF_424 = BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-424%3ACDF-424.wcdf/generatedContent";
 }
