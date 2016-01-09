@@ -1606,6 +1606,31 @@ public class ElementHelper {
    * 
    * @param driver
    * @param toLocator
+   */
+  public void MoveToElement( final WebDriver driver, final By toLocator ) {
+    this.log.debug( "MoveToElement::Enter" );
+    try {
+      WebElement element = FindElementInvisible( driver, toLocator );
+      if ( element != null ) {
+        Actions acts = new Actions( driver );
+        acts.moveToElement( element );
+        acts.build().perform();
+      } else {
+        this.log.warn( "Element null!" );
+      }
+    } catch ( StaleElementReferenceException sere ) {
+      this.log.warn( "Stale Element Reference Exception" );
+      MoveToElement( driver, toLocator );
+    }
+    this.log.debug( "MoveToElement::Exit" );
+  }
+
+  /**
+   * This method shall perform the MoveToElement wrap function of WebDriver.
+   * We have to do this wrap to avoid StaleElement exceptions.
+   * 
+   * @param driver
+   * @param toLocator
    * @param xOffset
    * @param yOffset
    */

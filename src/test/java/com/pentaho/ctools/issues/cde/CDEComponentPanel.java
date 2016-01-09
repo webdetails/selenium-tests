@@ -90,7 +90,7 @@ public class CDEComponentPanel extends BaseTest {
      * ## Step 1
      */
     //Open CDE sample in edit mode
-    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Go to Components Panel
@@ -176,32 +176,31 @@ public class CDEComponentPanel extends BaseTest {
     assertEquals( nameProperty, "initialized ui-state-active" );
 
     //Click enter to change following properties "Name" and "Parameters"
-    a.sendKeys( Keys.ENTER ).sendKeys( "a" ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).build().perform();
+    a.sendKeys( Keys.ENTER ).sendKeys( "a" ).sendKeys( Keys.ENTER ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).build().perform();
 
     /*
      * ## Step 4
      */
     //Change "Parameter" and assert using down arrow to navigate is blocked
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
-    String parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
+    //Focus to the top
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "#cdfdd-components-properties > div > div.tableCaption.ui-state-default > div.simpleProperties.propertiesSelected" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//td[contains(text(),'Parameter')]/.." ), "class", "initialized ui-state-active" );
+    String parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//td[contains(text(),'Parameter')]/.." ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
     a.sendKeys( Keys.ENTER ).build().perform();
-    assertNotNull( this.elemHelper.FindElement( driver, By.id( "popup" ) ) );
-    a.sendKeys( Keys.TAB ).build().perform();
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
-    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
-    assertEquals( parameterProperty, "initialized ui-state-active" );
+    WebElement popupParameter = this.elemHelper.FindElement( driver, By.id( "popupstates" ) );
+    assertNotNull( popupParameter );
+    String popupTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#popup_state_state0 > div > div.popup-header-container > div.popup-title-container" ) );
+    assertEquals( popupTitle, "Parameters" );
     a.sendKeys( Keys.DOWN ).build().perform();
-    WebElement closePopup = this.elemHelper.FindElement( driver, By.id( "popup_state0_buttonCancel" ) );
-    assertNotNull( closePopup );
-    closePopup.click();
-    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.id( "popup" ) ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ), "class", "initialized ui-state-active" );
-    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[3]" ) ).getAttribute( "class" );
+    this.elemHelper.ClickJS( driver, By.id( "popup_state0_buttonCancel" ) );
+    assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//td[contains(text(),'Parameter')]/.." ), "class", "initialized ui-state-active" );
+    parameterProperty = this.elemHelper.FindElement( driver, By.xpath( "//td[contains(text(),'Parameter')]/.." ) ).getAttribute( "class" );
     assertEquals( parameterProperty, "initialized ui-state-active" );
 
     //assert values are changed
-    String nameValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr/td[2]" ) );
+    String nameValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//td[contains(text(),'Name')]/../td[2]" ) );
     assertEquals( nameValue, "a" );
 
     /*
@@ -239,7 +238,7 @@ public class CDEComponentPanel extends BaseTest {
      * ## Step 1
      */
     //Open CDE sample in edit mode
-    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Go to Components Panel
@@ -248,13 +247,13 @@ public class CDEComponentPanel extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/h3/span" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/div/ul/li[24]/a[@title='CGG Dial Chart']" ) );
     String componentName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]/td" ) );
-    assertEquals( "CGG Dial Chart", componentName );
+    assertEquals( "CGG Dial Component", componentName );
 
     /*
      * ## Step 2
      */
     //Add Name
-    /*String expectedChartName = "dial";
+    String expectedChartName = "dial";
     this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]/form/input" ) ).sendKeys( "dial" );
     this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]/form/input" ) ).submit();
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div[2]/table/tbody/tr/td[2]" ), "dial" );
@@ -290,21 +289,16 @@ public class CDEComponentPanel extends BaseTest {
     this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_0']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_1" );
     String firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
-    assertEquals( "parameters_1", firstParameter );
-    this.elemHelper.MoveToElementAndClick( driver, By.xpath( "//div[@id='drag_icon_1']/span" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.id( "parameters_1" ), "class", "popup_drag_hover", 2 );
-    this.elemHelper.DragAndDrop( driver, By.xpath( "//div[@id='drag_icon_1']/span" ), By.xpath( "//div[@id='drag_icon_2']/span" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id", "parameters_2" );
-    firstParameter = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='popup-list-body ui-sortable']/div" ), "id" );
-    assertEquals( "parameters_2", firstParameter );
+    assertEquals( firstParameter, "parameters_1" );
     //Submit
     this.elemHelper.Click( driver, By.id( "popup_state0_buttonOk" ) );
     //Wait For Popup Disappear
     this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupbox" ) );
     //Check the colors array
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ), "[\"" + strColor3 + "\",\"" + strColor2 + "\",\"" + strColor1 + "\"]" );
+    String expectedRange = "[\"" + strColor2 + "\",\"" + strColor1 + "\",\"" + strColor3 + "\"]";
+    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ), expectedRange );
     String rangeColorArray = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody/tr[2]/td[2]" ) );
-    assertEquals( "[\"brown\",\"green\",\"blue\"]", rangeColorArray );*/
+    assertEquals( rangeColorArray, expectedRange );
 
   }
 }
