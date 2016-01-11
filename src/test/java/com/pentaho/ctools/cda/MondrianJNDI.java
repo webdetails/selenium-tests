@@ -309,8 +309,8 @@ public class MondrianJNDI extends BaseTest {
     /*
      * ## Step 5
      */
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='contents_filter']/input" ) ).clear();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='contents_filter']/input" ) ).sendKeys( "2004" );
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).sendKeys( "2004" );
     //Check we have only one element
     textPaging = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 1 of 1 elements (filter 3 elements)", textPaging );
@@ -330,8 +330,8 @@ public class MondrianJNDI extends BaseTest {
     /*
      * ## Step 6
      */
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='contents_filter']/input" ) ).clear();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='contents_filter']/input" ) ).sendKeys( "Merry" );
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).sendKeys( "Merry" );
     //Check we have only one element
     textPaging = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "contents_info" ) );
     assertEquals( "empty (filter 3 elements)", textPaging );
@@ -340,8 +340,8 @@ public class MondrianJNDI extends BaseTest {
     assertEquals( "No results.", textNoResult );
 
     //Clean data
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='contents_filter']/input" ) ).clear();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='contents_filter']/input" ) ).sendKeys( Keys.RETURN );
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).sendKeys( Keys.RETURN );
     //Order by Year
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) );
     //Order by Time

@@ -35,7 +35,7 @@ public class MarketPlace {
    */
   public void GoToMarketPlace() {
     log.info( "Enter: GoToMarketPlace" );
-    this.elemHelper.Get( driver, PageUrl.PUC );
+    this.elemHelper.Get( this.driver, PageUrl.PUC );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='mantle-perspective-switcher']//div[@class='custom-dropdown-label']" ) );
 
