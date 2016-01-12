@@ -296,6 +296,7 @@ public class FilterVisualGuide extends BaseTest {
     oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@title='Entry 1']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@title='Entry 1']/../div" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_simple_paginated div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "Entry 1", selectedString );
@@ -314,6 +315,7 @@ public class FilterVisualGuide extends BaseTest {
     applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//button[contains(text(),'Apply')]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "50 / 1000", selectedString );

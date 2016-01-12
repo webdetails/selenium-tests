@@ -147,6 +147,7 @@ public class FilterVisualGuide extends BaseTest {
     WebElement oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@title='One']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@title='One']/../div" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_simple div.filter-root-body" ) ) );
     String selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_simple']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "One", selectedString );
@@ -165,6 +166,7 @@ public class FilterVisualGuide extends BaseTest {
     WebElement applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_simple']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple']//button[contains(text(),'Apply')]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "All", selectedString );
@@ -208,6 +210,7 @@ public class FilterVisualGuide extends BaseTest {
     applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_limited']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_limited']//button[contains(text(),'Apply')]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_limited div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_limited']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "5 / 19", selectedString );
@@ -226,6 +229,7 @@ public class FilterVisualGuide extends BaseTest {
     oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@title='One']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@title='One']/../div" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_group div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_group']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "One", selectedString );
@@ -244,6 +248,7 @@ public class FilterVisualGuide extends BaseTest {
     applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_group']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//button[contains(text(),'Apply')]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_group div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "All", selectedString );
@@ -296,6 +301,7 @@ public class FilterVisualGuide extends BaseTest {
     oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@title='Entry 1']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@title='Entry 1']/../div" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_simple_paginated div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "Entry 1", selectedString );
@@ -314,6 +320,7 @@ public class FilterVisualGuide extends BaseTest {
     applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//button[contains(text(),'Apply')]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "50 / 1000", selectedString );
@@ -342,6 +349,7 @@ public class FilterVisualGuide extends BaseTest {
     oneSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//div[@title='One']/../div" ) );
     assertNotNull( oneSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//div[@title='One']/../div" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#singleFilterObj_addIn div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "One", selectedString );
@@ -370,6 +378,7 @@ public class FilterVisualGuide extends BaseTest {
     WebElement oneValue = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_values']//div[@title='One']/../div[@class='filter-item-value']" ) );
     assertNotNull( oneValue );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='singleFilterObj_values']//div[@title='One']/../div[@class='filter-item-value']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_values']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "One", selectedString );
 
@@ -385,6 +394,7 @@ public class FilterVisualGuide extends BaseTest {
     applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_values']//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_values']//button[contains(text(),'Apply')]" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_values']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "All", selectedString );
 
