@@ -162,17 +162,18 @@ public class FilterReference extends BaseTest {
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     //Search for th, assert shown results and select shown options
     this.elemHelper.SendKeys( driver, By.cssSelector( "div#multiFilterObj_group input.filter-filter-input" ), "th" );
+    WebElement groupZeroes = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "  //div[@id='multiFilterObj_group']//div[contains(text(),'Zeroes')]" ) );
+    assertNotNull( groupZeroes );
     selectThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Three']/../div" ) );
     assertNotNull( selectThree );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Three']/../div" ) );
+    WebElement groupOnes = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "  //div[@id='multiFilterObj_group']//div[contains(text(),'Ones')]" ) );
+    assertNotNull( groupOnes );
     WebElement selectThirteen = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Thirteen']/../div" ) );
     assertNotNull( selectThirteen );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Thirteen']/../div" ) );
-    WebElement selectTwentyThree = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-three']/../div" ) );
+    WebElement selectTwentyThree = this.elemHelper.FindElementInvisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-three']" ) );
     assertNotNull( selectTwentyThree );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-three']/../div" ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='One']/../div" ) ) );
-    assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Eight']/../div" ) ) );
     WebElement applyButton = this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Apply')]" ) );
     assertNotNull( applyButton );
     this.elemHelper.ClickJS( driver, By.xpath( "//button[contains(text(),'Apply')]" ) );
@@ -180,8 +181,8 @@ public class FilterReference extends BaseTest {
 
     //Assert correct values selected
     selectedMultiString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
-    assertEquals( "3 / 29", selectedMultiString );
+    assertEquals( "2 / 29", selectedMultiString );
     selectedMultiItem = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "txt_multiSelectionObj_group" ) );
-    assertEquals( "Result: [\"[Zeroes].[Three]\",\"[Ones].[Thirteen]\",\"[Twos].[Twenty-three]\"] Selected items: [Zeroes].[Three][Ones].[Thirteen][Twos].[Twenty-three]", selectedMultiItem );
+    assertEquals( selectedMultiItem, "Result: [\"[Zeroes].[Three]\",\"[Ones].[Thirteen]\"] Selected items: [Zeroes].[Three][Ones].[Thirteen]" );
   }
 }

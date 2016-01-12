@@ -237,9 +237,9 @@ public class FilterAddinAccordion extends BaseTest {
     assertNotNull( twelveSelector );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twelve']/../div" ) );
     this.elemHelper.ClearAndSendKeys( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ), "twenty" );
-    WebElement twentyFiveSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-five']/../div" ) );
+    WebElement twentyFiveSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-two']/../div" ) );
     assertNotNull( twentyFiveSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-five']/../div" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Twenty-two']/../div" ) );
     this.elemHelper.ClearAndSendKeys( driver, By.xpath( "//div[@id='multiFilterObj_group']//input[@class='filter-filter-input']" ), "six" );
     WebElement sixSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//div[@title='Six']/../div" ) );
     assertNotNull( sixSelector );
