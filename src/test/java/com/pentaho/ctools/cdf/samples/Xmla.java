@@ -93,9 +93,9 @@ public class Xmla extends BaseTest {
     //On new popup select "Manual enter" and set Enable Xmla as true
     WebElement manualButton = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='manualRadio']//input" ) );
     assertNotNull( manualButton );
-    manualButton.click();
+    this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='manualRadio']//input" ) );
     //Check if is already "TRUE"
-    String setAsTrue = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='analysisParametersTree']//div[2]//tr[3]/td[2]" ) ).getText();
+    String setAsTrue = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='analysisParametersTree']//div[2]//tr[3]/td[2]" ) );
     if ( setAsTrue.equalsIgnoreCase( "true" ) ) {
       assertEquals( setAsTrue, "true" );
     } else {
