@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package com.pentaho.ctools.issues.cde;
+package com.pentaho.ctools.issues.cde.editor;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;

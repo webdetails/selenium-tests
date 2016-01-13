@@ -26,7 +26,6 @@
 
 			<!-- CDE -->
 			<class name="com.pentaho.ctools.issues.cde.CDE149" />
-			<class name="com.pentaho.ctools.issues.cde.CDE267" />
 			<class name="com.pentaho.ctools.issues.cde.CDE269" />
 			<class name="com.pentaho.ctools.issues.cde.CDE286" />
 			<class name="com.pentaho.ctools.issues.cde.CDE342" />
@@ -49,10 +48,12 @@
 			<class name="com.pentaho.ctools.issues.cde.CDE452" />
 			<class name="com.pentaho.ctools.issues.cde.CDE453" />
 			<class name="com.pentaho.ctools.issues.cde.CDE505" />
-			<class name="com.pentaho.ctools.issues.cde.CDEComponentPanel" />
-			<class name="com.pentaho.ctools.issues.cde.CDEDataPanel" />
-			<class name="com.pentaho.ctools.issues.cde.CDELayoutPanel" />
+			<class name="com.pentaho.ctools.issues.cde.CDEMapComponentReference" />
 			<class name="com.pentaho.ctools.issues.cde.CDETableComponent" />
+			<!-- CDE Editor -->
+			<class name="com.pentaho.ctools.issues.cde.editor.CDEComponentPanel" />
+      <class name="com.pentaho.ctools.issues.cde.editor.CDEDataPanel" />
+      <class name="com.pentaho.ctools.issues.cde.editor.CDELayoutPanel" />
 
 			<!-- CDF -->
 			<class name="com.pentaho.ctools.issues.cdf.AutoIncludes" />

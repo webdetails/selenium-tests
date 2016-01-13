@@ -34,12 +34,11 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import com.pentaho.ctools.issues.cde.CDEComponentPanel;
 import com.pentaho.selenium.BaseTest;
 
 public class ScreenshotListener extends TestListenerAdapter {
 
-  private final Logger log = LogManager.getLogger( CDEComponentPanel.class );
+  private final Logger log = LogManager.getLogger( ScreenshotListener.class );
 
   @Override
   public void onTestFailure( ITestResult failingTest ) {

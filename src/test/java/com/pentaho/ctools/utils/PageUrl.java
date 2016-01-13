@@ -87,6 +87,7 @@ public class PageUrl extends BaseTest {
   public static final String FILTER_ADDIN_COMPONENT = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AFilterComponent%3Afilter_addIn_accordion.wcdf/generatedContent";
   public static final String MAP_COMPONENT_REFERENCE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Amaps.wcdf/generatedContent";
   public static final String MAP_COMPONENT_REFERENCE_6x = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ANewMapComponent%3Amaps.wcdf/generatedContent";
+  public static final String MAP_COMPONENT_REFERENCE_EDIT_6x = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ANewMapComponent%3Amaps.wcdf/edit";
   public static final String MAP_COMPONENT_FULL_TEST = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AFullMapTest.wcdf/generatedContent";
 
   /*

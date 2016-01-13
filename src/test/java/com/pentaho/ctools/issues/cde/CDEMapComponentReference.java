@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -47,9 +48,9 @@ import com.pentaho.selenium.BaseTest;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-public class CDE267 extends BaseTest {
+public class CDEMapComponentReference extends BaseTest {
   // Log instance
-  private final Logger log = LogManager.getLogger( CDE267.class );
+  private final Logger log = LogManager.getLogger( CDEMapComponentReference.class );
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
 
@@ -57,11 +58,12 @@ public class CDE267 extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Changing wdth and height of map popup has desired effect
+   *    Changing width and height of map popup has desired effect
    *
    * Description:
-   *    The test pretends validate the CDE-267 issue, editing the width and height of the popup generated when clicking a map's marker
-   *    has the desired effect.
+   *    The test pretends validate the CDE-267 issue, editing the width and 
+   *    height of the popup generated when clicking a map's marker has the 
+   *    desired effect.
    *
    * Steps:
    *    1. Open sample in edit mode, go to components Panel and select GeoLocalized Map
@@ -76,7 +78,7 @@ public class CDE267 extends BaseTest {
      * ## Step 1
      */
     //Open sample in edit mode
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Amaps.wcdf/wcdf.edit" );
+    driver.get( PageUrl.MAP_COMPONENT_REFERENCE_EDIT_6x );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //assert buttons and go to Components Panel
@@ -109,8 +111,8 @@ public class CDE267 extends BaseTest {
     //Click Advanced Properties and wait for it to be selected
     WebElement advancedProperties = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[@class='advancedProperties propertiesUnSelected']" ) );
     assertNotNull( advancedProperties );
-    advancedProperties.click();
-    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class", "advancedProperties propertiesSelected" );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[@class='advancedProperties propertiesUnSelected']" ) );
+    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[2]" ), "class", "advancedProperties propertiesSelected" );
 
     //Look for Popup Height and change it's value to 100
     WebElement popupHeight = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-components-properties']/tbody//td[@title=' Height for the popup window']/../td[2]" ) );
@@ -150,12 +152,12 @@ public class CDE267 extends BaseTest {
     //Look for map that was changed and assert it's width and height
     WebElement mapWithGeo = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "testWithGeoLocalization" ) );
     assertNotNull( mapWithGeo );
-    WebElement marker = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
+    WebElement marker = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div[2]/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='circle'][4]" ) );
     assertNotNull( marker );
     marker.click();
-    WebElement popup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='featurePopup394246_contentDiv']" ) );
+    WebElement popup = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.olPopupContent" ) );
     assertNotNull( popup );
 
-    assertEquals( "width: 300px; height: 100px; position: relative;", popup.getAttribute( "style" ) );
+    assertEquals( popup.getAttribute( "style" ), "width: 300px; height: 100px; position: relative;" );
   }
 }
