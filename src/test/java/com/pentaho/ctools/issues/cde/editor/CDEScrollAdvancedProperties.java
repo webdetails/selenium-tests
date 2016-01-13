@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package com.pentaho.ctools.issues.cde;
+package com.pentaho.ctools.issues.cde.editor;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
@@ -52,11 +52,11 @@ import com.pentaho.selenium.BaseTest;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-public class CDE408 extends BaseTest {
+public class CDEScrollAdvancedProperties extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private final Logger log = LogManager.getLogger( CDE408.class );
+  private final Logger log = LogManager.getLogger( CDEScrollAdvancedProperties.class );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -121,9 +121,9 @@ public class CDE408 extends BaseTest {
     /*
      * ## Step 3
      */
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.advancedProperties.propertiesUnSelected" ) );
     assertNotNull( element );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.advancedProperties.propertiesUnSelected" ) );
 
     /*
      * ## Step 4
