@@ -62,8 +62,8 @@ public class CDE388 extends BaseTest {
    *    Drag and drop of OlapWizard working correctly
    *
    * Description:
-   *    The test pretends validate the CDE-388 issue, so when user tries to use drag and drop functionality of OlapWizard
-   *    it works as expected.
+   *    The test pretends validate the CDE-388 issue, so when user tries to use 
+   *    drag and drop functionality of OlapWizard it works as expected.
    *
    * Steps:
    *    1. Wait for new Dashboard to be created, assert elements on page and go to data sources
@@ -112,14 +112,15 @@ public class CDE388 extends BaseTest {
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='cdfdd-datasources-properties']/div/div/div" ), "Properties" );
     String classText = this.elemHelper.FindElement( driver, By.xpath( "//div[@title='Datasources Panel']" ) ).getAttribute( "class" );
     assertEquals( "panelButton panelButton-active", classText );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div/h3/span" ) );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div/div/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cdfdd-datasources-palletePallete']/div/h3/span" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//a[contains(text(),'OLAP Chart wizard')]" ) );
 
     /*
      * ## Step 3
      */
-    String text = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='wizardDialog']//div[@class='popup-title-container']" ), "OLAP Wizard" );
-    assertEquals( "OLAP Wizard", text );
+
+    String text = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//a[contains(text(),'OLAP Chart wizard')]" ) );
+    assertEquals( text, "OLAP Chart wizard" );
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "cdfddOlapCatalogSelect" ) ) );
     select.selectByVisibleText( "SteelWheels" );
     Select select1 = new Select( this.elemHelper.FindElement( driver, By.id( "cdfddOlapCubeSelect" ) ) );
