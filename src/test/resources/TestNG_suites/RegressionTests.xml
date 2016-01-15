@@ -38,7 +38,6 @@
 			<class name="com.pentaho.ctools.issues.cde.CDE396" />
 			<class name="com.pentaho.ctools.issues.cde.CDE403" />
 			<class name="com.pentaho.ctools.issues.cde.CDE404" />
-			<class name="com.pentaho.ctools.issues.cde.CDE408" />
 			<class name="com.pentaho.ctools.issues.cde.CDE412" />
 			<class name="com.pentaho.ctools.issues.cde.CDE413" />
 			<class name="com.pentaho.ctools.issues.cde.CDE417" />
@@ -54,6 +53,7 @@
 			<class name="com.pentaho.ctools.issues.cde.editor.CDEComponentPanel" />
       <class name="com.pentaho.ctools.issues.cde.editor.CDEDataPanel" />
       <class name="com.pentaho.ctools.issues.cde.editor.CDELayoutPanel" />
+      <class name="com.pentaho.ctools.issues.cde.editor.CDEScrollAdvancedProperties" />
 
 			<!-- CDF -->
 			<class name="com.pentaho.ctools.issues.cdf.AutoIncludes" />
