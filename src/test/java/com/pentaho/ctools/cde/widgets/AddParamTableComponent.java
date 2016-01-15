@@ -11,8 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.cde.widgets.utils.WidgetUtils;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.gui.web.ctools.cde.utils.Widgets;
 
 /**
  * NOTE - The test was created regarding issue CDF-308
@@ -37,13 +37,14 @@ public class AddParamTableComponent {
   @Test
   public void testCheckParametersAddingWidgetParameter() throws Exception {
     //Step 0 - Delete the widget
-    WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
+    Widgets widgets = new Widgets();
+    widgets.RemoveWidgetByName( this.driver, this.widgetName );
 
     //Step 1 - Create widget with specific parameter
-    this.driver = WidgetUtils.CreateWidgetWithParameter( this.driver, this.widgetName, this.paramName );
+    this.driver = widgets.CreateWidgetWithParameter( this.driver, this.widgetName, this.paramName );
 
     //Step 2 - Access the widget
-    this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
+    this.driver = widgets.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
 
     //Step 3 - Add the TableComponent and go to Parameters
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) ) );
@@ -98,7 +99,7 @@ public class AddParamTableComponent {
 
     //Step 6 - Go bact to the widget and check if the parameters set previous are correct
     this.driver.switchTo().defaultContent();
-    this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
+    this.driver = widgets.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
     //Open the 'Components layout'
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) ) );
     frameCDEDashboard = this.driver.findElement( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) );

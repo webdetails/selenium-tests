@@ -1,4 +1,4 @@
-package com.pentaho.ctools.cde.widgets.utils;
+package com.pentaho.gui.web.ctools.cde.utils;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -18,15 +18,20 @@ import org.openqa.selenium.support.ui.Wait;
 
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
+import com.pentaho.gui.web.ctools.cde.CDEditor;
 import com.pentaho.gui.web.puc.BrowseFiles;
 
-public class WidgetUtils {
+public class Widgets {
   // The location of all widgets created through CDE Dashboard
-  private static final String FOLDER_WIDGETS = "/public/cde/widgets";
+  private final String widgetsFolder = "/public/cde/widgets";
   // Log instance
-  private static final Logger LOG = LogManager.getLogger( WidgetUtils.class );
-  // TODO 
-  private static Boolean firstTimeLoadingCDEDashboardEditor = true;
+  private final Logger log = LogManager.getLogger( Widgets.class );
+
+  /**
+   * Constructor
+   */
+  public Widgets() {
+  }
 
   /**
    * This method is responsible to remove the widget from 'Browse Files'.
@@ -35,12 +40,12 @@ public class WidgetUtils {
    * @param wait
    * @param widgetName
    */
-  public static void RemoveWidgetByName( final WebDriver driver, final String widgetName ) {
-    LOG.info( "RemoveWidgetByName::Enter" );
+  public void RemoveWidgetByName( final WebDriver driver, final String widgetName ) {
+    this.log.info( "RemoveWidgetByName::Enter" );
     BrowseFiles browser = new BrowseFiles( driver );
     browser.CheckShowHiddenFiles();
-    browser.DeleteMultipleFilesByName( FOLDER_WIDGETS, widgetName );
-    LOG.info( "RemoveWidgetByName::Exit" );
+    browser.DeleteMultipleFilesByName( this.widgetsFolder, widgetName );
+    this.log.info( "RemoveWidgetByName::Exit" );
   }
 
   /**
@@ -53,8 +58,7 @@ public class WidgetUtils {
    * @param paramName
    * @return
    */
-  public static WebDriver CreateWidgetWithParameter( WebDriver driver, String widgetName, String paramName )
-    throws Exception {
+  public WebDriver CreateWidgetWithParameter( WebDriver driver, String widgetName, String paramName ) throws Exception {
     ElementHelper elemHelper = new ElementHelper();
     //Step 1 - Go to homepage
     driver.switchTo().defaultContent();
@@ -162,90 +166,19 @@ public class WidgetUtils {
    * This method shall create an widget with specific parameter.
    *
    * @param driver
-   * @param wait
-   * @param baseUrl
    * @param widgetName
-   * @param paramName
    * @return
    */
-  public static void CreateWidget( final WebDriver driver, final String widgetName ) {
-    LOG.info( "CreateWidget::Enter" );
-    ElementHelper elemHelper = new ElementHelper();
-
+  public void CreateWidget( final WebDriver driver, final String widgetName ) {
+    this.log.info( "CreateWidget::Enter" );
     //Open New CDE Dashboard
     WebDriver thedriver = driver.switchTo().defaultContent();
 
-    thedriver.get( PageUrl.CDE_DASHBOARD );
+    CDEditor cdeEditor = new CDEditor( thedriver );
+    cdeEditor.GoToNewCDE();
+    cdeEditor.SaveWidget( widgetName );
 
-    if ( firstTimeLoadingCDEDashboardEditor ) {
-      firstTimeLoadingCDEDashboardEditor = false;
-      try {
-        //TODO - remove this sleep after upgrade Selenium from version 2.44 to upper.
-        Thread.sleep( 8000 );
-      } catch ( InterruptedException e ) {
-        //e.printStackTrace();
-      }
-    }
-
-    //wait for some contents loaded
-    WebElement elemLogo = elemHelper.WaitForElementPresence( thedriver, By.cssSelector( "div.cdfdd-toolbar-logo" ) );
-    WebElement buttonSave = elemHelper.WaitForElementPresence( thedriver, By.id( "Save" ) );
-    WebElement buttonSaveAs = elemHelper.WaitForElementPresence( thedriver, By.id( "SaveAs" ) );
-    WebElement buttonReload = elemHelper.WaitForElementPresence( thedriver, By.id( "cdfdd-main-Reload" ) );
-    WebElement buttonSaveTemplate = elemHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Save as Template']" ) );
-    WebElement buttonApplyTemplate = elemHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Apply Template']" ) );
-    WebElement buttonAddResource = elemHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Add Resource']" ) );
-    WebElement buttonAddBoostrap = elemHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Add Bootstrap Panel']" ) );
-    WebElement buttonAddFreeForm = elemHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Add FreeForm']" ) );
-    WebElement buttonAddRow = elemHelper.WaitForElementPresence( thedriver, By.xpath( "//a[@title='Add Row']" ) );
-    WebElement buttonLayout = elemHelper.WaitForElementPresenceAndVisible( thedriver, By.xpath( "//div[@class='layoutPanelButton']" ) );
-    WebElement buttonComponents = elemHelper.WaitForElementPresenceAndVisible( thedriver, By.xpath( "//div[@class='componentsPanelButton']" ) );
-    WebElement buttonDatasources = elemHelper.WaitForElementPresenceAndVisible( thedriver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
-    assertNotNull( elemLogo );
-    assertNotNull( buttonSave );
-    assertNotNull( buttonSaveAs );
-    assertNotNull( buttonReload );
-    assertNotNull( buttonSaveTemplate );
-    assertNotNull( buttonApplyTemplate );
-    assertNotNull( buttonAddResource );
-    assertNotNull( buttonAddBoostrap );
-    assertNotNull( buttonAddFreeForm );
-    assertNotNull( buttonAddRow );
-    assertNotNull( buttonLayout );
-    assertNotNull( buttonComponents );
-    assertNotNull( buttonDatasources );
-
-    //Save the widget
-    elemHelper.Click( thedriver, By.id( "Save" ) );
-    //WaitFor popup visible
-    elemHelper.WaitForElementPresence( thedriver, By.id( "popupbox" ) );
-    elemHelper.WaitForElementPresence( thedriver, By.id( "popupfade" ) );
-    //We need to wait for the animation finish for the display popup
-    elemHelper.FindElement( thedriver, By.id( "popup" ) );
-    //Wait for contents display
-    elemHelper.WaitForElementPresenceAndVisible( thedriver, By.cssSelector( "li.directory.collapsed" ) );
-    elemHelper.ClickJS( thedriver, By.xpath( "//label[@for='widgetRadio']" ) );
-    // Wait for explorer disabled
-    elemHelper.WaitForElementInvisibility( thedriver, By.id( "saveAsFEContainer" ) );
-
-    //Insert file name
-    elemHelper.ClickAndSendKeys( thedriver, By.id( "fileInput" ), widgetName );
-    //Insert widget name
-    elemHelper.ClickAndSendKeys( thedriver, By.id( "componentInput" ), widgetName );
-    //Press OK (SAVING)
-    elemHelper.Click( thedriver, By.id( "popup_state0_buttonOk" ) );
-    //Wait for the pop-up exit
-    elemHelper.WaitForElementInvisibility( thedriver, By.id( "popupbox" ) );
-
-    //Wait For the NotifyBar not present
-    elemHelper.WaitForElementNotPresent( thedriver, By.id( "notifyBar" ) );
-
-    //Wait for the page refreshed
-    elemHelper.WaitForTextPresence( thedriver, By.cssSelector( "div.cdfdd-title" ), widgetName );
-    String widgetTitle = elemHelper.WaitForElementPresentGetText( thedriver, By.cssSelector( "div.cdfdd-title" ) );
-    assertEquals( widgetName, widgetTitle );
-
-    LOG.info( "CreateWidget::Exit" );
+    this.log.info( "CreateWidget::Exit" );
   }
 
   /**
@@ -257,7 +190,7 @@ public class WidgetUtils {
    * @param widgetName
    * @return
    */
-  public static WebDriver OpenWidgetEditMode( WebDriver driver, Wait<WebDriver> wait, String baseUrl, String widgetName ) {
+  public WebDriver OpenWidgetEditMode( WebDriver driver, Wait<WebDriver> wait, String baseUrl, String widgetName ) {
     ElementHelper elemHelper = new ElementHelper();
     //Resuming Steps
     // 1. open the widget

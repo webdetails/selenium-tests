@@ -58,8 +58,15 @@ public class CDEditor {
     LOG.debug( "Enter: GoToNewCDE" );
     String currUrl = this.driver.getCurrentUrl();
     if ( currUrl != PageUrl.CDE_DASHBOARD ) {
-      this.driver.get( PageUrl.CDE_DASHBOARD );
+      this.elemHelper.Get( this.driver, PageUrl.CDE_DASHBOARD );
       this.elemHelper.WaitForElementInvisibility( this.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+
+      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.cdfdd-toolbar-logo" ) );
+      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "Save" ) );
+      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "SaveAs" ) );
+      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "cdfdd-main-Reload" ) );
+      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "#table-cdfdd-layout-treeOperations > a" ) );
+      this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "div.layoutPanelButton" ) );
     }
   }
 
@@ -118,6 +125,38 @@ public class CDEditor {
     WebElement okButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='popupbuttons']/button[@id='popup_state0_buttonOk']" ) );
     okButton.click();
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='popupbuttons']" ) );
+  }
+
+  /**
+   * This method shall save the current opened CDE into a widget.
+   * 
+   * @param widgetName - the widget name to save
+   */
+  public void SaveWidget( String widgetName ) {
+    //Save the widget
+    this.elemHelper.Click( this.driver, By.id( "Save" ) );
+    //WaitFor popup visible
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popupbox" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popupfade" ) );
+    //We need to wait for the animation finish for the display popup
+    this.elemHelper.FindElement( this.driver, By.id( "popup" ) );
+    //Wait for contents display
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "li.directory.collapsed" ) );
+    this.elemHelper.ClickJS( this.driver, By.xpath( "//label[@for='widgetRadio']" ) );
+    // Wait for explorer disabled
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "saveAsFEContainer" ) );
+
+    //Insert file name
+    this.elemHelper.ClickAndSendKeys( this.driver, By.id( "fileInput" ), widgetName );
+    //Insert widget name
+    this.elemHelper.ClickAndSendKeys( this.driver, By.id( "componentInput" ), widgetName );
+    //Press OK (SAVING)
+    this.elemHelper.ClickJS( this.driver, By.id( "popup_state0_buttonOk" ) );
+    //Wait for the pop-up exit
+    this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "popupbox" ) );
+
+    //Wait For the NotifyBar not present
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "notifyBar" ) );
   }
 
   /**
@@ -408,6 +447,12 @@ public class CDEditor {
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='popupTemplatemessage']" ) );
   }
 
+  /**
+   * This method shall access to the displayed popup and return all information
+   * displayed. After read the information display, dismiss the popup.
+   * 
+   * @return A object of type Popup with information displayed.
+   */
   public Popup Popup() {
     Popup dialogPopup = null;
     WebElement popup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup" ) );
@@ -425,12 +470,33 @@ public class CDEditor {
     return dialogPopup;
   }
 
+  /**
+   * Verify if the popup dialog is present.
+   * 
+   * @return true if the popup is present.
+   */
   public boolean PopupPresent() {
     return ( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "popup" ), 2 ) != null ) ? true
         : false;
   }
 
+  /**
+   * Verify if the popup dialog is not present.
+   * 
+   * @return true if popup dialog is not present.
+   */
   public boolean PopupNotPresent() {
     return this.elemHelper.WaitForElementNotPresent( this.driver, By.id( "popup" ), 2 );
+  }
+
+  /**
+   * This method shall return the Dashboard or Widget title in the opened CDE Editor.
+   * 
+   * @return The name displayed in CDE Editor for the sample.
+   */
+  public String Title() {
+    //Wait for the page refreshed
+    String title = this.elemHelper.WaitForTextDifferentEmpty( this.driver, By.cssSelector( "div.cdfdd-title" ) );
+    return title;
   }
 }

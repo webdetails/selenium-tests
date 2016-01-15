@@ -13,8 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.cde.widgets.utils.WidgetUtils;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.gui.web.ctools.cde.utils.Widgets;
 
 /**
  * NOTE - The test was created regarding issue CDE-302
@@ -56,11 +56,12 @@ public class SimpleExtensionPoints {
    */
   @Test
   public void tc1_AddSimpleExtensionPoint_ExtensionPointAdded() throws Exception {
+    Widgets widgets = new Widgets();
     //##Step 0 - Delete the widget
-    WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
+    widgets.RemoveWidgetByName( this.driver, this.widgetName );
 
     //##Step 1 - Create a widget
-    WidgetUtils.CreateWidget( this.driver, this.widgetName );
+    widgets.CreateWidget( this.driver, this.widgetName );
 
     //##Step 2 - Add a chart
     // Click in Datasources panel and add a CDA Datasource
@@ -123,7 +124,7 @@ public class SimpleExtensionPoints {
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "notifyBar" ) );
 
     //## Step 4 - Check if the value persist
-    this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
+    this.driver = widgets.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) ) );
     final WebElement frameCDEDashboard = this.driver.findElement( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) );
     this.driver.switchTo().frame( frameCDEDashboard );
@@ -181,8 +182,9 @@ public class SimpleExtensionPoints {
    */
   @Test
   public void tc2_EditSimpleExtensionPoint_ExtensionPointEditable() throws Exception {
+    Widgets widgets = new Widgets();
     //##Step 1 - Access to widget in Edit mode
-    this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
+    this.driver = widgets.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
 
     //##Step 2 - Change the extension point value
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) ) );
@@ -240,7 +242,7 @@ public class SimpleExtensionPoints {
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "notifyBar" ) );
 
     //## Step 3 - Check if the value persist
-    this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
+    this.driver = widgets.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) ) );
     frameCDEDashboard = this.driver.findElement( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) );
     this.driver.switchTo().frame( frameCDEDashboard );

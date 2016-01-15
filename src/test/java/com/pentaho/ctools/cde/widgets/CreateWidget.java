@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.cde.widgets.utils.WidgetUtils;
+import com.pentaho.gui.web.ctools.cde.utils.Widgets;
 
 /**
  * NOTE - The test was created regarding issue CDF-318
@@ -31,10 +31,11 @@ public class CreateWidget {
   @Test
   public void testCreateWidget() throws Exception {
     //Step 0 - Delete the widget
-    WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
+    Widgets widgets = new Widgets();
+    widgets.RemoveWidgetByName( this.driver, this.widgetName );
 
     //Create widget with specific parameter
-    this.driver = WidgetUtils.CreateWidgetWithParameter( this.driver, this.widgetName, this.paramName );
+    this.driver = widgets.CreateWidgetWithParameter( this.driver, this.widgetName, this.paramName );
   }
 
   @Test
@@ -43,8 +44,8 @@ public class CreateWidget {
     // 1. open the widget
     // 2. check if the parameter exist in settings
     // 3. check if the widget exist in 'widgets' at Component Layout
-
-    this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
+    Widgets widgets = new Widgets();
+    this.driver = widgets.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
 
     //Step 3 - Check if the parameter exist in 'Settings'
     //Move to the iframe

@@ -11,8 +11,8 @@ import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.cde.widgets.utils.WidgetUtils;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.gui.web.ctools.cde.utils.Widgets;
 
 /**
  * NOTE - The test was created regarding issue CDE-140
@@ -34,8 +34,9 @@ public class SelectCdaFileAsDatasource {
    */
   @BeforeClass
   public void setUpClass() {
+    Widgets widgets = new Widgets();
     // ##Step 0 - Delete the widget
-    WidgetUtils.RemoveWidgetByName( this.driver, this.widgetName );
+    widgets.RemoveWidgetByName( this.driver, this.widgetName );
   }
 
   /**
@@ -54,11 +55,13 @@ public class SelectCdaFileAsDatasource {
    */
   @Test
   public void tc1_SelectCdaFileAsDatasource_PathOfCdaFileCorrect() throws Exception {
+    Widgets widgets = new Widgets();
+
     // ##Step 1 - Create widget with specific parameter
-    WidgetUtils.CreateWidget( this.driver, this.widgetName );
+    widgets.CreateWidget( this.driver, this.widgetName );
 
     // ##Step 2 - Access the widget
-    this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
+    this.driver = widgets.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
 
     // ##Step 3 - Click in Datasources panel and add a CDA Datasource
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) ) );
@@ -108,7 +111,7 @@ public class SelectCdaFileAsDatasource {
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "notifyBar" ) );
 
     // ## Step 5 - Check if the file persist after SAVE widget
-    this.driver = WidgetUtils.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
+    this.driver = widgets.OpenWidgetEditMode( this.driver, this.wait, this.baseUrl, this.widgetName );
     // Open
     this.wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) ) );
     frameCDEDashboard = this.driver.findElement( By.xpath( "//div[@id='solutionNavigatorAndContentPanel']/div[4]/table/tbody/tr[2]/td/div/div/table/tbody/tr/td/iframe" ) );
