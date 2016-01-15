@@ -111,7 +111,7 @@ public class CDE286 extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/h3/span" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/div/ul/li[24]/a[@title='CGG Dial Chart']" ) );
     String componentName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[2]/td" ) );
-    assertEquals( "CGG Dial Chart", componentName );
+    assertEquals( componentName, "CGG Dial Component" );
 
     //Add Name
     String expectedChartName = "dial";
@@ -232,7 +232,7 @@ public class CDE286 extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@id='cggDialog']/div/input" ) );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='cggDialog']/div/button" ) );
     String actualUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='cggDialog']/div/div/input" ), "value" );
-    String expectedURL = "http://localhost:8080/pentaho/plugin/cgg/api/services/draw?script=/system/pentaho-cdf-dd/resources/custom/components/cgg/charts/dial.js&paramcolors=" + strColor3 + "&paramcolors=" + strColor2 + "&paramcolors=" + strColor1 + "&paramscale=" + strInterval3 + "&paramscale=" + strInterval2 + "&paramscale=" + strInterval1 + "&paramscale=" + strInterval0 + "&height=" + expectedHeight + "&width=" + expectedWidth + "&outputType=png";
+    String expectedURL = baseUrl + "plugin/cgg/api/services/draw?script=/system/pentaho-cdf-dd/resources/custom/components/cgg/charts/dial.js&paramcolors=" + strColor3 + "&paramcolors=" + strColor2 + "&paramcolors=" + strColor1 + "&paramscale=" + strInterval3 + "&paramscale=" + strInterval2 + "&paramscale=" + strInterval1 + "&paramscale=" + strInterval0 + "&height=" + expectedHeight + "&width=" + expectedWidth + "&outputType=png";
     assertEquals( expectedURL, actualUrl );
 
     /*
@@ -242,7 +242,7 @@ public class CDE286 extends BaseTest {
     WebElement elemImg = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
     assertNotNull( elemImg );
     String actualImgUrl = this.elemHelper.GetAttribute( driver, By.cssSelector( "img" ), "src" );
-    assertEquals( expectedURL + "&paramvalue=25", actualImgUrl );
+    assertEquals( actualImgUrl, expectedURL + "&paramvalue=25" );
 
   }
 
