@@ -31,6 +31,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 import com.pentaho.selenium.ConfigurationSettings;
 
@@ -57,12 +58,15 @@ public class VisualizationAPIComponent extends BaseTest {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
     // The URL for the VisualizationAPIComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/VisualizationAPIComponent
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A60-VisualizationAPIComponent%3Avisualization_component.xcdf/generatedContent" );
+    // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/VisualizationAPIComponent
+    this.elemHelper.Get( driver, PageUrl.VISUALIZATION_API_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 15 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+
+    //Wait for button sample to render with properly css
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ) );
   }
 
   /**
