@@ -1526,6 +1526,32 @@ public class ElementHelper {
   }
 
   /**
+   * This method find the element and sendkeys.
+   * 
+   * @param driver
+   * @param locator
+   * @param text
+   */
+  public void SendKeysAndSubmit( final WebDriver driver, final By locator, final CharSequence... keysToSend ) {
+    this.log.debug( "SendKeysAndSubmit::Enter" );
+
+    try {
+      WebElement element = WaitForElementPresenceAndVisible( driver, locator );
+      if ( element != null ) {
+        element.clear();
+        element.sendKeys( keysToSend );
+        element.submit();
+      } else {
+        this.log.error( "Element is null!" );
+      }
+    } catch ( StaleElementReferenceException e ) {
+      this.log.warn( "Stale Element Reference Exception" );
+      SendKeysAndSubmit( driver, locator, keysToSend );
+    }
+    this.log.debug( "SendKeysAndSubmit::Exit" );
+  }
+
+  /**
    * This method find the element and clear the contents in the element 
    * (input or textarea).
    * 
