@@ -97,8 +97,6 @@ public class CDE149 extends BaseTest {
      */
     //Add MDX query element and click Parameters
     this.elemHelper.ClickElementInvisible( driver, By.xpath( "//a[@title='denormalizedMdx over mondrianJdbc']" ) );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Parameters to be sent to the xaction']" ) );
-    assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[9]/td[2]" ) );
     assertNotNull( element );
     this.elemHelper.Click( driver, By.xpath( "//table[@id='table-cdfdd-datasources-properties']/tbody/tr[9]/td[2]" ) );
@@ -114,10 +112,10 @@ public class CDE149 extends BaseTest {
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "popup_state0_buttonCancel" ) );
     assertNotNull( element );
-    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//button[@class='popup-add-row-button']" ) );
+    element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#popup_state_state0 button.popup-add-row-button" ) );
     assertNotNull( element );
     for ( int i = 1; i <= 16; i++ ) {
-      this.elemHelper.Click( driver, By.xpath( "//button[@class='popup-add-row-button']" ) );
+      this.elemHelper.Click( driver, By.cssSelector( "#popup_state_state0 button.popup-add-row-button" ) );
     }
 
     /*
