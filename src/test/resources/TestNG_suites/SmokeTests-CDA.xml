@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="SmokeTests-CE" verbose="2">
+	<!-- Listener to validate it test case fail and take screenshot -->
+	<listeners>
+		<listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
+	</listeners>
+
+	<test name="All CE Tests" preserve-order="true" parallel="false">
+		<classes>
+			<!-- LOGIN -->
+			<class name="com.pentaho.ctools.main.LoginPentaho" />
+			<!-- CDA -->
+			<class name="com.pentaho.ctools.cda.CDADatasourceTest" />
+			<class name="com.pentaho.ctools.cda.MondrianJNDI" />
+			<class name="com.pentaho.ctools.cda.CDACacheManager" />
+			<!-- LOGOUT -->
+			<class name="com.pentaho.ctools.main.LogoutPentaho" />
+		</classes>
+	</test>
+</suite>
