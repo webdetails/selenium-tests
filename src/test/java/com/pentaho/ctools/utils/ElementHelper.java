@@ -21,7 +21,9 @@
  ******************************************************************************/
 package com.pentaho.ctools.utils;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -1783,5 +1785,46 @@ public class ElementHelper {
     }
     this.log.debug( "WaitForAlert::Exit" );
     return alert;
+  }
+
+  /**
+   * This method shall select a new window that has opened and return the handle for the parent window.
+   * 
+   * The handle should be stored in a string so we can go back to the parent window afterwards
+   * using the SelectParentWindow method
+   * 
+   * @param driver
+   * @return parentWindow
+   */
+  public String SelectNewWindow( final WebDriver driver ) {
+    String parentWindowHandle = driver.getWindowHandle();
+    Set<String> listWindows = driver.getWindowHandles();
+    WaitForNewWindow( driver );
+    listWindows = driver.getWindowHandles();
+    // Get the windowHandler of the new open window
+    Iterator<String> iterWindows = listWindows.iterator();
+    while ( iterWindows.hasNext() ) {
+      String windowHandle = iterWindows.next();
+      if ( windowHandle.equals( parentWindowHandle ) == false ) {
+        driver.switchTo().window( windowHandle );
+        break;
+      }
+    }
+    return parentWindowHandle;
+  }
+
+  /**
+   * This method shall close current window and select previous window to carry on testing
+   * 
+   * @param driver
+   * @param parentWindow
+   */
+  public void SelectParentWindow( final WebDriver driver, final String parentWindow ) {
+    // Need guarantee we close everything
+    WebDriver previewWindow = null;
+    String currentWindowHandle = driver.getWindowHandle();
+    previewWindow = driver.switchTo().window( currentWindowHandle );
+    previewWindow.close();
+    driver.switchTo().window( parentWindow );
   }
 }
