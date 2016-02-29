@@ -228,33 +228,76 @@ public class ElementHelper {
    * @return
    */
   public WebElement FindElementInvisible( WebDriver driver, By locator ) {
+    this.log.debug( "FindElementInvisible(Main)::Enter" );
+    WebElement element = FindElementInvisible( driver, locator, 30, 150 );
+    this.log.debug( "FindElementInvisible(Main)::Exit" );
+    return element;
+  }
+
+  /**
+   * This method works as a wrapper for findElement method of WebDriver.
+   * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
+   * the element is not ready in DOM. Hence, to prevent exception, we develop
+   * a function that is the same of findElement but avoid this exception.
+   *
+   * @param driver
+   * @param locator
+   * @return
+   */
+  public WebElement FindElementInvisible( WebDriver driver, By locator, Integer timeout ) {
+    this.log.debug( "FindElementInvisible(Main2)::Enter" );
+    WebElement element = FindElementInvisible( driver, locator, timeout, 150 );
+    this.log.debug( "FindElementInvisible(Main2)::Exit" );
+    return element;
+  }
+
+  /**
+   * This method works as a wrapper for findElement method of WebDriver.
+   * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
+   * the element is not ready in DOM. Hence, to prevent exception, we develop
+   * a function that is the same of findElement but avoid this exception.
+   *
+   * @param driver
+   * @param locator
+   * @return
+   */
+  public WebElement FindElementInvisible( WebDriver driver, By locator, Integer timeout, final Integer pollingTime ) {
     this.log.debug( "FindElementInvisible::Enter" );
     this.log.debug( "Locator: " + locator.toString() );
 
     WebElement element = null;
+    ExecutorService executor = null;
+    RunnableFindElementInvisible r = new RunnableFindElementInvisible( driver, timeout, pollingTime, locator );
+
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
-      WaitForElementPresence( driver, locator );
-      this.log.debug( "Element is presence!" );
-      List<WebElement> listElements = driver.findElements( locator );
-      if ( listElements.size() > 0 ) {
-        WebElement elementTmp = listElements.get( 0 );
-        if ( elementTmp.isEnabled() ) {
-          this.log.debug( "Return element found it" );
-          element = elementTmp;
-        } else {
-          this.log.warn( "Trying again! Enabled:" + elementTmp.isEnabled() );
-          element = FindElementInvisible( driver, locator );
-        }
+      executor = Executors.newSingleThreadExecutor();
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
+      element = r.getInvisbleElement();
+    } catch ( InterruptedException ie ) {
+      this.log.warn( "Interrupted Exception" );
+      this.log.warn( ie.toString() );
+    } catch ( ExecutionException ee ) {
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
+        this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
       } else {
-        this.log.warn( "No element found!" );
+        this.log.warn( "Execution Exception" );
+        this.log.warn( ee.toString() );
       }
-    } catch ( StaleElementReferenceException s ) {
-      this.log.warn( "Stale - got one. Locator: " + locator.toString() );
-      element = FindElementInvisible( driver, locator );
-    } catch ( TimeoutException te ) {
-      this.log.warn( "TimeoutException - got one. Locator: " + locator.toString() );
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      this.log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      this.log.warn( cte.toString() );
+    } catch ( Exception e ) {
+      this.log.error( "Exception" );
+      this.log.catching( e );
     }
+
+    if ( executor != null ) {
+      executor.shutdown();
+    }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     this.log.debug( "FindElementInvisible::Exit" );
     return element;
