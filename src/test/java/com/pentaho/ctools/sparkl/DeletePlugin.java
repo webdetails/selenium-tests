@@ -21,12 +21,15 @@
  ******************************************************************************/
 package com.pentaho.ctools.sparkl;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
 import com.pentaho.gui.web.puc.Sparkl;
-import com.pentaho.gui.web.puc.sparkl.PluginInfo;
+import com.pentaho.gui.web.puc.sparkl.PluginCard;
 import com.pentaho.selenium.BaseTest;
 
 public class DeletePlugin extends BaseTest {
@@ -42,40 +45,34 @@ public class DeletePlugin extends BaseTest {
    *    This test will validate the ability to edit existing plugins
    *
    * Steps:
-   *    1. Open Sparkl in Edit mode and assert layout
-   *    2. Assert saving of plugin information
-   *    3. Assert layout of elements view
-   *    4. Open existing dashboard and endpoint
-   *    5. Edit existing dashboard and endpoint
-   *    6. Create new dashboard and endpoint
-   *    7. Delete new dashboard and endpoint
+   *    1. Open Sparkl and assert desired plugin exists
+   *    2. Delete Plugin and assert messages sent to user
+   *    3. Assert Plugin is no longer present
    */
   @Test
-  public void tc1_Sparkl_Edit() {
-    this.log.info( "tc1_Sparkl_Edit" );
+  public void tc1_Sparkl_DeletePlugin() {
+    this.log.info( "tc1_Sparkl_DeletePlugin" );
 
     /*
      *  Step 1
      */
     Sparkl sparkl = new Sparkl( driver );
-
-    sparkl.GoToEditPage( "sparkl" );
+    sparkl.OpenSparkl();
+    PluginCard plugin = new PluginCard( "TestPlugin", "testPlugin", "this is the description" );
+    if ( !sparkl.PluginCardExists( plugin ) ) {
+      plugin.setName( "ATest" );
+    }
 
     /*
      *  Step 2
      */
-    String testString = "testtesttesttest";
-    PluginInfo currentInfo = sparkl.GetPluginInfo();
-    PluginInfo newPlugin = new PluginInfo( testString, testString, testString, testString, testString, testString, testString, testString );
-    sparkl.CheckEditAbout();
+    String confirm = sparkl.DeletePlugin( plugin );
+    assertEquals( "Are you sure you want to delete the plugin ?", confirm );
 
     /*
      *  Step 3
      */
-    sparkl.CheckEditElement();
-
-    /*
-     *  Step 4
-     */
+    //Failing test due to http://jira.pentaho.com/browse/SPARKL-141. Plugin needs to be removed by hand at the end of testing.
+    assertFalse( sparkl.PluginExists( plugin ) );
   }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Everyday Testing" verbose="2" preserve-order="true"
+	parallel="false">
+	<!-- Listener to validate it test case fail and take screenshot -->
+	<listeners>
+		<listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
+	</listeners>
+
+	<test name="Tests regarding Sparkl">
+		<classes>
+			<class name="com.pentaho.ctools.main.LoginPentaho" />
+			<class name="com.pentaho.ctools.sparkl.SparklMain" />
+			<class name="com.pentaho.ctools.sparkl.PluginDetails" />
+			<class name="com.pentaho.ctools.sparkl.CreateElement" />
+			<class name="com.pentaho.ctools.sparkl.DeleteElement" />
+			<class name="com.pentaho.ctools.sparkl.CreatePlugin" />
+			<class name="com.pentaho.ctools.sparkl.DeletePlugin" />
+			<class name="com.pentaho.ctools.main.LogoutPentaho" />
+		</classes>
+	</test>
+
+</suite>

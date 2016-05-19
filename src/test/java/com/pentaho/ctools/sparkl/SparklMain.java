@@ -33,6 +33,7 @@ import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.gui.web.puc.Sparkl;
+import com.pentaho.gui.web.puc.sparkl.PluginCard;
 import com.pentaho.selenium.BaseTest;
 
 public class SparklMain extends BaseTest {
@@ -91,31 +92,28 @@ public class SparklMain extends BaseTest {
      */
     Sparkl sparkl = new Sparkl( driver );
     sparkl.OpenSparkl();
+    PluginCard pluginSparkl = new PluginCard( "Sparkl", "sparkl", "Create and explore pentaho plugins." );
 
-    //Check id, title and description
-    sparkl.PluginCardExists( "Sparkl" );
-    String pluginId = sparkl.PluginCardId( "Sparkl" );
-    assertEquals( "Sparkl", pluginId );
-    String pluginTitle = sparkl.PluginCardTitle( "Sparkl" );
-    assertEquals( "sparkl", pluginTitle );
-    String pluginDescription = sparkl.PluginCardDescription( "Sparkl" );
-    assertEquals( "Create and explore pentaho plugins.", pluginDescription );
+    //Check id, title and description of multiple plugins
+    assertTrue( sparkl.PluginCardExists( pluginSparkl ) );
+    PluginCard shownPlugin = sparkl.GetPluginCard( pluginSparkl );
+    assertEquals( pluginSparkl, shownPlugin );
 
     /*
      *  Step 2
      */
     //Run Sparkl
-    String mainDashUrl = sparkl.RunPlugin( "Sparkl" );
+    String mainDashUrl = sparkl.RunPlugin( pluginSparkl );
     assertEquals( "http://localhost:8080/pentaho/plugin/sparkl/api/main", mainDashUrl );
 
     //Edit Sparkl
-    sparkl.GoToEditPage( "Sparkl" );
+    sparkl.GoToEditPage( pluginSparkl );
     WebElement editTitle = this.elemHelper.FindElement( driver, By.cssSelector( "div.pluginId" ) );
     assertNotNull( editTitle );
     sparkl.CloseEditPage();
 
     //Delete and cancel deletion of Sparkl
-    String confirmationMessage = sparkl.DeleteCancel( "Sparkl" );
+    String confirmationMessage = sparkl.DeleteCancelPlugin( pluginSparkl );
     assertEquals( "Are you sure you want to delete the plugin ?", confirmationMessage );
   }
 

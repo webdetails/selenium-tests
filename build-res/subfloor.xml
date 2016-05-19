@@ -418,6 +418,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest" />
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/atest1" />
 		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/CDE404" />
+		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/aTest" />
+		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/dTest" />
+		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/yTest" />
+		<delete dir="${pentaho.bi.server.dir}/pentaho-solutions/system/testPlugin" />
 	</target>
 
 
