@@ -108,12 +108,12 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@id= &quot;fileBrowserFiles&quot;]//div[contains(text(),'#Welcome')]</td>
-	<td>#Welcome</td>
+	<td>//*[@PATH=&quot;/public/ctools-samples/CDE Tutorial/01-welcome.wcdf&quot;]/div[contains(text(),'01-welcome')]</td>
+	<td>01-welcome</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id= &quot;fileBrowserFiles&quot;]//div[contains(text(),'#Welcome')]</td>
+	<td>//*[@PATH=&quot;/public/ctools-samples/CDE Tutorial/01-welcome.wcdf&quot;]/div[contains(text(),'01-welcome')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -138,13 +138,13 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@id= &quot;content&quot;]/div/div/div/h2</td>
-	<td>Welcome to the CDE Tutorial.</td>
+	<td>//div[@id= &quot;mainContent&quot;]/h1</td>
+	<td>Welcome</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id= &quot;content&quot;]/div/div/div/h2</td>
-	<td>Welcome to the CDE Tutorial.</td>
+	<td>//div[@id= &quot;mainContent&quot;]/h1</td>
+	<td>Welcome</td>
 </tr>
 </tbody></table>
 </body>

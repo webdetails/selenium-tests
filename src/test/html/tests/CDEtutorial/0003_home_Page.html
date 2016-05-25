@@ -62,11 +62,133 @@
 	<td>css=div.pentaho-tabWidgetLabel</td>
 	<td>CDA Cache</td>
 </tr>
+<!--Open "01-welcome"-->
 <tr>
 	<td>open</td>
-	<td>pentaho/api/repos/%3Apublic%3Actools-samples%3ADashboards%3Awelcome.wcdf/generatedContent</td>
+	<td>pentaho/Home</td>
 	<td></td>
 </tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.custom-dropdown-label</td>
+	<td>Home</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//button[contains(text(),'Browse Files')]</td>
+	<td>Browse Files</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[contains(text(),'Browse Files')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;fileBrowser&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id=&quot;fileBrowser&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFolders']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFiles']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserButtons']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='spinner large-spinner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='spinner large-spinner'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Tutorial')]</td>
+	<td>CDE Tutorial</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Tutorial')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//*[@PATH=&quot;/public/ctools-samples/CDE Tutorial/01-welcome.wcdf&quot;]/div[contains(text(),'01-welcome')]</td>
+	<td>01-welcome</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//*[@PATH=&quot;/public/ctools-samples/CDE Tutorial/01-welcome.wcdf&quot;]/div[contains(text(),'01-welcome')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserButtons&quot;]/div/button</td>
+	<td>Open</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserButtons&quot;]/div/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=//div[@class='busy-indicator-container waitPopup']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>xpath=//div[@class='busy-indicator-container waitPopup']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;mainContent&quot;]/h1</td>
+	<td>Welcome</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id= &quot;mainContent&quot;]/h1</td>
+	<td>Welcome</td>
+</tr>
+<!--END Open "01-welcome"-->
 <tr>
 	<td>waitForElementNotPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
@@ -75,12 +197,57 @@
 <!--Verificar Links Sidebar-->
 <tr>
 	<td>assertText</td>
-	<td>link=Welcome</td>
+	<td>//*[@id='sideMenu']/ul/a[1]/li</td>
+	<td>1. Welcome</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//*[@id='sideMenu']/ul/a[1]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
 	<td>Welcome</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//*[@id='sideMenu']/ul/a[2]/li</td>
+	<td>2. The CDE Interface</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>link=Welcome</td>
+	<td>//*[@id='sideMenu']/ul/a[2]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
@@ -89,28 +256,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Welcome to the CDE Tutorial.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>link=The CDE Interface</td>
-	<td>The CDE Interface</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=The CDE Interface</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -120,27 +267,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
 	<td>The CDE Interface</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
 	<td>The CDE Interface</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Hello World!</td>
-	<td>Hello World!</td>
+	<td>//*[@id='sideMenu']/ul/a[3]/li</td>
+	<td>3. Hello World</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Hello World!</td>
+	<td>//*[@id='sideMenu']/ul/a[3]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -150,27 +307,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Hello, World!</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Hello World</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Hello, World!</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Hello World</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=A simple one-chart dashboard</td>
-	<td>A simple one-chart dashboard</td>
+	<td>//*[@id='sideMenu']/ul/a[4]/li</td>
+	<td>4. A One-Chart Dashboard</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=A simple one-chart dashboard</td>
+	<td>//*[@id='sideMenu']/ul/a[4]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -180,27 +347,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>A simple one-chart dashboard</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>A One-Chart Dashboard</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>A simple one-chart dashboard</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>A One-Chart Dashboard</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Adding more charts</td>
-	<td>Adding more charts</td>
+	<td>//*[@id='sideMenu']/ul/a[5]/li</td>
+	<td>5. Adding Charts</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Adding more charts</td>
+	<td>//*[@id='sideMenu']/ul/a[5]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -210,27 +387,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Adding more charts</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Adding Charts</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Adding more charts</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Adding Charts</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Reacting to parameters</td>
-	<td>Reacting to parameters</td>
+	<td>//*[@id='sideMenu']/ul/a[6]/li</td>
+	<td>6. Reacting to Parameters</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Reacting to parameters</td>
+	<td>//*[@id='sideMenu']/ul/a[6]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -240,27 +427,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Reacting to parameters</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Reacting to Parameters</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Reacting to parameters</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Reacting to Parameters</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Making the charts talk to each other</td>
-	<td>Making the charts talk to each other</td>
+	<td>//*[@id='sideMenu']/ul/a[7]/li</td>
+	<td>7. Making the Charts Talk to Each Other</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Making the charts talk to each other</td>
+	<td>//*[@id='sideMenu']/ul/a[7]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -270,27 +467,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Making the charts talk to each other</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Making the Charts Talk to Each Other</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Making the charts talk to each other</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Making the Charts Talk to Each Other</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Understanding layout engine</td>
-	<td>Understanding layout engine</td>
+	<td>//*[@id='sideMenu']/ul/a[8]/li</td>
+	<td>8. Understanding Layout Engine</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Understanding layout engine</td>
+	<td>//*[@id='sideMenu']/ul/a[8]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -300,27 +507,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
 	<td>Understanding Layout Engine</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
 	<td>Understanding Layout Engine</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Adding external resources</td>
-	<td>Adding external resources</td>
+	<td>//*[@id='sideMenu']/ul/a[9]/li</td>
+	<td>9. Adding External Resources</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Adding external resources</td>
+	<td>//*[@id='sideMenu']/ul/a[9]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -330,27 +547,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Adding external resources</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Adding External Resources</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Adding external resources</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Adding External Resources</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=CCC Grand Tour: Enhancing charts</td>
-	<td>CCC Grand Tour: Enhancing charts</td>
+	<td>//*[@id='sideMenu']/ul/a[10]/li</td>
+	<td>10. CCC: Enhancing Charts</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=CCC Grand Tour: Enhancing charts</td>
+	<td>//*[@id='sideMenu']/ul/a[10]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -360,27 +587,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Charting: the CCC Grand Tour</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CCC: Enhancing Charts</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Charting: the CCC Grand Tour</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CCC: Enhancing Charts</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=CCC Grand Tour: Extension points</td>
-	<td>CCC Grand Tour: Extension points</td>
+	<td>//*[@id='sideMenu']/ul/a[11]/li</td>
+	<td>11. CCC: Extension Points</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=CCC Grand Tour: Extension points</td>
+	<td>//*[@id='sideMenu']/ul/a[11]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -390,27 +627,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>The CCC Grand Tour: Adding extension points</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CCC: Extension Points</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>The CCC Grand Tour: Adding extension points</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CCC: Extension Points</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=CCC Grand Tour: Configuring datasets</td>
-	<td>CCC Grand Tour: Configuring datasets</td>
+	<td>//*[@id='sideMenu']/ul/a[12]/li</td>
+	<td>12. CCC: Configuring Datasets</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=CCC Grand Tour: Configuring datasets</td>
+	<td>//*[@id='sideMenu']/ul/a[12]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -420,27 +667,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>The CCC Grand Tour: Configuring the datasets</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CCC: Configuring Datasets</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>The CCC Grand Tour: Configuring the datasets</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CCC: Configuring Datasets</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=exact:Datasources: Using CDA</td>
-	<td>Datasources: Using CDA</td>
+	<td>//*[@id='sideMenu']/ul/a[13]/li</td>
+	<td>13. CDA: Datasources</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=exact:Datasources: Using CDA</td>
+	<td>//*[@id='sideMenu']/ul/a[13]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -450,27 +707,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Datasources: Using CDA</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CDA: Datasources</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Datasources: Using CDA</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CDA: Datasources</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Understanding the CDA Editor</td>
-	<td>Understanding the CDA Editor</td>
+	<td>//*[@id='sideMenu']/ul/a[14]/li</td>
+	<td>14. CDA: The Editor</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Understanding the CDA Editor</td>
+	<td>//*[@id='sideMenu']/ul/a[14]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -480,27 +747,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Understanding the CDA Editor</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CDA: The Editor</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Understanding the CDA Editor</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>CDA: The Editor</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Creating tables</td>
-	<td>Creating tables</td>
+	<td>//*[@id='sideMenu']/ul/a[15]/li</td>
+	<td>15. Creating Tables</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Creating tables</td>
+	<td>//*[@id='sideMenu']/ul/a[15]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -510,27 +787,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Using Tables for Displaying Data</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Creating Tables</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Using Tables for Displaying Data</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Creating Tables</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Using table add-ins</td>
-	<td>Using table add-ins</td>
+	<td>//*[@id='sideMenu']/ul/a[16]/li</td>
+	<td>16. Using Table Add-ins</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Using table add-ins</td>
+	<td>//*[@id='sideMenu']/ul/a[16]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -540,27 +827,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
 	<td>Using Table Add-ins</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
 	<td>Using Table Add-ins</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Creating components</td>
-	<td>Creating components</td>
+	<td>//*[@id='sideMenu']/ul/a[17]/li</td>
+	<td>17. Creating Add-Ins</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Creating components</td>
+	<td>//*[@id='sideMenu']/ul/a[17]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -570,27 +867,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Creating components</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Creating Add-ins</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Creating components</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Creating Add-ins</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Creating an add-In</td>
-	<td>Creating an add-In</td>
+	<td>//*[@id='sideMenu']/ul/a[18]/li</td>
+	<td>18. Creating Components</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Creating an add-In</td>
+	<td>//*[@id='sideMenu']/ul/a[18]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -600,27 +907,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Creating an Add-In</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Creating Components</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Creating an Add-In</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Creating Components</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Getting the most out of CDA</td>
-	<td>Getting the most out of CDA</td>
+	<td>//*[@id='sideMenu']/ul/a[19]/li</td>
+	<td>19. Getting the Most out of CDA</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Getting the most out of CDA</td>
+	<td>//*[@id='sideMenu']/ul/a[19]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -630,27 +947,37 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Getting the most out of CDA</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Getting the Most out of CDA</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Getting the most out of CDA</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Getting the Most out of CDA</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Where to go from here</td>
-	<td>Where to go from here</td>
+	<td>//*[@id='sideMenu']/ul/a[20]/li</td>
+	<td>20. Where to Go From Here</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Where to go from here</td>
+	<td>//*[@id='sideMenu']/ul/a[20]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>15000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>300000</td>
 	<td></td>
 </tr>
 <tr>
@@ -660,14 +987,15 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>Where to go from here!</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Where to Go From Here</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Where to go from here!</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>Where to Go From Here</td>
 </tr>
+<!--END Left side links-->
 </tbody></table>
 </body>
 </html>
