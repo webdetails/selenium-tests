@@ -266,7 +266,7 @@ public class JFreeChartComponent extends BaseTest {
     }
 
     String attrSrcPopup = this.elemHelper.GetAttribute( popup, By.cssSelector( "img" ), "src" );
-    assertEquals( HttpStatus.SC_OK, HttpUtils.GetResponseCode( attrSrcPopup ) );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( attrSrcPopup ) );
     popup.close();
 
     driver = driver.switchTo().window( parentWindowHandle );
@@ -317,7 +317,7 @@ public class JFreeChartComponent extends BaseTest {
     }
 
     attrSrcPopup = this.elemHelper.GetAttribute( popup, By.cssSelector( "img" ), "src" );
-    assertEquals( HttpStatus.SC_OK, HttpUtils.GetResponseCode( attrSrcPopup ) );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( attrSrcPopup ) );
 
     popup.close();
     driver.switchTo().window( parentWindowHandle );

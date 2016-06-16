@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -445,7 +446,7 @@ public class MarketPlace {
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginImage']/img" ) );
     if ( element != null ) {
       String text = element.getAttribute( "data-ng-src" );
-      assertEquals( 200, HttpUtils.GetResponseCode( text, "admin", "password" ) );
+      assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( text, "admin", "password" ) );
     }
 
     //Assert version shown on button is the same as in the info
@@ -478,7 +479,7 @@ public class MarketPlace {
       for ( int i = 1; i < listElements.size(); i++ ) {
         element = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='carousel-inner']/div[" + i + "]/img" ) );
         String text = element.getAttribute( "data-ng-src" );
-        assertEquals( 200, HttpUtils.GetResponseCode( text, "admin", "password" ) );
+        assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( text, "admin", "password" ) );
       }
     }
 

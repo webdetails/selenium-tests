@@ -75,7 +75,7 @@ public class CDADatasourceTest extends BaseTest {
 
     //Test About
     String urlAbout = this.elemHelper.FindElement( driver, By.linkText( "About" ) ).getAttribute( "href" );
-    assertEquals( HttpStatus.SC_OK, HttpUtils.GetResponseCode( urlAbout, pentahoBaServerUsername, pentahoBaServerPassword ) );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( urlAbout, pentahoBaServerUsername, pentahoBaServerPassword ) );
 
     //sqk,jdbc
     String accessMethod1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='testTable']/tbody/tr[2]/td" ) );

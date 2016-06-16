@@ -21,11 +21,11 @@
  ******************************************************************************/
 package com.pentaho.ctools.utils;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Base64;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
@@ -35,10 +35,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
-
-import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 public class HttpUtils {
 
@@ -53,19 +49,19 @@ public class HttpUtils {
    */
   public static int GetHttpStatus( String url ) {
     LOG.debug( "The URL: " + url );
-    int nHttpStatus = HttpStatus.SC_BAD_REQUEST;
+    int nStatusCode = HttpStatus.SC_BAD_REQUEST;
 
     try {
       URL oUrl = new URL( url );
       URLConnection uc = oUrl.openConnection();
       uc.connect();
-      nHttpStatus = ( (HttpURLConnection) uc ).getResponseCode();
-      LOG.debug( "HTTP Status:" + nHttpStatus );
+      nStatusCode = ( (HttpURLConnection) uc ).getResponseCode();
+      LOG.debug( "HTTP Status:" + nStatusCode );
     } catch ( Exception ex ) {
       LOG.error( ex.getMessage() );
     }
 
-    return nHttpStatus;
+    return nStatusCode;
   }
 
   /**
@@ -96,30 +92,6 @@ public class HttpUtils {
   }
 
   /**
-   * This method shall return the status of HTTP request. When authentication is not needed.
-   *
-   * @param url
-   * @return
-   */
-  public static int GetResponseCode( String url ) {
-    LOG.debug( "The URL: " + url );
-    int nResponseCode = HttpStatus.SC_BAD_REQUEST;
-
-    try {
-      WebClient client = new WebClient();
-      nResponseCode = client.getPage( url ).getWebResponse().getStatusCode();
-      LOG.debug( "HTTP Status:" + nResponseCode );
-    } catch ( IOException ioe ) {
-      LOG.error( "IOException" );
-    } catch ( FailingHttpStatusCodeException fhscr ) {
-      LOG.warn( "FailingHttpStatusCodeException" );
-      nResponseCode = fhscr.getStatusCode();
-    }
-
-    return nResponseCode;
-  }
-
-  /**
    * This method shall return the status of HTTP request. When authentication is needed.
    *
    * @param url
@@ -128,24 +100,26 @@ public class HttpUtils {
    * @return
    * @throws Exception
    */
-  public static int GetResponseCode( String url, String username, String password ) {
+  public static int GetHttpStatus( String url, String username, String password ) {
     LOG.debug( "The URL: " + url );
-    int nResponseCode = HttpStatus.SC_BAD_REQUEST;
+    int nStatusCode = HttpStatus.SC_BAD_REQUEST;
 
+    String authString = username + ":" + password;
+    String authStringEnc = Base64.getEncoder().encodeToString( authString.getBytes() );
+
+    URL oUrl;
     try {
-      //set proxy username and password
-      WebClient client = new WebClient();
-      final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) client.getCredentialsProvider();
-      credentialsProvider.addCredentials( username, password );
-      nResponseCode = client.getPage( url ).getWebResponse().getStatusCode();
-      LOG.debug( "HTTP Status:" + nResponseCode );
-    } catch ( IOException ioe ) {
-      LOG.error( "IOException" );
-    } catch ( FailingHttpStatusCodeException fhscr ) {
-      LOG.warn( "FailingHttpStatusCodeException" );
-      nResponseCode = fhscr.getStatusCode();
+      oUrl = new URL( url );
+
+      URLConnection urlConnection = oUrl.openConnection();
+      urlConnection.setRequestProperty( "Authorization", "Basic " + authStringEnc );
+      urlConnection.connect();
+
+      nStatusCode = ( (HttpURLConnection) urlConnection ).getResponseCode();
+    } catch ( Exception e ) {
+      LOG.error( "Exception trying to access: " + url, e );
     }
-    return nResponseCode;
+    return nStatusCode;
   }
 
   /**

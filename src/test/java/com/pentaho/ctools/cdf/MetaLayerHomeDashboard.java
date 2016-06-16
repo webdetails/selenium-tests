@@ -26,6 +26,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -127,6 +128,6 @@ public class MetaLayerHomeDashboard extends BaseTest {
     assertEquals( "http://localhost:8080/pentaho/api/repos/pentaho-cdf/js-legacy/lib/fancybox/fancybox.png", background1 );
     this.elemHelper.FindElement( driver, By.id( "fancybox-close" ) ).click();
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "fancybox-content" ) );
-    assertEquals( "200", Integer.toString( HttpUtils.GetResponseCode( background1, "admin", "password" ) ) );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( background1, pentahoBaServerUsername, pentahoBaServerPassword ) );
   }
 }
