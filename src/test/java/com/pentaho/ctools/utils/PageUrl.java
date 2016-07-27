@@ -34,6 +34,7 @@ public class PageUrl extends BaseTest {
   public static final String PUC = BASE_URL + "Home";
   public static final String PUC_LOGIN = BASE_URL + "Login";
 
+  /********************** CDF **********************/
   /*
    * CDF
    */
@@ -75,10 +76,10 @@ public class PageUrl extends BaseTest {
   public static final String XMLA_DISCOVER_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Aqueries%3AXMLADiscover%3AxmlaDiscover.xcdf/generatedContent";
   public static final String XMLA_QUERY_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Aqueries%3AXMLA%3Axmla.xcdf/generatedContent";
 
+  /********************** CDE **********************/
   /*
    * CDE
    */
-  public static final String CDE_TUTORIALS_WELCOME = BASE_URL +"api/repos/:public:ctools-samples:CDE Tutorial:01-welcome.wcdf/generatedContent";
   public static final String SAMPLE_DASHBOARD = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/generatedContent";
   public static final String ADDIN_REFERENCE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent";
   public static final String ADDIN_REFERENCE_EDIT = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/wcdf.edit";
@@ -108,15 +109,7 @@ public class PageUrl extends BaseTest {
   public static final String FILTER_VISUAL_COMPONENT_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AFilterComponent%3Afilter_visual_guide.wcdf/generatedContent";
   public static final String FILTER_ADDIN_COMPONENT_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AFilterComponent%3Afilter_addIn_accordion.wcdf/generatedContent";
   public static final String MAP_COMPONENT_REFERENCE_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3ANewMapComponent%3Amaps.wcdf/generatedContent";
-
   public static final String MAP_COMPONENT_FULL_TEST_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3ANewMapComponent%3AFullMapTest.wcdf/generatedContent";
-
-  /*
-   * CDA
-   */
-  public static final String DATASOURCE_TEST = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Acda%3Acda_test.xcdf/generatedContent";
-  public static final String MONDRIAN_JNDI = BASE_URL + "plugin/cda/api/previewQuery?path=%2Fpublic%2Fplugin-samples%2Fcda%2Fcdafiles%2Fmondrian-jndi.cda";
-  public static final String OLAP4J_EDIT = BASE_URL + "plugin/cda/api/editFile?path=/public/plugin-samples/cda/cdafiles/olap4j.cda";
 
   /*
    * CDE Dashboard
@@ -124,12 +117,27 @@ public class PageUrl extends BaseTest {
   public static final String CDE_DASHBOARD = BASE_URL + "api/repos/wcdf/new";
 
   /*
-   * CGG 
+   * CDE - Tutorials
+   */
+  public static final String CDE_TUTORIALS_WELCOME = BASE_URL + "api/repos/:public:ctools-samples:CDE Tutorial:01-welcome.wcdf/generatedContent";
+
+  /********************** CDA **********************/
+  /*
+   * CDA
+   */
+  public static final String DATASOURCE_TEST = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Acda%3Acda_test.xcdf/generatedContent";
+  public static final String MONDRIAN_JNDI = BASE_URL + "plugin/cda/api/previewQuery?path=%2Fpublic%2Fplugin-samples%2Fcda%2Fcdafiles%2Fmondrian-jndi.cda";
+  public static final String OLAP4J_EDIT = BASE_URL + "plugin/cda/api/editFile?path=/public/plugin-samples/cda/cdafiles/olap4j.cda";
+
+  /********************** CDF **********************/
+  /*
+   * CGG
    */
   public static final String BAR_CHART = BASE_URL + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png";
   public static final String DIAL_CHART = BASE_URL + "plugin/cgg/api/services/draw?script=/public/dial.js&outputType=svg&paramvalue=35";
   public static final String SCATTER_CHART = BASE_URL + "plugin/cgg/api/services/draw?script=/public/testScatterChart.js&outputType=svg";
 
+  /********************** REGRESSION **********************/
   /*
    * Issues
    */
@@ -140,5 +148,4 @@ public class PageUrl extends BaseTest {
   public static final String ISSUES_CDE_366_EDIT = BASE_URL + "api/repos/:public:CDE366.wcdf/edit";
   public static final String ISSUES_CDE_379 = BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/generatedContent";
   public static final String ISSUES_CDE_379_EDIT = BASE_URL + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit";
-
 }
