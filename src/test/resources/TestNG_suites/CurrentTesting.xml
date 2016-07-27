@@ -9,11 +9,50 @@
   
 	<test verbose="1" name="Everyday Testing">
 		<classes>
-			<class name="com.pentaho.ctools.main.LoginPentaho" />
-			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" />
-			<class name="com.pentaho.ctools.cgg.BarChart" />
-      <class name="com.pentaho.ctools.cgg.ScatterChart" />
-      <class name="com.pentaho.ctools.cgg.DialChart" />
+			<!-- LOGIN -->
+      <class name="com.pentaho.ctools.main.LoginPentaho" />
+        <!-- CDE -->
+      <class name="com.pentaho.ctools.cde.SampleDashboard" />
+      <class name="com.pentaho.ctools.cde.reference.AddinReference" />
+      <class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />
+      <class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
+      <class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />
+      <class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
+      <class name="com.pentaho.ctools.cde.reference.DuplicateComponent" />
+      <class name="com.pentaho.ctools.cde.reference.ExportPopupComponent" />
+      <class name="com.pentaho.ctools.cde.reference.FilterAddinAccordion" />
+      <class name="com.pentaho.ctools.cde.reference.FilterReference" />
+      <class name="com.pentaho.ctools.cde.reference.FilterVisualGuide" />
+      <!-- <class name="com.pentaho.ctools.cde.reference.MapComponentFullTest" />
+      <class name="com.pentaho.ctools.cde.reference.MapComponentReference" />-->
+      <class name="com.pentaho.ctools.cde.reference.OlapSelectorComponent" />
+      <class name="com.pentaho.ctools.cde.reference.PopupComponent" />
+      <class name="com.pentaho.ctools.cde.reference.WidgetReference" />
+      <!-- CDA -->
+      <class name="com.pentaho.ctools.cda.CDADatasourceTest" />
+      <class name="com.pentaho.ctools.cda.MondrianJNDI" />
+      <class name="com.pentaho.ctools.cda.CDACacheManager" />
+      <!-- CDE-RequireJS -->
+      <class name="com.pentaho.ctools.cde.require.SampleDashboard" />
+      <class name="com.pentaho.ctools.cde.require.AddinReference" />
+      <class name="com.pentaho.ctools.cde.require.AddinReferenceEdit" />
+      <class name="com.pentaho.ctools.cde.require.AjaxRequestReference" />
+      <class name="com.pentaho.ctools.cde.require.BulletChartTestCase" />
+      <class name="com.pentaho.ctools.cde.require.CCCV2ShowCase" />
+      <class name="com.pentaho.ctools.cde.require.DashboardModuleComponent" />
+      <class name="com.pentaho.ctools.cde.require.DuplicateComponent" />
+      <class name="com.pentaho.ctools.cde.require.ExportPopupComponent" />
+      <class name="com.pentaho.ctools.cde.require.FilterAddinAccordion" />
+      <class name="com.pentaho.ctools.cde.require.FilterReference" />
+      <class name="com.pentaho.ctools.cde.require.FilterVisualGuide" />
+      <!-- <class name="com.pentaho.ctools.cde.require.MapComponentFullTest" />
+      <class name="com.pentaho.ctools.cde.require.MapComponentReference" />-->
+      <class name="com.pentaho.ctools.cde.require.OlapSelectorComponent" />
+      <class name="com.pentaho.ctools.cde.require.PopupComponent" />
+      <!-- Security -->
+      <class name="com.pentaho.ctools.security.AccessSystemResources" />
+      <!-- LOGOUT -->
+      <class name="com.pentaho.ctools.main.LogoutPentaho" />
 		</classes>
 	</test>
 	
