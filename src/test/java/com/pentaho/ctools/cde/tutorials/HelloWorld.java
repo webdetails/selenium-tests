@@ -1,0 +1,166 @@
+package com.pentaho.ctools.cde.tutorials;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.selenium.BaseTest;
+
+/**
+ * Testing the functionalities related with CDE Tutorials - Hello World.
+ *
+ * Naming convention for test:
+ *  'tcN_StateUnderTest_ExpectedBehavior'
+ *
+ */
+
+public class HelloWorld extends BaseTest {
+	  // Access to wrapper for webdriver
+	  private final ElementHelper elemHelper = new ElementHelper();
+	  //Log instance
+	  private final Logger log = LogManager.getLogger( HelloWorld.class );
+	  
+	  WebElement h1, h2, h3 ;
+	  
+	  /**
+	   * ############################### Setup ###############################
+	   *
+	   * Description:
+	   * 	Open Hello World Page
+	   */
+	  @BeforeClass
+	  public void openHelloWorldPage()
+	  {
+		  this.log.info( "openHelloWorldPage" );
+		  
+		  this.elemHelper.Click(driver, By.xpath("//*[@id='sideMenu']/ul/a[3]/li"));
+		  
+		  assertEquals("Hello World", this.elemHelper.WaitForElementPresentGetText(driver,By.xpath("//div[@id= 'mainContent']/h1")));
+		  
+		  return;
+	  }
+
+	  /**
+	   * ############################### Test Case 0 ###############################
+	   *
+	   * Test Case Name:
+	   *    Hello World Page Sections
+	   *    
+	   * Test Case Description:
+	   * 	Check sections in Hello World page.
+	   * 
+	   * Test Steps:
+	   * 		1. Check if headings are present and correctly displayed;
+	   */
+	  @Test
+	  public void tc0_HelloWorldPageSections_Displayed()
+	  {
+		  this.log.info( "tc0_HelloWorldPageSections_Displayed" );
+		  
+		  //Heading #1 - 1. Create a new Dashboard
+		  h1 = this.elemHelper.WaitForElementPresence(driver,By.xpath("//*[@id='headingOne']/a/h4"));
+		  assertNotNull(h1);
+
+		  //Heading #2 - 2. Create Rows and Columns
+		  h2 = this.elemHelper.WaitForElementPresence(driver,By.xpath("//*[@id='headingTwo']/a/h4"));
+		  assertNotNull(h2);
+
+		  //Heading #3 - 3. Create a Text Component
+		  h3 = this.elemHelper.WaitForElementPresence(driver,By.xpath("//*[@id='headingThree']/a/h4"));
+		  assertNotNull(h3);
+		  
+		  return;
+		  
+	  }
+	  
+	  /**
+	   * ############################### Test Case 1 ###############################
+	   *
+	   * Test Case Name:
+	   *    Check Images
+	   *    
+	   * Test Case Description:
+	   * 	Check if printscreens are present. 
+	   * 
+	   * Test Steps:
+	   * 		1. Expand headers;
+	   * 		2. Assert if images are present;
+	   * 		3. Check images URL returns HTTP Status OK (200).
+	   */
+	  @Test
+	  public void tc1_CheckImages_Displayed()
+	  {
+		  this.log.info( "tc1_CheckImages_Displayed" );
+		  		  
+		  //Step #1 - Expand Headers
+		  h1.click();
+		  h2.click();
+		  h3.click();
+		  
+		  //Step #2 - Assert all images are present and if they have a valid src (url - 200 OK) 
+		  CdeTutorials.checkImagesPresenceAndHttpStatus("collapseOne");
+		  CdeTutorials.checkImagesPresenceAndHttpStatus("collapseTwo");
+		  CdeTutorials.checkImagesPresenceAndHttpStatus("collapseThree");
+		  
+		  //Collapse Headers
+		  h1.click();
+		  h2.click();
+		  h3.click();
+		  
+		  return;  
+	  }
+	  
+	  /**
+	   * ############################### Test Case 2 ###############################
+	   *
+	   * Test Case Name:
+	   *    Preview and Edit Links.
+	   *    
+	   * Test Case Description:
+	   * 	Check Preview Dashboard and Edit Dashboard links.
+	   * 
+	   * Test Steps:
+	   * 		1. Assert if links are present;
+	   * 		2. Check if pages are loaded. 
+	   */
+	  @Test
+	  public void tc2_PreviewAndEditLinks_Displayed()
+	  {
+		  this.log.info( "tc2_PreviewAndEditLinks_Displayed" );
+		  		  
+		  // Store the current window handle
+		  String winHandleBefore = driver.getWindowHandle();
+		  
+		  //Click given link
+		  this.elemHelper.Click(driver, By.xpath("//a[contains(text(),'Edit')]"));
+		  
+		  // Switch to new window opened
+		  for(String winHandle : driver.getWindowHandles()){
+		      driver.switchTo().window(winHandle);
+		  }
+
+		  String docName = this.elemHelper.WaitForElementPresentGetText(driver, By.xpath("//*[@class='cdfdd-title']"));
+		  
+		  //Confirm page was loaded
+		  assertEquals(this.elemHelper.WaitForElementPresentGetText(driver, By.xpath("//title[contains(text(),'Webdetails CDE')]")),"Webdetails CDE");
+		  
+		  // Close the new window, if that window no more required
+		  driver.close();
+
+		  // Switch back to original browser (first window)
+		  driver.switchTo().window(winHandleBefore);
+		  
+		  CdeTutorials.clickAndCheckPageLoaded(	By.xpath("//a[contains(text(),'Preview')]"),
+												By.xpath("//title"),
+												docName);
+	  }
+	  
+
+}

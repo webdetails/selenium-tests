@@ -78,6 +78,7 @@ public class PageUrl extends BaseTest {
   /*
    * CDE
    */
+  public static final String CDE_TUTORIALS_WELCOME = BASE_URL +"api/repos/:public:ctools-samples:CDE Tutorial:01-welcome.wcdf/generatedContent";
   public static final String SAMPLE_DASHBOARD = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/generatedContent";
   public static final String ADDIN_REFERENCE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/generatedContent";
   public static final String ADDIN_REFERENCE_EDIT = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AaddIns.wcdf/wcdf.edit";
