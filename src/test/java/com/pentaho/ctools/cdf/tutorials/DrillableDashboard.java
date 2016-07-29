@@ -37,7 +37,7 @@ public class DrillableDashboard extends BaseTest {
 	}
 	
 	/**
-	   * ############################### Test Case 0 ###############################
+	   * ############################### Test Case 1 ###############################
 	   *
 	   * Test Case Name:
 	   *    Check Tabs Names
@@ -56,4 +56,40 @@ public class DrillableDashboard extends BaseTest {
 		CdfTutorials.checkTabs(4);
 	}
 	
+	/**
+	   * ############################### Test Case 2 ###############################
+	   *
+	   * Test Case Name:
+	   *    Check Webdetails Logo
+	   *    
+	   * Test Case Description:
+	   * 	Calls a function that clicks on the Webdetails logo at the bottom of the page and check if the page was loaded.
+	   * Test Steps:
+	   * 		1. Call the function checkWebdetailsLogoLink.
+	   */
+	@Test
+	public void tc2_checkWebdetailsLogo()
+	{
+		log.info( "checkWebdetailsLogo" );
+		
+		CdfTutorials.checkWebdetailsLogoLink();
+	}
+	
+	
+	/**
+	   * ############################### Test Case 3 ###############################
+	   *
+	   * Test Case Name:
+	   *    Check Tooltips 
+	   *    
+	   * Test Case Description:
+	   * 	Calls a function that checks every tooltips in every tab of the sample, clicks it and make sure the code file that pops up isn't empty.
+	   * Test Steps:
+	   * 		1. Call the function checkTooltips.
+	   */
+	@Test
+	public void tc3_checkTooltips()
+	{
+		CdfTutorials.checkTooltips(4);
+	}
 }

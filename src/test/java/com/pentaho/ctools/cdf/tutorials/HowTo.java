@@ -37,7 +37,7 @@ public class HowTo extends BaseTest {
 	}
 	
 	/**
-	   * ############################### Test Case 0 ###############################
+	   * ############################### Test Case 1 ###############################
 	   *
 	   * Test Case Name:
 	   *    Check Tabs Names
@@ -56,4 +56,22 @@ public class HowTo extends BaseTest {
 		CdfTutorials.checkTabs(5);
 	}
 	
+	/**
+	   * ############################### Test Case 2 ###############################
+	   *
+	   * Test Case Name:
+	   *    Check Webdetails Logo
+	   *    
+	   * Test Case Description:
+	   * 	Calls a function that clicks on the Webdetails logo at the bottom of the page and check if the page was loaded.
+	   * Test Steps:
+	   * 		1. Call the function checkWebdetailsLogoLink.
+	   */
+	@Test
+	public void tc2_checkWebdetailsLogo()
+	{
+		log.info( "checkWebdetailsLogo" );
+		
+		CdfTutorials.checkWebdetailsLogoLink();
+	}
 }
