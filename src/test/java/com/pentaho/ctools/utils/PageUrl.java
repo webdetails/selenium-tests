@@ -76,6 +76,22 @@ public class PageUrl extends BaseTest {
   public static final String XMLA_DISCOVER_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Aqueries%3AXMLADiscover%3AxmlaDiscover.xcdf/generatedContent";
   public static final String XMLA_QUERY_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Aqueries%3AXMLA%3Axmla.xcdf/generatedContent";
 
+  /*
+   * CDF - TUTORIALS
+   */
+	public static final String CDF_TUTORIAL_HOW_TO = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A0-howToStart%3AhowToStart.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_FIRST_DASHBOARD = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A1-firstDashboard%3AfirstDashboard.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_REPLACING_SECURE_PROMPT = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A2-replacingSecurePrompt%3AreplacingSecurePrompt.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_CHARTS = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A3-charts%3Acharts1.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_TEMPLATING = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A4-templating%3Atemplating.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_TIMEPLOTS_DATE_PICKERS = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A5-timeplot%3Atimeplot.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_MONDRIAN_ROLES = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A6-roles%3AmondrianRoles.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_DIAL_TRAFFIC = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A7-dialTraffic%3AdialTraffic.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_GEO_DASHBOARD = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A8-map%3Amap.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_TABLE_SPARKLINES = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A9-tableSparklines%3AtableSparklines.xcdf/generatedContent";
+	public static final String CDF_TUTORIAL_DRILLABLE_DASHBOARD = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3Acdf-samples%3A10-drillable%3Adrillable.xcdf/generatedContent";
+
+  
   /********************** CDE **********************/
   /*
    * CDE
