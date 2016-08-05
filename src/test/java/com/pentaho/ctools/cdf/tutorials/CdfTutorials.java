@@ -5,10 +5,12 @@ import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -80,12 +82,11 @@ public class CdfTutorials extends BaseTest{
 	 * 		1.For every tab:
 	 * 			1.1 Open the tab
 	 * 			1.2 Find all the tooltips in the sample (icons with a "?" image in the graphics).
-	 * 			1.3 If no tooltips were found:
-	 * 				1.3.1 Do nothing.
-	 * 			1.4 If tooltips were found, for each of them:
-	 * 				1.4.1 Click the tooltip. Content of the code file for the sample pops up.
-	 * 				1.4.2 Check if code file it's not empty.
-	 * 				1.4.3 Close the pop up.
+	 *
+	 * 			1.3 If tooltips were found, for each of them:
+	 * 				1.3.1 Click the tooltip. Content of the code file for the sample pops up.
+	 * 				1.3.2 Check if code file it's not empty.
+	 * 				1.3.3 Close the pop up.
 	 */
 	public static void checkTooltips (int nSteps)
 	{
@@ -105,27 +106,40 @@ public class CdfTutorials extends BaseTest{
 			//Open the tab
 			elemHelper.Click(driver, By.xpath(locator));
 			
-			//Find all the tooltips in the sample (icons with a "?" image in the graphics)
-			List<WebElement> tooltips = driver.findElements(By.xpath("//img[@class='samplesTooltip']"));
+			//Prevent the next line of code to wait for the timeout 
+			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 			
-			//Do nothing if no tooltips were found
-			if(tooltips == null)
-				return;
-			else
-				//If tooltips were found, for each of them 
-				for(WebElement tooltip : tooltips)
-				{
-					//Click the tooltip
-					tooltip.click();
+			Boolean result = false;
+			
+			while(result == false)
+			{
+				try{
+					//Find all the tooltips in the sample (icons with a "?" image in the graphics)
+					List<WebElement> tooltips = elemHelper.FindElements(driver, By.xpath("//img[@class='samplesTooltip']"));
 					
-					//Check if code file it's not empty
-					assertNotEquals(elemHelper.WaitForElementPresentGetText(driver, By.xpath("//textarea")),"");
+					//If tooltips were found, for each of them 
+					for(WebElement tooltip : tooltips)
+					{
+						//Click the tooltip
+						tooltip.click();	
+						
+						//Check if code file it's not empty
+						assertNotEquals(elemHelper.WaitForElementPresentGetText(driver, By.xpath("//textarea")),"");
+						
+						//Close pop up
+						elemHelper.Click(driver, By.xpath("//button[contains(text(),'Close')]"));
+						
+						//Wait for pop up to disappear
+						elemHelper.WaitForElementNotPresent(driver, By.xpath("//button[contains(text(),'Close')]"));
+					}
 					
-					//Close pop up
-					elemHelper.Click(driver, By.xpath("//button[contains(text(),'Close')]"));
-					
-					/*******TO-DO: wait for element to disappear******/
+					result = true;
 				}
+				catch(StaleElementReferenceException e)
+				{
+					result = false;
+				}
+			}
 		}
 	}
 }

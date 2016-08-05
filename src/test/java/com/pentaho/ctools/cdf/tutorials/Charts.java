@@ -75,4 +75,20 @@ public class Charts extends BaseTest {
 		CdfTutorials.checkWebdetailsLogoLink();
 	}
 	
+	/**
+	   * ############################### Test Case 3 ###############################
+	   *
+	   * Test Case Name:
+	   *    Check Tooltips 
+	   *    
+	   * Test Case Description:
+	   * 	Calls a function that checks every tooltips in every tab of the sample, clicks it and make sure the code file that pops up isn't empty.
+	   * Test Steps:
+	   * 		1. Call the function checkTooltips.
+	   */
+	@Test
+	public void tc3_checkTooltips()
+	{
+		CdfTutorials.checkTooltips(6);
+	}
 }

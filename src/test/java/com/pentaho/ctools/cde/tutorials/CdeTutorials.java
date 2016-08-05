@@ -37,8 +37,8 @@ public class CdeTutorials extends BaseTest {
 	   * 	Opens CDE Tutorials in Welcome page.
 	   */
 	  @Test
-	  public static void open() {
-		  log.info( "open" );
+	  public static void tc0_open() {
+		  log.info( "tc0_open" );
 		  
 		  //wait for invisibility of waiting pop-up
 		  elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
