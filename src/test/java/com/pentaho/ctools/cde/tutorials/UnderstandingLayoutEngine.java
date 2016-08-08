@@ -25,123 +25,118 @@ import com.pentaho.selenium.BaseTest;
  */
 
 public class UnderstandingLayoutEngine extends BaseTest {
-	  // Access to wrapper for webdriver
-	  private final ElementHelper elemHelper = new ElementHelper();
-	  //Log instance
-	  private final Logger log = LogManager.getLogger( UnderstandingLayoutEngine.class );
-	  
-	  WebElement h1;
-	  
-	  /**
-	   * ############################### Setup ###############################
-	   *
-	   * Description:
-	   * 	Open Making the Charts Talk to Each Other Page
-	   */
-	  @BeforeClass
-	  public void openUnderstandingLayoutEnginePage()
-	  {
-		  this.log.info( "openUnderstandingLayoutEnginePage" );
-		  
-		  this.elemHelper.Click(driver, By.xpath("//*[@id='sideMenu']/ul/a[8]/li"));
-		  
-		  assertEquals("Understanding Layout Engine", this.elemHelper.WaitForElementPresentGetText(driver,By.xpath("//div[@id= 'mainContent']/h1")));
-		  
-		  return;
-	  }
+  // Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
+  //Log instance
+  private final Logger log = LogManager.getLogger( UnderstandingLayoutEngine.class );
 
-	  /**
-	   * ############################### Test Case 0 ###############################
-	   *
-	   * Test Case Name:
-	   *    Understanding Layout Engine Page Sections
-	   *    
-	   * Test Case Description:
-	   * 	Check sections in Understanding Layout Engine page.
-	   * 
-	   * Test Steps:
-	   * 		1. Check if headings are present and correctly displayed;
-	   */
-	  @Test
-	  public void tc0_UnderstandingLayoutEngineSections_Displayed()
-	  {
-		  this.log.info( "tc0_UnderstandingLayoutEngineSections_Displayed" );
-		  
-		  //Heading #1
-		  h1 = this.elemHelper.WaitForElementPresence(driver,By.xpath("//*[@id='headingOne']/a/h4"));
-		  assertNotNull(h1);
-		  
- 		  return;
-	  }
-	  
-	  /**
-	   * ############################### Test Case 1 ###############################
-	   *
-	   * Test Case Name:
-	   *    Check Images
-	   *    
-	   * Test Case Description:
-	   * 	Check if printscreens are present. 
-	   * 
-	   * Test Steps:
-	   * 		1. Expand headers;
-	   * 		2. Assert if images are present;
-	   * 		3. Check images URL returns HTTP Status OK (200).
-	   */
-	  @Test
-	  public void tc1_CheckImages_Displayed()
-	  {
-		  this.log.info( "tc1_CheckImages_Displayed" );
-		  		  
-		  //Step #1 - Expand Headers
-		  h1.click();
-		  
-		  //Step #2 - Assert all images are present and if they have a valid src (url - 200 OK) 
-		  CdeTutorials.checkImagesPresenceAndHttpStatus("collapseOne");
-		  
-		  //Collapse Headers
-		  h1.click();
-		  
-		  return;  
-	  }
-	  
-	  /**
-	   * ############################### Test Case 2 ###############################
-	   *
-	   * Test Case Name:
-	   *    Preview and Edit Links.
-	   *    
-	   * Test Case Description:
-	   * 	Check Preview Dashboard and Edit Dashboard links.
-	   * 
-	   * Test Steps:
-	   * 		1. Assert if links are present;
-	   * 		2. Check if pages are loaded. 
-	   */
-	  @Test
-	  public void tc2_PreviewAndEditLinks_Displayed()
-	  {
-		  this.log.info( "tc2_PreviewAndEditLinks_Displayed" );
-		  
-		  //Multiple Preview/Edit buttons 
-		  List <WebElement> editLinks = driver.findElements(By.xpath("//a[contains(text(),'Edit')]"));
-		  List <WebElement> previewLinks = driver.findElements(By.xpath("//a[contains(text(),'Preview')]"));
-		  
-		  //Iterators for the Edit & Preview links Lists
-		  Iterator <WebElement> editLink = editLinks.iterator();
-		  Iterator <WebElement> previewLink = previewLinks.iterator();
-		  
-		  while(editLink.hasNext() && previewLink.hasNext())
-		  {
-			  //Assert Edit Dashboard link is present, page loads successfuly and gets the name of the CDE Doc
-			  String docName = CdeTutorials.getCdeDocName(editLink.next());
-			  
-			  //Preview links is present and page is loaded 
-			  CdeTutorials.clickAndCheckPageLoaded(	previewLink.next(),
-													By.xpath("//title"),
-													docName);
-		  }
-		  
-		  return;
-	  }
+  WebElement h1;
+
+  /**
+   * ############################### Setup ###############################
+   *
+   * Description:
+   * 	Open Making the Charts Talk to Each Other Page
+   */
+  @BeforeClass
+  public void openUnderstandingLayoutEnginePage() {
+    this.log.info( "openUnderstandingLayoutEnginePage" );
+
+    this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[8]/li" ) );
+
+    assertEquals( "Understanding Layout Engine", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
+
+    return;
+  }
+
+  /**
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Understanding Layout Engine Page Sections
+   *    
+   * Test Case Description:
+   * 	Check sections in Understanding Layout Engine page.
+   * 
+   * Test Steps:
+   * 		1. Check if headings are present and correctly displayed;
+   */
+  @Test
+  public void tc0_UnderstandingLayoutEngineSections_Displayed() {
+    this.log.info( "tc0_UnderstandingLayoutEngineSections_Displayed" );
+
+    //Heading #1
+    this.h1 = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//*[@id='headingOne']/a/h4" ) );
+    assertNotNull( this.h1 );
+
+    return;
+  }
+
+  /**
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Check Images
+   *    
+   * Test Case Description:
+   * 	Check if printscreens are present. 
+   * 
+   * Test Steps:
+   * 		1. Expand headers;
+   * 		2. Assert if images are present;
+   * 		3. Check images URL returns HTTP Status OK (200).
+   */
+  @Test
+  public void tc1_CheckImages_Displayed() {
+    this.log.info( "tc1_CheckImages_Displayed" );
+
+    //Step #1 - Expand Headers
+    this.h1.click();
+
+    //Step #2 - Assert all images are present and if they have a valid src (url - 200 OK) 
+    CdeTutorials.checkImagesPresenceAndHttpStatus( "collapseOne" );
+
+    //Collapse Headers
+    this.h1.click();
+
+    return;
+  }
+
+  /**
+   * ############################### Test Case 2 ###############################
+   *
+   * Test Case Name:
+   *    Preview and Edit Links.
+   *    
+   * Test Case Description:
+   * 	Check Preview Dashboard and Edit Dashboard links.
+   * 
+   * Test Steps:
+   * 		1. Assert if links are present;
+   * 		2. Check if pages are loaded. 
+   */
+  @Test
+  public void tc2_PreviewAndEditLinks_Displayed() {
+    this.log.info( "tc2_PreviewAndEditLinks_Displayed" );
+
+    //Multiple Preview/Edit buttons 
+    List<WebElement> editLinks = driver.findElements( By.xpath( "//a[contains(text(),'Edit')]" ) );
+    List<WebElement> previewLinks = driver.findElements( By.xpath( "//a[contains(text(),'Preview')]" ) );
+
+    //Iterators for the Edit & Preview links Lists
+    Iterator<WebElement> editLink = editLinks.iterator();
+    Iterator<WebElement> previewLink = previewLinks.iterator();
+
+    while ( editLink.hasNext() && previewLink.hasNext() ) {
+      // STEP 1
+      //Assert Edit Dashboard link is present, page loads successfully and gets the name of the CDE Doc
+      String docName = CdeTutorials.getCdeDocName( editLink.next() );
+
+      // STEP 2
+      //Preview links is present and page is loaded 
+      CdeTutorials.clickAndCheckPageLoaded( previewLink.next(), By.xpath( "//title" ), docName );
+    }
+
+    return;
+  }
 }
