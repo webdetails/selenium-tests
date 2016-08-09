@@ -661,7 +661,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<target name="resolve-test-java" depends="install-ivy" description="Retrieves all 'test-java' dependent libraries">
 		<echo message="Resolve dependencies 'test-java'." />
 		<ivy:resolve file="${ivy.file}" conf="test-java" />
-		<ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" sync="true" />
+		<ivy:retrieve pattern="${lib.ext.dir}/[artifact](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" sync="true" />
 	</target>
 
 
