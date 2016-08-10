@@ -87,30 +87,33 @@ public class BaseTest {
     new File( downloadDir ).mkdir();
 
     System.setProperty( "webdriver.log.file", "/dev/stdout" );
-    //System.setProperty( "webdriver.firefox.logfile", "/dev/stdout" );
+    // System.setProperty( "webdriver.firefox.logfile", "/dev/stdout" );
 
     // Setting log preferences
     LoggingPreferences logs = new LoggingPreferences();
     logs.enable( LogType.BROWSER, Level.WARNING );
-    /*logs.enable( LogType.SERVER, Level.WARNING );
-    logs.enable( LogType.DRIVER, Level.WARNING );
-    logs.enable( LogType.PROFILER, Level.WARNING );
-    logs.enable( LogType.CLIENT, Level.WARNING );
-    logs.enable( LogType.PERFORMANCE, Level.WARNING );*/
+    /*
+     * logs.enable( LogType.SERVER, Level.WARNING ); 
+     * logs.enable( LogType.DRIVER, Level.WARNING ); 
+     * logs.enable( LogType.PROFILER, Level.WARNING ); 
+     * logs.enable( LogType.CLIENT, Level.WARNING ); 
+     * logs.enable( LogType.PERFORMANCE, Level.WARNING );
+     */
 
     /*
      * INTERNET EXPLORER DRIVER
      */
     // Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
-    //ffProfile.setEnableNativeEvents( true );
+    // ffProfile.setEnableNativeEvents( true );
     ffProfile.setPreference( "general.useragent.locale", "en-US" );
     ffProfile.setPreference( "intl.accept_languages", "en-US, en" );
     ffProfile.setPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Download dir, 2 - specify dir
     ffProfile.setPreference( "browser.helperApps.alwaysAsk.force", false );
     ffProfile.setPreference( "browser.download.manager.showWhenStarting", false );
     ffProfile.setPreference( "browser.download.dir", downloadDir );
-    ffProfile.setPreference( "browser.helperApps.neverAsk.saveToDisk", "table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf" );
+    ffProfile.setPreference( "browser.helperApps.neverAsk.saveToDisk",
+        "table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf" );
 
     // Setting properties for webdriver
     DesiredCapabilities capabilities = DesiredCapabilities.firefox();
@@ -149,17 +152,17 @@ public class BaseTest {
     BaseTest.driver.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );
 
     // Initialize WAIT
-    wait = new FluentWait<WebDriver>( BaseTest.driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 5, TimeUnit.SECONDS );
+    wait = new FluentWait<>( BaseTest.driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 5, TimeUnit.SECONDS );
   }
 
   @AfterSuite
   public void tearDownClass() {
     this.log.info( "Master tearDown" );
 
-    /*LogEntries logEntries = DRIVER.manage().logs().get( LogType.BROWSER );
-    for ( LogEntry logEntry : logEntries ) {
-      log.info( logEntry.getMessage() );
-    }*/
+    /*
+     * LogEntries logEntries = DRIVER.manage().logs().get( LogType.BROWSER ); for ( LogEntry logEntry : logEntries ) {
+     * log.info( logEntry.getMessage() ); }
+     */
 
     BaseTest.driver.quit();
   }
@@ -191,6 +194,7 @@ public class BaseTest {
 
   /**
    * Returns the current state of WebDriver.
+   * 
    * @return The webdriver instance.
    */
   public static WebDriver getDriver() {

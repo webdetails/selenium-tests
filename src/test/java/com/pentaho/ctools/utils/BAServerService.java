@@ -31,7 +31,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BAServerService {
-  //Log instance
+  // Log instance
   private final static Logger LOG = LogManager.getLogger( BAServerService.class );
   // The BA Server URL
   private String baURL = "";
@@ -45,12 +45,17 @@ public class BAServerService {
   /**
    * The constructor.
    * 
-   * @param baURL - BA server url.
-   * @param baHostname - BA server hostname.
-   * @param baPort - BA server port.
-   * @param baServiceName - BA server service name (windows only).
+   * @param baURL
+   *          - BA server url.
+   * @param baHostname
+   *          - BA server hostname.
+   * @param baPort
+   *          - BA server port.
+   * @param baServiceName
+   *          - BA server service name (windows only).
    */
-  public BAServerService( final String baURL, final String baHostname, final String baPort, final String baServiceName ) {
+  public BAServerService( final String baURL, final String baHostname, final String baPort,
+      final String baServiceName ) {
     this.baURL = baURL;
     this.baHostname = baHostname;
     this.baPort = baPort;
@@ -66,33 +71,28 @@ public class BAServerService {
    * Start the BA Server and wait for server start-up.
    */
   public void Start() {
-    // you can pass query/start/stop to respective 
+    // you can pass query/start/stop to respective
     // operation on windows Audio Service while running
-    String[] command = { "cmd.exe",
-        "/c",
-        "sc",
-        "start",
-        this.baServiceName };
+    String[] command = { "cmd.exe", "/c", "sc", "start", this.baServiceName };
     String output = ExecuteCommand( command );
 
     if ( output.contains( "START_PENDING" ) ) {
-      //Check if Server is listening
-      for ( int nTry = 0; nTry < 20; nTry++ ) { //300000 == 5 minutes
+      // Check if Server is listening
+      for ( int nTry = 0; nTry < 20; nTry++ ) { // 300000 == 5 minutes
         boolean serverIsListening = HttpUtils.ServerListening( this.baHostname, Integer.parseInt( this.baPort ) );
         if ( serverIsListening == true ) {
           LOG.debug( "BA Server is listening NOW!" );
           break;
-        } else {
-          LOG.debug( "BA Server is NOT listening!" );
-          try {
-            Thread.sleep( 15000 );
-          } catch ( InterruptedException e ) {
-            e.printStackTrace();
-          }
+        }
+        LOG.debug( "BA Server is NOT listening!" );
+        try {
+          Thread.sleep( 15000 );
+        } catch ( InterruptedException e ) {
+          e.printStackTrace();
         }
       }
 
-      //Wait for access URL.
+      // Wait for access URL.
       int status = HttpUtils.GetHttpStatus( this.baURL );
       if ( status == HttpStatus.SC_OK ) {
         LOG.debug( "BA Server is ready to use!" );
@@ -108,31 +108,26 @@ public class BAServerService {
    * Stop the ba server and wait for server not available.
    */
   public void Stop() {
-    String[] command = { "cmd.exe",
-        "/c",
-        "sc",
-        "stop",
-        this.baServiceName };
+    String[] command = { "cmd.exe", "/c", "sc", "stop", this.baServiceName };
     String output = ExecuteCommand( command );
 
     if ( output.contains( "STOP_PENDING" ) ) {
-      //Check if Server is not listening
-      for ( int nTry = 0; nTry < 20; nTry++ ) { //300000 == 5 minutes
+      // Check if Server is not listening
+      for ( int nTry = 0; nTry < 20; nTry++ ) { // 300000 == 5 minutes
         boolean serverIsListening = HttpUtils.ServerListening( this.baHostname, Integer.parseInt( this.baPort ) );
         if ( serverIsListening == false ) {
           LOG.debug( "BA Server is NOT listening!" );
           break;
-        } else {
-          LOG.debug( "BA Server is STILL listening [" + this.baPort + "]!" );
-          try {
-            Thread.sleep( 15000 );
-          } catch ( InterruptedException e ) {
-            e.printStackTrace();
-          }
+        }
+        LOG.debug( "BA Server is STILL listening [" + this.baPort + "]!" );
+        try {
+          Thread.sleep( 15000 );
+        } catch ( InterruptedException e ) {
+          e.printStackTrace();
         }
       }
 
-      //Wait for access URL broken.
+      // Wait for access URL broken.
       int status = HttpUtils.GetHttpStatus( this.baURL );
       if ( status == HttpStatus.SC_BAD_REQUEST ) {
         LOG.debug( "BA Server is STOPPED!" );
@@ -145,8 +140,7 @@ public class BAServerService {
   }
 
   /**
-   * This method shall execute a windows command to start/stop/query 
-   * windows services
+   * This method shall execute a windows command to start/stop/query windows services
    * 
    * @param command
    * @return Output of the command execution.
@@ -165,10 +159,10 @@ public class BAServerService {
           LOG.debug( "OUTPUT:: " + line );
           output += line;
         }
-      } catch ( Exception ex ) {//InputStream
+      } catch ( Exception ex ) {// InputStream
         LOG.debug( "InputStream Exception : " + ex );
       }
-    } catch ( Exception ex ) { //Process
+    } catch ( Exception ex ) { // Process
       LOG.debug( "Process Exception : " + ex );
     }
     return output;

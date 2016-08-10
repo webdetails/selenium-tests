@@ -76,6 +76,7 @@ public class DirectoryWatcher {
       bFileCreated = future.get( timeout, TimeUnit.SECONDS );
       this.log.debug( "Finished!" );
     } catch ( TimeoutException e ) {
+      this.log.warn( e );
       future.cancel( true );
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );

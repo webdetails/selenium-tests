@@ -1,3 +1,24 @@
+/*!*****************************************************************************
+ *
+ * Selenium Tests For CTools
+ *
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
+ *
+ *******************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
 package com.pentaho.ctools.cde.tutorials;
 
 import static org.testng.Assert.assertEquals;
@@ -29,6 +50,8 @@ public class AddingCharts extends BaseTest {
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( AddingCharts.class );
+  // Instance to access CDF Tutorial page
+  private final CdeTutorials cdetutorials = new CdeTutorials();
 
   WebElement h1, h2, h3;
 
@@ -104,9 +127,9 @@ public class AddingCharts extends BaseTest {
     this.h3.click();
 
     //Step #2 - Assert all images are present and if they have a valid src (url - 200 OK) 
-    CdeTutorials.checkImagesPresenceAndHttpStatus( "collapseOne" );
-    CdeTutorials.checkImagesPresenceAndHttpStatus( "collapseTwo" );
-    CdeTutorials.checkImagesPresenceAndHttpStatus( "collapseThree" );
+    this.cdetutorials.checkImagesPresenceAndHttpStatus( "collapseOne" );
+    this.cdetutorials.checkImagesPresenceAndHttpStatus( "collapseTwo" );
+    this.cdetutorials.checkImagesPresenceAndHttpStatus( "collapseThree" );
 
     //Collapse Headers
     this.h1.click();
@@ -143,12 +166,10 @@ public class AddingCharts extends BaseTest {
 
     while ( editLink.hasNext() && previewLink.hasNext() ) {
       //Assert Edit Dashboard link is present, page loads successfuly and gets the name of the CDE Doc
-      String docName = CdeTutorials.getCdeDocName( editLink.next() );
+      String docName = this.cdetutorials.getCdeDocName( editLink.next() );
 
       //Preview links is present and page is loaded 
-      CdeTutorials.clickAndCheckPageLoaded( previewLink.next(), By.xpath( "//title" ), docName );
+      this.cdetutorials.clickAndCheckPageLoaded( previewLink.next(), By.xpath( "//title" ), docName );
     }
-
-    return;
   }
 }

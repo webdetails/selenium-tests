@@ -59,7 +59,7 @@ public class ActionsHelper extends Actions {
       this.moveToElement( element );
       this.perform();
     } catch ( StaleElementReferenceException sere ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", sere );
       this.MouseOver( locator );
     }
   }

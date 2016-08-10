@@ -1,3 +1,24 @@
+/*!*****************************************************************************
+ *
+ * Selenium Tests For CTools
+ *
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
+ *
+ *******************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
 package com.pentaho.ctools.cde.tutorials;
 
 import static org.testng.Assert.assertEquals;
@@ -26,6 +47,8 @@ public class HelloWorld extends BaseTest {
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( HelloWorld.class );
+  // Instance to access CDE Tutorial
+  private final CdeTutorials cdetutorial = new CdeTutorials();
 
   WebElement h1, h2, h3;
 
@@ -102,16 +125,14 @@ public class HelloWorld extends BaseTest {
     this.h3.click();
 
     //Step #2 - Assert all images are present and if they have a valid src (url - 200 OK) 
-    CdeTutorials.checkImagesPresenceAndHttpStatus( "collapseOne" );
-    CdeTutorials.checkImagesPresenceAndHttpStatus( "collapseTwo" );
-    CdeTutorials.checkImagesPresenceAndHttpStatus( "collapseThree" );
+    this.cdetutorial.checkImagesPresenceAndHttpStatus( "collapseOne" );
+    this.cdetutorial.checkImagesPresenceAndHttpStatus( "collapseTwo" );
+    this.cdetutorial.checkImagesPresenceAndHttpStatus( "collapseThree" );
 
     //Collapse Headers
     this.h1.click();
     this.h2.click();
     this.h3.click();
-
-    return;
   }
 
   /**
@@ -153,7 +174,7 @@ public class HelloWorld extends BaseTest {
     // Switch back to original browser (first window)
     driver.switchTo().window( winHandleBefore );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Preview')]" ), By.xpath( "//title" ), docName );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Preview')]" ), By.xpath( "//title" ), docName );
   }
 
 }

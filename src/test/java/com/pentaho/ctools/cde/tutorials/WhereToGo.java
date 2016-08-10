@@ -1,3 +1,24 @@
+/*!*****************************************************************************
+ *
+ * Selenium Tests For CTools
+ *
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
+ *
+ *******************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
 package com.pentaho.ctools.cde.tutorials;
 
 import static org.testng.Assert.assertEquals;
@@ -17,6 +38,8 @@ public class WhereToGo extends BaseTest {
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( WhereToGo.class );
+  // Instance to access CDE Tutorial
+  private final CdeTutorials cdetutorial = new CdeTutorials();
 
   //Headings of the page
   WebElement[] headings = new WebElement[5];
@@ -40,8 +63,6 @@ public class WhereToGo extends BaseTest {
     this.headings[2] = this.elemHelper.FindElement( driver, By.xpath( "//*[@id='headingThree']/a" ) );
     this.headings[3] = this.elemHelper.FindElement( driver, By.xpath( "//*[@id='headingFour']/a" ) );
     this.headings[4] = this.elemHelper.FindElement( driver, By.xpath( "//*[@id='headingFive']/a" ) );
-
-    return;
   }
 
   /**
@@ -81,7 +102,7 @@ public class WhereToGo extends BaseTest {
       String ctoolLocator = String.format( "//ul[@class='ctools-suite']/li[%d]/a", ( i + 1 ) );
 
       //Step #2
-      CdeTutorials.clickAndCheckPageLoaded( By.xpath( ctoolLocator ), By.xpath( "//h1[contains(@class,'ctool-name')]" ), ctools[i] );
+      this.cdetutorial.clickAndCheckPageLoaded( By.xpath( ctoolLocator ), By.xpath( "//h1[contains(@class,'ctool-name')]" ), ctools[i] );
     }
 
     //Collapse 1st header
@@ -113,33 +134,33 @@ public class WhereToGo extends BaseTest {
     for ( WebElement h : this.headings )
       h.click();
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'HTML')]" ), By.xpath( "//title" ), "HTML Tutorial" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'HTML')]" ), By.xpath( "//title" ), "HTML Tutorial" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'CSS')]" ), By.xpath( "//title" ), "CSS Tutorial" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'CSS')]" ), By.xpath( "//title" ), "CSS Tutorial" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'jQuery')]" ), By.xpath( "//title" ), "jQuery" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'jQuery')]" ), By.xpath( "//title" ), "jQuery" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'JavaScript (JS)')]" ), By.xpath( "//title" ), "JavaScript and HTML DOM Reference" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'JavaScript (JS)')]" ), By.xpath( "//title" ), "JavaScript and HTML DOM Reference" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Bootstrap')]" ), By.xpath( "//title" ), "Bootstrap · The world's most popular mobile-first and responsive front-end framework." );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Bootstrap')]" ), By.xpath( "//title" ), "Bootstrap · The world's most popular mobile-first and responsive front-end framework." );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Protovis')]" ), By.xpath( "//title" ), "Protovis" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Protovis')]" ), By.xpath( "//title" ), "Protovis" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Datatables')]" ), By.xpath( "//title" ), "DataTables | Table plug-in for jQuery" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Datatables')]" ), By.xpath( "//title" ), "DataTables | Table plug-in for jQuery" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Sparklines')]" ), By.xpath( "//title" ), "jQuery Sparklines" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Sparklines')]" ), By.xpath( "//title" ), "jQuery Sparklines" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Chosen')]" ), By.xpath( "//title" ), "Chosen: A jQuery Plugin by Harvest to Tame Unwieldy Select Boxes" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Chosen')]" ), By.xpath( "//title" ), "Chosen: A jQuery Plugin by Harvest to Tame Unwieldy Select Boxes" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Select2')]" ), By.xpath( "//title" ), "Select2 - The jQuery replacement for select boxes" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Select2')]" ), By.xpath( "//title" ), "Select2 - The jQuery replacement for select boxes" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Facebook page')]" ), By.xpath( "//title" ), "Webdetails" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Facebook page')]" ), By.xpath( "//title" ), "Webdetails" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Pedro Alves Blog')]" ), By.xpath( "//title" ), "Pedro Alves on Business Intelligence" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Pedro Alves Blog')]" ), By.xpath( "//title" ), "Pedro Alves on Business Intelligence" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Community Tools - CTools')]" ), By.xpath( "//title" ), "Community Tools - CTools" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Community Tools - CTools')]" ), By.xpath( "//title" ), "Community Tools - CTools" );
 
-    CdeTutorials.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'here')]" ), By.xpath( "//title" ), "Webdetails • Business Analytics" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'here')]" ), By.xpath( "//title" ), "Webdetails • Business Analytics" );
 
     //Collapse headers
     for ( WebElement h : this.headings )

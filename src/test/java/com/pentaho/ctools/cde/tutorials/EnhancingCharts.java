@@ -1,3 +1,24 @@
+/*!*****************************************************************************
+ *
+ * Selenium Tests For CTools
+ *
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
+ *
+ *******************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
 package com.pentaho.ctools.cde.tutorials;
 
 import static org.testng.Assert.assertEquals;
@@ -29,6 +50,8 @@ public class EnhancingCharts extends BaseTest {
   private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
   private final Logger log = LogManager.getLogger( EnhancingCharts.class );
+  // Instance to access CDE Tutorial
+  private final CdeTutorials cdetutorial = new CdeTutorials();
 
   WebElement h1, h2;
 
@@ -94,19 +117,21 @@ public class EnhancingCharts extends BaseTest {
   public void tc1_CheckImages_Displayed() {
     this.log.info( "tc1_CheckImages_Displayed" );
 
-    //Step #1 - Expand Headers
+    /*
+     * Step #1 - Expand Headers 
+     */
     this.h1.click();
     this.h2.click();
 
-    //Step #2 - Assert all images are present and if they have a valid src (url - 200 OK) 
-    CdeTutorials.checkImagesPresenceAndHttpStatus( "collapseOne" );
-    CdeTutorials.checkImagesPresenceAndHttpStatus( "collapseTwo" );
+    /*
+     * Step #2 - Assert all images are present and if they have a valid src (url - 200 OK) 
+     */
+    this.cdetutorial.checkImagesPresenceAndHttpStatus( "collapseOne" );
+    this.cdetutorial.checkImagesPresenceAndHttpStatus( "collapseTwo" );
 
     //Collapse Headers
     this.h1.click();
     this.h2.click();
-
-    return;
   }
 
   /**
@@ -136,13 +161,11 @@ public class EnhancingCharts extends BaseTest {
 
     while ( editLink.hasNext() && previewLink.hasNext() ) {
       //Assert Edit Dashboard link is present, page loads successfuly and gets the name of the CDE Doc
-      String docName = CdeTutorials.getCdeDocName( editLink.next() );
+      String docName = this.cdetutorial.getCdeDocName( editLink.next() );
 
       //Preview links is present and page is loaded 
-      CdeTutorials.clickAndCheckPageLoaded( previewLink.next(), By.xpath( "//title" ), docName );
+      this.cdetutorial.clickAndCheckPageLoaded( previewLink.next(), By.xpath( "//title" ), docName );
     }
-
-    return;
   }
 
 }

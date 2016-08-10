@@ -219,6 +219,7 @@ public class CDA99 extends BaseTest {
       String value = this.elemHelper.GetInputValue( this.previewWindow, By.id( "status" ) );
       assertEquals( "In Process", value );
     } catch ( NoSuchElementException see ) {
+      this.log.warn( see );
       selectNotExist = true;
     }
 

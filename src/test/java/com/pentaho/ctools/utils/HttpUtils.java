@@ -81,10 +81,10 @@ public class HttpUtils {
         driver.findElement( By.id( "web_" + ErrorNumber ) );
         errorFound = true;
       } catch ( NoSuchElementException s ) {
-        LOG.error( "NoSuchElement - got it." );
+        LOG.error( "NoSuchElement - got it.", s );
         break;
       } catch ( StaleElementReferenceException s ) {
-        LOG.error( "Stale - got it." );
+        LOG.error( "Stale - got it.", s );
       }
     }
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
@@ -133,6 +133,7 @@ public class HttpUtils {
     try (Socket s = new Socket( host, port );) {
       return true;
     } catch ( Exception e ) {
+      LOG.error( e );
       return false;
     }
   }
