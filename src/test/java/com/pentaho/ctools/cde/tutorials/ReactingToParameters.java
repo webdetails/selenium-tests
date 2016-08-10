@@ -59,7 +59,7 @@ public class ReactingToParameters extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Reacting To Parameters Page
+   *    Open Reacting To Parameters Page
    */
   @BeforeClass
   public void openReactingToParametersPage() {
@@ -68,8 +68,6 @@ public class ReactingToParameters extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[6]/li" ) );
 
     assertEquals( "Reacting to Parameters", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
-
-    return;
   }
 
   /**
@@ -79,10 +77,10 @@ public class ReactingToParameters extends BaseTest {
    *    Reacting To Parameters Page Sections
    *    
    * Test Case Description:
-   * 	Check sections in Reacting To Parameters page.
+   *    Check sections in Reacting To Parameters page.
    * 
    * Test Steps:
-   * 		1. Check if headings are present and correctly displayed;
+   *    1. Check if headings are present and correctly displayed;
    */
   @Test
   public void tc0_ReactingToParametersSections_Displayed() {
@@ -99,8 +97,6 @@ public class ReactingToParameters extends BaseTest {
     //Heading #3 
     this.h3 = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//*[@id='headingThree']/a/h4" ) );
     assertNotNull( this.h3 );
-
-    return;
   }
 
   /**
@@ -110,12 +106,12 @@ public class ReactingToParameters extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present.
    * 
    * Test Steps:
-   * 		1. Expand headers;
-   * 		2. Assert if images are present;
-   * 		3. Check images URL returns HTTP Status OK (200).
+   *    1. Expand headers;
+   *    2. Assert if images are present;
+   *    3. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc1_CheckImages_Displayed() {
@@ -144,11 +140,11 @@ public class ReactingToParameters extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc2_PreviewAndEditLinks_Displayed() {

@@ -59,7 +59,7 @@ public class ExtensionPoints extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Extension Points Page
+   *    Open Extension Points Page
    */
   @BeforeClass
   public void openExtensionPointsPage() {
@@ -68,8 +68,6 @@ public class ExtensionPoints extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[11]/li" ) );
 
     assertEquals( "CCC: Extension Points", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
-
-    return;
   }
 
   /**
@@ -79,10 +77,10 @@ public class ExtensionPoints extends BaseTest {
    *    Extension Points Page Sections
    *    
    * Test Case Description:
-   * 	Check sections in Extension Points page.
+   *    Check sections in Extension Points page.
    * 
    * Test Steps:
-   * 		1. Check if headings are present and correctly displayed;
+   *    1. Check if headings are present and correctly displayed;
    */
   @Test
   public void tc0_ExtensionPointsSections_Displayed() {
@@ -95,8 +93,6 @@ public class ExtensionPoints extends BaseTest {
     //Heading #2
     this.h2 = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//*[@id='headingThree']/a/h4" ) );
     assertNotNull( this.h2 );
-
-    return;
   }
 
   /**
@@ -106,12 +102,12 @@ public class ExtensionPoints extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present. 
    * 
    * Test Steps:
-   * 		1. Expand headers;
-   * 		2. Assert if images are present;
-   * 		3. Check images URL returns HTTP Status OK (200).
+   *    1. Expand headers;
+   *    2. Assert if images are present;
+   *    3. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc1_CheckImages_Displayed() {
@@ -141,11 +137,11 @@ public class ExtensionPoints extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc2_PreviewAndEditLinks_Displayed() {
@@ -175,12 +171,11 @@ public class ExtensionPoints extends BaseTest {
    *    Text links
    *    
    * Test Case Description:
-   * 	Click on all links in the text and check the pages are loaded. 
+   *    Click on all links in the text and check the pages are loaded. 
    * 
    * Test Steps:
-   * 	Steps:
-   * 		1. Check Protovis link;
-   * 		2. Check CCC link;
+   *    1. Check Protovis link;
+   *    2. Check CCC link;
    */
   @Test
   public void tc3_TextLinks_Displayed() {

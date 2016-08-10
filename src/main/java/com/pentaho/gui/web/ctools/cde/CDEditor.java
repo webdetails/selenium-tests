@@ -44,7 +44,7 @@ public class CDEditor {
   // Access to wrapper for webdriver
   private ElementHelper elemHelper = new ElementHelper();
   // Logging instance
-  private final static Logger LOG = LogManager.getLogger( CDEditor.class );
+  private final Logger log = LogManager.getLogger( CDEditor.class );
 
   public CDEditor( WebDriver driver ) {
     this.driver = driver;
@@ -55,7 +55,7 @@ public class CDEditor {
    *
    */
   public void GoToNewCDE() {
-    LOG.debug( "Enter: GoToNewCDE" );
+    this.log.debug( "Enter: GoToNewCDE" );
     String currUrl = this.driver.getCurrentUrl();
     if ( currUrl != PageUrl.CDE_DASHBOARD ) {
       this.elemHelper.Get( this.driver, PageUrl.CDE_DASHBOARD );
@@ -74,7 +74,7 @@ public class CDEditor {
    * This method shall 
    */
   public void GoToComponentPanel() {
-    LOG.debug( "Enter: GoToComponentPanel" );
+    this.log.debug( "Enter: GoToComponentPanel" );
 
     WebElement cdePanel = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "cdfdd-panels" ) );
     //If we are not in CDE Editor we go there.
@@ -101,7 +101,7 @@ public class CDEditor {
    *
    */
   public void SaveDashboard( String title, String path ) {
-    LOG.info( "SaveDashboard::Enter" );
+    this.log.info( "SaveDashboard::Enter" );
 
     //Click "Save"
     WebElement saveDashboard = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@id='Save']" ) );
@@ -164,7 +164,7 @@ public class CDEditor {
    *
    */
   public void AddRow() {
-    LOG.info( "Enter: AddRow" );
+    this.log.info( "Enter: AddRow" );
     if ( this.elemHelper.FindElement( this.driver, By.id( "panel-layout_panel" ) ) == null ) {
       WebElement layoutButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@title='Layout Panel']/a" ) );
       assertNotNull( layoutButton );
@@ -180,7 +180,7 @@ public class CDEditor {
    *
    */
   public void AddColumn() {
-    LOG.info( "Enter: AddColumn" );
+    this.log.info( "Enter: AddColumn" );
     if ( this.elemHelper.FindElement( this.driver, By.id( "panel-layout_panel" ) ) == null ) {
       WebElement layoutButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@title='Layout Panel']/a" ) );
       assertNotNull( layoutButton );
@@ -196,7 +196,7 @@ public class CDEditor {
    *
    */
   public void AddBootstrap() {
-    LOG.info( "Enter: AddBootstrap" );
+    this.log.info( "Enter: AddBootstrap" );
     if ( this.elemHelper.FindElement( this.driver, By.id( "panel-layout_panel" ) ) == null ) {
       WebElement layoutButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@title='Layout Panel']/a" ) );
       assertNotNull( layoutButton );
@@ -212,7 +212,7 @@ public class CDEditor {
    *
    */
   public void AddFreeform() {
-    LOG.info( "Enter: AddFreeform" );
+    this.log.info( "Enter: AddFreeform" );
     if ( this.elemHelper.FindElement( this.driver, By.id( "panel-layout_panel" ) ) == null ) {
       WebElement layoutButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@title='Layout Panel']/a" ) );
       assertNotNull( layoutButton );
@@ -228,7 +228,7 @@ public class CDEditor {
    *
    */
   public void AddHtml() {
-    LOG.info( "Enter: AddHtml" );
+    this.log.info( "Enter: AddHtml" );
     if ( this.elemHelper.FindElement( this.driver, By.id( "panel-layout_panel" ) ) == null ) {
       WebElement layoutButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@title='Layout Panel']/a" ) );
       assertNotNull( layoutButton );
@@ -244,7 +244,7 @@ public class CDEditor {
    *
    */
   public void AddSpace() {
-    LOG.info( "Enter: AddSpace" );
+    this.log.info( "Enter: AddSpace" );
     if ( this.elemHelper.FindElement( this.driver, By.id( "panel-layout_panel" ) ) == null ) {
       WebElement layoutButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@title='Layout Panel']/a" ) );
       assertNotNull( layoutButton );
@@ -263,7 +263,7 @@ public class CDEditor {
    * @param key
    */
   public void KeyShortcut( String key ) {
-    LOG.info( "Enter: KeyShortcut" );
+    this.log.info( "Enter: KeyShortcut" );
     int keyNumber;
     switch ( key ) {
       case "UP":
@@ -313,7 +313,7 @@ public class CDEditor {
    * @param key
    */
   public void KeyShortcut( int keyNumber ) {
-    LOG.info( "Enter: KeyShortcut" );
+    this.log.info( "Enter: KeyShortcut" );
     Robot robot;
     try {
       robot = new Robot();
@@ -333,7 +333,7 @@ public class CDEditor {
    * @param key
    */
   public void ShiftKeyShortcut( int keyNumber ) {
-    LOG.info( "Enter: ShiftKeyShortcut" );
+    this.log.info( "Enter: ShiftKeyShortcut" );
     Robot robot;
     try {
       robot = new Robot();
@@ -356,34 +356,34 @@ public class CDEditor {
    * @returns selected
    */
   public String DashboardSettings( String style, String type ) {
-    LOG.info( "Enter: DashboardSettings" );
+    this.log.info( "Enter: DashboardSettings" );
     String selected;
     WebElement settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
     assertNotNull( settingsLink );
     settingsLink.click();
     WebElement settingsPopup = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='popup']//div[@id='popupstates']" ) );
     assertNotNull( settingsPopup );
-    if ( style != "" ) {
+    if ( !style.equals( "" ) ) {
       Select styleSelect = new Select( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "styleInput" ) ) );
       styleSelect.selectByValue( style );
     }
-    if ( type != "" ) {
+    if ( !type.equals( "" ) ) {
       Select typeSelect = new Select( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "rendererInput" ) ) );
       typeSelect.selectByValue( type );
     }
-    if ( style != "" && type != "" ) {
+    if ( !style.equals( "" ) && !type.equals( "" ) ) {
       Select styleSelect = new Select( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "styleInput" ) ) );
       styleSelect.selectByValue( style );
       Select typeSelect = new Select( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "rendererInput" ) ) );
       typeSelect.selectByValue( type );
       selected = style + "," + type;
-    } else if ( style == "" && type != "" ) {
+    } else if ( style.equals( "" ) && type.equals( "" ) ) {
       Select typeSelect = new Select( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "rendererInput" ) ) );
       typeSelect.selectByValue( type );
       WebElement selectedStyle = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//select[@id='styleInput']/option[@selected='']" ) );
       selected = selectedStyle.getAttribute( "value" );
       selected = selected + "," + type;
-    } else if ( style != "" && type == "" ) {
+    } else if ( !style.equals( "" ) && type.equals( "" ) ) {
       Select styleSelect = new Select( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "rendererInput" ) ) );
       styleSelect.selectByValue( style );
       WebElement selectedType = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//select[@id='rendererInput']/option[@selected='']" ) );
@@ -408,7 +408,7 @@ public class CDEditor {
    * @returns equal
    */
   public boolean NotifyBannerMessage( String message ) {
-    LOG.info( "Enter: NotifyBannerMessage" );
+    this.log.info( "Enter: NotifyBannerMessage" );
     Boolean equal = false;
     WebElement notifySuccess = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='notifyBar']" ) );
     assertNotNull( notifySuccess );
@@ -425,7 +425,7 @@ public class CDEditor {
    * 
    */
   public void ApplyTemplate( String template ) {
-    LOG.info( "Enter: ApplyTemplate" );
+    this.log.info( "Enter: ApplyTemplate" );
     WebElement templateButton = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@title='Apply Template']" ) );
     assertNotNull( templateButton );
     templateButton.click();

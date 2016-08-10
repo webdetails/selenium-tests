@@ -32,7 +32,7 @@ import org.apache.logging.log4j.Logger;
 
 public class BAServerService {
   // Log instance
-  private final static Logger LOG = LogManager.getLogger( BAServerService.class );
+  private final Logger log = LogManager.getLogger( BAServerService.class );
   // The BA Server URL
   private String baURL = "";
   // The BA Server hostname
@@ -61,10 +61,10 @@ public class BAServerService {
     this.baPort = baPort;
     this.baServiceName = baServiceName;
 
-    LOG.debug( "BA Url: " + this.baURL );
-    LOG.debug( "BA Hostname: " + this.baHostname );
-    LOG.debug( "BA Port: " + this.baPort );
-    LOG.debug( "BA Service Name: " + this.baServiceName );
+    this.log.debug( "BA Url: " + this.baURL );
+    this.log.debug( "BA Hostname: " + this.baHostname );
+    this.log.debug( "BA Port: " + this.baPort );
+    this.log.debug( "BA Service Name: " + this.baServiceName );
   }
 
   /**
@@ -73,7 +73,11 @@ public class BAServerService {
   public void Start() {
     // you can pass query/start/stop to respective
     // operation on windows Audio Service while running
-    String[] command = { "cmd.exe", "/c", "sc", "start", this.baServiceName };
+    String[] command = { "cmd.exe",
+                         "/c",
+                         "sc",
+                         "start",
+                         this.baServiceName };
     String output = ExecuteCommand( command );
 
     if ( output.contains( "START_PENDING" ) ) {
@@ -81,10 +85,10 @@ public class BAServerService {
       for ( int nTry = 0; nTry < 20; nTry++ ) { // 300000 == 5 minutes
         boolean serverIsListening = HttpUtils.ServerListening( this.baHostname, Integer.parseInt( this.baPort ) );
         if ( serverIsListening == true ) {
-          LOG.debug( "BA Server is listening NOW!" );
+          this.log.debug( "BA Server is listening NOW!" );
           break;
         }
-        LOG.debug( "BA Server is NOT listening!" );
+        this.log.debug( "BA Server is NOT listening!" );
         try {
           Thread.sleep( 15000 );
         } catch ( InterruptedException e ) {
@@ -95,12 +99,12 @@ public class BAServerService {
       // Wait for access URL.
       int status = HttpUtils.GetHttpStatus( this.baURL );
       if ( status == HttpStatus.SC_OK ) {
-        LOG.debug( "BA Server is ready to use!" );
+        this.log.debug( "BA Server is ready to use!" );
       } else {
-        LOG.debug( "BA Server is initializing!" );
+        this.log.debug( "BA Server is initializing!" );
       }
     } else {
-      LOG.error( "The service didn't start." );
+      this.log.error( "The service didn't start." );
     }
   }
 
@@ -108,7 +112,11 @@ public class BAServerService {
    * Stop the ba server and wait for server not available.
    */
   public void Stop() {
-    String[] command = { "cmd.exe", "/c", "sc", "stop", this.baServiceName };
+    String[] command = { "cmd.exe",
+                         "/c",
+                         "sc",
+                         "stop",
+                         this.baServiceName };
     String output = ExecuteCommand( command );
 
     if ( output.contains( "STOP_PENDING" ) ) {
@@ -116,10 +124,10 @@ public class BAServerService {
       for ( int nTry = 0; nTry < 20; nTry++ ) { // 300000 == 5 minutes
         boolean serverIsListening = HttpUtils.ServerListening( this.baHostname, Integer.parseInt( this.baPort ) );
         if ( serverIsListening == false ) {
-          LOG.debug( "BA Server is NOT listening!" );
+          this.log.debug( "BA Server is NOT listening!" );
           break;
         }
-        LOG.debug( "BA Server is STILL listening [" + this.baPort + "]!" );
+        this.log.debug( "BA Server is STILL listening [" + this.baPort + "]!" );
         try {
           Thread.sleep( 15000 );
         } catch ( InterruptedException e ) {
@@ -130,12 +138,12 @@ public class BAServerService {
       // Wait for access URL broken.
       int status = HttpUtils.GetHttpStatus( this.baURL );
       if ( status == HttpStatus.SC_BAD_REQUEST ) {
-        LOG.debug( "BA Server is STOPPED!" );
+        this.log.debug( "BA Server is STOPPED!" );
       } else {
-        LOG.debug( "BA Server is shutdown!" );
+        this.log.debug( "BA Server is shutdown!" );
       }
     } else {
-      LOG.error( "The service couldn't stop." );
+      this.log.error( "The service couldn't stop." );
     }
   }
 
@@ -145,25 +153,25 @@ public class BAServerService {
    * @param command
    * @return Output of the command execution.
    */
-  private static String ExecuteCommand( String[] command ) {
+  private String ExecuteCommand( String[] command ) {
     String output = "";
     try {
       Process process = new ProcessBuilder( command ).start();
 
-      try (InputStream inputStream = process.getInputStream();
+      try ( InputStream inputStream = process.getInputStream();
           InputStreamReader inputStreamReader = new InputStreamReader( inputStream );
-          BufferedReader bufferedReader = new BufferedReader( inputStreamReader );) {
+          BufferedReader bufferedReader = new BufferedReader( inputStreamReader ); ) {
 
         String line;
         while ( ( line = bufferedReader.readLine() ) != null ) {
-          LOG.debug( "OUTPUT:: " + line );
+          this.log.debug( "OUTPUT:: " + line );
           output += line;
         }
-      } catch ( Exception ex ) {// InputStream
-        LOG.debug( "InputStream Exception : " + ex );
+      } catch ( Exception ex ) { // InputStream
+        this.log.debug( "InputStream Exception : " + ex );
       }
     } catch ( Exception ex ) { // Process
-      LOG.debug( "Process Exception : " + ex );
+      this.log.debug( "Process Exception : " + ex );
     }
     return output;
   }

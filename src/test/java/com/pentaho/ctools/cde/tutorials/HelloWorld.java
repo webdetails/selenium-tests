@@ -56,7 +56,7 @@ public class HelloWorld extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Hello World Page
+   *    Open Hello World Page
    */
   @BeforeClass
   public void openHelloWorldPage() {
@@ -65,8 +65,6 @@ public class HelloWorld extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[3]/li" ) );
 
     assertEquals( "Hello World", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
-
-    return;
   }
 
   /**
@@ -76,10 +74,10 @@ public class HelloWorld extends BaseTest {
    *    Hello World Page Sections
    *    
    * Test Case Description:
-   * 	Check sections in Hello World page.
+   *    Check sections in Hello World page.
    * 
    * Test Steps:
-   * 		1. Check if headings are present and correctly displayed;
+   *    1. Check if headings are present and correctly displayed;
    */
   @Test
   public void tc0_HelloWorldPageSections_Displayed() {
@@ -96,9 +94,6 @@ public class HelloWorld extends BaseTest {
     //Heading #3 - 3. Create a Text Component
     this.h3 = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//*[@id='headingThree']/a/h4" ) );
     assertNotNull( this.h3 );
-
-    return;
-
   }
 
   /**
@@ -108,12 +103,12 @@ public class HelloWorld extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present. 
    * 
    * Test Steps:
-   * 		1. Expand headers;
-   * 		2. Assert if images are present;
-   * 		3. Check images URL returns HTTP Status OK (200).
+   *    1. Expand headers;
+   *    2. Assert if images are present;
+   *    3. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc1_CheckImages_Displayed() {
@@ -142,11 +137,11 @@ public class HelloWorld extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc2_PreviewAndEditLinks_Displayed() {

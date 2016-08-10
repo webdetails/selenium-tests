@@ -59,7 +59,7 @@ public class AddingCharts extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Adding Charts Page
+   *    Open Adding Charts Page
    */
   @BeforeClass
   public void openAddingChartsPage() {
@@ -79,10 +79,10 @@ public class AddingCharts extends BaseTest {
    *    Adding Charts Page Sections
    *    
    * Test Case Description:
-   * 	Check sections in Adding Charts page.
+   *    Check sections in Adding Charts page.
    * 
    * Test Steps:
-   * 		1. Check if headings are present and correctly displayed;
+   *    1. Check if headings are present and correctly displayed;
    */
   @Test
   public void tc0_AddingChartsSections_Displayed() {
@@ -110,12 +110,12 @@ public class AddingCharts extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present. 
    * 
    * Test Steps:
-   * 		1. Expand headers;
-   * 		2. Assert if images are present;
-   * 		3. Check images URL returns HTTP Status OK (200).
+   *    1. Expand headers;
+   *    2. Assert if images are present;
+   *    3. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc1_CheckImages_Displayed() {
@@ -146,11 +146,11 @@ public class AddingCharts extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc2_PreviewAndEditLinks_Displayed() {

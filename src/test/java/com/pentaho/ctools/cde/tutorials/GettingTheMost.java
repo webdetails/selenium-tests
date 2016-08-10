@@ -48,7 +48,7 @@ public class GettingTheMost extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Getting the Most out of CDA Page
+   *    Open Getting the Most out of CDA Page
    */
   @BeforeClass
   public void openGettingTheMostPage() {
@@ -57,8 +57,6 @@ public class GettingTheMost extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[19]/li" ) );
 
     assertEquals( "Getting the Most out of CDA", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
-
-    return;
   }
 
   /**
@@ -68,11 +66,11 @@ public class GettingTheMost extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc0_PreviewAndEditLinks_Displayed() {
@@ -102,11 +100,11 @@ public class GettingTheMost extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present. 
    * 
    * Test Steps:
-   * 		1. Assert if images are present;
-   * 		2. Check images URL returns HTTP Status OK (200).
+   *    1. Assert if images are present;
+   *    2. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc1_CheckImages_Displayed() {

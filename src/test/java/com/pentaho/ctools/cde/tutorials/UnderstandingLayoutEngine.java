@@ -59,7 +59,7 @@ public class UnderstandingLayoutEngine extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Making the Charts Talk to Each Other Page
+   *    Open Making the Charts Talk to Each Other Page
    */
   @BeforeClass
   public void openUnderstandingLayoutEnginePage() {
@@ -68,8 +68,6 @@ public class UnderstandingLayoutEngine extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[8]/li" ) );
 
     assertEquals( "Understanding Layout Engine", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
-
-    return;
   }
 
   /**
@@ -79,10 +77,10 @@ public class UnderstandingLayoutEngine extends BaseTest {
    *    Understanding Layout Engine Page Sections
    *    
    * Test Case Description:
-   * 	Check sections in Understanding Layout Engine page.
+   *    Check sections in Understanding Layout Engine page.
    * 
    * Test Steps:
-   * 		1. Check if headings are present and correctly displayed;
+   *    1. Check if headings are present and correctly displayed;
    */
   @Test
   public void tc0_UnderstandingLayoutEngineSections_Displayed() {
@@ -91,8 +89,6 @@ public class UnderstandingLayoutEngine extends BaseTest {
     //Heading #1
     this.h1 = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//*[@id='headingOne']/a/h4" ) );
     assertNotNull( this.h1 );
-
-    return;
   }
 
   /**
@@ -102,12 +98,12 @@ public class UnderstandingLayoutEngine extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present. 
    * 
    * Test Steps:
-   * 		1. Expand headers;
-   * 		2. Assert if images are present;
-   * 		3. Check images URL returns HTTP Status OK (200).
+   *    1. Expand headers;
+   *    2. Assert if images are present;
+   *    3. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc1_CheckImages_Displayed() {
@@ -130,11 +126,11 @@ public class UnderstandingLayoutEngine extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc2_PreviewAndEditLinks_Displayed() {
@@ -157,7 +153,5 @@ public class UnderstandingLayoutEngine extends BaseTest {
       //Preview links is present and page is loaded 
       this.cdetutorial.clickAndCheckPageLoaded( previewLink.next(), By.xpath( "//title" ), docName );
     }
-
-    return;
   }
 }

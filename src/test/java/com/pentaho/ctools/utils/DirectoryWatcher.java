@@ -106,7 +106,7 @@ class CallCheckFolder implements Callable<Boolean> {
   @Override
   public Boolean call() {
 
-    try (WatchService watcher = FileSystems.getDefault().newWatchService()) {
+    try ( WatchService watcher = FileSystems.getDefault().newWatchService() ) {
 
       Path dir = Paths.get( this.path );
       dir.register( watcher, StandardWatchEventKinds.ENTRY_CREATE );

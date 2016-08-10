@@ -59,7 +59,7 @@ public class AddingExternalResources extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Making the Adding External Resources Page
+   *    Open Making the Adding External Resources Page
    */
   @BeforeClass
   public void openAddingExternalResourcesPage() {
@@ -79,10 +79,10 @@ public class AddingExternalResources extends BaseTest {
    *    Adding External Resources Page Sections
    *    
    * Test Case Description:
-   * 	Check sections in Adding External Resources page.
+   *    Check sections in Adding External Resources page.
    * 
    * Test Steps:
-   * 		1. Check if headings are present and correctly displayed;
+   *    1. Check if headings are present and correctly displayed;
    */
   @Test
   public void tc0_AddingExternalResourcesSections_Displayed() {
@@ -106,12 +106,12 @@ public class AddingExternalResources extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present. 
    * 
    * Test Steps:
-   * 		1. Expand headers;
-   * 		2. Assert if images are present;
-   * 		3. Check images URL returns HTTP Status OK (200).
+   *    1. Expand headers;
+   *    2. Assert if images are present;
+   *    3. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc1_CheckImages_Displayed() {
@@ -137,11 +137,11 @@ public class AddingExternalResources extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc2_PreviewAndEditLinks_Displayed() {
@@ -171,11 +171,10 @@ public class AddingExternalResources extends BaseTest {
    *    Text links
    *    
    * Test Case Description:
-   * 	Click on all links in the text and check the pages are loaded. 
+   *    Click on all links in the text and check the pages are loaded. 
    * 
    * Test Steps:
-   * 	Steps:
-   * 		1. Check XDATE link.
+   *    1. Check XDATE link.
    */
   @Test
   public void tc3_TextLinks_Displayed() {

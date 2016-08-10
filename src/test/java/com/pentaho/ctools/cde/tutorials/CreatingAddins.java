@@ -44,7 +44,7 @@ public class CreatingAddins extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Creating Add-ins Page
+   *    Open Creating Add-ins Page
    */
   @BeforeClass
   public void openCreatingAddinsPage() {
@@ -64,11 +64,10 @@ public class CreatingAddins extends BaseTest {
    *    Text links
    *    
    * Test Case Description:
-   * 	Click on all links in the text and check the pages are loaded. 
+   *    Click on all links in the text and check the pages are loaded. 
    * 
    * Test Steps:
-   * 	Steps:
-   * 		1. Check Sparklines link.
+   *    1. Check Sparklines link.
    */
   @Test
   public void tc0_TextLinks_Displayed() {

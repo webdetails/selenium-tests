@@ -48,7 +48,7 @@ public class Datasources extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open CDA: Datasources Page
+   *    Open CDA: Datasources Page
    */
   @BeforeClass
   public void openDatasourcesPage() {
@@ -57,8 +57,6 @@ public class Datasources extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[13]/li" ) );
 
     assertEquals( "CDA: Datasources", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
-
-    return;
   }
 
   /**
@@ -68,11 +66,11 @@ public class Datasources extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc0_PreviewAndEditLinks_Displayed() {
@@ -93,8 +91,6 @@ public class Datasources extends BaseTest {
       //Preview links is present and page is loaded 
       this.cdetutorial.clickAndCheckPageLoaded( previewLink.next(), By.xpath( "//title" ), docName );
     }
-
-    return;
   }
 
 }

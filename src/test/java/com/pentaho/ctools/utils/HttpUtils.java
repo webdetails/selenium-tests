@@ -130,7 +130,7 @@ public class HttpUtils {
    * @return - true is listening in the port, false otherwise.
    */
   public static boolean ServerListening( String host, int port ) {
-    try (Socket s = new Socket( host, port );) {
+    try ( Socket s = new Socket( host, port ); ) {
       return true;
     } catch ( Exception e ) {
       LOG.error( e );

@@ -44,7 +44,7 @@ public class TimeplotsDatePickers extends BaseTest {
    * ############################### Test Case 0 ###############################
    *
    * Description:
-   * 	Opens Timeplots and Date Pickers tutorial and check if the page was loaded.
+   *    Opens Timeplots and Date Pickers tutorial and check if the page was loaded.
    */
   @Test
   public void tc0_openTimeplotsDatePickers() {
@@ -55,22 +55,23 @@ public class TimeplotsDatePickers extends BaseTest {
 
     //Test if page was loaded
     assertEquals( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='title']/h1" ) ), "Timeplots and Date Pickers" );
-
-    return;
   }
 
   /**
-     * ############################### Test Case 1 ###############################
-     *
-     * Test Case Name:
-     *    Check Tabs Names
-     *    
-     * Test Case Description:
-     * 	Calls a function that check that the first tab is named "Intro" and the remaining tabs are named accordingly to the step number (e.g. Step1...StepX).
-     * 	The function will call another function that will check if every tab has a right panel with a title similar to the tab name.
-     * Test Steps:
-     * 		1. Call the function checkTabs with the quantity of steps that the sample has.
-     */
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Check Tabs Names
+   *    
+   * Test Case Description:
+   *    Calls a function that check that the first tab is named "Intro" and the 
+   *    remaining tabs are named accordingly to the step number (e.g. Step1...StepX).
+   *    The function will call another function that will check if every tab has 
+   *    a right panel with a title similar to the tab name.
+   * 
+   * Test Steps:
+   *    1. Call the function checkTabs with the quantity of steps that the sample has.
+   */
   @Test
   public void tc1_checkTabsNames() {
     this.log.info( "checkTabsNames" );
@@ -85,10 +86,11 @@ public class TimeplotsDatePickers extends BaseTest {
    *    Check Webdetails Logo
    *    
    * Test Case Description:
-   * 	Calls a function that clicks on the Webdetails logo at the bottom of the page and check if the page was loaded.
+   *    Calls a function that clicks on the Webdetails logo at the bottom of the 
+   *    page and check if the page was loaded.
    * 
    * Test Steps:
-   * 		1. Call the function checkWebdetailsLogoLink.
+   *    1. Call the function checkWebdetailsLogoLink.
    */
   @Test
   public void tc2_checkWebdetailsLogo() {
@@ -104,10 +106,11 @@ public class TimeplotsDatePickers extends BaseTest {
    *    Check Tooltips 
    *    
    * Test Case Description:
-   * 	Calls a function that checks every tooltips in every tab of the sample, clicks it and make sure the code file that pops up isn't empty.
+   *    Calls a function that checks every tooltips in every tab of the sample, 
+   *    clicks it and make sure the code file that pops up isn't empty.
    * 
    * Test Steps:
-   * 		1. Call the function checkTooltips.
+   *    1. Call the function checkTooltips.
    */
   @Test
   public void tc3_checkTooltips() {

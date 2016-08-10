@@ -54,12 +54,11 @@ public class Welcome extends BaseTest {
    *    Welcome Page Sections
    *    
    * Test Case Description:
-   * 	Check sections in Welcome page.
+   *    Check sections in Welcome page.
    * 
    * Test Steps:
-   * 	Steps:
-   * 		1. Open Welcome page
-   * 		2. Check if headings are present and correctly displayed;
+   *    1. Open Welcome page.
+   *    2. Check if headings are present and correctly displayed.
    */
   @Test
   public void tc0_WelcomePageSections_Displayed() {
@@ -87,26 +86,25 @@ public class Welcome extends BaseTest {
    *    CTools link list
    *    
    * Test Case Description:
-   * 	Click on all CTools links in CTools list and check the pages are loaded. 
+   *    Click on all CTools links in CTools list and check the pages are loaded. 
    * 
    * Test Steps:
-   * 	Steps:
-   * 		1. Check C-tools links;
-   * 		2. Check if C-tools pages are loaded.
+   *    1. Check C-tools links.
+   *    2. Check if C-tools pages are loaded.
    */
   @Test
   public void tc1_CtoolsLinkList_Displayed() {
     this.log.info( "tc1_WelcomePageSecions_Displayed" );
 
     String[] ctools = { "CDF",
-        "CDE",
-        "CDA",
-        "CCC",
-        "CGG",
-        "CDV",
-        "CDC",
-        "CST",
-        "CBF" };
+                        "CDE",
+                        "CDA",
+                        "CCC",
+                        "CGG",
+                        "CDV",
+                        "CDC",
+                        "CST",
+                        "CBF" };
 
     //Step #1
     //Expand first header
@@ -122,8 +120,6 @@ public class Welcome extends BaseTest {
 
     //Collapse first header
     this.elemHelper.Click( driver, By.xpath( "//*[@id='headingOne']/a/h4" ) );
-
-    return;
   }
 
   /**
@@ -133,18 +129,17 @@ public class Welcome extends BaseTest {
    *    Text links
    *    
    * Test Case Description:
-   * 	Click on all links in the text and check the pages are loaded. 
+   *    Click on all links in the text and check the pages are loaded. 
    * 
    * Test Steps:
-   * 	Steps:
-   * 		1. Check CDE link;
-   * 		2. Check CDA link;
-   * 		3. Check CCC link;
-   * 		4. Check CDF link;
-   * 		5. Check C-Tools Forum link;
-   * 		6. Check HTML link;
-   * 		7. Check CSS link;
-   * 		8. Check JQuery link;
+   *    1. Check CDE link;
+   *    2. Check CDA link;
+   *    3. Check CCC link;
+   *    4. Check CDF link;
+   *    5. Check C-Tools Forum link;
+   *    6. Check HTML link;
+   *    7. Check CSS link;
+   *    8. Check JQuery link;
    */
   @Test
   public void tc2_TextLinks_Displayed() {

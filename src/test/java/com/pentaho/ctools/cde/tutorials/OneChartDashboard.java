@@ -56,7 +56,7 @@ public class OneChartDashboard extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open A One-Chart Dashboard Page
+   *    Open A One-Chart Dashboard Page
    */
   @BeforeClass
   public void openOneChartDashboardPage() {
@@ -65,8 +65,6 @@ public class OneChartDashboard extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[4]/li" ) );
 
     assertEquals( "A One-Chart Dashboard", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
-
-    return;
   }
 
   /**
@@ -76,10 +74,10 @@ public class OneChartDashboard extends BaseTest {
    *    One-Chart Dashboard Page Sections
    *    
    * Test Case Description:
-   * 	Check sections in One-Chart Dashboard page.
+   *    Check sections in One-Chart Dashboard page.
    * 
    * Test Steps:
-   * 		1. Check if headings are present and correctly displayed;
+   *    1. Check if headings are present and correctly displayed;
    */
   @Test
   public void tc0_OneChartDashboardPageSections_Displayed() {
@@ -100,8 +98,6 @@ public class OneChartDashboard extends BaseTest {
     //Heading #4
     this.h4 = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//*[@id='headingFour']/a/h4" ) );
     assertNotNull( this.h3 );
-
-    return;
   }
 
   /**
@@ -111,12 +107,12 @@ public class OneChartDashboard extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present. 
    * 
    * Test Steps:
-   * 		1. Expand headers;
-   * 		2. Assert if images are present;
-   * 		3. Check images URL returns HTTP Status OK (200).
+   *    1. Expand headers;
+   *    2. Assert if images are present;
+   *    3. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc1_CheckImages_Displayed() {
@@ -148,11 +144,11 @@ public class OneChartDashboard extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc2_PreviewAndEditLinks_Displayed() {

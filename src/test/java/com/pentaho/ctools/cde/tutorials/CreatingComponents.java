@@ -48,7 +48,7 @@ public class CreatingComponents extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Creating Components Page
+   *    Open Creating Components Page
    */
   @BeforeClass
   public void openCreatingComponentsPage() {
@@ -68,12 +68,11 @@ public class CreatingComponents extends BaseTest {
    *    Text links
    *    
    * Test Case Description:
-   * 	Click on all links in the text and check the pages are loaded. 
+   *    Click on all links in the text and check the pages are loaded. 
    * 
    * Test Steps:
-   * 	Steps:
-   * 		1. Check Weather.com link.
-   * 		2. Check Weather in Lisbon link.
+   *    1. Check Weather.com link.
+   *    2. Check Weather in Lisbon link.
    */
   @Test
   public void tc0_TextLinks_Displayed() {
@@ -95,11 +94,11 @@ public class CreatingComponents extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc1_PreviewAndEditLinks_Displayed() {

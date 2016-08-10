@@ -51,11 +51,11 @@ public class CdeTutorialsMenu extends BaseTest {
    *    Sidebar Links
    *    
    * Test Case Description:
-   * 	Check if every link is correctly displayed and ordered  
+   *    Check if every link is correctly displayed and ordered
    * 
    * Test Steps:
-   * 		1. Get the ordered link;
-   * 		2. Assert if link is correctly displayed.
+   *    1. Get the ordered link;
+   *    2. Assert if link is correctly displayed.
    */
   @Test
   public void tc0_SidebarLinks_Ordered() {
@@ -63,25 +63,25 @@ public class CdeTutorialsMenu extends BaseTest {
 
     //Titles of CDE Tutorials pages
     String[] titles = { "Welcome",
-        "The CDE Interface",
-        "Hello World",
-        "A One-Chart Dashboard",
-        "Adding Charts",
-        "Reacting to Parameters",
-        "Making the Charts Talk to Each Other",
-        "Understanding Layout Engine",
-        "Adding External Resources",
-        "CCC: Enhancing Charts",
-        "CCC: Extension Points",
-        "CCC: Configuring Datasets",
-        "CDA: Datasources",
-        "CDA: The Editor",
-        "Creating Tables",
-        "Using Table Add-ins",
-        "Creating Add-Ins",
-        "Creating Components",
-        "Getting the Most out of CDA",
-        "Where to Go From Here" };
+                        "The CDE Interface",
+                        "Hello World",
+                        "A One-Chart Dashboard",
+                        "Adding Charts",
+                        "Reacting to Parameters",
+                        "Making the Charts Talk to Each Other",
+                        "Understanding Layout Engine",
+                        "Adding External Resources",
+                        "CCC: Enhancing Charts",
+                        "CCC: Extension Points",
+                        "CCC: Configuring Datasets",
+                        "CDA: Datasources",
+                        "CDA: The Editor",
+                        "Creating Tables",
+                        "Using Table Add-ins",
+                        "Creating Add-Ins",
+                        "Creating Components",
+                        "Getting the Most out of CDA",
+                        "Where to Go From Here" };
 
     //Assert if the titles of the pages are correct in the sidebar. Get every li item using an index
     for ( int i = 1; i <= 20; i++ ) {
@@ -96,8 +96,6 @@ public class CdeTutorialsMenu extends BaseTest {
       //Assert if the titles of the pages are correctly ordered and displayed
       assertEquals( title, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( titleLocator ) ) );
     }
-
-    return;
   }
 
   /**
@@ -107,12 +105,12 @@ public class CdeTutorialsMenu extends BaseTest {
    *    Page Titles
    *    
    * Test Case Description:
-   * 	Check if every page content displayed (verifying the titles).
+   *    Check if every page content displayed (verifying the titles).
    * 
    * Test Steps:
-   * 		1. Get the next page link;
-   * 		2. Click on the link to the page;
-   * 		3. Assert if page title is displayed.
+   *    1. Get the next page link;
+   *    2. Click on the link to the page;
+   *    3. Assert if page title is displayed.
    */
   @Test
   public void tc1_PageTitles_Displayed() {
@@ -120,25 +118,25 @@ public class CdeTutorialsMenu extends BaseTest {
 
     //Titles of CDE Tutorials pages
     String[] titles = { "Welcome",
-        "The CDE Interface",
-        "Hello World",
-        "A One-Chart Dashboard",
-        "Adding Charts",
-        "Reacting to Parameters",
-        "Making the Charts Talk to Each Other",
-        "Understanding Layout Engine",
-        "Adding External Resources",
-        "CCC: Enhancing Charts",
-        "CCC: Extension Points",
-        "CCC: Configuring Datasets",
-        "CDA: Datasources",
-        "CDA: The Editor",
-        "Creating Tables",
-        "Using Table Add-ins",
-        "Creating Add-ins",
-        "Creating Components",
-        "Getting the Most out of CDA",
-        "Where to Go From Here" };
+                        "The CDE Interface",
+                        "Hello World",
+                        "A One-Chart Dashboard",
+                        "Adding Charts",
+                        "Reacting to Parameters",
+                        "Making the Charts Talk to Each Other",
+                        "Understanding Layout Engine",
+                        "Adding External Resources",
+                        "CCC: Enhancing Charts",
+                        "CCC: Extension Points",
+                        "CCC: Configuring Datasets",
+                        "CDA: Datasources",
+                        "CDA: The Editor",
+                        "Creating Tables",
+                        "Using Table Add-ins",
+                        "Creating Add-ins",
+                        "Creating Components",
+                        "Getting the Most out of CDA",
+                        "Where to Go From Here" };
 
     //titleLocator - xpath locator of the title inside the page 
     String titleLocator = "//div[@id= 'mainContent']/h1";
@@ -159,7 +157,5 @@ public class CdeTutorialsMenu extends BaseTest {
       //Wait for page title to appear and assert if the titles of the pages are correctly displayed
       assertEquals( title, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( titleLocator ) ) );
     }
-
-    return;
   }
 }

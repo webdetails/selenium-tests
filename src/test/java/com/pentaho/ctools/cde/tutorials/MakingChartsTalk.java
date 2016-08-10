@@ -59,7 +59,7 @@ public class MakingChartsTalk extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Making the Charts Talk to Each Other Page
+   *    Open Making the Charts Talk to Each Other Page
    */
   @BeforeClass
   public void openMakingChartsTalkPage() {
@@ -79,10 +79,10 @@ public class MakingChartsTalk extends BaseTest {
    *    Making the Charts Talk to Each Other Page Sections
    *    
    * Test Case Description:
-   * 	Check sections in Making the Charts Talk to Each Other page.
+   *    Check sections in Making the Charts Talk to Each Other page.
    * 
    * Test Steps:
-   * 		1. Check if headings are present and correctly displayed;
+   *    1. Check if headings are present and correctly displayed;
    */
   @Test
   public void tc0_MakingChartsTalkSections_Displayed() {
@@ -106,12 +106,12 @@ public class MakingChartsTalk extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present. 
    * 
    * Test Steps:
-   * 		1. Expand headers;
-   * 		2. Assert if images are present;
-   * 		3. Check images URL returns HTTP Status OK (200).
+   *    1. Expand headers;
+   *    2. Assert if images are present;
+   *    3. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc1_CheckImages_Displayed() {
@@ -139,11 +139,11 @@ public class MakingChartsTalk extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc2_PreviewAndEditLinks_Displayed() {

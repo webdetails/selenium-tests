@@ -48,7 +48,7 @@ public class CreatingTables extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Creating Tables Page
+   *    Open Creating Tables Page
    */
   @BeforeClass
   public void openCreatingTablesPage() {
@@ -68,11 +68,11 @@ public class CreatingTables extends BaseTest {
    *    Preview and Edit Links.
    *    
    * Test Case Description:
-   * 	Check Preview Dashboard and Edit Dashboard links.
+   *    Check Preview Dashboard and Edit Dashboard links.
    * 
    * Test Steps:
-   * 		1. Assert if links are present;
-   * 		2. Check if pages are loaded. 
+   *    1. Assert if links are present;
+   *    2. Check if pages are loaded. 
    */
   @Test
   public void tc0_PreviewAndEditLinks_Displayed() {

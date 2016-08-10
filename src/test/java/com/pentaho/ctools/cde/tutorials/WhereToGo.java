@@ -48,7 +48,7 @@ public class WhereToGo extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open Where To Go From Here Page
+   *    Open Where To Go From Here Page
    */
   @BeforeClass
   public void openWhereToGoPage() {
@@ -72,26 +72,25 @@ public class WhereToGo extends BaseTest {
    *    CTools link list
    *    
    * Test Case Description:
-   * 	Click on all CTools links in CTools list and check the pages are loaded. 
+   *    Click on all CTools links in CTools list and check the pages are loaded. 
    * 
    * Test Steps:
-   * 	Steps:
-   * 		1. Check C-tools links;
-   * 		2. Check if C-tools pages are loaded.
+   *    1. Check C-tools links.
+   *    2. Check if C-tools pages are loaded.
    */
   @Test
   public void tc1_CtoolsLinkList_Displayed() {
     this.log.info( "tc1_WelcomePageSecions_Displayed" );
 
     String[] ctools = { "CDF",
-        "CDE",
-        "CDA",
-        "CCC",
-        "CGG",
-        "CDV",
-        "CDC",
-        "CST",
-        "CBF" };
+                        "CDE",
+                        "CDA",
+                        "CCC",
+                        "CGG",
+                        "CDV",
+                        "CDC",
+                        "CST",
+                        "CBF" };
 
     //Step #1
     //Expand 1st header
@@ -107,8 +106,6 @@ public class WhereToGo extends BaseTest {
 
     //Collapse 1st header
     this.headings[0].click();
-
-    return;
   }
 
   /**
@@ -118,21 +115,21 @@ public class WhereToGo extends BaseTest {
    *    Text links
    *    
    * Test Case Description:
-   * 	Click on all links in the text and check the pages are loaded. 
+   *    Click on all links in the text and check the pages are loaded. 
    * 
    * Test Steps:
-   * 	Steps:
-   * 		1. Expand headers;
-   * 		2. Check all links;
-   * 		3. Collapse headers.
+   *    1. Expand headers;
+   *    2. Check all links;
+   *    3. Collapse headers.
    */
   @Test
   public void tc2_OtherLinks_Displayed() {
     this.log.info( "tc2_TextLinks_Displayed" );
 
     //Expand headers
-    for ( WebElement h : this.headings )
+    for ( WebElement h : this.headings ) {
       h.click();
+    }
 
     this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'HTML')]" ), By.xpath( "//title" ), "HTML Tutorial" );
 
@@ -163,9 +160,8 @@ public class WhereToGo extends BaseTest {
     this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'here')]" ), By.xpath( "//title" ), "Webdetails • Business Analytics" );
 
     //Collapse headers
-    for ( WebElement h : this.headings )
+    for ( WebElement h : this.headings ) {
       h.click();
-
-    return;
+    }
   }
 }

@@ -44,7 +44,7 @@ public class TheEditor extends BaseTest {
    * ############################### Setup ###############################
    *
    * Description:
-   * 	Open CDA: The Editor Page
+   *    Open CDA: The Editor Page
    */
   @BeforeClass
   public void openDatasourcesPage() {
@@ -53,8 +53,6 @@ public class TheEditor extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[14]/li" ) );
 
     assertEquals( "CDA: The Editor", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
-
-    return;
   }
 
   /**
@@ -64,11 +62,11 @@ public class TheEditor extends BaseTest {
    *    Check Images
    *    
    * Test Case Description:
-   * 	Check if printscreens are present. 
+   *    Check if printscreens are present. 
    * 
    * Test Steps:
-   * 		1. Assert if images are present;
-   * 		2. Check images URL returns HTTP Status OK (200).
+   *    1. Assert if images are present;
+   *    2. Check images URL returns HTTP Status OK (200).
    */
   @Test
   public void tc0_CheckImages_Displayed() {
@@ -76,7 +74,5 @@ public class TheEditor extends BaseTest {
 
     //Step #2 - Assert all images are present and if they have a valid src (url - 200 OK) 
     this.cdetutorial.checkImagesPresenceAndHttpStatus( "mainContent" );
-
-    return;
   }
 }
