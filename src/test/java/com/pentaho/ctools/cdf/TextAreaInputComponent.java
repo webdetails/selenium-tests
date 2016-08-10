@@ -215,7 +215,7 @@ public class TextAreaInputComponent extends BaseTest {
   @Test
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
-    String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
+    String strInputString = "`|!\"1#$%&/()=?*Â»Âª:_Ã‡<>/*-+";
 
     this.elemHelper.Clear( driver, By.id( "myInput" ) );
     this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );

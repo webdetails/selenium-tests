@@ -23,7 +23,6 @@ package com.pentaho.ctools.cdf.require;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
@@ -224,7 +223,7 @@ public class TextInputComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
+    String strInputString = "`|!\"1#$%&/()=?*Â»Âª:_Ã‡<>/*-+";
     this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
     //After clean text, we need to trait the pop-up
     wait.until( ExpectedConditions.alertIsPresent() );

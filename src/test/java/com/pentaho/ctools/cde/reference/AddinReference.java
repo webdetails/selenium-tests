@@ -525,9 +525,9 @@ public class AddinReference extends BaseTest {
     chartRow3Col2Value =
         this.elemHelper.WaitForElementPresentGetText( driver, By.xpath(
             "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "-65.00�", chartRow1Col2Value );
-    assertEquals( "77.00�", chartRow2Col2Value );
-    assertEquals( "50.00�", chartRow3Col2Value );
+    assertEquals( "-65.00€", chartRow1Col2Value );
+    assertEquals( "77.00€", chartRow2Col2Value );
+    assertEquals( "50.00€", chartRow3Col2Value );
 
     // Check ordering - Custom trendArrow
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='TrendArrowObjTable']/thead/tr/th[3]" ) );
@@ -555,9 +555,9 @@ public class AddinReference extends BaseTest {
     chartRow3Col2Value =
         this.elemHelper.WaitForElementPresentGetText( driver, By.xpath(
             "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "-65.00�", chartRow1Col2Value );
-    assertEquals( "50.00�", chartRow2Col2Value );
-    assertEquals( "77.00�", chartRow3Col2Value );
+    assertEquals( "-65.00€", chartRow1Col2Value );
+    assertEquals( "50.00€", chartRow2Col2Value );
+    assertEquals( "77.00€", chartRow3Col2Value );
   }
 
   /**

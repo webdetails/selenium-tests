@@ -196,7 +196,7 @@ public class TextInputComponent extends BaseTest {
   @Test
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     // ## Step 1
-    String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
+    String strInputString = "`|!\"1#$%&/()=?*Â»Âª:_Ã‡<>/*-+";
     this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
     //After clean text, we need to trait the pop-up
     wait.until( ExpectedConditions.alertIsPresent() );
