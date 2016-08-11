@@ -110,13 +110,8 @@ public class PageUrl extends BaseTest {
   public static final String MAP_COMPONENT_FULL_TEST = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ANewMapComponent%3AFullMapTest.wcdf/generatedContent";
 
   /*
-   * CDE - OPEN DEMOS
-   */
-  public static final String OPEN_DEMOS = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3APublicDemo%3APublicDemo.wcdf/generatedContent?ts=1470326530929";
-
-  /*
-   * CDE - REQUIRE
-   */
+  * CDE - REQUIRE
+  */
   public static final String SAMPLE_DASHBOARD_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Acde_sample1.wcdf/generatedContent";
   public static final String ADDIN_REFERENCE_REQUIRE = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AAddIns%3AaddIns.wcdf/generatedContent";
   public static final String ADDIN_REFERENCE_REQUIRE_EDIT = BASE_URL + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AAddIns%3AaddIns.wcdf/wcdf.edit";
@@ -140,6 +135,11 @@ public class PageUrl extends BaseTest {
    * CDE - Tutorials
    */
   public static final String CDE_TUTORIALS_WELCOME = BASE_URL + "api/repos/:public:ctools-samples:CDE Tutorial:01-welcome.wcdf/generatedContent";
+
+  /*
+   * CDE - OPEN DEMOS
+   */
+  public static final String OPEN_DEMOS = BASE_URL + "api/repos/%3Apublic%3Actools-samples%3APublicDemo%3APublicDemo.wcdf/generatedContent?ts=1470326530929";
 
   /********************** CDA **********************/
   /*
