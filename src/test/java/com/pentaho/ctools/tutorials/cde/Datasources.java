@@ -55,6 +55,9 @@ public class Datasources extends BaseTest {
   public void openDatasourcesPage() {
     this.log.info( "openDatasourcesPage" );
 
+    // Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[13]/li" ) );
 
     assertEquals( "CDA: Datasources", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

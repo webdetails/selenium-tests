@@ -63,6 +63,9 @@ public class HelloWorld extends BaseTest {
   public void openHelloWorldPage() {
     this.log.info( "openHelloWorldPage" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[3]/li" ) );
 
     assertEquals( "Hello World", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

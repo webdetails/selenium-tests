@@ -20,15 +20,17 @@ public class TWars extends BaseTest {
   //Log instance
   private static final Logger log = LogManager.getLogger( TWars.class );
 
-  private String winHandleBefore = null;
+  private CdeOpenDemos cde = new CdeOpenDemos();
+  
+  private String winHandleBefore;
 
   @Test
   public void tc0_viewDemo() {
     log.info( "tc0_viewDemo" );
 
-    this.winHandleBefore = CdeOpenDemos.viewDemo( "T-Wars" );
-
-    assertTrue( ( elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='logoSubTitle']/p" ) ).contains( "Welcome" ) ) );
+    this.winHandleBefore = cde.viewDemo( "T-Wars" );
+    
+    assertTrue( ( elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='logoSubTitle']/p" ) ).contains( "Welcome "+pentahoBaServerUsername+"." ) ) );
   }
 
   @Test

@@ -66,6 +66,9 @@ public class UnderstandingLayoutEngine extends BaseTest {
   public void openUnderstandingLayoutEnginePage() {
     this.log.info( "openUnderstandingLayoutEnginePage" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[8]/li" ) );
 
     assertEquals( "Understanding Layout Engine", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
@@ -110,6 +113,9 @@ public class UnderstandingLayoutEngine extends BaseTest {
   public void tc1_CheckImages_Displayed() {
     this.log.info( "tc1_CheckImages_Displayed" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     //Step #1 - Expand Headers
     this.h1.click();
 

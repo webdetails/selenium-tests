@@ -65,6 +65,9 @@ public class Welcome extends BaseTest {
   public void tc0_WelcomePageSections_Displayed() {
     this.log.info( "tc0_WelcomePageSecions_Displayed" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     //Step #1
     //Click on Welcome sidebar link
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[1]/li" ) );
@@ -107,6 +110,9 @@ public class Welcome extends BaseTest {
                         "CST",
                         "CBF" };
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     //Step #1
     //Expand first header
     this.elemHelper.Click( driver, By.xpath( "//*[@id='headingOne']/a/h4" ) );

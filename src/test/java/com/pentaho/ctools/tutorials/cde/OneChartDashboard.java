@@ -63,6 +63,9 @@ public class OneChartDashboard extends BaseTest {
   public void openOneChartDashboardPage() {
     this.log.info( "openOneChartDashboardPage" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[4]/li" ) );
 
     assertEquals( "A One-Chart Dashboard", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
@@ -119,6 +122,9 @@ public class OneChartDashboard extends BaseTest {
   public void tc1_CheckImages_Displayed() {
     this.log.info( "tc1_CheckImages_Displayed" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     //Step #1 - Expand Headers
     this.h1.click();
     this.h2.click();

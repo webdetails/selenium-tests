@@ -66,6 +66,9 @@ public class AddingCharts extends BaseTest {
   public void openAddingChartsPage() {
     this.log.info( "openAddingChartsPage" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[5]/li" ) );
 
     assertEquals( "Adding Charts", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

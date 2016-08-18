@@ -31,11 +31,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.HttpUtils;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -49,25 +47,6 @@ public class CdeTutorials extends BaseTest {
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
   private final Logger log = LogManager.getLogger( CdeTutorials.class );
-
-  /**
-   * ############################### Test Case 0 ###############################
-   *
-   * Description: Opens CDE Tutorials in Welcome page.
-   */
-  @Test
-  public void tc0_open() {
-    this.log.info( "tc0_open" );
-
-    // wait for invisibility of waiting pop-up
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
-
-    // Open CDE Tutorials Welcome page
-    this.elemHelper.Get( driver, PageUrl.CDE_TUTORIALS_WELCOME );
-
-    // Test if page was loaded
-    assertEquals( "Welcome", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='mainContent']/h1" ) ) );
-  }
 
   /**
    * Description: Click on a link and check the page was loaded by confirming a presence of some text.
@@ -84,6 +63,9 @@ public class CdeTutorials extends BaseTest {
     // Store the current window handle
     String winHandleBefore = driver.getWindowHandle();
 
+    // Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     // Click given link
     this.elemHelper.Click( driver, linkLocator );
 
@@ -190,6 +172,9 @@ public class CdeTutorials extends BaseTest {
     // Store the current window handle
     String winHandleBefore = driver.getWindowHandle();
 
+    // Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     // Click given link
     element.click();
 

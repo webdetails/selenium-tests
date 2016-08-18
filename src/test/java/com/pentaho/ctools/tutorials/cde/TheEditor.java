@@ -51,6 +51,9 @@ public class TheEditor extends BaseTest {
   public void openDatasourcesPage() {
     this.log.info( "openTheEditorPage" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[14]/li" ) );
 
     assertEquals( "CDA: The Editor", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

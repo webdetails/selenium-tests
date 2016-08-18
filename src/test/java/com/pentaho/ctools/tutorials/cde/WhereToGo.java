@@ -152,7 +152,7 @@ public class WhereToGo extends BaseTest {
 
     this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Select2')]" ), By.xpath( "//title" ), "Select2 - The jQuery replacement for select boxes" );
 
-    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Facebook page')]" ), By.xpath( "//title" ), "Webdetails" );
+    this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Facebook page')]" ), By.xpath( "//title" ), "Webdetails | Facebook" );
 
     this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Pedro Alves Blog')]" ), By.xpath( "//title" ), "Pedro Alves on Business Intelligence" );
 

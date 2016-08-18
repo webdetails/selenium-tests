@@ -66,6 +66,9 @@ public class EnhancingCharts extends BaseTest {
   public void openEnhancingChartsPage() {
     this.log.info( "openEnhancingChartsPage" );
 
+    // Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[10]/li" ) );
 
     assertEquals( "CCC: Enhancing Charts", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

@@ -66,6 +66,9 @@ public class AddingExternalResources extends BaseTest {
   public void openAddingExternalResourcesPage() {
     this.log.info( "openAddingExternalResourcesPage" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[9]/li" ) );
 
     assertEquals( "Adding External Resources", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

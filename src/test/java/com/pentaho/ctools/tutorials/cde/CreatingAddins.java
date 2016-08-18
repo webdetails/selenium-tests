@@ -51,6 +51,9 @@ public class CreatingAddins extends BaseTest {
   public void openCreatingAddinsPage() {
     this.log.info( "openCreatingAddinsPage" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[17]/li" ) );
 
     assertEquals( "Creating Add-ins", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

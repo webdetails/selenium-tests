@@ -55,6 +55,9 @@ public class UsingTableAddins extends BaseTest {
   public void openUsingTableAddinsPage() {
     this.log.info( "openUsingTableAddinsPage" );
 
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+    
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[16]/li" ) );
 
     assertEquals( "Using Table Add-ins", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

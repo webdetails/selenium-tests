@@ -20,41 +20,24 @@
  *
  ******************************************************************************/
 
-package com.pentaho.gui.web.ctools.tutorials.opendemos;
+package com.pentaho.ctools.tutorials.opendemos;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
-import java.util.Hashtable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
-public class CdeOpenDemos extends BaseTest {
+public class OpenOpenDemos extends BaseTest {
   // Access to wrapper for webdriver
   private static final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private static final Logger log = LogManager.getLogger( CdeOpenDemos.class );
-
-  private static Hashtable<String, String> demos;
-
-  @BeforeClass
-  public void init() {
-    demos = new Hashtable<>();
-
-    demos.put( "T-Wars", "//ul[@class='navSlides']/li[1]/img" );
-    demos.put( "Automotive", "//ul[@class='navSlides']/li[2]/img" );
-    demos.put( "Theme Park", "//ul[@class='navSlides']/li[3]/img" );
-    demos.put( "Retail.Co", "//ul[@class='navSlides']/li[4]/img" );
-    demos.put( "Number One", "//ul[@class='navSlides']/li[5]/img" );
-  }
+  private static final Logger log = LogManager.getLogger( OpenOpenDemos.class );
 
   /**
    * Open Open Demos Homepage.
@@ -73,40 +56,5 @@ public class CdeOpenDemos extends BaseTest {
     assertEquals( "OPEN DEMOS", elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//p[@class='title']" ) ) );
 
     return;
-  }
-
-  @Test
-  public void tc1_checkTitlesAndLinksToDemos() {
-    String demoNumberXpath = String.format( "//*[@id='info']/h2" );
-    String demoTitleXpath = String.format( "//*[@id='info']/h1" );
-
-    for ( String title : demos.keySet() ) {
-      // Click on Demo thumbnail
-      elemHelper.Click( driver, By.xpath( demos.get( title ) ) );
-
-      // Assert Title Number
-      assertTrue( ( elemHelper.WaitForElementPresentGetText( driver, By.xpath( demoNumberXpath ) ).contains(
-          "Demo 0" ) ) );
-
-      // Assert Title Name
-      assertEquals( elemHelper.WaitForElementPresentGetText( driver, By.xpath( demoTitleXpath ) ), title );
-    }
-  }
-
-  public String viewDemo( String name ) {
-    
-    // Click on Demo thumbnail
-    elemHelper.Click( driver, By.xpath( demos.get( name ) ) );
-
-    String winHandleBefore = driver.getWindowHandle();
-
-    // Click on the "View Demo" button
-    elemHelper.Click( driver, By.xpath( "//p[contains(text(),'View Demo')]" ) );
-
-    for ( String winHandle : driver.getWindowHandles() ) {
-      driver.switchTo().window( winHandle );
-    }
-
-    return winHandleBefore;
   }
 }

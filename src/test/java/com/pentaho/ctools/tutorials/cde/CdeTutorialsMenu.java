@@ -149,13 +149,16 @@ public class CdeTutorialsMenu extends BaseTest {
       //Append the index to the title (e.g. "1. Welcome")
       String title = String.format( "%s", titles[i - 1] );
 
+      // Wait for the loading icon to disappear
+      elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
+      
       //Step #2
       //Click on the sidebar link
       this.elemHelper.Click( driver, By.xpath( linkLocator ) );
 
       //Step #3
       //Wait for page title to appear and assert if the titles of the pages are correctly displayed
-      assertEquals( title, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( titleLocator ) ) );
+      assertEquals( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( titleLocator ) ), title );
     }
   }
 }
