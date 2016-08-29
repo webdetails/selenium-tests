@@ -150,8 +150,8 @@ public class CdeTutorialsMenu extends BaseTest {
       String title = String.format( "%s", titles[i - 1] );
 
       // Wait for the loading icon to disappear
-      elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-      
+      elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
       //Step #2
       //Click on the sidebar link
       this.elemHelper.Click( driver, By.xpath( linkLocator ) );

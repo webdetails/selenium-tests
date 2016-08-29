@@ -56,8 +56,8 @@ public class CreatingTables extends BaseTest {
     this.log.info( "openCreatingTablesPage" );
 
     //Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-    
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[15]/li" ) );
 
     assertEquals( "Creating Tables", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

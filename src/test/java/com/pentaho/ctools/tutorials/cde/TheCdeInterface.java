@@ -64,8 +64,8 @@ public class TheCdeInterface extends BaseTest {
     this.log.info( "openTheCdeInterfacePage" );
 
     //Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-    
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[2]/li" ) );
 
     assertEquals( "The CDE Interface", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );
@@ -124,8 +124,8 @@ public class TheCdeInterface extends BaseTest {
     this.log.info( "tc1_CheckImages_Displayed" );
 
     //Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-    
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     //Step #1 - Expand Headers
     this.h1.click();
     this.h2.click();
@@ -161,8 +161,8 @@ public class TheCdeInterface extends BaseTest {
     this.log.info( "tc2_CheckCdaLink_Displayed" );
 
     //Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-    
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     //Expand Datasources header
     this.h3.click();
 
