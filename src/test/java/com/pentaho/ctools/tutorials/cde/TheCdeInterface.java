@@ -165,6 +165,8 @@ public class TheCdeInterface extends BaseTest {
 
     //Expand Datasources header
     this.h3.click();
+    this.h3.click();
+    this.h3.click();
 
     //Step #1 & #2
     this.cdetutorial.clickAndCheckPageLoaded( By.xpath( "//a[contains(text(),'Community Data Access')]" ), By.xpath( "//h1[contains(text(),'CDA')]" ), "CDA" );

@@ -22,8 +22,8 @@
 package com.pentaho.gui.web.ctools.tutorials.cdf;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -147,13 +147,13 @@ public class CdfTutorials extends BaseTest {
             // Click the tooltip
             tooltip.click();
 
-            String file = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//textarea" ) );
+            String file = this.elemHelper.GetInputValue( driver, By.xpath( "//textarea" ) );
 
             // Check if code file is not empty
-            assertFalse( file.equals( "" ) );
+            assertTrue( !file.equals( "" ) );
 
             // Wait for the loading icon to disappear
-            elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+            this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
             // Close pop up
             this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Close')]" ) );

@@ -152,6 +152,9 @@ public class Welcome extends BaseTest {
   public void tc2_TextLinks_Displayed() {
     this.log.info( "tc2_TextLinks_Displayed" );
 
+    // Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     //Expand second header
     this.elemHelper.Click( driver, By.xpath( "//*[@id='headingTwo']/a/h4" ) );
     //Expand first header

@@ -118,6 +118,9 @@ public class HelloWorld extends BaseTest {
   public void tc1_CheckImages_Displayed() {
     this.log.info( "tc1_CheckImages_Displayed" );
 
+    // Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     //Step #1 - Expand Headers
     this.h1.click();
     this.h2.click();
