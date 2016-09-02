@@ -181,8 +181,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="test.java.reports.html.dir" value="${basedir}/reports-java/html" description="Directory for the generated report in HTML" />
 	<property name="test.testng.suite.file" value="SmokeTests-CE.xml" />
 
-	<taskdef resource="testngtasks" classpath="${basedir}/lib/ext/testng.jar" />
-
+	<taskdef resource="testngtasks" classpath="${lib.ext.dir}/testng-latest.jar" />
+	
 	<!-- CLASSPATH FOR TEST-JAVA -->
 	<path id="test.java.classpath">
 		<fileset dir="${lib.ext.dir}" includes="**/*" />
@@ -297,6 +297,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<target name="run-test-java">
 		<mkdir dir="${test.java.reports.dir}" />
 
+		<confi-testng />
+		
 		<testng classpathref="test.java.classpath" outputdir="${test.java.reports.dir}">
 			<!-- The JVM arg is need to configure the logging system -->
 			<jvmarg value="-Dlog4j.configurationFile=./log4j2.xml" />
@@ -738,7 +740,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<ivy:resolve file="${ivy.file}" conf="${ivy.configs}" />
 		<ivy:report xml="true" todir="${ivy.reports.dir}" />
 	</target>
-
+	
 	<!--=======================================================================
         clean-common
 
@@ -863,5 +865,4 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			</exec>
 		</sequential>
 	</macrodef>
-
 </project>
