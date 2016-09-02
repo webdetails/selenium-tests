@@ -181,7 +181,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="test.java.reports.html.dir" value="${basedir}/reports-java/html" description="Directory for the generated report in HTML" />
 	<property name="test.testng.suite.file" value="SmokeTests-CE.xml" />
 
-	<taskdef resource="testngtasks" classpath="${lib.ext.dir}/testng-latest.jar" />
+	<taskdef resource="testngtasks" classpath="${lib.dir}/testng-latest.jar" />
 	
 	<!-- CLASSPATH FOR TEST-JAVA -->
 	<path id="test.java.classpath">
