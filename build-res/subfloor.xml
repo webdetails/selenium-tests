@@ -297,8 +297,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<target name="run-test-java">
 		<mkdir dir="${test.java.reports.dir}" />
 
-		<confi-testng />
-		
 		<testng classpathref="test.java.classpath" outputdir="${test.java.reports.dir}">
 			<!-- The JVM arg is need to configure the logging system -->
 			<jvmarg value="-Dlog4j.configurationFile=./log4j2.xml" />
