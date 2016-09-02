@@ -81,12 +81,14 @@ public class CdeOpenDemos extends BaseTest {
     String demoTitleXpath = String.format( "//*[@id='info']/h1" );
 
     for ( String title : demos.keySet() ) {
+      // Wait for the loading icon to disappear
+      elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
       // Click on Demo thumbnail
       elemHelper.Click( driver, By.xpath( demos.get( title ) ) );
 
       // Assert Title Number
-      assertTrue( ( elemHelper.WaitForElementPresentGetText( driver, By.xpath( demoNumberXpath ) ).contains(
-          "Demo 0" ) ) );
+      assertTrue( ( elemHelper.WaitForElementPresentGetText( driver, By.xpath( demoNumberXpath ) ).contains( "Demo 0" ) ) );
 
       // Assert Title Name
       assertEquals( elemHelper.WaitForElementPresentGetText( driver, By.xpath( demoTitleXpath ) ), title );
@@ -94,7 +96,7 @@ public class CdeOpenDemos extends BaseTest {
   }
 
   public String viewDemo( String name ) {
-    
+
     // Click on Demo thumbnail
     elemHelper.Click( driver, By.xpath( demos.get( name ) ) );
 

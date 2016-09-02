@@ -1,4 +1,5 @@
 package com.pentaho.ctools.tutorials.cde;
+
 /*!*****************************************************************************
  *
  * Selenium Tests For CTools
@@ -31,7 +32,7 @@ import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
-/**
+/** 
  * Testing the functionalities related with CDE Tutorials.
  *
  * Naming convention for test: 'tcN_StateUnderTest_ExpectedBehavior'

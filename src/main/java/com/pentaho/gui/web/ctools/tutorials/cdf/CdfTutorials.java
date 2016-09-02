@@ -22,8 +22,8 @@
 package com.pentaho.gui.web.ctools.tutorials.cdf;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -57,10 +57,10 @@ public class CdfTutorials extends BaseTest {
     for ( int i = 1; i <= nSteps; i++ ) {
       String locator = String.format( "//*[@id='%d']/a", i );
       String stepName = String.format( "Step%d", i );
-      
+
       // Wait for the loading icon to disappear
-      elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-      
+      elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
       assertEquals( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( locator ) ), stepName );
 
       this.elemHelper.Click( driver, By.xpath( locator ) );
@@ -86,10 +86,10 @@ public class CdfTutorials extends BaseTest {
    * Check if the logo that links to webdetails website at the bottom of the page is working correctly.
    */
   public void checkWebdetailsLogoLink() {
-    
+
     // Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-    
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     // Click on the Webdetails logo
     this.elemHelper.Click( driver, By.xpath( "//*[@id='footer']/div[1]/a" ) );
 
@@ -124,7 +124,7 @@ public class CdfTutorials extends BaseTest {
 
       // Wait for the loading icon to disappear
       elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-      
+
       // Open the tab
       this.elemHelper.Click( driver, By.xpath( locator ) );
 
@@ -140,21 +140,21 @@ public class CdfTutorials extends BaseTest {
 
           // If tooltips were found, for each of them
           for ( WebElement tooltip : tooltips ) {
-            
+
             // Wait for the loading icon to disappear
-            elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-            
+            elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
             // Click the tooltip
             tooltip.click();
 
-            this.elemHelper.WaitForElementPresence( driver, By.xpath( "//textarea" ) );
-              
-            // Check if code file it's not empty
-            assertNotEquals( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//textarea" ) ), "" );
+            String file = this.elemHelper.GetInputValue( driver, By.xpath( "//textarea" ) );
+
+            // Check if code file is not empty
+            assertTrue( !file.equals( "" ) );
 
             // Wait for the loading icon to disappear
-            elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-            
+            this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
             // Close pop up
             this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Close')]" ) );
 

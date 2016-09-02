@@ -16,12 +16,12 @@ import com.pentaho.selenium.BaseTest;
 
 public class TWars extends BaseTest {
   // Access to wrapper for webdriver
-  private static final ElementHelper elemHelper = new ElementHelper();
+  private final ElementHelper elemHelper = new ElementHelper();
   //Log instance
-  private static final Logger log = LogManager.getLogger( TWars.class );
+  private final Logger log = LogManager.getLogger( TWars.class );
 
   private CdeOpenDemos cde = new CdeOpenDemos();
-  
+
   private String winHandleBefore;
 
   @Test
@@ -29,29 +29,34 @@ public class TWars extends BaseTest {
     log.info( "tc0_viewDemo" );
 
     this.winHandleBefore = cde.viewDemo( "T-Wars" );
-    
-    assertTrue( ( elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='logoSubTitle']/p" ) ).contains( "Welcome "+pentahoBaServerUsername+"." ) ) );
+
+    // Wait for the loading icon to appear
+    elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+    // Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
+    assertTrue( ( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='logoSubTitle']/p" ) ).contains( "Welcome " + pentahoBaServerUsername + "." ) ) );
   }
 
   @Test
   public void tc1_checkTitlesAndGraphicsPresence() {
     //First Title
-    assertEquals( elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='broughtdownlabel']/p" ) ), "T-Fighters Brought Down" );
+    assertEquals( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='broughtdownlabel']/p" ) ), "T-Fighters Brought Down" );
 
     //First Grphic
-    assertNotNull( elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "broughtdownprotovis" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "broughtdownprotovis" ) ) );
 
     //Second Title
-    assertEquals( elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='clumsylabel']/p" ) ), "Why Are T-Fighters So Clumsy? Fan's Opinion Through The Years" );
+    assertEquals( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='clumsylabel']/p" ) ), "Why Are T-Fighters So Clumsy? Fan's Opinion Through The Years" );
 
     //Second Grphic
-    assertNotNull( elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "clumsyprotovis" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "clumsyprotovis" ) ) );
 
     //Third Title
-    assertEquals( elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='tfighterslabel']/p" ) ), "T-Fighters Brought Down By Character" );
+    assertEquals( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//*[@id='tfighterslabel']/p" ) ), "T-Fighters Brought Down By Character" );
 
     //Third Grphic
-    assertNotNull( elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "defender_vs_avengerprotovis" ) ) );
+    assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "defender_vs_avengerprotovis" ) ) );
   }
 
   @AfterClass

@@ -56,8 +56,8 @@ public class GettingTheMost extends BaseTest {
     this.log.info( "openGettingTheMostPage" );
 
     //Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-    
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     this.elemHelper.Click( driver, By.xpath( "//*[@id='sideMenu']/ul/a[19]/li" ) );
 
     assertEquals( "Getting the Most out of CDA", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id= 'mainContent']/h1" ) ) );

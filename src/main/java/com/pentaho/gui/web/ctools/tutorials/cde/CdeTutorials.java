@@ -64,8 +64,8 @@ public class CdeTutorials extends BaseTest {
     String winHandleBefore = driver.getWindowHandle();
 
     // Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-    
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     // Click given link
     this.elemHelper.Click( driver, linkLocator );
 
@@ -173,8 +173,8 @@ public class CdeTutorials extends BaseTest {
     String winHandleBefore = driver.getWindowHandle();
 
     // Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) ); 
-    
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     // Click given link
     element.click();
 
