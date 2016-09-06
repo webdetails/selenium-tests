@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -399,9 +399,9 @@ public class AddinReference extends BaseTest {
     String chartRow1Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div" ) );
     String chartRow2Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div" ) );
     String chartRow3Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "50.00€", chartRow1Col2Value );
-    assertEquals( "77.00€", chartRow2Col2Value );
-    assertEquals( "-65.00€", chartRow3Col2Value );
+    assertEquals( "50.00â‚¬", chartRow1Col2Value );
+    assertEquals( "77.00â‚¬", chartRow2Col2Value );
+    assertEquals( "-65.00â‚¬", chartRow3Col2Value );
 
     /*
      * ## Step 2
@@ -421,9 +421,9 @@ public class AddinReference extends BaseTest {
     chartRow1Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div" ) );
     chartRow2Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div" ) );
     chartRow3Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "-65.00€", chartRow1Col2Value );
-    assertEquals( "77.00€", chartRow2Col2Value );
-    assertEquals( "50.00€", chartRow3Col2Value );
+    assertEquals( "-65.00â‚¬", chartRow1Col2Value );
+    assertEquals( "77.00â‚¬", chartRow2Col2Value );
+    assertEquals( "50.00â‚¬", chartRow3Col2Value );
 
     //Check ordering - Custom trendArrow
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='TrendArrowObjTable']/thead/tr/th[3]" ) );
@@ -438,9 +438,9 @@ public class AddinReference extends BaseTest {
     chartRow1Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[1]/td[3]/div" ) );
     chartRow2Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[2]/td[3]/div" ) );
     chartRow3Col2Value = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='TrendArrowObjTable']/tbody/tr[3]/td[3]/div" ) );
-    assertEquals( "-65.00€", chartRow1Col2Value );
-    assertEquals( "50.00€", chartRow2Col2Value );
-    assertEquals( "77.00€", chartRow3Col2Value );
+    assertEquals( "-65.00â‚¬", chartRow1Col2Value );
+    assertEquals( "50.00â‚¬", chartRow2Col2Value );
+    assertEquals( "77.00â‚¬", chartRow3Col2Value );
   }
 
   /**

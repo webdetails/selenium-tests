@@ -2,7 +2,7 @@
 *
 * Selenium Tests For CTools
 *
-* Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+* Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
 *
 *******************************************************************************
 *
@@ -118,6 +118,6 @@ public class AutoCompleteBoxComponent extends BaseTest {
     assertEquals( "Amica Models & Co.", value4 );
     assertEquals( "Auto Canal+ Petit", value5 );
     assertEquals( "Alpha Cognac", value6 );
-    assertEquals( "Auto Associés & Cie.", value7 );
+    assertEquals( "Auto AssociÃ©s & Cie.", value7 );
   }
 }

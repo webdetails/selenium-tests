@@ -16,11 +16,133 @@
 	<td>60000</td>
 	<td></td>
 </tr>
+<!--Open "01-welcome"-->
 <tr>
 	<td>open</td>
-	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:welcome.wcdf/generatedContent</td>
+	<td>pentaho/Home</td>
 	<td></td>
 </tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.custom-dropdown-label</td>
+	<td>Home</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//button[contains(text(),'Browse Files')]</td>
+	<td>Browse Files</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[contains(text(),'Browse Files')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;fileBrowser&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id=&quot;fileBrowser&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFolders']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFiles']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserButtons']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='spinner large-spinner']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='spinner large-spinner'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Tutorial')]</td>
+	<td>CDE Tutorial</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Tutorial')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//*[@PATH=&quot;/public/ctools-samples/CDE Tutorial/01-welcome.wcdf&quot;]/div[contains(text(),'01-welcome')]</td>
+	<td>01-welcome</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//*[@PATH=&quot;/public/ctools-samples/CDE Tutorial/01-welcome.wcdf&quot;]/div[contains(text(),'01-welcome')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserButtons&quot;]/div/button</td>
+	<td>Open</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserButtons&quot;]/div/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=//div[@class='busy-indicator-container waitPopup']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>xpath=//div[@class='busy-indicator-container waitPopup']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;mainContent&quot;]/h1</td>
+	<td>Welcome</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id= &quot;mainContent&quot;]/h1</td>
+	<td>Welcome</td>
+</tr>
+<!--END Open "01-welcome"-->
 <tr>
 	<td>waitForElementNotPresent</td>
 	<td>css=div.blockUI.blockOverlay</td>
@@ -29,520 +151,209 @@
 <!--Verificar Textos-->
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
-	<td>Welcome to the CDE Tutorial.</td>
+	<td>//div[@id= &quot;mainContent&quot;]/h1</td>
+	<td>Welcome</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h3</td>
-	<td>The C-Tools Family</td>
+	<td>//*[@id='headingOne']/a/h4</td>
+	<td>The CTools Family</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//h3[2]</td>
+	<td>//*[@id='headingTwo']/a/h4</td>
 	<td>What is a CDE Dashboard?</td>
 </tr>
 <!--Verificar Links-->
 <tr>
 	<td>click</td>
-	<td>css=a.ctools.cdf &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdf/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdf/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://localhost:8080/pentaho/api/repos/:public:ctools-samples:Dashboards:welcome.wcdf/generatedContent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.ctools.cde &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.ctools.cde &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cde/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cde/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.ctools.cda &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.ctools.cda &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cda/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cda/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.ctools.ccc &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.ctools.ccc &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/ccc/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/ccc/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.ctools.cgg &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.ctools.cgg &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cgg/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cgg/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.ctools.cdv &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.ctools.cdv &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdv/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdv/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.ctools.cdb &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.ctools.cdb &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdb/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdb/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.ctools.cdc &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.ctools.cdc &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdc/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdc/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.ctools.cst &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.ctools.cst &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cst/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cst/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.ctools.cbf &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a.ctools.cbf &gt; div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cbf/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cbf/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=CDE</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=CDE</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cde/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cde/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=CDA</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=CDA</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cda/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cda/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=CCC</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=CCC</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/ccc/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/ccc/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=CDF</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=CDF</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdf/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.webdetails.pt/ctools/cdf/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=C-Tools forum</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=C-Tools forum</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://forums.pentaho.com/forumdisplay.php?80-Community-Tools-CTools</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://forums.pentaho.com/forumdisplay.php?80-Community-Tools-CTools</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=ctools.webdetails.org</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=ctools.webdetails.org</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://ctools.webdetails.org/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://ctools.webdetails.org/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=HyperText Markup Language (HTML)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=HyperText Markup Language (HTML)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.w3schools.com/html/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.w3schools.com/html/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Cascading Style Sheets (CSS)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Cascading Style Sheets (CSS)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://www.w3schools.com/css/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://www.w3schools.com/css/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=jQuery JavaScript general purpose library</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=jQuery JavaScript general purpose library</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForLocation</td>
-	<td>http://jquery.com/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://jquery.com/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>goBack</td>
-	<td></td>
-	<td></td>
-</tr>
-<!--Verificar Navegação Entre Páginas-->
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Next lesson &gt;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Next lesson &gt;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
-	<td></td>
+	<td>//*[@id='headingOne']/a/h4</td>
+	<td>The CTools Family</td>
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>css=h2</td>
-	<td>The CDE Interface</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[1]/a</td>
+	<td>CDF</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>css=h2</td>
-	<td>The CDE Interface</td>
+	<td>assertAttribute</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[1]/a@href</td>
+	<td>http://www.webdetails.pt/ctools/cdf/</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[2]/a</td>
+	<td>CDE</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[2]/a@href</td>
+	<td>http://www.webdetails.pt/ctools/cde/</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[3]/a</td>
+	<td>CDA</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[3]/a@href</td>
+	<td>http://www.webdetails.pt/ctools/cda/</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[4]/a</td>
+	<td>CCC</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[4]/a@href</td>
+	<td>http://www.webdetails.pt/ctools/ccc/</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[5]/a</td>
+	<td>CGG</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[5]/a@href</td>
+	<td>http://www.webdetails.pt/ctools/cgg/</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[6]/a</td>
+	<td>CDV</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[6]/a@href</td>
+	<td>http://www.webdetails.pt/ctools/cdv/</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[7]/a</td>
+	<td>CDC</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[7]/a@href</td>
+	<td>http://www.webdetails.pt/ctools/cdc/</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[8]/a</td>
+	<td>CST</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[8]/a@href</td>
+	<td>http://www.webdetails.pt/ctools/cst/</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[9]/a</td>
+	<td>CBF</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//ul[@class=&quot;ctools-suite&quot;]/li[9]/a@href</td>
+	<td>http://www.webdetails.pt/ctools/cbf/</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=CDE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=CDE@href</td>
+	<td>http://www.webdetails.pt/ctools/cde/</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=CDA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=CDA@href</td>
+	<td>http://www.webdetails.pt/ctools/cda/</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=CCC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=CCC@href</td>
+	<td>http://www.webdetails.pt/ctools/ccc/</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=CDF</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=CDF@href</td>
+	<td>http://www.webdetails.pt/ctools/cdf/</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=CTools Forum</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=CTools Forum@href</td>
+	<td>http://forums.pentaho.com/forumdisplay.php?80-Community-Tools-CTools</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=webdetails.pt/ctools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=webdetails.pt/ctools@href</td>
+	<td>http://www.webdetails.pt/ctools/</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//*[@id='headingTwo']/a/h4</td>
+	<td>What is a CDE Dashboard?</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=HyperText Markup Language (HTML)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=HyperText Markup Language (HTML)@href</td>
+	<td>http://www.w3schools.com/html/</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Cascading Style Sheets (CSS)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=Cascading Style Sheets (CSS)@href</td>
+	<td>http://www.w3schools.com/css/</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=jQuery JavaScript general purpose library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>link=jQuery JavaScript general purpose library@href</td>
+	<td>http://jquery.com/</td>
 </tr>
 </tbody></table>
 </body>

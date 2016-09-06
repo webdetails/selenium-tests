@@ -1,3 +1,24 @@
+/*!*****************************************************************************
+ *
+ * Selenium Tests For CTools
+ *
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
+ *
+ *******************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
 package com.pentaho.gui.web.puc;
 
 import static org.testng.Assert.assertEquals;
@@ -9,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -40,16 +62,16 @@ public class MarketPlace {
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='mantle-perspective-switcher']//div[@class='custom-dropdown-label']" ) );
 
     log.info( "Enter: Click MarketPlace Button" );
-    //Click 'Home' dropdown
+    // Click 'Home' dropdown
     this.elemHelper.Click( this.driver, By.xpath( "//div[@id='mantle-perspective-switcher']//div[@class='custom-dropdown-label']" ) );
 
-    //Assert dropdown shown and click MarketPlace
+    // Assert dropdown shown and click MarketPlace
     this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@id='customDropdownPopupMajor']//td[contains(text(),'Marketplace')]" ) );
     this.elemHelper.Click( this.driver, By.xpath( "//div[@id='customDropdownPopupMajor']//td[contains(text(),'Marketplace')]" ) );
     log.info( "Exit: Click MarketPlace Button" );
 
     log.info( "Enter: Assert marketplace perspective shown" );
-    //Focus Browser Perspective and refresh repository
+    // Focus Browser Perspective and refresh repository
     this.driver.switchTo().defaultContent();
     assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "applicationShell" ) ) );
     assertNotNull( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//iframe[@id='marketplace.perspective.osgi']" ) ) );
@@ -67,6 +89,7 @@ public class MarketPlace {
    * It looks for plugin name within the title of div's where plugin's names are stored, the same for author
    *
    * Ex: PluginExists("Pentaho Marketplace", "Pentaho")
+   * 
    * @param name
    * @param author
    * @returns exists
@@ -74,7 +97,7 @@ public class MarketPlace {
   public boolean PluginExists( String name, String author ) {
     log.info( "Enter: PluginExists" );
     Boolean exists = false;
-    //Look for Plugin by name and author
+    // Look for Plugin by name and author
     WebElement nameDiv = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='filteredPluginsContainer ng-isolate-scope']//div[@title='" + name + "']" ) );
     WebElement authorDiv = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='filteredPluginsContainer ng-isolate-scope']//div[@title='" + name + "']/../div[@title='" + author + "']" ) );
     if ( nameDiv != null && authorDiv != null ) {
@@ -86,15 +109,13 @@ public class MarketPlace {
   }
 
   /**
-   * This method will check the layout of the Marketplace. It does so by following these steps:
-   * 1 - Check the existence of and text on the Available and Installed tabs
-   * 2 - Checks the existence of the filters and Stages info popup
-   * 3 - Asserts Marketplace plugin exists on the list
-   * 4 - Asserts Hyperlink on bottom of page is accurate
+   * This method will check the layout of the Marketplace. It does so by following these steps: 1 - Check the existence
+   * of and text on the Available and Installed tabs 2 - Checks the existence of the filters and Stages info popup 3 -
+   * Asserts Marketplace plugin exists on the list 4 - Asserts Hyperlink on bottom of page is accurate
    *
    */
   public void CheckMarketPlaceLayout() {
-    //Assert tabs
+    // Assert tabs
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='pentaho-tab-bar']/div/div" ) );
     assertNotNull( element );
     String text = element.getText();
@@ -108,7 +129,7 @@ public class MarketPlace {
     element.click();
     this.elemHelper.WaitForElementInvisibility( this.driver, By.id( "floatingBarsG" ) );
 
-    //Assert filters
+    // Assert filters
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='pentaho-tab-deck-panel']/div/div/div[@data-options='pluginTypes']" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='pentaho-tab-deck-panel']/div/div/div[@data-options='developmentStages']" ) );
@@ -117,10 +138,10 @@ public class MarketPlace {
     assertNotNull( element );
     CheckStagesPopup();
 
-    //Assert Marketplace plugin exists on list
+    // Assert Marketplace plugin exists on list
     assertTrue( PluginExists( "Pentaho Marketplace ", "Pentaho" ) );
 
-    //Assert hyperlink on bottom of page is accurate
+    // Assert hyperlink on bottom of page is accurate
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@href='http://community.pentaho.com/marketplace/plugins/']" ) );
     assertNotNull( element );
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//a[@href='http://community.pentaho.com/marketplace/plugins/']/div/div/div" ) );
@@ -175,16 +196,17 @@ public class MarketPlace {
   }
 
   /**
-   * This method will check that clicking Installed tab only shows and shows all Installed plugins. It must be called from the Marketplace, with the "Available"
-   * tab selected and the driver set to marketplace.perspective.
+   * This method will check that clicking Installed tab only shows and shows all Installed plugins. It must be called
+   * from the Marketplace, with the "Available" tab selected and the driver set to marketplace.perspective.
    *
-   * It will get a list of all plugins on the Available tab that are installed and compare to a list of plugins shown after Installed tab is clicked
+   * It will get a list of all plugins on the Available tab that are installed and compare to a list of plugins shown
+   * after Installed tab is clicked
    *
    */
   public void CheckInstalledTab() {
-    //List all installed Plugins
+    // List all installed Plugins
     List<WebElement> allPlugins = this.driver.findElements( By.xpath( "//div[@class='filteredPluginsContainer ng-isolate-scope']/div/ul/li" ) );
-    List<String> installedPlugins = new ArrayList<String>();
+    List<String> installedPlugins = new ArrayList<>();
     int nTotal = allPlugins.size();
     for ( int i = 1; i <= nTotal; i++ ) {
       String text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div[3]/div/div[@class='infoVersionStatusMessage ng-binding']" ) );
@@ -195,50 +217,33 @@ public class MarketPlace {
       }
     }
 
-    //Click "Installed tab and List all shown Plugins
+    // Click "Installed tab and List all shown Plugins
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='pentaho-tab-bar']/div[2]/div" ) );
     assertNotNull( element );
     String text = element.getText();
     assertEquals( "Installed", text );
     element.click();
     allPlugins = this.driver.findElements( By.xpath( "//div[@class='filteredPluginsContainer ng-isolate-scope']/div/ul/li" ) );
-    List<String> shownPlugins = new ArrayList<String>();
+    List<String> shownPlugins = new ArrayList<>();
     nTotal = allPlugins.size();
     for ( int i = 1; i <= nTotal; i++ ) {
       text = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + i + "]/div/div/div[@class='pluginName ng-binding']" ) );
       shownPlugins.add( text );
     }
 
-    //Assert both lists are equal
+    // Assert both lists are equal
     assertEquals( installedPlugins, shownPlugins );
   }
 
   /**
-   * This method will filter given specific parameters and assert shown plugins are the ones expected
-   * It must be called from the Marketplace, with the driver set to marketplace.perspective.
+   * This method will filter given specific parameters and assert shown plugins are the ones expected It must be called
+   * from the Marketplace, with the driver set to marketplace.perspective.
    *
-   * ALL APPLIED FILTERS ARE CLEARED AT THE END OF THE METHOD
-   * The "type" param is an int array given as follows
-   * 1  Apps
-   * 2    Admin
-   * 3    Analysis
-   * 4    Dashboard
-   * 5    Data
-   * 6    Development
-   * 8  Language Packs
-   * 11 Visualizations
+   * ALL APPLIED FILTERS ARE CLEARED AT THE END OF THE METHOD The "type" param is an int array given as follows 1 Apps 2
+   * Admin 3 Analysis 4 Dashboard 5 Data 6 Development 8 Language Packs 11 Visualizations
    *
-   * The "stage" param is an int array given as follows
-   * 1  Customer
-   * 2    Development Phase
-   * 3    Snapshot Release
-   * 4    Limited Support
-   * 5    Production Release
-   * 7  Community
-   * 8    Development Phase
-   * 9    Snapshot Release
-   * 10   Stable Release
-   * 11   Mature Release
+   * The "stage" param is an int array given as follows 1 Customer 2 Development Phase 3 Snapshot Release 4 Limited
+   * Support 5 Production Release 7 Community 8 Development Phase 9 Snapshot Release 10 Stable Release 11 Mature Release
    *
    * @param type
    * @param stage
@@ -246,7 +251,7 @@ public class MarketPlace {
    * @return resultList
    */
   public List<String> CheckFiltersApplied( List<Number> type, List<Number> stage, String search ) {
-    //If there is a type filter add it
+    // If there is a type filter add it
     if ( !type.isEmpty() ) {
       WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-selected-options='selectedTypes']/div/button/span" ) );
       assertNotNull( element );
@@ -261,7 +266,7 @@ public class MarketPlace {
       element.click();
     }
 
-    //If there is a stage filter add it
+    // If there is a stage filter add it
     if ( !stage.isEmpty() ) {
       WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-options='developmentStages']/div/button/span" ) );
       assertNotNull( element );
@@ -276,18 +281,18 @@ public class MarketPlace {
       element.click();
     }
 
-    //If there is a search filter add it
+    // If there is a search filter add it
     if ( !search.isEmpty() ) {
       WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//input[@data-ng-model='searchText']" ) );
       assertNotNull( element );
       element.sendKeys( search );
     }
-    List<String> resultList = new ArrayList<String>();
+    List<String> resultList = new ArrayList<>();
 
-    //Check if there are plugins for the filters added
+    // Check if there are plugins for the filters added
     if ( this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@class='filteredPluginsContainer ng-isolate-scope']/div/ul/li" ), 1 ) != null ) {
 
-      //List all shown plugins
+      // List all shown plugins
       List<WebElement> allPlugins = this.driver.findElements( By.xpath( "//div[@class='filteredPluginsContainer ng-isolate-scope']/div/ul/li" ) );
       int nTotal = allPlugins.size();
       for ( int i = 1; i <= nTotal; i++ ) {
@@ -295,11 +300,11 @@ public class MarketPlace {
         resultList.add( text );
       }
 
-      //Check if layout wasn't compromised
+      // Check if layout wasn't compromised
       CheckPluginListLayout();
     }
 
-    //Remove added filters
+    // Remove added filters
     if ( !search.isEmpty() ) {
       WebElement element = this.elemHelper.FindElement( this.driver, By.xpath( "//input[@data-ng-model='searchText']" ) );
       assertNotNull( element );
@@ -323,9 +328,9 @@ public class MarketPlace {
     if ( nTotal != 0 ) {
       if ( nTotal >= 5 ) {
         int[] pluginToTest = { nTotal / 2,
-            nTotal / 3,
-            nTotal / 4,
-            nTotal / 5 };
+                               nTotal / 3,
+                               nTotal / 4,
+                               nTotal / 5 };
         for ( int i : pluginToTest ) {
           CheckIndividualPluginLayout( i );
         }
@@ -380,7 +385,7 @@ public class MarketPlace {
    * This method must be called from the Marketplace page with the driver set to the marketplace.perspective and no
    * filters applied
    *
-   *  It will use the CheckPluginPopup method feeding it the CTools position and 5 other random positions to be checked
+   * It will use the CheckPluginPopup method feeding it the CTools position and 5 other random positions to be checked
    *
    */
   public void CheckRandomPluginsDetails() {
@@ -412,7 +417,7 @@ public class MarketPlace {
    */
   public void CheckPluginPopup( int pos ) {
     log.info( "checking plugin in position: " + pos );
-    //Get Plugin name and author
+    // Get Plugin name and author
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + pos + "]/div/div/div[@class='pluginName ng-binding']" ) );
     assertNotNull( element );
     String title = element.getText();
@@ -422,17 +427,17 @@ public class MarketPlace {
     boolean installed = false;
     element = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + pos + "]//div[@class='infoVersionStatusMessage ng-binding']" ) );
     assertNotNull( element );
-    if ( element.getText() == "Installed" ) {
+    if ( element.getText().equals( "Installed" ) ) {
       installed = true;
     }
 
-    //Open Plugin
+    // Open Plugin
     this.elemHelper.Click( this.driver, By.xpath( "//div[@data-ng-show='plugins']/ul/li[" + pos + "]/div/div/div[@class='pluginName ng-binding']" ) );
 
-    //Wait for popup to open fully
+    // Wait for popup to open fully
     this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div/div[2]/div/div[@class='pluginName ng-binding']" ) );
 
-    //Assert title and author shown are the same and image exists
+    // Assert title and author shown are the same and image exists
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div/div[2]/div/div[@class='pluginName ng-binding']" ) );
     assertNotNull( element );
     assertEquals( title, element.getText() );
@@ -445,10 +450,10 @@ public class MarketPlace {
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginImage']/img" ) );
     if ( element != null ) {
       String text = element.getAttribute( "data-ng-src" );
-      assertEquals( 200, HttpUtils.GetResponseCode( text, "admin", "password" ) );
+      assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( text, "admin", "password" ) );
     }
 
-    //Assert version shown on button is the same as in the info
+    // Assert version shown on button is the same as in the info
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div/div/div[2]/button/span[@class='multiselectButtonText ng-binding']" ) );
     assertNotNull( element );
     String version = element.getText();
@@ -463,7 +468,7 @@ public class MarketPlace {
     assertNotNull( element );
     assertEquals( versions[0], element.getText().trim() );
 
-    //Assert buttons are shown
+    // Assert buttons are shown
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button" ) );
     assertNotNull( element );
     if ( installed ) {
@@ -471,18 +476,18 @@ public class MarketPlace {
       assertNotNull( element );
     }
 
-    //Assert Screenshot is showing
+    // Assert Screenshot is showing
     element = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='carousel-inner']/div/img" ) );
     if ( element != null ) {
       List<WebElement> listElements = this.driver.findElements( By.xpath( "//div[@class='carousel-inner']/div" ) );
       for ( int i = 1; i < listElements.size(); i++ ) {
         element = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='carousel-inner']/div[" + i + "]/img" ) );
         String text = element.getAttribute( "data-ng-src" );
-        assertEquals( 200, HttpUtils.GetResponseCode( text, "admin", "password" ) );
+        assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( text, "admin", "password" ) );
       }
     }
 
-    //Close popup and assert it is closed
+    // Close popup and assert it is closed
     element = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
     assertNotNull( element );
     element.click();
@@ -500,11 +505,11 @@ public class MarketPlace {
    */
   public boolean CheckIfPluginInstalled( String name ) {
     boolean installed = false;
-    //assert plugin exists
+    // assert plugin exists
     WebElement plugin = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']" ) );
     assertNotNull( plugin );
 
-    //check if is installed
+    // check if is installed
     String status = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//div[@class='infoVersionStatusMessage ng-binding']" ) );
     if ( status.contains( "Installed" ) ) {
       installed = true;
@@ -513,7 +518,8 @@ public class MarketPlace {
   }
 
   /**
-   * This method will check Installing plugin works correctly. It needs the plugin name and the success message in case it is not default.
+   * This method will check Installing plugin works correctly. It needs the plugin name and the success message in case
+   * it is not default.
    * 
    * This method must be called from the Marketplace page with the driver set to the marketplace.perspective
    * 
@@ -521,29 +527,29 @@ public class MarketPlace {
    * @param message
    */
   public void CheckInstallPlugin( String name, String message ) {
-    //assert plugin exists
+    // assert plugin exists
     WebElement plugin = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']" ) );
     assertNotNull( plugin );
 
-    //assert it is not installed
+    // assert it is not installed
     assertFalse( CheckIfPluginInstalled( name ) );
 
-    //Check button says "Install" and click it
+    // Check button says "Install" and click it
     String buttonMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
     assertEquals( buttonMessage, "Install" );
     this.elemHelper.Click( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
 
-    //Check popup text
+    // Check popup text
     String popupMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ) );
     String expectedMessage = "You are about to install " + name + ". Do you want to proceed?";
     assertEquals( popupMessage, expectedMessage );
 
-    //Click Ok
+    // Click Ok
     WebElement okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
     assertNotNull( okButton );
     okButton.click();
 
-    //wait for and assert popup message
+    // wait for and assert popup message
     if ( message.length() > 0 ) {
       expectedMessage = message;
     } else {
@@ -553,22 +559,23 @@ public class MarketPlace {
     popupMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ) );
     assertEquals( popupMessage, expectedMessage );
 
-    //Click Ok and assert dialog is gone
+    // Click Ok and assert dialog is gone
     okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
     assertNotNull( okButton );
     okButton.click();
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@window-class='confirmationDialog']" ), 3 );
 
-    //Assert plugin status is installed
+    // Assert plugin status is installed
     assertTrue( CheckIfPluginInstalled( name ) );
 
-    //Assert button reads "Up to Date"
+    // Assert button reads "Up to Date"
     buttonMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
     assertEquals( buttonMessage, "Up to Date" );
   }
 
   /**
-   * This method will check Uninstalling plugin works correctly. It needs the plugin name and the success message in case it is not default.
+   * This method will check Uninstalling plugin works correctly. It needs the plugin name and the success message in
+   * case it is not default.
    * 
    * This method must be called from the Marketplace page with the driver set to the marketplace.perspective
    * 
@@ -576,35 +583,35 @@ public class MarketPlace {
    * @param message
    */
   public void CheckUninstallPlugin( String name, String message ) {
-    //assert plugin exists
+    // assert plugin exists
     WebElement plugin = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']" ) );
     assertNotNull( plugin );
 
-    //assert it is installed
+    // assert it is installed
     assertTrue( CheckIfPluginInstalled( name ) );
 
-    //Open plugin details
+    // Open plugin details
     plugin = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']" ) );
     assertNotNull( plugin );
     plugin.click();
     this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='pluginDetailInfoContainer']/div/div[2]/div/div[@class='pluginName ng-binding']" ) );
 
-    //assert Uninstall button is enabled and click it
+    // assert Uninstall button is enabled and click it
     WebElement uninstallButton = this.elemHelper.WaitForElementPresence( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button[2]" ) );
     assertNotNull( uninstallButton );
     uninstallButton.click();
 
-    //Check popup text
+    // Check popup text
     String popupMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ) );
     String expectedMessage = "You are about to uninstall " + name + ". Do you want to proceed?";
     assertEquals( popupMessage, expectedMessage );
 
-    //Click Ok
+    // Click Ok
     WebElement okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
     assertNotNull( okButton );
     okButton.click();
 
-    //wait for and assert popup message
+    // wait for and assert popup message
     if ( message.length() > 0 ) {
       expectedMessage = message;
     } else {
@@ -614,31 +621,32 @@ public class MarketPlace {
     popupMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.cssSelector( "div.dialog.ng-scope div.body div.ng-binding" ) );
     assertEquals( popupMessage, expectedMessage );
 
-    //Click Ok and assert dialog is gone
+    // Click Ok and assert dialog is gone
     okButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@window-class='confirmationDialog']//div[@class='buttonsContainer']/button" ) );
     assertNotNull( okButton );
     okButton.click();
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@window-class='confirmationDialog']" ), 3 );
 
-    //assert uninstall button is disabled
+    // assert uninstall button is disabled
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='pluginDetailHeaderButtons']/button[2]" ), 3 );
 
-    //close popup
+    // close popup
     WebElement closeButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ) );
     assertNotNull( closeButton );
     closeButton.click();
     this.elemHelper.WaitForElementNotPresent( this.driver, By.xpath( "//div[@class='modal-container ng-scope']/button[@class='closeButton']" ), 3 );
 
-    //Assert plugin status is installed
+    // Assert plugin status is installed
     assertFalse( CheckIfPluginInstalled( name ) );
 
-    //Assert button reads "Up to Date"
+    // Assert button reads "Up to Date"
     String buttonMessage = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@data-ng-show='plugins']//div[@title='" + name + "']/../..//span[@class='text ng-binding']" ) );
     assertEquals( buttonMessage, "Install" );
   }
 
   /**
-   * This method will navigate to Installed tab, it has to be called from the Marketplacepage with the driver set to marketplace.perspective.
+   * This method will navigate to Installed tab, it has to be called from the Marketplacepage with the driver set to
+   * marketplace.perspective.
    *
    */
   public void GoToInstalledTab() {
@@ -650,10 +658,10 @@ public class MarketPlace {
   }
 
   /**
-   * This method will return an integer representing the amount of plugins currently shown on the Marketplace, 
-   * it has to be called from the Marketplacepage with the driver set to marketplace.perspective.
+   * This method will return an integer representing the amount of plugins currently shown on the Marketplace, it has to
+   * be called from the Marketplacepage with the driver set to marketplace.perspective.
    *
-   *@return size
+   * @return size
    */
   public int PluginListSize() {
     int size = 0;

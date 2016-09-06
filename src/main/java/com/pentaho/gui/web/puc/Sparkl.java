@@ -1,3 +1,24 @@
+/*!*****************************************************************************
+ *
+ * Selenium Tests For CTools
+ *
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
+ *
+ *******************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
 package com.pentaho.gui.web.puc;
 
 import static org.testng.Assert.assertNotNull;
@@ -38,7 +59,7 @@ public class Sparkl {
     this.driver.get( "http://localhost:8080/pentaho/plugin/sparkl/api/main" );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 360 );
 
-    //Assert Sparkl page is shown
+    // Assert Sparkl page is shown
     WebElement sparklLogo = this.elemHelper.FindElement( this.driver, By.cssSelector( "a.sparklLogo" ) );
     assertNotNull( sparklLogo );
 
@@ -58,11 +79,11 @@ public class Sparkl {
   public String ToolsEntryName( String name ) {
     log.info( "Enter: ToolsEntryName" );
     String text;
-    //Expand tools menu
+    // Expand tools menu
     WebElement toolsMenu = this.elemHelper.FindElement( this.driver, By.cssSelector( "td#toolsmenu" ) );
     assertNotNull( toolsMenu );
     toolsMenu.click();
-    //Look for Plugin by name
+    // Look for Plugin by name
     WebElement pluginEntry = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolsmenu']//td[text() = '" + name + "']" ) );
     if ( pluginEntry != null ) {
       text = pluginEntry.getText();
@@ -90,11 +111,11 @@ public class Sparkl {
   public boolean ToolsEntryExists( String name ) {
     log.info( "Enter: ToolsEntryExists" );
     Boolean exists = false;
-    //Expand tools menu
+    // Expand tools menu
     WebElement toolsMenu = this.elemHelper.FindElement( this.driver, By.cssSelector( "td#toolsmenu" ) );
     assertNotNull( toolsMenu );
     toolsMenu.click();
-    //Look for Plugin by name
+    // Look for Plugin by name
     WebElement pluginEntry = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='toolsmenu']//td[text() = '" + name + "']" ) );
     if ( pluginEntry != null ) {
       exists = true;
@@ -104,10 +125,10 @@ public class Sparkl {
   }
 
   /**
-   * This method will check for existence of Tools menu entry given Plugin's name and click entry asserting new
-   * tab is shown with plugin name.
+   * This method will check for existence of Tools menu entry given Plugin's name and click entry asserting new tab is
+   * shown with plugin name.
    *
-   *It must be called from Home page
+   * It must be called from Home page
    *
    * Ex: ToolsEntryWorks("Sparkl")
    * 
@@ -134,7 +155,7 @@ public class Sparkl {
    * @return exists
    */
   public boolean PluginCardExists( PluginCard plugin ) {
-    //check sparkl plugin entry
+    // check sparkl plugin entry
     boolean exists = false;
     PluginCard existingPlugin = GetPluginCard( plugin );
     if ( plugin.equals( existingPlugin ) ) {
@@ -150,7 +171,7 @@ public class Sparkl {
    * @return exists
    */
   public boolean PluginExists( PluginCard plugin ) {
-    //check sparkl plugin entry
+    // check sparkl plugin entry
     boolean exists = false;
     String id = plugin.getId();
     String pluginId = this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@id='pluginsListObj']//div[@title='" + id + "']" ) );
@@ -167,7 +188,7 @@ public class Sparkl {
    * @return exists
    */
   public PluginCard GetPluginCard( PluginCard plugin ) {
-    //check sparkl plugin entry
+    // check sparkl plugin entry
     String id = plugin.getId();
     String pluginName = "";
     String pluginId = "";
@@ -186,7 +207,7 @@ public class Sparkl {
    * It must be called from the Sparkl main dashboard
    */
   public void RefreshPage() {
-    //check Refresh button
+    // check Refresh button
     WebElement refreshButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='refreshObj']/button" ) );
     assertNotNull( refreshButton );
     refreshButton.click();
@@ -200,7 +221,7 @@ public class Sparkl {
    * @param parameter
    */
   public void SortBy( String parameter ) {
-    //check Sort list
+    // check Sort list
     WebElement sortList = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='pluginsListObj']" ) );
     assertNotNull( sortList );
     WebElement expandSort = this.elemHelper.FindElement( this.driver, By.cssSelector( "a.chzn-single span" ) );
@@ -228,7 +249,7 @@ public class Sparkl {
     } else if ( by.contains( "id" ) ) {
       searchXpath = "div[@class='id']";
     }
-    List<String> elements = new ArrayList<String>();
+    List<String> elements = new ArrayList<>();
     for ( int i = 1; i < listElements.size() + 1; i++ ) {
       elements.add( this.elemHelper.WaitForElementPresentGetText( this.driver, By.xpath( "//div[@class='sparklPluginCardContainer'][" + i + "]//" + searchXpath ) ).toLowerCase() );
     }
@@ -290,7 +311,7 @@ public class Sparkl {
     closeButton.click();
     this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 10 );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 10 );
-    //Assert Sparkl page is shown
+    // Assert Sparkl page is shown
     WebElement sparklLogo = this.elemHelper.FindElement( this.driver, By.cssSelector( "a.sparklLogo" ) );
     assertNotNull( sparklLogo );
   }
@@ -312,8 +333,8 @@ public class Sparkl {
   }
 
   /**
-   * This method will fully delete a plugin given the PluginCard object and return the confirmation
-   * message received by the user
+   * This method will fully delete a plugin given the PluginCard object and return the confirmation message received by
+   * the user
    *
    * It must be called from Sparkl main page
    * 
@@ -329,7 +350,7 @@ public class Sparkl {
     confirmDelete.click();
     this.elemHelper.FindElement( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
     this.elemHelper.WaitForElementInvisibility( this.driver, By.xpath( "//div[@class='blockUI blockOverlay']" ), 60 );
-    //Assert Sparkl page is shown
+    // Assert Sparkl page is shown
     WebElement sparklLogo = this.elemHelper.FindElement( this.driver, By.cssSelector( "a.sparklLogo" ) );
     assertNotNull( sparklLogo );
     return confirmationMessage;
@@ -374,7 +395,7 @@ public class Sparkl {
   }
 
   /**
-   * This method will get the plugin information currently displayed and assign it to a PluginInfo object 
+   * This method will get the plugin information currently displayed and assign it to a PluginInfo object
    *
    * It must be called from the About page of a plugin
    * 
@@ -394,8 +415,8 @@ public class Sparkl {
   }
 
   /**
-   * This method will enter the plugin info into the respective fields given a PluginInfo object, it will return a new pluginInfo object in
-   * case any of the properties of the object need to be altered 
+   * This method will enter the plugin info into the respective fields given a PluginInfo object, it will return a new
+   * pluginInfo object in case any of the properties of the object need to be altered
    *
    * It must be called from the About page of a plugin
    * 
@@ -403,29 +424,29 @@ public class Sparkl {
    * @return pluginInfo
    */
   public PluginInfo EnterPluginInfo( PluginInfo plugin ) {
-    //filling empty strings to avoid issue where we're unable to save emptying an info field
-    if ( plugin.getName() == "" ) {
+    // filling empty strings to avoid issue where we're unable to save emptying an info field
+    if ( plugin.getName().isEmpty() ) {
       plugin.setName( "notEmpty" );
     }
-    if ( plugin.getDate() == "" ) {
+    if ( plugin.getDate().isEmpty() ) {
       plugin.setDate( "notEmpty" );
     }
-    if ( plugin.getVersion() == "" ) {
+    if ( plugin.getVersion().isEmpty() ) {
       plugin.setVersion( "notEmpty" );
     }
-    if ( plugin.getDescription() == "" ) {
+    if ( plugin.getDescription().isEmpty() ) {
       plugin.setDescription( "notEmpty" );
     }
-    if ( plugin.getAuthorName() == "" ) {
+    if ( plugin.getAuthorName().isEmpty() ) {
       plugin.setAuthorName( "notEmpty" );
     }
-    if ( plugin.getAuthorEmail() == "" ) {
+    if ( plugin.getAuthorEmail().isEmpty() ) {
       plugin.setAuthorEmail( "notEmpty" );
     }
-    if ( plugin.getAuthorCompany() == "" ) {
+    if ( plugin.getAuthorCompany().isEmpty() ) {
       plugin.setAuthorCompany( "notEmpty" );
     }
-    if ( plugin.getAuthorCompanyUrl() == "" ) {
+    if ( plugin.getAuthorCompanyUrl().isEmpty() ) {
       plugin.setAuthorCompanyUrl( "notEmpty" );
     }
     this.elemHelper.ClearAndSendKeys( this.driver, By.xpath( "//div[@id='nameContainer']//input" ), plugin.getName() );
@@ -440,7 +461,7 @@ public class Sparkl {
   }
 
   /**
-   * This method will save currently present plugin info. 
+   * This method will save currently present plugin info.
    *
    * It must be called from the About page of a plugin
    * 
@@ -483,8 +504,7 @@ public class Sparkl {
   }
 
   /**
-   * This method will open a dashboard in view mode given the PluginElement object
-   * and returns title of opened dashboard
+   * This method will open a dashboard in view mode given the PluginElement object and returns title of opened dashboard
    * 
    * It will return the name part of the url
    *
@@ -509,8 +529,8 @@ public class Sparkl {
   }
 
   /**
-   * This method will open a dashboard in edit mode given the PluginElement object
-   * and return the title of the dashboard being edited in all lower case
+   * This method will open a dashboard in edit mode given the PluginElement object and return the title of the dashboard
+   * being edited in all lower case
    * 
    * It must be called from the Elements page of a plugin
    * 
@@ -543,27 +563,27 @@ public class Sparkl {
    * @param plugin
    */
   public void CreateElement( PluginElement plugin ) {
-    //Load variables from object
+    // Load variables from object
     String name = plugin.getName();
     String type = plugin.getType();
     String template = plugin.getTemplate();
     boolean admin = plugin.getAdmin();
 
-    //Check if element with that name exists
+    // Check if element with that name exists
     if ( !IsElementPresent( plugin ) ) {
 
-      //Click create button and test invalid naming
+      // Click create button and test invalid naming
       WebElement createButton = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='openNewElementButtonObj']/button" ) );
       assertNotNull( createButton );
       createButton.click();
       TestNamingElement();
 
-      //Enter name of Element
+      // Enter name of Element
       WebElement nameInput = this.elemHelper.FindElement( this.driver, By.id( "render_newElementNameForm" ) );
       assertNotNull( nameInput );
       nameInput.sendKeys( name );
 
-      //Select type/template/admin
+      // Select type/template/admin
       if ( type.equals( "dashboard" ) ) {
         WebElement selectType = this.elemHelper.FindElement( this.driver, By.xpath( "//div[@id='newElementTypeSelectorObj']/div/div" ) );
         assertNotNull( selectType );
@@ -715,7 +735,8 @@ public class Sparkl {
   }
 
   /**
-   * This method will delete an element given the PluginElement object. It will return the confirmation message sent to the user
+   * This method will delete an element given the PluginElement object. It will return the confirmation message sent to
+   * the user
    *
    * It must be called from the Elements page of a plugin
    * 
@@ -789,8 +810,8 @@ public class Sparkl {
   }
 
   /**
-   * This method will filter the elements given the type (dashboard or endpoint)
-   * if any other type is provided this method will clik the "All" button
+   * This method will filter the elements given the type (dashboard or endpoint) if any other type is provided this
+   * method will clik the "All" button
    *
    * It must be called from the Edit page of a plugin
    */
@@ -811,8 +832,8 @@ public class Sparkl {
   }
 
   /**
-   * This method will click the refresh button on the elements page and return true if the page
-   * is blocked by the refreshing icon
+   * This method will click the refresh button on the elements page and return true if the page is blocked by the
+   * refreshing icon
    *
    * It must be called from the Edit page of a plugin
    */

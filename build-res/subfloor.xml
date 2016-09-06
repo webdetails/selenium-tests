@@ -181,8 +181,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="test.java.reports.html.dir" value="${basedir}/reports-java/html" description="Directory for the generated report in HTML" />
 	<property name="test.testng.suite.file" value="SmokeTests-CE.xml" />
 
-	<taskdef resource="testngtasks" classpath="${basedir}/lib/testng-6.9.6.jar" />
-
+	<taskdef resource="testngtasks" classpath="${lib.dir}/testng-latest.jar" />
+	
 	<!-- CLASSPATH FOR TEST-JAVA -->
 	<path id="test.java.classpath">
 		<fileset dir="${lib.ext.dir}" includes="**/*" />
@@ -661,7 +661,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<target name="resolve-test-java" depends="install-ivy" description="Retrieves all 'test-java' dependent libraries">
 		<echo message="Resolve dependencies 'test-java'." />
 		<ivy:resolve file="${ivy.file}" conf="test-java" />
-		<ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" sync="true" />
+		<ivy:retrieve pattern="${lib.ext.dir}/[artifact](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" sync="true" />
 	</target>
 
 
@@ -738,7 +738,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<ivy:resolve file="${ivy.file}" conf="${ivy.configs}" />
 		<ivy:report xml="true" todir="${ivy.reports.dir}" />
 	</target>
-
+	
 	<!--=======================================================================
         clean-common
 
@@ -863,5 +863,4 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			</exec>
 		</sequential>
 	</macrodef>
-
 </project>

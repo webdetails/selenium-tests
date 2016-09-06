@@ -54,7 +54,9 @@ class RunnableWaitForText implements Runnable {
 
   @Override
   public void run() {
-    Wait<WebDriver> wait = new FluentWait<WebDriver>( this.driver ).withTimeout( this.timeout, TimeUnit.SECONDS ).pollingEvery( this.pollingTime, TimeUnit.MILLISECONDS );
+    Wait<WebDriver> wait =
+        new FluentWait<>( this.driver ).withTimeout( this.timeout, TimeUnit.SECONDS ).pollingEvery( this.pollingTime,
+            TimeUnit.MILLISECONDS );
 
     // Wait for element visible
     this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {
@@ -68,7 +70,7 @@ class RunnableWaitForText implements Runnable {
             if ( elem.isEnabled() ) {
               String text = elem.getText();
               setTextPresent( text );
-              return getTextPresent().equals( getTextToWait() ); //If true we stop waiting for.
+              return getTextPresent().equals( getTextToWait() ); // If true we stop waiting for.
             }
             return false;
           }

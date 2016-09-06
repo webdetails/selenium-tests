@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -152,7 +152,7 @@ public class ExportPopupComponent extends BaseTest {
     // Check URL of displayed image
     String chartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
     assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Fpentaho-cdf-dd-require%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", chartSRCUrl );
-    assertEquals( 200, HttpUtils.GetResponseCode( chartSRCUrl, "admin", "password" ) );
+    assertEquals( 200, HttpUtils.GetHttpStatus( chartSRCUrl, pentahoBaServerUsername, pentahoBaServerPassword ) );
 
     // Export chart and assert export was successful
     WebElement chartExportButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
@@ -223,7 +223,7 @@ public class ExportPopupComponent extends BaseTest {
     // Check URL of displayed image
     String countryChartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
     assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Fpentaho-cdf-dd-require%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", countryChartSRCUrl );
-    assertEquals( 200, HttpUtils.GetResponseCode( countryChartSRCUrl, "admin", "password" ) );
+    assertEquals( 200, HttpUtils.GetHttpStatus( countryChartSRCUrl, pentahoBaServerUsername, pentahoBaServerPassword ) );
 
     // Export chart and assert export was successful
     WebElement countryChartExportButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );

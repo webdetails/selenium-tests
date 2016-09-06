@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -52,7 +52,7 @@ public class ScreenshotListener extends TestListenerAdapter {
 
       new File( createDir ).mkdirs(); // Insure directory is there
 
-      try (FileOutputStream out = new FileOutputStream( createDir + testCaseName + ".png" )) {
+      try ( FileOutputStream out = new FileOutputStream( createDir + testCaseName + ".png" ) ) {
         this.log.debug( "Class: " + className );
         this.log.debug( "Test Case: " + testCaseName );
         this.log.debug( "Exception: " + ( failingTest.getThrowable() != null ? failingTest.getThrowable().getMessage()

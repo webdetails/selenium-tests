@@ -1,6 +1,6 @@
 /*
  * !*****************************************************************************
- * Selenium Tests For CTools Copyright (C) 2002-2015 by Pentaho :
+ * Selenium Tests For CTools Copyright (C) 2002-2016 by Pentaho :
  * http://www.pentaho.com
  * ********************************************************
  * ********************** Licensed under the Apache License, Version 2.0 (the

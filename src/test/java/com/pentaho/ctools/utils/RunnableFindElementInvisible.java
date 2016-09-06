@@ -39,7 +39,9 @@ public class RunnableFindElementInvisible implements Runnable {
 
   @Override
   public void run() {
-    Wait<WebDriver> wait = new FluentWait<WebDriver>( this.driver ).withTimeout( this.timeout, TimeUnit.SECONDS ).pollingEvery( this.pollingTime, TimeUnit.MILLISECONDS );
+    Wait<WebDriver> wait =
+        new FluentWait<>( this.driver ).withTimeout( this.timeout, TimeUnit.SECONDS ).pollingEvery( this.pollingTime,
+            TimeUnit.MILLISECONDS );
 
     // Wait for element present and not visible
     this.theElement = wait.until( new Function<WebDriver, WebElement>() {

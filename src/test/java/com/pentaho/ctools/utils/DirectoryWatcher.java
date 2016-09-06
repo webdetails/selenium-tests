@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -76,6 +76,7 @@ public class DirectoryWatcher {
       bFileCreated = future.get( timeout, TimeUnit.SECONDS );
       this.log.debug( "Finished!" );
     } catch ( TimeoutException e ) {
+      this.log.warn( e );
       future.cancel( true );
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );
@@ -105,7 +106,7 @@ class CallCheckFolder implements Callable<Boolean> {
   @Override
   public Boolean call() {
 
-    try (WatchService watcher = FileSystems.getDefault().newWatchService()) {
+    try ( WatchService watcher = FileSystems.getDefault().newWatchService() ) {
 
       Path dir = Paths.get( this.path );
       dir.register( watcher, StandardWatchEventKinds.ENTRY_CREATE );

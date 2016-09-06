@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="SmokeTests-Tutorials" verbose="2">
+	<!-- Listener to validate it test case fail and take screenshot -->
+	<listeners>
+		<listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
+	</listeners>
+
+	<test name="Tutorials Tests" preserve-order="true" parallel="false">
+		<classes>
+			<!-- LOGIN -->
+			<class name="com.pentaho.ctools.main.LoginPentaho" />
+			<!-- CDF Tutorials --> 
+			<class name="com.pentaho.ctools.tutorials.cdf.Charts" />
+			<class name="com.pentaho.ctools.tutorials.cdf.DialTraffic" />
+			<class name="com.pentaho.ctools.tutorials.cdf.DrillableDashboard" />
+			<class name="com.pentaho.ctools.tutorials.cdf.FirstDashboard" />
+			<class name="com.pentaho.ctools.tutorials.cdf.GeoDashboard" />
+			<class name="com.pentaho.ctools.tutorials.cdf.HowTo" />
+			<class name="com.pentaho.ctools.tutorials.cdf.MondrianRoles" />
+			<class name="com.pentaho.ctools.tutorials.cdf.ReplacingSecurePrompt" />
+			<class name="com.pentaho.ctools.tutorials.cdf.TableSparklines" />
+			<class name="com.pentaho.ctools.tutorials.cdf.Templating" />
+			<class name="com.pentaho.ctools.tutorials.cdf.TimeplotsDatePickers" />
+			<!-- CDE Tutorials --> 
+			<!-- The class OpenCdeTutorials need to be executed first! --> 
+			<class name="com.pentaho.ctools.tutorials.cde.OpenCdeTutorials" />
+			<class name="com.pentaho.ctools.tutorials.cde.CdeTutorialsMenu" />
+			<class name="com.pentaho.ctools.tutorials.cde.AddingCharts" />
+			<class name="com.pentaho.ctools.tutorials.cde.AddingExternalResources" />
+			<class name="com.pentaho.ctools.tutorials.cde.CreatingAddins" />
+			<class name="com.pentaho.ctools.tutorials.cde.CreatingComponents" />
+			<class name="com.pentaho.ctools.tutorials.cde.CreatingTables" />
+			<class name="com.pentaho.ctools.tutorials.cde.Datasources" />
+			<class name="com.pentaho.ctools.tutorials.cde.EnhancingCharts" />
+			<class name="com.pentaho.ctools.tutorials.cde.ExtensionPoints" />
+			<class name="com.pentaho.ctools.tutorials.cde.GettingTheMost" />
+			<class name="com.pentaho.ctools.tutorials.cde.HelloWorld" />
+			<class name="com.pentaho.ctools.tutorials.cde.MakingChartsTalk" />
+			<class name="com.pentaho.ctools.tutorials.cde.OneChartDashboard" />
+			<class name="com.pentaho.ctools.tutorials.cde.ReactingToParameters" />
+			<class name="com.pentaho.ctools.tutorials.cde.TheCdeInterface" />
+			<class name="com.pentaho.ctools.tutorials.cde.TheEditor" />
+			<class name="com.pentaho.ctools.tutorials.cde.UnderstandingLayoutEngine" />
+			<class name="com.pentaho.ctools.tutorials.cde.UsingTableAddins" />
+			<class name="com.pentaho.ctools.tutorials.cde.Welcome" />
+			<class name="com.pentaho.ctools.tutorials.cde.WhereToGo" />
+			<!-- Open Demos Tutorials -->
+			<!-- The class OpenOpenDemos need to be executed first! -->
+			<class name="com.pentaho.gui.web.ctools.tutorials.opendemos.CdeOpenDemos" />
+			<class name="com.pentaho.ctools.tutorials.opendemos.TWars" />
+			<class name="com.pentaho.ctools.tutorials.opendemos.Automotive" />
+			<class name="com.pentaho.ctools.tutorials.opendemos.RetailCo" />
+			<class name="com.pentaho.ctools.tutorials.opendemos.NumberOne" />
+			<class name="com.pentaho.ctools.tutorials.opendemos.ThemePark" />
+			<!-- LOGOUT -->
+			<class name="com.pentaho.ctools.main.LogoutPentaho" />
+		</classes>
+	</test>
+</suite>

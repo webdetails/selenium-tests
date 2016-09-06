@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -38,8 +38,7 @@ import com.pentaho.selenium.BaseTest;
 /**
  * Testing the functionalities related with Addin Reference edit mode.
  *
- * Naming convention for test:
- *  'tcN_StateUnderTest_ExpectedBehavior'
+ * Naming convention for test: 'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
 public class AddinReferenceEdit extends BaseTest {
@@ -47,21 +46,15 @@ public class AddinReferenceEdit extends BaseTest {
   private Boolean bFontChanged = false;
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( AddinReferenceEdit.class );
 
   /**
    * ############################### Test Case 1 ###############################
    *
-   * Test Case Name:
-   *    ChangeAddinReferenceSample
-   * Description:
-   *    Here we want to change the AddinReference title to use a different font
-   *    size.
-   * Steps:
-   *    1. Check the value on default, which is 18.
-   *    2. Edit the sample to have title with font size 34.
-   *    3. Check the value on the sample was changed.
+   * Test Case Name: ChangeAddinReferenceSample Description: Here we want to change the AddinReference title to use a
+   * different font size. Steps: 1. Check the value on default, which is 18. 2. Edit the sample to have title with font
+   * size 34. 3. Check the value on the sample was changed.
    */
   @Test
   public void tc01_ChangeAddinReferenceSample_FontSizeWasChanged() {
@@ -70,9 +63,9 @@ public class AddinReferenceEdit extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to AddinReference
+    // Go to AddinReference
     driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
-    //NOTE - we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     // Wait for title
@@ -89,9 +82,9 @@ public class AddinReferenceEdit extends BaseTest {
     /*
      * ## Step 3
      */
-    //Go to AddinReference
+    // Go to AddinReference
     driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
-    //NOTE - we have to wait for loading disappear
+    // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     String fontSize34 = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='Title']/span" ), "style" );
@@ -106,22 +99,23 @@ public class AddinReferenceEdit extends BaseTest {
     this.log.info( "ChangeFontSize" );
     driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE_EDIT );
 
-    //Expand first row - Title
+    // Expand first row - Title
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
-    //Click in HTML to open the Properties
+    // Click in HTML to open the Properties
     Actions acts = new Actions( driver );
-    acts.click( this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
+    acts.click( this.elemHelper.FindElement( driver, By.xpath(
+        "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
     acts.build().perform();
-    //Click in field 'Font Size' to be editable
+    // Click in field 'Font Size' to be editable
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
-    //Write 34
+    // Write 34
     this.elemHelper.FindElement( driver, By.name( "value" ) ).clear();
     this.elemHelper.SendKeys( driver, By.name( "value" ), value );
     this.elemHelper.FindElement( driver, By.name( "value" ) ).submit();
     this.bFontChanged = true;
-    //Save the changes
+    // Save the changes
     this.elemHelper.ClickJS( driver, By.linkText( "Save" ) );
-    //Wait for element present and invisible
+    // Wait for element present and invisible
     this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//div[@id='notifyBar']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='notifyBar']" ) );
   }

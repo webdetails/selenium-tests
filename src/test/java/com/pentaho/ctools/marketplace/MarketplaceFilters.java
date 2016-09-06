@@ -39,16 +39,12 @@ public class MarketplaceFilters extends BaseTest {
   /**
    * ############################### Test Case 1 ###############################
    *
-   * Test Case Name:
-   *    Asserting Type filter works as expected
+   * Test Case Name: Asserting Type filter works as expected
    *
-   * Description:
-   *    This test will validate the functionalities of the Type filter
+   * Description: This test will validate the functionalities of the Type filter
    *
-   * Steps:
-   *    1. Check "Apps" and assert plugins shown
-   *    2. Unchecked "Analysis" and "Data" and assert plugins shown
-   *    3. Unchecked "Apps", check "Visualization" and "Language Packs" and assert plugins shown
+   * Steps: 1. Check "Apps" and assert plugins shown 2. Unchecked "Analysis" and "Data" and assert plugins shown 3.
+   * Unchecked "Apps", check "Visualization" and "Language Packs" and assert plugins shown
    */
   @Test
   public void tc1_MarketPlacePage_TypeFilter() {
@@ -57,12 +53,12 @@ public class MarketplaceFilters extends BaseTest {
     market.GoToMarketPlace();
 
     /*
-     *  Step 1
+     * Step 1
      */
-    List<Number> type = new ArrayList<Number>();
+    List<Number> type = new ArrayList<>();
     type.add( 1 );
-    List<Number> stage = new ArrayList<Number>();
-    List<String> expectedList = new ArrayList<String>();
+    List<Number> stage = new ArrayList<>();
+    List<String> expectedList = new ArrayList<>();
     expectedList.add( "Pentaho Marketplace" );
     expectedList.add( "Community Dashboards Framework" );
     expectedList.add( "Community Data Access" );
@@ -72,7 +68,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    //expectedList.add( "Community Data Validation" );
+    // expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
     expectedList.add( "Startup Rule Engine" );
@@ -83,7 +79,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Pentaho Performance Monitoring" );
     expectedList.add( "IvyBC - Ivy Bootstrap Components (Free)" );
     expectedList.add( "IvyDD - Ivy Dashboard Designer" );
-    //expectedList.add( "IvySE - Ivy Schema Editor" );
+    // expectedList.add( "IvySE - Ivy Schema Editor" );
     expectedList.add( "IvyUD - Ivy User Details" );
     expectedList.add( "IvyDC - Ivy Dashboard Components" );
     expectedList.add( "IvyGS - Ivy Git Sync" );
@@ -92,7 +88,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Change Password" );
     expectedList.add( "Integrator plugin" );
     expectedList.add( "BTable" );
-    //expectedList.add( "Alfresco Audit Analysis and Reporting" );
+    // expectedList.add( "Alfresco Audit Analysis and Reporting" );
     expectedList.add( "Pentaho Log Manager" );
     expectedList.add( "Environment Display" );
     expectedList.add( "Pentaho Analytics Shell" );
@@ -102,12 +98,12 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Pentaho Analysis Editor" );
     expectedList.add( "Web Adhoc Query Executor" );
     expectedList.add( "Pentaho Transparent Authentication" );
-    List<String> resultList = new ArrayList<String>();
+    List<String> resultList = new ArrayList<>();
     resultList = market.CheckFiltersApplied( type, stage, "" );
     assertEquals( expectedList, resultList );
 
     /*
-     *  Step 2
+     * Step 2
      */
     type.add( 3 );
     type.add( 5 );
@@ -120,7 +116,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    //expectedList.add( "Community Data Validation" );
+    // expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
     expectedList.add( "Startup Rule Engine" );
@@ -145,66 +141,55 @@ public class MarketplaceFilters extends BaseTest {
     assertEquals( expectedList, resultList );
 
     /*
-     *  Step 3
+     * Step 3
      */
-    /*type.clear();
-    type.add( 8 );
-    type.add( 11 );
-    expectedList.clear();
-    expectedList.add( "D3 Component Library" );
-    expectedList.add( "Catalan Language Pack Installer" );
-    expectedList.add( "Dutch Language Pack Installer" );
-    expectedList.add( "French Language Pack Installer" );
-    expectedList.add( "German Language Pack Installer" );
-    expectedList.add( "Hindi Language Pack Installer" );
-    expectedList.add( "Italian Language Pack Installer" );
-    expectedList.add( "Japanese Language Pack Installer" );
-    expectedList.add( "Korean Language Pack Installer" );
-    expectedList.add( "Portuguese (Brazilian variant) Language Pack Installer" );
-    expectedList.add( "Portuguese (European variant) Language Pack Installer" );
-    expectedList.add( "Spanish Language Pack Installer" );
-    resultList.clear();
-    resultList = market.CheckFiltersApplied( type, stage, "" );
-    assertEquals( expectedList, resultList );*/
+    /*
+     * type.clear(); type.add( 8 ); type.add( 11 ); expectedList.clear(); expectedList.add( "D3 Component Library" );
+     * expectedList.add( "Catalan Language Pack Installer" ); expectedList.add( "Dutch Language Pack Installer" );
+     * expectedList.add( "French Language Pack Installer" ); expectedList.add( "German Language Pack Installer" );
+     * expectedList.add( "Hindi Language Pack Installer" ); expectedList.add( "Italian Language Pack Installer" );
+     * expectedList.add( "Japanese Language Pack Installer" ); expectedList.add( "Korean Language Pack Installer" );
+     * expectedList.add( "Portuguese (Brazilian variant) Language Pack Installer" ); expectedList.add(
+     * "Portuguese (European variant) Language Pack Installer" ); expectedList.add( "Spanish Language Pack Installer" );
+     * resultList.clear(); resultList = market.CheckFiltersApplied( type, stage, "" ); assertEquals( expectedList,
+     * resultList );
+     */
 
   }
 
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name:
-   *    Asserting DevStage filter works as expected
+   * Test Case Name: Asserting DevStage filter works as expected
    *
-   * Description:
-   *    This test will validate the functionalities of the DevStage filter
+   * Description: This test will validate the functionalities of the DevStage filter
    *
-   * Steps:
-   *    1. Check "Customer" and assert plugins shown
-   *    2. Unchecked "Customer", Check Customer stages 1 and 3 and assert plugins shown
-   *    3. Unchecked checked filters, check "Community", unchecked  stages 1 and 4 and assert plugins shown
+   * Steps: 1. Check "Customer" and assert plugins shown 2. Unchecked "Customer", Check Customer stages 1 and 3 and
+   * assert plugins shown 3. Unchecked checked filters, check "Community", unchecked stages 1 and 4 and assert plugins
+   * shown
    */
   @Test
   public void tc2_MarketPlacePage_DevStageFilter() {
     MarketPlace market = new MarketPlace( driver );
 
     /*
-     *  Step 1
+     * Step 1
      */
-    List<Number> type = new ArrayList<Number>();
-    List<Number> stage = new ArrayList<Number>();
+    List<Number> type = new ArrayList<>();
+    List<Number> stage = new ArrayList<>();
     stage.add( 1 );
-    List<String> expectedList = new ArrayList<String>();
+    List<String> expectedList = new ArrayList<>();
     expectedList.add( "Pentaho Marketplace" );
     expectedList.add( "Community Dashboards Framework" );
     expectedList.add( "Community Data Access" );
     expectedList.add( "Community Dashboard Editor" );
     expectedList.add( "Community Graphics Generator" );
-    List<String> resultList = new ArrayList<String>();
+    List<String> resultList = new ArrayList<>();
     resultList = market.CheckFiltersApplied( type, stage, "" );
     assertEquals( expectedList, resultList );
 
     /*
-     *  Step 2
+     * Step 2
      */
     stage.clear();
     stage.add( 2 );
@@ -215,7 +200,7 @@ public class MarketplaceFilters extends BaseTest {
     assertEquals( expectedList, resultList );
 
     /*
-     *  Step 3
+     * Step 3
      */
     stage.clear();
     stage.add( 7 );
@@ -226,7 +211,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    //expectedList.add( "Community Data Validation" );
+    // expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
     expectedList.add( "Startup Rule Engine" );
@@ -234,10 +219,10 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Saiku Chart Plus" );
     expectedList.add( "Pentaho CE Audit" );
     expectedList.add( "Tapa" );
-    //expectedList.add( "Pentaho Peformance Monitoring" );
+    // expectedList.add( "Pentaho Peformance Monitoring" );
     expectedList.add( "IvyBC - Ivy Bootstrap Components (Free)" );
     expectedList.add( "IvyDD - Ivy Dashboard Designer" );
-    //expectedList.add( "IvySE - Ivy Schema Editor" );
+    // expectedList.add( "IvySE - Ivy Schema Editor" );
     expectedList.add( "IvyUD - Ivy User Details" );
     expectedList.add( "IvyDC - Ivy Dashboard Components" );
     expectedList.add( "IvyGS - Ivy Git Sync" );
@@ -246,24 +231,21 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Change Password" );
     expectedList.add( "Integrator plugin" );
     expectedList.add( "BTable" );
-    //expectedList.add( "Alfresco Audit Analysis and Reporting" );
+    // expectedList.add( "Alfresco Audit Analysis and Reporting" );
     expectedList.add( "Pentaho Log Manager" );
     expectedList.add( "Environment Display" );
     expectedList.add( "Pentaho Analytics Shell" );
     expectedList.add( "Bissol Table Data Editor" );
     expectedList.add( "Mondrian Translator" );
     expectedList.add( "Pentaho Transparent Authentication" );
-    /*expectedList.add( "Catalan Language Pack Installer" );
-    expectedList.add( "Dutch Language Pack Installer" );
-    expectedList.add( "French Language Pack Installer" );
-    expectedList.add( "German Language Pack Installer" );
-    expectedList.add( "Hindi Language Pack Installer" );
-    expectedList.add( "Italian Language Pack Installer" );
-    expectedList.add( "Japanese Language Pack Installer" );
-    expectedList.add( "Korean Language Pack Installer" );
-    expectedList.add( "Portuguese (Brazilian variant) Language Pack Installer" );
-    expectedList.add( "Portuguese (European variant) Language Pack Installer" );
-    expectedList.add( "Spanish Language Pack Installer" );*/
+    /*
+     * expectedList.add( "Catalan Language Pack Installer" ); expectedList.add( "Dutch Language Pack Installer" );
+     * expectedList.add( "French Language Pack Installer" ); expectedList.add( "German Language Pack Installer" );
+     * expectedList.add( "Hindi Language Pack Installer" ); expectedList.add( "Italian Language Pack Installer" );
+     * expectedList.add( "Japanese Language Pack Installer" ); expectedList.add( "Korean Language Pack Installer" );
+     * expectedList.add( "Portuguese (Brazilian variant) Language Pack Installer" ); expectedList.add(
+     * "Portuguese (European variant) Language Pack Installer" ); expectedList.add( "Spanish Language Pack Installer" );
+     */
     resultList.clear();
     resultList = market.CheckFiltersApplied( type, stage, "" );
     assertEquals( expectedList, resultList );
@@ -273,27 +255,23 @@ public class MarketplaceFilters extends BaseTest {
   /**
    * ############################### Test Case 3 ###############################
    *
-   * Test Case Name:
-   *    Asserting Searching filter works as expected
+   * Test Case Name: Asserting Searching filter works as expected
    *
-   * Description:
-   *    This test will validate the functionalities of the Search filter
+   * Description: This test will validate the functionalities of the Search filter
    *
-   * Steps:
-   *    1. Input 'Webdetails' on search field and assert shown plugins
-   *    2. Input 'Community' on search field and assert shown plugins
-   *    3. Input 'D3' on search field and assert shown plugins
-   *    4. Input 'failure' on search field and assert shown plugins
+   * Steps: 1. Input 'Webdetails' on search field and assert shown plugins 2. Input 'Community' on search field and
+   * assert shown plugins 3. Input 'D3' on search field and assert shown plugins 4. Input 'failure' on search field and
+   * assert shown plugins
    */
   @Test
   public void tc3_MarketPlacePage_SearchFilter() {
     MarketPlace market = new MarketPlace( driver );
     /*
-     *  Step 1
+     * Step 1
      */
-    List<Number> type = new ArrayList<Number>();
-    List<Number> stage = new ArrayList<Number>();
-    List<String> expectedList = new ArrayList<String>();
+    List<Number> type = new ArrayList<>();
+    List<Number> stage = new ArrayList<>();
+    List<String> expectedList = new ArrayList<>();
     expectedList.add( "Community Dashboards Framework" );
     expectedList.add( "Community Data Access" );
     expectedList.add( "Community Dashboard Editor" );
@@ -302,29 +280,26 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Pentaho Repository Synchronizer" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    //expectedList.add( "Community Data Validation" );
+    // expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
     expectedList.add( "Startup Rule Engine" );
     expectedList.add( "D3 Component Library" );
     expectedList.add( "Environment Display" );
-    /*expectedList.add( "Catalan Language Pack Installer" );
-    expectedList.add( "Dutch Language Pack Installer" );
-    expectedList.add( "French Language Pack Installer" );
-    expectedList.add( "German Language Pack Installer" );
-    expectedList.add( "Hindi Language Pack Installer" );
-    expectedList.add( "Italian Language Pack Installer" );
-    expectedList.add( "Japanese Language Pack Installer" );
-    expectedList.add( "Korean Language Pack Installer" );
-    expectedList.add( "Portuguese (Brazilian variant) Language Pack Installer" );
-    expectedList.add( "Portuguese (European variant) Language Pack Installer" );
-    expectedList.add( "Spanish Language Pack Installer" );*/
-    List<String> resultList = new ArrayList<String>();
+    /*
+     * expectedList.add( "Catalan Language Pack Installer" ); expectedList.add( "Dutch Language Pack Installer" );
+     * expectedList.add( "French Language Pack Installer" ); expectedList.add( "German Language Pack Installer" );
+     * expectedList.add( "Hindi Language Pack Installer" ); expectedList.add( "Italian Language Pack Installer" );
+     * expectedList.add( "Japanese Language Pack Installer" ); expectedList.add( "Korean Language Pack Installer" );
+     * expectedList.add( "Portuguese (Brazilian variant) Language Pack Installer" ); expectedList.add(
+     * "Portuguese (European variant) Language Pack Installer" ); expectedList.add( "Spanish Language Pack Installer" );
+     */
+    List<String> resultList = new ArrayList<>();
     resultList = market.CheckFiltersApplied( type, stage, "Webdetails" );
     assertEquals( expectedList, resultList );
 
     /*
-     *  Step 2
+     * Step 2
      */
     expectedList.clear();
     expectedList.add( "Community Dashboards Framework" );
@@ -333,7 +308,7 @@ public class MarketplaceFilters extends BaseTest {
     expectedList.add( "Community Graphics Generator" );
     expectedList.add( "Community Startup Tabs" );
     expectedList.add( "Community Text Editor" );
-    //expectedList.add( "Community Data Validation" );
+    // expectedList.add( "Community Data Validation" );
     expectedList.add( "Community Distributed Cache" );
     expectedList.add( "Community File Repository" );
     expectedList.add( "IvyDD - Ivy Dashboard Designer" );
@@ -342,7 +317,7 @@ public class MarketplaceFilters extends BaseTest {
     assertEquals( expectedList, resultList );
 
     /*
-     *  Step 3
+     * Step 3
      */
     expectedList.clear();
     expectedList.add( "D3 Component Library" );
@@ -350,7 +325,7 @@ public class MarketplaceFilters extends BaseTest {
     assertEquals( expectedList, resultList );
 
     /*
-     *  Step 4
+     * Step 4
      */
     expectedList.clear();
     resultList = market.CheckFiltersApplied( type, stage, "failure" );
@@ -360,65 +335,56 @@ public class MarketplaceFilters extends BaseTest {
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name:
-   *    Asserting combination of filters work as expected
+   * Test Case Name: Asserting combination of filters work as expected
    *
-   * Description:
-   *    This test will validate the functionalities of the filters when used combined
+   * Description: This test will validate the functionalities of the filters when used combined
    *
-   * Steps:
-   *    1. Input 'Webdetails' on search field, "Customer" on Stage Filter and "Apps" on Type Filter and assert shown plugins
-   *    2. Input 'Community' on search field, check Customer stages 1 and 3  and unchecked "Analysis" and "Data" on Type and assert shown plugins
-   *    3. Input 'D3' on search field, check "Community", unchecked  stages 1 and 4 and check "Visualization" and "Language Packs" on Type and assert shown plugins
+   * Steps: 1. Input 'Webdetails' on search field, "Customer" on Stage Filter and "Apps" on Type Filter and assert shown
+   * plugins 2. Input 'Community' on search field, check Customer stages 1 and 3 and unchecked "Analysis" and "Data" on
+   * Type and assert shown plugins 3. Input 'D3' on search field, check "Community", unchecked stages 1 and 4 and check
+   * "Visualization" and "Language Packs" on Type and assert shown plugins
    *
    **/
   @Test
   public void tc4_MarketPlacePage_FiltersCombined() {
     MarketPlace market = new MarketPlace( driver );
     /*
-     *  Step 1
+     * Step 1
      */
-    List<Number> type = new ArrayList<Number>();
+    List<Number> type = new ArrayList<>();
     type.add( 1 );
-    List<Number> stage = new ArrayList<Number>();
+    List<Number> stage = new ArrayList<>();
     stage.add( 1 );
-    List<String> expectedList = new ArrayList<String>();
+    List<String> expectedList = new ArrayList<>();
     expectedList.add( "Community Dashboards Framework" );
     expectedList.add( "Community Data Access" );
     expectedList.add( "Community Dashboard Editor" );
     expectedList.add( "Community Graphics Generator" );
-    List<String> resultList = new ArrayList<String>();
+    List<String> resultList = new ArrayList<>();
     resultList = market.CheckFiltersApplied( type, stage, "Webdetails" );
     assertEquals( expectedList, resultList );
 
     /*
-     *  Step 2
+     * Step 2
      */
     type.add( 3 );
     type.add( 5 );
     stage.clear();
     stage.add( 2 );
     stage.add( 4 );
-    //expectedList.remove( 1 );
+    // expectedList.remove( 1 );
     expectedList.clear();
     resultList.clear();
     resultList = market.CheckFiltersApplied( type, stage, "Community" );
     assertEquals( expectedList, resultList );
 
     /*
-     *  Step 3
+     * Step 3
      */
-    /*type.clear();
-    type.add( 8 );
-    type.add( 11 );
-    stage.clear();
-    stage.add( 7 );
-    stage.add( 8 );
-    stage.add( 11 );
-    expectedList.clear();
-    expectedList.add( "D3 Component Library" );
-    resultList.clear();
-    resultList = market.CheckFiltersApplied( type, stage, "D3" );
-    assertEquals( expectedList, resultList );*/
+    /*
+     * type.clear(); type.add( 8 ); type.add( 11 ); stage.clear(); stage.add( 7 ); stage.add( 8 ); stage.add( 11 );
+     * expectedList.clear(); expectedList.add( "D3 Component Library" ); resultList.clear(); resultList =
+     * market.CheckFiltersApplied( type, stage, "D3" ); assertEquals( expectedList, resultList );
+     */
   }
 }

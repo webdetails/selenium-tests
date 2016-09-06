@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -223,7 +223,7 @@ public class TextAreaInputComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
+    String strInputString = "`|!\"1#$%&/()=?*Â»Âª:_Ã‡<>/*-+";
     this.elemHelper.Clear( driver, By.id( "myInput" ) );
     this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
     this.elemHelper.SendKeys( driver, By.id( "myInput" ), strInputString );

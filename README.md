@@ -19,14 +19,16 @@ See more about Carina Framework.
 
 https://github.com/qaprosoft/carina-archetype/wiki/Carina-tutorial
 
-## Install project on Intelij:
-
 ## TestNG Tutorial
 A good tutorial to learn how to use TestNG.
 http://www.guru99.com/all-about-testng-and-selenium.html
 
 About the Verbose attribute in testng xml files:
 http://seleniumone-by-arun.blogspot.pt/2013/05/158-understanding-usage-of-verbose.html
+
+##Tips
+1. Add Assert static imports under Content Assist Favorites, in order to import automatically static methods easily. See here: https://github.com/cbeust/testng-eclipse/issues/154
+2. Using of Hamcrest library, several available nice functions. Check out: http://www.vogella.com/tutorials/Hamcrest/article.html
 
 **Learn more about README.md syntax**
 https://confluence.atlassian.com/display/STASH/Markdown+syntax+guide

@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -34,6 +34,7 @@ import java.nio.file.Paths;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -121,7 +122,7 @@ public class CDE417 extends BaseTest {
    *
    */
   @Test
-  public void tc01_PopupExportComponent_PreviewerRendersChart() throws InterruptedException {
+  public void tc01_PopupExportComponent_PreviewerRendersChart() {
     this.log.info( "tc01_PopupExportComponent_PreviewerRendersChart" );
 
     /*
@@ -261,7 +262,7 @@ public class CDE417 extends BaseTest {
     // Check URL of displayed image
     String chartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
     assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2Fchart.js&paramcountries=France&paramcountries=USA&paramwidth=400&paramheight=400", chartSRCUrl );
-    assertEquals( 200, HttpUtils.GetResponseCode( chartSRCUrl, "admin", "password" ) );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( chartSRCUrl, pentahoBaServerUsername, pentahoBaServerPassword ) );
 
     // Export chart and assert export was successful
     WebElement chartExportButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
@@ -332,7 +333,7 @@ public class CDE417 extends BaseTest {
     // Check URL of displayed image
     String countryChartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
     assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2FIssues%2FCDF%2FCDF-548%2FcountryChart.js&paramwidth=400&paramheight=300", countryChartSRCUrl );
-    assertEquals( 200, HttpUtils.GetResponseCode( countryChartSRCUrl, "admin", "password" ) );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( countryChartSRCUrl, pentahoBaServerUsername, pentahoBaServerPassword ) );
 
     // Export chart and assert export was successful
     WebElement countryChartExportButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );

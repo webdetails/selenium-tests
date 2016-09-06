@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -57,6 +57,7 @@ public class FilterVisualGuide extends BaseTest {
    */
   @Test
   public void tc00_OpenSamplePage_Display() {
+    this.log.info( "tc00_OpenSamplePage_Display" );
     /*
      * ## Step 1
      */
@@ -72,7 +73,7 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( actualPageTitle, expectedPageTitle );
     //Get Title of sample
     String expectedSampleTitle = "Visual Guide to the Filter Component";
-    if ( pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_6X ) ) {
+    if ( !pentahoReleaseVersion.equalsIgnoreCase( ConfigurationSettings.PENTAHO_RELEASE_VERSION_5X ) ) {
       expectedSampleTitle = "Filter Component Visual Guide";
     }
     String actualSampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='docHeader']/h1" ), expectedSampleTitle );
@@ -134,7 +135,7 @@ public class FilterVisualGuide extends BaseTest {
     this.log.info( "tc01_FilterComponent_VisualGuide" );
 
     /*
-     * ## Step 1
+     * ## Step 1 - Getting Started
      */
     //Click Single Selector and assert filter is opened
     WebElement singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple']//div[@class='filter-collapse-icon collapsed']" ) );
@@ -172,7 +173,7 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( "All", selectedString );
 
     /*
-     * ## Step 2
+     * ## Step 2 Getting Started
      */
     //Click Limited Selector and assert filter is opened
     singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_limited']//div[@class='filter-collapse-icon collapsed']" ) );
@@ -216,7 +217,7 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( "5 / 19", selectedString );
 
     /*
-     * ## Step 3
+     * ## Step 3 - Organizing options into groups
      */
     //Click Single Selector and assert filter is opened
     singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//div[@class='filter-collapse-icon collapsed']" ) );
@@ -254,7 +255,7 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( "All", selectedString );
 
     /*
-     * ## Step 4
+     * ## Step 4 - Always expanded
      */
     //Assert filters are opened
     WebElement expandedSingleSelector = null;
@@ -288,7 +289,7 @@ public class FilterVisualGuide extends BaseTest {
     assertNotNull( expandedMultiSelector );
 
     /*
-     * ## Step 5
+     * ## Step 5 - Handling large list of options (CDA queries only)
      */
     //Click Single Selector and assert filter is opened
     singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_simple_paginated']//div[@class='filter-collapse-icon collapsed']" ) );
@@ -326,7 +327,7 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( "50 / 1000", selectedString );
 
     /*
-     * ## Step 6
+     * ## Step 6 - Advanced configuration
      */
     //Click Single Selector and assert filter is opened
     singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_addIn']//div[@class='filter-collapse-icon collapsed']" ) );
@@ -361,7 +362,7 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( "No available data", secondMessage );
 
     /*
-     * ## Step 7
+     * ## Step 7 - Advanced configuration
      */
     //Assert filters are opened
     WebElement valuesSingleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#singleFilterObj_values div.filter-root-body" ) );

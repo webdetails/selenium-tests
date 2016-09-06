@@ -2,19 +2,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Everyday Testing" verbose="2" preserve-order="true" parallel="false"> 
-	<!-- Listener to validate it test case fail and take screenshot -->
+  <!-- Listener to validate it test case fail and take screenshot -->
   <listeners>
     <listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
   </listeners>
   
-	<test verbose="1" name="Everyday Testing">
-		<classes>
-			<class name="com.pentaho.ctools.main.LoginPentaho" />
-			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" />
-			<class name="com.pentaho.ctools.cgg.BarChart" />
-      <class name="com.pentaho.ctools.cgg.ScatterChart" />
-      <class name="com.pentaho.ctools.cgg.DialChart" />
-		</classes>
-	</test>
-	
+  <test verbose="1" name="Everyday Testing">
+    <classes>
+      <!-- LOGIN -->
+      <class name="com.pentaho.ctools.main.LoginPentaho" />
+      <!-- LOGOUT -->
+      <class name="com.pentaho.ctools.main.LogoutPentaho" />
+    </classes>
+  </test>
+  
 </suite>

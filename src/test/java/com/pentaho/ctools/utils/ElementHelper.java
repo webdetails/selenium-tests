@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -61,7 +61,8 @@ public class ElementHelper {
    * This method shall wait for the title and return it.
    * 
    * @param driver
-   * @param url - URL to access
+   * @param url
+   *          - URL to access
    */
   public void Get( final WebDriver driver, final String url ) {
     this.log.debug( "Get(Main)::Enter" );
@@ -103,8 +104,7 @@ public class ElementHelper {
   }
 
   /**
-   * This method shall wait for the title and return it. The developer can
-   * specify the timeout and pollingTime.
+   * This method shall wait for the title and return it. The developer can specify the timeout and pollingTime.
    * 
    * 
    * @param driver
@@ -133,7 +133,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
+          Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
 
           // Wait for element visible
           this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {
@@ -184,10 +184,9 @@ public class ElementHelper {
   }
 
   /**
-   * This method works as a wrapper for findElement method of WebDriver.
-   * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
-   * the element is not ready in DOM. Hence, to prevent exception, we develop
-   * a function that is the same of findElement but avoid this exception.
+   * This method works as a wrapper for findElement method of WebDriver. So, in same cases, we may have the issue 'Stale
+   * Element Reference', i.e., the element is not ready in DOM. Hence, to prevent exception, we develop a function that
+   * is the same of findElement but avoid this exception.
    *
    * @param driver
    * @param locator
@@ -201,10 +200,9 @@ public class ElementHelper {
   }
 
   /**
-   * This method works as a wrapper for findElement method of WebDriver.
-   * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
-   * the element is not ready in DOM. Hence, to prevent exception, we develop
-   * a function that is the same of findElement but avoid this exception.
+   * This method works as a wrapper for findElement method of WebDriver. So, in same cases, we may have the issue 'Stale
+   * Element Reference', i.e., the element is not ready in DOM. Hence, to prevent exception, we develop a function that
+   * is the same of findElement but avoid this exception.
    *
    * @param driver
    * @param locator
@@ -218,10 +216,9 @@ public class ElementHelper {
   }
 
   /**
-   * This method works as a wrapper for findElement method of WebDriver.
-   * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
-   * the element is not ready in DOM. Hence, to prevent exception, we develop
-   * a function that is the same of findElement but avoid this exception.
+   * This method works as a wrapper for findElement method of WebDriver. So, in same cases, we may have the issue 'Stale
+   * Element Reference', i.e., the element is not ready in DOM. Hence, to prevent exception, we develop a function that
+   * is the same of findElement but avoid this exception.
    *
    * @param driver
    * @param locator
@@ -235,10 +232,9 @@ public class ElementHelper {
   }
 
   /**
-   * This method works as a wrapper for findElement method of WebDriver.
-   * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
-   * the element is not ready in DOM. Hence, to prevent exception, we develop
-   * a function that is the same of findElement but avoid this exception.
+   * This method works as a wrapper for findElement method of WebDriver. So, in same cases, we may have the issue 'Stale
+   * Element Reference', i.e., the element is not ready in DOM. Hence, to prevent exception, we develop a function that
+   * is the same of findElement but avoid this exception.
    *
    * @param driver
    * @param locator
@@ -252,10 +248,9 @@ public class ElementHelper {
   }
 
   /**
-   * This method works as a wrapper for findElement method of WebDriver.
-   * So, in same cases, we may have the issue 'Stale Element Reference', i.e.,
-   * the element is not ready in DOM. Hence, to prevent exception, we develop
-   * a function that is the same of findElement but avoid this exception.
+   * This method works as a wrapper for findElement method of WebDriver. So, in same cases, we may have the issue 'Stale
+   * Element Reference', i.e., the element is not ready in DOM. Hence, to prevent exception, we develop a function that
+   * is the same of findElement but avoid this exception.
    *
    * @param driver
    * @param locator
@@ -318,7 +313,7 @@ public class ElementHelper {
       WebElement element = FindElementInvisible( driver, locator );
       text = ( (JavascriptExecutor) driver ).executeScript( "return arguments[0].textContent", element ).toString();
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       text = FindElementInvisible( driver, locator ).getText();
     } catch ( Exception e ) {
       this.log.catching( e );
@@ -364,7 +359,8 @@ public class ElementHelper {
    * @param driver
    * @param locator
    * @param text
-   * @param timeout - in seconds
+   * @param timeout
+   *          - in seconds
    * @return
    */
   public String WaitForTextPresence( final WebDriver driver, final By locator, final String textToWait,
@@ -416,8 +412,7 @@ public class ElementHelper {
   }
 
   /**
-   * This method wait for text to be present but should be different from empty 
-   * or null.
+   * This method wait for text to be present but should be different from empty or null.
    *
    * @param driver
    * @param locator
@@ -432,8 +427,7 @@ public class ElementHelper {
   }
 
   /**
-   * This method wait for text to be present but should be different from empty 
-   * or null.
+   * This method wait for text to be present but should be different from empty or null.
    *
    * @param driver
    * @param locator
@@ -448,12 +442,12 @@ public class ElementHelper {
   }
 
   /**
-   * This method wait for text to be present but should be different from empty 
-   * or null.
+   * This method wait for text to be present but should be different from empty or null.
    *
    * @param driver
    * @param locator
-   * @param timeout - in seconds
+   * @param timeout
+   *          - in seconds
    * @param pollingTime
    * @return
    */
@@ -500,8 +494,7 @@ public class ElementHelper {
   }
 
   /**
-   * The function will search for the element and then click on it using
-   * the Click method of java script.
+   * The function will search for the element and then click on it using the Click method of java script.
    *
    * @param driver
    * @param locator
@@ -528,8 +521,7 @@ public class ElementHelper {
   }
 
   /**
-   * The function will search for the element and then click on it using
-   * the Click method of webdriver.
+   * The function will search for the element and then click on it using the Click method of webdriver.
    *
    * @param driver
    * @param locator
@@ -547,14 +539,14 @@ public class ElementHelper {
         this.log.error( "Element is null " + locator.toString() );
       }
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       Click( driver, locator );
     }
   }
 
   /**
-   * The function will search for the element present (doesn't matter
-   * if element is visible or not) and then click on it.
+   * The function will search for the element present (doesn't matter if element is visible or not) and then click on
+   * it.
    *
    * @param driver
    * @param locator
@@ -581,8 +573,8 @@ public class ElementHelper {
   }
 
   /**
-   * The function will search for the element present (doesn't matter
-   * if element is visible or not) and then click on it.
+   * The function will search for the element present (doesn't matter if element is visible or not) and then click on
+   * it.
    *
    * @param driver
    * @param locator
@@ -600,7 +592,7 @@ public class ElementHelper {
         this.log.error( "Element is null " + locator.toString() );
       }
     } catch ( StaleElementReferenceException sere ) {
-      //Repeat it again
+      // Repeat it again
       MoveToElementAndClick( driver, locator );
     }
 
@@ -608,8 +600,8 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to check if the element is present, if it doesn't
-   * then don't wait, if element is present, wait for its invisibility.
+   * This method pretends to check if the element is present, if it doesn't then don't wait, if element is present, wait
+   * for its invisibility.
    *
    * @param driver
    * @param locator
@@ -623,10 +615,9 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to check if the element is present, if it doesn't
-   * then don't wait, if element is present, wait for its invisibility.
-   * true - element  invisible
-   * false - element visible
+   * This method pretends to check if the element is present, if it doesn't then don't wait, if element is present, wait
+   * for its invisibility. true - element invisible false - element visible
+   * 
    * @param driver
    * @param locator
    * @param timeout
@@ -651,7 +642,7 @@ public class ElementHelper {
           }
 
           public void run() {
-            Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+            Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
             // Wait for element invisible
             this.isVisible = wait.until( new Function<WebDriver, Boolean>() {
@@ -713,10 +704,9 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to check if the element is present, if it doesn't
-   * we wait for presence for a specific timeout (input), after this, we will
-   * wait for element visible. And, if the element is present then we have to
-   * check if is visible if not wait for visibility.
+   * This method pretends to check if the element is present, if it doesn't we wait for presence for a specific timeout
+   * (input), after this, we will wait for element visible. And, if the element is present then we have to check if is
+   * visible if not wait for visibility.
    *
    * The default timeout to wait for elements is 30 seconds.
    *
@@ -731,16 +721,16 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to check if the element is present, if it doesn't
-   * we wait for presence for a specific timeout (input), after this, we will
-   * wait for element visible. And, if the element is present then we have to
-   * check if is visible if not wait for visibility.
+   * This method pretends to check if the element is present, if it doesn't we wait for presence for a specific timeout
+   * (input), after this, we will wait for element visible. And, if the element is present then we have to check if is
+   * visible if not wait for visibility.
    *
    * @param driver
    * @param locator
    * @param timeout
    */
-  public WebElement WaitForElementPresenceAndVisible( final WebDriver driver, final By locator, final Integer timeout ) {
+  public WebElement WaitForElementPresenceAndVisible( final WebDriver driver, final By locator,
+      final Integer timeout ) {
     this.log.debug( "WaitForElementPresenceAndVisible::Enter" );
     this.log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
@@ -763,7 +753,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
           // Wait for element visible
           this.theElement = wait.until( new Function<WebDriver, WebElement>() {
@@ -821,8 +811,8 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to check if the element is present, if it doesn't
-   * we wait for presence for a specific timeout (30 seconds).
+   * This method pretends to check if the element is present, if it doesn't we wait for presence for a specific timeout
+   * (30 seconds).
    *
    * @param driver
    * @param locator
@@ -835,8 +825,8 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to check if the element is present, if it doesn't
-   * we wait for presence for a specific timeout (30 seconds).
+   * This method pretends to check if the element is present, if it doesn't we wait for presence for a specific timeout
+   * (30 seconds).
    *
    * @param driver
    * @param locator
@@ -849,8 +839,8 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to check if the element is present, if it doesn't
-   * we wait for presence for a specific timeout (input).
+   * This method pretends to check if the element is present, if it doesn't we wait for presence for a specific timeout
+   * (input).
    *
    * @param driver
    * @param locator
@@ -878,7 +868,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingtime, TimeUnit.MILLISECONDS );
+          Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingtime, TimeUnit.MILLISECONDS );
 
           // Wait for element visible
           this.theElement = wait.until( new Function<WebDriver, WebElement>() {
@@ -936,8 +926,8 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to check if the element is present, if it doesn't
-   * then don't wait, if element is present, wait for its invisibility.
+   * This method pretends to check if the element is present, if it doesn't then don't wait, if element is present, wait
+   * for its invisibility.
    *
    * @param driver
    * @param locator
@@ -948,7 +938,7 @@ public class ElementHelper {
 
     WebElement element = null;
     List<WebElement> elements = null;
-    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS ).ignoring( StaleElementReferenceException.class );
+    Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS ).ignoring( StaleElementReferenceException.class );
 
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
@@ -975,12 +965,11 @@ public class ElementHelper {
   }
 
   /**
-   * This method check if the element is present, if don't waits for it.
-   * And then returns the textContent.
-   * The max timeout set for this function is 5 seconds.
+   * This method check if the element is present, if don't waits for it. And then returns the textContent. The max
+   * timeout set for this function is 5 seconds.
    *
-   * NOTE - the method was created to help on the tool tips, when mouse over an
-   * element and we want to read the elements.
+   * NOTE - the method was created to help on the tool tips, when mouse over an element and we want to read the
+   * elements.
    *
    * @param driver
    * @param locator
@@ -1056,8 +1045,8 @@ public class ElementHelper {
   }
 
   /**
-   * This method intends to check if two elements overlap or are contained inside each other, returns true if
-   * elements don't overlap.
+   * This method intends to check if two elements overlap or are contained inside each other, returns true if elements
+   * don't overlap.
    *
    * @param driver
    * @param element1
@@ -1096,16 +1085,15 @@ public class ElementHelper {
   }
 
   /**
-   * This function shall wait for the new window display.
-   * The code check if there is more than one window in the list. In the
-   * beginning we only have the main window.
+   * This function shall wait for the new window display. The code check if there is more than one window in the list.
+   * In the beginning we only have the main window.
    *
    * @param driver
    */
   public void WaitForNewWindow( WebDriver driver ) {
     this.log.debug( "WaitForNewWindow::Enter" );
 
-    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 500, TimeUnit.MILLISECONDS );
+    Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 500, TimeUnit.MILLISECONDS );
 
     wait.until( new ExpectedCondition<Boolean>() {
 
@@ -1119,15 +1107,14 @@ public class ElementHelper {
   }
 
   /**
-   * This function shall wait for the alert window to be closed or doesn't
-   * exist.
+   * This function shall wait for the alert window to be closed or doesn't exist.
    *
    * @param driver
    */
   public void WaitForAlertNotPresent( WebDriver driver ) {
     this.log.debug( "WaitForAlertNotPresent::Enter" );
 
-    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 100, TimeUnit.MILLISECONDS );
+    Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 100, TimeUnit.MILLISECONDS );
 
     wait.until( new ExpectedCondition<Boolean>() {
 
@@ -1139,6 +1126,7 @@ public class ElementHelper {
           alertExist = true;
         } catch ( NoAlertPresentException e ) {
           // Ignore the exception
+          e.printStackTrace();
         }
         return alertExist != true;
       }
@@ -1148,9 +1136,8 @@ public class ElementHelper {
   }
 
   /**
-   * The method will wait for the frame to be available to usage. To ensure that
-   * we check if an element exist inside (example a new element that refresh the
-   * frame).
+   * The method will wait for the frame to be available to usage. To ensure that we check if an element exist inside
+   * (example a new element that refresh the frame).
    *
    * @param driver
    * @param locator
@@ -1159,7 +1146,7 @@ public class ElementHelper {
     this.log.debug( "WaitForFrameReady::Enter" );
     this.log.debug( "Locator: " + locator.toString() );
 
-    Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 100, TimeUnit.MILLISECONDS );
+    Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 100, TimeUnit.MILLISECONDS );
 
     wait.until( new ExpectedCondition<Boolean>() {
 
@@ -1198,7 +1185,7 @@ public class ElementHelper {
         this.log.warn( "Element is null - could not get attribute value!" );
       }
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       attributeValue = GetAttribute( driver, locator, attributeName );
     }
 
@@ -1207,13 +1194,13 @@ public class ElementHelper {
   }
 
   /**
-  *
-  *
-  * @param driver
-  * @param locator
-  * @param attributeName
-  * @return
-  */
+   *
+   *
+   * @param driver
+   * @param locator
+   * @param attributeName
+   * @return
+   */
   public String GetAttribute( WebDriver driver, By locator, String attributeName, Integer timeout ) {
     this.log.debug( "GetAttribute::Enter" );
 
@@ -1226,7 +1213,7 @@ public class ElementHelper {
         this.log.warn( "Element is null - could not get attribute value!" );
       }
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       attributeValue = GetAttribute( driver, locator, attributeName );
     }
 
@@ -1235,8 +1222,7 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to assert the element is not present and return a
-   * boolean = true if it isn't.
+   * This method pretends to assert the element is not present and return a boolean = true if it isn't.
    *
    * @param driver
    * @param locator
@@ -1250,8 +1236,8 @@ public class ElementHelper {
   }
 
   /**
-   * This method pretends to assert the element is not present and return a
-   * boolean = true if it isn't. This method also allow user to set a specify timeout.
+   * This method pretends to assert the element is not present and return a boolean = true if it isn't. This method also
+   * allow user to set a specify timeout.
    *
    * @param driver
    * @param locator
@@ -1280,7 +1266,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
           // Wait for element visible
           this.NotPresent = wait.until( new Function<WebDriver, Boolean>() {
@@ -1334,13 +1320,13 @@ public class ElementHelper {
   }
 
   /**
-   * The method pretends to wait for an element reach the expected attribute
-   * value. The default timeout is 30 seconds.
+   * The method pretends to wait for an element reach the expected attribute value. The default timeout is 30 seconds.
    *
    * @param driver
    * @param locator
    * @param attributeName
-   * @param attributeValue - attribute value to wait.
+   * @param attributeValue
+   *          - attribute value to wait.
    */
   public void WaitForAttributeValue( final WebDriver driver, final By locator, final String attributeName,
       final String attributeValue ) {
@@ -1350,13 +1336,13 @@ public class ElementHelper {
   }
 
   /**
-   * The method pretends to wait for an element reach the expected attribute
-   * value, specifying a timeout.
+   * The method pretends to wait for an element reach the expected attribute value, specifying a timeout.
    *
    * @param driver
    * @param locator
    * @param attributeName
-   * @param attributeValue - attribute value to wait.
+   * @param attributeValue
+   *          - attribute value to wait.
    */
   public void WaitForAttributeValue( final WebDriver driver, final By locator, final String attributeName,
       final String attributeValue, final Integer timeout ) {
@@ -1373,7 +1359,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
           // Wait for element visible
           wait.until( new Function<WebDriver, Boolean>() {
@@ -1428,13 +1414,13 @@ public class ElementHelper {
   }
 
   /**
-   * The method pretends to wait for an element reach the expected attribute
-   * value. The default timeout is 30 seconds.
+   * The method pretends to wait for an element reach the expected attribute value. The default timeout is 30 seconds.
    *
    * @param driver
    * @param locator
    * @param attributeName
-   * @param attributeValue - attribute value to wait.
+   * @param attributeValue
+   *          - attribute value to wait.
    */
   public void WaitForAttributeValueEqualsTo( final WebDriver driver, final By locator, final String attributeName,
       final String attributeValue ) {
@@ -1444,13 +1430,13 @@ public class ElementHelper {
   }
 
   /**
-   * The method pretends to wait for an element reach the expected attribute
-   * value, specifying a timeout.
+   * The method pretends to wait for an element reach the expected attribute value, specifying a timeout.
    *
    * @param driver
    * @param locator
    * @param attributeName
-   * @param attributeValue - attribute value to wait.
+   * @param attributeValue
+   *          - attribute value to wait.
    */
   public void WaitForAttributeValueEqualsTo( final WebDriver driver, final By locator, final String attributeName,
       final String attributeValue, final Integer timeout ) {
@@ -1467,7 +1453,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
           // Wait for element visible
           wait.until( new Function<WebDriver, Boolean>() {
@@ -1540,7 +1526,7 @@ public class ElementHelper {
         this.log.error( "Element is null!" );
       }
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       ClickAndSendKeys( driver, locator, keysToSend );
     }
     this.log.debug( "ClickAndSendKeys::Exit" );
@@ -1564,7 +1550,7 @@ public class ElementHelper {
         this.log.error( "Element is null!" );
       }
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       SendKeys( driver, locator, keysToSend );
     }
     this.log.debug( "SendKeys::Exit" );
@@ -1590,15 +1576,14 @@ public class ElementHelper {
         this.log.error( "Element is null!" );
       }
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       SendKeysAndSubmit( driver, locator, keysToSend );
     }
     this.log.debug( "SendKeysAndSubmit::Exit" );
   }
 
   /**
-   * This method find the element and clear the contents in the element 
-   * (input or textarea).
+   * This method find the element and clear the contents in the element (input or textarea).
    * 
    * @param driver
    * @param locator
@@ -1614,7 +1599,7 @@ public class ElementHelper {
         this.log.error( "Element is null!" );
       }
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       Clear( driver, locator );
     }
     this.log.debug( "SendKeys::Exit" );
@@ -1639,7 +1624,7 @@ public class ElementHelper {
         this.log.error( "Element is null!" );
       }
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       SendKeys( driver, locator, keysToSend );
     }
     this.log.debug( "ClearAndSendKeys::Exit" );
@@ -1665,15 +1650,15 @@ public class ElementHelper {
         this.log.warn( "The element does not exist [null]. Could perform the select action!" );
       }
     } catch ( StaleElementReferenceException e ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", e );
       SelectByValue( driver, locator, value );
     }
     this.log.debug( "SelectByValue::Exit" );
   }
 
   /**
-   * This method shall perform the MoveToElement wrap function of WebDriver.
-   * We have to do this wrap to avoid StaleElement exceptions.
+   * This method shall perform the MoveToElement wrap function of WebDriver. We have to do this wrap to avoid
+   * StaleElement exceptions.
    * 
    * @param driver
    * @param toLocator
@@ -1697,8 +1682,8 @@ public class ElementHelper {
   }
 
   /**
-   * This method shall perform the MoveToElement wrap function of WebDriver.
-   * We have to do this wrap to avoid StaleElement exceptions.
+   * This method shall perform the MoveToElement wrap function of WebDriver. We have to do this wrap to avoid
+   * StaleElement exceptions.
    * 
    * @param driver
    * @param toLocator
@@ -1724,8 +1709,7 @@ public class ElementHelper {
   }
 
   /**
-   * The method shall move mouse over the element and fire the event
-   * onclick when clicking on the element.
+   * The method shall move mouse over the element and fire the event onclick when clicking on the element.
    * 
    * @param driver
    * @param locator
@@ -1785,7 +1769,7 @@ public class ElementHelper {
 
         @Override
         public Alert call() {
-          Wait<WebDriver> wait = new FluentWait<WebDriver>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
+          Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
 
           return wait.until( new Function<WebDriver, Alert>() {
 
@@ -1794,6 +1778,7 @@ public class ElementHelper {
               try {
                 return driver.switchTo().alert();
               } catch ( NoAlertPresentException e ) {
+                e.printStackTrace();
                 return null;
               }
             }
@@ -1833,8 +1818,8 @@ public class ElementHelper {
   /**
    * This method shall select a new window that has opened and return the handle for the parent window.
    * 
-   * The handle should be stored in a string so we can go back to the parent window afterwards
-   * using the SelectParentWindow method
+   * The handle should be stored in a string so we can go back to the parent window afterwards using the
+   * SelectParentWindow method
    * 
    * @param driver
    * @return parentWindow
@@ -1870,4 +1855,114 @@ public class ElementHelper {
     previewWindow.close();
     driver.switchTo().window( parentWindow );
   }
+
+  /**
+   * This method works as a wrapper for findElements method of WebDriver. So, in same cases, we may have the issue
+   * 'Stale Element Reference', i.e., the element is not ready in DOM. Hence, to prevent exception, we develop a
+   * function that is the same of findElement but avoid this exception.
+   *
+   * @param driver
+   * @param locator
+   * @return
+   */
+  public List<WebElement> FindElements( final WebDriver driver, final By locator ) {
+    this.log.debug( "FindElement::Enter" );
+    List<WebElement> elements = WaitForElementsPresenceAndVisible( driver, locator, 30 );
+    this.log.debug( "FindElement::Exit" );
+    return elements;
+  }
+
+  /**
+   * This method pretends to check if a list of elements is present, if it doesn't we wait for presence for a specific
+   * timeout (input), after this, we will wait for elementa visible. And, if any elements is present then we have to
+   * check if is visible if not wait for visibility.
+   *
+   * @param driver
+   * @param locator
+   * @param timeout
+   */
+  public List<WebElement> WaitForElementsPresenceAndVisible( final WebDriver driver, final By locator,
+      final Integer timeout ) {
+    this.log.debug( "WaitForElementPresenceAndVisible::Enter" );
+    this.log.debug( "Locator: " + locator.toString() );
+    List<WebElement> elements = null;
+    ExecutorService executor = null;
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+
+    try {
+
+      class RunnableObject implements Runnable {
+
+        private List<WebElement> theElements;
+
+        public RunnableObject( List<WebElement> theElements ) {
+          this.theElements = theElements;
+        }
+
+        public List<WebElement> getValue() {
+          return this.theElements;
+        }
+
+        @Override
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+
+          // Wait for element visible
+          this.theElements = wait.until( new Function<WebDriver, List<WebElement>>() {
+
+            @Override
+            public List<WebElement> apply( WebDriver d ) {
+              try {
+                List<WebElement> elems = d.findElements( locator );
+
+                for ( int i = 0; i < elems.size(); i++ ) {
+                  WebElement elem = elems.get( i );
+
+                  if ( elem != null && ( ( elem.isEnabled() ) && ( elem.isDisplayed() ) ) ) {
+                    continue;
+                  }
+                  elems.remove( i );
+                  i--;
+                }
+                return elems;
+              } catch ( StaleElementReferenceException sere ) {
+                return null;
+              }
+            }
+          } );
+        }
+      }
+
+      RunnableObject r = new RunnableObject( elements );
+      executor = Executors.newSingleThreadExecutor();
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
+      elements = r.getValue();
+    } catch ( InterruptedException ie ) {
+      this.log.warn( "Interrupted Exception" );
+      this.log.warn( ie.toString() );
+    } catch ( ExecutionException ee ) {
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
+        this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+      } else {
+        this.log.warn( "Execution Exception" );
+        this.log.warn( ee.toString() );
+      }
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      this.log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      this.log.warn( cte.toString() );
+    } catch ( Exception e ) {
+      this.log.error( "Exception" );
+      this.log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
+    }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+    this.log.debug( "WaitForElementPresenceAndVisible::Exit" );
+    return elements;
+  }
+
 }

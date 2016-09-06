@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -22,7 +22,9 @@
 package com.pentaho.ctools.cgg;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -72,8 +74,10 @@ public class BarChart extends BaseTest {
     String attrHeight = elementImage.getAttribute( "height" );
     String attrSrc = elementImage.getAttribute( "src" );
 
-    assertEquals( "852", attrWidth );
-    assertEquals( "637", attrHeight );
-    assertEquals( PageUrl.BAR_CHART, attrSrc );
+    assertFalse( attrWidth.isEmpty() );
+    assertFalse( attrHeight.isEmpty() );
+    assertTrue( ( Integer.parseInt( attrWidth ) > 800 ) ? true : false, "the number " + attrWidth );
+    assertTrue( ( Integer.parseInt( attrHeight ) > 600 ) ? true : false, "the number " + attrHeight );
+    assertEquals( attrSrc, PageUrl.BAR_CHART );
   }
 }

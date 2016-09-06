@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -219,6 +219,7 @@ public class CDA99 extends BaseTest {
       String value = this.elemHelper.GetInputValue( this.previewWindow, By.id( "status" ) );
       assertEquals( "In Process", value );
     } catch ( NoSuchElementException see ) {
+      this.log.warn( see );
       selectNotExist = true;
     }
 

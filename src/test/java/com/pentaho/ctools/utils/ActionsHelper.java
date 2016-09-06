@@ -2,7 +2,7 @@
  *
  * Selenium Tests For CTools
  *
- * Copyright (C) 2002-2015 by Pentaho : http://www.pentaho.com
+ * Copyright (C) 2002-2016 by Pentaho : http://www.pentaho.com
  *
  *******************************************************************************
  *
@@ -59,7 +59,7 @@ public class ActionsHelper extends Actions {
       this.moveToElement( element );
       this.perform();
     } catch ( StaleElementReferenceException sere ) {
-      this.log.warn( "Stale Element Reference Exception" );
+      this.log.warn( "Stale Element Reference Exception", sere );
       this.MouseOver( locator );
     }
   }

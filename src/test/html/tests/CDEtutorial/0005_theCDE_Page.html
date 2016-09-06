@@ -16,41 +16,180 @@
 	<td>60000</td>
 	<td></td>
 </tr>
+<!--Open "01-welcome"-->
 <tr>
 	<td>open</td>
-	<td>pentaho/api/repos/:public:ctools-samples:Dashboards:the_cde_interface.wcdf/generatedContent</td>
+	<td>pentaho/Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.custom-dropdown-label</td>
+	<td>Home</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//button[contains(text(),'Browse Files')]</td>
+	<td>Browse Files</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[contains(text(),'Browse Files')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;fileBrowser&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//div[@id=&quot;fileBrowser&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFolders']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserFiles']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='fileBrowserButtons']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>css=div.blockUI.blockOverlay</td>
+	<td>//div[@class='spinner large-spinner']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='spinner large-spinner'][2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Public')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'Webdetails Doc')]/../div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Tutorial')]</td>
+	<td>CDE Tutorial</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserFolders&quot;]//div[contains(text(),'CDE Tutorial')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//*[@PATH=&quot;/public/ctools-samples/CDE Tutorial/01-welcome.wcdf&quot;]/div[contains(text(),'01-welcome')]</td>
+	<td>01-welcome</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//*[@PATH=&quot;/public/ctools-samples/CDE Tutorial/01-welcome.wcdf&quot;]/div[contains(text(),'01-welcome')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;fileBrowserButtons&quot;]/div/button</td>
+	<td>Open</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id= &quot;fileBrowserButtons&quot;]/div/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=//div[@class='busy-indicator-container waitPopup']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>xpath=//div[@class='busy-indicator-container waitPopup']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id= &quot;mainContent&quot;]/h1</td>
+	<td>Welcome</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id= &quot;mainContent&quot;]/h1</td>
+	<td>Welcome</td>
+</tr>
+<!--END Open "01-welcome"-->
+<!--Open 2. The CDE Interface-->
+<tr>
+	<td>assertText</td>
+	<td>//*[@id='sideMenu']/ul/a[2]/li</td>
+	<td>2. The CDE Interface</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//*[@id='sideMenu']/ul/a[2]/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
+	<td>The CDE Interface</td>
 </tr>
 <!--Verificar Textos-->
 <tr>
 	<td>assertText</td>
-	<td>css=h2</td>
+	<td>//*[@id='mainContent']/h1/text()</td>
 	<td>The CDE Interface</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>css=h3</td>
-	<td>The Layout Section</td>
+	<td>//*[@id='headingOne']/a/h4</td>
+	<td>The Layout Perspective</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//h3[2]</td>
-	<td>The Components Section</td>
+	<td>//*[@id='headingTwo']/a/h4</td>
+	<td>The Components Perspective</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//h3[3]</td>
-	<td>The Data Sources Section</td>
+	<td>//*[@id='headingThree']/a/h4</td>
+	<td>The Datasources Perspective</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[5]/div/h3</td>
-	<td>Putting it all together: Layout, Components and Data Sources</td>
+	<td>//*[@id='mainContent']/h2</td>
+	<td>Layout, Components and Datasources</td>
+</tr>
+<!--Open The Layout Perspective div-->
+<tr>
+	<td>click</td>
+	<td>//*[@id='headingOne']/a</td>
+	<td></td>
 </tr>
 <!--Verificar Imagens-->
 <tr>
