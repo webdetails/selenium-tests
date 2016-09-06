@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title/>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs/>
+
+  <outputs>
+    <output type="result-set">
+      <destinations>
+        <runtime>output</runtime>
+      </destinations>
+    </output>
+  </outputs>
+
+  <resources>
+    <transformation-file>
+      <file>
+        <location>/public/ktr_from_xaction.ktr</location>
+        <mime-type>text/plain</mime-type>
+      </file>
+    </transformation-file>
+  </resources>
+  
+  <actions> 
+    <action-definition>
+      <component-name>KettleComponent</component-name>
+      <action-type>Pentaho Data Integration</action-type>
+      <action-resources>
+        <transformation-file type="resource"/>
+      </action-resources>
+      <action-outputs>
+        <transformation-output-rows type="result-set" mapping="output"/>
+      </action-outputs>
+      <component-definition>
+        <kettle-logging-level><![CDATA[basic]]></kettle-logging-level>
+        <monitor-step><![CDATA[sample]]></monitor-step>
+      </component-definition>
+    </action-definition>
+
+  </actions> 
+</action-sequence>
