@@ -994,7 +994,7 @@ public class ElementHelper {
         text = WaitForElementPresentGetText( driver, locator );
       }
     } else {
-      this.log.warn( "Element does not exist! [null eleemnt]" );
+      this.log.warn( "Element does not exist! [null element]" );
     }
 
     this.log.debug( "WaitForElementPresentGetText::Exit" );

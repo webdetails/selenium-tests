@@ -86,13 +86,11 @@ public class JFreeChartComponent extends BaseTest {
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
     // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath(
-        "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
     assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "jFreeChartComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath(
-        "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( "jFreeChartComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -210,28 +208,22 @@ public class JFreeChartComponent extends BaseTest {
 
     // ## Step 1
     // Check bar title
-    this.elemHelper.Click( driver, By.xpath( "//div[@class='caption-details']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-        "margin: -42px", 3 );
+    this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[@class='caption-details']" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: -42px", 3 );
     title = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "sampleObjectcaptiontitle" ) );
     assertTrue( title.equals( "Top 10 Customers" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px",
-        10 );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 10 );
     // Check the bar is visible
-    this.elemHelper.Click( driver, By.xpath( "//div[@class='caption-details']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-        "margin: -42px", 3 );
+    this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[@class='caption-details']" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: -42px", 3 );
     attriStyle = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='caption-bottom']" ), "style" );
     assertTrue( attriStyle.contains( "margin: -42px" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px",
-        10 );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 10 );
     // Click in Zoom
-    this.elemHelper.Click( driver, By.xpath( "//div[@class='caption-details']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-        "margin: -42px", 3 );
+    this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[@class='caption-details']" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: -42px", 3 );
     this.elemHelper.Click( driver, By.xpath( "//div[@id='sampleObjectcaptionzoom']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px",
-        10 );
+    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 10 );
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
@@ -262,37 +254,29 @@ public class JFreeChartComponent extends BaseTest {
 
       // ## Step 2
       // Change to pie chart
-      this.elemHelper.Click( driver, By.xpath( "//div[@class='caption-details']" ) );
-      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-          "margin: -42px", 3 );
+      this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[@class='caption-details']" ) );
+      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: -42px", 3 );
       this.elemHelper.Click( driver, By.xpath( "//div[@id='sampleObjectcaptionchartType']" ) );
-      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-          "margin: 0px", 3 );
+      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 3 );
       // NOTE - we have to wait for loading disappear
       this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
       // Check bar title
-      this.elemHelper.Click( driver, By.xpath( "//div[@class='caption-details']" ) );
-      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-          "margin: -42px", 3 );
+      this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[@class='caption-details']" ) );
+      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: -42px", 3 );
       title = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "sampleObjectcaptiontitle" ) );
       assertTrue( title.equals( "Top 10 Customers" ) );
-      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-          "margin: 0px", 3 );
+      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 3 );
       // Check bar is visible
-      this.elemHelper.Click( driver, By.xpath( "//div[@class='caption-details']" ) );
-      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-          "margin: -42px", 3 );
+      this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[@class='caption-details']" ) );
+      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: -42px", 3 );
       attriStyle = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@class='caption-bottom']" ), "style" );
       assertTrue( attriStyle.contains( "margin: -42px" ) );
-      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-          "margin: 0px", 3 );
+      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 3 );
       // Zoom
-      this.elemHelper.Click( driver, By.xpath( "//div[@class='caption-details']" ) );
-      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-          "margin: -42px", 3 );
+      this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[@class='caption-details']" ) );
+      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: -42px", 3 );
       this.elemHelper.Click( driver, By.xpath( "//div[@id='sampleObjectcaptionzoom']" ) );
-      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style",
-          "margin: 0px", 3 );
+      this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@class='caption-bottom']" ), "style", "margin: 0px", 3 );
       // NOTE - we have to wait for loading disappear
       this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
