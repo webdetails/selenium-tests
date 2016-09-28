@@ -125,6 +125,10 @@ public class TemplateComponent extends BaseTest {
    */
   @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
+
+    // Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     // ## Step 1
     // Render again the sample
     this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
