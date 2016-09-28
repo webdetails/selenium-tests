@@ -366,7 +366,15 @@ public class MondrianJNDI extends BaseTest {
 
       // Check if file was download
       boolean fileExist = new File( downloadDir + "\\cda-export.xls" ).exists();
+      if ( fileExist == false ) {
+        // >> Retrying to download the file again
+        this.elemHelper.MouseOverElementAndClick( driver, By.cssSelector( "button#export.cdaButton" ) );
 
+        // Wait for file to be created in the destination dir
+        dw.WatchForCreate( downloadDir );
+
+        fileExist = new File( downloadDir + "\\cda-export.xls" ).exists();
+      }
       assertTrue( fileExist );
 
       new File( downloadDir + "\\cda-export.xls" ).delete();
