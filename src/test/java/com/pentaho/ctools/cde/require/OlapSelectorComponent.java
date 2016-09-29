@@ -111,7 +111,7 @@ public class OlapSelectorComponent extends BaseTest {
     applyButton.click();
     this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
     String selectedCustomers = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "columnLabel" ) );
-    String expectedCustomers = "[\"[Customers].[" + firstName + "]\"\"[Customers].[" + secondName + "]\"\"[Customers].[" + thirdName + "]\"]";
+    String expectedCustomers = "[\"[Customers].[" + firstName + "]\" \"[Customers].[" + secondName + "]\" \"[Customers].[" + thirdName + "]\"]";
     assertEquals( expectedCustomers, selectedCustomers );
   }
 }

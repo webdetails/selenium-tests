@@ -140,6 +140,8 @@ public class ExportPopupComponent extends BaseTest {
     //Click to Export to PNG
     WebElement exportPNG = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='ChartExportPNGExporting']/div" ) );
     assertNotNull( exportPNG );
+    // Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
     exportPNG.click();
     WebElement linkExport = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.exportElement" ) );
     assertNotNull( linkExport );
