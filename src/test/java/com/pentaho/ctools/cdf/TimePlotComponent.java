@@ -151,7 +151,7 @@ public class TimePlotComponent extends BaseTest {
      * ## Step 1
      */
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sampleObject']/div/span" ) );
-    assertEquals( "Total order income", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/span" ) ) );
+    assertEquals( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/span" ) ), "total order income" );
     assertEquals( "Total Price", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) ) );
 
     WebElement element2004 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[contains(text(), '2004')]" ) );
