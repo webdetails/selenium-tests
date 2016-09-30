@@ -163,7 +163,7 @@ public class TimePlotComponent extends BaseTest {
      */
     WebElement sampleObj = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sampleObject']/div/span" ) );
     assertNotNull( sampleObj );
-    assertEquals( "Total order income", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/span" ) ) );
+    assertEquals( "total order income", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/span" ) ) );
     assertEquals( "Total Price", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/span[2]" ) ) );
 
     WebElement element2004 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[contains(text(), '2004')]" ) );
