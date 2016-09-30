@@ -254,7 +254,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ====================================================================-->
 	<target name="compile" depends="resolve-test-java">
 		<mkdir dir="${classes.dir}" />
-		<javac srcdir="${src.java.dir};${src.test.java.dir}" destdir="${classes.dir}" fork="yes" debug="true" includeAntRuntime="false" classpathref="test.java.classpath" nowarn="true">
+		<javac srcdir="${src.java.dir};${src.test.java.dir}" destdir="${classes.dir}" fork="yes" debug="true" includeAntRuntime="false" classpathref="test.java.classpath" nowarn="true" encoding="UTF-8">
 			<!--<compilerarg value="-Xlint"/>-->
 		</javac>
 	</target>
