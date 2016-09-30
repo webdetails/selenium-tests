@@ -299,7 +299,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 		<testng classpathref="test.java.classpath" outputdir="${test.java.reports.dir}">
 			<!-- The JVM arg is need to configure the logging system -->
-			<jvmarg value="-Dfile.encoding=UTF-8 -Dlog4j.configurationFile=./log4j2.xml" />
+			<jvmarg value="-Dlog4j.configurationFile=./log4j2.xml" />
 			<propertyset refid="testng-pentaho-settings-id" />
 			<xmlfileset dir="${src.test.suite.dir}" includes="${test.testng.suite.file}" />
 		</testng>
