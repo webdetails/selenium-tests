@@ -17,8 +17,9 @@
 			<class name="com.pentaho.ctools.cdf.CheckComponent" />
 			<class name="com.pentaho.ctools.cdf.CommentComponent" />
 			<class name="com.pentaho.ctools.cdf.DateInputComponent" />
-			<class name="com.pentaho.ctools.cdf.DateRangeInputComponent" >
+			<class name="com.pentaho.ctools.cdf.DateRangeInputComponent">
 				<methods>
+					<!-- http://jira.pentaho.com/browse/CDF-928 -->
 					<exclude name="tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful" />
 				</methods>
 			</class>
@@ -26,8 +27,9 @@
 			<class name="com.pentaho.ctools.cdf.ExecutePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.ExecuteXactionComponent" />
 			<class name="com.pentaho.ctools.cdf.JFreeChartComponent" />
-			<class name="com.pentaho.ctools.cdf.MetaLayerHomeDashboard" >
+			<class name="com.pentaho.ctools.cdf.MetaLayerHomeDashboard">
 				<methods>
+					<!-- http://jira.pentaho.com/browse/CDF-925 -->
 					<exclude name="tc1_LinkDetails_PopupJPivot" />
 				</methods>
 			</class>
@@ -46,8 +48,9 @@
 			<class name="com.pentaho.ctools.cdf.TextInputComponent" />
 			<class name="com.pentaho.ctools.cdf.TimePlotComponent" />
 			<class name="com.pentaho.ctools.cdf.TrafficComponent" />
-			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" >
+			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent">
 				<methods>
+					<!-- http://jira.pentaho.com/browse/BACKLOG-9820 -->
 					<exclude name="tc3_MaxNumber_PresentCorrectValue" />
 					<exclude name="tc4_MinNumber_PresentCorrectValue" />
 					<exclude name="tc5_AvgNumber_PresentCorrectValue" />
@@ -60,26 +63,23 @@
 			<class name="com.pentaho.ctools.cde.reference.AddinReference" />
 			<class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />
 			<class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
-			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" >
-				<methods>
-					<exclude name="tc01_ChartContent_DisplayedCorrect" />
-				</methods>
-			</class>
+			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.reference.DuplicateComponent" />
 			<class name="com.pentaho.ctools.cde.reference.ExportPopupComponent" />
 			<class name="com.pentaho.ctools.cde.reference.FilterAddinAccordion" />
 			<class name="com.pentaho.ctools.cde.reference.FilterReference" />
 			<class name="com.pentaho.ctools.cde.reference.FilterVisualGuide" />
-			<!-- <class name="com.pentaho.ctools.cde.reference.MapComponentFullTest" />
-			<class name="com.pentaho.ctools.cde.reference.MapComponentReference" /> -->
+			<!-- <class name="com.pentaho.ctools.cde.reference.MapComponentFullTest" 
+				/> <class name="com.pentaho.ctools.cde.reference.MapComponentReference" /> -->
 			<class name="com.pentaho.ctools.cde.reference.OlapSelectorComponent" />
 			<class name="com.pentaho.ctools.cde.reference.PopupComponent" />
 			<class name="com.pentaho.ctools.cde.reference.WidgetReference" />
 			<!-- CDA -->
 			<class name="com.pentaho.ctools.cda.CDADatasourceTest" />
-			<class name="com.pentaho.ctools.cda.MondrianJNDI" >
+			<class name="com.pentaho.ctools.cda.MondrianJNDI">
 				<methods>
+					<!-- http://jira.pentaho.com/browse/CDA-199 -->
 					<exclude name="tc3_ExportXls_FileDownload" />
 				</methods>
 			</class>
@@ -94,8 +94,9 @@
 			<class name="com.pentaho.ctools.cdf.require.CheckComponent" />
 			<class name="com.pentaho.ctools.cdf.require.CommentComponent" />
 			<class name="com.pentaho.ctools.cdf.require.DateInputComponent" />
-			<class name="com.pentaho.ctools.cdf.require.DateRangeInputComponent" >
+			<class name="com.pentaho.ctools.cdf.require.DateRangeInputComponent">
 				<methods>
+					<!-- http://jira.pentaho.com/browse/CDF-928 -->
 					<exclude name="tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful" />
 				</methods>
 			</class>
@@ -103,8 +104,9 @@
 			<class name="com.pentaho.ctools.cdf.require.ExecutePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.require.ExecuteXactionComponent" />
 			<class name="com.pentaho.ctools.cdf.require.JFreeChartComponent" />
-			<class name="com.pentaho.ctools.cdf.MetaLayerHomeDashboard" >
+			<class name="com.pentaho.ctools.cdf.MetaLayerHomeDashboard">
 				<methods>
+					<!-- http://jira.pentaho.com/browse/CDF-925 -->
 					<exclude name="tc1_LinkDetails_PopupJPivot" />
 				</methods>
 			</class>
@@ -124,8 +126,9 @@
 			<class name="com.pentaho.ctools.cdf.require.TextInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.TimePlotComponent" />
 			<class name="com.pentaho.ctools.cdf.require.TrafficComponent" />
-			<class name="com.pentaho.ctools.cdf.require.VisualizationAPIComponent" >
+			<class name="com.pentaho.ctools.cdf.require.VisualizationAPIComponent">
 				<methods>
+				    <!-- http://jira.pentaho.com/browse/BACKLOG-9820 -->
 					<exclude name="tc3_MaxNumber_PresentCorrectValue" />
 					<exclude name="tc4_MinNumber_PresentCorrectValue" />
 					<exclude name="tc5_AvgNumber_PresentCorrectValue" />
@@ -138,11 +141,7 @@
 			<class name="com.pentaho.ctools.cde.require.AddinReference" />
 			<class name="com.pentaho.ctools.cde.require.AddinReferenceEdit" />
 			<class name="com.pentaho.ctools.cde.require.AjaxRequestReference" />
-			<class name="com.pentaho.ctools.cde.require.BulletChartTestCase" >
-				<methods>
-					<exclude name="tc01_ChartContent_DisplayedCorrect" />
-				</methods>
-			</class>
+			<class name="com.pentaho.ctools.cde.require.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.require.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.require.DashboardModuleComponent" />
 			<class name="com.pentaho.ctools.cde.require.DuplicateComponent" />
@@ -150,8 +149,8 @@
 			<class name="com.pentaho.ctools.cde.require.FilterAddinAccordion" />
 			<class name="com.pentaho.ctools.cde.require.FilterReference" />
 			<class name="com.pentaho.ctools.cde.require.FilterVisualGuide" />
-			<!-- <class name="com.pentaho.ctools.cde.require.MapComponentFullTest" />
-			<class name="com.pentaho.ctools.cde.require.MapComponentReference" />-->
+			<!-- <class name="com.pentaho.ctools.cde.require.MapComponentFullTest" 
+				/> <class name="com.pentaho.ctools.cde.require.MapComponentReference" /> -->
 			<class name="com.pentaho.ctools.cde.require.OlapSelectorComponent" />
 			<class name="com.pentaho.ctools.cde.require.PopupComponent" />
 			<!-- Security -->
