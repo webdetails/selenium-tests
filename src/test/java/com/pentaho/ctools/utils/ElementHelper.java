@@ -547,6 +547,12 @@ public class ElementHelper {
 			this.log.warn( "Web Driver Exception", wde );
 			if ( this.clickRetry > 0 ) {
 				this.clickRetry--;
+				try {
+					// Delay 100 ms for page loading or any other dom element loaded
+					Thread.sleep( 100 );
+				} catch ( InterruptedException ie ) {
+					this.log.error( "InterruptedException", ie );
+				}
 				Click( driver, locator );
 				this.clickRetry = RETRY_15;
 			}
