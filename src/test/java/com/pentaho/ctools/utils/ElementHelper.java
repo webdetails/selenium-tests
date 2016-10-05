@@ -53,9 +53,12 @@ import org.openqa.selenium.support.ui.Wait;
 import com.google.common.base.Function;
 
 public class ElementHelper {
-
+	// Retry
+	private final static int RETRY_15 = 15;
 	// Log instance
 	private final Logger log = LogManager.getLogger( ElementHelper.class );
+	// Counter for number of retries
+	private int clickRetry = RETRY_15;
 
 	/**
 	 * This method shall wait for the title and return it.
@@ -540,6 +543,13 @@ public class ElementHelper {
 		} catch ( StaleElementReferenceException e ) {
 			this.log.warn( "Stale Element Reference Exception", e );
 			Click( driver, locator );
+		} catch ( WebDriverException wde ) {
+			this.log.warn( "Web Driver Exception", wde );
+			if ( this.clickRetry > 0 ) {
+				this.clickRetry--;
+				Click( driver, locator );
+				this.clickRetry = RETRY_15;
+			}
 		}
 	}
 

@@ -38,35 +38,36 @@ import com.pentaho.selenium.BaseTest;
 
 public class ScreenshotListener extends TestListenerAdapter {
 
-  private final Logger log = LogManager.getLogger( ScreenshotListener.class );
+	private final Logger log = LogManager.getLogger( ScreenshotListener.class );
 
-  @Override
-  public void onTestFailure( ITestResult failingTest ) {
-    try {
-      WebDriver driver = BaseTest.getDriver();
+	@Override
+	public void onTestFailure( ITestResult failingTest ) {
+		try {
+			WebDriver driver = BaseTest.getDriver();
 
-      final String className = failingTest.getInstanceName();
-      final String testCaseName = failingTest.getName();
-      final String dir = className.replace( ".", "/" ) + "/";
-      final String createDir = "reports-java/screenshots/" + dir;
+			final String className = failingTest.getInstanceName();
+			final String testCaseName = failingTest.getName();
+			final String dir = className.replace( ".", "/" ) + "/";
+			final String createDir = "reports-java/screenshots/" + dir;
 
-      new File( createDir ).mkdirs(); // Insure directory is there
+			new File( createDir ).mkdirs(); // Insure directory is there
 
-      try ( FileOutputStream out = new FileOutputStream( createDir + testCaseName + ".png" ) ) {
-        this.log.debug( "Class: " + className );
-        this.log.debug( "Test Case: " + testCaseName );
-        this.log.debug( "Exception: " + ( failingTest.getThrowable() != null ? failingTest.getThrowable().getMessage()
-            : "<no exception>" ) );
-        out.write( ( (TakesScreenshot) driver ).getScreenshotAs( OutputType.BYTES ) );
-      } catch ( final FileNotFoundException fnfe ) {
-        fnfe.printStackTrace();
-      } catch ( IOException ioe ) {
-        ioe.printStackTrace();
-      } catch ( final Exception e ) {
-        e.printStackTrace();
-      }
-    } catch ( Exception ex ) {
-      ex.printStackTrace();
-    }
-  }
+			try ( FileOutputStream out = new FileOutputStream( createDir + testCaseName + ".png" ) ) {
+				this.log.debug( "Class: " + className );
+				this.log.debug( "Test Case: " + testCaseName );
+				this.log.debug( "Exception: " + ( failingTest.getThrowable() != null
+				    ? "(Class)" + failingTest.getThrowable().getClass().getName() + "(Message)" + failingTest.getThrowable().getMessage()
+				    : "<no exception>" ) );
+				out.write( ( (TakesScreenshot) driver ).getScreenshotAs( OutputType.BYTES ) );
+			} catch ( final FileNotFoundException fnfe ) {
+				fnfe.printStackTrace();
+			} catch ( IOException ioe ) {
+				ioe.printStackTrace();
+			} catch ( final Exception e ) {
+				e.printStackTrace();
+			}
+		} catch ( Exception ex ) {
+			ex.printStackTrace();
+		}
+	}
 }
