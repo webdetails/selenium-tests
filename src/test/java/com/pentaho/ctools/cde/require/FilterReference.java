@@ -183,6 +183,6 @@ public class FilterReference extends BaseTest {
     selectedMultiString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "2 / 29", selectedMultiString );
     selectedMultiItem = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "txt_multiSelectionObj_group" ) );
-    assertEquals( selectedMultiItem, "Result: [\"[Zeroes].[Three]\",\"[Ones].[Thirteen]\"] Selected items: [Zeroes].[Three][Ones].[Thirteen]" );
+    assertEquals( selectedMultiItem, "Result: [\"[Zeroes].[Three]\",\"[Ones].[Thirteen]\"] Selected items: [Zeroes].[Three] [Ones].[Thirteen]" );
   }
 }

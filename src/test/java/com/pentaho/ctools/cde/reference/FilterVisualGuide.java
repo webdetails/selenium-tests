@@ -324,7 +324,9 @@ public class FilterVisualGuide extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//span[@class='filter-root-info-selected-items']" ) );
-    assertEquals( "50 / 1000", selectedString );
+    assertEquals( "All", selectedString );
+    this.elemHelper.ClickJS( driver, By.xpath( "//*[@id='mCSB_12_container']/div[@class='filter-root-items']//div[@class='filter-root-child'][1]/div[contains(@class,'filter-item-container')]//div[@class='filter-item-selection-icon']" ) );
+    selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//span[@class='filter-root-info-selected-items']" ) );
 
     /*
      * ## Step 6 - Advanced configuration

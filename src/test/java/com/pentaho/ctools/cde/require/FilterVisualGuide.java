@@ -318,7 +318,7 @@ public class FilterVisualGuide extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-body" ) ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//span[@class='filter-root-info-selected-items']" ) );
-    assertEquals( "50 / 1000", selectedString );
+    assertEquals( "All", selectedString );
 
     /*
      * ## Step 6
