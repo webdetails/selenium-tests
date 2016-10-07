@@ -193,7 +193,7 @@ public class PrptComponent extends BaseTest {
       String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "button.pentaho-button" ) );
       assertEquals( "View Report", buttonName );
     } else {
-      String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
+      String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button[contains(text(),'View Report')]" ) );
       assertEquals( "View Report", buttonName );
     }
     //Check the generated image
