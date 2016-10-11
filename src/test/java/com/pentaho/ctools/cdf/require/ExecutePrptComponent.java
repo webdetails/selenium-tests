@@ -15,12 +15,11 @@
  */
 package com.pentaho.ctools.cdf.require;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
-import java.io.File;
-
+import com.pentaho.ctools.utils.DirectoryWatcher;
+import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
+import com.pentaho.selenium.BaseTest;
+import com.pentaho.selenium.ConfigurationSettings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -30,11 +29,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.DirectoryWatcher;
-import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
-import com.pentaho.selenium.BaseTest;
-import com.pentaho.selenium.ConfigurationSettings;
+import java.io.File;
+
+import static org.testng.Assert.*;
 
 /**
  * Testing the functionalities related with Execute Prpt Component.
@@ -55,8 +52,7 @@ public class ExecutePrptComponent extends BaseTest {
    * Test Case Name:
    *    Open Sample Page
    */
-  @Test
-  public void tc0_OpenSamplePage_Display() {
+  @Test public void tc0_OpenSamplePage_Display() {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
     // The URL for the ExecutePrptComponent under CDF samples
@@ -78,8 +74,7 @@ public class ExecutePrptComponent extends BaseTest {
    * Steps:
    *    1. Check title web page and sample title.
    */
-  @Test
-  public void tc1_PageContent_DisplayTitle() {
+  @Test public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
     // Wait for title become visible and with value 'Community Dashboard Framework'
@@ -102,8 +97,7 @@ public class ExecutePrptComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
-  public void tc2_ReloadSample_SampleReadyToUse() {
+  @Test public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
     /*
@@ -140,8 +134,7 @@ public class ExecutePrptComponent extends BaseTest {
    * Steps:
    *    1. Check the contents presented
    */
-  @Test
-  public void tc3_CheckDisplayPage_DataIsDisplayedAsExpected() {
+  @Test public void tc3_CheckDisplayPage_DataIsDisplayedAsExpected() {
     this.log.info( "tc3_CheckDisplayPage_DataIsDisplayedAsExpected" );
 
     /*
@@ -176,7 +169,7 @@ public class ExecutePrptComponent extends BaseTest {
       String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "button.pentaho-button" ) );
       assertEquals( "View Report", buttonName );
     } else {
-      String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
+      String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button[contains(text(),'View Report')]" ) );
       assertEquals( "View Report", buttonName );
     }
     //Check the generated image
@@ -208,8 +201,7 @@ public class ExecutePrptComponent extends BaseTest {
    *    1. Enable prompt panel
    *    2. Disable prompt panel
    */
-  @Test
-  public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
+  @Test public void tc4_TogglePromptPanel_PromptPanelEnableDisable() {
     this.log.info( "tc4_TogglePromptPanel_PromptPanelEnableDisable" );
 
     driver.switchTo().defaultContent();
@@ -240,8 +232,7 @@ public class ExecutePrptComponent extends BaseTest {
    *    1. Disable Classic Cars and assert results
    *    2. Enable Motorcycles and assert results
    */
-  @Test
-  public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
+  @Test public void tc5_SelectSeveralProducts_ReportIsRefreshed() {
     this.log.info( "tc5_SelectSeveralProducts_ReportIsRefreshed" );
 
     driver.switchTo().defaultContent();
@@ -322,8 +313,7 @@ public class ExecutePrptComponent extends BaseTest {
    *    8. Select: Text
    * @throws InterruptedException
    */
-  @Test
-  public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
+  @Test public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
     this.log.info( "tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised" );
 
     DirectoryWatcher dw = new DirectoryWatcher();
@@ -491,8 +481,7 @@ public class ExecutePrptComponent extends BaseTest {
    * Steps:
    *    1. Click in close window
    */
-  @Test
-  public void tc7_ClosePrpt_PopUpIsClosed() {
+  @Test public void tc7_ClosePrpt_PopUpIsClosed() {
     this.log.info( "tc7_ClosePrpt_PopUpIsClosed" );
 
     // ## Step 1

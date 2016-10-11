@@ -22,10 +22,8 @@
 
 package com.pentaho.ctools.cdf.require;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
+import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.selenium.BaseTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -35,8 +33,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.selenium.BaseTest;
+import static org.testng.Assert.*;
 
 /**
  * Testing the functionals related with Tables, paging, sort, display rows,
@@ -61,8 +58,7 @@ public class TableComponent extends BaseTest {
    * Test Case Name:
    *    Open Sample Page
    */
-  @Test
-  public void tc0_OpenSamplePage_Display() {
+  @Test public void tc0_OpenSamplePage_Display() {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
     //The URL for the TableComponent under CDF samples
@@ -83,8 +79,7 @@ public class TableComponent extends BaseTest {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test
-  public void tc1_PageContent_DisplayTitle() {
+  @Test public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
     //Wait for title become visible and with value 'Community Dashboard Framework'
@@ -107,9 +102,11 @@ public class TableComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
-  public void tc2_ReloadSample_SampleReadyToUse() {
+  @Test public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
+
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
     //Render again the sample
     this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
@@ -136,8 +133,7 @@ public class TableComponent extends BaseTest {
    *    3. Go to the end page and check the data.
    *    4. Go to the first page and check the data.
    */
-  @Test
-  public void tc3_Paging_NavigateBetweenPages() {
+  @Test public void tc3_Paging_NavigateBetweenPages() {
     this.log.info( "tc3_Paging_NavigateBetweenPages" );
 
     wait.until( ExpectedConditions.visibilityOfElementLocated( By.id( "sampleObjectTable_length" ) ) );
@@ -225,8 +221,7 @@ public class TableComponent extends BaseTest {
    *    6. Go to the end page and check the data.
    *    7. Go to the first page and check the data.
    */
-  @Test
-  public void tc4_Sort_ElementsAreSort() {
+  @Test public void tc4_Sort_ElementsAreSort() {
     this.log.info( "tc4_Sort_ElementsAreSort" );
 
     /*
@@ -367,8 +362,7 @@ public class TableComponent extends BaseTest {
    *    1. Select 25 and paging
    *    2. Select 50 (no paging)
    */
-  @Test
-  public void tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected() {
+  @Test public void tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected() {
     this.log.info( "tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected" );
 
     assertEquals( "Showing 1 to 10 of 50 entries", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObjectTable_info']" ) ) );
@@ -452,8 +446,7 @@ public class TableComponent extends BaseTest {
    *    2. Search for 'Euro' (Check paging, display entries, sort)
    *    3. Search for 'TODO' (no result)
    */
-  @Test
-  public void tc6_SearchEngine_TableDisplayedContentSearch() {
+  @Test public void tc6_SearchEngine_TableDisplayedContentSearch() {
     this.log.info( "tc6_SearchEngine_TableDisplayedContentSearch" );
 
     /*
