@@ -15,10 +15,9 @@
  */
 package com.pentaho.ctools.cdf;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
+import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
+import com.pentaho.selenium.BaseTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -26,9 +25,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
-import com.pentaho.selenium.BaseTest;
+import static org.testng.Assert.*;
 
 /**
  * Testing the functionalities related with Prpt Component.
@@ -49,8 +46,7 @@ public class ExecuteAnalyzerComponent extends BaseTest {
    * Test Case Name:
    *    Open Sample Page
    */
-  @Test
-  public void tc0_OpenSamplePage_Display() {
+  @Test public void tc0_OpenSamplePage_Display() {
     this.log.info( "tc0_OpenSamplePage_Display" );
     // The URL for the ExecutePrptComponent under CDF samples
     // This sample is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/ExecutePrptComponent
@@ -70,8 +66,7 @@ public class ExecuteAnalyzerComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
-  public void tc1_PageContent_DisplayTitle() {
+  @Test public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
     wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
@@ -93,11 +88,14 @@ public class ExecuteAnalyzerComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
-  public void tc2_ReloadSample_SampleReadyToUse() {
+  @Test public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
     // Render again the sample
+
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
 
@@ -127,8 +125,7 @@ public class ExecuteAnalyzerComponent extends BaseTest {
    * Steps:
    *    1. Check the contents presented
    */
-  @Test
-  public void tc3_CheckDisplayPage_DataIsDisplayedAsExpected() {
+  @Test public void tc3_CheckDisplayPage_DataIsDisplayedAsExpected() {
     this.log.info( "tc3_CheckDisplayPage_DataIsDisplayedAsExpected" );
 
     // ## Step 1

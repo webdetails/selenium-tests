@@ -15,14 +15,8 @@
  */
 package com.pentaho.ctools.cdf.require;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-
+import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.selenium.BaseTest;
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,8 +25,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.selenium.BaseTest;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+
+import static org.testng.Assert.*;
 
 /**
  * Testing the functionalities related with Xaction Component.
@@ -53,8 +50,7 @@ public class ExecuteXactionComponent extends BaseTest {
    * Test Case Name:
    *    Open Sample Page
    */
-  @Test
-  public void tc0_OpenSamplePage_Display() {
+  @Test public void tc0_OpenSamplePage_Display() {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
     // The URL for the ExecuteXactionComponent under CDF samples
@@ -75,8 +71,7 @@ public class ExecuteXactionComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
-  public void tc1_PageContent_DisplayTitle() {
+  @Test public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
     // Wait for title become visible and with value 'Community Dashboard Framework'
@@ -99,13 +94,16 @@ public class ExecuteXactionComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
-  public void tc2_ReloadSample_SampleReadyToUse() {
+  @Test public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
     /*
      * ## Step 1
      */
+
+    //Wait for the loading icon to disappear
+    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+
     // Render again the sample
     this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
     this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
@@ -135,8 +133,7 @@ public class ExecuteXactionComponent extends BaseTest {
    *    2. Check if a chart was generated
    *    3. Check the http request for the image generated
    */
-  @Test
-  public void tc3_PressToGenerateChart_ChartIsDisplayed() {
+  @Test public void tc3_PressToGenerateChart_ChartIsDisplayed() {
     this.log.info( "tc3_PressToGenerateChart_ChartIsDisplayed" );
 
     /*
