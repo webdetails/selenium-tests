@@ -42,8 +42,6 @@ import com.pentaho.selenium.BaseTest;
  *
  */
 public class LogoutPentaho extends BaseTest {
-	// Instance of the driver (browser emulator)
-	//
 	// Access to wrapper for webdriver
 	private final ElementHelper elemHelper = new ElementHelper();
 	//Log instance
@@ -95,7 +93,7 @@ public class LogoutPentaho extends BaseTest {
 
 		//## Step 3
 		//Wait for form display (login form)
-		WebElement elForm = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "login" ) );
+		WebElement elForm = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "login" ) );
 		assertNotNull( elForm );
 		WebElement boxUsername = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "j_username" ) );
 		assertNotNull( boxUsername );
