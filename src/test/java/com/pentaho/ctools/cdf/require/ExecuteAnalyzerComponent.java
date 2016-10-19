@@ -38,113 +38,113 @@ import com.pentaho.selenium.BaseTest;
  *
  */
 public class ExecuteAnalyzerComponent extends BaseTest {
-  // Access to wrapper for webdriver
-  private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
-  private final Logger log = LogManager.getLogger( ExecuteAnalyzerComponent.class );
+	// Access to wrapper for webdriver
+	private final ElementHelper elemHelper = new ElementHelper();
+	//Log instance
+	private final Logger log = LogManager.getLogger( ExecuteAnalyzerComponent.class );
 
-  /**
-   * ############################### Test Case 0 ###############################
-   *
-   * Test Case Name:
-   *    Open Sample Page
-   */
-  @Test
-  public void tc0_OpenSamplePage_Display() {
-    this.log.info( "tc0_OpenSamplePage_Display" );
-    // The URL for the ExecutePrptComponent under CDF samples
-    // This sample is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/ExecutePrptComponent
-    driver.get( PageUrl.EXECUTE_ANALYZER_COMPONENT_REQUIRE );
+	/**
+	 * ############################### Test Case 0 ###############################
+	 *
+	 * Test Case Name:
+	 *    Open Sample Page
+	 */
+	@Test
+	public void tc0_OpenSamplePage_Display() {
+		this.log.info( "tc0_OpenSamplePage_Display" );
+		// The URL for the ExecutePrptComponent under CDF samples
+		// This sample is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/ExecutePrptComponent
+		this.elemHelper.Get( driver, PageUrl.EXECUTE_ANALYZER_COMPONENT_REQUIRE );
 
-    // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-  }
+		// NOTE - we have to wait for loading disappear
+		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+	}
 
-  /**
-   * ############################### Test Case 2 ###############################
-   *
-   * Test Case Name:
-   *    Reload Sample
-   * Description:
-   *    Reload the sample (not refresh page).
-   * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
-   */
-  @Test
-  public void tc1_PageContent_DisplayTitle() {
-    this.log.info( "tc1_PageContent_DisplayTitle" );
-    // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
-    // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+	/**
+	 * ############################### Test Case 2 ###############################
+	 *
+	 * Test Case Name:
+	 *    Reload Sample
+	 * Description:
+	 *    Reload the sample (not refresh page).
+	 * Steps:
+	 *    1. Click in Code and then click in button 'Try me'.
+	 */
+	@Test
+	public void tc1_PageContent_DisplayTitle() {
+		this.log.info( "tc1_PageContent_DisplayTitle" );
+		// Wait for title become visible and with value 'Community Dashboard Framework'
+		wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+		// Wait for visibility of 'VisualizationAPIComponent'
+		wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
-    // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "ExecuteAnalyzerComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
-  }
+		// Validate the sample that we are testing is the one
+		assertEquals( "Community Dashboard Framework", driver.getTitle() );
+		assertEquals( "ExecuteAnalyzerComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+	}
 
-  /**
-   * ############################### Test Case 2 ###############################
-   *
-   * Test Case Name:
-   *    Reload Sample
-   * Description:
-   *    Reload the sample (not refresh page).
-   * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
-   */
-  @Test
-  public void tc2_ReloadSample_SampleReadyToUse() {
-    this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
-    // ## Step 1
-    // Render again the sample
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
+	/**
+	 * ############################### Test Case 2 ###############################
+	 *
+	 * Test Case Name:
+	 *    Reload Sample
+	 * Description:
+	 *    Reload the sample (not refresh page).
+	 * Steps:
+	 *    1. Click in Code and then click in button 'Try me'.
+	 */
+	@Test
+	public void tc2_ReloadSample_SampleReadyToUse() {
+		this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
+		// ## Step 1
+		// Render again the sample
+		this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+		this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
 
-    // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+		// NOTE - we have to wait for loading disappear
+		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    // Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
+		// Now sample element must be displayed
+		assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
-    //Check the number of divs with id 'SampleObject'
-    //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
-    assertEquals( 1, nSampleObject );
+		//Check the number of divs with id 'SampleObject'
+		//Hence, we guarantee when click Try Me the previous div is replaced
+		int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+		assertEquals( 1, nSampleObject );
 
-    WebElement elemButton = this.elemHelper.FindElement( driver, By.cssSelector( "button span" ) );
-    assertNotNull( elemButton );
-  }
+		WebElement elemButton = this.elemHelper.FindElement( driver, By.cssSelector( "button span" ) );
+		assertNotNull( elemButton );
+	}
 
-  /**
-   * ############################### Test Case 3 ###############################
-   *
-   * Test Case Name:
-   *    Select HTML and PDF (content type)
-   * Description:
-   *    The test case pretends validate the result when change for option HTML
-   *    and PDF for content-type.
-   * Steps:
-   *    1. Check the contents presented
-   */
-  @Test
-  public void tc3_CheckDisplayPage_DataIsDisplayedAsExpected() {
-    this.log.info( "tc3_CheckDisplayPage_DataIsDisplayedAsExpected" );
+	/**
+	 * ############################### Test Case 3 ###############################
+	 *
+	 * Test Case Name:
+	 *    Select HTML and PDF (content type)
+	 * Description:
+	 *    The test case pretends validate the result when change for option HTML
+	 *    and PDF for content-type.
+	 * Steps:
+	 *    1. Check the contents presented
+	 */
+	@Test
+	public void tc3_CheckDisplayPage_DataIsDisplayedAsExpected() {
+		this.log.info( "tc3_CheckDisplayPage_DataIsDisplayedAsExpected" );
 
-    // ## Step 1
-    String buttonText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
-    assertEquals( "Execute Analyzer", buttonText );
-    this.elemHelper.FindElement( driver, By.xpath( "//button/span" ) ).click();
-    wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "fancybox-content" ) ) );
-    //Move to iframe
-    WebElement elemIFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
-    String attrId = elemIFrame.getAttribute( "id" );
-    driver.switchTo().frame( attrId );
-    //Wait for glasspane display and disable
-    this.elemHelper.WaitForElementPresence( driver, By.id( "glasspane" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
-    //Check presence of tool bar elements
-    WebElement elemLine = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sortHandle_1" ), 45 );
-    assertNotNull( elemLine );
-  }
+		// ## Step 1
+		String buttonText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
+		assertEquals( "Execute Analyzer", buttonText );
+		this.elemHelper.FindElement( driver, By.xpath( "//button/span" ) ).click();
+		wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "fancybox-content" ) ) );
+		//Move to iframe
+		WebElement elemIFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
+		String attrId = elemIFrame.getAttribute( "id" );
+		this.elemHelper.SwitchToFrame( driver, attrId );
+		//Wait for glasspane display and disable
+		this.elemHelper.WaitForElementPresence( driver, By.id( "glasspane" ), 5 );
+		this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
+		//Check presence of tool bar elements
+		WebElement elemLine = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sortHandle_1" ), 45 );
+		assertNotNull( elemLine );
+	}
 }

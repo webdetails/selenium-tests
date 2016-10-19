@@ -38,103 +38,103 @@ import org.openqa.selenium.WebDriver;
 
 public class HttpUtils {
 
-  private static Logger LOG = LogManager.getLogger( HttpUtils.class );
+	private static Logger LOG = LogManager.getLogger( HttpUtils.class );
 
-  /**
-   * This method shall return the status of HTTP request.
-   *
-   * @param url
-   * @return
-   * @throws Exception
-   */
-  public static int GetHttpStatus( String url ) {
-    LOG.debug( "The URL: " + url );
-    int nStatusCode = HttpStatus.SC_BAD_REQUEST;
+	/**
+	 * This method shall return the status of HTTP request.
+	 *
+	 * @param url
+	 * @return
+	 * @throws Exception
+	 */
+	public static int GetHttpStatus( String url ) {
+		LOG.debug( "The URL: " + url );
+		int nStatusCode = HttpStatus.SC_BAD_REQUEST;
 
-    try {
-      URL oUrl = new URL( url );
-      URLConnection uc = oUrl.openConnection();
-      uc.connect();
-      nStatusCode = ( (HttpURLConnection) uc ).getResponseCode();
-      LOG.debug( "HTTP Status:" + nStatusCode );
-    } catch ( Exception ex ) {
-      LOG.error( ex.getMessage() );
-    }
+		try {
+			URL oUrl = new URL( url );
+			URLConnection uc = oUrl.openConnection();
+			uc.connect();
+			nStatusCode = ( (HttpURLConnection) uc ).getResponseCode();
+			LOG.debug( "HTTP Status:" + nStatusCode );
+		} catch ( Exception ex ) {
+			LOG.error( ex.getMessage() );
+		}
 
-    return nStatusCode;
-  }
+		return nStatusCode;
+	}
 
-  /**
-   * This method shall look for HttpErrors return the status of HTTP request. Will return false if no error with that number was found.
-   *
-   * @param driver
-   * @param ErrorNumber
-   * @return
-   * @throws Exception
-   */
-  public static boolean GetHttpError( WebDriver driver, String ErrorNumber ) {
-    Boolean errorFound = false;
-    driver.manage().timeouts().implicitlyWait( 1, TimeUnit.SECONDS );
+	/**
+	 * This method shall look for HttpErrors return the status of HTTP request. Will return false if no error with that number was found.
+	 *
+	 * @param driver
+	 * @param ErrorNumber
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean GetHttpError( WebDriver driver, String ErrorNumber ) {
+		boolean errorFound = false;
+		driver.manage().timeouts().implicitlyWait( 1, TimeUnit.SECONDS );
 
-    for ( int i = 0; i < 1000; i++ ) {
-      try {
-        driver.findElement( By.id( "web_" + ErrorNumber ) );
-        errorFound = true;
-      } catch ( NoSuchElementException s ) {
-        LOG.error( "NoSuchElement - got it.", s );
-        break;
-      } catch ( StaleElementReferenceException s ) {
-        LOG.error( "Stale - got it.", s );
-      }
-    }
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-    return errorFound;
-  }
+		for ( int i = 0; i < 1000; i++ ) {
+			try {
+				driver.findElement( By.id( "web_" + ErrorNumber ) );
+				errorFound = true;
+			} catch ( NoSuchElementException s ) {
+				LOG.error( "NoSuchElement - got it.", s );
+				break;
+			} catch ( StaleElementReferenceException s ) {
+				LOG.error( "Stale - got it.", s );
+			}
+		}
+		driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+		return errorFound;
+	}
 
-  /**
-   * This method shall return the status of HTTP request. When authentication is needed.
-   *
-   * @param url
-   * @param username
-   * @param password
-   * @return
-   * @throws Exception
-   */
-  public static int GetHttpStatus( String url, String username, String password ) {
-    LOG.debug( "The URL: " + url );
-    int nStatusCode = HttpStatus.SC_BAD_REQUEST;
+	/**
+	 * This method shall return the status of HTTP request. When authentication is needed.
+	 *
+	 * @param url
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws Exception
+	 */
+	public static int GetHttpStatus( String url, String username, String password ) {
+		LOG.debug( "The URL: " + url );
+		int nStatusCode = HttpStatus.SC_BAD_REQUEST;
 
-    String authString = username + ":" + password;
-    String authStringEnc = Base64.getEncoder().encodeToString( authString.getBytes() );
+		String authString = username + ":" + password;
+		String authStringEnc = Base64.getEncoder().encodeToString( authString.getBytes() );
 
-    URL oUrl;
-    try {
-      oUrl = new URL( url );
+		URL oUrl;
+		try {
+			oUrl = new URL( url );
 
-      URLConnection urlConnection = oUrl.openConnection();
-      urlConnection.setRequestProperty( "Authorization", "Basic " + authStringEnc );
-      urlConnection.connect();
+			URLConnection urlConnection = oUrl.openConnection();
+			urlConnection.setRequestProperty( "Authorization", "Basic " + authStringEnc );
+			urlConnection.connect();
 
-      nStatusCode = ( (HttpURLConnection) urlConnection ).getResponseCode();
-    } catch ( Exception e ) {
-      LOG.error( "Exception trying to access: " + url, e );
-    }
-    return nStatusCode;
-  }
+			nStatusCode = ( (HttpURLConnection) urlConnection ).getResponseCode();
+		} catch ( Exception e ) {
+			LOG.error( "Exception trying to access: " + url, e );
+		}
+		return nStatusCode;
+	}
 
-  /**
-   * The method check if a host is listening in the specified port.
-   * 
-   * @param host - Host name.
-   * @param port - Port
-   * @return - true is listening in the port, false otherwise.
-   */
-  public static boolean ServerListening( String host, int port ) {
-    try ( Socket s = new Socket( host, port ); ) {
-      return true;
-    } catch ( Exception e ) {
-      LOG.error( e );
-      return false;
-    }
-  }
+	/**
+	 * The method check if a host is listening in the specified port.
+	 * 
+	 * @param host - Host name.
+	 * @param port - Port
+	 * @return - true is listening in the port, false otherwise.
+	 */
+	public static boolean ServerListening( String host, int port ) {
+		try ( Socket s = new Socket( host, port ); ) {
+			return true;
+		} catch ( Exception e ) {
+			LOG.error( e );
+			return false;
+		}
+	}
 }

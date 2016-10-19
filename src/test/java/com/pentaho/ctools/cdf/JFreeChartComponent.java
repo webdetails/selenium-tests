@@ -250,7 +250,7 @@ public class JFreeChartComponent extends BaseTest {
 
       driver = driver.switchTo().window( parentWindowHandle );
       assertTrue( driver.getWindowHandles().size() == 1 );
-      driver.switchTo().defaultContent();
+      this.elemHelper.SwitchToDefault(driver);
 
       // ## Step 2
       // Change to pie chart

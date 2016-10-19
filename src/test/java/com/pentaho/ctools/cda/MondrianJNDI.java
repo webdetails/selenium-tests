@@ -582,7 +582,7 @@ public class MondrianJNDI extends BaseTest {
       assertEquals( confirmationMsg, expectedCnfText );
 
       this.elemHelper.WaitForAlertNotPresent( driver );
-      driver.switchTo().defaultContent();
+      this.elemHelper.SwitchToDefault(driver);
 
       elementPresent = this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "img.deleteIcon.button" ), 2 );
     }

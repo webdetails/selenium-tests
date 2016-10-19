@@ -36,113 +36,113 @@ import com.pentaho.selenium.BaseTest;
 
 public class PluginDetails extends BaseTest {
 
-  private static Logger log = LogManager.getLogger( PluginDetails.class );
+	private final Logger log = LogManager.getLogger( PluginDetails.class );
 
-  /**
-   * ############################### Test Case 1 ###############################
-   *
-   * Test Case Name:
-   *    Able to edit existing plugin
-   * Description:
-   *    This test will validate the ability to edit existing plugins
-   *
-   * Steps:
-   *    1. Open Sparkl in Edit mode and assert layout
-   *    2. Assert saving of plugin information
-   *    3. Assert layout of elements view
-   *    4. Open existing dashboard and endpoint
-   *    5. Edit existing dashboard
-   *    6. Delete and cancel dashboard and endpoint
-   */
-  @Test
-  public void tc1_Sparkl_Edit() {
-    log.info( "tc1_Sparkl_Edit" );
+	/**
+	 * ############################### Test Case 1 ###############################
+	 *
+	 * Test Case Name:
+	 *    Able to edit existing plugin
+	 * Description:
+	 *    This test will validate the ability to edit existing plugins
+	 *
+	 * Steps:
+	 *    1. Open Sparkl in Edit mode and assert layout
+	 *    2. Assert saving of plugin information
+	 *    3. Assert layout of elements view
+	 *    4. Open existing dashboard and endpoint
+	 *    5. Edit existing dashboard
+	 *    6. Delete and cancel dashboard and endpoint
+	 */
+	@Test
+	public void tc1_Sparkl_Edit() {
+		log.info( "tc1_Sparkl_Edit" );
 
-    /*
-     *  Step 1
-     */
-    Sparkl sparkl = new Sparkl( driver );
-    sparkl.OpenSparkl();
-    PluginCard plugin = new PluginCard( "ATest", "aTest", "testDescription" );
-    sparkl.GoToEditPage( plugin );
+		/*
+		 *  Step 1
+		 */
+		Sparkl sparkl = new Sparkl( driver );
+		sparkl.OpenSparkl();
+		PluginCard plugin = new PluginCard( "ATest", "aTest", "testDescription" );
+		sparkl.GoToEditPage( plugin );
 
-    /*
-     *  Step 2
-     */
-    String testString = "testtesttesttest";
+		/*
+		 *  Step 2
+		 */
+		String testString = "testtesttesttest";
 
-    //Store current info
-    PluginInfo currentInfo = sparkl.GetPluginInfo();
-    PluginInfo newInfo = new PluginInfo( testString, testString, testString, testString, testString, testString, testString, testString );
+		//Store current info
+		PluginInfo currentInfo = sparkl.GetPluginInfo();
+		PluginInfo newInfo = new PluginInfo( testString, testString, testString, testString, testString, testString, testString, testString );
 
-    //Enter new info and assert it is saved correctly
-    newInfo = sparkl.EnterPluginInfo( newInfo );
-    sparkl.SavePluginInfo();
-    PluginInfo shownInfo = sparkl.GetPluginInfo();
-    assertEquals( shownInfo, newInfo );
+		//Enter new info and assert it is saved correctly
+		newInfo = sparkl.EnterPluginInfo( newInfo );
+		sparkl.SavePluginInfo();
+		PluginInfo shownInfo = sparkl.GetPluginInfo();
+		assertEquals( shownInfo, newInfo );
 
-    //Enter previous info and assert it is saved correctly
-    currentInfo = sparkl.EnterPluginInfo( currentInfo );
-    sparkl.SavePluginInfo();
-    shownInfo = sparkl.GetPluginInfo();
-    assertEquals( shownInfo, currentInfo );
+		//Enter previous info and assert it is saved correctly
+		currentInfo = sparkl.EnterPluginInfo( currentInfo );
+		sparkl.SavePluginInfo();
+		shownInfo = sparkl.GetPluginInfo();
+		assertEquals( shownInfo, currentInfo );
 
-    /*
-     *  Step 3
-     */
-    //is create element present and working
-    sparkl.GoToElements();
-    PluginElement testDash = new PluginElement( "test", "dashboard", "clean", false );
-    sparkl.CreateElement( testDash );
-    sparkl.DeleteElement( testDash );
+		/*
+		 *  Step 3
+		 */
+		//is create element present and working
+		sparkl.GoToElements();
+		PluginElement testDash = new PluginElement( "test", "dashboard", "clean", false );
+		sparkl.CreateElement( testDash );
+		sparkl.DeleteElement( testDash );
 
-    //is filtering working
-    sparkl.FilterElements( "dashboard" );
-    assertTrue( sparkl.AssertElementsFiltered( "dashboard" ) );
-    sparkl.FilterElements( "endpoint" );
-    assertTrue( sparkl.AssertElementsFiltered( "endpoint" ) );
+		//is filtering working
+		sparkl.FilterElements( "dashboard" );
+		assertTrue( sparkl.AssertElementsFiltered( "dashboard" ) );
+		sparkl.FilterElements( "endpoint" );
+		assertTrue( sparkl.AssertElementsFiltered( "endpoint" ) );
 
-    //Go back to all before clicking refresh
-    sparkl.FilterElements( "all" );
-    assertTrue( sparkl.RefreshElements() );
+		//Go back to all before clicking refresh
+		sparkl.FilterElements( "all" );
+		assertTrue( sparkl.RefreshElements() );
 
-    /*
-     *  Step 4
-     */
-    //Open main dashboard and assert correct page is loaded
-    sparkl.OpenSparkl();
-    PluginCard pluginSparkl = new PluginCard( "Sparkl", "sparkl", "Create and explore pentaho plugins." );
-    sparkl.GoToEditPage( pluginSparkl );
-    sparkl.GoToElements();
-    PluginElement mainDash = new PluginElement( "main", "dashboard", "clean", true );
-    String dashboard = sparkl.ViewDashboard( mainDash );
-    assertEquals( dashboard, "main" );
+		/*
+		 *  Step 4
+		 */
+		//Open main dashboard and assert correct page is loaded
+		sparkl.OpenSparkl();
+		PluginCard pluginSparkl = new PluginCard( "Sparkl", "sparkl", "Create and explore pentaho plugins." );
+		sparkl.GoToEditPage( pluginSparkl );
+		sparkl.GoToElements();
+		PluginElement mainDash = new PluginElement( "main", "dashboard", "clean", true );
+		String dashboard = sparkl.ViewDashboard( mainDash );
+		assertEquals( dashboard, "main" );
 
-    //Run createelement endpoint and assert correct page is loaded
-    PluginElement createEnd = new PluginElement( "createelement", "endpoint", "ktr", true );
-    String endpoint = sparkl.RunEndpoint( createEnd );
-    assertEquals( endpoint, "createelement" );
+		//Run createelement endpoint and assert correct page is loaded
+		PluginElement createEnd = new PluginElement( "createelement", "endpoint", "ktr", true );
+		String endpoint = sparkl.RunEndpoint( createEnd );
+		assertEquals( endpoint, "createelement" );
 
-    /*
-     *  Step 5
-     */
-    //Edit dashboard
-    //Open main dashboard and assert correct page is loaded
-    PluginElement variableDash = new PluginElement( "variableinfo", "dashboard", "clean", true );
-    String editDashboard = sparkl.EditDashboard( variableDash );
-    assertEquals( editDashboard, "variableinfo" );
-    /*
-     *  Step 6
-     */
-    //delete dashboard
-    PluginElement pluginDash = new PluginElement( "plugininfo", "dashboard", "clean", true );
-    String deletePlugininfo = sparkl.DeleteCancelElement( pluginDash );
-    assertEquals( "You are about to delete plugininfo. Please, press OK to continue...", deletePlugininfo );
+		/*
+		 *  Step 5
+		 */
+		//Edit dashboard
+		//Open main dashboard and assert correct page is loaded
+		PluginElement variableDash = new PluginElement( "variableinfo", "dashboard", "clean", true );
+		String editDashboard = sparkl.EditDashboard( variableDash );
+		assertEquals( editDashboard, "variableinfo" );
+		/*
+		 *  Step 6
+		 */
+		//delete dashboard
+		PluginElement pluginDash = new PluginElement( "plugininfo", "dashboard", "clean", true );
+		String deletePlugininfo = sparkl.DeleteCancelElement( pluginDash );
+		assertEquals( "You are about to delete plugininfo. Please, press OK to continue...", deletePlugininfo );
 
-    //delete dashboard
-    PluginElement deleteEnd = new PluginElement( "deleteplugin", "endpoint", "ktr", true );
-    String deleteDeleteplugin = sparkl.DeleteCancelElement( deleteEnd );
-    assertEquals( "You are about to delete deleteplugin. Please, press OK to continue...", deleteDeleteplugin );
+		//delete dashboard
+		PluginElement deleteEnd = new PluginElement( "deleteplugin", "endpoint", "ktr", true );
+		String deleteDeleteplugin = sparkl.DeleteCancelElement( deleteEnd );
+		assertEquals( "You are about to delete deleteplugin. Please, press OK to continue...", deleteDeleteplugin );
 
-  }
+	}
 }

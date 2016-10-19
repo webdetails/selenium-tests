@@ -1646,6 +1646,65 @@ public class ElementHelper {
 	}
 
 	/**
+	 * This method is a wrap of switchTo method used in WebDriver.
+	 *
+	 * @param driver
+	 * @param nameOrId
+	 */
+	public WebDriver SwitchToFrame( final WebDriver driver, String nameOrId ) {
+		WebDriver newframe = null;
+		driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+		newframe = driver.switchTo().frame( nameOrId );
+		driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+		return newframe;
+	}
+
+	/**
+	 * This method is a wrap of switchTo method used in WebDriver.
+	 *
+	 * @param driver
+	 * @param index
+	 */
+	public WebDriver SwitchToFrame( final WebDriver driver, int index ) {
+		WebDriver newframe = null;
+		driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+		newframe = driver.switchTo().frame( index );
+		driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+		return newframe;
+	}
+
+	/**
+	 * This method is a wrap of switchTo method used in WebDriver.
+	 *
+	 * @param driver
+	 * @param frameElement
+	 */
+	public WebDriver SwitchToFrame( final WebDriver driver, WebElement frameElement ) {
+		WebDriver newframe = null;
+		driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+		newframe = driver.switchTo().frame( frameElement );
+		driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+		return newframe;
+	}
+
+	/**
+	 * This method is a wrap of switchTo method used in WebDriver.
+	 *
+	 * @param driver
+	 */
+	public WebDriver SwitchToDefault( final WebDriver driver ) {
+		WebDriver newframe = null;
+		driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+		newframe = driver.switchTo().defaultContent();
+		driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+		return newframe;
+	}
+
+	/**
 	 * This method shall select an element on a drop-down list by Value.
 	 *
 	 * @param driver
@@ -1889,7 +1948,7 @@ public class ElementHelper {
 
 	/**
 	 * This method pretends to check if a list of elements is present, if it doesn't we wait for presence for a specific
-	 * timeout (input), after this, we will wait for elementa visible. And, if any elements is present then we have to
+	 * timeout (input), after this, we will wait for element visible. And, if any elements is present then we have to
 	 * check if is visible if not wait for visibility.
 	 *
 	 * @param driver

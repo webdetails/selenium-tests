@@ -40,7 +40,7 @@ public class LoginPage {
 	// Access to wrapper for webdriver
 	private ElementHelper elemHelper = new ElementHelper();
 	// Logging instance
-	private static Logger LOG = LogManager.getLogger( LoginPage.class );
+	private final Logger LOG = LogManager.getLogger( LoginPage.class );
 	// The title of the page Login
 	private final String page_title_login = "Pentaho User Console - Login";
 	// The title of the page Login
