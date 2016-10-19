@@ -13,102 +13,85 @@ import com.pentaho.gui.web.ctools.tutorials.opendemos.CdeOpenDemos;
 import com.pentaho.selenium.BaseTest;
 
 public class ThemePark extends BaseTest {
-  // Access to wrapper for webdriver
-  private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
-  private final Logger log = LogManager.getLogger( ThemePark.class );
+	// Access to wrapper for webdriver
+	private final ElementHelper elemHelper = new ElementHelper();
+	//Log instance
+	private final Logger log = LogManager.getLogger( ThemePark.class );
 
-  private CdeOpenDemos cde = new CdeOpenDemos();
+	private CdeOpenDemos cde = new CdeOpenDemos();
 
-  private String winHandleBefore;
+	private String winHandleBefore;
 
-  private final String[] months = { "Jan",
-                                    "Feb",
-                                    "Mar",
-                                    "Apr",
-                                    "May",
-                                    "Jun",
-                                    "Jul",
-                                    "Aug",
-                                    "Sep",
-                                    "Oct",
-                                    "Nov",
-                                    "Dec" };
+	private final String[] parks = { "All Parks",
+	                                 "WonderIsland",
+	                                 "AdventurePark",
+	                                 "OceanWorld" };
 
-  private final String[] years = { "2003",
-                                   "2004",
-                                   "2005" };
+	private final String[] titles = { "Visits",
+	                                  "All Time Visits",
+	                                  "Fans Club",
+	                                  "Bestsellers",
+	                                  "Most Popular" };
 
-  private final String[] parks = { "All Parks",
-                                   "WonderIsland",
-                                   "AdventurePark",
-                                   "OceanWorld" };
+	private final String[] chartIds = { "lineChartprotovis",
+	                                    "fansclubChartprotovis",
+	                                    "bestsellerChartprotovis",
+	                                    "mostpopularChartprotovis" };
 
-  private final String[] titles = { "Visits",
-                                    "All Time Visits",
-                                    "Fans Club",
-                                    "Bestsellers",
-                                    "Most Popular" };
+	@Test
+	public void tc0_viewDemo() {
+		log.info( "tc0_viewDemo" );
 
-  private final String[] chartIds = { "lineChartprotovis",
-                                      "fansclubChartprotovis",
-                                      "bestsellerChartprotovis",
-                                      "mostpopularChartprotovis" };
+		this.winHandleBefore = cde.viewDemo( "Theme Park" );
 
-  @Test
-  public void tc0_viewDemo() {
-    log.info( "tc0_viewDemo" );
+		// Wait for the loading icon to disappear
+		elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-    this.winHandleBefore = cde.viewDemo( "Theme Park" );
+		assertNotNull( this.elemHelper.WaitForElementPresence( driver, By.xpath( "//title[contains(text(),'Theme Park Dashboard')]" ) ) );
+	}
 
-    // Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+	@Test
+	public void tc1_checkTitlesAndGraphicsPresence() {
 
-    assertNotNull( this.elemHelper.WaitForElementPresence( driver, By.xpath( "//title[contains(text(),'Theme Park Dashboard')]" ) ) );
-  }
+		for ( String park : parks ) {
 
-  @Test
-  public void tc1_checkTitlesAndGraphicsPresence() {
+			//Locator of the next chart title in the list
+			String parkLocator = String.format( "//*[@id='visitsTableTable']//td[contains(text(),'%s')]", park );
 
-    for ( String park : parks ) {
+			//Assert that the title exists
+			assertNotNull( this.elemHelper.WaitForElementPresence( driver, By.xpath( parkLocator ) ) );
 
-      //Locator of the next chart title in the list
-      String parkLocator = String.format( "//*[@id='visitsTableTable']//td[contains(text(),'%s')]", park );
+			//Wait for the loading icon to disappear
+			elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
 
-      //Assert that the title exists
-      assertNotNull( this.elemHelper.WaitForElementPresence( driver, By.xpath( parkLocator ) ) );
+			//Click on the park, in the parks table
+			elemHelper.Click( driver, By.xpath( parkLocator ) );
+		}
 
-      //Wait for the loading icon to disappear
-      elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+		for ( String title : titles ) {
 
-      //Click on the park, in the parks table
-      elemHelper.Click( driver, By.xpath( parkLocator ) );
-    }
+			//Locator of the next chart title in the list
+			String titleLocator = String.format( "//h2[text()='%s']", title );
 
-    for ( String title : titles ) {
+			//Assert that the title exists
+			assertNotNull( this.elemHelper.WaitForElementPresence( driver, By.xpath( titleLocator ) ) );
+		}
 
-      //Locator of the next chart title in the list
-      String titleLocator = String.format( "//h2[text()='%s']", title );
+		for ( String chartId : chartIds ) {
 
-      //Assert that the title exists
-      assertNotNull( this.elemHelper.WaitForElementPresence( driver, By.xpath( titleLocator ) ) );
-    }
+			//Locator of the next chart id in the list
+			String chartLocator = String.format( "//*[@id='%s']", chartId );
 
-    for ( String chartId : chartIds ) {
+			//Assert that the title exists
+			assertNotNull( this.elemHelper.WaitForElementPresence( driver, By.xpath( chartLocator ) ) );
+		}
 
-      //Locator of the next chart id in the list
-      String chartLocator = String.format( "//*[@id='%s']", chartId );
+	}
 
-      //Assert that the title exists
-      assertNotNull( this.elemHelper.WaitForElementPresence( driver, By.xpath( chartLocator ) ) );
-    }
+	@AfterClass
+	public void closeDemo() {
+		driver.close();
 
-  }
-
-  @AfterClass
-  public void closeDemo() {
-    driver.close();
-
-    driver.switchTo().window( this.winHandleBefore );
-  }
+		driver.switchTo().window( this.winHandleBefore );
+	}
 }
