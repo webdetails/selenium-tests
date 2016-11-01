@@ -48,9 +48,6 @@ public class BaseTest {
 	protected static String baseUrl;
 	// Directory are all download files persist
 	protected static String downloadDir;
-	// The pentaho's release version that tests are running against.
-	// Possible values = "5.x" "6.x"
-	protected static String pentahoReleaseVersion;
 	// The BA Server URL
 	protected static String pentahoBaServerUrl;
 	// The BA Server hostname
@@ -74,18 +71,15 @@ public class BaseTest {
 		// Initialize BASEURL
 		baseUrl = "http://localhost:8080/pentaho/";
 		downloadDir = System.getProperty( "java.io.tmpdir" ) + "\\SeleniumDonwloadDir";
-		pentahoReleaseVersion = System.getProperty( "pentaho.release.version" );
 		pentahoBaServerServiceName = System.getProperty( "pentaho.bi.server.service.name" );
 		pentahoBaServerUrl = System.getProperty( "pentaho.bi.server.url" );
 		pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
 		pentahoBaServerPort = System.getProperty( "pentaho.bi.server.port" );
 
-		this.log.info( "pentaho.release.version::" + pentahoReleaseVersion );
-
 		new File( downloadDir ).mkdir();
 
 		System.setProperty( "webdriver.log.file", "/dev/stdout" );
-		// System.setProperty( "webdriver.firefox.logfile", "/dev/stdout" );
+		//System.setProperty( "webdriver.firefox.logfile", "/dev/stdout" );
 
 		// Setting log preferences
 		LoggingPreferences logs = new LoggingPreferences();

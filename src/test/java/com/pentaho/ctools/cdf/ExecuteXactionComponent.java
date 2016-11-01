@@ -32,6 +32,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -57,7 +58,7 @@ public class ExecuteXactionComponent extends BaseTest {
 	public void tc0_OpenSamplePage_Display() {
 		// The URL for the ExecuteXactionComponent under CDF samples
 		// This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/ExecuteXactionComponent
-		driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A76-ExecuteXactionComponent%3Aexecute_xaction_component.xcdf/generatedContent" );
+		this.elemHelper.Get( driver, PageUrl.EXECUTE_XACTION_COMPONENT );
 
 		// NOTE - we have to wait for loading disappear
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -99,8 +100,8 @@ public class ExecuteXactionComponent extends BaseTest {
 	public void tc2_ReloadSample_SampleReadyToUse() {
 		// ## Step 1
 		// Render again the sample
-		this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-		this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+		this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+		this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
 
 		// NOTE - we have to wait for loading disappear
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -110,7 +111,7 @@ public class ExecuteXactionComponent extends BaseTest {
 
 		//Check the number of divs with id 'SampleObject'
 		//Hence, we guarantee when click Try Me the previous div is replaced
-		final int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+		int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
 		assertEquals( 1, nSampleObject );
 	}
 
@@ -130,24 +131,24 @@ public class ExecuteXactionComponent extends BaseTest {
 	@Test
 	public void tc3_PressToGenerateChart_ChartIsDisplayed() {
 		// ## Step 1
-		final String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
+		String buttonName = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#sampleObject > button > span" ) );
 		assertEquals( "Execute XAction", buttonName );
 		//Click in button
-		this.elemHelper.FindElement( driver, By.xpath( "//button" ) ).click();
+		this.elemHelper.Click( driver, By.cssSelector( "#sampleObject > button > span" ) );
 
 		// ## Step 1
-		wait.until( ExpectedConditions.presenceOfElementLocated( By.id( "fancybox-content" ) ) );
+		this.elemHelper.FindElement( driver, By.id( "fancybox-frame" ) );
 		this.elemHelper.SwitchToFrame( driver, "fancybox-frame" );
 		//Check the title
-		final String chartTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table/tbody/tr/td" ) );
+		String chartTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table/tbody/tr/td" ) );
 		assertEquals( "Action Successful", chartTitle );
 		//Check for the displayed image
-		final WebElement xactionElement = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
+		WebElement xactionElement = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
 		assertNotNull( xactionElement );
 
-		final String attrSrc = xactionElement.getAttribute( "src" );
-		final String attrWidth = xactionElement.getAttribute( "width" );
-		final String attrHeight = xactionElement.getAttribute( "height" );
+		String attrSrc = xactionElement.getAttribute( "src" );
+		String attrWidth = xactionElement.getAttribute( "width" );
+		String attrHeight = xactionElement.getAttribute( "height" );
 
 		assertTrue( attrSrc.startsWith( baseUrl + "getImage?image=tmp_chart_admin-" ) );
 		assertEquals( attrWidth, "500" );
@@ -155,12 +156,12 @@ public class ExecuteXactionComponent extends BaseTest {
 
 		// ## Step 3
 		try {
-			final URL url = new URL( attrSrc );
-			final URLConnection connection = url.openConnection();
+			URL url = new URL( attrSrc );
+			URLConnection connection = url.openConnection();
 			connection.connect();
 
 			assertEquals( HttpStatus.SC_OK, ( (HttpURLConnection) connection ).getResponseCode() );
-		} catch ( final Exception ex ) {
+		} catch ( Exception ex ) {
 			this.log.error( ex.getMessage() );
 		}
 
