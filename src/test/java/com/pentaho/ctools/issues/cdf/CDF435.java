@@ -77,8 +77,8 @@ public class CDF435 extends BaseTest {
 		/*
 		 * ## Step 1
 		 */
-		//Go to New CDE Dashboard
-		driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-435%3AIssue_435.wcdf/generatedContent" );
+		// Go to New CDE Dashboard
+		this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-435%3AIssue_435.wcdf/generatedContent" );
 
 		// Wait for loading disappear
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 90 );

@@ -89,7 +89,7 @@ public class InstallUninstall extends BaseTest {
      */
     market.GoToMarketPlace();
     assertTrue( market.CheckIfPluginInstalled( "Community Text Editor" ) );
-    driver.get( baseUrl + "plugin/cte/api/edit?path=/public/plugin-samples/pentaho-cdf/template.html" );
+    this.elemHelper.Get( baseUrl + "plugin/cte/api/edit?path=/public/plugin-samples/pentaho-cdf/template.html" );
     WebElement pathSpan = this.elemHelper.FindElement( driver, By.cssSelector( "span#infoArea" ) );
     assertNotNull( pathSpan );
   }
@@ -131,7 +131,7 @@ public class InstallUninstall extends BaseTest {
      */
     market.GoToMarketPlace();
     assertFalse( market.CheckIfPluginInstalled( "Community Text Editor" ) );
-    driver.get( baseUrl + "plugin/cte/api/edit?path=/public/plugin-samples/pentaho-cdf/template.html" );
+    this.elemHelper.Get( baseUrl + "plugin/cte/api/edit?path=/public/plugin-samples/pentaho-cdf/template.html" );
     WebElement pathSpan = this.elemHelper.FindElement( driver, By.cssSelector( "span#infoArea" ), 5 );
     assertNull( pathSpan );
   }

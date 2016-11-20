@@ -26,12 +26,12 @@ import static org.testng.Assert.assertEquals;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -44,7 +44,7 @@ import com.pentaho.selenium.BaseTest;
 public class AjaxRequestReference extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( AjaxRequestReference.class );
 
   /**
@@ -61,8 +61,8 @@ public class AjaxRequestReference extends BaseTest {
   public void tc01_PageContent_InformationPresent() {
     this.log.info( "tc01_PageContent_InformationPresent" );
 
-    //Go to AddinReference
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AAjaxRequest%3AajaxRequest.wcdf/generatedContent" );
+    // Go to AddinReference
+    this.elemHelper.Get( driver, PageUrl.AJAX_REQUEST_REFERENCE_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -72,8 +72,10 @@ public class AjaxRequestReference extends BaseTest {
      * ## Step 1
      */
     //Check page title
-    wait.until( ExpectedConditions.titleIs( "Ajax Request Reference" ) );
-    assertEquals( "Ajax Request Reference", driver.getTitle() );
+
+    String expectedTitle = "Ajax Request Reference";
+    String actualTitle = this.elemHelper.WaitForTitle( driver, expectedTitle );
+    assertEquals( actualTitle, expectedTitle );
     //Check title
     String title = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='Title']/span" ) );
     assertEquals( "Ajax Request Reference", title );

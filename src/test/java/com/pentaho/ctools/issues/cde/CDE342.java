@@ -75,8 +75,8 @@ public class CDE342 extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to Issue sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent" );
+    // Go to Issue sample
+    this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Wait for Input field
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "col1" ) );

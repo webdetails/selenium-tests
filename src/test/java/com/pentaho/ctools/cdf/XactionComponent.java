@@ -19,17 +19,16 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-
 import org.apache.http.HttpStatus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.HttpUtils;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -42,6 +41,8 @@ import com.pentaho.selenium.BaseTest;
 public class XactionComponent extends BaseTest {
   // Access to wrapper for webdriver.
   private final ElementHelper elemHelper = new ElementHelper();
+  // Log instance
+  private final Logger log = LogManager.getLogger( XactionComponent.class );
 
   /**
    * ############################### Test Case 0 ###############################
@@ -51,9 +52,11 @@ public class XactionComponent extends BaseTest {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
+    this.log.info( "tc0_OpenSamplePage_Display" );
+
     // The URL for the XactionComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/XactionComponent
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A10-XactionComponent%3Axaction_component.xcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.XACTION_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -63,22 +66,31 @@ public class XactionComponent extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Reload Sample
+   *    Validate Page Contents
+   *
    * Description:
-   *    Reload the sample (not refresh page).
+   *    Here we want to validate the page contents.
+   *
    * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
+   *    1. Check the widget's title.
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
+    this.log.info( "tc1_PageContent_DisplayTitle" );
+
+    /*
+     * ## Step 1
+     */
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
-    // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    String expectedPageTitle = "Community Dashboard Framework";
+    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    // Wait for visibility of 'XactionComponent'
+    String expectedSampleTitle = "XactionComponent";
+    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "XactionComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( actualPageTitle, expectedPageTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
   }
 
   /**
@@ -86,17 +98,21 @@ public class XactionComponent extends BaseTest {
    *
    * Test Case Name:
    *    Reload Sample
+   *
    * Description:
    *    Reload the sample (not refresh page).
+   *
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
+    this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
+
     // ## Step 1
     // Render again the sample
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -106,7 +122,7 @@ public class XactionComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -124,6 +140,8 @@ public class XactionComponent extends BaseTest {
    */
   @Test
   public void tc3_GenerateChart_ChartIsDisplayed() {
+    this.log.info( "tc3_GenerateChart_ChartIsDisplayed" );
+
     // ## Step 1
     WebElement xactionElement = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
     assertNotNull( xactionElement );
@@ -137,15 +155,6 @@ public class XactionComponent extends BaseTest {
     assertEquals( attrHeight, "600" );
 
     // ## Step 2
-    try {
-      URL url = new URL( attrSrc );
-      URLConnection connection = url.openConnection();
-      connection.connect();
-
-      assertEquals( HttpStatus.SC_OK, ( (HttpURLConnection) connection ).getResponseCode() );
-
-    } catch ( Exception ex ) {
-      ex.printStackTrace();
-    }
+    assertEquals( HttpUtils.GetHttpStatus( attrSrc ), HttpStatus.SC_OK );
   }
 }

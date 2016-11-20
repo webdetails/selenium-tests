@@ -76,12 +76,12 @@ public class CDE394 extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to Issue Sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent" );
+    // Go to Issue Sample
+    this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-394%3ACDE-394%25282%2529.wcdf/generatedContent" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Wait for menus: filemenu, viewmenu, toolsmenu AND helpmenu
-    this.elemHelper.WaitForElementVisibility( driver, By.id( "column1protovis" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "column1protovis" ) );
     WebElement element = this.elemHelper.FindElement( driver, By.xpath( "//div[contains(@id,'column1protovis')]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect']" ) );
     assertNotNull( element );
     String widthText = element.getAttribute( "width" );

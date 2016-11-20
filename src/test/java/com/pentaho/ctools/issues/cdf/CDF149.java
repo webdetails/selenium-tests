@@ -78,7 +78,7 @@ public class CDF149 extends BaseTest {
 		 * ## Step 1
 		 */
 		//Open CDE Sample
-		driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/wcdf.edit" );
+		this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Acde_sample1.wcdf/wcdf.edit" );
 
 		//Assert Panel selectors and select Components
 		WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='cdfdd-modes']/div[@title='Datasources Panel']" ) );

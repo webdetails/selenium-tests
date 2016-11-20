@@ -50,7 +50,7 @@ import com.pentaho.selenium.BaseTest;
 public class DateRangeInputComponent extends BaseTest {
 	// Access to wrapper for webdriver
 	private final ElementHelper elemHelper = new ElementHelper();
-	//Log instance
+	// Log instance
 	private final Logger log = LogManager.getLogger( DateRangeInputComponent.class );
 
 	/**

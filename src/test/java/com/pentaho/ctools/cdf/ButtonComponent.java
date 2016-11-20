@@ -52,7 +52,7 @@ public class ButtonComponent extends BaseTest {
   public void tc0_OpenSamplePage_Display() {
     // The URL for the ButtonComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/ButtonComponent
-    driver.get( PageUrl.BUTTON_COMPONENT );
+    this.elemHelper.Get( driver, PageUrl.BUTTON_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -96,8 +96,8 @@ public class ButtonComponent extends BaseTest {
      * ## Step 1
      */
     // Render again the sample
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

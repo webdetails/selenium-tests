@@ -160,7 +160,7 @@ public class CDE417 extends BaseTest {
 		 * ## Step 3
 		 */
 		// Go to Export Popup Component sample in Edit mode
-		driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/edit" );
+		this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/edit" );
 
 		//Save Dashboard
 		WebElement saveButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "Save" ) );
@@ -174,7 +174,7 @@ public class CDE417 extends BaseTest {
 		/* 
 		 * ## Step 4 
 		  */
-		//Go to components panel and expand "Others"
+		// Go to components panel and expand "Others"
 		WebElement componentsPanelButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.componentsPanelButton" ) );
 		assertNotNull( componentsPanelButton );
 		componentsPanelButton.click();
@@ -242,7 +242,7 @@ public class CDE417 extends BaseTest {
 		/* 
 		 * ## Step 6 
 		 */
-		driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/generatedContent" );
+		this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-548%3ACDF-548.wcdf/generatedContent" );
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
 		//Click export Button

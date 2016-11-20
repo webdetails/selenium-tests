@@ -78,7 +78,7 @@ public class CDEMapComponentReference extends BaseTest {
 		 * ## Step 1
 		 */
 		//Open sample in edit mode
-		driver.get( PageUrl.MAP_COMPONENT_REFERENCE_EDIT_6x );
+		this.elemHelper.Get( PageUrl.MAP_COMPONENT_REFERENCE_EDIT_6x );
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
 		//assert buttons and go to Components Panel

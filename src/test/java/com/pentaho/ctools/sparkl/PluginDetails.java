@@ -102,7 +102,7 @@ public class PluginDetails extends BaseTest {
 		sparkl.FilterElements( "endpoint" );
 		assertTrue( sparkl.AssertElementsFiltered( "endpoint" ) );
 
-		//Go back to all before clicking refresh
+		// Go back to all before clicking refresh
 		sparkl.FilterElements( "all" );
 		assertTrue( sparkl.RefreshElements() );
 

@@ -76,11 +76,11 @@ public class CDF430 extends BaseTest {
      * ## Step 1
      */
     //Set locale
-    driver.get( baseUrl + "Home?locale=en-US" );
+    this.elemHelper.Get( baseUrl + "Home?locale=en-US" );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
-    //Go to Sparkl sample
-    driver.get( baseUrl + "plugin/CDE404/api/i18ntest" );
+    // Go to Sparkl sample
+    this.elemHelper.Get( baseUrl + "plugin/CDE404/api/i18ntest" );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -105,8 +105,8 @@ public class CDF430 extends BaseTest {
     /*
      * ## Step 2
      */
-    //Go to CDE sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/generatedContent" );
+    // Go to CDE sample
+    this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/generatedContent" );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -131,8 +131,8 @@ public class CDF430 extends BaseTest {
     /*
      * ## Step 3
      */
-    //Go to CDE sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDF%3Acdf_i18nTest.xcdf/generatedContent?locale=en-US" );
+    // Go to CDE sample
+    this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDF%3Acdf_i18nTest.xcdf/generatedContent?locale=en-US" );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

@@ -80,10 +80,10 @@ public class CDEDataPanel extends BaseTest {
      * ## Step 1
      */
     //Open CDE sample in edit mode
-    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.Get( PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    //Go to Components Panel
+    // Go to Components Panel
     this.elemHelper.Click( driver, By.xpath( "//div[@title='Datasources Panel']/a" ) );
 
     //Add some Datasources
@@ -137,7 +137,7 @@ public class CDEDataPanel extends BaseTest {
     sqlJdbc = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[5]" ) );
     assertNotNull( sqlJdbc );
 
-    //Go to to sqlJndi and assert it's selected
+    // Go to to sqlJndi and assert it's selected
     a.sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[6]" ), "class", "child-of-SQL initialized collapsed ui-state-active" );
     String areaChartClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-datasources-datasources']/tbody/tr[6]" ) ).getAttribute( "class" );

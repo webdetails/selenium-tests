@@ -30,7 +30,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -47,7 +46,7 @@ import com.pentaho.selenium.BaseTest;
 public class AnalyzerComponent extends BaseTest {
 	// Access to wrapper for webdriver
 	private final ElementHelper elemHelper = new ElementHelper();
-	//Log instance
+	// Log instance
 	private final Logger log = LogManager.getLogger( AnalyzerComponent.class );
 
 	/**
@@ -89,14 +88,17 @@ public class AnalyzerComponent extends BaseTest {
 	@Test
 	public void tc1_PageContent_DisplayTitle() {
 		this.log.info( "tc1_PageContent_DisplayTitle" );
+
 		// Wait for title become visible and with value 'Community Dashboard Framework'
-		wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
-		// Wait for visibility of 'VisualizationAPIComponent'
-		wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+		String expectedPageTitle = "Community Dashboard Framework";
+		String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+		// Wait for visibility of 'AnalyzerComponent'
+		String expectedSampleTitle = "AnalyzerComponent";
+		String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
 
 		// Validate the sample that we are testing is the one
-		assertEquals( "Community Dashboard Framework", driver.getTitle() );
-		assertEquals( "AnalyzerComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+		assertEquals( actualPageTitle, expectedPageTitle );
+		assertEquals( actualSampleTitle, expectedSampleTitle );
 	}
 
 	/**
@@ -136,7 +138,7 @@ public class AnalyzerComponent extends BaseTest {
 
 		//Check the number of divs with id 'SampleObject'
 		//Hence, we guarantee when click Try Me the previous div is replaced
-		int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+		int nSampleObject = this.elemHelper.FindElements(driver, By.id( "sampleObject" ) ).size();
 		assertEquals( 1, nSampleObject );
 	}
 

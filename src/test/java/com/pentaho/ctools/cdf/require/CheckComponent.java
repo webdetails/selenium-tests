@@ -43,7 +43,7 @@ import com.pentaho.selenium.BaseTest;
 public class CheckComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( CheckComponent.class );
 
   /**
@@ -58,7 +58,7 @@ public class CheckComponent extends BaseTest {
 
     // The URL for the CheckComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/CheckComponent
-    driver.get( PageUrl.CHECK_COMPONENT_REQUIRE );
+    this.elemHelper.Get( PageUrl.CHECK_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

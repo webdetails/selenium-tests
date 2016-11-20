@@ -30,10 +30,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -46,17 +46,8 @@ import com.pentaho.selenium.BaseTest;
 public class PopupComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( PopupComponent.class );
-
-  @BeforeClass
-  public void setUpTestCase() {
-    //Go to AddinReference
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Apopup.wcdf/generatedContent" );
-
-    //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-  }
 
   /**
    * ############################### Test Case 1 ###############################
@@ -72,6 +63,12 @@ public class PopupComponent extends BaseTest {
   @Test
   public void tc01_PageContent_DisplayContent() {
     this.log.info( "tc01_PageContent_DisplayContent" );
+
+    // Go to AddinReference
+    this.elemHelper.Get( driver, PageUrl.POPUP_COMPONENT );
+
+    //NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     /*
      * ## Step 1
@@ -147,7 +144,7 @@ public class PopupComponent extends BaseTest {
     this.elemHelper.ClickJS( driver, By.cssSelector( "a.close" ) );
     //wait for popup disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "a.close" ) );
-    WebElement element = driver.findElement( By.cssSelector( "a.close" ) );
+    WebElement element = this.elemHelper.FindElementInvisible( driver, By.cssSelector( "a.close" ) );
     assertFalse( element.isDisplayed() );
   }
 
@@ -189,7 +186,7 @@ public class PopupComponent extends BaseTest {
     this.elemHelper.ClickJS( driver, By.xpath( "//div[8]/a" ) );
     //wait for popup disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[8]/a" ) );
-    WebElement element = driver.findElement( By.xpath( "//div[8]/a" ) );
+    WebElement element = this.elemHelper.FindElementInvisible( driver, By.xpath( "//div[8]/a" ) );
     assertFalse( element.isDisplayed() );
   }
 }

@@ -69,8 +69,8 @@ public class CDE396 extends BaseTest {
   public void tc1_RefreshCde_ReturnsInfo() {
     this.log.info( "tc1_RefreshCde_ReturnsInfo" );
 
-    //Go to User Console
-    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh" );
+    // Go to User Console
+    this.elemHelper.Get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh" );
 
     /*
      * ## Step 1

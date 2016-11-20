@@ -29,7 +29,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -61,7 +60,7 @@ public class TrafficComponent extends BaseTest {
 
     // The URL for the TrafficComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TrafficComponent
-    driver.get( PageUrl.TRAFFIC_COMPONENT );
+    this.elemHelper.Get( driver, PageUrl.TRAFFIC_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -80,14 +79,20 @@ public class TrafficComponent extends BaseTest {
   @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
+
+    /*
+     * ## Step 1
+     */
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    String title = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
-    // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    String expectedPageTitle = "Community Dashboard Framework";
+    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    // Wait for visibility of 'TrafficComponent'
+    String expectedSampleTitle = "TrafficComponent";
+    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", title );
-    assertEquals( "TrafficComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( actualPageTitle, expectedPageTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
   }
 
   /**
@@ -118,19 +123,19 @@ public class TrafficComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
   /**
      * ############################### Test Case 3 ###############################
      *
-     * Test Case Name: 
+     * Test Case Name:
      *    Time Plot
-     * Description: 
+     * Description:
      *    For this component we need to validate when user move mouse over plot
-     *    we have new values for Total Price. 
-     * Steps: 
+     *    we have new values for Total Price.
+     * Steps:
      *    1. Check if the plot is presented
      *    2. Move mouse over graphic and check the expected value for Total Price
      */

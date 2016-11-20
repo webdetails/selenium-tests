@@ -73,7 +73,7 @@ public class CDE269 extends BaseTest {
      * ## Step 1
      */
     //Open URL
-    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/getHeaders?solution=&path=/public/plugin-samples/pentaho-cdf-dd&file=cde_sample1.wcdf&absolute=true&root=localhost:8080&scheme=https" );
+    this.elemHelper.Get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/getHeaders?solution=&path=/public/plugin-samples/pentaho-cdf-dd&file=cde_sample1.wcdf&absolute=true&root=localhost:8080&scheme=https" );
 
     //Wait for Elements and assert them
     WebElement element = this.elemHelper.FindElement( driver, By.xpath( "//body/pre" ) );

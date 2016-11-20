@@ -74,7 +74,7 @@ public class Select2Component extends BaseTest {
      * ## Step 1
      */
     //Open Created sample and click button
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-474%3ACDF-474.wcdf/generatedContent" );
+    this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-474%3ACDF-474.wcdf/generatedContent" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
 
     //Click first dropdown

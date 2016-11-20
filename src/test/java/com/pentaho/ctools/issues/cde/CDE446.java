@@ -78,7 +78,7 @@ public class CDE446 extends BaseTest {
      * ## Step 1
      */
     //Open created dashboard's cda file
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDE/CDE-446/CDE-446.cda" );
+    this.elemHelper.Get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDE/CDE-446/CDE-446.cda" );
     this.elemHelper.FindElement( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 

@@ -43,7 +43,7 @@ import com.pentaho.selenium.BaseTest;
 public class ButtonComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( ButtonComponent.class );
 
   /**
@@ -58,7 +58,7 @@ public class ButtonComponent extends BaseTest {
 
     // The URL for the ButtonComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/ButtonComponent
-    driver.get( PageUrl.BUTTON_COMPONENT_REQUIRE );
+    this.elemHelper.Get( driver, PageUrl.BUTTON_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );

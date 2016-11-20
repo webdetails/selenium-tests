@@ -76,8 +76,8 @@ public class CDE347 extends BaseTest {
 		/*
 		 * ## Step 1
 		 */
-		//Go to Bullet Chart sample
-		driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit" );
+		// Go to Bullet Chart sample
+		this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Accc_bullet.wcdf/edit" );
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 		//Wait for buttons: Layout. Components, Datasources AND Preview
 		WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@title='Datasources Panel']" ) );

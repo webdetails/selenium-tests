@@ -81,8 +81,8 @@ public class CDE286 extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to New CDE Dashboard
-    driver.get( PageUrl.CDE_DASHBOARD );
+    // Go to New CDE Dashboard
+    this.elemHelper.Get( PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //assert buttons
     WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Save as Template']" ) );
@@ -238,7 +238,7 @@ public class CDE286 extends BaseTest {
     /*
      * ## Step 4
      */
-    driver.get( expectedURL + "&paramvalue=25" );
+    this.elemHelper.Get( expectedURL + "&paramvalue=25" );
     WebElement elemImg = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
     assertNotNull( elemImg );
     String actualImgUrl = this.elemHelper.GetAttribute( driver, By.cssSelector( "img" ), "src" );

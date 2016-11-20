@@ -78,10 +78,10 @@ public class CDE430 extends BaseTest {
      * ## Step 1 
      */
     //New CDE dashboard
-    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.Get( PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    //Go to components Panel
+    // Go to components Panel
     WebElement componentsButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( componentsButton );
     componentsButton.click();

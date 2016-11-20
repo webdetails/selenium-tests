@@ -32,7 +32,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -50,83 +49,86 @@ import com.pentaho.selenium.BaseTest;
  * NOTE - The test was created regarding issue CDF-318
  */
 public class MetaLayerHomeDashboard extends BaseTest {
-	// Access to wrapper for webdriver
-	private final ElementHelper elemHelper = new ElementHelper();
-	//Log instance
-	private final Logger log = LogManager.getLogger( MetaLayerHomeDashboard.class );
+  // Access to wrapper for webdriver
+  private final ElementHelper elemHelper = new ElementHelper();
+  // Log instance
+  private final Logger log = LogManager.getLogger( MetaLayerHomeDashboard.class );
 
-	/**
-	 * ############################### Test Case 1 ###############################
-	 *
-	 * Test Case Name:
-	 *    MetaLayer Home Dashboard - clicking details
-	 * Description:
-	 *    We pretend to validate when user click on 'Details...' a pop-up message
-	 *    is displayed.
-	 * Steps:
-	 *    1. Open the MetaLayer Home Dashboard.
-	 *    2. Click in 'Details...'.
-	 *    3. Check if we have width = 500 and height = 600
-	 */
-	@Test
-	public void tc1_LinkDetails_PopupJPivot() {
-		this.log.info( "tc1_LinkDetails_PopupJPivot" );
+  /**
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    MetaLayer Home Dashboard - clicking details
+   * Description:
+   *    We pretend to validate when user click on 'Details...' a pop-up message
+   *    is displayed.
+   * Steps:
+   *    1. Open the MetaLayer Home Dashboard.
+   *    2. Click in 'Details...'.
+   *    3. Check if we have width = 500 and height = 600
+   */
+  @Test
+  public void tc1_LinkDetails_PopupJPivot() {
+    this.log.info( "tc1_LinkDetails_PopupJPivot" );
 
-		/*
-		 * ## Step 1
-		 */
-		driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalayer.xcdf/generatedContent" );
+    /*
+     * ## Step 1
+     */
+    this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A20-samples%3Ahome_dashboard_2%3Ahome_dashboard_metalayer.xcdf/generatedContent" );
 
-		//NOTE - we have to wait for loading disappear
-		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    //NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-		//Wait for title become visible and with value 'Community Dashboard Framework'
-		wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
-		//Wait for visibility of 'Top Ten Customers'
-		wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='titleObject']" ) ) );
-		// Validate the sample that we are testing is the one
-		assertEquals( "Community Dashboard Framework", driver.getTitle() );
-		assertEquals( "Top Ten Customers", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='titleObject']" ) ) );
+    // Wait for title become visible and with value 'Community Dashboard Framework'
+    String expectedPageTitle = "Community Dashboard Framework";
+    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    // Wait for visibility of 'Top Ten Customers'
+    String expectedSampleTitle = "Top Ten Customers";
+    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
 
-		/*
-		 * ## Step 2
-		 */
-		//Wait for visibility of 'topTenCustomersDetailsObject' the text 'Details'
-		WebElement linkDetails = this.elemHelper.FindElement( driver, By.linkText( "Details..." ) );
-		assertEquals( "Details...", linkDetails.getText() );
-		//click on the 'Details...'
-		linkDetails.click();
+    // Validate the sample that we are testing is the one
+    assertEquals( actualPageTitle, expectedPageTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
 
-		/*
-		 * ## Step 3
-		 */
-		//Wait for the frame
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "fancybox-content" ) );
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//iframe" ) );
-		WebElement frame = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
-		String valueFrameAttrSrc = frame.getAttribute( "src" );
+    /*
+     * ## Step 2
+     */
+    //Wait for visibility of 'topTenCustomersDetailsObject' the text 'Details'
+    WebElement linkDetails = this.elemHelper.FindElement( driver, By.linkText( "Details..." ) );
+    assertEquals( "Details...", linkDetails.getText() );
+    //click on the 'Details...'
+    linkDetails.click();
 
-		//Check if we have the sizes 500 and 600
-		assertTrue( StringUtils.containsIgnoreCase( valueFrameAttrSrc, "&width=500&height=600" ) );
+    /*
+     * ## Step 3
+     */
+    //Wait for the frame
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "fancybox-content" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//iframe" ) );
+    WebElement frame = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
+    String valueFrameAttrSrc = frame.getAttribute( "src" );
 
-		//NOTE - we have to wait for loading disappear
-		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    //Check if we have the sizes 500 and 600
+    assertTrue( StringUtils.containsIgnoreCase( valueFrameAttrSrc, "&width=500&height=600" ) );
 
-		//Wait for the element be visible.
-		WebDriver driverFrame = this.elemHelper.SwitchToFrame( driver, frame );
-		assertNotNull( this.elemHelper.FindElement( driverFrame, By.xpath( "//div[@id='internal_content']" ) ) );
-		assertEquals( "Measures", this.elemHelper.WaitForElementPresentGetText( driverFrame, By.xpath( "//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]" ) ) );
-		assertEquals( "Australian Collectors, Co.", this.elemHelper.WaitForElementPresentGetText( driverFrame, By.xpath( "//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div" ) ) );
-		assertEquals( "180,125", this.elemHelper.WaitForElementPresentGetText( driverFrame, By.xpath( "//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td" ) ) );
+    //NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-		//Close pop-up
-		this.elemHelper.SwitchToDefault( driver );
-		wait.until( ExpectedConditions.elementToBeClickable( By.id( "fancybox-close" ) ) );
-		String background = this.elemHelper.FindElement( driver, By.cssSelector( "#fancybox-close" ) ).getCssValue( "background-image" );
-		String background1 = background.substring( background.indexOf( 34 ) + 1, background.lastIndexOf( 34 ) );
-		assertEquals( baseUrl + "plugin/pentaho-cdf/api/resources/js/compressed/lib/fancybox/fancybox.png", background1 );
-		this.elemHelper.ClickJS( driver, By.id( "fancybox-close" ) );
-		this.elemHelper.WaitForElementInvisibility( driver, By.id( "fancybox-content" ) );
-		assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( background1, pentahoBaServerUsername, pentahoBaServerPassword ) );
-	}
+    //Wait for the element be visible.
+    WebDriver driverFrame = this.elemHelper.SwitchToFrame( driver, frame );
+    assertNotNull( this.elemHelper.FindElement( driverFrame, By.xpath( "//div[@id='internal_content']" ) ) );
+    assertEquals( "Measures", this.elemHelper.WaitForElementPresentGetText( driverFrame, By.xpath( "//div[@id='internal_content']/table/tbody/tr[2]/td[2]/p/table/tbody/tr/th[2]" ) ) );
+    assertEquals( "Australian Collectors, Co.", this.elemHelper.WaitForElementPresentGetText( driverFrame, By.xpath( "//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[5]/th/div" ) ) );
+    assertEquals( "180,125", this.elemHelper.WaitForElementPresentGetText( driverFrame, By.xpath( "//div[@id='internal_content']/table[1]/tbody/tr[2]/td[2]/p[1]/table/tbody/tr[7]/td" ) ) );
+
+    //Close pop-up
+    this.elemHelper.SwitchToDefault( driver );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "fancybox-close" ) );
+    String background = this.elemHelper.FindElement( driver, By.cssSelector( "#fancybox-close" ) ).getCssValue( "background-image" );
+    String background1 = background.substring( background.indexOf( 34 ) + 1, background.lastIndexOf( 34 ) );
+    assertEquals( baseUrl + "plugin/pentaho-cdf/api/resources/js/compressed/lib/fancybox/fancybox.png", background1 );
+    this.elemHelper.ClickJS( driver, By.id( "fancybox-close" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "fancybox-content" ) );
+    assertEquals( HttpStatus.SC_OK, HttpUtils.GetHttpStatus( background1, pentahoBaServerUsername, pentahoBaServerPassword ) );
+  }
 }

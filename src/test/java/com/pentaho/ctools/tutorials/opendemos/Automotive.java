@@ -16,7 +16,7 @@ import com.pentaho.selenium.BaseTest;
 public class Automotive extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( Automotive.class );
 
   private CdeOpenDemos cde = new CdeOpenDemos();

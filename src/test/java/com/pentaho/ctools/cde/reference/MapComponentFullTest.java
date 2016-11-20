@@ -69,7 +69,7 @@ public class MapComponentFullTest extends BaseTest {
     this.log.info( "tc0_OpenSamplePage" );
 
     // Go to MapComponentFullTest
-    driver.get( PageUrl.MAP_COMPONENT_FULL_TEST );
+    this.elemHelper.Get( driver, PageUrl.MAP_COMPONENT_FULL_TEST );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
@@ -160,12 +160,12 @@ public class MapComponentFullTest extends BaseTest {
      * ## Step 2
      */
     // Zoom in - in order for the elements to be visible
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div[5]/div[3]" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div[5]/div[3]" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     Actions acts2 = new Actions( driver );
-    acts2.moveToElement( driver.findElement( By.id( "dfooter" ) ) ).perform();
+    acts2.moveToElement( this.elemHelper.FindElement( driver, By.id( "dfooter" ) ) ).perform();
     // >>> Open Marker 1
-    driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
@@ -186,10 +186,10 @@ public class MapComponentFullTest extends BaseTest {
     WebElement marker1SeriesTrains = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='HiddenContentCol']/div/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='path'][5]" ) );
     assertEquals( "rgb(148,103,189)", marker1SeriesTrains.getAttribute( "fill" ) );
     // Close popup
-    this.elemHelper.FindElement( driver, By.id( "featurePopup_close" ) ).click();
+    this.elemHelper.Click( driver, By.id( "featurePopup_close" ) );
 
     // >>> Open Marker 2
-    driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) );
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
@@ -209,7 +209,7 @@ public class MapComponentFullTest extends BaseTest {
     this.elemHelper.FindElement( driver, By.id( "featurePopup_close" ) ).click();
 
     // >>> Open Marker 3
-    driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) );
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
@@ -227,7 +227,7 @@ public class MapComponentFullTest extends BaseTest {
     this.elemHelper.FindElement( driver, By.id( "featurePopup_close" ) ).click();
 
     // >>> Open Marker 4
-    driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][4]" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][4]" ) );
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
@@ -253,7 +253,7 @@ public class MapComponentFullTest extends BaseTest {
     this.elemHelper.FindElement( driver, By.id( "featurePopup_close" ) ).click();
 
     // >>> Open Marker 5
-    driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][5]" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][5]" ) );
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
@@ -279,7 +279,7 @@ public class MapComponentFullTest extends BaseTest {
     this.elemHelper.FindElement( driver, By.id( "featurePopup_close" ) ).click();
 
     // >>> Open Marker 6
-    driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][6]" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][6]" ) );
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
@@ -297,7 +297,7 @@ public class MapComponentFullTest extends BaseTest {
     this.elemHelper.FindElement( driver, By.id( "featurePopup_close" ) ).click();
 
     // >>> Open Marker 7
-    driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][7]" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][7]" ) );
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
@@ -321,7 +321,7 @@ public class MapComponentFullTest extends BaseTest {
     /*
      * ## Step 3
      */
-    driver.findElement( By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][5]" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][5]" ) );
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );

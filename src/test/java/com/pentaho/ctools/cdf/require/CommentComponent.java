@@ -57,7 +57,7 @@ public class CommentComponent extends BaseTest {
   public Boolean tcRemoveComment = false;
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( CommentComponent.class );
 
   /**
@@ -71,7 +71,7 @@ public class CommentComponent extends BaseTest {
     this.log.info( "tc0_OpenSamplePage_Display" );
     // The URL for the CommentComponent under CDF samples
     // This sample is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/CommentComponent
-    driver.get( PageUrl.COMMENT_COMPONENT_REQUIRE );
+    this.elemHelper.Get( PageUrl.COMMENT_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
@@ -132,7 +132,7 @@ public class CommentComponent extends BaseTest {
     int nCommentComponent = 0;
     WebElement divComment = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.commentComponent" ) );
     if ( divComment != null ) {
-      nCommentComponent = driver.findElements( By.cssSelector( "div.commentComponent" ) ).size();
+      nCommentComponent = this.elemHelper.FindElements( driver, By.cssSelector( "div.commentComponent" ) ).size();
     }
     assertEquals( nCommentComponent, 1 );
   }
@@ -212,7 +212,7 @@ public class CommentComponent extends BaseTest {
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.navigateRefresh" ) );
     //Check if the comment was added
     String strCommentTimeAdded = "admin, " + sdf.format( timeAddedComment1 );
-    // Need to remove the last digit of minutes to avoid failing. Because, we 
+    // Need to remove the last digit of minutes to avoid failing. Because, we
     // could catch something like 14:22 and the comment was added at 14:21:59
     strCommentTimeAdded = strCommentTimeAdded.substring( 0, strCommentTimeAdded.length() - 1 );
     String commentDetails1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
@@ -242,7 +242,7 @@ public class CommentComponent extends BaseTest {
     //Check if the comment was added
     //Comment added 2
     String strCommentTimeAdded2 = "admin, " + sdf.format( timeAddedComment2 );
-    // Need to remove the last digit of minutes to avoid failing. Because, we 
+    // Need to remove the last digit of minutes to avoid failing. Because, we
     // could catch something like 14:22 and the comment was added at 14:21:59
     strCommentTimeAdded2 = strCommentTimeAdded2.substring( 0, strCommentTimeAdded2.length() - 1 );
     String commentDetails2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
@@ -278,7 +278,7 @@ public class CommentComponent extends BaseTest {
     //Check if the comment was added
     //Comment added 3
     String strCommentTimeAdded3 = "admin, " + sdf.format( timeAddedComment3 );
-    // Need to remove the last digit of minutes to avoid failing. Because, we 
+    // Need to remove the last digit of minutes to avoid failing. Because, we
     // could catch something like 14:22 and the comment was added at 14:21:59
     strCommentTimeAdded3 = strCommentTimeAdded3.substring( 0, strCommentTimeAdded3.length() - 1 );
     String commentDetails3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
@@ -366,7 +366,7 @@ public class CommentComponent extends BaseTest {
 
     driver.manage().timeouts().implicitlyWait( 2, TimeUnit.SECONDS );
 
-    List<WebElement> listEraseComments = driver.findElements( By.cssSelector( "div.archive" ) );
+    List<WebElement> listEraseComments = elemHelper.FindElements( driver, By.cssSelector( "div.archive" ) );
     int nIteractions = listEraseComments.size();
     this.log.info( "Number elements to remove: " + nIteractions );
     if ( nIteractions > 0 ) {
@@ -384,6 +384,7 @@ public class CommentComponent extends BaseTest {
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
   }
 
+  @Override
   @AfterClass( alwaysRun = true )
   public void tearDownClass() {
     if ( this.tcRemoveComment ) {

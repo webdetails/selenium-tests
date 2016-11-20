@@ -30,9 +30,7 @@ import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
@@ -49,7 +47,7 @@ import com.pentaho.selenium.BaseTest;
 public class MonthPickerComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( MonthPickerComponent.class );
 
   /**
@@ -64,7 +62,7 @@ public class MonthPickerComponent extends BaseTest {
 
     // The URL for the MonthPickerComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/MonthPickerComponent
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A46-MonthPickerComponent%3Amonth_picker_component.xcdf/generatedContent" );
+    this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A46-MonthPickerComponent%3Amonth_picker_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -84,14 +82,19 @@ public class MonthPickerComponent extends BaseTest {
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
+    /*
+     * ## Step1
+     */
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
-    // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    String expectedPageTitle = "Community Dashboard Framework";
+    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    // Wait for visibility of 'MonthPickerComponent'
+    String expectedSampleTitle = "MonthPickerComponent";
+    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "MonthPickerComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( actualPageTitle, expectedPageTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
   }
 
   /**
@@ -123,7 +126,7 @@ public class MonthPickerComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements(driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -156,11 +159,7 @@ public class MonthPickerComponent extends BaseTest {
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "monthPickerComponent" ) ) );
     select.selectByValue( strTimeToPick );
 
-    wait.until( ExpectedConditions.alertIsPresent() );
-    Alert alert = driver.switchTo().alert();
-    String confirmationMsg = alert.getText();
-    alert.accept();
-
-    assertEquals( "You chose: " + strTimeToPick, confirmationMsg );
+    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    assertEquals( confirmationMsg, "You chose: " + strTimeToPick );
   }
 }

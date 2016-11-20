@@ -74,7 +74,7 @@ public class CDF501 extends BaseTest {
      * ## Step 1
      */
     //Open Created sample with params on the URL
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-501%3Aurl_param.wcdf/generatedContent?paramtype=success&type=awesome" );
+    this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-501%3Aurl_param.wcdf/generatedContent?paramtype=success&type=awesome" );
 
     /*
      * ## Step 2

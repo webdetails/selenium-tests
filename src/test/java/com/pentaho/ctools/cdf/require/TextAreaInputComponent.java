@@ -43,7 +43,7 @@ import com.pentaho.selenium.BaseTest;
 public class TextAreaInputComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( TextAreaInputComponent.class );
 
   /**
@@ -51,8 +51,8 @@ public class TextAreaInputComponent extends BaseTest {
    */
   @BeforeClass
   public void setUpClass() {
-    //Go to AddinReference
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextareaInputComponent%3Atext_area_input_component.xcdf/generatedContent" );
+    // Go to AddinReference
+    this.elemHelper.Get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextareaInputComponent%3Atext_area_input_component.xcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -135,7 +135,7 @@ public class TextAreaInputComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements(driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 

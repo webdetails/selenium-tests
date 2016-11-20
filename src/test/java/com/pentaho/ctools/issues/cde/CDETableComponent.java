@@ -97,7 +97,7 @@ public class CDETableComponent extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_EDIT );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    //Go to components panel, expand other components and select table component
+    // Go to components panel, expand other components and select table component
     WebElement buttonComponentPanel = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( buttonComponentPanel );
     buttonComponentPanel.click();

@@ -43,7 +43,7 @@ import com.pentaho.selenium.BaseTest;
 public class DialChart extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( DialChart.class );
 
   /**
@@ -62,7 +62,7 @@ public class DialChart extends BaseTest {
     /*
      * ## Step 1
      */
-    driver.get( PageUrl.DIAL_CHART );
+    this.elemHelper.Get( PageUrl.DIAL_CHART );
 
     //Check Pointer
     WebElement elemPointer = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='polygon'][@id='ponteiro' and @transform='rotate(62.99999999999999,300,275)']" ) );

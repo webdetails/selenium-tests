@@ -45,7 +45,7 @@ import com.pentaho.selenium.BaseTest;
 public class TimePlotComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( TimePlotComponent.class );
 
   /**
@@ -60,7 +60,7 @@ public class TimePlotComponent extends BaseTest {
 
     // The URL for the TimePlotComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/TimePlotComponent
-    driver.get( PageUrl.TIME_COMPONENT_REQUIRE );
+    this.elemHelper.Get( PageUrl.TIME_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
@@ -120,7 +120,7 @@ public class TimePlotComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements(driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
 
     //It could be possible to raise an error of "Error processing component" and the workaround is refresh the page.

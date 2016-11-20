@@ -6,3 +6,4 @@ lib/ext/
 /.settings/
 /.project
 /.classpath
+/bin/

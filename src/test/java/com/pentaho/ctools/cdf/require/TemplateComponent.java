@@ -46,7 +46,7 @@ import com.pentaho.selenium.BaseTest;
 public class TemplateComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( TemplateComponent.class );
 
   /**
@@ -54,8 +54,8 @@ public class TemplateComponent extends BaseTest {
    */
   @BeforeClass
   public void setUpTestCase() {
-    //Go to AddinReference
-    driver.get( PageUrl.TEMPLATE_COMPONENT_REQUIRE );
+    // Go to AddinReference
+    this.elemHelper.Get( PageUrl.TEMPLATE_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -142,7 +142,7 @@ public class TemplateComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements(driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
