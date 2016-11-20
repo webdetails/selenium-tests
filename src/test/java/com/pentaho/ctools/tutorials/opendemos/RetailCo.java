@@ -20,7 +20,7 @@ import com.pentaho.selenium.BaseTest;
 public class RetailCo extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( RetailCo.class );
 
   private CdeOpenDemos cde = new CdeOpenDemos();

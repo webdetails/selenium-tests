@@ -42,6 +42,7 @@ import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -113,7 +114,7 @@ public class CDAExportToXls extends BaseTest {
      * ## Step 1
      */
     //Open sample CDA file
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-100/CDA-100.cda" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDA_100 );
 
     //wait for invisibility of waiting pop-up
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 180 );
@@ -139,10 +140,8 @@ public class CDAExportToXls extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
 
     //Check the presented contains
-    WebElement elemStatus = this.elemHelper.FindElement( driver, By.id( "status" ) );
-    assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
-    elemStatus = this.elemHelper.FindElement( driver, By.id( "orderDate" ) );
-    assertEquals( "2003-03-01", elemStatus.getAttribute( "value" ) );
+    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "status" ), "value" ), "Shipped" );
+    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "orderDate" ), "value" ), "2003-03-01" );
 
     //Check text on table
     String columnOneRowOne = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
@@ -217,7 +216,7 @@ public class CDAExportToXls extends BaseTest {
      * ## Step 1
      */
     //Open Issue Sample
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-112/cda112.cda" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDA_112 );
 
     //wait for invisibility of waiting pop-up
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 180 );
@@ -338,7 +337,7 @@ public class CDAExportToXls extends BaseTest {
      * ## Step 1
      */
     //Open Issue Sample
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-118/sql-jndi-Copy.cda" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDA_118_COPY );
 
     //wait for invisibility of waiting pop-up
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 180 );
@@ -435,8 +434,8 @@ public class CDAExportToXls extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to sql-jdbc CDA sample
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-stringArray-jndi.cda" );
+    // Go to sql-jdbc CDA sample
+    this.elemHelper.Get( driver, PageUrl.SQL_STRINGARRAY_JNDI );
 
     //wait for invisibility of waiting pop-up
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ), 180 );
@@ -461,15 +460,13 @@ public class CDAExportToXls extends BaseTest {
      * ## Step 2
      */
     //Check the presented contains
-    WebElement elemStatus = this.elemHelper.FindElement( driver, By.id( "countries" ) );
-    assertEquals( "France;USA", elemStatus.getAttribute( "value" ) );
+    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "countries" ), "value" ), "France;USA" );
     //Check text on table
     String columnOneRowOne = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
     String columnTwoRowOne = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td[2]" ) );
     assertEquals( "Alpha Cognac", columnOneRowOne );
     assertEquals( "61100", columnTwoRowOne );
-    elemStatus = this.elemHelper.FindElement( driver, By.id( "countries" ) );
-    elemStatus.clear();
+    this.elemHelper.Clear( driver, By.id( "countries" ) );
     refreshButton = this.elemHelper.FindElement( driver, By.xpath( "//button[@id='button']" ) );
     assertNotNull( refreshButton );
     refreshButton.click();
@@ -480,8 +477,7 @@ public class CDAExportToXls extends BaseTest {
     //wait to render page
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
     //Check the presented contains
-    elemStatus = this.elemHelper.FindElement( driver, By.id( "countries" ) );
-    assertEquals( "", elemStatus.getAttribute( "value" ) );
+    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "countries" ), "value" ), "" );
     //Check text on table
     columnOneRowOne = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
     assertEquals( "No results.", columnOneRowOne );
@@ -526,6 +522,7 @@ public class CDAExportToXls extends BaseTest {
     }
   }
 
+  @Override
   @AfterClass( alwaysRun = true )
   public void tearDownClass() {
     this.log.info( "tearDownClass" );

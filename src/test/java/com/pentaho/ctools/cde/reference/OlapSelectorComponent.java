@@ -28,10 +28,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -53,13 +53,13 @@ public class OlapSelectorComponent extends BaseTest {
    *    Sniff test to sample
    *
    * Description:
-   *    This test is to assert simple functionality of sample 
+   *    This test is to assert simple functionality of sample
    *
    * Steps:
    *    1. Opne sample and assert selector button is shown
    *    2. Click button and assert options are shown
    *    3. Make options and click ok, assert options were correctly selected
-   *    
+   *
    */
   @Test
   public void tc1_OlapSelectorComponent_SniffTestSample() {
@@ -69,14 +69,15 @@ public class OlapSelectorComponent extends BaseTest {
      * ## Step 1
      */
     // Go to Olap Selector Sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3AOlapSelector%3AolapSelector.wcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.OLAP_SELECTOR_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Check page title
-    wait.until( ExpectedConditions.titleIs( "olapSelector" ) );
-    assertEquals( "olapSelector", driver.getTitle() );
+    String expectedTitle = "olapSelector";
+    String actualTitle = this.elemHelper.WaitForTitle( driver, expectedTitle );
+    assertEquals( actualTitle, expectedTitle );
 
     // Wait for Selector button
     WebElement selectorButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='title']" ) );
@@ -104,9 +105,9 @@ public class OlapSelectorComponent extends BaseTest {
     /*
      * ## Step 3
      */
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='options']//span[@title='Alpha Cognac']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='options']//span[@title='Asian Shopping Network, Co']" ) ).click();
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='options']//span[@title='Diecast Collectables']" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@class='options']//span[@title='Alpha Cognac']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@class='options']//span[@title='Asian Shopping Network, Co']" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@class='options']//span[@title='Diecast Collectables']" ) );
     WebElement applyButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='footer']/div[@class='button validate']" ) );
     assertNotNull( applyButton );
     applyButton.click();

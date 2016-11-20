@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -73,8 +74,8 @@ public class CDF486 extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to New CDE Dashboard
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent" );
+    // Go to New CDE Dashboard
+    this.elemHelper.Get( driver, PageUrl.SAMPLE_BLUEPRINT );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -98,8 +99,8 @@ public class CDF486 extends BaseTest {
     /*
      * ## Step 2
      */
-    //Go to New CDE Dashboard
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A20-samples%3Ablueprint%3Ablueprint.xcdf/generatedContent?dashboardType=clean" );
+    // Go to New CDE Dashboard
+    this.elemHelper.Get( driver, PageUrl.SAMPLE_BLUEPRINT_DASHBOARDTYPE_CLEAN );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

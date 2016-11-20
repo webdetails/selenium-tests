@@ -66,7 +66,7 @@ import com.pentaho.selenium.BaseTest;
  * - http://jira.pentaho.com/browse/QUALITY-997
  * - http://jira.pentaho.com/browse/QUALITY-1141
  * - http://jira.pentaho.com/browse/QUALITY-1142
- * 
+ *
  * NOTE
  * To test this script it is required to have CDE plugin installed.
  *
@@ -116,8 +116,8 @@ public class CDELayoutPanel extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to New CDE Dashboard
-    driver.get( PageUrl.CDE_DASHBOARD );
+    // Go to New CDE Dashboard
+    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Open Dashboard Settings and assert bootstrap is selected as renderer
@@ -322,7 +322,7 @@ public class CDELayoutPanel extends BaseTest {
     WebElement secondColumn = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[7]" ) );
     assertNotNull( secondColumn );
 
-    //Go to second column and back to first and assert first column is selected
+    // Go to second column and back to first and assert first column is selected
     a.sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( "c" ).sendKeys( Keys.TAB ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ), "class", "ui-state-active" );
     String firstColumnClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[8]" ) ).getAttribute( "class" );
@@ -423,7 +423,7 @@ public class CDELayoutPanel extends BaseTest {
     //Open dashboard in edit
     this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_366_EDIT );
 
-    //Open Settings and assert Style and Dashboard Type were saved 
+    //Open Settings and assert Style and Dashboard Type were saved
     settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
     assertNotNull( settingsLink );
     settingsLink.click();

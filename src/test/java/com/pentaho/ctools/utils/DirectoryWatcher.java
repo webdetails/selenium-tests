@@ -41,7 +41,7 @@ import org.apache.logging.log4j.Logger;
 public class DirectoryWatcher {
   //Time to wait for a file or something new get in directory
   private final long waitTimeout = 30;
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( DirectoryWatcher.class );
 
   /**

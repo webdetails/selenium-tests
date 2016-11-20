@@ -44,7 +44,7 @@ import com.pentaho.selenium.BaseTest;
 public class AutoCompleteBoxComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( AutoCompleteBoxComponent.class );
 
   /**
@@ -67,7 +67,7 @@ public class AutoCompleteBoxComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    driver.get( PageUrl.AUTOCOMPLETE_BOX_COMPONENT_REQUIRE );
+    this.elemHelper.Get( driver, PageUrl.AUTOCOMPLETE_BOX_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -85,9 +85,9 @@ public class AutoCompleteBoxComponent extends BaseTest {
     /*
      * ## Step 2
      */
-    //Render again the sample 
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    //Render again the sample
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -98,8 +98,7 @@ public class AutoCompleteBoxComponent extends BaseTest {
      * ## Step 3
      */
     //Key press 'a'
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "input.autocomplete-input.ui-autocomplete-input" ) );
-    this.elemHelper.FindElement( driver, By.cssSelector( "input.autocomplete-input.ui-autocomplete-input" ) ).sendKeys( "a" );
+    this.elemHelper.SendKeys( driver, By.cssSelector( "input.autocomplete-input.ui-autocomplete-input" ), "a" );
 
     //Retrieve data by pressing key 'a'
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "ul.ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content.ui-corner-all" ), 45 );

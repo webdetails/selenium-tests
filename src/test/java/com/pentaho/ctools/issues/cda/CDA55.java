@@ -32,6 +32,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -75,8 +76,8 @@ public class CDA55 extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to User Console
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-55/sample-kettle-ParamArray.cda" );
+    // Go to User Console
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDA_55 );
 
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dataAccessSelector" ) );
     assertNotNull( element );
@@ -95,10 +96,8 @@ public class CDA55 extends BaseTest {
      * ## Step 2
      */
     //Check the presented contains
-    WebElement elemCountries = this.elemHelper.FindElement( driver, By.id( "countries" ) );
-    assertEquals( "France;USA", elemCountries.getAttribute( "value" ) );
-    WebElement elemCostumers = this.elemHelper.FindElement( driver, By.id( "Costumers" ) );
-    assertEquals( "103;112", elemCostumers.getAttribute( "value" ) );
+    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "countries" ), "value" ), "France;USA" );
+    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "Costumers" ), "value" ), "103;112" );
     //Check we have two elements and no more than that
     String textPaging = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 2 of 2 elements", textPaging );

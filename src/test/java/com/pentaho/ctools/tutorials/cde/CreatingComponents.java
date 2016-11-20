@@ -40,7 +40,7 @@ import com.pentaho.selenium.BaseTest;
 public class CreatingComponents extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( CreatingComponents.class );
   // Instance to access CDE Tutorial
   private final CdeTutorials cdetutorial = new CdeTutorials();
@@ -82,7 +82,7 @@ public class CreatingComponents extends BaseTest {
   public void tc0_TextLinks_Displayed() {
     this.log.info( "tc0_TextLinks_Displayed" );
 
-    List<WebElement> elements = driver.findElements( By.xpath( "//p/a[contains(text(),'www.weather.com')]" ) );
+    List<WebElement> elements = this.elemHelper.FindElements(driver,  By.xpath( "//p/a[contains(text(),'www.weather.com')]" ) );
 
     this.cdetutorial.clickAndCheckPageLoaded( elements.get( 0 ), By.xpath( "//title" ), "The Weather Channel - National and Local Weather Forecast, Severe Storms, Hurricanes, Cyclones, Radar and Report from weather.com" );
 
@@ -109,8 +109,8 @@ public class CreatingComponents extends BaseTest {
     this.log.info( "tc1_PreviewAndEditLinks_Displayed" );
 
     //Multiple Preview/Edit buttons 
-    List<WebElement> editLinks = driver.findElements( By.xpath( "//a[contains(text(),'Edit')]" ) );
-    List<WebElement> previewLinks = driver.findElements( By.xpath( "//a[contains(text(),'Preview')]" ) );
+    List<WebElement> editLinks = this.elemHelper.FindElements(driver,  By.xpath( "//a[contains(text(),'Edit')]" ) );
+    List<WebElement> previewLinks = this.elemHelper.FindElements(driver,  By.xpath( "//a[contains(text(),'Preview')]" ) );
 
     //Iterators for the Edit & Preview links Lists
     Iterator<WebElement> editLink = editLinks.iterator();

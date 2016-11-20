@@ -38,11 +38,11 @@ import com.pentaho.selenium.BaseTest;
  * The script is testing the issue:
  * - http://jira.pentaho.com/browse/CDE-412
  * - http://jira.pentaho.com/browse/CDE-465
- * 
+ *
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-993
  * - http://jira.pentaho.com/browse/QUALITY-1091
- * 
+ *
  * NOTE
  * To test this script it is required to have CDE plugin installed.
  *
@@ -82,8 +82,8 @@ public class CDE412 extends BaseTest {
      * ## Step 1
      */
 
-    //Go to New CDE Dashboard
-    driver.get( PageUrl.CDE_DASHBOARD );
+    // Go to New CDE Dashboard
+    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Assert elements on page and go to Datasources Panel
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );

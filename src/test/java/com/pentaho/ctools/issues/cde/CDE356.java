@@ -88,8 +88,8 @@ public class CDE356 extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to New CDE Dashboard
-    driver.get( PageUrl.CDE_DASHBOARD );
+    // Go to New CDE Dashboard
+    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Add Row and assert it was added
@@ -209,6 +209,7 @@ public class CDE356 extends BaseTest {
     this.failure = 1;
   }
 
+  @Override
   @AfterClass( alwaysRun = true )
   public void tearDownClass() {
     this.log.info( "tearDownClass" );

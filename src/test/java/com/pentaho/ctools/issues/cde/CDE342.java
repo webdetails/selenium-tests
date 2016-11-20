@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -60,7 +61,7 @@ public class CDE342 extends BaseTest {
    *    Assert autocomplete works properly
    *
    * Description:
-   *    The test pretends validate the CDE-342 issue, so when user writes on the 
+   *    The test pretends validate the CDE-342 issue, so when user writes on the
    *    autocomplete input field, the options available update accordingly.
    *
    * Steps:
@@ -75,8 +76,8 @@ public class CDE342 extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to Issue sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-342%3Atest_simple_ac.wcdf/generatedContent" );
+    // Go to Issue sample
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_342 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //Wait for Input field
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "col1" ) );

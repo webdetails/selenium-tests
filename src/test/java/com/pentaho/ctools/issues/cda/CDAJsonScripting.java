@@ -32,6 +32,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -65,11 +66,11 @@ public class CDAJsonScripting extends BaseTest {
    *    CDA-127 - How Json Scripting datasource handles invalid numbers (0/0)
    *    CDA-130 - Asserting that Json Scripting datasource accepts null values.
    *    CDA-160 - Invalid values should return null instead "LibFormulaErrorValue{errorCode=503, errorMessage=Arithmetic Error}"
-   *       
+   *
    * Steps:
    *    1. Open sample and select "Sample query on SteelWheelsSales" on the datasources
    *    2. Wait for and assert elements and text on page
-   *    
+   *
    */
   @Test
   public void tc1_CdaFileViewer_JsonScriptingNull() {
@@ -79,7 +80,7 @@ public class CDAJsonScripting extends BaseTest {
      * ## Step 1
      */
     //Open sample CDA file
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-130/json-scripting.cda" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDA_130 );
 
     //wait for invisibility of waiting pop-up
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );

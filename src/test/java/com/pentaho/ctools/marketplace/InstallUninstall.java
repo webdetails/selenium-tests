@@ -34,6 +34,7 @@ import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.BAServerService;
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.gui.web.puc.LoginPage;
 import com.pentaho.gui.web.puc.MarketPlace;
 import com.pentaho.selenium.BaseTest;
@@ -89,7 +90,7 @@ public class InstallUninstall extends BaseTest {
      */
     market.GoToMarketPlace();
     assertTrue( market.CheckIfPluginInstalled( "Community Text Editor" ) );
-    driver.get( baseUrl + "plugin/cte/api/edit?path=/public/plugin-samples/pentaho-cdf/template.html" );
+    this.elemHelper.Get( driver, PageUrl.CTE_TEMPLATE );
     WebElement pathSpan = this.elemHelper.FindElement( driver, By.cssSelector( "span#infoArea" ) );
     assertNotNull( pathSpan );
   }
@@ -131,7 +132,7 @@ public class InstallUninstall extends BaseTest {
      */
     market.GoToMarketPlace();
     assertFalse( market.CheckIfPluginInstalled( "Community Text Editor" ) );
-    driver.get( baseUrl + "plugin/cte/api/edit?path=/public/plugin-samples/pentaho-cdf/template.html" );
+    this.elemHelper.Get( driver, PageUrl.CTE_TEMPLATE );
     WebElement pathSpan = this.elemHelper.FindElement( driver, By.cssSelector( "span#infoArea" ), 5 );
     assertNull( pathSpan );
   }

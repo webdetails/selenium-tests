@@ -39,10 +39,10 @@ import com.pentaho.selenium.BaseTest;
 /**
  * The script is testing the issue:
  *  - http://jira.pentaho.com/browse/CDE-430
- *  
+ *
  * and the automation test is described:
  *  - http://jira.pentaho.com/browse/QUALITY-1085
- *  
+ *
  * NOTE To test this script it is required to have CDE plugin installed.
  *
  * Naming convention for test: 'tcN_StateUnderTest_ExpectedBehavior'
@@ -57,13 +57,13 @@ public class CDE430 extends BaseTest {
   /**
    * ############################### Test Case 1 ###############################
    *
-   * Test Case Name: 
+   * Test Case Name:
    *   Assert Popup Export Component properties show list with type options
    *
-   * Description: 
+   * Description:
    *   The test pretends validate the CDE-430 issue, so when user clicks the down arron when Chart Exprt or Data Export Types are
    *   selected, a drop down list is shown with valid type options
-   *   
+   *
    * Steps:
    *  1. Open new CDE dashboard and go to Components Panel
    *  2. Add Export Popup Component and go to Advanced Properties
@@ -74,22 +74,22 @@ public class CDE430 extends BaseTest {
   public void tc01_PopupExportComponent_TypeListShown() {
     this.log.info( "tc01_PopupExportComponent_TypeListShown" );
 
-    /* 
-     * ## Step 1 
+    /*
+     * ## Step 1
      */
     //New CDE dashboard
-    driver.get( PageUrl.CDE_DASHBOARD );
+    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    //Go to components Panel
+    // Go to components Panel
     WebElement componentsButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( componentsButton );
     componentsButton.click();
     WebElement componentsPanel = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "panel-componentens_panel" ) );
     assertNotNull( componentsPanel );
 
-    /* 
-     * ## Step 2 
+    /*
+     * ## Step 2
      */
     //Add Export Popup Component
     WebElement expandOthers = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='cdfdd-components-pallete']/div[@id='cdfdd-components-palletePallete']/div[2]/h3/a" ) );
@@ -105,8 +105,8 @@ public class CDE430 extends BaseTest {
     advancedProperties.click();
     this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.xpath( "//div[@id='cdfdd-components-properties']/div/div/div[3]" ), "class", "advancedProperties propertiesSelected" );
 
-    /* 
-     * ## Step 3 
+    /*
+     * ## Step 3
      */
     //Assert list appears for Chart Types to Export
     WebElement chartType = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Chart Image to Export']/../td[2]" ) );
@@ -141,8 +141,8 @@ public class CDE430 extends BaseTest {
     a.sendKeys( Keys.ENTER ).sendKeys( Keys.ENTER ).build().perform();
     this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//body/ul/li/a" ) );
 
-    /* 
-     * ## Step 4 
+    /*
+     * ## Step 4
      */
     //Assert list appears for Data Types to Export
     WebElement dataType = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Type for Data File to Export']/../td[2]" ) );

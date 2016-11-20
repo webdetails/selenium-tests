@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -74,7 +75,7 @@ public class CleanDashboard extends BaseTest {
      * ## Step 1
      */
     //Open Created sample and click button
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Astart_here.xcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.SAMPLE_START_HERE );
 
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
 
@@ -88,7 +89,7 @@ public class CleanDashboard extends BaseTest {
      * ## Step 2
      */
     //Open Created sample and click button
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Astart_here.xcdf/generatedContent?dashboardType=clean" );
+    this.elemHelper.Get( driver, PageUrl.SAMPLE_START_HERE_DASHBOARDTYPE_CLEAN );
 
     //Assert script
     loadedScript = this.elemHelper.WaitForElementPresence( driver, By.tagName( "script" ) );

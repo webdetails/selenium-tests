@@ -55,11 +55,13 @@ public class FilterReference extends BaseTest {
    */
   @Test
   public void tc00_OpenSamplePage_Display() {
+    this.log.info( "tc00_OpenSamplePage_Display" );
+
     /*
      * ## Step 1
      */
     //Open Filter Component Reference sample
-    driver.get( PageUrl.FILTER_REFERENCE_COMPONENT_REQUIRE );
+    this.elemHelper.Get( driver, PageUrl.FILTER_REFERENCE_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
@@ -96,14 +98,14 @@ public class FilterReference extends BaseTest {
    *    Sniff test to Filter Component Reference
    *
    * Description:
-   *    This test is to assert simple functionality of sample 
+   *    This test is to assert simple functionality of sample
    *
    * Steps:
    *    1. Click Single Selection, search for eighteen and assert it has one result
    *    2. Select it. Assert text changed and selector closed
-   *    3. Click Multiple Selection select a value and click cancel. Assert no change to text 
+   *    3. Click Multiple Selection select a value and click cancel. Assert no change to text
    *    4. Click again, select multiple values, click apply and assert text changed
-   *        
+   *
    */
   @Test
   public void tc01_FilterComponent_FilterReference() {

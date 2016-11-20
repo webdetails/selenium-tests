@@ -32,6 +32,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -81,7 +82,7 @@ public class CDAHelpButtons extends BaseTest {
      * ## Step 1
      */
     //Open Sql-Jdbc Sample
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/plugin-samples/cda/cdafiles/sql-jdbc.cda" );
+    this.elemHelper.Get( driver, PageUrl.SQL_JDBC );
 
     //Wait for buttons: button, Cache This AND Query URL
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dataAccessSelector" ) );
@@ -100,8 +101,8 @@ public class CDAHelpButtons extends BaseTest {
     //wait to render page
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresence( driver, By.id( "outputIndexId" ) );
-    this.elemHelper.FindElement( driver, By.id( "outputIndexId" ) ).click();
-    this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
+    this.elemHelper.Click( driver, By.id( "outputIndexId" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
 
     /*
@@ -116,7 +117,7 @@ public class CDAHelpButtons extends BaseTest {
     assertEquals( "This Id is used to select the desired set of Output Options for the current Data Access.", p2Text );
     WebElement closeButton = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='outputIndexHelp']//a[@class='jqmClose']" ) );
     assertNotNull( closeButton );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='outputIndexHelp']//a[@class='jqmClose']" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='outputIndexHelp']//a[@class='jqmClose']" ) );
 
     /*
      * ## Step 3
@@ -126,8 +127,7 @@ public class CDAHelpButtons extends BaseTest {
     element.click();
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='helpButton']" ) );
     assertNotNull( element );
-    String styleText1 = this.elemHelper.FindElement( driver, By.id( "status" ) ).getAttribute( "class" );
-    assertEquals( "cdaButton cdaButtonSelected", styleText1 );
+    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "status" ), "class" ), "cdaButton cdaButtonSelected" );
 
     /*
      * ## Step 4
@@ -137,8 +137,7 @@ public class CDAHelpButtons extends BaseTest {
     element.click();
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='parameterHolder']/div[2]/div[2]/div" ) );
     assertNotNull( element );
-    String styleText2 = this.elemHelper.FindElement( driver, By.id( "orderDate" ) ).getAttribute( "class" );
-    assertEquals( "cdaButton cdaButtonSelected", styleText2 );
+    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "orderDate" ), "class" ), "cdaButton cdaButtonSelected" );
 
     /*
      * ## Step 5
@@ -147,7 +146,6 @@ public class CDAHelpButtons extends BaseTest {
     assertNotNull( element );
     element.click();
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='helpButton helpButtonShort']" ) );
-    String styleText = this.elemHelper.FindElement( driver, By.id( "outputIndexId" ) ).getAttribute( "class" );
-    assertEquals( "cdaButton cdaButtonShort cdaButtonSelected", styleText );
+    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "outputIndexId" ), "class" ), "cdaButton cdaButtonShort cdaButtonSelected" );
   }
 }

@@ -19,7 +19,7 @@
  * limitations under the License.
  *
  ******************************************************************************/
-package com.pentaho.ctools.issues.cde;
+package com.pentaho.ctools.cde.reference;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -47,11 +48,11 @@ import com.pentaho.selenium.BaseTest;
  *  'tcN_StateUnderTest_ExpectedBehavior'
  *
  */
-public class CDE438 extends BaseTest {
+public class CggComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
   // Log instance
-  private final Logger log = LogManager.getLogger( CDE438.class );
+  private final Logger log = LogManager.getLogger( CggComponent.class );
 
   /**
    * ############################### Test Case 1 ###############################
@@ -75,7 +76,7 @@ public class CDE438 extends BaseTest {
      * ## Step 1
      */
     //Open CGG Component sample
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3ACggComponent%3AcggComponent.wcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.CGG_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
