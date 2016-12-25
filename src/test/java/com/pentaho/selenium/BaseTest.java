@@ -34,12 +34,16 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
 	// Instance of the driver (browser emulator)
 	protected static WebDriver driver;
+	// Instance to be used on wait commands
+	protected static Wait<WebDriver> wait;
 	// The base url to be append the relative url in test
 	protected static String baseUrl;
 	// Directory are all download files persist
@@ -137,6 +141,9 @@ public class BaseTest {
 		BaseTest.driver.manage().timeouts().pageLoadTimeout( 180, TimeUnit.SECONDS );
 		BaseTest.driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 		BaseTest.driver.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );
+
+		// Initialize WAIT
+		wait = new FluentWait<>( BaseTest.driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 5, TimeUnit.SECONDS );
 	}
 
 	@AfterSuite
@@ -158,6 +165,14 @@ public class BaseTest {
 	 */
 	public static String getBaseUrl() {
 		return baseUrl;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public static Wait<WebDriver> getWait() {
+		return wait;
 	}
 
 	/**

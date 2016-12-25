@@ -30,6 +30,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -46,7 +47,7 @@ import com.pentaho.selenium.BaseTest;
 public class BulletChartTestCase extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( BulletChartTestCase.class );
 
   /**
@@ -59,8 +60,8 @@ public class BulletChartTestCase extends BaseTest {
   public void tc00_OpenSamplePage_Display() {
     this.log.info( "tc00_OpenSamplePage_Display" );
 
-    // Go to AddinReference
-    this.elemHelper.Get( driver, PageUrl.BULLET_CHART_TEST_CASE );
+    //Go to AddinReference
+    driver.get( PageUrl.BULLET_CHART_TEST_CASE );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -88,12 +89,11 @@ public class BulletChartTestCase extends BaseTest {
      * ## Step 0
      */
     //Check page title
-    String expectedTitle = "Bullet chart testcase";
-    String actualTitle = this.elemHelper.WaitForTitle( driver, expectedTitle );
-    assertEquals( actualTitle, expectedTitle );
+    wait.until( ExpectedConditions.titleIs( "Bullet chart testcase" ) );
+    assertEquals( "Bullet chart testcase", driver.getTitle() );
     //Check title
     String title = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#title > span" ) );
-    assertEquals( title, "Bullet chart test case" );
+    assertEquals( "Bullet chart test case", title );
 
     /*
      * ## Step 1
@@ -102,7 +102,7 @@ public class BulletChartTestCase extends BaseTest {
     //Check title
     String subtitle1 = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#subtitle1 > span" ) );
     assertEquals( "No data sent", subtitle1 );
-    //Check series title and subtitle
+    //Check serie title and subtitle
     String cht1Title1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='obj1protovis']/*[name()='svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][6]/*[name()='text']" ) );
     assertEquals( "Title", cht1Title1 );
     String cht1Subtitle1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='obj1protovis']/*[name()='svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][7]/*[name()='text']" ) );

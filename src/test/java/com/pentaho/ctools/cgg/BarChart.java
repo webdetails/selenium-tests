@@ -46,7 +46,7 @@ import com.pentaho.selenium.BaseTest;
 public class BarChart extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( BarChart.class );
 
   /**
@@ -54,10 +54,8 @@ public class BarChart extends BaseTest {
    *
    * Test Case Name:
    *    Bar Chart
-   *
    * Description:
    *    We pretend to check if an image is displayed with bares in a chart.
-   *
    * Steps:
    *    1. Open the bar chart.
    */
@@ -68,7 +66,7 @@ public class BarChart extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.Get( driver, PageUrl.BAR_CHART );
+    driver.get( PageUrl.BAR_CHART );
 
     WebElement elementImage = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
     assertNotNull( elementImage );

@@ -44,7 +44,7 @@ import com.pentaho.selenium.BaseTest;
 public class SampleDashboard extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( SampleDashboard.class );
 
   /**
@@ -55,8 +55,8 @@ public class SampleDashboard extends BaseTest {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
-    // Go to the CDE Sample Dashboard web page.
-    this.elemHelper.Get( driver, PageUrl.SAMPLE_DASHBOARD );
+    //Go to the CDE Sample Dashboard web page.
+    driver.get( PageUrl.SAMPLE_DASHBOARD );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -149,7 +149,7 @@ public class SampleDashboard extends BaseTest {
     /*
      * ## Step 2
      */
-    // Go to the end
+    //Go to the end
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
     this.elemHelper.WaitForTextPresence( driver, By.id( "tableTable_info" ), "Showing 21 to 30 of 44 entries" );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
@@ -186,7 +186,7 @@ public class SampleDashboard extends BaseTest {
     /*
      * ## Step 5
      */
-    // Go to next
+    //Go to next
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
     this.elemHelper.WaitForTextPresence( driver, By.id( "tableTable_info" ), "Showing 31 to 40 of 44 entries" );
     customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[5]/td" ) );
@@ -222,7 +222,7 @@ public class SampleDashboard extends BaseTest {
     total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[1]/td[2]" ) );
     assertEquals( "Auto Canal+ Petit", customer );
     assertEquals( "20,743.56", total );
-    // Go to next page and check the contents
+    //Go to next page and check the contents
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
     this.elemHelper.WaitForTextPresence( driver, By.id( "tableTable_info" ), "Showing 11 to 20 of 44 entries" );
     customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[5]/td" ) );
@@ -242,7 +242,7 @@ public class SampleDashboard extends BaseTest {
     total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[1]/td[2]" ) );
     assertEquals( "Salzburg Collectables", customer );
     assertEquals( "409,484.24", total );
-    // Go to next page and check the contents
+    //Go to next page and check the contents
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
     this.elemHelper.WaitForTextPresence( driver, By.id( "tableTable_info" ), "Showing 11 to 20 of 44 entries" );
     customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[5]/td" ) );

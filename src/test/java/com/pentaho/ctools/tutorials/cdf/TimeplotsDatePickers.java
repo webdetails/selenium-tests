@@ -36,7 +36,7 @@ import com.pentaho.selenium.BaseTest;
 public class TimeplotsDatePickers extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( TimeplotsDatePickers.class );
   // Instance to access CDF Tutorial page
   private final CdfTutorials cdftutorials = new CdfTutorials();

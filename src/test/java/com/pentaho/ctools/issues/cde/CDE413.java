@@ -42,7 +42,7 @@ import com.pentaho.selenium.BaseTest;
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-936
  * - http://jira.pentaho.com/browse/QUALITY-1146
- *
+ * 
  * NOTE
  * To test this script it is required to have CDE plugin installed.
  *
@@ -82,8 +82,8 @@ public class CDE413 extends BaseTest {
     /*
      * ## Step 1
      */
-    // Go to New CDE Dashboard
-    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
+    //Go to New CDE Dashboard
+    driver.get( PageUrl.CDE_DASHBOARD );
     //assert buttons
     WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Save as Template']" ) );
     WebElement buttonApplyTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Apply Template']" ) );

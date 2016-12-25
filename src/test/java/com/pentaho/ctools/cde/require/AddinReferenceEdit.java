@@ -64,7 +64,7 @@ public class AddinReferenceEdit extends BaseTest {
      * ## Step 1
      */
     // Go to AddinReference
-    this.elemHelper.Get( driver, PageUrl.ADDIN_REFERENCE_REQUIRE );
+    driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -83,7 +83,7 @@ public class AddinReferenceEdit extends BaseTest {
      * ## Step 3
      */
     // Go to AddinReference
-    this.elemHelper.Get( driver, PageUrl.ADDIN_REFERENCE_REQUIRE );
+    driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE );
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -97,27 +97,29 @@ public class AddinReferenceEdit extends BaseTest {
    */
   private void ChangeFontSize( String value ) {
     this.log.info( "ChangeFontSize" );
-    this.elemHelper.Get( driver, PageUrl.ADDIN_REFERENCE_REQUIRE_EDIT );
+    driver.get( PageUrl.ADDIN_REFERENCE_REQUIRE_EDIT );
 
     // Expand first row - Title
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
     // Click in HTML to open the Properties
     Actions acts = new Actions( driver );
-    acts.click( this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
+    acts.click( this.elemHelper.FindElement( driver, By.xpath(
+        "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
     acts.build().perform();
     // Click in field 'Font Size' to be editable
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
     // Write 34
-    this.elemHelper.SendKeysAndSubmit( driver, By.name( "value" ), value );
+    this.elemHelper.FindElement( driver, By.name( "value" ) ).clear();
+    this.elemHelper.SendKeys( driver, By.name( "value" ), value );
+    this.elemHelper.FindElement( driver, By.name( "value" ) ).submit();
     this.bFontChanged = true;
     // Save the changes
     this.elemHelper.ClickJS( driver, By.linkText( "Save" ) );
     // Wait for element present and invisible
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='notifyBar']" ) );
+    this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//div[@id='notifyBar']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='notifyBar']" ) );
   }
 
-  @Override
   @AfterClass( alwaysRun = true )
   public void tearDownClass() {
     this.log.info( "tearDownClass##" + AddinReferenceEdit.class.getSimpleName() );

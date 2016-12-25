@@ -31,7 +31,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -44,7 +43,7 @@ import com.pentaho.selenium.BaseTest;
 public class TextAreaInputComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( TextAreaInputComponent.class );
 
   /**
@@ -52,8 +51,8 @@ public class TextAreaInputComponent extends BaseTest {
    */
   @BeforeClass
   public void setUpTestCase() {
-    // Go to TextAreaInputComponent
-    this.elemHelper.Get( driver, PageUrl.TEXT_AREA_INPUT_COMPONENT );
+    //Go to TextAreaInputComponent
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextAreaInputComponent%3Atext_area_input_component.xcdf/generatedContent" );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -64,10 +63,8 @@ public class TextAreaInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    Page Content
-   *
    * Description:
    *    This test pretends to validate the contents present in the page.
-   *
    * Steps:
    *    1. Check sample title.
    *    2. Check sample description.
@@ -118,10 +115,8 @@ public class TextAreaInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    Reload Sample
-   *
    * Description:
    *    Reload the sample (not refresh page).
-   *
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -140,7 +135,7 @@ public class TextAreaInputComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -149,10 +144,8 @@ public class TextAreaInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    Insert a small text
-   *
    * Description:
    *    We pretend validate when we insert a small text an alert is raised.
-   *
    * Steps:
    *    1. Insert text
    *    2. Check for alert
@@ -178,10 +171,8 @@ public class TextAreaInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    Insert a long text
-   *
    * Description:
    *    We pretend validate when we insert a long text an alert is raised.
-   *
    * Steps:
    *    1. Insert text
    *    2. Check for alert
@@ -213,11 +204,9 @@ public class TextAreaInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    Insert special characters
-   *
    * Description:
    *    We pretend validate when we insert a special characters an alert is
    *    raised.
-   *
    * Steps:
    *    1. Insert text
    *    2. Check for alert

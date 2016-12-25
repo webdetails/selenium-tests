@@ -53,7 +53,7 @@ public class TextComponent extends BaseTest {
   private Date dNow = new Date();
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( TextComponent.class );
 
   /**
@@ -66,7 +66,7 @@ public class TextComponent extends BaseTest {
   public void tc0_OpenSamplePage_Display() {
     // The URL for the TextComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TextComponent
-    this.elemHelper.Get( driver, PageUrl.TEXT_COMPONENT );
+    driver.get( PageUrl.TEXT_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -76,13 +76,11 @@ public class TextComponent extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Validate Page Contents
-   *
+   *    Reload Sample
    * Description:
-   *    Here we want to validate the page contents.
-   *
+   *    Reload the sample (not refresh page).
    * Steps:
-   *    1. Check the widget's title.
+   *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
@@ -101,10 +99,8 @@ public class TextComponent extends BaseTest {
    *
    * Test Case Name:
    *    Reload Sample
-   *
    * Description:
    *    Reload the sample (not refresh page).
-   *
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -124,7 +120,7 @@ public class TextComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -133,11 +129,9 @@ public class TextComponent extends BaseTest {
    *
    * Test Case Name:
    *    Text Component
-   *
    * Description:
    *    The component just displayed a text in sample area, so we want to
    *    validate the displayed text is according specification.
-   *
    * Steps:
    *    1. Validate the displayed text
    */

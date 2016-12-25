@@ -22,14 +22,15 @@
 package com.pentaho.ctools.issues.cdf;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -73,10 +74,12 @@ public class AutoIncludes extends BaseTest {
      * ## Step 1
      */
     //Open Created sample and click button
-    this.elemHelper.Get( driver, PageUrl.ISSUES_AUTO_INCLUDES );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-595%3ACDF-595.wcdf/generatedContent" );
 
     //Click Query button
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='table']/button" ) );
+    WebElement queryButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='table']/button" ) );
+    assertNotNull( queryButton );
+    queryButton.click();
 
     /*
      * ## Step 2

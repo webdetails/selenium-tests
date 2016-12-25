@@ -91,7 +91,7 @@ public class CDE505 extends BaseTest {
     /*
      * ## Step 1
      */
-    // Go to New CDE Dashboard
+    //Go to New CDE Dashboard
     CDEditor cdeditor = new CDEditor( driver );
     cdeditor.GoToNewCDE();
     cdeditor.GoToComponentPanel();

@@ -93,7 +93,7 @@ public class CDEComponentPanel extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    // Go to Components Panel
+    //Go to Components Panel
     this.elemHelper.Click( driver, By.xpath( "//div[@title='Components Panel']/a" ) );
 
     //Assert behavior of accordion
@@ -160,7 +160,7 @@ public class CDEComponentPanel extends BaseTest {
     tableComponent = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) );
     assertNotNull( tableComponent );
 
-    // Go to to table component and assert it's selected
+    //Go to to table component and assert it's selected
     a.sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).sendKeys( Keys.DOWN ).build().perform();
     this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ), "class", "child-of-OTHERCOMPONENTS initialized collapsed ui-state-active" );
     String tableClass = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-components-components']/tbody/tr[5]" ) ).getAttribute( "class" );
@@ -241,7 +241,7 @@ public class CDEComponentPanel extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    // Go to Components Panel
+    //Go to Components Panel
     this.elemHelper.Click( driver, By.xpath( "//div[@title='Components Panel']/a" ) );
 
     this.elemHelper.Click( driver, By.xpath( "//div[@id='cdfdd-components-palletePallete']/div/h3/span" ) );

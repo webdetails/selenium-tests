@@ -31,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -49,17 +48,17 @@ public class OlapSelectorComponent extends BaseTest {
   /**
    * ############################### Test Case 1 ###############################
    *
-   * Test Case Name:
+      * Test Case Name:
    *    Sniff test to sample
    *
    * Description:
-   *    This test is to assert simple functionality of sample
+   *    This test is to assert simple functionality of sample 
    *
    * Steps:
    *    1. Opne sample and assert selector button is shown
    *    2. Click button and assert options are shown
    *    3. Make options and click ok, assert options were correctly selected
-   *
+   *    
    */
   @Test
   public void tc01_OlapSelectorComponent_SniffTestSample() {
@@ -69,7 +68,7 @@ public class OlapSelectorComponent extends BaseTest {
      * ## Step 1
      */
     // Go to Olap Selector Sample
-    this.elemHelper.Get( driver, PageUrl.OLAP_SELECTOR_COMPONENT_REQUIRE );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Apentaho-cdf-dd-require%3Atests%3AOlapSelector%3AolapSelector.wcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

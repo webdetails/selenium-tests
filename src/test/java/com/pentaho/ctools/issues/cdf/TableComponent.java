@@ -33,7 +33,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -73,7 +72,7 @@ public class TableComponent extends BaseTest {
    *
    * Steps:
    *    1. Open created sample search for "class", assert expected result, clear search and assert all is shown
-   *    2. Expand first row and assert expansion was successful
+   *    2. Expand first row and assert expansion was successful 
    *    2. Click Refresh button and expand same row asserting expansion was successful
    *    3. Change page and expand second row asserting expansion was successful
    *
@@ -86,13 +85,15 @@ public class TableComponent extends BaseTest {
      * ## Step 1
      */
     //Open Created sample
-    this.elemHelper.Get( driver, PageUrl.ISSUES_TABLE_EXPAND );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ATableExpandTest%3AtableExpandTest.wcdf/generatedContent" );
 
     //Wait for loading to finish
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //search for "Mot" and assert shown result
-    this.elemHelper.SendKeys( driver, By.xpath( "//input[@type='search']" ), "class" );
+    WebElement searchInput = this.elemHelper.FindElement( driver, By.xpath( "//input[@type='search']" ) );
+    assertNotNull( searchInput );
+    searchInput.sendKeys( "class" );
     WebElement firstResult = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ) );
     assertNotNull( firstResult );
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr/td" ), "Classic Cars" );
@@ -101,7 +102,7 @@ public class TableComponent extends BaseTest {
     assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//table[@id='tblMainTable']/tbody/tr[2]/td" ) ) );
 
     //Clear search and assert all results shown
-    WebElement searchInput = this.elemHelper.FindElement( driver, By.xpath( "//input[@type='search']" ) );
+    searchInput = this.elemHelper.FindElement( driver, By.xpath( "//input[@type='search']" ) );
     assertNotNull( searchInput );
     searchInput.sendKeys( Keys.BACK_SPACE );
     searchInput.sendKeys( Keys.BACK_SPACE );

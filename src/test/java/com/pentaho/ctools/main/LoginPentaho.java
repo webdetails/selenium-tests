@@ -36,7 +36,7 @@ import com.pentaho.selenium.BaseTest;
  *
  */
 public class LoginPentaho extends BaseTest {
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( LoginPentaho.class );
 
   /**

@@ -32,7 +32,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -66,7 +65,7 @@ public class CDA110 extends BaseTest {
    * Steps:
    *    1. Open sample and select "full outer" on the datasources
    *    2. Wait for and assert elements and text on page
-   *
+   *    
    */
   @Test
   public void tc1_CdaFileViewer_FullOuterJoin() {
@@ -76,7 +75,7 @@ public class CDA110 extends BaseTest {
      * ## Step 1
      */
     //Open sample CDA file
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDA_110 );
+    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-110/cda110.cda" );
 
     //wait for invisibility of waiting pop-up
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );

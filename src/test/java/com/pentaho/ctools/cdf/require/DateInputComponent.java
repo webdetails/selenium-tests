@@ -45,7 +45,7 @@ import com.pentaho.selenium.BaseTest;
 public class DateInputComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( DateInputComponent.class );
 
   /**
@@ -53,11 +53,9 @@ public class DateInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    DateInputComponent
-   *
    * Description:
    *    We pretend to check the component when user pick a data an alert message
    *    is displayed indicating the date picked.
-   *
    * Steps:
    *    1. Go to Pentaho solution web page.
    *    2. Render the component again.
@@ -69,14 +67,14 @@ public class DateInputComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.Get( driver, PageUrl.DATEINPUT_COMPONENT_REQUIRE );
+    driver.get( PageUrl.DATEINPUT_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Wait for visibility of 'DateInputComponent'
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+    this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
     // Validate the sample that we are testing is the one
     assertEquals( "Community Dashboard Framework", driver.getTitle() );
     assertEquals( "DateInputComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );

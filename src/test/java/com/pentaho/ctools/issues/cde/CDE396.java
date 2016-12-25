@@ -29,7 +29,6 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -70,8 +69,8 @@ public class CDE396 extends BaseTest {
   public void tc1_RefreshCde_ReturnsInfo() {
     this.log.info( "tc1_RefreshCde_ReturnsInfo" );
 
-    // Go to User Console
-    this.elemHelper.Get( driver, PageUrl.CDE_REFRESH );
+    //Go to User Console
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/refresh" );
 
     /*
      * ## Step 1

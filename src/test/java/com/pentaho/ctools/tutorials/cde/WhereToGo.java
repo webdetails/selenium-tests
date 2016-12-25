@@ -37,7 +37,7 @@ import com.pentaho.selenium.BaseTest;
 public class WhereToGo extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( WhereToGo.class );
   // Instance to access CDE Tutorial
   private final CdeTutorials cdetutorial = new CdeTutorials();

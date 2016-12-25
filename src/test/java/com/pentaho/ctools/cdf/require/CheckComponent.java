@@ -43,7 +43,7 @@ import com.pentaho.selenium.BaseTest;
 public class CheckComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( CheckComponent.class );
 
   /**
@@ -57,8 +57,8 @@ public class CheckComponent extends BaseTest {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
     // The URL for the CheckComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/CheckComponent
-    this.elemHelper.Get( driver, PageUrl.CHECK_COMPONENT_REQUIRE );
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/CheckComponent
+    driver.get( PageUrl.CHECK_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -66,16 +66,14 @@ public class CheckComponent extends BaseTest {
   }
 
   /**
-   * ############################### Test Case 1 ###############################
+   * ############################### Test Case 2 ###############################
    *
    * Test Case Name:
-   *    Validate Page Contents
-   *
+   *    Reload Sample
    * Description:
-   *    Here we want to validate the page contents.
-   *
+   *    Reload the sample (not refresh page).
    * Steps:
-   *    1. Check the widget's title.
+   *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
@@ -97,10 +95,8 @@ public class CheckComponent extends BaseTest {
    *
    * Test Case Name:
    *    Reload Sample
-   *
    * Description:
    *    Reload the sample (not refresh page).
-   *
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -126,11 +122,9 @@ public class CheckComponent extends BaseTest {
    *
    * Test Case Name:
    *    Check options
-   *
    * Description:
    *    Here we pretend to check each option one by one and validate if an alert
    *    is raised with correct message.
-   *
    * Steps:
    *    1. Check in Southern and validate alert
    *    2. Check in Eastern and validate alert
@@ -176,11 +170,9 @@ public class CheckComponent extends BaseTest {
    *
    * Test Case Name:
    *    Unchecked options
-   *
    * Description:
    *    Here we pretend to unchecked each option one by one and validate if an
    *    alert is raised with correct message.
-   *
    * Steps:
    *    1. Unchecked Southern and validate alert
    *    2. Unchecked Eastern and validate alert
@@ -226,11 +218,9 @@ public class CheckComponent extends BaseTest {
    *
    * Test Case Name:
    *    Check and Unchecked Arbitrary
-   *
    * Description:
    *    Here we pretend to check and unchecked arbitrary and validate the alert
    *    message according each action (check and unchecked).
-   *
    * Steps:
    *    1. Check and unchecked arbitrary, and validate alert message
    */

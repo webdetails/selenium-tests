@@ -53,7 +53,7 @@ public class DuplicateComponent extends BaseTest {
    *    Sniff test to sample
    *
    * Description:
-   *    This test is to assert simple functionality of sample
+   *    This test is to assert simple functionality of sample 
    *
       * Steps:
    *    1. Open Duplicate Component sample and assert elements on page
@@ -69,7 +69,7 @@ public class DuplicateComponent extends BaseTest {
      * ## Step 1
      */
     //Open Duplicate Component sample
-    this.elemHelper.Get( driver, PageUrl.DUPLICATE_COMPONENT );
+    driver.get( PageUrl.DUPLICATE_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

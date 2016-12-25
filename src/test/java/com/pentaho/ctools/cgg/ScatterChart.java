@@ -44,7 +44,7 @@ import com.pentaho.selenium.BaseTest;
 public class ScatterChart extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( ScatterChart.class );
 
   /**
@@ -63,7 +63,7 @@ public class ScatterChart extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.Get( driver, PageUrl.SCATTER_CHART );
+    driver.get( PageUrl.SCATTER_CHART );
 
     this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']" ) );
 

@@ -31,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -77,11 +76,11 @@ public class CDF430 extends BaseTest {
      * ## Step 1
      */
     //Set locale
-    this.elemHelper.Get( driver, PageUrl.PUC_LOCALE_EN_US );
+    driver.get( baseUrl + "Home?locale=en-US" );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
 
-    // Go to Sparkl sample
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_404 );
+    //Go to Sparkl sample
+    driver.get( baseUrl + "plugin/CDE404/api/i18ntest" );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -106,8 +105,8 @@ public class CDF430 extends BaseTest {
     /*
      * ## Step 2
      */
-    // Go to CDE sample
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_430 );
+    //Go to CDE sample
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/generatedContent" );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -132,8 +131,8 @@ public class CDF430 extends BaseTest {
     /*
      * ## Step 3
      */
-    // Go to CDE sample
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_430_LOCALE_EN_US );
+    //Go to CDE sample
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDF%3Acdf_i18nTest.xcdf/generatedContent?locale=en-US" );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

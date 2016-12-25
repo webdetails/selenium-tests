@@ -70,7 +70,7 @@ public class MondrianJNDI extends BaseTest {
   @Test
   public void tc0_OpenSamplePage_Display() {
     // This samples is in: Public/plugin-samples/CDA/cdafiles/mondrian-jndi
-    this.elemHelper.Get( driver, PageUrl.MONDRIAN_JNDI );
+    driver.get( PageUrl.MONDRIAN_JNDI );
   }
 
   /**
@@ -294,7 +294,8 @@ public class MondrianJNDI extends BaseTest {
     /*
      * ## Step 5
      */
-    this.elemHelper.ClearAndSendKeys( driver, By.cssSelector( "#contents_filter input" ), "2004" );
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).sendKeys( "2004" );
     // Check we have only one element
     textPaging = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 1 of 1 elements (filter 3 elements)", textPaging );
@@ -314,7 +315,8 @@ public class MondrianJNDI extends BaseTest {
     /*
      * ## Step 6
      */
-    this.elemHelper.ClearAndSendKeys( driver, By.cssSelector( "#contents_filter input" ), "Merry" );
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).sendKeys( "Merry" );
     // Check we have only one element
     textPaging = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "contents_info" ) );
     assertEquals( "empty (filter 3 elements)", textPaging );
@@ -323,8 +325,8 @@ public class MondrianJNDI extends BaseTest {
     assertEquals( "No results.", textNoResult );
 
     // Clean data
-    this.elemHelper.ClearAndSendKeys( driver, By.cssSelector( "#contents_filter input" ), Keys.RETURN );
-
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).clear();
+    this.elemHelper.FindElement( driver, By.cssSelector( "#contents_filter input" ) ).sendKeys( Keys.RETURN );
     // Order by Year
     this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='contents']/thead/tr/th[2]" ) );
     // Order by Time
@@ -416,7 +418,7 @@ public class MondrianJNDI extends BaseTest {
     /*
      * ## Step 2
      */
-    this.elemHelper.Get( driver, queryUrl );
+    driver.get( queryUrl );
     String jsonQueryActual = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "body" ) );
     String jsonQueryExpected = "{\"queryInfo\":{\"totalRows\":\"3\"},\"resultset\":[[\"All Years\",\"2003\",3573701.2500000023,3.5737012500000023],[\"All Years\",\"2004\",4750205.889999998,4.750205889999998],[\"All Years\",\"2005\",1513074.4600000002,1.5130744600000002]],\"metadata\":[{\"colIndex\":0,\"colType\":\"String\",\"colName\":\"[Time].[(All)]\"},{\"colIndex\":1,\"colType\":\"String\",\"colName\":\"Year\"},{\"colIndex\":2,\"colType\":\"Numeric\",\"colName\":\"price\"},{\"colIndex\":3,\"colType\":\"Numeric\",\"colName\":\"PriceInK\"}]}";
     JsonParser parser = new JsonParser();
@@ -424,7 +426,7 @@ public class MondrianJNDI extends BaseTest {
     JsonElement expected = parser.parse( jsonQueryExpected );
     assertEquals( actual, expected );
 
-    this.elemHelper.Get( driver, PageUrl.MONDRIAN_JNDI );
+    driver.get( PageUrl.MONDRIAN_JNDI );
     String filename = this.elemHelper.WaitForTextPresence( driver, By.id( "fileid" ), "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda" );
     String pleaseSelect = this.elemHelper.WaitForTextPresence( driver, By.id( "pleaseselect" ), "Please select a Data Access ID" );
     assertEquals( "/public/plugin-samples/cda/cdafiles/mondrian-jndi.cda", filename );
@@ -451,7 +453,8 @@ public class MondrianJNDI extends BaseTest {
     // wait to render page
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     // Check the presented contains
-    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "status" ), "value" ), "Shipped" );
+    WebElement elemStatus = this.elemHelper.FindElement( driver, By.id( "status" ) );
+    assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
     // Check we have three elements and no more than that
     String textPaging = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "contents_info" ) );
     assertEquals( "View 1 to 3 of 3 elements", textPaging );
@@ -473,8 +476,9 @@ public class MondrianJNDI extends BaseTest {
     Select selectPeriod = new Select( this.elemHelper.FindElement( driver, By.id( "periodType" ) ) );
     selectPeriod.selectByValue( "1" ); // every day
 
-    this.elemHelper.ClearAndSendKeys( driver, By.cssSelector( "#contents_filter input" ), selectedHours );
-    this.elemHelper.Click( driver, By.linkText( "Ok" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//input[@id='startAt']" ) ).clear();
+    this.elemHelper.FindElement( driver, By.xpath( "//input[@id='startAt']" ) ).sendKeys( selectedHours );
+    this.elemHelper.FindElement( driver, By.linkText( "Ok" ) ).click();
 
     Set<String> listWindows = driver.getWindowHandles();
     // wait for popup render
@@ -578,7 +582,7 @@ public class MondrianJNDI extends BaseTest {
       assertEquals( confirmationMsg, expectedCnfText );
 
       this.elemHelper.WaitForAlertNotPresent( driver );
-      this.elemHelper.SwitchToDefault( driver );
+      this.elemHelper.SwitchToDefault(driver);
 
       elementPresent = this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "img.deleteIcon.button" ), 2 );
     }

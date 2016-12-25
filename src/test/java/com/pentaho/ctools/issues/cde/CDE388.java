@@ -62,7 +62,7 @@ public class CDE388 extends BaseTest {
    *    Drag and drop of OlapWizard working correctly
    *
    * Description:
-   *    The test pretends validate the CDE-388 issue, so when user tries to use
+   *    The test pretends validate the CDE-388 issue, so when user tries to use 
    *    drag and drop functionality of OlapWizard it works as expected.
    *
    * Steps:
@@ -79,8 +79,8 @@ public class CDE388 extends BaseTest {
      * ## Step 1
      */
 
-    // Go to New CDE Dashboard
-    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
+    //Go to New CDE Dashboard
+    driver.get( PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //assert buttons
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//a[@title='Save as Template']" ) );

@@ -75,7 +75,7 @@ public class CDF424 extends BaseTest {
     /*
      * ## Step 1
      */
-    // Go to Issue Sample
+    //Go to Issue Sample
     this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_424 );
 
     // Wait for loading disappear

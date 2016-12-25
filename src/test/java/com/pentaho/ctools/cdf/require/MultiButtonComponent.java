@@ -26,11 +26,12 @@ import static org.testng.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -43,7 +44,7 @@ import com.pentaho.selenium.BaseTest;
 public class MultiButtonComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( MultiButtonComponent.class );
 
   /**
@@ -57,8 +58,8 @@ public class MultiButtonComponent extends BaseTest {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
     // The URL for the MultiButtonComponent under CDF samples
-    // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/MultiButtonComponent
-    this.elemHelper.Get( driver, PageUrl.MULTIBUTTON_COMPONENT_REQUIRE );
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/MultiButtonComponent
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A56-MultiButtonComponent%3Amultibutton_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -66,34 +67,27 @@ public class MultiButtonComponent extends BaseTest {
   }
 
   /**
-   * ############################### Test Case 1 ###############################
+   * ############################### Test Case 2 ###############################
    *
    * Test Case Name:
-   *    Validate Page Contents
-   *
+   *    Reload Sample
    * Description:
-   *    Here we want to validate the page contents.
-   *
+   *    Reload the sample (not refresh page).
    * Steps:
-   *    1. Check the widget's title.
+   *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
-    /*
-     * ## Step1
-     */
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    String expectedPageTitle = "Community Dashboard Framework";
-    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
-    // Wait for visibility of 'MultiButtonComponent'
-    String expectedSampleTitle = "MultiButtonComponent";
-    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    // Wait for visibility of 'VisualizationAPIComponent'
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( actualPageTitle, expectedPageTitle );
-    assertEquals( actualSampleTitle, expectedSampleTitle );
+    assertEquals( "Community Dashboard Framework", driver.getTitle() );
+    assertEquals( "MultiButtonComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -113,8 +107,8 @@ public class MultiButtonComponent extends BaseTest {
      * ## Step 1
      */
     // Render again the sample
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -125,7 +119,7 @@ public class MultiButtonComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -145,35 +139,46 @@ public class MultiButtonComponent extends BaseTest {
   @Test
   public void tc3_ClickInEachOption_AlertDisplayed() {
     this.log.info( "tc3_ClickInEachOption_AlertDisplayed" );
-    String actualConfirmationMsg = "";
 
     /*
      * ## Step 1
      */
-    this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Eastern')]" ) );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "you chose: Eastern" );
+    this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Eastern')]" ) ).click();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    alert.accept();
+    assertEquals( "you chose: Eastern", confirmationMsg );
 
     /*
      * ## Step 2
      */
-    this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Central')]" ) );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "you chose: Central" );
+    this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Central')]" ) ).click();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    alert = driver.switchTo().alert();
+    confirmationMsg = alert.getText();
+    alert.accept();
+    assertEquals( "you chose: Central", confirmationMsg );
 
     /*
      * ## Step 3
      */
-    this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Western')]" ) );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "you chose: Western" );
+    this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Western')]" ) ).click();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    alert = driver.switchTo().alert();
+    confirmationMsg = alert.getText();
+    alert.accept();
+    assertEquals( "you chose: Western", confirmationMsg );
 
     /*
      * ## Step 4
      */
-    this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Southern')]" ) );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "you chose: Southern" );
+    this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Southern')]" ) ).click();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    alert = driver.switchTo().alert();
+    confirmationMsg = alert.getText();
+    alert.accept();
+    assertEquals( "you chose: Southern", confirmationMsg );
   }
 
   /**
@@ -193,34 +198,45 @@ public class MultiButtonComponent extends BaseTest {
   @Test
   public void tc4_ClickArbitrary_AlertDisplayed() {
     this.log.info( "tc4_ClickArbitrary_AlertDisplayed" );
-    String actualConfirmationMsg = "";
 
     /*
      * ## Step 1
      */
-    this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Central')]" ) );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "you chose: Central" );
+    this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Central')]" ) ).click();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    alert.accept();
+    assertEquals( "you chose: Central", confirmationMsg );
 
     /*
      * ## Step 2
      */
-    this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Southern')]" ) );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "you chose: Southern" );
+    this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Southern')]" ) ).click();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    alert = driver.switchTo().alert();
+    confirmationMsg = alert.getText();
+    alert.accept();
+    assertEquals( "you chose: Southern", confirmationMsg );
 
     /*
      * ## Step 3
      */
-    this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Eastern')]" ) );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "you chose: Eastern" );
+    this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Eastern')]" ) ).click();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    alert = driver.switchTo().alert();
+    confirmationMsg = alert.getText();
+    alert.accept();
+    assertEquals( "you chose: Eastern", confirmationMsg );
 
     /*
      * ## Step 4
      */
-    this.elemHelper.Click( driver, By.xpath( "//button[contains(text(),'Southern')]" ) );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "you chose: Southern" );
+    this.elemHelper.FindElement( driver, By.xpath( "//button[contains(text(),'Southern')]" ) ).click();
+    wait.until( ExpectedConditions.alertIsPresent() );
+    alert = driver.switchTo().alert();
+    confirmationMsg = alert.getText();
+    alert.accept();
+    assertEquals( "you chose: Southern", confirmationMsg );
   }
 }

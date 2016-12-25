@@ -32,7 +32,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -79,7 +78,7 @@ public class CDE446 extends BaseTest {
      * ## Step 1
      */
     //Open created dashboard's cda file
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_446_CDA );
+    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDE/CDE-446/CDE-446.cda" );
     this.elemHelper.FindElement( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 

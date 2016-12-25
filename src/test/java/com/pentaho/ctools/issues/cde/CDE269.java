@@ -31,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -74,7 +73,7 @@ public class CDE269 extends BaseTest {
      * ## Step 1
      */
     //Open URL
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_269 );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/getHeaders?solution=&path=/public/plugin-samples/pentaho-cdf-dd&file=cde_sample1.wcdf&absolute=true&root=localhost:8080&scheme=https" );
 
     //Wait for Elements and assert them
     WebElement element = this.elemHelper.FindElement( driver, By.xpath( "//body/pre" ) );

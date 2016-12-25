@@ -46,7 +46,7 @@ import com.pentaho.selenium.BaseTest;
 public class TheCdeInterface extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( TheCdeInterface.class );
   // Instance to access CDE Tutorial
   private final CdeTutorials cdetutorial = new CdeTutorials();

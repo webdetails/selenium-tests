@@ -53,7 +53,7 @@ public class TextComponent extends BaseTest {
   private Date dNow = new Date();
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( TextComponent.class );
 
   /**
@@ -68,7 +68,7 @@ public class TextComponent extends BaseTest {
 
     // The URL for the TextComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/TextComponent
-    this.elemHelper.Get( driver, PageUrl.TEXT_COMPONENT_REQUIRE );
+    driver.get( PageUrl.TEXT_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -128,7 +128,7 @@ public class TextComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 

@@ -24,14 +24,13 @@ package com.pentaho.ctools.cdf;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -44,8 +43,6 @@ import com.pentaho.selenium.BaseTest;
 public class TextInputComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
-  private final Logger log = LogManager.getLogger( TextInputComponent.class );
 
   /**
    * ############################### Test Case 0 ###############################
@@ -55,11 +52,9 @@ public class TextInputComponent extends BaseTest {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
-    this.log.info( "tc0_OpenSamplePage_Display" );
-
     // The URL for the TextInputComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TextInputComponent
-    this.elemHelper.Get( driver, PageUrl.TEXT_INPUT_COMPONENT );
+    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A37-TextInputComponent%3Atext_input_component.xcdf/generatedContent" );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -69,31 +64,22 @@ public class TextInputComponent extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Validate Page Contents
-   *
+   *    Reload Sample
    * Description:
-   *    Here we want to validate the page contents.
-   *
+   *    Reload the sample (not refresh page).
    * Steps:
-   *    1. Check the widget's title.
+   *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
-    this.log.info( "tc1_PageContent_DisplayTitle" );
-
-    /*
-     * ## Step 1
-     */
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    String expectedPageTitle = "Community Dashboard Framework";
-    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
-    // Wait for visibility of 'TextInputComponent'
-    String expectedSampleTitle = "TextInputComponent";
-    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    // Wait for visibility of 'VisualizationAPIComponent'
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( actualPageTitle, expectedPageTitle );
-    assertEquals( actualSampleTitle, expectedSampleTitle );
+    assertEquals( "Community Dashboard Framework", driver.getTitle() );
+    assertEquals( "TextInputComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -101,21 +87,17 @@ public class TextInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    Reload Sample
-   *
    * Description:
    *    Reload the sample (not refresh page).
-   *
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
-    this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
-
     // ## Step 1
     // Render again the sample
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
+    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -125,7 +107,7 @@ public class TextInputComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -134,10 +116,8 @@ public class TextInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    Insert a small text
-   *
    * Description:
    *    We pretend validate when we insert a small text an alert is raised.
-   *
    * Steps:
    *    1. Insert text
    *    2. Check for alert
@@ -145,22 +125,20 @@ public class TextInputComponent extends BaseTest {
    */
   @Test
   public void tc3_InputSmallPhrase_AlertDispayed() {
-    this.log.info( "tc3_InputSmallPhrase_AlertDispayed" );
-
-    /*
-     * ## Step 1
-     */
+    // ## Step 1
     String strInputString = "Hello World!";
-    this.elemHelper.Clear( driver, By.id( "myInput" ) );
-    this.elemHelper.SendKeys( driver, By.id( "myInput" ), strInputString );
-    this.elemHelper.SendKeys( driver, By.id( "myInput" ), Keys.ENTER );
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( Keys.ENTER );
 
-    /*
-     * ## Step 2
-     */
-    String actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    String expctedConfirmationMsg = "you typed: " + strInputString;
-    assertEquals( actualConfirmationMsg, expctedConfirmationMsg );
+    // ## Step 2
+    wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "you typed: " + strInputString;
+    alert.accept();
+
+    assertEquals( expectedCnfText, confirmationMsg );
   }
 
   /**
@@ -168,10 +146,8 @@ public class TextInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    Insert a long text
-   *
    * Description:
    *    We pretend validate when we insert a long text an alert is raised.
-   *
    * Steps:
    *    1. Insert text
    *    2. Check for alert
@@ -179,29 +155,29 @@ public class TextInputComponent extends BaseTest {
    */
   @Test
   public void tc4_InputLongPhrase_AlertDispayed() {
-    this.log.info( "tc4_InputLongPhrase_AlertDispayed" );
-
-    /*
-     * ## Step 1
-     */
+    // ## Step 1
     String strInputString = "Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!";
     strInputString += strInputString;
     strInputString += strInputString;
     strInputString += strInputString;
     strInputString += strInputString;
-    this.elemHelper.Clear( driver, By.id( "myInput" ) );
-    //After clean text, we need to treat the pop-up
-    this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
+    //After clean text, we need to trait the pop-up
+    wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = driver.switchTo().alert();
+    alert.accept();
 
-    this.elemHelper.SendKeys( driver, By.id( "myInput" ), strInputString );
-    this.elemHelper.SendKeys( driver, By.id( "myInput" ), Keys.ENTER );
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( Keys.ENTER );
 
-    /*
-     * ## Step 2
-     */
-    String actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    String expctedConfirmationMsg = "you typed: " + strInputString;
-    assertEquals( actualConfirmationMsg, expctedConfirmationMsg );
+    // ## Step 2
+    wait.until( ExpectedConditions.alertIsPresent() );
+    alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "you typed: " + strInputString;
+    alert.accept();
+
+    assertEquals( expectedCnfText, confirmationMsg );
   }
 
   /**
@@ -209,11 +185,9 @@ public class TextInputComponent extends BaseTest {
    *
    * Test Case Name:
    *    Insert special characters
-   *
    * Description:
    *    We pretend validate when we insert a special characters an alert is
    *    raised.
-   *
    * Steps:
    *    1. Insert text
    *    2. Check for alert
@@ -221,22 +195,24 @@ public class TextInputComponent extends BaseTest {
    */
   @Test
   public void tc5_InputSpecialPhrase_AlertDispayed() {
-    this.log.info( "tc5_InputSpecialPhrase_AlertDispayed" );
-
     // ## Step 1
     String strInputString = "`|!\"1#$%&/()=?*»ª:_Ç<>/*-+";
-    this.elemHelper.Clear( driver, By.id( "myInput" ) );
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).clear();
     //After clean text, we need to trait the pop-up
-    this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    wait.until( ExpectedConditions.alertIsPresent() );
+    Alert alert = driver.switchTo().alert();
+    alert.accept();
 
-    this.elemHelper.SendKeys( driver, By.id( "myInput" ), strInputString );
-    this.elemHelper.SendKeys( driver, By.id( "myInput" ), Keys.ENTER );
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( strInputString );
+    this.elemHelper.FindElement( driver, By.id( "myInput" ) ).sendKeys( Keys.ENTER );
 
-    /*
-     * ## Step 2
-     */
-    String actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    String expctedConfirmationMsg = "you typed: " + strInputString;
-    assertEquals( actualConfirmationMsg, expctedConfirmationMsg );
+    // ## Step 2
+    wait.until( ExpectedConditions.alertIsPresent() );
+    alert = driver.switchTo().alert();
+    String confirmationMsg = alert.getText();
+    String expectedCnfText = "you typed: " + strInputString;
+    alert.accept();
+
+    assertEquals( expectedCnfText, confirmationMsg );
   }
 }

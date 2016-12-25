@@ -38,6 +38,7 @@ import org.hamcrest.CoreMatchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
@@ -57,7 +58,7 @@ public class CommentComponent extends BaseTest {
   private Boolean tcRemoveComment = false;
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( CommentComponent.class );
 
   /**
@@ -69,11 +70,10 @@ public class CommentComponent extends BaseTest {
   @Test
   public void tc0_OpenSamplePage_Display() {
     this.log.info( "tc0_OpenSamplePage_Display" );
-
     // The URL for the CommentComponent under CDF samples
-    // This sample is in:
+    // This sample is in: 
     // ::Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/CommentComponent
-    this.elemHelper.Get( driver, PageUrl.COMMENT_COMPONENT );
+    driver.get( PageUrl.COMMENT_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -83,28 +83,23 @@ public class CommentComponent extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Validate Page Contents
-   *
+   *    Reload Sample
    * Description:
-   *    Here we want to validate the page contents.
-   *
+   *    Reload the sample (not refresh page).
    * Steps:
-   *    1. Check the widget's title.
+   *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
-
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    String expectedPageTitle = "Community Dashboard Framework";
-    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
-    // Wait for visibility of 'CommentsComponent'
-    String expectedSampleTitle = "CommentsComponent";
-    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
+    // Wait for visibility of 'VisualizationAPIComponent'
+    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( actualPageTitle, expectedPageTitle );
-    assertEquals( actualSampleTitle, expectedSampleTitle );
+    assertEquals( "Community Dashboard Framework", driver.getTitle() );
+    assertEquals( "CommentsComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
   }
 
   /**
@@ -112,10 +107,8 @@ public class CommentComponent extends BaseTest {
    *
    * Test Case Name:
    *    Reload Sample
-   *
    * Description:
    *    Reload the sample (not refresh page).
-   *
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -137,7 +130,7 @@ public class CommentComponent extends BaseTest {
     int nCommentComponent = 0;
     WebElement divComment = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.commentComponent" ) );
     if ( divComment != null ) {
-      nCommentComponent = this.elemHelper.FindElements( driver, By.cssSelector( "div.commentComponent" ) ).size();
+      nCommentComponent = driver.findElements( By.cssSelector( "div.commentComponent" ) ).size();
     }
     assertEquals( nCommentComponent, 1 );
 
@@ -215,10 +208,10 @@ public class CommentComponent extends BaseTest {
     this.elemHelper.ClickJS( driver, By.cssSelector( "div.saveComment" ) );
     Date timeAddedComment1 = new Date();
     //wait for the page rendered
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.navigateRefresh" ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
     //Check if the comment was added
     String strCommentTimeAdded = "admin, " + sdf.format( timeAddedComment1 );
-    // Need to remove the last digit of minutes to avoid failing. Because, we
+    // Need to remove the last digit of minutes to avoid failing. Because, we 
     // could catch something like 14:22 and the comment was added at 14:21:59
     strCommentTimeAdded = strCommentTimeAdded.substring( 0, strCommentTimeAdded.length() - 1 );
     String commentDetails1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
@@ -242,13 +235,13 @@ public class CommentComponent extends BaseTest {
     this.elemHelper.ClickJS( driver, By.cssSelector( "div.saveComment" ) );
     Date timeAddedComment2 = new Date();
     //wait for the page rendered (and for the two added comments persist
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.navigateRefresh" ) );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]" ) );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]" ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[1]" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[2]" ) ) );
     //Check if the comment was added
     //Comment added 2
     String strCommentTimeAdded2 = "admin, " + sdf.format( timeAddedComment2 );
-    // Need to remove the last digit of minutes to avoid failing. Because, we
+    // Need to remove the last digit of minutes to avoid failing. Because, we 
     // could catch something like 14:22 and the comment was added at 14:21:59
     strCommentTimeAdded2 = strCommentTimeAdded2.substring( 0, strCommentTimeAdded2.length() - 1 );
     String commentDetails2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
@@ -277,14 +270,14 @@ public class CommentComponent extends BaseTest {
     this.elemHelper.ClickJS( driver, By.cssSelector( "div.saveComment" ) );
     Date timeAddedComment3 = new Date();
     //wait for the page rendered (and for the two added comments persist
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.navigateRefresh" ) );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]" ) );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]" ) );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[3]" ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[1]" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[2]" ) ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//div[@id='sampleObject']/div/div/div[3]" ) ) );
     //Check if the comment was added
     //Comment added 3
     String strCommentTimeAdded3 = "admin, " + sdf.format( timeAddedComment3 );
-    // Need to remove the last digit of minutes to avoid failing. Because, we
+    // Need to remove the last digit of minutes to avoid failing. Because, we 
     // could catch something like 14:22 and the comment was added at 14:21:59
     strCommentTimeAdded3 = strCommentTimeAdded3.substring( 0, strCommentTimeAdded3.length() - 1 );
     String commentDetails3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
@@ -338,7 +331,7 @@ public class CommentComponent extends BaseTest {
     this.elemHelper.FindElement( driver, By.cssSelector( "textarea.addCommentText" ) ).sendKeys( commentText );
     this.elemHelper.ClickJS( driver, By.cssSelector( "div.saveComment" ) );
     //wait for the page rendered
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.navigateRefresh" ) );
+    wait.until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "div.navigateRefresh" ) ) );
     //Check if the comment was added
     String commentAdded = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
     assertEquals( commentAdded, commentText );
@@ -371,7 +364,7 @@ public class CommentComponent extends BaseTest {
 
     driver.manage().timeouts().implicitlyWait( 2, TimeUnit.SECONDS );
 
-    List<WebElement> listEraseComments = this.elemHelper.FindElements( driver, By.cssSelector( "div.archive" ) );
+    List<WebElement> listEraseComments = driver.findElements( By.cssSelector( "div.archive" ) );
     int nIteractions = listEraseComments.size();
     this.log.info( "Number elements to remove: " + nIteractions );
     if ( nIteractions > 0 ) {
@@ -389,7 +382,6 @@ public class CommentComponent extends BaseTest {
     driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
   }
 
-  @Override
   @AfterClass
   public void tearDownClass() {
     if ( this.tcRemoveComment ) {

@@ -30,6 +30,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -46,7 +47,7 @@ import com.pentaho.selenium.BaseTest;
 public class BulletChartTestCase extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( BulletChartTestCase.class );
 
   /**
@@ -58,8 +59,8 @@ public class BulletChartTestCase extends BaseTest {
   @Test
   public void tc00_OpenSamplePage_Display() {
     this.log.info( "tc00_OpenSamplePage_Display" );
-    // Go to BullertChartTestCase
-    this.elemHelper.Get( driver, PageUrl.BULLET_CHART_TEST_CASE_REQUIRE );
+    //Go to BullertChartTestCase
+    driver.get( PageUrl.BULLET_CHART_TEST_CASE_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -88,9 +89,8 @@ public class BulletChartTestCase extends BaseTest {
      * ## Step 0
      */
     //Check page title
-    String expectedTitle = "Bullet chart testcase";
-    String actualTitle = this.elemHelper.WaitForTitle( driver, expectedTitle );
-    assertEquals( actualTitle, expectedTitle );
+    wait.until( ExpectedConditions.titleIs( "Bullet chart testcase" ) );
+    assertEquals( "Bullet chart testcase", driver.getTitle() );
     //Check title
     String title = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#title > span" ) );
     assertEquals( "Bullet chart test case", title );
@@ -125,7 +125,7 @@ public class BulletChartTestCase extends BaseTest {
     //Check title
     String subtitle2 = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "subtitle2" ) );
     assertEquals( "Returning one value only (65)", subtitle2 );
-    //Check series title and subtitle
+    //Check serie title and subtitle
     String cht2Title1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='obj2protovis']/*[name()='svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][6]/*[name()='text']" ) );
     assertEquals( "Value only", cht2Title1 );
     String cht2Subtitle1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='obj2protovis']/*[name()='svg']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g']/*[name()='g'][7]/*[name()='text']" ) );

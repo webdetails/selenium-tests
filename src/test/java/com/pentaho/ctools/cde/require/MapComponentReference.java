@@ -31,6 +31,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
@@ -51,7 +52,7 @@ import com.pentaho.selenium.BaseTest;
 public class MapComponentReference extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( MapComponentReference.class );
 
   /**
@@ -64,8 +65,8 @@ public class MapComponentReference extends BaseTest {
   public void tc0_OpenSamplePage_Display() {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
-    // Go to MapComponentReference
-    this.elemHelper.Get( driver, PageUrl.MAP_COMPONENT_REFERENCE_REQUIRE );
+    //Go to MapComponentReference
+    driver.get( PageUrl.MAP_COMPONENT_REFERENCE_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
@@ -96,10 +97,8 @@ public class MapComponentReference extends BaseTest {
    *
    * Test Case Name:
    *    Validate Page Contents
-   *
    * Description:
    *    Here we want to validate the page contents.
-   *
    * Steps:
    *    1. Check the widget's title.
    *    2. Check Global Options
@@ -237,10 +236,8 @@ public class MapComponentReference extends BaseTest {
    *
    * Test Case Name:
    *    Map with no markers and no shapes
-   *
    * Description:
    *    Validate contents in a simple map.
-   *
    * Steps:
    *    1. Check the data exist
    *    2. Perform a zoom
@@ -250,29 +247,29 @@ public class MapComponentReference extends BaseTest {
   public void tc2_MapWithNoMarkersAndShapes_MapMustBeVisible() {
     this.log.info( "tc2_MapWithNoMarkersAndShapes_MapMustBeVisible" );
     //wait for initialize
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "10000 km" );
+    wait.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "10000 km" ) );
 
     //## Step1
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='subtitle0']/span" ) );
-    assertEquals( "Map with no markers and no shapes - Simple Case", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='subtitle0']/span" ) ) );
+    assertEquals( "Map with no markers and no shapes - Simple Case", driver.findElement( By.xpath( "//div[@id='subtitle0']/span" ) ).getText() );
     //Scale
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
-    assertEquals( "2000 km", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ) );
+    assertEquals( "2000 km", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
-    assertEquals( "1000 mi", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ) );
+    assertEquals( "1000 mi", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
     //ButtonLayer
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='simpleTest']/div/div[7]/div[2]/img" ) ) );
+    assertNotNull( driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[7]/div[2]/img" ) ) );
     //Get same images
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='simpleTest']/div/div/div/img" ) ) );
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='simpleTest']/div/div/div/img[12]" ) ) );
+    assertNotNull( driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div/div/img" ) ) );
+    assertNotNull( driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div/div/img[12]" ) ) );
 
     //## Step2
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div[3]" ) );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div" ) );
+    driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[5]/div" ) ).click();
     //wait for the field update
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km" );
+    wait.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km" ) );
     String expectedKilometers = "1000 km";
     String actualKilometers = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), expectedKilometers );
     assertEquals( actualKilometers, expectedKilometers );
@@ -281,13 +278,13 @@ public class MapComponentReference extends BaseTest {
     assertEquals( actualMiles, expectedMiles );
 
     //## Step3
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) );
+    driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) ).click();
     //wait for the field update
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "100 km" );
+    wait.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "100 km" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
-    assertEquals( "10000 km", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ) );
+    assertEquals( "10000 km", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ).getText() );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
-    assertEquals( "5000 mi", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ) );
+    assertEquals( "5000 mi", driver.findElement( By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ).getText() );
   }
 
   /**
@@ -295,11 +292,9 @@ public class MapComponentReference extends BaseTest {
    *
    * Test Case Name:
    *    Map engine and map tile services.
-   *
    * Description:
    *    Validate the contents on the map and check if the map is display when
    *    we change the map engine and tile services.
-   *
    * Steps:
    *    1. Check the data exist
    *    2. Chance map to Google
@@ -309,28 +304,28 @@ public class MapComponentReference extends BaseTest {
   public void tc3_MapEngineAndTileServices_MapDisplayedAfterChanges() {
     this.log.info( "tc3_MapEngineAndTileServices_MapDisplayedAfterChanges" );
     //wait for initialize
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ), "10000 km" );
+    wait.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ), "10000 km" ) );
 
     //## Step1
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='subtitle1']/span" ) );
-    assertEquals( "Map engine and map tile services", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='subtitle1']/span" ) ) );
+    assertEquals( "Map engine and map tile services", driver.findElement( By.xpath( "//div[@id='subtitle1']/span" ) ).getText() );
     //mapEngine and service
-    assertEquals( "Select map engine:", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='content']/div/div[6]/div/div/div" ) ) );
-    assertEquals( "Select tile map service:", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='content']/div/div[6]/div/div[2]/div" ) ) );
+    assertEquals( "Select map engine:", driver.findElement( By.xpath( "//div[@id='content']/div/div[6]/div/div/div" ) ).getText() );
+    assertEquals( "Select tile map service:", driver.findElement( By.xpath( "//div[@id='content']/div/div[6]/div/div[2]/div" ) ).getText() );
     //Zoom
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[5]/div" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[5]/div[2]" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[5]/div[3]" ) );
     //Scale
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) );
-    assertEquals( "2000 km", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) ) );
+    assertEquals( "2000 km", driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) ).getText() );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) );
-    assertEquals( "1000 mi", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) ) );
+    assertEquals( "1000 mi", driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) ).getText() );
     //Check if we are using OpenLayers
-    String mapId = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='testTileServices']/div" ), "id" );
+    String mapId = driver.findElement( By.xpath( "//div[@id='testTileServices']/div" ) ).getAttribute( "id" );
     assertTrue( mapId.contains( "OpenLayers" ) );
-    Select mapEngine = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='selectMapEngineObj']/select" ) ) );
-    Select mapService = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='selectTileObj']/select" ) ) );
+    Select mapEngine = new Select( driver.findElement( By.xpath( "//div[@id='selectMapEngineObj']/select" ) ) );
+    Select mapService = new Select( driver.findElement( By.xpath( "//div[@id='selectTileObj']/select" ) ) );
     assertEquals( "openlayers", mapEngine.getFirstSelectedOption().getText() );
     assertEquals( "mapquest-sat", mapService.getFirstSelectedOption().getText() );
 
@@ -339,30 +334,30 @@ public class MapComponentReference extends BaseTest {
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div[@class='gm-style']" ) );
     //Image with Google (left down corner)
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
+    assertNotNull( driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
     //Text 'Termos de Utilização (righ down corner)
     String strMap = "Map";
     String strTerms = "Terms of Use";
     String strSat = "Satellite";
 
-    assertEquals( strTerms, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[6]/div[2]/a" ) ) );
+    assertEquals( strTerms, driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[6]/div[2]/a" ) ).getText() );
     //check if we have mapquest-sat/Mapa/Satelite
-    assertEquals( "mapquest-sat", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ) ) );
-    assertEquals( strMap, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div[2]/div" ) ) );
-    assertEquals( strSat, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div[3]/div" ) ) );
+    assertEquals( "mapquest-sat", driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ) ).getText() );
+    assertEquals( strMap, driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[9]/div[2]/div" ) ).getText() );
+    assertEquals( strSat, driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[9]/div[3]/div" ) ).getText() );
 
     //## Step3
     mapService.selectByValue( "mapbox-world-dark" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ), "mapquest-sat" );
+    wait.until( ExpectedConditions.invisibilityOfElementWithText( By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ), "mapquest-sat" ) );
     //Image with Google (left down corner)
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
+    assertNotNull( driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
     //Text 'Termos de Utilização (righ down corner)
-    assertEquals( strTerms, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[6]/div[2]/a" ) ) );
+    assertEquals( strTerms, driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[6]/div[2]/a" ) ).getText() );
     //check if we have mapbox-world-dark/Mapa/Satelite
-    assertEquals( "mapbox-world-dark", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ) ) );
-    assertEquals( strMap, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div[2]/div" ) ) );
-    assertEquals( strSat, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div[3]/div" ) ) );
+    assertEquals( "mapbox-world-dark", driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ) ).getText() );
+    assertEquals( strMap, driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[9]/div[2]/div" ) ).getText() );
+    assertEquals( strSat, driver.findElement( By.xpath( "//div[@id='testTileServices']/div/div[9]/div[3]/div" ) ).getText() );
   }
 
   /**
@@ -370,11 +365,9 @@ public class MapComponentReference extends BaseTest {
    *
    * Test Case Name:
    *    Map with Markers based on Long/lat.
-   *
    * Description:
    *    Along validate the contents of the map we are going to validate the
    *    markers, if they displayed the correct contents.
-   *
    * Steps:
    *    1. Check the data exist
    *    2. Chick in each marker
@@ -430,11 +423,9 @@ public class MapComponentReference extends BaseTest {
    *
    * Test Case Name:
    *    Map with Markers based on city.
-   *
    * Description:
    *    Along validate the contents of the map we are going to validate the
    *    markers, if they displayed the correct contents.
-   *
    * Steps:
    *    1. Check the data exist
    *    2. Chick in each marker
@@ -500,11 +491,9 @@ public class MapComponentReference extends BaseTest {
    *
    * Test Case Name:
    *    Map with Shapes
-   *
    * Description:
    *    Check if the map has shapes and by click in a known shape must change
    *    its color.
-   *
    * Steps:
    *    1. Check the data exist
    *    2. Chick in a shape country

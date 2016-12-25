@@ -59,7 +59,7 @@ public class FilterAddinAccordion extends BaseTest {
      * ## Step 1
      */
     //Open Filter Component Add-in Reference sample
-    this.elemHelper.Get( driver, PageUrl.FILTER_ADDIN_COMPONENT );
+    driver.get( PageUrl.FILTER_ADDIN_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -93,15 +93,15 @@ public class FilterAddinAccordion extends BaseTest {
    *    Sniff test to Filter Component AddIn Reference
    *
    * Description:
-   *    This test is to assert simple functionality of sample
+   *    This test is to assert simple functionality of sample 
    *
    * Steps:
    *    1. Assert opening one filter closes one that was previously opened
    *    2. Open first single filter, search, assert results, select and assert string
    *    3. Open second single filter, search, assert results, select and assert string
-   *    4. Click Multiple Selection select a value and click cancel. Assert no change to text
+   *    4. Click Multiple Selection select a value and click cancel. Assert no change to text 
    *    5. Click again, select multiple values, click apply and assert text changed
-   *
+   *        
    */
   @Test
   public void tc01_FilterComponent_AddInReference() {

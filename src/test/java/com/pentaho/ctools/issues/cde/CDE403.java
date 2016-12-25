@@ -75,8 +75,8 @@ public class CDE403 extends BaseTest {
   public void tc01_CdeDashboard_InputFieldFocus() {
     this.log.info( "tc01_CdeDashboard_InputFieldFocus" );
 
-    // Go to New CDE Dashboard
-    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
+    //Go to New CDE Dashboard
+    driver.get( PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     /*
      * ## Step 1

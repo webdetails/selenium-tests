@@ -31,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -75,7 +74,7 @@ public class Select2Component extends BaseTest {
      * ## Step 1
      */
     //Open Created sample and click button
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_474 );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-474%3ACDF-474.wcdf/generatedContent" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
 
     //Click first dropdown

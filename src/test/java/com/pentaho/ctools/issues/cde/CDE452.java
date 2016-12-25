@@ -81,7 +81,7 @@ public class CDE452 extends BaseTest {
      * ## Step 1
      */
     //Open system dashboard in edit mode and assert elements on page
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_404_EDIT2 );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( element );
@@ -93,7 +93,7 @@ public class CDE452 extends BaseTest {
     assertNotNull( element );
 
     //Open repository dashboard in edit mode and assert elements on page
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_430_EDIT );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( element );
@@ -108,7 +108,7 @@ public class CDE452 extends BaseTest {
      * ## Step 2
      */
     //Log out
-    this.elemHelper.Get( driver, PageUrl.PUC );
+    driver.get( PageUrl.PUC );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
@@ -159,13 +159,13 @@ public class CDE452 extends BaseTest {
     assertEquals( "suzy", text );
 
     //Open system dashboard in edit mode and assert elements on page
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_404_EDIT2 );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( text, "Access Denied or file not found - /system/CDE404/dashboards/i18nTest.wcdf" );
 
     //Open repository dashboard in edit mode and assert elements on page
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_430_EDIT );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( text, "Access Denied or file not found - /public/Issues/CDF/CDF-430/CDE/i18nTest.wcdf" );
@@ -174,7 +174,7 @@ public class CDE452 extends BaseTest {
      * ## Step 3
      */
     //Log out
-    this.elemHelper.Get( driver, PageUrl.PUC );
+    driver.get( PageUrl.PUC );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
@@ -225,13 +225,13 @@ public class CDE452 extends BaseTest {
     assertEquals( "pat", text );
 
     //Open system dashboard in edit mode and assert elements on page
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_404_EDIT2 );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( text, "This functionality is limited to users with permission 'Create Content'" );
 
     //Open repository dashboard in edit mode and assert elements on page
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_430_EDIT );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( text, "This functionality is limited to users with permission 'Create Content'" );
@@ -240,7 +240,7 @@ public class CDE452 extends BaseTest {
      * ## Step 4
      */
     //Log out
-    this.elemHelper.Get( driver, PageUrl.PUC );
+    driver.get( PageUrl.PUC );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
@@ -291,19 +291,19 @@ public class CDE452 extends BaseTest {
     assertEquals( "tiffany", text );
 
     //Open system dashboard in edit mode and assert elements on page
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_404_EDIT2 );
+    driver.get( baseUrl + "plugin/pentaho-cdf-dd/api/renderer/edit?absolute=false&inferScheme=false&file=i18nTest.wcdf&path=%2FCDE404%2Fdashboards%2F&solution=system&mode=edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( text, "This functionality is limited to users with permission 'Create Content'" );
 
     //Open repository dashboard in edit mode and assert elements on page
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_430_EDIT );
+    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-430%3ACDE%3Ai18nTest.wcdf/edit" );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
     assertEquals( text, "This functionality is limited to users with permission 'Create Content'" );
 
     //Log out
-    this.elemHelper.Get( driver, PageUrl.PUC );
+    driver.get( PageUrl.PUC );
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
     assertNotNull( element );
@@ -357,7 +357,7 @@ public class CDE452 extends BaseTest {
   private void failed() {
     if ( this.failure == 2 ) {
       //Log out
-      this.elemHelper.Get( driver, PageUrl.PUC );
+      driver.get( PageUrl.PUC );
       this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
       WebElement element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td[2]" ) );
@@ -431,7 +431,6 @@ public class CDE452 extends BaseTest {
     }
   }
 
-  @Override
   @AfterClass( alwaysRun = true )
   public void tearDownClass() {
     this.log.info( "tearDownClass" );

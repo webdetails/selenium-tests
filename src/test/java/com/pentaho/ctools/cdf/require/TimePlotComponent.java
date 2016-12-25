@@ -45,7 +45,7 @@ import com.pentaho.selenium.BaseTest;
 public class TimePlotComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  // Log instance
+  //Log instance
   private final Logger log = LogManager.getLogger( TimePlotComponent.class );
 
   /**
@@ -60,7 +60,7 @@ public class TimePlotComponent extends BaseTest {
 
     // The URL for the TimePlotComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/TimePlotComponent
-    this.elemHelper.Get( driver, PageUrl.TIME_COMPONENT_REQUIRE );
+    driver.get( PageUrl.TIME_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
@@ -82,7 +82,7 @@ public class TimePlotComponent extends BaseTest {
     this.log.info( "tc1_PageContent_DisplayTitle" );
     // Wait for title become visible and with value 'Community Dashboard Framework'
     String pageTitle = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
-    // Wait for visibility of 'timePlotComponent'
+    // Wait for visibility of 'timePlotComponent'    
     String sampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "timePlotComponent" );
 
     // Validate the sample that we are testing is the one
@@ -120,7 +120,7 @@ public class TimePlotComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
+    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
 
     //It could be possible to raise an error of "Error processing component" and the workaround is refresh the page.

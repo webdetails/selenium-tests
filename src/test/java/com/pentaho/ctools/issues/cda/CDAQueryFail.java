@@ -32,7 +32,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
-import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -45,7 +44,7 @@ import com.pentaho.selenium.BaseTest;
  * - http://jira.pentaho.com/browse/QUALITY-1122
  * - http://jira.pentaho.com/browse/QUALITY-1140
  * - http://jira.pentaho.com/browse/QUALITY-1129
- *
+ *  
  * NOTE
  * To test this script it is required to have CDA plugin installed.
  *
@@ -84,7 +83,7 @@ public class CDAQueryFail extends BaseTest {
      * ## Step 1
      */
     //Open Issue Sample
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDA_118 );
+    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDA/CDA-118/sql-jndi.cda" );
 
     //wait for invisibility of waiting pop-up
     this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='busy-indicator-container waitPopup']" ) );
@@ -127,7 +126,8 @@ public class CDAQueryFail extends BaseTest {
     assertNotNull( queryButton );
 
     //Check the presented contains
-    assertEquals( this.elemHelper.GetAttribute( driver, By.id( "sales" ), "value" ), "10000" );
+    WebElement newSalesParam = this.elemHelper.FindElement( driver, By.id( "sales" ) );
+    assertEquals( "10000", newSalesParam.getAttribute( "value" ) );
 
     //Check text on table
     String columnOneRowOne = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/tbody/tr/td" ) );
@@ -139,7 +139,7 @@ public class CDAQueryFail extends BaseTest {
      * ## Step 4
      */
     //Open Sample with outpuColumnName in the URL
-    this.elemHelper.Get( driver, PageUrl.ISSUES_CDA_118_DOQUERY );
+    driver.get( baseUrl + "plugin/cda/api/doQuery?paramsales=10000&paramorderDate=2004-03-01&path=%2Fpublic%2FIssues%2FCDA%2FCDA-118%2Fsql-jndi.cda&dataAccessId=1&outputIndexId=1&&outputColumnName=STATUS" );
 
     //Assert query result
     String result = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//body" ) );
