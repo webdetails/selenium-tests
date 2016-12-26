@@ -44,7 +44,7 @@ import com.pentaho.selenium.BaseTest;
 public class DashboardModuleComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( DashboardModuleComponent.class );
 
   /**
@@ -55,8 +55,10 @@ public class DashboardModuleComponent extends BaseTest {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
-    //Go to the CDE Sample Dashboard web page.
-    driver.get( PageUrl.DASHBOARD_MODULE_COMPONENT_REQUIRE );
+    this.log.info( "tc0_OpenSamplePage_Display" );
+
+    // Go to the CDE Sample Dashboard web page.
+    this.elemHelper.Get( driver, PageUrl.DASHBOARD_MODULE_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -68,8 +70,11 @@ public class DashboardModuleComponent extends BaseTest {
    *
    * Test Case Name:
    *    Page Content
+   *
    * Description:
-   *    The test case pretends to validate the display data in Dashboard Component sample is according with expected behavior.
+   *    The test case pretends to validate the display data in Dashboard
+   *    Component sample is according with expected behavior.
+   *
    * Steps:
    *    1. Check for displayed text
    */
@@ -126,13 +131,14 @@ public class DashboardModuleComponent extends BaseTest {
    *
    * Test Case Name:
    *    Paging
+   *
    * Description:
    *    The test case pretends to validate paging functionality.
+   *
    * Steps:
    *    1. Press next on first table
    *    2. Press next on second table
    *    3. Press next on third table
-   *    
    */
   @Test
   public void tc2_Paging_UserCanPaging() {
@@ -199,9 +205,11 @@ public class DashboardModuleComponent extends BaseTest {
    *
    * Test Case Name:
    *    Click chart updates table
+   *
    * Description:
-   *    The test case pretends to validate the update of table when we click the corresponding
-   *    chart
+   *    The test case pretends to validate the update of table when we click
+   *    the corresponding chart.
+   *
    * Steps:
    *    1. Enable/Disable series on first chart, click chart and navigate
    *    2. Enable/Disable series on second chart, click chart and navigate

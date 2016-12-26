@@ -81,8 +81,8 @@ public class CDEditor {
     if ( cdePanel == null ) {
       GoToNewCDE();
     }
-    //Go to Component Panel
-    //Check if we are there already!
+    // Go to Component Panel
+    // Check if we are there already!
     WebElement componentPanelActive = this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.panelButton.panelButton-active[title='Components Panel']" ), 1 );
     if ( componentPanelActive == null ) {
       this.elemHelper.ClickJS( this.driver, By.cssSelector( "div.componentsPanelButton" ) );

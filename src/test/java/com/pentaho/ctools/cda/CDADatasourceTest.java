@@ -66,10 +66,10 @@ public class CDADatasourceTest extends BaseTest {
     /*
      * Step 0 - Go to web page.
      */
-    //Go to the CDA Cache Manager web page.
-    driver.get( PageUrl.DATASOURCE_TEST );
+    // Go to the CDA Cache Manager web page.
+    this.elemHelper.Get( driver, PageUrl.DATASOURCE_TEST );
     //wait for element to be visible
-    this.elemHelper.WaitForElementVisibility( driver, By.xpath( "//table[@id='testTable']/tbody/tr[15]/td" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='testTable']/tbody/tr[15]/td" ) );
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 

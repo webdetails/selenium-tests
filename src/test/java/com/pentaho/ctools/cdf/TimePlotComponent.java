@@ -45,7 +45,7 @@ import com.pentaho.selenium.BaseTest;
 public class TimePlotComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( TimePlotComponent.class );
 
   /**
@@ -58,7 +58,7 @@ public class TimePlotComponent extends BaseTest {
   public void tc0_OpenSamplePage_Display() {
     // The URL for the TimePlotComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TimePlotComponent
-    driver.get( PageUrl.TIMEPLOT_COMPONENT );
+    this.elemHelper.Get( driver, PageUrl.TIMEPLOT_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -68,11 +68,13 @@ public class TimePlotComponent extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Reload Sample
+   *    Validate Page Contents
+   *
    * Description:
-   *    Reload the sample (not refresh page).
+   *    Here we want to validate the page contents.
+   *
    * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
+   *    1. Check the widget's title.
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
@@ -81,7 +83,7 @@ public class TimePlotComponent extends BaseTest {
     String sampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), "timePlotComponent" );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "timePlotComponent", sampleTitle );
+    assertEquals( sampleTitle, "timePlotComponent" );
   }
 
   /**
@@ -112,7 +114,7 @@ public class TimePlotComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
 
     //It could be possible to raise an error of "Error processing component" and the workaround is refresh the page.

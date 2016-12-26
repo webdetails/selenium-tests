@@ -49,13 +49,13 @@ public class DuplicateComponent extends BaseTest {
   /**
    * ############################### Test Case 1 ###############################
    *
-      * Test Case Name:
+   * Test Case Name:
    *    Sniff test to sample
    *
    * Description:
-   *    This test is to assert simple functionality of sample 
+   *    This test is to assert simple functionality of sample
    *
-      * Steps:
+   * Steps:
    *    1. Open Duplicate Component sample and assert elements on page
    *    2. Assert elements on page and click first "Duplicate" link
    *    3. Assert elements are duplicated correctly and click second "Duplicate" link
@@ -69,7 +69,7 @@ public class DuplicateComponent extends BaseTest {
      * ## Step 1
      */
     //Open Duplicate Component sample
-    driver.get( PageUrl.DUPLICATE_COMPONENT );
+    this.elemHelper.Get( driver, PageUrl.DUPLICATE_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

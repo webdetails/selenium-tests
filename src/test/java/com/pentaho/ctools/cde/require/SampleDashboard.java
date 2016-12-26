@@ -44,7 +44,7 @@ import com.pentaho.selenium.BaseTest;
 public class SampleDashboard extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( SampleDashboard.class );
 
   /**
@@ -55,8 +55,10 @@ public class SampleDashboard extends BaseTest {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
-    //Go to the CDE Sample Dashboard web page.
-    driver.get( PageUrl.SAMPLE_DASHBOARD_REQUIRE );
+    this.log.info( "tc0_OpenSamplePage_Display" );
+
+    // Go to the CDE Sample Dashboard web page.
+    this.elemHelper.Get( driver, PageUrl.SAMPLE_DASHBOARD_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -68,9 +70,11 @@ public class SampleDashboard extends BaseTest {
    *
    * Test Case Name:
    *    Page Content
+   *
    * Description:
    *    The test case pretends to validate the display data in CDE Sample
    *    Dashboard is according with expected behavior.
+   *
    * Steps:
    *    1. Check for display text
    */
@@ -115,8 +119,10 @@ public class SampleDashboard extends BaseTest {
    *
    * Test Case Name:
    *    Paging
+   *
    * Description:
    *    The test case pretends to validate paging functionality.
+   *
    * Steps:
    *    1. Press next
    *    2. Go to the end
@@ -150,7 +156,7 @@ public class SampleDashboard extends BaseTest {
     /*
      * ## Step 2
      */
-    //Go to the end
+    // Go to the end
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
     this.elemHelper.WaitForTextPresence( driver, By.id( "tableTable_info" ), "Showing 21 to 30 of 44 entries" );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
@@ -187,7 +193,7 @@ public class SampleDashboard extends BaseTest {
     /*
      * ## Step 5
      */
-    //Go to next
+    // Go to next
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
     this.elemHelper.WaitForTextPresence( driver, By.id( "tableTable_info" ), "Showing 31 to 40 of 44 entries" );
     customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[5]/td" ) );
@@ -201,8 +207,10 @@ public class SampleDashboard extends BaseTest {
    *
    * Test Case Name:
    *    Sorting
+   *
    * Description:
    *    The test case pretends to validate sorting functionality.
+   *
    * Steps:
    *    1. Sort Asc by Customer
    *    2. Sort Desc by Total
@@ -223,7 +231,7 @@ public class SampleDashboard extends BaseTest {
     total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[1]/td[2]" ) );
     assertEquals( "Auto Canal+ Petit", customer );
     assertEquals( "20,743.56", total );
-    //Go to next page and check the contents
+    // Go to next page and check the contents
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
     this.elemHelper.WaitForTextPresence( driver, By.id( "tableTable_info" ), "Showing 11 to 20 of 44 entries" );
     customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[5]/td" ) );
@@ -243,7 +251,7 @@ public class SampleDashboard extends BaseTest {
     total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[1]/td[2]" ) );
     assertEquals( "Salzburg Collectables", customer );
     assertEquals( "409,484.24", total );
-    //Go to next page and check the contents
+    // Go to next page and check the contents
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='tableTable_paginate']/a[2]" ) );
     this.elemHelper.WaitForTextPresence( driver, By.id( "tableTable_info" ), "Showing 11 to 20 of 44 entries" );
     customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='tableTable']/tbody/tr[5]/td" ) );
@@ -257,9 +265,11 @@ public class SampleDashboard extends BaseTest {
    *
    * Test Case Name:
    *    Table update
+   *
    * Description:
    *    The test case pretends to validate the update of table when we select
    *    data from chart.
+   *
    * Steps:
    *    1. Enable/Disable series
    *    2. Select a data and navigate between pages

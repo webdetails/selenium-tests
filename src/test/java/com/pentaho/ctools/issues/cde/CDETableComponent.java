@@ -97,7 +97,7 @@ public class CDETableComponent extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_EDIT );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    //Go to components panel, expand other components and select table component
+    // Go to components panel, expand other components and select table component
     WebElement buttonComponentPanel = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='componentsPanelButton']" ) );
     assertNotNull( buttonComponentPanel );
     buttonComponentPanel.click();
@@ -108,14 +108,14 @@ public class CDETableComponent extends BaseTest {
     assertNotNull( tableComponent );
     tableComponent.click();
 
-    //On properties table select Advanced and then assert title of "Style" property
+    // On properties table select Advanced and then assert title of "Style" property
     WebElement advancedProperties = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='advancedProperties propertiesUnSelected']" ) );
     assertNotNull( advancedProperties );
     advancedProperties.click();
     WebElement styleProperty = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//td[@title='Table Style, if left empty will infer from the dashboard renderer type']" ) );
     assertNotNull( styleProperty );
 
-    //Open dashboard settings, assert bootstrap is selected as renderer, select blueprint, assert new selection, save
+    // Open dashboard settings, assert bootstrap is selected as renderer, select blueprint, assert new selection, save
     WebElement settingsLink = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='headerLinks']//a[@onclick='cdfdd.saveSettings()']" ) );
     assertNotNull( settingsLink );
     settingsLink.click();

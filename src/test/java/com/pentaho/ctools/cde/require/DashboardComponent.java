@@ -45,7 +45,7 @@ import com.pentaho.selenium.BaseTest;
 public class DashboardComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( DashboardComponent.class );
 
   /**
@@ -56,8 +56,10 @@ public class DashboardComponent extends BaseTest {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
-    //Go to the CDE Sample Dashboard web page.
-    driver.get( PageUrl.DASHBOARD_COMPONENT_REQUIRE );
+    this.log.info( "tc0_OpenSamplePage_Display" );
+
+    // Go to the CDE Sample Dashboard web page.
+    this.elemHelper.Get( driver, PageUrl.DASHBOARD_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -69,8 +71,11 @@ public class DashboardComponent extends BaseTest {
    *
    * Test Case Name:
    *    Page Content
+   *
    * Description:
-   *    The test case pretends to validate the display data in Dashboard Component sample is according with expected behavior.
+   *    The test case pretends to validate the display data in Dashboard
+   *    Component sample is according with expected behavior.
+   *
    * Steps:
    *    1. Check for displayed text
    */
@@ -123,8 +128,10 @@ public class DashboardComponent extends BaseTest {
    *
    * Test Case Name:
    *    Paging
+   *
    * Description:
    *    The test case pretends to validate paging functionality.
+   *
    * Steps:
    *    1. Press next
    *    2. Go to the end
@@ -157,7 +164,7 @@ public class DashboardComponent extends BaseTest {
     /*
      * ## Step 2
      */
-    //Go to the end of second dashboard
+    // Go to the end of second dashboard
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
     this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 11 to 20 of 44 entries" );
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
@@ -178,9 +185,11 @@ public class DashboardComponent extends BaseTest {
    *
    * Test Case Name:
    *    Table 1 update
+   *
    * Description:
    *    The test case pretends to validate the update of table when we select
    *    data from chart or selector.
+   *
    * Steps:
    *    1. Enable/Disable series
    *    2. Select a data and navigate between pages
@@ -251,9 +260,11 @@ public class DashboardComponent extends BaseTest {
    *
    * Test Case Name:
    *    Table 2 update
+   *
    * Description:
    *    The test case pretends to validate the update of table when we select
    *    data from chart or selector.
+   *
    * Steps:
    *    1. Enable/Disable series
    *    2. Select a data and navigate between pages

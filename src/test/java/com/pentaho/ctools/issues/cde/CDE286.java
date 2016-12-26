@@ -39,7 +39,7 @@ import com.pentaho.selenium.BaseTest;
 /**
  * The script is testing the issue:
  * - http://jira.pentaho.com/browse/CDE-286
- * 
+ *
  * and the automation test is described:
  * - http://jira.pentaho.com/browse/QUALITY-1016
  *
@@ -71,7 +71,6 @@ public class CDE286 extends BaseTest {
    *    2. Add CGG Dial Component and fill it's properties
    *    3. Click "Shift+G" to create export file and choose URL
    *    4. Add "&param=25" to URL and assert Dial Component is properly shown
-   * @throws InterruptedException 
    *
    */
   @Test
@@ -81,8 +80,8 @@ public class CDE286 extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to New CDE Dashboard
-    driver.get( PageUrl.CDE_DASHBOARD );
+    // Go to New CDE Dashboard
+    this.elemHelper.Get( driver, PageUrl.CDE_DASHBOARD );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //assert buttons
     WebElement buttonSaveTemplate = this.elemHelper.WaitForElementPresence( driver, By.xpath( "//a[@title='Save as Template']" ) );
@@ -238,7 +237,7 @@ public class CDE286 extends BaseTest {
     /*
      * ## Step 4
      */
-    driver.get( expectedURL + "&paramvalue=25" );
+    this.elemHelper.Get( driver, expectedURL + "&paramvalue=25" );
     WebElement elemImg = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
     assertNotNull( elemImg );
     String actualImgUrl = this.elemHelper.GetAttribute( driver, By.cssSelector( "img" ), "src" );

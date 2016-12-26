@@ -28,6 +28,7 @@ import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -74,7 +75,7 @@ public class CDF501 extends BaseTest {
      * ## Step 1
      */
     //Open Created sample with params on the URL
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-501%3Aurl_param.wcdf/generatedContent?paramtype=success&type=awesome" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_501 );
 
     /*
      * ## Step 2

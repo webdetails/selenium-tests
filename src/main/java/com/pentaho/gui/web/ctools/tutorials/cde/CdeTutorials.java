@@ -211,7 +211,7 @@ public class CdeTutorials extends BaseTest {
     String xpathLocator = String.format( "//*[@id='%s']//img", parentId );
 
     // Locates every image under the parentId web element
-    List<WebElement> img = driver.findElements( By.xpath( xpathLocator ) );
+    List<WebElement> img = this.elemHelper.FindElements(driver, By.xpath( xpathLocator ) );
 
     // Test if images were found
     assertNotNull( img );

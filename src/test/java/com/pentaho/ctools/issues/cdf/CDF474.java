@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -72,8 +73,8 @@ public class CDF474 extends BaseTest {
     /*
      * ## Step 1
      */
-    //Go to New CDE Dashboard
-    driver.get( baseUrl + "api/repos/:public:Issues:CDF:CDF-474:CDF-474.wcdf/generatedContent" );
+    // Go to New CDE Dashboard
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_474 );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -90,6 +91,6 @@ public class CDF474 extends BaseTest {
     element = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "select2-drop" ) );
     assertNotNull( element );
     String text1 = element.getAttribute( "style" );
-    assertTrue( text != text1 );
+    assertTrue( !text.equals( text1 ) );
   }
 }

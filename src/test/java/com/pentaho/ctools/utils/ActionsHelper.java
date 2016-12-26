@@ -33,9 +33,9 @@ public class ActionsHelper extends Actions {
 
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( ActionsHelper.class );
-  //The driver to access the page
+  // The driver to access the page
   private WebDriver driver;
 
   /**

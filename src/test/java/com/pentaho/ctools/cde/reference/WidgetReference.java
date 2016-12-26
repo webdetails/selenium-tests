@@ -30,10 +30,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -46,17 +46,8 @@ import com.pentaho.selenium.BaseTest;
 public class WidgetReference extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( WidgetReference.class );
-
-  @BeforeClass
-  public void setUpClass() {
-    //Go to AddinReference
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf-dd%3Atests%3Awidgets.wcdf/generatedContent" );
-
-    //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-  }
 
   /**
    * ############################### Test Case 1 ###############################
@@ -71,6 +62,12 @@ public class WidgetReference extends BaseTest {
   @Test
   public void tc01_PageContent_DisplayContent() {
     this.log.info( "tc01_PageContent_DisplayContent" );
+
+    // Go to AddinReference
+    this.elemHelper.Get( driver, PageUrl.WIDGET_REFERENCE );
+
+    //NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     /*
      * ## Step 1

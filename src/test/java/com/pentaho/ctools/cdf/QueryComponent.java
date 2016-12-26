@@ -27,10 +27,10 @@ import static org.testng.Assert.assertTrue;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -43,7 +43,7 @@ import com.pentaho.selenium.BaseTest;
 public class QueryComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( QueryComponent.class );
 
   /**
@@ -57,7 +57,7 @@ public class QueryComponent extends BaseTest {
     this.log.info( "tc0_OpenSamplePage_Display" );
     // The URL for the QueryComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/QueryComponent
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3A30-documentation%3A30-component_reference%3A10-core%3A70-QueryComponent%3Aquery_component.xcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.QUERY_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -67,24 +67,31 @@ public class QueryComponent extends BaseTest {
    * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
-   *    Reload Sample
+   *    Validate Page Contents
+   *
    * Description:
-   *    Reload the sample (not refresh page).
+   *    Here we want to validate the page contents.
+   *
    * Steps:
-   *    1. Click in Code and then click in button 'Try me'.
+   *    1. Check the widget's title.
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
+    /*
+     * ## Step 1
+     */
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    wait.until( ExpectedConditions.titleContains( "Community Dashboard Framework" ) );
-    // Wait for visibility of 'VisualizationAPIComponent'
-    wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    String expectedPageTitle = "Community Dashboard Framework";
+    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    // Wait for visibility of 'QueryComponent'
+    String expectedSampleTitle = "QueryComponent";
+    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "QueryComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( actualPageTitle, expectedPageTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
   }
 
   /**
@@ -92,8 +99,10 @@ public class QueryComponent extends BaseTest {
    *
    * Test Case Name:
    *    Reload Sample
+   *
    * Description:
    *    Reload the sample (not refresh page).
+   *
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
@@ -103,8 +112,8 @@ public class QueryComponent extends BaseTest {
 
     // ## Step 1
     // Render again the sample
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -114,7 +123,7 @@ public class QueryComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
@@ -123,8 +132,10 @@ public class QueryComponent extends BaseTest {
    *
    * Test Case Name:
    *    Query Compoment
+   *
    * Description:
    *    We pretend validate the result of a query.
+   *
    * Steps:
    *    1. Execute the component and check the return value of query data.
    */

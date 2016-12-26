@@ -29,7 +29,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -46,16 +45,22 @@ import com.pentaho.selenium.BaseTest;
 public class TemplateComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( TemplateComponent.class );
 
   /**
-   * Go to the TemplateComponent web page.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  @BeforeClass
-  public void setUpTestCase() {
-    //Go to AddinReference
-    driver.get( PageUrl.TEMPLATE_COMPONENT_REQUIRE );
+  @Test
+  public void tc0_OpenSamplePage_Display() {
+    this.log.info( "tc0_OpenSamplePage_Display" );
+
+    //The URL for the TemplateComponent under CDF samples
+    //This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/Template Component
+    this.elemHelper.Get( driver, PageUrl.TEMPLATE_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -142,7 +147,7 @@ public class TemplateComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 

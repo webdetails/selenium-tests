@@ -33,6 +33,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -78,7 +79,7 @@ public class CDAChangeProperty extends BaseTest {
      * ## Step 1
      */
     // Open Sample and select query
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDE/CDE-379/Chart1.cda" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_CDA );
 
     WebElement dataSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dataAccessSelector" ) );
     assertNotNull( dataSelector );
@@ -96,14 +97,14 @@ public class CDAChangeProperty extends BaseTest {
     // assert Column name
     WebElement columnHeader = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='contents']/thead/tr/th" ) );
     assertNotNull( columnHeader );
-    String columnText = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='contents']/thead/tr/th" ) ).getText();
+    String columnText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/thead/tr/th" ) );
     assertEquals( "CUSTOMER", columnText );
 
     /*
      * ## Step 2
      */
     //Open file to edit CDA and go to Datasources Panel
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_EDIT );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     WebElement buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( buttonDatasources );
@@ -134,7 +135,7 @@ public class CDAChangeProperty extends BaseTest {
     okButton.click();
     this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ), "[[\"0\",\"testing\"]]" );
-    String columnsParameter = this.elemHelper.FindElement( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) ).getText();
+    String columnsParameter = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) );
     assertEquals( "[[\"0\",\"testing\"]]", columnsParameter );
 
     //Save dashboard
@@ -149,7 +150,7 @@ public class CDAChangeProperty extends BaseTest {
      * ## Step 3
      */
     // Open Sample and select query
-    driver.get( baseUrl + "plugin/cda/api/previewQuery?path=/public/Issues/CDE/CDE-379/Chart1.cda" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_CDA );
 
     dataSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "dataAccessSelector" ) );
     assertNotNull( dataSelector );
@@ -167,14 +168,14 @@ public class CDAChangeProperty extends BaseTest {
     // assert Column name
     columnHeader = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='contents']/thead/tr/th" ) );
     assertNotNull( columnHeader );
-    columnText = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='contents']/thead/tr/th" ) ).getText();
+    columnText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='contents']/thead/tr/th" ) );
     assertEquals( "testing", columnText );
 
     /*
      * ## Step 4
      */
     //Open file to edit CDA and go to Datasources Panel
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_EDIT );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
     assertNotNull( buttonDatasources );
@@ -207,7 +208,7 @@ public class CDAChangeProperty extends BaseTest {
     okButton.click();
     this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
     this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ), "[]" );
-    columnsParameter = this.elemHelper.FindElement( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) ).getText();
+    columnsParameter = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) );
     assertEquals( "[]", columnsParameter );
 
     //Save dashboard
@@ -224,7 +225,7 @@ public class CDAChangeProperty extends BaseTest {
     this.log.info( "tearDownClass" );
     if ( this.failure == 0 ) {
       //Open file to edit CDA and go to Datasources Panel
-      driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDE%3ACDE-379%3AChart1.wcdf/wcdf.edit" );
+      this.elemHelper.Get( driver, PageUrl.ISSUES_CDE_379_EDIT );
       this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
       WebElement buttonDatasources = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='datasourcesPanelButton']" ) );
       assertNotNull( buttonDatasources );
@@ -257,7 +258,7 @@ public class CDAChangeProperty extends BaseTest {
       okButton.click();
       this.elemHelper.WaitForElementNotPresent( driver, By.id( "popupstates" ) );
       this.elemHelper.WaitForTextPresence( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ), "[]" );
-      String columnsParameter = this.elemHelper.FindElement( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) ).getText();
+      String columnsParameter = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//td[@title='Change the columns default names']/../td[2]" ) );
       assertEquals( "[]", columnsParameter );
 
       //Save dashboard

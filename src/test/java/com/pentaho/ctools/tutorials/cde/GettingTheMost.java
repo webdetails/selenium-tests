@@ -40,7 +40,7 @@ import com.pentaho.selenium.BaseTest;
 public class GettingTheMost extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( GettingTheMost.class );
   // Instance to access CDE Tutorial
   private final CdeTutorials cdetutorial = new CdeTutorials();
@@ -81,8 +81,8 @@ public class GettingTheMost extends BaseTest {
     this.log.info( "tc0_PreviewAndEditLinks_Displayed" );
 
     //Multiple Preview/Edit buttons 
-    List<WebElement> editLinks = driver.findElements( By.xpath( "//a[contains(text(),'Edit')]" ) );
-    List<WebElement> previewLinks = driver.findElements( By.xpath( "//a[contains(text(),'Preview')]" ) );
+    List<WebElement> editLinks = this.elemHelper.FindElements(driver, By.xpath( "//a[contains(text(),'Edit')]" ) );
+    List<WebElement> previewLinks = this.elemHelper.FindElements(driver, By.xpath( "//a[contains(text(),'Preview')]" ) );
 
     //Iterators for the Edit & Preview links Lists
     Iterator<WebElement> editLink = editLinks.iterator();

@@ -17,7 +17,7 @@ import com.pentaho.selenium.BaseTest;
 public class TWars extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( TWars.class );
 
   private CdeOpenDemos cde = new CdeOpenDemos();

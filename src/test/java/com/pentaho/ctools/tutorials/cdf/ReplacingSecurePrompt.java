@@ -36,7 +36,7 @@ import com.pentaho.selenium.BaseTest;
 public class ReplacingSecurePrompt extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( ReplacingSecurePrompt.class );
   // Instance to access CDE Tutorial
   private final CdfTutorials cdftutorial = new CdfTutorials();

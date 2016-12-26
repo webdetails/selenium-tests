@@ -32,6 +32,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -75,7 +76,7 @@ public class CDF469 extends BaseTest {
      * ## Step 1
      */
     //Open created dashboard
-    driver.get( baseUrl + "api/repos/%3Apublic%3AIssues%3ACDF%3ACDF-469%3Acdf-469.wcdf/generatedContent" );
+    this.elemHelper.Get( driver, PageUrl.ISSUES_CDF_469 );
 
     // Wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );

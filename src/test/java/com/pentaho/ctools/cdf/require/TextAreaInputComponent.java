@@ -27,10 +27,10 @@ import static org.testng.Assert.assertTrue;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
+import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
 
 /**
@@ -43,23 +43,29 @@ import com.pentaho.selenium.BaseTest;
 public class TextAreaInputComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
-  //Log instance
+  // Log instance
   private final Logger log = LogManager.getLogger( TextAreaInputComponent.class );
 
   /**
-   * Go to the TextAreaInputComponent web page.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  @BeforeClass
-  public void setUpClass() {
-    //Go to AddinReference
-    driver.get( baseUrl + "api/repos/%3Apublic%3Aplugin-samples%3Apentaho-cdf%3Apentaho-cdf-require%3A30-documentation%3A30-component_reference%3A10-core%3A38-TextareaInputComponent%3Atext_area_input_component.xcdf/generatedContent" );
+  @Test
+  public void tc0_OpenSamplePage_Display() {
+    this.log.info( "tc0_OpenSamplePage_Display" );
+
+    //The URL for the TextAreaInputComponent under CDF samples
+    //This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/TextAreaInput Component
+    this.elemHelper.Get( driver, PageUrl.TEXT_AREA_INPUT_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
-   * ############################### Test Case 2 ###############################
+   * ############################### Test Case 1 ###############################
    *
    * Test Case Name:
    *    Page Content
@@ -135,7 +141,7 @@ public class TextAreaInputComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = driver.findElements( By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
     assertEquals( 1, nSampleObject );
   }
 
