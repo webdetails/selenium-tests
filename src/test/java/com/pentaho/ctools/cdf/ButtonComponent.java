@@ -24,6 +24,8 @@ package com.pentaho.ctools.cdf;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -41,6 +43,8 @@ import com.pentaho.selenium.BaseTest;
 public class ButtonComponent extends BaseTest {
   // Access to wrapper for webdriver
   private final ElementHelper elemHelper = new ElementHelper();
+  // Log instance
+  private final Logger log = LogManager.getLogger( ButtonComponent.class );
 
   /**
    * ############################### Test Case 0 ###############################
@@ -50,6 +54,8 @@ public class ButtonComponent extends BaseTest {
    */
   @Test
   public void tc0_OpenSamplePage_Display() {
+    this.log.info( "tc0_OpenSamplePage_Display" );
+
     // The URL for the ButtonComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/ButtonComponent
     this.elemHelper.Get( driver, PageUrl.BUTTON_COMPONENT );
@@ -70,6 +76,8 @@ public class ButtonComponent extends BaseTest {
    */
   @Test
   public void tc1_PageContent_DisplayTitle() {
+    this.log.info( "tc1_PageContent_DisplayTitle" );
+
     // Wait for title become visible and with value 'Community Dashboard Framework'
     String pageTitle = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
     // Wait for visibility of 'VisualizationAPIComponent'
@@ -92,6 +100,8 @@ public class ButtonComponent extends BaseTest {
    */
   @Test
   public void tc2_ReloadSample_SampleReadyToUse() {
+    this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
+
     /*
      * ## Step 1
      */
@@ -120,6 +130,8 @@ public class ButtonComponent extends BaseTest {
    */
   @Test
   public void tc3_ClickableButton_AlertMessageDisplayed() {
+    this.log.info( "tc3_ClickableButton_AlertMessageDisplayed" );
+
     /*
      * ## Step 1
      */

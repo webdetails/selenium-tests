@@ -27,7 +27,6 @@ import static org.testng.Assert.assertTrue;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -48,11 +47,16 @@ public class TextAreaInputComponent extends BaseTest {
   private final Logger log = LogManager.getLogger( TextAreaInputComponent.class );
 
   /**
-   * Go to the TextAreaInputComponent web page.
+   * ############################### Test Case 0 ###############################
+   *
+   * Test Case Name:
+   *    Open Sample Page
    */
-  @BeforeClass
-  public void setUpTestCase() {
-    // Go to TextAreaInputComponent
+  @Test
+  public void tc0_OpenSamplePage_Display() {
+    this.log.info( "tc0_OpenSamplePage_Display" );
+    // The URL for the TextAreaInputComponent under CDF samples
+    // This samples is in: Public/plugin-samples/CDF/Documentation/Component Reference/Core Components/TextAreaInputComponent
     this.elemHelper.Get( driver, PageUrl.TEXT_AREA_INPUT_COMPONENT );
 
     //NOTE - we have to wait for loading disappear
