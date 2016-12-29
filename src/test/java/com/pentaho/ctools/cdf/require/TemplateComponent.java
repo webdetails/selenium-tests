@@ -84,11 +84,16 @@ public class TemplateComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    // Page title
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    //Sample Title
-    String sampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//span[2]" ) );
-    assertEquals( "TemplateComponent", sampleTitle );
+    // Wait for title become visible and with value 'Community Dashboard Framework'
+    String expectedPageTitle = "Community Dashboard Framework";
+    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    // Wait for visibility of 'TemplateComponent'
+    String expectedSampleTitle = "TemplateComponent";
+    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//span[2]" ) );
+
+    // Validate the sample that we are testing is the one
+    assertEquals( actualPageTitle, expectedPageTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
 
     /*
      * ## Step 2

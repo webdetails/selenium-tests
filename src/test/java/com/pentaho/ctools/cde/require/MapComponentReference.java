@@ -114,12 +114,19 @@ public class MapComponentReference extends BaseTest {
     /*
      * ## Step 1
      */
+    // Wait for title become visible and with value 'Community Dashboard Framework'
+    String expectedPageTitle = "Map Component Reference";
+    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    // Wait for visibility of 'OpenFlashChartComponent'
+    String expectedSampleTitle = "Map Component Reference";
+    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='title']/span" ) );
+    String expectedSampleDesc = "This component allows the user to either navigate through the map and see information about marked locations, or to represent quantities as the fill color of a set of shapes/regions.";
+    String actualSampleDesc = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/p" ) );
+
     // Validate the sample that we are testing is the one
-    assertEquals( "Map Component Reference", driver.getTitle() );
-    String sampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='title']/span" ) );
-    assertEquals( "Map Component Reference", sampleTitle );
-    String sampleDesc = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/p" ) );
-    assertEquals( "This component allows the user to either navigate through the map and see information about marked locations, or to represent quantities as the fill color of a set of shapes/regions.", sampleDesc );
+    assertEquals( actualPageTitle, expectedPageTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
+    assertEquals( actualSampleDesc, expectedSampleDesc );
 
     /*
      * ## Step 2

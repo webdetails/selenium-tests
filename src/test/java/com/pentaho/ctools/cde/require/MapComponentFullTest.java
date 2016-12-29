@@ -100,13 +100,19 @@ public class MapComponentFullTest extends BaseTest {
     /*
      * ## Step 1
      */
-    // Check page title
-    assertEquals( "Map Component Full Test", driver.getTitle() );
-    // Check sample title
-    String sampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[2]/div[2]/div/div/span" ) );
-    assertEquals( "Map Component Full Test", sampleTitle );
-    String sampleMapTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[2]/span" ) );
-    assertEquals( "Full Map with CGG Markers and PopupWindows", sampleMapTitle );
+    // Wait for title become visible and with value 'Map Component Full Test'
+    String expectedPageTitle = "Map Component Full Test";
+    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    // Wait for visibility of 'Map Component Full Test'
+    String expectedSampleTitle = "Map Component Full Test";
+    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[2]/div[2]/div/div/span" ) );
+    String expectedSampleMapTitle = "Full Map with CGG Markers and PopupWindows";
+    String actualSampleMapTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[2]/span" ) );
+
+    // Validate the sample that we are testing is the one
+    assertEquals( actualPageTitle, expectedPageTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
+    assertEquals( actualSampleMapTitle, expectedSampleMapTitle );
   }
 
   /**

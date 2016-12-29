@@ -75,11 +75,16 @@ public class DateInputComponent extends BaseTest {
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    //Wait for visibility of 'DateInputComponent'
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+    // Wait for title become visible and with value 'Community Dashboard Framework'
+    String expectedPageTitle = "Community Dashboard Framework";
+    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    // Wait for visibility of 'DateInputComponent'
+    String expectedSampleTitle = "DateInputComponent";
+    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+
     // Validate the sample that we are testing is the one
-    assertEquals( "Community Dashboard Framework", driver.getTitle() );
-    assertEquals( "DateInputComponent", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) ) );
+    assertEquals( actualPageTitle, expectedPageTitle );
+    assertEquals( actualSampleTitle, expectedSampleTitle );
 
     /*
      * ## Step 2
