@@ -66,16 +66,16 @@ public class DialChart extends BaseTest {
 
     //Check Pointer
     WebElement elemPointer = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='polygon'][@id='ponteiro' and @transform='rotate(62.99999999999999,300,275)']" ) );
-    WebElement basePointers = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='path'][@id='base_ponteiro']" ) );
     assertNotNull( elemPointer );
+    WebElement basePointers = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='path'][@id='base_ponteiro']" ) );
     assertNotNull( basePointers );
 
     //Check Colors
     WebElement elemColor1 = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][@fill='rgb(255,0,0)']" ) );
-    WebElement elemColor2 = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][2][@fill='rgb(255,255,0)']" ) );
-    WebElement elemColor3 = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][3][@fill='rgb(0,128,0)']" ) );
     assertNotNull( elemColor1 );
+    WebElement elemColor2 = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][2][@fill='rgb(255,255,0)']" ) );
     assertNotNull( elemColor2 );
+    WebElement elemColor3 = this.elemHelper.FindElement( driver, By.xpath( "//*[local-name()='g'][6]/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][3][@fill='rgb(0,128,0)']" ) );
     assertNotNull( elemColor3 );
   }
 }

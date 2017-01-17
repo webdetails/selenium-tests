@@ -35,67 +35,67 @@ import com.pentaho.ctools.utils.PageUrl;
 
 public class LoginPage {
 
-	// The driver
-	private WebDriver driver;
-	// Access to wrapper for webdriver
-	private ElementHelper elemHelper = new ElementHelper();
-	// Logging instance
-	private final Logger LOG = LogManager.getLogger( LoginPage.class );
-	// The title of the page Login
-	private final String page_title_login = "Pentaho User Console - Login";
-	// The title of the page Login
-	private final String page_title_puc = "Pentaho User Console";
+  // The driver
+  private WebDriver driver;
+  // Access to wrapper for webdriver
+  private ElementHelper elemHelper = new ElementHelper();
+  // Logging instance
+  private final Logger LOG = LogManager.getLogger( LoginPage.class );
+  // The title of the page Login
+  private final String page_title_login = "Pentaho User Console - Login";
+  // The title of the page Login
+  private final String page_title_puc = "Pentaho User Console";
 
-	public LoginPage( WebDriver driver ) {
-		this.driver = driver;
-		GoToLoginPage();
-	}
+  public LoginPage( WebDriver driver ) {
+    this.driver = driver;
+    GoToLoginPage();
+  }
 
-	/**
-	 * This method will navigate to the Browse Files page
-	 *
-	 */
-	private void GoToLoginPage() {
-		LOG.info( "Enter: Login" );
-		this.elemHelper.Get( this.driver, PageUrl.PUC_LOGIN );
-		//Wait for form display
-		WebElement formLogin = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "login" ) );
-		assertNotNull( formLogin );
-		// Check the page title
-		String actualTitle = this.elemHelper.WaitForTitle( driver, page_title_login );
-		assertEquals( actualTitle, page_title_login );
-	}
+  /**
+   * This method will navigate to the Browse Files page
+   *
+   */
+  private void GoToLoginPage() {
+    LOG.info( "Enter: Login" );
+    this.elemHelper.Get( this.driver, PageUrl.PUC_LOGIN );
+    //Wait for form display
+    WebElement formLogin = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "login" ) );
+    assertNotNull( formLogin );
+    // Check the page title
+    String actualTitle = this.elemHelper.WaitForTitle( driver, page_title_login );
+    assertEquals( actualTitle, page_title_login );
+  }
 
-	/**
-	 * This method will login to PUC using provided user and password to login
-	 *
-	 * @param user
-	 * @param pass
-	 *
-	 */
-	public void Login( String user, String pass ) {
-		//Wait for elements present and log in using provided credentials
-		this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
-		this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
-		this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
-		this.elemHelper.ClearAndSendKeys( driver, By.id( "j_username" ), user );
-		this.elemHelper.ClearAndSendKeys( driver, By.id( "j_password" ), pass );
-		this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
+  /**
+   * This method will login to PUC using provided user and password to login
+   *
+   * @param user
+   * @param pass
+   *
+   */
+  public void Login( String user, String pass ) {
+    //Wait for elements present and log in using provided credentials
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_username" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "j_password" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "button.btn" ) );
+    this.elemHelper.ClearAndSendKeys( driver, By.id( "j_username" ), user );
+    this.elemHelper.ClearAndSendKeys( driver, By.id( "j_password" ), pass );
+    this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
-		//wait for visibility of waiting pop-up
-		this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ), 20 );
-		this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ) );
+    //wait for visibility of waiting pop-up
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ), 120 );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ) );
 
-		//Wait to load the new page
-		String actualTitlePage = this.elemHelper.WaitForTitle( this.driver, page_title_puc );
-		assertEquals( actualTitlePage, page_title_puc, actualTitlePage );
-		WebElement dropdownLoggedUser = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "#pucUserDropDown > table > tbody > tr > td:nth-child(1) > div" ) );
-		assertNotNull( dropdownLoggedUser );
-		WebElement frameHomePerpective = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "home.perspective" ) );
-		assertNotNull( frameHomePerpective );
+    //Wait to load the new page
+    String actualTitlePage = this.elemHelper.WaitForTitle( this.driver, page_title_puc );
+    assertEquals( actualTitlePage, page_title_puc, actualTitlePage );
+    WebElement dropdownLoggedUser = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "#pucUserDropDown > table > tbody > tr > td:nth-child(1) > div" ) );
+    assertNotNull( dropdownLoggedUser );
+    WebElement frameHomePerpective = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "home.perspective" ) );
+    assertNotNull( frameHomePerpective );
 
-		//Logged as ADMIN user
-		String actualUser = this.elemHelper.WaitForTextPresence( this.driver, By.cssSelector( "#pucUserDropDown > table > tbody > tr > td:nth-child(1) > div" ), user );
-		assertEquals( actualUser, user );
-	}
+    //Logged as ADMIN user
+    String actualUser = this.elemHelper.WaitForTextPresence( this.driver, By.cssSelector( "#pucUserDropDown > table > tbody > tr > td:nth-child(1) > div" ), user );
+    assertEquals( actualUser, user );
+  }
 }

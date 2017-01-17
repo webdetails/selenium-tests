@@ -72,14 +72,15 @@ public class BarChart extends BaseTest {
 
     WebElement elementImage = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
     assertNotNull( elementImage );
-    String attrWidth = elementImage.getAttribute( "width" );
-    String attrHeight = elementImage.getAttribute( "height" );
-    String attrSrc = elementImage.getAttribute( "src" );
 
+    String attrWidth = elementImage.getAttribute( "width" );
     assertFalse( attrWidth.isEmpty() );
+    String attrHeight = elementImage.getAttribute( "height" );
     assertFalse( attrHeight.isEmpty() );
     assertTrue( ( Integer.parseInt( attrWidth ) > 800 ) ? true : false, "the number " + attrWidth );
     assertTrue( ( Integer.parseInt( attrHeight ) > 600 ) ? true : false, "the number " + attrHeight );
+
+    String attrSrc = elementImage.getAttribute( "src" );
     assertEquals( attrSrc, PageUrl.BAR_CHART );
   }
 }
