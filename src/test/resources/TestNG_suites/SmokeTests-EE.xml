@@ -20,6 +20,7 @@
 			<class name="com.pentaho.ctools.cdf.DateInputComponent" />
 			<class name="com.pentaho.ctools.cdf.DateRangeInputComponent" >
 				<methods>
+					<!-- http://jira.pentaho.com/browse/CDF-928 -->
 					<exclude name="tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful" />
 				</methods>
 			</class>
@@ -44,13 +45,7 @@
 			<class name="com.pentaho.ctools.cdf.TextInputComponent" />
 			<class name="com.pentaho.ctools.cdf.TimePlotComponent" />
 			<class name="com.pentaho.ctools.cdf.TrafficComponent" />
-			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" >
-				<methods>
-					<exclude name="tc3_MaxNumber_PresentCorrectValue" />
-					<exclude name="tc4_MinNumber_PresentCorrectValue" />
-					<exclude name="tc5_AvgNumber_PresentCorrectValue" />
-				</methods>
-			</class>
+			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" />
 			<class name="com.pentaho.ctools.cdf.XactionComponent" />
 			<class name="com.pentaho.ctools.cdf.samples.Xmla" />
 			<!-- CDE -->
@@ -58,11 +53,7 @@
 			<class name="com.pentaho.ctools.cde.reference.AddinReference" />
 			<class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />
 			<class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
-			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" >
-				<methods>
-					<exclude name="tc01_ChartContent_DisplayedCorrect" />
-				</methods>
-			</class>
+			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.reference.DuplicateComponent" />
 			<class name="com.pentaho.ctools.cde.reference.ExportPopupComponent" />
@@ -78,6 +69,7 @@
 			<class name="com.pentaho.ctools.cda.CDADatasourceTest" />
 			<class name="com.pentaho.ctools.cda.MondrianJNDI" >
 				<methods>
+					<!-- http://jira.pentaho.com/browse/CDA-199 -->
 					<exclude name="tc3_ExportXls_FileDownload" />
 				</methods>
 			</class>
@@ -95,6 +87,7 @@
 			<class name="com.pentaho.ctools.cdf.require.DateInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.DateRangeInputComponent" >
 				<methods>
+					<!-- http://jira.pentaho.com/browse/CDF-928 -->
 					<exclude name="tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful" />
 				</methods>
 			</class>
@@ -120,13 +113,7 @@
 			<class name="com.pentaho.ctools.cdf.require.TextInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.TimePlotComponent" />
 			<class name="com.pentaho.ctools.cdf.require.TrafficComponent" />
-			<class name="com.pentaho.ctools.cdf.require.VisualizationAPIComponent" >
-				<methods>
-					<exclude name="tc3_MaxNumber_PresentCorrectValue" />
-					<exclude name="tc4_MinNumber_PresentCorrectValue" />
-					<exclude name="tc5_AvgNumber_PresentCorrectValue" />
-				</methods>
-			</class>
+			<class name="com.pentaho.ctools.cdf.require.VisualizationAPIComponent" />
 			<class name="com.pentaho.ctools.cdf.require.XactionComponent" />
 			<class name="com.pentaho.ctools.cdf.require.samples.Xmla" />
 			<!-- CDE-RequireJS -->
@@ -134,11 +121,7 @@
 			<class name="com.pentaho.ctools.cde.require.AddinReference" />
 			<class name="com.pentaho.ctools.cde.require.AddinReferenceEdit" />
 			<class name="com.pentaho.ctools.cde.require.AjaxRequestReference" />
-			<class name="com.pentaho.ctools.cde.require.BulletChartTestCase" >
-				<methods>
-					<exclude name="tc01_ChartContent_DisplayedCorrect" />
-				</methods>
-			</class>
+			<class name="com.pentaho.ctools.cde.require.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.require.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.require.DashboardModuleComponent" />
 			<class name="com.pentaho.ctools.cde.require.DuplicateComponent" />

@@ -48,14 +48,7 @@
 			<class name="com.pentaho.ctools.cdf.TextInputComponent" />
 			<class name="com.pentaho.ctools.cdf.TimePlotComponent" />
 			<class name="com.pentaho.ctools.cdf.TrafficComponent" />
-			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent">
-				<methods>
-					<!-- http://jira.pentaho.com/browse/BACKLOG-9820 -->
-					<exclude name="tc3_MaxNumber_PresentCorrectValue" />
-					<exclude name="tc4_MinNumber_PresentCorrectValue" />
-					<exclude name="tc5_AvgNumber_PresentCorrectValue" />
-				</methods>
-			</class>
+			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" />
 			<class name="com.pentaho.ctools.cdf.XactionComponent" />
 			<class name="com.pentaho.ctools.cdf.samples.Xmla" />
 			<!-- CDE -->
@@ -126,14 +119,7 @@
 			<class name="com.pentaho.ctools.cdf.require.TextInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.TimePlotComponent" />
 			<class name="com.pentaho.ctools.cdf.require.TrafficComponent" />
-			<class name="com.pentaho.ctools.cdf.require.VisualizationAPIComponent">
-				<methods>
-				    <!-- http://jira.pentaho.com/browse/BACKLOG-9820 -->
-					<exclude name="tc3_MaxNumber_PresentCorrectValue" />
-					<exclude name="tc4_MinNumber_PresentCorrectValue" />
-					<exclude name="tc5_AvgNumber_PresentCorrectValue" />
-				</methods>
-			</class>
+			<class name="com.pentaho.ctools.cdf.require.VisualizationAPIComponent"/>
 			<class name="com.pentaho.ctools.cdf.require.XactionComponent" />
 			<class name="com.pentaho.ctools.cdf.require.samples.Xmla" />
 			<!-- CDE-RequireJS -->
