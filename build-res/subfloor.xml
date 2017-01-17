@@ -310,7 +310,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
          Copy the CTools, samples and other resources to Pentaho server.
          ====================================================================-->
-	<target name="copy-ctools-and-other-resources" depends="delete-sparkl-plugins, set-up-marketplace">
+	<target name="copy-ctools-and-other-resources" depends="delete-sparkl-plugins">
 		<echo message="Starting copy CTools and other resources." />
 
 		<!-- Delete CTools on server -->
