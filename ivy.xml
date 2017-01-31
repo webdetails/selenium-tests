@@ -73,7 +73,7 @@
         <dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.6.2" conf="test-java->default"/>
         <dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.6.2" conf="test-java->default"/>
         <!-- To use NumberUtils and StringUtils -->
-        <dependency org="org.apache.commons" name="commons-lang3" rev="3.4"/>
+        <dependency org="org.apache.commons" name="commons-lang3" rev="3.4" conf="test-java->default"/>
         
     </dependencies>
 </ivy-module>
