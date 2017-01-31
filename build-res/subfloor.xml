@@ -159,13 +159,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="pentaho.postgres.service.name" value="Pentaho Solution Repository" description="The service name of Postgres" />
 	<property name="pentaho.postgres.hostname" value="localhost" description="The hostname where postgres is running." />
 	<property name="pentaho.postgres.port" value="5432" description="The port where postgres is running." />
-	<property name="pentaho.release.version" value="5.x" description="Indicate the version that we are going to run the tests against." />
+	<property name="pentaho.release.version" value="7.x" description="Indicate the version that we are going to run the tests against." />
 	<propertyset id="testng-pentaho-settings-id">
 		<propertyref name="pentaho.release.version" />
 	</propertyset>
 
 	<!-- Ivy properties -->
-	<property name="ivy.settingsurl" value="file:${basedir}/ivysettings.xml" description="URL to the (common) ivysettings.xml.  This file is required by the build to configure IVY.  Note you must escape the ':' if this property exists in a .properties file" />
+	<property name="ivy.settingsurl" value="file:${basedir}/ivysettings.xml" description="URL to the (common) ivysettings.xml. This file is required by the build to configure IVY. Note you must escape the ':' if this property exists in a .properties file." />
 	<property name="ivy.file" value="ivy.xml" description="The name of the IVY xml file defining your project's dependencies" />
 	<property name="ivy.artifact.group" value="pentaho" description="IVY metadata describing the originating company or organization" />
 	<property name="ivy.artifact.ivyfilename" value="ivy.xml" description="The name of the IVY xml file to deploy with the artifact" />
@@ -174,7 +174,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<property name="ivy.use.symlinks" value="true" description="Flag indicating if Ivy should create symlinks when retrieving artifacts." />
 	<property name="ivy.local.default.root" value="C:\.ivy2" description="Dir of ivy cache" />
 	<property name="ivy.clean.pattern" value="pentaho" description="Clean CTools" />
-
+	<property name="ivy.default.ivy.user.dir" value="${basedir}" description="Dir of ivy cache" />
+	
+	
 	<!-- TEST propertis -->
 	<property name="test.html.reports.dir" value="${basedir}/reports-html" description="Directory to drag reports for the selenium html scripts" />
 	<property name="test.java.reports.dir" value="${basedir}/reports-java" description="Directory to drag reports" />
@@ -252,7 +254,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         Compile the script tests in Java
         ====================================================================-->
-	<target name="compile" depends="resolve-test-java">
+	<target name="compile" depends="resolve-plugin, resolve-test-java">
 		<mkdir dir="${classes.dir}" />
 		<javac srcdir="${src.java.dir};${src.test.java.dir}" destdir="${classes.dir}" fork="yes" debug="true" includeAntRuntime="false" classpathref="test.java.classpath" nowarn="true" encoding="UTF-8">
 			<!--<compilerarg value="-Xlint"/>-->
@@ -319,24 +321,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<property name="pentaho.plugin.cda.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/cda" />
 		<property name="pentaho.plugin.cdf.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf" />
 		<property name="pentaho.plugin.cde.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/pentaho-cdf-dd" />
-		<property name="pentaho.plugin.sparkl.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/sparkl" />
+		<!--<property name="pentaho.plugin.sparkl.dir" value="${pentaho.bi.server.dir}/pentaho-solutions/system/sparkl" />-->
 		<!-- Delete CGG, CDA, CDF, CDE, SPARKL at default-content in BA Server -->
 		<delete>
 			<fileset dir="${pentaho.default.content.dir}" includes="**/*" />
 		</delete>
 		<!-- Delete CGG, CDA, CDF, CDE, SPARKL at system in BA Server -->
+		<delete dir="${tmp.dir}" />
 		<delete dir="${pentaho.plugin.cgg.dir}" />
 		<delete dir="${pentaho.plugin.cda.dir}" />
 		<delete dir="${pentaho.plugin.cdf.dir}" />
 		<delete dir="${pentaho.plugin.cde.dir}" />
-		<delete dir="${pentaho.plugin.sparkl.dir}" />
+		<!--<delete dir="${pentaho.plugin.sparkl.dir}" />-->
 
 		<!-- Unzip the ctools -->
 		<unzip src="${lib.ext.dir}/plugin/cgg.zip" dest="${tmp.dir}" />
 		<unzip src="${lib.ext.dir}/plugin/cda.zip" dest="${tmp.dir}" />
 		<unzip src="${lib.ext.dir}/plugin/pentaho-cdf.zip" dest="${tmp.dir}" />
 		<unzip src="${lib.ext.dir}/plugin/pentaho-cdf-dd.zip" dest="${tmp.dir}" />
-		<unzip src="${lib.ext.dir}/plugin/sparkl.zip" dest="${tmp.dir}" />
+		<!--<unzip src="${lib.ext.dir}/plugin/sparkl.zip" dest="${tmp.dir}" />-->
 		<!-- unzip the samples -->
 		<!-- 
           1- Create a directory with name 'public'
@@ -370,25 +373,26 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<copy todir="${pentaho.plugin.cde.dir}">
 			<fileset dir="${tmp.dir}/pentaho-cdf-dd" />
 		</copy>
-		<copy todir="${pentaho.plugin.sparkl.dir}">
+<!--		<copy todir="${pentaho.plugin.sparkl.dir}">
 			<fileset dir="${tmp.dir}/sparkl" />
-		</copy>
+		</copy>-->
 		<copy file="${tmp.dir}/plugin-samples.zip" todir="${pentaho.default.content.dir}" />
 		<!-- copy all issues to default content -->
-		<copy file="${resources.dir}/Issues/public.zip" todir="${pentaho.default.content.dir}" />
+		<!--<copy file="${resources.dir}/Issues/public.zip" todir="${pentaho.default.content.dir}" />-->
 		<!-- Copy resources for CDF Tutorial -->
-		<copy todir="${pentaho.plugin.cdf.dir}">
+		<!--<copy todir="${pentaho.plugin.cdf.dir}">
 			<fileset dir="${resources.dir}/cdf-tutorial" />
-		</copy>
+		</copy>-->
 
 		<!-- Add Sparkl plugins for tests -->
+		<!--
 		<mkdir dir="${tmp.dir}/sparkl-plugins" />
 		<unzip src="${resources.dir}/Sparkl/Plugins.zip" dest="${tmp.dir}/sparkl-plugins" />
 		<copy todir="${pentaho.bi.server.dir}/pentaho-solutions/system" overwrite="true">
 			<fileset dir="${tmp.dir}/sparkl-plugins">
 				<include name="**/*" />
 			</fileset>
-		</copy>
+		</copy>-->
 	</target>
 
 
@@ -648,7 +652,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<target name="resolve-plugin" depends="install-ivy" description="Retrieves all 'plugin' dependent libraries">
 		<echo message="Resolve dependencies 'plugin'." />
 		<ivy:resolve file="${ivy.file}" conf="plugin" />
-		<ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" sync="true" />
+		<ivy:retrieve pattern="${lib.ext.dir}/[conf]/[artifact](-[classifier]).[ext]" />
 	</target>
 
 	<!--=======================================================================
@@ -661,7 +665,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	<target name="resolve-test-java" depends="install-ivy" description="Retrieves all 'test-java' dependent libraries">
 		<echo message="Resolve dependencies 'test-java'." />
 		<ivy:resolve file="${ivy.file}" conf="test-java" />
-		<ivy:retrieve pattern="${lib.ext.dir}/[artifact](-[classifier]).[ext]" symlink="${ivy.use.symlinks.internal}" sync="true" />
+		<ivy:retrieve pattern="${lib.ext.dir}/[artifact](-[classifier]).[ext]" />
 	</target>
 
 
