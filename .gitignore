@@ -1,4 +1,7 @@
+tmp/
+cache/
 build/
+resol-cache*
 reports-java/
 target/
 test-output/
