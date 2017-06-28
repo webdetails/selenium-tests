@@ -1961,6 +1961,118 @@ public class ElementHelper {
     previewWindow.close();
     driver.switchTo().window( parentWindow );
   }
+  
+  
+  /**
+   * This method shall find for elements presence and not for 'presence and visible'.
+   *
+   * @param driver
+   * @param locator
+   * @return
+   */
+  public List<WebElement> FindElementsPresence( final WebDriver driver, final By locator ) {
+    this.log.debug( "FindElement::Enter" );
+    List<WebElement> elements = WaitForElementsPresence( driver, locator, 30 );
+    this.log.debug( "FindElement::Exit" );
+    return elements;
+  }
+  
+  /**
+   * This method pretends to check if a list of elements is present, if it doesn't we wait for presence for a specific
+   * timeout (input). Only element presents, not visible.
+   *
+   * @param driver
+   * @param locator
+   * @param timeout
+   */
+  public List<WebElement> WaitForElementsPresence( final WebDriver driver, final By locator,
+      final long timeout ) {
+    this.log.debug( "WaitForElementPresenceAndVisible::Enter" );
+    this.log.debug( "Locator: " + locator.toString() );
+    List<WebElement> elements = null;
+    ExecutorService executor = null;
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+
+    try {
+
+      class RunnableObject implements Runnable {
+
+        private List<WebElement> theElements;
+
+        public RunnableObject( List<WebElement> theElements ) {
+          this.theElements = theElements;
+        }
+
+        public List<WebElement> getValue() {
+          return this.theElements;
+        }
+
+        @Override
+        public void run() {
+          Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+
+          // Wait for element visible
+          this.theElements = wait.until( new Function<WebDriver, List<WebElement>>() {
+
+            @Override
+            public List<WebElement> apply( WebDriver d ) {
+              try {
+                List<WebElement> elems = d.findElements( locator );
+                int count = 0;
+                for ( int i = 0; i < elems.size(); i++ ) {
+                  WebElement elem = elems.get( i );
+
+                  if ( elem != null && elem.isEnabled() ) {
+                    count++;
+                    continue;
+                  }                  
+                }
+                
+                if (count != elems.size()) {
+                  return null;
+                }
+                
+                return elems;
+              } catch ( StaleElementReferenceException sere ) {
+                return null;
+              }
+            }
+          } );
+        }
+      }
+
+      RunnableObject r = new RunnableObject( elements );
+      executor = Executors.newSingleThreadExecutor();
+      executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
+      elements = r.getValue();
+    } catch ( InterruptedException ie ) {
+      this.log.warn( "Interrupted Exception" );
+      this.log.warn( ie.toString() );
+    } catch ( ExecutionException ee ) {
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
+        this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
+      } else {
+        this.log.warn( "Execution Exception" );
+        this.log.warn( ee.toString() );
+      }
+    } catch ( java.util.concurrent.TimeoutException cte ) {
+      this.log.warn( "Thread timeout exceeded! Looking for: " + locator.toString() );
+      this.log.warn( cte.toString() );
+    } catch ( Exception e ) {
+      this.log.error( "Exception" );
+      this.log.catching( e );
+    }
+
+    if ( executor != null ) {
+      executor.shutdown();
+    }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+
+    this.log.debug( "WaitForElementPresenceAndVisible::Exit" );
+    return elements;
+  }
+
 
   /**
    * This method works as a wrapper for findElements method of WebDriver. So, in same cases, we may have the issue
@@ -2020,16 +2132,28 @@ public class ElementHelper {
             public List<WebElement> apply( WebDriver d ) {
               try {
                 List<WebElement> elems = d.findElements( locator );
-
+                int count = 0;
+                log.debug( "TESTING size: " + elems.size() );
                 for ( int i = 0; i < elems.size(); i++ ) {
                   WebElement elem = elems.get( i );
 
+                  log.debug( "TESTING elem: " + i );
+                  
+                  log.debug( "TESTING ena: " + elem.isEnabled() );
+                  log.debug( "TESTING dis: " + elem.isDisplayed() );
+                  
                   if ( elem != null && ( ( elem.isEnabled() ) && ( elem.isDisplayed() ) ) ) {
+                    count++;
                     continue;
-                  }
-                  elems.remove( i );
-                  i--;
+                  }                  
                 }
+                
+                log.debug( "TESTING count: " + count );
+                log.debug( "TESTING size: " + elems.size() );
+                if (count != elems.size()) {
+                  return null;
+                }
+                
                 return elems;
               } catch ( StaleElementReferenceException sere ) {
                 return null;

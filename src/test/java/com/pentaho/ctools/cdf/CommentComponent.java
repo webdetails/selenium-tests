@@ -30,7 +30,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -369,9 +368,7 @@ public class CommentComponent extends BaseTest {
     this.log.info( "Remove comments" );
     ElementHelper nElemHelper = new ElementHelper();
 
-    driver.manage().timeouts().implicitlyWait( 2, TimeUnit.SECONDS );
-
-    List<WebElement> listEraseComments = this.elemHelper.FindElements( driver, By.cssSelector( "div.archive" ) );
+    List<WebElement> listEraseComments = nElemHelper.FindElementsPresence( driver, By.cssSelector( "div.archive" ) );
     int nIteractions = listEraseComments.size();
     this.log.info( "Number elements to remove: " + nIteractions );
     if ( nIteractions > 0 ) {
@@ -386,7 +383,6 @@ public class CommentComponent extends BaseTest {
         this.log.debug( "One comment removed." );
       }
     }
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
   }
 
   @Override

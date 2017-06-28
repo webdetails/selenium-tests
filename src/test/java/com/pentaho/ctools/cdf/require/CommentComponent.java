@@ -376,7 +376,7 @@ public class CommentComponent extends BaseTest {
 
     driver.manage().timeouts().implicitlyWait( 2, TimeUnit.SECONDS );
 
-    List<WebElement> listEraseComments = elemHelper.FindElements( driver, By.cssSelector( "div.archive" ) );
+    List<WebElement> listEraseComments = elemHelper.FindElementsPresence( driver, By.cssSelector( "div.archive" ) );
     int nIteractions = listEraseComments.size();
     this.log.info( "Number elements to remove: " + nIteractions );
     if ( nIteractions > 0 ) {
