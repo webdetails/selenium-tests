@@ -120,7 +120,7 @@ public class AddinReference extends BaseTest {
     assertEquals( actualTextSubTitle6, expectedTextSubTitle6 );
 
     // Check subtitle
-    String expectedTextSubTitle7 = "Setting defaults";
+    String expectedTextSubTitle7 = "Supported AddIns - Table \"colType\"";
     String actualTextSubTitle7 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='SupportedAddinsTitle']" ) );
     assertEquals( actualTextSubTitle7, expectedTextSubTitle7 );
   }
