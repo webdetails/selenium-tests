@@ -262,7 +262,7 @@ public class SelectMultiComponent extends BaseTest {
    * Steps:
    *    1. Select Arbitrary
    */
-  @Test
+  //@Test
   public void tc5_SelectArbitrary_AlertDisplayed() {
     this.log.info( "tc5_SelectArbitrary_AlertDisplayed" );
     String actualConfirmationMsg = "";
@@ -271,6 +271,7 @@ public class SelectMultiComponent extends BaseTest {
      * ## Step 1
      */
     Select list = new Select( this.elemHelper.FindElement( driver, By.cssSelector( "select" ) ) );
+    list.selectByValue( "Eastern" );
     actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
     assertEquals( actualConfirmationMsg, "you chose: Eastern" );
 
