@@ -83,8 +83,8 @@ public class LoginPage {
     this.elemHelper.Click( driver, By.cssSelector( "button.btn" ) );
 
     //wait for visibility of waiting pop-up
-    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ), 120 );
-    this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ) );
+    this.elemHelper.WaitForElementPresence( this.driver, By.cssSelector( "div.pentaho-busy-indicator-title.waitPopup_title" ), 120 );
+    this.elemHelper.WaitForElementNotPresent( this.driver, By.cssSelector( "div.pentaho-busy-indicator-title.waitPopup_title" ) );
 
     //Wait to load the new page
     String actualTitlePage = this.elemHelper.WaitForTitle( this.driver, page_title_puc );
