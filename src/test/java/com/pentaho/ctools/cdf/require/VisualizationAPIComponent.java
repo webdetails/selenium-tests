@@ -88,7 +88,7 @@ public class VisualizationAPIComponent extends BaseTest {
 
 		// Wait for visibility of 'VisualizationAPIComponent'
 		String expectedSampleTitle = "VisualizationAPIComponent";
-		String actualSampleTitle = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ), expectedSampleTitle );
+		String actualSampleTitle = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div.webdetailsBoxShadow h2 span:nth-child(2)" ), expectedSampleTitle );
 
 		// Validate the sample that we are testing is the one
 		assertEquals( actualTitlePage, expectedTitlePage );
@@ -113,8 +113,8 @@ public class VisualizationAPIComponent extends BaseTest {
 		 * ## Step 1
 		 */
 		// Render again the sample
-		this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-		this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
+		this.elemHelper.ClickJS( driver, By.cssSelector( "#ui-id-2" ) );
+		this.elemHelper.ClickJS( driver, By.cssSelector( "#code > button" ) );
 
 		// NOTE - we have to wait for loading disappear
 		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
@@ -142,8 +142,8 @@ public class VisualizationAPIComponent extends BaseTest {
 		/*
 		 * ## Step 1
 		 */
-		String expectedValue = "35659.00";
-		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), expectedValue );
+		String expectedValue = "The result is 35659";
+		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject > span" ), expectedValue );
 
 		assertEquals( actualValue, expectedValue );
 	}
@@ -165,39 +165,39 @@ public class VisualizationAPIComponent extends BaseTest {
 	@Test
 	public void tc4_MinNumber_PresentCorrectValue() {
 		this.log.info( "tc4_MinNumber_PresentCorrectValue" );
+		
+    /*
+     * ## Step 1 - Change the option parameter to MIN and reload sample
+     */
+    // Render again the sample
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#ui-id-2" ) );
 
-		/*
-		 * ## Step 1 - Change the option parameter to MIN and reload sample
-		 */
-		// Render again the sample
-		this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    // Wait for board load
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "code" ) );
+    // Change contains to MIN
+    String text = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "samplecode" ) ).getText().replace( "max", "min" );
+    text = text.replace( "// Using postFetch to convert data types, because the query is passing // a Numeric field as String and that breaks the sample visualization. ", "" );
+    this.elemHelper.Clear( driver, By.xpath( "//div[@id='code']/textarea" ) );
+    this.elemHelper.SendKeys( driver, By.xpath( "//div[@id='code']/textarea" ), text );
 
-		// Wait for board load
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']" ) );
-		// Replace text
-		String text = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']/textarea" ) ).getText().replace( "MAX", "MIN" );
-		text = text.replace( "// Using postFetch to convert data types, because the query is passing // a Numeric field as String and that breaks the sample visualization. ", "" );
+    // Click in Try me
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#code > button" ) );
+    // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    // Now sample element must be displayed
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
-		this.elemHelper.Clear( driver, By.xpath( "//div[@id='code']/textarea" ) );
-		this.elemHelper.SendKeys( driver, By.xpath( "//div[@id='code']/textarea" ), text );
+    /*
+     * ## Step 2 - Check the presented value for MIN.
+     */
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sample" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject > span" ) );
 
-		// Click in Try me
-		this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
-		// NOTE - we have to wait for loading disappear
-		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-		// Now sample element must be displayed
-		assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
+    String expectedValue = "The result is 490";
+    String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject > span" ), expectedValue );
 
-		/*
-		 * ## Step 2 - Check the presented value for MIN.
-		 */
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sample']" ) );
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
-
-		String expectedValue = "490.00";
-		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), expectedValue );
-		assertEquals( actualValue, expectedValue );
+    assertEquals( expectedValue, actualValue );
 	}
 
 	/**
@@ -220,32 +220,32 @@ public class VisualizationAPIComponent extends BaseTest {
 		 * ## Step 1 - Change the option parameter to AVG and reload sample
 		 */
 		// Render again the sample
-		this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+		this.elemHelper.ClickJS( driver, By.cssSelector( "#ui-id-2" ) );
 
 		// Wait for board load
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']" ) );
+		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "code" ) );
 		// Replace text
-		String text = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='code']/textarea" ) ).getText().replace( "MAX", "AVG" );
+		String text = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "samplecode" ) ).getText().replace( "max", "avg" );
 		text = text.replace( "// Using postFetch to convert data types, because the query is passing // a Numeric field as String and that breaks the sample visualization. ", "" );
 		this.elemHelper.Clear( driver, By.xpath( "//div[@id='code']/textarea" ) );
 		this.elemHelper.SendKeys( driver, By.xpath( "//div[@id='code']/textarea" ), text );
 
 		// Click in Try me
-		this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
-		// NOTE - we have to wait for loading disappear
-		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-		// Now sample element must be displayed
-		assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#code > button" ) );
+    // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    // Now sample element must be displayed
+    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
 
 		/*
 		 * ## Step 2 - Check the presented value for MIN.
 		 */
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sample']" ) );
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ) );
+		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sample" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject > span" ) );
 
-		String expectedValue = "4787.772727272727";
-		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='sample']/div[2]/div/span" ), expectedValue );
+		String expectedValue = "The result is 4787.772727272727";
+		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject > span" ), expectedValue );
 		assertEquals( actualValue, expectedValue );
 	}
 }
