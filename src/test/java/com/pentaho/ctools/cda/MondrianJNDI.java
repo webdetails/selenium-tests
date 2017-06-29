@@ -473,7 +473,7 @@ public class MondrianJNDI extends BaseTest {
     Select selectPeriod = new Select( this.elemHelper.FindElement( driver, By.id( "periodType" ) ) );
     selectPeriod.selectByValue( "1" ); // every day
 
-    this.elemHelper.ClearAndSendKeys( driver, By.cssSelector( "#contents_filter input" ), selectedHours );
+    this.elemHelper.ClearAndSendKeys( driver, By.id( "startAt" ), selectedHours );
     this.elemHelper.Click( driver, By.linkText( "Ok" ) );
 
     Set<String> listWindows = driver.getWindowHandles();

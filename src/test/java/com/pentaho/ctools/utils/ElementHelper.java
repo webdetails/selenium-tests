@@ -1162,7 +1162,9 @@ public class ElementHelper {
   public void WaitForAlertNotPresent( WebDriver driver ) {
     this.log.debug( "WaitForAlertNotPresent::Enter" );
 
-    Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 100, TimeUnit.MILLISECONDS );
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+    
+    Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
 
     wait.until( new ExpectedCondition<Boolean>() {
 
@@ -1171,12 +1173,11 @@ public class ElementHelper {
         Boolean alertExist = Boolean.valueOf( false );
         try {
           d.switchTo().alert();
-          alertExist = Boolean.valueOf( true );
         } catch ( NoAlertPresentException e ) {
-          // Ignore the exception
-          e.printStackTrace();
+          log.warn("Exception No Alert");
+          alertExist= Boolean.valueOf(true);
         }
-        return Boolean.valueOf( alertExist != Boolean.valueOf( true ) );
+        return alertExist;
       }
     } );
 
