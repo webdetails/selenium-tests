@@ -162,31 +162,32 @@ public class PopupComponent extends BaseTest {
   @Test
   public void tc03_PopupExample2_PopupDisplay() {
     this.log.info( "tc03_PopupExample2_PopupDisplay" );
-
+    
     /*
      * ## Step 1
      */
-    String strExampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='Example2Title']" ) );
-    String strExampleDesc = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='Example2Desc']/p" ) );
-    String strButtonName = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='example2Obj']/button" ) );
+    String strExampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "Example2Title" ) );
+    String strExampleDesc = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#Example2Desc > p" ));
+    String strButtonName = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#example2Obj > button" ) );
 
-    assertEquals( "Example 2", strExampleTitle );
-    assertEquals( "Button popup appearing in the west, can't be dragged and clicking anywhere outside the element will popup the button", strExampleDesc );
-    assertEquals( "Popup", strButtonName );
+    assertEquals( strExampleTitle, "Example 2" );
+    assertEquals( strExampleDesc, "Button popup appearing in the west, can't be dragged and clicking anywhere outside the element will popup the button" );
+    assertEquals( strButtonName, "Popup" );
 
     /*
      * ## Step 2
      */
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example2Obj']/button" ) );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='popupContent2']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#example2Obj > button" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.id( "popupContent2" ) );
     //Check text
-    String textInPopup = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='popupContent2']" ) );
+    String textInPopup = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "popupContent2" ) );
     assertEquals( "A simple text that can be used as a tooltip", textInPopup );
     //Close popup
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[8]/a" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div.popupComponent.east > a.close" ) );
     //wait for popup disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[8]/a" ) );
-    WebElement element = this.elemHelper.FindElementInvisible( driver, By.xpath( "//div[8]/a" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.popupComponent.east > a.close" ) );
+    WebElement element = this.elemHelper.FindElementInvisible( driver, By.cssSelector( "div.popupComponent.east > a.close" ) );
+    assertNotNull( element );
     assertFalse( element.isDisplayed() );
   }
 }
