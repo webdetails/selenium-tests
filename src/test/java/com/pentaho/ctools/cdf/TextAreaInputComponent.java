@@ -87,7 +87,7 @@ public class TextAreaInputComponent extends BaseTest {
     String expectedPageTitle = "Community Dashboard Framework";
     String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
     // Wait for visibility of 'TextareaInputComponent'
-    String expectedSampleTitle = "TextareaInputComponent";
+    String expectedSampleTitle = "TextAreaInputComponent";
     String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//span[2]" ) );
 
     // Validate the sample that we are testing is the one
