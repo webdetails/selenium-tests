@@ -196,7 +196,6 @@ public class PrptComponent extends BaseTest {
     log.debug(DropDown);
     assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector(".dijitEditorIconParameters")));
     assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector(".dijitEditorIconRefresh")));
-    
     //Check the Product Name and Output Type
     WebElement elemtLine = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.parameter-label" ), 45 );
     assertNotNull( elemtLine );
