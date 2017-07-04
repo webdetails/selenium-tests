@@ -185,9 +185,11 @@ public class PrptComponent extends BaseTest {
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.elemHelper.SwitchToFrame( driver, "sampleObject_prptFrame" );
     //Check presence of tool bar elements
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='toolbar']/div" ) ) );
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='toolbar']/div[2]" ) ) );
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='toolbar']/span" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector("#toolbar")));
+    String DropDown = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( ".dijitValidationTextBoxLabel" ) );
+    assertEquals( DropDown, "Maximum" );
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector(".dijitEditorIconParameters")));
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector(".dijitEditorIconRefresh")));
     //Check the Product Name and Output Type
     WebElement elemtLine = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.parameter-label" ), 45 );
     assertNotNull( elemtLine );
