@@ -143,7 +143,7 @@ public class VisualizationAPIComponent extends BaseTest {
 		 * ## Step 1
 		 */
 		String expectedValue = "The result is 35659";
-		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject > span" ), expectedValue );
+		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject>span" ), expectedValue );
 
 		assertEquals( actualValue, expectedValue );
 	}
@@ -192,10 +192,10 @@ public class VisualizationAPIComponent extends BaseTest {
      * ## Step 2 - Check the presented value for MIN.
      */
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sample" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject > span" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject>span" ), 5 );
 
     String expectedValue = "The result is 490";
-    String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject > span" ), expectedValue );
+    String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject>span" ), expectedValue );
 
     assertEquals( expectedValue, actualValue );
 	}
@@ -242,10 +242,9 @@ public class VisualizationAPIComponent extends BaseTest {
 		 * ## Step 2 - Check the presented value for MIN.
 		 */
 		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sample" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject > span" ) );
-
+        this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject>span" ), 5 );
 		String expectedValue = "The result is 4787.772727272727";
-		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject > span" ), expectedValue );
+		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject>span" ), expectedValue );
 		assertEquals( actualValue, expectedValue );
 	}
 }
