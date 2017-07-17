@@ -135,7 +135,7 @@ public class VisualizationAPIComponent extends BaseTest {
 		/*
 		 * ## Step 1
 		 */
-		String expectedValue = "The result is 35659";
+		String expectedValue = "The result is 35659.00";
 		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject > span" ), expectedValue );
 
 		assertEquals( actualValue, expectedValue );
@@ -181,7 +181,7 @@ public class VisualizationAPIComponent extends BaseTest {
 		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sample" ) );
 		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject > span" ) );
 
-		String expectedValue = "The result is 490";
+		String expectedValue = "The result is 490.00";
 		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject > span" ), expectedValue );
 
 		assertEquals( expectedValue, actualValue );
@@ -227,7 +227,7 @@ public class VisualizationAPIComponent extends BaseTest {
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sample" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject > span" ) );
 
-    String expectedValue = "The result is 4787.772727272727";
+    String expectedValue = "The result is 4787.77";
     String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject > span" ), expectedValue );
     assertEquals( expectedValue, actualValue );		
 	}

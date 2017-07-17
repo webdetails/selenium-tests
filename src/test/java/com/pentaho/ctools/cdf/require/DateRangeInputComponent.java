@@ -147,9 +147,9 @@ public class DateRangeInputComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.ClickJS( driver, By.id( "myInput" ) );
-    this.elemHelper.ClickJS( driver, By.id( "myInput2" ) );
-    this.elemHelper.ClickJS( driver, By.linkText( "Today" ) );
+    this.elemHelper.ClickAndSendKeys(driver, By.id( "myInput2" ), Keys.ENTER);
+    this.elemHelper.WaitForElementPresence(driver, By.cssSelector("div.ui-daterangepickercontain > div"));   
+    this.elemHelper.Click( driver, By.linkText( "Today" ) );
 
     /*
      * ## Step 2
@@ -183,9 +183,9 @@ public class DateRangeInputComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.ClickJS( driver, By.id( "myInput" ) );
-    this.elemHelper.ClickJS( driver, By.id( "myInput2" ) );
-    this.elemHelper.ClickJS( driver, By.linkText( "Last 7 days" ) );
+    this.elemHelper.ClickAndSendKeys(driver, By.id( "myInput2" ), Keys.ENTER);
+    this.elemHelper.WaitForElementPresence(driver, By.cssSelector("div.ui-daterangepickercontain > div"));   
+    this.elemHelper.Click( driver, By.linkText( "Last 7 days" ) );
 
     /*
      * ## Step 2
@@ -221,9 +221,9 @@ public class DateRangeInputComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.ClickJS( driver, By.id( "myInput" ) );
-    this.elemHelper.ClickJS( driver, By.id( "myInput2" ) );
-    this.elemHelper.ClickJS( driver, By.linkText( "Month to date" ) );
+    this.elemHelper.ClickAndSendKeys(driver, By.id( "myInput2" ), Keys.ENTER);
+    this.elemHelper.WaitForElementPresence(driver, By.cssSelector("div.ui-daterangepickercontain > div"));   
+    this.elemHelper.Click( driver, By.linkText( "Month to date" ) );
 
     /*
      * ## Step 2
@@ -259,9 +259,9 @@ public class DateRangeInputComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.ClickJS( driver, By.id( "myInput" ) );
-    this.elemHelper.ClickJS( driver, By.id( "myInput2" ) );
-    this.elemHelper.ClickJS( driver, By.linkText( "Year to date" ) );
+    this.elemHelper.ClickAndSendKeys(driver, By.id( "myInput2" ), Keys.ENTER);
+    this.elemHelper.WaitForElementPresence(driver, By.cssSelector("div.ui-daterangepickercontain > div"));   
+    this.elemHelper.Click( driver, By.linkText( "Year to date" ) );
 
     /*
      * ## Step 2
@@ -298,9 +298,9 @@ public class DateRangeInputComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.ClickJS( driver, By.id( "myInput" ) );
-    this.elemHelper.ClickJS( driver, By.id( "myInput2" ) );
-    this.elemHelper.ClickJS( driver, By.linkText( "The previous Month" ) );
+    this.elemHelper.ClickAndSendKeys(driver, By.id( "myInput2" ), Keys.ENTER);
+    this.elemHelper.WaitForElementPresence(driver, By.cssSelector("div.ui-daterangepickercontain > div"));   
+    this.elemHelper.Click( driver, By.linkText( "The previous Month" ) );
 
     /*
      * ## Step 2

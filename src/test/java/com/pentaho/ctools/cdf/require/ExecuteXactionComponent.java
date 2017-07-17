@@ -156,7 +156,7 @@ public class ExecuteXactionComponent extends BaseTest {
     String chartTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table/tbody/tr/td" ) );
     assertEquals( "Action Successful", chartTitle );
     //Check for the displayed image
-    WebElement xactionElement = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
+    WebElement xactionElement = this.elemHelper.WaitForElementPresence(driver, By.cssSelector( "img" ));
     assertNotNull( xactionElement );
 
     String attrSrc = xactionElement.getAttribute( "src" );
