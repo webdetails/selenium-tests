@@ -25,7 +25,12 @@
 			</class>
 			<class name="com.pentaho.ctools.cdf.DialComponent" />
 			<class name="com.pentaho.ctools.cdf.ExecutePrptComponent" />
-			<class name="com.pentaho.ctools.cdf.ExecuteXactionComponent" />
+			<class name="com.pentaho.ctools.cdf.ExecuteXactionComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/CDF-982 -->
+					<exclude name="tc3_PressToGenerateChart_ChartIsDisplayed()" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.JFreeChartComponent" />
 			<class name="com.pentaho.ctools.cdf.MetaLayerHomeDashboard">
 				<methods>
@@ -95,9 +100,14 @@
 			</class>
 			<class name="com.pentaho.ctools.cdf.require.DialComponent" />
 			<class name="com.pentaho.ctools.cdf.require.ExecutePrptComponent" />
-			<class name="com.pentaho.ctools.cdf.require.ExecuteXactionComponent" />
+			<class name="com.pentaho.ctools.cdf.require.ExecuteXactionComponent" >
+				<methods>
+					<!-- http://jira.pentaho.com/browse/CDF-982 -->
+					<exclude name="tc3_PressToGenerateChart_ChartIsDisplayed" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.require.JFreeChartComponent" />
-			<class name="com.pentaho.ctools.cdf.MetaLayerHomeDashboard">
+			<class name="com.pentaho.ctools.cdf.require.MetaLayerHomeDashboard">
 				<methods>
 					<!-- http://jira.pentaho.com/browse/CDF-925 -->
 					<exclude name="tc1_LinkDetails_PopupJPivot" />
