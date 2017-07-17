@@ -104,7 +104,7 @@ public class ExportPopupComponent extends BaseTest {
 	 */
 	@AfterClass
 	public void teardown() {
-		this.DeleteFile();
+//		this.DeleteFile();
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class ExportPopupComponent extends BaseTest {
 
 			//Check if the file downloaded is the expected
 			String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
-			assertEquals( md5, "3bc1e421664d221d7c3fdc9cd56069ca" );
+			assertEquals( md5, "f231c2ce469ab5c29324a648217385a1" );
 		} catch ( Exception e ) {
 			this.log.error( e.getMessage() );
 			assertTrue( false );
