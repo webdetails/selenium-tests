@@ -116,7 +116,7 @@ public class DateRangeInputComponent extends BaseTest {
      * ##Step 1
      */
     // Render again the sample
-    this.elemHelper.Click( driver, By.cssSelector( "a#ui-id-2.ui-tabs-anchor" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "li:nth-child(2) > a" ));
     this.elemHelper.Click( driver, By.cssSelector( "#code > button" ) );
 
     // NOTE - we have to wait for loading disappear

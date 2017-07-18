@@ -24,12 +24,9 @@ package com.pentaho.ctools.cdf;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -115,8 +112,8 @@ public class QueryComponent extends BaseTest {
 
     // ## Step 1
     // Render again the sample
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "li:nth-child(2) > a" ));
+    this.elemHelper.Click( driver, By.id( "tryMe" ) );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -126,8 +123,8 @@ public class QueryComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObjectResult'
     //Hence, we guarantee when click Try Me the previous div is replaced
-     int nSampleObject = this.elemHelper.FindElements( driver, By.cssSelector( "#sampleObjectResult" ) ).size();
-     assertEquals( 1, nSampleObject );
+    int nSampleObject = this.elemHelper.FindElements( driver, By.cssSelector( "#sampleObjectResult" ) ).size();
+    assertEquals( nSampleObject, 1 );
   }
 
   /**

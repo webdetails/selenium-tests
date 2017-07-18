@@ -115,7 +115,7 @@ public class TimePlotComponent extends BaseTest {
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
-    assertEquals( 1, nSampleObject );
+    assertEquals( nSampleObject, 1 );
 
     //It could be possible to raise an error of "Error processing component" and the workaround is refresh the page.
     WebElement chart = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.timeplot-container.timeplot" ), 2 );
