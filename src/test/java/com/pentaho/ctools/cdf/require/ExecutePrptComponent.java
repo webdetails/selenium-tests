@@ -159,9 +159,13 @@ public class ExecutePrptComponent extends BaseTest {
     this.elemHelper.WaitForElementPresence( driver, By.id( "glasspane" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     //Check presence of tool bar elements
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='toolbar']/div" ) ) );
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='toolbar']/div[2]" ) ) );
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='toolbar']/span" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#toolbar-parameterToggle > span" ) ) );
+    String rowLimitExpected = "Row Limit:";
+    String rowLimitActul = this.elemHelper.WaitForTextPresence( driver, By.id( "row-limit-label" ), rowLimitExpected);
+    assertEquals( rowLimitExpected, rowLimitActul );
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#rowLimitControl > div:nth-child(2)" ) ) );    //DROP DOWN
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#rowLimitControl > div.rl_rowsNumberInput" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#toolbar-clearCache > span" ) ) );
     //Check the Product Name and Output Type
     WebElement elemtLine = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.parameter-label" ), 45 );
     assertNotNull( elemtLine );
