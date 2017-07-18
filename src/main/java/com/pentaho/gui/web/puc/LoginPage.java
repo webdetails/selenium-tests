@@ -89,7 +89,7 @@ public class LoginPage {
     //Wait to load the new page
     String actualTitlePage = this.elemHelper.WaitForTitle( this.driver, page_title_puc );
     assertEquals( actualTitlePage, page_title_puc, actualTitlePage );
-    WebElement dropdownLoggedUser = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "#pucUserDropDown > table > tbody > tr > td:nth-child(1) > div" ) );
+    WebElement dropdownLoggedUser = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.cssSelector( "#pucUserDropDown > table > tbody > tr > td:nth-child(1) > div" ), 120 );
     assertNotNull( dropdownLoggedUser );
     WebElement frameHomePerpective = this.elemHelper.WaitForElementPresenceAndVisible( this.driver, By.id( "home.perspective" ) );
     assertNotNull( frameHomePerpective );

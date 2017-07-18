@@ -110,8 +110,8 @@ public class QueryComponent extends BaseTest {
      * ## Step 1
      */
     // Render again the sample
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "li:nth-child(2) > a" ));
+    this.elemHelper.Click( driver, By.id( "tryMe" ) );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 10 );
@@ -123,7 +123,7 @@ public class QueryComponent extends BaseTest {
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = this.elemHelper.FindElementsPresence( driver, By.id( "sampleObject" ) ).size();
-    assertEquals( 1, nSampleObject );
+    assertEquals( nSampleObject, 1 );
   }
 
   /**

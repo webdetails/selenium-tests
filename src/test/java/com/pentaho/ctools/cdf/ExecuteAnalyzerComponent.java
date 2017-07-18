@@ -120,7 +120,7 @@ public class ExecuteAnalyzerComponent extends BaseTest {
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
     int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
-    assertEquals( 1, nSampleObject );
+    assertEquals( nSampleObject, 1 );
 
     WebElement elemButton = this.elemHelper.FindElement( driver, By.cssSelector( "button span" ) );
     assertNotNull( elemButton );

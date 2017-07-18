@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="SmokeTests-CE" verbose="2">
+<suite name="SmokeTests-CE" verbose="2" preserve-order="true" parallel="false" thread-count="1">
 	<!-- Listener to validate it test case fail and take screenshot -->
 	<listeners>
 		<listener class-name="com.pentaho.selenium.listener.ScreenshotListener" />
 	</listeners>
 
-	<test name="All CE Tests" preserve-order="true" parallel="false">
+	<test name="Phase 1" preserve-order="true" parallel="false" thread-count="1" group-by-instances="false" verbose="2">
 		<classes>
 			<!-- LOGIN -->
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
+		</classes>
+	</test>
+
+	<test name="Phase 2" preserve-order="true" parallel="false" thread-count="1" group-by-instances="false" verbose="2">
+		<classes>
 			<!-- CDF -->
 			<class name="com.pentaho.ctools.cdf.AutoCompleteBoxComponent" />
 			<class name="com.pentaho.ctools.cdf.ButtonComponent" />
@@ -56,36 +61,7 @@
 			<class name="com.pentaho.ctools.cdf.VisualizationAPIComponent" />
 			<class name="com.pentaho.ctools.cdf.XactionComponent" />
 			<class name="com.pentaho.ctools.cdf.samples.Xmla" />
-			<!-- CDE -->
-			<class name="com.pentaho.ctools.cde.SampleDashboard" />
-			<class name="com.pentaho.ctools.cde.reference.AddinReference" />
-			<class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />
-			<class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
-			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />
-			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
-			<class name="com.pentaho.ctools.cde.reference.DuplicateComponent" />
-			<class name="com.pentaho.ctools.cde.reference.ExportPopupComponent" />
-			<class name="com.pentaho.ctools.cde.reference.FilterAddinAccordion" />
-			<class name="com.pentaho.ctools.cde.reference.FilterReference" />
-			<class name="com.pentaho.ctools.cde.reference.FilterVisualGuide" />
-			<!-- <class name="com.pentaho.ctools.cde.reference.MapComponentFullTest" 
-				/> <class name="com.pentaho.ctools.cde.reference.MapComponentReference" /> -->
-			<class name="com.pentaho.ctools.cde.reference.OlapSelectorComponent" />
-			<class name="com.pentaho.ctools.cde.reference.PopupComponent" />
-			<class name="com.pentaho.ctools.cde.reference.WidgetReference" />
-			<!-- CDA -->
-			<class name="com.pentaho.ctools.cda.CDADatasourceTest" />
-			<class name="com.pentaho.ctools.cda.MondrianJNDI">
-				<methods>
-					<!-- http://jira.pentaho.com/browse/CDA-199 -->
-					<exclude name="tc3_ExportXls_FileDownload" />
-				</methods>
-			</class>
-			<class name="com.pentaho.ctools.cda.CDACacheManager" />
-			<!-- CGG -->
-			<class name="com.pentaho.ctools.cgg.BarChart" />
-			<class name="com.pentaho.ctools.cgg.ScatterChart" />
-			<class name="com.pentaho.ctools.cgg.DialChart" />
+			
 			<!-- CDF-RequireJS -->
 			<class name="com.pentaho.ctools.cdf.require.AutoCompleteBoxComponent" />
 			<class name="com.pentaho.ctools.cdf.require.ButtonComponent" />
@@ -132,6 +108,25 @@
 			<class name="com.pentaho.ctools.cdf.require.VisualizationAPIComponent"/>
 			<class name="com.pentaho.ctools.cdf.require.XactionComponent" />
 			<class name="com.pentaho.ctools.cdf.require.samples.Xmla" />
+			
+			<!-- CDE -->
+			<class name="com.pentaho.ctools.cde.SampleDashboard" />
+			<class name="com.pentaho.ctools.cde.reference.AddinReference" />
+			<class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />
+			<class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
+			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />
+			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
+			<class name="com.pentaho.ctools.cde.reference.DuplicateComponent" />
+			<class name="com.pentaho.ctools.cde.reference.ExportPopupComponent" />
+			<class name="com.pentaho.ctools.cde.reference.FilterAddinAccordion" />
+			<class name="com.pentaho.ctools.cde.reference.FilterReference" />
+			<class name="com.pentaho.ctools.cde.reference.FilterVisualGuide" />
+			<!-- <class name="com.pentaho.ctools.cde.reference.MapComponentFullTest" 
+				/> <class name="com.pentaho.ctools.cde.reference.MapComponentReference" /> -->
+			<class name="com.pentaho.ctools.cde.reference.OlapSelectorComponent" />
+			<class name="com.pentaho.ctools.cde.reference.PopupComponent" />
+			<class name="com.pentaho.ctools.cde.reference.WidgetReference" />
+			
 			<!-- CDE-RequireJS -->
 			<class name="com.pentaho.ctools.cde.require.SampleDashboard" />
 			<class name="com.pentaho.ctools.cde.require.AddinReference" />
@@ -149,8 +144,30 @@
 				/> <class name="com.pentaho.ctools.cde.require.MapComponentReference" /> -->
 			<class name="com.pentaho.ctools.cde.require.OlapSelectorComponent" />
 			<class name="com.pentaho.ctools.cde.require.PopupComponent" />
+			
+			<!-- CDA -->
+			<class name="com.pentaho.ctools.cda.CDADatasourceTest" />
+			<class name="com.pentaho.ctools.cda.MondrianJNDI">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/CDA-199 -->
+					<exclude name="tc3_ExportXls_FileDownload" />
+				</methods>
+			</class>
+			<class name="com.pentaho.ctools.cda.CDACacheManager" />
+			
+			<!-- CGG -->
+			<class name="com.pentaho.ctools.cgg.BarChart" />
+			<class name="com.pentaho.ctools.cgg.ScatterChart" />
+			<class name="com.pentaho.ctools.cgg.DialChart" />
+
+			
 			<!-- Security -->
-			<class name="com.pentaho.ctools.security.AccessSystemResources" />
+			<class name="com.pentaho.ctools.security.AccessSystemResources" />						
+		</classes>
+	</test>
+	
+	<test name="Phase 3" preserve-order="true" parallel="false" thread-count="1" group-by-instances="false" verbose="2">
+		<classes>
 			<!-- LOGOUT -->
 			<class name="com.pentaho.ctools.main.LogoutPentaho" />
 		</classes>
