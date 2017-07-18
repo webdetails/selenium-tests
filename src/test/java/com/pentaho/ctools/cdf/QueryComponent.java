@@ -113,7 +113,7 @@ public class QueryComponent extends BaseTest {
     // ## Step 1
     // Render again the sample
     this.elemHelper.Click( driver, By.cssSelector( "li:nth-child(2) > a" ));
-    this.elemHelper.Click( driver, By.id( "tryMe" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "#code > button" ) );
 
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
