@@ -14,7 +14,7 @@
 		</classes>
 	</test>
 
-	<test name="Phase 2" preserve-order="true" parallel="classes" thread-count="3" group-by-instances="false" verbose="2">
+	<test name="Phase 2" preserve-order="true" parallel="false" thread-count="1" group-by-instances="false" verbose="2">
 		<classes>
 			<!-- CDF -->
 			<class name="com.pentaho.ctools.cdf.AutoCompleteBoxComponent" />
