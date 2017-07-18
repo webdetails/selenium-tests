@@ -65,7 +65,7 @@ public class VisualizationAPIComponent extends BaseTest {
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
 		//Wait for button sample to render with properly css
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ) );
+		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ), 120 );
 	}
 
 	/**
