@@ -62,6 +62,7 @@ public class OpenFlashChartComponent extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.OPEN_FLASH_CHART_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 10 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
@@ -112,14 +113,12 @@ public class OpenFlashChartComponent extends BaseTest {
      * ## Step 1
      */
     // Render again the sample
-
-    //Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
-
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.Click( driver, By.cssSelector( "li:nth-child(2) > a" ));
+    this.elemHelper.Click( driver, By.cssSelector( "#code > button" ) );
+    
 
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 10 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
