@@ -23,6 +23,7 @@ package com.pentaho.selenium;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,6 +32,9 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -65,7 +69,7 @@ public class BaseTest {
     this.log.info( "Master setup" );
 
     // Initialize BASEURL
-    baseUrl = "http://localhost:8080/pentaho/";
+    baseUrl = "http://admin:8080/pentaho/";
     downloadDir = System.getProperty( "java.io.tmpdir" ) + "\\SeleniumDonwloadDir";
     pentahoBaServerServiceName = System.getProperty( "pentaho.bi.server.service.name" );
     pentahoBaServerUrl = System.getProperty( "pentaho.bi.server.url" );
@@ -79,7 +83,7 @@ public class BaseTest {
 
     // Setting log preferences
     LoggingPreferences logs = new LoggingPreferences();
-    //logs.enable( LogType.BROWSER, Level.WARNING );
+    logs.enable( LogType.BROWSER, Level.SEVERE );
     /*
      * logs.enable( LogType.SERVER, Level.WARNING );
      * logs.enable( LogType.DRIVER, Level.WARNING );
@@ -143,11 +147,12 @@ public class BaseTest {
   public void tearDownClass() {
     this.log.info( "Master tearDown" );
 
-    /*
-     * LogEntries logEntries = DRIVER.manage().logs().get( LogType.BROWSER ); for ( LogEntry logEntry : logEntries ) {
-     * log.info( logEntry.getMessage() ); }
-     */
-
+    
+     LogEntries logEntries = driver.manage().logs().get( LogType.BROWSER ); 
+     for ( LogEntry logEntry : logEntries ) {
+       log.info( logEntry.getMessage() ); 
+     }
+     
     BaseTest.driver.quit();
   }
 

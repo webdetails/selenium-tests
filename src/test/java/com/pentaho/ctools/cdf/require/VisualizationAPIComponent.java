@@ -23,11 +23,13 @@
 package com.pentaho.ctools.cdf.require;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -61,11 +63,12 @@ public class VisualizationAPIComponent extends BaseTest {
 		this.elemHelper.Get( driver, PageUrl.VISUALIZATION_API_COMPONENT_REQUIRE );
 
 		// NOTE - we have to wait for loading disappear
-		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 15 );
+		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
 		//Wait for button sample to render with properly css
-		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ), 120 );
+		WebElement buttonVisible = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ), 120 );
+		assertNotNull( buttonVisible );
 	}
 
 	/**
@@ -113,8 +116,8 @@ public class VisualizationAPIComponent extends BaseTest {
 		 * ## Step 1
 		 */
 		// Render again the sample
-		this.elemHelper.ClickJS( driver, By.cssSelector( "#ui-id-2" ) );
-		this.elemHelper.ClickJS( driver, By.cssSelector( "#code > button" ) );
+		this.elemHelper.Click( driver, By.cssSelector( "li:nth-child(2) > a" ));
+		this.elemHelper.Click( driver, By.cssSelector( "#code > button" ) );
 
 		// NOTE - we have to wait for loading disappear
 		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
@@ -170,7 +173,7 @@ public class VisualizationAPIComponent extends BaseTest {
      * ## Step 1 - Change the option parameter to MIN and reload sample
      */
     // Render again the sample
-    this.elemHelper.ClickJS( driver, By.cssSelector( "#ui-id-2" ) );
+		this.elemHelper.Click( driver, By.cssSelector( "li:nth-child(2) > a" ));
 
     // Wait for board load
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "code" ) );
@@ -181,7 +184,7 @@ public class VisualizationAPIComponent extends BaseTest {
     this.elemHelper.SendKeys( driver, By.xpath( "//div[@id='code']/textarea" ), text );
 
     // Click in Try me
-    this.elemHelper.ClickJS( driver, By.cssSelector( "#code > button" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "#code > button" ) );
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -220,7 +223,7 @@ public class VisualizationAPIComponent extends BaseTest {
 		 * ## Step 1 - Change the option parameter to AVG and reload sample
 		 */
 		// Render again the sample
-		this.elemHelper.ClickJS( driver, By.cssSelector( "#ui-id-2" ) );
+		this.elemHelper.Click( driver, By.cssSelector( "li:nth-child(2) > a" ));
 
 		// Wait for board load
 		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "code" ) );
@@ -231,7 +234,7 @@ public class VisualizationAPIComponent extends BaseTest {
 		this.elemHelper.SendKeys( driver, By.xpath( "//div[@id='code']/textarea" ), text );
 
 		// Click in Try me
-		this.elemHelper.ClickJS( driver, By.cssSelector( "#code > button" ) );
+		this.elemHelper.Click( driver, By.cssSelector( "#code > button" ) );
 		// NOTE - we have to wait for loading disappear
 		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -242,7 +245,7 @@ public class VisualizationAPIComponent extends BaseTest {
 		 * ## Step 2 - Check the presented value for MIN.
 		 */
 		this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sample" ) );
-        this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject>span" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampleObject>span" ) );
 		String expectedValue = "The result is 4787.77";
 		String actualValue = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#sampleObject>span" ), expectedValue );
 		assertEquals( actualValue, expectedValue );
