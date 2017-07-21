@@ -62,11 +62,11 @@ public class BaseTest {
   protected static String pentahoBaServerPassword = "password";
 
   // Log instance
-  private final Logger log = LogManager.getLogger( BaseTest.class );
+  private static Logger log = LogManager.getLogger( BaseTest.class );
 
   @BeforeSuite
   public void setUpClass() {
-    this.log.info( "Master setup" );
+    log.info( "Master setup" );
 
     // Initialize BASEURL
     baseUrl = "http://localhost:8080/pentaho/";
@@ -83,14 +83,14 @@ public class BaseTest {
 
     // Setting log preferences
     LoggingPreferences logs = new LoggingPreferences();
-    logs.enable( LogType.BROWSER, Level.SEVERE );
-    /*
-     * logs.enable( LogType.SERVER, Level.WARNING );
-     * logs.enable( LogType.DRIVER, Level.WARNING );
-     * logs.enable( LogType.PROFILER, Level.WARNING );
-     * logs.enable( LogType.CLIENT, Level.WARNING );
-     * logs.enable( LogType.PERFORMANCE, Level.WARNING );
-     */
+    logs.enable( LogType.BROWSER, Level.ALL );
+    
+     logs.enable( LogType.SERVER, Level.ALL );
+     logs.enable( LogType.DRIVER, Level.ALL );
+     logs.enable( LogType.PROFILER, Level.ALL );
+     logs.enable( LogType.CLIENT, Level.ALL );
+     logs.enable( LogType.PERFORMANCE, Level.ALL );
+     
 
     /*
      * INTERNET EXPLORER DRIVER
@@ -145,15 +145,47 @@ public class BaseTest {
 
   @AfterSuite
   public void tearDownClass() {
-    this.log.info( "Master tearDown" );
-
-    
-     LogEntries logEntries = driver.manage().logs().get( LogType.BROWSER ); 
-     for ( LogEntry logEntry : logEntries ) {
-       log.info( logEntry.getMessage() ); 
-     }
-     
+    log.info( "Master tearDown" );
+          
     BaseTest.driver.quit();
+  }
+  
+  /**
+   * Print all Messages regarding
+   * @return
+   */
+  public static void printBrowserMessages(){
+    log.info( "------> PRINTING LOGS FROM BROWSER <-----");
+    LogEntries logEntries = driver.manage().logs().get( LogType.BROWSER ); 
+    for ( LogEntry logEntry : logEntries ) {
+      log.info( logEntry.getMessage() ); 
+    }
+    log.info( "------> PRINTING LOGS FROM SERVER <-----");
+    LogEntries logEntries2 = driver.manage().logs().get( LogType.SERVER ); 
+    for ( LogEntry logEntry : logEntries2 ) {
+      log.info( logEntry.getMessage() ); 
+    }
+    log.info( "------> PRINTING LOGS FROM DRIVER <-----");
+    LogEntries logEntries3 = driver.manage().logs().get( LogType.DRIVER ); 
+    for ( LogEntry logEntry : logEntries3 ) {
+      log.info( logEntry.getMessage() ); 
+    }
+    log.info( "------> PRINTING LOGS FROM PROFILER <-----");
+    LogEntries logEntries4 = driver.manage().logs().get( LogType.PROFILER ); 
+    for ( LogEntry logEntry : logEntries4 ) {
+      log.info( logEntry.getMessage() ); 
+    }
+    log.info( "------> PRINTING LOGS FROM CLIENT <-----");
+    LogEntries logEntries5 = driver.manage().logs().get( LogType.CLIENT ); 
+    for ( LogEntry logEntry : logEntries5 ) {
+      log.info( logEntry.getMessage() ); 
+    }
+    log.info( "------> PRINTING LOGS FROM PERFORMANCE <-----");
+    LogEntries logEntries6 = driver.manage().logs().get( LogType.PERFORMANCE ); 
+    for ( LogEntry logEntry : logEntries6 ) {
+      log.info( logEntry.getMessage() ); 
+    }
+    log.info( "------> END <-----");
   }
 
   /**
