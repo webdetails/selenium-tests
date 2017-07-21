@@ -84,16 +84,15 @@ public class BaseTest {
     // Setting log preferences
     LoggingPreferences logs = new LoggingPreferences();
     logs.enable( LogType.BROWSER, Level.ALL );
-    
-     logs.enable( LogType.SERVER, Level.ALL );
-     logs.enable( LogType.DRIVER, Level.ALL );
-     logs.enable( LogType.PROFILER, Level.ALL );
-     logs.enable( LogType.CLIENT, Level.ALL );
-     logs.enable( LogType.PERFORMANCE, Level.ALL );
+    logs.enable( LogType.SERVER, Level.ALL );
+    logs.enable( LogType.DRIVER, Level.ALL );
+    logs.enable( LogType.PROFILER, Level.ALL );
+    logs.enable( LogType.CLIENT, Level.ALL );
+    logs.enable( LogType.PERFORMANCE, Level.ALL );
      
 
     /*
-     * INTERNET EXPLORER DRIVER
+     * Firefox DRIVER
      */
     // Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();

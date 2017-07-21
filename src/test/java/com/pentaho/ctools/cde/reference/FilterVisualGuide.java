@@ -64,6 +64,7 @@ public class FilterVisualGuide extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.FILTER_VISUAL_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     //Get Page Title
@@ -304,25 +305,41 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( "Entry 1", selectedString );
 
     //Click Multi Selector and assert filter is opened
-    multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//div[@class='filter-collapse-icon collapsed']" ) );
+    multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-collapse-icon.collapsed" ) );
     assertNotNull( multiSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//div[@class='filter-collapse-icon collapsed']" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-collapse-icon.collapsed" ) );
     optionMultiContainer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-body" ) );
     assertNotNull( optionMultiContainer );
 
     //Select All, click Apply and assert filter closed and strings correct
-    allSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//div[@class='filter-root-selection-icon none-selected']" ) );
+    allSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-selection-icon.none-selected" ) );
     assertNotNull( allSelector );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//div[@class='filter-root-selection-icon none-selected']" ) );
-    applyButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//button[contains(text(),'Apply')]" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-selection-icon.none-selected" ) );
+    applyButton = this.elemHelper.FindElement( driver, By.cssSelector( "div#multiFilterObj_simple_paginated  div.filter-controls div:nth-child(2) button" ) );
     assertNotNull( applyButton );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//button[contains(text(),'Apply')]" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "div#multiFilterObj_simple_paginated  div.filter-controls div:nth-child(2) button" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-body" ) ) );
-    selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//span[@class='filter-root-info-selected-items']" ) );
-    assertEquals( "All", selectedString );
-    this.elemHelper.ClickJS( driver, By.xpath( "//*[@id='mCSB_12_container']/div[@class='filter-root-items']//div[@class='filter-root-child'][1]/div[contains(@class,'filter-item-container')]//div[@class='filter-item-selection-icon']" ) );
-    selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_simple_paginated']//span[@class='filter-root-info-selected-items']" ) );
+    selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#multiFilterObj_simple_paginated > div.filter-root-container.multi-select.collapsed > div.filter-root-header.all-selected span" ) );
+    assertEquals( selectedString, "All" );
+    //Open Again and click in one element
+    this.elemHelper.Click( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-collapse-icon.collapsed" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#multiFilterObj_simple_paginated > div.filter-root-container.multi-select.expanded" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div > div > div.filter-item-selection-icon" ) );
+    selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div > div > div.filter-item-label" ) );
+    assertEquals( selectedString, "Entry 1" );
+    WebElement unCheckedItem = this.elemHelper.FindElement( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div.filter-item-container.none-selected" ) );
+    assertNotNull( unCheckedItem );
+    this.elemHelper.Click( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-controls div:nth-child(2) button" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#multiFilterObj_simple_paginated > div.filter-root-container.multi-select.collapsed > div.filter-root-header.some-selected > div.filter-root-header-label > span > span" ) );
+    assertEquals( selectedString, "49" );
+    selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#multiFilterObj_simple_paginated > div.filter-root-container.multi-select.collapsed > div.filter-root-header.some-selected > div.filter-root-header-label > span > span:nth-child(2)" ) );
+    assertEquals( selectedString, "/ 1000" );
+    
+    
 
     /*
      * ## Step 6 - Advanced configuration
