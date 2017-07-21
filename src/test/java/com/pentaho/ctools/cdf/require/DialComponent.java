@@ -67,7 +67,7 @@ public class DialComponent extends BaseTest {
 		this.elemHelper.Get( driver, PageUrl.DIAL_COMPONENT );
 
 		// NOTE - we have to wait for loading disappear
-		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 	}
 
