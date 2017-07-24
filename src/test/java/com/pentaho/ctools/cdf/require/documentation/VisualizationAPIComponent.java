@@ -23,6 +23,7 @@
 package com.pentaho.ctools.cdf.require.documentation;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
@@ -63,17 +64,20 @@ public class VisualizationAPIComponent extends BaseTest {
 		this.elemHelper.Get( driver, PageUrl.VISUALIZATION_API_COMPONENT_REQUIRE );
 
 		// NOTE - we have to wait for loading disappear
-		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
+		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
 		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
 		//Wait for button sample to render with properly css
-		WebElement buttonVisible = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ), 120 );
-		printBrowserMessages();
-		//assertNotNull( buttonVisible );
+		WebElement buttonVisible = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ), 10 );
+		
 		if ( buttonVisible == null) {
 		  driver.navigate().refresh();
+		  
 		  this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
 	    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+	    
+	    buttonVisible = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ), 10 );
+	    assertNotNull( buttonVisible );
 		}
 	}
 

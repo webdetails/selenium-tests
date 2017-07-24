@@ -79,7 +79,7 @@ public class BaseTest {
     new File( downloadDir ).mkdir();
 
     System.setProperty( "webdriver.log.file", "/dev/stdout" );
-    //System.setProperty( "webdriver.firefox.logfile", "/dev/stdout" );
+    System.setProperty( "webdriver.firefox.logfile", "/dev/stdout" );
 
     // Setting log preferences
     LoggingPreferences logs = new LoggingPreferences();
@@ -145,7 +145,9 @@ public class BaseTest {
   @AfterSuite
   public void tearDownClass() {
     log.info( "Master tearDown" );
-          
+    
+    BaseTest.printBrowserMessages();
+    
     BaseTest.driver.quit();
   }
   
@@ -153,7 +155,7 @@ public class BaseTest {
    * Print all Messages regarding
    * @return
    */
-  public static void printBrowserMessages(){
+  public static void printBrowserMessages() {
     log.info( "------> PRINTING LOGS FROM BROWSER <-----");
     LogEntries logEntries = driver.manage().logs().get( LogType.BROWSER ); 
     for ( LogEntry logEntry : logEntries ) {
