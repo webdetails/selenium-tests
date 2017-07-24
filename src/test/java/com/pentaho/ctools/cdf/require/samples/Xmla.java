@@ -57,37 +57,48 @@ public class Xmla extends BaseTest {
   @Test
   public void tc1_XmlaQueryEnable_CheckForEnable() {
     this.log.info( "tc1_XmlaQueryEnable_CheckForEnable" );
-    //To set up this test we must enable xmla for SteelWheels datasource
+    //To set up this test we must enable xmla for SteelWheels data source
     this.elemHelper.Get( driver, PageUrl.PUC );
 
-    // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ), 20 );
-    this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "div.busy-indicator-container.waitPopup" ) );
+    //wait for visibility of waiting pop-up
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.pentaho-busy-indicator-title.waitPopup_title" ), 120 );
+    this.elemHelper.WaitForElementNotPresent( driver, By.cssSelector( "div.pentaho-busy-indicator-title.waitPopup_title" ) );
+
     //Wait to load the new page
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pucUserDropDown']/table/tbody/tr/td/div" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//iframe[@id='home.perspective']" ) );
+    WebElement dropdownLoggedUser = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#pucUserDropDown > table > tbody > tr > td:nth-child(1) > div" ), 120 );
+    assertNotNull( dropdownLoggedUser );
+    WebElement frameHomePerpective = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "home.perspective" ) );
+    assertNotNull( frameHomePerpective );
+
+    //Wait for user displays
+    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#pucUserDropDown > table > tbody > tr > td:nth-child(1) > div" ) );
 
     //Open File menu and select Manage Data Sources
+    // Click File
     WebElement fileMenu = this.elemHelper.FindElement( driver, By.id( "filemenu" ) );
     assertNotNull( fileMenu );
-    fileMenu.click();
+    this.elemHelper.ClickJS( driver, By.id( "filemenu" ) );
+    // Click Manage Data Source
     WebElement manageSources = this.elemHelper.FindElement( driver, By.id( "manageDatasourceItem" ) );
     assertNotNull( manageSources );
-    manageSources.click();
-    //Wait for datasources popup to open click "SteelWheels Analysis" and click edit
-    WebElement dataPopup = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog']" ) );
+    this.elemHelper.ClickJS( driver, By.id( "manageDatasourceItem" ) );
+    //Wait for data sources popup to open click "SteelWheels Analysis" and click edit
+    WebElement dataPopup = this.elemHelper.FindElement( driver, By.cssSelector( "div.pentaho-dialog" ) );
     assertNotNull( dataPopup );
-    WebElement steelSource = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog']//tbody//div[contains(text(),'SteelWheels')]" ) );
+    // Click in the data source 'SteelWheels'
+    WebElement steelSource = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog']//div[contains(text(),'SteelWheels')]" ) );
     assertNotNull( steelSource );
-    steelSource.click();
-    WebElement settingsButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='pentaho-dialog']//div[@id='datasourceDropdownButton']/img" ) );
+    this.elemHelper.Click( driver, By.xpath( "//div[@class='pentaho-dialog']//div[contains(text(),'SteelWheels')]" ) );
+    // Click in the wheel
+    WebElement settingsButton = this.elemHelper.FindElement( driver, By.cssSelector( "#datasourceDropdownButton > img" ) );
     assertNotNull( settingsButton );
-    settingsButton.click();
-    WebElement optionsPopup = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='popupContent']" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#datasourceDropdownButton > img" ) );
+    // Click in Edit
+    WebElement optionsPopup = this.elemHelper.FindElement( driver, By.cssSelector( "div.popupContent" ) );
     assertNotNull( optionsPopup );
-    WebElement editButton = this.elemHelper.FindElement( driver, By.xpath( "//div[@class='popupContent']//td[contains(text(),'Edit...')]" ) );
+    WebElement editButton = this.elemHelper.FindElement( driver, By.cssSelector( "div.popupContent td" ) );
     assertNotNull( editButton );
-    editButton.click();
+    this.elemHelper.Click( driver, By.cssSelector( "div.popupContent td" ) );
 
     //On new popup select "Manual enter" and set Enable Xmla as true
     WebElement manualButton = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='manualRadio']//input" ) );
