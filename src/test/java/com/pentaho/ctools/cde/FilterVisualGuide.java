@@ -326,11 +326,9 @@ public class FilterVisualGuide extends BaseTest {
     //Open Again and click in one element
     this.elemHelper.Click( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-collapse-icon.collapsed" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#multiFilterObj_simple_paginated > div.filter-root-container.multi-select.expanded" ) );
-    this.elemHelper.ClickJS( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div > div > div.filter-item-selection-icon" ) );
-    selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div > div > div.filter-item-label" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-item-container.all-selected > div.filter-item-body > div.filter-item-label" ) );
+    selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-root-items > div.filter-root-child > div.filter-item-container.none-selected > div.filter-item-body > div.filter-item-label" ) );
     assertEquals( selectedString, "Entry 1" );
-    WebElement unCheckedItem = this.elemHelper.FindElement( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div.filter-item-container.none-selected" ) );
-    assertNotNull( unCheckedItem );
     this.elemHelper.Click( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-controls div:nth-child(2) button" ) );
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
@@ -338,6 +336,7 @@ public class FilterVisualGuide extends BaseTest {
     assertEquals( selectedString, "49" );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#multiFilterObj_simple_paginated > div.filter-root-container.multi-select.collapsed > div.filter-root-header.some-selected > div.filter-root-header-label > span > span:nth-child(2)" ) );
     assertEquals( selectedString, "/ 1000" );
+    
     
     
 
