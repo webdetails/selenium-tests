@@ -326,7 +326,7 @@ public class FilterVisualGuide extends BaseTest {
     //Open Again and click in one element
     this.elemHelper.Click( driver, By.cssSelector( "div#multiFilterObj_simple_paginated div.filter-collapse-icon.collapsed" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#multiFilterObj_simple_paginated > div.filter-root-container.multi-select.expanded" ) );
-    this.elemHelper.ClickJS( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div > div > div.filter-item-selection-icon" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div > div > div.filter-item-selection-icon" ) );
     selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div > div > div.filter-item-label" ) );
     assertEquals( selectedString, "Entry 1" );
     WebElement unCheckedItem = this.elemHelper.FindElement( driver, By.cssSelector( "#mCSB_12_container > div.filter-root-items > div:nth-child(1) > div.filter-item-container.none-selected" ) );
