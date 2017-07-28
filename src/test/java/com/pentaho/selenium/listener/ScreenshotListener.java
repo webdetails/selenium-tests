@@ -70,4 +70,32 @@ public class ScreenshotListener extends TestListenerAdapter {
 			ex.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * @param className
+	 * @param testCaseName
+	 */
+	public void printScreen(String className, String testCaseName){
+	  try {
+    WebDriver driver = BaseTest.getDriver();
+
+    final String dir = className.replace( ".", "/" ) + "/";
+    final String createDir = "reports-java/screenshots/" + dir;
+
+    new File( createDir ).mkdirs(); // Insure directory is there
+
+    try ( FileOutputStream out = new FileOutputStream( createDir + testCaseName + ".png" ) ) {
+       out.write( ( (TakesScreenshot) driver ).getScreenshotAs( OutputType.BYTES ) );
+    } catch ( final FileNotFoundException fnfe ) {
+      fnfe.printStackTrace();
+    } catch ( IOException ioe ) {
+      ioe.printStackTrace();
+    } catch ( final Exception e ) {
+      e.printStackTrace();
+    }
+  } catch ( Exception ex ) {
+    ex.printStackTrace();
+  }
+	}
 }

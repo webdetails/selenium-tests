@@ -15,7 +15,8 @@
 		<dependency org="org.seleniumhq.selenium" name="selenium-java" rev="2.53.1" conf="build->default" />
 		<dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.6.2" conf="build->default" />
 		<dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.6.2" conf="build->default" />
-		<dependency org="org.apache.commons" name="commons-lang3" rev="3.4" conf="build->default" />
+		<dependency org="org.apache.commons" name="commons-lang3" rev="3.4" conf="build->default" />		
+		<dependency org="net.jsourcerer.webdriver" name="JSErrorCollector" rev="0.7-atlassian-1"/>		
 	</dependencies>
 
 </ivy-module>

@@ -22,6 +22,8 @@
 package com.pentaho.selenium;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -40,6 +42,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+
+import net.jsourcerer.webdriver.jserrorcollector.JavaScriptError;
 
 public class BaseTest {
   // Instance of the driver (browser emulator)
@@ -78,9 +82,6 @@ public class BaseTest {
 
     new File( downloadDir ).mkdir();
 
-    System.setProperty( "webdriver.log.file", "/dev/stdout" );
-    System.setProperty( "webdriver.firefox.logfile", "/dev/stdout" );
-
     // Setting log preferences
     LoggingPreferences logs = new LoggingPreferences();
     logs.enable( LogType.BROWSER, Level.ALL );
@@ -96,7 +97,8 @@ public class BaseTest {
      */
     // Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
-    // ffProfile.setEnableNativeEvents( true );
+    System.setProperty( "webdriver.firefox.logfile", System.getProperty( "java.io.tmpdir" ) + "\\wedriver-firefox.log" );
+    ffProfile.setPreference( "webdriver.log.file", System.getProperty( "java.io.tmpdir" ) + "\\wedriver.log" );
     ffProfile.setPreference( "general.useragent.locale", "en-US" );
     ffProfile.setPreference( "intl.accept_languages", "en-US, en" );
     ffProfile.setPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Download dir, 2 - specify dir
@@ -105,6 +107,13 @@ public class BaseTest {
     ffProfile.setPreference( "browser.download.dir", downloadDir );
     ffProfile.setPreference( "browser.helperApps.neverAsk.saveToDisk", "application/unknown;table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf;text/xml;application/xml;image/png;image/svg+xml;application/json;application/javascript" );
 
+    try {
+      JavaScriptError.addExtension(ffProfile);
+    } catch ( IOException e ) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
     // Setting properties for webdriver
     DesiredCapabilities capabilities = DesiredCapabilities.firefox();
     capabilities.setCapability( CapabilityType.LOGGING_PREFS, logs );
@@ -161,16 +170,16 @@ public class BaseTest {
     for ( LogEntry logEntry : logEntries ) {
       log.info( logEntry.getMessage() ); 
     }
-    log.info( "------> PRINTING LOGS FROM SERVER <-----");
+    /*log.info( "------> PRINTING LOGS FROM SERVER <-----");
     LogEntries logEntries2 = driver.manage().logs().get( LogType.SERVER ); 
     for ( LogEntry logEntry : logEntries2 ) {
       log.info( logEntry.getMessage() ); 
-    }
-    log.info( "------> PRINTING LOGS FROM DRIVER <-----");
+    }*/
+    /*log.info( "------> PRINTING LOGS FROM DRIVER <-----");
     LogEntries logEntries3 = driver.manage().logs().get( LogType.DRIVER ); 
     for ( LogEntry logEntry : logEntries3 ) {
       log.info( logEntry.getMessage() ); 
-    }
+    }*/
     log.info( "------> PRINTING LOGS FROM PROFILER <-----");
     LogEntries logEntries4 = driver.manage().logs().get( LogType.PROFILER ); 
     for ( LogEntry logEntry : logEntries4 ) {
@@ -186,6 +195,9 @@ public class BaseTest {
     for ( LogEntry logEntry : logEntries6 ) {
       log.info( logEntry.getMessage() ); 
     }
+    log.info( "------> PRINTING LOGS JavaScriptError <-----");
+    final List<JavaScriptError> jsErrors = JavaScriptError.readErrors(driver);
+    log.debug( jsErrors );
     log.info( "------> END <-----");
   }
 

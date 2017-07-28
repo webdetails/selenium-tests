@@ -35,6 +35,7 @@ import org.testng.annotations.Test;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.PageUrl;
 import com.pentaho.selenium.BaseTest;
+import com.pentaho.selenium.listener.ScreenshotListener;
 
 /**
  * Testing the functionalities related with component Visualization API.
@@ -64,13 +65,20 @@ public class VisualizationAPIComponent extends BaseTest {
 		this.elemHelper.Get( driver, PageUrl.VISUALIZATION_API_COMPONENT_REQUIRE );
 
 		// NOTE - we have to wait for loading disappear
-		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
-		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+		this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 30 );
+		this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 120);
 
 		//Wait for button sample to render with properly css
-		WebElement buttonVisible = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ), 10 );
+		WebElement buttonVisible = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ) );
+		
+		
 		
 		if ( buttonVisible == null) {
+		  log.debug(">>> Show fail here - going to refresh page.");
+		  
+		  ScreenshotListener sl = new ScreenshotListener();
+		  sl.printScreen( "com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent", "tc0_OpenSamplePage_Display" );
+		  
 		  driver.navigate().refresh();
 		  
 		  this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
@@ -78,6 +86,8 @@ public class VisualizationAPIComponent extends BaseTest {
 	    
 	    buttonVisible = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#example > ul > li.ui-state-default.ui-corner-top.ui-tabs-active.ui-state-active" ), 10 );
 	    assertNotNull( buttonVisible );
+	    
+	    printBrowserMessages();
 		}
 	}
 
@@ -102,7 +112,7 @@ public class VisualizationAPIComponent extends BaseTest {
 		// Wait for visibility of 'VisualizationAPIComponent'
 		String expectedSampleTitle = "VisualizationAPIComponent";
 		String actualSampleTitle = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div.webdetailsBoxShadow h2 span:nth-child(2)" ), expectedSampleTitle );
-		printBrowserMessages();
+		
 		// Validate the sample that we are testing is the one
 		assertEquals( actualTitlePage, expectedTitlePage );
 		assertEquals( actualSampleTitle, expectedSampleTitle );
