@@ -319,7 +319,6 @@ public class ExecutePrptComponent extends BaseTest {
    *    6. Select: Comma Separated Value
    *    7. Select: Rich-Text-Format
    *    8. Select: Text
-   * @throws InterruptedException
    */
   @Test
   public void tc6_SelectAllOutputTypeOptions_DialogBoxIsRaised() {
@@ -335,6 +334,7 @@ public class ExecutePrptComponent extends BaseTest {
     this.elemHelper.SwitchToFrame( driver, attrIframeId );
     Select select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/html;page-mode=page" );
+    this.elemHelper.WaitForElementPresence( driver, By.id( "glasspane" ), 3 );
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     //Check the generated image
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
@@ -361,6 +361,7 @@ public class ExecutePrptComponent extends BaseTest {
     this.elemHelper.SwitchToFrame( driver, attrIframeId );
     select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/html;page-mode=stream" );
+    this.elemHelper.WaitForElementPresence( driver, By.id( "glasspane" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     //Check the generated image
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
@@ -387,6 +388,7 @@ public class ExecutePrptComponent extends BaseTest {
     this.elemHelper.SwitchToFrame( driver, attrIframeId );
     select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/pdf" );
+    this.elemHelper.WaitForElementPresence( driver, By.id( "glasspane" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     //Check the generated image
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
