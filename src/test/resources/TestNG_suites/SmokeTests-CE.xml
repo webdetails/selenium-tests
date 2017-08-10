@@ -30,12 +30,7 @@
 			</class>
 			<class name="com.pentaho.ctools.cdf.documentation.DialComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.ExecutePrptComponent" />
-			<class name="com.pentaho.ctools.cdf.documentation.ExecuteXactionComponent">
-				<methods>
-					<!-- http://jira.pentaho.com/browse/CDF-982 -->
-					<exclude name="tc3_PressToGenerateChart_ChartIsDisplayed()" />
-				</methods>
-			</class>
+			<class name="com.pentaho.ctools.cdf.documentation.ExecuteXactionComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.JFreeChartComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.MonthPickerComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.MultiButtonComponent" />
@@ -78,14 +73,8 @@
 			</class>
 			<class name="com.pentaho.ctools.cdf.require.documentation.DialComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.ExecutePrptComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.ExecuteXactionComponent" >
-				<methods>
-					<!-- http://jira.pentaho.com/browse/CDF-982 -->
-					<exclude name="tc3_PressToGenerateChart_ChartIsDisplayed" />
-				</methods>
-			</class>
-			<class name="com.pentaho.ctools.cdf.require.documentation.JFreeChartComponent" />
-			
+			<class name="com.pentaho.ctools.cdf.require.documentation.ExecuteXactionComponent" />
+			<class name="com.pentaho.ctools.cdf.require.documentation.JFreeChartComponent" />			
 			<class name="com.pentaho.ctools.cdf.require.documentation.MonthPickerComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.MultiButtonComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.OpenFlashChartComponent" />
