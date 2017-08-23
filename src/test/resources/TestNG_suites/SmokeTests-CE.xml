@@ -17,7 +17,12 @@
 	<test name="Phase 2" preserve-order="true" parallel="false" thread-count="1" group-by-instances="false" verbose="2">
 		<classes>
 			<!-- CDF - DOCUMENTATION -->
-			<class name="com.pentaho.ctools.cdf.documentation.AutoCompleteBoxComponent" />
+			<class name="com.pentaho.ctools.cdf.documentation.AutoCompleteBoxComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/BACKLOG-18456 -->
+					<exclude name="tc1_AutocompleteBox_DataAreListed" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.documentation.ButtonComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.CheckComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.CommentComponent" />
@@ -33,12 +38,26 @@
 			<class name="com.pentaho.ctools.cdf.documentation.MonthPickerComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.MultiButtonComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.PrptComponent" />
-			<class name="com.pentaho.ctools.cdf.documentation.QueryComponent" />
+			<class name="com.pentaho.ctools.cdf.documentation.QueryComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/BACKLOG-18456 -->
+					<exclude name="tc2_ReloadSample_SampleReadyToUse" />
+					<exclude name="tc3_ExecuteQuery_ReturnedTextAsExpected" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.documentation.RadioComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.SchedulePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.SelectComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.SelectMultiComponent" />
-			<class name="com.pentaho.ctools.cdf.documentation.TableComponent" />
+			<class name="com.pentaho.ctools.cdf.documentation.TableComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/BACKLOG-18456 -->
+					<exclude name="tc3_Paging_NavigateBetweenPages" />
+					<exclude name="tc4_Sort_ElementsAreSort" />
+					<exclude name="tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected" />
+					<exclude name="tc6_SearchEngine_TableDisplayedContentSearch" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.documentation.TextAreaInputComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.TextInputComponent" />
@@ -47,9 +66,21 @@
 			
 
 			<!-- CDF-RequireJS - DOCUMENTATION -->
-			<class name="com.pentaho.ctools.cdf.require.documentation.AutoCompleteBoxComponent" />
+			<class name="com.pentaho.ctools.cdf.require.documentation.AutoCompleteBoxComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/BACKLOG-18456 -->
+					<exclude name="tc1_AutocompleteBox_DataAreListed" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.require.documentation.ButtonComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.CheckComponent" />
+			<class name="com.pentaho.ctools.cdf.require.documentation.CheckComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/BACKLOG-18456 -->
+					<exclude name="tc3_CheckEachOption_AfterCheckAnAlertIsDisplayed" />
+					<exclude name="tc4_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed" />
+					<exclude name="tc5_UncheckedEachOption_AfterUncheckAnAlertIsDisplayed" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.require.documentation.CommentComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.DateInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.DateRangeInputComponent">
@@ -63,17 +94,43 @@
 			<class name="com.pentaho.ctools.cdf.require.documentation.MonthPickerComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.MultiButtonComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.PrptComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.QueryComponent" />
+			<class name="com.pentaho.ctools.cdf.require.documentation.QueryComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/BACKLOG-18456 -->
+					<exclude name="tc2_ReloadSample_SampleReadyToUse" />
+					<exclude name="tc3_ExecuteQuery_ReturnedTextAsExpected" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.require.documentation.RadioComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SchedulePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SelectComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SelectMultiComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.TableComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.TemplateComponent" />
+			<class name="com.pentaho.ctools.cdf.require.documentation.TableComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/BACKLOG-18456 -->
+					<exclude name="tc3_Paging_NavigateBetweenPages" />
+					<exclude name="tc4_Sort_ElementsAreSort" />
+					<exclude name="tc5_DisplayEntries_DisplayTheNumberOfEntriesSelected" />
+					<exclude name="tc6_SearchEngine_TableDisplayedContentSearch" />
+				</methods>
+			</class>
+			<class name="com.pentaho.ctools.cdf.require.documentation.TemplateComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/BACKLOG-18456 -->
+					<exclude name="tc3_TemplateElements_DisplayedCorrectly" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextAreaInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextInputComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent"/>
+			<class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent">
+				<methods>
+					<!-- http://jira.pentaho.com/browse/CDF-983 -->
+					<exclude name="tc3_MaxNumber_PresentCorrectValue" />
+					<exclude name="tc4_MinNumber_PresentCorrectValue" />
+					<exclude name="tc5_AvgNumber_PresentCorrectValue" />
+				</methods>
+			</class>
 			<class name="com.pentaho.ctools.cdf.require.documentation.XactionComponent" />
 			
 			<!-- CDE -->
