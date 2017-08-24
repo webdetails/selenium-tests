@@ -61,7 +61,10 @@
 			<class name="com.pentaho.ctools.cdf.documentation.TextAreaInputComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.TextInputComponent" />
-			<class name="com.pentaho.ctools.cdf.documentation.VisualizationAPIComponent" />
+			<!-- 
+				http://jira.pentaho.com/browse/BACKLOG-18456
+				<class name="com.pentaho.ctools.cdf.documentation.VisualizationAPIComponent">
+			-->
 			<class name="com.pentaho.ctools.cdf.documentation.XactionComponent" />
 			
 
@@ -123,14 +126,10 @@
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextAreaInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextInputComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent">
-				<methods>
-					<!-- http://jira.pentaho.com/browse/CDF-983 -->
-					<exclude name="tc3_MaxNumber_PresentCorrectValue" />
-					<exclude name="tc4_MinNumber_PresentCorrectValue" />
-					<exclude name="tc5_AvgNumber_PresentCorrectValue" />
-				</methods>
-			</class>
+			<!-- 
+				http://jira.pentaho.com/browse/BACKLOG-18456
+				<class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent">
+			-->
 			<class name="com.pentaho.ctools.cdf.require.documentation.XactionComponent" />
 			
 			<!-- CDE -->
