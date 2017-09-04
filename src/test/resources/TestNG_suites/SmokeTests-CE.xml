@@ -74,7 +74,11 @@
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextInputComponent" />
 			<!-- 
+<<<<<<< HEAD
 				 http://jira.pentaho.com/browse/CDF-983 
+=======
+				 http://jira.pentaho.com/browse/CDF-983
+>>>>>>> branch 'master' of https://github.com/webdetails/selenium-tests.git
 				 <class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent" />
 			-->
 			<class name="com.pentaho.ctools.cdf.require.documentation.XactionComponent" />
