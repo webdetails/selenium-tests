@@ -21,12 +21,10 @@
  ******************************************************************************/
 package com.pentaho.ctools.cdf.require.documentation;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -58,11 +56,11 @@ public class SelectComponent extends BaseTest {
 
     // The URL for the SelectComponent under CDF samples
     // This samples is in: Public/plugin-samples/CDF/Require Samples/Documentation/Component Reference/Core Components/SelectComponent
-    this.elemHelper.Get( driver, PageUrl.SELECT_COMPONENT_REQUIRE );
+    this.elemHelper.Get( BaseTest.driver, PageUrl.SELECT_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -83,15 +81,15 @@ public class SelectComponent extends BaseTest {
      * ## Step 1
      */
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    String expectedPageTitle = "Community Dashboard Framework";
-    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    final String expectedPageTitle = "Community Dashboard Framework";
+    final String actualPageTitle = this.elemHelper.WaitForTitle( BaseTest.driver, expectedPageTitle );
     // Wait for visibility of 'SelectComponent'
-    String expectedSampleTitle = "SelectComponent";
-    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
+    final String expectedSampleTitle = "SelectComponent";
+    final String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.xpath( "//div[@id='dashboardContent']/div/div/div/h2/span[2]" ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( actualPageTitle, expectedPageTitle );
-    assertEquals( actualSampleTitle, expectedSampleTitle );
+    Assert.assertEquals( actualPageTitle, expectedPageTitle );
+    Assert.assertEquals( actualSampleTitle, expectedSampleTitle );
   }
 
   /**
@@ -110,20 +108,20 @@ public class SelectComponent extends BaseTest {
 
     // ## Step 1
     // Render again the sample
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) ).click();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='code']/button" ) ).click();
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "li:nth-child(2) > a" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#code > button" ) );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 1 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
-    assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
+    Assert.assertTrue( this.elemHelper.FindElement( BaseTest.driver, By.id( "sample" ) ).isDisplayed() );
 
-    //Check the number of divs with id 'SampleObject'
-    //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
-    assertEquals( nSampleObject, 1 );
+    // Check the number of divs with id 'SampleObject'
+    // Hence, we guarantee when click Try Me the previous div is replaced
+    final int nSampleObject = this.elemHelper.FindElements( BaseTest.driver, By.id( "sampleObject" ) ).size();
+    Assert.assertEquals( nSampleObject, 1 );
   }
 
   /**
@@ -145,13 +143,13 @@ public class SelectComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    this.elemHelper.SelectByValue( driver, By.cssSelector( "select" ), "2" );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "You chose: 2" );
+    this.elemHelper.SelectByValue( BaseTest.driver, By.cssSelector( "select" ), "2" );
+    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( BaseTest.driver );
+    Assert.assertEquals( actualConfirmationMsg, "You chose: 2" );
 
     // ## Step 2
-    this.elemHelper.SelectByValue( driver, By.cssSelector( "select" ), "1" );
-    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
-    assertEquals( actualConfirmationMsg, "You chose: 1" );
+    this.elemHelper.SelectByValue( BaseTest.driver, By.cssSelector( "select" ), "1" );
+    actualConfirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( BaseTest.driver );
+    Assert.assertEquals( actualConfirmationMsg, "You chose: 1" );
   }
 }
