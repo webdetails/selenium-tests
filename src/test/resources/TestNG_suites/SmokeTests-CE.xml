@@ -73,10 +73,7 @@
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextAreaInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextInputComponent" />
-			<!-- 
-				 http://jira.pentaho.com/browse/CDF-983
-				 <class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent" />
-			-->
+			<class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.XactionComponent" />
 			
 			<!-- CDE -->
