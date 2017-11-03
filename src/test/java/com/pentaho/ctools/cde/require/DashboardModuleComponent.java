@@ -21,13 +21,11 @@
  ******************************************************************************/
 package com.pentaho.ctools.cde.require;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -58,11 +56,11 @@ public class DashboardModuleComponent extends BaseTest {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
     // Go to the CDE Sample Dashboard web page.
-    this.elemHelper.Get( driver, PageUrl.DASHBOARD_MODULE_COMPONENT_REQUIRE );
+    this.elemHelper.Get( BaseTest.driver, PageUrl.DASHBOARD_MODULE_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -86,44 +84,44 @@ public class DashboardModuleComponent extends BaseTest {
      * ## Step 1
      */
     //Check title
-    String pageTitle = this.elemHelper.WaitForTitle( driver, "Community Dashboard Framework" );
-    assertEquals( "Community Dashboard Framework", pageTitle );
+    final String pageTitle = this.elemHelper.WaitForTitle( BaseTest.driver, "Community Dashboard Framework" );
+    Assert.assertEquals( "Community Dashboard Framework", pageTitle );
 
     //Check the signature1
-    String textAuthor1 = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "cde_sample1_alias1_signature" ) );
-    assertEquals( "Pedro Alves, webdetails", textAuthor1 );
+    final String textAuthor1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "cde_sample1_alias1_signature" ) );
+    Assert.assertEquals( "Pedro Alves, Hitachi Vantara", textAuthor1 );
 
     //Check the signature2
-    String textAuthor2 = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "cde_sample1_alias2_signature" ) );
-    assertEquals( "Pedro Alves, webdetails", textAuthor2 );
+    final String textAuthor2 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "cde_sample1_alias2_signature" ) );
+    Assert.assertEquals( "Pedro Alves, Hitachi Vantara", textAuthor2 );
 
     //Check the signature3
-    String textAuthor3 = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "cde_sample1_sampleDash3_signature" ) );
-    assertEquals( "Pedro Alves, webdetails", textAuthor3 );
+    final String textAuthor3 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "cde_sample1_sampleDash3_signature" ) );
+    Assert.assertEquals( "Pedro Alves, Hitachi Vantara", textAuthor3 );
 
     //Check the chart1
-    String elemChart1 = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "//div[@id='cde_sample1_alias1_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
-    assertNotNull( elemChart1 );
+    final String elemChart1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "//div[@id='cde_sample1_alias1_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
+    Assert.assertNotNull( elemChart1 );
 
     //Check the chart2
-    String elemChart2 = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "//div[@id='cde_sample1_alias2_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
-    assertNotNull( elemChart2 );
+    final String elemChart2 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "//div[@id='cde_sample1_alias2_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
+    Assert.assertNotNull( elemChart2 );
 
     //Check the chart3
-    WebElement elemChart3 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cde_sample1_sampleDash3_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
-    assertNotNull( elemChart3 );
+    final WebElement elemChart3 = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_sampleDash3_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
+    Assert.assertNotNull( elemChart3 );
 
     //Check the table1
-    WebElement elemTable1 = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr/td" ) );
-    assertNotNull( elemTable1 );
+    final WebElement elemTable1 = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr/td" ) );
+    Assert.assertNotNull( elemTable1 );
 
     //Check the table2
-    WebElement elemTable2 = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr/td" ) );
-    assertNotNull( elemTable2 );
+    final WebElement elemTable2 = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr/td" ) );
+    Assert.assertNotNull( elemTable2 );
 
     //Check the table3
-    WebElement elemTable3 = this.elemHelper.FindElement( driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr/td" ) );
-    assertNotNull( elemTable3 );
+    final WebElement elemTable3 = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr/td" ) );
+    Assert.assertNotNull( elemTable3 );
   }
 
   /**
@@ -147,56 +145,56 @@ public class DashboardModuleComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    String customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
-    String total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[7]/td[2]" ) );
-    String paggingInfo = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "cde_sample1_alias1_tableTable_info" ) );
-    assertEquals( "Vida Sport, Ltd", customer );
-    assertEquals( "78,155.28", total );
-    assertEquals( "Showing 1 to 10 of 44 entries", paggingInfo );
+    String customer = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
+    String total = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[7]/td[2]" ) );
+    String paggingInfo = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "cde_sample1_alias1_tableTable_info" ) );
+    Assert.assertEquals( "Vida Sport, Ltd", customer );
+    Assert.assertEquals( "78,155.28", total );
+    Assert.assertEquals( "Showing 1 to 10 of 44 entries", paggingInfo );
     //Click next
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias1_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias1_tableTable_info" ), "Showing 11 to 20 of 44 entries" );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_alias1_tableTable_paginate']/a[2]" ) );
+    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "cde_sample1_alias1_tableTable_info" ), "Showing 11 to 20 of 44 entries" );
     //Check next page on first dashboard
-    customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[5]/td" ) );
-    total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "Marseille Mini Autos", customer );
-    assertEquals( "61,072.54", total );
+    customer = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[5]/td" ) );
+    total = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
+    Assert.assertEquals( "Marseille Mini Autos", customer );
+    Assert.assertEquals( "61,072.54", total );
 
     /*
      * ## Step 2
      */
-    customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
-    total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[7]/td[2]" ) );
-    paggingInfo = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "cde_sample1_alias2_tableTable_info" ) );
-    assertEquals( "Vida Sport, Ltd", customer );
-    assertEquals( "78,155.28", total );
-    assertEquals( "Showing 1 to 10 of 44 entries", paggingInfo );
+    customer = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
+    total = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[7]/td[2]" ) );
+    paggingInfo = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "cde_sample1_alias2_tableTable_info" ) );
+    Assert.assertEquals( "Vida Sport, Ltd", customer );
+    Assert.assertEquals( "78,155.28", total );
+    Assert.assertEquals( "Showing 1 to 10 of 44 entries", paggingInfo );
     //Click next
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 11 to 20 of 44 entries" );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
+    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 11 to 20 of 44 entries" );
     //Check next page on first dashboard
-    customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[5]/td" ) );
-    total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "Marseille Mini Autos", customer );
-    assertEquals( "61,072.54", total );
+    customer = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[5]/td" ) );
+    total = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[1]/td[2]" ) );
+    Assert.assertEquals( "Marseille Mini Autos", customer );
+    Assert.assertEquals( "61,072.54", total );
 
     /*
      * ## Step 3
      */
-    customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[2]/td" ) );
-    total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[7]/td[2]" ) );
-    paggingInfo = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "cde_sample1_sampleDash3_tableTable_info" ) );
-    assertEquals( "Vida Sport, Ltd", customer );
-    assertEquals( "78,155.28", total );
-    assertEquals( "Showing 1 to 10 of 44 entries", paggingInfo );
+    customer = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[2]/td" ) );
+    total = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[7]/td[2]" ) );
+    paggingInfo = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "cde_sample1_sampleDash3_tableTable_info" ) );
+    Assert.assertEquals( "Vida Sport, Ltd", customer );
+    Assert.assertEquals( "78,155.28", total );
+    Assert.assertEquals( "Showing 1 to 10 of 44 entries", paggingInfo );
     //Click next
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_sampleDash3_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_sampleDash3_tableTable_info" ), "Showing 11 to 20 of 44 entries" );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_sampleDash3_tableTable_paginate']/a[2]" ) );
+    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "cde_sample1_sampleDash3_tableTable_info" ), "Showing 11 to 20 of 44 entries" );
     //Check next page on first dashboard
-    customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[5]/td" ) );
-    total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "Marseille Mini Autos", customer );
-    assertEquals( "61,072.54", total );
+    customer = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[5]/td" ) );
+    total = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[1]/td[2]" ) );
+    Assert.assertEquals( "Marseille Mini Autos", customer );
+    Assert.assertEquals( "61,072.54", total );
 
   }
 
@@ -222,92 +220,92 @@ public class DashboardModuleComponent extends BaseTest {
     /*
      * ## Step 1
      */
-    String sampleChartTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
-    assertEquals( "Sales by territory and market", sampleChartTitle );
+    String sampleChartTitle = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
+    Assert.assertEquals( "Sales by territory and market", sampleChartTitle );
     //disable/enable APAC on chart 1
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(150,150,150)" );
-    String attributeValueApac = this.elemHelper.GetAttribute( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill" );
-    assertEquals( "rgb(150,150,150)", attributeValueApac );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(0,0,0)" );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(150,150,150)" );
+    String attributeValueApac = this.elemHelper.GetAttribute( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill" );
+    Assert.assertEquals( "rgb(150,150,150)", attributeValueApac );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(0,0,0)" );
     //Click NA/Vintage Cars on first chart
-    this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]//*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][7]" ) );
+    this.elemHelper.MouseOverElementAndClick( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]//*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][7]" ) );
     //Wait for page render
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //check contents
-    String customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
-    String total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "The Sharp Gifts Warehouse", customer1 );
-    assertEquals( "168,967.80", total1 );
+    String customer1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
+    String total1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
+    Assert.assertEquals( "The Sharp Gifts Warehouse", customer1 );
+    Assert.assertEquals( "168,967.80", total1 );
     //Next page
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias1_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias1_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
-    customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
-    total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "Signal Gift Stores", customer1 );
-    assertEquals( "23,203.62", total1 );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_alias1_tableTable_paginate']/a[2]" ) );
+    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "cde_sample1_alias1_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
+    customer1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
+    total1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
+    Assert.assertEquals( "Signal Gift Stores", customer1 );
+    Assert.assertEquals( "23,203.62", total1 );
 
     /*
      * ## Step 2
      */
-    sampleChartTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
-    assertEquals( "Sales by territory and market", sampleChartTitle );
+    sampleChartTitle = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
+    Assert.assertEquals( "Sales by territory and market", sampleChartTitle );
     //disable/enable APAC on chart 1
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(150,150,150)" );
-    attributeValueApac = this.elemHelper.GetAttribute( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill" );
-    assertEquals( "rgb(150,150,150)", attributeValueApac );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(0,0,0)" );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(150,150,150)" );
+    attributeValueApac = this.elemHelper.GetAttribute( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill" );
+    Assert.assertEquals( "rgb(150,150,150)", attributeValueApac );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(0,0,0)" );
     //Click NA/Vintage Cars on first chart
-    this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]//*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][7]" ) );
+    this.elemHelper.MouseOverElementAndClick( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]//*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][7]" ) );
     //Wait for page render
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //check contents
-    customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
-    total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "The Sharp Gifts Warehouse", customer1 );
-    assertEquals( "168,967.80", total1 );
+    customer1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
+    total1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[1]/td[2]" ) );
+    Assert.assertEquals( "The Sharp Gifts Warehouse", customer1 );
+    Assert.assertEquals( "168,967.80", total1 );
     //Next page
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
-    customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
-    total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "Signal Gift Stores", customer1 );
-    assertEquals( "23,203.62", total1 );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
+    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
+    customer1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
+    total1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[1]/td[2]" ) );
+    Assert.assertEquals( "Signal Gift Stores", customer1 );
+    Assert.assertEquals( "23,203.62", total1 );
 
     /*
      * ## Step 3
      */
-    sampleChartTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
-    assertEquals( "Sales by territory and market", sampleChartTitle );
+    sampleChartTitle = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
+    Assert.assertEquals( "Sales by territory and market", sampleChartTitle );
     //disable/enable APAC on chart 1
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(150,150,150)" );
-    attributeValueApac = this.elemHelper.GetAttribute( driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill" );
-    assertEquals( "rgb(150,150,150)", attributeValueApac );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(0,0,0)" );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(150,150,150)" );
+    attributeValueApac = this.elemHelper.GetAttribute( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill" );
+    Assert.assertEquals( "rgb(150,150,150)", attributeValueApac );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(0,0,0)" );
     //Click NA/Vintage Cars on first chart
-    this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]//*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][7]" ) );
+    this.elemHelper.MouseOverElementAndClick( BaseTest.driver, By.xpath( "//div[contains(@id,'cde_sample1_sampleDash3_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]//*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][7]" ) );
     //Wait for page render
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //check contents
-    customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[2]/td" ) );
-    total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "The Sharp Gifts Warehouse", customer1 );
-    assertEquals( "168,967.80", total1 );
+    customer1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[2]/td" ) );
+    total1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[1]/td[2]" ) );
+    Assert.assertEquals( "The Sharp Gifts Warehouse", customer1 );
+    Assert.assertEquals( "168,967.80", total1 );
     //Next page
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_sampleDash3_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_sampleDash3_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
-    customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[2]/td" ) );
-    total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "Signal Gift Stores", customer1 );
-    assertEquals( "23,203.62", total1 );
+    this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_sampleDash3_tableTable_paginate']/a[2]" ) );
+    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "cde_sample1_sampleDash3_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
+    customer1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[2]/td" ) );
+    total1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[1]/td[2]" ) );
+    Assert.assertEquals( "Signal Gift Stores", customer1 );
+    Assert.assertEquals( "23,203.62", total1 );
   }
 
 }
