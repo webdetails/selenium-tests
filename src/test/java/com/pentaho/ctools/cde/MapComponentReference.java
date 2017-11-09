@@ -22,16 +22,12 @@
 
 package com.pentaho.ctools.cde;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -65,30 +61,30 @@ public class MapComponentReference extends BaseTest {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
     // Go to MapComponentReference
-    this.elemHelper.Get( driver, PageUrl.MAP_COMPONENT_REFERENCE );
+    this.elemHelper.Get( BaseTest.driver, PageUrl.MAP_COMPONENT_REFERENCE );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 180 );
 
     //Wait for page render on each map test
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km", 90 );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ), "200 km", 90 );
+    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.cssSelector( "#simpleTest div.olControlScaleLine.olControlNoSelect div" ), "10000 km", 90 );
+    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.cssSelector( "#testTileServices div.olControlNoSelect div" ), "2000 km", 90 );
     //Wait for the three marks
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ), 90 );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ), 90 );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ), 90 );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.xpath( "//div[@id='testWithMarker']/div[2]/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ), 90 );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.xpath( "//div[@id='testWithMarker']/div[2]/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ), 90 );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.xpath( "//div[@id='testWithMarker']/div[2]/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ), 90 );
     //Wait for the three marks
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ), 90 );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ), 90 );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ), 90 );
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][4]" ), 90 );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.xpath( "//div[@id='testWithGeoLocalization']/div[2]/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='circle']" ), 90 );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.xpath( "//div[@id='testWithGeoLocalization']/div[2]/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='circle'][2]" ), 90 );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.xpath( "//div[@id='testWithGeoLocalization']/div[2]/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='circle'][3]" ), 90 );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.xpath( "//div[@id='testWithGeoLocalization']/div[2]/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='circle'][4]" ), 90 );
     //Wait for shapes
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ), 90 );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.xpath( "//div[@id='testWithShapes']/div[2]/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ), 90 );
 
     //Just check if the sample title is displayed.
-    String actualSampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#title span" ) );
-    assertEquals( "Map Component Reference", actualSampleTitle );
+    final String actualSampleTitle = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "div#title span" ) );
+    Assert.assertEquals( "Map Component Reference", actualSampleTitle );
   }
 
   /**
@@ -113,128 +109,128 @@ public class MapComponentReference extends BaseTest {
      * ## Step 1
      */
     // Wait for title become visible and with value 'Community Dashboard Framework'
-    String expectedPageTitle = "Map Component Reference";
-    String actualPageTitle = this.elemHelper.WaitForTitle( driver, expectedPageTitle );
+    final String expectedPageTitle = "Map Component Reference";
+    final String actualPageTitle = this.elemHelper.WaitForTitle( BaseTest.driver, expectedPageTitle );
     // Wait for visibility of 'OpenFlashChartComponent'
-    String expectedSampleTitle = "Map Component Reference";
-    String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( driver, By.xpath( "//div[@id='title']/span" ) );
-    String expectedSampleDesc = "This component allows the user to either navigate through the map and see information about marked locations, or to represent quantities as the fill color of a set of shapes/regions.";
-    String actualSampleDesc = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/p" ) );
+    final String expectedSampleTitle = "Map Component Reference";
+    final String actualSampleTitle = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.xpath( "//div[@id='title']/span" ) );
+    final String expectedSampleDesc = "This component allows the user to either navigate through the map and see information about marked locations, or to represent quantities as the fill color of a set of shapes/regions.";
+    final String actualSampleDesc = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/p" ) );
 
     // Validate the sample that we are testing is the one
-    assertEquals( actualPageTitle, expectedPageTitle );
-    assertEquals( actualSampleTitle, expectedSampleTitle );
-    assertEquals( actualSampleDesc, expectedSampleDesc );
+    Assert.assertEquals( actualPageTitle, expectedPageTitle );
+    Assert.assertEquals( actualSampleTitle, expectedSampleTitle );
+    Assert.assertEquals( actualSampleDesc, expectedSampleDesc );
 
     /*
      * ## Step 2
      */
-    final String subTitleGlobalOptions = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/h3" ) );
-    assertEquals( "Global Options", subTitleGlobalOptions );
-    final String goItem1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd/b" ) );
-    final String goItem2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[2]/b" ) );
-    final String goItem3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[3]/b" ) );
-    final String goItem4 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[4]/b" ) );
-    final String goItem5 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[5]/b" ) );
-    final String goItem6 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[6]/b" ) );
-    final String goItem7 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[7]/b" ) );
-    final String goItem8 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[8]/b" ) );
-    final String goItem9 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[9]/b" ) );
-    final String goItem10 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[10]/b" ) );
-    final String goItem11 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[11]/b" ) );
-    final String goItem12 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[12]/b" ) );
-    final String goItem13 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[13]/b" ) );
-    final String goItem14 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl/dd[14]/b" ) );
-    assertEquals( "listeners:", goItem1 );
-    assertEquals( "parameters:", goItem2 );
-    assertEquals( "htmlObject:", goItem3 );
-    assertEquals( "executeAtStart:", goItem4 );
-    assertEquals( "preExecution:", goItem5 );
-    assertEquals( "postExecution:", goItem6 );
-    assertEquals( "Center Longitude:", goItem7 );
-    assertEquals( "Center Latitude:", goItem8 );
-    assertEquals( "Default zoom Level:", goItem9 );
-    assertEquals( "Datasource:", goItem10 );
-    assertEquals( "Map Engine:", goItem11 );
-    assertEquals( "API_KEY:", goItem12 );
-    assertEquals( "Tilesets to display as layers:", goItem13 );
-    assertEquals( "Operation Mode:", goItem14 );
+    final String subTitleGlobalOptions = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/h3" ) );
+    Assert.assertEquals( subTitleGlobalOptions, "Global Options" );
+    final String goItem1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt" ) );
+    final String goItem2 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[2]" ) );
+    final String goItem3 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[3]" ) );
+    final String goItem4 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[4]" ) );
+    final String goItem5 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[5]" ) );
+    final String goItem6 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[6]" ) );
+    final String goItem7 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[7]" ) );
+    final String goItem8 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[8]" ) );
+    final String goItem9 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[9]" ) );
+    final String goItem10 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[10]" ) );
+    final String goItem11 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[11]" ) );
+    final String goItem12 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[12]" ) );
+    final String goItem13 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[13]" ) );
+    final String goItem14 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl/dt[14]" ) );
+    Assert.assertEquals( goItem1, "listeners" );
+    Assert.assertEquals( goItem2, "parameters" );
+    Assert.assertEquals( goItem3, "htmlObject" );
+    Assert.assertEquals( goItem4, "executeAtStart" );
+    Assert.assertEquals( goItem5, "preExecution" );
+    Assert.assertEquals( goItem6, "postExecution" );
+    Assert.assertEquals( goItem7, "Center Longitude" );
+    Assert.assertEquals( goItem8, "Center Latitude" );
+    Assert.assertEquals( goItem9, "Default zoom Level" );
+    Assert.assertEquals( goItem10, "Datasource" );
+    Assert.assertEquals( goItem11, "Map Engine" );
+    Assert.assertEquals( goItem12, "API_KEY" );
+    Assert.assertEquals( goItem13, "Tilesets to display as layers" );
+    Assert.assertEquals( goItem14, "Operation Mode" );
 
     /*
      * ## Step 3
      */
-    final String subTitleOptionsMarker = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/h3[2]" ) );
-    assertEquals( "Options valid in Marker mode", subTitleOptionsMarker );
-    final String omItem1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd/b" ) );
-    final String omItem2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd[2]/b" ) );
-    final String omItem3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd[3]/b" ) );
-    final String omItem4 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd[4]/b" ) );
-    final String omItem5 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd[5]/b" ) );
-    final String omItem6 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd[6]/b" ) );
-    final String omItem7 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd[7]/b" ) );
-    final String omItem8 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd[8]/b" ) );
-    final String omItem9 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd[9]/b" ) );
-    final String omItem10 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[2]/dd[10]/b" ) );
-    assertEquals( "Marker image:", omItem1 );
-    assertEquals( "Marker Width:", omItem2 );
-    assertEquals( "Marker Height:", omItem3 );
-    assertEquals( "Marker Click Parameters:", omItem4 );
-    assertEquals( "Marker click Function:", omItem5 );
-    assertEquals( "Cgg Graph for Marker:", omItem6 );
-    assertEquals( "Cgg Graph Parameters:", omItem7 );
-    assertEquals( "Div for popup window:", omItem8 );
-    assertEquals( "Popup Width:", omItem9 );
-    assertEquals( "Popup Height:", omItem10 );
+    final String subTitleOptionsMarker = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/h3[2]" ) );
+    Assert.assertEquals( subTitleOptionsMarker, "Options valid in Marker mode" );
+    final String omItem1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt" ) );
+    final String omItem2 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt[2]" ) );
+    final String omItem3 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt[3]" ) );
+    final String omItem4 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt[4]" ) );
+    final String omItem5 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt[5]" ) );
+    final String omItem6 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt[6]" ) );
+    final String omItem7 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt[7]" ) );
+    final String omItem8 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt[8]" ) );
+    final String omItem9 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt[9]" ) );
+    final String omItem10 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[2]/dt[10]" ) );
+    Assert.assertEquals( omItem1, "Marker image" );
+    Assert.assertEquals( omItem2, "Marker Width" );
+    Assert.assertEquals( omItem3, "Marker Height" );
+    Assert.assertEquals( omItem4, "Marker Click Parameters" );
+    Assert.assertEquals( omItem5, "Marker click Function" );
+    Assert.assertEquals( omItem6, "Cgg Graph for Marker" );
+    Assert.assertEquals( omItem7, "Cgg Graph Parameters" );
+    Assert.assertEquals( omItem8, "Div for popup window" );
+    Assert.assertEquals( omItem9, "Popup Width" );
+    Assert.assertEquals( omItem10, "Popup Height" );
 
     /*
      * ## Step 4
      */
-    final String subTitleLocationMarker = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/h3[3]" ) );
-    assertEquals( "Location Result Set in Marker mode", subTitleLocationMarker );
-    final String lmItem1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd/b" ) );
-    final String lmItem2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[2]/b" ) );
-    final String lmItem3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[3]/b" ) );
-    final String lmItem4 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[4]/b" ) );
-    final String lmItem5 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[5]/b" ) );
-    final String lmItem6 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[6]/b" ) );
-    final String lmItem7 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[7]/b" ) );
-    final String lmItem8 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[8]/b" ) );
-    final String lmItem9 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[9]/b" ) );
-    final String lmItem10 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[10]/b" ) );
-    final String lmItem11 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[11]/b" ) );
-    final String lmItem12 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[12]/b" ) );
-    final String lmItem13 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[13]/b" ) );
-    final String lmItem14 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[14]/b" ) );
-    final String lmItem15 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[3]/dd[15]/b" ) );
-    assertEquals( "Longitude:", lmItem1 );
-    assertEquals( "Latitude:", lmItem2 );
-    assertEquals( "Address:", lmItem3 );
-    assertEquals( "City:", lmItem4 );
-    assertEquals( "County:", lmItem5 );
-    assertEquals( "State:", lmItem6 );
-    assertEquals( "Region:", lmItem7 );
-    assertEquals( "Country:", lmItem8 );
-    assertEquals( "Description:", lmItem9 );
-    assertEquals( "marker:", lmItem10 );
-    assertEquals( "markerWidth:", lmItem11 );
-    assertEquals( "markerHeight:", lmItem12 );
-    assertEquals( "popupContents:", lmItem13 );
-    assertEquals( "popupWidth:", lmItem14 );
-    assertEquals( "popupHeight:", lmItem15 );
+    final String subTitleLocationMarker = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/h3[3]" ) );
+    Assert.assertEquals( subTitleLocationMarker, "Location Result Set in Marker mode" );
+    final String lmItem1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt" ) );
+    final String lmItem2 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[2]" ) );
+    final String lmItem3 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[3]" ) );
+    final String lmItem4 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[4]" ) );
+    final String lmItem5 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[5]" ) );
+    final String lmItem6 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[6]" ) );
+    final String lmItem7 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[7]" ) );
+    final String lmItem8 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[8]" ) );
+    final String lmItem9 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[9]" ) );
+    final String lmItem10 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[10]" ) );
+    final String lmItem11 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[11]" ) );
+    final String lmItem12 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[12]" ) );
+    final String lmItem13 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[13]" ) );
+    final String lmItem14 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[14]" ) );
+    final String lmItem15 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[3]/dt[15]" ) );
+    Assert.assertEquals( lmItem1, "Longitude" );
+    Assert.assertEquals( lmItem2, "Latitude" );
+    Assert.assertEquals( lmItem3, "Address" );
+    Assert.assertEquals( lmItem4, "City" );
+    Assert.assertEquals( lmItem5, "County" );
+    Assert.assertEquals( lmItem6, "State" );
+    Assert.assertEquals( lmItem7, "Region" );
+    Assert.assertEquals( lmItem8, "Country" );
+    Assert.assertEquals( lmItem9, "Description" );
+    Assert.assertEquals( lmItem10, "marker" );
+    Assert.assertEquals( lmItem11, "markerWidth" );
+    Assert.assertEquals( lmItem12, "markerHeight" );
+    Assert.assertEquals( lmItem13, "popupContents" );
+    Assert.assertEquals( lmItem14, "popupWidth" );
+    Assert.assertEquals( lmItem15, "popupHeight" );
 
     /*
      * ## Step 5
      */
-    final String subTitleOptionsSahpes = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/h3[4]" ) );
-    assertEquals( "Options valid in Shapes mode", subTitleOptionsSahpes );
-    final String osItem1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[4]/dd/b" ) );
-    final String osItem2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[4]/dd[2]/b" ) );
-    final String osItem3 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[4]/dd[3]/b" ) );
-    final String osItem4 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='documentation']/dl[4]/dd[4]/b" ) );
-    assertEquals( "Shape Definitions:", osItem1 );
-    assertEquals( "Shape Mouse Over Function:", osItem2 );
-    assertEquals( "Shape Mouse Out Function:", osItem3 );
-    assertEquals( "Shape Mouse Click Function:", osItem4 );
+    final String subTitleOptionsSahpes = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/h3[4]" ) );
+    Assert.assertEquals( subTitleOptionsSahpes, "Options valid in Shapes mode" );
+    final String osItem1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[4]/dt" ) );
+    final String osItem2 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[4]/dt[2]" ) );
+    final String osItem3 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[4]/dt[3]" ) );
+    final String osItem4 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='documentation']/dl[4]/dt[4]" ) );
+    Assert.assertEquals( osItem1, "Shape Definitions" );
+    Assert.assertEquals( osItem2, "Shape Mouse Over Function" );
+    Assert.assertEquals( osItem3, "Shape Mouse Out Function" );
+    Assert.assertEquals( osItem4, "Shape Mouse Click Function" );
   }
 
   /**
@@ -247,52 +243,40 @@ public class MapComponentReference extends BaseTest {
    * Steps:
    *    1. Check the data exist
    *    2. Perform a zoom
-   *    3. Click in Globe
    */
   @Test
   public void tc2_MapWithNoMarkersAndShapes_MapMustBeVisible() {
     this.log.info( "tc2_MapWithNoMarkersAndShapes_MapMustBeVisible" );
-    //wait for initialize
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "10000 km" );
 
     /*
      * ## Step1
      */
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='subtitle0']/span" ) );
-    assertEquals( "Map with no markers and no shapes - Simple Case", this.elemHelper.FindElement( driver, By.xpath( "//div[@id='subtitle0']/span" ) ).getText() );
+    final String noMarkersAndShapesTitle = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.cssSelector( "#subtitle0 span" ) );
+    Assert.assertEquals( noMarkersAndShapesTitle, "Map with no markers and no shapes - Simple Case" );
     //Scale
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
-    assertEquals( "200 km", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
-    assertEquals( "200 mi", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ) );
-    //ButtonLayer
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='simpleTest']/div/div[7]/div[2]/img" ) ) );
+    final String scaleKm = this.elemHelper.WaitForTextPresence( BaseTest.driver, By.cssSelector( "#simpleTest div.olControlScaleLine.olControlNoSelect div" ), "10000 km" );
+    final String scaleMi = this.elemHelper.WaitForTextPresence( BaseTest.driver, By.cssSelector( "#simpleTest div.olControlScaleLine.olControlNoSelect div:nth-child(2)" ), "5000 mi" );
+    Assert.assertEquals( scaleKm, "10000 km" );
+    Assert.assertEquals( scaleMi, "5000 mi" );
+    //Controls Zoom in and out
+    final WebElement zoomin = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#simpleTest > div.map-controls > div > div.map-controls-zoom > div.map-control-button.map-control-zoom-in" ) );
+    final WebElement zoomout = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#simpleTest > div.map-controls > div > div.map-controls-zoom > div.map-control-button.map-control-zoom-out" ) );
+    final WebElement buttonpan = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#simpleTest > div.map-controls > div > div.map-controls-mode > div" ) );
+    Assert.assertNotNull( zoomin );
+    Assert.assertNotNull( zoomout );
+    Assert.assertNotNull( buttonpan );
     //Get same images
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='simpleTest']/div/div/div/img" ) ) );
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='simpleTest']/div/div/div/img[12]" ) ) );
+    Assert.assertNotNull( this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#simpleTest > div.map-container.olMap.pan.moving > div > div >div > img" ) ) );
 
     /*
      * ## Step2
      */
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div[3]" ) );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#simpleTest > div.map-controls > div > div.map-controls-zoom > div.map-control-button.map-control-zoom-in" ) );
     //wait for the field update
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "200 km" );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
-    assertEquals( "100 km", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
-    assertEquals( "100 mi", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ) );
-
-    //## Step3
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='simpleTest']/div/div[5]/div[2]" ) );
-    //wait for the field update
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ), "100 km" );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) );
-    assertEquals( "10000 km", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div" ) ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) );
-    assertEquals( "5000 mi", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='simpleTest']/div/div[8]/div[2]" ) ) );
+    final String scaleKm2 = this.elemHelper.WaitForTextPresence( BaseTest.driver, By.cssSelector( "#simpleTest div.olControlScaleLine.olControlNoSelect div" ), "5000 km" );
+    final String scaleMi2 = this.elemHelper.WaitForTextPresence( BaseTest.driver, By.cssSelector( "#simpleTest div.olControlScaleLine.olControlNoSelect div:nth-child(2)" ), "2000 mi" );
+    Assert.assertEquals( scaleKm2, "5000 km" );
+    Assert.assertEquals( scaleMi2, "2000 mi" );
   }
 
   /**
@@ -311,67 +295,65 @@ public class MapComponentReference extends BaseTest {
   @Test
   public void tc3_MapEngineAndTileServices_MapDisplayedAfterChanges() {
     this.log.info( "tc3_MapEngineAndTileServices_MapDisplayedAfterChanges" );
-    //wait for initialize
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ), "10000 km" );
 
     /*
      * ## Step1
      */
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='subtitle1']/span" ) );
-    assertEquals( "Map engine and map tile services", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='subtitle1']/span" ) ) );
+    final String noMarkersAndShapesTitle = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.cssSelector( "#subtitle1 > span" ) );
+    Assert.assertEquals( noMarkersAndShapesTitle, "Map tile services" );
     //mapEngine and service
-    assertEquals( "Select map engine:", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='content']/div/div[6]/div/div/div" ) ) );
-    assertEquals( "Select tile map service:", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='content']/div/div[6]/div/div[2]/div" ) ) );
+    final String dropdownLabel = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.xpath( "//div[6]/div/div[2]/div" ) );
+    Assert.assertEquals( dropdownLabel, "Select tile map service:" );
     //Zoom
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[5]/div" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[5]/div[2]" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[5]/div[3]" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( BaseTest.driver, By.cssSelector( "#testTileServices > div.map-controls > div > div.map-controls-zoom > div.map-control-button.map-control-zoom-in" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( BaseTest.driver, By.cssSelector( "#testTileServices > div.map-controls > div > div.map-controls-zoom > div.map-control-button.map-control-zoom-out" ) );
+    this.elemHelper.WaitForElementPresenceAndVisible( BaseTest.driver, By.cssSelector( "#testTileServices > div.map-controls > div > div.map-controls-zoom > div.map-control-button.map-control-zoombox" ) );
     //Scale
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) );
-    assertEquals( "200 km", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div" ) ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) );
-    assertEquals( "200 mi", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[8]/div[2]" ) ) );
-    //Check if we are using OpenLayers
-    final String mapId = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='testTileServices']/div" ), "id" );
-    assertTrue( mapId.contains( "OpenLayers" ) );
-    final Select mapEngine = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='selectMapEngineObj']/select" ) ) );
-    final Select mapService = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='selectTileObj']/select" ) ) );
-    assertEquals( "openlayers", mapEngine.getFirstSelectedOption().getText() );
-    assertEquals( "mapquest-sat", mapService.getFirstSelectedOption().getText() );
+    final String scalekm = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.cssSelector( "#testTileServices div.olControlScaleLineTop" ) );
+    Assert.assertEquals( scalekm, "2000 km" );
+    final String scalemi = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.cssSelector( "#testTileServices div.olControlScaleLineBottom" ) );
+    Assert.assertEquals( scalemi, "1000 mi" );
+    //Check if map service exist
+    final WebElement mapService = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#selectTileObj > select" ) );
+    Assert.assertNotNull( mapService );
+    final String expectedTileMapServiceDefaultValue = "default";
+    final Select dropMapService = new Select( mapService );
+    String actualTileMapServiceDefaultValue = dropMapService.getFirstSelectedOption().getText();
+    Assert.assertEquals( actualTileMapServiceDefaultValue, expectedTileMapServiceDefaultValue );
 
     /*
      * ## Step2
      */
-    mapEngine.selectByValue( "google" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='testTileServices']/div[@class='gm-style']" ) );
-    //Image with Google (left down corner)
-    assertNotNull( this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
-    //Text 'Termos de Utilização (righ down corner)
-    final String strMap = "Map";
-    final String strTerms = "Terms of Use";
-    final String strSat = "Satellite";
+    dropMapService.selectByValue( "google" );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    assertEquals( strTerms, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[6]/div[2]/a" ) ) );
-    //check if we have mapquest-sat/Mapa/Satelite
-    assertEquals( "mapquest-sat", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ) ) );
-    assertEquals( strMap, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div[2]/div" ) ) );
-    assertEquals( strSat, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div[3]/div" ) ) );
+    actualTileMapServiceDefaultValue = dropMapService.getFirstSelectedOption().getText();
+    Assert.assertEquals( actualTileMapServiceDefaultValue, "google" );
+
+    //Check for image is Google
+    final String actualGoogleImgTitle = this.elemHelper.GetAttribute( BaseTest.driver, By.cssSelector( "#testTileServices > div.map-container.olMap.moving.pan > div > div > div > div:nth-child(2) > a" ), "title" );
+    final String expectedGoogleImgTitle = "Click to see this area on Google Maps";
+    Assert.assertEquals( actualGoogleImgTitle, expectedGoogleImgTitle );
+
+    //Check Map render:
+    final WebElement googleMapRender = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testTileServices > div.map-container > div > div > div > div:nth-child(8) > div > div > div:nth-child(4) > svg" ) );
+    Assert.assertNotNull( googleMapRender );
 
     /*
      * ## Step3
      */
-    mapService.selectByValue( "mapbox-world-dark" );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    this.elemHelper.WaitForTextDifferentOf( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ), "mapquest-sat" );
-    //Image with Google (left down corner)
-    assertNotNull( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testTileServices']/div/div[2]/a/div/img" ) ) );
-    //Text 'Termos de Utilização (righ down corner)
-    assertEquals( strTerms, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[6]/div[2]/a" ) ) );
-    //check if we have mapbox-world-dark/Mapa/Satelite
-    assertEquals( "mapbox-world-dark", this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div/div" ) ) );
-    assertEquals( strMap, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div[2]/div" ) ) );
-    assertEquals( strSat, this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='testTileServices']/div/div[9]/div[3]/div" ) ) );
+    dropMapService.selectByValue( "mapbox-world-dark" );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+
+    actualTileMapServiceDefaultValue = dropMapService.getFirstSelectedOption().getText();
+    Assert.assertEquals( actualTileMapServiceDefaultValue, "mapbox-world-dark" );
+
+    final String actualMapBoxText = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#testTileServices > div.map-container > div > div:nth-child(3) > a" ) );
+    Assert.assertEquals( actualMapBoxText, "MapBox" );
+
+    final WebElement mapBoxDarkMapRender = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testTileServices > div.map-container > div > div > div:nth-child(5) > svg" ) );
+    Assert.assertNotNull( mapBoxDarkMapRender );
+
   }
 
   /**
@@ -390,46 +372,46 @@ public class MapComponentReference extends BaseTest {
   public void tc4_MapWithMarkersBasedLongLat_MarkersShouldDisplayCorrectContents() {
     this.log.info( "tc4_MapWithMarkersBasedLongLat_MarkersShouldDisplayCorrectContents" );
     /*
-     * ## Step 1
+     * ## Step  1
      */
-    final WebElement marker1 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
-    final WebElement marker2 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) );
-    final WebElement marker3 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithMarker']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) );
-    assertNotNull( marker1 );
-    assertNotNull( marker2 );
-    assertNotNull( marker3 );
-    assertEquals( "/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_grey.png", marker1.getAttribute( "xlink:href" ) );
-    assertEquals( "/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_blue.png", marker2.getAttribute( "xlink:href" ) );
-    assertEquals( "/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_grey02.png", marker3.getAttribute( "xlink:href" ) );
+
+    final WebElement marker1 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithMarker > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > image" ) );
+    final WebElement marker2 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithMarker > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > image:nth-child(2)" ) );
+    final WebElement marker3 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithMarker > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > image:nth-child(3)" ) );
+    Assert.assertNotNull( marker1 );
+    Assert.assertNotNull( marker2 );
+    Assert.assertNotNull( marker3 );
+    Assert.assertEquals( marker1.getAttribute( "xlink:href" ), "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/Map/images/marker_grey.png" );
+    Assert.assertEquals( marker2.getAttribute( "xlink:href" ), "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/Map/images/marker_blue.png" );
+    Assert.assertEquals( marker3.getAttribute( "xlink:href" ), "/pentaho/api/repos/pentaho-cdf-dd/resources/custom/amd-components/Map/images/marker_grey02.png" );
 
     /*
      * ## Step 2
      */
     //Zoom in - in order for the elements to be visible
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithMarker']/div/div[5]/div[3]" ) ).click();
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithMarker']/div/div[5]/div[3]" ) ).click();
+    final WebElement markersZoomIn = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithMarker div.map-control-button.map-control-zoom-out" ) );
+    Assert.assertNotNull( markersZoomIn );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithMarker div.map-control-button.map-control-zoom-out" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithMarker div.map-control-button.map-control-zoom-out" ) );
 
     //Open Marker 1
-    marker1.click();
-    //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker1Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
-    assertEquals( "Atelier Graphique", marker1Text );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithMarker > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > image" ) );
+    final String marker1Text = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#testWithMarker #HiddenContentCol" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithMarker div.olPopupCloseBox" ) );
+    Assert.assertEquals( marker1Text, "Atelier Graphique" );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "#testWithMarker div.olPopup" ) );
     //Open Marker 2
-    marker2.click();
-    //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker2Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
-    assertEquals( "Australian Collectors, Co.", marker2Text );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithMarker > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > image:nth-child(2)" ) );
+    final String marker2Text = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#testWithMarker #HiddenContentCol" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithMarker div.olPopupCloseBox" ) );
+    Assert.assertEquals( marker2Text, "Australian Collectors, Co." );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "#testWithMarker div.olPopup" ) );
     //Open Marker 3
-    marker3.click();
-    //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker3Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@class='olPopupCloseBox']" ) ).click();
-    assertEquals( "Signal Gift Stores", marker3Text );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithMarker > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > image:nth-child(3)" ) );
+    final String marker3Text = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#testWithMarker #HiddenContentCol" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithMarker div.olPopupCloseBox" ) );
+    Assert.assertEquals( marker3Text, "Signal Gift Stores" );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "#testWithMarker div.olPopup" ) );
   }
 
   /**
@@ -447,57 +429,54 @@ public class MapComponentReference extends BaseTest {
   @Test
   public void tc5_MapWithMarkersBasedCity_MarkersShouldDisplayCorrectContents() {
     this.log.info( "tc5_MapWithMarkersBasedCity_MarkersShouldDisplayCorrectContents" );
+
+    final String title = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#subtitle3 > span" ) );
+    Assert.assertEquals( title, "Map with markers based on city names and popup windows on click" );
+
     /*
      * ## Step 1
      */
     //Check if the chart is already rendered
-    this.elemHelper.WaitForElementPresence( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ), 90 );
-    final WebElement marker1 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image']" ) );
-    final WebElement marker2 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][2]" ) );
-    final WebElement marker3 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][3]" ) );
-    final WebElement marker4 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='image'][4]" ) );
-    assertNotNull( marker1 );
-    assertNotNull( marker2 );
-    assertNotNull( marker3 );
-    assertNotNull( marker4 );
-    assertEquals( "/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_grey.png", marker1.getAttribute( "xlink:href" ) );
-    assertEquals( "/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_grey02.png", marker2.getAttribute( "xlink:href" ) );
-    assertEquals( "/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_orange.png", marker3.getAttribute( "xlink:href" ) );
-    assertEquals( "/pentaho/content/pentaho-cdf-dd/resources/custom/components/NewMapComponent/images/marker_purple.png", marker4.getAttribute( "xlink:href" ) );
+    final WebElement marker1 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > circle" ) );
+    final WebElement marker2 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > circle:nth-child(2)" ) );
+    final WebElement marker3 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > circle:nth-child(3)" ) );
+    final WebElement marker4 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > circle:nth-child(4)" ) );
+    final WebElement marker5 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > circle:nth-child(5)" ) );
+    Assert.assertNotNull( marker1 );
+    Assert.assertNotNull( marker2 );
+    Assert.assertNotNull( marker3 );
+    Assert.assertNotNull( marker4 );
+    Assert.assertNotNull( marker5 );
 
     /*
      * ## Step 2
      */
-    //Zoom in - in order for the elements to be visible
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='testWithGeoLocalization']/div/div[5]/div[3]" ) );
-    //Open Marker 1
-    marker1.click();
-    //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker1Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
-    assertEquals( "Atelier Graphique", marker1Text );
+    this.elemHelper.MoveToElement( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)" ) );
     //Open Marker 2
-    marker2.click();
-    //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker2Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
-    assertEquals( "Signal Gift Stores", marker2Text );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > circle:nth-child(2)" ) );
+    final String marker2Text = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization #HiddenContentCol" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization div.olPopupCloseBox" ) );
+    Assert.assertEquals( marker2Text, "Australian Collectors, Co." );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization div.olPopup" ) );
     //Open Marker 3
-    marker3.click();
-    //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker3Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
-    assertEquals( "La Rochelle Gifts", marker3Text );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > circle:nth-child(3)" ) );
+    final String marker3Text = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization #HiddenContentCol" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization div.olPopupCloseBox" ) );
+    Assert.assertEquals( marker3Text, "Signal Gift Stores" );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization div.olPopup" ) );
     //Open Marker 4
-    marker4.click();
-    //Wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final String marker4Text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='HiddenContentCol']" ) );
-    this.elemHelper.Click( driver, By.xpath( "(//div[@class='olPopupCloseBox'])[2]" ) );
-    assertEquals( "Baane Mini Imports", marker4Text );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > circle:nth-child(4)" ) );
+    final String marker4Text = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization #HiddenContentCol" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization div.olPopupCloseBox" ) );
+    Assert.assertEquals( marker4Text, "La Rochelle Gifts" );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization div.olPopup" ) );
+    //Open Marker 5
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization > div.map-container > div > div > div:nth-child(5) > svg > g:nth-child(3) > g > circle:nth-child(5)" ) );
+    final String marker5Text = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization #HiddenContentCol" ) );
+    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization  div.olPopupCloseBox" ) );
+    Assert.assertEquals( marker5Text, "Baane Mini Imports" );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization div.olPopup" ) );
+
   }
 
   /**
@@ -510,56 +489,36 @@ public class MapComponentReference extends BaseTest {
    *    its color.
    * Steps:
    *    1. Check the data exist
-   *    2. Chick in a shape country
    */
   @Test
-  public void tc6_MapWithShapes_ShapesAreClickable() {
-    this.log.info( "tc6_MapWithShapes_ShapesAreClickable" );
+  public void tc6_MapWithShapes_Available() {
+    this.log.info( "tc6_MapWithShapes_Available" );
 
-    //Zoom in the map
-    this.elemHelper.FindElement( driver, By.xpath( "//div[12]/div/div/div[5]/div[3]" ) ).click();
+    final String title = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.cssSelector( "#subtitle4 > span" ) );
+    Assert.assertEquals( title, "Map with Shapes (population per km2, top 100 countries)" );
 
     /*
      * ## Step 1
      */
-    final WebElement shape1 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ) );
-    final WebElement shape2 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]" ) );
-    final WebElement shape3 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]" ) );
-    final WebElement shape4 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]" ) );
-    assertNotNull( shape1 );
-    assertNotNull( shape2 );
-    assertNotNull( shape3 );
-    assertNotNull( shape4 );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ), "fill", "rgba(255,8,0,255)", 10 );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]" ), "fill", "rgba(183,212,0,255)", 15 );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]" ), "fill", "rgba(167,202,0,255)", 15 );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]" ), "fill", "rgba(167,202,0,255)", 15 );
-    final String attrFillShape1 = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][2]" ), "fill" );
-    final String attrFillShape2 = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][10]" ), "fill" );
-    final String attrFillShape3 = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][13]" ), "fill" );
-    final String attrFillShape4 = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='testWithShapes']/div/div/div[5]/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='path'][14]" ), "fill" );
-    assertEquals( "rgba(255,8,0,255)", attrFillShape1 );
-    assertEquals( "rgba(183,212,0,255)", attrFillShape2 );
-    assertEquals( "rgba(167,202,0,255)", attrFillShape3 );
-    assertEquals( "rgba(167,202,0,255)", attrFillShape4 );
-
-    /*
-     * ## Step 2
-     */
-    //Click in shape4 (England) and check it comes with red.
-    String shapeId = shape1.getAttribute( "id" );
-    shape1.click();
-    //Wait for change color
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//*[local-name()='path' and @fill='red']" ) );
-    WebElement shapeRed = this.elemHelper.FindElement( driver, By.id( shapeId ) );
-    assertEquals( "red", shapeRed.getAttribute( "fill" ) );
-
-    //Related to issue CDE-317
-    final Actions action = new Actions( driver );
-    action.moveToElement( shape2 ).build().perform();
-    action.moveToElement( shape1 ).build().perform();
-    shapeId = shape1.getAttribute( "id" );
-    shapeRed = this.elemHelper.FindElement( driver, By.id( shapeId ) );
-    assertEquals( "red", shapeRed.getAttribute( "fill" ) );
+    final WebElement shape1 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(5)" ) );
+    final WebElement shape2 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(41)" ) );
+    final WebElement shape3 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(80)" ) );
+    final WebElement shape4 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(111)" ) );
+    Assert.assertNotNull( shape1 );
+    Assert.assertNotNull( shape2 );
+    Assert.assertNotNull( shape3 );
+    Assert.assertNotNull( shape4 );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(5)" ), "fill", "rgba(228,68,15,1)", 10 );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(41)" ), "fill", "rgba(224,164,51,1)", 10 );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(80)" ), "fill", "rgba(185,173,74,1)", 10 );
+    this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(111)" ), "fill", "rgba(182,174,76,1)", 10 );
+    final String attrFillShape1 = this.elemHelper.GetAttribute( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(5)" ), "fill" );
+    final String attrFillShape2 = this.elemHelper.GetAttribute( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(41)" ), "fill" );
+    final String attrFillShape3 = this.elemHelper.GetAttribute( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(80)" ), "fill" );
+    final String attrFillShape4 = this.elemHelper.GetAttribute( BaseTest.driver, By.cssSelector( "#testWithShapes div.map-container div:nth-child(5) > svg > g:nth-child(2) > g > path:nth-child(111)" ), "fill" );
+    Assert.assertEquals( attrFillShape1, "rgba(228,68,15,1)" );
+    Assert.assertEquals( attrFillShape2, "rgba(224,164,51,1)" );
+    Assert.assertEquals( attrFillShape3, "rgba(185,173,74,1)" );
+    Assert.assertEquals( attrFillShape4, "rgba(182,174,76,1)" );
   }
 }
