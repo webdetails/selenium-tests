@@ -21,6 +21,8 @@
  ******************************************************************************/
 package com.pentaho.ctools.cde.require;
 
+import static org.testng.Assert.assertEquals;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -59,7 +61,7 @@ public class DashboardModuleComponent extends BaseTest {
     this.elemHelper.Get( BaseTest.driver, PageUrl.DASHBOARD_MODULE_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
     this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
@@ -100,27 +102,27 @@ public class DashboardModuleComponent extends BaseTest {
     Assert.assertEquals( "Pedro Alves, Hitachi Vantara", textAuthor3 );
 
     //Check the chart1
-    final String elemChart1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "//div[@id='cde_sample1_alias1_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
+    final WebElement elemChart1 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#cde_sample1_alias1_chartprotovis > svg > g" ) );
     Assert.assertNotNull( elemChart1 );
 
     //Check the chart2
-    final String elemChart2 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "//div[@id='cde_sample1_alias2_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
+    final WebElement elemChart2 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#cde_sample1_alias2_chartprotovis > svg > g" ) );
     Assert.assertNotNull( elemChart2 );
 
     //Check the chart3
-    final WebElement elemChart3 = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_sampleDash3_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
+    final WebElement elemChart3 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#cde_sample1_sampleDash3_chartprotovis > svg > g" ) );
     Assert.assertNotNull( elemChart3 );
 
     //Check the table1
-    final WebElement elemTable1 = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr/td" ) );
+    final WebElement elemTable1 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#cde_sample1_alias1_tableTable > tbody > tr > td" ) );
     Assert.assertNotNull( elemTable1 );
 
     //Check the table2
-    final WebElement elemTable2 = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr/td" ) );
+    final WebElement elemTable2 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#cde_sample1_alias2_tableTable > tbody > tr > td" ) );
     Assert.assertNotNull( elemTable2 );
 
     //Check the table3
-    final WebElement elemTable3 = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr/td" ) );
+    final WebElement elemTable3 = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#cde_sample1_sampleDash3_tableTable > tbody > tr > td" ) );
     Assert.assertNotNull( elemTable3 );
   }
 
@@ -240,8 +242,13 @@ public class DashboardModuleComponent extends BaseTest {
     Assert.assertEquals( "The Sharp Gifts Warehouse", customer1 );
     Assert.assertEquals( "168,967.80", total1 );
     //Next page
+    String chart1FirstPagination = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.id( "cde_sample1_alias1_tableTable_info" ) );
+    assertEquals( chart1FirstPagination, "Showing 1 to 10 of 35 entries" );
+
     this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_alias1_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "cde_sample1_alias1_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
+
+    String chart1SecondPagination = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.id( "cde_sample1_alias1_tableTable_info" ) );
+    assertEquals( chart1SecondPagination, "Showing 11 to 20 of 35 entries" );
     customer1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
     total1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
     Assert.assertEquals( "Signal Gift Stores", customer1 );
@@ -270,8 +277,13 @@ public class DashboardModuleComponent extends BaseTest {
     Assert.assertEquals( "The Sharp Gifts Warehouse", customer1 );
     Assert.assertEquals( "168,967.80", total1 );
     //Next page
+    String chart2FirstPagination = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.id( "cde_sample1_alias2_tableTable_info" ) );
+    assertEquals( chart2FirstPagination, "Showing 1 to 10 of 35 entries" );
+
     this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
+
+    String chart2SecondPagination = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.id( "cde_sample1_alias2_tableTable_info" ) );
+    assertEquals( chart2SecondPagination, "Showing 11 to 20 of 35 entries" );
     customer1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
     total1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[1]/td[2]" ) );
     Assert.assertEquals( "Signal Gift Stores", customer1 );
@@ -300,8 +312,13 @@ public class DashboardModuleComponent extends BaseTest {
     Assert.assertEquals( "The Sharp Gifts Warehouse", customer1 );
     Assert.assertEquals( "168,967.80", total1 );
     //Next page
+    String chart3FirstPagination = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.id( "cde_sample1_sampleDash3_tableTable_info" ) );
+    assertEquals( chart3FirstPagination, "Showing 1 to 10 of 35 entries" );
+
     this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[@id='cde_sample1_sampleDash3_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "cde_sample1_sampleDash3_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
+
+    String chart3SecondPagination = this.elemHelper.WaitForTextDifferentEmpty( BaseTest.driver, By.id( "cde_sample1_sampleDash3_tableTable_info" ) );
+    assertEquals( chart3SecondPagination, "Showing 11 to 20 of 35 entries" );
     customer1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[2]/td" ) );
     total1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//table[@id='cde_sample1_sampleDash3_tableTable']/tbody/tr[1]/td[2]" ) );
     Assert.assertEquals( "Signal Gift Stores", customer1 );
