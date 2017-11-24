@@ -78,43 +78,45 @@
 			
 			<!-- CDE -->
 			<class name="com.pentaho.ctools.cde.SampleDashboard" />
-			<class name="com.pentaho.ctools.cde.AddinReference" />
-			<class name="com.pentaho.ctools.cde.AddinReferenceEdit" />
-			<class name="com.pentaho.ctools.cde.AjaxRequestReference" />
-			<class name="com.pentaho.ctools.cde.BulletChartTestCase" />
-			<class name="com.pentaho.ctools.cde.CCCV2ShowCase" />
-			<class name="com.pentaho.ctools.cde.DuplicateComponent" />
-			<class name="com.pentaho.ctools.cde.ExportPopupComponent" />
-			<class name="com.pentaho.ctools.cde.FilterAddinAccordion" />
-			<class name="com.pentaho.ctools.cde.FilterReference" />
-			<!-- http://jira.pentaho.com/browse/CDE-937
-			<class name="com.pentaho.ctools.cde.FilterVisualGuide" />
-			 -->
-			<class name="com.pentaho.ctools.cde.MapComponentFullTest" />
-			<class name="com.pentaho.ctools.cde.MapComponentReference" />
-			<class name="com.pentaho.ctools.cde.OlapSelectorComponent" />
-			<class name="com.pentaho.ctools.cde.PopupComponent" />
-			<class name="com.pentaho.ctools.cde.WidgetReference" />
+			<class name="com.pentaho.ctools.cde.reference.AddinReference" />
+			<class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />
+			<class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
+			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />
+			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
+			<class name="com.pentaho.ctools.cde.reference.PopupComponent" />
+			<class name="com.pentaho.ctools.cde.reference.VisualizationAPIReference" />
+			<class name="com.pentaho.ctools.cde.reference.WidgetReference" />
+			<class name="com.pentaho.ctools.cde.reference.samples.CggComponent" />
+			<class name="com.pentaho.ctools.cde.reference.samples.DuplicateComponent" />
+			<class name="com.pentaho.ctools.cde.reference.samples.ExportPopupComponent" />
+			<class name="com.pentaho.ctools.cde.reference.samples.FilterAddinAccordion" />
+			<class name="com.pentaho.ctools.cde.reference.samples.FilterReference" />
+			<!-- http://jira.pentaho.com/browse/CDE-937 <class name="com.pentaho.ctools.cde.reference.samples.FilterVisualGuide" /> -->
+			<class name="com.pentaho.ctools.cde.reference.samples.MapComponentFullTest" />
+			<class name="com.pentaho.ctools.cde.reference.samples.MapComponentReference" />
+			<class name="com.pentaho.ctools.cde.reference.samples.OlapSelectorComponent" />
+
 			
 			<!-- CDE-RequireJS -->
 			<class name="com.pentaho.ctools.cde.require.SampleDashboard" />
-			<class name="com.pentaho.ctools.cde.require.AddinReference" />
-			<class name="com.pentaho.ctools.cde.require.AddinReferenceEdit" />
-			<class name="com.pentaho.ctools.cde.require.AjaxRequestReference" />
-			<class name="com.pentaho.ctools.cde.require.BulletChartTestCase" />
-			<class name="com.pentaho.ctools.cde.require.CCCV2ShowCase" />
-			<class name="com.pentaho.ctools.cde.require.DashboardModuleComponent" />
-			<class name="com.pentaho.ctools.cde.require.DuplicateComponent" />
-			<class name="com.pentaho.ctools.cde.require.ExportPopupComponent" />
-			<class name="com.pentaho.ctools.cde.require.FilterAddinAccordion" />
-			<class name="com.pentaho.ctools.cde.require.FilterReference" />
-			<!-- http://jira.pentaho.com/browse/CDE-937
-			<class name="com.pentaho.ctools.cde.require.FilterVisualGuide" />
-			-->
-			<class name="com.pentaho.ctools.cde.require.MapComponentFullTest" />
-			<class name="com.pentaho.ctools.cde.require.MapComponentReference" />
-			<class name="com.pentaho.ctools.cde.require.OlapSelectorComponent" />
-			<class name="com.pentaho.ctools.cde.require.PopupComponent" />
+			<class name="com.pentaho.ctools.cde.require.dashboard.DashboardModuleComponent" />
+			<class name="com.pentaho.ctools.cde.require.reference.BulletChartTestCase" />
+			<class name="com.pentaho.ctools.cde.require.reference.CCCV2ShowCase" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.AddinReference" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.AddinReferenceEdit" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.AjaxRequestReference" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.CggComponent" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.DashboardComponent" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.DuplicateComponent" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.ExportPopupComponent" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.FilterAddinAccordion" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.FilterReference" />
+			<!-- http://jira.pentaho.com/browse/CDE-937 <class name="com.pentaho.ctools.cde.require.reference.samples.FilterVisualGuide" /> -->
+			<class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentFullTest" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentReference" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.OlapSelectorComponent" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.PopupComponent" />
+			<class name="com.pentaho.ctools.cde.require.reference.samples.VisualizationAPIReference" />
 			
 			
 			<!-- CDA -->
