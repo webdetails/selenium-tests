@@ -106,49 +106,21 @@ public class VisualizationAPIReference extends BaseTest {
     String actualChartTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "Dashboard" ) );
     assertEquals( actualChartTitle, expectedChartTitle );
 
-    //TODO
-    //Validate content
-
-  }
-
-  /**
-   * ############################### Test Case 3 ###############################
-   *
-   * Test Case Name:
-   *    Toggle Series
-   *    
-   * Description:
-   *    The test case pretends validate the tooltip when mouse over a bar.
-   *    
-   * Steps:
-   *    1. Check tooltip.
-   */
-  //@Test
-  public void tc03_ToggleSeries_ChartsChanged() {
     /*
      * ## Step 2 
      */
     //Serie 1
     String serie1 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ) );
-    assertEquals( serie1, "Classic Cars" );
+    assertEquals( serie1, "APAC" );
     //Serie 2
     String serie2 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(2) > g:nth-child(2) > text" ) );
-    assertEquals( serie2, "Motorcycles" );
+    assertEquals( serie2, "EMEA" );
     //Serie 3
     String serie3 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(3) > g:nth-child(2) > text" ) );
-    assertEquals( serie3, "Planes" );
+    assertEquals( serie3, "Japan" );
     //Serie 4
     String serie4 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(4) > g:nth-child(2) > text" ) );
-    assertEquals( serie4, "Ships" );
-    //Serie 5
-    String serie5 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(5) > g:nth-child(2) > text" ) );
-    assertEquals( serie5, "Trains" );
-    //Serie 6
-    String serie6 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(6) > g:nth-child(2) > text" ) );
-    assertEquals( serie6, "Trucks and Buses" );
-    //Serie 7
-    String serie7 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(7) > g:nth-child(2) > text" ) );
-    assertEquals( serie7, "Vintage Cars" );
+    assertEquals( serie4, "NA" );
 
     /*
      * ## Step 3 
@@ -173,25 +145,149 @@ public class VisualizationAPIReference extends BaseTest {
     assertNotNull( rectSerie4 );
     String colorSerie4 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(4) > rect" ), "fill" );
     assertEquals( colorSerie4, "rgb(242,194,73)" );
-    //Serie 5
-    WebElement rectSerie5 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(5) > rect" ) );
-    assertNotNull( rectSerie5 );
-    String colorSerie5 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(5) > rect" ), "fill" );
-    assertEquals( colorSerie5, "rgb(95,67,196)" );
-    //Serie 6
-    WebElement rectSerie6 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(6) > rect" ) );
-    assertNotNull( rectSerie6 );
-    String colorSerie6 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(6) > rect" ), "fill" );
-    assertEquals( colorSerie6, "rgb(148,111,221)" );
-    //Serie 7
-    WebElement rectSerie7 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(7) > rect" ) );
-    assertNotNull( rectSerie7 );
-    String colorSerie7 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(7) > rect" ), "fill" );
-    assertEquals( colorSerie7, "rgb(0,132,91)" );
   }
 
   /**
    * ############################### Test Case 3 ###############################
+   *
+   * Test Case Name:
+   *    Toggle Series
+   *    
+   * Description:
+   *    The test case pretends validate the toggle series button change to other 
+   *    chart.
+   *    
+   * Steps:
+   *    1. Click in Toggle Series
+   *    2. Check chart content.
+   *    3. Click in Toggle Series
+   *    4. Check chart content.
+   */
+  @Test
+  public void tc03_ToggleSeries_ChartsChanged() {
+    this.log.info( "tc03_ToggleSeries_ChartsChanged" );
+
+    /*
+     * ## Step 1 
+     */
+    WebElement buttonToggleSeries = this.elemHelper.FindElement( driver, By.cssSelector( "#ToggledSpot > button" ) );
+    assertNotNull( buttonToggleSeries );
+    this.elemHelper.Click( driver, By.cssSelector( "#ToggledSpot > button" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForTextDifferentOf( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ), "APAC" );
+
+    /*
+     * ## Step 2 
+     */
+    //Number charts
+    //Serie 1
+    String ch1Serie1 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ) );
+    assertEquals( ch1Serie1, "Classic Cars" );
+    //Serie 2
+    String ch1Serie2 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(2) > g:nth-child(2) > text" ) );
+    assertEquals( ch1Serie2, "Motorcycles" );
+    //Serie 3
+    String ch1Serie3 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(3) > g:nth-child(2) > text" ) );
+    assertEquals( ch1Serie3, "Planes" );
+    //Serie 4
+    String ch1Serie4 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(4) > g:nth-child(2) > text" ) );
+    assertEquals( ch1Serie4, "Ships" );
+    //Serie 5
+    String ch1Serie5 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(5) > g:nth-child(2) > text" ) );
+    assertEquals( ch1Serie5, "Trains" );
+    //Serie 6
+    String ch1Serie6 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(6) > g:nth-child(2) > text" ) );
+    assertEquals( ch1Serie6, "Trucks and Buses" );
+    //Serie 7
+    String ch1Serie7 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(7) > g:nth-child(2) > text" ) );
+    assertEquals( ch1Serie7, "Vintage Cars" );
+    //Color
+    //Serie 1
+    WebElement ch1RectSerie1 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(1) > rect" ) );
+    assertNotNull( ch1RectSerie1 );
+    String ch1ColorSerie1 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(1) > rect" ), "fill" );
+    assertEquals( ch1ColorSerie1, "rgb(0,93,166)" );
+    //Serie 2
+    WebElement ch1RectSerie2 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(2) > rect" ) );
+    assertNotNull( ch1RectSerie2 );
+    String ch1ColorSerie2 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(2) > rect" ), "fill" );
+    assertEquals( ch1ColorSerie2, "rgb(3,169,244)" );
+    //Serie 3
+    WebElement ch1RectSerie3 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(3) > rect" ) );
+    assertNotNull( ch1RectSerie3 );
+    String ch1ColorSerie3 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(3) > rect" ), "fill" );
+    assertEquals( ch1ColorSerie3, "rgb(255,121,0)" );
+    //Serie 4
+    WebElement ch1RectSerie4 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(4) > rect" ) );
+    assertNotNull( ch1RectSerie4 );
+    String ch1ColorSerie4 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(4) > rect" ), "fill" );
+    assertEquals( ch1ColorSerie4, "rgb(242,194,73)" );
+    //Serie 5
+    WebElement ch1RectSerie5 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(5) > rect" ) );
+    assertNotNull( ch1RectSerie5 );
+    String ch1ColorSerie5 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(5) > rect" ), "fill" );
+    assertEquals( ch1ColorSerie5, "rgb(95,67,196)" );
+    //Serie 6
+    WebElement ch1RectSerie6 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(6) > rect" ) );
+    assertNotNull( ch1RectSerie6 );
+    String ch1ColorSerie6 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(6) > rect" ), "fill" );
+    assertEquals( ch1ColorSerie6, "rgb(148,111,221)" );
+    //Serie 7
+    WebElement ch1RectSerie7 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(7) > rect" ) );
+    assertNotNull( ch1RectSerie7 );
+    String ch1ColorSerie7 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(7) > rect" ), "fill" );
+    assertEquals( ch1ColorSerie7, "rgb(0,132,91)" );
+
+    /*
+     * ## Step 3 
+     */
+    this.elemHelper.Click( driver, By.cssSelector( "#ToggledSpot > button" ) );
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForTextDifferentOf( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ), "Classic Cars" );
+
+    /*
+     * ## Step 4 
+     */
+    //Number of charts
+    //Serie 1
+    String ch2Serie1 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ) );
+    assertEquals( ch2Serie1, "APAC" );
+    //Serie 2
+    String ch2Serie2 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(2) > g:nth-child(2) > text" ) );
+    assertEquals( ch2Serie2, "EMEA" );
+    //Serie 3
+    String ch2Serie3 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(3) > g:nth-child(2) > text" ) );
+    assertEquals( ch2Serie3, "Japan" );
+    //Serie 4
+    String ch2Serie4 = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(4) > g > g > g > g > g:nth-child(4) > g:nth-child(2) > text" ) );
+    assertEquals( ch2Serie4, "NA" );
+    //Color
+    //Serie 1
+    WebElement ch2RectSerie1 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(1) > rect" ) );
+    assertNotNull( ch2RectSerie1 );
+    String ch2ColorSerie1 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(1) > rect" ), "fill" );
+    assertEquals( ch2ColorSerie1, "rgb(0,93,166)" );
+    //Serie 2
+    WebElement ch2RectSerie2 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(2) > rect" ) );
+    assertNotNull( ch2RectSerie2 );
+    String ch2ColorSerie2 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(2) > rect" ), "fill" );
+    assertEquals( ch2ColorSerie2, "rgb(3,169,244)" );
+    //Serie 3
+    WebElement ch2RectSerie3 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(3) > rect" ) );
+    assertNotNull( ch2RectSerie3 );
+    String ch2ColorSerie3 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(3) > rect" ), "fill" );
+    assertEquals( ch2ColorSerie3, "rgb(255,121,0)" );
+    //Serie 4
+    WebElement ch2RectSerie4 = this.elemHelper.FindElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(4) > rect" ) );
+    assertNotNull( ch2RectSerie4 );
+    String ch2ColorSerie4 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(4) > rect" ), "fill" );
+    assertEquals( ch2ColorSerie4, "rgb(242,194,73)" );
+  }
+
+  /**
+   * ############################### Test Case 4 ###############################
    *
    * Test Case Name:
    *    MouseOver
@@ -202,9 +298,9 @@ public class VisualizationAPIReference extends BaseTest {
    * Steps:
    *    1. Check tooltip.
    */
-  //@Test
-  public void tc03_MouseOver_BarsChangeColor() {
-    this.log.info( "tc03_MouseOver_BarsChangeColor" );
+  @Test
+  public void tc04_MouseOver_BarsChangeColor() {
+    this.log.info( "tc04_MouseOver_BarsChangeColor" );
 
     /*
      * ## Step 1 
@@ -213,6 +309,6 @@ public class VisualizationAPIReference extends BaseTest {
     this.elemHelper.MoveToElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(1) > rect" ), 5, 5 );
     // Get tooltip
     String actualTooltip = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "div.tipsy > div" ) );
-    assertEquals( actualTooltip, "Product: Classic Cars\nSales: 4 091 419.88" );
+    assertEquals( actualTooltip, "Markets: APAC\nSales: 1 281 705.87" );
   }
 }
