@@ -72,6 +72,7 @@ public class OlapSelectorComponent extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.OLAP_SELECTOR_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 5 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Check page title
@@ -86,7 +87,7 @@ public class OlapSelectorComponent extends BaseTest {
      * ## Step 2
      */
     //click selector button
-    selectorButton.click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='title']" ) );
 
     //Assert Options are shown
     WebElement optionList = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
@@ -110,7 +111,7 @@ public class OlapSelectorComponent extends BaseTest {
     WebElement applyButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='footer']/div[@class='button validate']" ) );
     assertNotNull( applyButton );
     applyButton.click();
-    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
     String selectedCustomers = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "columnLabel" ) );
     String expectedCustomers = "[\"[Customers].[" + firstName + "]\" \"[Customers].[" + secondName + "]\" \"[Customers].[" + thirdName + "]\"]";
     assertEquals( expectedCustomers, selectedCustomers );
