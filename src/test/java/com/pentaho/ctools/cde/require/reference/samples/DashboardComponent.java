@@ -92,19 +92,15 @@ public class DashboardComponent extends BaseTest {
 
     //Check the signature1
     String textAuthor1 = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "cde_sample1_alias1_signature" ) );
-    assertEquals( "Pedro Alves, webdetails", textAuthor1 );
+    assertEquals( "Pedro Alves, Hitachi Vantara", textAuthor1 );
 
     //Check the signature2
     String textAuthor2 = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "cde_sample1_alias2_signature" ) );
-    assertEquals( "Pedro Alves, webdetails", textAuthor2 );
+    assertEquals( "Pedro Alves, Hitachi Vantara", textAuthor2 );
 
     //Check the selector1
     String terrSelect = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "territorySelObj" ) );
     assertNotNull( terrSelect );
-
-    //Check the selector2
-    String prodSelect = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "prodLineSelObj" ) );
-    assertNotNull( prodSelect );
 
     //Check we have chart 1
     WebElement elemChart1 = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='cde_sample1_alias1_chart']/div//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']" ) );
@@ -165,19 +161,12 @@ public class DashboardComponent extends BaseTest {
     * ## Step 2
     */
     // Go to the end of second dashboard
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 11 to 20 of 44 entries" );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 21 to 30 of 44 entries" );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 31 to 40 of 44 entries" );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias2_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 41 to 44 of 44 entries" );
+    String actualPaging = this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 1 to 5 of 5 entries" );
+    assertEquals( actualPaging, "Showing 1 to 5 of 5 entries" );
     customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
     total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[3]/td[2]" ) );
-    assertEquals( "Frau da Collezione", customer );
-    assertEquals( "4,128.96", total );
-
+    assertEquals( customer, "Jane" );
+    assertEquals( total, "37.00" );
   }
 
   /**
@@ -215,11 +204,13 @@ public class DashboardComponent extends BaseTest {
     /*
     * ## Step 2
     */
-    //Click NA/Vintage Cars on first chart
+    //Click NA-Vintage Cars on first chart
     this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias1_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]//*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][7]" ) );
     //Wait for page render
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    String actualPaging = this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias1_tableTable_info" ), "Showing 1 to 10 of 35 entries" );
+    assertEquals( actualPaging, "Showing 1 to 10 of 35 entries" );
     //check contents
     String customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
     String total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
@@ -227,7 +218,8 @@ public class DashboardComponent extends BaseTest {
     assertEquals( "168,967.80", total1 );
     //Next page
     this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='cde_sample1_alias1_tableTable_paginate']/a[2]" ) );
-    this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias1_tableTable_info" ), "Showing 11 to 20 of 21 entries" );
+    actualPaging = this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias1_tableTable_info" ), "Showing 11 to 20 of 35 entries" );
+    assertEquals( actualPaging, "Showing 11 to 20 of 35 entries" );
     customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
     total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
     assertEquals( "Signal Gift Stores", customer1 );
@@ -247,12 +239,16 @@ public class DashboardComponent extends BaseTest {
     total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
     assertEquals( "Extreme Desk Decorations, Ltd", customer1 );
     assertEquals( "69,410.95", total1 );
+    actualPaging = this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias1_tableTable_info" ), "Showing 1 to 10 of 10 entries" );
+    assertEquals( actualPaging, "Showing 1 to 10 of 10 entries" );
 
     //Validate other table did not respond to changes on other chart/selector
     String customer = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
     String total = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[3]/td[2]" ) );
-    assertEquals( "Frau da Collezione", customer );
-    assertEquals( "4,128.96", total );
+    assertEquals( customer, "Jane" );
+    assertEquals( total, "37.00" );
+    actualPaging = this.elemHelper.WaitForTextPresence( driver, By.id( "cde_sample1_alias2_tableTable_info" ), "Showing 1 to 5 of 5 entries" );
+    assertEquals( actualPaging, "Showing 1 to 5 of 5 entries" );
   }
 
   /**
@@ -268,7 +264,6 @@ public class DashboardComponent extends BaseTest {
   * Steps:
   *    1. Enable/Disable series
   *    2. Select a data and navigate between pages
-  *    3. Select a territory and navigate between pages
   */
   @Test
   public void tc4_UpdateTableByClickingChart_Table2UpdatedForSpecificData() {
@@ -281,47 +276,25 @@ public class DashboardComponent extends BaseTest {
     String sampleChartTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
     assertEquals( "Sales by territory and market", sampleChartTitle );
     //disable/enable APAC on chart 2
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(150,150,150)" );
-    String attributeValueApac = this.elemHelper.GetAttribute( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill" );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#cde_sample1_alias2_chartprotovis > svg > g > g:nth-child(2) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.cssSelector( "#cde_sample1_alias2_chartprotovis > svg > g > g:nth-child(2) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ), "fill", "rgb(150,150,150)" );
+    String attributeValueApac = this.elemHelper.GetAttribute( driver, By.cssSelector( "#cde_sample1_alias2_chartprotovis > svg > g > g:nth-child(2) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ), "fill" );
     assertEquals( "rgb(150,150,150)", attributeValueApac );
-    this.elemHelper.ClickJS( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
-    this.elemHelper.WaitForAttributeValue( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(0,0,0)" );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#cde_sample1_alias2_chartprotovis > svg > g > g:nth-child(2) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ) );
+    this.elemHelper.WaitForAttributeValue( driver, By.cssSelector( "#cde_sample1_alias2_chartprotovis > svg > g > g:nth-child(2) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ), "fill", "rgb(0,0,0)" );
 
     /*
     * ## Step 2
     */
-    //Click Japan/Planes on second chart
-    this.elemHelper.MouseOverElementAndClick( driver, By.xpath( "//div[contains(@id,'cde_sample1_alias2_chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]//*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='rect'][3]" ) );
+    //Click Total Sold - Rc1 on second chart
+    this.elemHelper.MouseOverElementAndClick( driver, By.cssSelector( "#cde_sample1_alias2_chartprotovis > svg > g > g:nth-child(3) > g > g:nth-child(2) > g > g > g:nth-child(3) > rect" ) );
     //Wait for page render
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     //check contents
     String customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
     String total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "Osaka Souveniers Co.", customer1 );
-    assertEquals( "39,649.31", total1 );
-
-    /*
-    * ## Step 3
-    */
-    //Select Trucks and Buses on Product Selector
-    Select prodSelect = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='prodLineSelObj']/select" ) ) );
-    prodSelect.selectByValue( "Trucks and Buses" );
-    //Wait for page render
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    //check contents
-    customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[2]/td" ) );
-    total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias2_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "Tokyo Collectables, Ltd", customer1 );
-    assertEquals( "44,498.22", total1 );
-
-    //Validate other table did not respond to changes on other chart/selector
-    customer1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[2]/td" ) );
-    total1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//table[@id='cde_sample1_alias1_tableTable']/tbody/tr[1]/td[2]" ) );
-    assertEquals( "Extreme Desk Decorations, Ltd", customer1 );
-    assertEquals( "69,410.95", total1 );
-
+    assertEquals( customer1, "Jane" );
+    assertEquals( total1, "2.00" );
   }
 }
