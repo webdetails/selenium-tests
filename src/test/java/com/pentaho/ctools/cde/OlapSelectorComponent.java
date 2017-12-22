@@ -56,7 +56,7 @@ public class OlapSelectorComponent extends BaseTest {
    *    This test is to assert simple functionality of sample
    *
    * Steps:
-   *    1. Opne sample and assert selector button is shown
+   *    1. Open sample and assert selector button is shown
    *    2. Click button and assert options are shown
    *    3. Make options and click ok, assert options were correctly selected
    *
@@ -72,6 +72,7 @@ public class OlapSelectorComponent extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.OLAP_SELECTOR_COMPONENT );
 
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Check page title
@@ -87,7 +88,7 @@ public class OlapSelectorComponent extends BaseTest {
      * ## Step 2
      */
     //click selector button
-    selectorButton.click();
+    this.elemHelper.Click( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='title']" ) );
 
     //Assert Options are shown
     WebElement optionList = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
@@ -111,7 +112,7 @@ public class OlapSelectorComponent extends BaseTest {
     WebElement applyButton = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@class='footer']/div[@class='button validate']" ) );
     assertNotNull( applyButton );
     applyButton.click();
-    this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@id='column1']/div/div/div[@class='optionList']" ) );
     String selectedCustomers = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "columnLabel" ) );
     String expectedCustomers = "[\"[Customers].[" + firstName + "]\" \"[Customers].[" + secondName + "]\" \"[Customers].[" + thirdName + "]\"]";
     assertEquals( selectedCustomers, expectedCustomers );
