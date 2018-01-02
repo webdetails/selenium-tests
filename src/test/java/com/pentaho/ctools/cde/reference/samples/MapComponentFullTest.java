@@ -22,6 +22,8 @@
 
 package com.pentaho.ctools.cde.reference.samples;
 
+import static org.testng.Assert.assertNotNull;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -332,21 +334,20 @@ public class MapComponentFullTest extends BaseTest {
     this.elemHelper.WaitForElementPresenceAndVisible( BaseTest.driver, By.cssSelector( "#HiddenContentColprotovis" ) );
     // Move mouse to element
     final WebElement marker5Serie1Tooltip = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
-    final Actions acts = new Actions( BaseTest.driver );
-    acts.moveToElement( marker5Serie1Tooltip );
-    acts.perform();
+    assertNotNull( marker5Serie1Tooltip );
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
     final String tooltipProduct = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@class='tipsy tipsy-sww']/div[2]/div/table/tbody/tr[1]/td[1]/span" ) );
-    acts.perform();
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
     final String tooltipProductValue = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@class='tipsy tipsy-sww']/div[2]/div/table/tbody/tr[1]/td[3]/span" ) );
-    acts.perform();
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
     final String tooltipSeries = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@class='tipsy tipsy-sww']/div[2]/div/table/tbody/tr[2]/td[1]/span" ) );
-    acts.perform();
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
     final String tooltipSeriesValue = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@class='tipsy tipsy-sww']/div[2]/div/table/tbody/tr[2]/td[3]/span" ) );
-    acts.perform();
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
     final String tooltipValues = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@class='tipsy tipsy-sww']/div[2]/div/table/tbody/tr[3]/td[1]/span" ) );
-    acts.perform();
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
     final String tooltipValuesValue = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@class='tipsy tipsy-sww']/div[2]/div/table/tbody/tr[3]/td[3]/span[1]" ) );
-    acts.perform();
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
     final String tooltipValuesValueP = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@class='tipsy tipsy-sww']/div[2]/div/table/tbody/tr[3]/td[3]/span[2]" ) );
     Assert.assertEquals( tooltipProduct, "Product" );
     Assert.assertEquals( tooltipProductValue, "Classic Cars" );
