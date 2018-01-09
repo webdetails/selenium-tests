@@ -87,7 +87,7 @@
 			<class name="com.pentaho.ctools.cde.ExportPopupComponent" />
 			<class name="com.pentaho.ctools.cde.FilterAddinAccordion" />
 			<class name="com.pentaho.ctools.cde.FilterReference" />
-			<class name="com.pentaho.ctools.cde.FilterVisualGuide" />
+			<!-- http://jira.pentaho.com/browse/CDE-937 <class name="com.pentaho.ctools.cde.FilterVisualGuide" /> -->
 			<class name="com.pentaho.ctools.cde.MapComponentFullTest" />
 			<!-- <class name="com.pentaho.ctools.cde.MapComponentReference" /> -->
 			<class name="com.pentaho.ctools.cde.OlapSelectorComponent" />
@@ -106,7 +106,7 @@
 			<class name="com.pentaho.ctools.cde.require.ExportPopupComponent" />
 			<class name="com.pentaho.ctools.cde.require.FilterAddinAccordion" />
 			<class name="com.pentaho.ctools.cde.require.FilterReference" />
-			<class name="com.pentaho.ctools.cde.require.FilterVisualGuide" />
+			<!-- http://jira.pentaho.com/browse/CDE-937 <class name="com.pentaho.ctools.cde.require.FilterVisualGuide" /> -->
 			<class name="com.pentaho.ctools.cde.require.MapComponentFullTest" />
 			<!-- <class name="com.pentaho.ctools.cde.require.MapComponentReference" /> -->
 			<class name="com.pentaho.ctools.cde.require.OlapSelectorComponent" />
