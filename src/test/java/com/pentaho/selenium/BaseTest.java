@@ -23,7 +23,6 @@ package com.pentaho.selenium;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -34,8 +33,6 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.logging.LogEntries;
-import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
@@ -90,7 +87,6 @@ public class BaseTest {
     logs.enable( LogType.PROFILER, Level.ALL );
     logs.enable( LogType.CLIENT, Level.ALL );
     logs.enable( LogType.PERFORMANCE, Level.ALL );
-     
 
     /*
      * Firefox DRIVER
@@ -108,12 +104,12 @@ public class BaseTest {
     ffProfile.setPreference( "browser.helperApps.neverAsk.saveToDisk", "application/unknown;table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf;text/xml;application/xml;image/png;image/svg+xml;application/json;application/javascript" );
 
     try {
-      JavaScriptError.addExtension(ffProfile);
+      JavaScriptError.addExtension( ffProfile );
     } catch ( IOException e ) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    
+
     // Setting properties for webdriver
     DesiredCapabilities capabilities = DesiredCapabilities.firefox();
     capabilities.setCapability( CapabilityType.LOGGING_PREFS, logs );
@@ -154,23 +150,23 @@ public class BaseTest {
   @AfterSuite
   public void tearDownClass() {
     log.info( "Master tearDown" );
-    
+
     BaseTest.printBrowserMessages();
-    
+
     BaseTest.driver.quit();
   }
-  
+
   /**
    * Print all Messages regarding
    * @return
    */
   public static void printBrowserMessages() {
-    log.info( "------> PRINTING LOGS FROM BROWSER <-----");
-    LogEntries logEntries = driver.manage().logs().get( LogType.BROWSER ); 
+    log.info( "------> PRINTING LOGS FROM BROWSER <-----" );
+    /*LogEntries logEntries = driver.manage().logs().get( LogType.BROWSER );
     for ( LogEntry logEntry : logEntries ) {
-      log.info( logEntry.getMessage() ); 
+      log.info( logEntry.getMessage() );
     }
-    /*log.info( "------> PRINTING LOGS FROM SERVER <-----");
+    log.info( "------> PRINTING LOGS FROM SERVER <-----");
     LogEntries logEntries2 = driver.manage().logs().get( LogType.SERVER ); 
     for ( LogEntry logEntry : logEntries2 ) {
       log.info( logEntry.getMessage() ); 
@@ -179,26 +175,27 @@ public class BaseTest {
     LogEntries logEntries3 = driver.manage().logs().get( LogType.DRIVER ); 
     for ( LogEntry logEntry : logEntries3 ) {
       log.info( logEntry.getMessage() ); 
-    }*/
-    log.info( "------> PRINTING LOGS FROM PROFILER <-----");
-    LogEntries logEntries4 = driver.manage().logs().get( LogType.PROFILER ); 
+    }
+    log.info( "------> PRINTING LOGS FROM PROFILER <-----" );
+    LogEntries logEntries4 = driver.manage().logs().get( LogType.PROFILER );
     for ( LogEntry logEntry : logEntries4 ) {
-      log.info( logEntry.getMessage() ); 
+      log.info( logEntry.getMessage() );
     }
-    log.info( "------> PRINTING LOGS FROM CLIENT <-----");
-    LogEntries logEntries5 = driver.manage().logs().get( LogType.CLIENT ); 
+    log.info( "------> PRINTING LOGS FROM CLIENT <-----" );
+    LogEntries logEntries5 = driver.manage().logs().get( LogType.CLIENT );
     for ( LogEntry logEntry : logEntries5 ) {
-      log.info( logEntry.getMessage() ); 
+      log.info( logEntry.getMessage() );
     }
-    log.info( "------> PRINTING LOGS FROM PERFORMANCE <-----");
-    LogEntries logEntries6 = driver.manage().logs().get( LogType.PERFORMANCE ); 
+    log.info( "------> PRINTING LOGS FROM PERFORMANCE <-----" );
+    LogEntries logEntries6 = driver.manage().logs().get( LogType.PERFORMANCE );
     for ( LogEntry logEntry : logEntries6 ) {
-      log.info( logEntry.getMessage() ); 
+      log.info( logEntry.getMessage() );
     }
-    log.info( "------> PRINTING LOGS JavaScriptError <-----");
-    final List<JavaScriptError> jsErrors = JavaScriptError.readErrors(driver);
+    log.info( "------> PRINTING LOGS JavaScriptError <-----" );
+    final List<JavaScriptError> jsErrors = JavaScriptError.readErrors( driver );
     log.debug( jsErrors );
-    log.info( "------> END <-----");
+    */
+    log.info( "------> END <-----" );
   }
 
   /**
