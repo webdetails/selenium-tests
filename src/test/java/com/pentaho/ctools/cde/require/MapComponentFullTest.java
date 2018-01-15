@@ -24,6 +24,7 @@ package com.pentaho.ctools.cde.require;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -337,15 +338,17 @@ public class MapComponentFullTest extends BaseTest {
     this.elemHelper.MoveToElement( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
 
     String actualTooltip = this.elemHelper.GetAttributeInvisible( driver, By.cssSelector( "div.fakeTipsyTarget" ), "original-title" );
-    String expectedTooltip = "<div class=\"ccc-tt\"><table class=\"ccc-tt-ds ccc-tt-plot ccc-tt-plot-pie ccc-tt-chartOrient-h\" data-ccc-color=\"rgb(31,119,180)\"><tBody><tr class=\"ccc-tt-dim ccc-tt-dimValueType-Any ccc-tt-dimDiscrete\"><td class=\"ccc-tt-dimLabel\"><span>Product</span></td><td class=\"ccc-tt-dimRoles\"><span class=\"ccc-tt-role ccc-tt-role-color\"><span class=\"ccc-tt-roleIcon\"></span><span class=\"ccc-tt-roleLabel\">Color</span></span><span class=\"ccc-tt-role ccc-tt-role-category\"><span class=\"ccc-tt-roleIcon\"></span><span class=\"ccc-tt-roleLabel\">Category</span></span></td><td class=\"ccc-tt-dimValue\"><span class=\"ccc-tt-value\">Classic Cars</span></td></tr><tr class=\"ccc-tt-dim ccc-tt-dimValueType-Any ccc-tt-dimDiscrete\"><td class=\"ccc-tt-dimLabel\"><span>Series</span></td><td class=\"ccc-tt-dimRoles\"></td><td class=\"ccc-tt-dimValue\"><span class=\"ccc-tt-value\">Quantity</span></td></tr><tr class=\"ccc-tt-dim ccc-tt-dimValueType-Number ccc-tt-dimContinuous\"><td class=\"ccc-tt-dimLabel\"><span>Value</span></td><td class=\"ccc-tt-dimRoles\"><span class=\"ccc-tt-role ccc-tt-role-value\"><span class=\"ccc-tt-roleIcon\"></span><span class=\"ccc-tt-roleLabel\">Value</span></span></td><td class=\"ccc-tt-dimValue\"><span class=\"ccc-tt-value\">1,381</span> <span class=\"ccc-tt-valuePct\">17%</span></td></tr></tBody></table></div>";
-    assertEquals( actualTooltip, expectedTooltip );
+    String expectedTooltip = "<div class=\"ccc-tt\"><table class=\"ccc-tt-ds ccc-tt-plot ccc-tt-plot-pie ccc-tt-chartOrient-h\" data-ccc-color=\"rgb(31,119,180)\"><tBody><tr class=\"ccc-tt-dim ccc-tt-dimValueType-Any ccc-tt-dimDiscrete\"><td class=\"ccc-tt-dimLabel\"><span>Product</span></td><td class=\"ccc-tt-dimRoles\"><span class=\"ccc-tt-role ccc-tt-role-color\"><span class=\"ccc-tt-roleIcon\"></span><span class=\"ccc-tt-roleLabel\">Color</span></span><span class=\"ccc-tt-role ccc-tt-role-category\"><span class=\"ccc-tt-roleIcon\"></span><span class=\"ccc-tt-roleLabel\">Category</span></span></td><td class=\"ccc-tt-dimValue\"><span class=\"ccc-tt-value\">Classic Cars</span></td></tr><tr class=\"ccc-tt-dim ccc-tt-dimValueType-Any ccc-tt-dimDiscrete\"><td class=\"ccc-tt-dimLabel\"><span>Series</span></td><td class=\"ccc-tt-dimRoles\"></td><td class=\"ccc-tt-dimValue\"><span class=\"ccc-tt-value\">Quantity</span></td></tr><tr class=\"ccc-tt-dim ccc-tt-dimValueType-Number ccc-tt-dimContinuous\"><td class=\"ccc-tt-dimLabel\"><span>Value</span></td><td class=\"ccc-tt-dimRoles\"><span class=\"ccc-tt-role ccc-tt-role-value\"><span class=\"ccc-tt-roleIcon\"></span><span class=\"ccc-tt-roleLabel\">Value</span></span></td><td class=\"ccc-tt-dimValue\"><span class=\"ccc-tt-value\">1,381</span>";
+    String expectedTooltip2 = "<span class=\"ccc-tt-valuePct\">17%</span></td></tr></tBody></table></div>";
+    assertTrue( actualTooltip.contains( expectedTooltip ) );
+    assertTrue( actualTooltip.contains( expectedTooltip2 ) );
 
     Actions acts = new Actions( BaseTest.driver );
     WebElement element = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//div[@id='HiddenContentColprotovis']/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][1]" ) );
     acts.moveToElement( element );
     acts.perform();
     final String tooltipProduct = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@class='tipsy tipsy-sww']/div[2]/div/table/tbody/tr[1]/td[1]/span" ) );
-    Assert.assertEquals( tooltipProduct, "Product" );
+    assertEquals( tooltipProduct, "Product" );
 
     /*
     this.elemHelper.MouseOverElementAndClick( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ) );
