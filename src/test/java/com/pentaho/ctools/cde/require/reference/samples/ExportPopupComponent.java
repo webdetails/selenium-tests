@@ -139,26 +139,22 @@ public class ExportPopupComponent extends BaseTest {
     // NOTE - we have to wait for loading disappear
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
-    //Wait to for notification message - NEED TO BE REMOVED AFTER CLOSE THE CASE: http://jira.pentaho.com/browse/CDE-868
-    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockMsg.blockElement.ui-draggable" ) );
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockMsg.blockElement.ui-draggable" ) );
-
     //Get Title of sample
     String title = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "Title" ) );
     assertEquals( "Export Popup Component Reference", title );
 
     //Assert presence of elements
     WebElement chart = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "TheChartprotovis" ) );
-    WebElement chartBar = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g']/*[name()='g'][2]/*[name()='rect'][4]" ) );
-    WebElement chartLegend = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g'][4]/*[name()='g']/*[name()='g'][6]/*[name()='text']" ) );
-    WebElement table = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "TheTableTable" ) );
-    WebElement columnHeader = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='TheTableTable']/thead/tr/th" ) );
-    WebElement c2r6 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@id='TheTableTable']/tbody/tr[6]/td[2]" ) );
     assertNotNull( chart );
+    WebElement chartBar = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g']/*[name()='g'][2]/*[name()='rect'][4]" ) );
     assertNotNull( chartBar );
+    WebElement chartLegend = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='TheChartprotovis']/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[name()='g']/*[name()='g'][2]/*[name()='g']/*[name()='g'][4]/*[name()='g']/*[name()='g'][6]/*[name()='text']" ) );
     assertNotNull( chartLegend );
+    WebElement table = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "sampletableCol" ) );
     assertNotNull( table );
+    WebElement columnHeader = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampletableColTable > thead > tr > th" ) );
     assertNotNull( columnHeader );
+    WebElement c2r6 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "#sampletableColTable > tbody > tr:nth-child(6) > td.column1.number" ) );
     assertNotNull( c2r6 );
 
     /*
@@ -220,10 +216,10 @@ public class ExportPopupComponent extends BaseTest {
      */
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.exportElement" ) );
     //Click export Button
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='ChartExportSVGExporting']/div" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "#ChartExportSVGExporting > div" ) );
 
     //Assert popup and click Export Chart link
-    this.elemHelper.Click( driver, By.xpath( "//body/div[9]/div[1]" ) );
+    this.elemHelper.Click( driver, By.xpath( "//body/div[8]/div" ) );
 
     //Assert chart popup
     WebElement exportCountryChartPopup = this.elemHelper.FindElement( driver, By.id( "fancybox-content" ) );
@@ -277,12 +273,12 @@ public class ExportPopupComponent extends BaseTest {
      */
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "fancybox-overlay" ) );
     //Click to Export to CSV
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='DataExportCSVExporting']/div" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "#DataExportCSVExporting > div" ) );
 
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.xpath( "//body/div[10]/div[1]" ) );
+      this.elemHelper.Click( driver, By.xpath( "//body/div[9]/div" ) );
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
@@ -316,13 +312,13 @@ public class ExportPopupComponent extends BaseTest {
     /*
      * ## Step 5
      */
-    //Click to Export to CSV
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='DataExportXLSExporting']/div" ) );
+    //Click to Export to XLS
+    this.elemHelper.Click( driver, By.cssSelector( "#DataExportXLSExporting > div" ) );
 
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.xpath( "//body/div[11]/div[1]" ) );
+      this.elemHelper.Click( driver, By.xpath( "//body/div[10]/div" ) );
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
@@ -357,12 +353,12 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 6
      */
     //Click to Export to JSON
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='DataExportJSONExporting']/div" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "#DataExportJSONExporting > div" ) );
 
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.xpath( "//body/div[12]/div[1]" ) );
+      this.elemHelper.Click( driver, By.xpath( "//body/div[11]/div" ) );
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
@@ -397,12 +393,12 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 7
      */
     //Click to Export to XML
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='DataExportXMLExporting']/div" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "#DataExportXMLExporting > div" ) );
 
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.xpath( "//body/div[13]/div[1]" ) );
+      this.elemHelper.Click( driver, By.xpath( "//body/div[12]/div" ) );
 
       //Wait for file to be created in the destination dir
       DirectoryWatcher dw = new DirectoryWatcher();
