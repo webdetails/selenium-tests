@@ -78,16 +78,16 @@ public class FilterReference extends BaseTest {
 
     //Assert presence of elements
     WebElement singleFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "singleFilterObj_group" ) );
-    WebElement multipleFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "multiFilterObj_group" ) );
-    WebElement singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//span[@class='filter-root-info-selected-item']" ) );
-    WebElement multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
-    WebElement singleText = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "txt_singleSelectionObj_group" ) );
-    WebElement multiText = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "txt_multiSelectionObj_group" ) );
     assertNotNull( singleFilter );
+    WebElement multipleFilter = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "multiFilterObj_group" ) );
     assertNotNull( multipleFilter );
+    WebElement singleSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='singleFilterObj_group']//span[@class='filter-root-info-selected-item']" ) );
     assertNotNull( singleSelector );
+    WebElement multiSelector = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     assertNotNull( multiSelector );
+    WebElement singleText = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "txt_singleSelectionObj_group_col" ) );
     assertNotNull( singleText );
+    WebElement multiText = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "txt_multiSelectionObj_group_col" ) );
     assertNotNull( multiText );
   }
 
@@ -134,7 +134,7 @@ public class FilterReference extends BaseTest {
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//div[@class='filter-root-items']" ) ) );
     String selectedString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='singleFilterObj_group']//span[@class='filter-root-info-selected-item']" ) );
     assertEquals( "Eighteen", selectedString );
-    String selectedItem = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "txt_singleSelectionObj_group" ) );
+    String selectedItem = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "txt_singleSelectionObj_group_col" ) );
     assertEquals( "Result: [\"[Ones].[Eighteen]\"]", selectedItem );
 
     /*
@@ -152,7 +152,7 @@ public class FilterReference extends BaseTest {
     assertTrue( this.elemHelper.WaitForElementInvisibility( driver, By.xpath( "//button[contains(text(),'Cancel')]" ) ) );
     String selectedMultiString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "None", selectedMultiString );
-    String selectedMultiItem = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "txt_multiSelectionObj_group" ) );
+    String selectedMultiItem = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "txt_multiSelectionObj_group_col" ) );
     assertEquals( "Result: [] Selected items:", selectedMultiItem );
 
     /*
@@ -184,7 +184,7 @@ public class FilterReference extends BaseTest {
     //Assert correct values selected
     selectedMultiString = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='multiFilterObj_group']//span[@class='filter-root-info-selected-items']" ) );
     assertEquals( "2 / 29", selectedMultiString );
-    selectedMultiItem = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "txt_multiSelectionObj_group" ) );
+    selectedMultiItem = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "txt_multiSelectionObj_group_col" ) );
     assertEquals( selectedMultiItem, "Result: [\"[Zeroes].[Three]\",\"[Ones].[Thirteen]\"] Selected items: [Zeroes].[Three] [Ones].[Thirteen]" );
   }
 }
