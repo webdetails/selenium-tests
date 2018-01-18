@@ -120,7 +120,7 @@ public class WidgetReference extends BaseTest {
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     WebElement rect = this.elemHelper.FindElement( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(1) > rect:nth-child(4)" ) );
-    assertEquals( rect.getAttribute( "height" ), "224.64270000000002" ); //224.64270000000002
+    assertEquals( rect.getAttribute( "height" ), "223.65089999999998" ); //224.64270000000002
     //>Select 2004
     select.selectByValue( "2004" );
     //wait for loading bar disappear
