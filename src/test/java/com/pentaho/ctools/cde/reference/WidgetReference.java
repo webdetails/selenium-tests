@@ -134,7 +134,7 @@ public class WidgetReference extends BaseTest {
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     rect = this.elemHelper.FindElement( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(1) > rect:nth-child(4)" ) );
-    assertEquals( rect.getAttribute( "height" ), "163.4682857142857" ); //163.4682857142857
+    assertEquals( rect.getAttribute( "height" ), "162.7465714285714" ); //162.7465714285714
 
     /*
      * ## Step 3
