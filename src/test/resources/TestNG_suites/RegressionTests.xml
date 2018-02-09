@@ -42,7 +42,7 @@
 			<class name="com.pentaho.ctools.issues.cde.CDE413" />
 			<class name="com.pentaho.ctools.issues.cde.CDE417" />
 			<class name="com.pentaho.ctools.issues.cde.CDE430" />
-			<class name="com.pentaho.ctools.issues.cde.CDE438" />
+			<!-- <class name="com.pentaho.ctools.issues.cde.CDE438" />   // PAULA: the class doesn't exist -->
 			<class name="com.pentaho.ctools.issues.cde.CDE446" />
 			<class name="com.pentaho.ctools.issues.cde.CDE452" />
 			<class name="com.pentaho.ctools.issues.cde.CDE453" />
@@ -51,9 +51,9 @@
 			<class name="com.pentaho.ctools.issues.cde.CDETableComponent" />
 			<!-- CDE Editor -->
 			<class name="com.pentaho.ctools.issues.cde.editor.CDEComponentPanel" />
-      <class name="com.pentaho.ctools.issues.cde.editor.CDEDataPanel" />
-      <class name="com.pentaho.ctools.issues.cde.editor.CDELayoutPanel" />
-      <class name="com.pentaho.ctools.issues.cde.editor.CDEScrollAdvancedProperties" />
+      		<class name="com.pentaho.ctools.issues.cde.editor.CDEDataPanel" />
+      		<class name="com.pentaho.ctools.issues.cde.editor.CDELayoutPanel" />
+      		<class name="com.pentaho.ctools.issues.cde.editor.CDEScrollAdvancedProperties" />
 
 			<!-- CDF -->
 			<class name="com.pentaho.ctools.issues.cdf.AutoIncludes" />

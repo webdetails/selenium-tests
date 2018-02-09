@@ -11,12 +11,12 @@
 	<test name="Tests regarding Sparkl">
 		<classes>
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
-			<class name="com.pentaho.ctools.sparkl.SparklMain" />
-			<class name="com.pentaho.ctools.sparkl.PluginDetails" />
-			<class name="com.pentaho.ctools.sparkl.CreateElement" />
-			<class name="com.pentaho.ctools.sparkl.DeleteElement" />
-			<class name="com.pentaho.ctools.sparkl.CreatePlugin" />
-			<class name="com.pentaho.ctools.sparkl.DeletePlugin" />
+			<class name="com.pentaho.sparkl.SparklMain" />
+			<class name="com.pentaho.sparkl.PluginDetails" />
+			<class name="com.pentaho.sparkl.CreateElement" />
+			<class name="com.pentaho.sparkl.DeleteElement" />
+			<class name="com.pentaho.sparkl.CreatePlugin" />
+			<class name="com.pentaho.sparkl.DeletePlugin" />
 			<class name="com.pentaho.ctools.main.LogoutPentaho" />
 		</classes>
 	</test>
