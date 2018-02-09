@@ -5,8 +5,12 @@ resol-cache*
 reports-java/
 target/
 test-output/
+out/
 lib/ext/
 /.settings/
 /.project
 /.classpath
 /bin/
+\.idea/
+\.gitignore
+*.iml
