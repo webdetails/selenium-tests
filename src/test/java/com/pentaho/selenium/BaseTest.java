@@ -74,7 +74,7 @@ public class BaseTest {
 
     // Initialize BASEURL
     baseUrl = "http://localhost:8080/pentaho/";
-    downloadDir = System.getProperty( "java.io.tmpdir" ) + "\\SeleniumDonwloadDir";
+    downloadDir = System.getProperty( "java.io.tmpdir" ) + "/SeleniumDownloadDir";
     pentahoBaServerServiceName = System.getProperty( "pentaho.bi.server.service.name" );
     pentahoBaServerUrl = System.getProperty( "pentaho.bi.server.url" );
     pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
@@ -97,8 +97,8 @@ public class BaseTest {
      */
     // Initialize DRIVER
     FirefoxProfile ffProfile = new FirefoxProfile();
-    System.setProperty( "webdriver.firefox.logfile", System.getProperty( "java.io.tmpdir" ) + "\\wedriver-firefox.log" );
-    ffProfile.setPreference( "webdriver.log.file", System.getProperty( "java.io.tmpdir" ) + "\\wedriver.log" );
+    System.setProperty( "webdriver.firefox.logfile", System.getProperty( "java.io.tmpdir" ) + "/webdriver-firefox.log" );
+    ffProfile.setPreference( "webdriver.log.file", System.getProperty( "java.io.tmpdir" ) + "/webdriver.log" );
     ffProfile.setPreference( "general.useragent.locale", "en-US" );
     ffProfile.setPreference( "intl.accept_languages", "en-US, en" );
     ffProfile.setPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Download dir, 2 - specify dir
