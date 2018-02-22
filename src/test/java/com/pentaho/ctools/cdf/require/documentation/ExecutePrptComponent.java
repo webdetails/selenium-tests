@@ -417,50 +417,50 @@ public class ExecutePrptComponent extends BaseTest {
     this.elemHelper.SwitchToDefault( driver );
     attrIframeId = this.elemHelper.GetAttribute( driver, By.xpath( "//iframe" ), "id" );
     this.elemHelper.SwitchToFrame( driver, attrIframeId );
-    new File( downloadDir + "\\InventorybyLine.xls" ).delete();
+    new File( downloadDir + "/InventorybyLine.xls" ).delete();
     select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/excel;page-mode=flow" );
     //Wait for file to be created in the destination dir
     dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
-    assertTrue( new File( downloadDir + "\\InventorybyLine.xls" ).exists() );
-    new File( downloadDir + "\\InventorybyLine.xls" ).delete();
+    assertTrue( new File( downloadDir + "/InventorybyLine.xls" ).exists() );
+    new File( downloadDir + "/InventorybyLine.xls" ).delete();
 
     /*
      *  ## Step 5
      */
-    new File( downloadDir + "\\InventorybyLine.xlsx" ).delete();
+    new File( downloadDir + "/InventorybyLine.xlsx" ).delete();
     select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;page-mode=flow" );
     //Wait for file to be created in the destination dir
     dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
-    assertTrue( new File( downloadDir + "\\InventorybyLine.xlsx" ).exists() );
-    new File( downloadDir + "\\InventorybyLine.xlsx" ).delete();
+    assertTrue( new File( downloadDir + "/InventorybyLine.xlsx" ).exists() );
+    new File( downloadDir + "/InventorybyLine.xlsx" ).delete();
 
     /*
      *  ## Step 6
      */
-    new File( downloadDir + "\\InventorybyLine.csv" ).delete();
+    new File( downloadDir + "/InventorybyLine.csv" ).delete();
     select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/csv;page-mode=stream" );
     //Wait for file to be created in the destination dir
     dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
-    assertTrue( new File( downloadDir + "\\InventorybyLine.csv" ).exists() );
-    new File( downloadDir + "\\InventorybyLine.csv" ).delete();
+    assertTrue( new File( downloadDir + "/InventorybyLine.csv" ).exists() );
+    new File( downloadDir + "/InventorybyLine.csv" ).delete();
 
     /*
      *  ## Step 7
      */
-    new File( downloadDir + "\\InventorybyLine.rtf" ).delete();
+    new File( downloadDir + "/InventorybyLine.rtf" ).delete();
     select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "table/rtf;page-mode=flow" );
     //Wait for file to be created in the destination dir
     dw.WatchForCreate( downloadDir );
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
-    assertTrue( new File( downloadDir + "\\InventorybyLine.rtf" ).exists() );
-    new File( downloadDir + "\\InventorybyLine.rtf" ).delete();
+    assertTrue( new File( downloadDir + "/InventorybyLine.rtf" ).exists() );
+    new File( downloadDir + "/InventorybyLine.rtf" ).delete();
 
     /*
      *  ## Step 8
