@@ -57,17 +57,17 @@ public class ExportPopupComponent extends BaseTest {
   // Log instance
   private final Logger log = LogManager.getLogger( ExportPopupComponent.class );
   // The path for the export file
-  private String exportFilePath = "\\export_chart_png.png";
+  private String exportFilePath = "/export_chart_png.png";
   // The path for the export file
-  private String exportFilePath2 = "\\export_chart_svg.svg";
+  private String exportFilePath2 = "/export_chart_svg.svg";
   // The path for the export file
-  private String exportFilePath3 = "\\export.csv";
+  private String exportFilePath3 = "/export.csv";
   // The path for the export file
-  private String exportFilePath4 = "\\export.xls";
+  private String exportFilePath4 = "/export.xls";
   // The path for the export file
-  private String exportFilePath5 = "\\export.json";
+  private String exportFilePath5 = "/export.json";
   // The path for the export file
-  private String exportFilePath6 = "\\export.xml";
+  private String exportFilePath6 = "/export.xml";
 
   /**
    * The function will delete the export file.
