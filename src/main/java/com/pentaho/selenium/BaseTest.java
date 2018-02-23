@@ -89,7 +89,6 @@ public class BaseTest {
      * Firefox DRIVER
      */
     // Initialize DRIVER
-    System.setProperty( "webdriver.gecko.driver", "C:\\SeleniumDrivers\\geckodriver-v0.19.1\\geckodriver.exe" );
     System.setProperty( "webdriver.firefox.logfile", System.getProperty( "java.io.tmpdir" ) + "/webdriver-firefox.log" );
 
     FirefoxOptions foptions = new FirefoxOptions();
