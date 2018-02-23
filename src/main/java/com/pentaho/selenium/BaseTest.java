@@ -97,6 +97,7 @@ public class BaseTest {
     foptions.addPreference( "intl.accept_languages", "en-US, en" );
     foptions.addPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Download dir, 2 - specify dir
     foptions.addPreference( "browser.helperApps.alwaysAsk.force", false );
+    foptions.addPreference( "browser.tabs.remote.autostart", false );
     foptions.addPreference( "browser.download.manager.showWhenStarting", false );
     foptions.addPreference( "browser.download.dir", downloadDir );
     foptions.addPreference( "browser.helperApps.neverAsk.saveToDisk", "application/unknown;table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf;text/xml;application/xml;image/png;image/svg+xml;application/json;application/javascript" );
