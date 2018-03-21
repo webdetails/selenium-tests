@@ -21,6 +21,7 @@
  ******************************************************************************/
 package com.pentaho.ctools.utils;
 
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -600,17 +601,59 @@ public class ElementHelper {
   }
 
   /**
+   * The method shall move mouse over the element and fire the event onclick when clicking on the element.
+   *
+   * @param driver
+   * @param locator
+   */
+  public void MouseOverElement( final WebDriver driver, final By locator ) {
+    this.log.debug( "MouseOverElementAndClick::Enter" );
+    final WebElement elementToOver = this.WaitForElementPresenceAndVisible( driver, locator );
+    if ( elementToOver != null ) {
+      final String mouseOverScript = "arguments[0].scrollIntoView();if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+
+      final JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript( mouseOverScript, elementToOver );
+    } else
+      this.log.warn( "Element null!" );
+    this.log.debug( "MouseOverElementAndClick::Exit" );
+  }
+
+  /**
+   * The method pretends to get focus on the a specific element.
+   * Probably the element is not visible and we need to scroll down, to click 
+   * on it or mouse over the element.
+   *
+   * @param driver
+   * @param locator
+   */
+  public void FocusElement( final WebDriver driver, final By locator ) {
+    this.log.debug( "FocusElement::Enter" );
+    final WebElement elementToOver = this.FindElementInvisible( driver, locator );
+    if ( elementToOver != null ) {
+      final String mouseOverScript = "arguments[0].scrollIntoView();";
+      final JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript( mouseOverScript, elementToOver );
+    } else
+      this.log.warn( "Element null!" );
+    this.log.debug( "FocusElement::Exit" );
+  }
+
+  /**
    * This method shall perform the MoveToElement wrap function of WebDriver. We have to do this wrap to avoid
    * StaleElement exceptions.
    *
    * @param driver
-   * @param toLocator
+   * @param locator
    */
-  public void MoveToElement( final WebDriver driver, final By toLocator ) {
+  public void MoveToElement( final WebDriver driver, final By locator ) {
     this.log.debug( "MoveToElement::Enter" );
     try {
-      final WebElement element = this.FindElementInvisible( driver, toLocator );
+      final WebElement element = this.FindElementInvisible( driver, locator );
       if ( element != null ) {
+        // Introduce the below call due: https://github.com/mozilla/geckodriver/issues/901
+        FocusElement( driver, locator );
+
         final Actions acts = new Actions( driver );
         acts.moveToElement( element );
         acts.build().perform();
@@ -618,7 +661,7 @@ public class ElementHelper {
         this.log.warn( "Element null!" );
     } catch ( final StaleElementReferenceException sere ) {
       this.log.warn( "Stale Element Reference Exception" );
-      this.MoveToElement( driver, toLocator );
+      this.MoveToElement( driver, locator );
     }
     this.log.debug( "MoveToElement::Exit" );
   }
@@ -628,15 +671,17 @@ public class ElementHelper {
    * StaleElement exceptions.
    *
    * @param driver
-   * @param toLocator
+   * @param locator
    * @param xOffset
    * @param yOffset
    */
-  public void MoveToElement( final WebDriver driver, final By toLocator, final int xOffset, final int yOffset ) {
+  public void MoveToElement( final WebDriver driver, final By locator, final int xOffset, final int yOffset ) {
     this.log.debug( "MoveToElement::Enter" );
     try {
-      final WebElement element = this.WaitForElementPresenceAndVisible( driver, toLocator );
+      final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator );
       if ( element != null ) {
+        FocusElement( driver, locator );
+
         final Actions acts = new Actions( driver );
         acts.moveToElement( element, xOffset, yOffset );
         acts.build().perform();
@@ -644,7 +689,7 @@ public class ElementHelper {
         this.log.warn( "Element null!" );
     } catch ( final StaleElementReferenceException sere ) {
       this.log.warn( "Stale Element Reference Exception" );
-      this.MoveToElement( driver, toLocator, xOffset, yOffset );
+      this.MoveToElement( driver, locator, xOffset, yOffset );
     }
     this.log.debug( "MoveToElement::Exit" );
   }
@@ -662,6 +707,8 @@ public class ElementHelper {
     try {
       final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator );
       if ( element != null ) {
+        FocusElement( driver, locator );
+
         final Actions builder = new Actions( driver );
         builder.moveToElement( element ).click( element );
         builder.perform();
@@ -867,7 +914,7 @@ public class ElementHelper {
 
         @Override
         public Alert call() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( pollingTime ) );
 
           return wait.until( new Function<WebDriver, Alert>() {
 
@@ -922,7 +969,7 @@ public class ElementHelper {
 
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
-    final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+    final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( 30 ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
     wait.until( new ExpectedCondition<Boolean>() {
 
@@ -1001,7 +1048,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
           wait.until( new Function<WebDriver, Boolean>() {
@@ -1094,7 +1141,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
           wait.until( new Function<WebDriver, Boolean>() {
@@ -1191,7 +1238,7 @@ public class ElementHelper {
 
           @Override
           public void run() {
-            final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+            final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
             // Wait for element invisible
             this.isVisible = wait.until( new Function<WebDriver, Boolean>() {
@@ -1296,7 +1343,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
           this.NotPresent = wait.until( new Function<WebDriver, Boolean>() {
@@ -1405,7 +1452,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( pollingTime ) );
 
           // Wait for element visible
           this.theElement = wait.until( new Function<WebDriver, WebElement>() {
@@ -1509,7 +1556,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
           this.theElement = wait.until( new Function<WebDriver, WebElement>() {
@@ -1631,7 +1678,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
           this.theElements = wait.until( new Function<WebDriver, List<WebElement>>() {
@@ -1726,7 +1773,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( 50, TimeUnit.MILLISECONDS );
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
           this.theElements = wait.until( new Function<WebDriver, List<WebElement>>() {
@@ -1807,7 +1854,7 @@ public class ElementHelper {
     this.log.debug( "WaitForFrameReady::Enter" );
     this.log.debug( "Locator: " + locator.toString() );
 
-    final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 100, TimeUnit.MILLISECONDS );
+    final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( 30 ) ).pollingEvery( Duration.ofMillis( 100 ) );
 
     wait.until( new ExpectedCondition<Boolean>() {
 
@@ -1834,7 +1881,7 @@ public class ElementHelper {
   public void WaitForNewWindow( final WebDriver driver ) {
     this.log.debug( "WaitForNewWindow::Enter" );
 
-    final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( 30, TimeUnit.SECONDS ).pollingEvery( 500, TimeUnit.MILLISECONDS );
+    final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( 30 ) ).pollingEvery( Duration.ofMillis( 100 ) );
 
     wait.until( new ExpectedCondition<Boolean>() {
 
@@ -2133,7 +2180,7 @@ public class ElementHelper {
 
         @Override
         public void run() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( timeout, TimeUnit.SECONDS ).pollingEvery( pollingTime, TimeUnit.MILLISECONDS );
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( pollingTime ) );
 
           // Wait for element visible
           this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {

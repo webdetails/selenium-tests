@@ -1,7 +1,7 @@
 package com.pentaho.ctools.utils;
 
+import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -40,7 +40,7 @@ public class RunnableFindElementInvisible implements Runnable {
 
   @Override
   public void run() {
-    final Wait<WebDriver> wait = new FluentWait<>( this.driver ).withTimeout( this.timeout, TimeUnit.SECONDS ).pollingEvery( this.pollingTime, TimeUnit.MILLISECONDS );
+    final Wait<WebDriver> wait = new FluentWait<>( this.driver ).withTimeout( Duration.ofSeconds( this.timeout ) ).pollingEvery( Duration.ofMillis( this.pollingTime ) );
 
     // Wait for element present and not visible
     this.theElement = wait.until( new Function<WebDriver, WebElement>() {
