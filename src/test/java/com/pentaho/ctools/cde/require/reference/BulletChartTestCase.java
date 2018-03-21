@@ -25,7 +25,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -244,9 +243,7 @@ public class BulletChartTestCase extends BaseTest {
     /*
      * ## Step 4
      */
-    final Actions acts = new Actions( BaseTest.driver );
-    acts.moveToElement( this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "div.webdetailsFooterCtools" ) ) );
-    acts.perform();
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "div.webdetailsFooterCtools" ) );
     //Chart 4
     //Check title
     final String subtitle4 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "subtitle4" ) );

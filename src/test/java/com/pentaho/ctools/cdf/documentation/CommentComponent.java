@@ -36,7 +36,6 @@ import org.apache.logging.log4j.Logger;
 import org.hamcrest.CoreMatchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
@@ -345,13 +344,8 @@ public class CommentComponent extends BaseTest {
     /*
      * ## Step 2
      */
-    Actions acts = new Actions( driver );
-    acts.moveToElement( this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) ) );
-    acts.build().perform();
-    acts.perform();
-    acts.moveToElement( this.elemHelper.FindElement( driver, By.cssSelector( "div.archive" ) ) );
-    acts.click();
-    acts.perform();
+    this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "div.archive" ) );
     //Check we don't have more comments
     noComments = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.comment" ) );
     assertEquals( "No Comments to show!", noComments );
@@ -374,12 +368,8 @@ public class CommentComponent extends BaseTest {
     if ( nIteractions > 0 ) {
       this.log.debug( "We have comments to remove" );
       for ( int i = 1; i <= nIteractions; i++ ) {
-        Actions acts = new Actions( driver );
-        acts.moveToElement( nElemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) ) );
-        acts.perform();
-        acts.moveToElement( nElemHelper.FindElement( driver, By.cssSelector( "div.archive" ) ) );
-        acts.click();
-        acts.perform();
+        this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
+        this.elemHelper.Click( driver, By.cssSelector( "div.archive" ) );
         this.log.debug( "One comment removed." );
       }
     }

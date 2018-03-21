@@ -29,7 +29,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -136,8 +135,7 @@ public class PopupComponent extends BaseTest {
     assertEquals( "13.579274999999999", elemRect3.getAttribute( "width" ) ); //13.866458173700408
     assertEquals( "104.68426666666666", elemRect4.getAttribute( "width" ) ); //106.89819634537434
     //Check subtitles
-    Actions acts = new Actions( driver );
-    acts.moveToElement( elemRect2 ).perform();
+    this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='popupContent1']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='rect'][2]" ) );
     String tooltipValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[3]/span" ) );
     assertEquals( "49,578", tooltipValue );
     //Close popup
@@ -162,12 +160,12 @@ public class PopupComponent extends BaseTest {
   @Test
   public void tc03_PopupExample2_PopupDisplay() {
     this.log.info( "tc03_PopupExample2_PopupDisplay" );
-    
+
     /*
      * ## Step 1
      */
     String strExampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "Example2Title" ) );
-    String strExampleDesc = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#Example2Desc > p" ));
+    String strExampleDesc = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#Example2Desc > p" ) );
     String strButtonName = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#example2Obj > button" ) );
 
     assertEquals( strExampleTitle, "Example 2" );

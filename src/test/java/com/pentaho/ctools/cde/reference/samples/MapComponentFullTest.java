@@ -22,7 +22,6 @@
 
 package com.pentaho.ctools.cde.reference.samples;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -30,7 +29,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -168,11 +166,7 @@ public class MapComponentFullTest extends BaseTest {
     /*
      * ## Step 2
      */
-    // Zoom in - in order for the elements to be visible
-    this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization div:nth-child(2) div div:nth-child(5)" ) );
-    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    final Actions acts2 = new Actions( BaseTest.driver );
-    acts2.moveToElement( this.elemHelper.FindElement( BaseTest.driver, By.id( "dfooter" ) ) ).perform();
+    this.elemHelper.MoveToElement( driver, By.id( "dfooter" ) );
     // >>> Open Marker 1
     this.elemHelper.Click( BaseTest.driver, By.cssSelector( "#testWithGeoLocalization div:nth-child(2) div div:nth-child(5) g:nth-child(3) g image:nth-child(1)" ) );
     // Wait for loading disappear
@@ -344,13 +338,6 @@ public class MapComponentFullTest extends BaseTest {
     String expectedTooltip2 = "<span class=\"ccc-tt-valuePct\">17%</span></td></tr></tBody></table></div>";
     assertTrue( actualTooltip.contains( expectedTooltip ) );
     assertTrue( actualTooltip.contains( expectedTooltip2 ) );
-
-    Actions acts = new Actions( BaseTest.driver );
-    WebElement element = this.elemHelper.FindElement( BaseTest.driver, By.xpath( "//div[@id='HiddenContentColprotovis']/*[local-name()='svg']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='path'][1]" ) );
-    acts.moveToElement( element );
-    acts.perform();
-    final String tooltipProduct = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@class='tipsy tipsy-sww']/div[2]/div/table/tbody/tr[1]/td[1]/span" ) );
-    assertEquals( tooltipProduct, "Product" );
 
     /*
     this.elemHelper.MoveToElement( driver, By.cssSelector( "#HiddenContentColprotovis > svg:nth-child(1) > g:nth-child(3) > g:nth-child(3) > g:nth-child(1) > g:nth-child(1) > path" ), 5, 5 );
