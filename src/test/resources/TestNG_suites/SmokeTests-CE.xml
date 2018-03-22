@@ -19,15 +19,15 @@
 			<!-- CDF - DOCUMENTATION -->
 			<class name="com.pentaho.ctools.cdf.documentation.AutoCompleteBoxComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.ButtonComponent" />
-			<class name="com.pentaho.ctools.cdf.documentation.CheckComponent" />
+			<!-- TODO <class name="com.pentaho.ctools.cdf.documentation.CheckComponent" /> -->
 			<class name="com.pentaho.ctools.cdf.documentation.CommentComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.DateInputComponent" />
-			<class name="com.pentaho.ctools.cdf.documentation.DateRangeInputComponent">
+			<!-- TODO <class name="com.pentaho.ctools.cdf.documentation.DateRangeInputComponent">
 				<methods>
-					<!-- http://jira.pentaho.com/browse/CDF-928 -->
+					<!-- http://jira.pentaho.com/browse/CDF-928 
 					<exclude name="tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful" />
 				</methods>
-			</class>
+			</class>-->
 			<!-- http://jira.pentaho.com/browse/BACKLOG-20622
 			<class name="com.pentaho.ctools.cdf.documentation.ExecutePrptComponent" />
 			-->
@@ -42,26 +42,26 @@
 			<class name="com.pentaho.ctools.cdf.documentation.SchedulePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.SelectComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.SelectMultiComponent" />
-			<class name="com.pentaho.ctools.cdf.documentation.TableComponent" />
-			<class name="com.pentaho.ctools.cdf.documentation.TextAreaInputComponent" />
+			<!-- TODO <class name="com.pentaho.ctools.cdf.documentation.TableComponent" />-->
+			<!-- TODO <class name="com.pentaho.ctools.cdf.documentation.TextAreaInputComponent" />-->
 			<class name="com.pentaho.ctools.cdf.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.TextInputComponent" />
-			<class name="com.pentaho.ctools.cdf.documentation.VisualizationAPIComponent" />
+			<!-- TODO <class name="com.pentaho.ctools.cdf.documentation.VisualizationAPIComponent" />-->
 			<class name="com.pentaho.ctools.cdf.documentation.XactionComponent" />
 			
 
 			<!-- CDF-RequireJS - DOCUMENTATION -->
 			<class name="com.pentaho.ctools.cdf.require.documentation.AutoCompleteBoxComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.ButtonComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.CheckComponent" />
+			<!-- TODO <class name="com.pentaho.ctools.cdf.require.documentation.CheckComponent" />-->
 			<class name="com.pentaho.ctools.cdf.require.documentation.CommentComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.DateInputComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.DateRangeInputComponent">
+			<!-- TODO <class name="com.pentaho.ctools.cdf.require.documentation.DateRangeInputComponent">
 				<methods>
-					<!-- http://jira.pentaho.com/browse/CDF-928 -->
+					<!-- http://jira.pentaho.com/browse/CDF-928
 					<exclude name="tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful" />
 				</methods>
-			</class>
+			</class>-->
 			<!-- http://jira.pentaho.com/browse/BACKLOG-20622
 			<class name="com.pentaho.ctools.cdf.require.documentation.ExecutePrptComponent" />
 			-->
@@ -76,9 +76,9 @@
 			<class name="com.pentaho.ctools.cdf.require.documentation.SchedulePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SelectComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SelectMultiComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.TableComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.TemplateComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.TextAreaInputComponent" />
+			<!-- TODO <class name="com.pentaho.ctools.cdf.require.documentation.TableComponent" />-->
+			<!-- TODO <class name="com.pentaho.ctools.cdf.require.documentation.TemplateComponent" />-->
+			<!-- TODO <class name="com.pentaho.ctools.cdf.require.documentation.TextAreaInputComponent" />-->
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent" />
@@ -87,13 +87,13 @@
 			<!-- CDE -->
 			<class name="com.pentaho.ctools.cde.SampleDashboard" />
 			<class name="com.pentaho.ctools.cde.reference.AddinReference" />
-			<class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />-->
 			<class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
 			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.reference.PopupComponent" />
 			<class name="com.pentaho.ctools.cde.reference.VisualizationAPIReference" />
-			<class name="com.pentaho.ctools.cde.reference.WidgetReference" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.reference.WidgetReference" />-->
 			<class name="com.pentaho.ctools.cde.reference.samples.CggComponent" />
 			<class name="com.pentaho.ctools.cde.reference.samples.DuplicateComponent" />
 			<class name="com.pentaho.ctools.cde.reference.samples.ExportPopupComponent" />
@@ -111,12 +111,12 @@
 			<class name="com.pentaho.ctools.cde.require.reference.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.require.reference.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.AddinReference" />
-			<class name="com.pentaho.ctools.cde.require.reference.samples.AddinReferenceEdit" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.AddinReferenceEdit" />-->
 			<class name="com.pentaho.ctools.cde.require.reference.samples.AjaxRequestReference" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.CggComponent" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.DashboardComponent" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.DuplicateComponent" />
-			<class name="com.pentaho.ctools.cde.require.reference.samples.ExportPopupComponent" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.ExportPopupComponent" />-->
 			<class name="com.pentaho.ctools.cde.require.reference.samples.FilterAddinAccordion" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.FilterReference" />
 			<!-- http://jira.pentaho.com/browse/CDE-937 <class name="com.pentaho.ctools.cde.require.reference.samples.FilterVisualGuide" /> -->
@@ -124,7 +124,7 @@
 			<class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentReference" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.OlapSelectorComponent" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.PopupComponent" />
-			<class name="com.pentaho.ctools.cde.require.reference.samples.VisualizationAPIReference" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.VisualizationAPIReference" />-->
 			
 			
 			<!-- CDA -->
