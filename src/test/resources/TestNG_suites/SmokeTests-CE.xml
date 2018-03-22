@@ -24,7 +24,7 @@
 			<class name="com.pentaho.ctools.cdf.documentation.DateInputComponent" />
 			<!-- TODO <class name="com.pentaho.ctools.cdf.documentation.DateRangeInputComponent">
 				<methods>
-					<!-- http://jira.pentaho.com/browse/CDF-928 
+					http://jira.pentaho.com/browse/CDF-928 
 					<exclude name="tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful" />
 				</methods>
 			</class>-->
