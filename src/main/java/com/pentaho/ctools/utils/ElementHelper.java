@@ -646,7 +646,7 @@ public class ElementHelper {
    * @param driver
    * @param locator
    */
-  public void MoveToElement( final WebDriver driver, final By locator ) {
+  public void FocusAndMoveToElement( final WebDriver driver, final By locator ) {
     this.log.debug( "MoveToElement::Enter" );
     try {
       final WebElement element = this.FindElementInvisible( driver, locator );
@@ -654,6 +654,30 @@ public class ElementHelper {
         // Introduce the below call due: https://github.com/mozilla/geckodriver/issues/901
         FocusElement( driver, locator );
 
+        final Actions acts = new Actions( driver );
+        acts.moveToElement( element );
+        acts.build().perform();
+      } else
+        this.log.warn( "Element null!" );
+    } catch ( final StaleElementReferenceException sere ) {
+      this.log.warn( "Stale Element Reference Exception" );
+      this.MoveToElement( driver, locator );
+    }
+    this.log.debug( "MoveToElement::Exit" );
+  }
+
+  /**
+   * This method shall perform the MoveToElement wrap function of WebDriver. We have to do this wrap to avoid
+   * StaleElement exceptions.
+   *
+   * @param driver
+   * @param locator
+   */
+  public void MoveToElement( final WebDriver driver, final By locator ) {
+    this.log.debug( "MoveToElement::Enter" );
+    try {
+      final WebElement element = this.FindElementInvisible( driver, locator );
+      if ( element != null ) {
         final Actions acts = new Actions( driver );
         acts.moveToElement( element );
         acts.build().perform();

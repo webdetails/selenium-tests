@@ -129,7 +129,7 @@ public class CCCV2ShowCase extends BaseTest {
     assertEquals( "1.98M", barChartRectValue3 );
 
     // Mouse hover elements
-    this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2]" ) );
+    this.elemHelper.MoveToElement( driver, By.cssSelector( "#barChartprotovis > svg > g > g > g:nth-child(2) > g > g > g:nth-child(1) > rect:nth-child(2)" ) );
     String seriesLabel = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[1]/span" ) );
     assertEquals( seriesLabel, "Series" );
     String seriesValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[3]/span" ) );
@@ -142,6 +142,11 @@ public class CCCV2ShowCase extends BaseTest {
     assertEquals( valueLabel, "Value" );
     String valueValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[3]/span" ) );
     assertEquals( valueValue, "4,987,739.84" );
+
+    // The below code need to be executed to remove the previous tooltip
+    this.elemHelper.Click( driver, By.id( "LineChartTitleRow" ) );
+    boolean bNotPresent = this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.tipsy.tipsy-s" ) );
+    assertTrue( bNotPresent );
   }
 
   /**
@@ -175,7 +180,7 @@ public class CCCV2ShowCase extends BaseTest {
     assertThat( "Current cy: " + lineChartCircle3Cy, Double.valueOf( lineChartCircle3Cy ), greaterThan( Double.valueOf( 24 ) ) );
 
     // Mouse hover elements
-    this.elemHelper.MoveToElement( driver, By.cssSelector( "#LineChartprotovis > svg > g > g > g:nth-child(3) > g > g > g:nth-child(3) > circle:nth-child(2)" ) );
+    this.elemHelper.FocusAndMoveToElement( driver, By.cssSelector( "#LineChartprotovis > svg > g > g > g:nth-child(3) > g > g > g:nth-child(3) > circle:nth-child(2)" ) );
     String measuresLabel = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[1]/span" ) );
     assertEquals( "Measures", measuresLabel );
     String measuresValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[1]/td[3]/span" ) );
