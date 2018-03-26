@@ -81,7 +81,7 @@
 			<!-- TODO <class name="com.pentaho.ctools.cdf.require.documentation.TextAreaInputComponent" />-->
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextInputComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent" />
+			<!-- TODO <class name="com.pentaho.ctools.cdf.require.documentation.VisualizationAPIComponent" />-->
 			<class name="com.pentaho.ctools.cdf.require.documentation.XactionComponent" />
 			
 			<!-- CDE -->
@@ -89,26 +89,26 @@
 			<class name="com.pentaho.ctools.cde.reference.AddinReference" />
 			<!-- TODO <class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />-->
 			<class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
-			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />  -->
 			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
-			<class name="com.pentaho.ctools.cde.reference.PopupComponent" />
-			<class name="com.pentaho.ctools.cde.reference.VisualizationAPIReference" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.reference.PopupComponent" />  -->
+			<!-- TODO <class name="com.pentaho.ctools.cde.reference.VisualizationAPIReference" /> -->
 			<!-- TODO <class name="com.pentaho.ctools.cde.reference.WidgetReference" />-->
 			<class name="com.pentaho.ctools.cde.reference.samples.CggComponent" />
 			<class name="com.pentaho.ctools.cde.reference.samples.DuplicateComponent" />
-			<class name="com.pentaho.ctools.cde.reference.samples.ExportPopupComponent" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.reference.samples.ExportPopupComponent" />-->
 			<class name="com.pentaho.ctools.cde.reference.samples.FilterAddinAccordion" />
 			<class name="com.pentaho.ctools.cde.reference.samples.FilterReference" />
 			<!-- http://jira.pentaho.com/browse/CDE-937 <class name="com.pentaho.ctools.cde.reference.samples.FilterVisualGuide" /> -->
-			<class name="com.pentaho.ctools.cde.reference.samples.MapComponentFullTest" />
-			<class name="com.pentaho.ctools.cde.reference.samples.MapComponentReference" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.reference.samples.MapComponentFullTest" />-->
+			<!-- TODO <class name="com.pentaho.ctools.cde.reference.samples.MapComponentReference" />-->
 			<class name="com.pentaho.ctools.cde.reference.samples.OlapSelectorComponent" />
 
 			
 			<!-- CDE-RequireJS -->
-			<class name="com.pentaho.ctools.cde.require.SampleDashboard" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.require.SampleDashboard" />  -->
 			<class name="com.pentaho.ctools.cde.require.dashboard.DashboardModuleComponent" />
-			<class name="com.pentaho.ctools.cde.require.reference.BulletChartTestCase" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.BulletChartTestCase" />  -->
 			<class name="com.pentaho.ctools.cde.require.reference.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.AddinReference" />
 			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.AddinReferenceEdit" />-->
@@ -120,10 +120,10 @@
 			<class name="com.pentaho.ctools.cde.require.reference.samples.FilterAddinAccordion" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.FilterReference" />
 			<!-- http://jira.pentaho.com/browse/CDE-937 <class name="com.pentaho.ctools.cde.require.reference.samples.FilterVisualGuide" /> -->
-			<class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentFullTest" />
-			<class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentReference" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentFullTest" />-->
+			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentReference" />-->
 			<class name="com.pentaho.ctools.cde.require.reference.samples.OlapSelectorComponent" />
-			<class name="com.pentaho.ctools.cde.require.reference.samples.PopupComponent" />
+			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.PopupComponent" />  -->
 			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.VisualizationAPIReference" />-->
 			
 			
