@@ -610,7 +610,7 @@ public class ElementHelper {
     this.log.debug( "MouseOverElementAndClick::Enter" );
     final WebElement elementToOver = this.WaitForElementPresenceAndVisible( driver, locator );
     if ( elementToOver != null ) {
-      final String mouseOverScript = "arguments[0].scrollIntoView();if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+      final String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
 
       final JavascriptExecutor js = (JavascriptExecutor) driver;
       js.executeScript( mouseOverScript, elementToOver );
@@ -704,8 +704,6 @@ public class ElementHelper {
     try {
       final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator );
       if ( element != null ) {
-        FocusElement( driver, locator );
-
         final Actions acts = new Actions( driver );
         acts.moveToElement( element, xOffset, yOffset );
         acts.build().perform();
@@ -731,8 +729,6 @@ public class ElementHelper {
     try {
       final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator );
       if ( element != null ) {
-        FocusElement( driver, locator );
-
         final Actions builder = new Actions( driver );
         builder.moveToElement( element ).click( element );
         builder.perform();
