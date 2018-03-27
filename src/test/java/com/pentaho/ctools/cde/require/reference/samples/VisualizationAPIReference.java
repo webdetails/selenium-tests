@@ -306,7 +306,7 @@ public class VisualizationAPIReference extends BaseTest {
      * ## Step 1 
      */
     // Mouse over first rectangle
-    this.elemHelper.MoveToElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(1) > rect" ), 5, 5 );
+    this.elemHelper.FocusAndMoveToElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(1) > rect" ) );
     // Get tooltip
     String actualTooltip = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "div.tipsy > div" ) );
     assertEquals( actualTooltip, "Markets: APAC\nSales: 1 281 705.87" );

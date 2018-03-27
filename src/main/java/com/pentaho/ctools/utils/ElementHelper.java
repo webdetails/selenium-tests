@@ -640,20 +640,32 @@ public class ElementHelper {
   }
 
   /**
-   * This method shall perform the MoveToElement wrap function of WebDriver. We have to do this wrap to avoid
-   * StaleElement exceptions.
+   * Due the new Selenium3 the MoveToElement doesn't get focus on the element, hence
+   * we need to provide a workaround to get element focus first and then move to 
+   * element.
+   * 
+   * This method focus the element and move pointer to it.
+   * 
+   * Note: On Selenium 3, the MoveToElement moves to the element on center position
+   * of the element.
    *
    * @param driver
    * @param locator
+   * @param xOffset
+   * @param yOffset
    */
   public void FocusAndMoveToElement( final WebDriver driver, final By locator ) {
     this.log.debug( "MoveToElement::Enter" );
     try {
       final WebElement element = this.FindElementInvisible( driver, locator );
       if ( element != null ) {
+        // Focus Element
         // Introduce the below call due: https://github.com/mozilla/geckodriver/issues/901
-        FocusElement( driver, locator );
+        final String mouseOverScript = "arguments[0].scrollIntoView();";
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript( mouseOverScript, element );
 
+        // Move to Element
         final Actions acts = new Actions( driver );
         acts.moveToElement( element );
         acts.build().perform();
@@ -662,6 +674,45 @@ public class ElementHelper {
     } catch ( final StaleElementReferenceException sere ) {
       this.log.warn( "Stale Element Reference Exception" );
       this.MoveToElement( driver, locator );
+    }
+    this.log.debug( "MoveToElement::Exit" );
+  }
+
+  /**
+   * Due the new Selenium3 the MoveToElement doesn't get focus on the element, hence
+   * we need to provide a workaround to get element focus first and then move to 
+   * element.
+   * 
+   * This method focus the element and move pointer to it on some coordinates.
+   * 
+   * Note: On Selenium 3, the MoveToElement moves to the element on center position
+   * of the element.
+   *
+   * @param driver
+   * @param locator
+   * @param xOffset
+   * @param yOffset
+   */
+  public void FocusAndMoveToElement( final WebDriver driver, final By locator, final int xOffset, final int yOffset ) {
+    this.log.debug( "MoveToElement::Enter" );
+    try {
+      final WebElement element = this.FindElementInvisible( driver, locator );
+      if ( element != null ) {
+        // Focus Element
+        // Introduce the below call due: https://github.com/mozilla/geckodriver/issues/901
+        final String mouseOverScript = "arguments[0].scrollIntoView();";
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript( mouseOverScript, element );
+
+        // Move to Element on x and y offset
+        final Actions acts = new Actions( driver );
+        acts.moveToElement( element, xOffset, yOffset );
+        acts.build().perform();
+      } else
+        this.log.warn( "Element null!" );
+    } catch ( final StaleElementReferenceException sere ) {
+      this.log.warn( "Stale Element Reference Exception" );
+      this.MoveToElement( driver, locator, xOffset, yOffset );
     }
     this.log.debug( "MoveToElement::Exit" );
   }

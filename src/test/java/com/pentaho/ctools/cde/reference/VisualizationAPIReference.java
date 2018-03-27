@@ -194,9 +194,9 @@ public class VisualizationAPIReference extends BaseTest {
      * ## Step 1 
      */
     // Mouse over first rectangle
-    this.elemHelper.MoveToElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(1) > rect" ), 5, 5 );
+    this.elemHelper.FocusAndMoveToElement( driver, By.cssSelector( "#ChartObj > svg > g:nth-child(5) > g > g:nth-child(3) > g > g > g:nth-child(2) > rect" ), -15, 5 );
     // Get tooltip
     String actualTooltip = this.elemHelper.WaitForTextDifferentEmpty( driver, By.cssSelector( "div.tipsy > div" ) );
-    assertEquals( actualTooltip, "Product: Classic Cars\nSales: 4 091 419.88" );
+    assertEquals( actualTooltip, "Product: Motorcycles\nSales: 1 274 125.2" );
   }
 }

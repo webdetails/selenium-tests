@@ -92,7 +92,7 @@
 			<!-- TODO <class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />  -->
 			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
 			<!-- TODO <class name="com.pentaho.ctools.cde.reference.PopupComponent" />  -->
-			<!-- TODO <class name="com.pentaho.ctools.cde.reference.VisualizationAPIReference" /> -->
+			<class name="com.pentaho.ctools.cde.reference.VisualizationAPIReference" />
 			<!-- TODO <class name="com.pentaho.ctools.cde.reference.WidgetReference" />-->
 			<class name="com.pentaho.ctools.cde.reference.samples.CggComponent" />
 			<class name="com.pentaho.ctools.cde.reference.samples.DuplicateComponent" />
@@ -124,7 +124,7 @@
 			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentReference" />-->
 			<class name="com.pentaho.ctools.cde.require.reference.samples.OlapSelectorComponent" />
 			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.PopupComponent" />  -->
-			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.VisualizationAPIReference" />-->
+			<class name="com.pentaho.ctools.cde.require.reference.samples.VisualizationAPIReference" />
 			
 			
 			<!-- CDA -->
