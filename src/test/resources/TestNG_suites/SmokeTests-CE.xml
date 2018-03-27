@@ -91,7 +91,7 @@
 			<class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
 			<!-- TODO <class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />  -->
 			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
-			<!-- TODO <class name="com.pentaho.ctools.cde.reference.PopupComponent" />  -->
+			<class name="com.pentaho.ctools.cde.reference.PopupComponent" />
 			<class name="com.pentaho.ctools.cde.reference.VisualizationAPIReference" />
 			<!-- TODO <class name="com.pentaho.ctools.cde.reference.WidgetReference" />-->
 			<class name="com.pentaho.ctools.cde.reference.samples.CggComponent" />
@@ -123,7 +123,7 @@
 			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentFullTest" />-->
 			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.MapComponentReference" />-->
 			<class name="com.pentaho.ctools.cde.require.reference.samples.OlapSelectorComponent" />
-			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.PopupComponent" />  -->
+			<class name="com.pentaho.ctools.cde.require.reference.samples.PopupComponent" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.VisualizationAPIReference" />
 			
 			
