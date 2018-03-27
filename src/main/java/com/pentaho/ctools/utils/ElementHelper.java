@@ -884,6 +884,8 @@ public class ElementHelper {
 
   /**
    * This method find the element and sendkeys.
+   * 
+   * NOTE: User must clear the field (text-box) before add any key.
    *
    * @param driver
    * @param locator
@@ -895,7 +897,6 @@ public class ElementHelper {
     try {
       final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator );
       if ( element != null ) {
-        element.clear();
         element.sendKeys( keysToSend );
         element.submit();
       } else

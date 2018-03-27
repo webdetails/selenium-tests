@@ -27,7 +27,6 @@ import static org.testng.Assert.assertTrue;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
@@ -105,14 +104,14 @@ public class AddinReferenceEdit extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.ADDIN_REFERENCE_EDIT );
 
     //Expand first row - Title
-    this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[5]/td/span" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( ".table-cdfdd-layout-tree > tbody > tr:nth-child(5) > td > span" ) );
     //Click in HTML to open the Properties
-    Actions acts = new Actions( driver );
-    acts.click( this.elemHelper.FindElement( driver, By.xpath( "//table[@id='table-cdfdd-layout-tree']/tbody/tr[6]/td[1]" ) ) );
-    acts.build().perform();
+    this.elemHelper.Click( driver, By.cssSelector( ".table-cdfdd-layout-tree > tbody > tr:nth-child(6) > td" ) );
     //Click in field 'Font Size' to be editable
-    this.elemHelper.ClickJS( driver, By.xpath( "//table[@id='table-cdfdd-layout-properties']/tbody/tr[3]/td[2]" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( ".table-cdfdd-layout-properties > tbody > tr:nth-child(3) > td:nth-child(2)" ) );
     //Write 34
+    this.elemHelper.Clear( driver, By.name( "value" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( ".table-cdfdd-layout-properties > tbody > tr:nth-child(3) > td:nth-child(2)" ) );
     this.elemHelper.SendKeysAndSubmit( driver, By.name( "value" ), value );
     this.bFontChanged = true;
     //Save the changes
