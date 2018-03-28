@@ -432,7 +432,18 @@ public class ElementHelper {
   public void Get( final WebDriver driver, final String url ) {
     this.log.debug( "Get(Main)::Enter" );
 
-    driver.get( url );
+    driver.manage().timeouts().implicitlyWait( 10, TimeUnit.SECONDS );
+
+    for ( int retry = 0; retry < 3; retry++ ) {
+      try {
+        driver.get( url );
+        break;
+      } catch ( TimeoutException te ) {
+        this.log.debug( "TimeoutException", te );
+      }
+    }
+
+    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
 
     final String complete = "complete";
     String state = ( (JavascriptExecutor) driver ).executeScript( "return document.readyState" ).toString();
