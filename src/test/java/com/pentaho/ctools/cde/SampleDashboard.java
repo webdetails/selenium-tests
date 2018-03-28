@@ -271,6 +271,7 @@ public class SampleDashboard extends BaseTest {
     final String sampleChartTitle = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
     Assert.assertEquals( "Sales by territory and market", sampleChartTitle );
     //disable APAC
+    this.elemHelper.FocusElement( driver, By.xpath( "//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
     this.elemHelper.ClickJS( BaseTest.driver, By.xpath( "//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ) );
     this.elemHelper.WaitForAttributeValue( BaseTest.driver, By.xpath( "//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='text']" ), "fill", "rgb(150,150,150)" );
     //disable/enable EMEA
@@ -300,7 +301,7 @@ public class SampleDashboard extends BaseTest {
     this.elemHelper.MouseOverElementAndClick( BaseTest.driver, By.xpath( "//*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g'][3]//*[local-name()='rect'][2]" ) );
     //Wait for page render
     this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3 );
-    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
     //check contents
     this.elemHelper.WaitForTextPresence( BaseTest.driver, By.id( "tableTable_info" ), "Showing 1 to 10 of 21 entries" );
     String paggingInfo = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "tableTable_info" ) );
