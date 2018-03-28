@@ -76,9 +76,16 @@ public class MondrianJNDI extends BaseTest {
   /**
    * ############################### Test Case 1 ###############################
    *
-   * Test Case Name: Page Content Description: The test case pretends to validate if the field filename and about are
-   * present and the about works as expected. Steps: 1. Check if we are reading the correct file 2. Check if About is
-   * working
+   * Test Case Name: 
+   *    Page Content 
+   * 
+   * Description: 
+   *    The test case pretends to validate if the field filename and about are
+   *    present and the about works as expected. 
+   * 
+   * Steps: 
+   *    1. Check if we are reading the correct file 
+   *    2. Check if About is working
    */
   @Test
   public void tc1_PageContent_DisplayeFilenameAndAbout() {
@@ -132,10 +139,20 @@ public class MondrianJNDI extends BaseTest {
   /**
    * ############################### Test Case 2 ###############################
    *
-   * Test Case Name: Select Data Access Description: The test case pretends to validate the data presented when we
-   * select a data access, checking the ordering and search. Steps: 1. Select data access 'Mdx Query on SampleData -
-   * Jndi' 2. Order by Year 3. Order by Price 4. Order by PriceInk 5. Search existence content 6. Search inexistance
-   * content
+   * Test Case Name: 
+   *    Select Data Access
+   * 
+   * Description: 
+   *    The test case pretends to validate the data presented when we
+   *    select a data access, checking the ordering and search. 
+   * 
+   * Steps: 
+   *    1. Select data access 'Mdx Query on SampleData - Jndi' 
+   *    2. Order by Year
+   *    3. Order by Price
+   *    4. Order by PriceInk
+   *    5. Search existence content
+   *    6. Search inexistance content
    */
   @Test
   public void tc2_SelectDataAccess_DisplayDataForSelectedDataAccess() {
@@ -147,7 +164,7 @@ public class MondrianJNDI extends BaseTest {
     Select select = new Select( this.elemHelper.FindElement( driver, By.id( "dataAccessSelector" ) ) );
     select.selectByVisibleText( "Mdx Query on SampleData - Jndi" );
     // wait to render page
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 60 );
     // Check the presented contains
     WebElement elemStatus = this.elemHelper.FindElement( driver, By.id( "status" ) );
     assertEquals( "Shipped", elemStatus.getAttribute( "value" ) );
@@ -384,8 +401,15 @@ public class MondrianJNDI extends BaseTest {
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name: Query URL Description: The test case pretends to validate return data when call query url. Steps:
-   * 1. Check query url diaLOG 2. Open a new browser with query url
+   * Test Case Name: 
+   *    Query URL 
+   * 
+   * Description: 
+   *    The test case pretends to validate return data when call query url.
+   *    
+   * Steps:
+   *  1. Check query url dialog
+   *  2. Open a new browser with query url
    */
   @Test
   public void tc4_QueryURL_ReturnValueIsTheSameDisplayedInPage() {
@@ -411,7 +435,9 @@ public class MondrianJNDI extends BaseTest {
     String queryUrl = inputQueryUrl.getAttribute( "value" );
     this.log.debug( "Query URL: " + queryUrl );
 
-    this.elemHelper.ClickJS( driver, By.linkText( "Close" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#queryUrlDialog a.jqmClose" ) );
+    boolean dialogQueryUrl = this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "#queryUrlDialog" ) );
+    assertTrue( dialogQueryUrl );
 
     /*
      * ## Step 2
@@ -434,9 +460,18 @@ public class MondrianJNDI extends BaseTest {
   /**
    * ############################### Test Case 4 ###############################
    *
-   * Test Case Name: Query URL Description: The test case pretends to validate return data when call query url. Steps:
-   * 1. Select the option 'Mdx...' 2. Click in Cache this 3. Set a period 4. In the new window, check the schedule 5.
-   * Remove the schedule
+   * Test Case Name: 
+   *    Query URL
+   * 
+   * Description: 
+   *    The test case pretends to validate return data when call query url.
+   *    
+   * Steps:
+   *    1. Select the option 'Mdx...'
+   *    2. Click in Cache this
+   *    3. Set a period
+   *    4. In the new window, check the schedule
+   *    5. Remove the schedule
    */
   @Test
   public void tc5_CacheThisSimple_ScheduleIsSetSuccessful() {
