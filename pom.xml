@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -45,7 +46,8 @@
 	<properties>
 		<surefire.plugin.version>2.20.1</surefire.plugin.version>
 		<compile.plugin.version>3.7.0</compile.plugin.version>
-	</properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
 
 	<dependencies>
@@ -104,6 +106,25 @@
 		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
 		<plugins>
 			<plugin>
+				<!-- GOAL: CLEAN -->
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<verbose>true</verbose>
+					<filesets>
+						<fileset>
+							<directory>reports-java</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+						<fileset>
+							<directory>test-output</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>						
+					</filesets>
+				</configuration>
+			</plugin>
+			<!-- GOAL: COMPILE -->
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${compile.plugin.version}</version>
@@ -116,6 +137,7 @@
 					</compilerArgs>
 				</configuration>
 			</plugin>
+			<!-- GOAL: TEST -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
