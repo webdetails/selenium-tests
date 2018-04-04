@@ -141,7 +141,8 @@ public class PopupComponent extends BaseTest {
     assertEquals( "104.68426666666666", elemRect4.getAttribute( "width" ) ); //106.89819634537434
     //Check subtitles
     this.elemHelper.FocusAndMoveToElement( driver, By.cssSelector( "#chartprotovis > svg > g > g:nth-child(3) > g > g:nth-child(2) > g > g > g > rect:nth-child(2)" ) );
-    String tooltipValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]/div/table/tbody/tr[3]/td[3]/span" ) );
+    String tooltipValue = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.tipsy > div:nth-child(2) > div > table > tbody > tr:nth-child(3) > td:nth-child(3) > span" ) );
+
     assertEquals( "49,578", tooltipValue );
     //Close popup
     this.elemHelper.ClickJS( driver, By.cssSelector( "a.close" ) );
