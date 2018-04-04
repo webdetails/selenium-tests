@@ -89,7 +89,7 @@
 			<class name="com.pentaho.ctools.cde.reference.AddinReference" />
 			<class name="com.pentaho.ctools.cde.reference.AddinReferenceEdit" />
 			<class name="com.pentaho.ctools.cde.reference.AjaxRequestReference" />
-			<!-- TODO <class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />  -->
+			<class name="com.pentaho.ctools.cde.reference.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.reference.PopupComponent" />
 			<class name="com.pentaho.ctools.cde.reference.VisualizationAPIReference" />
@@ -108,7 +108,7 @@
 			<!-- CDE-RequireJS -->
 			<!-- TODO <class name="com.pentaho.ctools.cde.require.SampleDashboard" />  -->
 			<class name="com.pentaho.ctools.cde.require.dashboard.DashboardModuleComponent" />
-			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.BulletChartTestCase" />  -->
+			<class name="com.pentaho.ctools.cde.require.reference.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.require.reference.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.AddinReference" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.AddinReferenceEdit" />

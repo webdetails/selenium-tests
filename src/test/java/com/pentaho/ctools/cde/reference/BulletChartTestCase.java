@@ -243,7 +243,7 @@ public class BulletChartTestCase extends BaseTest {
     /*
      * ## Step 4
      */
-    this.elemHelper.MoveToElement( driver, By.cssSelector( "div.webdetailsFooterCtools" ) );
+    this.elemHelper.FocusAndMoveToElement( driver, By.cssSelector( "div.webdetailsFooterCtools" ) );
     //Chart 4
     //Check title
     final String subtitle4 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "subtitle4" ) );
