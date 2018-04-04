@@ -42,7 +42,7 @@
 			<class name="com.pentaho.ctools.cdf.documentation.SchedulePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.SelectComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.SelectMultiComponent" />
-			<!-- TODO <class name="com.pentaho.ctools.cdf.documentation.TableComponent" />-->
+			<class name="com.pentaho.ctools.cdf.documentation.TableComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.TextAreaInputComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.TextComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.TextInputComponent" />
@@ -76,7 +76,7 @@
 			<class name="com.pentaho.ctools.cdf.require.documentation.SchedulePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SelectComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SelectMultiComponent" />
-			<!-- TODO <class name="com.pentaho.ctools.cdf.require.documentation.TableComponent" />-->
+			<class name="com.pentaho.ctools.cdf.require.documentation.TableComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TemplateComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextAreaInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextComponent" />
@@ -93,7 +93,7 @@
 			<class name="com.pentaho.ctools.cde.reference.CCCV2ShowCase" />
 			<class name="com.pentaho.ctools.cde.reference.PopupComponent" />
 			<class name="com.pentaho.ctools.cde.reference.VisualizationAPIReference" />
-			<!-- TODO <class name="com.pentaho.ctools.cde.reference.WidgetReference" />-->
+			<class name="com.pentaho.ctools.cde.reference.WidgetReference" />
 			<class name="com.pentaho.ctools.cde.reference.samples.CggComponent" />
 			<class name="com.pentaho.ctools.cde.reference.samples.DuplicateComponent" />
 			<!-- TODO <class name="com.pentaho.ctools.cde.reference.samples.ExportPopupComponent" />-->

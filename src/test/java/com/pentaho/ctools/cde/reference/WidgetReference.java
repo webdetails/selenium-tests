@@ -153,8 +153,8 @@ public class WidgetReference extends BaseTest {
      * ## Step 4
      */
     //Check tooltip
-    this.elemHelper.MoveToElement( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(6) > rect" ) );
-    String tooltipValue = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@class='tipsy tipsy-s']/div[2]" ) );
+    this.elemHelper.FocusAndMoveToElement( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(6) > rect" ) );
+    String tooltipValue = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div.tipsy > div:nth-child(2)" ) );
     assertEquals( tooltipValue, "Series Trucks and Buses Markets APAC Value 488" );
   }
 }
