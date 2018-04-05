@@ -22,11 +22,11 @@
 package com.pentaho.ctools.cde.reference;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
@@ -119,22 +119,28 @@ public class WidgetReference extends BaseTest {
     //wait for loading bar disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    WebElement rect = this.elemHelper.FindElement( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(1) > rect:nth-child(4)" ) );
-    assertEquals( rect.getAttribute( "height" ), "223.65089999999998" ); //223.65089999999998
+    String rect1 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(1) > rect:nth-child(4)" ), "height" );
+    log.debug( "Heigh: " + rect1 );
+    Float rect1Value = Float.parseFloat( rect1 );
+    assertTrue( rect1Value > rect1Value - 1 || rect1Value < rect1Value + 1 );
     //>Select 2004
     select.selectByValue( "2004" );
     //wait for loading bar disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    rect = this.elemHelper.FindElement( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(1) > rect:nth-child(4)" ) );
-    assertEquals( rect.getAttribute( "height" ), "150.84446666666665" ); //150.84446666666665
+    String rect2 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(1) > rect:nth-child(4)" ), "height" );
+    log.debug( "Heigh: " + rect2 );
+    Float rect2Value = Float.parseFloat( rect2 );
+    assertTrue( rect2Value > rect2Value - 1 || rect2Value < rect2Value + 1 );
     //>Select 2005
     select.selectByValue( "2005" );
     //wait for loading bar disappear
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
-    rect = this.elemHelper.FindElement( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(1) > rect:nth-child(4)" ) );
-    assertEquals( rect.getAttribute( "height" ), "162.7465714285714" ); //162.7465714285714
+    String rect3 = this.elemHelper.GetAttribute( driver, By.cssSelector( "#widgetSample_chartprotovis > svg > g > g > g > g:nth-child(2) > g > g > g:nth-child(1) > rect:nth-child(4)" ), "height" );
+    log.debug( "Heigh: " + rect3 );
+    Float rect3Value = Float.parseFloat( rect3 );
+    assertTrue( rect3Value > rect3Value - 1 || rect3Value < rect3Value + 1 );
 
     /*
      * ## Step 3
