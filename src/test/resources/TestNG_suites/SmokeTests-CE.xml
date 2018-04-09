@@ -106,7 +106,7 @@
 
 			
 			<!-- CDE-RequireJS -->
-			<!-- TODO <class name="com.pentaho.ctools.cde.require.SampleDashboard" />  -->
+			<class name="com.pentaho.ctools.cde.require.SampleDashboard" />
 			<class name="com.pentaho.ctools.cde.require.dashboard.DashboardModuleComponent" />
 			<class name="com.pentaho.ctools.cde.require.reference.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.require.reference.CCCV2ShowCase" />

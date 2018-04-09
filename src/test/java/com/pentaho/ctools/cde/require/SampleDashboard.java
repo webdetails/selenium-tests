@@ -279,6 +279,7 @@ public class SampleDashboard extends BaseTest {
     /*
      * ## Step 1
      */
+    this.elemHelper.FocusElement( driver, By.id( "chart" ) );
     final String sampleChartTitle = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[contains(@id,'chart')]/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g']/*[local-name()='text']" ) );
     Assert.assertEquals( "Sales by territory and market", sampleChartTitle );
     //disable APAC
