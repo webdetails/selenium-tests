@@ -179,7 +179,7 @@ public class ExportPopupComponent extends BaseTest {
       this.elemHelper.Click( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher();
+      DirectoryWatcher dw = new DirectoryWatcher( 10 );
       dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
@@ -216,10 +216,11 @@ public class ExportPopupComponent extends BaseTest {
      */
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.exportElement" ) );
     //Click export Button
+    this.elemHelper.FocusElement( driver, By.cssSelector( "#ChartExportSVGExporting > div" ) );
     this.elemHelper.Click( driver, By.cssSelector( "#ChartExportSVGExporting > div" ) );
 
     //Assert popup and click Export Chart link
-    this.elemHelper.Click( driver, By.xpath( "//body/div[8]/div" ) );
+    this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(12) > div" ) );
 
     //Assert chart popup
     WebElement exportCountryChartPopup = this.elemHelper.FindElement( driver, By.id( "fancybox-content" ) );
@@ -236,7 +237,7 @@ public class ExportPopupComponent extends BaseTest {
       this.elemHelper.Click( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher();
+      DirectoryWatcher dw = new DirectoryWatcher( 10 );
       dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
@@ -273,15 +274,16 @@ public class ExportPopupComponent extends BaseTest {
      */
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "fancybox-overlay" ) );
     //Click to Export to CSV
+    this.elemHelper.FocusElement( driver, By.cssSelector( "#DataExportCSVExporting > div" ) );
     this.elemHelper.Click( driver, By.cssSelector( "#DataExportCSVExporting > div" ) );
 
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.xpath( "//body/div[9]/div" ) );
+      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(13) > div" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher();
+      DirectoryWatcher dw = new DirectoryWatcher( 10 );
       dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
@@ -318,10 +320,10 @@ public class ExportPopupComponent extends BaseTest {
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.xpath( "//body/div[10]/div" ) );
+      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(14) > div" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher();
+      DirectoryWatcher dw = new DirectoryWatcher( 10 );
       dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
@@ -358,10 +360,10 @@ public class ExportPopupComponent extends BaseTest {
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.xpath( "//body/div[11]/div" ) );
+      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(15) > div" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher();
+      DirectoryWatcher dw = new DirectoryWatcher( 5 );
       dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist
@@ -398,10 +400,10 @@ public class ExportPopupComponent extends BaseTest {
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.xpath( "//body/div[12]/div" ) );
+      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(16) > div" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher();
+      DirectoryWatcher dw = new DirectoryWatcher( 5 );
       dw.WatchForCreate( downloadDir );
 
       //Check if the file really exist

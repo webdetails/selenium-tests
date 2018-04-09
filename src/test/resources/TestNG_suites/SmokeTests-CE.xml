@@ -96,7 +96,7 @@
 			<class name="com.pentaho.ctools.cde.reference.WidgetReference" />
 			<class name="com.pentaho.ctools.cde.reference.samples.CggComponent" />
 			<class name="com.pentaho.ctools.cde.reference.samples.DuplicateComponent" />
-			<!-- TODO <class name="com.pentaho.ctools.cde.reference.samples.ExportPopupComponent" />-->
+			<class name="com.pentaho.ctools.cde.reference.samples.ExportPopupComponent" />
 			<class name="com.pentaho.ctools.cde.reference.samples.FilterAddinAccordion" />
 			<class name="com.pentaho.ctools.cde.reference.samples.FilterReference" />
 			<!-- http://jira.pentaho.com/browse/CDE-937 <class name="com.pentaho.ctools.cde.reference.samples.FilterVisualGuide" /> -->
@@ -116,7 +116,7 @@
 			<class name="com.pentaho.ctools.cde.require.reference.samples.CggComponent" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.DashboardComponent" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.DuplicateComponent" />
-			<!-- TODO <class name="com.pentaho.ctools.cde.require.reference.samples.ExportPopupComponent" />-->
+			<class name="com.pentaho.ctools.cde.require.reference.samples.ExportPopupComponent" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.FilterAddinAccordion" />
 			<class name="com.pentaho.ctools.cde.require.reference.samples.FilterReference" />
 			<!-- http://jira.pentaho.com/browse/CDE-937 <class name="com.pentaho.ctools.cde.require.reference.samples.FilterVisualGuide" /> -->

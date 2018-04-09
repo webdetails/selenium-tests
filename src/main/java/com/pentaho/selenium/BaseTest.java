@@ -23,6 +23,7 @@
 package com.pentaho.selenium;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -69,11 +70,15 @@ public class BaseTest {
 
     // Initialize BASEURL
     baseUrl = "http://localhost:8080/pentaho/";
-    downloadDir = System.getProperty( "java.io.tmpdir" ) + "/SeleniumDownloadDir";
+    downloadDir = Paths.get( System.getProperty( "java.io.tmpdir" ), "SeleniumDownloadDir" ).normalize().toAbsolutePath().toString();
     pentahoBaServerServiceName = System.getProperty( "pentaho.bi.server.service.name" );
     pentahoBaServerUrl = System.getProperty( "pentaho.bi.server.url" );
     pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
     pentahoBaServerPort = System.getProperty( "pentaho.bi.server.port" );
+
+    log.debug( "PRINT PROPERTIES:" );
+    log.debug( "baseUrl: " + baseUrl );
+    log.debug( "downloadDir: " + downloadDir );
 
     new File( downloadDir ).mkdir();
 
@@ -98,6 +103,7 @@ public class BaseTest {
     foptions.addPreference( "intl.accept_languages", "en-US, en" );
     foptions.addPreference( "browser.download.folderList", 2 ); // 0 - Desktop, 1- Download dir, 2 - specify dir
     foptions.addPreference( "browser.helperApps.alwaysAsk.force", false );
+    foptions.addPreference( "browser.download.useDownloadDir", true );
     foptions.addPreference( "browser.tabs.remote.autostart", false );
     foptions.addPreference( "browser.download.manager.showWhenStarting", false );
     foptions.addPreference( "browser.download.dir", downloadDir );
