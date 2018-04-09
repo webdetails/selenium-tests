@@ -55,7 +55,7 @@ public class TemplateComponent extends BaseTest {
    *    Open Sample Page
    */
   @Test
-  public void tc0_OpenSamplePage_Display() {
+  public void tc00_OpenSamplePage_Display() {
     this.log.info( "tc0_OpenSamplePage_Display" );
 
     //The URL for the TemplateComponent under CDF samples
@@ -63,7 +63,8 @@ public class TemplateComponent extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.TEMPLATE_COMPONENT_REQUIRE );
 
     //NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
   /**
@@ -78,7 +79,7 @@ public class TemplateComponent extends BaseTest {
    *    2. Check sample description.
    */
   @Test
-  public void tc1_PageContent_ContentPresent() {
+  public void tc01_PageContent_ContentPresent() {
     this.log.info( "tc1_PageContent_ContentPresent" );
 
     /*
@@ -134,10 +135,7 @@ public class TemplateComponent extends BaseTest {
    *    1. Click in Code and then click in button 'Try me'.
    */
   @Test
-  public void tc2_ReloadSample_SampleReadyToUse() {
-
-    // Wait for the loading icon to disappear
-    elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@class='blockUI blockOverlay']" ) );
+  public void tc02_ReloadSample_SampleReadyToUse() {
 
     // ## Step 1
     // Render again the sample
@@ -145,7 +143,8 @@ public class TemplateComponent extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
-    this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
     assertTrue( this.elemHelper.FindElement( driver, By.id( "sample" ) ).isDisplayed() );
@@ -166,8 +165,8 @@ public class TemplateComponent extends BaseTest {
    * Steps:
    *    1. Assert all six elements have correct text
    */
-  @Test
-  public void tc3_TemplateElements_DisplayedCorrectly() {
+  @Test( dependsOnMethods = "com.pentaho.ctools.cdf.require.documentation.TemplateComponent.tc02_ReloadSample_SampleReadyToUse" )
+  public void tc03_TemplateElements_DisplayedCorrectly() {
     // ## Step 1
     //First element
     WebElement firstElement = this.elemHelper.FindElement( driver, By.xpath( "//div[@id='sampleObject']/div/div[@class='templateRow'][1]" ) );
