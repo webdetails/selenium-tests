@@ -39,7 +39,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.pentaho.ctools.utils.DirectoryWatcher;
 import com.pentaho.ctools.utils.ElementHelper;
 import com.pentaho.ctools.utils.HttpUtils;
 import com.pentaho.ctools.utils.PageUrl;
@@ -161,7 +160,8 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 2
      */
     //Click to Export to PNG
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='ChartExportPNGExporting']/div" ) );
+    this.elemHelper.FocusElement( driver, By.id( "ExportCharts" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='ChartExportPNGExporting']/div" ) );
     this.elemHelper.Click( driver, By.cssSelector( "div.exportElement" ) );
 
     //Assert chart popup
@@ -179,21 +179,19 @@ public class ExportPopupComponent extends BaseTest {
       this.elemHelper.Click( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher( 10 );
-      dw.WatchForCreate( downloadDir );
-
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath );
-      // assertTrue(exportFile.exists());
 
       //Wait for the file to be downloaded totally
       for ( int i = 0; i < 50; i++ ) { //we only try 50 times == 5000 ms
-        long nSize = FileUtils.sizeOf( exportFile );
-        //Since the file always contents the same data, we wait for the expected bytes
-        if ( nSize >= 5000 ) {
-          break;
+        if ( exportFile.exists() ) {
+          long nSize = FileUtils.sizeOf( exportFile );
+          //Since the file always contents the same data, we wait for the expected bytes
+          if ( nSize >= 5000 ) {
+            break;
+          }
+          this.log.info( "BeforeSleep " + nSize );
         }
-        this.log.info( "BeforeSleep " + nSize );
         Thread.sleep( 100 );
       }
 
@@ -203,12 +201,14 @@ public class ExportPopupComponent extends BaseTest {
       String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
       assertEquals( md5, "b9cc6ec4ac71cbcfb9fcd741f8fc62f7" );
 
+      Thread.sleep( 500 );
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );
     }
 
     // Close dialog box
-    this.elemHelper.Click( driver, By.id( "fancybox-close" ) );
+    this.elemHelper.ClickJS( driver, By.id( "fancybox-close" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "fancybox-wrap" ) );
     assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
 
     /*
@@ -216,11 +216,16 @@ public class ExportPopupComponent extends BaseTest {
      */
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.exportElement" ) );
     //Click export Button
-    this.elemHelper.FocusElement( driver, By.cssSelector( "#ChartExportSVGExporting > div" ) );
-    this.elemHelper.Click( driver, By.cssSelector( "#ChartExportSVGExporting > div" ) );
-
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#ChartExportSVGExporting > div" ) );
     //Assert popup and click Export Chart link
-    this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(12) > div" ) );
+    Boolean increment = false;
+    WebElement exportsvg = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.popupComponent:nth-child(11) > div" ), 3 );
+    if ( exportsvg != null )
+      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(11) > div" ) );
+    else {
+      increment = true;
+      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(12) > div" ) );
+    }
 
     //Assert chart popup
     WebElement exportCountryChartPopup = this.elemHelper.FindElement( driver, By.id( "fancybox-content" ) );
@@ -237,21 +242,20 @@ public class ExportPopupComponent extends BaseTest {
       this.elemHelper.Click( driver, By.cssSelector( "div.exportChartPopupButton.exportChartOkButton" ) );
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher( 10 );
-      dw.WatchForCreate( downloadDir );
-
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath2 );
       // assertTrue(exportFile.exists());
 
       //Wait for the file to be downloaded totally
       for ( int i = 0; i < 50; i++ ) { //we only try 50 times == 5000 ms
-        long nSize = FileUtils.sizeOf( exportFile );
-        //Since the file always contents the same data, we wait for the expected bytes
-        if ( nSize >= 30000 ) {
-          break;
+        if ( exportFile.exists() ) {
+          long nSize = FileUtils.sizeOf( exportFile );
+          //Since the file always contents the same data, we wait for the expected bytes
+          if ( nSize >= 30000 ) {
+            break;
+          }
+          this.log.info( "BeforeSleep " + nSize );
         }
-        this.log.info( "BeforeSleep " + nSize );
         Thread.sleep( 100 );
       }
 
@@ -260,13 +264,16 @@ public class ExportPopupComponent extends BaseTest {
       //Check if the file downloaded is the expected
       String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
       assertEquals( md5, "4e0c6695e4aac3b2b7d52fac25258897" );
+
+      Thread.sleep( 500 );
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );
       assertTrue( false );
     }
 
     // Close dialog box
-    this.elemHelper.Click( driver, By.id( "fancybox-close" ) );
+    this.elemHelper.ClickJS( driver, By.id( "fancybox-close" ) );
+    this.elemHelper.WaitForElementInvisibility( driver, By.id( "fancybox-wrap" ) );
     assertTrue( this.elemHelper.WaitForElementNotPresent( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div/div[1]" ) ) );
 
     /*
@@ -274,30 +281,38 @@ public class ExportPopupComponent extends BaseTest {
      */
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "fancybox-overlay" ) );
     //Click to Export to CSV
-    this.elemHelper.FocusElement( driver, By.cssSelector( "#DataExportCSVExporting > div" ) );
-    this.elemHelper.Click( driver, By.cssSelector( "#DataExportCSVExporting > div" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#DataExportCSVExporting > div" ) );
 
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(13) > div" ) );
+      if ( increment ) {
+        this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.popupComponent:nth-child(13) > div" ), 3 );
+        this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(13) > div" ) );
+      } else {
+        WebElement exportCSV = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.popupComponent:nth-child(12) > div" ), 3 );
+        if ( exportCSV != null ) {
+          this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(12) > div" ) );
+        } else {
+          increment = true;
+          this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(13) > div" ) );
+        }
+      }
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher( 10 );
-      dw.WatchForCreate( downloadDir );
-
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath3 );
-      // assertTrue(exportFile.exists());
 
       //Wait for the file to be downloaded totally
       for ( int i = 0; i < 50; i++ ) { //we only try 50 times == 5000 ms
-        long nSize = FileUtils.sizeOf( exportFile );
-        //Since the file always contents the same data, we wait for the expected bytes
-        if ( nSize >= 3000 ) {
-          break;
+        if ( exportFile.exists() ) {
+          long nSize = FileUtils.sizeOf( exportFile );
+          //Since the file always contents the same data, we wait for the expected bytes
+          if ( nSize >= 3000 ) {
+            break;
+          }
+          this.log.info( "BeforeSleep " + nSize );
         }
-        this.log.info( "BeforeSleep " + nSize );
         Thread.sleep( 100 );
       }
 
@@ -306,6 +321,8 @@ public class ExportPopupComponent extends BaseTest {
       //Check if the file downloaded is the expected
       String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
       assertEquals( md5, "ce173f0d7430a31e070cbed042cb6068" );
+
+      Thread.sleep( 500 );
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );
       assertTrue( false );
@@ -315,29 +332,38 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 5
      */
     //Click to Export to XLS
-    this.elemHelper.Click( driver, By.cssSelector( "#DataExportXLSExporting > div" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#DataExportXLSExporting > div" ) );
 
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(14) > div" ) );
+      if ( increment ) {
+        this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.popupComponent:nth-child(14) > div" ), 3 );
+        this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(14) > div" ) );
+      } else {
+        WebElement exportCSV = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.popupComponent:nth-child(13) > div" ), 3 );
+        if ( exportCSV != null ) {
+          this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(13) > div" ) );
+        } else {
+          increment = true;
+          this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(14) > div" ) );
+        }
+      }
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher( 10 );
-      dw.WatchForCreate( downloadDir );
-
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath4 );
-      // assertTrue(exportFile.exists());
 
       //Wait for the file to be downloaded totally
       for ( int i = 0; i < 50; i++ ) { //we only try 50 times == 5000 ms
-        long nSize = FileUtils.sizeOf( exportFile );
-        //Since the file always contents the same data, we wait for the expected bytes
-        if ( nSize >= 20000 ) {
-          break;
+        if ( exportFile.exists() ) {
+          long nSize = FileUtils.sizeOf( exportFile );
+          //Since the file always contents the same data, we wait for the expected bytes
+          if ( nSize >= 20000 ) {
+            break;
+          }
+          this.log.info( "BeforeSleep " + nSize );
         }
-        this.log.info( "BeforeSleep " + nSize );
         Thread.sleep( 100 );
       }
 
@@ -346,6 +372,8 @@ public class ExportPopupComponent extends BaseTest {
       //Check if the file downloaded is the expected
       String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
       assertEquals( md5, "2f16c56802d4d31dfc09a00bbcf8e71a" );
+
+      Thread.sleep( 500 );
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );
       assertTrue( false );
@@ -355,29 +383,38 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 6
      */
     //Click to Export to JSON
-    this.elemHelper.Click( driver, By.cssSelector( "#DataExportJSONExporting > div" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#DataExportJSONExporting > div" ) );
 
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(15) > div" ) );
+      if ( increment ) {
+        this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.popupComponent:nth-child(15) > div" ), 3 );
+        this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(15) > div" ) );
+      } else {
+        WebElement exportCSV = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.popupComponent:nth-child(14) > div" ), 3 );
+        if ( exportCSV != null ) {
+          this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(14) > div" ) );
+        } else {
+          increment = true;
+          this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(15) > div" ) );
+        }
+      }
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher( 5 );
-      dw.WatchForCreate( downloadDir );
-
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath5 );
-      // assertTrue(exportFile.exists());
 
       //Wait for the file to be downloaded totally
       for ( int i = 0; i < 50; i++ ) { //we only try 50 times == 5000 ms
-        long nSize = FileUtils.sizeOf( exportFile );
-        //Since the file always contents the same data, we wait for the expected bytes
-        if ( nSize >= 4000 ) {
-          break;
+        if ( exportFile.exists() ) {
+          long nSize = FileUtils.sizeOf( exportFile );
+          //Since the file always contents the same data, we wait for the expected bytes
+          if ( nSize >= 4000 ) {
+            break;
+          }
+          this.log.info( "BeforeSleep " + nSize );
         }
-        this.log.info( "BeforeSleep " + nSize );
         Thread.sleep( 100 );
       }
 
@@ -386,6 +423,8 @@ public class ExportPopupComponent extends BaseTest {
       //Check if the file downloaded is the expected
       String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
       assertEquals( md5, "de77ef9444d37f191737549a8c7a87fc" );
+
+      Thread.sleep( 500 );
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );
       assertTrue( false );
@@ -395,29 +434,38 @@ public class ExportPopupComponent extends BaseTest {
      * ## Step 7
      */
     //Click to Export to XML
-    this.elemHelper.Click( driver, By.cssSelector( "#DataExportXMLExporting > div" ) );
+    this.elemHelper.ClickJS( driver, By.cssSelector( "#DataExportXMLExporting > div" ) );
 
     //Click export and assert file is correctly downloaded
     try {
       //Click to export
-      this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(16) > div" ) );
+      if ( increment ) {
+        this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.popupComponent:nth-child(16) > div" ), 3 );
+        this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(16) > div" ) );
+      } else {
+        WebElement exportCSV = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.popupComponent:nth-child(15) > div" ), 3 );
+        if ( exportCSV != null ) {
+          this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(15) > div" ) );
+        } else {
+          increment = true;
+          this.elemHelper.Click( driver, By.cssSelector( "div.popupComponent:nth-child(16) > div" ) );
+        }
+      }
 
       //Wait for file to be created in the destination dir
-      DirectoryWatcher dw = new DirectoryWatcher( 5 );
-      dw.WatchForCreate( downloadDir );
-
       //Check if the file really exist
       File exportFile = new File( this.exportFilePath6 );
-      // assertTrue(exportFile.exists());
 
       //Wait for the file to be downloaded totally
       for ( int i = 0; i < 50; i++ ) { //we only try 50 times == 5000 ms
-        long nSize = FileUtils.sizeOf( exportFile );
-        //Since the file always contents the same data, we wait for the expected bytes
-        if ( nSize >= 6000 ) {
-          break;
+        if ( exportFile.exists() ) {
+          long nSize = FileUtils.sizeOf( exportFile );
+          //Since the file always contents the same data, we wait for the expected bytes
+          if ( nSize >= 6000 ) {
+            break;
+          }
+          this.log.info( "BeforeSleep " + nSize );
         }
-        this.log.info( "BeforeSleep " + nSize );
         Thread.sleep( 100 );
       }
 
@@ -426,6 +474,8 @@ public class ExportPopupComponent extends BaseTest {
       //Check if the file downloaded is the expected
       String md5 = DigestUtils.md5Hex( Files.readAllBytes( exportFile.toPath() ) );
       assertEquals( md5, "1aeba3355dee869b97832729c7945474" );
+
+      Thread.sleep( 500 );
     } catch ( Exception e ) {
       this.log.error( e.getMessage() );
       assertTrue( false );
