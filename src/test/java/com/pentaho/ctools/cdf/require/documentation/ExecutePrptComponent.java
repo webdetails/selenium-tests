@@ -122,7 +122,7 @@ public class ExecutePrptComponent extends BaseTest {
 
     //Check the number of divs with id 'SampleObject'
     //Hence, we guarantee when click Try Me the previous div is replaced
-    int nSampleObject = this.elemHelper.FindElements(driver, By.id( "sampleObject" ) ).size();
+    int nSampleObject = this.elemHelper.FindElements( driver, By.id( "sampleObject" ) ).size();
     assertEquals( nSampleObject, 1 );
 
     WebElement elemButton = this.elemHelper.FindElement( driver, By.cssSelector( "button span" ) );
@@ -149,7 +149,7 @@ public class ExecutePrptComponent extends BaseTest {
      */
     String buttonText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//button/span" ) );
     assertEquals( "Execute Prpt", buttonText );
-    this.elemHelper.FindElement( driver, By.xpath( "//button/span" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//button/span" ) );
     this.elemHelper.WaitForElementPresence( driver, By.id( "fancybox-content" ) );
     //Move to iframe
     WebElement elemIFrame = this.elemHelper.FindElement( driver, By.xpath( "//iframe" ) );
@@ -161,9 +161,9 @@ public class ExecutePrptComponent extends BaseTest {
     //Check presence of tool bar elements
     assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#toolbar-parameterToggle > span" ) ) );
     String rowLimitExpected = "Row Limit:";
-    String rowLimitActul = this.elemHelper.WaitForTextPresence( driver, By.id( "row-limit-label" ), rowLimitExpected);
+    String rowLimitActul = this.elemHelper.WaitForTextPresence( driver, By.id( "row-limit-label" ), rowLimitExpected );
     assertEquals( rowLimitExpected, rowLimitActul );
-    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#rowLimitControl > div:nth-child(2)" ) ) );    //DROP DOWN
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#rowLimitControl > div:nth-child(2)" ) ) ); //DROP DOWN
     assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#rowLimitControl > div.rl_rowsNumberInput" ) ) );
     assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#toolbar-clearCache > span" ) ) );
     //Check the Product Name and Output Type
@@ -393,22 +393,22 @@ public class ExecutePrptComponent extends BaseTest {
     //Check the generated image
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
     this.elemHelper.SwitchToFrame( driver, "reportContent" );
-    WebElement elemTextLayer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']" ) );
+    WebElement elemTextLayer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer" ) );
     assertNotNull( elemTextLayer );
-    WebElement elemTextLayerdiv1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
+    WebElement elemTextLayerdiv1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div" ) );
     assertNotNull( elemTextLayerdiv1 );
-    WebElement elemTextLayerdiv2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
+    WebElement elemTextLayerdiv2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(2)" ) );
     assertNotNull( elemTextLayerdiv2 );
-    WebElement elemTextLayerdiv3 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
+    WebElement elemTextLayerdiv3 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(3)" ) );
     assertNotNull( elemTextLayerdiv3 );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ), "L I N E :", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div" ), "L I N E :", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div" ) );
     assertEquals( "L I N E :", text );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ), "M o t o r c y c l e s", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(2)" ), "M o t o r c y c l e s", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(2)" ) );
     assertEquals( "M o t o r c y c l e s", text );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ), "MSRP", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(3)" ), "MSRP", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(3)" ) );
     assertEquals( "MSRP", text );
 
     /*

@@ -190,12 +190,12 @@ public class PrptComponent extends BaseTest {
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.elemHelper.SwitchToFrame( driver, "sampleObject_prptFrame" );
     //Check presence of tool bar elements
-    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector("#toolbar")));
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( "#toolbar" ) ) );
     String DropDown = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( ".dijitValidationTextBoxLabel" ) );
     assertEquals( DropDown, "Maximum" );
-    log.debug(DropDown);
-    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector(".dijitEditorIconParameters")));
-    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector(".dijitEditorIconRefresh")));
+    log.debug( DropDown );
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( ".dijitEditorIconParameters" ) ) );
+    assertNotNull( this.elemHelper.FindElement( driver, By.cssSelector( ".dijitEditorIconRefresh" ) ) );
     //Check the Product Name and Output Type
     WebElement elemtLine = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div.parameter-label" ), 45 );
     assertNotNull( elemtLine );
@@ -231,8 +231,10 @@ public class PrptComponent extends BaseTest {
    *
    * Test Case Name:
    *    Toggle Prompt Panel
+   *    
    * Description:
    *    The test case pretends disable and enable the prompt panel.
+   * 
    * Steps:
    *    1. Enable prompt panel
    *    2. Disable prompt panel
@@ -245,17 +247,18 @@ public class PrptComponent extends BaseTest {
     /*
      * ## Step 1
      */
+    this.elemHelper.FocusElement( driver, By.id( "selectorObject" ) );
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div#sampleObject iframe" ) );
     this.elemHelper.SwitchToFrame( driver, "sampleObject_prptFrame" );
     assertNotNull( this.elemHelper.FindElement( driver, By.id( "reportControlPanel" ) ) );
-    this.elemHelper.FindElement( driver, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) );
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "reportControlPanel" ) );
     assertFalse( this.elemHelper.WaitForElementNotPresent( driver, By.id( "reportControlPanel" ), 2 ) );
 
     /*
      * ## Step 2
      */
-    this.elemHelper.FindElement( driver, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) ).click();
+    this.elemHelper.Click( driver, By.xpath( "//span[@id='toolbar-parameterToggle']/span" ) );
     assertNotNull( this.elemHelper.FindElement( driver, By.id( "reportControlPanel" ) ) );
   }
 
@@ -418,33 +421,26 @@ public class PrptComponent extends BaseTest {
     this.elemHelper.SwitchToFrame( driver, "sampleObject_prptFrame" );
     select = new Select( this.elemHelper.FindElement( driver, By.xpath( "//div[@class='parameter']/div[2]/select" ) ) );
     select.selectByValue( "pageable/pdf" );
-    //TODO - testing this, to avoid failing. After we see that the sleep helps - we study an alternative.
-    try {
-      Thread.sleep( 10000 );
-    } catch ( InterruptedException e ) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
     this.elemHelper.WaitForElementInvisibility( driver, By.id( "glasspane" ) );
     //Check the generated image
     this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "iframe#reportContent" ) );
     this.elemHelper.SwitchToFrame( driver, "reportContent" );
-    WebElement elemTextLayer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']" ) );
+    WebElement elemTextLayer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer" ) );
     assertNotNull( elemTextLayer );
-    WebElement elemTextLayerdiv1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
+    WebElement elemTextLayerdiv1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div" ) );
     assertNotNull( elemTextLayerdiv1 );
-    WebElement elemTextLayerdiv2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
+    WebElement elemTextLayerdiv2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(2)" ) );
     assertNotNull( elemTextLayerdiv2 );
-    WebElement elemTextLayerdiv3 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
+    WebElement elemTextLayerdiv3 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(3)" ) );
     assertNotNull( elemTextLayerdiv3 );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ), "L I N E :", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div" ), "L I N E :", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div" ) );
     assertEquals( "L I N E :", text );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ), "M o t o r c y c l e s", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[2]" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(2)" ), "M o t o r c y c l e s", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(2)" ) );
     assertEquals( "M o t o r c y c l e s", text );
-    this.elemHelper.WaitForTextPresence( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ), "MSRP", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='pageContainer1']/div[@class='textLayer']/div[3]" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(3)" ), "MSRP", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(3)" ) );
     assertEquals( "MSRP", text );
 
     /*
