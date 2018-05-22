@@ -28,15 +28,11 @@
 					<exclude name="tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful" />
 				</methods>
 			</class>-->
-			<!-- http://jira.pentaho.com/browse/BACKLOG-20622
 			<class name="com.pentaho.ctools.cdf.documentation.ExecutePrptComponent" />
-			-->
 			<class name="com.pentaho.ctools.cdf.documentation.ExecuteXactionComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.MonthPickerComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.MultiButtonComponent" />
-			<!-- http://jira.pentaho.com/browse/BACKLOG-20622
 			<class name="com.pentaho.ctools.cdf.documentation.PrptComponent" />
-			 -->
 			<class name="com.pentaho.ctools.cdf.documentation.QueryComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.RadioComponent" />
 			<class name="com.pentaho.ctools.cdf.documentation.SchedulePrptComponent" />
@@ -62,21 +58,20 @@
 					<exclude name="tc8_AllDatesBeforePressCancelAndSelectDate_DateIsCancelAndThenSetSuccessful" />
 				</methods>
 			</class>-->
-			<!-- http://jira.pentaho.com/browse/BACKLOG-20622
 			<class name="com.pentaho.ctools.cdf.require.documentation.ExecutePrptComponent" />
-			-->
 			<class name="com.pentaho.ctools.cdf.require.documentation.ExecuteXactionComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.MonthPickerComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.MultiButtonComponent" />
-			<!-- http://jira.pentaho.com/browse/BACKLOG-20622
 			<class name="com.pentaho.ctools.cdf.require.documentation.PrptComponent" />
-			-->
 			<class name="com.pentaho.ctools.cdf.require.documentation.QueryComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.RadioComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SchedulePrptComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SelectComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.SelectMultiComponent" />
-			<class name="com.pentaho.ctools.cdf.require.documentation.TableComponent" />
+			<!-- TODO 
+				https://jira.pentaho.com/browse/CDF-1005
+				<class name="com.pentaho.ctools.cdf.require.documentation.TableComponent" />
+			 -->
 			<class name="com.pentaho.ctools.cdf.require.documentation.TemplateComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextAreaInputComponent" />
 			<class name="com.pentaho.ctools.cdf.require.documentation.TextComponent" />
