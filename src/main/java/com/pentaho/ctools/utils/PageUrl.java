@@ -67,7 +67,7 @@ public class PageUrl extends BaseTest {
   public static final String DATERANGEINPUT_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:43-DateRangeInputComponent:date_range_component.xcdf/generatedContent";
   public static final String EXECUTE_ANALYZER_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:91-ExecuteAnalyzerComponent:execute_analyzer_component.xcdf/generatedContent";
   public static final String EXECUTE_PRPT_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:85-ExecutePrptComponent:execute_prpt_component.xcdf/generatedContent";
-  public static final String EXECUTE_XACTION_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:3legacy:0-documentation:30-component_reference:10-core:76-ExecuteXactionComponent:execute_xaction_component.xcdf/generatedContent";
+  public static final String EXECUTE_XACTION_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:76-ExecuteXactionComponent:execute_xaction_component.xcdf/generatedContent";
   public static final String MONTH_PICKER_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:46-MonthPickerComponent:month_picker_component.xcdf/generatedContent";
   public static final String MULTIBUTTON_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:56-MultiButtonComponent:multibutton_component.xcdf/generatedContent";
   public static final String PRPT_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:63-PentahoReportingComponent:prpt_component.xcdf/generatedContent";
@@ -81,7 +81,7 @@ public class PageUrl extends BaseTest {
   public static final String TEXT_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:34-TextComponent:text_component.xcdf/generatedContent";
   public static final String TEXT_INPUT_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:37-TextInputComponent:text_input_component.xcdf/generatedContent";
   public static final String VISUALIZATION_API_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:60-VisualizationAPIComponent:visualization_component.xcdf/generatedContent";
-  public static final String XACTION_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:30-documentation:legacy:30-component_reference:10-core:10-XactionComponent:xaction_component.xcdf/generatedContent";
+  public static final String XACTION_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf:legacy:30-documentation:30-component_reference:10-core:10-XactionComponent:xaction_component.xcdf/generatedContent";
 
   /*
    * CDF - REQUIRE
@@ -137,49 +137,49 @@ public class PageUrl extends BaseTest {
   /*
    * CDE - Legacy
    */
-  public static final String SAMPLE_DASHBOARD = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:cde_sample1.wcdf/generatedContent";
-  public static final String SAMPLE_DASHBOARD_EDIT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:cde_sample1.wcdf/wcdf.edit";
-  public static final String CGG_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:CggComponent:cggComponent.wcdf/generatedContent";
-  public static final String ADDIN_REFERENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:addIns.wcdf/generatedContent";
-  public static final String ADDIN_REFERENCE_EDIT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:addIns.wcdf/wcdf.edit";
-  public static final String AJAX_REQUEST_REFERENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:ajaxRequest.wcdf/generatedContent";
-  public static final String CCCV2_SHOWCASE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:testCCCv2-II.wcdf/generatedContent";
-  public static final String BULLET_CHART_TEST_CASE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:ccc_bullet.wcdf/generatedContent";
-  public static final String DUPLICATE_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:DuplicateComponent:duplicateComponent.wcdf/generatedContent";
-  public static final String EXPORT_POPUP_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:ExportPopup:ExportPopupComponent.wcdf/generatedContent";
-  public static final String FILTER_REFERENCE_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:FilterComponent:filter_reference.wcdf/generatedContent";
-  public static final String FILTER_VISUAL_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:FilterComponent:filter_visual_guide.wcdf/generatedContent";
-  public static final String FILTER_ADDIN_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:FilterComponent:filter_addIn_accordion.wcdf/generatedContent";
-  public static final String MAP_COMPONENT_REFERENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:NewMapComponent:maps.wcdf/generatedContent";
-  public static final String MAP_COMPONENT_REFERENCE_EDIT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:NewMapComponent:maps.wcdf/wcdf.edit";
-  public static final String MAP_COMPONENT_FULL_TEST = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:NewMapComponent:FullMapTest.wcdf/generatedContent";
-  public static final String OLAP_SELECTOR_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:OlapSelector:olapSelector.wcdf/generatedContent";
-  public static final String POPUP_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:popup.wcdf/generatedContent";
-  public static final String VIZUALIZATION_API_REFRENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:VisualizationAPIreference.wcdf/generatedContent";
-  public static final String WIDGET_REFERENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:widgets.wcdf/generatedContent";
+  public static final String SAMPLE_DASHBOARD = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:cde_sample1.wcdf/generatedContent";
+  public static final String SAMPLE_DASHBOARD_EDIT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:cde_sample1.wcdf/wcdf.edit";
+  public static final String CGG_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:CggComponent:cggComponent.wcdf/generatedContent";
+  public static final String ADDIN_REFERENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:addIns.wcdf/generatedContent";
+  public static final String ADDIN_REFERENCE_EDIT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:addIns.wcdf/wcdf.edit";
+  public static final String AJAX_REQUEST_REFERENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:ajaxRequest.wcdf/generatedContent";
+  public static final String BULLET_CHART_TEST_CASE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:ccc_bullet.wcdf/generatedContent";
+  public static final String CCCV2_SHOWCASE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:testCCCv2-II.wcdf/generatedContent";
+  public static final String DUPLICATE_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:DuplicateComponent:duplicateComponent.wcdf/generatedContent";
+  public static final String EXPORT_POPUP_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:ExportPopup:ExportPopupComponent.wcdf/generatedContent";
+  public static final String FILTER_REFERENCE_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:FilterComponent:filter_reference.wcdf/generatedContent";
+  public static final String FILTER_VISUAL_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:FilterComponent:filter_visual_guide.wcdf/generatedContent";
+  public static final String FILTER_ADDIN_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:FilterComponent:filter_addIn_accordion.wcdf/generatedContent";
+  public static final String MAP_COMPONENT_REFERENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:NewMapComponent:maps.wcdf/generatedContent";
+  public static final String MAP_COMPONENT_REFERENCE_EDIT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:NewMapComponent:maps.wcdf/wcdf.edit";
+  public static final String MAP_COMPONENT_FULL_TEST = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:NewMapComponent:FullMapTest.wcdf/generatedContent";
+  public static final String OLAP_SELECTOR_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:OlapSelector:olapSelector.wcdf/generatedContent";
+  public static final String POPUP_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:popup.wcdf/generatedContent";
+  public static final String VIZUALIZATION_API_REFRENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:VisualizationAPIreference.wcdf/generatedContent";
+  public static final String WIDGET_REFERENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:widgets.wcdf/generatedContent";
 
   /*
   * CDE - REQUIRE
   */
-  public static final String SAMPLE_DASHBOARD_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:cde_sample1.wcdf/generatedContent";
-  public static final String ADDIN_REFERENCE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:AddIns:addIns.wcdf/generatedContent";
-  public static final String ADDIN_REFERENCE_REQUIRE_EDIT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:AddIns:addIns.wcdf/wcdf.edit";
-  public static final String AJAX_REQUEST_REFERENCE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:AjaxRequest:ajaxRequest.wcdf/generatedContent";
-  public static final String BULLET_CHART_TEST_CASE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:ccc_bullet.wcdf/generatedContent";
-  public static final String CCCV2_SHOWCASE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:testCCCv2-II.wcdf/generatedContent";
-  public static final String CGG_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:CggComponent:cggComponent.wcdf/generatedContent";
-  public static final String DASHBOARD_MODULE_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:dashboard:dashboard_module.xcdf/generatedContent";
-  public static final String DASHBOARD_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:DashboardComponent:DashboardComponent.wcdf/generatedContent";
-  public static final String DUPLICATE_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:DuplicateComponent:duplicateComponent.wcdf/generatedContent";
-  public static final String EXPORT_POPUP_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:ExportPopup:ExportPopupComponent.wcdf/generatedContent";
-  public static final String FILTER_REFERENCE_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:FilterComponent:filter_reference.wcdf/generatedContent";
-  public static final String FILTER_VISUAL_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:FilterComponent:filter_visual_guide.wcdf/generatedContent";
-  public static final String FILTER_ADDIN_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:FilterComponent:filter_addIn_accordion.wcdf/generatedContent";
-  public static final String MAP_COMPONENT_REFERENCE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:NewMapComponent:maps.wcdf/generatedContent";
-  public static final String MAP_COMPONENT_FULL_TEST_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:NewMapComponent:FullMapTest.wcdf/generatedContent";
-  public static final String OLAP_SELECTOR_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:OlapSelector:olapSelector.wcdf/generatedContent";
-  public static final String VIZUALIZATION_API_REFRENCE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:VisualizationApi:VisualizationAPIreference.wcdf/generatedContent";
-  public static final String POPUP_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:pentaho-cdf-dd-require:tests:PopupComponent:popup.wcdf/generatedContent";
+  public static final String SAMPLE_DASHBOARD_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:cde_sample1.wcdf/generatedContent";
+  public static final String ADDIN_REFERENCE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:AddIns:addIns.wcdf/generatedContent";
+  public static final String ADDIN_REFERENCE_REQUIRE_EDIT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:AddIns:addIns.wcdf/wcdf.edit";
+  public static final String AJAX_REQUEST_REFERENCE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:AjaxRequest:ajaxRequest.wcdf/generatedContent";
+  public static final String BULLET_CHART_TEST_CASE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:ccc_bullet.wcdf/generatedContent";
+  public static final String CCCV2_SHOWCASE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:testCCCv2-II.wcdf/generatedContent";
+  public static final String CGG_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:CggComponent:cggComponent.wcdf/generatedContent";
+  public static final String DASHBOARD_MODULE_COMPONENT_REQUIRE = BASE_URL + "/api/repos/:public:plugin-samples:pentaho-cdf-dd:dashboard:dashboard_module.xcdf/generatedContent";
+  public static final String DASHBOARD_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:DashboardComponent:DashboardComponent.wcdf/generatedContent";
+  public static final String DUPLICATE_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:DuplicateComponent:duplicateComponent.wcdf/generatedContent";
+  public static final String EXPORT_POPUP_COMPONENT_REQUIRE = BASE_URL + "/api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:ExportPopup:ExportPopupComponent.wcdf/generatedContent";
+  public static final String FILTER_REFERENCE_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:FilterComponent:filter_reference.wcdf/generatedContent";
+  public static final String FILTER_VISUAL_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:FilterComponent:filter_visual_guide.wcdf/generatedContent";
+  public static final String FILTER_ADDIN_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:FilterComponent:filter_addIn_accordion.wcdf/generatedContent";
+  public static final String MAP_COMPONENT_REFERENCE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:NewMapComponent:maps.wcdf/generatedContent";
+  public static final String MAP_COMPONENT_FULL_TEST_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:NewMapComponent:FullMapTest.wcdf/generatedContent";
+  public static final String OLAP_SELECTOR_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:OlapSelector:olapSelector.wcdf/generatedContent";
+  public static final String POPUP_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:PopupComponent:popup.wcdf/generatedContent";
+  public static final String VIZUALIZATION_API_REFRENCE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:VisualizationApi:VisualizationAPIreference.wcdf/generatedContent";
 
   /*
    * CDE Dashboard
