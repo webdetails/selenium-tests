@@ -168,7 +168,7 @@ public class PageUrl extends BaseTest {
   public static final String BULLET_CHART_TEST_CASE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:ccc_bullet.wcdf/generatedContent";
   public static final String CCCV2_SHOWCASE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:testCCCv2-II.wcdf/generatedContent";
   public static final String CGG_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:CggComponent:cggComponent.wcdf/generatedContent";
-  public static final String DASHBOARD_MODULE_COMPONENT_REQUIRE = BASE_URL + "/api/repos/:public:plugin-samples:pentaho-cdf-dd:dashboard:dashboard_module.xcdf/generatedContent";
+  public static final String DASHBOARD_MODULE_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:dashboard:dashboard_module.xcdf/generatedContent";
   public static final String DASHBOARD_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:DashboardComponent:DashboardComponent.wcdf/generatedContent";
   public static final String DUPLICATE_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:DuplicateComponent:duplicateComponent.wcdf/generatedContent";
   public static final String EXPORT_POPUP_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:ExportPopup:ExportPopupComponent.wcdf/generatedContent";
