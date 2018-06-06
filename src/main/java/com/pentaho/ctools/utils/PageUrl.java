@@ -171,7 +171,7 @@ public class PageUrl extends BaseTest {
   public static final String DASHBOARD_MODULE_COMPONENT_REQUIRE = BASE_URL + "/api/repos/:public:plugin-samples:pentaho-cdf-dd:dashboard:dashboard_module.xcdf/generatedContent";
   public static final String DASHBOARD_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:DashboardComponent:DashboardComponent.wcdf/generatedContent";
   public static final String DUPLICATE_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:DuplicateComponent:duplicateComponent.wcdf/generatedContent";
-  public static final String EXPORT_POPUP_COMPONENT_REQUIRE = BASE_URL + "/api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:ExportPopup:ExportPopupComponent.wcdf/generatedContent";
+  public static final String EXPORT_POPUP_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:ExportPopup:ExportPopupComponent.wcdf/generatedContent";
   public static final String FILTER_REFERENCE_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:FilterComponent:filter_reference.wcdf/generatedContent";
   public static final String FILTER_VISUAL_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:FilterComponent:filter_visual_guide.wcdf/generatedContent";
   public static final String FILTER_ADDIN_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:FilterComponent:filter_addIn_accordion.wcdf/generatedContent";

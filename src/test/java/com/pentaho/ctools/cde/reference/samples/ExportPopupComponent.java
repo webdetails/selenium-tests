@@ -174,8 +174,8 @@ public class ExportPopupComponent extends BaseTest {
 
     // Check URL of displayed image
     String chartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", chartSRCUrl );
-    assertEquals( 200, HttpUtils.GetHttpStatus( chartSRCUrl, pentahoBaServerUsername, pentahoBaServerPassword ) );
+    assertEquals( chartSRCUrl, baseUrl + "plugin/cgg/api/services/draw?outputType=png&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Flegacy%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200" );
+    assertEquals( HttpUtils.GetHttpStatus( chartSRCUrl, pentahoBaServerUsername, pentahoBaServerPassword ), 200 );
 
     //Click export and assert file is correctly downloaded
     try {
@@ -235,8 +235,8 @@ public class ExportPopupComponent extends BaseTest {
 
     // Check URL of displayed image
     String countryChartSRCUrl = this.elemHelper.GetAttribute( driver, By.xpath( "//div[@id='fancybox-content']/div/div/div/div[2]/img" ), "src" );
-    assertEquals( baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200", countryChartSRCUrl );
-    assertEquals( 200, HttpUtils.GetHttpStatus( countryChartSRCUrl, pentahoBaServerUsername, pentahoBaServerPassword ) );
+    assertEquals( countryChartSRCUrl, baseUrl + "plugin/cgg/api/services/draw?outputType=svg&script=%2Fpublic%2Fplugin-samples%2Fpentaho-cdf-dd%2Flegacy%2Ftests%2FExportPopup%2FBarChart.js&paramwidth=350&paramheight=200" );
+    assertEquals( HttpUtils.GetHttpStatus( countryChartSRCUrl, pentahoBaServerUsername, pentahoBaServerPassword ), 200 );
 
     //Click export and assert file is correctly downloaded
     try {
