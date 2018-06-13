@@ -72,12 +72,14 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    Page Content
+   *    
    * Description:
    *    The test case pretends to validate the display contents on the page.
+   *    
    * Steps:
    *    1. Check display texts
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc00_OpenSamplePage_Display" )
   public void tc01_PageContent_ContentDisplayed() {
     this.log.info( "tc01_PageContent_CachedQueries" );
 
@@ -130,13 +132,15 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    Sparkline
+   *    
    * Description:
    *    The test case pretends to validate the sparkline sample.
+   *    
    * Steps:
    *    1. Check if the sample for 'sparkline' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc01_PageContent_ContentDisplayed" )
   public void tc02_Sparkline_SampleWorks() {
     this.log.info( "tc02_Sparkline_SampleWorks" );
 
@@ -188,13 +192,15 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    pvSparkline
+   *    
    * Description:
    *    The test case pretends to validate the pvSparkline sample.
+   *    
    * Steps:
    *    1. Check if the sample for 'pvSparkline' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc02_Sparkline_SampleWorks" )
   public void tc03_pvSparkline_SampleWorks() {
     this.log.info( "tc03_pvSparkline_SampleWorks" );
 
@@ -251,13 +257,15 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    DataBar
+   *    
    * Description:
    *    The test case pretends to validate the dataBar sample.
+   *    
    * Steps:
    *    1. Check if the sample for 'dataBar' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc03_pvSparkline_SampleWorks" )
   public void tc04_dataBar_SampleWorks() {
     this.log.info( "tc04_dataBar_SampleWorks" );
 
@@ -351,13 +359,15 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    trendArrow
+   *    
    * Description:
    *    The test case pretends to validate the trendArrow sample.
+   *    
    * Steps:
    *    1. Check if the sample for 'trendArrow' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc04_dataBar_SampleWorks" )
   public void tc05_trendArrow_SampleWorks() {
     this.log.info( "tc05_trendArrow_SampleWorks" );
 
@@ -448,13 +458,15 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    hyperlink
+   *    
    * Description:
    *    The test case pretends to validate the hyperlink sample.
+   *    
    * Steps:
    *    1. Check if the sample for 'hyperlink' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc05_trendArrow_SampleWorks" )
   public void tc06_hyperlink_SampleWorks() {
     this.log.info( "tc06_hyperlink_SampleWorks" );
 
@@ -550,13 +562,15 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    Circle
+   *    
    * Description:
    *    The test case pretends to validate the Circle sample.
+   *    
    * Steps:
    *    1. Check if the sample for 'Circle' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc06_hyperlink_SampleWorks" )
   public void tc07_Circle_SampleWorks() {
     this.log.info( "tc07_Circle_SampleWorks" );
 
@@ -667,13 +681,15 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    formattedText
+   *    
    * Description:
    *    The test case pretends to validate the formattedText sample.
+   *    
    * Steps:
    *    1. Check if the sample for 'formattedText' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc07_Circle_SampleWorks" )
   public void tc08_FormattedText_SampleWorks() {
     this.log.info( "tc08_FormattedText_SampleWorks" );
 
@@ -769,13 +785,15 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    cccBulletChart
+   *    
    * Description:
    *    The test case pretends to validate the cccBulletChart sample.
+   *    
    * Steps:
    *    1. Check if the sample for 'cccBulletChart' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc08_FormattedText_SampleWorks" )
   public void tc09_CCCBulletChart_SampleWorks() {
     this.log.info( "tc09_CCCBulletChart_SampleWorks" );
 
@@ -846,13 +864,15 @@ public class AddinReference extends BaseTest {
    *
    * Test Case Name:
    *    groupHeaders
+   *    
    * Description:
    *    The test case pretends to validate the groupHeaders sample.
+   *    
    * Steps:
    *    1. Check if the sample for 'groupHeaders' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.tc09_CCCBulletChart_SampleWorks" )
   public void tc10_GroupHeaderst_SampleWorks() {
     this.log.info( "tc10_GroupHeaderst_SampleWorks" );
 
