@@ -101,6 +101,7 @@
 			<!-- TODO <class name="com.pentaho.ctools.cde.samples.legacy.reference.samples.MapComponentFullTest" />-->
 			<!-- TODO <class name="com.pentaho.ctools.cde.samples.legacy.reference.samples.MapComponentReference" />-->
 			<class name="com.pentaho.ctools.cde.samples.legacy.reference.samples.OlapSelectorComponent" />
+			<class name="com.pentaho.ctools.cde.samples.legacy.realtime.RealTimeSampleDashboard" />
 
 			
 			<!-- CDE-RequireJS -->
@@ -123,6 +124,7 @@
 			<class name="com.pentaho.ctools.cde.samples.require.reference.others.OlapSelectorComponent" />
 			<class name="com.pentaho.ctools.cde.samples.require.reference.others.PopupComponent" />
 			<class name="com.pentaho.ctools.cde.samples.require.reference.others.VisualizationAPIReference" />
+			<class name="com.pentaho.ctools.cde.samples.require.realtime.RealTimeSampleDashboard" />
 			
 			
 			<!-- CDA -->

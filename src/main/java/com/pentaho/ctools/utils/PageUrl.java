@@ -157,6 +157,7 @@ public class PageUrl extends BaseTest {
   public static final String POPUP_COMPONENT = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:popup.wcdf/generatedContent";
   public static final String VIZUALIZATION_API_REFRENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:VisualizationAPIreference.wcdf/generatedContent";
   public static final String WIDGET_REFERENCE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:tests:widgets.wcdf/generatedContent";
+  public static final String REAL_TIMTE_DASHBOARD_LEGACY = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:legacy:realtime:real_time.wcdf/generatedContent";
 
   /*
   * CDE - REQUIRE
@@ -180,6 +181,7 @@ public class PageUrl extends BaseTest {
   public static final String OLAP_SELECTOR_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:OlapSelector:olapSelector.wcdf/generatedContent";
   public static final String POPUP_COMPONENT_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:PopupComponent:popup.wcdf/generatedContent";
   public static final String VIZUALIZATION_API_REFRENCE_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:tests:VisualizationApi:VisualizationAPIreference.wcdf/generatedContent";
+  public static final String REAL_TIMTE_DASHBOARD_REQUIRE = BASE_URL + "api/repos/:public:plugin-samples:pentaho-cdf-dd:realtime:real_time.wcdf/generatedContent";
 
   /*
    * CDE Dashboard
