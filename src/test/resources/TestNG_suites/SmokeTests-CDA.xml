@@ -12,9 +12,9 @@
 			<!-- LOGIN -->
 			<class name="com.pentaho.ctools.main.LoginPentaho" />
 			<!-- CDA -->
-			<class name="com.pentaho.ctools.cda.CDADatasourceTest" />
-			<class name="com.pentaho.ctools.cda.MondrianJNDI" />
-			<class name="com.pentaho.ctools.cda.CDACacheManager" />
+			<class name="com.pentaho.ctools.cda.samples.CDADatasourceTest" />
+			<class name="com.pentaho.ctools.cda.samples.MondrianJNDI" />
+			<class name="com.pentaho.ctools.cda.samples.CDACacheManager" />
 			<!-- LOGOUT -->
 			<class name="com.pentaho.ctools.main.LogoutPentaho" />
 		</classes>
