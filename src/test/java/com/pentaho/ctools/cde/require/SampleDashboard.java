@@ -78,7 +78,7 @@ public class SampleDashboard extends BaseTest {
    */
   @Test
   public void tc1_PageContent_ContentDisplayedAsExpected() {
-    this.log.info( "tc1_PageContent_CachedQueries" );
+    this.log.info( "tc1_PageContent_ContentDisplayedAsExpected" );
 
     /*
      * ## Step 1
