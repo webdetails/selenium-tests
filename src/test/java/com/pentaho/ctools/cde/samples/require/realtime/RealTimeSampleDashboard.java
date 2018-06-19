@@ -127,7 +127,6 @@ public class RealTimeSampleDashboard extends BaseTest {
    * 
    * Steps:
    *    1. Check Lat and Long
-   *    2. Chart title
    *    3. Check Y axis
    * 
    */
@@ -144,14 +143,7 @@ public class RealTimeSampleDashboard extends BaseTest {
     Assert.assertEquals( crtLong, "Long.G" );
 
     /**
-     * Step 2 - Chart title
-     */
-    this.elemHelper.FindElement( driver, By.cssSelector( "#graphicColumnprotovis > svg > g:nth-child(5) > g > g:nth-child(7) > g > text" ) );
-    String crtTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#graphicColumnprotovis > svg > g:nth-child(5) > g > g:nth-child(7) > g > text" ) );
-    Assert.assertEquals( crtTitle, "G forces" );
-
-    /**
-     * Step 3 - Check Y axis
+     * Step 2 - Check Y axis
      */
     WebElement crtAxisY = this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "#graphicColumnprotovis > svg > g:nth-child(5) > g > g:nth-child(8) > g:nth-child(1)" ) );
     Assert.assertNotNull( crtAxisY );
