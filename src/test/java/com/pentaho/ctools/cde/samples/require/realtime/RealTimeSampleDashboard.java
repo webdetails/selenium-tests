@@ -137,15 +137,15 @@ public class RealTimeSampleDashboard extends BaseTest {
     /**
      * Step 1 - Check Lat and Long
      */
-    String crtLat = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#graphicColumnprotovis > svg > g:nth-child(4) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ) );
+    String crtLat = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#graphicColumnprotovis > svg > g:nth-child(4) > g > g > g > g > g:nth-child(1) > g:nth-child(2) > text" ), "Lat.G" );
     Assert.assertEquals( crtLat, "Lat.G" );
-    String crtLong = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "#graphicColumnprotovis > svg > g:nth-child(4) > g > g > g > g > g:nth-child(2) > g:nth-child(2) > text" ) );
+    String crtLong = this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "#graphicColumnprotovis > svg > g:nth-child(4) > g > g > g > g > g:nth-child(2) > g:nth-child(2) > text" ), "Long.G" );
     Assert.assertEquals( crtLong, "Long.G" );
 
     /**
      * Step 2 - Check Y axis
      */
-    WebElement crtAxisY = this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "#graphicColumnprotovis > svg > g:nth-child(5) > g > g:nth-child(8) > g:nth-child(1)" ) );
+    WebElement crtAxisY = this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "#graphicColumnprotovis > svg > g:nth-child(5) > g" ) );
     Assert.assertNotNull( crtAxisY );
   }
 
