@@ -150,9 +150,9 @@ public class AddinReference extends BaseTest {
     String sampleTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "SparklineTitle" ) );
     assertEquals( "sparkline", sampleTitle );
     //Check the hyperlink
-    WebElement elemUrl = this.elemHelper.FindElement( driver, By.linkText( "JQuery Sparkline plugin" ) );
-    String attrHref = elemUrl.getAttribute( "href" );
-    assertEquals( "http://www.omnipotent.net/jquery.sparkline/", attrHref );
+    this.elemHelper.WaitForAttributeValueEqualsTo( driver, By.linkText( "JQuery Sparkline plugin" ), "href", "http://www.omnipotent.net/jquery.sparkline/" );
+    String attrHref = this.elemHelper.GetAttribute( driver, By.linkText( "JQuery Sparkline plugin" ), "href" );
+    assertEquals( attrHref, "http://www.omnipotent.net/jquery.sparkline/" );
 
     //Check Defaults
     String defaultText = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='SparklineDescHtml']/blockquote/pre" ) );
