@@ -89,7 +89,7 @@ public class CommentComponent extends BaseTest {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cdf.samples.legacy.documentation.CommentComponent.tc0_OpenSamplePage_Display" )
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -117,6 +117,7 @@ public class CommentComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
+  @Test( dependsOnMethods = "com.pentaho.ctools.cdf.samples.legacy.documentation.CommentComponent.tc1_PageContent_DisplayTitle" )
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
     // ## Step 1
@@ -151,7 +152,7 @@ public class CommentComponent extends BaseTest {
    * Steps:
    *    1. Check the contents of display page
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cdf.samples.legacy.documentation.CommentComponent.tc2_ReloadSample_SampleReadyToUse" )
   public void tc3_DisplayComponent_CheckDisplayedPage() {
     this.log.info( "tc3_DisplayComponent_CheckDisplayedPage" );
     /*
@@ -182,7 +183,7 @@ public class CommentComponent extends BaseTest {
    *    2. Add another comment
    *    3. Add another comment
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cdf.samples.legacy.documentation.CommentComponent.tc3_DisplayComponent_CheckDisplayedPage" )
   public void tc4_AddComponent_CommentIsDisplayed() {
     this.log.info( "tc4_AddComponent_CommentIsDisplayed" );
     /*
@@ -192,6 +193,7 @@ public class CommentComponent extends BaseTest {
 
     String smallText = "Remove this comment please";
     String longText = "The policy states that a pre departure beverage should be served to First Class/Envoy Class customers on every flight. Beverages given by flight attendants (including bottles of water) must be collected before or during the walk through before takeoff/landing. Because we have not integrated ALL P/P's between East/West, you may find that the West f/a's collect before closing the a/c door as it was/may still be policy. Reasons short of laziness to not serve? Catering hasn't provided adequate supplies yet. Steady stream of passengers because the flight is way late and the agents have a steady flow of customers line up. Even then, they should try. Short of that, there is NO excuse.";
+    String expLongText = "The policy states that a pre departure beverage should be served to First Class/Envoy Class customers on every flight. Beverages given by flight attendants (including bottles of water) must be collected before or during the walk through before takeoff/landing. Because we have not integrated ALL P/P\\'s between East/West, you may find that the West f/a\\'s collect before closing the a/c door as it was/may still be policy. Reasons short of laziness to not serve? Catering hasn\\'t provided adequate supplies yet. Steady stream of passengers because the flight is way late and the agents have a steady flow of customers line up. Even then, they should try. Short of that, there is NO excuse.";
     String specCharText = "+´~~º-113334233&#$%66/8&%$53";
     SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm", Locale.US );
 
@@ -252,7 +254,7 @@ public class CommentComponent extends BaseTest {
     String commentDetails2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div" ) );
     assertThat( "Comment added: " + commentDetails2, commentDetails2, CoreMatchers.containsString( strCommentTimeAdded2 ) );
     String commentAdded2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
-    assertEquals( commentAdded2, longText );
+    assertEquals( commentAdded2, expLongText );
     //Comment added 1
     commentDetails1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div" ) );
     assertThat( "Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString( strCommentTimeAdded ) );
@@ -294,7 +296,7 @@ public class CommentComponent extends BaseTest {
     commentDetails2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div" ) );
     assertThat( "Comment added: " + commentDetails2, commentDetails2, CoreMatchers.containsString( strCommentTimeAdded2 ) );
     commentAdded2 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[2]/div[2]/div" ) );
-    assertEquals( commentAdded2, longText );
+    assertEquals( commentAdded2, expLongText );
     //Comment added 1
     commentDetails1 = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[3]/div" ) );
     assertThat( "Comment added: " + commentDetails1, commentDetails1, CoreMatchers.containsString( strCommentTimeAdded ) );
@@ -313,7 +315,7 @@ public class CommentComponent extends BaseTest {
    *    1. Add a comment
    *    2. Remove added comment
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cdf.samples.legacy.documentation.CommentComponent.tc4_AddComponent_CommentIsDisplayed" )
   public void tc5_RemoveCoomment_CommentRemoved() {
     this.log.info( "tc5_RemoveCoomment_CommentRemoved" );
     this.tcRemoveComment = true;
@@ -368,7 +370,7 @@ public class CommentComponent extends BaseTest {
     if ( nIteractions > 0 ) {
       this.log.debug( "We have comments to remove" );
       for ( int i = 1; i <= nIteractions; i++ ) {
-        this.elemHelper.MoveToElement( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
+        this.elemHelper.FocusAndMoveToElement( driver, By.xpath( "//div[@id='sampleObject']/div/div/div[1]/div[2]/div" ) );
         this.elemHelper.Click( driver, By.cssSelector( "div.archive" ) );
         this.log.debug( "One comment removed." );
       }
