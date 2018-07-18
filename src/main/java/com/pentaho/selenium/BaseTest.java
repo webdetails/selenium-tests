@@ -76,6 +76,8 @@ public class BaseTest {
     pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
     pentahoBaServerPort = System.getProperty( "pentaho.bi.server.port" );
 
+    // System.setProperty( "webdriver.gecko.driver", "C:\\SeleniumDrivers\\geckodriver-v0.20.0\\geckodriver.exe" );
+
     log.debug( "PRINT PROPERTIES:" );
     log.debug( "baseUrl: " + baseUrl );
     log.debug( "downloadDir: " + downloadDir );
@@ -108,6 +110,9 @@ public class BaseTest {
     foptions.addPreference( "browser.download.manager.showWhenStarting", false );
     foptions.addPreference( "browser.download.dir", downloadDir );
     foptions.addPreference( "browser.helperApps.neverAsk.saveToDisk", "application/unknown;table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf;text/xml;application/xml;image/png;image/svg+xml;application/json;application/javascript" );
+    foptions.addPreference( "security.insecure_password.ui.enabled", false );
+    foptions.addPreference( "security.insecure_field_warning.contextual.enabled", false );
+
     foptions.setCapability( CapabilityType.LOGGING_PREFS, logs );
     foptions.setLogLevel( FirefoxDriverLogLevel.DEBUG );
 
