@@ -75,7 +75,9 @@ public class BaseTest {
     pentahoBaServerUrl = System.getProperty( "pentaho.bi.server.url" );
     pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
     pentahoBaServerPort = System.getProperty( "pentaho.bi.server.port" );
-    
+
+    // System.setProperty( "webdriver.gecko.driver", "C:\\SeleniumDrivers\\geckodriver-v0.20.0\\geckodriver.exe" );
+
     log.debug( "PRINT PROPERTIES:" );
     log.debug( "baseUrl: " + baseUrl );
     log.debug( "downloadDir: " + downloadDir );
