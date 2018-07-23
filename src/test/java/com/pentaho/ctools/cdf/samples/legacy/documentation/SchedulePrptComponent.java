@@ -229,9 +229,7 @@ public class SchedulePrptComponent extends BaseTest {
     String day = sdfDay.format( d40days );
     for ( WebElement cell2 : columns2 ) {
       String strCell2 = cell2.getText();
-      log.debug( "The day: " + strCell2 );
       if ( strCell2.equals( day ) ) {
-        log.debug( "Going to click" );
         cell2.findElement( By.linkText( day ) ).click();
         break;
       }
