@@ -203,9 +203,9 @@ public class SchedulePrptComponent extends BaseTest {
     slWeekday.selectByValue( "3" );
     //Select Range Of Recurrence
     //Start - tomorrow
-    this.elemHelper.FindElement( driver, By.id( "rangeStartIn" ) ).clear();
-    this.elemHelper.FindElement( driver, By.id( "rangeStartIn" ) ).sendKeys( sdf.format( dTomorrow ) );
-    this.elemHelper.Click( driver, By.id( "rangeStartIn" ) );
+    this.elemHelper.Clear( driver, By.id( "rangeStartIn" ) );
+    this.elemHelper.SendKeys( driver, By.id( "rangeStartIn" ), sdf.format( dTomorrow ) );
+    this.elemHelper.ClickJS( driver, By.id( "rangeStartIn" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     WebElement dateCalendar = this.elemHelper.FindElement( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     List<WebElement> columns = dateCalendar.findElements( By.tagName( "td" ) );
@@ -220,9 +220,9 @@ public class SchedulePrptComponent extends BaseTest {
     //End
     //Select End Date
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "endByRadio" ) );
-    this.elemHelper.FindElement( driver, By.id( "endByRadio" ) ).click();
-    this.elemHelper.FindElement( driver, By.id( "endByIn" ) ).sendKeys( sdf.format( d40days ) );
-    this.elemHelper.FindElement( driver, By.id( "endByIn" ) ).click();
+    this.elemHelper.ClickJS( driver, By.id( "endByRadio" ) );
+    this.elemHelper.SendKeys( driver, By.id( "endByIn" ), sdf.format( d40days ) );
+    this.elemHelper.ClickJS( driver, By.id( "endByIn" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     WebElement dateCalendar2 = this.elemHelper.FindElement( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     List<WebElement> columns2 = dateCalendar2.findElements( By.tagName( "td" ) );
