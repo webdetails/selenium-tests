@@ -88,7 +88,7 @@ public class SchedulePrptComponent extends BaseTest {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cdf.samples.legacy.documentation.SchedulePrptComponent.tc0_OpenSamplePage" )
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -119,7 +119,7 @@ public class SchedulePrptComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cdf.samples.legacy.documentation.SchedulePrptComponent.tc1_PageContent_DisplayTitle" )
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
@@ -152,7 +152,7 @@ public class SchedulePrptComponent extends BaseTest {
    *    4. On Schedule Manager, it is set the schedule.
    * @throws InterruptedException
    */
-  @Test
+  @Test( dependsOnMethods = "com.pentaho.ctools.cdf.samples.legacy.documentation.SchedulePrptComponent.tc2_ReloadSample_SampleReadyToUse" )
   public void tc3_SchedulePrpt_ScheduleCreatedSuccessful() {
     this.log.info( "tc3_SchedulePrpt_ScheduleCreatedSuccessful" );
     this.bRemoveSchedule = true;
@@ -194,7 +194,7 @@ public class SchedulePrptComponent extends BaseTest {
     Select slAMFM = new Select( this.elemHelper.FindElement( driver, By.id( "amPm" ) ) );
     slAMFM.selectByValue( "pm" );
     //Select Option 'The x y of every month
-    this.elemHelper.FindElement( driver, By.xpath( "//div[@id='patternMonth']/input[2]" ) ).click();
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='patternMonth']/input[2]" ) );
     //Select Month
     Select slOccDay = new Select( this.elemHelper.FindElement( driver, By.id( "monthOpt1Select" ) ) );
     slOccDay.selectByValue( "1" );
@@ -203,9 +203,9 @@ public class SchedulePrptComponent extends BaseTest {
     slWeekday.selectByValue( "3" );
     //Select Range Of Recurrence
     //Start - tomorrow
-    this.elemHelper.FindElement( driver, By.id( "rangeStartIn" ) ).clear();
-    this.elemHelper.FindElement( driver, By.id( "rangeStartIn" ) ).sendKeys( sdf.format( dTomorrow ) );
-    this.elemHelper.Click( driver, By.id( "rangeStartIn" ) );
+    this.elemHelper.Clear( driver, By.id( "rangeStartIn" ) );
+    this.elemHelper.SendKeys( driver, By.id( "rangeStartIn" ), sdf.format( dTomorrow ) );
+    this.elemHelper.ClickJS( driver, By.id( "rangeStartIn" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     WebElement dateCalendar = this.elemHelper.FindElement( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     List<WebElement> columns = dateCalendar.findElements( By.tagName( "td" ) );
@@ -220,16 +220,18 @@ public class SchedulePrptComponent extends BaseTest {
     //End
     //Select End Date
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.id( "endByRadio" ) );
-    this.elemHelper.FindElement( driver, By.id( "endByRadio" ) ).click();
-    this.elemHelper.FindElement( driver, By.id( "endByIn" ) ).sendKeys( sdf.format( d40days ) );
-    this.elemHelper.FindElement( driver, By.id( "endByIn" ) ).click();
+    this.elemHelper.ClickJS( driver, By.id( "endByRadio" ) );
+    this.elemHelper.SendKeys( driver, By.id( "endByIn" ), sdf.format( d40days ) );
+    this.elemHelper.ClickJS( driver, By.id( "endByIn" ) );
     this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     WebElement dateCalendar2 = this.elemHelper.FindElement( driver, By.xpath( "//table[@class='ui-datepicker-calendar']" ) );
     List<WebElement> columns2 = dateCalendar2.findElements( By.tagName( "td" ) );
     String day = sdfDay.format( d40days );
     for ( WebElement cell2 : columns2 ) {
       String strCell2 = cell2.getText();
+      log.debug( "The day: " + strCell2 );
       if ( strCell2.equals( day ) ) {
+        log.debug( "Going to click" );
         cell2.findElement( By.linkText( day ) ).click();
         break;
       }
