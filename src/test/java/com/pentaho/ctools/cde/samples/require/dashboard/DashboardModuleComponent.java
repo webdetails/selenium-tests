@@ -91,6 +91,16 @@ public class DashboardModuleComponent extends BaseTest {
 
     //Check the signature1
     final String textAuthor1 = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "cde_sample1_alias1_signature" ) );
+    /*
+     * TO Remove when someone fix https://jira.pentaho.com/browse/CDF-1005
+     */
+    if ( !textAuthor1.equals( "Pedro Alves, Hitachi Vantara" ) ) {
+      //Let's try one more time if we can validate the page and get the content.
+      driver.navigate().refresh();
+      // NOTE - we have to wait for loading disappear
+      this.elemHelper.WaitForElementPresence( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
+      this.elemHelper.WaitForElementInvisibility( BaseTest.driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
+    }
     Assert.assertEquals( "Pedro Alves, Hitachi Vantara", textAuthor1 );
 
     //Check the signature2

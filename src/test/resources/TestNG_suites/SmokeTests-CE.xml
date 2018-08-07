@@ -106,6 +106,7 @@
 			
 			<!-- CDE-RequireJS -->
 			<class name="com.pentaho.ctools.cde.samples.require.SampleDashboard" />
+			<!-- DashboardModuleComponent https://jira.pentaho.com/browse/CDF-1005  -->
 			<class name="com.pentaho.ctools.cde.samples.require.dashboard.DashboardModuleComponent" />
 			<class name="com.pentaho.ctools.cde.samples.require.reference.BulletChartTestCase" />
 			<class name="com.pentaho.ctools.cde.samples.require.reference.CCCV2ShowCase" />
