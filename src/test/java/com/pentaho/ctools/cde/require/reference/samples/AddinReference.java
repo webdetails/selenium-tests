@@ -77,7 +77,7 @@ public class AddinReference extends BaseTest {
    * Steps:
    *    1. Check display texts
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc00_OpenSamplePage_Display")
   public void tc01_PageContent_ContentDisplayed() {
     this.log.info( "tc01_PageContent_CachedQueries" );
 
@@ -136,7 +136,7 @@ public class AddinReference extends BaseTest {
    *    1. Check if the sample for 'sparkline' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc01_PageContent_ContentDisplayed")
   public void tc02_Sparkline_SampleWorks() {
     this.log.info( "tc02_Sparkline_SampleWorks" );
 
@@ -194,7 +194,7 @@ public class AddinReference extends BaseTest {
    *    1. Check if the sample for 'pvSparkline' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc02_Sparkline_SampleWorks")
   public void tc03_pvSparkline_SampleWorks() {
     this.log.info( "tc03_pvSparkline_SampleWorks" );
 
@@ -257,7 +257,7 @@ public class AddinReference extends BaseTest {
    *    1. Check if the sample for 'dataBar' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc03_pvSparkline_SampleWorks")
   public void tc04_dataBar_SampleWorks() {
     this.log.info( "tc04_dataBar_SampleWorks" );
 
@@ -357,7 +357,7 @@ public class AddinReference extends BaseTest {
    *    1. Check if the sample for 'trendArrow' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc04_dataBar_SampleWorks")
   public void tc05_trendArrow_SampleWorks() {
     this.log.info( "tc05_trendArrow_SampleWorks" );
 
@@ -454,7 +454,7 @@ public class AddinReference extends BaseTest {
    *    1. Check if the sample for 'hyperlink' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc05_trendArrow_SampleWorks")
   public void tc06_hyperlink_SampleWorks() {
     this.log.info( "tc06_hyperlink_SampleWorks" );
 
@@ -555,8 +555,8 @@ public class AddinReference extends BaseTest {
    * Steps:
    *    1. Check if the sample for 'Circle' has its contents present
    *    2. Order the table
-   */
-  @Test
+   */ 
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc06_hyperlink_SampleWorks")
   public void tc07_Circle_SampleWorks() {
     this.log.info( "tc07_Circle_SampleWorks" );
 
@@ -673,7 +673,7 @@ public class AddinReference extends BaseTest {
    *    1. Check if the sample for 'formattedText' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc07_Circle_SampleWorks")
   public void tc08_FormattedText_SampleWorks() {
     this.log.info( "tc08_FormattedText_SampleWorks" );
 
@@ -775,7 +775,7 @@ public class AddinReference extends BaseTest {
    *    1. Check if the sample for 'cccBulletChart' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc08_FormattedText_SampleWorks")
   public void tc09_CCCBulletChart_SampleWorks() {
     this.log.info( "tc09_CCCBulletChart_SampleWorks" );
 
@@ -852,7 +852,7 @@ public class AddinReference extends BaseTest {
    *    1. Check if the sample for 'groupHeaders' has its contents present
    *    2. Order the table
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.reference.samples.AddinReference.tc09_CCCBulletChart_SampleWorks")
   public void tc10_GroupHeaderst_SampleWorks() {
     this.log.info( "tc10_GroupHeaderst_SampleWorks" );
 
