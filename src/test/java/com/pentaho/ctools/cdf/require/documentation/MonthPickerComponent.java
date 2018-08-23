@@ -66,6 +66,7 @@ public class MonthPickerComponent extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.MONTH_PICKER_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
@@ -81,7 +82,7 @@ public class MonthPickerComponent extends BaseTest {
    * Steps:
    *    1. Check the widget's title.
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cdf.require.documentation.MonthPickerComponent.tc0_OpenSamplePage_Display")
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -112,7 +113,7 @@ public class MonthPickerComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cdf.require.documentation.MonthPickerComponent.tc1_PageContent_DisplayTitle")
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
@@ -124,6 +125,7 @@ public class MonthPickerComponent extends BaseTest {
     this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 2 );
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
@@ -146,7 +148,7 @@ public class MonthPickerComponent extends BaseTest {
    * Steps:
    *    1. Pick a month and check for alert
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cdf.require.documentation.MonthPickerComponent.tc2_ReloadSample_SampleReadyToUse")
   public void tc3_SelectMonth_AlertDisplayed() {
     this.log.info( "tc3_SelectMonth_AlertDisplayed" );
 
