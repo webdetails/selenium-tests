@@ -78,7 +78,7 @@ public class DashboardModuleComponent extends BaseTest {
    * Steps:
    *    1. Check for displayed text
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.dashboard.DashboardModuleComponent.tc0_OpenSamplePage_Display")
   public void tc1_PageContent_ContentDisplayedAsExpected() {
     this.log.info( "tc1_PageContent_ContentDisplayedAsExpected" );
 
@@ -140,7 +140,7 @@ public class DashboardModuleComponent extends BaseTest {
    *    2. Press next on second table
    *    3. Press next on third table
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cde.require.dashboard.DashboardModuleComponent.tc1_PageContent_ContentDisplayedAsExpected")
   public void tc2_Paging_UserCanPaging() {
     this.log.info( "tc2_Paging_UserCanPaging" );
 
@@ -215,7 +215,7 @@ public class DashboardModuleComponent extends BaseTest {
    *    2. Enable/Disable series on second chart, click chart and navigate
    *    3. Enable/Disable series on third chart, click chart and navigate
    */
-  @Test
+  @Test(dependsOnMethods = "com.pentaho.ctools.cde.require.dashboard.DashboardModuleComponent.tc2_Paging_UserCanPaging")
   public void tc3_UpdateTableByClickingChart_Table1UpdatedForSpecificData() {
     this.log.info( "tc3_UpdateTableByClickingChart_Table1UpdatedForSpecificData" );
 
