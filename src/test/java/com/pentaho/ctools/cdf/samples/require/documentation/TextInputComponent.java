@@ -62,6 +62,7 @@ public class TextInputComponent extends BaseTest {
     this.elemHelper.Get( driver, PageUrl.TEXT_INPUT_COMPONENT_REQUIRE );
 
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3);
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
   }
 
@@ -75,7 +76,7 @@ public class TextInputComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cdf.samples.require.documentation.TextInputComponent.tc0_OpenSamplePage_Display")
   public void tc1_PageContent_DisplayTitle() {
     this.log.info( "tc1_PageContent_DisplayTitle" );
 
@@ -104,7 +105,7 @@ public class TextInputComponent extends BaseTest {
    * Steps:
    *    1. Click in Code and then click in button 'Try me'.
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cdf.samples.require.documentation.TextInputComponent.tc1_PageContent_DisplayTitle")
   public void tc2_ReloadSample_SampleReadyToUse() {
     this.log.info( "tc2_ReloadSample_SampleReadyToUse" );
 
@@ -112,10 +113,11 @@ public class TextInputComponent extends BaseTest {
      * ## Step 1
      */
     // Render again the sample
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
-    this.elemHelper.Click( driver, By.xpath( "//div[@id='code']/button" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='example']/ul/li[2]/a" ) );
+    this.elemHelper.ClickJS( driver, By.xpath( "//div[@id='code']/button" ) );
 
     // NOTE - we have to wait for loading disappear
+    this.elemHelper.WaitForElementPresence( driver, By.cssSelector( "div.blockUI.blockOverlay" ), 3);
     this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.blockUI.blockOverlay" ) );
 
     // Now sample element must be displayed
@@ -139,7 +141,7 @@ public class TextInputComponent extends BaseTest {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cdf.samples.require.documentation.TextInputComponent.tc2_ReloadSample_SampleReadyToUse")
   public void tc3_InputSmallPhrase_AlertDispayed() {
     this.log.info( "tc3_InputSmallPhrase_AlertDispayed" );
 
@@ -171,7 +173,7 @@ public class TextInputComponent extends BaseTest {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cdf.samples.require.documentation.TextInputComponent.tc3_InputSmallPhrase_AlertDispayed")
   public void tc4_InputLongPhrase_AlertDispayed() {
     this.log.info( "tc4_InputLongPhrase_AlertDispayed" );
 
@@ -211,7 +213,7 @@ public class TextInputComponent extends BaseTest {
    *    2. Check for alert
    *    3. Check the input text inserted
    */
-  @Test
+  @Test (dependsOnMethods = "com.pentaho.ctools.cdf.samples.require.documentation.TextInputComponent.tc4_InputLongPhrase_AlertDispayed")
   public void tc5_InputSpecialPhrase_AlertDispayed() {
     this.log.info( "tc5_InputSpecialPhrase_AlertDispayed" );
 
