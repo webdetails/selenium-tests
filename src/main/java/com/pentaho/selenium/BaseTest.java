@@ -29,7 +29,6 @@ import java.util.logging.Level;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -76,7 +75,7 @@ public class BaseTest {
     pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
     pentahoBaServerPort = System.getProperty( "pentaho.bi.server.port" );
 
-    // System.setProperty( "webdriver.gecko.driver", "C:\\SeleniumDrivers\\geckodriver-v0.20.0\\geckodriver.exe" );
+    //System.setProperty( "webdriver.gecko.driver", "C:\\MyPrograms\\GeckoDriver\\geckodriver-v0.24.0-win64\\geckodriver.exe" );
 
     log.debug( "PRINT PROPERTIES:" );
     log.debug( "baseUrl: " + baseUrl );
@@ -142,7 +141,7 @@ public class BaseTest {
      */
 
     BaseTest.driver.manage().window().setPosition( new Point( 0, 0 ) );
-    BaseTest.driver.manage().window().setSize( new Dimension( 1360, 764 ) );
+    BaseTest.driver.manage().window().maximize();//setSize( new Dimension( 1360, 764 ) );
     BaseTest.driver.manage().timeouts().pageLoadTimeout( 180, TimeUnit.SECONDS );
     BaseTest.driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
     BaseTest.driver.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );

@@ -424,20 +424,20 @@ public class PrptComponent extends BaseTest {
     this.elemHelper.SwitchToFrame( driver, "reportContent" );
     WebElement elemTextLayer = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer" ) );
     assertNotNull( elemTextLayer );
-    WebElement elemTextLayerdiv1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div" ) );
+    WebElement elemTextLayerdiv1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer span" ) );
     assertNotNull( elemTextLayerdiv1 );
-    WebElement elemTextLayerdiv2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(2)" ) );
+    WebElement elemTextLayerdiv2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer span:nth-child(2)" ) );
     assertNotNull( elemTextLayerdiv2 );
-    WebElement elemTextLayerdiv3 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(3)" ) );
+    WebElement elemTextLayerdiv3 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer span:nth-child(3)" ) );
     assertNotNull( elemTextLayerdiv3 );
-    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div" ), "L I N E :", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer span" ), "L I N E :", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer span" ) );
     assertEquals( "L I N E :", text );
-    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(2)" ), "M o t o r c y c l e s", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(2)" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer span:nth-child(2)" ), "M o t o r c y c l e s", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer span:nth-child(2)" ) );
     assertEquals( "M o t o r c y c l e s", text );
-    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(3)" ), "MSRP", 60 );
-    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer div:nth-child(3)" ) );
+    this.elemHelper.WaitForTextPresence( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer span:nth-child(3)" ), "MSRP", 60 );
+    text = this.elemHelper.WaitForElementPresentGetText( driver, By.cssSelector( "div#viewerContainer div#viewer.pdfViewer div.page div.textLayer span:nth-child(3)" ) );
     assertEquals( "MSRP", text );
 
     /*

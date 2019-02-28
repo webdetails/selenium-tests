@@ -65,7 +65,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.14.2</version>
+			<version>6.14.3</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
@@ -117,7 +117,7 @@
 						<fileset>
 							<directory>test-output</directory>
 							<followSymlinks>false</followSymlinks>
-						</fileset>						
+						</fileset>
 					</filesets>
 				</configuration>
 			</plugin>

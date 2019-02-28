@@ -561,7 +561,7 @@ public class MondrianJNDI extends BaseTest {
         assertEquals( "status", queryParam1 );
         assertEquals( "Shipped", queryParam2 );
         assertThat( "Last Execution: " + queryLExec, queryLExec, CoreMatchers.containsString( "1970-01-01" ) );
-        assertThat( "Last Execution: " + queryLExec, queryLExec, CoreMatchers.containsString( "00:00:00" ) );
+        assertThat( "Last Execution: " + queryLExec, queryLExec, CoreMatchers.containsString( "01:00:00" ) );
         assertThat( "Next Execution: " + queryNExec, queryNExec, CoreMatchers.containsString( strToday ) );
         assertThat( "Next Execution: " + queryNExec, queryNExec, CoreMatchers.containsString( selectedHours + ":00:00" ) );
         assertEquals( "0 0 21 * * ? *", queryCron );

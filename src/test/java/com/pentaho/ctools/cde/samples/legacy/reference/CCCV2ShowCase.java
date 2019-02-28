@@ -76,15 +76,21 @@ public class CCCV2ShowCase extends BaseTest {
     // search for width of barchartrect1
     // search for width of barchartrect2
     // search for width of barchartrect3
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1][@width>192]" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2][@width>249]" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3][@width>100]" ) );
+    WebElement barchartrect1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][1][@width>192]" ), 10 );
+    assertNotNull(barchartrect1);
+    WebElement barchartrect2 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][2][@width>249]" ), 10 );
+    assertNotNull(barchartrect2);
+    WebElement barchartrect3 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='BarChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][2]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][1]/*[local-name()='rect'][3][@width>100]" ), 10 );
+    assertNotNull(barchartrect3);
     // search for cy of line1
     // search for cy of line7
     // search for cy of line11
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1][@cy>120]" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7][@cy>136]" ) );
-    this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11][@cy>24]" ) );
+    WebElement cyofline1 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][1][@cy>108]" ), 10 );
+    assertNotNull(cyofline1);
+    WebElement cyofline7 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][7][@cy>122]" ), 10 );
+    assertNotNull(cyofline7);
+    WebElement cyofline11 = this.elemHelper.WaitForElementPresenceAndVisible( driver, By.xpath( "//div[@id='LineChartBodyRow']/div/div/*[local-name()='svg' and namespace-uri()='http://www.w3.org/2000/svg']/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='g']/*[local-name()='g']/*[local-name()='g'][3]/*[local-name()='circle'][11][@cy>22]" ), 10 );
+    assertNotNull(cyofline11);
   }
 
   /**
@@ -144,7 +150,7 @@ public class CCCV2ShowCase extends BaseTest {
     assertEquals( valueValue, "4,987,739.84" );
 
     // The below code need to be executed to remove the previous tooltip
-    this.elemHelper.Click( driver, By.id( "LineChartTitleRow" ) );
+    this.elemHelper.MoveToElement( driver, By.id( "LineChartTitleRow" ) );
     boolean bNotPresent = this.elemHelper.WaitForElementInvisibility( driver, By.cssSelector( "div.tipsy.tipsy-s" ) );
     assertTrue( bNotPresent );
   }
@@ -175,9 +181,9 @@ public class CCCV2ShowCase extends BaseTest {
     double lineChartCircle1Cy = Double.parseDouble( lineChartCircle1.getAttribute( "cy" ) );
     double lineChartCircle2Cy = Double.parseDouble( lineChartCircle2.getAttribute( "cy" ) );
     double lineChartCircle3Cy = Double.parseDouble( lineChartCircle3.getAttribute( "cy" ) );
-    assertThat( "Current cy: " + lineChartCircle1Cy, Double.valueOf( lineChartCircle1Cy ), greaterThan( Double.valueOf( 120 ) ) );
-    assertThat( "Current cy: " + lineChartCircle2Cy, Double.valueOf( lineChartCircle2Cy ), greaterThan( Double.valueOf( 136 ) ) );
-    assertThat( "Current cy: " + lineChartCircle3Cy, Double.valueOf( lineChartCircle3Cy ), greaterThan( Double.valueOf( 24 ) ) );
+    assertThat( "Current cy: " + lineChartCircle1Cy, Double.valueOf( lineChartCircle1Cy ), greaterThan( Double.valueOf( 108 ) ) );
+    assertThat( "Current cy: " + lineChartCircle2Cy, Double.valueOf( lineChartCircle2Cy ), greaterThan( Double.valueOf( 122 ) ) );
+    assertThat( "Current cy: " + lineChartCircle3Cy, Double.valueOf( lineChartCircle3Cy ), greaterThan( Double.valueOf( 22 ) ) );
 
     // Mouse hover elements
     this.elemHelper.FocusAndMoveToElement( driver, By.cssSelector( "#LineChartprotovis > svg > g > g > g:nth-child(3) > g > g > g:nth-child(3) > circle:nth-child(2)" ) );
