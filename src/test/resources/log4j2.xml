@@ -2,13 +2,17 @@
 <!DOCTYPE configuration>
 <configuration status="WARN">
   <appenders>
+  	<file name="file" fileName="logs/ui-selenium.log" append="false">
+      <patternlayout pattern="%d{HH:mm:ss.SSS} %-45logger{36}:%-4L - %m%n"/>
+    </file>
     <console name="console" target="SYSTEM_OUT">
-      <patternLayout pattern="%d{HH:mm:ss.SSS} %-45logger{36}:%-4L - %m%n"/>
+      <patternlayout pattern="%d{HH:mm:ss.SSS} %-45logger{36}:%-4L - %m%n"/>
     </console>
   </appenders>
   <loggers>
     <root level="debug">
       <appenderRef ref="console"/>
+      <appenderRef ref="file"/>
     </root>
   </loggers>
 </configuration>
