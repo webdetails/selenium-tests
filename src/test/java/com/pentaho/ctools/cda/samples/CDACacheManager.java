@@ -28,6 +28,7 @@ import static org.testng.Assert.assertNotNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hamcrest.CoreMatchers;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -110,22 +111,26 @@ public class CDACacheManager extends BaseTest {
     buttonCachedQueries.click();
 
     //Click in clear cache
-    this.elemHelper.FindElement( driver, By.id( "clearCacheButton" ) ).click();
+    this.elemHelper.ClickJS( driver, By.id( "clearCacheButton" ) );
 
     /*
      * ## Step 1
      */
+    //NOTE we need to handle the alert on the this page, because 
+    //the alert is unique and we can't use: WaitForAlertReturnConfirmationMsg
     //Wait for pop-up 1
-
-    String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    Alert alert = this.elemHelper.WaitForAlert(driver, 10, 50);
+    String confirmationMsg = alert.getText();
     String expectedCnfText = "This will remove ALL items from cache. Are you sure?";
     assertEquals( expectedCnfText, confirmationMsg );
-
+    alert.accept();
+    
     //Wait for pop-up 2
-    confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( driver );
+    confirmationMsg = alert.getText();
     expectedCnfText = "items have been removed from cache";
     assertThat( "The displayed popup: " + confirmationMsg, confirmationMsg, CoreMatchers.containsString( expectedCnfText ) );
-
+    alert.accept();
+    
     /*
      * ## Step 2
      */
