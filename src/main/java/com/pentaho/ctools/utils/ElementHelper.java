@@ -989,35 +989,35 @@ public class ElementHelper {
   public Alert WaitForAlert( final WebDriver driver, final long timeout, final long pollingTime ) {
     this.log.debug( "WaitForAlert::Enter" );
     ExecutorService executor = null;
+    
+    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     Alert alert = null;
 
     try {
-      class CheckForAlert implements Callable<Alert> {
+    	class CheckForAlert implements Callable<Alert> {
 
         @Override
         public Alert call() {
-          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( pollingTime ) );
+        
+          final Wait<WebDriver> wait = new FluentWait<>( driver )
+        		  .withTimeout( Duration.ofSeconds( timeout ) )
+        		  .pollingEvery( Duration.ofMillis( pollingTime ) )
+        		  .ignoring(NoAlertPresentException.class);
 
           return wait.until( new Function<WebDriver, Alert>() {
 
             @Override
-            public Alert apply( final WebDriver driver ) {
-              try {
-                return driver.switchTo().alert();
-              } catch ( final NoAlertPresentException e ) {
-                e.printStackTrace();
-                return null;
-              }
-            }
-          } );
+            public Alert apply( WebDriver driver ) {
+            	return driver.switchTo().alert();
+            }          
+          });
         }
       }
 
       final CheckForAlert call = new CheckForAlert();
       executor = Executors.newSingleThreadExecutor();
       alert = executor.submit( call ).get( timeout + 2, TimeUnit.SECONDS );
-
     } catch ( final InterruptedException ie ) {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
@@ -1052,7 +1052,9 @@ public class ElementHelper {
 
     driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
-    final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( 30 ) ).pollingEvery( Duration.ofMillis( 50 ) );
+    final Wait<WebDriver> wait = new FluentWait<>( driver )
+    		.withTimeout( Duration.ofSeconds( 30 ) )
+    		.pollingEvery( Duration.ofMillis( 50 ) );
 
     wait.until( new ExpectedCondition<Boolean>() {
 
@@ -1081,12 +1083,17 @@ public class ElementHelper {
   public String WaitForAlertReturnConfirmationMsg( final WebDriver driver ) {
     this.log.debug( "WaitForAlertReturnConfirmationMsg::Enter" );
     String confirmationMsg = "";
-    final Alert alert = this.WaitForAlert( driver, 10, 15 );
+    final Alert alert = this.WaitForAlert( driver, 10, 250 );
 
     if ( alert != null ) {
       confirmationMsg = alert.getText();
       alert.accept();
+
+      driver.switchTo().defaultContent();
+      this.WaitForAlertNotPresent(driver);
     }
+    
+
 
     this.log.debug( "WaitForAlertReturnConfirmationMsg::Exit" );
     return confirmationMsg;

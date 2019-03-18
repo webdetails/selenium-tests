@@ -21,16 +21,11 @@
  ******************************************************************************/
 package com.pentaho.ctools.cda.samples;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hamcrest.CoreMatchers;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -66,28 +61,28 @@ public class CDACacheManager extends BaseTest {
     this.log.info( "tc1_PageContent_CachedQueries" );
 
     // Go to the CDA Cache Manager web page.
-    this.elemHelper.Get( driver, PageUrl.CDA_CACHE_MANAGER );
+    this.elemHelper.Get( BaseTest.driver, PageUrl.CDA_CACHE_MANAGER );
 
-    String expectedTitle = "CDA Cache Manager";
-    String actualTitle = this.elemHelper.WaitForTitle( driver, expectedTitle );
-    assertEquals( actualTitle, expectedTitle );
+    final String expectedTitle = "CDA Cache Manager";
+    final String actualTitle = this.elemHelper.WaitForTitle( BaseTest.driver, expectedTitle );
+    Assert.assertEquals( actualTitle, expectedTitle );
 
     // Go to Cached Queries
-    WebElement buttonCachedQueries = this.elemHelper.FindElement( driver, By.id( "cacheButton" ) );
-    assertNotNull( buttonCachedQueries );
+    final WebElement buttonCachedQueries = this.elemHelper.FindElement( BaseTest.driver, By.id( "cacheButton" ) );
+    Assert.assertNotNull( buttonCachedQueries );
     buttonCachedQueries.click();
 
     /*
      * ## Step 1
      */
-    String subTitle = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cachedQueries']/div[3]" ) );
-    assertEquals( "Queries in cache", subTitle );
+    final String subTitle = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='cachedQueries']/div[3]" ) );
+    Assert.assertEquals( "Queries in cache", subTitle );
 
     /*
      * ## Step 2
      */
-    String buttonTextClearCache = this.elemHelper.WaitForElementPresentGetText( driver, By.id( "clearCacheButton" ) );
-    assertEquals( "Clear Cache", buttonTextClearCache );
+    final String buttonTextClearCache = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.id( "clearCacheButton" ) );
+    Assert.assertEquals( "Clear Cache", buttonTextClearCache );
   }
 
   /**
@@ -106,35 +101,42 @@ public class CDACacheManager extends BaseTest {
     this.log.info( "tc2_ClearCache_AllQueriesWhereRemove" );
 
     // Go to Cached Queries
-    WebElement buttonCachedQueries = this.elemHelper.FindElement( driver, By.id( "cacheButton" ) );
-    assertNotNull( buttonCachedQueries );
-    buttonCachedQueries.click();
+    WebElement buttonCachedQueries = this.elemHelper.FindElement( BaseTest.driver, By.id( "cacheButton" ) );
+    Assert.assertNotNull( buttonCachedQueries );
+    this.elemHelper.ClickJS( BaseTest.driver, By.id( "cacheButton" ) );
 
     //Click in clear cache
-    this.elemHelper.ClickJS( driver, By.id( "clearCacheButton" ) );
+    this.elemHelper.ClickJS( BaseTest.driver, By.id( "clearCacheButton" ) );
 
     /*
      * ## Step 1
      */
-    //NOTE we need to handle the alert on the this page, because 
+    //NOTE we need to handle the alert on the this page, because
     //the alert is unique and we can't use: WaitForAlertReturnConfirmationMsg
     //Wait for pop-up 1
-    Alert alert = this.elemHelper.WaitForAlert(driver, 10, 50);
-    String confirmationMsg = alert.getText();
-    String expectedCnfText = "This will remove ALL items from cache. Are you sure?";
-    assertEquals( expectedCnfText, confirmationMsg );
-    alert.accept();
-    
+    //final Alert alert = this.elemHelper.WaitForAlert( BaseTest.driver, 10, 250 );
+    //alert.accept();
+    final String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( BaseTest.driver );
+    final String expectedCnfText = "This will remove ALL items from cache. Are you sure?";
+    Assert.assertEquals( expectedCnfText, confirmationMsg );
+
+    /*
     //Wait for pop-up 2
-    confirmationMsg = alert.getText();
+    confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( BaseTest.driver );
     expectedCnfText = "items have been removed from cache";
-    assertThat( "The displayed popup: " + confirmationMsg, confirmationMsg, CoreMatchers.containsString( expectedCnfText ) );
-    alert.accept();
-    
+    MatcherAssert.assertThat( "The displayed popup: " + confirmationMsg, confirmationMsg, CoreMatchers.containsString( expectedCnfText ) );
+    */
     /*
      * ## Step 2
      */
-    String textEmptyCache = this.elemHelper.WaitForElementPresentGetText( driver, By.xpath( "//div[@id='cachedQueriesOverviewLines']/div" ) );
-    assertEquals( "Cache is empty.", textEmptyCache );
+    BaseTest.driver.navigate().refresh();
+
+    // Go to Cached Queries
+    buttonCachedQueries = this.elemHelper.FindElement( BaseTest.driver, By.id( "cacheButton" ) );
+    Assert.assertNotNull( buttonCachedQueries );
+    this.elemHelper.ClickJS( BaseTest.driver, By.id( "cacheButton" ) );
+
+    final String textEmptyCache = this.elemHelper.WaitForElementPresentGetText( BaseTest.driver, By.xpath( "//div[@id='cachedQueriesOverviewLines']/div" ) );
+    Assert.assertEquals( "Cache is empty.", textEmptyCache );
   }
 }
