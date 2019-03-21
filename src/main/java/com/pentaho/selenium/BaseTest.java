@@ -178,6 +178,13 @@ public class BaseTest {
     foptions.addPreference( "browser.helperApps.neverAsk.saveToDisk", "application/unknown;table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf;text/xml;application/xml;image/png;image/svg+xml;application/json;application/javascript" );
     foptions.addPreference( "security.insecure_password.ui.enabled", false );
     foptions.addPreference( "security.insecure_field_warning.contextual.enabled", false );
+    //Clear cache:
+    foptions.addPreference( "browser.cache.disk.enable", false );
+    foptions.addPreference( "browser.cache.memory.enable", false );
+    foptions.addPreference( "browser.cache.offline.enable", false );
+    foptions.addPreference( "dom.caches.enabled", false );
+    foptions.addPreference( "dom.clearSiteData.enabled", false );
+    foptions.addPreference( "pdfjs.enabledCache.state", false );
 
     foptions.setCapability( CapabilityType.LOGGING_PREFS, logs );
     foptions.setLogLevel( FirefoxDriverLogLevel.DEBUG );
