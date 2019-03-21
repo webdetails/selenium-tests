@@ -45,12 +45,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
-
-import com.google.common.base.Function;
 
 public class ElementHelper {
   // Retry
@@ -71,10 +68,11 @@ public class ElementHelper {
 
     try {
       final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator );
-      if ( element != null )
+      if ( element != null ) {
         element.clear();
-      else
+      } else {
         this.log.error( "Element is null!" );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       this.Clear( driver, locator );
@@ -97,8 +95,9 @@ public class ElementHelper {
       if ( element != null ) {
         element.clear();
         element.sendKeys( keysToSend );
-      } else
+      } else {
         this.log.error( "Element is null!" );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       this.SendKeys( driver, locator, keysToSend );
@@ -121,8 +120,9 @@ public class ElementHelper {
       if ( element != null ) {
         element.click();
         this.log.debug( "Click::Exit" );
-      } else
+      } else {
         this.log.error( "Element is null " + locator.toString() );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       this.Click( driver, locator );
@@ -157,8 +157,9 @@ public class ElementHelper {
       if ( element != null ) {
         element.click();
         element.sendKeys( keysToSend );
-      } else
+      } else {
         this.log.error( "Element is null!" );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       this.ClickAndSendKeys( driver, locator, keysToSend );
@@ -178,16 +179,18 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
 
     final WebElement element = this.FindElementInvisible( driver, locator );
-    if ( element != null )
+    if ( element != null ) {
       try {
         final JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript( "arguments[0].click();", element );
       } catch ( final WebDriverException wde ) {
-        if ( wde.getMessage().contains( "arguments[0].click is not a function" ) )
+        if ( wde.getMessage().contains( "arguments[0].click is not a function" ) ) {
           element.click();
+        }
       }
-    else
+    } else {
       this.log.error( "Element is null " + locator.toString() );
+    }
 
     this.log.debug( "ClickElementInvisible::Exit" );
   }
@@ -203,16 +206,18 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
 
     final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator );
-    if ( element != null )
+    if ( element != null ) {
       try {
         final JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript( "arguments[0].click();", element );
       } catch ( final WebDriverException wde ) {
-        if ( wde.getMessage().contains( "arguments[0].click is not a function" ) )
+        if ( wde.getMessage().contains( "arguments[0].click is not a function" ) ) {
           element.click();
+        }
       }
-    else
+    } else {
       this.log.error( "Element is null " + locator.toString() );
+    }
 
     this.log.debug( "ClickJS::Exit" );
   }
@@ -232,8 +237,9 @@ public class ElementHelper {
 
     final WebElement drag = this.FindElement( driver, from );
     final WebElement drop = this.FindElement( driver, to );
-    if ( drag != null && drop != null )
+    if ( drag != null && drop != null ) {
       new Actions( driver ).dragAndDrop( drag, drop ).build().perform();
+    }
 
     this.log.debug( "DragAndDrop::exit" );
   }
@@ -360,8 +366,6 @@ public class ElementHelper {
     ExecutorService executor = null;
     final RunnableFindElementInvisible r = new RunnableFindElementInvisible( driver, timeout, pollingTime, locator );
 
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
-
     try {
       executor = Executors.newSingleThreadExecutor();
       executor.submit( r ).get( timeout + 2, TimeUnit.SECONDS );
@@ -370,9 +374,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -384,10 +388,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "FindElementInvisible::Exit" );
     return element;
@@ -424,6 +427,107 @@ public class ElementHelper {
   }
 
   /**
+   * Due the new Selenium3 the MoveToElement doesn't get focus on the element, hence
+   * we need to provide a workaround to get element focus first and then move to
+   * element.
+   *
+   * This method focus the element and move pointer to it.
+   *
+   * Note: On Selenium 3, the MoveToElement moves to the element on center position
+   * of the element.
+   *
+   * @param driver
+   * @param locator
+   * @param xOffset
+   * @param yOffset
+   */
+  public void FocusAndMoveToElement( final WebDriver driver, final By locator ) {
+    this.log.debug( "MoveToElement::Enter" );
+    try {
+      final WebElement element = this.FindElementInvisible( driver, locator );
+      if ( element != null ) {
+        // Focus Element
+        // Introduce the below call due: https://github.com/mozilla/geckodriver/issues/901
+        final String mouseOverScript = "arguments[0].scrollIntoView();";
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript( mouseOverScript, element );
+
+        // Move to Element
+        final Actions acts = new Actions( driver );
+        acts.moveToElement( element );
+        acts.build().perform();
+      } else {
+        this.log.warn( "Element null!" );
+      }
+    } catch ( final StaleElementReferenceException sere ) {
+      this.log.warn( "Stale Element Reference Exception" );
+      this.MoveToElement( driver, locator );
+    }
+    this.log.debug( "MoveToElement::Exit" );
+  }
+
+  /**
+   * Due the new Selenium3 the MoveToElement doesn't get focus on the element, hence
+   * we need to provide a workaround to get element focus first and then move to
+   * element.
+   *
+   * This method focus the element and move pointer to it on some coordinates.
+   *
+   * Note: On Selenium 3, the MoveToElement moves to the element on center position
+   * of the element.
+   *
+   * @param driver
+   * @param locator
+   * @param xOffset
+   * @param yOffset
+   */
+  public void FocusAndMoveToElement( final WebDriver driver, final By locator, final int xOffset, final int yOffset ) {
+    this.log.debug( "MoveToElement::Enter" );
+    try {
+      final WebElement element = this.FindElementInvisible( driver, locator );
+      if ( element != null ) {
+        // Focus Element
+        // Introduce the below call due: https://github.com/mozilla/geckodriver/issues/901
+        final String mouseOverScript = "arguments[0].scrollIntoView();";
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript( mouseOverScript, element );
+
+        // Move to Element on x and y offset
+        final Actions acts = new Actions( driver );
+        acts.moveToElement( element, xOffset, yOffset );
+        acts.build().perform();
+      } else {
+        this.log.warn( "Element null!" );
+      }
+    } catch ( final StaleElementReferenceException sere ) {
+      this.log.warn( "Stale Element Reference Exception" );
+      this.MoveToElement( driver, locator, xOffset, yOffset );
+    }
+    this.log.debug( "MoveToElement::Exit" );
+  }
+
+  /**
+   * The method pretends to get focus on the a specific element.
+   * Probably the element is not visible and we need to scroll down, to click
+   * on it or mouse over the element.
+   *
+   * @param driver
+   * @param locator
+   */
+  public void FocusElement( final WebDriver driver, final By locator ) {
+    this.log.debug( "FocusElement::Enter" );
+    final WebElement elementToOver = this.FindElementInvisible( driver, locator );
+    if ( elementToOver != null ) {
+      final String mouseOverScript = "arguments[0].scrollIntoView();";
+      final JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript( mouseOverScript, elementToOver );
+    } else {
+      this.log.warn( "Element null!" );
+    }
+    this.log.debug( "FocusElement::Exit" );
+  }
+
+  /**
    * This method shall wait for the title and return it.
    *
    * @param driver
@@ -432,23 +536,19 @@ public class ElementHelper {
   public void Get( final WebDriver driver, final String url ) {
     this.log.debug( "Get(Main)::Enter" );
 
-    driver.manage().timeouts().implicitlyWait( 10, TimeUnit.SECONDS );
-
     for ( int retry = 0; retry < 3; retry++ ) {
       try {
         driver.get( url );
         break;
-      } catch ( TimeoutException te ) {
+      } catch ( final TimeoutException te ) {
         this.log.debug( "TimeoutException", te );
       }
     }
 
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-
     final String complete = "complete";
     String state = ( (JavascriptExecutor) driver ).executeScript( "return document.readyState" ).toString();
     this.log.debug( "Page state: " + state );
-    for ( int i = 0; i < 20; i++ )
+    for ( int i = 0; i < 20; i++ ) {
       if ( !state.equalsIgnoreCase( complete ) ) {
         try {
           Thread.sleep( 500 );
@@ -457,8 +557,10 @@ public class ElementHelper {
         }
         state = ( (JavascriptExecutor) driver ).executeScript( "return document.readyState" ).toString();
         this.log.debug( "Page state: " + state );
-      } else
+      } else {
         break;
+      }
+    }
 
     this.log.debug( "Get(Main)::Exit" );
   }
@@ -477,10 +579,11 @@ public class ElementHelper {
     String attributeValue = "";
     try {
       final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator, 30 );
-      if ( element != null )
+      if ( element != null ) {
         attributeValue = element.getAttribute( attributeName );
-      else
+      } else {
         this.log.warn( "Element is null - could not get attribute value!" );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       attributeValue = this.GetAttribute( driver, locator, attributeName );
@@ -505,10 +608,11 @@ public class ElementHelper {
     String attributeValue = "";
     try {
       final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator, timeout );
-      if ( element != null )
+      if ( element != null ) {
         attributeValue = element.getAttribute( attributeName );
-      else
+      } else {
         this.log.warn( "Element is null - could not get attribute value!" );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       attributeValue = this.GetAttribute( driver, locator, attributeName );
@@ -532,10 +636,11 @@ public class ElementHelper {
     String attributeValue = "";
     try {
       final WebElement element = this.WaitForElementPresence( driver, locator, 30 );
-      if ( element != null )
+      if ( element != null ) {
         attributeValue = element.getAttribute( attributeName );
-      else
+      } else {
         this.log.warn( "Element is null - could not get attribute value!" );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       attributeValue = this.GetAttribute( driver, locator, attributeName );
@@ -558,8 +663,9 @@ public class ElementHelper {
 
     String attrValue = "";
     final WebElement element = this.FindElement( driver, locator );
-    if ( element != null )
+    if ( element != null ) {
       attrValue = element.getAttribute( "value" );
+    }
 
     this.log.debug( "GetInputValue::Exit" );
     return attrValue;
@@ -596,6 +702,26 @@ public class ElementHelper {
    * @param driver
    * @param locator
    */
+  public void MouseOverElement( final WebDriver driver, final By locator ) {
+    this.log.debug( "MouseOverElementAndClick::Enter" );
+    final WebElement elementToOver = this.WaitForElementPresenceAndVisible( driver, locator );
+    if ( elementToOver != null ) {
+      final String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+
+      final JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript( mouseOverScript, elementToOver );
+    } else {
+      this.log.warn( "Element null!" );
+    }
+    this.log.debug( "MouseOverElementAndClick::Exit" );
+  }
+
+  /**
+   * The method shall move mouse over the element and fire the event onclick when clicking on the element.
+   *
+   * @param driver
+   * @param locator
+   */
   public void MouseOverElementAndClick( final WebDriver driver, final By locator ) {
     this.log.debug( "MouseOverElementAndClick::Enter" );
     final WebElement elementToOver = this.WaitForElementPresenceAndVisible( driver, locator );
@@ -606,126 +732,10 @@ public class ElementHelper {
       final JavascriptExecutor js = (JavascriptExecutor) driver;
       js.executeScript( mouseOverScript, elementToOver );
       js.executeScript( onClickScript, elementToOver );
-    } else
+    } else {
       this.log.warn( "Element null!" );
-    this.log.debug( "MouseOverElementAndClick::Exit" );
-  }
-
-  /**
-   * The method shall move mouse over the element and fire the event onclick when clicking on the element.
-   *
-   * @param driver
-   * @param locator
-   */
-  public void MouseOverElement( final WebDriver driver, final By locator ) {
-    this.log.debug( "MouseOverElementAndClick::Enter" );
-    final WebElement elementToOver = this.WaitForElementPresenceAndVisible( driver, locator );
-    if ( elementToOver != null ) {
-      final String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
-
-      final JavascriptExecutor js = (JavascriptExecutor) driver;
-      js.executeScript( mouseOverScript, elementToOver );
-    } else
-      this.log.warn( "Element null!" );
-    this.log.debug( "MouseOverElementAndClick::Exit" );
-  }
-
-  /**
-   * The method pretends to get focus on the a specific element.
-   * Probably the element is not visible and we need to scroll down, to click 
-   * on it or mouse over the element.
-   *
-   * @param driver
-   * @param locator
-   */
-  public void FocusElement( final WebDriver driver, final By locator ) {
-    this.log.debug( "FocusElement::Enter" );
-    final WebElement elementToOver = this.FindElementInvisible( driver, locator );
-    if ( elementToOver != null ) {
-      final String mouseOverScript = "arguments[0].scrollIntoView();";
-      final JavascriptExecutor js = (JavascriptExecutor) driver;
-      js.executeScript( mouseOverScript, elementToOver );
-    } else
-      this.log.warn( "Element null!" );
-    this.log.debug( "FocusElement::Exit" );
-  }
-
-  /**
-   * Due the new Selenium3 the MoveToElement doesn't get focus on the element, hence
-   * we need to provide a workaround to get element focus first and then move to 
-   * element.
-   * 
-   * This method focus the element and move pointer to it.
-   * 
-   * Note: On Selenium 3, the MoveToElement moves to the element on center position
-   * of the element.
-   *
-   * @param driver
-   * @param locator
-   * @param xOffset
-   * @param yOffset
-   */
-  public void FocusAndMoveToElement( final WebDriver driver, final By locator ) {
-    this.log.debug( "MoveToElement::Enter" );
-    try {
-      final WebElement element = this.FindElementInvisible( driver, locator );
-      if ( element != null ) {
-        // Focus Element
-        // Introduce the below call due: https://github.com/mozilla/geckodriver/issues/901
-        final String mouseOverScript = "arguments[0].scrollIntoView();";
-        final JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript( mouseOverScript, element );
-
-        // Move to Element
-        final Actions acts = new Actions( driver );
-        acts.moveToElement( element );
-        acts.build().perform();
-      } else
-        this.log.warn( "Element null!" );
-    } catch ( final StaleElementReferenceException sere ) {
-      this.log.warn( "Stale Element Reference Exception" );
-      this.MoveToElement( driver, locator );
     }
-    this.log.debug( "MoveToElement::Exit" );
-  }
-
-  /**
-   * Due the new Selenium3 the MoveToElement doesn't get focus on the element, hence
-   * we need to provide a workaround to get element focus first and then move to 
-   * element.
-   * 
-   * This method focus the element and move pointer to it on some coordinates.
-   * 
-   * Note: On Selenium 3, the MoveToElement moves to the element on center position
-   * of the element.
-   *
-   * @param driver
-   * @param locator
-   * @param xOffset
-   * @param yOffset
-   */
-  public void FocusAndMoveToElement( final WebDriver driver, final By locator, final int xOffset, final int yOffset ) {
-    this.log.debug( "MoveToElement::Enter" );
-    try {
-      final WebElement element = this.FindElementInvisible( driver, locator );
-      if ( element != null ) {
-        // Focus Element
-        // Introduce the below call due: https://github.com/mozilla/geckodriver/issues/901
-        final String mouseOverScript = "arguments[0].scrollIntoView();";
-        final JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript( mouseOverScript, element );
-
-        // Move to Element on x and y offset
-        final Actions acts = new Actions( driver );
-        acts.moveToElement( element, xOffset, yOffset );
-        acts.build().perform();
-      } else
-        this.log.warn( "Element null!" );
-    } catch ( final StaleElementReferenceException sere ) {
-      this.log.warn( "Stale Element Reference Exception" );
-      this.MoveToElement( driver, locator, xOffset, yOffset );
-    }
-    this.log.debug( "MoveToElement::Exit" );
+    this.log.debug( "MouseOverElementAndClick::Exit" );
   }
 
   /**
@@ -743,8 +753,9 @@ public class ElementHelper {
         final Actions acts = new Actions( driver );
         acts.moveToElement( element );
         acts.build().perform();
-      } else
+      } else {
         this.log.warn( "Element null!" );
+      }
     } catch ( final StaleElementReferenceException sere ) {
       this.log.warn( "Stale Element Reference Exception" );
       this.MoveToElement( driver, locator );
@@ -769,8 +780,9 @@ public class ElementHelper {
         final Actions acts = new Actions( driver );
         acts.moveToElement( element, xOffset, yOffset );
         acts.build().perform();
-      } else
+      } else {
         this.log.warn( "Element null!" );
+      }
     } catch ( final StaleElementReferenceException sere ) {
       this.log.warn( "Stale Element Reference Exception" );
       this.MoveToElement( driver, locator, xOffset, yOffset );
@@ -794,8 +806,9 @@ public class ElementHelper {
         final Actions builder = new Actions( driver );
         builder.moveToElement( element ).click( element );
         builder.perform();
-      } else
+      } else {
         this.log.error( "Element is null " + locator.toString() );
+      }
     } catch ( final StaleElementReferenceException sere ) {
       // Repeat it again
       this.MoveToElementAndClick( driver, locator );
@@ -820,8 +833,9 @@ public class ElementHelper {
       if ( elementSelector != null ) {
         final Select list = new Select( elementSelector );
         list.selectByValue( value );
-      } else
+      } else {
         this.log.warn( "The element does not exist [null]. Could perform the select action!" );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       this.SelectByValue( driver, locator, value );
@@ -882,10 +896,11 @@ public class ElementHelper {
 
     try {
       final WebElement element = this.WaitForElementPresenceAndVisible( driver, locator );
-      if ( element != null )
+      if ( element != null ) {
         element.sendKeys( keysToSend );
-      else
+      } else {
         this.log.error( "Element is null!" );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       this.SendKeys( driver, locator, keysToSend );
@@ -895,7 +910,7 @@ public class ElementHelper {
 
   /**
    * This method find the element and sendkeys.
-   * 
+   *
    * NOTE: User must clear the field (text-box) before add any key.
    *
    * @param driver
@@ -910,8 +925,9 @@ public class ElementHelper {
       if ( element != null ) {
         element.sendKeys( keysToSend );
         element.submit();
-      } else
+      } else {
         this.log.error( "Element is null!" );
+      }
     } catch ( final StaleElementReferenceException e ) {
       this.log.warn( "Stale Element Reference Exception", e );
       this.SendKeysAndSubmit( driver, locator, keysToSend );
@@ -925,27 +941,7 @@ public class ElementHelper {
    * @param driver
    */
   public WebDriver SwitchToDefault( final WebDriver driver ) {
-    WebDriver newframe = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
-    newframe = driver.switchTo().defaultContent();
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-
-    return newframe;
-  }
-
-  /**
-   * This method is a wrap of switchTo method used in WebDriver.
-   *
-   * @param driver
-   * @param index
-   */
-  public WebDriver SwitchToFrame( final WebDriver driver, final int index ) {
-    WebDriver newframe = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
-    newframe = driver.switchTo().frame( index );
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-
-    return newframe;
+    return driver.switchTo().defaultContent();
   }
 
   /**
@@ -955,12 +951,7 @@ public class ElementHelper {
    * @param nameOrId
    */
   public WebDriver SwitchToFrame( final WebDriver driver, final String nameOrId ) {
-    WebDriver newframe = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
-    newframe = driver.switchTo().frame( nameOrId );
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-
-    return newframe;
+    return driver.switchTo().frame( nameOrId );
   }
 
   /**
@@ -970,12 +961,7 @@ public class ElementHelper {
    * @param frameElement
    */
   public WebDriver SwitchToFrame( final WebDriver driver, final WebElement frameElement ) {
-    WebDriver newframe = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
-    newframe = driver.switchTo().frame( frameElement );
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-
-    return newframe;
+    return driver.switchTo().frame( frameElement );
   }
 
   /**
@@ -989,29 +975,18 @@ public class ElementHelper {
   public Alert WaitForAlert( final WebDriver driver, final long timeout, final long pollingTime ) {
     this.log.debug( "WaitForAlert::Enter" );
     ExecutorService executor = null;
-    
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     Alert alert = null;
 
     try {
-    	class CheckForAlert implements Callable<Alert> {
+      class CheckForAlert implements Callable<Alert> {
 
         @Override
         public Alert call() {
-        
-          final Wait<WebDriver> wait = new FluentWait<>( driver )
-        		  .withTimeout( Duration.ofSeconds( timeout ) )
-        		  .pollingEvery( Duration.ofMillis( pollingTime ) )
-        		  .ignoring(NoAlertPresentException.class);
 
-          return wait.until( new Function<WebDriver, Alert>() {
+          final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( pollingTime ) ).ignoring( NoAlertPresentException.class );
 
-            @Override
-            public Alert apply( WebDriver driver ) {
-            	return driver.switchTo().alert();
-            }          
-          });
+          return wait.until( driver1 -> driver1.switchTo().alert() );
         }
       }
 
@@ -1022,9 +997,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded!" );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -1036,8 +1011,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
+    }
     this.log.debug( "WaitForAlert::Exit" );
     return alert;
   }
@@ -1050,25 +1026,17 @@ public class ElementHelper {
   public void WaitForAlertNotPresent( final WebDriver driver ) {
     this.log.debug( "WaitForAlertNotPresent::Enter" );
 
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
+    final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( 30 ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
-    final Wait<WebDriver> wait = new FluentWait<>( driver )
-    		.withTimeout( Duration.ofSeconds( 30 ) )
-    		.pollingEvery( Duration.ofMillis( 50 ) );
-
-    wait.until( new ExpectedCondition<Boolean>() {
-
-      @Override
-      public Boolean apply( final WebDriver d ) {
-        Boolean alertExist = Boolean.valueOf( false );
-        try {
-          d.switchTo().alert();
-        } catch ( final NoAlertPresentException e ) {
-          ElementHelper.this.log.warn( "Exception No Alert" );
-          alertExist = Boolean.valueOf( true );
-        }
-        return alertExist;
+    wait.until( d -> {
+      Boolean alertExist = Boolean.valueOf( false );
+      try {
+        d.switchTo().alert();
+      } catch ( final NoAlertPresentException e ) {
+        ElementHelper.this.log.warn( "Exception No Alert" );
+        alertExist = Boolean.valueOf( true );
       }
+      return alertExist;
     } );
 
     this.log.debug( "WaitForAlertNotPresent::Exit" );
@@ -1090,10 +1058,8 @@ public class ElementHelper {
       alert.accept();
 
       driver.switchTo().defaultContent();
-      this.WaitForAlertNotPresent(driver);
+      this.WaitForAlertNotPresent( driver );
     }
-    
-
 
     this.log.debug( "WaitForAlertReturnConfirmationMsg::Exit" );
     return confirmationMsg;
@@ -1130,7 +1096,6 @@ public class ElementHelper {
     this.log.debug( "Attribute: " + attributeName );
     this.log.debug( "AttributeValue: " + attributeValue );
     ExecutorService executor = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1141,22 +1106,18 @@ public class ElementHelper {
           final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
-          wait.until( new Function<WebDriver, Boolean>() {
-
-            @Override
-            public Boolean apply( final WebDriver d ) {
-              try {
-                final List<WebElement> listElements = d.findElements( locator );
-                if ( listElements.size() > 0 ) {
-                  final WebElement element = listElements.get( 0 );
-                  final String attrValue = element.getAttribute( attributeName ).toLowerCase();
-                  final String attrValueFor = attributeValue.toLowerCase();
-                  return Boolean.valueOf( attrValue.contains( attrValueFor ) );
-                }
-                return Boolean.valueOf( false );
-              } catch ( final StaleElementReferenceException sere ) {
-                return Boolean.valueOf( true );
+          wait.until( d -> {
+            try {
+              final List<WebElement> listElements = d.findElements( locator );
+              if ( listElements.size() > 0 ) {
+                final WebElement element = listElements.get( 0 );
+                final String attrValue = element.getAttribute( attributeName ).toLowerCase();
+                final String attrValueFor = attributeValue.toLowerCase();
+                return Boolean.valueOf( attrValue.contains( attrValueFor ) );
               }
+              return Boolean.valueOf( false );
+            } catch ( final StaleElementReferenceException sere ) {
+              return Boolean.valueOf( true );
             }
           } );
         }
@@ -1169,9 +1130,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -1183,10 +1144,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForAttributeValue::Exit" );
   }
@@ -1223,7 +1183,6 @@ public class ElementHelper {
     this.log.debug( "Attribute: " + attributeName );
     this.log.debug( "AttributeValue: " + attributeValue );
     ExecutorService executor = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1234,22 +1193,18 @@ public class ElementHelper {
           final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
-          wait.until( new Function<WebDriver, Boolean>() {
-
-            @Override
-            public Boolean apply( final WebDriver d ) {
-              try {
-                final List<WebElement> listElements = d.findElements( locator );
-                if ( listElements.size() > 0 ) {
-                  final WebElement element = listElements.get( 0 );
-                  final String attrValue = element.getAttribute( attributeName ).toLowerCase();
-                  final String attrValueFor = attributeValue.toLowerCase();
-                  return Boolean.valueOf( attrValue.equals( attrValueFor ) );
-                }
-                return Boolean.valueOf( false );
-              } catch ( final StaleElementReferenceException sere ) {
-                return Boolean.valueOf( true );
+          wait.until( d -> {
+            try {
+              final List<WebElement> listElements = d.findElements( locator );
+              if ( listElements.size() > 0 ) {
+                final WebElement element = listElements.get( 0 );
+                final String attrValue = element.getAttribute( attributeName ).toLowerCase();
+                final String attrValueFor = attributeValue.toLowerCase();
+                return Boolean.valueOf( attrValue.equals( attrValueFor ) );
               }
+              return Boolean.valueOf( false );
+            } catch ( final StaleElementReferenceException sere ) {
+              return Boolean.valueOf( true );
             }
           } );
         }
@@ -1262,9 +1217,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -1276,10 +1231,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForAttributeValue::Exit" );
   }
@@ -1315,8 +1269,6 @@ public class ElementHelper {
 
     try {
 
-      driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
-
       try {
         class RunnableObject implements Runnable {
 
@@ -1331,21 +1283,17 @@ public class ElementHelper {
             final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
             // Wait for element invisible
-            this.isVisible = wait.until( new Function<WebDriver, Boolean>() {
-
-              @Override
-              public Boolean apply( final WebDriver d ) {
-                try {
-                  final List<WebElement> listElements = d.findElements( locator );
-                  if ( listElements.size() > 0 ) {
-                    final WebElement elem = listElements.get( 0 );
-                    return Boolean.valueOf( !elem.isDisplayed() ? true : false );
-                  }
-                  // The element does not exit, i.e., is not visible and even present
-                  return Boolean.valueOf( true );
-                } catch ( final StaleElementReferenceException sere ) {
-                  return Boolean.valueOf( false );
+            this.isVisible = wait.until( d -> {
+              try {
+                final List<WebElement> listElements = d.findElements( locator );
+                if ( listElements.size() > 0 ) {
+                  final WebElement elem = listElements.get( 0 );
+                  return Boolean.valueOf( !elem.isDisplayed() ? true : false );
                 }
+                // The element does not exit, i.e., is not visible and even present
+                return Boolean.valueOf( true );
+              } catch ( final StaleElementReferenceException sere ) {
+                return Boolean.valueOf( false );
               }
             } );
           }
@@ -1374,10 +1322,9 @@ public class ElementHelper {
         this.log.catching( e );
       }
 
-      if ( executor != null )
+      if ( executor != null ) {
         executor.shutdown();
-
-      driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+      }
 
     } catch ( final Exception ge ) {
       this.log.error( "Exception" );
@@ -1415,7 +1362,6 @@ public class ElementHelper {
     Boolean notPresent = Boolean.valueOf( false );
     ExecutorService executor = null;
     this.log.debug( "Locator: " + locator.toString() );
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1436,18 +1382,15 @@ public class ElementHelper {
           final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
-          this.NotPresent = wait.until( new Function<WebDriver, Boolean>() {
-
-            @Override
-            public Boolean apply( final WebDriver d ) {
-              try {
-                final List<WebElement> listElem = d.findElements( locator );
-                if ( listElem.size() == 0 )
-                  return Boolean.valueOf( true );
-                return Boolean.valueOf( false );
-              } catch ( final StaleElementReferenceException sere ) {
+          this.NotPresent = wait.until( d -> {
+            try {
+              final List<WebElement> listElem = d.findElements( locator );
+              if ( listElem.size() == 0 ) {
                 return Boolean.valueOf( true );
               }
+              return Boolean.valueOf( false );
+            } catch ( final StaleElementReferenceException sere ) {
+              return Boolean.valueOf( true );
             }
           } );
         }
@@ -1461,9 +1404,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -1475,10 +1418,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForElementNotPresent::Exit" );
     return notPresent.booleanValue();
@@ -1525,7 +1467,6 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
     ExecutorService executor = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1545,22 +1486,19 @@ public class ElementHelper {
           final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( pollingTime ) );
 
           // Wait for element visible
-          this.theElement = wait.until( new Function<WebDriver, WebElement>() {
-
-            @Override
-            public WebElement apply( final WebDriver d ) {
-              try {
-                final List<WebElement> listElem = d.findElements( locator );
-                if ( listElem.size() > 0 ) {
-                  final WebElement elem = listElem.get( 0 );
-                  if ( elem.isEnabled() )
-                    return elem;
-                  return null;
+          this.theElement = wait.until( d -> {
+            try {
+              final List<WebElement> listElem = d.findElements( locator );
+              if ( listElem.size() > 0 ) {
+                final WebElement elem = listElem.get( 0 );
+                if ( elem.isEnabled() ) {
+                  return elem;
                 }
                 return null;
-              } catch ( final StaleElementReferenceException sere ) {
-                return null;
               }
+              return null;
+            } catch ( final StaleElementReferenceException sere ) {
+              return null;
             }
           } );
         }
@@ -1574,9 +1512,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -1588,10 +1526,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForElementPresence::Exit" );
     return element;
@@ -1628,7 +1565,6 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     WebElement element = null;
     ExecutorService executor = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1649,22 +1585,19 @@ public class ElementHelper {
           final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
-          this.theElement = wait.until( new Function<WebDriver, WebElement>() {
-
-            @Override
-            public WebElement apply( final WebDriver d ) {
-              try {
-                final List<WebElement> listElem = d.findElements( locator );
-                if ( listElem.size() > 0 ) {
-                  final WebElement elem = listElem.get( 0 );
-                  if ( elem != null && elem.isEnabled() == true && elem.isDisplayed() == true )
-                    return elem;
-                  return null;
+          this.theElement = wait.until( d -> {
+            try {
+              final List<WebElement> listElem = d.findElements( locator );
+              if ( listElem.size() > 0 ) {
+                final WebElement elem = listElem.get( 0 );
+                if ( elem != null && elem.isEnabled() == true && elem.isDisplayed() == true ) {
+                  return elem;
                 }
                 return null;
-              } catch ( final StaleElementReferenceException sere ) {
-                return null;
               }
+              return null;
+            } catch ( final StaleElementReferenceException sere ) {
+              return null;
             }
           } );
         }
@@ -1678,9 +1611,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -1692,10 +1625,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForElementPresenceAndVisible::Exit" );
     return element;
@@ -1717,7 +1649,7 @@ public class ElementHelper {
     String text = "";
 
     final WebElement element = this.WaitForElementPresence( driver, locator, 5, 15 );
-    if ( element != null )
+    if ( element != null ) {
       try {
         // Cross-browser, see: http://www.quirksmode.org/dom/html/
         text = ( (JavascriptExecutor) driver ).executeScript( "return (arguments[0].innerText == null)?arguments[0].textContent:arguments[0].innerText", element ).toString();
@@ -1730,8 +1662,9 @@ public class ElementHelper {
         this.log.warn( wde.toString() );
         text = this.WaitForElementPresentGetText( driver, locator );
       }
-    else
+    } else {
       this.log.warn( "Element does not exist! [null element]" );
+    }
 
     this.log.debug( "WaitForElementPresentGetText::Exit" );
     return text;
@@ -1750,7 +1683,6 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     List<WebElement> elements = null;
     ExecutorService executor = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1771,29 +1703,26 @@ public class ElementHelper {
           final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
-          this.theElements = wait.until( new Function<WebDriver, List<WebElement>>() {
+          this.theElements = wait.until( d -> {
+            try {
+              final List<WebElement> elems = d.findElements( locator );
+              int count = 0;
+              for ( int i = 0; i < elems.size(); i++ ) {
+                final WebElement elem = elems.get( i );
 
-            @Override
-            public List<WebElement> apply( final WebDriver d ) {
-              try {
-                final List<WebElement> elems = d.findElements( locator );
-                int count = 0;
-                for ( int i = 0; i < elems.size(); i++ ) {
-                  final WebElement elem = elems.get( i );
-
-                  if ( elem != null && elem.isEnabled() ) {
-                    count++;
-                    continue;
-                  }
+                if ( elem != null && elem.isEnabled() ) {
+                  count++;
+                  continue;
                 }
+              }
 
-                if ( count != elems.size() )
-                  return null;
-
-                return elems;
-              } catch ( final StaleElementReferenceException sere ) {
+              if ( count != elems.size() ) {
                 return null;
               }
+
+              return elems;
+            } catch ( final StaleElementReferenceException sere ) {
+              return null;
             }
           } );
         }
@@ -1807,9 +1736,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -1821,10 +1750,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForElementPresenceAndVisible::Exit" );
     return elements;
@@ -1845,7 +1773,6 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     List<WebElement> elements = null;
     ExecutorService executor = null;
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
 
@@ -1866,37 +1793,34 @@ public class ElementHelper {
           final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( 50 ) );
 
           // Wait for element visible
-          this.theElements = wait.until( new Function<WebDriver, List<WebElement>>() {
+          this.theElements = wait.until( d -> {
+            try {
+              final List<WebElement> elems = d.findElements( locator );
+              int count = 0;
+              ElementHelper.this.log.debug( "TESTING size: " + elems.size() );
+              for ( int i = 0; i < elems.size(); i++ ) {
+                final WebElement elem = elems.get( i );
 
-            @Override
-            public List<WebElement> apply( final WebDriver d ) {
-              try {
-                final List<WebElement> elems = d.findElements( locator );
-                int count = 0;
-                ElementHelper.this.log.debug( "TESTING size: " + elems.size() );
-                for ( int i = 0; i < elems.size(); i++ ) {
-                  final WebElement elem = elems.get( i );
+                ElementHelper.this.log.debug( "TESTING elem: " + i );
 
-                  ElementHelper.this.log.debug( "TESTING elem: " + i );
+                ElementHelper.this.log.debug( "TESTING ena: " + elem.isEnabled() );
+                ElementHelper.this.log.debug( "TESTING dis: " + elem.isDisplayed() );
 
-                  ElementHelper.this.log.debug( "TESTING ena: " + elem.isEnabled() );
-                  ElementHelper.this.log.debug( "TESTING dis: " + elem.isDisplayed() );
-
-                  if ( elem != null && elem.isEnabled() && elem.isDisplayed() ) {
-                    count++;
-                    continue;
-                  }
+                if ( elem != null && elem.isEnabled() && elem.isDisplayed() ) {
+                  count++;
+                  continue;
                 }
+              }
 
-                ElementHelper.this.log.debug( "TESTING count: " + count );
-                ElementHelper.this.log.debug( "TESTING size: " + elems.size() );
-                if ( count != elems.size() )
-                  return null;
-
-                return elems;
-              } catch ( final StaleElementReferenceException sere ) {
+              ElementHelper.this.log.debug( "TESTING count: " + count );
+              ElementHelper.this.log.debug( "TESTING size: " + elems.size() );
+              if ( count != elems.size() ) {
                 return null;
               }
+
+              return elems;
+            } catch ( final StaleElementReferenceException sere ) {
+              return null;
             }
           } );
         }
@@ -1910,9 +1834,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -1924,10 +1848,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForElementPresenceAndVisible::Exit" );
     return elements;
@@ -1946,17 +1869,14 @@ public class ElementHelper {
 
     final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( 30 ) ).pollingEvery( Duration.ofMillis( 100 ) );
 
-    wait.until( new ExpectedCondition<Boolean>() {
+    wait.until( d -> {
+      Boolean elementExist = Boolean.valueOf( false );
+      final List<WebElement> listElements = d.findElements( locator );
 
-      @Override
-      public Boolean apply( final WebDriver d ) {
-        Boolean elementExist = Boolean.valueOf( false );
-        final List<WebElement> listElements = d.findElements( locator );
-
-        if ( listElements.size() > 0 )
-          elementExist = Boolean.valueOf( true );
-        return elementExist;
+      if ( listElements.size() > 0 ) {
+        elementExist = Boolean.valueOf( true );
       }
+      return elementExist;
     } );
 
     this.log.debug( "WaitForFrameReady::Exit" );
@@ -1973,13 +1893,7 @@ public class ElementHelper {
 
     final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( 30 ) ).pollingEvery( Duration.ofMillis( 100 ) );
 
-    wait.until( new ExpectedCondition<Boolean>() {
-
-      @Override
-      public Boolean apply( final WebDriver d ) {
-        return Boolean.valueOf( d.getWindowHandles().size() != 1 );
-      }
-    } );
+    wait.until( d -> Boolean.valueOf( d.getWindowHandles().size() != 1 ) );
 
     this.log.debug( "WaitForNewWindow::Exit" );
   }
@@ -2031,7 +1945,6 @@ public class ElementHelper {
     String textPresent = "";
     ExecutorService executor = null;
     final RunnableWaitForTextDifferentEmpty r = new RunnableWaitForTextDifferentEmpty( driver, timeout, pollingTime, locator );
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
       executor = Executors.newSingleThreadExecutor();
@@ -2056,11 +1969,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
-
+    }
     this.log.debug( "WaitForTextPresence::Exit" );
     return textPresent;
   }
@@ -2108,7 +2019,6 @@ public class ElementHelper {
     this.log.debug( "Locator: " + locator.toString() );
     ExecutorService executor = null;
     final RunnableWaitForTextDifferentOf r = new RunnableWaitForTextDifferentOf( driver, text, timeout, pollingTime, locator );
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
       executor = Executors.newSingleThreadExecutor();
@@ -2117,9 +2027,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded! Looking for: " + locator.toString() );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -2131,10 +2041,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForTextPresence::Exit" );
   }
@@ -2187,7 +2096,6 @@ public class ElementHelper {
     String textPresent = "";
     ExecutorService executor = null;
     final RunnableWaitForText r = new RunnableWaitForText( driver, timeout, pollingTime, locator, textToWait );
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     try {
       executor = Executors.newSingleThreadExecutor();
@@ -2218,10 +2126,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForTextPresence::Exit" );
     return textPresent;
@@ -2254,7 +2161,6 @@ public class ElementHelper {
   public String WaitForTitle( final WebDriver driver, final String title, final long timeout, final long pollingTime ) {
     this.log.debug( "WaitForTitle::Enter" );
     String returnTitle = "";
-    driver.manage().timeouts().implicitlyWait( 0, TimeUnit.SECONDS );
 
     ExecutorService executor = null;
 
@@ -2273,13 +2179,9 @@ public class ElementHelper {
           final Wait<WebDriver> wait = new FluentWait<>( driver ).withTimeout( Duration.ofSeconds( timeout ) ).pollingEvery( Duration.ofMillis( pollingTime ) );
 
           // Wait for element visible
-          this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {
-
-            @Override
-            public Boolean apply( final WebDriver d ) {
-              final String currentTitle = driver.getTitle();
-              return Boolean.valueOf( currentTitle != null && currentTitle.contains( title ) );
-            }
+          this.textIsEquals = wait.until( d -> {
+            final String currentTitle = driver.getTitle();
+            return Boolean.valueOf( currentTitle != null && currentTitle.contains( title ) );
           } );
         }
       }
@@ -2296,9 +2198,9 @@ public class ElementHelper {
       this.log.warn( "Interrupted Exception" );
       this.log.warn( ie.toString() );
     } catch ( final ExecutionException ee ) {
-      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) )
+      if ( ee.getCause().getClass().getCanonicalName().equalsIgnoreCase( TimeoutException.class.getCanonicalName() ) ) {
         this.log.warn( "WebDriver timeout exceeded!" );
-      else {
+      } else {
         this.log.warn( "Execution Exception" );
         this.log.warn( ee.toString() );
       }
@@ -2310,10 +2212,9 @@ public class ElementHelper {
       this.log.catching( e );
     }
 
-    if ( executor != null )
+    if ( executor != null ) {
       executor.shutdown();
-
-    driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
+    }
 
     this.log.debug( "WaitForTitle::Exit" );
     return returnTitle;

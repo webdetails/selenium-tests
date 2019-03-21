@@ -41,50 +41,117 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
-  // Instance of the driver (browser emulator)
-  protected static WebDriver driver;
   // The base url to be append the relative url in test
   protected static String baseUrl;
   // Directory are all download files persist
   protected static String downloadDir;
-  // The BA Server URL
-  protected static String pentahoBaServerUrl;
+  // Instance of the driver (browser emulator)
+  protected static WebDriver driver;
+  // Log instance
+  private static Logger log = LogManager.getLogger( BaseTest.class );
   // The BA Server hostname
   protected static String pentahoBaServerHostname;
+  // The BA Server password to use on tests
+  protected static String pentahoBaServerPassword = "password";
   // The BA Server port
   protected static String pentahoBaServerPort;
   // The BA Server service name (Windows only)
   protected static String pentahoBaServerServiceName;
+  // The BA Server URL
+  protected static String pentahoBaServerUrl;
+
   // The BA Server username to use on tests
   protected static String pentahoBaServerUsername = "admin";
-  // The BA Server password to use on tests
-  protected static String pentahoBaServerPassword = "password";
 
-  // Log instance
-  private static Logger log = LogManager.getLogger( BaseTest.class );
+  /**
+   * TODO
+   *
+   * @return
+   */
+  public static String getBaseUrl() {
+    return BaseTest.baseUrl;
+  }
+
+  /**
+   *
+   * @return
+   */
+  public static String getDownloadDir() {
+    return BaseTest.downloadDir;
+  }
+
+  /**
+   * Returns the current state of WebDriver.
+   *
+   * @return The webdriver instance.
+   */
+  public static WebDriver getDriver() {
+    return BaseTest.driver;
+  }
+
+  /**
+   * Print all Messages regarding
+   * @return
+   */
+  public static void printBrowserMessages() {
+    BaseTest.log.info( "------> PRINTING LOGS FROM BROWSER <-----" );
+    /*LogEntries logEntries = driver.manage().logs().get( LogType.BROWSER );
+    for ( LogEntry logEntry : logEntries ) {
+      log.info( logEntry.getMessage() );
+    }
+    log.info( "------> PRINTING LOGS FROM SERVER <-----");
+    LogEntries logEntries2 = driver.manage().logs().get( LogType.SERVER );
+    for ( LogEntry logEntry : logEntries2 ) {
+      log.info( logEntry.getMessage() );
+    }*/
+    /*log.info( "------> PRINTING LOGS FROM DRIVER <-----");
+    LogEntries logEntries3 = driver.manage().logs().get( LogType.DRIVER );
+    for ( LogEntry logEntry : logEntries3 ) {
+      log.info( logEntry.getMessage() );
+    }
+    log.info( "------> PRINTING LOGS FROM PROFILER <-----");
+    LogEntries logEntries4 = driver.manage().logs().get( LogType.PROFILER );
+    for ( LogEntry logEntry : logEntries4 ) {
+      log.info( logEntry.getMessage() );
+    }
+    log.info( "------> PRINTING LOGS FROM CLIENT <-----");
+    LogEntries logEntries5 = driver.manage().logs().get( LogType.CLIENT );
+    for ( LogEntry logEntry : logEntries5 ) {
+      log.info( logEntry.getMessage() );
+    }
+    log.info( "------> PRINTING LOGS FROM PERFORMANCE <-----");
+    LogEntries logEntries6 = driver.manage().logs().get( LogType.PERFORMANCE );
+    for ( LogEntry logEntry : logEntries6 ) {
+      log.info( logEntry.getMessage() );
+    }
+    log.info( "------> PRINTING LOGS JavaScriptError <-----");
+    final List<JavaScriptError> jsErrors = JavaScriptError.readErrors(driver);
+    log.debug( jsErrors );*/
+    BaseTest.log.info( "------> END <-----" );
+  }
 
   @BeforeSuite
   public void setUpClass() {
-    log.info( "Master setup" );
+    BaseTest.log.info( "Master setup" );
 
     // Initialize BASEURL
-    baseUrl = "http://localhost:8080/pentaho/";
-    downloadDir = Paths.get( System.getProperty( "java.io.tmpdir" ), "SeleniumDownloadDir" ).normalize().toAbsolutePath().toString();
-    pentahoBaServerServiceName = System.getProperty( "pentaho.bi.server.service.name" );
-    pentahoBaServerUrl = System.getProperty( "pentaho.bi.server.url" );
-    pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
-    pentahoBaServerPort = System.getProperty( "pentaho.bi.server.port" );
+    BaseTest.baseUrl = "http://localhost:8080/pentaho/";
+    BaseTest.downloadDir = Paths.get( System.getProperty( "java.io.tmpdir" ), "SeleniumDownloadDir" ).normalize().toAbsolutePath().toString();
+    BaseTest.pentahoBaServerServiceName = System.getProperty( "pentaho.bi.server.service.name" );
+    BaseTest.pentahoBaServerUrl = System.getProperty( "pentaho.bi.server.url" );
+    BaseTest.pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
+    BaseTest.pentahoBaServerPort = System.getProperty( "pentaho.bi.server.port" );
 
-    //System.setProperty( "webdriver.gecko.driver", "C:\\MyPrograms\\GeckoDriver\\geckodriver-v0.24.0-win64\\geckodriver.exe" );
+    //System.setProperty( "webdriver.gecko.driver", "C:\\MyPrograms\\GeckoDriver\\geckodriver-v0.21.0-win64\\geckodriver.exe" );
 
-    log.debug( "PRINT PROPERTIES:" );
-    log.debug( "baseUrl: " + baseUrl );
-    log.debug( "downloadDir: " + downloadDir );
+    BaseTest.log.debug( "PRINT PROPERTIES:" );
+    BaseTest.log.debug( "baseUrl: " + BaseTest.baseUrl );
+    BaseTest.log.debug( "downloadDir: " + BaseTest.downloadDir );
 
-    new File( downloadDir ).mkdir();
+    new File( BaseTest.downloadDir ).mkdir();
 
     // Setting log preferences
-    LoggingPreferences logs = new LoggingPreferences();
+    final LoggingPreferences logs = new LoggingPreferences();
     logs.enable( LogType.BROWSER, Level.ALL );
     logs.enable( LogType.SERVER, Level.ALL );
     logs.enable( LogType.DRIVER, Level.ALL );
@@ -98,7 +165,7 @@ public class BaseTest {
     // Initialize DRIVER
     System.setProperty( "webdriver.firefox.logfile", System.getProperty( "java.io.tmpdir" ) + "/webdriver-firefox.log" );
 
-    FirefoxOptions foptions = new FirefoxOptions();
+    final FirefoxOptions foptions = new FirefoxOptions();
     foptions.addPreference( "webdriver.log.file", System.getProperty( "java.io.tmpdir" ) + "/webdriver.log" );
     foptions.addPreference( "general.useragent.locale", "en-US" );
     foptions.addPreference( "intl.accept_languages", "en-US, en" );
@@ -107,7 +174,7 @@ public class BaseTest {
     foptions.addPreference( "browser.download.useDownloadDir", true );
     foptions.addPreference( "browser.tabs.remote.autostart", false );
     foptions.addPreference( "browser.download.manager.showWhenStarting", false );
-    foptions.addPreference( "browser.download.dir", downloadDir );
+    foptions.addPreference( "browser.download.dir", BaseTest.downloadDir );
     foptions.addPreference( "browser.helperApps.neverAsk.saveToDisk", "application/unknown;table/excel;application/vnd.ms-excel;application/msexcel;application/x-msexcel;application/x-ms-excel;application/x-excel;application/x-dos_ms_excel;application/xls;application/x-xls;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;text/csv;application/rtf;text/xml;application/xml;image/png;image/svg+xml;application/json;application/javascript" );
     foptions.addPreference( "security.insecure_password.ui.enabled", false );
     foptions.addPreference( "security.insecure_field_warning.contextual.enabled", false );
@@ -143,83 +210,15 @@ public class BaseTest {
     BaseTest.driver.manage().window().setPosition( new Point( 0, 0 ) );
     BaseTest.driver.manage().window().maximize();//setSize( new Dimension( 1360, 764 ) );
     BaseTest.driver.manage().timeouts().pageLoadTimeout( 180, TimeUnit.SECONDS );
-    BaseTest.driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS );
     BaseTest.driver.manage().timeouts().setScriptTimeout( 30, TimeUnit.SECONDS );
   }
 
   @AfterSuite
   public void tearDownClass() {
-    log.info( "Master tearDown" );
+    BaseTest.log.info( "Master tearDown" );
 
     BaseTest.printBrowserMessages();
 
     BaseTest.driver.quit();
-  }
-
-  /**
-   * Print all Messages regarding
-   * @return
-   */
-  public static void printBrowserMessages() {
-    log.info( "------> PRINTING LOGS FROM BROWSER <-----" );
-    /*LogEntries logEntries = driver.manage().logs().get( LogType.BROWSER ); 
-    for ( LogEntry logEntry : logEntries ) {
-      log.info( logEntry.getMessage() ); 
-    }
-    log.info( "------> PRINTING LOGS FROM SERVER <-----");
-    LogEntries logEntries2 = driver.manage().logs().get( LogType.SERVER ); 
-    for ( LogEntry logEntry : logEntries2 ) {
-      log.info( logEntry.getMessage() ); 
-    }*/
-    /*log.info( "------> PRINTING LOGS FROM DRIVER <-----");
-    LogEntries logEntries3 = driver.manage().logs().get( LogType.DRIVER ); 
-    for ( LogEntry logEntry : logEntries3 ) {
-      log.info( logEntry.getMessage() ); 
-    }
-    log.info( "------> PRINTING LOGS FROM PROFILER <-----");
-    LogEntries logEntries4 = driver.manage().logs().get( LogType.PROFILER ); 
-    for ( LogEntry logEntry : logEntries4 ) {
-      log.info( logEntry.getMessage() ); 
-    }
-    log.info( "------> PRINTING LOGS FROM CLIENT <-----");
-    LogEntries logEntries5 = driver.manage().logs().get( LogType.CLIENT ); 
-    for ( LogEntry logEntry : logEntries5 ) {
-      log.info( logEntry.getMessage() ); 
-    }
-    log.info( "------> PRINTING LOGS FROM PERFORMANCE <-----");
-    LogEntries logEntries6 = driver.manage().logs().get( LogType.PERFORMANCE ); 
-    for ( LogEntry logEntry : logEntries6 ) {
-      log.info( logEntry.getMessage() ); 
-    }
-    log.info( "------> PRINTING LOGS JavaScriptError <-----");
-    final List<JavaScriptError> jsErrors = JavaScriptError.readErrors(driver);
-    log.debug( jsErrors );*/
-    log.info( "------> END <-----" );
-  }
-
-  /**
-   * TODO
-   *
-   * @return
-   */
-  public static String getBaseUrl() {
-    return baseUrl;
-  }
-
-  /**
-   *
-   * @return
-   */
-  public static String getDownloadDir() {
-    return downloadDir;
-  }
-
-  /**
-   * Returns the current state of WebDriver.
-   *
-   * @return The webdriver instance.
-   */
-  public static WebDriver getDriver() {
-    return driver;
   }
 }

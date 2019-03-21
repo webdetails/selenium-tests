@@ -10,19 +10,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
-import com.google.common.base.Function;
-
 class RunnableWaitForTextDifferentEmpty implements Runnable {
 
-  private WebDriver driver;
-  private long timeout;
-  private long pollingTime;
-  private By locator;
-
-  private Boolean textIsEquals;
   private String currentTextPresent;
+  private final WebDriver driver;
+  private final By locator;
+  private final long pollingTime;
 
-  public RunnableWaitForTextDifferentEmpty( WebDriver driver, long timeout, long pollingTime, By locator ) {
+  private final long timeout;
+
+  public RunnableWaitForTextDifferentEmpty( final WebDriver driver, final long timeout, final long pollingTime,
+      final By locator ) {
     super();
     this.driver = driver;
     this.timeout = timeout;
@@ -30,47 +28,39 @@ class RunnableWaitForTextDifferentEmpty implements Runnable {
     this.locator = locator;
   }
 
-  public Boolean isTextEquals() {
-    return this.textIsEquals;
+  public By getLocator() {
+    return this.locator;
   }
 
   public String getTextPresent() {
     return this.currentTextPresent;
   }
 
-  public void setTextPresent( String text ) {
-    this.currentTextPresent = text;
-  }
-
-  public By getLocator() {
-    return this.locator;
-  }
-
   @Override
   public void run() {
-    Wait<WebDriver> wait = new FluentWait<>( this.driver ).withTimeout( Duration.ofSeconds( this.timeout ) ).pollingEvery( Duration.ofMillis( this.pollingTime ) );
+    final Wait<WebDriver> wait = new FluentWait<>( this.driver ).withTimeout( Duration.ofSeconds( this.timeout ) ).pollingEvery( Duration.ofMillis( this.pollingTime ) );
 
     // Wait for element visible
-    this.textIsEquals = wait.until( new Function<WebDriver, Boolean>() {
-
-      @Override
-      public Boolean apply( WebDriver d ) {
-        try {
-          List<WebElement> listElem = d.findElements( getLocator() );
-          if ( listElem.size() > 0 ) {
-            WebElement elem = listElem.get( 0 );
-            if ( elem.isEnabled() ) {
-              String text = elem.getText();
-              setTextPresent( text );
-              return Boolean.valueOf( !( getTextPresent().isEmpty() || getTextPresent().equals( "" ) || getTextPresent().equalsIgnoreCase( "null" ) ) );// If true we stop waiting for.
-            }
-            return Boolean.valueOf( false );
+    wait.until( d -> {
+      try {
+        final List<WebElement> listElem = d.findElements( RunnableWaitForTextDifferentEmpty.this.getLocator() );
+        if ( listElem.size() > 0 ) {
+          final WebElement elem = listElem.get( 0 );
+          if ( elem.isEnabled() ) {
+            final String text = elem.getText();
+            RunnableWaitForTextDifferentEmpty.this.setTextPresent( text );
+            return Boolean.valueOf( !( RunnableWaitForTextDifferentEmpty.this.getTextPresent().isEmpty() || RunnableWaitForTextDifferentEmpty.this.getTextPresent().equals( "" ) || RunnableWaitForTextDifferentEmpty.this.getTextPresent().equalsIgnoreCase( "null" ) ) );// If true we stop waiting for.
           }
           return Boolean.valueOf( false );
-        } catch ( StaleElementReferenceException sere ) {
-          return Boolean.valueOf( false );
         }
+        return Boolean.valueOf( false );
+      } catch ( final StaleElementReferenceException sere ) {
+        return Boolean.valueOf( false );
       }
     } );
+  }
+
+  public void setTextPresent( final String text ) {
+    this.currentTextPresent = text;
   }
 }
