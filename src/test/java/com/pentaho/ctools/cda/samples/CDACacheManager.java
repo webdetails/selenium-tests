@@ -23,7 +23,10 @@ package com.pentaho.ctools.cda.samples;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -105,27 +108,29 @@ public class CDACacheManager extends BaseTest {
     Assert.assertNotNull( buttonCachedQueries );
     this.elemHelper.ClickJS( BaseTest.driver, By.id( "cacheButton" ) );
 
+    final JavascriptExecutor jsDriver = (JavascriptExecutor) BaseTest.driver;
+    jsDriver.executeScript( "window.confirm = function(message) {document.lastConfirmMessage = message; return true; }" );
+    jsDriver.executeScript( "window.alert = function(message) {document.lastAlertMessage = message; return true; }" );
+
     //Click in clear cache
     this.elemHelper.ClickJS( BaseTest.driver, By.id( "clearCacheButton" ) );
+
+    final String message = (String) jsDriver.executeScript( "return document.lastConfirmMessage" );
+    final String message2 = (String) jsDriver.executeScript( "return document.lastAlertMessage" );
 
     /*
      * ## Step 1
      */
-    //NOTE we need to handle the alert on the this page, because
-    //the alert is unique and we can't use: WaitForAlertReturnConfirmationMsg
-    //Wait for pop-up 1
-    //final Alert alert = this.elemHelper.WaitForAlert( BaseTest.driver, 10, 250 );
-    //alert.accept();
-    final String confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( BaseTest.driver );
-    final String expectedCnfText = "This will remove ALL items from cache. Are you sure?";
-    Assert.assertEquals( expectedCnfText, confirmationMsg );
+    //final String confMsg[] = this.elemHelper.WaitForAlert2( BaseTest.driver, 5, 250 );
+    //Assert.assertTrue( confMsg.length == 2 );
 
-    /*
+    String expectedCnfText = "This will remove ALL items from cache. Are you sure?";
+    Assert.assertEquals( expectedCnfText, message );
+
     //Wait for pop-up 2
-    confirmationMsg = this.elemHelper.WaitForAlertReturnConfirmationMsg( BaseTest.driver );
     expectedCnfText = "items have been removed from cache";
-    MatcherAssert.assertThat( "The displayed popup: " + confirmationMsg, confirmationMsg, CoreMatchers.containsString( expectedCnfText ) );
-    */
+    MatcherAssert.assertThat( "The displayed popup: " + message2, message2, CoreMatchers.containsString( expectedCnfText ) );
+
     /*
      * ## Step 2
      */
