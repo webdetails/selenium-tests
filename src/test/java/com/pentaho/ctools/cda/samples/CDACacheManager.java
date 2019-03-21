@@ -121,9 +121,6 @@ public class CDACacheManager extends BaseTest {
     /*
      * ## Step 1
      */
-    //final String confMsg[] = this.elemHelper.WaitForAlert2( BaseTest.driver, 5, 250 );
-    //Assert.assertTrue( confMsg.length == 2 );
-
     String expectedCnfText = "This will remove ALL items from cache. Are you sure?";
     Assert.assertEquals( expectedCnfText, message );
 
@@ -134,8 +131,6 @@ public class CDACacheManager extends BaseTest {
     /*
      * ## Step 2
      */
-    BaseTest.driver.navigate().refresh();
-
     // Go to Cached Queries
     buttonCachedQueries = this.elemHelper.FindElement( BaseTest.driver, By.id( "cacheButton" ) );
     Assert.assertNotNull( buttonCachedQueries );
