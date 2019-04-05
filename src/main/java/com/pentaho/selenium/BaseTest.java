@@ -142,7 +142,7 @@ public class BaseTest {
     BaseTest.pentahoBaServerHostname = System.getProperty( "pentaho.bi.server.hostname" );
     BaseTest.pentahoBaServerPort = System.getProperty( "pentaho.bi.server.port" );
 
-    //System.setProperty( "webdriver.gecko.driver", "C:\\MyPrograms\\GeckoDriver\\geckodriver-v0.21.0-win64\\geckodriver.exe" );
+    System.setProperty( "webdriver.gecko.driver", "C:\\MyPrograms\\GeckoDriver\\geckodriver-v0.24.0-win64\\geckodriver.exe" );
 
     BaseTest.log.debug( "PRINT PROPERTIES:" );
     BaseTest.log.debug( "baseUrl: " + BaseTest.baseUrl );
