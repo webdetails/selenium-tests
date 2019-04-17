@@ -233,9 +233,11 @@ public class PageUrl extends BaseTest {
   /*
    * CGG - Samples
    */
-  public static final String BAR_CHART = BASE_URL + "plugin/cgg/api/services/draw?script=/public/testBarChart.js&outputType=png";
+  public static final String BAR_CHART_VIZ2 = BASE_URL + "plugin/cgg/api/services/draw?script=/public/testBarChart-viz2.js&outputType=png";
+  public static final String BAR_CHART_VIZ3 = BASE_URL + "plugin/cgg/api/services/draw?script=/public/testBarChart-viz3.js&outputType=png";
   public static final String DIAL_CHART = BASE_URL + "plugin/cgg/api/services/draw?script=/public/dial.js&outputType=svg&paramvalue=35";
-  public static final String SCATTER_CHART = BASE_URL + "plugin/cgg/api/services/draw?script=/public/testScatterChart.js&outputType=svg";
+  public static final String SCATTER_CHART_VIZ2 = BASE_URL + "plugin/cgg/api/services/draw?script=/public/testScatterChart-viz2.js&outputType=svg";
+  public static final String SCATTER_CHART_VIZ3 = BASE_URL + "plugin/cgg/api/services/draw?script=/public/testScatterChart-viz3.js&outputType=svg";
 
   /*###############################################
    #                                              #

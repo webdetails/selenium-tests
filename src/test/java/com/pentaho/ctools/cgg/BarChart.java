@@ -21,15 +21,11 @@
  ******************************************************************************/
 package com.pentaho.ctools.cgg;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.pentaho.ctools.utils.ElementHelper;
@@ -62,25 +58,60 @@ public class BarChart extends BaseTest {
    *    1. Open the bar chart.
    */
   @Test
-  public void tc1_BarChart_ImageRendered() {
-    this.log.info( "tc1_BarChart_ImageRendered" );
+  public void tc1_BarChartViz2_PngRendered() {
+    this.log.info( "tc1_BarChartViz2_PngRendered" );
 
     /*
      * ## Step 1
      */
-    this.elemHelper.Get( driver, PageUrl.BAR_CHART );
+    this.elemHelper.Get( BaseTest.driver, PageUrl.BAR_CHART_VIZ2 );
 
-    WebElement elementImage = this.elemHelper.FindElement( driver, By.cssSelector( "img" ) );
-    assertNotNull( elementImage );
+    final WebElement elementImage = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "img" ), 5 );
+    Assert.assertNotNull( elementImage );
 
-    String attrWidth = elementImage.getAttribute( "width" );
-    assertFalse( attrWidth.isEmpty() );
-    String attrHeight = elementImage.getAttribute( "height" );
-    assertFalse( attrHeight.isEmpty() );
-    assertTrue( ( Integer.parseInt( attrWidth ) > 800 ) ? true : false, "the number " + attrWidth );
-    assertTrue( ( Integer.parseInt( attrHeight ) > 600 ) ? true : false, "the number " + attrHeight );
+    final String attrWidth = elementImage.getAttribute( "width" );
+    Assert.assertFalse( attrWidth.isEmpty() );
+    final String attrHeight = elementImage.getAttribute( "height" );
+    Assert.assertFalse( attrHeight.isEmpty() );
+    Assert.assertTrue( ( Integer.parseInt( attrWidth ) > 800 ) ? true : false, "the number " + attrWidth );
+    Assert.assertTrue( ( Integer.parseInt( attrHeight ) > 600 ) ? true : false, "the number " + attrHeight );
 
-    String attrSrc = elementImage.getAttribute( "src" );
-    assertEquals( attrSrc, PageUrl.BAR_CHART );
+    final String attrSrc = elementImage.getAttribute( "src" );
+    Assert.assertEquals( attrSrc, PageUrl.BAR_CHART_VIZ2 );
+  }
+
+  /**
+   * ############################### Test Case 1 ###############################
+   *
+   * Test Case Name:
+   *    Bar Chart
+   *
+   * Description:
+   *    We pretend to check if an image is displayed with bares in a chart.
+   *
+   * Steps:
+   *    1. Open the bar chart.
+   */
+  @Test
+  public void tc2_BarChartViz3_PngRendered() {
+    this.log.info( "tc2_BarChartViz3_PngRendered" );
+
+    /*
+     * ## Step 1
+     */
+    this.elemHelper.Get( BaseTest.driver, PageUrl.BAR_CHART_VIZ3 );
+
+    final WebElement elementImage = this.elemHelper.FindElement( BaseTest.driver, By.cssSelector( "img" ), 5 );
+    Assert.assertNotNull( elementImage );
+
+    final String attrWidth = elementImage.getAttribute( "width" );
+    Assert.assertFalse( attrWidth.isEmpty() );
+    final String attrHeight = elementImage.getAttribute( "height" );
+    Assert.assertFalse( attrHeight.isEmpty() );
+    Assert.assertTrue( ( Integer.parseInt( attrWidth ) > 800 ) ? true : false, "the number " + attrWidth );
+    Assert.assertTrue( ( Integer.parseInt( attrHeight ) > 600 ) ? true : false, "the number " + attrHeight );
+
+    final String attrSrc = elementImage.getAttribute( "src" );
+    Assert.assertEquals( attrSrc, PageUrl.BAR_CHART_VIZ3 );
   }
 }
